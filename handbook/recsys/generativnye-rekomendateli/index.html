@@ -1,0 +1,338 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Генеративные рекомендатели на масштабе: HSTU, OneRec и наследники · EDU FAMCS</title>
+<meta name="description" content="Генеративные рекомендатели на масштабе: HSTU, OneRec и наследники — Рекомендательные системы. Хендбук ML-курса ФПМИ.">
+<meta name="theme-color" content="#060A16">
+<meta name="robots" content="noindex, nofollow">
+<meta name="htmx-config" content='{"allowEval":false,"includeIndicatorStyles":false,"historyCacheSize":0,"selfRequestsOnly":true}'>
+<meta name="katex-js" content="/edufamcs-demo/static/vendor/katex/katex.min.js">
+<meta name="katex-css" content="/edufamcs-demo/static/vendor/katex/katex.min.css">
+<link rel="icon" href="/edufamcs-demo/static/brand/logo/favicon-16.svg" type="image/svg+xml" sizes="16x16">
+<link rel="icon" href="/edufamcs-demo/static/brand/logo/favicon.svg" type="image/svg+xml" sizes="any">
+<link rel="preload" href="/edufamcs-demo/static/brand/fonts/manrope-cyrillic-400.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/edufamcs-demo/static/brand/fonts/unbounded-cyrillic-800.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="/edufamcs-demo/static/brand/fonts.css">
+<link rel="stylesheet" href="/edufamcs-demo/static/brand/tokens.css">
+<link rel="stylesheet" href="/edufamcs-demo/static/brand/components.css">
+<link rel="stylesheet" href="/edufamcs-demo/static/css/site.css">
+<link rel="stylesheet" href="/edufamcs-demo/static/css/hub.css">
+<link rel="stylesheet" href="/edufamcs-demo/static/css/about.css">
+<link rel="stylesheet" href="/edufamcs-demo/static/handbook/handbook.css">
+<script src="/edufamcs-demo/static/js/theme.js"></script>
+<script src="/edufamcs-demo/static/vendor/htmx/htmx.min.js" defer></script>
+<script src="/edufamcs-demo/static/vendor/alpine/alpine-csp.min.js" defer></script>
+<script src="/edufamcs-demo/static/js/site.js" defer></script>
+<script src="/edufamcs-demo/static/handbook/handbook.js" defer></script>
+</head>
+<body class="" hx-headers='{"X-CSRFToken": "6XjzE3eTbFUYokKGArlXFhX8Xbpn0PKGvHSDo11g6wi7DTVp7E45CMtdvTvSyZsq"}'>
+<a class="skip" href="#main">К содержанию</a>
+<div class="demo-bar" role="note">Демо-версия для отзывов: вход, запись на курсы и формы здесь не работают.</div>
+
+<header class="hdr">
+  <div class="container">
+    <a class="brand" href="/edufamcs-demo/" aria-label="EDU FAMCS — главная">
+      <span class="full"><img class="only-light" src="/edufamcs-demo/static/brand/logo/logo-edu-light.svg" alt="EDU FAMCS" width="196" height="40"><img class="only-dark" src="/edufamcs-demo/static/brand/logo/logo-edu-dark.svg" alt="EDU FAMCS" width="196" height="40"></span>
+      <span class="short"><img class="only-light" src="/edufamcs-demo/static/brand/logo/logo-edu-light.svg" alt="EDU FAMCS" height="30"><img class="only-dark" src="/edufamcs-demo/static/brand/logo/logo-edu-dark.svg" alt="EDU FAMCS" height="30"></span>
+    </a>
+    <nav class="nav" id="main-nav" aria-label="Основная навигация">
+      <a href="/edufamcs-demo/#courses">Курсы</a>
+      <a href="/edufamcs-demo/ml/" >Машинное обучение</a>
+      
+      <a href="/edufamcs-demo/handbook/" aria-current="page">Хендбук</a>
+      <a href="/edufamcs-demo/news/" >Новости</a>
+      <a href="/edufamcs-demo/people/" >Авторы</a>
+      <a href="/edufamcs-demo/about/" >О&nbsp;нас</a>
+    </nav>
+    <div class="hdr-actions">
+      
+      <a class="btn btn-outline btn-login" href="/edufamcs-demo/accounts/login/?next=/handbook/recsys/generativnye-rekomendateli/">Войти</a>
+      
+      <button class="icon-btn menu-btn" type="button" aria-label="Меню" aria-expanded="false" aria-controls="main-nav"><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-menu"/></svg></button>
+    </div>
+  </div>
+</header>
+
+<main id="main">
+
+
+
+<div class="container hb-page s-recsys">
+  <div class="hb">
+    <aside class="hb-nav" aria-label="Статьи раздела">
+      
+<form class="hb-search" action="/edufamcs-demo/handbook/search/" method="get" role="search">
+  <svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-search"/></svg>
+  <input class="input" type="search" name="q" value="" placeholder="Поиск по хендбуку" aria-label="Поиск по хендбуку" autocomplete="off" maxlength="120"
+    hx-get="/edufamcs-demo/handbook/search/" hx-trigger="input changed delay:250ms, search" hx-target="#hb-nav-results" hx-sync="this:replace">
+</form>
+
+      <div id="hb-nav-results" class="hb-nav-results" aria-live="polite"></div>
+      <a class="grp" href="/edufamcs-demo/handbook/recsys/">Генеративная эра: 2023–2026</a>
+      
+      <a class="" href="/edufamcs-demo/handbook/recsys/semanticheskie-id-tiger/">Семантические ID и генеративный retrieval: TIGER</a>
+      
+      <a class="cur" href="/edufamcs-demo/handbook/recsys/generativnye-rekomendateli/" aria-current="page">Генеративные рекомендатели на масштабе: HSTU, OneRec и наследники</a>
+      
+      <a class="" href="/edufamcs-demo/handbook/recsys/llm-v-rekomendaciyah/">Большие языковые модели в рекомендациях</a>
+      
+    </aside>
+
+    <article class="hb-main">
+      <nav class="crumbs" aria-label="Навигация"><a href="/edufamcs-demo/handbook/">Хендбук</a><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-chev"/></svg><a href="/edufamcs-demo/handbook/recsys/">Рекомендательные системы</a></nav>
+      <h1 class="h1">Генеративные рекомендатели на масштабе: HSTU, OneRec и наследники</h1>
+      <div class="hb-meta">
+        
+        
+        <span><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-clock"/></svg>15&nbsp;мин</span>
+        <span class="hb-authors"><span class="avatar sm" title="Артем Лебедевич">АЛ</span>Артем Лебедевич</span>
+        <span><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-edit"/></svg>9 ноября 2026</span>
+        
+        
+      </div>
+
+      
+      <details class="hb-mtoc">
+        <summary><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-list"/></svg>Содержание<svg class="ico sm" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-chev-down"/></svg></summary>
+        <a class="l2" href="#что-не-так-с-dlrm">Что не так с DLRM</a><a class="l2" href="#hstu-meta-2024">HSTU (Meta, 2024)</a><a class="l2" href="#масштабирование-ранжирования-bytedance-meta-и-другие">Масштабирование ранжирования: ByteDance, Meta и другие</a><a class="l2" href="#argus-яндекс-20252026">ARGUS (Яндекс, 2025–2026)</a><a class="l2" href="#end-to-end-генерация-onerec-kuaishou">End-to-end генерация: OneRec (Kuaishou)</a><a class="l2" href="#другие-компании">Другие компании</a><a class="l2" href="#что-общего">Что общего</a><a class="l2" href="#трезвая-оценка">Трезвая оценка</a><a class="l2" href="#вопросы-на-собеседованиях">Вопросы на собеседованиях</a><a class="l2" href="#что-почитать">Что почитать</a>
+      </details>
+      
+
+      <div class="prose"><p>До 2023 года рекомендатели крупных компаний выглядели как DLRM: сотни разнородных признаков (счётчики, категории, кросс-признаки), огромные таблицы эмбеддингов, несколько полносвязных слоёв сверху. Такие модели плохо масштабируются: удвоение параметров почти не улучшает качество, потому что большая часть параметров — таблицы, а «умная» часть мала. В 2024–2026 годах индустрия сменила парадигму: <strong>одна большая модель над последовательностью действий пользователя</strong>, у которой качество растёт как степенной закон от вычислений — как у LLM. Эта глава — обзор того, что именно изменилось, кто это сделал и какой реальный эффект.</p>
+<p>Предварительно полезно знать: SASRec и <a href="/edufamcs-demo/handbook/recsys/posledovatelnye-modeli/" rel="noopener noreferrer nofollow">последовательные модели</a>, двухстадийную воронку (<a href="/edufamcs-demo/handbook/recsys/kandidaty-i-ranzhirovanie/" rel="noopener noreferrer nofollow">глава 5</a>) и идею семантических ID (<a href="/edufamcs-demo/handbook/recsys/semanticheskie-id-tiger/" rel="noopener noreferrer nofollow">глава 15</a>).</p>
+<h2 id="что-не-так-с-dlrm">Что не так с DLRM</h2>
+<ol>
+<li><strong>Ручные признаки.</strong> Агрегаты («число просмотров категории за 7 дней») отбрасывают порядок и контекст событий; инженерия признаков — главный вид труда, а не обучение.</li>
+<li><strong>Нет законов масштабирования.</strong> Рост числа слоёв или ширины даёт убывающий выигрыш (в статьях Meta и ByteDance это подаётся как основная причина перехода).</li>
+<li><strong>Раздельные модели</strong> для retrieval, ранжирования и разных задач — дублирование данных, инфраструктуры и ошибок согласования.</li>
+</ol>
+<p>Новая парадигма превращает данные в «текст»: каждое действие пользователя (просмотр, лайк, покупка, пропуск) — токен или группа токенов, последовательность — «предложение», а цель — предсказание следующего.</p>
+<h2 id="hstu-meta-2024">HSTU (Meta, 2024)</h2>
+<p><strong>HSTU</strong> (Hierarchical Sequential Transduction Unit; Zhai et al., Meta, ICML 2024, <em>Actions Speak Louder than Words: Trillion-Parameter Sequential Transducers for Generative Recommendations</em>, <a href="https://arxiv.org/abs/2402.17152" rel="noopener noreferrer nofollow">arXiv:2402.17152</a>) — центральная работа первого этапа.</p>
+<p><strong>Постановка.</strong> И retrieval, и ranking записываются как <strong>sequential transduction</strong>: на вход последовательность токенов, вперемешку признаки/объекты и действия; на выход — предсказание следующего действия. Метрические и категориальные признаки сведены к последовательностям: вместо агрегатов за окна — полная история, а «числовые признаки» нивелируются длинной историей. Ранжирование — это предсказание действия <em>после</em> показа конкретного кандидата (в последовательность подмешан токен кандидата), поэтому ранкер и ретривер используют один бэкбон.</p>
+<p><strong>Архитектура.</strong> Блок HSTU заменяет «внимание + FFN» трансформера единым слоем с тремя частями: проекция <span class="tex">U,V,Q,K = \phi_1(f_1(X))</span> (где <span class="tex">\phi_1</span> — SiLU), пространственная часть внимания и поэлементное «гейтование» результата:</p>
+<div class="tex tex-block">A(X)V(X) = \phi_2\!\big(Q K^\top + \mathrm{rab}\big)\,V, \qquad Y = f_2\big(\mathrm{Norm}(A V)\odot U\big).</div>
+<p>Принципиальное отличие от стандартного внимания — <strong>нет softmax</strong>: веса внимания <span class="tex">\phi_2 = \mathrm{SiLU}</span> <strong>поточечные</strong> (pointwise). Аргумент авторов: softmax нормирует веса в распределение и тем самым скрывает, <em>сколько</em> предыдущих действий релевантно, а для рекомендаций важна интенсивность («пользователь кликал на эту тему 40 раз, а не 2»), к тому же нестационарные огромные словари плохо ложатся на softmax. <span class="tex">\mathrm{rab}</span> — относительные позиционные и временные смещения. Поточечное внимание допускает разреженность, и авторы реализуют ядро, ускоряющее обработку длинных разреженных последовательностей (по их данным, в 5,3–15,2 раза быстрее FlashAttention-2 на длине 8192).</p>
+<p><strong>Инференс.</strong> Ранжирование тысяч кандидатов для одного пользователя — дорого: каждый кандидат требует прохода по всей истории. <strong>M-FALCON</strong> (Microbatched-Fast Attention Leveraging Cacheable OperatioNs) обрабатывает микробатч кандидатов за один проход со специальной маской внимания (кандидаты не видят друг друга) и переиспользует вычисления по истории (KV-кэш). По данным авторов, это позволило обслуживать модель, в 285 раз более сложную по FLOPs, чем прежний DLRM, с пропускной способностью в 1,5–3 раза выше.</p>
+<p><strong>Масштаб и результаты.</strong> Модели до <strong>1,5 трлн параметров</strong> (в основном таблицы эмбеддингов, не «умная» часть); на публичных датасетах прирост NDCG до 65,8% над базовыми методами; в онлайн-A/B ранкер дал <strong>+12,4%</strong> по основному событию вовлечённости (E-Task) и +4,4% по событию потребления (C-Task), а HSTU как новый источник кандидатов — +6,2% и +5,0%. Главное — степенной закон качества от вычислений на трёх порядках величины. Оговорки: онлайн-цифры внутренние и невоспроизводимы, а сравнение с DLRM-базой Meta зависит от того, насколько хорошо эта база настроена; независимых воспроизведений масштаба в триллион параметров нет.</p>
+<h2 id="масштабирование-ранжирования-bytedance-meta-и-другие">Масштабирование ранжирования: ByteDance, Meta и другие</h2>
+<p>Параллельно развивалась линия, где <strong>сохраняют</strong> ранжирующую архитектуру с признаками, но масштабируют её так, чтобы вычисления использовались эффективно.</p>
+<ul>
+<li><strong>Wukong</strong> (Meta, ICML 2024, <a href="https://arxiv.org/abs/2403.02545" rel="noopener noreferrer nofollow">arXiv:2403.02545</a>): стек факторизационных машин с линейным сжатием; впервые показан законоподобный рост качества DLRM-подобной модели на два порядка вычислений.</li>
+<li><strong>LONGER</strong> (ByteDance, RecSys 2025, <a href="https://arxiv.org/abs/2505.04421" rel="noopener noreferrer nofollow">arXiv:2505.04421</a>): моделирование <strong>длинных</strong> историй (тысячи действий) с глобальными токенами и сжатием через cross-attention; развёрнут в более чем десяти сценариях ByteDance.</li>
+<li><strong>RankMixer</strong> (ByteDance, 2025, <a href="https://arxiv.org/abs/2507.15551" rel="noopener noreferrer nofollow">arXiv:2507.15551</a>): блок, где смешивание признаков идёт операциями, дружелюбными к GPU, вместо слабонагруженного внимания; масштабировали ранкер примерно в 100 раз при той же задержке и подняли MFU с 4,5% до 45%; по авторским данным, +0,3% активных дней и +1,08% времени в приложении.</li>
+<li><strong>OneTrans</strong> (ByteDance, 2025, <a href="https://arxiv.org/abs/2510.26104" rel="noopener noreferrer nofollow">arXiv:2510.26104</a>): один трансформер для обоих — взаимодействий признаков и последовательностей; +5,68% GMV на пользователя в онлайн-A/B.</li>
+<li><strong>TokenMixer-Large</strong> (ByteDance, 2026, <a href="https://arxiv.org/abs/2602.06563" rel="noopener noreferrer nofollow">arXiv:2602.06563</a>): до 7 млрд параметров в проде и 15 млрд офлайн; на разных поверхностях +1,66% заказов (e-commerce), +2,0% ADSS в рекламе, +1,4% выручки в лайвах.</li>
+<li><strong>MixFormer</strong> (ByteDance, KDD 2026, <a href="https://arxiv.org/abs/2602.14110" rel="noopener noreferrer nofollow">arXiv:2602.14110</a>): совместное масштабирование плотной части и последовательностей в Douyin и Douyin Lite; по описанию авторов, устойчивый рост вовлечённости (числа в абстракте не приводятся).</li>
+</ul>
+<h2 id="argus-яндекс-20252026">ARGUS (Яндекс, 2025–2026)</h2>
+<p><strong>ARGUS</strong> (Хрыльченко, Матвеев, Макеев, Байкалов; Яндекс; <a href="https://arxiv.org/abs/2507.15994" rel="noopener noreferrer nofollow">arXiv:2507.15994</a>, <em>Scaling Recommender Transformers to One Billion Parameters</em>, принята на KDD 2026). Идея: <strong>авторегрессивное</strong> обучение на пользовательских историях с двумя совместными подзадачами — предсказать <em>обратную связь</em> (лайк, дослушал, пропустил) и <em>следующий объект</em>. Рецепт позволил обучить трансформеры размером <strong>до миллиарда параметров</strong> (крупнейший энкодер в работе про HSTU — около 176 млн). В A/B на музыкальной платформе с миллионами пользователей (Яндекс Музыка) заявлено +2,26% суммарного времени прослушивания и +6,37% вероятности лайка — по словам авторов, крупнейший прирост качества от нейросетевой модели на этой платформе. Это пример для русскоязычного читателя: рекомендательный кейс на масштабе, сопоставимом с зарубежными.</p>
+<h2 id="end-to-end-генерация-onerec-kuaishou">End-to-end генерация: OneRec (Kuaishou)</h2>
+<p>Следующий шаг — отказ от каскада «retrieval → pre-rank → rank → re-rank». <strong>OneRec</strong> (Kuaishou, Deng et al., 2025, <a href="https://arxiv.org/abs/2502.18965" rel="noopener noreferrer nofollow">arXiv:2502.18965</a>) — одна encoder–decoder модель, которая <strong>сразу генерирует готовую выдачу</strong> (сессию из нескольких видео), токен за токеном, по семантическим ID объектов (глава 15). Компоненты:</p>
+<ul>
+<li><strong>Токенизация видео</strong> в SID по мультимодальным эмбеддингам.</li>
+<li><strong>Sparse MoE</strong> в декодере: ёмкость растёт без пропорционального роста вычислений.</li>
+<li><strong>Session-wise generation</strong>: целый список генерируется как последовательность, и объекты в нём согласованы (разнообразие и порядок «встроены» в модель, а не навешены правилами).</li>
+<li><strong>Выравнивание по предпочтениям.</strong> Нужен сигнал «что лучше»: обученная reward-модель оценивает сгенерированные сессии, а по лучшей/худшей строятся пары для <strong>DPO</strong> (итеративно). Проблема, которую это решает: показывается один список на запрос, поэтому контрфактического «что было бы, если…» нет — приходится симулировать отклик моделью.</li>
+</ul>
+<p><strong>Результаты.</strong> В основном потоке Kuaishou: +1,6% времени просмотра (arXiv, февраль 2025). В <em>OneRec Technical Report</em> (<a href="https://arxiv.org/abs/2506.13695" rel="noopener noreferrer nofollow">arXiv:2506.13695</a>, июнь 2025) вычислительная ёмкость модели выросла в 10 раз, MFU достиг 23,7% (обучение) и 28,8% (инференс), операционные затраты составили 10,6% от затрат традиционного конвейера, а система обслуживает 25% всех запросов Kuaishou и Kuaishou Lite; время в приложении +0,54% и +1,24% соответственно. <strong>OneRec-V2</strong> (<a href="https://arxiv.org/abs/2508.20900" rel="noopener noreferrer nofollow">arXiv:2508.20900</a>): по диагнозу авторов, 97,66% вычислений V1 уходило на кодирование последовательности, а не на генерацию; «ленивая» decoder-only архитектура сократила вычисления на 94% и обучающие ресурсы на 90%, что позволило дойти до 8 млрд параметров; выравнивание по реальной обратной связи пользователей (в абстракте названы Duration-Aware Reward Shaping и Adaptive Ratio Clipping) вместо одной лишь reward-модели дало +0,467% и +0,741% времени в приложении на двух сегментах.</p>
+<p><strong>OneRec-Think</strong> (<a href="https://arxiv.org/abs/2510.11639" rel="noopener noreferrer nofollow">arXiv:2510.11639</a>, препринт): текстовое рассуждение перед генерацией ID, выравнивание SID с текстом и RL с наградой, учитывающей несколько допустимых трактовок интересов; для промышленного развёртывания авторы предлагают архитектуру <strong>Think-Ahead</strong> (абстракт её не раскрывает, детали — в статье); онлайн +0,159% времени в приложении. Пример хорошо показывает соотношение эффекта и цены: доли процента при заметном усложнении системы.</p>
+<h2 id="другие-компании">Другие компании</h2>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>Модель</th>
+<th>Компания</th>
+<th>Год</th>
+<th>Что генерирует / предсказывает</th>
+<th>Масштаб и заявленный эффект</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>HSTU</td>
+<td>Meta</td>
+<td>2024</td>
+<td>следующее действие; retrieval и ranking в одной модели</td>
+<td>до 1,5 трлн параметров; +12,4% по основному событию вовлечённости</td>
+</tr>
+<tr>
+<td>Wukong</td>
+<td>Meta</td>
+<td>2024</td>
+<td>CTR-подобные скоры (ранкер)</td>
+<td>закон масштабирования до ~100× вычислений</td>
+</tr>
+<tr>
+<td>LONGER</td>
+<td>ByteDance</td>
+<td>2025</td>
+<td>скоры по очень длинным историям</td>
+<td>более 10 сценариев, «миллиарды пользователей»</td>
+</tr>
+<tr>
+<td>RankMixer</td>
+<td>ByteDance</td>
+<td>2025</td>
+<td>скоры (ранкер)</td>
+<td>1B параметров; MFU 4,5% → 45%; +1,08% времени в приложении</td>
+</tr>
+<tr>
+<td>OneTrans</td>
+<td>ByteDance</td>
+<td>2025</td>
+<td>скоры (ранкер, один трансформер)</td>
+<td>+5,68% GMV на пользователя</td>
+</tr>
+<tr>
+<td>TokenMixer-Large</td>
+<td>ByteDance</td>
+<td>2026</td>
+<td>скоры (ранкер)</td>
+<td>7B в проде, 15B офлайн; +1,66% заказов</td>
+</tr>
+<tr>
+<td>MixFormer</td>
+<td>ByteDance</td>
+<td>2026</td>
+<td>скоры (ранкер)</td>
+<td>Douyin и Douyin Lite; числа в абстракте нет</td>
+</tr>
+<tr>
+<td>ARGUS</td>
+<td>Яндекс</td>
+<td>2025–2026</td>
+<td>следующий объект и обратная связь</td>
+<td>до 1B параметров; +2,26% времени прослушивания</td>
+</tr>
+<tr>
+<td>OneRec</td>
+<td>Kuaishou</td>
+<td>2025</td>
+<td>целая выдача через SID</td>
+<td>25% запросов; +0,54% / +1,24% времени в приложении</td>
+</tr>
+<tr>
+<td>OneRec-V2</td>
+<td>Kuaishou</td>
+<td>2025</td>
+<td>то же, lazy decoder-only, RL</td>
+<td>8B параметров; −94% вычислений; +0,467% / +0,741%</td>
+</tr>
+<tr>
+<td>OneRec-Think</td>
+<td>Kuaishou</td>
+<td>2025</td>
+<td>рассуждение + SID</td>
+<td>+0,159% времени в приложении</td>
+</tr>
+<tr>
+<td>MTGR</td>
+<td>Meituan</td>
+<td>2025 (CIKM)</td>
+<td>скоры на базе HSTU с кросс-признаками</td>
+<td>65× FLOPs на сэмпл относительно DLRM; основной трафик, <a href="https://arxiv.org/abs/2505.18654" rel="noopener noreferrer nofollow">arXiv:2505.18654</a></td>
+</tr>
+<tr>
+<td>MTFM</td>
+<td>Meituan</td>
+<td>2026</td>
+<td>единая фундаментальная модель, много сценариев</td>
+<td>числа в абстракте нет (<a href="https://arxiv.org/abs/2602.11235" rel="noopener noreferrer nofollow">arXiv:2602.11235</a>)</td>
+</tr>
+<tr>
+<td>UniPinRec</td>
+<td>Pinterest</td>
+<td>2026</td>
+<td>общий кодировщик: retrieval + ranking</td>
+<td>≈+1% вовлечённости, −11,1% задержки, +63,6% QPS; заменяет не весь ранкер (<a href="https://arxiv.org/abs/2606.00422" rel="noopener noreferrer nofollow">arXiv:2606.00422</a>)</td>
+</tr>
+<tr>
+<td>Foundation model</td>
+<td>Netflix</td>
+<td>2025</td>
+<td>единые пользовательские представления для нескольких задач</td>
+<td>только техблог Netflix (март 2025) и его пересказы; публичных A/B-чисел нет</td>
+</tr>
+</tbody>
+</table></div>
+<h2 id="что-общего">Что общего</h2>
+<ol>
+<li><strong>Токенизация действий и объектов.</strong> Всё превращается в токены: SID у OneRec, токены кандидатов у HSTU, группы признаков у RankMixer/OneTrans.</li>
+<li><strong>Длинный контекст.</strong> Тысячи событий, а не последние 50; для этого нужны разреженное внимание, сжатие истории, KV-кэш по пользователю.</li>
+<li><strong>Предобучение + выравнивание.</strong> Сначала авторегрессивное обучение на логах, затем RL/DPO по сигналам вознаграждения (OneRec, OneRec-V2, OneRec-Think). Ключевая проблема — как получить честный сигнал для списков, которых никто не видел (reward-модель, симуляция).</li>
+<li><strong>Эффективность железа.</strong> Ключевая метрика — <strong>MFU</strong> (доля пиковых FLOPs GPU, которую реально использует модель). Классические рекомендательные модели используют единицы процентов, потому что упираются в память таблиц и в разреженные операции; все перечисленные работы лечат именно это. От MFU напрямую зависят стоимость инференса и возможность масштабирования.</li>
+<li><strong>Единая модель вместо каскада</strong> — но пока только частично: UniPinRec не заменяет L2-ранкер, OneRec заменил не все сценарии.</li>
+</ol>
+<h2 id="трезвая-оценка">Трезвая оценка</h2>
+<ul>
+<li><strong>Приросты — десятые доли процента.</strong> Типичные числа: +0,159%, +0,3%, +0,47%, +0,54% времени. «+12,4%» у HSTU и «+5,68% GMV» у OneTrans — внутренние метрики конкретных поверхностей, а базовые системы у разных компаний сильно отличаются зрелостью; сравнивать числа между компаниями нельзя.</li>
+<li><strong>Значительная часть источников — препринты и технические отчёты</strong> без рецензии (особенно 2026 года); числа даны самими авторами, независимых воспроизведений нет. Принимайте их как гипотезы об эффекте, а не как факты.</li>
+<li><strong>Цена.</strong> Десятки и сотни GPU, переписанная инфраструктура обучения и обслуживания, команда из десятков инженеров (в авторских списках OneRec-V2 — 75 человек). Эффект в десятые доли процента окупается при сотнях миллионов пользователей и выручке порядка миллиардов; у небольшого магазина тот же процент — копейки.</li>
+<li><strong>Для небольшой компании</strong> разумный путь: <a href="/edufamcs-demo/handbook/recsys/posledovatelnye-modeli/" rel="noopener noreferrer nofollow">SASRec</a> или <a href="/edufamcs-demo/handbook/recsys/slim-i-ease/" rel="noopener noreferrer nofollow">EASE</a> для кандидатов и градиентный бустинг для ранжирования (<a href="/edufamcs-demo/handbook/recsys/kandidaty-i-ranzhirovanie/" rel="noopener noreferrer nofollow">двухстадийная схема</a>), качественное логирование и A/B (<a href="/edufamcs-demo/handbook/recsys/prodakshen-i-ab-testy/" rel="noopener noreferrer nofollow">глава 14</a>); трансформер над последовательностью — как дополнительный источник кандидатов или признаков. Это даёт большую часть эффекта за малую долю цены.</li>
+<li><strong>Что остаётся неясным.</strong> Работает ли это за пределами видео-ленты (там действий много и они короткие), как на длинной истории редких покупок, и сохраняется ли прирост при долгом горизонте, — открытый вопрос, а не доказанный факт.</li>
+</ul>
+<h2 id="вопросы-на-собеседованиях">Вопросы на собеседованиях</h2>
+<ul>
+<li><em>Зачем в HSTU убрали softmax?</em> Чтобы сохранить информацию об интенсивности предпочтений и не нормировать веса при огромных нестационарных словарях; плюс поточечное внимание допускает разреженные ядра.</li>
+<li><em>Что такое MFU и почему рекомендательные модели исторически с ним плохи?</em> Доля используемых пиковых FLOPs; причина — таблицы эмбеддингов и разреженные операции ограничены памятью, а не вычислениями.</li>
+<li><em>Чем OneRec отличается от каскада?</em> Одна модель генерирует выдачу целиком, и согласованность списка обеспечивает модель, а не правила; цена — сложнее контроль и отладка.</li>
+<li><em>Как обучать с RL, если пользователь видит лишь один список?</em> Reward-модель как симулятор отклика, off-policy-коррекция, DPO по парам.</li>
+</ul>
+<h2 id="что-почитать">Что почитать</h2>
+<ul>
+<li>Zhai et al. <em>Actions Speak Louder than Words: Trillion-Parameter Sequential Transducers for Generative Recommendations</em>. ICML 2024 (<a href="https://arxiv.org/abs/2402.17152" rel="noopener noreferrer nofollow">arXiv:2402.17152</a>).</li>
+<li>Хрыльченко, Матвеев, Макеев, Байкалов. <em>Scaling Recommender Transformers to One Billion Parameters</em> (<a href="https://arxiv.org/abs/2507.15994" rel="noopener noreferrer nofollow">arXiv:2507.15994</a>).</li>
+<li>Deng et al. <em>OneRec</em> (<a href="https://arxiv.org/abs/2502.18965" rel="noopener noreferrer nofollow">arXiv:2502.18965</a>); <em>OneRec Technical Report</em> (<a href="https://arxiv.org/abs/2506.13695" rel="noopener noreferrer nofollow">arXiv:2506.13695</a>); <em>OneRec-V2 Technical Report</em> (<a href="https://arxiv.org/abs/2508.20900" rel="noopener noreferrer nofollow">arXiv:2508.20900</a>).</li>
+<li>Zhu et al. <em>RankMixer</em> (<a href="https://arxiv.org/abs/2507.15551" rel="noopener noreferrer nofollow">arXiv:2507.15551</a>); Zhang et al. <em>Wukong</em> (<a href="https://arxiv.org/abs/2403.02545" rel="noopener noreferrer nofollow">arXiv:2403.02545</a>).</li>
+<li>Видео курса: <a href="https://youtu.be/BbWTrvwaejg" rel="noopener noreferrer nofollow">DeepRecSys, лекция 12: Generative Recommendations</a>, <a href="https://youtu.be/CW0X_rY7wzs" rel="noopener noreferrer nofollow">семинар 12: TIGER, generative retrieval</a>, <a href="https://youtu.be/6OSjw4upu3g" rel="noopener noreferrer nofollow">лекция 13: исследования Sber AI Lab в области рексистем</a>.</li>
+</ul>
+</div>
+      
+
+      
+      <nav class="pager" aria-label="Соседние статьи">
+        <a href="/edufamcs-demo/handbook/recsys/semanticheskie-id-tiger/"><span><svg class="ico sm" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-arrow-left"/></svg>Назад</span>Семантические ID и генеративный retrieval: TIGER</a>
+        <a href="/edufamcs-demo/handbook/recsys/llm-v-rekomendaciyah/"><span>Дальше<svg class="ico sm" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-arrow"/></svg></span>Большие языковые модели в рекомендациях</a>
+      </nav>
+      
+    </article>
+
+    <aside class="hb-toc" aria-label="На этой странице">
+      <a class="l2" href="#что-не-так-с-dlrm">Что не так с DLRM</a><a class="l2" href="#hstu-meta-2024">HSTU (Meta, 2024)</a><a class="l2" href="#масштабирование-ранжирования-bytedance-meta-и-другие">Масштабирование ранжирования: ByteDance, Meta и другие</a><a class="l2" href="#argus-яндекс-20252026">ARGUS (Яндекс, 2025–2026)</a><a class="l2" href="#end-to-end-генерация-onerec-kuaishou">End-to-end генерация: OneRec (Kuaishou)</a><a class="l2" href="#другие-компании">Другие компании</a><a class="l2" href="#что-общего">Что общего</a><a class="l2" href="#трезвая-оценка">Трезвая оценка</a><a class="l2" href="#вопросы-на-собеседованиях">Вопросы на собеседованиях</a><a class="l2" href="#что-почитать">Что почитать</a>
+    </aside>
+  </div>
+</div>
+
+
+</main>
+
+<footer class="ftr" data-theme="dark">
+  <svg class="sym fern" viewBox="0 0 40.5 65.02" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#fern"/></svg>
+  <div class="container">
+    <div class="ftr-row">
+      <a href="/edufamcs-demo/" aria-label="EDU FAMCS — главная"><img src="/edufamcs-demo/static/brand/logo/logo-edu-dark.svg" alt="EDU FAMCS" width="196" height="40"></a>
+      <ul class="ftr-links">
+        <li><a href="/edufamcs-demo/#courses">Курсы</a></li>
+        <li><a href="/edufamcs-demo/ml/">Машинное обучение</a></li>
+        <li><a href="/edufamcs-demo/handbook/">Хендбук</a></li>
+        <li><a href="/edufamcs-demo/news/">Новости</a></li>
+        <li><a href="/edufamcs-demo/people/">Авторы</a></li>
+        <li><a href="/edufamcs-demo/about/">О&nbsp;нас</a></li>
+        <li><a href="/edufamcs-demo/propose/">Предложить или исправить</a></li>
+        <li><a href="/edufamcs-demo/privacy/">Конфиденциальность</a></li>
+      </ul>
+    </div>
+    <div class="ftr-big" aria-hidden="true">EDU<span class="d">·</span>FAMCS</div>
+    <p class="ftr-copy">© 2026 EDU FAMCS · Минск</p>
+  </div>
+</footer>
+
+<div class="toasts-region" aria-live="polite" id="toasts">
+
+</div>
+
+</body>
+</html>

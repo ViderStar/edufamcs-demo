@@ -1,0 +1,285 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Метод опорных векторов · EDU FAMCS</title>
+<meta name="description" content="Метод опорных векторов — Классическое машинное обучение. Хендбук ML-курса ФПМИ.">
+<meta name="theme-color" content="#060A16">
+<meta name="robots" content="noindex, nofollow">
+<meta name="htmx-config" content='{"allowEval":false,"includeIndicatorStyles":false,"historyCacheSize":0,"selfRequestsOnly":true}'>
+<meta name="katex-js" content="/edufamcs-demo/static/vendor/katex/katex.min.js">
+<meta name="katex-css" content="/edufamcs-demo/static/vendor/katex/katex.min.css">
+<link rel="icon" href="/edufamcs-demo/static/brand/logo/favicon-16.svg" type="image/svg+xml" sizes="16x16">
+<link rel="icon" href="/edufamcs-demo/static/brand/logo/favicon.svg" type="image/svg+xml" sizes="any">
+<link rel="preload" href="/edufamcs-demo/static/brand/fonts/manrope-cyrillic-400.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/edufamcs-demo/static/brand/fonts/unbounded-cyrillic-800.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="/edufamcs-demo/static/brand/fonts.css">
+<link rel="stylesheet" href="/edufamcs-demo/static/brand/tokens.css">
+<link rel="stylesheet" href="/edufamcs-demo/static/brand/components.css">
+<link rel="stylesheet" href="/edufamcs-demo/static/css/site.css">
+<link rel="stylesheet" href="/edufamcs-demo/static/css/hub.css">
+<link rel="stylesheet" href="/edufamcs-demo/static/css/about.css">
+<link rel="stylesheet" href="/edufamcs-demo/static/handbook/handbook.css">
+<script src="/edufamcs-demo/static/js/theme.js"></script>
+<script src="/edufamcs-demo/static/vendor/htmx/htmx.min.js" defer></script>
+<script src="/edufamcs-demo/static/vendor/alpine/alpine-csp.min.js" defer></script>
+<script src="/edufamcs-demo/static/js/site.js" defer></script>
+<script src="/edufamcs-demo/static/handbook/handbook.js" defer></script>
+</head>
+<body class="" hx-headers='{"X-CSRFToken": "k8tL4bvP5ryddQRmthLhRQSroFeF5sRIJS2PO9ic0iWmsp250uupOlowWnkaDCzs"}'>
+<a class="skip" href="#main">К содержанию</a>
+<div class="demo-bar" role="note">Демо-версия для отзывов: вход, запись на курсы и формы здесь не работают.</div>
+
+<header class="hdr">
+  <div class="container">
+    <a class="brand" href="/edufamcs-demo/" aria-label="EDU FAMCS — главная">
+      <span class="full"><img class="only-light" src="/edufamcs-demo/static/brand/logo/logo-edu-light.svg" alt="EDU FAMCS" width="196" height="40"><img class="only-dark" src="/edufamcs-demo/static/brand/logo/logo-edu-dark.svg" alt="EDU FAMCS" width="196" height="40"></span>
+      <span class="short"><img class="only-light" src="/edufamcs-demo/static/brand/logo/logo-edu-light.svg" alt="EDU FAMCS" height="30"><img class="only-dark" src="/edufamcs-demo/static/brand/logo/logo-edu-dark.svg" alt="EDU FAMCS" height="30"></span>
+    </a>
+    <nav class="nav" id="main-nav" aria-label="Основная навигация">
+      <a href="/edufamcs-demo/#courses">Курсы</a>
+      <a href="/edufamcs-demo/ml/" >Машинное обучение</a>
+      
+      <a href="/edufamcs-demo/handbook/" aria-current="page">Хендбук</a>
+      <a href="/edufamcs-demo/news/" >Новости</a>
+      <a href="/edufamcs-demo/people/" >Авторы</a>
+      <a href="/edufamcs-demo/about/" >О&nbsp;нас</a>
+    </nav>
+    <div class="hdr-actions">
+      
+      <a class="btn btn-outline btn-login" href="/edufamcs-demo/accounts/login/?next=/handbook/classic/metod-opornyh-vektorov/">Войти</a>
+      
+      <button class="icon-btn menu-btn" type="button" aria-label="Меню" aria-expanded="false" aria-controls="main-nav"><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-menu"/></svg></button>
+    </div>
+  </div>
+</header>
+
+<main id="main">
+
+
+
+<div class="container hb-page hb-tone">
+  <div class="hb">
+    <aside class="hb-nav" aria-label="Статьи раздела">
+      
+<form class="hb-search" action="/edufamcs-demo/handbook/search/" method="get" role="search">
+  <svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-search"/></svg>
+  <input class="input" type="search" name="q" value="" placeholder="Поиск по хендбуку" aria-label="Поиск по хендбуку" autocomplete="off" maxlength="120"
+    hx-get="/edufamcs-demo/handbook/search/" hx-trigger="input changed delay:250ms, search" hx-target="#hb-nav-results" hx-sync="this:replace">
+</form>
+
+      <div id="hb-nav-results" class="hb-nav-results" aria-live="polite"></div>
+      <a class="grp" href="/edufamcs-demo/handbook/classic/">Базовые модели</a>
+      
+      <a class="" href="/edufamcs-demo/handbook/classic/knn-i-naivnyj-bajes/">Метод ближайших соседей и наивный Байес</a>
+      
+      <a class="" href="/edufamcs-demo/handbook/classic/linejnaya-regressiya/">Линейная регрессия</a>
+      
+      <a class="" href="/edufamcs-demo/handbook/classic/logisticheskaya-regressiya-i-metriki/">Логистическая регрессия и метрики классификации</a>
+      
+      <a class="cur" href="/edufamcs-demo/handbook/classic/metod-opornyh-vektorov/" aria-current="page">Метод опорных векторов</a>
+      
+    </aside>
+
+    <article class="hb-main">
+      <nav class="crumbs" aria-label="Навигация"><a href="/edufamcs-demo/handbook/">Хендбук</a><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-chev"/></svg><a href="/edufamcs-demo/handbook/classic/">Классическое машинное обучение</a></nav>
+      <h1 class="h1">Метод опорных векторов</h1>
+      <div class="hb-meta">
+        
+        
+        <span><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-clock"/></svg>9&nbsp;мин</span>
+        <span class="hb-authors"><span class="avatar sm" title="Артем Лебедевич">АЛ</span>Артем Лебедевич</span>
+        <span><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-edit"/></svg>9 ноября 2026</span>
+        
+        
+      </div>
+
+      
+      <details class="hb-mtoc">
+        <summary><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-list"/></svg>Содержание<svg class="ico sm" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-chev-down"/></svg></summary>
+        <a class="l2" href="#идея-максимального-зазора">Идея максимального зазора</a><a class="l2" href="#жёсткий-зазор">Жёсткий зазор</a><a class="l2" href="#мягкий-зазор">Мягкий зазор</a><a class="l2" href="#двойственная-задача-и-опорные-векторы">Двойственная задача и опорные векторы</a><a class="l2" href="#ядровой-трюк">Ядровой трюк</a><a class="l2" href="#svr">SVR</a><a class="l2" href="#сложность-масштаб-и-вероятности">Сложность, масштаб и вероятности</a><a class="l2" href="#история">История</a><a class="l2" href="#код">Код</a><a class="l2" href="#практика-и-типичные-ошибки">Практика и типичные ошибки</a><a class="l2" href="#что-почитать">Что почитать</a>
+      </details>
+      
+
+      <div class="prose"><p>Метод опорных векторов (SVM, support vector machine) строит линейный разделитель не по принципу «минимизировать ошибку на обучении», а по принципу <strong>максимального зазора</strong>: из бесконечного множества гиперплоскостей, разделяющих классы, выбрать ту, что максимально удалена от обоих классов. В сочетании с ядровым трюком метод даёт нелинейные границы, оставаясь выпуклой задачей оптимизации. Алгоритм был стандартом классификации в 1990–2000-х (тексты, биоинформатика, распознавание образов), пока на больших данных его не вытеснили бустинг и нейросети; но на выборках до десятков тысяч объектов с масштабированными плотными признаками SVM с RBF-ядром остаётся сильным вариантом.</p>
+<h2 id="идея-максимального-зазора">Идея максимального зазора</h2>
+<p>Классы <span class="tex">y_i\in\{-1,+1\}</span>, разделяющая гиперплоскость <span class="tex">w^\top x+b=0</span>. Расстояние от точки <span class="tex">x</span> до неё равно <span class="tex">\dfrac{|w^\top x+b|}{\|w\|}</span>. Нормируем <span class="tex">w,b</span> так, чтобы ближайшие точки удовлетворяли <span class="tex">|w^\top x+b|=1</span>. Тогда зазор (margin) между классами равен <span class="tex">\dfrac{2}{\|w\|}</span>.</p>
+<p>Интуиция: широкий зазор означает, что небольшое смещение точки не меняет класс — модель устойчива, а теория Вапника–Червоненкиса связывает ширину зазора с ёмкостью модели и обобщающей способностью.</p>
+<h2 id="жёсткий-зазор">Жёсткий зазор</h2>
+<p>Если выборка линейно разделима, максимизация зазора эквивалентна:</p>
+<div class="tex tex-block">\min_{w,b}\ \tfrac12\|w\|^2\quad\text{при}\quad y_i(w^\top x_i+b)\ge1,\ i=1,\dots,n.</div>
+<p>Это задача квадратичного программирования с выпуклой целью и линейными ограничениями — единственный глобальный минимум. Объекты, для которых ограничение активно (<span class="tex">y_i(w^\top x_i+b)=1</span>), лежат на границе зазора и называются <strong>опорными векторами</strong>; на положение гиперплоскости влияют только они, остальные можно удалить без изменения решения.</p>
+<h2 id="мягкий-зазор">Мягкий зазор</h2>
+<p>Реальные данные шумны и не всегда разделимы. Вводим штрафные переменные <span class="tex">\xi_i\ge0</span> — насколько объект нарушает зазор:</p>
+<div class="tex tex-block">\min_{w,b,\xi}\ \tfrac12\|w\|^2+C\sum_{i=1}^n\xi_i\quad\text{при}\quad y_i(w^\top x_i+b)\ge1-\xi_i,\ \xi_i\ge0.</div>
+<p><span class="tex">C</span> — цена ошибки. Большой <span class="tex">C</span> — узкий зазор и мало нарушений (риск переобучения), малый <span class="tex">C</span> — широкий зазор и больше нарушений (риск недообучения).</p>
+<p><strong>Hinge loss.</strong> Исключая <span class="tex">\xi_i=\max\big(0,\,1-y_ia(x_i)\big)</span>, где <span class="tex">a(x)=w^\top x+b</span>, получаем безусловную задачу:</p>
+<div class="tex tex-block">\min_{w,b}\ \tfrac12\|w\|^2+C\sum_{i}\max\big(0,\,1-y_i\,a(x_i)\big).</div>
+<p>То есть SVM — обычная регуляризованная линейная модель с функцией потерь hinge. Величина <span class="tex">M_i=y_ia(x_i)</span> — <strong>отступ</strong> (margin объекта): <span class="tex">M&gt;0</span> — верный класс, <span class="tex">M&lt;0</span> — ошибка. Сравнение потерь как функций отступа:</p>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>Потеря</th>
+<th>Формула</th>
+<th>Особенности</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>0–1</td>
+<td><span class="tex">[M&lt;0]</span></td>
+<td>то, что хотим, но не выпукла</td>
+</tr>
+<tr>
+<td>Hinge</td>
+<td><span class="tex">\max(0,1-M)</span></td>
+<td>ноль при <span class="tex">M\ge1</span>: «достаточно уверенные» не вносят вклад, поэтому разрежённость решения</td>
+</tr>
+<tr>
+<td>Log-loss</td>
+<td><span class="tex">\ln(1+e^{-M})</span></td>
+<td>гладкая, положительна всегда: каждый объект тянет границу; даёт вероятности</td>
+</tr>
+</tbody>
+</table></div>
+<p>Обе выпуклы. Hinge — мажоранта 0–1 потери; log-loss становится ею после перехода к основанию 2, <span class="tex">\log_2(1+e^{-M})</span> (при <span class="tex">M=0</span> натуральный логарифм даёт <span class="tex">\ln2\approx0{,}69&lt;1</span>). Различие в поведении при <span class="tex">M\ge1</span> — главная причина, почему у SVM есть опорные векторы, а у логистической регрессии нет.</p>
+<h2 id="двойственная-задача-и-опорные-векторы">Двойственная задача и опорные векторы</h2>
+<p>Запишем лагранжиан с множителями <span class="tex">\alpha_i\ge0</span> (подробнее об условиях Каруша–Куна–Таккера и двойственности — в разделе об <a href="/edufamcs-demo/handbook/math/gradienty-i-optimizaciya/" rel="noopener noreferrer nofollow">оптимизации</a>). Приравнивая нулю производные по <span class="tex">w</span> и <span class="tex">b</span>, получаем <span class="tex">w=\sum_i\alpha_iy_ix_i</span> и <span class="tex">\sum_i\alpha_iy_i=0</span>. Двойственная задача:</p>
+<div class="tex tex-block">\max_{\alpha}\ \sum_i\alpha_i-\tfrac12\sum_{i,j}\alpha_i\alpha_jy_iy_j\,x_i^\top x_j\quad\text{при}\quad 0\le\alpha_i\le C,\ \sum_i\alpha_iy_i=0.</div>
+<p>Из условий дополняющей нежёсткости <span class="tex">\alpha_i&gt;0</span> только у опорных векторов: объектов на границе зазора или внутри него (нарушителей). Предсказание:</p>
+<div class="tex tex-block">a(x)=\sum_{i\in SV}\alpha_iy_i\,x_i^\top x+b.</div>
+<p>Два наблюдения, на которых держится ядровой метод: и обучение, и предсказание зависят от данных <strong>только через скалярные произведения</strong> <span class="tex">x_i^\top x_j</span>, и решение разрежено — определяется опорными векторами.</p>
+<h2 id="ядровой-трюк">Ядровой трюк</h2>
+<p>Если классы не разделимы линейно, перейдём в пространство признаков <span class="tex">\varphi(x)</span> высокой размерности, где разделимы, и построим линейный разделитель там. Скалярное произведение в этом пространстве заменим <strong>ядром</strong></p>
+<div class="tex tex-block">K(x,x')=\varphi(x)^\top\varphi(x'),</div>
+<p>вычисляя его напрямую, не строя <span class="tex">\varphi</span> (иногда бесконечномерное). Достаточно, чтобы <span class="tex">K</span> было симметричным положительно полуопределённым (условие Мерсера). Наиболее частые ядра:</p>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>Ядро</th>
+<th>Формула</th>
+<th>Комментарий</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Линейное</td>
+<td><span class="tex">x^\top x'</span></td>
+<td>быстро, при большом числе признаков (тексты)</td>
+</tr>
+<tr>
+<td>Полиномиальное</td>
+<td><span class="tex">(\gamma x^\top x'+r)^p</span></td>
+<td>признаки-произведения до степени <span class="tex">p</span></td>
+</tr>
+<tr>
+<td>RBF (гауссово)</td>
+<td><span class="tex">\exp(-\gamma\lVert x-x'\rVert^2)</span></td>
+<td>универсальное, соответствует бесконечномерному <span class="tex">\varphi</span></td>
+</tr>
+</tbody>
+</table></div>
+<p><strong>Влияние гиперпараметров RBF-SVM.</strong></p>
+<ul>
+<li><span class="tex">\gamma</span> задаёт радиус влияния опорного вектора (<span class="tex">\sim1/\sqrt\gamma</span>). Большой <span class="tex">\gamma</span> — каждая точка влияет только рядом, граница рваная, переобучение; малый <span class="tex">\gamma</span> — почти линейная граница, недообучение.</li>
+<li><span class="tex">C</span> работает как регуляризатор: большой <span class="tex">C</span> — стремление классифицировать все точки верно.</li>
+<li>Хорошие значения лежат вдоль диагонали сетки <span class="tex">(C,\gamma)</span>: сильное увеличение <span class="tex">\gamma</span> компенсируется уменьшением <span class="tex">C</span>. Ищут по логарифмической сетке, например <span class="tex">C\in[10^{-2},10^{3}]</span>, <span class="tex">\gamma\in[10^{-4},10^{1}]</span>.</li>
+</ul>
+<p><strong>Масштабирование обязательно</strong>: RBF-ядро зависит от евклидова расстояния, и признаки с большей шкалой вытесняют остальные. Как и в kNN, <code>StandardScaler</code> — внутри пайплайна.</p>
+<h2 id="svr">SVR</h2>
+<p>Для регрессии (SVR) используют <span class="tex">\varepsilon</span>-нечувствительную потерю: <span class="tex">\max(0,|y-a(x)|-\varepsilon)</span>. Ошибки внутри «трубки» шириной <span class="tex">\varepsilon</span> вокруг предсказания не штрафуются; опорными становятся объекты на границе и вне трубки. Параметры: <span class="tex">C</span>, <span class="tex">\varepsilon</span>, ядро.</p>
+<h2 id="сложность-масштаб-и-вероятности">Сложность, масштаб и вероятности</h2>
+<p>Решатели ядровой SVM (libsvm, SMO) имеют сложность между <span class="tex">O(n^2)</span> и <span class="tex">O(n^3)</span> по числу объектов и требуют хранения ядра, поэтому метод плохо масштабируется: десятки тысяч объектов — пределы комфорта, сотни тысяч — нет. Для больших выборок и разреженных признаков берут:</p>
+<ul>
+<li><code>LinearSVC</code> (liblinear) — линейная SVM, около <span class="tex">O(nd)</span> на итерацию;</li>
+<li><code>SGDClassifier(loss="hinge")</code> — онлайн-обучение;</li>
+<li>приближение ядра (<code>Nystroem</code>, <code>RBFSampler</code>) + линейная модель.</li>
+</ul>
+<p>SVM выдаёт знаковое расстояние до границы, не вероятность. Вероятности получают калибровкой <strong>Platt scaling</strong>: логистическая регрессия над оценкой <span class="tex">a(x)</span>; в sklearn — <code>SVC(probability=True)</code> (дополнительная внутренняя кросс-валидация, в несколько раз медленнее) либо <code>CalibratedClassifierCV</code>. Platt scaling монотонен, поэтому порядок объектов и AUC он не меняет; изотоническая калибровка может создать ничьи и немного сдвинуть AUC.</p>
+<h2 id="история">История</h2>
+<p>Метод «обобщённого портрета» — линейного разделителя с максимальным зазором, который выражается через небольшое подмножество обучающих объектов, — предложили В. Вапник и А. Лернер (1963), развили Вапник и А. Червоненкис (1964); работа Вапника и Червоненкиса над равномерной сходимостью частот (1968–1971) дала статистическую теорию обучения и VC-размерность. Boser, Guyon и Vapnik (1992) соединили максимальный зазор с ядрами и получили нелинейный классификатор. Cortes и Vapnik (1995) ввели мягкий зазор (support-vector networks), сделавший метод применимым к шумным данным. С конца 1990-х SVM стал бенчмарком для текстов (Joachims) и биоинформатики.</p>
+<h2 id="код">Код</h2>
+<div class="code"><div class="code-head"><span class="lang">python</span></div><pre><code><span class="tok-k">from</span> sklearn.datasets <span class="tok-k">import</span> load_breast_cancer
+<span class="tok-k">from</span> sklearn.model_selection <span class="tok-k">import</span> GridSearchCV<span class="tok-p">,</span> StratifiedKFold
+<span class="tok-k">from</span> sklearn.pipeline <span class="tok-k">import</span> Pipeline
+<span class="tok-k">from</span> sklearn.preprocessing <span class="tok-k">import</span> StandardScaler
+<span class="tok-k">from</span> sklearn.svm <span class="tok-k">import</span> SVC
+
+X<span class="tok-p">,</span> y <span class="tok-p">=</span> load_breast_cancer<span class="tok-p">(</span>return_X_y<span class="tok-p">=</span><span class="tok-k">True</span><span class="tok-p">)</span>
+pipe <span class="tok-p">=</span> Pipeline<span class="tok-p">(</span><span class="tok-p">[</span><span class="tok-p">(</span><span class="tok-s">"</span><span class="tok-s">scale</span><span class="tok-s">"</span><span class="tok-p">,</span> StandardScaler<span class="tok-p">(</span><span class="tok-p">)</span><span class="tok-p">)</span><span class="tok-p">,</span> <span class="tok-p">(</span><span class="tok-s">"</span><span class="tok-s">svm</span><span class="tok-s">"</span><span class="tok-p">,</span> SVC<span class="tok-p">(</span>kernel<span class="tok-p">=</span><span class="tok-s">"</span><span class="tok-s">rbf</span><span class="tok-s">"</span><span class="tok-p">)</span><span class="tok-p">)</span><span class="tok-p">]</span><span class="tok-p">)</span>
+grid <span class="tok-p">=</span> <span class="tok-p">{</span>
+    <span class="tok-s">"</span><span class="tok-s">svm__C</span><span class="tok-s">"</span><span class="tok-p">:</span> <span class="tok-p">[</span><span class="tok-n">0.1</span><span class="tok-p">,</span> <span class="tok-n">1</span><span class="tok-p">,</span> <span class="tok-n">10</span><span class="tok-p">,</span> <span class="tok-n">100</span><span class="tok-p">]</span><span class="tok-p">,</span>
+    <span class="tok-s">"</span><span class="tok-s">svm__gamma</span><span class="tok-s">"</span><span class="tok-p">:</span> <span class="tok-p">[</span><span class="tok-s">"</span><span class="tok-s">scale</span><span class="tok-s">"</span><span class="tok-p">,</span> <span class="tok-n">1e-3</span><span class="tok-p">,</span> <span class="tok-n">1e-2</span><span class="tok-p">,</span> <span class="tok-n">1e-1</span><span class="tok-p">]</span><span class="tok-p">,</span>
+<span class="tok-p">}</span>
+gs <span class="tok-p">=</span> GridSearchCV<span class="tok-p">(</span>pipe<span class="tok-p">,</span> grid<span class="tok-p">,</span> cv<span class="tok-p">=</span>StratifiedKFold<span class="tok-p">(</span><span class="tok-n">5</span><span class="tok-p">,</span> shuffle<span class="tok-p">=</span><span class="tok-k">True</span><span class="tok-p">,</span> random_state<span class="tok-p">=</span><span class="tok-n">0</span><span class="tok-p">)</span><span class="tok-p">,</span>
+                  scoring<span class="tok-p">=</span><span class="tok-s">"</span><span class="tok-s">roc_auc</span><span class="tok-s">"</span><span class="tok-p">,</span> n_jobs<span class="tok-p">=</span><span class="tok-p">-</span><span class="tok-n">1</span><span class="tok-p">)</span><span class="tok-p">.</span>fit<span class="tok-p">(</span>X<span class="tok-p">,</span> y<span class="tok-p">)</span>
+<span class="tok-f">print</span><span class="tok-p">(</span>gs<span class="tok-p">.</span>best_params_<span class="tok-p">,</span> <span class="tok-f">round</span><span class="tok-p">(</span>gs<span class="tok-p">.</span>best_score_<span class="tok-p">,</span> <span class="tok-n">4</span><span class="tok-p">)</span><span class="tok-p">)</span>
+<span class="tok-f">print</span><span class="tok-p">(</span><span class="tok-s">"</span><span class="tok-s">опорных векторов:</span><span class="tok-s">"</span><span class="tok-p">,</span> gs<span class="tok-p">.</span>best_estimator_<span class="tok-p">[</span><span class="tok-s">"</span><span class="tok-s">svm</span><span class="tok-s">"</span><span class="tok-p">]</span><span class="tok-p">.</span>n_support_<span class="tok-p">)</span>
+</code></pre></div>
+<h2 id="практика-и-типичные-ошибки">Практика и типичные ошибки</h2>
+<ul>
+<li><strong>Нет масштабирования</strong> — главная причина плохого SVM; тюнить <span class="tex">C,\gamma</span> до этого бессмысленно.</li>
+<li><strong>Поиск только по <span class="tex">C</span> при фиксированном <span class="tex">\gamma</span></strong> или по линейной сетке: параметры нужно искать в логарифмическом масштабе и совместно.</li>
+<li><strong>Ядровой SVM на сотнях тысяч объектов</strong>: время и память растут быстрее линейно. Переходите на <code>LinearSVC</code>/SGD или бустинг.</li>
+<li><strong>Дисбаланс классов</strong>: используйте <code>class_weight="balanced"</code> и метрики PR/AUC, а не accuracy.</li>
+<li><strong><code>predict_proba</code> как истина</strong>: это Platt scaling, он может не согласовываться с <code>predict</code>; для порога используйте <code>decision_function</code>.</li>
+<li><strong>Интерпретация</strong>: ядровую SVM трудно объяснить; у линейной веса читаются как у логистической регрессии.</li>
+<li>Вопросы собеседований: вывод ширины зазора <span class="tex">2/\|w\|</span>, зачем двойственная задача, что такое опорные векторы, что делает ядро, чем hinge отличается от log-loss, роль <span class="tex">C</span> и <span class="tex">\gamma</span>.</li>
+</ul>
+<h2 id="что-почитать">Что почитать</h2>
+<ul>
+<li>B. Boser, I. Guyon, V. Vapnik, <em>A training algorithm for optimal margin classifiers</em>, COLT, 1992.</li>
+<li>C. Cortes, V. Vapnik, <em>Support-vector networks</em>, Machine Learning, 20, 1995: <a href="https://link.springer.com/article/10.1007/BF00994018" rel="noopener noreferrer nofollow">link.springer.com/article/10.1007/BF00994018</a>.</li>
+<li>C.-W. Hsu, C.-C. Chang, C.-J. Lin, <em>A Practical Guide to Support Vector Classification</em>: <a href="https://www.csie.ntu.edu.tw/~cjlin/papers/guide/guide.pdf" rel="noopener noreferrer nofollow">csie.ntu.edu.tw/~cjlin/papers/guide/guide.pdf</a> — рецепт «масштабирование, RBF, сетка по <span class="tex">C,\gamma</span>».</li>
+<li>Документация scikit-learn, Support Vector Machines: <a href="https://scikit-learn.org/stable/modules/svm.html" rel="noopener noreferrer nofollow">scikit-learn.org/stable/modules/svm.html</a>.</li>
+<li>Учебник по машинному обучению Яндекса, глава «Линейные модели» (раздел про SVM и hinge loss): <a href="https://education.yandex.ru/handbook/ml/article/linear-models" rel="noopener noreferrer nofollow">education.yandex.ru/handbook/ml/article/linear-models</a>.</li>
+<li>Видеолекция первого сезона: <a href="https://youtu.be/nu9XjoU5flE" rel="noopener noreferrer nofollow">youtu.be/nu9XjoU5flE</a>.</li>
+</ul>
+</div>
+      
+
+      
+      <nav class="pager" aria-label="Соседние статьи">
+        <a href="/edufamcs-demo/handbook/classic/logisticheskaya-regressiya-i-metriki/"><span><svg class="ico sm" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-arrow-left"/></svg>Назад</span>Логистическая регрессия и метрики классификации</a>
+        <a href="/edufamcs-demo/handbook/classic/derevya-reshenij/"><span>Дальше<svg class="ico sm" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-arrow"/></svg></span>Деревья решений</a>
+      </nav>
+      
+    </article>
+
+    <aside class="hb-toc" aria-label="На этой странице">
+      <a class="l2" href="#идея-максимального-зазора">Идея максимального зазора</a><a class="l2" href="#жёсткий-зазор">Жёсткий зазор</a><a class="l2" href="#мягкий-зазор">Мягкий зазор</a><a class="l2" href="#двойственная-задача-и-опорные-векторы">Двойственная задача и опорные векторы</a><a class="l2" href="#ядровой-трюк">Ядровой трюк</a><a class="l2" href="#svr">SVR</a><a class="l2" href="#сложность-масштаб-и-вероятности">Сложность, масштаб и вероятности</a><a class="l2" href="#история">История</a><a class="l2" href="#код">Код</a><a class="l2" href="#практика-и-типичные-ошибки">Практика и типичные ошибки</a><a class="l2" href="#что-почитать">Что почитать</a>
+    </aside>
+  </div>
+</div>
+
+
+</main>
+
+<footer class="ftr" data-theme="dark">
+  <svg class="sym fern" viewBox="0 0 40.5 65.02" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#fern"/></svg>
+  <div class="container">
+    <div class="ftr-row">
+      <a href="/edufamcs-demo/" aria-label="EDU FAMCS — главная"><img src="/edufamcs-demo/static/brand/logo/logo-edu-dark.svg" alt="EDU FAMCS" width="196" height="40"></a>
+      <ul class="ftr-links">
+        <li><a href="/edufamcs-demo/#courses">Курсы</a></li>
+        <li><a href="/edufamcs-demo/ml/">Машинное обучение</a></li>
+        <li><a href="/edufamcs-demo/handbook/">Хендбук</a></li>
+        <li><a href="/edufamcs-demo/news/">Новости</a></li>
+        <li><a href="/edufamcs-demo/people/">Авторы</a></li>
+        <li><a href="/edufamcs-demo/about/">О&nbsp;нас</a></li>
+        <li><a href="/edufamcs-demo/propose/">Предложить или исправить</a></li>
+        <li><a href="/edufamcs-demo/privacy/">Конфиденциальность</a></li>
+      </ul>
+    </div>
+    <div class="ftr-big" aria-hidden="true">EDU<span class="d">·</span>FAMCS</div>
+    <p class="ftr-copy">© 2026 EDU FAMCS · Минск</p>
+  </div>
+</footer>
+
+<div class="toasts-region" aria-live="polite" id="toasts">
+
+</div>
+
+</body>
+</html>

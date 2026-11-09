@@ -1,0 +1,250 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Метод ближайших соседей и наивный Байес · EDU FAMCS</title>
+<meta name="description" content="Метод ближайших соседей и наивный Байес — Классическое машинное обучение. Хендбук ML-курса ФПМИ.">
+<meta name="theme-color" content="#060A16">
+<meta name="robots" content="noindex, nofollow">
+<meta name="htmx-config" content='{"allowEval":false,"includeIndicatorStyles":false,"historyCacheSize":0,"selfRequestsOnly":true}'>
+<meta name="katex-js" content="/edufamcs-demo/static/vendor/katex/katex.min.js">
+<meta name="katex-css" content="/edufamcs-demo/static/vendor/katex/katex.min.css">
+<link rel="icon" href="/edufamcs-demo/static/brand/logo/favicon-16.svg" type="image/svg+xml" sizes="16x16">
+<link rel="icon" href="/edufamcs-demo/static/brand/logo/favicon.svg" type="image/svg+xml" sizes="any">
+<link rel="preload" href="/edufamcs-demo/static/brand/fonts/manrope-cyrillic-400.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/edufamcs-demo/static/brand/fonts/unbounded-cyrillic-800.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="/edufamcs-demo/static/brand/fonts.css">
+<link rel="stylesheet" href="/edufamcs-demo/static/brand/tokens.css">
+<link rel="stylesheet" href="/edufamcs-demo/static/brand/components.css">
+<link rel="stylesheet" href="/edufamcs-demo/static/css/site.css">
+<link rel="stylesheet" href="/edufamcs-demo/static/css/hub.css">
+<link rel="stylesheet" href="/edufamcs-demo/static/css/about.css">
+<link rel="stylesheet" href="/edufamcs-demo/static/handbook/handbook.css">
+<script src="/edufamcs-demo/static/js/theme.js"></script>
+<script src="/edufamcs-demo/static/vendor/htmx/htmx.min.js" defer></script>
+<script src="/edufamcs-demo/static/vendor/alpine/alpine-csp.min.js" defer></script>
+<script src="/edufamcs-demo/static/js/site.js" defer></script>
+<script src="/edufamcs-demo/static/handbook/handbook.js" defer></script>
+</head>
+<body class="" hx-headers='{"X-CSRFToken": "Dl2CMda4SyCzQd8TL3jfg8ZzuO3NGBKP25BGwbXrNp0I5MjCig2ndDvE2w9ieLsz"}'>
+<a class="skip" href="#main">К содержанию</a>
+<div class="demo-bar" role="note">Демо-версия для отзывов: вход, запись на курсы и формы здесь не работают.</div>
+
+<header class="hdr">
+  <div class="container">
+    <a class="brand" href="/edufamcs-demo/" aria-label="EDU FAMCS — главная">
+      <span class="full"><img class="only-light" src="/edufamcs-demo/static/brand/logo/logo-edu-light.svg" alt="EDU FAMCS" width="196" height="40"><img class="only-dark" src="/edufamcs-demo/static/brand/logo/logo-edu-dark.svg" alt="EDU FAMCS" width="196" height="40"></span>
+      <span class="short"><img class="only-light" src="/edufamcs-demo/static/brand/logo/logo-edu-light.svg" alt="EDU FAMCS" height="30"><img class="only-dark" src="/edufamcs-demo/static/brand/logo/logo-edu-dark.svg" alt="EDU FAMCS" height="30"></span>
+    </a>
+    <nav class="nav" id="main-nav" aria-label="Основная навигация">
+      <a href="/edufamcs-demo/#courses">Курсы</a>
+      <a href="/edufamcs-demo/ml/" >Машинное обучение</a>
+      
+      <a href="/edufamcs-demo/handbook/" aria-current="page">Хендбук</a>
+      <a href="/edufamcs-demo/news/" >Новости</a>
+      <a href="/edufamcs-demo/people/" >Авторы</a>
+      <a href="/edufamcs-demo/about/" >О&nbsp;нас</a>
+    </nav>
+    <div class="hdr-actions">
+      
+      <a class="btn btn-outline btn-login" href="/edufamcs-demo/accounts/login/?next=/handbook/classic/knn-i-naivnyj-bajes/">Войти</a>
+      
+      <button class="icon-btn menu-btn" type="button" aria-label="Меню" aria-expanded="false" aria-controls="main-nav"><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-menu"/></svg></button>
+    </div>
+  </div>
+</header>
+
+<main id="main">
+
+
+
+<div class="container hb-page hb-tone">
+  <div class="hb">
+    <aside class="hb-nav" aria-label="Статьи раздела">
+      
+<form class="hb-search" action="/edufamcs-demo/handbook/search/" method="get" role="search">
+  <svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-search"/></svg>
+  <input class="input" type="search" name="q" value="" placeholder="Поиск по хендбуку" aria-label="Поиск по хендбуку" autocomplete="off" maxlength="120"
+    hx-get="/edufamcs-demo/handbook/search/" hx-trigger="input changed delay:250ms, search" hx-target="#hb-nav-results" hx-sync="this:replace">
+</form>
+
+      <div id="hb-nav-results" class="hb-nav-results" aria-live="polite"></div>
+      <a class="grp" href="/edufamcs-demo/handbook/classic/">Базовые модели</a>
+      
+      <a class="cur" href="/edufamcs-demo/handbook/classic/knn-i-naivnyj-bajes/" aria-current="page">Метод ближайших соседей и наивный Байес</a>
+      
+      <a class="" href="/edufamcs-demo/handbook/classic/linejnaya-regressiya/">Линейная регрессия</a>
+      
+      <a class="" href="/edufamcs-demo/handbook/classic/logisticheskaya-regressiya-i-metriki/">Логистическая регрессия и метрики классификации</a>
+      
+      <a class="" href="/edufamcs-demo/handbook/classic/metod-opornyh-vektorov/">Метод опорных векторов</a>
+      
+    </aside>
+
+    <article class="hb-main">
+      <nav class="crumbs" aria-label="Навигация"><a href="/edufamcs-demo/handbook/">Хендбук</a><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-chev"/></svg><a href="/edufamcs-demo/handbook/classic/">Классическое машинное обучение</a></nav>
+      <h1 class="h1">Метод ближайших соседей и наивный Байес</h1>
+      <div class="hb-meta">
+        
+        
+        <span><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-clock"/></svg>10&nbsp;мин</span>
+        <span class="hb-authors"><span class="avatar sm" title="Артем Лебедевич">АЛ</span>Артем Лебедевич</span>
+        <span><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-edit"/></svg>9 ноября 2026</span>
+        
+        
+      </div>
+
+      
+      <details class="hb-mtoc">
+        <summary><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-list"/></svg>Содержание<svg class="ico sm" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-chev-down"/></svg></summary>
+        <a class="l2" href="#k-ближайших-соседей">k ближайших соседей</a><a class="l3" href="#идея">Идея</a><a class="l3" href="#формулы">Формулы</a><a class="l3" href="#метрики-и-масштабирование">Метрики и масштабирование</a><a class="l3" href="#выбор">Выбор k</a><a class="l3" href="#проклятие-размерности">Проклятие размерности</a><a class="l3" href="#сложность-и-индексы">Сложность и индексы</a><a class="l2" href="#наивный-байесовский-классификатор">Наивный байесовский классификатор</a><a class="l3" href="#идея-1">Идея</a><a class="l3" href="#решающее-правило-в-логарифмах">Решающее правило в логарифмах</a><a class="l3" href="#варианты">Варианты</a><a class="l3" href="#сглаживание-лапласа">Сглаживание Лапласа</a><a class="l3" href="#тексты-спам-и-почему-наивность-работает">Тексты, спам и почему «наивность» работает</a><a class="l3" href="#генеративный-и-дискриминативный-подходы">Генеративный и дискриминативный подходы</a><a class="l2" href="#код">Код</a><a class="l2" href="#практика-и-типичные-ошибки">Практика и типичные ошибки</a><a class="l2" href="#что-почитать">Что почитать</a>
+      </details>
+      
+
+      <div class="prose"><p>Две модели, в которых нет градиентного обучения. Первая опирается на <strong>расстояния</strong>: объект похож на своих соседей. Вторая — на <strong>подсчёт вероятностей</strong>: класс выбирается по формуле Байеса из частот. Они противоположны по философии (ленивая непараметрическая против генеративной параметрической), обе обучаются за один проход и обе остаются сильными бейзлайнами.</p>
+<h2 id="k-ближайших-соседей">k ближайших соседей</h2>
+<h3 id="идея">Идея</h3>
+<p>Для нового объекта <span class="tex">x</span> найти <span class="tex">k</span> ближайших объектов обучающей выборки и ответить по их меткам. Обучения нет: модель — это запомненная выборка (lazy learning). Метод предложили Э. Фикс и Дж. Ходжес (1951) для непараметрической дискриминации; Т. Кавер и П. Харт (1967) доказали, что при <span class="tex">n\to\infty</span> ошибка 1-NN не превосходит удвоенной байесовской ошибки. Метод универсален: никаких предположений о форме распределения не требуется.</p>
+<h3 id="формулы">Формулы</h3>
+<p>Пусть <span class="tex">N_k(x)</span> — множество индексов <span class="tex">k</span> ближайших к <span class="tex">x</span> объектов. Классификация голосованием:</p>
+<div class="tex tex-block">a(x)=\arg\max_{c}\sum_{i\in N_k(x)}[y_i=c],</div>
+<p>регрессия усреднением: <span class="tex">a(x)=\frac1k\sum_{i\in N_k(x)}y_i</span>. <strong>Взвешенный kNN</strong> учитывает расстояние:</p>
+<div class="tex tex-block">a(x)=\arg\max_{c}\sum_{i\in N_k(x)}w_i\,[y_i=c],\qquad w_i=\frac1{\rho(x,x_i)+\varepsilon}\ \text{или}\ K\!\left(\frac{\rho(x,x_i)}{h}\right).</div>
+<p>Веса нужны, чтобы ближайший сосед влиял сильнее дальнего и чтобы реже возникали ничьи.</p>
+<h3 id="метрики-и-масштабирование">Метрики и масштабирование</h3>
+<p>Метрика Минковского <span class="tex">\rho_p(x,z)=\big(\sum_j|x_j-z_j|^p\big)^{1/p}</span>: <span class="tex">p=2</span> — евклидова, <span class="tex">p=1</span> — манхэттенская. <strong>Косинусное</strong> расстояние <span class="tex">1-\frac{x^\top z}{\|x\|\|z\|}</span> сравнивает направления и используется для текстов и эмбеддингов. Масштаб критичен: признак с диапазоном <span class="tex">10^5</span> (доход) заглушит признак с диапазоном <span class="tex">1</span> (доля), поэтому перед kNN всегда нужен <code>StandardScaler</code> или <code>MinMaxScaler</code>, а в идеале — осмысленные веса признаков.</p>
+<h3 id="выбор">Выбор <span class="tex">k</span></h3>
+<p><span class="tex">k</span> управляет компромиссом смещения и разброса. При <span class="tex">k=1</span> граница рваная, модель идеально помнит обучение (ошибка на train нулевая) и переобучена — высокий разброс. При <span class="tex">k=n</span> ответ — глобальное большинство: высокое смещение. <span class="tex">k</span> подбирают кросс-валидацией, для бинарной задачи обычно нечётное; хорошая отправная точка поиска — порядка <span class="tex">\sqrt n</span>.</p>
+<h3 id="проклятие-размерности">Проклятие размерности</h3>
+<p>В пространстве высокой размерности расстояния концентрируются: при независимых одинаково распределённых признаках отношение расстояний до ближайшего и до самого далёкого соседа стремится к 1 (Beyer et al., 1999), «ближайший» теряет смысл. На реальных данных с низкой внутренней размерностью эффект слабее, поэтому kNN по эмбеддингам работает. Иллюстрация: чтобы в единичном кубе <span class="tex">[0,1]^d</span> захватить долю <span class="tex">k/n</span> равномерно распределённых точек, нужен подкуб с ребром <span class="tex">(k/n)^{1/d}</span>, и при росте <span class="tex">d</span> оно стремится к 1 — «окрестность» занимает почти весь куб. Следствия: kNN плохо работает при сотнях разреженных признаков; помогают отбор признаков, PCA и обучаемые эмбеддинги (метрическое обучение).</p>
+<h3 id="сложность-и-индексы">Сложность и индексы</h3>
+<p>Наивное предсказание — <span class="tex">O(nd)</span> на объект: скан всей выборки. Это главный недостаток в продакшене (задержка и память растут с данными). Ускорение: <strong>KD-tree</strong> и <strong>ball tree</strong> — деревья пространственного разбиения; в низких размерностях (порядка десятка признаков) дают около <span class="tex">O(\log n)</span>, в высоких деградируют до скана. Для больших размерностей и миллионов векторов используют <strong>приближённый</strong> поиск (ANN): HNSW, IVF, квантизация, жертвуя долей полноты ради скорости; это та же задача, что решают <a href="/edufamcs-demo/handbook/retrieval/vektornye-indeksy/" rel="noopener noreferrer nofollow">векторные индексы</a>. Семантический поиск по эмбеддингам — это kNN в обученном пространстве.</p>
+<h2 id="наивный-байесовский-классификатор">Наивный байесовский классификатор</h2>
+<h3 id="идея-1">Идея</h3>
+<p>Оптимальный (байесовский) классификатор выбирает класс с максимальной апостериорной вероятностью. По формуле Байеса</p>
+<div class="tex tex-block">P(y\mid x)=\frac{P(x\mid y)\,P(y)}{P(x)}\ \Rightarrow\ a(x)=\arg\max_y P(y)\,P(x_1,\dots,x_d\mid y).</div>
+<p>Проблема в совместном распределении <span class="tex">P(x_1,\dots,x_d\mid y)</span>: для <span class="tex">d</span> бинарных признаков это <span class="tex">2^d-1</span> параметров на класс. «Наивное» допущение — признаки условно независимы при известном классе:</p>
+<div class="tex tex-block">P(x_1,\dots,x_d\mid y)=\prod_{j=1}^d P(x_j\mid y).</div>
+<p>Теперь нужно оценить <span class="tex">d</span> одномерных распределений на класс — подсчётом частот.</p>
+<h3 id="решающее-правило-в-логарифмах">Решающее правило в логарифмах</h3>
+<p>Произведение сотен малых вероятностей уходит в машинный ноль, поэтому считают сумму логарифмов (монотонность <span class="tex">\log</span> сохраняет argmax; знаменатель <span class="tex">P(x)</span> не зависит от <span class="tex">y</span> и отбрасывается):</p>
+<div class="tex tex-block">a(x)=\arg\max_y\Big[\log P(y)+\sum_{j=1}^d\log P(x_j\mid y)\Big].</div>
+<h3 id="варианты">Варианты</h3>
+<ul>
+<li><strong>Gaussian NB</strong> — непрерывные признаки, <span class="tex">P(x_j\mid y)=\mathcal N(\mu_{jy},\sigma_{jy}^2)</span>; параметры — выборочные среднее и дисперсия внутри класса.</li>
+<li><strong>Multinomial NB</strong> — счётчики (слова в документе): <span class="tex">P(x_j\mid y)=\theta_{jy}</span>, <span class="tex">x_j</span> — число вхождений.</li>
+<li><strong>Bernoulli NB</strong> — бинарные признаки «слово есть/нет»; штрафует и за отсутствие признаков.</li>
+</ul>
+<h3 id="сглаживание-лапласа">Сглаживание Лапласа</h3>
+<p>Если слово ни разу не встретилось в классе, <span class="tex">\theta_{jy}=0</span>, и логарифм даёт <span class="tex">-\infty</span>: один незнакомый признак обнуляет весь класс. Решение — аддитивное сглаживание:</p>
+<div class="tex tex-block">\theta_{jy}=\frac{n_{jy}+\alpha}{n_y+\alpha d},</div>
+<p>где <span class="tex">n_{jy}</span> — суммарное число вхождений признака <span class="tex">j</span> в объектах класса <span class="tex">y</span>, <span class="tex">n_y=\sum_j n_{jy}</span>, <span class="tex">\alpha=1</span> — сглаживание Лапласа, <span class="tex">\alpha&lt;1</span> — Лидстоуна. <span class="tex">\alpha</span> — гиперпараметр, подбирается кросс-валидацией.</p>
+<h3 id="тексты-спам-и-почему-наивность-работает">Тексты, спам и почему «наивность» работает</h3>
+<p>Наивный Байес — классическая модель для текстов: мешок слов и Multinomial NB. Работа Sahami, Dumais, Heckerman, Horvitz (1998) применила байесовский подход к фильтрации спама, и на таких моделях строились первые массовые антиспам-фильтры. Условная независимость слов явно ложна («Нью» и «Йорк»), но метод даёт хорошую <strong>классификацию</strong> при плохих <strong>вероятностях</strong>. Домингос и Пацциани (1997) показали, что при 0–1 потере NB остаётся оптимальным в гораздо более широком классе распределений, чем те, где признаки независимы: для верного решения достаточно, чтобы правильный класс получил максимальную оценку, а не точную вероятность. Чжан (2004) добавил объяснение, почему так часто бывает: зависимости распределены по классам похоже или взаимно гасятся и argmax не меняют. Практическое следствие: выходы <code>predict_proba</code> у NB сильно перекошены к 0 и 1, перед использованием их нужно калибровать.</p>
+<h3 id="генеративный-и-дискриминативный-подходы">Генеративный и дискриминативный подходы</h3>
+<p>NB — <strong>генеративная</strong> модель: учит <span class="tex">P(x\mid y)P(y)</span>, то есть как данные порождаются. <strong>Дискриминативная</strong> (логистическая регрессия) учит <span class="tex">P(y\mid x)</span> напрямую. Нг и Джордан (2001) показали: NB приближается к своей асимптотической ошибке (обычно более высокой, если допущение независимости нарушено) быстрее — за порядка <span class="tex">\log d</span> примеров против порядка <span class="tex">d</span> у логистической регрессии, поэтому на малых выборках он часто лучше, а с ростом выборки логистическая регрессия его обгоняет. У Gaussian NB с дисперсиями, общими для всех классов (<span class="tex">\sigma_{jy}=\sigma_j</span>), решающая граница линейна, а в бинарном случае апостериорная вероятность — сигмоида от линейной функции <span class="tex">x</span>: то же семейство, что у <a href="/edufamcs-demo/handbook/classic/logisticheskaya-regressiya-i-metriki/" rel="noopener noreferrer nofollow">логистической регрессии</a>; отличается способ оценки параметров.</p>
+<h2 id="код">Код</h2>
+<p>kNN: масштабирование и подбор <span class="tex">k</span> в одном пайплайне.</p>
+<div class="code"><div class="code-head"><span class="lang">python</span></div><pre><code><span class="tok-k">from</span> sklearn.datasets <span class="tok-k">import</span> load_wine
+<span class="tok-k">from</span> sklearn.model_selection <span class="tok-k">import</span> GridSearchCV<span class="tok-p">,</span> StratifiedKFold
+<span class="tok-k">from</span> sklearn.neighbors <span class="tok-k">import</span> KNeighborsClassifier
+<span class="tok-k">from</span> sklearn.pipeline <span class="tok-k">import</span> Pipeline
+<span class="tok-k">from</span> sklearn.preprocessing <span class="tok-k">import</span> StandardScaler
+
+X<span class="tok-p">,</span> y <span class="tok-p">=</span> load_wine<span class="tok-p">(</span>return_X_y<span class="tok-p">=</span><span class="tok-k">True</span><span class="tok-p">)</span>
+pipe <span class="tok-p">=</span> Pipeline<span class="tok-p">(</span><span class="tok-p">[</span><span class="tok-p">(</span><span class="tok-s">"</span><span class="tok-s">scale</span><span class="tok-s">"</span><span class="tok-p">,</span> StandardScaler<span class="tok-p">(</span><span class="tok-p">)</span><span class="tok-p">)</span><span class="tok-p">,</span> <span class="tok-p">(</span><span class="tok-s">"</span><span class="tok-s">knn</span><span class="tok-s">"</span><span class="tok-p">,</span> KNeighborsClassifier<span class="tok-p">(</span><span class="tok-p">)</span><span class="tok-p">)</span><span class="tok-p">]</span><span class="tok-p">)</span>
+grid <span class="tok-p">=</span> <span class="tok-p">{</span>
+    <span class="tok-s">"</span><span class="tok-s">knn__n_neighbors</span><span class="tok-s">"</span><span class="tok-p">:</span> <span class="tok-f">list</span><span class="tok-p">(</span><span class="tok-f">range</span><span class="tok-p">(</span><span class="tok-n">1</span><span class="tok-p">,</span> <span class="tok-n">31</span><span class="tok-p">,</span> <span class="tok-n">2</span><span class="tok-p">)</span><span class="tok-p">)</span><span class="tok-p">,</span>
+    <span class="tok-s">"</span><span class="tok-s">knn__weights</span><span class="tok-s">"</span><span class="tok-p">:</span> <span class="tok-p">[</span><span class="tok-s">"</span><span class="tok-s">uniform</span><span class="tok-s">"</span><span class="tok-p">,</span> <span class="tok-s">"</span><span class="tok-s">distance</span><span class="tok-s">"</span><span class="tok-p">]</span><span class="tok-p">,</span>
+    <span class="tok-s">"</span><span class="tok-s">knn__p</span><span class="tok-s">"</span><span class="tok-p">:</span> <span class="tok-p">[</span><span class="tok-n">1</span><span class="tok-p">,</span> <span class="tok-n">2</span><span class="tok-p">]</span><span class="tok-p">,</span>
+<span class="tok-p">}</span>
+gs <span class="tok-p">=</span> GridSearchCV<span class="tok-p">(</span>pipe<span class="tok-p">,</span> grid<span class="tok-p">,</span> cv<span class="tok-p">=</span>StratifiedKFold<span class="tok-p">(</span><span class="tok-n">5</span><span class="tok-p">,</span> shuffle<span class="tok-p">=</span><span class="tok-k">True</span><span class="tok-p">,</span> random_state<span class="tok-p">=</span><span class="tok-n">0</span><span class="tok-p">)</span><span class="tok-p">,</span>
+                  scoring<span class="tok-p">=</span><span class="tok-s">"</span><span class="tok-s">accuracy</span><span class="tok-s">"</span><span class="tok-p">)</span><span class="tok-p">.</span>fit<span class="tok-p">(</span>X<span class="tok-p">,</span> y<span class="tok-p">)</span>
+<span class="tok-f">print</span><span class="tok-p">(</span>gs<span class="tok-p">.</span>best_params_<span class="tok-p">,</span> gs<span class="tok-p">.</span>best_score_<span class="tok-p">)</span>
+</code></pre></div>
+<p>Наивный Байес на текстах:</p>
+<div class="code"><div class="code-head"><span class="lang">python</span></div><pre><code><span class="tok-k">from</span> sklearn.datasets <span class="tok-k">import</span> fetch_20newsgroups
+<span class="tok-k">from</span> sklearn.feature_extraction.text <span class="tok-k">import</span> CountVectorizer
+<span class="tok-k">from</span> sklearn.naive_bayes <span class="tok-k">import</span> MultinomialNB
+<span class="tok-k">from</span> sklearn.pipeline <span class="tok-k">import</span> make_pipeline
+<span class="tok-k">from</span> sklearn.metrics <span class="tok-k">import</span> classification_report
+
+cats <span class="tok-p">=</span> <span class="tok-p">[</span><span class="tok-s">"</span><span class="tok-s">rec.autos</span><span class="tok-s">"</span><span class="tok-p">,</span> <span class="tok-s">"</span><span class="tok-s">sci.med</span><span class="tok-s">"</span><span class="tok-p">,</span> <span class="tok-s">"</span><span class="tok-s">comp.graphics</span><span class="tok-s">"</span><span class="tok-p">]</span>
+rm <span class="tok-p">=</span> <span class="tok-p">(</span><span class="tok-s">"</span><span class="tok-s">headers</span><span class="tok-s">"</span><span class="tok-p">,</span> <span class="tok-s">"</span><span class="tok-s">footers</span><span class="tok-s">"</span><span class="tok-p">,</span> <span class="tok-s">"</span><span class="tok-s">quotes</span><span class="tok-s">"</span><span class="tok-p">)</span>
+tr <span class="tok-p">=</span> fetch_20newsgroups<span class="tok-p">(</span>subset<span class="tok-p">=</span><span class="tok-s">"</span><span class="tok-s">train</span><span class="tok-s">"</span><span class="tok-p">,</span> categories<span class="tok-p">=</span>cats<span class="tok-p">,</span> remove<span class="tok-p">=</span>rm<span class="tok-p">)</span>
+te <span class="tok-p">=</span> fetch_20newsgroups<span class="tok-p">(</span>subset<span class="tok-p">=</span><span class="tok-s">"</span><span class="tok-s">test</span><span class="tok-s">"</span><span class="tok-p">,</span> categories<span class="tok-p">=</span>cats<span class="tok-p">,</span> remove<span class="tok-p">=</span>rm<span class="tok-p">)</span>
+
+nb <span class="tok-p">=</span> make_pipeline<span class="tok-p">(</span>CountVectorizer<span class="tok-p">(</span>min_df<span class="tok-p">=</span><span class="tok-n">2</span><span class="tok-p">)</span><span class="tok-p">,</span> MultinomialNB<span class="tok-p">(</span>alpha<span class="tok-p">=</span><span class="tok-n">0.5</span><span class="tok-p">)</span><span class="tok-p">)</span><span class="tok-p">.</span>fit<span class="tok-p">(</span>tr<span class="tok-p">.</span>data<span class="tok-p">,</span> tr<span class="tok-p">.</span>target<span class="tok-p">)</span>
+<span class="tok-f">print</span><span class="tok-p">(</span>classification_report<span class="tok-p">(</span>te<span class="tok-p">.</span>target<span class="tok-p">,</span> nb<span class="tok-p">.</span>predict<span class="tok-p">(</span>te<span class="tok-p">.</span>data<span class="tok-p">)</span><span class="tok-p">,</span> target_names<span class="tok-p">=</span>te<span class="tok-p">.</span>target_names<span class="tok-p">)</span><span class="tok-p">)</span>
+</code></pre></div>
+<h2 id="практика-и-типичные-ошибки">Практика и типичные ошибки</h2>
+<ul>
+<li><strong>kNN без масштабирования</strong> — самая частая ошибка; результат определяется единицами измерения.</li>
+<li><strong>Дубликаты между train и test</strong>: при <span class="tex">k=1</span> они дают идеальную точность, не имеющую отношения к обобщению.</li>
+<li><strong>Категориальные признаки</strong> с one-hot в евклидовой метрике: любое несовпадение категории добавляет одно и то же расстояние <span class="tex">\sqrt2</span>, независимо от того, насколько категории похожи по смыслу, а при смеси с числовыми признаками вклад категорий зависит от их масштаба. Нужна согласованная схема весов (например, расстояние Гауэра для смешанных данных) или обучаемые эмбеддинги категорий.</li>
+<li><strong>Скорость в продакшене.</strong> Хранить всю выборку и считать расстояния онлайн не масштабируется; нужен ANN-индекс или смена модели.</li>
+<li><strong>NB: коррелированные признаки</strong> учитываются дважды и перекашивают вероятности; удаляйте дубли, калибруйте вероятности.</li>
+<li><strong>NB: нулевые вероятности</strong> — не забывайте <span class="tex">\alpha&gt;0</span>; для Gaussian NB с нулевой дисперсией признака в классе есть <code>var_smoothing</code>.</li>
+<li>На собеседованиях спрашивают: почему NB работает при нарушении независимости, чем kNN отличается от k-means, какова сложность предсказания kNN и как её снизить.</li>
+</ul>
+<h2 id="что-почитать">Что почитать</h2>
+<ul>
+<li>E. Fix, J. Hodges, <em>Discriminatory Analysis. Nonparametric Discrimination: Consistency Properties</em>, USAF School of Aviation Medicine, 1951.</li>
+<li>T. Cover, P. Hart, <em>Nearest neighbor pattern classification</em>, IEEE Trans. Information Theory, 13(1), 1967: <a href="https://doi.org/10.1109/TIT.1967.1053964" rel="noopener noreferrer nofollow">doi.org/10.1109/TIT.1967.1053964</a>.</li>
+<li>K. Beyer, J. Goldstein, R. Ramakrishnan, U. Shaft, <em>When Is "Nearest Neighbor" Meaningful?</em>, ICDT, 1999.</li>
+<li>P. Domingos, M. Pazzani, <em>On the Optimality of the Simple Bayesian Classifier under Zero-One Loss</em>, Machine Learning, 29, 1997.</li>
+<li>H. Zhang, <em>The Optimality of Naive Bayes</em>, FLAIRS, 2004.</li>
+<li>A. Ng, M. Jordan, <em>On Discriminative vs. Generative Classifiers: A comparison of logistic regression and naive Bayes</em>, NIPS, 2001.</li>
+<li>M. Sahami et al., <em>A Bayesian Approach to Filtering Junk E-Mail</em>, AAAI Workshop, 1998.</li>
+<li>Документация scikit-learn: <a href="https://scikit-learn.org/stable/modules/neighbors.html" rel="noopener noreferrer nofollow">Nearest Neighbors</a>, <a href="https://scikit-learn.org/stable/modules/naive_bayes.html" rel="noopener noreferrer nofollow">Naive Bayes</a>.</li>
+<li>Учебник по машинному обучению Яндекса: <a href="https://education.yandex.ru/handbook/ml/article/metricheskiye-metody" rel="noopener noreferrer nofollow">Метрические методы</a>, <a href="https://education.yandex.ru/handbook/ml/article/generativnyj-podhod-k-klassifikacii" rel="noopener noreferrer nofollow">Генеративный подход к классификации</a>.</li>
+<li>Видеолекция первого сезона по наивному Байесу: <a href="https://youtu.be/S5yE56bD5Nk" rel="noopener noreferrer nofollow">youtu.be/S5yE56bD5Nk</a>.</li>
+</ul>
+</div>
+      
+
+      
+      <nav class="pager" aria-label="Соседние статьи">
+        <a href="/edufamcs-demo/handbook/classic/razvedochnyj-analiz-dannyh/"><span><svg class="ico sm" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-arrow-left"/></svg>Назад</span>Разведочный анализ данных</a>
+        <a href="/edufamcs-demo/handbook/classic/linejnaya-regressiya/"><span>Дальше<svg class="ico sm" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-arrow"/></svg></span>Линейная регрессия</a>
+      </nav>
+      
+    </article>
+
+    <aside class="hb-toc" aria-label="На этой странице">
+      <a class="l2" href="#k-ближайших-соседей">k ближайших соседей</a><a class="l3" href="#идея">Идея</a><a class="l3" href="#формулы">Формулы</a><a class="l3" href="#метрики-и-масштабирование">Метрики и масштабирование</a><a class="l3" href="#выбор">Выбор k</a><a class="l3" href="#проклятие-размерности">Проклятие размерности</a><a class="l3" href="#сложность-и-индексы">Сложность и индексы</a><a class="l2" href="#наивный-байесовский-классификатор">Наивный байесовский классификатор</a><a class="l3" href="#идея-1">Идея</a><a class="l3" href="#решающее-правило-в-логарифмах">Решающее правило в логарифмах</a><a class="l3" href="#варианты">Варианты</a><a class="l3" href="#сглаживание-лапласа">Сглаживание Лапласа</a><a class="l3" href="#тексты-спам-и-почему-наивность-работает">Тексты, спам и почему «наивность» работает</a><a class="l3" href="#генеративный-и-дискриминативный-подходы">Генеративный и дискриминативный подходы</a><a class="l2" href="#код">Код</a><a class="l2" href="#практика-и-типичные-ошибки">Практика и типичные ошибки</a><a class="l2" href="#что-почитать">Что почитать</a>
+    </aside>
+  </div>
+</div>
+
+
+</main>
+
+<footer class="ftr" data-theme="dark">
+  <svg class="sym fern" viewBox="0 0 40.5 65.02" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#fern"/></svg>
+  <div class="container">
+    <div class="ftr-row">
+      <a href="/edufamcs-demo/" aria-label="EDU FAMCS — главная"><img src="/edufamcs-demo/static/brand/logo/logo-edu-dark.svg" alt="EDU FAMCS" width="196" height="40"></a>
+      <ul class="ftr-links">
+        <li><a href="/edufamcs-demo/#courses">Курсы</a></li>
+        <li><a href="/edufamcs-demo/ml/">Машинное обучение</a></li>
+        <li><a href="/edufamcs-demo/handbook/">Хендбук</a></li>
+        <li><a href="/edufamcs-demo/news/">Новости</a></li>
+        <li><a href="/edufamcs-demo/people/">Авторы</a></li>
+        <li><a href="/edufamcs-demo/about/">О&nbsp;нас</a></li>
+        <li><a href="/edufamcs-demo/propose/">Предложить или исправить</a></li>
+        <li><a href="/edufamcs-demo/privacy/">Конфиденциальность</a></li>
+      </ul>
+    </div>
+    <div class="ftr-big" aria-hidden="true">EDU<span class="d">·</span>FAMCS</div>
+    <p class="ftr-copy">© 2026 EDU FAMCS · Минск</p>
+  </div>
+</footer>
+
+<div class="toasts-region" aria-live="polite" id="toasts">
+
+</div>
+
+</body>
+</html>

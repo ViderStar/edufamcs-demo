@@ -1,0 +1,251 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Графовые модели: от случайных блужданий до LightGCN · EDU FAMCS</title>
+<meta name="description" content="Графовые модели: от случайных блужданий до LightGCN — Рекомендательные системы. Хендбук ML-курса ФПМИ.">
+<meta name="theme-color" content="#060A16">
+<meta name="robots" content="noindex, nofollow">
+<meta name="htmx-config" content='{"allowEval":false,"includeIndicatorStyles":false,"historyCacheSize":0,"selfRequestsOnly":true}'>
+<meta name="katex-js" content="/edufamcs-demo/static/vendor/katex/katex.min.js">
+<meta name="katex-css" content="/edufamcs-demo/static/vendor/katex/katex.min.css">
+<link rel="icon" href="/edufamcs-demo/static/brand/logo/favicon-16.svg" type="image/svg+xml" sizes="16x16">
+<link rel="icon" href="/edufamcs-demo/static/brand/logo/favicon.svg" type="image/svg+xml" sizes="any">
+<link rel="preload" href="/edufamcs-demo/static/brand/fonts/manrope-cyrillic-400.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/edufamcs-demo/static/brand/fonts/unbounded-cyrillic-800.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="/edufamcs-demo/static/brand/fonts.css">
+<link rel="stylesheet" href="/edufamcs-demo/static/brand/tokens.css">
+<link rel="stylesheet" href="/edufamcs-demo/static/brand/components.css">
+<link rel="stylesheet" href="/edufamcs-demo/static/css/site.css">
+<link rel="stylesheet" href="/edufamcs-demo/static/css/hub.css">
+<link rel="stylesheet" href="/edufamcs-demo/static/css/about.css">
+<link rel="stylesheet" href="/edufamcs-demo/static/handbook/handbook.css">
+<script src="/edufamcs-demo/static/js/theme.js"></script>
+<script src="/edufamcs-demo/static/vendor/htmx/htmx.min.js" defer></script>
+<script src="/edufamcs-demo/static/vendor/alpine/alpine-csp.min.js" defer></script>
+<script src="/edufamcs-demo/static/js/site.js" defer></script>
+<script src="/edufamcs-demo/static/handbook/handbook.js" defer></script>
+</head>
+<body class="" hx-headers='{"X-CSRFToken": "un1r9NCBU5e5VOuPWT4dZG2UKHmXw2cpT7AvTLpYPWCeanFyt6NlWbyZipss4cU9"}'>
+<a class="skip" href="#main">К содержанию</a>
+<div class="demo-bar" role="note">Демо-версия для отзывов: вход, запись на курсы и формы здесь не работают.</div>
+
+<header class="hdr">
+  <div class="container">
+    <a class="brand" href="/edufamcs-demo/" aria-label="EDU FAMCS — главная">
+      <span class="full"><img class="only-light" src="/edufamcs-demo/static/brand/logo/logo-edu-light.svg" alt="EDU FAMCS" width="196" height="40"><img class="only-dark" src="/edufamcs-demo/static/brand/logo/logo-edu-dark.svg" alt="EDU FAMCS" width="196" height="40"></span>
+      <span class="short"><img class="only-light" src="/edufamcs-demo/static/brand/logo/logo-edu-light.svg" alt="EDU FAMCS" height="30"><img class="only-dark" src="/edufamcs-demo/static/brand/logo/logo-edu-dark.svg" alt="EDU FAMCS" height="30"></span>
+    </a>
+    <nav class="nav" id="main-nav" aria-label="Основная навигация">
+      <a href="/edufamcs-demo/#courses">Курсы</a>
+      <a href="/edufamcs-demo/ml/" >Машинное обучение</a>
+      
+      <a href="/edufamcs-demo/handbook/" aria-current="page">Хендбук</a>
+      <a href="/edufamcs-demo/news/" >Новости</a>
+      <a href="/edufamcs-demo/people/" >Авторы</a>
+      <a href="/edufamcs-demo/about/" >О&nbsp;нас</a>
+    </nav>
+    <div class="hdr-actions">
+      
+      <a class="btn btn-outline btn-login" href="/edufamcs-demo/accounts/login/?next=/handbook/recsys/grafovye-modeli/">Войти</a>
+      
+      <button class="icon-btn menu-btn" type="button" aria-label="Меню" aria-expanded="false" aria-controls="main-nav"><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-menu"/></svg></button>
+    </div>
+  </div>
+</header>
+
+<main id="main">
+
+
+
+<div class="container hb-page s-recsys">
+  <div class="hb">
+    <aside class="hb-nav" aria-label="Статьи раздела">
+      
+<form class="hb-search" action="/edufamcs-demo/handbook/search/" method="get" role="search">
+  <svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-search"/></svg>
+  <input class="input" type="search" name="q" value="" placeholder="Поиск по хендбуку" aria-label="Поиск по хендбуку" autocomplete="off" maxlength="120"
+    hx-get="/edufamcs-demo/handbook/search/" hx-trigger="input changed delay:250ms, search" hx-target="#hb-nav-results" hx-sync="this:replace">
+</form>
+
+      <div id="hb-nav-results" class="hb-nav-results" aria-live="polite"></div>
+      <a class="grp" href="/edufamcs-demo/handbook/recsys/">Линейные и нейросетевые модели: 2011–2023</a>
+      
+      <a class="" href="/edufamcs-demo/handbook/recsys/slim-i-ease/">Линейные item-item модели: SLIM и EASE</a>
+      
+      <a class="" href="/edufamcs-demo/handbook/recsys/ctr-modeli/">Модели CTR: от логрегрессии до DCN и DIN</a>
+      
+      <a class="" href="/edufamcs-demo/handbook/recsys/two-tower-ann/">Нейросетевые рекомендации: two-tower, negative sampling, ANN</a>
+      
+      <a class="" href="/edufamcs-demo/handbook/recsys/posledovatelnye-modeli/">Последовательные модели: GRU4Rec, SASRec, BERT4Rec</a>
+      
+      <a class="cur" href="/edufamcs-demo/handbook/recsys/grafovye-modeli/" aria-current="page">Графовые модели: от случайных блужданий до LightGCN</a>
+      
+    </aside>
+
+    <article class="hb-main">
+      <nav class="crumbs" aria-label="Навигация"><a href="/edufamcs-demo/handbook/">Хендбук</a><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-chev"/></svg><a href="/edufamcs-demo/handbook/recsys/">Рекомендательные системы</a></nav>
+      <h1 class="h1">Графовые модели: от случайных блужданий до LightGCN</h1>
+      <div class="hb-meta">
+        
+        
+        <span><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-clock"/></svg>13&nbsp;мин</span>
+        <span class="hb-authors"><span class="avatar sm" title="Артем Лебедевич">АЛ</span>Артем Лебедевич</span>
+        <span><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-edit"/></svg>9 ноября 2026</span>
+        
+        
+      </div>
+
+      
+      <details class="hb-mtoc">
+        <summary><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-list"/></svg>Содержание<svg class="ico sm" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-chev-down"/></svg></summary>
+        <a class="l2" href="#случайные-блуждания-и">Случайные блуждания: P^3\alpha и RP^3\beta</a><a class="l2" href="#графовые-нейросети">Графовые нейросети</a><a class="l2" href="#lightgcn-2020">LightGCN (2020)</a><a class="l2" href="#что-идёт-дальше">Что идёт дальше</a><a class="l2" href="#где-графы-реально-применяют">Где графы реально применяют</a><a class="l2" href="#подводные-камни">Подводные камни</a><a class="l2" href="#что-почитать">Что почитать</a>
+      </details>
+      
+
+      <div class="prose"><p>Матрица взаимодействий <span class="tex">R \in \{0,1\}^{|U|\times|I|}</span> — это ещё и <strong>двудольный граф</strong>: пользователи слева, объекты справа, ребро — взаимодействие. Матричное разложение смотрит на этот граф «в упор»: учитывает только прямые рёбра. Но рекомендовать можно и по цепочкам: пользователь <span class="tex">u</span> → объект <span class="tex">i</span> → другой пользователь <span class="tex">v</span> → объект <span class="tex">j</span>, который <span class="tex">v</span> любит, а <span class="tex">u</span> ещё не видел. Это связь <strong>высокого порядка</strong>, и графовые модели делают её явной.</p>
+<h2 id="случайные-блуждания-и">Случайные блуждания: <span class="tex">P^3_\alpha</span> и <span class="tex">RP^3_\beta</span></h2>
+<p>Простейший графовый метод не обучает ничего. Пусть <span class="tex">P^{UI}</span> — матрица переходов «пользователь → объект» (строки <span class="tex">R</span>, нормированные на сумму 1), <span class="tex">P^{IU}</span> — «объект → пользователь» (столбцы <span class="tex">R</span>, нормированные). Трёхшаговое блуждание из <span class="tex">u</span> заканчивается в объекте <span class="tex">j</span> с вероятностью <span class="tex">\big(P^{UI}P^{IU}P^{UI}\big)_{uj}</span>. Сортируем объекты по этой вероятности — готовая рекомендация.</p>
+<p><strong><span class="tex">P^3_\alpha</span></strong> (Cooper et al., WWW 2014) возводит вероятности переходов в степень <span class="tex">\alpha</span> без перенормировки. Для бинарной матрицы все переходы из узла равновероятны, <span class="tex">p = 1/\deg</span>, поэтому <span class="tex">\alpha</span> работает как штраф за степень узла: вклад перехода <span class="tex">\deg^{-\alpha}</span>, и при <span class="tex">\alpha &gt; 1</span> пути через «болтливых» пользователей и хабы весят меньше. При <span class="tex">\alpha = 1</span> — обычное блуждание. Для взвешенных рёбер (счётчики, рейтинги) <span class="tex">\alpha &gt; 1</span> ещё и заостряет распределение в пользу сильных рёбер.</p>
+<p>На практике вероятности считают не симуляцией, а умножением разреженных матриц: <span class="tex">W = P^{IU}P^{UI}</span> — матрица «объект → объект» за два шага, а скоры пользователя — <span class="tex">P^{UI}_{u\cdot}\,W</span>. Так <span class="tex">P^3_\alpha</span> превращается в item-kNN с особой мерой сходства, и всё сказанное про <a href="/edufamcs-demo/handbook/recsys/kollaborativnaya-filtraciya-po-sosedyam/" rel="noopener noreferrer nofollow">kNN</a> (прореживание <span class="tex">W</span> до топ-<span class="tex">k</span> соседей, пересчёт по расписанию) применимо и здесь.</p>
+<p>Проблема блужданий — <strong>смещение к популярному</strong>: на третьем шаге почти любое блуждание приходит в хаб, в который ведёт много рёбер. <strong><span class="tex">RP^3_\beta</span></strong> (Christoffel et al., RecSys 2015; расширено в Paudel et al., TiiS 2016) делит вероятность на популярность конечного объекта в степени <span class="tex">\beta</span>:</p>
+<div class="tex tex-block">\hat r_{uj} = \frac{\big(P^{3}_\alpha\big)_{uj}}{\mathrm{pop}(j)^{\beta}}.</div>
+<p>При <span class="tex">\beta = 0</span> получаем <span class="tex">P^3_\alpha</span>; чем больше <span class="tex">\beta</span>, тем сильнее штраф популярным и тем больше в выдаче «длинного хвоста» (ценой точности, если перестараться). Метод имеет два гиперпараметра <span class="tex">\alpha,\beta</span>, обучения нет, а на открытых датасетах <span class="tex">RP^3_\beta</span> стабильно оказывался среди сильнейших бейзлайнов (то самое наблюдение из статьи про <a href="/edufamcs-demo/handbook/recsys/slim-i-ease/" rel="noopener noreferrer nofollow">линейные модели</a>: простые методы догоняют нейросети).</p>
+<p><strong>Swing</strong> (Yang et al., Alibaba, 2020) строит item-item граф для «похожих товаров» и тоже считает по структуре двудольного графа, но доверяет совместным кликам неравномерно. Если два пользователя <span class="tex">u, v</span> оба кликнули <span class="tex">i</span> и <span class="tex">j</span>, а больше у них мало общего, это сильное свидетельство связи <span class="tex">i</span>–<span class="tex">j</span>; если их истории почти совпадают, совместный клик ничего нового не говорит:</p>
+<div class="tex tex-block">s(i,j) = \sum_{u \in U_i \cap U_j}\ \sum_{v \in U_i \cap U_j,\ v \ne u} \frac{1}{\alpha + |I_u \cap I_v|},</div>
+<p>где <span class="tex">U_i</span> — пользователи объекта <span class="tex">i</span>, <span class="tex">I_u</span> — объекты пользователя <span class="tex">u</span>, а <span class="tex">\alpha</span> — свой сглаживающий параметр (не тот, что в <span class="tex">P^3_\alpha</span>). Swing устойчив к «шумным» парам вроде товаров, которые кликают все подряд, и до сих пор популярен как дешёвый источник item-to-item кандидатов.</p>
+<p><strong>Pixie</strong> (Eksombatchai et al., Pinterest, WWW 2018). Блуждания в масштабе Pinterest: граф из 3 млрд узлов (пины и доски) и 17 млрд рёбер, прореженный и загруженный целиком в память сервера. Рекомендации строятся <strong>в реальном времени</strong>: из пинов запроса (недавние действия пользователя) запускают множество коротких блужданий с возвратом в стартовую вершину, а число посещений пина служит скором; блуждание останавливают досрочно, как только достаточно пинов набрали нужное число посещений. Блуждания смещаются по признакам пользователя (язык, тематика) — просто изменением вероятностей переходов. По данным авторов, один сервер обслуживает около 1200 запросов в секунду с задержкой 60 мс; обучения и пересчёта эмбеддингов нет.</p>
+<h2 id="графовые-нейросети">Графовые нейросети</h2>
+<p><strong>Идея message passing.</strong> Каждый узел обновляет эмбеддинг агрегированием эмбеддингов соседей, затем слои повторяются: после <span class="tex">K</span> слоёв эмбеддинг узла зависит от его окрестности радиуса <span class="tex">K</span>.</p>
+<ul>
+<li><strong>GCN</strong> (Kipf, Welling, ICLR 2017). Слой <span class="tex">H^{(k+1)} = \sigma\big(\tilde D^{-1/2}\tilde A\tilde D^{-1/2}H^{(k)}W^{(k)}\big)</span>, где <span class="tex">\tilde A = A + I</span> — граф с петлями, <span class="tex">\tilde D</span> — степени. Симметричная нормировка не даёт хабам доминировать. Работает на всём графе сразу — для миллиардов узлов непрактично.</li>
+<li><strong>GraphSAGE</strong> (Hamilton et al., 2017). Агрегирует не всех, а <strong>сэмплированных</strong> соседей фиксированного числа, и учит функцию агрегации — модель индуктивна: эмбеддинги вычисляются и для новых узлов, а не хранятся в таблице.</li>
+<li><strong>PinSage</strong> (Ying et al., Pinterest, KDD 2018). GraphSAGE в промышленном масштабе: граф 3 млрд узлов и 18 млрд рёбер. Нововведения: соседи выбираются не равномерно, а <strong>по важности</strong> — короткими случайными блужданиями из узла, и берутся <span class="tex">T</span> самых посещаемых (с весами посещений при агрегации); обучение на мини-батчах на GPU, вывод эмбеддингов всех узлов — через MapReduce; <strong>hard negatives</strong> — объекты из середины выдачи персонализированного PageRank относительно запроса: связанные с ним, но слабее, чем позитив; учебный план: трудных негативов становится больше с каждой эпохой. PinSage — одна из первых графовых нейросетей, испытанных на веб-масштабе: авторы сообщают о выигрыше в офлайн-метриках, пользовательских исследованиях и онлайн A/B.</li>
+<li><strong>NGCF</strong> (Wang et al., SIGIR 2019). Применяет GCN-подобные слои к двудольному графу пользователь–объект с обучаемыми эмбеддингами узлов. На слое: <span class="tex">e_u^{(k+1)} = \mathrm{LeakyReLU}\big(W_1 e_u^{(k)} + \sum_{i\in N_u}\tfrac{1}{\sqrt{|N_u||N_i|}}(W_1 e_i^{(k)} + W_2(e_i^{(k)}\odot e_u^{(k)}))\big)</span>. Эмбеддинги всех слоёв склеиваются; потеря — BPR.</li>
+</ul>
+<h2 id="lightgcn-2020">LightGCN (2020)</h2>
+<p>He et al. (SIGIR 2020) сделали наблюдение и проверили его абляциями: у NGCF лишнее почти всё. Матрицы преобразования <span class="tex">W_1, W_2</span> и нелинейность нужны в классификации узлов с богатыми входными признаками, а здесь на входе только ID-эмбеддинги — нечего преобразовывать, всё это только ухудшает обучение. Итоговая модель — <em>только</em> пропагация и усреднение:</p>
+<div class="tex tex-block">e_u^{(k+1)} = \sum_{i \in N_u}\frac{1}{\sqrt{|N_u|\,|N_i|}}\, e_i^{(k)}, \qquad
+e_i^{(k+1)} = \sum_{u \in N_i}\frac{1}{\sqrt{|N_i|\,|N_u|}}\, e_u^{(k)}.</div>
+<p>В матричном виде: <span class="tex">E^{(k+1)} = \hat A E^{(k)}</span>, где <span class="tex">\hat A = D^{-1/2}\begin{pmatrix}0 &amp; R\\ R^\top &amp; 0\end{pmatrix}D^{-1/2}</span> — нормированная матрица смежности. Параметры модели — только <span class="tex">E^{(0)}</span>, начальные эмбеддинги. Итоговое представление — взвешенное среднее по слоям (учитывает и собственные признаки, как self-loop в GCN, и окрестность разных радиусов):</p>
+<div class="tex tex-block">e_u = \sum_{k=0}^{K}\alpha_k e_u^{(k)}, \quad \alpha_k = \tfrac{1}{K+1}, \qquad \hat y_{ui} = e_u^\top e_i .</div>
+<p>Обучение — BPR: <span class="tex">\mathcal{L} = -\sum_{(u,i^+,i^-)}\log\sigma(\hat y_{ui^+} - \hat y_{ui^-}) + \lambda\|E^{(0)}\|^2</span>. Типичные <span class="tex">K = 2</span>–<span class="tex">3</span>.</p>
+<p>Интерпретация: LightGCN — <strong>сглаживание эмбеддингов по графу</strong> (низкочастотный фильтр на спектре <span class="tex">\hat A</span>). Эмбеддинг пользователя становится близок к эмбеддингам его объектов и объектов пользователей с похожими вкусами. С этой точки зрения LightGCN близок к линейным моделям: два шага пропагации дают нормированную матрицу совстречаемости <span class="tex">\tilde R^\top \tilde R</span>, где <span class="tex">\tilde R = D_U^{-1/2} R D_I^{-1/2}</span>, — ту же структуру, что использует EASE, только LightGCN работает с ней через обучаемые эмбеддинги, а EASE — напрямую. Shen et al. (CIKM 2021) довели мысль до конца: в терминах обработки сигналов на графах kNN, матричное разложение, линейные автоэнкодеры и LightGCN — разные низкочастотные фильтры, а фильтр в замкнутой форме без обучения (GF-CF) на трёх датасетах не уступает нейросетевым моделям.</p>
+<div class="code"><div class="code-head"><span class="lang">python</span></div><pre><code><span class="tok-k">import</span> numpy <span class="tok-k">as</span> np<span class="tok-p">,</span> scipy.sparse <span class="tok-k">as</span> sp<span class="tok-p">,</span> torch
+
+<span class="tok-k">def</span> <span class="tok-f">normalized_adj</span><span class="tok-p">(</span>R<span class="tok-p">:</span> sp<span class="tok-p">.</span>csr_matrix<span class="tok-p">)</span> <span class="tok-p">-</span><span class="tok-p">&gt;</span> torch<span class="tok-p">.</span>Tensor<span class="tok-p">:</span>
+    nu<span class="tok-p">,</span> ni <span class="tok-p">=</span> R<span class="tok-p">.</span>shape
+    A <span class="tok-p">=</span> sp<span class="tok-p">.</span>bmat<span class="tok-p">(</span><span class="tok-p">[</span><span class="tok-p">[</span><span class="tok-k">None</span><span class="tok-p">,</span> R<span class="tok-p">]</span><span class="tok-p">,</span> <span class="tok-p">[</span>R<span class="tok-p">.</span>T<span class="tok-p">,</span> <span class="tok-k">None</span><span class="tok-p">]</span><span class="tok-p">]</span><span class="tok-p">,</span> <span class="tok-f">format</span><span class="tok-p">=</span><span class="tok-s">"</span><span class="tok-s">csr</span><span class="tok-s">"</span><span class="tok-p">)</span>          <span class="tok-c"># [(nu+ni), (nu+ni)]</span>
+    deg <span class="tok-p">=</span> np<span class="tok-p">.</span>asarray<span class="tok-p">(</span>A<span class="tok-p">.</span>sum<span class="tok-p">(</span><span class="tok-n">1</span><span class="tok-p">)</span><span class="tok-p">,</span> dtype<span class="tok-p">=</span>np<span class="tok-p">.</span>float64<span class="tok-p">)</span><span class="tok-p">.</span>ravel<span class="tok-p">(</span><span class="tok-p">)</span>           <span class="tok-c"># float: иначе power(-0.5) упадёт на int</span>
+    d_inv_sqrt <span class="tok-p">=</span> np<span class="tok-p">.</span>power<span class="tok-p">(</span>deg<span class="tok-p">,</span> <span class="tok-p">-</span><span class="tok-n">0.5</span><span class="tok-p">,</span> where<span class="tok-p">=</span>deg <span class="tok-p">&gt;</span> <span class="tok-n">0</span><span class="tok-p">,</span> out<span class="tok-p">=</span>np<span class="tok-p">.</span>zeros_like<span class="tok-p">(</span>deg<span class="tok-p">)</span><span class="tok-p">)</span>
+    A_hat <span class="tok-p">=</span> sp<span class="tok-p">.</span>diags<span class="tok-p">(</span>d_inv_sqrt<span class="tok-p">)</span> <span class="tok-p">@</span> A <span class="tok-p">@</span> sp<span class="tok-p">.</span>diags<span class="tok-p">(</span>d_inv_sqrt<span class="tok-p">)</span>
+    A_hat <span class="tok-p">=</span> A_hat<span class="tok-p">.</span>tocoo<span class="tok-p">(</span><span class="tok-p">)</span>
+    idx <span class="tok-p">=</span> torch<span class="tok-p">.</span>tensor<span class="tok-p">(</span>np<span class="tok-p">.</span>vstack<span class="tok-p">(</span><span class="tok-p">[</span>A_hat<span class="tok-p">.</span>row<span class="tok-p">,</span> A_hat<span class="tok-p">.</span>col<span class="tok-p">]</span><span class="tok-p">)</span><span class="tok-p">,</span> dtype<span class="tok-p">=</span>torch<span class="tok-p">.</span>long<span class="tok-p">)</span>
+    <span class="tok-k">return</span> torch<span class="tok-p">.</span>sparse_coo_tensor<span class="tok-p">(</span>idx<span class="tok-p">,</span> torch<span class="tok-p">.</span>tensor<span class="tok-p">(</span>A_hat<span class="tok-p">.</span>data<span class="tok-p">,</span> dtype<span class="tok-p">=</span>torch<span class="tok-p">.</span>float32<span class="tok-p">)</span><span class="tok-p">,</span> A_hat<span class="tok-p">.</span>shape<span class="tok-p">)</span><span class="tok-p">.</span>coalesce<span class="tok-p">(</span><span class="tok-p">)</span>
+
+<span class="tok-k">class</span> <span class="tok-f">LightGCN</span><span class="tok-p">(</span>torch<span class="tok-p">.</span>nn<span class="tok-p">.</span>Module<span class="tok-p">)</span><span class="tok-p">:</span>
+    <span class="tok-k">def</span> <span class="tok-f">__init__</span><span class="tok-p">(</span><span class="tok-f">self</span><span class="tok-p">,</span> n_users<span class="tok-p">,</span> n_items<span class="tok-p">,</span> A_hat<span class="tok-p">,</span> d<span class="tok-p">=</span><span class="tok-n">64</span><span class="tok-p">,</span> K<span class="tok-p">=</span><span class="tok-n">3</span><span class="tok-p">)</span><span class="tok-p">:</span>
+        <span class="tok-f">super</span><span class="tok-p">(</span><span class="tok-p">)</span><span class="tok-p">.</span><span class="tok-f">__init__</span><span class="tok-p">(</span><span class="tok-p">)</span>
+        <span class="tok-f">self</span><span class="tok-p">.</span>nu<span class="tok-p">,</span> <span class="tok-f">self</span><span class="tok-p">.</span>K<span class="tok-p">,</span> <span class="tok-f">self</span><span class="tok-p">.</span>A <span class="tok-p">=</span> n_users<span class="tok-p">,</span> K<span class="tok-p">,</span> A_hat
+        <span class="tok-f">self</span><span class="tok-p">.</span>emb <span class="tok-p">=</span> torch<span class="tok-p">.</span>nn<span class="tok-p">.</span>Embedding<span class="tok-p">(</span>n_users <span class="tok-p">+</span> n_items<span class="tok-p">,</span> d<span class="tok-p">)</span>
+        torch<span class="tok-p">.</span>nn<span class="tok-p">.</span>init<span class="tok-p">.</span>normal_<span class="tok-p">(</span><span class="tok-f">self</span><span class="tok-p">.</span>emb<span class="tok-p">.</span>weight<span class="tok-p">,</span> std<span class="tok-p">=</span><span class="tok-n">0.1</span><span class="tok-p">)</span>
+
+    <span class="tok-k">def</span> <span class="tok-f">propagate</span><span class="tok-p">(</span><span class="tok-f">self</span><span class="tok-p">)</span><span class="tok-p">:</span>
+        e <span class="tok-p">=</span> <span class="tok-f">self</span><span class="tok-p">.</span>emb<span class="tok-p">.</span>weight
+        layers <span class="tok-p">=</span> <span class="tok-p">[</span>e<span class="tok-p">]</span>
+        <span class="tok-k">for</span> _ <span class="tok-k">in</span> <span class="tok-f">range</span><span class="tok-p">(</span><span class="tok-f">self</span><span class="tok-p">.</span>K<span class="tok-p">)</span><span class="tok-p">:</span>
+            e <span class="tok-p">=</span> torch<span class="tok-p">.</span>sparse<span class="tok-p">.</span>mm<span class="tok-p">(</span><span class="tok-f">self</span><span class="tok-p">.</span>A<span class="tok-p">,</span> e<span class="tok-p">)</span>       <span class="tok-c"># E^{(k+1)} = A_hat E^{(k)}</span>
+            layers<span class="tok-p">.</span>append<span class="tok-p">(</span>e<span class="tok-p">)</span>
+        out <span class="tok-p">=</span> torch<span class="tok-p">.</span>stack<span class="tok-p">(</span>layers<span class="tok-p">)</span><span class="tok-p">.</span>mean<span class="tok-p">(</span><span class="tok-n">0</span><span class="tok-p">)</span>         <span class="tok-c"># alpha_k = 1/(K+1)</span>
+        <span class="tok-k">return</span> out<span class="tok-p">[</span><span class="tok-p">:</span><span class="tok-f">self</span><span class="tok-p">.</span>nu<span class="tok-p">]</span><span class="tok-p">,</span> out<span class="tok-p">[</span><span class="tok-f">self</span><span class="tok-p">.</span>nu<span class="tok-p">:</span><span class="tok-p">]</span>
+
+    <span class="tok-k">def</span> <span class="tok-f">bpr_loss</span><span class="tok-p">(</span><span class="tok-f">self</span><span class="tok-p">,</span> u<span class="tok-p">,</span> pos<span class="tok-p">,</span> neg<span class="tok-p">,</span> reg<span class="tok-p">=</span><span class="tok-n">1e-4</span><span class="tok-p">)</span><span class="tok-p">:</span>
+        U<span class="tok-p">,</span> I <span class="tok-p">=</span> <span class="tok-f">self</span><span class="tok-p">.</span>propagate<span class="tok-p">(</span><span class="tok-p">)</span>
+        eu<span class="tok-p">,</span> ep<span class="tok-p">,</span> en <span class="tok-p">=</span> U<span class="tok-p">[</span>u<span class="tok-p">]</span><span class="tok-p">,</span> I<span class="tok-p">[</span>pos<span class="tok-p">]</span><span class="tok-p">,</span> I<span class="tok-p">[</span>neg<span class="tok-p">]</span>
+        loss <span class="tok-p">=</span> <span class="tok-p">-</span>torch<span class="tok-p">.</span>nn<span class="tok-p">.</span>functional<span class="tok-p">.</span>logsigmoid<span class="tok-p">(</span><span class="tok-p">(</span>eu <span class="tok-p">*</span> ep<span class="tok-p">)</span><span class="tok-p">.</span>sum<span class="tok-p">(</span><span class="tok-p">-</span><span class="tok-n">1</span><span class="tok-p">)</span> <span class="tok-p">-</span> <span class="tok-p">(</span>eu <span class="tok-p">*</span> en<span class="tok-p">)</span><span class="tok-p">.</span>sum<span class="tok-p">(</span><span class="tok-p">-</span><span class="tok-n">1</span><span class="tok-p">)</span><span class="tok-p">)</span><span class="tok-p">.</span>mean<span class="tok-p">(</span><span class="tok-p">)</span>
+        e0 <span class="tok-p">=</span> <span class="tok-f">self</span><span class="tok-p">.</span>emb<span class="tok-p">.</span>weight
+        l2 <span class="tok-p">=</span> <span class="tok-p">(</span>e0<span class="tok-p">[</span>u<span class="tok-p">]</span><span class="tok-p">.</span>pow<span class="tok-p">(</span><span class="tok-n">2</span><span class="tok-p">)</span><span class="tok-p">.</span>sum<span class="tok-p">(</span><span class="tok-p">)</span> <span class="tok-p">+</span> e0<span class="tok-p">[</span><span class="tok-f">self</span><span class="tok-p">.</span>nu <span class="tok-p">+</span> pos<span class="tok-p">]</span><span class="tok-p">.</span>pow<span class="tok-p">(</span><span class="tok-n">2</span><span class="tok-p">)</span><span class="tok-p">.</span>sum<span class="tok-p">(</span><span class="tok-p">)</span> <span class="tok-p">+</span> e0<span class="tok-p">[</span><span class="tok-f">self</span><span class="tok-p">.</span>nu <span class="tok-p">+</span> neg<span class="tok-p">]</span><span class="tok-p">.</span>pow<span class="tok-p">(</span><span class="tok-n">2</span><span class="tok-p">)</span><span class="tok-p">.</span>sum<span class="tok-p">(</span><span class="tok-p">)</span><span class="tok-p">)</span> <span class="tok-p">/</span> <span class="tok-f">len</span><span class="tok-p">(</span>u<span class="tok-p">)</span>
+        <span class="tok-k">return</span> loss <span class="tok-p">+</span> reg <span class="tok-p">*</span> l2
+</code></pre></div>
+<p>Каждый шаг обучения пропагирует эмбеддинги по всему графу: <span class="tex">K</span> разреженных умножений, <span class="tex">O(K\,|E|\,d)</span> операций. Так можно жить, пока граф — до десятков миллионов рёбер — помещается в память GPU. На больших графах переходят к сэмплированию соседей (как в PinSage).</p>
+<h2 id="что-идёт-дальше">Что идёт дальше</h2>
+<ul>
+<li><strong>Пересглаживание (oversmoothing).</strong> С ростом <span class="tex">K</span> эмбеддинги узлов одной компоненты сближаются. Спектр <span class="tex">\hat A</span> лежит в <span class="tex">[-1, 1]</span>, и в <span class="tex">\hat A^K</span> выживают только компоненты с собственными значениями <span class="tex">\pm 1</span> (у двудольного графа есть оба); соответствующие собственные векторы пропорциональны <span class="tex">\sqrt{\deg}</span>. После многих слоёв все пользователи смотрят в одном направлении (и все объекты — в одном), различаясь лишь нормой. Поэтому <span class="tex">K</span> маленькое, а итог — среднее по слоям, чтобы сохранить сигнал ранних слоёв.</li>
+<li><strong>UltraGCN</strong> (Mao et al., CIKM 2021). Отказывается от явной пропагации: бесконечное число слоёв аппроксимируется ограничением на предельное состояние, и вместо сообщений добавляется потеря, сближающая эмбеддинги соседей (в графах «пользователь–объект» и «объект–объект»). Обучается на порядок быстрее LightGCN.</li>
+<li><strong>SimGCL</strong> (Yu et al., SIGIR 2022). Контрастивное обучение для GNN: вместо дорогих аугментаций графа (удаление рёбер, узлов) достаточно добавлять небольшой случайный шум к эмбеддингам на каждом слое и сближать два шумных представления одного узла (InfoNCE). Выигрыш даёт не аугментация графа, а равномерность распределения эмбеддингов, снижающая смещение в сторону популярного.</li>
+</ul>
+<h2 id="где-графы-реально-применяют">Где графы реально применяют</h2>
+<ul>
+<li><strong>Генерация кандидатов</strong>: Pixie, PinSage-подобные эмбеддинги в ANN-индексе; граф — хороший источник для item-to-item.</li>
+<li><strong>Холодные объекты и узлы</strong>: индуктивные модели (GraphSAGE/PinSage) вычисляют эмбеддинг по соседям и содержимому без переобучения.</li>
+<li><strong>Социальные связи</strong>: друзья и подписки — дополнительные рёбра (рекомендации в соцсетях, подписки).</li>
+<li><strong>Мульти-реляционные графы</strong>: пользователь–товар–бренд–магазин; граф знаний.</li>
+<li><strong>Антифрод и сообщества</strong>: те же методы.</li>
+</ul>
+<p>Честная оценка: в офлайн-бенчмарках настроенные <span class="tex">RP^3_\beta</span>, EASE и LightGCN держатся рядом; в индустрии графовая часть чаще всего работает как <strong>один из источников кандидатов</strong> и признаков для ранжировщика, а не как единственная модель. Реальные затраты — в инфраструктуре: хранение графа, сэмплирование, обновление.</p>
+<h2 id="подводные-камни">Подводные камни</h2>
+<ul>
+<li><strong>Утечка через граф.</strong> Если тестовые рёбра входят в граф при пропагации, модель видит ответ. Граф строится только из обучающих взаимодействий.</li>
+<li><strong>Хабы.</strong> Популярные объекты имеют тысячи соседей; нормировка по степеням помогает, но не исчерпывает проблему. Для <span class="tex">P^3</span> — параметр <span class="tex">\beta</span>.</li>
+<li><strong>Обновление.</strong> Трансдуктивные модели (LightGCN, NGCF) знают только узлы из обучения, их нужно переобучать по мере роста графа; блуждания (Pixie) учитывают новые рёбра сразу, индуктивные модели (GraphSAGE, PinSage) считают эмбеддинг нового узла без переобучения.</li>
+<li><strong>Холодные пользователи.</strong> Нового пользователя нет в таблице <span class="tex">E^{(0)}</span>, а у узла без рёбер нет и соседей. Нужен либо пересчёт, либо индуктивная модель с признаками, либо другой источник кандидатов.</li>
+<li><strong>Память.</strong> Эмбеддинги всех узлов и сам граф на миллиардах объектов приходится шардировать.</li>
+</ul>
+<h2 id="что-почитать">Что почитать</h2>
+<ul>
+<li>Cooper et al. <em>Random Walks in Recommender Systems: Exact Computation and Simulations</em>, WWW 2014 (<span class="tex">P^3_\alpha</span>, DOI 10.1145/2567948.2579244); Christoffel et al. <em>Blockbusters and Wallflowers: Accurate, Diverse, and Scalable Recommendations with Random Walks</em>, RecSys 2015 (<span class="tex">RP^3_\beta</span>, DOI 10.1145/2792838.2800180); Paudel et al. <em>Updatable, Accurate, Diverse, and Scalable Recommendations for Interactive Applications</em>, ACM TiiS 2016.</li>
+<li>Yang et al. <a href="https://arxiv.org/abs/2010.05525" rel="noopener noreferrer nofollow"><em>Large Scale Product Graph Construction for Recommendation in E-commerce</em></a>, 2020 (Swing).</li>
+<li>Eksombatchai et al. <a href="https://arxiv.org/abs/1711.07601" rel="noopener noreferrer nofollow"><em>Pixie</em></a>, WWW 2018.</li>
+<li>Kipf, Welling. <a href="https://arxiv.org/abs/1609.02907" rel="noopener noreferrer nofollow"><em>Semi-Supervised Classification with GCN</em></a>, 2017; Hamilton et al. <a href="https://arxiv.org/abs/1706.02216" rel="noopener noreferrer nofollow"><em>GraphSAGE</em></a>, 2017; Ying et al. <a href="https://arxiv.org/abs/1806.01973" rel="noopener noreferrer nofollow"><em>PinSage</em></a>, 2018.</li>
+<li>Wang et al. <a href="https://arxiv.org/abs/1905.08108" rel="noopener noreferrer nofollow"><em>NGCF</em></a>, 2019; He et al. <a href="https://arxiv.org/abs/2002.02126" rel="noopener noreferrer nofollow"><em>LightGCN</em></a>, 2020; Shen et al. <a href="https://arxiv.org/abs/2108.07567" rel="noopener noreferrer nofollow"><em>How Powerful is Graph Convolution for Recommendation?</em></a>, CIKM 2021 (GF-CF).</li>
+<li>Mao et al. <a href="https://arxiv.org/abs/2110.15114" rel="noopener noreferrer nofollow"><em>UltraGCN</em></a>, 2021; Yu et al. <a href="https://arxiv.org/abs/2112.08679" rel="noopener noreferrer nofollow"><em>SimGCL</em></a>, 2022.</li>
+<li>Курс DeepRecSys, лекция 8: <a href="https://www.youtube.com/watch?v=CUTT5NZWvNM" rel="noopener noreferrer nofollow">графовые нейросети</a>.</li>
+</ul>
+</div>
+      
+
+      
+      <nav class="pager" aria-label="Соседние статьи">
+        <a href="/edufamcs-demo/handbook/recsys/posledovatelnye-modeli/"><span><svg class="ico sm" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-arrow-left"/></svg>Назад</span>Последовательные модели: GRU4Rec, SASRec, BERT4Rec</a>
+        <a href="/edufamcs-demo/handbook/recsys/kandidaty-i-ranzhirovanie/"><span>Дальше<svg class="ico sm" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-arrow"/></svg></span>Двухстадийная схема: кандидаты → ранжирование</a>
+      </nav>
+      
+    </article>
+
+    <aside class="hb-toc" aria-label="На этой странице">
+      <a class="l2" href="#случайные-блуждания-и">Случайные блуждания: P^3\alpha и RP^3\beta</a><a class="l2" href="#графовые-нейросети">Графовые нейросети</a><a class="l2" href="#lightgcn-2020">LightGCN (2020)</a><a class="l2" href="#что-идёт-дальше">Что идёт дальше</a><a class="l2" href="#где-графы-реально-применяют">Где графы реально применяют</a><a class="l2" href="#подводные-камни">Подводные камни</a><a class="l2" href="#что-почитать">Что почитать</a>
+    </aside>
+  </div>
+</div>
+
+
+</main>
+
+<footer class="ftr" data-theme="dark">
+  <svg class="sym fern" viewBox="0 0 40.5 65.02" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#fern"/></svg>
+  <div class="container">
+    <div class="ftr-row">
+      <a href="/edufamcs-demo/" aria-label="EDU FAMCS — главная"><img src="/edufamcs-demo/static/brand/logo/logo-edu-dark.svg" alt="EDU FAMCS" width="196" height="40"></a>
+      <ul class="ftr-links">
+        <li><a href="/edufamcs-demo/#courses">Курсы</a></li>
+        <li><a href="/edufamcs-demo/ml/">Машинное обучение</a></li>
+        <li><a href="/edufamcs-demo/handbook/">Хендбук</a></li>
+        <li><a href="/edufamcs-demo/news/">Новости</a></li>
+        <li><a href="/edufamcs-demo/people/">Авторы</a></li>
+        <li><a href="/edufamcs-demo/about/">О&nbsp;нас</a></li>
+        <li><a href="/edufamcs-demo/propose/">Предложить или исправить</a></li>
+        <li><a href="/edufamcs-demo/privacy/">Конфиденциальность</a></li>
+      </ul>
+    </div>
+    <div class="ftr-big" aria-hidden="true">EDU<span class="d">·</span>FAMCS</div>
+    <p class="ftr-copy">© 2026 EDU FAMCS · Минск</p>
+  </div>
+</footer>
+
+<div class="toasts-region" aria-live="polite" id="toasts">
+
+</div>
+
+</body>
+</html>

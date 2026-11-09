@@ -1,0 +1,279 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Кластеризация: k-means, иерархическая, DBSCAN · EDU FAMCS</title>
+<meta name="description" content="Кластеризация: k-means, иерархическая, DBSCAN — Классическое машинное обучение. Хендбук ML-курса ФПМИ.">
+<meta name="theme-color" content="#060A16">
+<meta name="robots" content="noindex, nofollow">
+<meta name="htmx-config" content='{"allowEval":false,"includeIndicatorStyles":false,"historyCacheSize":0,"selfRequestsOnly":true}'>
+<meta name="katex-js" content="/edufamcs-demo/static/vendor/katex/katex.min.js">
+<meta name="katex-css" content="/edufamcs-demo/static/vendor/katex/katex.min.css">
+<link rel="icon" href="/edufamcs-demo/static/brand/logo/favicon-16.svg" type="image/svg+xml" sizes="16x16">
+<link rel="icon" href="/edufamcs-demo/static/brand/logo/favicon.svg" type="image/svg+xml" sizes="any">
+<link rel="preload" href="/edufamcs-demo/static/brand/fonts/manrope-cyrillic-400.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/edufamcs-demo/static/brand/fonts/unbounded-cyrillic-800.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="/edufamcs-demo/static/brand/fonts.css">
+<link rel="stylesheet" href="/edufamcs-demo/static/brand/tokens.css">
+<link rel="stylesheet" href="/edufamcs-demo/static/brand/components.css">
+<link rel="stylesheet" href="/edufamcs-demo/static/css/site.css">
+<link rel="stylesheet" href="/edufamcs-demo/static/css/hub.css">
+<link rel="stylesheet" href="/edufamcs-demo/static/css/about.css">
+<link rel="stylesheet" href="/edufamcs-demo/static/handbook/handbook.css">
+<script src="/edufamcs-demo/static/js/theme.js"></script>
+<script src="/edufamcs-demo/static/vendor/htmx/htmx.min.js" defer></script>
+<script src="/edufamcs-demo/static/vendor/alpine/alpine-csp.min.js" defer></script>
+<script src="/edufamcs-demo/static/js/site.js" defer></script>
+<script src="/edufamcs-demo/static/handbook/handbook.js" defer></script>
+</head>
+<body class="" hx-headers='{"X-CSRFToken": "LDByzO8wuDkjzL7s5NdjidX0TkOKIhfbanaCjMVTpuIsOkibC0WrfIt5r2UfgrXV"}'>
+<a class="skip" href="#main">К содержанию</a>
+<div class="demo-bar" role="note">Демо-версия для отзывов: вход, запись на курсы и формы здесь не работают.</div>
+
+<header class="hdr">
+  <div class="container">
+    <a class="brand" href="/edufamcs-demo/" aria-label="EDU FAMCS — главная">
+      <span class="full"><img class="only-light" src="/edufamcs-demo/static/brand/logo/logo-edu-light.svg" alt="EDU FAMCS" width="196" height="40"><img class="only-dark" src="/edufamcs-demo/static/brand/logo/logo-edu-dark.svg" alt="EDU FAMCS" width="196" height="40"></span>
+      <span class="short"><img class="only-light" src="/edufamcs-demo/static/brand/logo/logo-edu-light.svg" alt="EDU FAMCS" height="30"><img class="only-dark" src="/edufamcs-demo/static/brand/logo/logo-edu-dark.svg" alt="EDU FAMCS" height="30"></span>
+    </a>
+    <nav class="nav" id="main-nav" aria-label="Основная навигация">
+      <a href="/edufamcs-demo/#courses">Курсы</a>
+      <a href="/edufamcs-demo/ml/" >Машинное обучение</a>
+      
+      <a href="/edufamcs-demo/handbook/" aria-current="page">Хендбук</a>
+      <a href="/edufamcs-demo/news/" >Новости</a>
+      <a href="/edufamcs-demo/people/" >Авторы</a>
+      <a href="/edufamcs-demo/about/" >О&nbsp;нас</a>
+    </nav>
+    <div class="hdr-actions">
+      
+      <a class="btn btn-outline btn-login" href="/edufamcs-demo/accounts/login/?next=/handbook/classic/klasterizaciya/">Войти</a>
+      
+      <button class="icon-btn menu-btn" type="button" aria-label="Меню" aria-expanded="false" aria-controls="main-nav"><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-menu"/></svg></button>
+    </div>
+  </div>
+</header>
+
+<main id="main">
+
+
+
+<div class="container hb-page hb-tone">
+  <div class="hb">
+    <aside class="hb-nav" aria-label="Статьи раздела">
+      
+<form class="hb-search" action="/edufamcs-demo/handbook/search/" method="get" role="search">
+  <svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-search"/></svg>
+  <input class="input" type="search" name="q" value="" placeholder="Поиск по хендбуку" aria-label="Поиск по хендбуку" autocomplete="off" maxlength="120"
+    hx-get="/edufamcs-demo/handbook/search/" hx-trigger="input changed delay:250ms, search" hx-target="#hb-nav-results" hx-sync="this:replace">
+</form>
+
+      <div id="hb-nav-results" class="hb-nav-results" aria-live="polite"></div>
+      <a class="grp" href="/edufamcs-demo/handbook/classic/">Обучение без учителя</a>
+      
+      <a class="cur" href="/edufamcs-demo/handbook/classic/klasterizaciya/" aria-current="page">Кластеризация: k-means, иерархическая, DBSCAN</a>
+      
+      <a class="" href="/edufamcs-demo/handbook/classic/snizhenie-razmernosti/">Снижение размерности: PCA, t-SNE, UMAP</a>
+      
+    </aside>
+
+    <article class="hb-main">
+      <nav class="crumbs" aria-label="Навигация"><a href="/edufamcs-demo/handbook/">Хендбук</a><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-chev"/></svg><a href="/edufamcs-demo/handbook/classic/">Классическое машинное обучение</a></nav>
+      <h1 class="h1">Кластеризация: k-means, иерархическая, DBSCAN</h1>
+      <div class="hb-meta">
+        
+        
+        <span><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-clock"/></svg>11&nbsp;мин</span>
+        <span class="hb-authors"><span class="avatar sm" title="Артем Лебедевич">АЛ</span>Артем Лебедевич</span>
+        <span><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-edit"/></svg>9 ноября 2026</span>
+        
+        
+      </div>
+
+      
+      <details class="hb-mtoc">
+        <summary><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-list"/></svg>Содержание<svg class="ico sm" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-chev-down"/></svg></summary>
+        <a class="l2" href="#k-means">K-means</a><a class="l2" href="#выбор-числа-кластеров">Выбор числа кластеров</a><a class="l2" href="#иерархическая-агломеративная-кластеризация">Иерархическая агломеративная кластеризация</a><a class="l2" href="#dbscan">DBSCAN</a><a class="l2" href="#gmm-и-em">GMM и EM</a><a class="l2" href="#сравнение-на-лунах-и-кольцах">Сравнение на «лунах» и «кольцах»</a><a class="l2" href="#ловушки">Ловушки</a><a class="l2" href="#что-почитать">Что почитать</a>
+      </details>
+      
+
+      <div class="prose"><p>В задаче кластеризации меток нет: нужно разбить объекты на группы так, чтобы внутри группы они были похожи, а между группами — различались. Правильного ответа не существует, поэтому постановка всегда неоднозначна: что считать «похожими» (метрика), какой должна быть форма кластера (шар, цепочка, пятно произвольной формы) и сколько их нужно. Один и тот же набор точек разумно разбивается разными способами, и выбор алгоритма — это выбор допущения о том, как выглядит кластер. Кластеризацию применяют для сегментации клиентов, группировки документов и товаров, поиска аномалий (шум), сжатия (векторное квантование), предобработки признаков и разведочного анализа.</p>
+<p>Все методы ниже опираются на расстояние, поэтому <strong>масштабирование признаков обязательно</strong> (<code>StandardScaler</code>): признак в рублях задавит признак в штуках. Для разреженных текстовых и эмбеддинговых данных чаще используют косинусное расстояние; после нормировки векторов <span class="tex">\|a-b\|^2 = 2 - 2\cos(a,b)</span>, так что евклидово расстояние упорядочивает пары так же.</p>
+<h2 id="k-means">K-means</h2>
+<p>Алгоритм Ллойда (Lloyd, 1957, опубл. 1982) минимизирует внутрикластерный разброс:</p>
+<div class="tex tex-block">J(C, \mu) = \sum_{k=1}^{K}\sum_{x\in C_k}\|x-\mu_k\|^2 .</div>
+<p>Шаги:</p>
+<ol>
+<li>выбрать <span class="tex">K</span> начальных центров <span class="tex">\mu_1,\dots,\mu_K</span>;</li>
+<li><strong>назначение</strong>: каждую точку отнести к ближайшему центру;</li>
+<li><strong>пересчёт</strong>: <span class="tex">\mu_k</span> = среднее точек кластера <span class="tex">C_k</span>;</li>
+<li>повторять 2–3 до стабилизации назначений.</li>
+</ol>
+<p>Каждый шаг не увеличивает <span class="tex">J</span> (шаг 2 минимизирует по <span class="tex">C</span> при фиксированных <span class="tex">\mu</span>, шаг 3 — по <span class="tex">\mu</span> при фиксированных <span class="tex">C</span>, и среднее — минимум суммы квадратов), число разбиений конечно, поэтому алгоритм сходится, но только к <strong>локальному минимуму</strong>; задача глобально NP-трудна. Стоимость итерации <span class="tex">O(nKd)</span>, это один из самых быстрых методов.</p>
+<p><strong>Инициализация.</strong> Случайные центры дают плохие локальные минимумы (два центра в одном кластере, ни одного — в другом). <strong>k-means++</strong> (Arthur &amp; Vassilvitskii, 2007): первый центр случайный, каждый следующий выбирается с вероятностью, пропорциональной <span class="tex">D(x)^2</span> — квадрату расстояния до ближайшего уже выбранного центра. Центры оказываются разнесёнными; гарантируется <span class="tex">O(\log K)</span>-приближение к оптимуму в среднем. В sklearn <code>init="k-means++"</code> по умолчанию, <code>n_init</code> перезапусков — берётся лучший по <span class="tex">J</span> (inertia).</p>
+<p><strong>Варианты.</strong> <em>Mini-Batch K-Means</em> пересчитывает центры по случайным мини-батчам — на порядки быстрее на больших данных, качество чуть хуже. <em>Bisecting K-Means</em> стартует с одного кластера и последовательно делит надвое кластер с наибольшей ошибкой; даёт иерархию и обычно более ровные результаты. <em>K-medoids</em> берёт центром реальную точку, устойчивее к выбросам.</p>
+<p><strong>Где ломается k-means.</strong> Он неявно предполагает шарообразные кластеры примерно одинакового размера и числа точек:</p>
+<ul>
+<li>кластеры разных размеров и плотностей: граница проходит посередине между центрами, а не по «естественной» границе;</li>
+<li>невыпуклые формы (луны, кольца, цепочки) — разрезаются по прямой;</li>
+<li>выбросы тянут среднее;</li>
+<li>разный масштаб признаков.</li>
+</ul>
+<h2 id="выбор-числа-кластеров">Выбор числа кластеров</h2>
+<p><strong>Метод локтя.</strong> Строят <span class="tex">J(K)</span> при <span class="tex">K=1,2,\dots</span>: функция монотонно убывает, и ищут точку, после которой выигрыш резко замедляется. Локоть часто неочевиден.</p>
+<p><strong>Коэффициент силуэта.</strong> Для объекта <span class="tex">i</span>: <span class="tex">a(i)</span> — среднее расстояние до остальных точек своего кластера, <span class="tex">b(i)</span> — минимальное (по чужим кластерам) среднее расстояние до точек чужого кластера:</p>
+<div class="tex tex-block">s(i)=\frac{b(i)-a(i)}{\max\{a(i),\,b(i)\}} \in [-1,1].</div>
+<p>Близко к 1 — объект глубоко в своём кластере; около 0 — на границе; отрицательное — скорее всего в чужом кластере. Среднее <span class="tex">s</span> по всем точкам ищут на сетке <span class="tex">K</span>. <strong>График силуэта</strong> (по кластерам, точки отсортированы по <span class="tex">s</span>; длина полосы — <span class="tex">s(i)</span>, толщина блока — размер кластера) полезнее одного числа: в хорошем разбиении у каждого кластера заметная часть точек правее среднего силуэта и почти нет отрицательных значений. Кластер, целиком лежащий левее среднего или с множеством отрицательных <span class="tex">s(i)</span>, — признак лишнего или неудачного разделения. Силуэт предпочитает выпуклые кластеры, поэтому для DBSCAN он смещён, и там его нужно считать осторожно (без шума). Ещё варианты: индекс Дэвиса–Болдина, Калинского–Харабаза, gap statistic и устойчивость разбиения при ресэмплинге. Главный критерий — осмысленность результата для задачи: метрики подсказывают, но не решают.</p>
+<h2 id="иерархическая-агломеративная-кластеризация">Иерархическая агломеративная кластеризация</h2>
+<p>Алгоритм (снизу вверх): сначала каждая точка — свой кластер; на каждом шаге сливаются два ближайших кластера, пока не останется один. Результат — <strong>дендрограмма</strong>: дерево слияний, у которого высота узла равна расстоянию слияния. Горизонтальный разрез на выбранной высоте даёт плоское разбиение; большой «скачок» высоты слияния подсказывает число кластеров. <span class="tex">K</span> задавать заранее не нужно, но стоимость <span class="tex">O(n^2)</span> по памяти и до <span class="tex">O(n^3)</span> по времени (у оптимизированных реализаций — <span class="tex">O(n^2\log n)</span>), так что метод применим до десятков тысяч объектов.</p>
+<p>Расстояние между кластерами <span class="tex">A</span> и <span class="tex">B</span> (linkage) определяет форму результата:</p>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>Linkage</th>
+<th>Расстояние</th>
+<th>Особенность</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>single</td>
+<td><span class="tex">\min_{a\in A,b\in B}d(a,b)</span></td>
+<td>находит цепочки и невыпуклые формы, но «цепляется» за шум и мосты</td>
+</tr>
+<tr>
+<td>complete</td>
+<td><span class="tex">\max_{a,b}d(a,b)</span></td>
+<td>компактные кластеры, чувствителен к выбросам</td>
+</tr>
+<tr>
+<td>average</td>
+<td><span class="tex">\frac{1}{\lvert A\rvert\,\lvert B\rvert}\sum_{a,b}d(a,b)</span></td>
+<td>компромисс</td>
+</tr>
+<tr>
+<td>Ward</td>
+<td>прирост <span class="tex">J</span> при слиянии</td>
+<td>минимизирует внутрикластерную дисперсию; аналог k-means, лучший выбор по умолчанию, только евклидово расстояние</td>
+</tr>
+</tbody>
+</table></div>
+<h2 id="dbscan">DBSCAN</h2>
+<p>DBSCAN (Ester, Kriegel, Sander, Xu, 1996) определяет кластер как область высокой плотности, отделённую областями низкой. Два параметра: радиус <span class="tex">\varepsilon</span> (<code>eps</code>) и <code>min_samples</code>. Для точки <span class="tex">x</span> берётся её <span class="tex">\varepsilon</span>-окрестность:</p>
+<ul>
+<li><strong>core point</strong> (ядровая): в окрестности не менее <code>min_samples</code> точек (включая саму);</li>
+<li><strong>border point</strong> (граничная): не ядровая, но лежит в окрестности ядровой;</li>
+<li><strong>noise</strong> (шум): остальные.</li>
+</ul>
+<p>Кластер — максимальное множество ядровых точек, связанных цепочками «достижимости» (каждая в <span class="tex">\varepsilon</span>-окрестности предыдущей), плюс их граничные точки. Алгоритм обходит точки, запускает «заливку» из каждой непосещённой ядровой точки. С пространственным индексом в малых размерностях и разумным <span class="tex">\varepsilon</span> работает близко к <span class="tex">O(n\log n)</span>; в худшем случае (большой <span class="tex">\varepsilon</span>, высокая размерность) — <span class="tex">O(n^2)</span>.</p>
+<p>Достоинства: не нужно задавать число кластеров, любая форма, явный шум. Ограничения:</p>
+<ul>
+<li><strong>eps подбирается трудно.</strong> Эвристика — график <span class="tex">k</span>-расстояний: для каждой точки расстояние до <span class="tex">k</span>-го соседа (<span class="tex">k</span> = <code>min_samples</code>), отсортированное по возрастанию; по «колену» кривой выбирают <span class="tex">\varepsilon</span>. <code>min_samples</code> берут не меньше <span class="tex">d+1</span>, часто <span class="tex">2d</span>.</li>
+<li><strong>Единая плотность.</strong> При кластерах разной плотности один <span class="tex">\varepsilon</span> либо склеит плотные, либо превратит разреженные в шум.</li>
+<li><strong>Трансдуктивность.</strong> В sklearn нет <code>predict</code> для новых точек: границы определяются только данными; для новых объектов обучают классификатор (например, kNN) на полученных метках или используют <code>approximate_predict</code> из библиотеки <code>hdbscan</code>.</li>
+<li>Проклятие размерности: в высоких размерностях расстояния концентрируются, и плотность теряет смысл; сначала снижают размерность (см. <a href="/edufamcs-demo/handbook/classic/snizhenie-razmernosti/" rel="noopener noreferrer nofollow">PCA, t-SNE, UMAP</a>).</li>
+<li>Граничные точки, доступные из двух кластеров, зависят от порядка обхода.</li>
+</ul>
+<p><strong>HDBSCAN</strong> (Campello, Moulavi, Sander, 2013) убирает <span class="tex">\varepsilon</span>: строит иерархию DBSCAN по всем <span class="tex">\varepsilon</span> одновременно (на основе «взаимной достижимости» и минимального остовного дерева), сжимает её и выбирает кластеры, наиболее устойчивые по диапазону плотностей. Главный параметр — <code>min_cluster_size</code>. Работает с кластерами разной плотности и даёт <strong>силу принадлежности</strong> точки кластеру (<code>probabilities_</code>); входит в sklearn с версии 1.3 как <code>sklearn.cluster.HDBSCAN</code>. В отдельной библиотеке <code>hdbscan</code> есть ещё оценка выбросов GLOSH (<code>outlier_scores_</code>) и предсказание для новых точек.</p>
+<h2 id="gmm-и-em">GMM и EM</h2>
+<p><strong>Гауссова смесь</strong> (GMM) моделирует данные как <span class="tex">p(x)=\sum_k \pi_k\,\mathcal N(x\mid\mu_k,\Sigma_k)</span> и подбирает параметры EM-алгоритмом (Dempster, Laird, Rubin, 1977): E-шаг вычисляет «мягкие» ответственности <span class="tex">\gamma_{ik}=P(k\mid x_i)</span>, M-шаг пересчитывает <span class="tex">\pi_k,\mu_k,\Sigma_k</span> взвешенно. K-means — частный случай при сферических одинаковых ковариациях и жёстких назначениях. Преимущества GMM: эллипсоидные кластеры, вероятностный выход, число компонент выбирается по BIC/AIC. Недостатки: локальные максимумы, чувствительность к инициализации, вырождение ковариаций (регуляризация <code>reg_covar</code>).</p>
+<h2 id="сравнение-на-лунах-и-кольцах">Сравнение на «лунах» и «кольцах»</h2>
+<p>Наглядный тест: на <code>make_blobs</code> и k-means, и Ward, и GMM справляются; на <code>make_moons</code> и <code>make_circles</code> k-means режет данные прямой линией, Ward и average-связь тоже, single linkage и DBSCAN/HDBSCAN восстанавливают структуру. На данных с разной плотностью выигрывает HDBSCAN; на шумных — DBSCAN/HDBSCAN отделяют шум, а k-means назначает его кластерам.</p>
+<div class="code"><div class="code-head"><span class="lang">python</span></div><pre><code><span class="tok-k">import</span> numpy <span class="tok-k">as</span> np
+<span class="tok-k">from</span> sklearn.cluster <span class="tok-k">import</span> KMeans<span class="tok-p">,</span> AgglomerativeClustering<span class="tok-p">,</span> DBSCAN<span class="tok-p">,</span> HDBSCAN
+<span class="tok-k">from</span> sklearn.datasets <span class="tok-k">import</span> make_moons
+<span class="tok-k">from</span> sklearn.metrics <span class="tok-k">import</span> silhouette_score<span class="tok-p">,</span> adjusted_rand_score
+<span class="tok-k">from</span> sklearn.neighbors <span class="tok-k">import</span> NearestNeighbors
+<span class="tok-k">from</span> sklearn.preprocessing <span class="tok-k">import</span> StandardScaler
+
+X<span class="tok-p">,</span> y <span class="tok-p">=</span> make_moons<span class="tok-p">(</span><span class="tok-n">1000</span><span class="tok-p">,</span> noise<span class="tok-p">=</span><span class="tok-n">0.07</span><span class="tok-p">,</span> random_state<span class="tok-p">=</span><span class="tok-n">0</span><span class="tok-p">)</span>
+X <span class="tok-p">=</span> StandardScaler<span class="tok-p">(</span><span class="tok-p">)</span><span class="tok-p">.</span>fit_transform<span class="tok-p">(</span>X<span class="tok-p">)</span>
+
+<span class="tok-c"># выбор K для k-means по силуэту</span>
+<span class="tok-k">for</span> k <span class="tok-k">in</span> <span class="tok-f">range</span><span class="tok-p">(</span><span class="tok-n">2</span><span class="tok-p">,</span> <span class="tok-n">8</span><span class="tok-p">)</span><span class="tok-p">:</span>
+    labels <span class="tok-p">=</span> KMeans<span class="tok-p">(</span>k<span class="tok-p">,</span> n_init<span class="tok-p">=</span><span class="tok-n">10</span><span class="tok-p">,</span> random_state<span class="tok-p">=</span><span class="tok-n">0</span><span class="tok-p">)</span><span class="tok-p">.</span>fit_predict<span class="tok-p">(</span>X<span class="tok-p">)</span>
+    <span class="tok-f">print</span><span class="tok-p">(</span>k<span class="tok-p">,</span> <span class="tok-f">round</span><span class="tok-p">(</span>silhouette_score<span class="tok-p">(</span>X<span class="tok-p">,</span> labels<span class="tok-p">)</span><span class="tok-p">,</span> <span class="tok-n">3</span><span class="tok-p">)</span><span class="tok-p">)</span>
+
+<span class="tok-c"># k-distance для eps в DBSCAN</span>
+d<span class="tok-p">,</span> _ <span class="tok-p">=</span> NearestNeighbors<span class="tok-p">(</span>n_neighbors<span class="tok-p">=</span><span class="tok-n">5</span><span class="tok-p">)</span><span class="tok-p">.</span>fit<span class="tok-p">(</span>X<span class="tok-p">)</span><span class="tok-p">.</span>kneighbors<span class="tok-p">(</span>X<span class="tok-p">)</span>
+kdist <span class="tok-p">=</span> np<span class="tok-p">.</span>sort<span class="tok-p">(</span>d<span class="tok-p">[</span><span class="tok-p">:</span><span class="tok-p">,</span> <span class="tok-p">-</span><span class="tok-n">1</span><span class="tok-p">]</span><span class="tok-p">)</span>           <span class="tok-c"># смотрим на колено кривой</span>
+
+models <span class="tok-p">=</span> <span class="tok-p">{</span>
+    <span class="tok-s">"</span><span class="tok-s">kmeans</span><span class="tok-s">"</span><span class="tok-p">:</span> KMeans<span class="tok-p">(</span><span class="tok-n">2</span><span class="tok-p">,</span> n_init<span class="tok-p">=</span><span class="tok-n">10</span><span class="tok-p">,</span> random_state<span class="tok-p">=</span><span class="tok-n">0</span><span class="tok-p">)</span><span class="tok-p">,</span>
+    <span class="tok-s">"</span><span class="tok-s">ward</span><span class="tok-s">"</span><span class="tok-p">:</span> AgglomerativeClustering<span class="tok-p">(</span><span class="tok-n">2</span><span class="tok-p">,</span> linkage<span class="tok-p">=</span><span class="tok-s">"</span><span class="tok-s">ward</span><span class="tok-s">"</span><span class="tok-p">)</span><span class="tok-p">,</span>
+    <span class="tok-s">"</span><span class="tok-s">single</span><span class="tok-s">"</span><span class="tok-p">:</span> AgglomerativeClustering<span class="tok-p">(</span><span class="tok-n">2</span><span class="tok-p">,</span> linkage<span class="tok-p">=</span><span class="tok-s">"</span><span class="tok-s">single</span><span class="tok-s">"</span><span class="tok-p">)</span><span class="tok-p">,</span>
+    <span class="tok-s">"</span><span class="tok-s">dbscan</span><span class="tok-s">"</span><span class="tok-p">:</span> DBSCAN<span class="tok-p">(</span>eps<span class="tok-p">=</span><span class="tok-n">0.2</span><span class="tok-p">,</span> min_samples<span class="tok-p">=</span><span class="tok-n">5</span><span class="tok-p">)</span><span class="tok-p">,</span>
+    <span class="tok-s">"</span><span class="tok-s">hdbscan</span><span class="tok-s">"</span><span class="tok-p">:</span> HDBSCAN<span class="tok-p">(</span>min_cluster_size<span class="tok-p">=</span><span class="tok-n">20</span><span class="tok-p">)</span><span class="tok-p">,</span>
+<span class="tok-p">}</span>
+<span class="tok-k">for</span> name<span class="tok-p">,</span> m <span class="tok-k">in</span> models<span class="tok-p">.</span>items<span class="tok-p">(</span><span class="tok-p">)</span><span class="tok-p">:</span>
+    labels <span class="tok-p">=</span> m<span class="tok-p">.</span>fit_predict<span class="tok-p">(</span>X<span class="tok-p">)</span>
+    <span class="tok-f">print</span><span class="tok-p">(</span>name<span class="tok-p">,</span> <span class="tok-s">"</span><span class="tok-s">ARI =</span><span class="tok-s">"</span><span class="tok-p">,</span> <span class="tok-f">round</span><span class="tok-p">(</span>adjusted_rand_score<span class="tok-p">(</span>y<span class="tok-p">,</span> labels<span class="tok-p">)</span><span class="tok-p">,</span> <span class="tok-n">3</span><span class="tok-p">)</span><span class="tok-p">,</span>
+          <span class="tok-s">"</span><span class="tok-s">noise =</span><span class="tok-s">"</span><span class="tok-p">,</span> <span class="tok-f">int</span><span class="tok-p">(</span><span class="tok-p">(</span>labels <span class="tok-p">==</span> <span class="tok-p">-</span><span class="tok-n">1</span><span class="tok-p">)</span><span class="tok-p">.</span>sum<span class="tok-p">(</span><span class="tok-p">)</span><span class="tok-p">)</span><span class="tok-p">)</span>
+</code></pre></div>
+<p>Внешние метрики (ARI, NMI) применимы только когда есть разметка для проверки; в реальной задаче остаются внутренние (силуэт) и прикладные — стабильность сегментов, различия бизнес-метрик между ними.</p>
+<h2 id="ловушки">Ловушки</h2>
+<ul>
+<li>Кластеры на картинке PCA/t-SNE не доказывают кластеров в данных; кластеризуйте в исходном (или умеренно сжатом) пространстве.</li>
+<li>Силуэт и инерция не сравнимы между разными метриками и масштабами.</li>
+<li>Результат k-means зависит от <code>random_state</code>: проверяйте стабильность на нескольких запусках.</li>
+<li>Кластеры — гипотезы: чтобы назвать их «сегментами клиентов», опишите каждый по признакам и проверьте на отложенных данных.</li>
+<li>На интервью спрашивают: сходимость k-means и почему к локальному минимуму; идея k-means++; силуэт; отличие core/border/noise в DBSCAN; когда DBSCAN хуже k-means.</li>
+</ul>
+<h2 id="что-почитать">Что почитать</h2>
+<ul>
+<li>Arthur D., Vassilvitskii S. <em>k-means++: The Advantages of Careful Seeding</em>, SODA 2007.</li>
+<li>Ester M., Kriegel H.-P., Sander J., Xu X. <em>A Density-Based Algorithm for Discovering Clusters in Large Spatial Databases with Noise</em>, KDD 1996.</li>
+<li>Campello R., Moulavi D., Sander J. <em>Density-Based Clustering Based on Hierarchical Density Estimates</em>, PAKDD 2013; объяснение работы: https://hdbscan.readthedocs.io/en/latest/how_hdbscan_works.html</li>
+<li>Rousseeuw P. <em>Silhouettes: a graphical aid to the interpretation and validation of cluster analysis</em>, J. Comput. Appl. Math., 1987.</li>
+<li>Dempster A., Laird N., Rubin D. <em>Maximum Likelihood from Incomplete Data via the EM Algorithm</em>, JRSS B, 1977.</li>
+<li>Документация scikit-learn, Clustering: https://scikit-learn.org/stable/modules/clustering.html</li>
+<li>Хендбук Яндекса, «Кластеризация»: https://education.yandex.ru/handbook/ml/article/klasterizaciya</li>
+</ul>
+</div>
+      
+
+      
+      <nav class="pager" aria-label="Соседние статьи">
+        <a href="/edufamcs-demo/handbook/classic/giperparametry-i-interpretiruemost/"><span><svg class="ico sm" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-arrow-left"/></svg>Назад</span>Подбор гиперпараметров и интерпретируемость</a>
+        <a href="/edufamcs-demo/handbook/classic/snizhenie-razmernosti/"><span>Дальше<svg class="ico sm" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-arrow"/></svg></span>Снижение размерности: PCA, t-SNE, UMAP</a>
+      </nav>
+      
+    </article>
+
+    <aside class="hb-toc" aria-label="На этой странице">
+      <a class="l2" href="#k-means">K-means</a><a class="l2" href="#выбор-числа-кластеров">Выбор числа кластеров</a><a class="l2" href="#иерархическая-агломеративная-кластеризация">Иерархическая агломеративная кластеризация</a><a class="l2" href="#dbscan">DBSCAN</a><a class="l2" href="#gmm-и-em">GMM и EM</a><a class="l2" href="#сравнение-на-лунах-и-кольцах">Сравнение на «лунах» и «кольцах»</a><a class="l2" href="#ловушки">Ловушки</a><a class="l2" href="#что-почитать">Что почитать</a>
+    </aside>
+  </div>
+</div>
+
+
+</main>
+
+<footer class="ftr" data-theme="dark">
+  <svg class="sym fern" viewBox="0 0 40.5 65.02" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#fern"/></svg>
+  <div class="container">
+    <div class="ftr-row">
+      <a href="/edufamcs-demo/" aria-label="EDU FAMCS — главная"><img src="/edufamcs-demo/static/brand/logo/logo-edu-dark.svg" alt="EDU FAMCS" width="196" height="40"></a>
+      <ul class="ftr-links">
+        <li><a href="/edufamcs-demo/#courses">Курсы</a></li>
+        <li><a href="/edufamcs-demo/ml/">Машинное обучение</a></li>
+        <li><a href="/edufamcs-demo/handbook/">Хендбук</a></li>
+        <li><a href="/edufamcs-demo/news/">Новости</a></li>
+        <li><a href="/edufamcs-demo/people/">Авторы</a></li>
+        <li><a href="/edufamcs-demo/about/">О&nbsp;нас</a></li>
+        <li><a href="/edufamcs-demo/propose/">Предложить или исправить</a></li>
+        <li><a href="/edufamcs-demo/privacy/">Конфиденциальность</a></li>
+      </ul>
+    </div>
+    <div class="ftr-big" aria-hidden="true">EDU<span class="d">·</span>FAMCS</div>
+    <p class="ftr-copy">© 2026 EDU FAMCS · Минск</p>
+  </div>
+</footer>
+
+<div class="toasts-region" aria-live="polite" id="toasts">
+
+</div>
+
+</body>
+</html>

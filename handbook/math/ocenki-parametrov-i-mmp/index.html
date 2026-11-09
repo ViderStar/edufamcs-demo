@@ -1,0 +1,256 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Оценки параметров и метод максимального правдоподобия · EDU FAMCS</title>
+<meta name="description" content="Оценки параметров и метод максимального правдоподобия — Математическая база. Хендбук ML-курса ФПМИ.">
+<meta name="theme-color" content="#060A16">
+<meta name="robots" content="noindex, nofollow">
+<meta name="htmx-config" content='{"allowEval":false,"includeIndicatorStyles":false,"historyCacheSize":0,"selfRequestsOnly":true}'>
+<meta name="katex-js" content="/edufamcs-demo/static/vendor/katex/katex.min.js">
+<meta name="katex-css" content="/edufamcs-demo/static/vendor/katex/katex.min.css">
+<link rel="icon" href="/edufamcs-demo/static/brand/logo/favicon-16.svg" type="image/svg+xml" sizes="16x16">
+<link rel="icon" href="/edufamcs-demo/static/brand/logo/favicon.svg" type="image/svg+xml" sizes="any">
+<link rel="preload" href="/edufamcs-demo/static/brand/fonts/manrope-cyrillic-400.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/edufamcs-demo/static/brand/fonts/unbounded-cyrillic-800.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="/edufamcs-demo/static/brand/fonts.css">
+<link rel="stylesheet" href="/edufamcs-demo/static/brand/tokens.css">
+<link rel="stylesheet" href="/edufamcs-demo/static/brand/components.css">
+<link rel="stylesheet" href="/edufamcs-demo/static/css/site.css">
+<link rel="stylesheet" href="/edufamcs-demo/static/css/hub.css">
+<link rel="stylesheet" href="/edufamcs-demo/static/css/about.css">
+<link rel="stylesheet" href="/edufamcs-demo/static/handbook/handbook.css">
+<script src="/edufamcs-demo/static/js/theme.js"></script>
+<script src="/edufamcs-demo/static/vendor/htmx/htmx.min.js" defer></script>
+<script src="/edufamcs-demo/static/vendor/alpine/alpine-csp.min.js" defer></script>
+<script src="/edufamcs-demo/static/js/site.js" defer></script>
+<script src="/edufamcs-demo/static/handbook/handbook.js" defer></script>
+</head>
+<body class="" hx-headers='{"X-CSRFToken": "lk0PVkwCUtxMzZ9wp6wXIML4Vm6Qk7VpK4zTFijZPkVVOykfWjf5Fhh9t4clShD9"}'>
+<a class="skip" href="#main">К содержанию</a>
+<div class="demo-bar" role="note">Демо-версия для отзывов: вход, запись на курсы и формы здесь не работают.</div>
+
+<header class="hdr">
+  <div class="container">
+    <a class="brand" href="/edufamcs-demo/" aria-label="EDU FAMCS — главная">
+      <span class="full"><img class="only-light" src="/edufamcs-demo/static/brand/logo/logo-edu-light.svg" alt="EDU FAMCS" width="196" height="40"><img class="only-dark" src="/edufamcs-demo/static/brand/logo/logo-edu-dark.svg" alt="EDU FAMCS" width="196" height="40"></span>
+      <span class="short"><img class="only-light" src="/edufamcs-demo/static/brand/logo/logo-edu-light.svg" alt="EDU FAMCS" height="30"><img class="only-dark" src="/edufamcs-demo/static/brand/logo/logo-edu-dark.svg" alt="EDU FAMCS" height="30"></span>
+    </a>
+    <nav class="nav" id="main-nav" aria-label="Основная навигация">
+      <a href="/edufamcs-demo/#courses">Курсы</a>
+      <a href="/edufamcs-demo/ml/" >Машинное обучение</a>
+      
+      <a href="/edufamcs-demo/handbook/" aria-current="page">Хендбук</a>
+      <a href="/edufamcs-demo/news/" >Новости</a>
+      <a href="/edufamcs-demo/people/" >Авторы</a>
+      <a href="/edufamcs-demo/about/" >О&nbsp;нас</a>
+    </nav>
+    <div class="hdr-actions">
+      
+      <a class="btn btn-outline btn-login" href="/edufamcs-demo/accounts/login/?next=/handbook/math/ocenki-parametrov-i-mmp/">Войти</a>
+      
+      <button class="icon-btn menu-btn" type="button" aria-label="Меню" aria-expanded="false" aria-controls="main-nav"><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-menu"/></svg></button>
+    </div>
+  </div>
+</header>
+
+<main id="main">
+
+
+
+<div class="container hb-page hb-tone">
+  <div class="hb">
+    <aside class="hb-nav" aria-label="Статьи раздела">
+      
+<form class="hb-search" action="/edufamcs-demo/handbook/search/" method="get" role="search">
+  <svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-search"/></svg>
+  <input class="input" type="search" name="q" value="" placeholder="Поиск по хендбуку" aria-label="Поиск по хендбуку" autocomplete="off" maxlength="120"
+    hx-get="/edufamcs-demo/handbook/search/" hx-trigger="input changed delay:250ms, search" hx-target="#hb-nav-results" hx-sync="this:replace">
+</form>
+
+      <div id="hb-nav-results" class="hb-nav-results" aria-live="polite"></div>
+      <a class="grp" href="/edufamcs-demo/handbook/math/">Вероятность и статистика</a>
+      
+      <a class="" href="/edufamcs-demo/handbook/math/teoriya-veroyatnostej/">Теория вероятностей</a>
+      
+      <a class="cur" href="/edufamcs-demo/handbook/math/ocenki-parametrov-i-mmp/" aria-current="page">Оценки параметров и метод максимального правдоподобия</a>
+      
+      <a class="" href="/edufamcs-demo/handbook/math/intervaly-i-proverka-gipotez/">Доверительные интервалы и проверка гипотез</a>
+      
+    </aside>
+
+    <article class="hb-main">
+      <nav class="crumbs" aria-label="Навигация"><a href="/edufamcs-demo/handbook/">Хендбук</a><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-chev"/></svg><a href="/edufamcs-demo/handbook/math/">Математическая база</a></nav>
+      <h1 class="h1">Оценки параметров и метод максимального правдоподобия</h1>
+      <div class="hb-meta">
+        
+        
+        <span><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-clock"/></svg>10&nbsp;мин</span>
+        <span class="hb-authors"><span class="avatar sm" title="Артем Лебедевич">АЛ</span>Артем Лебедевич</span>
+        <span><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-edit"/></svg>9 ноября 2026</span>
+        
+        
+      </div>
+
+      
+      <details class="hb-mtoc">
+        <summary><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-list"/></svg>Содержание<svg class="ico sm" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-chev-down"/></svg></summary>
+        <a class="l2" href="#выборка-и-эмпирическая-функция-распределения">Выборка и эмпирическая функция распределения</a><a class="l2" href="#точечные-оценки-и-их-свойства">Точечные оценки и их свойства</a><a class="l3" href="#выборочное-среднее-и-дисперсия">Выборочное среднее и дисперсия</a><a class="l2" href="#метод-моментов">Метод моментов</a><a class="l2" href="#метод-максимального-правдоподобия">Метод максимального правдоподобия</a><a class="l2" href="#главная-связь-с-ml-потери-как-правдоподобие">Главная связь с ML: потери как правдоподобие</a><a class="l3" href="#map-и-регуляризация">MAP и регуляризация</a><a class="l2" href="#смещение-и-разброс">Смещение и разброс</a><a class="l2" href="#бутстрап">Бутстрап</a><a class="l2" href="#код">Код</a><a class="l2" href="#ловушки">Ловушки</a><a class="l2" href="#что-почитать">Что почитать</a>
+      </details>
+      
+
+      <div class="prose"><p>Теория вероятностей идёт от известного распределения к данным. Математическая статистика решает обратную задачу: по данным восстановить распределение или его параметры. Обучение любой вероятностной модели — частный случай этой задачи, а функции потерь MSE и log-loss оказываются следствиями одного принципа — максимального правдоподобия.</p>
+<h2 id="выборка-и-эмпирическая-функция-распределения">Выборка и эмпирическая функция распределения</h2>
+<p><strong>Выборка</strong> <span class="tex">X=(x_1,\dots,x_n)</span> — реализации независимых одинаково распределённых величин с неизвестной функцией распределения <span class="tex">F</span>. Упорядочив значения, получаем <strong>вариационный ряд</strong> <span class="tex">x_{(1)}\le\dots\le x_{(n)}</span>. <strong>Эмпирическая функция распределения</strong> — доля наблюдений не больше <span class="tex">x</span>:</p>
+<div class="tex tex-block">F_n(x)=\frac1n\sum_{i=1}^n\mathbb{I}[x_i\le x].</div>
+<p>Это кусочно-постоянная «лесенка» с шагом <span class="tex">1/n</span> в каждой точке выборки. По <strong>теореме Гливенко–Кантелли</strong>, <span class="tex">\sup_x|F_n(x)-F(x)|\to0</span> почти наверное: по большой выборке можно восстановить распределение целиком, не только отдельные моменты. Скорость — порядка <span class="tex">1/\sqrt n</span> (неравенство Дворецкого–Кифера–Вольфовица: <span class="tex">P\{\sup_x|F_n-F|&gt;\varepsilon\}\le2e^{-2n\varepsilon^2}</span>), и на сравнении <span class="tex">F_n</span> с гипотетической <span class="tex">F</span> строится критерий Колмогорова (см. <a href="/edufamcs-demo/handbook/math/intervaly-i-proverka-gipotez/" rel="noopener noreferrer nofollow">следующую главу</a>). Любая характеристика распределения, посчитанная по <span class="tex">F_n</span> вместо <span class="tex">F</span> (среднее, медиана, квантиль), — <strong>подстановочная</strong> (plug-in) оценка; на этой идее держится бутстрап.</p>
+<h2 id="точечные-оценки-и-их-свойства">Точечные оценки и их свойства</h2>
+<p><strong>Точечная оценка</strong> <span class="tex">\hat\theta=\hat\theta(x_1,\dots,x_n)</span> — функция выборки, приближающая параметр <span class="tex">\theta</span>. Она сама случайная величина, и её качество описывают свойствами:</p>
+<ul>
+<li><strong>несмещённость</strong>: <span class="tex">\mathbb{E}\hat\theta=\theta</span>; <strong>смещение</strong> <span class="tex">\mathrm{bias}=\mathbb{E}\hat\theta-\theta</span>;</li>
+<li><strong>состоятельность</strong>: <span class="tex">\hat\theta\to\theta</span> по вероятности при <span class="tex">n\to\infty</span>;</li>
+<li><strong>эффективность</strong>: среди несмещённых оценок минимальна дисперсия. Нижняя граница (при условиях регулярности модели) — неравенство Рао–Крамера: <span class="tex">\mathrm{Var}\,\hat\theta\ge1/(nI(\theta))</span>, где <span class="tex">I(\theta)=\mathbb{E}\big[(\partial_\theta\ln p(x;\theta))^2\big]</span> — информация Фишера одного наблюдения.</li>
+</ul>
+<p>Качество в среднем квадратичном сводится к разложению</p>
+<div class="tex tex-block">\mathbb{E}(\hat\theta-\theta)^2=\mathrm{bias}^2+\mathrm{Var}\,\hat\theta.</div>
+<p>Смещённая оценка с малой дисперсией может быть лучше несмещённой с большой. Это зародыш компромисса bias–variance, главного для всего ML (<a href="/edufamcs-demo/handbook/classic/chto-takoe-ml/" rel="noopener noreferrer nofollow">что такое ML</a>): регуляризация сознательно вносит смещение ради снижения дисперсии.</p>
+<h3 id="выборочное-среднее-и-дисперсия">Выборочное среднее и дисперсия</h3>
+<p>Оценка среднего <span class="tex">\bar x=\frac1n\sum x_i</span> несмещённая и состоятельная, <span class="tex">\mathrm{Var}\,\bar x=\sigma^2/n</span>. Оценка дисперсии «в лоб» <span class="tex">\hat\sigma^2=\frac1n\sum(x_i-\bar x)^2</span> <strong>смещена</strong>: <span class="tex">\mathbb{E}\hat\sigma^2=\frac{n-1}n\sigma^2</span>. Причина: отклонения измеряются от <span class="tex">\bar x</span>, которое само подогнано под выборку и лежит к точкам ближе, чем истинное <span class="tex">\mu</span>. Лишняя степень свободы «потрачена» на оценку среднего. <strong>Поправка Бесселя</strong> даёт несмещённую оценку:</p>
+<div class="tex tex-block">s^2=\frac1{n-1}\sum_{i=1}^n(x_i-\bar x)^2.</div>
+<p>(<code>np.var</code> по умолчанию делит на <span class="tex">n</span>, <code>ddof=1</code> — на <span class="tex">n-1</span>; <code>pandas</code> по умолчанию на <span class="tex">n-1</span> — типичный источник расхождений.) Для больших <span class="tex">n</span> разница несущественна, для малых — заметна.</p>
+<h2 id="метод-моментов">Метод моментов</h2>
+<p>Теоретические моменты <span class="tex">\mathbb{E}\xi^k=m_k(\theta)</span> заменяем выборочными <span class="tex">\frac1n\sum x_i^k</span> и решаем получившуюся систему относительно <span class="tex">\theta</span>. Для экспоненциального распределения <span class="tex">\mathbb{E}\xi=1/\lambda</span>, откуда <span class="tex">\hat\lambda=1/\bar x</span>; для Пуассона <span class="tex">\hat\lambda=\bar x</span>. Метод прост и даёт состоятельные оценки, но, как правило, менее эффективен, чем следующий.</p>
+<h2 id="метод-максимального-правдоподобия">Метод максимального правдоподобия</h2>
+<p>Идея Фишера (1922): выбрать параметры, при которых наблюдаемая выборка наиболее вероятна. Для независимых наблюдений <strong>функция правдоподобия</strong> <span class="tex">L(\theta)=\prod_ip(x_i;\theta)</span> (плотность или PMF), а оценка максимизирует её:</p>
+<div class="tex tex-block">\hat\theta_{ML}=\arg\max_\theta\ \ell(\theta),\qquad\ell(\theta)=\ln L(\theta)=\sum_{i=1}^n\ln p(x_i;\theta).</div>
+<p>Логарифм монотонен, поэтому точка максимума та же, но произведение превращается в сумму: проще дифференцировать, нет численного underflow. При условиях регулярности оценка ММП состоятельна, асимптотически нормальна и асимптотически эффективна (достигает границы Рао–Крамера): <span class="tex">\sqrt n(\hat\theta-\theta)\xrightarrow{d}\mathcal{N}(0,I(\theta)^{-1})</span>. При конечном <span class="tex">n</span> может быть смещённой.</p>
+<p><strong>Бернулли.</strong> <span class="tex">x_i\in\{0,1\}</span>, <span class="tex">P(x=1)=p</span>. Пусть <span class="tex">k=\sum x_i</span>:</p>
+<div class="tex tex-block">\ell(p)=k\ln p+(n-k)\ln(1-p),\quad\ell'(p)=\frac kp-\frac{n-k}{1-p}=0\ \Rightarrow\ \hat p=\frac kn.</div>
+<p>Доля успехов — ММП-оценка вероятности: оценка CTR как <span class="tex">\text{клики}/\text{показы}</span>.</p>
+<p><strong>Нормальное.</strong> <span class="tex">x_i\sim\mathcal{N}(\mu,\sigma^2)</span>:</p>
+<div class="tex tex-block">\ell(\mu,\sigma^2)=-\frac n2\ln(2\pi\sigma^2)-\frac1{2\sigma^2}\sum(x_i-\mu)^2.</div>
+<p><span class="tex">\partial\ell/\partial\mu=0</span> даёт <span class="tex">\hat\mu=\bar x</span>; <span class="tex">\partial\ell/\partial\sigma^2=0</span> даёт <span class="tex">\hat\sigma^2=\frac1n\sum(x_i-\bar x)^2</span> — ММП-оценка дисперсии смещена, как отмечено выше.</p>
+<p><strong>Экспоненциальное</strong> (выборка <span class="tex">Y</span> из ноутбука лекции): <span class="tex">\ell(\lambda)=n\ln\lambda-\lambda\sum y_i</span>, <span class="tex">\hat\lambda=1/\bar y</span> (в ноутбуке <span class="tex">\approx0{,}14</span>); для <strong>Пуассона</strong> <span class="tex">\hat\lambda=\bar x</span> (по выборке <span class="tex">X</span> получается <span class="tex">4{,}82</span>). В обоих случаях ММП совпадает с методом моментов.</p>
+<h2 id="главная-связь-с-ml-потери-как-правдоподобие">Главная связь с ML: потери как правдоподобие</h2>
+<p>Условная модель <span class="tex">p(y\mid x;w)</span>. ММП по <span class="tex">w</span> — минимизация отрицательного логарифма правдоподобия (NLL), <span class="tex">-\sum_i\ln p(y_i\mid x_i;w)</span>. Три важнейшие функции потерь — три конкретные модели распределения <span class="tex">y</span>.</p>
+<ol>
+<li><strong>MSE ↔ гауссов шум.</strong> Пусть <span class="tex">y=w^\top x+\varepsilon</span>, <span class="tex">\varepsilon\sim\mathcal{N}(0,\sigma^2)</span>. Тогда <span class="tex">-\ell=\frac n2\ln(2\pi\sigma^2)+\frac1{2\sigma^2}\sum(y_i-w^\top x_i)^2</span>, и максимум по <span class="tex">w</span> достигается на минимуме суммы квадратов. Метод наименьших квадратов — ММП при нормальном шуме; при шуме Лапласа получается MAE.</li>
+<li><strong>Log-loss ↔ Бернулли.</strong> <span class="tex">y\in\{0,1\}</span>, <span class="tex">p(y=1\mid x)=\sigma(w^\top x)=\hat p</span>. <span class="tex">-\ell=-\sum[y_i\ln\hat p_i+(1-y_i)\ln(1-\hat p_i)]</span> — бинарная кросс-энтропия из <a href="/edufamcs-demo/handbook/math/teoriya-veroyatnostej/" rel="noopener noreferrer nofollow">предыдущей главы</a>. Логистическая регрессия — ММП модели Бернулли с логит-связью.</li>
+<li><strong>Softmax-кросс-энтропия ↔ категориальное распределение.</strong> <span class="tex">p(y=k\mid x)=\mathrm{softmax}(z)_k</span>, <span class="tex">-\ell=-\sum_i\ln\mathrm{softmax}(z_i)_{y_i}</span>.</li>
+</ol>
+<p>Следствие: выбор функции потерь — это допущение о распределении шума. MSE чувствительна к выбросам, потому что нормальное распределение имеет лёгкие хвосты и считает выброс почти невозможным; для тяжёлых хвостов берут Huber или MAE (хвосты Лапласа).</p>
+<h3 id="map-и-регуляризация">MAP и регуляризация</h3>
+<p>Байесовский взгляд: <span class="tex">w</span> тоже случайный, с априорным распределением <span class="tex">p(w)</span>. Апостериорное по теореме Байеса: <span class="tex">p(w\mid\mathcal{D})\propto p(\mathcal{D}\mid w)\,p(w)</span>. Точка максимума апостериорного распределения (<strong>MAP</strong>):</p>
+<div class="tex tex-block">\hat w_{MAP}=\arg\max_w\big[\ln p(\mathcal{D}\mid w)+\ln p(w)\big].</div>
+<p>Правдоподобие — это уже знакомая потеря, а <span class="tex">\ln p(w)</span> — регуляризатор:</p>
+<ul>
+<li><span class="tex">w_j\sim\mathcal{N}(0,\tau^2)</span>: <span class="tex">-\ln p(w)=\frac1{2\tau^2}\|w\|_2^2+\text{const}</span> — <strong><span class="tex">L_2</span>-регуляризация (Ridge)</strong>, <span class="tex">\lambda=\sigma^2/\tau^2</span> для MSE;</li>
+<li><span class="tex">w_j\sim\mathrm{Laplace}(0,b)</span>: <span class="tex">-\ln p(w)=\frac1b\|w\|_1+\text{const}</span> — <strong><span class="tex">L_1</span>-регуляризация (Lasso)</strong>: пик Лапласа в нуле «притягивает» веса к нулю.</li>
+</ul>
+<p>Сила регуляризации — степень доверия к априори: меньше данных — больше вес априорного. При <span class="tex">n\to\infty</span> правдоподобие доминирует, MAP стремится к ММП.</p>
+<h2 id="смещение-и-разброс">Смещение и разброс</h2>
+<p>Оценка <span class="tex">\hat\theta</span> зависит от конкретной выборки. На разных выборках она принимает разные значения; их разброс — дисперсия, а систематический сдвиг от истины — смещение. Для предсказания <span class="tex">\hat f(x)</span> полная ошибка раскладывается на <span class="tex">\mathrm{bias}^2+\mathrm{Var}+\sigma^2_{noise}</span> (неустранимый шум). Простая модель имеет большое смещение и малую дисперсию (недообучение), сложная — наоборот (переобучение). Оценка <span class="tex">\hat\sigma^2</span> с делителем <span class="tex">n</span> — типичный пример: смещённая, но с меньшей дисперсией, чем <span class="tex">s^2</span>.</p>
+<h2 id="бутстрап">Бутстрап</h2>
+<p>Стандартная ошибка среднего известна в замкнутом виде <span class="tex">s/\sqrt n</span>, а для медианы, квантилей, AUC, отношений метрик простой формулы нет: асимптотические выражения требуют оценивать плотность или выводить дисперсию отдельно для каждой статистики. <strong>Бутстрап</strong> (Efron, 1979) заменяет <span class="tex">F</span> на <span class="tex">F_n</span>: <span class="tex">B</span> раз генерируем псевдовыборки того же размера <strong>с возвращением</strong> из исходной выборки, считаем на каждой статистику <span class="tex">T^*_b</span> и берём разброс по <span class="tex">b</span> как оценку разброса <span class="tex">T</span>:</p>
+<div class="tex tex-block">\widehat{\mathrm{SE}}(T)=\sqrt{\frac1{B-1}\sum_b(T^*_b-\bar T^*)^2}.</div>
+<p>Процентили <span class="tex">T^*</span> дают доверительный интервал (<a href="/edufamcs-demo/handbook/math/intervaly-i-proverka-gipotez/" rel="noopener noreferrer nofollow">дальше</a>). Метод применим почти к любой гладкой статистике и особенно хорош для метрик на тестовой выборке, но не лечит малую выборку: он воспроизводит ошибки, уже заложенные в <span class="tex">F_n</span>. Классические случаи, где наивный бутстрап ломается, — экстремальные статистики (максимум выборки) и распределения с бесконечной дисперсией.</p>
+<h2 id="код">Код</h2>
+<div class="code"><div class="code-head"><span class="lang">python</span></div><pre><code><span class="tok-k">import</span> numpy <span class="tok-k">as</span> np
+<span class="tok-k">from</span> scipy <span class="tok-k">import</span> optimize<span class="tok-p">,</span> stats
+
+rng <span class="tok-p">=</span> np<span class="tok-p">.</span>random<span class="tok-p">.</span>default_rng<span class="tok-p">(</span><span class="tok-n">0</span><span class="tok-p">)</span>
+
+<span class="tok-c"># 1) ММП нормального распределения: численно и аналитически</span>
+x <span class="tok-p">=</span> rng<span class="tok-p">.</span>normal<span class="tok-p">(</span>loc<span class="tok-p">=</span><span class="tok-n">5.0</span><span class="tok-p">,</span> scale<span class="tok-p">=</span><span class="tok-n">2.0</span><span class="tok-p">,</span> size<span class="tok-p">=</span><span class="tok-n">200</span><span class="tok-p">)</span>
+<span class="tok-k">def</span> <span class="tok-f">nll</span><span class="tok-p">(</span>theta<span class="tok-p">)</span><span class="tok-p">:</span>
+    mu<span class="tok-p">,</span> log_s <span class="tok-p">=</span> theta                      <span class="tok-c"># log-параметризация: sigma &gt; 0 без ограничений</span>
+    <span class="tok-k">return</span> <span class="tok-p">-</span>stats<span class="tok-p">.</span>norm<span class="tok-p">.</span>logpdf<span class="tok-p">(</span>x<span class="tok-p">,</span> mu<span class="tok-p">,</span> np<span class="tok-p">.</span>exp<span class="tok-p">(</span>log_s<span class="tok-p">)</span><span class="tok-p">)</span><span class="tok-p">.</span>sum<span class="tok-p">(</span><span class="tok-p">)</span>
+res <span class="tok-p">=</span> optimize<span class="tok-p">.</span>minimize<span class="tok-p">(</span>nll<span class="tok-p">,</span> x0<span class="tok-p">=</span><span class="tok-p">[</span><span class="tok-n">0.0</span><span class="tok-p">,</span> <span class="tok-n">0.0</span><span class="tok-p">]</span><span class="tok-p">,</span> method<span class="tok-p">=</span><span class="tok-s">"</span><span class="tok-s">BFGS</span><span class="tok-s">"</span><span class="tok-p">)</span>
+<span class="tok-f">print</span><span class="tok-p">(</span>res<span class="tok-p">.</span>x<span class="tok-p">[</span><span class="tok-n">0</span><span class="tok-p">]</span><span class="tok-p">,</span> np<span class="tok-p">.</span>exp<span class="tok-p">(</span>res<span class="tok-p">.</span>x<span class="tok-p">[</span><span class="tok-n">1</span><span class="tok-p">]</span><span class="tok-p">)</span><span class="tok-p">)</span>          <span class="tok-c"># численно</span>
+<span class="tok-f">print</span><span class="tok-p">(</span>x<span class="tok-p">.</span>mean<span class="tok-p">(</span><span class="tok-p">)</span><span class="tok-p">,</span> x<span class="tok-p">.</span>std<span class="tok-p">(</span>ddof<span class="tok-p">=</span><span class="tok-n">0</span><span class="tok-p">)</span><span class="tok-p">)</span>             <span class="tok-c"># аналитически (делитель n)</span>
+<span class="tok-f">print</span><span class="tok-p">(</span><span class="tok-s">"</span><span class="tok-s">несмещённая s =</span><span class="tok-s">"</span><span class="tok-p">,</span> x<span class="tok-p">.</span>std<span class="tok-p">(</span>ddof<span class="tok-p">=</span><span class="tok-n">1</span><span class="tok-p">)</span><span class="tok-p">)</span>
+
+<span class="tok-c"># 2) ММП для экспоненциальной выборки</span>
+y <span class="tok-p">=</span> rng<span class="tok-p">.</span>exponential<span class="tok-p">(</span>scale<span class="tok-p">=</span><span class="tok-n">1</span> <span class="tok-p">/</span> <span class="tok-n">0.14</span><span class="tok-p">,</span> size<span class="tok-p">=</span><span class="tok-n">100</span><span class="tok-p">)</span>
+<span class="tok-f">print</span><span class="tok-p">(</span><span class="tok-n">1</span> <span class="tok-p">/</span> y<span class="tok-p">.</span>mean<span class="tok-p">(</span><span class="tok-p">)</span><span class="tok-p">,</span> stats<span class="tok-p">.</span>expon<span class="tok-p">.</span>fit<span class="tok-p">(</span>y<span class="tok-p">,</span> floc<span class="tok-p">=</span><span class="tok-n">0</span><span class="tok-p">)</span><span class="tok-p">[</span><span class="tok-n">1</span><span class="tok-p">]</span> <span class="tok-p">*</span><span class="tok-p">*</span> <span class="tok-p">-</span><span class="tok-n">1</span><span class="tok-p">)</span>   <span class="tok-c"># lambda = 1 / scale</span>
+
+<span class="tok-c"># 3) Смещение оценки дисперсии: n=5, много повторов</span>
+v0 <span class="tok-p">=</span> <span class="tok-p">[</span>rng<span class="tok-p">.</span>normal<span class="tok-p">(</span>size<span class="tok-p">=</span><span class="tok-n">5</span><span class="tok-p">)</span><span class="tok-p">.</span>var<span class="tok-p">(</span>ddof<span class="tok-p">=</span><span class="tok-n">0</span><span class="tok-p">)</span> <span class="tok-k">for</span> _ <span class="tok-k">in</span> <span class="tok-f">range</span><span class="tok-p">(</span><span class="tok-n">50_000</span><span class="tok-p">)</span><span class="tok-p">]</span>
+v1 <span class="tok-p">=</span> <span class="tok-p">[</span>rng<span class="tok-p">.</span>normal<span class="tok-p">(</span>size<span class="tok-p">=</span><span class="tok-n">5</span><span class="tok-p">)</span><span class="tok-p">.</span>var<span class="tok-p">(</span>ddof<span class="tok-p">=</span><span class="tok-n">1</span><span class="tok-p">)</span> <span class="tok-k">for</span> _ <span class="tok-k">in</span> <span class="tok-f">range</span><span class="tok-p">(</span><span class="tok-n">50_000</span><span class="tok-p">)</span><span class="tok-p">]</span>
+<span class="tok-f">print</span><span class="tok-p">(</span>np<span class="tok-p">.</span>mean<span class="tok-p">(</span>v0<span class="tok-p">)</span><span class="tok-p">,</span> np<span class="tok-p">.</span>mean<span class="tok-p">(</span>v1<span class="tok-p">)</span><span class="tok-p">)</span>            <span class="tok-c"># ≈0.8 и ≈1.0 (истина 1)</span>
+
+<span class="tok-c"># 4) Бутстрап: стандартная ошибка медианы и 95% интервал</span>
+z <span class="tok-p">=</span> rng<span class="tok-p">.</span>lognormal<span class="tok-p">(</span>mean<span class="tok-p">=</span><span class="tok-n">0</span><span class="tok-p">,</span> sigma<span class="tok-p">=</span><span class="tok-n">1</span><span class="tok-p">,</span> size<span class="tok-p">=</span><span class="tok-n">300</span><span class="tok-p">)</span>
+B <span class="tok-p">=</span> <span class="tok-n">5000</span>
+meds <span class="tok-p">=</span> np<span class="tok-p">.</span>array<span class="tok-p">(</span><span class="tok-p">[</span>np<span class="tok-p">.</span>median<span class="tok-p">(</span>rng<span class="tok-p">.</span>choice<span class="tok-p">(</span>z<span class="tok-p">,</span> size<span class="tok-p">=</span>z<span class="tok-p">.</span>size<span class="tok-p">,</span> replace<span class="tok-p">=</span><span class="tok-k">True</span><span class="tok-p">)</span><span class="tok-p">)</span> <span class="tok-k">for</span> _ <span class="tok-k">in</span> <span class="tok-f">range</span><span class="tok-p">(</span>B<span class="tok-p">)</span><span class="tok-p">]</span><span class="tok-p">)</span>
+<span class="tok-f">print</span><span class="tok-p">(</span><span class="tok-s">"</span><span class="tok-s">median =</span><span class="tok-s">"</span><span class="tok-p">,</span> np<span class="tok-p">.</span>median<span class="tok-p">(</span>z<span class="tok-p">)</span><span class="tok-p">,</span> <span class="tok-s">"</span><span class="tok-s">SE =</span><span class="tok-s">"</span><span class="tok-p">,</span> meds<span class="tok-p">.</span>std<span class="tok-p">(</span>ddof<span class="tok-p">=</span><span class="tok-n">1</span><span class="tok-p">)</span><span class="tok-p">,</span>
+      <span class="tok-s">"</span><span class="tok-s">CI =</span><span class="tok-s">"</span><span class="tok-p">,</span> np<span class="tok-p">.</span>percentile<span class="tok-p">(</span>meds<span class="tok-p">,</span> <span class="tok-p">[</span><span class="tok-n">2.5</span><span class="tok-p">,</span> <span class="tok-n">97.5</span><span class="tok-p">]</span><span class="tok-p">)</span><span class="tok-p">)</span>
+</code></pre></div>
+<p>В пункте 3 видно смещение: при <span class="tex">n=5</span> среднее по повторам оценки с делителем <span class="tex">n</span> около <span class="tex">0{,}8=\frac{n-1}n</span>.</p>
+<h2 id="ловушки">Ловушки</h2>
+<ul>
+<li><strong>Сравнение смещённой и несмещённой дисперсии.</strong> В <code>numpy</code> и <code>pandas</code> разные значения <code>ddof</code> по умолчанию.</li>
+<li><strong>Произведение вместо суммы логарифмов.</strong> Произведение тысяч вероятностей даёт машинный нуль; всегда работайте с логарифмами, а суммы вероятностей внутри логарифма (смеси) считайте через <code>logsumexp</code>.</li>
+<li><strong>Негладкое или неограниченное правдоподобие.</strong> Для смеси гауссиан <span class="tex">L\to\infty</span> при вырождении компоненты в точку; нужны ограничения или априори.</li>
+<li><strong>ММП при сепарабельности.</strong> В логистической регрессии на линейно разделимых данных оценка <span class="tex">\|w\|\to\infty</span>; спасает регуляризация (то есть MAP).</li>
+<li><strong>Неверная модель шума.</strong> MSE на дискретных или сильно асимметричных целях (число заказов, время) — повод взять Пуассона/log-normal NLL или преобразовать цель.</li>
+<li><strong>Бутстрап зависимых данных.</strong> Пользователи с множеством событий не независимы: ресэмплируйте по пользователям, а не по строкам.</li>
+<li><strong>Малые <span class="tex">n</span> у редких событий.</strong> Оценка <span class="tex">\hat p=k/n</span> при <span class="tex">k=0</span> даёт <span class="tex">p=0</span>; применяют сглаживание Лапласа, байесовские оценки с априорным Beta.</li>
+</ul>
+<h2 id="что-почитать">Что почитать</h2>
+<ul>
+<li>R. Fisher. <em>On the mathematical foundations of theoretical statistics</em>. Phil. Trans. R. Soc. A, 1922.</li>
+<li>B. Efron. <em>Bootstrap methods: another look at the jackknife</em>. Annals of Statistics, 1979.</li>
+<li>B. Efron, T. Hastie. <em>Computer Age Statistical Inference</em>. Cambridge UP, 2016 — <a href="https://hastie.su.domains/CASI/" rel="noopener noreferrer nofollow">hastie.su.domains/CASI</a>.</li>
+<li>K. Murphy. <em>Probabilistic Machine Learning: An Introduction</em>. MIT Press, 2022, глава 4 «Statistics» (ММП, регуляризация как MAP, байесовская и частотная статистика) — <a href="https://probml.github.io/pml-book/book1.html" rel="noopener noreferrer nofollow">probml.github.io/pml-book</a>.</li>
+<li>Учебник ШАД Яндекса, теормин «Параметрические оценки» (несмещённость, метод моментов, ММП, bias–variance) — <a href="https://contest.yandex.ru/tracks/ml/mathematical-foundations/parametric-estimation" rel="noopener noreferrer nofollow">contest.yandex.ru/tracks/ml/mathematical-foundations/parametric-estimation</a>.</li>
+<li>Ноутбук лекции 3 курса ML ФПМИ БГУ <code>math.stat.ipynb</code> — ЭФР, оценки Пуассона и экспоненциального распределения.</li>
+</ul>
+</div>
+      
+
+      
+      <nav class="pager" aria-label="Соседние статьи">
+        <a href="/edufamcs-demo/handbook/math/teoriya-veroyatnostej/"><span><svg class="ico sm" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-arrow-left"/></svg>Назад</span>Теория вероятностей</a>
+        <a href="/edufamcs-demo/handbook/math/intervaly-i-proverka-gipotez/"><span>Дальше<svg class="ico sm" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-arrow"/></svg></span>Доверительные интервалы и проверка гипотез</a>
+      </nav>
+      
+    </article>
+
+    <aside class="hb-toc" aria-label="На этой странице">
+      <a class="l2" href="#выборка-и-эмпирическая-функция-распределения">Выборка и эмпирическая функция распределения</a><a class="l2" href="#точечные-оценки-и-их-свойства">Точечные оценки и их свойства</a><a class="l3" href="#выборочное-среднее-и-дисперсия">Выборочное среднее и дисперсия</a><a class="l2" href="#метод-моментов">Метод моментов</a><a class="l2" href="#метод-максимального-правдоподобия">Метод максимального правдоподобия</a><a class="l2" href="#главная-связь-с-ml-потери-как-правдоподобие">Главная связь с ML: потери как правдоподобие</a><a class="l3" href="#map-и-регуляризация">MAP и регуляризация</a><a class="l2" href="#смещение-и-разброс">Смещение и разброс</a><a class="l2" href="#бутстрап">Бутстрап</a><a class="l2" href="#код">Код</a><a class="l2" href="#ловушки">Ловушки</a><a class="l2" href="#что-почитать">Что почитать</a>
+    </aside>
+  </div>
+</div>
+
+
+</main>
+
+<footer class="ftr" data-theme="dark">
+  <svg class="sym fern" viewBox="0 0 40.5 65.02" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#fern"/></svg>
+  <div class="container">
+    <div class="ftr-row">
+      <a href="/edufamcs-demo/" aria-label="EDU FAMCS — главная"><img src="/edufamcs-demo/static/brand/logo/logo-edu-dark.svg" alt="EDU FAMCS" width="196" height="40"></a>
+      <ul class="ftr-links">
+        <li><a href="/edufamcs-demo/#courses">Курсы</a></li>
+        <li><a href="/edufamcs-demo/ml/">Машинное обучение</a></li>
+        <li><a href="/edufamcs-demo/handbook/">Хендбук</a></li>
+        <li><a href="/edufamcs-demo/news/">Новости</a></li>
+        <li><a href="/edufamcs-demo/people/">Авторы</a></li>
+        <li><a href="/edufamcs-demo/about/">О&nbsp;нас</a></li>
+        <li><a href="/edufamcs-demo/propose/">Предложить или исправить</a></li>
+        <li><a href="/edufamcs-demo/privacy/">Конфиденциальность</a></li>
+      </ul>
+    </div>
+    <div class="ftr-big" aria-hidden="true">EDU<span class="d">·</span>FAMCS</div>
+    <p class="ftr-copy">© 2026 EDU FAMCS · Минск</p>
+  </div>
+</footer>
+
+<div class="toasts-region" aria-live="polite" id="toasts">
+
+</div>
+
+</body>
+</html>

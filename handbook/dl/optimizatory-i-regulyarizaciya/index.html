@@ -1,0 +1,271 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Оптимизаторы, регуляризация и практика обучения · EDU FAMCS</title>
+<meta name="description" content="Оптимизаторы, регуляризация и практика обучения — Введение в глубокое обучение. Хендбук ML-курса ФПМИ.">
+<meta name="theme-color" content="#060A16">
+<meta name="robots" content="noindex, nofollow">
+<meta name="htmx-config" content='{"allowEval":false,"includeIndicatorStyles":false,"historyCacheSize":0,"selfRequestsOnly":true}'>
+<meta name="katex-js" content="/edufamcs-demo/static/vendor/katex/katex.min.js">
+<meta name="katex-css" content="/edufamcs-demo/static/vendor/katex/katex.min.css">
+<link rel="icon" href="/edufamcs-demo/static/brand/logo/favicon-16.svg" type="image/svg+xml" sizes="16x16">
+<link rel="icon" href="/edufamcs-demo/static/brand/logo/favicon.svg" type="image/svg+xml" sizes="any">
+<link rel="preload" href="/edufamcs-demo/static/brand/fonts/manrope-cyrillic-400.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/edufamcs-demo/static/brand/fonts/unbounded-cyrillic-800.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="/edufamcs-demo/static/brand/fonts.css">
+<link rel="stylesheet" href="/edufamcs-demo/static/brand/tokens.css">
+<link rel="stylesheet" href="/edufamcs-demo/static/brand/components.css">
+<link rel="stylesheet" href="/edufamcs-demo/static/css/site.css">
+<link rel="stylesheet" href="/edufamcs-demo/static/css/hub.css">
+<link rel="stylesheet" href="/edufamcs-demo/static/css/about.css">
+<link rel="stylesheet" href="/edufamcs-demo/static/handbook/handbook.css">
+<script src="/edufamcs-demo/static/js/theme.js"></script>
+<script src="/edufamcs-demo/static/vendor/htmx/htmx.min.js" defer></script>
+<script src="/edufamcs-demo/static/vendor/alpine/alpine-csp.min.js" defer></script>
+<script src="/edufamcs-demo/static/js/site.js" defer></script>
+<script src="/edufamcs-demo/static/handbook/handbook.js" defer></script>
+</head>
+<body class="" hx-headers='{"X-CSRFToken": "DZgeKJiDAjDoaD9iwvT1iqPVA3wxk78b2JPiuH50va1xpck13IC9fVl08LC2ShQV"}'>
+<a class="skip" href="#main">К содержанию</a>
+<div class="demo-bar" role="note">Демо-версия для отзывов: вход, запись на курсы и формы здесь не работают.</div>
+
+<header class="hdr">
+  <div class="container">
+    <a class="brand" href="/edufamcs-demo/" aria-label="EDU FAMCS — главная">
+      <span class="full"><img class="only-light" src="/edufamcs-demo/static/brand/logo/logo-edu-light.svg" alt="EDU FAMCS" width="196" height="40"><img class="only-dark" src="/edufamcs-demo/static/brand/logo/logo-edu-dark.svg" alt="EDU FAMCS" width="196" height="40"></span>
+      <span class="short"><img class="only-light" src="/edufamcs-demo/static/brand/logo/logo-edu-light.svg" alt="EDU FAMCS" height="30"><img class="only-dark" src="/edufamcs-demo/static/brand/logo/logo-edu-dark.svg" alt="EDU FAMCS" height="30"></span>
+    </a>
+    <nav class="nav" id="main-nav" aria-label="Основная навигация">
+      <a href="/edufamcs-demo/#courses">Курсы</a>
+      <a href="/edufamcs-demo/ml/" >Машинное обучение</a>
+      
+      <a href="/edufamcs-demo/handbook/" aria-current="page">Хендбук</a>
+      <a href="/edufamcs-demo/news/" >Новости</a>
+      <a href="/edufamcs-demo/people/" >Авторы</a>
+      <a href="/edufamcs-demo/about/" >О&nbsp;нас</a>
+    </nav>
+    <div class="hdr-actions">
+      
+      <a class="btn btn-outline btn-login" href="/edufamcs-demo/accounts/login/?next=/handbook/dl/optimizatory-i-regulyarizaciya/">Войти</a>
+      
+      <button class="icon-btn menu-btn" type="button" aria-label="Меню" aria-expanded="false" aria-controls="main-nav"><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-menu"/></svg></button>
+    </div>
+  </div>
+</header>
+
+<main id="main">
+
+
+
+<div class="container hb-page hb-tone">
+  <div class="hb">
+    <aside class="hb-nav" aria-label="Статьи раздела">
+      
+<form class="hb-search" action="/edufamcs-demo/handbook/search/" method="get" role="search">
+  <svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-search"/></svg>
+  <input class="input" type="search" name="q" value="" placeholder="Поиск по хендбуку" aria-label="Поиск по хендбуку" autocomplete="off" maxlength="120"
+    hx-get="/edufamcs-demo/handbook/search/" hx-trigger="input changed delay:250ms, search" hx-target="#hb-nav-results" hx-sync="this:replace">
+</form>
+
+      <div id="hb-nav-results" class="hb-nav-results" aria-live="polite"></div>
+      <a class="grp" href="/edufamcs-demo/handbook/dl/">Основы нейросетей</a>
+      
+      <a class="" href="/edufamcs-demo/handbook/dl/nejron-i-mnogoslojnyj-perceptron/">Нейрон и многослойный перцептрон</a>
+      
+      <a class="" href="/edufamcs-demo/handbook/dl/obratnoe-rasprostranenie-oshibki/">Обратное распространение ошибки</a>
+      
+      <a class="cur" href="/edufamcs-demo/handbook/dl/optimizatory-i-regulyarizaciya/" aria-current="page">Оптимизаторы, регуляризация и практика обучения</a>
+      
+    </aside>
+
+    <article class="hb-main">
+      <nav class="crumbs" aria-label="Навигация"><a href="/edufamcs-demo/handbook/">Хендбук</a><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-chev"/></svg><a href="/edufamcs-demo/handbook/dl/">Введение в глубокое обучение</a></nav>
+      <h1 class="h1">Оптимизаторы, регуляризация и практика обучения</h1>
+      <div class="hb-meta">
+        
+        
+        <span><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-clock"/></svg>12&nbsp;мин</span>
+        <span class="hb-authors"><span class="avatar sm" title="Артем Лебедевич">АЛ</span>Артем Лебедевич</span>
+        <span><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-edit"/></svg>9 ноября 2026</span>
+        
+        
+      </div>
+
+      
+      <details class="hb-mtoc">
+        <summary><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-list"/></svg>Содержание<svg class="ico sm" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-chev-down"/></svg></summary>
+        <a class="l2" href="#мини-батч-sgd">Мини-батч SGD</a><a class="l2" href="#импульс-и-нестеров">Импульс и Нестеров</a><a class="l2" href="#адаптивные-оптимизаторы">Адаптивные оптимизаторы</a><a class="l2" href="#расписания-learning-rate">Расписания learning rate</a><a class="l2" href="#регуляризация">Регуляризация</a><a class="l2" href="#рецепт-карпати">Рецепт Карпати</a><a class="l2" href="#практика-обучения">Практика обучения</a><a class="l2" href="#типичные-баги">Типичные баги</a><a class="l2" href="#код-цикл-обучения">Код: цикл обучения</a><a class="l2" href="#что-почитать">Что почитать</a>
+      </details>
+      
+
+      <div class="prose"><p>Backprop даёт градиент, но не говорит, как им распорядиться. Функция потерь нейросети невыпуклая, с миллионами параметров, а градиент считается по случайному мини-батчу. Выбор оптимизатора, расписания шага и регуляризации часто влияет на итоговое качество не меньше, чем архитектура.</p>
+<h2 id="мини-батч-sgd">Мини-батч SGD</h2>
+<p>Полный градиент <span class="tex">\nabla L(\theta)=\frac1N\sum_i\nabla \ell_i(\theta)</span> слишком дорог. Берём случайный батч <span class="tex">B</span> из <span class="tex">b</span> объектов и считаем</p>
+<div class="tex tex-block">g_t=\frac1b\sum_{i\in B}\nabla\ell_i(\theta_{t-1}),\qquad \theta_t=\theta_{t-1}-\eta\,g_t.</div>
+<p>Оценка <span class="tex">g_t</span> несмещённая, но шумная; дисперсия падает как <span class="tex">1/b</span>. Шум не только помеха: он помогает выбираться из седловых точек и, по ряду наблюдений, смещает решение к более плоским минимумам, которые лучше обобщаются. Эпоха — один проход по данным; перед каждой эпохой данные перемешивают (<code>shuffle=True</code>).</p>
+<p><strong>Размер батча и шаг.</strong> Больший батч — меньше шума, лучше загрузка GPU, но при том же <span class="tex">\eta</span> шагов за эпоху меньше. Эмпирическое правило линейного масштабирования (Goyal и соавторы, 2017, для SGD): при увеличении батча в <span class="tex">k</span> раз увеличивайте <span class="tex">\eta</span> примерно в <span class="tex">k</span> раз (с прогревом), пока не упрётесь в предел, после которого качество падает.</p>
+<h2 id="импульс-и-нестеров">Импульс и Нестеров</h2>
+<p>Плоские овраги с крутыми стенками заставляют SGD «зигзагать». <strong>Импульс</strong> (momentum) накапливает скользящее среднее градиентов:</p>
+<div class="tex tex-block">v_t=\mu v_{t-1}+g_t,\qquad \theta_t=\theta_{t-1}-\eta v_t,\quad \mu\approx0{,}9.</div>
+<p>Колебания поперёк оврага гасятся, а движение вдоль него ускоряется. <strong>Метод Нестерова</strong> вычисляет градиент не в текущей точке, а в «заглядывающей вперёд» <span class="tex">\theta_{t-1}-\eta\mu v_{t-1}</span>, что даёт более точную коррекцию (в PyTorch — <code>nesterov=True</code>). Для свёрточных сетей SGD с импульсом остаётся классическим выбором: по ряду работ (Wilson и соавторы, 2017) при тщательно подобранном расписании он обобщается не хуже или лучше адаптивных методов. Визуальные трансформеры, наоборот, обучают AdamW.</p>
+<h2 id="адаптивные-оптимизаторы">Адаптивные оптимизаторы</h2>
+<p>Идея: у разных параметров разный масштаб градиента, поэтому нужен свой шаг для каждого.</p>
+<p><strong>AdaGrad</strong> (Дучи и соавторы, 2011) делит шаг на корень из суммы квадратов градиентов: <span class="tex">\theta\leftarrow\theta-\frac{\eta}{\sqrt{G_t}+\varepsilon}g_t</span>, <span class="tex">G_t=\sum_{s\le t}g_s^2</span>. Редкие признаки получают большие шаги — хорошо для разреженных данных (эмбеддинги слов и товаров). Но <span class="tex">G_t</span> только растёт, и шаг со временем вырождается в ноль.</p>
+<p><strong>RMSProp</strong> (Хинтон, 2012, лекция курса Coursera) заменяет сумму экспоненциальным средним <span class="tex">v_t=\beta v_{t-1}+(1-\beta)g_t^2</span> и тем самым не даёт шагу умереть.</p>
+<p><strong>Adam</strong> (Кингма и Ба, 2014) соединяет импульс и RMSProp:</p>
+<div class="tex tex-block">m_t=\beta_1m_{t-1}+(1-\beta_1)g_t,\qquad v_t=\beta_2v_{t-1}+(1-\beta_2)g_t^2,</div>
+<div class="tex tex-block">\hat m_t=\frac{m_t}{1-\beta_1^t},\quad \hat v_t=\frac{v_t}{1-\beta_2^t},\qquad \theta_t=\theta_{t-1}-\eta\frac{\hat m_t}{\sqrt{\hat v_t}+\varepsilon}.</div>
+<p>Стандартные значения <span class="tex">\beta_1=0{,}9</span>, <span class="tex">\beta_2=0{,}999</span>, <span class="tex">\varepsilon=10^{-8}</span>. <strong>Коррекция смещения</strong> нужна потому, что <span class="tex">m_0=v_0=0</span>: на первых шагах скользящие средние занижены (<span class="tex">m_1=0{,}1g_1</span> вместо <span class="tex">g_1</span>), и деление на <span class="tex">1-\beta^t</span> это исправляет. Adam хранит два буфера размером с модель, поэтому оптимизатор занимает в памяти вдвое больше самих весов.</p>
+<p><strong>AdamW</strong> (Лощилов и Хуттер, 2017) исправляет ошибку, незаметную много лет. В SGD <span class="tex">L_2</span>-регуляризация и weight decay — одно и то же, но в Adam <span class="tex">L_2</span>-слагаемое попадает в градиент и затем делится на <span class="tex">\sqrt{\hat v_t}</span>, так что регуляризация слабее для параметров с большим градиентом. AdamW применяет затухание <strong>отдельно</strong> от адаптивного шага:</p>
+<div class="tex tex-block">\theta_t=\theta_{t-1}-\eta\Big(\frac{\hat m_t}{\sqrt{\hat v_t}+\varepsilon}+\lambda\,\theta_{t-1}\Big).</div>
+<p>Для трансформеров и современных сетей по умолчанию берут <code>AdamW</code> (<span class="tex">\lambda\sim0{,}01</span>–<span class="tex">0{,}1</span>, без затухания для смещений и параметров нормализации).</p>
+<p>Что выбрать: для старта — AdamW с <span class="tex">\eta=10^{-3}</span> (для трансформеров <span class="tex">10^{-4}</span>–<span class="tex">3\cdot10^{-4}</span>), для свёрточных сетей на картинках — SGD с импульсом 0,9 и cosine-расписанием. Adam менее чувствителен к выбору <span class="tex">\eta</span>. В рекомендательных моделях важнее другое: строка эмбеддинга редкого товара получает градиент редко, и адаптивный шаг (AdaGrad, Adam) делает её обновления крупнее, чем у популярных. Для огромных таблиц эмбеддингов используют разреженные варианты (<code>SparseAdam</code>, row-wise AdaGrad), которые не трогают строки вне батча.</p>
+<h2 id="расписания-learning-rate">Расписания learning rate</h2>
+<p>Постоянный <span class="tex">\eta</span> — почти всегда плохой выбор: в начале нужен осторожный разогрев, в конце — малый шаг, чтобы успокоиться в минимуме.</p>
+<ul>
+<li><strong>Warmup</strong>: линейный рост <span class="tex">\eta</span> от нуля за первые сотни–тысячи шагов. Нужен, потому что оценки <span class="tex">v_t</span> в начале шумные, а веса и нормализации ещё не «устоялись»; для трансформеров это стандарт, а для post-norm-архитектуры без него обучение часто расходится.</li>
+<li><strong>Step decay</strong>: уменьшать <span class="tex">\eta</span> в 10 раз на фиксированных эпохах (классика для ResNet).</li>
+<li><strong>Cosine annealing</strong> (Лощилов и Хуттер, SGDR, 2016): <span class="tex">\eta_t=\eta_{min}+\frac12(\eta_{max}-\eta_{min})(1+\cos\frac{\pi t}{T})</span>. Плавно, один гиперпараметр <span class="tex">T</span>. Версия с перезапусками (warm restarts) периодически поднимает шаг обратно.</li>
+<li><strong>One-cycle</strong> (Смит и Топин, 2017): шаг растёт до большого значения, затем падает почти до нуля. На ряде задач позволяет обучать в разы быстрее (super-convergence).</li>
+<li><strong>LR range test</strong> (Смит, 2015): за несколько сотен шагов плавно (в популярных реализациях — экспоненциально) увеличиваем <span class="tex">\eta</span> от <span class="tex">10^{-7}</span> до <span class="tex">1</span> и смотрим на кривую потерь; рабочий шаг — примерно на порядок меньше точки, где потери начинают расти. Самый дешёвый способ подобрать <span class="tex">\eta</span>.</li>
+</ul>
+<h2 id="регуляризация">Регуляризация</h2>
+<p>Сеть с миллионами параметров легко запоминает обучающую выборку. Что с этим делают:</p>
+<ul>
+<li><strong>Weight decay</strong> (<span class="tex">L_2</span>): штраф <span class="tex">\frac\lambda2\|\theta\|^2</span> (в AdamW — отдельным слагаемым в шаге) удерживает веса малыми, а функцию — менее «изломанной».</li>
+<li><strong>Dropout</strong> (Шривастава и соавторы, 2014): при обучении каждый нейрон обнуляется с вероятностью <span class="tex">p</span>, а оставшиеся активации масштабируются на <span class="tex">1/(1-p)</span> (inverted dropout). Сеть не может полагаться на конкретные нейроны — это аналог ансамбля из экспоненциального числа «прореженных» подсетей. На инференсе dropout выключен.</li>
+<li><strong>Ранняя остановка</strong> (early stopping): следим за метрикой на валидации и останавливаемся, когда она перестала улучшаться <code>patience</code> эпох; сохраняем лучшие веса. Дёшево и работает всегда.</li>
+<li><strong>Аугментации</strong>: случайные повороты, кропы, шум, маскирование токенов — расширяют данные за счёт инвариантностей, о которых мы знаем заранее. Самый сильный регуляризатор в зрении.</li>
+<li><strong>Label smoothing</strong> (Сегеди и соавторы, 2016): вместо one-hot цели используется <span class="tex">(1-\varepsilon)\,\text{onehot}+\varepsilon/C</span>. Не даёт логитам расти до бесконечности и улучшает калибровку (<code>CrossEntropyLoss(label_smoothing=0.1)</code>).</li>
+</ul>
+<h2 id="рецепт-карпати">Рецепт Карпати</h2>
+<p>Андрей Карпати в статье «A Recipe for Training Neural Networks» (2019) сформулировал порядок, который экономит недели:</p>
+<ol>
+<li><strong>Сначала смотрите на данные</strong>: распределения, дубликаты, дисбаланс, ошибки разметки.</li>
+<li><strong>Постройте сквозной каркас</strong> с глупой моделью и простейшим бейзлайном (линейная модель, бустинг, константа). Без бейзлайна вы не поймёте, хорошо ли работает сеть.</li>
+<li><strong>Переобучите один батч</strong> до нулевой потери. Если не получается — баг в коде, а не в гиперпараметрах.</li>
+<li><strong>Проверьте значение потерь в начале</strong>: для <span class="tex">C</span> классов при случайной инициализации оно должно быть около <span class="tex">\ln C</span>.</li>
+<li>Усложняйте по одному изменению за раз, следите за кривыми train/val; сначала добейтесь переобучения, затем регуляризуйте.</li>
+<li>Подбирайте гиперпараметры случайным поиском, а не по сетке; в конце — ансамбль и дообучение подольше.</li>
+</ol>
+<h2 id="практика-обучения">Практика обучения</h2>
+<ul>
+<li><strong>Gradient clipping</strong>: <code>torch.nn.utils.clip_grad_norm_(model.parameters(), 1.0)</code> ограничивает норму градиента; стандарт для RNN и трансформеров, лечит взрывы потерь.</li>
+<li><strong>Смешанная точность</strong> (Микевичюс и соавторы, 2018): прямой и обратный проход в <code>float16</code>/<code>bfloat16</code>, мастер-копия весов в <code>float32</code>; в fp16 дополнительно масштабируют потерю (loss scaling, <code>torch.amp.GradScaler</code>), чтобы мелкие градиенты не обнулялись. На GPU с тензорными ядрами ускорение обычно в 1,5–3 раза, память под активации примерно вдвое меньше (веса и состояния оптимизатора остаются в <code>float32</code>); в PyTorch — <code>torch.autocast</code>.</li>
+<li><strong>Воспроизводимость</strong>: фиксируйте сиды (<code>torch.manual_seed</code>, numpy, python), версии библиотек и конфиг; полной детерминированности на GPU без <code>torch.use_deterministic_algorithms(True)</code> не будет. Сравнивая два подхода, прогоняйте их на нескольких сидах — разброс между сидами часто сопоставим с эффектом.</li>
+<li><strong>Чекпойнты</strong>: сохраняйте не только веса, но и состояние оптимизатора, расписания и номер эпохи, иначе возобновление ломает обучение.</li>
+<li><strong>Трекинг экспериментов</strong>: логируйте конфиг, метрики по эпохам и хэш кода (MLflow, Weights &amp; Biases, TensorBoard).</li>
+</ul>
+<p>Практические аспекты обучения нейросетей именно для рекомендаций разбираются в семинаре курса DeepRecSys: <a href="https://www.youtube.com/watch?v=WBDq10D9zoU" rel="noopener noreferrer nofollow">WBDq10D9zoU</a>. Как такие модели встраиваются в продакшен-схему, показано в статье <a href="/edufamcs-demo/handbook/recsys/two-tower-ann/" rel="noopener noreferrer nofollow">про двухбашенные модели</a>.</p>
+<h2 id="типичные-баги">Типичные баги</h2>
+<ul>
+<li>Забыт <code>model.eval()</code> на валидации: dropout включён, BatchNorm считает статистику по батчу, метрики шумят и занижены. Не забывайте вернуть <code>model.train()</code>.</li>
+<li>Забыт <code>optimizer.zero_grad()</code> — градиенты суммируются между шагами.</li>
+<li>Softmax (или сигмоида) перед <code>CrossEntropyLoss</code>/<code>BCEWithLogitsLoss</code>: функция внутри потери применяется второй раз, вероятности из <span class="tex">[0,1]</span> снова сжимаются к почти равномерным, градиенты слабеют; обучение идёт, но плохо.</li>
+<li><strong>Утечки</strong>: нормализация или отбор признаков, обученные на всей выборке; дубликаты и пересечения пользователей между train и val; для временных данных — случайное разбиение вместо разбиения по времени.</li>
+<li>Перепутаны оси (<code>(B, C)</code> против <code>(C, B)</code>) — форма сходится из-за broadcasting, а смысл потерян. Сверяйте <code>shape</code> на каждом слое.</li>
+<li>Неверный тип меток: для <code>CrossEntropyLoss</code> нужен <code>int64</code> с индексами классов.</li>
+<li>Итоговое качество сообщают по той же валидации, на которой подбирали гиперпараметры и выбирали эпоху: оценка завышена. Нужна отложенная тестовая выборка, к которой обращаются один раз.</li>
+</ul>
+<h2 id="код-цикл-обучения">Код: цикл обучения</h2>
+<div class="code"><div class="code-head"><span class="lang">python</span></div><pre><code><span class="tok-k">import</span> copy<span class="tok-p">,</span> torch
+<span class="tok-k">from</span> torch <span class="tok-k">import</span> nn
+
+<span class="tok-k">def</span> <span class="tok-f">fit</span><span class="tok-p">(</span>model<span class="tok-p">,</span> train_dl<span class="tok-p">,</span> val_dl<span class="tok-p">,</span> epochs<span class="tok-p">=</span><span class="tok-n">50</span><span class="tok-p">,</span> lr<span class="tok-p">=</span><span class="tok-n">1e-3</span><span class="tok-p">,</span> wd<span class="tok-p">=</span><span class="tok-n">1e-2</span><span class="tok-p">,</span> patience<span class="tok-p">=</span><span class="tok-n">5</span><span class="tok-p">,</span> device<span class="tok-p">=</span><span class="tok-s">"</span><span class="tok-s">cuda</span><span class="tok-s">"</span><span class="tok-p">)</span><span class="tok-p">:</span>
+    model<span class="tok-p">.</span>to<span class="tok-p">(</span>device<span class="tok-p">)</span>
+    opt <span class="tok-p">=</span> torch<span class="tok-p">.</span>optim<span class="tok-p">.</span>AdamW<span class="tok-p">(</span>model<span class="tok-p">.</span>parameters<span class="tok-p">(</span><span class="tok-p">)</span><span class="tok-p">,</span> lr<span class="tok-p">=</span>lr<span class="tok-p">,</span> weight_decay<span class="tok-p">=</span>wd<span class="tok-p">)</span>
+    total <span class="tok-p">=</span> epochs <span class="tok-p">*</span> <span class="tok-f">len</span><span class="tok-p">(</span>train_dl<span class="tok-p">)</span>
+    sched <span class="tok-p">=</span> torch<span class="tok-p">.</span>optim<span class="tok-p">.</span>lr_scheduler<span class="tok-p">.</span>OneCycleLR<span class="tok-p">(</span>opt<span class="tok-p">,</span> max_lr<span class="tok-p">=</span>lr<span class="tok-p">,</span> total_steps<span class="tok-p">=</span>total<span class="tok-p">,</span>
+                                                anneal_strategy<span class="tok-p">=</span><span class="tok-s">"</span><span class="tok-s">cos</span><span class="tok-s">"</span><span class="tok-p">,</span> pct_start<span class="tok-p">=</span><span class="tok-n">0.1</span><span class="tok-p">)</span>
+    loss_fn <span class="tok-p">=</span> nn<span class="tok-p">.</span>CrossEntropyLoss<span class="tok-p">(</span>label_smoothing<span class="tok-p">=</span><span class="tok-n">0.05</span><span class="tok-p">)</span>
+    best<span class="tok-p">,</span> best_state<span class="tok-p">,</span> bad <span class="tok-p">=</span> <span class="tok-f">float</span><span class="tok-p">(</span><span class="tok-s">"</span><span class="tok-s">inf</span><span class="tok-s">"</span><span class="tok-p">)</span><span class="tok-p">,</span> <span class="tok-k">None</span><span class="tok-p">,</span> <span class="tok-n">0</span>
+
+    <span class="tok-k">for</span> epoch <span class="tok-k">in</span> <span class="tok-f">range</span><span class="tok-p">(</span>epochs<span class="tok-p">)</span><span class="tok-p">:</span>
+        model<span class="tok-p">.</span>train<span class="tok-p">(</span><span class="tok-p">)</span>
+        <span class="tok-k">for</span> x<span class="tok-p">,</span> y <span class="tok-k">in</span> train_dl<span class="tok-p">:</span>
+            x<span class="tok-p">,</span> y <span class="tok-p">=</span> x<span class="tok-p">.</span>to<span class="tok-p">(</span>device<span class="tok-p">)</span><span class="tok-p">,</span> y<span class="tok-p">.</span>to<span class="tok-p">(</span>device<span class="tok-p">)</span>
+            opt<span class="tok-p">.</span>zero_grad<span class="tok-p">(</span>set_to_none<span class="tok-p">=</span><span class="tok-k">True</span><span class="tok-p">)</span>
+            loss <span class="tok-p">=</span> loss_fn<span class="tok-p">(</span>model<span class="tok-p">(</span>x<span class="tok-p">)</span><span class="tok-p">,</span> y<span class="tok-p">)</span>
+            loss<span class="tok-p">.</span>backward<span class="tok-p">(</span><span class="tok-p">)</span>
+            nn<span class="tok-p">.</span>utils<span class="tok-p">.</span>clip_grad_norm_<span class="tok-p">(</span>model<span class="tok-p">.</span>parameters<span class="tok-p">(</span><span class="tok-p">)</span><span class="tok-p">,</span> <span class="tok-n">1.0</span><span class="tok-p">)</span>
+            opt<span class="tok-p">.</span>step<span class="tok-p">(</span><span class="tok-p">)</span>
+            sched<span class="tok-p">.</span>step<span class="tok-p">(</span><span class="tok-p">)</span>                      <span class="tok-c"># расписание — после каждого батча</span>
+
+        model<span class="tok-p">.</span>eval<span class="tok-p">(</span><span class="tok-p">)</span>
+        val<span class="tok-p">,</span> n <span class="tok-p">=</span> <span class="tok-n">0.0</span><span class="tok-p">,</span> <span class="tok-n">0</span>
+        <span class="tok-k">with</span> torch<span class="tok-p">.</span>no_grad<span class="tok-p">(</span><span class="tok-p">)</span><span class="tok-p">:</span>
+            <span class="tok-k">for</span> x<span class="tok-p">,</span> y <span class="tok-k">in</span> val_dl<span class="tok-p">:</span>
+                x<span class="tok-p">,</span> y <span class="tok-p">=</span> x<span class="tok-p">.</span>to<span class="tok-p">(</span>device<span class="tok-p">)</span><span class="tok-p">,</span> y<span class="tok-p">.</span>to<span class="tok-p">(</span>device<span class="tok-p">)</span>
+                val <span class="tok-p">+</span><span class="tok-p">=</span> nn<span class="tok-p">.</span>functional<span class="tok-p">.</span>cross_entropy<span class="tok-p">(</span>model<span class="tok-p">(</span>x<span class="tok-p">)</span><span class="tok-p">,</span> y<span class="tok-p">,</span> reduction<span class="tok-p">=</span><span class="tok-s">"</span><span class="tok-s">sum</span><span class="tok-s">"</span><span class="tok-p">)</span><span class="tok-p">.</span>item<span class="tok-p">(</span><span class="tok-p">)</span>
+                n <span class="tok-p">+</span><span class="tok-p">=</span> <span class="tok-f">len</span><span class="tok-p">(</span>y<span class="tok-p">)</span>
+        val <span class="tok-p">/</span><span class="tok-p">=</span> n
+        <span class="tok-k">if</span> val <span class="tok-p">&lt;</span> best <span class="tok-p">-</span> <span class="tok-n">1e-4</span><span class="tok-p">:</span>
+            best<span class="tok-p">,</span> bad <span class="tok-p">=</span> val<span class="tok-p">,</span> <span class="tok-n">0</span>
+            best_state <span class="tok-p">=</span> copy<span class="tok-p">.</span>deepcopy<span class="tok-p">(</span>model<span class="tok-p">.</span>state_dict<span class="tok-p">(</span><span class="tok-p">)</span><span class="tok-p">)</span>
+        <span class="tok-k">else</span><span class="tok-p">:</span>
+            bad <span class="tok-p">+</span><span class="tok-p">=</span> <span class="tok-n">1</span>
+            <span class="tok-k">if</span> bad <span class="tok-p">&gt;</span><span class="tok-p">=</span> patience<span class="tok-p">:</span>
+                <span class="tok-k">break</span>
+    model<span class="tok-p">.</span>load_state_dict<span class="tok-p">(</span>best_state<span class="tok-p">)</span>
+    <span class="tok-k">return</span> model
+</code></pre></div>
+<p>Расписание здесь шагает после каждого батча. Валидационная потеря считается без label smoothing: это честная кросс-энтропия, по ней выбирается лучшая эпоха. Поэтому сравнивать её напрямую с train-потерей (со сглаживанием) нельзя — у сглаженной потери даже идеальная модель имеет ненулевой минимум.</p>
+<h2 id="что-почитать">Что почитать</h2>
+<ul>
+<li>Kingma, Ba, <em>Adam: A Method for Stochastic Optimization</em>, 2014: <a href="https://arxiv.org/abs/1412.6980" rel="noopener noreferrer nofollow">arxiv.org/abs/1412.6980</a>.</li>
+<li>Loshchilov, Hutter, <em>Decoupled Weight Decay Regularization</em> (AdamW), 2017: <a href="https://arxiv.org/abs/1711.05101" rel="noopener noreferrer nofollow">arxiv.org/abs/1711.05101</a>; <em>SGDR: Stochastic Gradient Descent with Warm Restarts</em>, 2016: <a href="https://arxiv.org/abs/1608.03983" rel="noopener noreferrer nofollow">arxiv.org/abs/1608.03983</a>.</li>
+<li>Srivastava et al., <em>Dropout</em>, JMLR, 2014: <a href="https://jmlr.org/papers/v15/srivastava14a.html" rel="noopener noreferrer nofollow">jmlr.org/papers/v15/srivastava14a.html</a>.</li>
+<li>Smith, <em>Cyclical Learning Rates for Training Neural Networks</em>, 2015: <a href="https://arxiv.org/abs/1506.01186" rel="noopener noreferrer nofollow">arxiv.org/abs/1506.01186</a>; Smith, Topin, <em>Super-Convergence: Very Fast Training of Neural Networks Using Large Learning Rates</em>, 2017: <a href="https://arxiv.org/abs/1708.07120" rel="noopener noreferrer nofollow">arxiv.org/abs/1708.07120</a>.</li>
+<li>Goyal et al., <em>Accurate, Large Minibatch SGD: Training ImageNet in 1 Hour</em>, 2017: <a href="https://arxiv.org/abs/1706.02677" rel="noopener noreferrer nofollow">arxiv.org/abs/1706.02677</a>.</li>
+<li>Karpathy, <em>A Recipe for Training Neural Networks</em>, 2019: <a href="https://karpathy.github.io/2019/04/25/recipe/" rel="noopener noreferrer nofollow">karpathy.github.io/2019/04/25/recipe</a>.</li>
+<li>Micikevicius et al., <em>Mixed Precision Training</em>, 2018: <a href="https://arxiv.org/abs/1710.03740" rel="noopener noreferrer nofollow">arxiv.org/abs/1710.03740</a>; Яндекс Образование, «Тонкости обучения»: <a href="https://contest.yandex.ru/tracks/ml/deep-learning-introduction/training-techniques" rel="noopener noreferrer nofollow">contest.yandex.ru/tracks/ml/deep-learning-introduction/training-techniques</a>.</li>
+</ul>
+</div>
+      
+
+      
+      <nav class="pager" aria-label="Соседние статьи">
+        <a href="/edufamcs-demo/handbook/dl/obratnoe-rasprostranenie-oshibki/"><span><svg class="ico sm" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-arrow-left"/></svg>Назад</span>Обратное распространение ошибки</a>
+        <a href="/edufamcs-demo/handbook/dl/svertochnye-seti/"><span>Дальше<svg class="ico sm" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-arrow"/></svg></span>Свёрточные сети</a>
+      </nav>
+      
+    </article>
+
+    <aside class="hb-toc" aria-label="На этой странице">
+      <a class="l2" href="#мини-батч-sgd">Мини-батч SGD</a><a class="l2" href="#импульс-и-нестеров">Импульс и Нестеров</a><a class="l2" href="#адаптивные-оптимизаторы">Адаптивные оптимизаторы</a><a class="l2" href="#расписания-learning-rate">Расписания learning rate</a><a class="l2" href="#регуляризация">Регуляризация</a><a class="l2" href="#рецепт-карпати">Рецепт Карпати</a><a class="l2" href="#практика-обучения">Практика обучения</a><a class="l2" href="#типичные-баги">Типичные баги</a><a class="l2" href="#код-цикл-обучения">Код: цикл обучения</a><a class="l2" href="#что-почитать">Что почитать</a>
+    </aside>
+  </div>
+</div>
+
+
+</main>
+
+<footer class="ftr" data-theme="dark">
+  <svg class="sym fern" viewBox="0 0 40.5 65.02" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#fern"/></svg>
+  <div class="container">
+    <div class="ftr-row">
+      <a href="/edufamcs-demo/" aria-label="EDU FAMCS — главная"><img src="/edufamcs-demo/static/brand/logo/logo-edu-dark.svg" alt="EDU FAMCS" width="196" height="40"></a>
+      <ul class="ftr-links">
+        <li><a href="/edufamcs-demo/#courses">Курсы</a></li>
+        <li><a href="/edufamcs-demo/ml/">Машинное обучение</a></li>
+        <li><a href="/edufamcs-demo/handbook/">Хендбук</a></li>
+        <li><a href="/edufamcs-demo/news/">Новости</a></li>
+        <li><a href="/edufamcs-demo/people/">Авторы</a></li>
+        <li><a href="/edufamcs-demo/about/">О&nbsp;нас</a></li>
+        <li><a href="/edufamcs-demo/propose/">Предложить или исправить</a></li>
+        <li><a href="/edufamcs-demo/privacy/">Конфиденциальность</a></li>
+      </ul>
+    </div>
+    <div class="ftr-big" aria-hidden="true">EDU<span class="d">·</span>FAMCS</div>
+    <p class="ftr-copy">© 2026 EDU FAMCS · Минск</p>
+  </div>
+</footer>
+
+<div class="toasts-region" aria-live="polite" id="toasts">
+
+</div>
+
+</body>
+</html>

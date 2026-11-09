@@ -1,0 +1,250 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Двухстадийная схема: кандидаты → ранжирование · EDU FAMCS</title>
+<meta name="description" content="Двухстадийная схема: кандидаты → ранжирование — Рекомендательные системы. Хендбук ML-курса ФПМИ.">
+<meta name="theme-color" content="#060A16">
+<meta name="robots" content="noindex, nofollow">
+<meta name="htmx-config" content='{"allowEval":false,"includeIndicatorStyles":false,"historyCacheSize":0,"selfRequestsOnly":true}'>
+<meta name="katex-js" content="/edufamcs-demo/static/vendor/katex/katex.min.js">
+<meta name="katex-css" content="/edufamcs-demo/static/vendor/katex/katex.min.css">
+<link rel="icon" href="/edufamcs-demo/static/brand/logo/favicon-16.svg" type="image/svg+xml" sizes="16x16">
+<link rel="icon" href="/edufamcs-demo/static/brand/logo/favicon.svg" type="image/svg+xml" sizes="any">
+<link rel="preload" href="/edufamcs-demo/static/brand/fonts/manrope-cyrillic-400.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/edufamcs-demo/static/brand/fonts/unbounded-cyrillic-800.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="/edufamcs-demo/static/brand/fonts.css">
+<link rel="stylesheet" href="/edufamcs-demo/static/brand/tokens.css">
+<link rel="stylesheet" href="/edufamcs-demo/static/brand/components.css">
+<link rel="stylesheet" href="/edufamcs-demo/static/css/site.css">
+<link rel="stylesheet" href="/edufamcs-demo/static/css/hub.css">
+<link rel="stylesheet" href="/edufamcs-demo/static/css/about.css">
+<link rel="stylesheet" href="/edufamcs-demo/static/handbook/handbook.css">
+<script src="/edufamcs-demo/static/js/theme.js"></script>
+<script src="/edufamcs-demo/static/vendor/htmx/htmx.min.js" defer></script>
+<script src="/edufamcs-demo/static/vendor/alpine/alpine-csp.min.js" defer></script>
+<script src="/edufamcs-demo/static/js/site.js" defer></script>
+<script src="/edufamcs-demo/static/handbook/handbook.js" defer></script>
+</head>
+<body class="" hx-headers='{"X-CSRFToken": "YdDUPlqzGg4dbRAeRxyNp8m8Ynfplc1ynXcYzjdWB7smqqLXoKhVmDSdw5lUTmJi"}'>
+<a class="skip" href="#main">К содержанию</a>
+<div class="demo-bar" role="note">Демо-версия для отзывов: вход, запись на курсы и формы здесь не работают.</div>
+
+<header class="hdr">
+  <div class="container">
+    <a class="brand" href="/edufamcs-demo/" aria-label="EDU FAMCS — главная">
+      <span class="full"><img class="only-light" src="/edufamcs-demo/static/brand/logo/logo-edu-light.svg" alt="EDU FAMCS" width="196" height="40"><img class="only-dark" src="/edufamcs-demo/static/brand/logo/logo-edu-dark.svg" alt="EDU FAMCS" width="196" height="40"></span>
+      <span class="short"><img class="only-light" src="/edufamcs-demo/static/brand/logo/logo-edu-light.svg" alt="EDU FAMCS" height="30"><img class="only-dark" src="/edufamcs-demo/static/brand/logo/logo-edu-dark.svg" alt="EDU FAMCS" height="30"></span>
+    </a>
+    <nav class="nav" id="main-nav" aria-label="Основная навигация">
+      <a href="/edufamcs-demo/#courses">Курсы</a>
+      <a href="/edufamcs-demo/ml/" >Машинное обучение</a>
+      
+      <a href="/edufamcs-demo/handbook/" aria-current="page">Хендбук</a>
+      <a href="/edufamcs-demo/news/" >Новости</a>
+      <a href="/edufamcs-demo/people/" >Авторы</a>
+      <a href="/edufamcs-demo/about/" >О&nbsp;нас</a>
+    </nav>
+    <div class="hdr-actions">
+      
+      <a class="btn btn-outline btn-login" href="/edufamcs-demo/accounts/login/?next=/handbook/recsys/kandidaty-i-ranzhirovanie/">Войти</a>
+      
+      <button class="icon-btn menu-btn" type="button" aria-label="Меню" aria-expanded="false" aria-controls="main-nav"><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-menu"/></svg></button>
+    </div>
+  </div>
+</header>
+
+<main id="main">
+
+
+
+<div class="container hb-page s-recsys">
+  <div class="hb">
+    <aside class="hb-nav" aria-label="Статьи раздела">
+      
+<form class="hb-search" action="/edufamcs-demo/handbook/search/" method="get" role="search">
+  <svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-search"/></svg>
+  <input class="input" type="search" name="q" value="" placeholder="Поиск по хендбуку" aria-label="Поиск по хендбуку" autocomplete="off" maxlength="120"
+    hx-get="/edufamcs-demo/handbook/search/" hx-trigger="input changed delay:250ms, search" hx-target="#hb-nav-results" hx-sync="this:replace">
+</form>
+
+      <div id="hb-nav-results" class="hb-nav-results" aria-live="polite"></div>
+      <a class="grp" href="/edufamcs-demo/handbook/recsys/">Рекомендательная система целиком</a>
+      
+      <a class="cur" href="/edufamcs-demo/handbook/recsys/kandidaty-i-ranzhirovanie/" aria-current="page">Двухстадийная схема: кандидаты → ранжирование</a>
+      
+      <a class="" href="/edufamcs-demo/handbook/recsys/holodnyj-start-i-bandity/">Холодный старт, исследование и бандиты</a>
+      
+      <a class="" href="/edufamcs-demo/handbook/recsys/prodakshen-i-ab-testy/">Рекомендации в продакшене: A/B-тесты и эксплуатация</a>
+      
+    </aside>
+
+    <article class="hb-main">
+      <nav class="crumbs" aria-label="Навигация"><a href="/edufamcs-demo/handbook/">Хендбук</a><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-chev"/></svg><a href="/edufamcs-demo/handbook/recsys/">Рекомендательные системы</a></nav>
+      <h1 class="h1">Двухстадийная схема: кандидаты → ранжирование</h1>
+      <div class="hb-meta">
+        
+        
+        <span><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-clock"/></svg>12&nbsp;мин</span>
+        <span class="hb-authors"><span class="avatar sm" title="Артем Лебедевич">АЛ</span>Артем Лебедевич</span>
+        <span><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-edit"/></svg>9 ноября 2026</span>
+        
+        
+      </div>
+
+      
+      <details class="hb-mtoc">
+        <summary><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-list"/></svg>Содержание<svg class="ico sm" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-chev-down"/></svg></summary>
+        <a class="l2" href="#источники-кандидатов">Источники кандидатов</a><a class="l2" href="#ранжирующая-модель">Ранжирующая модель</a><a class="l2" href="#pre-ranking-промежуточный-этап-каскада">Pre-ranking: промежуточный этап каскада</a><a class="l2" href="#learning-to-rank">Learning to rank</a><a class="l2" href="#как-собрать-обучающую-выборку-без-утечек">Как собрать обучающую выборку без утечек</a><a class="l2" href="#переранжирование">Переранжирование</a><a class="l3" href="#mmr">MMR</a><a class="l3" href="#dpp">DPP</a><a class="l3" href="#калибровка">Калибровка</a><a class="l3" href="#смешивание-целей">Смешивание целей</a><a class="l3" href="#правила-и-ограничения">Правила и ограничения</a><a class="l2" href="#что-почитать">Что почитать</a>
+      </details>
+      
+
+      <div class="prose"><p>Одна модель не может одновременно быть быстрой на миллионах объектов и точной в деталях. Поэтому промышленные рекомендатели почти всегда устроены как воронка:</p>
+<ol>
+<li><strong>Генерация кандидатов</strong> (retrieval) — несколько дешёвых источников сужают каталог с миллионов объектов до сотен.</li>
+<li><strong>Ранжирование</strong> (ranking) — тяжёлая модель с богатыми признаками упорядочивает эти сотни.</li>
+<li><strong>Переранжирование и бизнес-правила</strong> — разнообразие, фильтры наличия, ограничения на долю одного продавца или категории.</li>
+</ol>
+<p>Каждая стадия решает свою задачу и оценивается своей метрикой: кандидаты — по Recall@N (не потеряли ли релевантное), ранжирование — по NDCG@k или MAP@k на итоговом списке.</p>
+<h2 id="источники-кандидатов">Источники кандидатов</h2>
+<p>Кандидатов собирают из нескольких источников — они дополняют друг друга:</p>
+<ul>
+<li><strong>коллаборативные модели</strong>: <a href="/edufamcs-demo/handbook/recsys/matrichnye-razlozheniya-als/" rel="noopener noreferrer nofollow">ALS</a>, <a href="/edufamcs-demo/handbook/recsys/slim-i-ease/" rel="noopener noreferrer nofollow">EASE</a>, <a href="/edufamcs-demo/handbook/recsys/two-tower-ann/" rel="noopener noreferrer nofollow">двухбашенная сеть</a> с ANN-индексом, <a href="/edufamcs-demo/handbook/recsys/posledovatelnye-modeli/" rel="noopener noreferrer nofollow">последовательные модели</a>;</li>
+<li><strong>item-to-item</strong>: похожие на недавно просмотренные (совместная встречаемость, <a href="/edufamcs-demo/handbook/recsys/grafovye-modeli/" rel="noopener noreferrer nofollow">графовые</a> методы, близость эмбеддингов);</li>
+<li><strong>популярное</strong>: глобально, в категории, в регионе, за последние часы;</li>
+<li><strong>история пользователя</strong>: повторные покупки, брошенная корзина;</li>
+<li><strong>контентные</strong>: по тексту и признакам — для новых объектов.</li>
+</ul>
+<p>Списки объединяют и дедуплицируют. Важно сохранить, <strong>откуда</strong> пришёл кандидат и с каким скором: это сильные признаки для ранжирующей модели. Размер пула — компромисс: больше кандидатов — выше потолок качества, но дороже ранжирование.</p>
+<h2 id="ранжирующая-модель">Ранжирующая модель</h2>
+<p>На второй стадии объектов мало, поэтому можно позволить себе признаки, которые невозможно посчитать для всего каталога:</p>
+<ul>
+<li><strong>пользователь</strong>: активность, средний чек, любимые категории, давность последнего визита;</li>
+<li><strong>объект</strong>: популярность за разные окна, цена, рейтинг, возраст, CTR в прошлом;</li>
+<li><strong>пара пользователь–объект</strong>: сколько раз пользователь смотрел эту категорию или бренд, отношение цены к его среднему чеку, скалярное произведение векторов из ALS, ранг и скор в каждом источнике;</li>
+<li><strong>контекст</strong>: время суток, день недели, устройство, страница.</li>
+</ul>
+<p>Стандартный выбор — градиентный бустинг над деревьями (LightGBM, CatBoost, XGBoost): он хорошо работает с разнородными табличными признаками, быстро обучается и интерпретируем. Нейросетевые ранжировщики (DCN, DLRM, трансформеры над историей — см. <a href="/edufamcs-demo/handbook/recsys/ctr-modeli/" rel="noopener noreferrer nofollow">модели CTR</a>) появляются, когда данных очень много.</p>
+<h2 id="pre-ranking-промежуточный-этап-каскада">Pre-ranking: промежуточный этап каскада</h2>
+<p>Разрыв между стадиями велик: retrieval отдаёт тысячи кандидатов с простым скором, а тяжёлый ранжировщик (DCN, DIN) укладывается в бюджет по задержке лишь на сотни. В рекламных и маркетплейс-системах между ними вставляют <strong>pre-ranking</strong> — лёгкую модель, которая режет, например, 5000 кандидатов до 500. Получается каскад «много → меньше → ещё меньше», где у каждой стадии свой бюджет на объект.</p>
+<p>Исторически pre-ranking был упрощённой копией ранжировщика (логрегрессия или двухбашенная сеть на подмножестве признаков). <strong>COLD</strong> (Wang et al., Alibaba, DLP-KDD 2020, <em>Towards the Next Generation of Pre-Ranking System</em>) формулирует его как совместное проектирование модели и вычислительных затрат: берётся полноценная глубокая сеть с кросс-признаками (а не двухбашенная), но состав признаков и структура подбираются под заданный бюджет вычислений; признаки отбирают по весам SE-блока («важность»), а инференс ускоряют инженерно (параллелизм, вычисления в низкой точности на GPU). Модель обучается и обслуживается онлайн, что помогает при сдвиге распределения; с 2019 года COLD работает почти во всех продуктах медийной рекламы Alibaba, где есть pre-ranking. Общий вывод: pre-ranking ограничен не архитектурой, а бюджетом. Поэтому его оценивают не только собственным AUC, но и согласованностью с ранжировщиком — какая доля топа финальной модели пережила отсечение.</p>
+<p>Типичная ловушка: pre-ranking обучают на показанных объектах, а применяют на всём пуле кандидатов — смещение отбора (sample selection bias). Лечится выборкой «невыживших» в качестве негативов или дистилляцией с ранжировщика, который умеет оценивать любого кандидата.</p>
+<h2 id="learning-to-rank">Learning to rank</h2>
+<p>Ранжирование можно обучать тремя способами.</p>
+<p><strong>Pointwise.</strong> Каждая пара <span class="tex">(u, i)</span> — отдельный пример, задача — бинарная классификация «будет ли взаимодействие», потеря — logloss. Просто и часто достаточно, но модель оптимизирует калиброванную вероятность, а не порядок внутри списка.</p>
+<p><strong>Pairwise.</strong> Учимся правильно упорядочивать пары объектов одного пользователя. В RankNet вероятность того, что <span class="tex">i</span> должен стоять выше <span class="tex">j</span>, моделируется через разность скоров:</p>
+<div class="tex tex-block">P_{ij} = \frac{1}{1 + e^{-\sigma(s_i - s_j)}}, \qquad
+\mathcal{L}_{ij} = -\log P_{ij} \quad \text{для пар, где } i \text{ релевантнее } j ,</div>
+<p>где <span class="tex">\sigma &gt; 0</span> — масштаб (здесь это число, а не сигмоида; обычно <span class="tex">\sigma = 1</span>).</p>
+<p><strong>Listwise.</strong> Оптимизируем метрику всего списка. NDCG негладкая — она зависит от сортировки, — поэтому напрямую градиентом её не оптимизировать. LambdaRank обходит это: берёт градиент RankNet по скору <span class="tex">s_i</span>, <span class="tex">\partial \mathcal{L}_{ij}/\partial s_i = -\sigma/\big(1 + e^{\sigma (s_i - s_j)}\big)</span>, и умножает его на изменение NDCG при обмене объектов местами:</p>
+<div class="tex tex-block">\lambda_{ij} = \frac{-\sigma}{1 + e^{\sigma (s_i - s_j)}} \cdot \big|\Delta \mathrm{NDCG}_{ij}\big| .</div>
+<p>Пары, перестановка которых сильно меняет верх списка, получают большой вес; перестановки в хвосте почти не влияют. LambdaMART — это LambdaRank, где модель — градиентный бустинг (подробности и сравнение с другими потерями — в <a href="/edufamcs-demo/handbook/retrieval/learning-to-rank/" rel="noopener noreferrer nofollow">/handbook/retrieval/learning-to-rank/</a>); он реализован в LightGBM (<code>objective="lambdarank"</code>), XGBoost (<code>rank:ndcg</code>) и CatBoost (<code>YetiRank</code>, <code>LambdaMart</code>).</p>
+<div class="code"><div class="code-head"><span class="lang">python</span></div><pre><code><span class="tok-k">from</span> lightgbm <span class="tok-k">import</span> LGBMRanker
+
+<span class="tok-c"># строки отсортированы по user_id; group — число кандидатов у каждого пользователя</span>
+ranker <span class="tok-p">=</span> LGBMRanker<span class="tok-p">(</span>objective<span class="tok-p">=</span><span class="tok-s">"</span><span class="tok-s">lambdarank</span><span class="tok-s">"</span><span class="tok-p">,</span> n_estimators<span class="tok-p">=</span><span class="tok-n">500</span><span class="tok-p">,</span> learning_rate<span class="tok-p">=</span><span class="tok-n">0.05</span><span class="tok-p">,</span> num_leaves<span class="tok-p">=</span><span class="tok-n">63</span><span class="tok-p">)</span>
+ranker<span class="tok-p">.</span>fit<span class="tok-p">(</span>
+    X_train<span class="tok-p">,</span> y_train<span class="tok-p">,</span> group<span class="tok-p">=</span>train<span class="tok-p">.</span>groupby<span class="tok-p">(</span><span class="tok-s">"</span><span class="tok-s">user_id</span><span class="tok-s">"</span><span class="tok-p">)</span><span class="tok-p">.</span>size<span class="tok-p">(</span><span class="tok-p">)</span><span class="tok-p">.</span>to_numpy<span class="tok-p">(</span><span class="tok-p">)</span><span class="tok-p">,</span>
+    eval_set<span class="tok-p">=</span><span class="tok-p">[</span><span class="tok-p">(</span>X_val<span class="tok-p">,</span> y_val<span class="tok-p">)</span><span class="tok-p">]</span><span class="tok-p">,</span> eval_group<span class="tok-p">=</span><span class="tok-p">[</span>val<span class="tok-p">.</span>groupby<span class="tok-p">(</span><span class="tok-s">"</span><span class="tok-s">user_id</span><span class="tok-s">"</span><span class="tok-p">)</span><span class="tok-p">.</span>size<span class="tok-p">(</span><span class="tok-p">)</span><span class="tok-p">.</span>to_numpy<span class="tok-p">(</span><span class="tok-p">)</span><span class="tok-p">]</span><span class="tok-p">,</span>
+    eval_at<span class="tok-p">=</span><span class="tok-p">[</span><span class="tok-n">10</span><span class="tok-p">]</span><span class="tok-p">,</span>
+<span class="tok-p">)</span>
+</code></pre></div>
+<h2 id="как-собрать-обучающую-выборку-без-утечек">Как собрать обучающую выборку без утечек</h2>
+<p>Это самая тонкая часть схемы. Ранжировщик учится на кандидатах, которые выдала первая стадия, поэтому данные нужно резать по времени <strong>дважды</strong>:</p>
+<ol>
+<li>Выбираем моменты <span class="tex">T_1 &lt; T_2</span>. Модели кандидатов обучаем на событиях до <span class="tex">T_1</span>.</li>
+<li>Для пользователей генерируем кандидатов этими моделями и считаем признаки — тоже только по данным до <span class="tex">T_1</span>.</li>
+<li>Метки берём из окна <span class="tex">[T_1, T_2)</span>: было ли взаимодействие с кандидатом.</li>
+<li>Для теста повторяем то же со сдвигом: кандидаты и признаки по данным до <span class="tex">T_2</span>, метки — из <span class="tex">[T_2, T_3)</span>.</li>
+</ol>
+<p>Если обучить модель кандидатов на всех данных, включая окно меток, её скор станет «подсказкой» ответа: ранжировщик научится ему доверять, а в проде, где будущего нет, качество провалится. Та же проблема с признаками популярности, посчитанными по всему логу.</p>
+<p>Ещё два практических момента:</p>
+<ul>
+<li>Пользователей, у которых среди кандидатов нет ни одного положительного, из обучения ранжировщика обычно исключают — для listwise-потерь они не несут сигнала. Но в <strong>оценке</strong> их оставляют, иначе метрика завысится.</li>
+<li>Сравнивайте итог с потолком: какая доля тестовых объектов вообще попала в кандидаты (Recall@N первой стадии). Если потолок 30 %, улучшать ранжирование дальше бессмысленно — сначала нужны кандидаты.</li>
+</ul>
+<h2 id="переранжирование">Переранжирование</h2>
+<p>Даже идеально упорядоченный по вероятности клика список может быть плохим: десять почти одинаковых чёрных футболок. Последний шаг применяет к ранжированному списку диверсификацию, калибровку, бизнес-правила и объединение нескольких целей.</p>
+<h3 id="mmr">MMR</h3>
+<p><strong>MMR</strong> (maximal marginal relevance; Carbonell, Goldstein, 1998) жадно выбирает следующий объект, максимизируя компромисс между релевантностью и непохожестью на уже выбранные:</p>
+<div class="tex tex-block">i_{t+1} = \arg\max_{i \notin S}\Big[\lambda\, s(u, i) - (1 - \lambda) \max_{j \in S} \mathrm{sim}(i, j)\Big],</div>
+<p>где <span class="tex">S</span> — уже выбранные объекты, <span class="tex">s</span> — скор ранжировщика (нормированный в <span class="tex">[0,1]</span>, иначе масштабы <span class="tex">s</span> и <span class="tex">\mathrm{sim}</span> несопоставимы), <span class="tex">\mathrm{sim}</span> — косинус эмбеддингов или совпадение категорий. <span class="tex">\lambda = 1</span> — исходный порядок, <span class="tex">\lambda \to 0</span> — максимальное разнообразие. Сложность <span class="tex">O(k \cdot n)</span> вычислений <span class="tex">\mathrm{sim}</span> для списка из <span class="tex">k</span> объектов из <span class="tex">n</span> кандидатов — тривиально для сотен кандидатов.</p>
+<div class="code"><div class="code-head"><span class="lang">python</span></div><pre><code><span class="tok-k">import</span> numpy <span class="tok-k">as</span> np
+
+<span class="tok-k">def</span> <span class="tok-f">mmr</span><span class="tok-p">(</span>scores<span class="tok-p">,</span> emb<span class="tok-p">,</span> k<span class="tok-p">=</span><span class="tok-n">10</span><span class="tok-p">,</span> lam<span class="tok-p">=</span><span class="tok-n">0.7</span><span class="tok-p">)</span><span class="tok-p">:</span>
+    <span class="tok-s">"""scores: [n] в [0,1]; emb: [n, d] с единичной нормой. Возвращает индексы выбранных."""</span>
+    chosen<span class="tok-p">,</span> rest <span class="tok-p">=</span> <span class="tok-p">[</span><span class="tok-p">]</span><span class="tok-p">,</span> <span class="tok-f">list</span><span class="tok-p">(</span><span class="tok-f">range</span><span class="tok-p">(</span><span class="tok-f">len</span><span class="tok-p">(</span>scores<span class="tok-p">)</span><span class="tok-p">)</span><span class="tok-p">)</span>
+    max_sim <span class="tok-p">=</span> np<span class="tok-p">.</span>zeros<span class="tok-p">(</span><span class="tok-f">len</span><span class="tok-p">(</span>scores<span class="tok-p">)</span><span class="tok-p">)</span>                <span class="tok-c"># max_j sim(i, j) по выбранным</span>
+    <span class="tok-k">for</span> _ <span class="tok-k">in</span> <span class="tok-f">range</span><span class="tok-p">(</span>k<span class="tok-p">)</span><span class="tok-p">:</span>
+        val <span class="tok-p">=</span> lam <span class="tok-p">*</span> scores<span class="tok-p">[</span>rest<span class="tok-p">]</span> <span class="tok-p">-</span> <span class="tok-p">(</span><span class="tok-n">1</span> <span class="tok-p">-</span> lam<span class="tok-p">)</span> <span class="tok-p">*</span> max_sim<span class="tok-p">[</span>rest<span class="tok-p">]</span>
+        best <span class="tok-p">=</span> rest<span class="tok-p">[</span><span class="tok-f">int</span><span class="tok-p">(</span>np<span class="tok-p">.</span>argmax<span class="tok-p">(</span>val<span class="tok-p">)</span><span class="tok-p">)</span><span class="tok-p">]</span>
+        chosen<span class="tok-p">.</span>append<span class="tok-p">(</span>best<span class="tok-p">)</span><span class="tok-p">;</span> rest<span class="tok-p">.</span>remove<span class="tok-p">(</span>best<span class="tok-p">)</span>
+        max_sim <span class="tok-p">=</span> np<span class="tok-p">.</span>maximum<span class="tok-p">(</span>max_sim<span class="tok-p">,</span> emb <span class="tok-p">@</span> emb<span class="tok-p">[</span>best<span class="tok-p">]</span><span class="tok-p">)</span>
+    <span class="tok-k">return</span> chosen
+</code></pre></div>
+<h3 id="dpp">DPP</h3>
+<p><strong>Determinantal point process</strong> задаёт распределение по подмножествам: вероятность набора <span class="tex">S</span> пропорциональна <span class="tex">\det L_S</span>, где <span class="tex">L_{ij} = q_i\,\langle v_i, v_j\rangle\, q_j</span> — ядро из качества (релевантности) <span class="tex">q_i</span> и сходства <span class="tex">v_i</span>. Определитель — квадрат объёма параллелепипеда, натянутого на векторы: большой, когда объекты и релевантны, и непохожи. Нахождение подмножества с максимальным определителем — NP-трудная задача, но жадный алгоритм (Chen et al., NeurIPS 2018, <em>Fast Greedy MAP Inference for DPP</em>) работает за <span class="tex">O(nk^2)</span> с инкрементальным разложением Холецкого. Wilhelm et al. (CIKM 2018) внедрили DPP на главной странице YouTube: ядро строится из скоров ранжировщика и сходства между видео, его параметры обучают на примерах пользовательских предпочтений, а подмножество выбирают приближённым жадным выводом. В онлайн-экспериментах это дало рост вовлечённости и в коротком, и в длинном горизонте. Отличие от MMR: DPP учитывает взаимодействие <em>всего набора</em>, а не только максимальное сходство с ближайшим выбранным.</p>
+<h3 id="калибровка">Калибровка</h3>
+<p>Список, точный по вероятности клика, может не отражать пропорции интересов: если 70 % просмотров пользователя — мелодрамы, а 30 % — боевики, топ легко целиком состоит из мелодрам, и меньший интерес вытесняется. <strong>Калиброванные рекомендации</strong> (Steck, RecSys 2018) требуют, чтобы распределение категорий в списке <span class="tex">q(c \mid u)</span> было близко к распределению в истории <span class="tex">p(c \mid u)</span>. Расстояние измеряют KL-дивергенцией <span class="tex">\mathrm{KL}\big(p \,\|\, \tilde q\big)</span>, где <span class="tex">\tilde q = (1-\alpha)q + \alpha p</span> с малым <span class="tex">\alpha</span> — сглаживание, чтобы KL не уходила в бесконечность, когда категории нет в списке. Список строят жадно, максимизируя <span class="tex">(1-\lambda)\sum_{i \in S} s(u,i) - \lambda\,\mathrm{KL}\big(p \,\|\, \tilde q\big)</span>. Эффект: интересы меньшей доли тоже получают место, примерно пропорциональное их доле в истории.</p>
+<h3 id="смешивание-целей">Смешивание целей</h3>
+<p>Модель обычно предсказывает несколько вероятностей: клик <span class="tex">p_{\text{click}}</span>, покупка <span class="tex">p_{\text{buy}}</span>, время просмотра <span class="tex">\hat t</span>. Итоговый скор — взвешенная комбинация:</p>
+<div class="tex tex-block">\mathrm{score}(u,i) = p_{\text{click}}^{\,w_1}\; p_{\text{buy}}^{\,w_2}\;\hat t^{\,w_3} \quad\text{или}\quad \sum_k w_k\,p_k .</div>
+<p>Мультипликативная форма удобна: низкая вероятность одной цели не компенсируется высокой другой. Веса <span class="tex">w_k</span> — не обучаемые параметры, а <strong>рычаги продукта</strong>: их подбирают A/B-тестами и автоматической оптимизацией по онлайн-метрикам, следя за тем, как меняются долгосрочные метрики. Нормировка вероятностей (калибровка) — обязательное условие: без неё веса несравнимы.</p>
+<h3 id="правила-и-ограничения">Правила и ограничения</h3>
+<p>Затем фильтры наличия и возрастных ограничений, лимиты («не более двух объектов одного продавца подряд»), слоты под рекламу и новинки, «замораживание» позиций. Правила лучше держать <strong>после</strong> модели и логировать: иначе обучающие данные искажаются невидимыми для модели вмешательствами.</p>
+<h2 id="что-почитать">Что почитать</h2>
+<ul>
+<li>Covington et al. <a href="https://research.google/pubs/deep-neural-networks-for-youtube-recommendations/" rel="noopener noreferrer nofollow"><em>Deep Neural Networks for YouTube Recommendations</em></a>, RecSys 2016 — классический пример двух стадий.</li>
+<li>Wang et al. <a href="https://arxiv.org/abs/2007.16122" rel="noopener noreferrer nofollow"><em>COLD: Towards the Next Generation of Pre-Ranking System</em></a>, 2020.</li>
+<li>Carbonell, Goldstein. <a href="https://www.cs.cmu.edu/~jgc/publication/The_Use_MMR_Diversity_Based_LTMIR_1998.pdf" rel="noopener noreferrer nofollow"><em>The Use of MMR, Diversity-Based Reranking…</em></a>, SIGIR 1998; Chen et al. <a href="https://arxiv.org/abs/1709.05135" rel="noopener noreferrer nofollow"><em>Fast Greedy MAP Inference for DPP</em></a>, NeurIPS 2018; Wilhelm et al. <em>Practical Diversified Recommendations on YouTube with Determinantal Point Processes</em>, CIKM 2018 (DOI 10.1145/3269206.3272018); Steck. <em>Calibrated Recommendations</em>, RecSys 2018.</li>
+<li>Курс DeepRecSys, <a href="https://www.youtube.com/watch?v=2CLyLE3oOTQ" rel="noopener noreferrer nofollow">лекция 2: ML-дизайн рекомендательных систем</a>.</li>
+<li>ODS: <a href="https://www.youtube.com/watch?v=mbtKshGN6jg" rel="noopener noreferrer nofollow">Ирина Елисова, «Двухэтапная модель»</a>; МТС «Your first recsys»: <a href="https://www.youtube.com/watch?v=DBITVmvkovw" rel="noopener noreferrer nofollow">лекция 4</a> (ранжирование градиентным бустингом, двухэтапная архитектура) и <a href="https://www.youtube.com/watch?v=ikCHaELpwVQ" rel="noopener noreferrer nofollow">лекция 5</a> (метрики, ANN, нейросети).</li>
+</ul>
+</div>
+      
+
+      
+      <nav class="pager" aria-label="Соседние статьи">
+        <a href="/edufamcs-demo/handbook/recsys/grafovye-modeli/"><span><svg class="ico sm" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-arrow-left"/></svg>Назад</span>Графовые модели: от случайных блужданий до LightGCN</a>
+        <a href="/edufamcs-demo/handbook/recsys/holodnyj-start-i-bandity/"><span>Дальше<svg class="ico sm" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-arrow"/></svg></span>Холодный старт, исследование и бандиты</a>
+      </nav>
+      
+    </article>
+
+    <aside class="hb-toc" aria-label="На этой странице">
+      <a class="l2" href="#источники-кандидатов">Источники кандидатов</a><a class="l2" href="#ранжирующая-модель">Ранжирующая модель</a><a class="l2" href="#pre-ranking-промежуточный-этап-каскада">Pre-ranking: промежуточный этап каскада</a><a class="l2" href="#learning-to-rank">Learning to rank</a><a class="l2" href="#как-собрать-обучающую-выборку-без-утечек">Как собрать обучающую выборку без утечек</a><a class="l2" href="#переранжирование">Переранжирование</a><a class="l3" href="#mmr">MMR</a><a class="l3" href="#dpp">DPP</a><a class="l3" href="#калибровка">Калибровка</a><a class="l3" href="#смешивание-целей">Смешивание целей</a><a class="l3" href="#правила-и-ограничения">Правила и ограничения</a><a class="l2" href="#что-почитать">Что почитать</a>
+    </aside>
+  </div>
+</div>
+
+
+</main>
+
+<footer class="ftr" data-theme="dark">
+  <svg class="sym fern" viewBox="0 0 40.5 65.02" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#fern"/></svg>
+  <div class="container">
+    <div class="ftr-row">
+      <a href="/edufamcs-demo/" aria-label="EDU FAMCS — главная"><img src="/edufamcs-demo/static/brand/logo/logo-edu-dark.svg" alt="EDU FAMCS" width="196" height="40"></a>
+      <ul class="ftr-links">
+        <li><a href="/edufamcs-demo/#courses">Курсы</a></li>
+        <li><a href="/edufamcs-demo/ml/">Машинное обучение</a></li>
+        <li><a href="/edufamcs-demo/handbook/">Хендбук</a></li>
+        <li><a href="/edufamcs-demo/news/">Новости</a></li>
+        <li><a href="/edufamcs-demo/people/">Авторы</a></li>
+        <li><a href="/edufamcs-demo/about/">О&nbsp;нас</a></li>
+        <li><a href="/edufamcs-demo/propose/">Предложить или исправить</a></li>
+        <li><a href="/edufamcs-demo/privacy/">Конфиденциальность</a></li>
+      </ul>
+    </div>
+    <div class="ftr-big" aria-hidden="true">EDU<span class="d">·</span>FAMCS</div>
+    <p class="ftr-copy">© 2026 EDU FAMCS · Минск</p>
+  </div>
+</footer>
+
+<div class="toasts-region" aria-live="polite" id="toasts">
+
+</div>
+
+</body>
+</html>

@@ -1,0 +1,260 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Подбор гиперпараметров и интерпретируемость · EDU FAMCS</title>
+<meta name="description" content="Подбор гиперпараметров и интерпретируемость — Классическое машинное обучение. Хендбук ML-курса ФПМИ.">
+<meta name="theme-color" content="#060A16">
+<meta name="robots" content="noindex, nofollow">
+<meta name="htmx-config" content='{"allowEval":false,"includeIndicatorStyles":false,"historyCacheSize":0,"selfRequestsOnly":true}'>
+<meta name="katex-js" content="/edufamcs-demo/static/vendor/katex/katex.min.js">
+<meta name="katex-css" content="/edufamcs-demo/static/vendor/katex/katex.min.css">
+<link rel="icon" href="/edufamcs-demo/static/brand/logo/favicon-16.svg" type="image/svg+xml" sizes="16x16">
+<link rel="icon" href="/edufamcs-demo/static/brand/logo/favicon.svg" type="image/svg+xml" sizes="any">
+<link rel="preload" href="/edufamcs-demo/static/brand/fonts/manrope-cyrillic-400.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/edufamcs-demo/static/brand/fonts/unbounded-cyrillic-800.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="/edufamcs-demo/static/brand/fonts.css">
+<link rel="stylesheet" href="/edufamcs-demo/static/brand/tokens.css">
+<link rel="stylesheet" href="/edufamcs-demo/static/brand/components.css">
+<link rel="stylesheet" href="/edufamcs-demo/static/css/site.css">
+<link rel="stylesheet" href="/edufamcs-demo/static/css/hub.css">
+<link rel="stylesheet" href="/edufamcs-demo/static/css/about.css">
+<link rel="stylesheet" href="/edufamcs-demo/static/handbook/handbook.css">
+<script src="/edufamcs-demo/static/js/theme.js"></script>
+<script src="/edufamcs-demo/static/vendor/htmx/htmx.min.js" defer></script>
+<script src="/edufamcs-demo/static/vendor/alpine/alpine-csp.min.js" defer></script>
+<script src="/edufamcs-demo/static/js/site.js" defer></script>
+<script src="/edufamcs-demo/static/handbook/handbook.js" defer></script>
+</head>
+<body class="" hx-headers='{"X-CSRFToken": "Iy95ZRkNmopCH8ljQJeJGKfYdohZYZhX7iI9JP7ahfNLWHw2nWXRDfL3L6nuw9ZH"}'>
+<a class="skip" href="#main">К содержанию</a>
+<div class="demo-bar" role="note">Демо-версия для отзывов: вход, запись на курсы и формы здесь не работают.</div>
+
+<header class="hdr">
+  <div class="container">
+    <a class="brand" href="/edufamcs-demo/" aria-label="EDU FAMCS — главная">
+      <span class="full"><img class="only-light" src="/edufamcs-demo/static/brand/logo/logo-edu-light.svg" alt="EDU FAMCS" width="196" height="40"><img class="only-dark" src="/edufamcs-demo/static/brand/logo/logo-edu-dark.svg" alt="EDU FAMCS" width="196" height="40"></span>
+      <span class="short"><img class="only-light" src="/edufamcs-demo/static/brand/logo/logo-edu-light.svg" alt="EDU FAMCS" height="30"><img class="only-dark" src="/edufamcs-demo/static/brand/logo/logo-edu-dark.svg" alt="EDU FAMCS" height="30"></span>
+    </a>
+    <nav class="nav" id="main-nav" aria-label="Основная навигация">
+      <a href="/edufamcs-demo/#courses">Курсы</a>
+      <a href="/edufamcs-demo/ml/" >Машинное обучение</a>
+      
+      <a href="/edufamcs-demo/handbook/" aria-current="page">Хендбук</a>
+      <a href="/edufamcs-demo/news/" >Новости</a>
+      <a href="/edufamcs-demo/people/" >Авторы</a>
+      <a href="/edufamcs-demo/about/" >О&nbsp;нас</a>
+    </nav>
+    <div class="hdr-actions">
+      
+      <a class="btn btn-outline btn-login" href="/edufamcs-demo/accounts/login/?next=/handbook/classic/giperparametry-i-interpretiruemost/">Войти</a>
+      
+      <button class="icon-btn menu-btn" type="button" aria-label="Меню" aria-expanded="false" aria-controls="main-nav"><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-menu"/></svg></button>
+    </div>
+  </div>
+</header>
+
+<main id="main">
+
+
+
+<div class="container hb-page hb-tone">
+  <div class="hb">
+    <aside class="hb-nav" aria-label="Статьи раздела">
+      
+<form class="hb-search" action="/edufamcs-demo/handbook/search/" method="get" role="search">
+  <svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-search"/></svg>
+  <input class="input" type="search" name="q" value="" placeholder="Поиск по хендбуку" aria-label="Поиск по хендбуку" autocomplete="off" maxlength="120"
+    hx-get="/edufamcs-demo/handbook/search/" hx-trigger="input changed delay:250ms, search" hx-target="#hb-nav-results" hx-sync="this:replace">
+</form>
+
+      <div id="hb-nav-results" class="hb-nav-results" aria-live="polite"></div>
+      <a class="grp" href="/edufamcs-demo/handbook/classic/">Деревья, ансамбли и настройка</a>
+      
+      <a class="" href="/edufamcs-demo/handbook/classic/derevya-reshenij/">Деревья решений</a>
+      
+      <a class="" href="/edufamcs-demo/handbook/classic/ansambli-i-sluchajnyj-les/">Ансамбли и случайный лес</a>
+      
+      <a class="" href="/edufamcs-demo/handbook/classic/gradientnyj-busting/">Градиентный бустинг</a>
+      
+      <a class="cur" href="/edufamcs-demo/handbook/classic/giperparametry-i-interpretiruemost/" aria-current="page">Подбор гиперпараметров и интерпретируемость</a>
+      
+    </aside>
+
+    <article class="hb-main">
+      <nav class="crumbs" aria-label="Навигация"><a href="/edufamcs-demo/handbook/">Хендбук</a><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-chev"/></svg><a href="/edufamcs-demo/handbook/classic/">Классическое машинное обучение</a></nav>
+      <h1 class="h1">Подбор гиперпараметров и интерпретируемость</h1>
+      <div class="hb-meta">
+        
+        
+        <span><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-clock"/></svg>12&nbsp;мин</span>
+        <span class="hb-authors"><span class="avatar sm" title="Артем Лебедевич">АЛ</span>Артем Лебедевич</span>
+        <span><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-edit"/></svg>9 ноября 2026</span>
+        
+        
+      </div>
+
+      
+      <details class="hb-mtoc">
+        <summary><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-list"/></svg>Содержание<svg class="ico sm" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-chev-down"/></svg></summary>
+        <a class="l2" href="#параметры-и-гиперпараметры">Параметры и гиперпараметры</a><a class="l2" href="#кросс-валидация">Кросс-валидация</a><a class="l3" href="#вложенная-кросс-валидация">Вложенная кросс-валидация</a><a class="l2" href="#стратегии-поиска">Стратегии поиска</a><a class="l2" href="#зачем-нужна-интерпретируемость">Зачем нужна интерпретируемость</a><a class="l2" href="#permutation-importance">Permutation importance</a><a class="l2" href="#pdp-и-ice">PDP и ICE</a><a class="l2" href="#shap">SHAP</a><a class="l2" href="#lime">LIME</a><a class="l2" href="#ловушки-интерпретации">Ловушки интерпретации</a><a class="l2" href="#код">Код</a><a class="l2" href="#что-почитать">Что почитать</a>
+      </details>
+      
+
+      <div class="prose"><p>Модель с настроенными гиперпараметрами и честной оценкой качества почти всегда полезнее модели с модной архитектурой и «угаданными» настройками. Вторая половина темы — зачем и как объяснять предсказания: от глобальной важности признаков до вклада каждого признака в отдельный ответ.</p>
+<h2 id="параметры-и-гиперпараметры">Параметры и гиперпараметры</h2>
+<p><strong>Параметры</strong> модели (веса линейной регрессии, пороги в деревьях) находятся в процессе обучения минимизацией функции потерь на трейне. <strong>Гиперпараметры</strong> (глубина дерева, число деревьев, <span class="tex">C</span> и <span class="tex">\gamma</span> в SVM, скорость обучения, регуляризация) задаются до обучения и управляют сложностью модели; их нельзя выбирать по ошибке на трейне, потому что с ростом сложности она, как правило, только улучшается. Выбирают их по качеству на данных, которые модель не использовала при обучении.</p>
+<p>Главная опасность — переобучение на валидацию: чем больше конфигураций перебрано, тем выше шанс, что лучшая из них выиграла случайно. Поэтому схема всегда трёхчастная: трейн → валидация (выбор гиперпараметров) → <strong>тест, который открывают один раз</strong>, в самом конце. Если после взгляда на тест вы поменяли модель, тест больше не тест.</p>
+<h2 id="кросс-валидация">Кросс-валидация</h2>
+<ul>
+<li><strong>KFold</strong>: выборка делится на <span class="tex">K</span> частей, модель <span class="tex">K</span> раз обучается на <span class="tex">K-1</span> частях и оценивается на оставшейся; оценка — среднее по фолдам (и стандартное отклонение — оно показывает, различаются ли конфигурации вообще).</li>
+<li><strong>StratifiedKFold</strong>: сохраняет долю классов в каждом фолде; обязателен при дисбалансе.</li>
+<li><strong>GroupKFold</strong> — если у одного пользователя или объекта несколько строк, и <strong>TimeSeriesSplit</strong> — для временных данных (валидация только «из будущего»). Обычный KFold на таких данных течёт и даёт завышенную оценку.</li>
+</ul>
+<h3 id="вложенная-кросс-валидация">Вложенная кросс-валидация</h3>
+<p>Если выбрать лучшую конфигурацию по CV и сообщить её же CV-оценку, получится оптимистичная оценка: максимум по шуму смещён вверх. <strong>Nested CV</strong> разделяет эти задачи: внешний цикл оценивает качество <em>процедуры</em> «подбор + обучение»; во внутреннем цикле на обучающей части внешнего фолда подбираются гиперпараметры. Стоимость — <span class="tex">K_{\text{out}}\times K_{\text{in}}\times |\text{сетка}|</span> обучений, поэтому её используют для честного сравнения моделей на малых данных, а на больших хватает простого hold-out теста.</p>
+<h2 id="стратегии-поиска">Стратегии поиска</h2>
+<p><strong>Grid search</strong> перебирает декартово произведение сетки значений. Число конфигураций растёт экспоненциально с числом гиперпараметров, а равномерная сетка тратит много запусков на повторение одних и тех же значений важных параметров.</p>
+<p><strong>Random search</strong> (Bergstra &amp; Bengio, 2012): значения каждого параметра сэмплируются независимо из заданного распределения (для <span class="tex">C</span>, <span class="tex">\gamma</span>, <span class="tex">\eta</span> — логравномерного). На практике для данной задачи важна лишь малая часть гиперпараметров («низкая эффективная размерность»). Тогда <span class="tex">N</span> случайных точек дают <span class="tex">N</span> разных значений каждого важного параметра, а сетка на <span class="tex">d</span> параметров — только <span class="tex">N^{1/d}</span> разных значений. Поэтому при одинаковом бюджете случайный поиск обычно находит конфигурацию не хуже.</p>
+<p><strong>Байесовская оптимизация</strong>: строится суррогатная модель <span class="tex">\hat f(\theta)</span> зависимости метрики от гиперпараметров по уже проведённым запускам (гауссов процесс, случайный лес, TPE), и следующая точка выбирается максимизацией <strong>acquisition function</strong>, балансирующей эксплуатацию (там, где суррогат предсказывает хорошо) и исследование (там, где неопределённость велика). Например, Expected Improvement: <span class="tex">\mathrm{EI}(\theta)=\mathbb{E}\max(0, f(\theta)-f^*)</span> для максимизируемой метрики, где <span class="tex">f^*</span> — лучшее найденное значение. <strong>TPE</strong> (Tree-structured Parzen Estimator, Bergstra et al., 2011) вместо <span class="tex">p(y\mid\theta)</span> моделирует <span class="tex">p(\theta\mid y)</span>: делит запуски на «хорошие» и «плохие» по квантилю метрики, оценивает плотности <span class="tex">l(\theta)</span> и <span class="tex">g(\theta)</span> и выбирает точки с максимальным <span class="tex">l(\theta)/g(\theta)</span>. Он работает с условными пространствами (параметры, существующие только при определённом выборе модели). <strong>Optuna</strong> (Akiba et al., 2019) — библиотека с TPE по умолчанию, динамическим определением пространства поиска через <code>trial.suggest_*</code> и отсечением неперспективных запусков.</p>
+<p><strong>Successive halving</strong> (Jamieson &amp; Talwalkar, 2016) и <strong>Hyperband</strong> (Li et al., 2018): запустить много конфигураций на малом бюджете (эпохи, число деревьев, доля данных), оставить лучшую долю (половину или треть), увеличить бюджет во столько же раз и повторить. Hyperband перебирает несколько вариантов «сколько конфигураций против сколько бюджета на каждую», страхуясь от неудачного выбора. Подходит там, где качество при малом бюджете коррелирует с итоговым. В sklearn — <code>HalvingGridSearchCV</code> и <code>HalvingRandomSearchCV</code> (пока экспериментальные: нужен импорт <code>sklearn.experimental.enable_halving_search_cv</code>), в Optuna — <code>HyperbandPruner</code>.</p>
+<p><strong>Ранняя остановка</strong> как частный случай: число итераций бустинга или эпох нейросети — гиперпараметр, который не надо перебирать, достаточно следить за валидационной метрикой.</p>
+<p>Практический рецепт: сначала random search или Optuna на 50–200 запусков по грубому диапазону, затем сузить диапазоны вокруг лучших значений; параметры вроде <span class="tex">\eta</span> и <span class="tex">C</span> — на логарифмической шкале; препроцессинг (масштабирование, отбор признаков) включать <strong>в Pipeline</strong>, чтобы он обучался внутри каждого фолда, а не на всей выборке.</p>
+<h2 id="зачем-нужна-интерпретируемость">Зачем нужна интерпретируемость</h2>
+<p>Отладка (модель использует артефакт вместо признака: утечку, водяной знак), доверие пользователей и экспертов, регуляторные требования (кредитный скоринг, медицина: право на объяснение решения), поиск причин дрейфа, а иногда и новое знание о данных. Объяснения бывают <strong>глобальными</strong> (какие признаки важны для модели в целом, как выглядит зависимость) и <strong>локальными</strong> (почему именно для этого объекта такой ответ). Простые модели (линейные, неглубокое дерево) интерпретируемы по построению; для остальных используются <strong>post-hoc</strong> методы, ниже.</p>
+<h2 id="permutation-importance">Permutation importance</h2>
+<p>Берём обученную модель и отложенную выборку, перемешиваем значения признака <span class="tex">j</span> между объектами (разрываем его связь с таргетом) и смотрим, насколько упала метрика:</p>
+<div class="tex tex-block">\mathrm{PI}_j = s(f, X, y) - \frac1R\sum_{r=1}^{R} s(f, X^{(j,r)}, y),</div>
+<p>где <span class="tex">s</span> — метрика, <span class="tex">X^{(j,r)}</span> — выборка с перемешанным столбцом <span class="tex">j</span> (идея Breiman, 2001; в общем виде — Fisher, Rudin, Dominici, 2019, «model reliance»). Метод модельно-независим и измеряет реальную полезность признака для качества. Минусы: при сильной корреляции признаков перемешивание создаёт нереалистичные объекты, а важность делится между «двойниками» (модель берёт информацию из второго), так что обоих можно ошибочно счесть неважными; считать надо на валидации, иначе важности отражают переобучение.</p>
+<h2 id="pdp-и-ice">PDP и ICE</h2>
+<p><strong>Partial Dependence Plot</strong> (Friedman, 2001) показывает средний отклик модели при фиксированном значении признака <span class="tex">x_S</span>, усреднённый по остальным:</p>
+<div class="tex tex-block">\mathrm{PD}(x_S) = \frac1n \sum_{i=1}^{n} f(x_S, x_C^{(i)}).</div>
+<p><strong>ICE</strong> (Goldstein et al., 2015) — те же кривые для каждого объекта по отдельности, без усреднения. Если кривые ICE идут в разные стороны, усреднение PDP скроет эффект: например, признак повышает отклик для одной группы и понижает для другой, а PDP выглядит плоским. Оба метода предполагают независимость <span class="tex">x_S</span> и <span class="tex">x_C</span>: при корреляции вычисляются предсказания в областях, где данных нет (альтернатива — ALE).</p>
+<h2 id="shap">SHAP</h2>
+<p>Значения Шепли из теории кооперативных игр распределяют «выигрыш» (отклонение предсказания от среднего) между «игроками»-признаками. Вклад признака <span class="tex">j</span> — среднее его предельного вклада по всем порядкам добавления признаков:</p>
+<div class="tex tex-block">\varphi_j = \sum_{S \subseteq F\setminus\{j\}} \frac{|S|!\,(p-|S|-1)!}{p!}\,\bigl[f(S\cup\{j\}) - f(S)\bigr],</div>
+<p>где <span class="tex">F</span> — множество признаков, <span class="tex">p=|F|</span>, <span class="tex">f(S)</span> — ожидаемый ответ модели, если известны только признаки из <span class="tex">S</span> (остальные усреднены по фоновой выборке). Lundberg и Lee (2017) показали, что единственная аддитивная атрибуция с тремя естественными свойствами — локальная точность (вклады в сумме дают прогноз), отсутствующий признак получает нулевой вклад, согласованность (если модель изменилась так, что признак стал влиять сильнее, его вклад не уменьшается) — это значения Шепли:</p>
+<div class="tex tex-block">f(x) = \varphi_0 + \sum_{j=1}^{p}\varphi_j, \qquad \varphi_0 = \mathbb{E} f(X).</div>
+<p>Прямое вычисление перебирает <span class="tex">2^{p}</span> коалиций, и каждое <span class="tex">f(S)</span> — ещё и усреднение по фоновой выборке: при <span class="tex">p=30</span> это уже миллиард коалиций. Для деревьев <strong>TreeSHAP</strong> (Lundberg et al., 2020) считает точные значения за полиномиальное время, обходя структуру ансамбля; для остальных моделей есть KernelSHAP (взвешенная регрессия по сэмплам коалиций) и DeepSHAP.</p>
+<p>Как читать:</p>
+<ul>
+<li><strong>force/waterfall plot</strong> для объекта: от базового значения <span class="tex">\varphi_0</span> красные признаки поднимают прогноз, синие снижают, длина стрелки — величина вклада;</li>
+<li><strong>summary (beeswarm) plot</strong>: каждая точка — объект, ось <span class="tex">x</span> — SHAP-значение, цвет — значение признака; признаки упорядочены по среднему <span class="tex">|\varphi_j|</span>. Видно и важность, и направление: «большое значение признака → положительный вклад»;</li>
+<li><strong>dependence plot</strong>: <span class="tex">\varphi_j</span> от <span class="tex">x_j</span>, раскрашенный вторым признаком, показывает взаимодействия.</li>
+</ul>
+<p>Для классификаторов на бустинге SHAP считается в пространстве логитов, а не вероятностей: вклады аддитивны именно там.</p>
+<h2 id="lime">LIME</h2>
+<p>LIME (Ribeiro et al., 2016) объясняет один объект так: сгенерировать возмущения вокруг <span class="tex">x</span>, получить ответы модели, взвесить их близостью к <span class="tex">x</span> и обучить простую (линейную) модель — её коэффициенты и есть объяснение. Быстро и универсально, но нестабильно: результат зависит от выбора окрестности и сэмплирования. Для табличных данных с деревьями TreeSHAP точнее и надёжнее; LIME остаётся популярным для текстов и изображений.</p>
+<h2 id="ловушки-интерпретации">Ловушки интерпретации</h2>
+<ul>
+<li><strong>Важность ≠ причинность.</strong> Объяснение показывает, как <em>модель</em> использует признак, а не как устроен мир. Признак «число обращений в поддержку» может быть важен, но не причиной оттока.</li>
+<li><strong>Коррелированные признаки</strong> размывают и PI, и SHAP, и PDP; сгруппируйте их или анализируйте на уровне групп.</li>
+<li><strong>Объяснения зависят от модели и фона</strong>: разные модели с одинаковым качеством дают разные важности. Не стоит рассказывать «истину о данных», опираясь на одну модель.</li>
+<li>Проверяйте объяснения на здравый смысл: если ID-подобный признак наверху рейтинга — это утечка.</li>
+</ul>
+<h2 id="код">Код</h2>
+<div class="code"><div class="code-head"><span class="lang">python</span></div><pre><code><span class="tok-k">import</span> optuna<span class="tok-p">,</span> shap
+<span class="tok-k">from</span> sklearn.datasets <span class="tok-k">import</span> load_breast_cancer
+<span class="tok-k">from</span> sklearn.inspection <span class="tok-k">import</span> permutation_importance
+<span class="tok-k">from</span> sklearn.model_selection <span class="tok-k">import</span> GridSearchCV<span class="tok-p">,</span> cross_val_score<span class="tok-p">,</span> train_test_split
+<span class="tok-k">from</span> sklearn.pipeline <span class="tok-k">import</span> Pipeline
+<span class="tok-k">from</span> sklearn.preprocessing <span class="tok-k">import</span> StandardScaler
+<span class="tok-k">from</span> sklearn.svm <span class="tok-k">import</span> SVC
+<span class="tok-k">import</span> lightgbm <span class="tok-k">as</span> lgb
+
+X<span class="tok-p">,</span> y <span class="tok-p">=</span> load_breast_cancer<span class="tok-p">(</span>return_X_y<span class="tok-p">=</span><span class="tok-k">True</span><span class="tok-p">,</span> as_frame<span class="tok-p">=</span><span class="tok-k">True</span><span class="tok-p">)</span>
+X_tr<span class="tok-p">,</span> X_te<span class="tok-p">,</span> y_tr<span class="tok-p">,</span> y_te <span class="tok-p">=</span> train_test_split<span class="tok-p">(</span>X<span class="tok-p">,</span> y<span class="tok-p">,</span> stratify<span class="tok-p">=</span>y<span class="tok-p">,</span> random_state<span class="tok-p">=</span><span class="tok-n">0</span><span class="tok-p">)</span>
+
+<span class="tok-c"># Grid search по пайплайну: масштабирование обучается внутри каждого фолда</span>
+pipe <span class="tok-p">=</span> Pipeline<span class="tok-p">(</span><span class="tok-p">[</span><span class="tok-p">(</span><span class="tok-s">"</span><span class="tok-s">scaler</span><span class="tok-s">"</span><span class="tok-p">,</span> StandardScaler<span class="tok-p">(</span><span class="tok-p">)</span><span class="tok-p">)</span><span class="tok-p">,</span> <span class="tok-p">(</span><span class="tok-s">"</span><span class="tok-s">svm</span><span class="tok-s">"</span><span class="tok-p">,</span> SVC<span class="tok-p">(</span><span class="tok-p">)</span><span class="tok-p">)</span><span class="tok-p">]</span><span class="tok-p">)</span>
+grid <span class="tok-p">=</span> GridSearchCV<span class="tok-p">(</span>pipe<span class="tok-p">,</span> <span class="tok-p">{</span><span class="tok-s">"</span><span class="tok-s">svm__C</span><span class="tok-s">"</span><span class="tok-p">:</span> <span class="tok-p">[</span><span class="tok-n">0.1</span><span class="tok-p">,</span> <span class="tok-n">1</span><span class="tok-p">,</span> <span class="tok-n">10</span><span class="tok-p">,</span> <span class="tok-n">100</span><span class="tok-p">]</span><span class="tok-p">,</span> <span class="tok-s">"</span><span class="tok-s">svm__gamma</span><span class="tok-s">"</span><span class="tok-p">:</span> <span class="tok-p">[</span><span class="tok-n">1e-3</span><span class="tok-p">,</span> <span class="tok-n">1e-2</span><span class="tok-p">,</span> <span class="tok-n">1e-1</span><span class="tok-p">]</span><span class="tok-p">}</span><span class="tok-p">,</span>
+                    cv<span class="tok-p">=</span><span class="tok-n">5</span><span class="tok-p">,</span> scoring<span class="tok-p">=</span><span class="tok-s">"</span><span class="tok-s">roc_auc</span><span class="tok-s">"</span><span class="tok-p">)</span><span class="tok-p">.</span>fit<span class="tok-p">(</span>X_tr<span class="tok-p">,</span> y_tr<span class="tok-p">)</span>
+<span class="tok-f">print</span><span class="tok-p">(</span>grid<span class="tok-p">.</span>best_params_<span class="tok-p">,</span> grid<span class="tok-p">.</span>best_score_<span class="tok-p">)</span>
+
+<span class="tok-c"># Nested CV: оценка процедуры подбора</span>
+<span class="tok-f">print</span><span class="tok-p">(</span>cross_val_score<span class="tok-p">(</span>grid<span class="tok-p">,</span> X_tr<span class="tok-p">,</span> y_tr<span class="tok-p">,</span> cv<span class="tok-p">=</span><span class="tok-n">5</span><span class="tok-p">,</span> scoring<span class="tok-p">=</span><span class="tok-s">"</span><span class="tok-s">roc_auc</span><span class="tok-s">"</span><span class="tok-p">)</span><span class="tok-p">.</span>mean<span class="tok-p">(</span><span class="tok-p">)</span><span class="tok-p">)</span>
+
+<span class="tok-c"># Optuna (TPE) для LightGBM</span>
+<span class="tok-k">def</span> <span class="tok-f">make</span><span class="tok-p">(</span>p<span class="tok-p">)</span><span class="tok-p">:</span>
+    <span class="tok-k">return</span> lgb<span class="tok-p">.</span>LGBMClassifier<span class="tok-p">(</span>n_estimators<span class="tok-p">=</span><span class="tok-n">300</span><span class="tok-p">,</span> verbose<span class="tok-p">=</span><span class="tok-p">-</span><span class="tok-n">1</span><span class="tok-p">,</span> learning_rate<span class="tok-p">=</span>p<span class="tok-p">[</span><span class="tok-s">"</span><span class="tok-s">lr</span><span class="tok-s">"</span><span class="tok-p">]</span><span class="tok-p">,</span>
+                              num_leaves<span class="tok-p">=</span>p<span class="tok-p">[</span><span class="tok-s">"</span><span class="tok-s">leaves</span><span class="tok-s">"</span><span class="tok-p">]</span><span class="tok-p">,</span> reg_lambda<span class="tok-p">=</span>p<span class="tok-p">[</span><span class="tok-s">"</span><span class="tok-s">l2</span><span class="tok-s">"</span><span class="tok-p">]</span><span class="tok-p">,</span>
+                              colsample_bytree<span class="tok-p">=</span>p<span class="tok-p">[</span><span class="tok-s">"</span><span class="tok-s">colsample</span><span class="tok-s">"</span><span class="tok-p">]</span><span class="tok-p">)</span>
+
+<span class="tok-k">def</span> <span class="tok-f">objective</span><span class="tok-p">(</span>trial<span class="tok-p">)</span><span class="tok-p">:</span>
+    p <span class="tok-p">=</span> <span class="tok-p">{</span><span class="tok-s">"</span><span class="tok-s">lr</span><span class="tok-s">"</span><span class="tok-p">:</span> trial<span class="tok-p">.</span>suggest_float<span class="tok-p">(</span><span class="tok-s">"</span><span class="tok-s">lr</span><span class="tok-s">"</span><span class="tok-p">,</span> <span class="tok-n">1e-2</span><span class="tok-p">,</span> <span class="tok-n">0.3</span><span class="tok-p">,</span> log<span class="tok-p">=</span><span class="tok-k">True</span><span class="tok-p">)</span><span class="tok-p">,</span>
+         <span class="tok-s">"</span><span class="tok-s">leaves</span><span class="tok-s">"</span><span class="tok-p">:</span> trial<span class="tok-p">.</span>suggest_int<span class="tok-p">(</span><span class="tok-s">"</span><span class="tok-s">leaves</span><span class="tok-s">"</span><span class="tok-p">,</span> <span class="tok-n">4</span><span class="tok-p">,</span> <span class="tok-n">64</span><span class="tok-p">,</span> log<span class="tok-p">=</span><span class="tok-k">True</span><span class="tok-p">)</span><span class="tok-p">,</span>
+         <span class="tok-s">"</span><span class="tok-s">l2</span><span class="tok-s">"</span><span class="tok-p">:</span> trial<span class="tok-p">.</span>suggest_float<span class="tok-p">(</span><span class="tok-s">"</span><span class="tok-s">l2</span><span class="tok-s">"</span><span class="tok-p">,</span> <span class="tok-n">1e-3</span><span class="tok-p">,</span> <span class="tok-n">10</span><span class="tok-p">,</span> log<span class="tok-p">=</span><span class="tok-k">True</span><span class="tok-p">)</span><span class="tok-p">,</span>
+         <span class="tok-s">"</span><span class="tok-s">colsample</span><span class="tok-s">"</span><span class="tok-p">:</span> trial<span class="tok-p">.</span>suggest_float<span class="tok-p">(</span><span class="tok-s">"</span><span class="tok-s">colsample</span><span class="tok-s">"</span><span class="tok-p">,</span> <span class="tok-n">0.4</span><span class="tok-p">,</span> <span class="tok-n">1.0</span><span class="tok-p">)</span><span class="tok-p">}</span>
+    <span class="tok-k">return</span> cross_val_score<span class="tok-p">(</span>make<span class="tok-p">(</span>p<span class="tok-p">)</span><span class="tok-p">,</span> X_tr<span class="tok-p">,</span> y_tr<span class="tok-p">,</span> cv<span class="tok-p">=</span><span class="tok-n">5</span><span class="tok-p">,</span> scoring<span class="tok-p">=</span><span class="tok-s">"</span><span class="tok-s">roc_auc</span><span class="tok-s">"</span><span class="tok-p">)</span><span class="tok-p">.</span>mean<span class="tok-p">(</span><span class="tok-p">)</span>
+
+study <span class="tok-p">=</span> optuna<span class="tok-p">.</span>create_study<span class="tok-p">(</span>direction<span class="tok-p">=</span><span class="tok-s">"</span><span class="tok-s">maximize</span><span class="tok-s">"</span><span class="tok-p">,</span> sampler<span class="tok-p">=</span>optuna<span class="tok-p">.</span>samplers<span class="tok-p">.</span>TPESampler<span class="tok-p">(</span>seed<span class="tok-p">=</span><span class="tok-n">0</span><span class="tok-p">)</span><span class="tok-p">)</span>
+study<span class="tok-p">.</span>optimize<span class="tok-p">(</span>objective<span class="tok-p">,</span> n_trials<span class="tok-p">=</span><span class="tok-n">50</span><span class="tok-p">)</span>
+best <span class="tok-p">=</span> make<span class="tok-p">(</span>study<span class="tok-p">.</span>best_params<span class="tok-p">)</span><span class="tok-p">.</span>fit<span class="tok-p">(</span>X_tr<span class="tok-p">,</span> y_tr<span class="tok-p">)</span>
+
+<span class="tok-c"># Интерпретация на отложенной выборке</span>
+pi <span class="tok-p">=</span> permutation_importance<span class="tok-p">(</span>best<span class="tok-p">,</span> X_te<span class="tok-p">,</span> y_te<span class="tok-p">,</span> scoring<span class="tok-p">=</span><span class="tok-s">"</span><span class="tok-s">roc_auc</span><span class="tok-s">"</span><span class="tok-p">,</span> n_repeats<span class="tok-p">=</span><span class="tok-n">20</span><span class="tok-p">,</span> random_state<span class="tok-p">=</span><span class="tok-n">0</span><span class="tok-p">)</span>
+<span class="tok-f">print</span><span class="tok-p">(</span><span class="tok-f">sorted</span><span class="tok-p">(</span><span class="tok-f">zip</span><span class="tok-p">(</span>pi<span class="tok-p">.</span>importances_mean<span class="tok-p">,</span> X<span class="tok-p">.</span>columns<span class="tok-p">)</span><span class="tok-p">)</span><span class="tok-p">[</span><span class="tok-p">-</span><span class="tok-n">5</span><span class="tok-p">:</span><span class="tok-p">]</span><span class="tok-p">)</span>
+
+explainer <span class="tok-p">=</span> shap<span class="tok-p">.</span>TreeExplainer<span class="tok-p">(</span>best<span class="tok-p">)</span>
+sv <span class="tok-p">=</span> explainer<span class="tok-p">(</span>X_te<span class="tok-p">)</span>                 <span class="tok-c"># shap.Explanation, значения в логитах</span>
+shap<span class="tok-p">.</span>plots<span class="tok-p">.</span>beeswarm<span class="tok-p">(</span>sv<span class="tok-p">)</span>              <span class="tok-c"># summary plot</span>
+shap<span class="tok-p">.</span>plots<span class="tok-p">.</span>waterfall<span class="tok-p">(</span>sv<span class="tok-p">[</span><span class="tok-n">0</span><span class="tok-p">]</span><span class="tok-p">)</span>          <span class="tok-c"># один объект</span>
+</code></pre></div>
+<h2 id="что-почитать">Что почитать</h2>
+<ul>
+<li>Bergstra J., Bengio Y. <em>Random Search for Hyper-Parameter Optimization</em>, JMLR, 2012: https://jmlr.org/papers/v13/bergstra12a.html</li>
+<li>Хендбук Яндекса, «Подбор гиперпараметров»: https://education.yandex.ru/handbook/ml/article/podbor-giperparametrov</li>
+<li>Akiba T. et al. <em>Optuna: A Next-generation Hyperparameter Optimization Framework</em>, KDD 2019: https://arxiv.org/abs/1907.10902</li>
+<li>Li L. et al. <em>Hyperband: A Novel Bandit-Based Approach to Hyperparameter Optimization</em>, JMLR, 2018: https://arxiv.org/abs/1603.06560</li>
+<li>Lundberg S., Lee S.-I. <em>A Unified Approach to Interpreting Model Predictions</em>, NeurIPS 2017: https://arxiv.org/abs/1705.07874</li>
+<li>Molnar C. <em>Interpretable Machine Learning</em> — свободно доступная книга про PDP, ICE, permutation importance, SHAP, LIME: https://christophm.github.io/interpretable-ml-book/</li>
+<li>Ribeiro M. T., Singh S., Guestrin C. <em>"Why Should I Trust You?": Explaining the Predictions of Any Classifier</em>, KDD 2016.</li>
+</ul>
+</div>
+      
+
+      
+      <nav class="pager" aria-label="Соседние статьи">
+        <a href="/edufamcs-demo/handbook/classic/gradientnyj-busting/"><span><svg class="ico sm" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-arrow-left"/></svg>Назад</span>Градиентный бустинг</a>
+        <a href="/edufamcs-demo/handbook/classic/klasterizaciya/"><span>Дальше<svg class="ico sm" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-arrow"/></svg></span>Кластеризация: k-means, иерархическая, DBSCAN</a>
+      </nav>
+      
+    </article>
+
+    <aside class="hb-toc" aria-label="На этой странице">
+      <a class="l2" href="#параметры-и-гиперпараметры">Параметры и гиперпараметры</a><a class="l2" href="#кросс-валидация">Кросс-валидация</a><a class="l3" href="#вложенная-кросс-валидация">Вложенная кросс-валидация</a><a class="l2" href="#стратегии-поиска">Стратегии поиска</a><a class="l2" href="#зачем-нужна-интерпретируемость">Зачем нужна интерпретируемость</a><a class="l2" href="#permutation-importance">Permutation importance</a><a class="l2" href="#pdp-и-ice">PDP и ICE</a><a class="l2" href="#shap">SHAP</a><a class="l2" href="#lime">LIME</a><a class="l2" href="#ловушки-интерпретации">Ловушки интерпретации</a><a class="l2" href="#код">Код</a><a class="l2" href="#что-почитать">Что почитать</a>
+    </aside>
+  </div>
+</div>
+
+
+</main>
+
+<footer class="ftr" data-theme="dark">
+  <svg class="sym fern" viewBox="0 0 40.5 65.02" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#fern"/></svg>
+  <div class="container">
+    <div class="ftr-row">
+      <a href="/edufamcs-demo/" aria-label="EDU FAMCS — главная"><img src="/edufamcs-demo/static/brand/logo/logo-edu-dark.svg" alt="EDU FAMCS" width="196" height="40"></a>
+      <ul class="ftr-links">
+        <li><a href="/edufamcs-demo/#courses">Курсы</a></li>
+        <li><a href="/edufamcs-demo/ml/">Машинное обучение</a></li>
+        <li><a href="/edufamcs-demo/handbook/">Хендбук</a></li>
+        <li><a href="/edufamcs-demo/news/">Новости</a></li>
+        <li><a href="/edufamcs-demo/people/">Авторы</a></li>
+        <li><a href="/edufamcs-demo/about/">О&nbsp;нас</a></li>
+        <li><a href="/edufamcs-demo/propose/">Предложить или исправить</a></li>
+        <li><a href="/edufamcs-demo/privacy/">Конфиденциальность</a></li>
+      </ul>
+    </div>
+    <div class="ftr-big" aria-hidden="true">EDU<span class="d">·</span>FAMCS</div>
+    <p class="ftr-copy">© 2026 EDU FAMCS · Минск</p>
+  </div>
+</footer>
+
+<div class="toasts-region" aria-live="polite" id="toasts">
+
+</div>
+
+</body>
+</html>

@@ -1,0 +1,288 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Векторные индексы: HNSW, IVF, PQ · EDU FAMCS</title>
+<meta name="description" content="Векторные индексы: HNSW, IVF, PQ — Поиск. Хендбук ML-курса ФПМИ.">
+<meta name="theme-color" content="#060A16">
+<meta name="robots" content="noindex, nofollow">
+<meta name="htmx-config" content='{"allowEval":false,"includeIndicatorStyles":false,"historyCacheSize":0,"selfRequestsOnly":true}'>
+<meta name="katex-js" content="/edufamcs-demo/static/vendor/katex/katex.min.js">
+<meta name="katex-css" content="/edufamcs-demo/static/vendor/katex/katex.min.css">
+<link rel="icon" href="/edufamcs-demo/static/brand/logo/favicon-16.svg" type="image/svg+xml" sizes="16x16">
+<link rel="icon" href="/edufamcs-demo/static/brand/logo/favicon.svg" type="image/svg+xml" sizes="any">
+<link rel="preload" href="/edufamcs-demo/static/brand/fonts/manrope-cyrillic-400.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/edufamcs-demo/static/brand/fonts/unbounded-cyrillic-800.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="/edufamcs-demo/static/brand/fonts.css">
+<link rel="stylesheet" href="/edufamcs-demo/static/brand/tokens.css">
+<link rel="stylesheet" href="/edufamcs-demo/static/brand/components.css">
+<link rel="stylesheet" href="/edufamcs-demo/static/css/site.css">
+<link rel="stylesheet" href="/edufamcs-demo/static/css/hub.css">
+<link rel="stylesheet" href="/edufamcs-demo/static/css/about.css">
+<link rel="stylesheet" href="/edufamcs-demo/static/handbook/handbook.css">
+<script src="/edufamcs-demo/static/js/theme.js"></script>
+<script src="/edufamcs-demo/static/vendor/htmx/htmx.min.js" defer></script>
+<script src="/edufamcs-demo/static/vendor/alpine/alpine-csp.min.js" defer></script>
+<script src="/edufamcs-demo/static/js/site.js" defer></script>
+<script src="/edufamcs-demo/static/handbook/handbook.js" defer></script>
+</head>
+<body class="" hx-headers='{"X-CSRFToken": "ChuDVsTLQy7PQH92iCsEwW5I7iDYLvFq113HFqG8LpvY5gkLPPbMtrBNF0JtjFna"}'>
+<a class="skip" href="#main">К содержанию</a>
+<div class="demo-bar" role="note">Демо-версия для отзывов: вход, запись на курсы и формы здесь не работают.</div>
+
+<header class="hdr">
+  <div class="container">
+    <a class="brand" href="/edufamcs-demo/" aria-label="EDU FAMCS — главная">
+      <span class="full"><img class="only-light" src="/edufamcs-demo/static/brand/logo/logo-edu-light.svg" alt="EDU FAMCS" width="196" height="40"><img class="only-dark" src="/edufamcs-demo/static/brand/logo/logo-edu-dark.svg" alt="EDU FAMCS" width="196" height="40"></span>
+      <span class="short"><img class="only-light" src="/edufamcs-demo/static/brand/logo/logo-edu-light.svg" alt="EDU FAMCS" height="30"><img class="only-dark" src="/edufamcs-demo/static/brand/logo/logo-edu-dark.svg" alt="EDU FAMCS" height="30"></span>
+    </a>
+    <nav class="nav" id="main-nav" aria-label="Основная навигация">
+      <a href="/edufamcs-demo/#courses">Курсы</a>
+      <a href="/edufamcs-demo/ml/" >Машинное обучение</a>
+      
+      <a href="/edufamcs-demo/handbook/" aria-current="page">Хендбук</a>
+      <a href="/edufamcs-demo/news/" >Новости</a>
+      <a href="/edufamcs-demo/people/" >Авторы</a>
+      <a href="/edufamcs-demo/about/" >О&nbsp;нас</a>
+    </nav>
+    <div class="hdr-actions">
+      
+      <a class="btn btn-outline btn-login" href="/edufamcs-demo/accounts/login/?next=/handbook/retrieval/vektornye-indeksy/">Войти</a>
+      
+      <button class="icon-btn menu-btn" type="button" aria-label="Меню" aria-expanded="false" aria-controls="main-nav"><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-menu"/></svg></button>
+    </div>
+  </div>
+</header>
+
+<main id="main">
+
+
+
+<div class="container hb-page s-recsys">
+  <div class="hb">
+    <aside class="hb-nav" aria-label="Статьи раздела">
+      
+<form class="hb-search" action="/edufamcs-demo/handbook/search/" method="get" role="search">
+  <svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-search"/></svg>
+  <input class="input" type="search" name="q" value="" placeholder="Поиск по хендбуку" aria-label="Поиск по хендбуку" autocomplete="off" maxlength="120"
+    hx-get="/edufamcs-demo/handbook/search/" hx-trigger="input changed delay:250ms, search" hx-target="#hb-nav-results" hx-sync="this:replace">
+</form>
+
+      <div id="hb-nav-results" class="hb-nav-results" aria-live="polite"></div>
+      <a class="grp" href="/edufamcs-demo/handbook/retrieval/">Нейросетевой поиск</a>
+      
+      <a class="" href="/edufamcs-demo/handbook/retrieval/plotnyj-i-gibridnyj-poisk/">Плотный и гибридный поиск</a>
+      
+      <a class="" href="/edufamcs-demo/handbook/retrieval/nejrosetevoe-ranzhirovanie/">Нейросетевое ранжирование: cross-encoder, ColBERT, SPLADE</a>
+      
+      <a class="cur" href="/edufamcs-demo/handbook/retrieval/vektornye-indeksy/" aria-current="page">Векторные индексы: HNSW, IVF, PQ</a>
+      
+    </aside>
+
+    <article class="hb-main">
+      <nav class="crumbs" aria-label="Навигация"><a href="/edufamcs-demo/handbook/">Хендбук</a><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-chev"/></svg><a href="/edufamcs-demo/handbook/retrieval/">Поиск</a></nav>
+      <h1 class="h1">Векторные индексы: HNSW, IVF, PQ</h1>
+      <div class="hb-meta">
+        
+        
+        <span><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-clock"/></svg>16&nbsp;мин</span>
+        <span class="hb-authors"><span class="avatar sm" title="Артем Лебедевич">АЛ</span>Артем Лебедевич</span>
+        <span><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-edit"/></svg>9 ноября 2026</span>
+        
+        
+      </div>
+
+      
+      <details class="hb-mtoc">
+        <summary><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-list"/></svg>Содержание<svg class="ico sm" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-chev-down"/></svg></summary>
+        <a class="l2" href="#задача-и-компромисс">Задача и компромисс</a><a class="l2" href="#почему-не-деревья">Почему не деревья</a><a class="l2" href="#ivf-инвертированный-файл">IVF: инвертированный файл</a><a class="l2" href="#product-quantization">Product quantization</a><a class="l2" href="#графовые-индексы">Графовые индексы</a><a class="l2" href="#библиотеки-и-системы">Библиотеки и системы</a><a class="l2" href="#фильтрация-обновления-удаления">Фильтрация, обновления, удаления</a><a class="l2" href="#код-ivf-pq-против-hnsw">Код: IVF-PQ против HNSW</a><a class="l2" href="#бенчмарки">Бенчмарки</a><a class="l2" href="#типичные-грабли">Типичные грабли</a><a class="l2" href="#связь-с-рекомендациями">Связь с рекомендациями</a><a class="l2" href="#что-почитать">Что почитать</a>
+      </details>
+      
+
+      <div class="prose"><p>Эмбеддинги получены, документов <span class="tex">N = 10^8</span>, размерность <span class="tex">d = 768</span>. Нужно за миллисекунды найти <span class="tex">k</span> ближайших к запросу векторов. Эта глава — про то, как это делают, и почему почти везде ответ «приближённо».</p>
+<h2 id="задача-и-компромисс">Задача и компромисс</h2>
+<p><strong>Точный поиск</strong> (brute force, <code>IndexFlatIP</code> / <code>IndexFlatL2</code>) считает расстояние до всех векторов: <span class="tex">O(Nd)</span> на запрос. Для <span class="tex">N = 10^6</span>, <span class="tex">d = 768</span> это ~<span class="tex">10^9</span> умножений-сложений и, главное, чтение 3 ГБ памяти — порядка сотни миллисекунд на один запрос на CPU (упирается в пропускную способность памяти; батч запросов амортизирует чтение), единицы миллисекунд на GPU. Хранение: <span class="tex">4Nd</span> байт, то есть 3 ГБ на миллион векторов float32 и 300 ГБ на сто миллионов. Для малых корпусов (до сотен тысяч) точный поиск на матричном умножении — разумный выбор, ничего не усложняйте.</p>
+<p><strong>Приближённый поиск</strong> (ANN) жертвует точностью ради скорости и памяти. Три оси компромисса:</p>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>ось</th>
+<th>что измеряем</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>recall@k</td>
+<td>какая доля истинных <span class="tex">k</span> ближайших найдена</td>
+</tr>
+<tr>
+<td>QPS / задержка</td>
+<td>запросов в секунду при заданном recall</td>
+</tr>
+<tr>
+<td>память</td>
+<td>байт на вектор + накладные расходы структуры</td>
+</tr>
+</tbody>
+</table></div>
+<p>Сравнивать индексы нужно <strong>кривыми</strong> «recall — QPS», а не одной точкой: у каждого индекса есть параметр, сдвигающий режим (<code>nprobe</code>, <code>efSearch</code>), и справедливое сравнение — при одинаковом recall.</p>
+<p>Для нормированных векторов косинус, скалярное произведение и евклидово расстояние эквивалентны по порядку: <span class="tex">\|x - y\|^2 = 2 - 2\,x^\top y</span>. Поэтому библиотеки обычно считают L2 или inner product, а косинус получают предварительной нормировкой.</p>
+<h2 id="почему-не-деревья">Почему не деревья</h2>
+<p>В низкой размерности спасают <strong>KD-деревья</strong>: делим пространство гиперплоскостями по координатам, на запросе отсекаем ветки, не пересекающиеся с шаром радиуса «лучший найденный». В размерности <span class="tex">d \gtrsim 20</span> работает проклятие размерности: расстояния до ближайшего и до среднего соседа почти совпадают, шар запроса пересекает почти все ячейки, обход вырождается в полный перебор. Для эмбеддингов (<span class="tex">d \sim 10^2</span>–<span class="tex">10^3</span>) деревья бесполезны (хотя случайные проекционные леса вроде Annoy, использованного в Spotify, ещё живы).</p>
+<p><strong>LSH</strong> (Indyk &amp; Motwani, 1998) — первая теоретически обоснованная схема: хеш-функции, для которых близкие точки сталкиваются с большей вероятностью, чем далёкие. Для косинуса — знак проекции на случайный вектор <span class="tex">h_r(x) = \mathrm{sign}(r^\top x)</span> (SimHash, Charikar, 2002); вероятность совпадения бита равна <span class="tex">1 - \theta(x, y)/\pi</span>, где <span class="tex">\theta</span> — угол между векторами: случайная гиперплоскость разделяет <span class="tex">x</span> и <span class="tex">y</span> с вероятностью <span class="tex">\theta/\pi</span>. Несколько таблиц по <span class="tex">b</span> бит каждая. Гарантии есть, но на практике LSH требует много таблиц (память) и проигрывает схемам, которые учитывают структуру данных: квантизации и графам.</p>
+<h2 id="ivf-инвертированный-файл">IVF: инвертированный файл</h2>
+<p>Тот же приём, что и в инвертированном индексе для BM25, перенесённый на векторы.</p>
+<ol>
+<li><strong>Обучение.</strong> k-means на выборке векторов даёт <code>nlist</code> центроидов — «грубый квантизатор».</li>
+<li><strong>Добавление.</strong> Каждый вектор попадает в список ближайшего центроида.</li>
+<li><strong>Запрос.</strong> Находим <code>nprobe</code> ближайших центроидов, перебираем только их списки: в среднем <span class="tex">N \cdot \text{nprobe} / \text{nlist}</span> векторов вместо <span class="tex">N</span>.</li>
+</ol>
+<p>Ориентир из документации FAISS: <span class="tex">\text{nlist} \approx 4\sqrt{N}</span> … <span class="tex">16\sqrt{N}</span> (для <span class="tex">N = 10^6</span> — 4–16 тыс. списков), на обучение k-means — от <span class="tex">30</span> до <span class="tex">256</span> векторов на центроид; <code>nprobe</code> — от единиц до сотен. Больше <code>nprobe</code> — выше recall и больше работа. Слабое место: вектор запроса у границы ячеек, ближайший сосед лежит в соседней ячейке — отсюда необходимость <code>nprobe &gt; 1</code>. Другая проблема — неравномерные списки: плотные кластеры дают долгие запросы.</p>
+<h2 id="product-quantization">Product quantization</h2>
+<p>IVF экономит время, но не память: векторы хранятся целиком. <strong>Product quantization</strong> (Jégou, Douze, Schmid, 2011) сжимает вектор в несколько байт.</p>
+<p>Разрежем вектор на <span class="tex">m</span> подвекторов размерности <span class="tex">d/m</span>. Для каждой подпространственной «колонки» обучим свой k-means на <span class="tex">2^{8} = 256</span> центров (кодбук). Вектор <span class="tex">x</span> заменяется на <span class="tex">m</span> номеров ближайших центров — <span class="tex">m</span> байт вместо <span class="tex">4d</span>. При <span class="tex">d = 768</span>, <span class="tex">m = 96</span> получаем 96 байт вместо 3072: сжатие в 32 раза. Неявный общий кодбук имеет <span class="tex">256^m</span> кодовых слов, хотя хранится лишь <span class="tex">m \cdot 256 \cdot (d/m) = 256 d</span> чисел.</p>
+<p><strong>Асимметричное расстояние (ADC).</strong> Запрос <span class="tex">q</span> не квантуем. Для каждого подпространства заранее считаем таблицу расстояний от подвектора <span class="tex">q^{(j)}</span> до 256 центров <span class="tex">c^{(j)}_i</span>:</p>
+<div class="tex tex-block">T_j[i] = \big\|q^{(j)} - c^{(j)}_i\big\|^2, \qquad
+\tilde d(q, x)^2 = \sum_{j=1}^{m} T_j\big[\,\text{code}_j(x)\,\big] .</div>
+<p>Расстояние до сжатого вектора — <span class="tex">m</span> обращений в таблицы и сложений, без умножений на размерность <span class="tex">d</span>. Таблицы стоят <span class="tex">O(256\, d)</span> на запрос и делятся на всю базу. Ошибка в расстоянии — это ошибка квантования только базового вектора; поэтому асимметричный вариант точнее симметричного (где квантуется и запрос).</p>
+<p><strong>IVF-PQ</strong> комбинирует: грубый квантизатор выбирает списки, в них хранятся PQ-коды <strong>остатков</strong> <span class="tex">x - c_{\text{cell}(x)}</span> — остатки имеют меньший разброс, и кодбуки точнее. Это рабочая лошадка миллиардных индексов.</p>
+<p><strong>OPQ</strong> (Ge et al., 2013): PQ режет вектор по координатам как есть, а подпространства могут быть сильно неравны по дисперсии. OPQ обучает ортогональное вращение <span class="tex">R</span> (так, чтобы подпространства стали как можно более независимыми и равными по энергии), после чего кодирует <span class="tex">Rx</span>. Потери на квантовании заметно падают при почти нулевой цене на запросе.</p>
+<p><strong>Скалярная и бинарная квантизация.</strong> Проще PQ: каждую координату в int8 (в 4 раза меньше памяти, потеря recall обычно доли процента) или в 1 бит по знаку (32-кратное сжатие, расстояние Хэмминга через <code>popcount</code>). Бинарные векторы ищут быстро и грубо, затем топ-100…1000 <strong>переранжируют</strong> полноточными векторами (rescoring) — схема стала популярной с Matryoshka-эмбеддингами: можно обрезать вектор до 256–512 координат и ещё бинаризовать. Качество восстанавливает дообученная на этот случай модель, но гарантий нет: проверяйте на своих данных.</p>
+<h2 id="графовые-индексы">Графовые индексы</h2>
+<p><strong>NSW</strong> (Navigable Small World, Малков и др., 2014): строим граф, где каждый вектор связан с несколькими близкими, плюс несколько «длинных» рёбер. Поиск — жадный обход: стартуем в случайной вершине, идём к соседу, ближайшему к запросу, пока улучшается. Идея из теории «маленького мира» (Клейнберг): благодаря длинным рёбрам жадный маршрут до цели занимает полилогарифмическое по <span class="tex">N</span> число шагов.</p>
+<p><strong>HNSW</strong> (Hierarchical NSW, Малков и Яшунин, 2016/2018) добавляет <strong>иерархию слоёв</strong>, как в skip-list. Вершина получает максимальный слой <span class="tex">\ell = \lfloor -\ln(U)\cdot m_L \rfloor</span>, <span class="tex">U \sim \mathrm{U}(0, 1)</span>, <span class="tex">m_L = 1/\ln M</span> — дискретизированное экспоненциальное (геометрическое) распределение: <span class="tex">P(\ell \ge j) = M^{-j}</span>, верхние слои редкие, нижние плотные. Поиск спускается сверху: на верхнем слое жадно двигаемся к области запроса, найденная вершина — вход на слой ниже, и так до слоя 0, где ведётся уточнённый поиск. Параметры:</p>
+<ul>
+<li><span class="tex">M</span> — максимальное число рёбер вершины (на слое 0 — <span class="tex">2M</span>). Больше <span class="tex">M</span> — выше recall и память (по оценке FAISS, <span class="tex">4d + 8M</span> байт на вектор для float32: <span class="tex">2M</span> соседей по 4 байта на слое 0);</li>
+<li><code>efConstruction</code> — размер списка кандидатов при вставке; больше — лучше граф, дольше построение;</li>
+<li><code>efSearch</code> — размер списка кандидатов при запросе, главный регулятор recall/QPS; обязано быть <span class="tex">\ge k</span>.</li>
+</ul>
+<p>Сложность поиска в эмпирике логарифмическая по <span class="tex">N</span>. Вставка — это поиск по уже построенному графу плюс выбор рёбер эвристикой, сохраняющей разнообразие направлений (не просто <span class="tex">M</span> ближайших). Минусы: память (граф + полные векторы в RAM), долгое построение, <strong>удаление</strong> — трудная операция: вершины помечают удалёнными, а граф со временем деградирует, пока его не перестроят.</p>
+<p><strong>DiskANN / Vamana</strong> (Subramanya et al., 2019). Граф для SSD: один слой (граф Vamana с параметром <span class="tex">\alpha &gt; 1</span>, добавляющим длинные рёбра), в RAM хранятся только PQ-коды для навигации, а полные векторы и списки соседей лежат на диске; поиск делает несколько чтений за запрос и дочитывает точные векторы для финального ранжирования. Миллиард векторов на одной машине с 64 ГБ RAM и SSD. Позже появились версии с фильтрами и онлайн-обновлениями (FreshDiskANN).</p>
+<p><strong>ScaNN</strong> (Guo et al., ICML 2020). Ключевая идея — <strong>анизотропная квантизация</strong>. Для поиска по скалярному произведению важны прежде всего документы с большим <span class="tex">q^\top x</span>, а запросы, для которых <span class="tex">x</span> попадает в топ, почти сонаправлены с <span class="tex">x</span>. Поэтому остаток квантования <span class="tex">x - \tilde x</span> разбивают на параллельную и ортогональную вектору <span class="tex">x</span> компоненты и штрафуют параллельную сильнее: она напрямую искажает <span class="tex">q^\top x</span> для «своих» запросов, а ортогональная — почти нет. Это даёт лучший recall при том же коде, чем стандартная PQ с евклидовой ошибкой.</p>
+<h2 id="библиотеки-и-системы">Библиотеки и системы</h2>
+<ul>
+<li><strong>FAISS</strong> (Johnson, Douze, Jégou, 2017; обзор <em>The Faiss library</em>, 2024) — библиотека Meta, эталонная реализация flat, IVF, PQ, HNSW, GPU-версий; индексы собираются фабрикой строк, например <code>"IVF4096,PQ64"</code> или <code>"OPQ64,IVF4096,PQ64"</code>.</li>
+<li><strong>hnswlib</strong> — минималистичная реализация HNSW.</li>
+<li><strong>Lucene / OpenSearch / Elasticsearch</strong> — k-NN поверх HNSW (Lucene) или FAISS/nmslib; важно, что вектор живёт рядом с инвертированным индексом и фильтрами, то есть гибридный поиск делается в одной системе.</li>
+<li><strong>Векторные БД</strong> (Qdrant, Milvus, Weaviate, pgvector и др.) — оболочка над теми же алгоритмами: хранение, метаданные, фильтры, репликация, обновления. Выбор системы — это в первую очередь вопрос эксплуатации, а не алгоритма.</li>
+</ul>
+<h2 id="фильтрация-обновления-удаления">Фильтрация, обновления, удаления</h2>
+<p>Реальный запрос редко звучит «ближайшие 10 вообще»: «ближайшие 10 среди товаров в наличии, в категории X, доступных пользователю».</p>
+<ul>
+<li><strong>Post-filter</strong>: ищем топ-<span class="tex">k'</span> (<span class="tex">k' \gg k</span>), потом фильтруем. Просто, но при селективном фильтре (проходит 1% документов) результат пуст или меньше <span class="tex">k</span>.</li>
+<li><strong>Pre-filter</strong>: сначала фильтр, затем перебор отобранного. Точен, но на больших множествах — медленнее ANN.</li>
+<li><strong>Фильтр внутри обхода</strong> (filtered HNSW, ACORN, фильтрованный DiskANN): в графе не учитываются недопустимые вершины, но связность страдает при селективных фильтрах. В хороших системах выбор стратегии делается по оценке селективности: мало допустимых — перебор, много — обход с фильтром.</li>
+<li><strong>Обновления.</strong> IVF: добавление дёшево, но центроиды устаревают при сдвиге распределения — периодически переобучайте. HNSW: вставки онлайн, удаления через пометки и периодическую пересборку. Типичная практика: сегменты (как в Lucene) — новые данные в небольшой индекс, фоновые слияния.</li>
+<li><strong>Смена модели эмбеддингов</strong> = полная переиндексация. Версионируйте индекс вместе с версией модели; нельзя искать векторами одной модели по индексу другой.</li>
+</ul>
+<h2 id="код-ivf-pq-против-hnsw">Код: IVF-PQ против HNSW</h2>
+<div class="code"><div class="code-head"><span class="lang">python</span></div><pre><code><span class="tok-k">import</span> time
+<span class="tok-k">import</span> numpy <span class="tok-k">as</span> np
+<span class="tok-k">import</span> faiss
+
+rng <span class="tok-p">=</span> np<span class="tok-p">.</span>random<span class="tok-p">.</span>default_rng<span class="tok-p">(</span><span class="tok-n">0</span><span class="tok-p">)</span>
+d<span class="tok-p">,</span> n<span class="tok-p">,</span> nq<span class="tok-p">,</span> k <span class="tok-p">=</span> <span class="tok-n">128</span><span class="tok-p">,</span> <span class="tok-n">200_000</span><span class="tok-p">,</span> <span class="tok-n">1_000</span><span class="tok-p">,</span> <span class="tok-n">10</span>
+<span class="tok-c"># синтетика с низкой внутренней размерностью, как у настоящих эмбеддингов</span>
+<span class="tok-c"># (на чистом гауссовском шуме в d = 128 проваливается любой ANN-индекс)</span>
+W <span class="tok-p">=</span> rng<span class="tok-p">.</span>standard_normal<span class="tok-p">(</span><span class="tok-p">(</span><span class="tok-n">16</span><span class="tok-p">,</span> d<span class="tok-p">)</span><span class="tok-p">)</span><span class="tok-p">.</span>astype<span class="tok-p">(</span>np<span class="tok-p">.</span>float32<span class="tok-p">)</span>
+<span class="tok-k">def</span> <span class="tok-f">sample</span><span class="tok-p">(</span>m<span class="tok-p">)</span><span class="tok-p">:</span>
+    <span class="tok-k">return</span> <span class="tok-p">(</span>rng<span class="tok-p">.</span>standard_normal<span class="tok-p">(</span><span class="tok-p">(</span>m<span class="tok-p">,</span> <span class="tok-n">16</span><span class="tok-p">)</span><span class="tok-p">,</span> dtype<span class="tok-p">=</span>np<span class="tok-p">.</span>float32<span class="tok-p">)</span> <span class="tok-p">@</span> W
+            <span class="tok-p">+</span> <span class="tok-n">0.3</span> <span class="tok-p">*</span> rng<span class="tok-p">.</span>standard_normal<span class="tok-p">(</span><span class="tok-p">(</span>m<span class="tok-p">,</span> d<span class="tok-p">)</span><span class="tok-p">,</span> dtype<span class="tok-p">=</span>np<span class="tok-p">.</span>float32<span class="tok-p">)</span><span class="tok-p">)</span>
+xb<span class="tok-p">,</span> xq <span class="tok-p">=</span> sample<span class="tok-p">(</span>n<span class="tok-p">)</span><span class="tok-p">,</span> sample<span class="tok-p">(</span>nq<span class="tok-p">)</span>
+
+flat <span class="tok-p">=</span> faiss<span class="tok-p">.</span>IndexFlatL2<span class="tok-p">(</span>d<span class="tok-p">)</span><span class="tok-p">;</span> flat<span class="tok-p">.</span>add<span class="tok-p">(</span>xb<span class="tok-p">)</span>
+_<span class="tok-p">,</span> gt <span class="tok-p">=</span> flat<span class="tok-p">.</span>search<span class="tok-p">(</span>xq<span class="tok-p">,</span> k<span class="tok-p">)</span>                            <span class="tok-c"># истинные соседи</span>
+
+<span class="tok-k">def</span> <span class="tok-f">recall</span><span class="tok-p">(</span>ids<span class="tok-p">)</span><span class="tok-p">:</span> <span class="tok-k">return</span> np<span class="tok-p">.</span>mean<span class="tok-p">(</span><span class="tok-p">[</span><span class="tok-f">len</span><span class="tok-p">(</span><span class="tok-f">set</span><span class="tok-p">(</span>a<span class="tok-p">)</span> <span class="tok-p">&amp;</span> <span class="tok-f">set</span><span class="tok-p">(</span>b<span class="tok-p">)</span><span class="tok-p">)</span> <span class="tok-p">/</span> k <span class="tok-k">for</span> a<span class="tok-p">,</span> b <span class="tok-k">in</span> <span class="tok-f">zip</span><span class="tok-p">(</span>ids<span class="tok-p">,</span> gt<span class="tok-p">)</span><span class="tok-p">]</span><span class="tok-p">)</span>
+
+<span class="tok-c"># IVF-PQ: 1024 списка (меньше ориентира 4*sqrt(N) ~ 1800, чтобы быстрее обучалось),</span>
+<span class="tok-c"># 16 подвекторов по 8 бит -&gt; 16 байт на вектор</span>
+quant <span class="tok-p">=</span> faiss<span class="tok-p">.</span>IndexFlatL2<span class="tok-p">(</span>d<span class="tok-p">)</span>
+ivfpq <span class="tok-p">=</span> faiss<span class="tok-p">.</span>IndexIVFPQ<span class="tok-p">(</span>quant<span class="tok-p">,</span> d<span class="tok-p">,</span> <span class="tok-n">1024</span><span class="tok-p">,</span> <span class="tok-n">16</span><span class="tok-p">,</span> <span class="tok-n">8</span><span class="tok-p">)</span>
+ivfpq<span class="tok-p">.</span>train<span class="tok-p">(</span>xb<span class="tok-p">[</span><span class="tok-p">:</span><span class="tok-n">50_000</span><span class="tok-p">]</span><span class="tok-p">)</span><span class="tok-p">;</span> ivfpq<span class="tok-p">.</span>add<span class="tok-p">(</span>xb<span class="tok-p">)</span>
+<span class="tok-k">for</span> nprobe <span class="tok-k">in</span> <span class="tok-p">(</span><span class="tok-n">1</span><span class="tok-p">,</span> <span class="tok-n">4</span><span class="tok-p">,</span> <span class="tok-n">16</span><span class="tok-p">,</span> <span class="tok-n">64</span><span class="tok-p">)</span><span class="tok-p">:</span>
+    ivfpq<span class="tok-p">.</span>nprobe <span class="tok-p">=</span> nprobe
+    t <span class="tok-p">=</span> time<span class="tok-p">.</span>perf_counter<span class="tok-p">(</span><span class="tok-p">)</span><span class="tok-p">;</span> _<span class="tok-p">,</span> ids <span class="tok-p">=</span> ivfpq<span class="tok-p">.</span>search<span class="tok-p">(</span>xq<span class="tok-p">,</span> k<span class="tok-p">)</span>
+    <span class="tok-f">print</span><span class="tok-p">(</span><span class="tok-s">f</span><span class="tok-s">"</span><span class="tok-s">IVFPQ nprobe=</span><span class="tok-s">{</span>nprobe<span class="tok-s">:</span><span class="tok-s">3d</span><span class="tok-s">}</span><span class="tok-s"> recall=</span><span class="tok-s">{</span>recall<span class="tok-p">(</span>ids<span class="tok-p">)</span><span class="tok-s">:</span><span class="tok-s">.3f</span><span class="tok-s">}</span><span class="tok-s"> qps=</span><span class="tok-s">{</span>nq<span class="tok-p">/</span><span class="tok-p">(</span>time<span class="tok-p">.</span>perf_counter<span class="tok-p">(</span><span class="tok-p">)</span><span class="tok-p">-</span>t<span class="tok-p">)</span><span class="tok-s">:</span><span class="tok-s">.0f</span><span class="tok-s">}</span><span class="tok-s">"</span><span class="tok-p">)</span>
+
+<span class="tok-c"># HNSW: M=32, полные векторы в памяти</span>
+hnsw <span class="tok-p">=</span> faiss<span class="tok-p">.</span>IndexHNSWFlat<span class="tok-p">(</span>d<span class="tok-p">,</span> <span class="tok-n">32</span><span class="tok-p">)</span>
+hnsw<span class="tok-p">.</span>hnsw<span class="tok-p">.</span>efConstruction <span class="tok-p">=</span> <span class="tok-n">200</span>
+hnsw<span class="tok-p">.</span>add<span class="tok-p">(</span>xb<span class="tok-p">)</span>
+<span class="tok-k">for</span> ef <span class="tok-k">in</span> <span class="tok-p">(</span><span class="tok-n">16</span><span class="tok-p">,</span> <span class="tok-n">64</span><span class="tok-p">,</span> <span class="tok-n">256</span><span class="tok-p">)</span><span class="tok-p">:</span>
+    hnsw<span class="tok-p">.</span>hnsw<span class="tok-p">.</span>efSearch <span class="tok-p">=</span> ef
+    t <span class="tok-p">=</span> time<span class="tok-p">.</span>perf_counter<span class="tok-p">(</span><span class="tok-p">)</span><span class="tok-p">;</span> _<span class="tok-p">,</span> ids <span class="tok-p">=</span> hnsw<span class="tok-p">.</span>search<span class="tok-p">(</span>xq<span class="tok-p">,</span> k<span class="tok-p">)</span>
+    <span class="tok-f">print</span><span class="tok-p">(</span><span class="tok-s">f</span><span class="tok-s">"</span><span class="tok-s">HNSW   ef=</span><span class="tok-s">{</span>ef<span class="tok-s">:</span><span class="tok-s">4d</span><span class="tok-s">}</span><span class="tok-s">     recall=</span><span class="tok-s">{</span>recall<span class="tok-p">(</span>ids<span class="tok-p">)</span><span class="tok-s">:</span><span class="tok-s">.3f</span><span class="tok-s">}</span><span class="tok-s"> qps=</span><span class="tok-s">{</span>nq<span class="tok-p">/</span><span class="tok-p">(</span>time<span class="tok-p">.</span>perf_counter<span class="tok-p">(</span><span class="tok-p">)</span><span class="tok-p">-</span>t<span class="tok-p">)</span><span class="tok-s">:</span><span class="tok-s">.0f</span><span class="tok-s">}</span><span class="tok-s">"</span><span class="tok-p">)</span>
+</code></pre></div>
+<p>Что увидите (прогон на ноутбуке, QPS зависят от железа): у IVF-PQ recall@10 растёт с <code>nprobe</code> примерно от 0,2 до 0,6 и упирается в потолок квантования — 16 байт на вектор не различают близких соседей, и дальнейший рост <code>nprobe</code> почти не помогает. Зато индекс занимает ~16 байт на вектор против <span class="tex">4d + 8M \approx 770</span> байт у HNSW. У HNSW recall растёт примерно от 0,9 при <code>efSearch = 16</code> до 1,0 при 256, а QPS падает в несколько раз. Потолок IVF-PQ снимают переранжированием: берут из PQ в 10–100 раз больше кандидатов и пересчитывают расстояния по полным векторам (<code>IndexRefineFlat</code> в FAISS) или по более длинному коду с диска. Практика: HNSW — когда всё помещается в RAM и важна задержка; IVF-PQ / DiskANN — когда не помещается. Для осмысленных выводов подставьте свои эмбеддинги.</p>
+<h2 id="бенчмарки">Бенчмарки</h2>
+<p><strong>ann-benchmarks</strong> (Aumüller, Bernhardsson, Faithfull, 2018) — стандартный набор: SIFT, GloVe, Fashion-MNIST и др., кривые recall — QPS для десятков библиотек на одном процессоре. <strong>big-ann-benchmarks</strong> (NeurIPS 2021–2023) — миллиард векторов и отдельные треки: фильтрация, разреженные векторы, потоковые обновления. Важно: на этих наборах HNSW почти всегда лидирует по скорости, но датасеты — не ваши. Если распределение запросов отличается от распределения документов (а у text-to-image и у bi-encoder'ов с разными башнями так и есть), графовые индексы могут просесть — проверяйте out-of-distribution запросы.</p>
+<h2 id="типичные-грабли">Типичные грабли</h2>
+<ul>
+<li>Recall считается относительно <strong>точного</strong> поиска на тех же эмбеддингах, а не относительно разметки. Отдельно измеряйте: потеря от ANN против потери самой модели.</li>
+<li>Забыли нормировать вектора, а индекс — inner product.</li>
+<li><code>nprobe</code> / <code>efSearch</code> подобраны на средних запросах, а хвост (редкие запросы) страдает: смотрите p99 и recall по сегментам запросов.</li>
+<li>PQ обучают на выборке, не похожей на данные (старый срез каталога) — центры «не там».</li>
+<li>Размерность и число подвекторов: <span class="tex">d</span> должно делиться на <span class="tex">m</span>; для OPQ — на <span class="tex">m</span> после вращения.</li>
+<li>Память HNSW: 100 млн векторов по 768 float32 — 300 ГБ только на векторы, граф сверху. Считайте до выбора железа.</li>
+</ul>
+<h2 id="связь-с-рекомендациями">Связь с рекомендациями</h2>
+<p>В двухбашенных рекомендателях эмбеддинги айтемов индексируются ровно так же; запросом выступает вектор пользователя. Особенности — частая смена пользовательских векторов, строгие фильтры доступности и жёсткие требования к задержке; см. главу про <a href="/edufamcs-demo/handbook/recsys/two-tower-ann/" rel="noopener noreferrer nofollow">two-tower и ANN</a>. Инженерную сторону такого поиска в рекомендациях можно посмотреть в докладе Александра Бутенко <a href="https://www.youtube.com/watch?v=VGLW6_rTzOM" rel="noopener noreferrer nofollow">«Ускорение рекомендаций в проде»</a> (ODS AI Ru).</p>
+<h2 id="что-почитать">Что почитать</h2>
+<ul>
+<li>Malkov, Yashunin, <a href="https://arxiv.org/abs/1603.09320" rel="noopener noreferrer nofollow">Efficient and robust ANN search using Hierarchical Navigable Small World graphs</a>, 2016 (TPAMI 2018).</li>
+<li>Jégou, Douze, Schmid, <em>Product Quantization for Nearest Neighbor Search</em>, IEEE TPAMI 2011; Ge et al., <em>Optimized Product Quantization</em>, CVPR 2013 / TPAMI 2014.</li>
+<li>Charikar, <em>Similarity Estimation Techniques from Rounding Algorithms</em>, STOC 2002 (SimHash); Malkov et al., <em>Approximate nearest neighbor algorithm based on navigable small world graphs</em>, Information Systems, 2014 (NSW).</li>
+<li>Subramanya et al., DiskANN: Fast Accurate Billion-point Nearest Neighbor Search on a Single Node, NeurIPS 2019; Guo et al., <a href="https://arxiv.org/abs/1908.10396" rel="noopener noreferrer nofollow">Accelerating Large-Scale Inference with Anisotropic Vector Quantization (ScaNN)</a>, 2020.</li>
+<li>Johnson, Douze, Jégou, <a href="https://arxiv.org/abs/1702.08734" rel="noopener noreferrer nofollow">Billion-scale similarity search with GPUs</a>, 2017; Douze et al., <a href="https://arxiv.org/abs/2401.08281" rel="noopener noreferrer nofollow">The Faiss library</a>, 2024.</li>
+<li>Aumüller, Bernhardsson, Faithfull, <a href="https://arxiv.org/abs/1807.05614" rel="noopener noreferrer nofollow">ANN-Benchmarks</a>, 2018; <a href="https://ann-benchmarks.com" rel="noopener noreferrer nofollow">ann-benchmarks.com</a>.</li>
+<li><a href="https://github.com/facebookresearch/faiss/wiki/Guidelines-to-choose-an-index" rel="noopener noreferrer nofollow">Wiki FAISS: guidelines to choose an index</a>.</li>
+</ul>
+</div>
+      
+
+      
+      <nav class="pager" aria-label="Соседние статьи">
+        <a href="/edufamcs-demo/handbook/retrieval/nejrosetevoe-ranzhirovanie/"><span><svg class="ico sm" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-arrow-left"/></svg>Назад</span>Нейросетевое ранжирование: cross-encoder, ColBERT, SPLADE</a>
+        <a href="/edufamcs-demo/handbook/retrieval/rag/"><span>Дальше<svg class="ico sm" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-arrow"/></svg></span>RAG: поиск для языковых моделей</a>
+      </nav>
+      
+    </article>
+
+    <aside class="hb-toc" aria-label="На этой странице">
+      <a class="l2" href="#задача-и-компромисс">Задача и компромисс</a><a class="l2" href="#почему-не-деревья">Почему не деревья</a><a class="l2" href="#ivf-инвертированный-файл">IVF: инвертированный файл</a><a class="l2" href="#product-quantization">Product quantization</a><a class="l2" href="#графовые-индексы">Графовые индексы</a><a class="l2" href="#библиотеки-и-системы">Библиотеки и системы</a><a class="l2" href="#фильтрация-обновления-удаления">Фильтрация, обновления, удаления</a><a class="l2" href="#код-ivf-pq-против-hnsw">Код: IVF-PQ против HNSW</a><a class="l2" href="#бенчмарки">Бенчмарки</a><a class="l2" href="#типичные-грабли">Типичные грабли</a><a class="l2" href="#связь-с-рекомендациями">Связь с рекомендациями</a><a class="l2" href="#что-почитать">Что почитать</a>
+    </aside>
+  </div>
+</div>
+
+
+</main>
+
+<footer class="ftr" data-theme="dark">
+  <svg class="sym fern" viewBox="0 0 40.5 65.02" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#fern"/></svg>
+  <div class="container">
+    <div class="ftr-row">
+      <a href="/edufamcs-demo/" aria-label="EDU FAMCS — главная"><img src="/edufamcs-demo/static/brand/logo/logo-edu-dark.svg" alt="EDU FAMCS" width="196" height="40"></a>
+      <ul class="ftr-links">
+        <li><a href="/edufamcs-demo/#courses">Курсы</a></li>
+        <li><a href="/edufamcs-demo/ml/">Машинное обучение</a></li>
+        <li><a href="/edufamcs-demo/handbook/">Хендбук</a></li>
+        <li><a href="/edufamcs-demo/news/">Новости</a></li>
+        <li><a href="/edufamcs-demo/people/">Авторы</a></li>
+        <li><a href="/edufamcs-demo/about/">О&nbsp;нас</a></li>
+        <li><a href="/edufamcs-demo/propose/">Предложить или исправить</a></li>
+        <li><a href="/edufamcs-demo/privacy/">Конфиденциальность</a></li>
+      </ul>
+    </div>
+    <div class="ftr-big" aria-hidden="true">EDU<span class="d">·</span>FAMCS</div>
+    <p class="ftr-copy">© 2026 EDU FAMCS · Минск</p>
+  </div>
+</footer>
+
+<div class="toasts-region" aria-live="polite" id="toasts">
+
+</div>
+
+</body>
+</html>

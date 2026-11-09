@@ -1,0 +1,234 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Матричные разложения и ALS · EDU FAMCS</title>
+<meta name="description" content="Матричные разложения и ALS — Рекомендательные системы. Хендбук ML-курса ФПМИ.">
+<meta name="theme-color" content="#060A16">
+<meta name="robots" content="noindex, nofollow">
+<meta name="htmx-config" content='{"allowEval":false,"includeIndicatorStyles":false,"historyCacheSize":0,"selfRequestsOnly":true}'>
+<meta name="katex-js" content="/edufamcs-demo/static/vendor/katex/katex.min.js">
+<meta name="katex-css" content="/edufamcs-demo/static/vendor/katex/katex.min.css">
+<link rel="icon" href="/edufamcs-demo/static/brand/logo/favicon-16.svg" type="image/svg+xml" sizes="16x16">
+<link rel="icon" href="/edufamcs-demo/static/brand/logo/favicon.svg" type="image/svg+xml" sizes="any">
+<link rel="preload" href="/edufamcs-demo/static/brand/fonts/manrope-cyrillic-400.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/edufamcs-demo/static/brand/fonts/unbounded-cyrillic-800.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="/edufamcs-demo/static/brand/fonts.css">
+<link rel="stylesheet" href="/edufamcs-demo/static/brand/tokens.css">
+<link rel="stylesheet" href="/edufamcs-demo/static/brand/components.css">
+<link rel="stylesheet" href="/edufamcs-demo/static/css/site.css">
+<link rel="stylesheet" href="/edufamcs-demo/static/css/hub.css">
+<link rel="stylesheet" href="/edufamcs-demo/static/css/about.css">
+<link rel="stylesheet" href="/edufamcs-demo/static/handbook/handbook.css">
+<script src="/edufamcs-demo/static/js/theme.js"></script>
+<script src="/edufamcs-demo/static/vendor/htmx/htmx.min.js" defer></script>
+<script src="/edufamcs-demo/static/vendor/alpine/alpine-csp.min.js" defer></script>
+<script src="/edufamcs-demo/static/js/site.js" defer></script>
+<script src="/edufamcs-demo/static/handbook/handbook.js" defer></script>
+</head>
+<body class="" hx-headers='{"X-CSRFToken": "6wTkD6V6wnCigjpZthB020wupmJA5phhvgson4Itre0rvSAI0uk8Zv2zX4P5DzZ1"}'>
+<a class="skip" href="#main">К содержанию</a>
+<div class="demo-bar" role="note">Демо-версия для отзывов: вход, запись на курсы и формы здесь не работают.</div>
+
+<header class="hdr">
+  <div class="container">
+    <a class="brand" href="/edufamcs-demo/" aria-label="EDU FAMCS — главная">
+      <span class="full"><img class="only-light" src="/edufamcs-demo/static/brand/logo/logo-edu-light.svg" alt="EDU FAMCS" width="196" height="40"><img class="only-dark" src="/edufamcs-demo/static/brand/logo/logo-edu-dark.svg" alt="EDU FAMCS" width="196" height="40"></span>
+      <span class="short"><img class="only-light" src="/edufamcs-demo/static/brand/logo/logo-edu-light.svg" alt="EDU FAMCS" height="30"><img class="only-dark" src="/edufamcs-demo/static/brand/logo/logo-edu-dark.svg" alt="EDU FAMCS" height="30"></span>
+    </a>
+    <nav class="nav" id="main-nav" aria-label="Основная навигация">
+      <a href="/edufamcs-demo/#courses">Курсы</a>
+      <a href="/edufamcs-demo/ml/" >Машинное обучение</a>
+      
+      <a href="/edufamcs-demo/handbook/" aria-current="page">Хендбук</a>
+      <a href="/edufamcs-demo/news/" >Новости</a>
+      <a href="/edufamcs-demo/people/" >Авторы</a>
+      <a href="/edufamcs-demo/about/" >О&nbsp;нас</a>
+    </nav>
+    <div class="hdr-actions">
+      
+      <a class="btn btn-outline btn-login" href="/edufamcs-demo/accounts/login/?next=/handbook/recsys/matrichnye-razlozheniya-als/">Войти</a>
+      
+      <button class="icon-btn menu-btn" type="button" aria-label="Меню" aria-expanded="false" aria-controls="main-nav"><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-menu"/></svg></button>
+    </div>
+  </div>
+</header>
+
+<main id="main">
+
+
+
+<div class="container hb-page s-recsys">
+  <div class="hb">
+    <aside class="hb-nav" aria-label="Статьи раздела">
+      
+<form class="hb-search" action="/edufamcs-demo/handbook/search/" method="get" role="search">
+  <svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-search"/></svg>
+  <input class="input" type="search" name="q" value="" placeholder="Поиск по хендбуку" aria-label="Поиск по хендбуку" autocomplete="off" maxlength="120"
+    hx-get="/edufamcs-demo/handbook/search/" hx-trigger="input changed delay:250ms, search" hx-target="#hb-nav-results" hx-sync="this:replace">
+</form>
+
+      <div id="hb-nav-results" class="hb-nav-results" aria-live="polite"></div>
+      <a class="grp" href="/edufamcs-demo/handbook/recsys/">Классика: 1992–2012</a>
+      
+      <a class="" href="/edufamcs-demo/handbook/recsys/nepersonalnye-i-kontentnye/">Неперсонализированные и контентные рекомендации</a>
+      
+      <a class="" href="/edufamcs-demo/handbook/recsys/kollaborativnaya-filtraciya-po-sosedyam/">Коллаборативная фильтрация по соседям</a>
+      
+      <a class="cur" href="/edufamcs-demo/handbook/recsys/matrichnye-razlozheniya-als/" aria-current="page">Матричные разложения и ALS</a>
+      
+      <a class="" href="/edufamcs-demo/handbook/recsys/neyavnyj-fidbek-bpr/">Неявный фидбэк: BPR, WARP и негативы</a>
+      
+    </aside>
+
+    <article class="hb-main">
+      <nav class="crumbs" aria-label="Навигация"><a href="/edufamcs-demo/handbook/">Хендбук</a><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-chev"/></svg><a href="/edufamcs-demo/handbook/recsys/">Рекомендательные системы</a></nav>
+      <h1 class="h1">Матричные разложения и ALS</h1>
+      <div class="hb-meta">
+        
+        
+        <span><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-clock"/></svg>11&nbsp;мин</span>
+        <span class="hb-authors"><span class="avatar sm" title="Артем Лебедевич">АЛ</span>Артем Лебедевич</span>
+        <span><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-edit"/></svg>9 ноября 2026</span>
+        
+        
+      </div>
+
+      
+      <details class="hb-mtoc">
+        <summary><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-list"/></svg>Содержание<svg class="ico sm" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-chev-down"/></svg></summary>
+        <a class="l2" href="#история-netflix-prize-20062009">История: Netflix Prize (2006–2009)</a><a class="l2" href="#постановка-для-явных-оценок">Постановка для явных оценок</a><a class="l2" href="#шаг-als-вывод-формулы">Шаг ALS: вывод формулы</a><a class="l2" href="#неявный-фидбэк-als-с-весами-уверенности">Неявный фидбэк: ALS с весами уверенности</a><a class="l2" href="#как-подбирать-гиперпараметры">Как подбирать гиперпараметры</a><a class="l2" href="#als-или-sgd">ALS или SGD</a><a class="l2" href="#ограничения">Ограничения</a><a class="l2" href="#что-почитать">Что почитать</a>
+      </details>
+      
+
+      <div class="prose"><p>Идея матричного разложения: найти для каждого пользователя <span class="tex">u</span> и объекта <span class="tex">i</span> короткие векторы <span class="tex">x_u, y_i \in \mathbb{R}^f</span> (обычно <span class="tex">f</span> от 32 до 256) так, чтобы их скалярное произведение объясняло наблюдаемые взаимодействия:</p>
+<div class="tex tex-block">\hat r_{ui} = x_u^\top y_i, \qquad R \approx X Y^\top,</div>
+<p>где <span class="tex">X \in \mathbb{R}^{|U| \times f}</span> и <span class="tex">Y \in \mathbb{R}^{|I| \times f}</span> — матрицы факторов. Компоненты векторов можно понимать как скрытые «вкусы»: насколько пользователь любит жанр и насколько объект к этому жанру относится. Мы их не задаём — модель находит их сама.</p>
+<h2 id="история-netflix-prize-20062009">История: Netflix Prize (2006–2009)</h2>
+<p>Соседские методы (<a href="/edufamcs-demo/handbook/recsys/kollaborativnaya-filtraciya-po-sosedyam/" rel="noopener noreferrer nofollow">предыдущая статья</a>) плохо работают на разреженных данных: два пользователя редко оценили много общих фильмов. Чем ответили матричные разложения:</p>
+<ul>
+<li><strong>Netflix Prize (2006).</strong> Netflix выложил ~100 млн оценок и пообещал миллион долларов за улучшение RMSE на 10% относительно собственной системы Cinematch. Метрика — RMSE на отложенных (по времени) оценках.</li>
+<li><strong>FunkSVD (Simon Funk, блог, декабрь 2006).</strong> Не настоящий SVD: факторы обучаются стохастическим градиентным спуском <strong>только по известным оценкам</strong> с регуляризацией — ровно постановка из раздела ниже. Подробный пост с описанием метода быстро сделал его основой многих сильных решений.</li>
+<li><strong>Смещения.</strong> Модель <span class="tex">\hat r_{ui} = \mu + b_u + b_i + x_u^\top y_i</span> объясняет значительную часть разброса оценок «строгими» пользователями и «хорошими» фильмами, а факторам остаётся взаимодействие вкуса и объекта.</li>
+<li><strong>SVD++ (Koren, 2008).</strong> Добавляет <strong>неявный</strong> фидбэк: сам факт, что пользователь оценивал фильм <span class="tex">j</span>, говорит о вкусе. <span class="tex">\hat r_{ui} = \mu + b_u + b_i + y_i^\top\big(x_u + |N(u)|^{-1/2}\sum_{j\in N(u)} z_j\big)</span>, где <span class="tex">N(u)</span> — все объекты, с которыми было взаимодействие. Работает и для пользователей с малым числом явных оценок.</li>
+<li><strong>timeSVD++ (Koren, 2009).</strong> Смещения и вкусы зависят от времени: <span class="tex">b_u(t)</span>, <span class="tex">x_u(t)</span> — люди и фильмы «дрейфуют».</li>
+<li><strong>ALS для явных оценок.</strong> Zhou et al. (2008, ALS-WR) показали, что ту же задачу можно решать чередованием точных решений гребневой регрессии и параллелить на кластере; регуляризацию они масштабировали на число оценок пользователя и объекта.</li>
+<li><strong>Итог.</strong> В 2009 году команда BellKor's Pragmatic Chaos выиграла приз ансамблем из сотен предикторов. По рассказу инженеров Netflix, в прод попали две модели из промежуточного приза 2007 года (матричное разложение и RBM), а финальный ансамбль — нет: прирост точности не окупал инженерных затрат, а бизнес уже уходил от оценок к стримингу и неявным сигналам. Обзор подхода — Koren, Bell, Volinsky, <em>Matrix Factorization Techniques for Recommender Systems</em> (IEEE Computer, 2009).</li>
+</ul>
+<p>Неявный вариант ALS, описанный ниже, — Hu, Koren, Volinsky, <em>Collaborative Filtering for Implicit Feedback Datasets</em> (ICDM, 2008): та же команда Koren, но уже для ситуации без оценок.</p>
+<h2 id="постановка-для-явных-оценок">Постановка для явных оценок</h2>
+<p>Пусть <span class="tex">\Omega</span> — множество известных пар <span class="tex">(u, i)</span> с оценками <span class="tex">r_{ui}</span>. Минимизируем квадрат ошибки на известных ячейках с L2-регуляризацией:</p>
+<div class="tex tex-block">\mathcal{L}(X, Y) = \sum_{(u,i) \in \Omega} \left(r_{ui} - x_u^\top y_i\right)^2 + \lambda \left( \sum_u \|x_u\|^2 + \sum_i \|y_i\|^2 \right)</div>
+<p>Без регуляризации модель запоминает обучающие оценки и плохо обобщает: у пользователя с двумя оценками вектор из 64 чисел подгоняется под них идеально. На практике к скалярному произведению добавляют ещё и смещения: <span class="tex">\hat r_{ui} = \mu + b_u + b_i + x_u^\top y_i</span> — общий средний уровень, «строгость» пользователя и «качество» объекта.</p>
+<p>Функция <span class="tex">\mathcal{L}</span> не выпукла по <span class="tex">(X, Y)</span> одновременно: прогноз <span class="tex">x_u^\top y_i</span> билинеен, и его квадрат даёт слагаемые четвёртой степени по параметрам. Но если <strong>зафиксировать</strong> <span class="tex">Y</span>, задача по <span class="tex">X</span> становится обычной гребневой регрессией — выпуклой и решаемой в явном виде. На этом и построен ALS.</p>
+<h2 id="шаг-als-вывод-формулы">Шаг ALS: вывод формулы</h2>
+<p>Зафиксируем <span class="tex">Y</span> и найдём оптимальный <span class="tex">x_u</span> для одного пользователя. Слагаемые, зависящие от <span class="tex">x_u</span>:</p>
+<div class="tex tex-block">\mathcal{L}_u(x_u) = \sum_{i \in \Omega_u} \left(r_{ui} - x_u^\top y_i\right)^2 + \lambda \|x_u\|^2,</div>
+<p>где <span class="tex">\Omega_u</span> — объекты, оценённые пользователем. Соберём их векторы в матрицу <span class="tex">Y_u \in \mathbb{R}^{|\Omega_u| \times f}</span>, а оценки — в вектор <span class="tex">r_u</span>. Тогда</p>
+<div class="tex tex-block">\mathcal{L}_u = \|r_u - Y_u x_u\|^2 + \lambda \|x_u\|^2 .</div>
+<p>Градиент по <span class="tex">x_u</span>:</p>
+<div class="tex tex-block">\nabla_{x_u} \mathcal{L}_u = -2\, Y_u^\top (r_u - Y_u x_u) + 2 \lambda x_u .</div>
+<p>Приравниваем к нулю:</p>
+<div class="tex tex-block">Y_u^\top Y_u\, x_u + \lambda x_u = Y_u^\top r_u
+\quad\Longrightarrow\quad
+x_u = \left(Y_u^\top Y_u + \lambda I\right)^{-1} Y_u^\top r_u .</div>
+<p>Матрица <span class="tex">Y_u^\top Y_u + \lambda I</span> размера <span class="tex">f \times f</span> положительно определена при <span class="tex">\lambda &gt; 0</span>, поэтому решение существует и единственно. Симметрично, при фиксированном <span class="tex">X</span>:</p>
+<div class="tex tex-block">y_i = \left(X_i^\top X_i + \lambda I\right)^{-1} X_i^\top r_i ,</div>
+<p>где <span class="tex">X_i</span> — векторы пользователей, оценивших объект <span class="tex">i</span>.</p>
+<p>Алгоритм чередует два шага: обновить всех пользователей при фиксированных объектах, затем всех объектов при фиксированных пользователях. Каждый шаг точно минимизирует <span class="tex">\mathcal{L}</span> по своему блоку и потому не увеличивает её; значения <span class="tex">\mathcal{L}</span> ограничены снизу и монотонно сходятся, а факторы приходят к стационарной точке, не обязательно к глобальному минимуму. Обычно хватает 10–20 итераций. Главное практическое преимущество — <strong>независимость</strong>: векторы разных пользователей на одном шаге считаются параллельно, что хорошо ложится на многоядерные CPU, GPU и кластеры.</p>
+<div class="code"><div class="code-head"><span class="lang">python</span></div><pre><code><span class="tok-k">import</span> numpy <span class="tok-k">as</span> np
+
+<span class="tok-k">def</span> <span class="tok-f">als_step</span><span class="tok-p">(</span>R<span class="tok-p">,</span> Y<span class="tok-p">,</span> lam<span class="tok-p">)</span><span class="tok-p">:</span>
+    <span class="tok-s">"""Обновляет факторы пользователей. R — csr-матрица оценок, Y — факторы объектов."""</span>
+    f <span class="tok-p">=</span> Y<span class="tok-p">.</span>shape<span class="tok-p">[</span><span class="tok-n">1</span><span class="tok-p">]</span>
+    X <span class="tok-p">=</span> np<span class="tok-p">.</span>zeros<span class="tok-p">(</span><span class="tok-p">(</span>R<span class="tok-p">.</span>shape<span class="tok-p">[</span><span class="tok-n">0</span><span class="tok-p">]</span><span class="tok-p">,</span> f<span class="tok-p">)</span><span class="tok-p">)</span>
+    <span class="tok-k">for</span> u <span class="tok-k">in</span> <span class="tok-f">range</span><span class="tok-p">(</span>R<span class="tok-p">.</span>shape<span class="tok-p">[</span><span class="tok-n">0</span><span class="tok-p">]</span><span class="tok-p">)</span><span class="tok-p">:</span>
+        idx <span class="tok-p">=</span> R<span class="tok-p">.</span>indices<span class="tok-p">[</span>R<span class="tok-p">.</span>indptr<span class="tok-p">[</span>u<span class="tok-p">]</span><span class="tok-p">:</span>R<span class="tok-p">.</span>indptr<span class="tok-p">[</span>u <span class="tok-p">+</span> <span class="tok-n">1</span><span class="tok-p">]</span><span class="tok-p">]</span>
+        r_u <span class="tok-p">=</span> R<span class="tok-p">.</span>data<span class="tok-p">[</span>R<span class="tok-p">.</span>indptr<span class="tok-p">[</span>u<span class="tok-p">]</span><span class="tok-p">:</span>R<span class="tok-p">.</span>indptr<span class="tok-p">[</span>u <span class="tok-p">+</span> <span class="tok-n">1</span><span class="tok-p">]</span><span class="tok-p">]</span>
+        Y_u <span class="tok-p">=</span> Y<span class="tok-p">[</span>idx<span class="tok-p">]</span>
+        X<span class="tok-p">[</span>u<span class="tok-p">]</span> <span class="tok-p">=</span> np<span class="tok-p">.</span>linalg<span class="tok-p">.</span>solve<span class="tok-p">(</span>Y_u<span class="tok-p">.</span>T <span class="tok-p">@</span> Y_u <span class="tok-p">+</span> lam <span class="tok-p">*</span> np<span class="tok-p">.</span>eye<span class="tok-p">(</span>f<span class="tok-p">)</span><span class="tok-p">,</span> Y_u<span class="tok-p">.</span>T <span class="tok-p">@</span> r_u<span class="tok-p">)</span>
+    <span class="tok-k">return</span> X
+</code></pre></div>
+<h2 id="неявный-фидбэк-als-с-весами-уверенности">Неявный фидбэк: ALS с весами уверенности</h2>
+<p>С кликами и покупками постановка меняется (Hu, Koren, Volinsky, 2008). Неизвестные ячейки нельзя просто выбросить — тогда модель увидит только «единицы» и научится предсказывать единицу везде. Вместо этого вводят предпочтение <span class="tex">p_{ui} = [r_{ui} &gt; 0]</span> и уверенность <span class="tex">c_{ui} = 1 + \alpha r_{ui}</span> и суммируют по <strong>всем</strong> парам:</p>
+<div class="tex tex-block">\mathcal{L} = \sum_{u, i} c_{ui} \left(p_{ui} - x_u^\top y_i\right)^2 + \lambda \left( \sum_u \|x_u\|^2 + \sum_i \|y_i\|^2 \right)</div>
+<p>Нули участвуют в обучении с маленьким весом <span class="tex">1</span>, наблюдаемые взаимодействия — с весом, растущим вместе с силой сигнала. Тот же вывод с диагональной матрицей весов <span class="tex">C^u = \mathrm{diag}(c_{u1}, \dots, c_{u|I|})</span> даёт</p>
+<div class="tex tex-block">x_u = \left(Y^\top C^u Y + \lambda I\right)^{-1} Y^\top C^u p_u .</div>
+<p>Наивно считать <span class="tex">Y^\top C^u Y</span> для каждого пользователя дорого — это проход по всему каталогу. Трюк: <span class="tex">Y^\top C^u Y = Y^\top Y + Y^\top (C^u - I) Y</span>. Первое слагаемое общее для всех пользователей и считается один раз за шаг, а в <span class="tex">C^u - I</span> ненулевые только <span class="tex">n_u</span> диагональных элементов — по объектам, с которыми пользователь взаимодействовал. Итоговая сложность шага — <span class="tex">O(f^2 \cdot \mathrm{nnz}(R) + f^3 |U|)</span>, линейная по числу наблюдений.</p>
+<h2 id="как-подбирать-гиперпараметры">Как подбирать гиперпараметры</h2>
+<ul>
+<li><strong><span class="tex">f</span>, число факторов.</strong> Больше — выразительнее, но медленнее и легче переобучиться. Начните с 64.</li>
+<li><strong><span class="tex">\lambda</span>, регуляризация.</strong> Чем больше шума и меньше данных, тем больше. Перебирайте по логарифмической сетке.</li>
+<li><strong><span class="tex">\alpha</span>, масштаб уверенности.</strong> Типичные значения от 1 до 40; часто полезно перед этим сжать счётчики, например <span class="tex">r \to \log(1 + r)</span>.</li>
+<li><strong>Число итераций.</strong> 10–20, дальше прирост обычно незаметен.</li>
+</ul>
+<p>Подбирать всё это нужно на <strong>валидации по времени</strong>, а не по случайному сплиту: иначе выигрывает модель, которая лучше подглядывает в будущее.</p>
+<div class="code"><div class="code-head"><span class="lang">python</span></div><pre><code><span class="tok-k">from</span> implicit.als <span class="tok-k">import</span> AlternatingLeastSquares
+
+model <span class="tok-p">=</span> AlternatingLeastSquares<span class="tok-p">(</span>factors<span class="tok-p">=</span><span class="tok-n">64</span><span class="tok-p">,</span> regularization<span class="tok-p">=</span><span class="tok-n">0.05</span><span class="tok-p">,</span> alpha<span class="tok-p">=</span><span class="tok-n">10.0</span><span class="tok-p">,</span> iterations<span class="tok-p">=</span><span class="tok-n">15</span><span class="tok-p">)</span>
+model<span class="tok-p">.</span>fit<span class="tok-p">(</span>user_items<span class="tok-p">)</span>                       <span class="tok-c"># csr: пользователи × объекты, значения — веса событий</span>
+ids<span class="tok-p">,</span> scores <span class="tok-p">=</span> model<span class="tok-p">.</span>recommend<span class="tok-p">(</span>user_id<span class="tok-p">,</span> user_items<span class="tok-p">[</span>user_id<span class="tok-p">]</span><span class="tok-p">,</span> N<span class="tok-p">=</span><span class="tok-n">10</span><span class="tok-p">,</span> filter_already_liked_items<span class="tok-p">=</span><span class="tok-k">True</span><span class="tok-p">)</span>
+</code></pre></div>
+<h2 id="als-или-sgd">ALS или SGD</h2>
+<p>Ту же функцию потерь можно минимизировать стохастическим градиентным спуском, обходя наблюдаемые пары. SGD проще расширять (произвольные признаки, другие функции потерь), но для неявного фидбэка он неудобен: суммирование идёт по всем парам, включая нули, и их приходится сэмплировать. ALS же учитывает все нули точно благодаря трюку с <span class="tex">Y^\top Y</span>, не требует подбора шага обучения и хорошо параллелится. Поэтому для implicit-данных ALS — сильный и быстрый бейзлайн, который полезно иметь в любом проекте, даже если в итоге победит нейросеть.</p>
+<h2 id="ограничения">Ограничения</h2>
+<p>Модель знает только ID: для нового пользователя или объекта вектора нет (холодный старт), признаки и контекст не учитываются, а порядок событий во времени теряется. Эти ограничения закрывают <a href="/edufamcs-demo/handbook/recsys/two-tower-ann/" rel="noopener noreferrer nofollow">двухбашенные модели</a>, <a href="/edufamcs-demo/handbook/recsys/posledovatelnye-modeli/" rel="noopener noreferrer nofollow">последовательные модели</a> и <a href="/edufamcs-demo/handbook/recsys/kandidaty-i-ranzhirovanie/" rel="noopener noreferrer nofollow">двухстадийная схема</a> с ранжированием по признакам.</p>
+<p>Что дальше по истории. Квадратичная потеря на нулях — не лучший способ оптимизировать порядок: это исправляют ранжирующие функции потерь в <a href="/edufamcs-demo/handbook/recsys/neyavnyj-fidbek-bpr/" rel="noopener noreferrer nofollow">BPR и WARP</a>, там же — эмпирическая проверка того, что iALS при хорошей настройке остаётся сильным. Альтернативный путь вообще без факторов — линейные модели <a href="/edufamcs-demo/handbook/recsys/slim-i-ease/" rel="noopener noreferrer nofollow">SLIM и EASE</a>.</p>
+<h2 id="что-почитать">Что почитать</h2>
+<ul>
+<li>Koren Y., Bell R., Volinsky C. <em>Matrix Factorization Techniques for Recommender Systems</em>, IEEE Computer, 2009 — https://doi.org/10.1109/MC.2009.263</li>
+<li>Hu Y., Koren Y., Volinsky C. <em>Collaborative Filtering for Implicit Feedback Datasets</em>, ICDM 2008 — https://doi.org/10.1109/ICDM.2008.22</li>
+<li>Koren Y. <em>Factorization Meets the Neighborhood</em> (SVD++), KDD 2008 — https://doi.org/10.1145/1401890.1401944</li>
+<li>Koren Y. <em>Collaborative Filtering with Temporal Dynamics</em>, KDD 2009 — https://doi.org/10.1145/1557019.1557072</li>
+<li>Zhou Y., Wilkinson D., Schreiber R., Pan R. <em>Large-Scale Parallel Collaborative Filtering for the Netflix Prize</em>, AAIM 2008 — https://doi.org/10.1007/978-3-540-68880-8_32</li>
+<li>Учебник по ML от ШАД Яндекса, 9.2 «Рекомендации на основе матричных разложений» — https://contest.yandex.ru/tracks/ml/recommender-systems/matrix-factorization-recommendations</li>
+<li>DeepRecSys, семинар 2 — https://youtu.be/q55mPzvw-AM; лекция Волохова по нейросетевой матричной факторизации и DSSM — https://youtu.be/IznR42dGH-c</li>
+</ul>
+</div>
+      
+
+      
+      <nav class="pager" aria-label="Соседние статьи">
+        <a href="/edufamcs-demo/handbook/recsys/kollaborativnaya-filtraciya-po-sosedyam/"><span><svg class="ico sm" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-arrow-left"/></svg>Назад</span>Коллаборативная фильтрация по соседям</a>
+        <a href="/edufamcs-demo/handbook/recsys/neyavnyj-fidbek-bpr/"><span>Дальше<svg class="ico sm" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-arrow"/></svg></span>Неявный фидбэк: BPR, WARP и негативы</a>
+      </nav>
+      
+    </article>
+
+    <aside class="hb-toc" aria-label="На этой странице">
+      <a class="l2" href="#история-netflix-prize-20062009">История: Netflix Prize (2006–2009)</a><a class="l2" href="#постановка-для-явных-оценок">Постановка для явных оценок</a><a class="l2" href="#шаг-als-вывод-формулы">Шаг ALS: вывод формулы</a><a class="l2" href="#неявный-фидбэк-als-с-весами-уверенности">Неявный фидбэк: ALS с весами уверенности</a><a class="l2" href="#как-подбирать-гиперпараметры">Как подбирать гиперпараметры</a><a class="l2" href="#als-или-sgd">ALS или SGD</a><a class="l2" href="#ограничения">Ограничения</a><a class="l2" href="#что-почитать">Что почитать</a>
+    </aside>
+  </div>
+</div>
+
+
+</main>
+
+<footer class="ftr" data-theme="dark">
+  <svg class="sym fern" viewBox="0 0 40.5 65.02" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#fern"/></svg>
+  <div class="container">
+    <div class="ftr-row">
+      <a href="/edufamcs-demo/" aria-label="EDU FAMCS — главная"><img src="/edufamcs-demo/static/brand/logo/logo-edu-dark.svg" alt="EDU FAMCS" width="196" height="40"></a>
+      <ul class="ftr-links">
+        <li><a href="/edufamcs-demo/#courses">Курсы</a></li>
+        <li><a href="/edufamcs-demo/ml/">Машинное обучение</a></li>
+        <li><a href="/edufamcs-demo/handbook/">Хендбук</a></li>
+        <li><a href="/edufamcs-demo/news/">Новости</a></li>
+        <li><a href="/edufamcs-demo/people/">Авторы</a></li>
+        <li><a href="/edufamcs-demo/about/">О&nbsp;нас</a></li>
+        <li><a href="/edufamcs-demo/propose/">Предложить или исправить</a></li>
+        <li><a href="/edufamcs-demo/privacy/">Конфиденциальность</a></li>
+      </ul>
+    </div>
+    <div class="ftr-big" aria-hidden="true">EDU<span class="d">·</span>FAMCS</div>
+    <p class="ftr-copy">© 2026 EDU FAMCS · Минск</p>
+  </div>
+</footer>
+
+<div class="toasts-region" aria-live="polite" id="toasts">
+
+</div>
+
+</body>
+</html>

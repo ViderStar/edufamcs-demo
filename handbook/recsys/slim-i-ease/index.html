@@ -1,0 +1,254 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Линейные item-item модели: SLIM и EASE · EDU FAMCS</title>
+<meta name="description" content="Линейные item-item модели: SLIM и EASE — Рекомендательные системы. Хендбук ML-курса ФПМИ.">
+<meta name="theme-color" content="#060A16">
+<meta name="robots" content="noindex, nofollow">
+<meta name="htmx-config" content='{"allowEval":false,"includeIndicatorStyles":false,"historyCacheSize":0,"selfRequestsOnly":true}'>
+<meta name="katex-js" content="/edufamcs-demo/static/vendor/katex/katex.min.js">
+<meta name="katex-css" content="/edufamcs-demo/static/vendor/katex/katex.min.css">
+<link rel="icon" href="/edufamcs-demo/static/brand/logo/favicon-16.svg" type="image/svg+xml" sizes="16x16">
+<link rel="icon" href="/edufamcs-demo/static/brand/logo/favicon.svg" type="image/svg+xml" sizes="any">
+<link rel="preload" href="/edufamcs-demo/static/brand/fonts/manrope-cyrillic-400.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/edufamcs-demo/static/brand/fonts/unbounded-cyrillic-800.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="/edufamcs-demo/static/brand/fonts.css">
+<link rel="stylesheet" href="/edufamcs-demo/static/brand/tokens.css">
+<link rel="stylesheet" href="/edufamcs-demo/static/brand/components.css">
+<link rel="stylesheet" href="/edufamcs-demo/static/css/site.css">
+<link rel="stylesheet" href="/edufamcs-demo/static/css/hub.css">
+<link rel="stylesheet" href="/edufamcs-demo/static/css/about.css">
+<link rel="stylesheet" href="/edufamcs-demo/static/handbook/handbook.css">
+<script src="/edufamcs-demo/static/js/theme.js"></script>
+<script src="/edufamcs-demo/static/vendor/htmx/htmx.min.js" defer></script>
+<script src="/edufamcs-demo/static/vendor/alpine/alpine-csp.min.js" defer></script>
+<script src="/edufamcs-demo/static/js/site.js" defer></script>
+<script src="/edufamcs-demo/static/handbook/handbook.js" defer></script>
+</head>
+<body class="" hx-headers='{"X-CSRFToken": "lxA6Oo4B2bldeVLl99683Jnr9Y7NSa4JKh9aymRYX2JmtuW4GmPg0eTwHGdiqkMt"}'>
+<a class="skip" href="#main">К содержанию</a>
+<div class="demo-bar" role="note">Демо-версия для отзывов: вход, запись на курсы и формы здесь не работают.</div>
+
+<header class="hdr">
+  <div class="container">
+    <a class="brand" href="/edufamcs-demo/" aria-label="EDU FAMCS — главная">
+      <span class="full"><img class="only-light" src="/edufamcs-demo/static/brand/logo/logo-edu-light.svg" alt="EDU FAMCS" width="196" height="40"><img class="only-dark" src="/edufamcs-demo/static/brand/logo/logo-edu-dark.svg" alt="EDU FAMCS" width="196" height="40"></span>
+      <span class="short"><img class="only-light" src="/edufamcs-demo/static/brand/logo/logo-edu-light.svg" alt="EDU FAMCS" height="30"><img class="only-dark" src="/edufamcs-demo/static/brand/logo/logo-edu-dark.svg" alt="EDU FAMCS" height="30"></span>
+    </a>
+    <nav class="nav" id="main-nav" aria-label="Основная навигация">
+      <a href="/edufamcs-demo/#courses">Курсы</a>
+      <a href="/edufamcs-demo/ml/" >Машинное обучение</a>
+      
+      <a href="/edufamcs-demo/handbook/" aria-current="page">Хендбук</a>
+      <a href="/edufamcs-demo/news/" >Новости</a>
+      <a href="/edufamcs-demo/people/" >Авторы</a>
+      <a href="/edufamcs-demo/about/" >О&nbsp;нас</a>
+    </nav>
+    <div class="hdr-actions">
+      
+      <a class="btn btn-outline btn-login" href="/edufamcs-demo/accounts/login/?next=/handbook/recsys/slim-i-ease/">Войти</a>
+      
+      <button class="icon-btn menu-btn" type="button" aria-label="Меню" aria-expanded="false" aria-controls="main-nav"><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-menu"/></svg></button>
+    </div>
+  </div>
+</header>
+
+<main id="main">
+
+
+
+<div class="container hb-page s-recsys">
+  <div class="hb">
+    <aside class="hb-nav" aria-label="Статьи раздела">
+      
+<form class="hb-search" action="/edufamcs-demo/handbook/search/" method="get" role="search">
+  <svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-search"/></svg>
+  <input class="input" type="search" name="q" value="" placeholder="Поиск по хендбуку" aria-label="Поиск по хендбуку" autocomplete="off" maxlength="120"
+    hx-get="/edufamcs-demo/handbook/search/" hx-trigger="input changed delay:250ms, search" hx-target="#hb-nav-results" hx-sync="this:replace">
+</form>
+
+      <div id="hb-nav-results" class="hb-nav-results" aria-live="polite"></div>
+      <a class="grp" href="/edufamcs-demo/handbook/recsys/">Линейные и нейросетевые модели: 2011–2023</a>
+      
+      <a class="cur" href="/edufamcs-demo/handbook/recsys/slim-i-ease/" aria-current="page">Линейные item-item модели: SLIM и EASE</a>
+      
+      <a class="" href="/edufamcs-demo/handbook/recsys/ctr-modeli/">Модели CTR: от логрегрессии до DCN и DIN</a>
+      
+      <a class="" href="/edufamcs-demo/handbook/recsys/two-tower-ann/">Нейросетевые рекомендации: two-tower, negative sampling, ANN</a>
+      
+      <a class="" href="/edufamcs-demo/handbook/recsys/posledovatelnye-modeli/">Последовательные модели: GRU4Rec, SASRec, BERT4Rec</a>
+      
+      <a class="" href="/edufamcs-demo/handbook/recsys/grafovye-modeli/">Графовые модели: от случайных блужданий до LightGCN</a>
+      
+    </aside>
+
+    <article class="hb-main">
+      <nav class="crumbs" aria-label="Навигация"><a href="/edufamcs-demo/handbook/">Хендбук</a><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-chev"/></svg><a href="/edufamcs-demo/handbook/recsys/">Рекомендательные системы</a></nav>
+      <h1 class="h1">Линейные item-item модели: SLIM и EASE</h1>
+      <div class="hb-meta">
+        
+        
+        <span><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-clock"/></svg>14&nbsp;мин</span>
+        <span class="hb-authors"><span class="avatar sm" title="Артем Лебедевич">АЛ</span>Артем Лебедевич</span>
+        <span><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-edit"/></svg>9 ноября 2026</span>
+        
+        
+      </div>
+
+      
+      <details class="hb-mtoc">
+        <summary><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-list"/></svg>Содержание<svg class="ico sm" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-chev-down"/></svg></summary>
+        <a class="l2" href="#постановка-автоэнкодер-без-скрытого-слоя">Постановка: автоэнкодер без скрытого слоя</a><a class="l2" href="#slim-2011">SLIM (2011)</a><a class="l2" href="#ease-2019">EASE (2019)</a><a class="l3" href="#вывод">Вывод</a><a class="l3" href="#почему-это-работает">Почему это работает</a><a class="l3" href="#цена-и-масштаб">Цена и масштаб</a><a class="l2" href="#автоэнкодеры-как-нелинейное-продолжение">Автоэнкодеры как нелинейное продолжение</a><a class="l2" href="#почему-простые-модели-догнали-нейросети">Почему простые модели догнали нейросети</a><a class="l2" href="#как-ease-используют-в-индустрии">Как EASE используют в индустрии</a><a class="l2" href="#подводные-камни">Подводные камни</a><a class="l2" href="#что-почитать">Что почитать</a>
+      </details>
+      
+
+      <div class="prose"><p>Классический item-based kNN считает сходство двух объектов по формуле, которую выбрал человек: косинус, Жаккар, условная вероятность. Формула не знает, для чего её будут использовать. Если пользователь купил объекты <span class="tex">a</span> и <span class="tex">a'</span> — почти дубли друг друга, — и оба похожи на <span class="tex">c</span>, kNN засчитает свидетельство в пользу <span class="tex">c</span> дважды, хотя <span class="tex">a'</span> ничего не добавляет к <span class="tex">a</span>. Идея линейных моделей — заменить эвристику <strong>обучаемой матрицей</strong> <span class="tex">W \in \mathbb{R}^{|I| \times |I|}</span> и подобрать её так, чтобы по истории пользователя восстанавливалась его же история.</p>
+<h2 id="постановка-автоэнкодер-без-скрытого-слоя">Постановка: автоэнкодер без скрытого слоя</h2>
+<p>Пусть <span class="tex">X \in \{0,1\}^{|U| \times |I|}</span> — матрица взаимодействий (строка — пользователь). Модель предсказывает скоры как</p>
+<div class="tex tex-block">\hat X = X W, \qquad \hat x_{ui} = \sum_{j} x_{uj} W_{ji}.</div>
+<p>Скор объекта <span class="tex">i</span> для пользователя — сумма весов от объектов, с которыми он уже взаимодействовал. Это автоэнкодер, у которого нет ни скрытого слоя, ни нелинейности: вход и выход имеют размерность <span class="tex">|I|</span>, а вся модель — одна матрица. Каждый столбец <span class="tex">W_{\cdot i}</span> — отдельная линейная регрессия «предскажи столбец <span class="tex">i</span> по остальным столбцам». Если не добавить ограничений, оптимум тривиален: <span class="tex">W = I</span> даёт <span class="tex">\hat X = X</span> с нулевой ошибкой, и модель ничего не рекомендует. Поэтому два семейства моделей отличаются тем, как они запрещают тождественное решение и регуляризуют <span class="tex">W</span>.</p>
+<h2 id="slim-2011">SLIM (2011)</h2>
+<p>Ning и Karypis (ICDM 2011) назвали подход Sparse LInear Methods. Задача для всей матрицы:</p>
+<div class="tex tex-block">\min_{W} \; \tfrac12 \|X - XW\|_F^2 + \tfrac{\beta}{2}\|W\|_F^2 + \lambda \|W\|_1
+\quad \text{при } W \ge 0,\ \mathrm{diag}(W) = 0.</div>
+<ul>
+<li><span class="tex">\mathrm{diag}(W)=0</span> — запрет тождественного решения: объект нельзя предсказывать самим собой.</li>
+<li><span class="tex">W \ge 0</span> — только положительные связи («купили <span class="tex">j</span> — больше шансов на <span class="tex">i</span>»). Интерпретируемо и устойчиво.</li>
+<li><span class="tex">\ell_1</span> даёт разреженные столбцы: у каждого объекта остаётся десяток-другой соседей, как у kNN, но выбранных оптимизацией, а не пороговым отсечением.</li>
+<li><span class="tex">\ell_2</span> вместе с <span class="tex">\ell_1</span> — elastic net, стабилизирует решение при коррелированных столбцах.</li>
+</ul>
+<p>Столбцы <span class="tex">W</span> не связаны друг с другом, поэтому задача распадается на <span class="tex">|I|</span> независимых elastic-net регрессий, и их решают координатным спуском параллельно. Это сразу и сила, и слабость: на каталоге в сотни тысяч объектов нужно сотни тысяч регрессий, и обучение занимает часы или сутки. SLIM стал сильным бейзлайном на MovieLens и Netflix, но широко применялся ограниченно именно из-за цены обучения. Для ускорения на практике ограничивают список кандидатов-соседей в каждой регрессии (предотбор через kNN).</p>
+<h2 id="ease-2019">EASE (2019)</h2>
+<p>Harald Steck (WWW 2019, <em>Embarrassingly Shallow Autoencoders for Sparse Data</em>) задал вопрос: что будет, если выбросить <span class="tex">\ell_1</span> и неотрицательность и оставить только <span class="tex">\ell_2</span>? Тогда задача становится гладкой и квадратичной, а её решение — <strong>в замкнутой форме</strong>.</p>
+<div class="tex tex-block">\min_{B} \; \|X - XB\|_F^2 + \lambda \|B\|_F^2 \quad \text{при } \mathrm{diag}(B) = 0.</div>
+<h3 id="вывод">Вывод</h3>
+<p>Без ограничения на диагональ решение — гребневая регрессия: <span class="tex">\hat B = (X^\top X + \lambda I)^{-1} X^\top X</span>. Добавим ограничение <span class="tex">\mathrm{diag}(B)=0</span> множителями Лагранжа <span class="tex">\gamma \in \mathbb{R}^{|I|}</span>:</p>
+<div class="tex tex-block">\mathcal{L}(B,\gamma) = \|X - XB\|_F^2 + \lambda\|B\|_F^2 + 2\gamma^\top \mathrm{diag}(B).</div>
+<p>Обозначим <span class="tex">G = X^\top X</span> (матрица Грама, <span class="tex">|I|\times|I|</span>) и <span class="tex">\hat P = (G + \lambda I)^{-1}</span>. Приравнивая градиент по <span class="tex">B</span> нулю:</p>
+<div class="tex tex-block">-2G + 2(G + \lambda I)B + 2\,\mathrm{diagMat}(\gamma) = 0
+\;\Rightarrow\;
+B = \hat P\,\big(G - \mathrm{diagMat}(\gamma)\big) = I - \hat P\,\big(\lambda I + \mathrm{diagMat}(\gamma)\big).</div>
+<p>Условие <span class="tex">\mathrm{diag}(B)=0</span> даёт <span class="tex">1 - \hat P_{jj}(\lambda + \gamma_j) = 0</span>, то есть <span class="tex">\lambda + \gamma_j = 1/\hat P_{jj}</span>. Подставляя,</p>
+<div class="tex tex-block">\boxed{\,B_{ij} = -\frac{\hat P_{ij}}{\hat P_{jj}} \ (i \ne j), \qquad B_{ii} = 0, \qquad \hat P = (X^\top X + \lambda I)^{-1}\,}</div>
+<p>Это весь алгоритм обучения: собрать матрицу Грама, обратить, нормировать столбцы на диагональ и обнулить диагональ.</p>
+<div class="code"><div class="code-head"><span class="lang">python</span></div><pre><code><span class="tok-k">import</span> numpy <span class="tok-k">as</span> np
+<span class="tok-k">import</span> scipy.sparse <span class="tok-k">as</span> sp
+
+<span class="tok-k">def</span> <span class="tok-f">fit_ease</span><span class="tok-p">(</span>X<span class="tok-p">:</span> sp<span class="tok-p">.</span>csr_matrix<span class="tok-p">,</span> lam<span class="tok-p">:</span> <span class="tok-f">float</span> <span class="tok-p">=</span> <span class="tok-n">500.0</span><span class="tok-p">)</span> <span class="tok-p">-</span><span class="tok-p">&gt;</span> np<span class="tok-p">.</span>ndarray<span class="tok-p">:</span>
+    G <span class="tok-p">=</span> <span class="tok-p">(</span>X<span class="tok-p">.</span>T <span class="tok-p">@</span> X<span class="tok-p">)</span><span class="tok-p">.</span>toarray<span class="tok-p">(</span><span class="tok-p">)</span><span class="tok-p">.</span>astype<span class="tok-p">(</span>np<span class="tok-p">.</span>float64<span class="tok-p">)</span>
+    G<span class="tok-p">[</span>np<span class="tok-p">.</span>diag_indices_from<span class="tok-p">(</span>G<span class="tok-p">)</span><span class="tok-p">]</span> <span class="tok-p">+</span><span class="tok-p">=</span> lam
+    P <span class="tok-p">=</span> np<span class="tok-p">.</span>linalg<span class="tok-p">.</span>inv<span class="tok-p">(</span>G<span class="tok-p">)</span>
+    B <span class="tok-p">=</span> <span class="tok-p">-</span>P <span class="tok-p">/</span> np<span class="tok-p">.</span>diag<span class="tok-p">(</span>P<span class="tok-p">)</span>          <span class="tok-c"># делит каждый столбец j на P_jj</span>
+    B<span class="tok-p">[</span>np<span class="tok-p">.</span>diag_indices_from<span class="tok-p">(</span>B<span class="tok-p">)</span><span class="tok-p">]</span> <span class="tok-p">=</span> <span class="tok-n">0.0</span>
+    <span class="tok-k">return</span> B
+
+<span class="tok-k">def</span> <span class="tok-f">recommend</span><span class="tok-p">(</span>X_user<span class="tok-p">:</span> sp<span class="tok-p">.</span>csr_matrix<span class="tok-p">,</span> B<span class="tok-p">:</span> np<span class="tok-p">.</span>ndarray<span class="tok-p">,</span> k<span class="tok-p">:</span> <span class="tok-f">int</span> <span class="tok-p">=</span> <span class="tok-n">20</span><span class="tok-p">)</span> <span class="tok-p">-</span><span class="tok-p">&gt;</span> np<span class="tok-p">.</span>ndarray<span class="tok-p">:</span>
+    scores <span class="tok-p">=</span> X_user <span class="tok-p">@</span> B                        <span class="tok-c"># [n_users, |I|]</span>
+    scores<span class="tok-p">[</span>X_user<span class="tok-p">.</span>nonzero<span class="tok-p">(</span><span class="tok-p">)</span><span class="tok-p">]</span> <span class="tok-p">=</span> <span class="tok-p">-</span>np<span class="tok-p">.</span>inf         <span class="tok-c"># маскируем уже просмотренное</span>
+    top <span class="tok-p">=</span> np<span class="tok-p">.</span>argpartition<span class="tok-p">(</span><span class="tok-p">-</span>scores<span class="tok-p">,</span> k<span class="tok-p">,</span> axis<span class="tok-p">=</span><span class="tok-n">1</span><span class="tok-p">)</span><span class="tok-p">[</span><span class="tok-p">:</span><span class="tok-p">,</span> <span class="tok-p">:</span>k<span class="tok-p">]</span>
+    order <span class="tok-p">=</span> np<span class="tok-p">.</span>take_along_axis<span class="tok-p">(</span>scores<span class="tok-p">,</span> top<span class="tok-p">,</span> <span class="tok-n">1</span><span class="tok-p">)</span><span class="tok-p">.</span>argsort<span class="tok-p">(</span><span class="tok-n">1</span><span class="tok-p">)</span><span class="tok-p">[</span><span class="tok-p">:</span><span class="tok-p">,</span> <span class="tok-p">:</span><span class="tok-p">:</span><span class="tok-p">-</span><span class="tok-n">1</span><span class="tok-p">]</span>
+    <span class="tok-k">return</span> np<span class="tok-p">.</span>take_along_axis<span class="tok-p">(</span>top<span class="tok-p">,</span> order<span class="tok-p">,</span> <span class="tok-n">1</span><span class="tok-p">)</span>
+</code></pre></div>
+<p><code>B = -P / np.diag(P)</code> делит столбец <span class="tex">j</span> на <span class="tex">P_{jj}</span> благодаря бродкастингу по строкам. Маскирование просмотренного обязательно: линейная модель с <span class="tex">\mathrm{diag}(B)=0</span> всё равно может ставить уже виденные объекты выше новых: скор виденного <span class="tex">j</span> — это <span class="tex">\sum_{k \ne j} x_{uk} B_{kj}</span>, и он велик, если <span class="tex">j</span> похож на остальную историю.</p>
+<h3 id="почему-это-работает">Почему это работает</h3>
+<p>Матрица <span class="tex">\hat P</span> — регуляризованная обратная матрица Грама; с точностью до центрирования и нормировки это оценка обратной ковариации (precision matrix). Известный факт из гауссовых графических моделей: <span class="tex">-P_{ij}/P_{jj}</span> — коэффициент при объекте <span class="tex">i</span> в линейной регрессии объекта <span class="tex">j</span> на все остальные объекты. То есть <span class="tex">B</span> хранит <strong>условные зависимости</strong>, а не маргинальные корреляции. Именно это решает проблему «дважды засчитанного» сходства из начала статьи: если <span class="tex">a'</span> почти дублирует <span class="tex">a</span>, то при известном <span class="tex">a</span> он почти ничего не добавляет к предсказанию <span class="tex">c</span>, и вес делится между ними, а не суммируется. Единственный гиперпараметр — <span class="tex">\lambda</span>; он на порядки больше, чем в обычной гребневой регрессии, потому что <span class="tex">X^\top X</span> содержит счётчики совстречаемости (для крупных наборов — тысячи).</p>
+<h3 id="цена-и-масштаб">Цена и масштаб</h3>
+<p>Обращение <span class="tex">|I|\times|I|</span> плотной матрицы стоит <span class="tex">O(|I|^3)</span> по времени и <span class="tex">O(|I|^2)</span> по памяти. На практике потолок — порядка 50–100 тыс. объектов (при 50 тыс. и float32 матрица занимает 10 ГБ). Для типичного каталога это значит, что модель нельзя запустить «как есть» на миллионе SKU. Приёмы:</p>
+<ul>
+<li><strong>Отбор по популярности.</strong> Оставить <span class="tex">N</span> самых частых объектов (хвост всё равно слабо покрыт данными), редкие обслужить другой моделью.</li>
+<li><strong>Шардирование по смыслу.</strong> Отдельная матрица на категорию или вертикаль, если пользователи редко пересекают их.</li>
+<li><strong>Разреженные приближения.</strong> SANSA (Spišák et al., RecSys 2023) не обращает <span class="tex">X^\top X + \lambda I</span>, а строит разреженную приближённую обратную через разреженное (в том числе неполное) разложение Холецкого; плотная матрица не появляется ни при обучении, ни при выдаче, плотность модели задаётся заранее, и авторы масштабируют EASE до миллионов объектов.</li>
+<li><strong>Низкоранговые.</strong> ELSA (Vančura et al., RecSys 2022) ищет <span class="tex">B = \tilde A\tilde A^\top - I</span>, где <span class="tex">\tilde A</span> — матрица <span class="tex">|I| \times r</span> со строками единичной длины (диагональ <span class="tex">B</span> получается нулевой); обучается SGD на GPU, память <span class="tex">O(|I| r)</span>.</li>
+<li><strong>Другие регуляризаторы.</strong> EDLAE (Steck, NeurIPS 2020) разбирает, как ещё отучить линейный автоэнкодер от тождественного решения. Обычный dropout на входе помогает лишь частично: он эквивалентен <span class="tex">\ell_2</span>-штрафу, взвешенному по популярности объекта. Dropout с «усиленным» весом ошибки на выпавших координатах (emphasized denoising) устраняет тождественное решение полностью; для полноранговой модели решение тоже замкнутое, есть и низкоранговая версия. Связь с матричным разложением разобрана в Jin et al. (KDD 2021): по замкнутым решениям видно, что регрессия вроде EASE и разложение родственны и различаются лишь тем, как «сжимают» сингулярные числа матрицы <span class="tex">X</span>; там же — какой диапазон <span class="tex">\lambda</span> разумен.</li>
+</ul>
+<h2 id="автоэнкодеры-как-нелинейное-продолжение">Автоэнкодеры как нелинейное продолжение</h2>
+<p>Линейная модель — частный случай автоэнкодера. Нелинейные версии добавляют узкий скрытый слой и функции активации.</p>
+<ul>
+<li><strong>Mult-VAE</strong> (Liang et al., WWW 2018). Вариационный автоэнкодер с мультиномиальным правдоподобием: вход — вектор взаимодействий пользователя <span class="tex">x_u</span>, кодировщик выдаёт <span class="tex">\mu, \sigma</span>, декодер — распределение по каталогу <span class="tex">\pi(z)=\mathrm{softmax}(f_\theta(z))</span>, лог-правдоподобие <span class="tex">\sum_i x_{ui}\log\pi_i</span>. Потеря — ELBO с весом <span class="tex">\beta</span> на KL-члене, подобранным отжигом (обычно <span class="tex">\beta \approx 0{,}2</span>). Мультиномиальная потеря ближе к ранжированию, чем гауссова или логистическая, потому что объекты конкурируют за ограниченную вероятностную массу.</li>
+<li><strong>RecVAE</strong> (Shenbin et al., WSDM 2020). Добавляет композитный априор, нормировку <span class="tex">\beta</span> на число взаимодействий пользователя и чередование шагов кодировщика и декодера; стабильно выигрывает у Mult-VAE.</li>
+</ul>
+<p>Различие по сути: EASE выучивает матрицу <span class="tex">|I|\times|I|</span> без узкого места, а VAE сжимает пользователя в вектор размерности <span class="tex">d \ll |I|</span>. Узкое место помогает обобщать, когда данных много, и мешает, когда их мало: в экспериментах Steck (2019) на плотном ML-20M Mult-VAE и EASE почти вровень, а на более разреженном Million Song Dataset EASE заметно впереди.</p>
+<h2 id="почему-простые-модели-догнали-нейросети">Почему простые модели догнали нейросети</h2>
+<p>Конец 2010-х — время, когда каждая конференция приносила десяток «SOTA-нейросетей». В 2019 году Dacrema, Cremonesi и Jannach разобрали 18 нейросетевых алгоритмов с ведущих конференций; воспроизвести с разумными усилиями удалось 7. Шесть из них часто проигрывали простым эвристикам — настроенным kNN и графовым <span class="tex">P^3_\alpha</span>, <span class="tex">RP^3_\beta</span> (см. <a href="/edufamcs-demo/handbook/recsys/grafovye-modeli/" rel="noopener noreferrer nofollow">графовые модели</a>), а седьмой обгонял эвристики, но не стабильно обгонял хорошо настроенный линейный метод (SLIM). Anelli et al. (2022) сравнили десять алгоритмов, классических и нейросетевых, с настройкой всех бейзлайнов на трёх популярных датасетах: явного победителя нет, но ни по одной метрике точности лучшей не оказалась нейросеть, а линейные модели, kNN и классическое матричное разложение стабильно в числе сильных.</p>
+<p>Причин несколько:</p>
+<ol>
+<li><strong>Настройка гиперпараметров бейзлайнов</strong> в статьях недостаточна, а у нейросетей — гораздо подробнее.</li>
+<li><strong>Разреженные данные</strong>: у большинства пользователей десятки взаимодействий; нелинейность выигрывает у линейной модели только когда есть данные для её обучения.</li>
+<li><strong>Протоколы оценки</strong>: случайный сплит, сэмплированные метрики, утечка из будущего (подробнее — в статье про <a href="/edufamcs-demo/handbook/recsys/oflajn-metriki/" rel="noopener noreferrer nofollow">офлайн-метрики</a>).</li>
+</ol>
+<p>Вывод для практики: любая новая модель должна сравниваться с настроенными EASE и item-kNN, иначе прирост может оказаться иллюзией.</p>
+<h2 id="как-ease-используют-в-индустрии">Как EASE используют в индустрии</h2>
+<ul>
+<li><strong>Источник кандидатов.</strong> Берём строку <span class="tex">\hat x_u = x_u B</span>, маскируем просмотренное, оставляем топ-<span class="tex">N</span> (100–500). Это первая стадия <a href="/edufamcs-demo/handbook/recsys/kandidaty-i-ranzhirovanie/" rel="noopener noreferrer nofollow">двухстадийной схемы</a>: быстрая, без признаков, но с хорошим Recall.</li>
+<li><strong>Признак ранжирующей модели.</strong> Скор EASE для пары <span class="tex">(u,i)</span> и ранг в списке добавляют в градиентный бустинг рядом с контекстными признаками. Рядом со скорами из двухбашенной сети они дают разные сигналы: EASE хорошо ловит условные связи, а нейросеть — признаки и свежесть.</li>
+<li><strong>Item-to-item.</strong> Строка <span class="tex">B_{j\cdot}</span> — это скоры для «пользователя», у которого в истории один объект <span class="tex">j</span> (<span class="tex">e_j^\top B</span>), то есть готовый список «с этим покупают» для карточки товара. В отличие от kNN, веса уже очищены от сходства, которое объясняется через третьи объекты.</li>
+<li><strong>Веса событий.</strong> Бинарная матрица <span class="tex">X</span> — лишь один вариант. Можно положить в <span class="tex">X</span> веса <span class="tex">w_{ui}</span>: покупка = 3, добавление в корзину = 2, просмотр = 1 (подбираются на валидации), а также обрезать вклад повторных событий логарифмом. Для нескольких типов событий считают одну матрицу с весами либо отдельные <span class="tex">B</span> на каждый тип с последующим взвешиванием.</li>
+<li><strong>Затухание по времени.</strong> Старые события умножают на <span class="tex">e^{-\Delta t/\tau}</span>; обновление раз в сутки — пересчитать <span class="tex">G</span> инкрементально и заново обратить.</li>
+</ul>
+<h2 id="подводные-камни">Подводные камни</h2>
+<ul>
+<li><strong>Память и время обращения.</strong> Считать в float64 на CPU по 30 тыс. объектов — минуты; на 100 тыс. — уже часы и десятки гигабайт. Матрица <span class="tex">X^\top X + \lambda I</span> симметрична и положительно определена, поэтому быстрее и устойчивее обращать её через разложение Холецкого (<code>torch.linalg.cholesky</code> + <code>torch.linalg.cholesky_inverse</code> на GPU, float32 обычно хватает при разумном <span class="tex">\lambda</span>).</li>
+<li><strong>Выбор <span class="tex">\lambda</span>.</strong> При слишком малом <span class="tex">\lambda</span> матрица плохо обусловлена, при слишком большом <span class="tex">\hat P \approx (I - G/\lambda)/\lambda</span> и <span class="tex">B_{ij} \approx G_{ij}/\lambda</span>: модель вырождается в ненормированную совстречаемость, то есть в популярное. Перебирают по логарифмической сетке (50, 200, 500, 1000, 3000) на валидации.</li>
+<li><strong>Популярность.</strong> Модель переоценивает популярные объекты; в рекомендациях «с этим покупают» их часто надо демпфировать (деление на степень популярности).</li>
+<li><strong>Холодный старт.</strong> У нового объекта нулевой столбец в <span class="tex">X</span>, EASE о нём ничего не знает. Нужны контентные источники.</li>
+<li><strong>Утечка.</strong> Пользователь, чьи события в <span class="tex">X</span> участвуют в обучении <span class="tex">B</span>, а затем проверяется на том же — классическая ошибка. Матрицу строят до отсечки по времени, а тестовые события используют только как цель.</li>
+</ul>
+<h2 id="что-почитать">Что почитать</h2>
+<ul>
+<li>Steck. <em>Embarrassingly Shallow Autoencoders for Sparse Data</em>, WWW 2019 — <a href="https://arxiv.org/abs/1905.03375" rel="noopener noreferrer nofollow">arXiv:1905.03375</a>. Полный вывод и эксперименты на трёх датасетах.</li>
+<li>Ning, Karypis. <em>SLIM: Sparse Linear Methods for Top-N Recommender Systems</em>, ICDM 2011 (DOI 10.1109/ICDM.2011.134).</li>
+<li>Steck. <em>Autoencoders that don't overfit towards the Identity</em>, NeurIPS 2020 (EDLAE); Jin et al. <a href="https://arxiv.org/abs/2105.12937" rel="noopener noreferrer nofollow"><em>Towards a Better Understanding of Linear Models for Recommendation</em>, KDD 2021</a>.</li>
+<li>Vančura et al. <em>Scalable Linear Shallow Autoencoder for Collaborative Filtering</em>, RecSys 2022 (ELSA, DOI 10.1145/3523227.3551482); Spišák et al. <em>Scalable Approximate NonSymmetric Autoencoder for Collaborative Filtering</em>, RecSys 2023 (SANSA).</li>
+<li>Liang et al. <a href="https://arxiv.org/abs/1802.05814" rel="noopener noreferrer nofollow"><em>Variational Autoencoders for Collaborative Filtering</em>, WWW 2018</a>; Shenbin et al. <a href="https://arxiv.org/abs/1912.11160" rel="noopener noreferrer nofollow"><em>RecVAE</em>, WSDM 2020</a>.</li>
+<li>Dacrema, Cremonesi, Jannach. <a href="https://arxiv.org/abs/1907.06902" rel="noopener noreferrer nofollow"><em>Are We Really Making Much Progress?</em>, RecSys 2019</a>; Anelli et al. <a href="https://arxiv.org/abs/2203.01155" rel="noopener noreferrer nofollow"><em>Top-N Recommendation Algorithms: A Quest for the State-of-the-Art</em>, UMAP 2022</a>.</li>
+<li>Курс DeepRecSys, семинар 2: классические модели и бенчмарк Yambda — <a href="https://www.youtube.com/watch?v=q55mPzvw-AM" rel="noopener noreferrer nofollow">видео</a>.</li>
+</ul>
+</div>
+      
+
+      
+      <nav class="pager" aria-label="Соседние статьи">
+        <a href="/edufamcs-demo/handbook/recsys/neyavnyj-fidbek-bpr/"><span><svg class="ico sm" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-arrow-left"/></svg>Назад</span>Неявный фидбэк: BPR, WARP и негативы</a>
+        <a href="/edufamcs-demo/handbook/recsys/ctr-modeli/"><span>Дальше<svg class="ico sm" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-arrow"/></svg></span>Модели CTR: от логрегрессии до DCN и DIN</a>
+      </nav>
+      
+    </article>
+
+    <aside class="hb-toc" aria-label="На этой странице">
+      <a class="l2" href="#постановка-автоэнкодер-без-скрытого-слоя">Постановка: автоэнкодер без скрытого слоя</a><a class="l2" href="#slim-2011">SLIM (2011)</a><a class="l2" href="#ease-2019">EASE (2019)</a><a class="l3" href="#вывод">Вывод</a><a class="l3" href="#почему-это-работает">Почему это работает</a><a class="l3" href="#цена-и-масштаб">Цена и масштаб</a><a class="l2" href="#автоэнкодеры-как-нелинейное-продолжение">Автоэнкодеры как нелинейное продолжение</a><a class="l2" href="#почему-простые-модели-догнали-нейросети">Почему простые модели догнали нейросети</a><a class="l2" href="#как-ease-используют-в-индустрии">Как EASE используют в индустрии</a><a class="l2" href="#подводные-камни">Подводные камни</a><a class="l2" href="#что-почитать">Что почитать</a>
+    </aside>
+  </div>
+</div>
+
+
+</main>
+
+<footer class="ftr" data-theme="dark">
+  <svg class="sym fern" viewBox="0 0 40.5 65.02" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#fern"/></svg>
+  <div class="container">
+    <div class="ftr-row">
+      <a href="/edufamcs-demo/" aria-label="EDU FAMCS — главная"><img src="/edufamcs-demo/static/brand/logo/logo-edu-dark.svg" alt="EDU FAMCS" width="196" height="40"></a>
+      <ul class="ftr-links">
+        <li><a href="/edufamcs-demo/#courses">Курсы</a></li>
+        <li><a href="/edufamcs-demo/ml/">Машинное обучение</a></li>
+        <li><a href="/edufamcs-demo/handbook/">Хендбук</a></li>
+        <li><a href="/edufamcs-demo/news/">Новости</a></li>
+        <li><a href="/edufamcs-demo/people/">Авторы</a></li>
+        <li><a href="/edufamcs-demo/about/">О&nbsp;нас</a></li>
+        <li><a href="/edufamcs-demo/propose/">Предложить или исправить</a></li>
+        <li><a href="/edufamcs-demo/privacy/">Конфиденциальность</a></li>
+      </ul>
+    </div>
+    <div class="ftr-big" aria-hidden="true">EDU<span class="d">·</span>FAMCS</div>
+    <p class="ftr-copy">© 2026 EDU FAMCS · Минск</p>
+  </div>
+</footer>
+
+<div class="toasts-region" aria-live="polite" id="toasts">
+
+</div>
+
+</body>
+</html>

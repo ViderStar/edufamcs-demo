@@ -1,0 +1,310 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Разведочный анализ данных · EDU FAMCS</title>
+<meta name="description" content="Разведочный анализ данных — Классическое машинное обучение. Хендбук ML-курса ФПМИ.">
+<meta name="theme-color" content="#060A16">
+<meta name="robots" content="noindex, nofollow">
+<meta name="htmx-config" content='{"allowEval":false,"includeIndicatorStyles":false,"historyCacheSize":0,"selfRequestsOnly":true}'>
+<meta name="katex-js" content="/edufamcs-demo/static/vendor/katex/katex.min.js">
+<meta name="katex-css" content="/edufamcs-demo/static/vendor/katex/katex.min.css">
+<link rel="icon" href="/edufamcs-demo/static/brand/logo/favicon-16.svg" type="image/svg+xml" sizes="16x16">
+<link rel="icon" href="/edufamcs-demo/static/brand/logo/favicon.svg" type="image/svg+xml" sizes="any">
+<link rel="preload" href="/edufamcs-demo/static/brand/fonts/manrope-cyrillic-400.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/edufamcs-demo/static/brand/fonts/unbounded-cyrillic-800.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="/edufamcs-demo/static/brand/fonts.css">
+<link rel="stylesheet" href="/edufamcs-demo/static/brand/tokens.css">
+<link rel="stylesheet" href="/edufamcs-demo/static/brand/components.css">
+<link rel="stylesheet" href="/edufamcs-demo/static/css/site.css">
+<link rel="stylesheet" href="/edufamcs-demo/static/css/hub.css">
+<link rel="stylesheet" href="/edufamcs-demo/static/css/about.css">
+<link rel="stylesheet" href="/edufamcs-demo/static/handbook/handbook.css">
+<script src="/edufamcs-demo/static/js/theme.js"></script>
+<script src="/edufamcs-demo/static/vendor/htmx/htmx.min.js" defer></script>
+<script src="/edufamcs-demo/static/vendor/alpine/alpine-csp.min.js" defer></script>
+<script src="/edufamcs-demo/static/js/site.js" defer></script>
+<script src="/edufamcs-demo/static/handbook/handbook.js" defer></script>
+</head>
+<body class="" hx-headers='{"X-CSRFToken": "byVvBhfrT7e9a6x60bwfuD31BJaeXO7jAiuzlf2OOYCipFIPxofnr8z69rgJvYP3"}'>
+<a class="skip" href="#main">К содержанию</a>
+<div class="demo-bar" role="note">Демо-версия для отзывов: вход, запись на курсы и формы здесь не работают.</div>
+
+<header class="hdr">
+  <div class="container">
+    <a class="brand" href="/edufamcs-demo/" aria-label="EDU FAMCS — главная">
+      <span class="full"><img class="only-light" src="/edufamcs-demo/static/brand/logo/logo-edu-light.svg" alt="EDU FAMCS" width="196" height="40"><img class="only-dark" src="/edufamcs-demo/static/brand/logo/logo-edu-dark.svg" alt="EDU FAMCS" width="196" height="40"></span>
+      <span class="short"><img class="only-light" src="/edufamcs-demo/static/brand/logo/logo-edu-light.svg" alt="EDU FAMCS" height="30"><img class="only-dark" src="/edufamcs-demo/static/brand/logo/logo-edu-dark.svg" alt="EDU FAMCS" height="30"></span>
+    </a>
+    <nav class="nav" id="main-nav" aria-label="Основная навигация">
+      <a href="/edufamcs-demo/#courses">Курсы</a>
+      <a href="/edufamcs-demo/ml/" >Машинное обучение</a>
+      
+      <a href="/edufamcs-demo/handbook/" aria-current="page">Хендбук</a>
+      <a href="/edufamcs-demo/news/" >Новости</a>
+      <a href="/edufamcs-demo/people/" >Авторы</a>
+      <a href="/edufamcs-demo/about/" >О&nbsp;нас</a>
+    </nav>
+    <div class="hdr-actions">
+      
+      <a class="btn btn-outline btn-login" href="/edufamcs-demo/accounts/login/?next=/handbook/classic/razvedochnyj-analiz-dannyh/">Войти</a>
+      
+      <button class="icon-btn menu-btn" type="button" aria-label="Меню" aria-expanded="false" aria-controls="main-nav"><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-menu"/></svg></button>
+    </div>
+  </div>
+</header>
+
+<main id="main">
+
+
+
+<div class="container hb-page hb-tone">
+  <div class="hb">
+    <aside class="hb-nav" aria-label="Статьи раздела">
+      
+<form class="hb-search" action="/edufamcs-demo/handbook/search/" method="get" role="search">
+  <svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-search"/></svg>
+  <input class="input" type="search" name="q" value="" placeholder="Поиск по хендбуку" aria-label="Поиск по хендбуку" autocomplete="off" maxlength="120"
+    hx-get="/edufamcs-demo/handbook/search/" hx-trigger="input changed delay:250ms, search" hx-target="#hb-nav-results" hx-sync="this:replace">
+</form>
+
+      <div id="hb-nav-results" class="hb-nav-results" aria-live="polite"></div>
+      <a class="grp" href="/edufamcs-demo/handbook/classic/">Основы</a>
+      
+      <a class="" href="/edufamcs-demo/handbook/classic/chto-takoe-ml/">Что такое машинное обучение</a>
+      
+      <a class="cur" href="/edufamcs-demo/handbook/classic/razvedochnyj-analiz-dannyh/" aria-current="page">Разведочный анализ данных</a>
+      
+    </aside>
+
+    <article class="hb-main">
+      <nav class="crumbs" aria-label="Навигация"><a href="/edufamcs-demo/handbook/">Хендбук</a><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-chev"/></svg><a href="/edufamcs-demo/handbook/classic/">Классическое машинное обучение</a></nav>
+      <h1 class="h1">Разведочный анализ данных</h1>
+      <div class="hb-meta">
+        
+        
+        <span><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-clock"/></svg>9&nbsp;мин</span>
+        <span class="hb-authors"><span class="avatar sm" title="Артем Лебедевич">АЛ</span>Артем Лебедевич</span>
+        <span><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-edit"/></svg>9 ноября 2026</span>
+        
+        
+      </div>
+
+      
+      <details class="hb-mtoc">
+        <summary><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-list"/></svg>Содержание<svg class="ico sm" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-chev-down"/></svg></summary>
+        <a class="l2" href="#типы-признаков">Типы признаков</a><a class="l2" href="#описательные-статистики">Описательные статистики</a><a class="l2" href="#пропуски">Пропуски</a><a class="l2" href="#выбросы-дубликаты-ошибки">Выбросы, дубликаты, ошибки</a><a class="l2" href="#связи-между-признаками">Связи между признаками</a><a class="l2" href="#визуализация">Визуализация</a><a class="l2" href="#категориальные-признаки-анонс">Категориальные признаки: анонс</a><a class="l2" href="#код">Код</a><a class="l2" href="#чек-лист-eda">Чек-лист EDA</a><a class="l2" href="#практика-и-типичные-ошибки">Практика и типичные ошибки</a><a class="l2" href="#что-почитать">Что почитать</a>
+      </details>
+      
+
+      <div class="prose"><p>Разведочный анализ данных (EDA, exploratory data analysis) — это работа с данными до моделирования, цель которой понять, что в них лежит. Термин и философию заложил Дж. Тьюки в книге <em>Exploratory Data Analysis</em> (1977): прежде чем проверять гипотезы, нужно смотреть на данные и позволять им подсказывать вопросы. EDA решает четыре практические задачи: найти ошибки в данных, найти утечки, сформулировать гипотезы о зависимостях и придумать признаки. Каждая из них дешевле на этом этапе, чем после недели экспериментов с моделью.</p>
+<h2 id="типы-признаков">Типы признаков</h2>
+<p>От типа зависит, какие статистики и преобразования допустимы.</p>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>Тип</th>
+<th>Пример</th>
+<th>Что можно</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Числовой (непрерывный, дискретный)</td>
+<td>цена, число заказов</td>
+<td>среднее, квантили, масштабирование</td>
+</tr>
+<tr>
+<td>Категориальный</td>
+<td>город, бренд</td>
+<td>частоты, кодирование</td>
+</tr>
+<tr>
+<td>Порядковый</td>
+<td>уровень образования, рейтинг 1–5</td>
+<td>порядок есть, расстояния условны</td>
+</tr>
+<tr>
+<td>Дата и время</td>
+<td>момент заказа</td>
+<td>компоненты (день недели, час), лаги, разности</td>
+</tr>
+<tr>
+<td>Текст</td>
+<td>описание товара</td>
+<td>токены, TF-IDF, эмбеддинги</td>
+</tr>
+</tbody>
+</table></div>
+<p>Типичная ловушка: идентификаторы (<code>user_id</code>, почтовый индекс) хранятся числами, но числовыми не являются. Среднее почтовых индексов бессмысленно.</p>
+<h2 id="описательные-статистики">Описательные статистики</h2>
+<p>Первый взгляд — <code>df.info()</code>, <code>df.describe()</code>: размер, типы, пропуски, минимум, максимум, квантили. Затем распределения по каждому признаку.</p>
+<p><strong>Среднее и медиана.</strong> Среднее <span class="tex">\bar x=\frac1n\sum x_i</span> чувствительно к выбросам, медиана устойчива. Для доходов или цен среднее почти всегда выше медианы: распределение скошено вправо. Меру скошенности даёт коэффициент асимметрии <span class="tex">\mathbb{E}\big[((x-\mu)/\sigma)^3\big]</span>; значения заметно больше нуля — тяжёлый правый хвост.</p>
+<p><strong>Квантили и IQR.</strong> Квартили <span class="tex">Q_1,Q_2,Q_3</span> делят выборку на четыре равные по числу объектов части, межквартильный размах <span class="tex">\mathrm{IQR}=Q_3-Q_1</span> — устойчивая мера разброса.</p>
+<p><strong>Лог-преобразование.</strong> Для положительных величин с тяжёлым хвостом (цены, длительности, число кликов) работает <span class="tex">\log(1+x)</span>: хвост сжимается, распределение становится ближе к симметричному, линейные модели и расстояния ведут себя спокойнее. Деревья от монотонных преобразований признаков не зависят, но таргет в регрессии логарифмировать часто полезно.</p>
+<h2 id="пропуски">Пропуски</h2>
+<p>Пропуск — информация о процессе сбора данных. Классификация восходит к Рубину (1976), который ввёл понятие «missing at random»; привычная тройка терминов закрепилась в книге Little и Rubin (1987):</p>
+<ul>
+<li><strong>MCAR</strong> (missing completely at random): пропуск не зависит ни от чего. Простое удаление строк несмещённо, но теряет данные.</li>
+<li><strong>MAR</strong> (at random): вероятность пропуска зависит от наблюдаемых признаков (доход чаще пропущен у молодых). Заполнение с опорой на другие признаки уместно.</li>
+<li><strong>MNAR</strong> (not at random): пропуск зависит от самого значения (богатые не указывают доход). Импутация по наблюдаемым признакам здесь смещена, а факт пропуска сам является сигналом.</li>
+</ul>
+<p>Стратегии: удалить строки или признак (если пропусков больше ~50% и они не информативны), заполнить медианой/модой, заполнить по группе, использовать <code>KNNImputer</code>/итеративную импутацию. Всегда добавляйте <strong>индикатор пропуска</strong> (<code>add_indicator=True</code>): модель сможет использовать сам факт отсутствия. Параметры импутации — только по обучающей части (внутри <code>Pipeline</code>).</p>
+<h2 id="выбросы-дубликаты-ошибки">Выбросы, дубликаты, ошибки</h2>
+<p><strong>Правило Тьюки:</strong> значение считается выбросом, если оно за пределами <span class="tex">[Q_1-1{,}5\,\mathrm{IQR},\;Q_3+1{,}5\,\mathrm{IQR}]</span>. Альтернатива — z-оценка <span class="tex">z=(x-\mu)/\sigma</span> с порогом <span class="tex">|z|&gt;3</span>; она сама использует среднее и <span class="tex">\sigma</span>, которые выбросами и искажаются, поэтому для скошенных данных надёжнее IQR.</p>
+<p>Выброс — не обязательно ошибка. Заказ на миллион может быть опечаткой, а может быть самым ценным клиентом; сбой датчика и мошенническая операция выглядят одинаково. Алгоритм: проверить источник, при ошибке — исправить или удалить, при реальном значении — оставить и выбрать устойчивую модель или метрику (медиана, MAE, Huber).</p>
+<p>Дополнительно проверяют:</p>
+<ul>
+<li><strong>дубликаты</strong> (полные и по ключу): если они разъедутся по train и test, получится утечка;</li>
+<li><strong>некорректные значения</strong>: отрицательный возраст, дата из будущего, нулевая цена;</li>
+<li><strong>единицы измерения</strong>: часть данных в рублях, часть в копейках, вес в граммах и килограммах; признак с «двумя пиками» нередко именно это.</li>
+</ul>
+<h2 id="связи-между-признаками">Связи между признаками</h2>
+<p><strong>Корреляция Пирсона</strong> <span class="tex">r=\dfrac{\sum (x_i-\bar x)(y_i-\bar y)}{\sqrt{\sum (x_i-\bar x)^2\sum (y_i-\bar y)^2}}</span> измеряет <em>линейную</em> связь, чувствительна к выбросам. <strong>Корреляция Спирмена</strong> — Пирсон на рангах; ловит любую монотонную связь и устойчива к выбросам. Нулевая корреляция не означает независимости: для <span class="tex">y=x^2</span> при симметричном <span class="tex">x</span> она нулевая.</p>
+<p>Для двух категориальных признаков строят <strong>таблицу сопряжённости</strong> (<code>pd.crosstab</code>) и смотрят на доли по строкам; формальная проверка — <span class="tex">\chi^2</span>-критерий. Для связи числового признака с таргетом: средний таргет по квантильным корзинам признака.</p>
+<p>Две причины смотреть на связи с таргетом. Первая — гипотезы для признаков. Вторая — поиск <strong>признаков-подсказок</strong>: если один признак предсказывает таргет почти идеально (AUC 0,99 по одному полю), чаще всего это утечка, а не находка. Выясните, как и когда признак считается. Корреляции между самими признаками (сильные <span class="tex">|r|&gt;0{,}9</span>) предупреждают о мультиколлинеарности, важной для линейных моделей.</p>
+<h2 id="визуализация">Визуализация</h2>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>График</th>
+<th>Для чего</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Гистограмма / KDE</td>
+<td>форма распределения, хвосты, мультимодальность</td>
+</tr>
+<tr>
+<td>Boxplot</td>
+<td>медиана, квартили, выбросы; сравнение групп</td>
+</tr>
+<tr>
+<td>Scatter</td>
+<td>связь двух числовых признаков, нелинейность, кластеры</td>
+</tr>
+<tr>
+<td>Pairplot</td>
+<td>попарные связи сразу</td>
+</tr>
+<tr>
+<td>Heatmap корреляций</td>
+<td>мультиколлинеарность, кандидаты в признаки</td>
+</tr>
+<tr>
+<td>Столбчатые диаграммы по категориям</td>
+<td>частоты и средний таргет</td>
+</tr>
+</tbody>
+</table></div>
+<p>Аргумент за графики — <strong>квартет Энскомба</strong> (1973): четыре набора по 11 точек с практически одинаковыми средними, дисперсиями, корреляцией (≈0,816) и прямой регрессии <span class="tex">y\approx3+0{,}5x</span>, но один — линейная зависимость с шумом, второй — парабола, третий — прямая с одним выбросом, четвёртый — вертикальный столбец с одной удалённой точкой. Таблица статистик их не различает, график — сразу. Сводные числа нужно подтверждать картинкой.</p>
+<h2 id="категориальные-признаки-анонс">Категориальные признаки: анонс</h2>
+<p>Модели ожидают числа, поэтому категории кодируют. <strong>One-hot</strong> создаёт бинарный столбец на категорию; подходит для линейных моделей при небольшом числе значений, на категориях высокой кардинальности раздувает матрицу. <strong>Target encoding</strong> заменяет категорию средним таргета по ней — мощно, но опасно: считать его нужно только по фолдам (out-of-fold) со сглаживанием, иначе таргет просочится в признак. Подробности и работа с редкими категориями — в главах про линейные модели и бустинг.</p>
+<h2 id="код">Код</h2>
+<div class="code"><div class="code-head"><span class="lang">python</span></div><pre><code><span class="tok-k">import</span> numpy <span class="tok-k">as</span> np
+<span class="tok-k">import</span> pandas <span class="tok-k">as</span> pd
+<span class="tok-k">import</span> seaborn <span class="tok-k">as</span> sns
+<span class="tok-k">import</span> matplotlib.pyplot <span class="tok-k">as</span> plt
+
+df <span class="tok-p">=</span> pd<span class="tok-p">.</span>read_parquet<span class="tok-p">(</span><span class="tok-s">"</span><span class="tok-s">data.parquet</span><span class="tok-s">"</span><span class="tok-p">)</span>
+
+df<span class="tok-p">.</span>info<span class="tok-p">(</span><span class="tok-p">)</span>
+<span class="tok-f">print</span><span class="tok-p">(</span>df<span class="tok-p">.</span>describe<span class="tok-p">(</span>include<span class="tok-p">=</span><span class="tok-s">"</span><span class="tok-s">all</span><span class="tok-s">"</span><span class="tok-p">)</span><span class="tok-p">.</span>T<span class="tok-p">)</span>
+<span class="tok-f">print</span><span class="tok-p">(</span>df<span class="tok-p">.</span>isna<span class="tok-p">(</span><span class="tok-p">)</span><span class="tok-p">.</span>mean<span class="tok-p">(</span><span class="tok-p">)</span><span class="tok-p">.</span>sort_values<span class="tok-p">(</span>ascending<span class="tok-p">=</span><span class="tok-k">False</span><span class="tok-p">)</span><span class="tok-p">.</span>head<span class="tok-p">(</span><span class="tok-n">10</span><span class="tok-p">)</span><span class="tok-p">)</span>   <span class="tok-c"># доля пропусков</span>
+<span class="tok-f">print</span><span class="tok-p">(</span>df<span class="tok-p">[</span><span class="tok-s">"</span><span class="tok-s">city</span><span class="tok-s">"</span><span class="tok-p">]</span><span class="tok-p">.</span>value_counts<span class="tok-p">(</span>normalize<span class="tok-p">=</span><span class="tok-k">True</span><span class="tok-p">)</span><span class="tok-p">.</span>head<span class="tok-p">(</span><span class="tok-n">10</span><span class="tok-p">)</span><span class="tok-p">)</span>
+<span class="tok-f">print</span><span class="tok-p">(</span><span class="tok-s">"</span><span class="tok-s">дубликатов:</span><span class="tok-s">"</span><span class="tok-p">,</span> df<span class="tok-p">.</span>duplicated<span class="tok-p">(</span><span class="tok-p">)</span><span class="tok-p">.</span>sum<span class="tok-p">(</span><span class="tok-p">)</span><span class="tok-p">)</span>
+
+<span class="tok-c"># правило Тьюки</span>
+q1<span class="tok-p">,</span> q3 <span class="tok-p">=</span> df<span class="tok-p">[</span><span class="tok-s">"</span><span class="tok-s">price</span><span class="tok-s">"</span><span class="tok-p">]</span><span class="tok-p">.</span>quantile<span class="tok-p">(</span><span class="tok-p">[</span><span class="tok-n">0.25</span><span class="tok-p">,</span> <span class="tok-n">0.75</span><span class="tok-p">]</span><span class="tok-p">)</span>
+iqr <span class="tok-p">=</span> q3 <span class="tok-p">-</span> q1
+mask <span class="tok-p">=</span> <span class="tok-p">(</span>df<span class="tok-p">[</span><span class="tok-s">"</span><span class="tok-s">price</span><span class="tok-s">"</span><span class="tok-p">]</span> <span class="tok-p">&lt;</span> q1 <span class="tok-p">-</span> <span class="tok-n">1.5</span> <span class="tok-p">*</span> iqr<span class="tok-p">)</span> <span class="tok-p">|</span> <span class="tok-p">(</span>df<span class="tok-p">[</span><span class="tok-s">"</span><span class="tok-s">price</span><span class="tok-s">"</span><span class="tok-p">]</span> <span class="tok-p">&gt;</span> q3 <span class="tok-p">+</span> <span class="tok-n">1.5</span> <span class="tok-p">*</span> iqr<span class="tok-p">)</span>
+<span class="tok-f">print</span><span class="tok-p">(</span><span class="tok-s">"</span><span class="tok-s">выбросов по price:</span><span class="tok-s">"</span><span class="tok-p">,</span> mask<span class="tok-p">.</span>mean<span class="tok-p">(</span><span class="tok-p">)</span><span class="tok-p">)</span>
+
+df<span class="tok-p">[</span><span class="tok-s">"</span><span class="tok-s">log_price</span><span class="tok-s">"</span><span class="tok-p">]</span> <span class="tok-p">=</span> np<span class="tok-p">.</span>log1p<span class="tok-p">(</span>df<span class="tok-p">[</span><span class="tok-s">"</span><span class="tok-s">price</span><span class="tok-s">"</span><span class="tok-p">]</span><span class="tok-p">)</span>
+fig<span class="tok-p">,</span> ax <span class="tok-p">=</span> plt<span class="tok-p">.</span>subplots<span class="tok-p">(</span><span class="tok-n">1</span><span class="tok-p">,</span> <span class="tok-n">2</span><span class="tok-p">,</span> figsize<span class="tok-p">=</span><span class="tok-p">(</span><span class="tok-n">10</span><span class="tok-p">,</span> <span class="tok-n">3</span><span class="tok-p">)</span><span class="tok-p">)</span>
+sns<span class="tok-p">.</span>histplot<span class="tok-p">(</span>df<span class="tok-p">[</span><span class="tok-s">"</span><span class="tok-s">price</span><span class="tok-s">"</span><span class="tok-p">]</span><span class="tok-p">,</span> ax<span class="tok-p">=</span>ax<span class="tok-p">[</span><span class="tok-n">0</span><span class="tok-p">]</span><span class="tok-p">)</span><span class="tok-p">;</span> sns<span class="tok-p">.</span>histplot<span class="tok-p">(</span>df<span class="tok-p">[</span><span class="tok-s">"</span><span class="tok-s">log_price</span><span class="tok-s">"</span><span class="tok-p">]</span><span class="tok-p">,</span> ax<span class="tok-p">=</span>ax<span class="tok-p">[</span><span class="tok-n">1</span><span class="tok-p">]</span><span class="tok-p">)</span>
+
+<span class="tok-f">print</span><span class="tok-p">(</span>df<span class="tok-p">.</span>corr<span class="tok-p">(</span>numeric_only<span class="tok-p">=</span><span class="tok-k">True</span><span class="tok-p">,</span> method<span class="tok-p">=</span><span class="tok-s">"</span><span class="tok-s">spearman</span><span class="tok-s">"</span><span class="tok-p">)</span><span class="tok-p">[</span><span class="tok-s">"</span><span class="tok-s">target</span><span class="tok-s">"</span><span class="tok-p">]</span><span class="tok-p">.</span>sort_values<span class="tok-p">(</span><span class="tok-p">)</span><span class="tok-p">)</span>
+sns<span class="tok-p">.</span>heatmap<span class="tok-p">(</span>df<span class="tok-p">.</span>corr<span class="tok-p">(</span>numeric_only<span class="tok-p">=</span><span class="tok-k">True</span><span class="tok-p">,</span> method<span class="tok-p">=</span><span class="tok-s">"</span><span class="tok-s">spearman</span><span class="tok-s">"</span><span class="tok-p">)</span><span class="tok-p">,</span> cmap<span class="tok-p">=</span><span class="tok-s">"</span><span class="tok-s">coolwarm</span><span class="tok-s">"</span><span class="tok-p">,</span> center<span class="tok-p">=</span><span class="tok-n">0</span><span class="tok-p">)</span>
+sns<span class="tok-p">.</span>pairplot<span class="tok-p">(</span>df<span class="tok-p">.</span>sample<span class="tok-p">(</span>n<span class="tok-p">=</span><span class="tok-f">min</span><span class="tok-p">(</span><span class="tok-f">len</span><span class="tok-p">(</span>df<span class="tok-p">)</span><span class="tok-p">,</span> <span class="tok-n">2000</span><span class="tok-p">)</span><span class="tok-p">,</span> random_state<span class="tok-p">=</span><span class="tok-n">0</span><span class="tok-p">)</span><span class="tok-p">,</span> <span class="tok-f">vars</span><span class="tok-p">=</span><span class="tok-p">[</span><span class="tok-s">"</span><span class="tok-s">price</span><span class="tok-s">"</span><span class="tok-p">,</span> <span class="tok-s">"</span><span class="tok-s">age</span><span class="tok-s">"</span><span class="tok-p">,</span> <span class="tok-s">"</span><span class="tok-s">target</span><span class="tok-s">"</span><span class="tok-p">]</span><span class="tok-p">)</span>
+</code></pre></div>
+<h2 id="чек-лист-eda">Чек-лист EDA</h2>
+<ol>
+<li>Размер, типы, память; ключ уникальности строк.</li>
+<li>Доля пропусков по признакам и механизм (MCAR/MAR/MNAR); индикаторы.</li>
+<li>Дубликаты и недопустимые значения; единицы измерения.</li>
+<li>Распределения всех признаков и таргета; хвосты, лог-преобразования.</li>
+<li>Выбросы: ошибка или сигнал.</li>
+<li>Баланс классов или распределение таргета.</li>
+<li>Связь каждого признака с таргетом; подозрительно сильные — проверить на утечку.</li>
+<li>Корреляции между признаками.</li>
+<li>Временная структура: тренд, сезонность, дрейф распределений между периодами.</li>
+<li>Список гипотез, признаков и решений по чистке — письменно, чтобы воспроизвести.</li>
+</ol>
+<h2 id="практика-и-типичные-ошибки">Практика и типичные ошибки</h2>
+<ul>
+<li>Чистить и анализировать всю выборку вместе, включая тест: выбранные пороги и импутации «знают» о тесте. EDA для решений делают на train.</li>
+<li>Доверять <code>describe()</code> без графиков (см. Энскомба).</li>
+<li>Удалять все выбросы подряд: теряются самые интересные случаи, а на продакшене они всё равно придут.</li>
+<li>Заполнять пропуски нулём в признаке, где ноль — реальное значение.</li>
+<li>Пропустить временной дрейф: распределение признака в январе и в декабре различается, а валидация случайная.</li>
+<li>Типичные ошибки в курсе собраны отдельно: <a href="/edufamcs-demo/handbook/mistakes/" rel="noopener noreferrer nofollow">/handbook/mistakes/</a>.</li>
+</ul>
+<h2 id="что-почитать">Что почитать</h2>
+<ul>
+<li>J. W. Tukey, <em>Exploratory Data Analysis</em>, Addison-Wesley, 1977.</li>
+<li>F. J. Anscombe, <em>Graphs in Statistical Analysis</em>, The American Statistician, 27(1), 1973.</li>
+<li>D. B. Rubin, <em>Inference and missing data</em>, Biometrika, 63(3), 1976 — понятие MAR; R. Little, D. Rubin, <em>Statistical Analysis with Missing Data</em>, Wiley, 1987 — классификация MCAR/MAR/MNAR и методы импутации.</li>
+<li>Документация pandas, <em>Working with missing data</em>: <a href="https://pandas.pydata.org/docs/user_guide/missing_data.html" rel="noopener noreferrer nofollow">pandas.pydata.org/docs/user_guide/missing_data.html</a>.</li>
+<li>Галерея seaborn: <a href="https://seaborn.pydata.org/examples/index.html" rel="noopener noreferrer nofollow">seaborn.pydata.org/examples</a>.</li>
+<li>Видеолекция первого сезона «Предварительный анализ данных»: <a href="https://youtu.be/-60BZOVtElQ" rel="noopener noreferrer nofollow">youtu.be/-60BZOVtElQ</a>.</li>
+</ul>
+</div>
+      
+
+      
+      <nav class="pager" aria-label="Соседние статьи">
+        <a href="/edufamcs-demo/handbook/classic/chto-takoe-ml/"><span><svg class="ico sm" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-arrow-left"/></svg>Назад</span>Что такое машинное обучение</a>
+        <a href="/edufamcs-demo/handbook/classic/knn-i-naivnyj-bajes/"><span>Дальше<svg class="ico sm" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-arrow"/></svg></span>Метод ближайших соседей и наивный Байес</a>
+      </nav>
+      
+    </article>
+
+    <aside class="hb-toc" aria-label="На этой странице">
+      <a class="l2" href="#типы-признаков">Типы признаков</a><a class="l2" href="#описательные-статистики">Описательные статистики</a><a class="l2" href="#пропуски">Пропуски</a><a class="l2" href="#выбросы-дубликаты-ошибки">Выбросы, дубликаты, ошибки</a><a class="l2" href="#связи-между-признаками">Связи между признаками</a><a class="l2" href="#визуализация">Визуализация</a><a class="l2" href="#категориальные-признаки-анонс">Категориальные признаки: анонс</a><a class="l2" href="#код">Код</a><a class="l2" href="#чек-лист-eda">Чек-лист EDA</a><a class="l2" href="#практика-и-типичные-ошибки">Практика и типичные ошибки</a><a class="l2" href="#что-почитать">Что почитать</a>
+    </aside>
+  </div>
+</div>
+
+
+</main>
+
+<footer class="ftr" data-theme="dark">
+  <svg class="sym fern" viewBox="0 0 40.5 65.02" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#fern"/></svg>
+  <div class="container">
+    <div class="ftr-row">
+      <a href="/edufamcs-demo/" aria-label="EDU FAMCS — главная"><img src="/edufamcs-demo/static/brand/logo/logo-edu-dark.svg" alt="EDU FAMCS" width="196" height="40"></a>
+      <ul class="ftr-links">
+        <li><a href="/edufamcs-demo/#courses">Курсы</a></li>
+        <li><a href="/edufamcs-demo/ml/">Машинное обучение</a></li>
+        <li><a href="/edufamcs-demo/handbook/">Хендбук</a></li>
+        <li><a href="/edufamcs-demo/news/">Новости</a></li>
+        <li><a href="/edufamcs-demo/people/">Авторы</a></li>
+        <li><a href="/edufamcs-demo/about/">О&nbsp;нас</a></li>
+        <li><a href="/edufamcs-demo/propose/">Предложить или исправить</a></li>
+        <li><a href="/edufamcs-demo/privacy/">Конфиденциальность</a></li>
+      </ul>
+    </div>
+    <div class="ftr-big" aria-hidden="true">EDU<span class="d">·</span>FAMCS</div>
+    <p class="ftr-copy">© 2026 EDU FAMCS · Минск</p>
+  </div>
+</footer>
+
+<div class="toasts-region" aria-live="polite" id="toasts">
+
+</div>
+
+</body>
+</html>

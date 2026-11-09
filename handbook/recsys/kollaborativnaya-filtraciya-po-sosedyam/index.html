@@ -1,0 +1,252 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Коллаборативная фильтрация по соседям · EDU FAMCS</title>
+<meta name="description" content="Коллаборативная фильтрация по соседям — Рекомендательные системы. Хендбук ML-курса ФПМИ.">
+<meta name="theme-color" content="#060A16">
+<meta name="robots" content="noindex, nofollow">
+<meta name="htmx-config" content='{"allowEval":false,"includeIndicatorStyles":false,"historyCacheSize":0,"selfRequestsOnly":true}'>
+<meta name="katex-js" content="/edufamcs-demo/static/vendor/katex/katex.min.js">
+<meta name="katex-css" content="/edufamcs-demo/static/vendor/katex/katex.min.css">
+<link rel="icon" href="/edufamcs-demo/static/brand/logo/favicon-16.svg" type="image/svg+xml" sizes="16x16">
+<link rel="icon" href="/edufamcs-demo/static/brand/logo/favicon.svg" type="image/svg+xml" sizes="any">
+<link rel="preload" href="/edufamcs-demo/static/brand/fonts/manrope-cyrillic-400.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/edufamcs-demo/static/brand/fonts/unbounded-cyrillic-800.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="/edufamcs-demo/static/brand/fonts.css">
+<link rel="stylesheet" href="/edufamcs-demo/static/brand/tokens.css">
+<link rel="stylesheet" href="/edufamcs-demo/static/brand/components.css">
+<link rel="stylesheet" href="/edufamcs-demo/static/css/site.css">
+<link rel="stylesheet" href="/edufamcs-demo/static/css/hub.css">
+<link rel="stylesheet" href="/edufamcs-demo/static/css/about.css">
+<link rel="stylesheet" href="/edufamcs-demo/static/handbook/handbook.css">
+<script src="/edufamcs-demo/static/js/theme.js"></script>
+<script src="/edufamcs-demo/static/vendor/htmx/htmx.min.js" defer></script>
+<script src="/edufamcs-demo/static/vendor/alpine/alpine-csp.min.js" defer></script>
+<script src="/edufamcs-demo/static/js/site.js" defer></script>
+<script src="/edufamcs-demo/static/handbook/handbook.js" defer></script>
+</head>
+<body class="" hx-headers='{"X-CSRFToken": "hmoSEE3NrXO4pK2nqfg5tc9PUlRwYKKZG6XWoCQamOcdEjd6XsZdqHFUs3X1wUsJ"}'>
+<a class="skip" href="#main">К содержанию</a>
+<div class="demo-bar" role="note">Демо-версия для отзывов: вход, запись на курсы и формы здесь не работают.</div>
+
+<header class="hdr">
+  <div class="container">
+    <a class="brand" href="/edufamcs-demo/" aria-label="EDU FAMCS — главная">
+      <span class="full"><img class="only-light" src="/edufamcs-demo/static/brand/logo/logo-edu-light.svg" alt="EDU FAMCS" width="196" height="40"><img class="only-dark" src="/edufamcs-demo/static/brand/logo/logo-edu-dark.svg" alt="EDU FAMCS" width="196" height="40"></span>
+      <span class="short"><img class="only-light" src="/edufamcs-demo/static/brand/logo/logo-edu-light.svg" alt="EDU FAMCS" height="30"><img class="only-dark" src="/edufamcs-demo/static/brand/logo/logo-edu-dark.svg" alt="EDU FAMCS" height="30"></span>
+    </a>
+    <nav class="nav" id="main-nav" aria-label="Основная навигация">
+      <a href="/edufamcs-demo/#courses">Курсы</a>
+      <a href="/edufamcs-demo/ml/" >Машинное обучение</a>
+      
+      <a href="/edufamcs-demo/handbook/" aria-current="page">Хендбук</a>
+      <a href="/edufamcs-demo/news/" >Новости</a>
+      <a href="/edufamcs-demo/people/" >Авторы</a>
+      <a href="/edufamcs-demo/about/" >О&nbsp;нас</a>
+    </nav>
+    <div class="hdr-actions">
+      
+      <a class="btn btn-outline btn-login" href="/edufamcs-demo/accounts/login/?next=/handbook/recsys/kollaborativnaya-filtraciya-po-sosedyam/">Войти</a>
+      
+      <button class="icon-btn menu-btn" type="button" aria-label="Меню" aria-expanded="false" aria-controls="main-nav"><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-menu"/></svg></button>
+    </div>
+  </div>
+</header>
+
+<main id="main">
+
+
+
+<div class="container hb-page s-recsys">
+  <div class="hb">
+    <aside class="hb-nav" aria-label="Статьи раздела">
+      
+<form class="hb-search" action="/edufamcs-demo/handbook/search/" method="get" role="search">
+  <svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-search"/></svg>
+  <input class="input" type="search" name="q" value="" placeholder="Поиск по хендбуку" aria-label="Поиск по хендбуку" autocomplete="off" maxlength="120"
+    hx-get="/edufamcs-demo/handbook/search/" hx-trigger="input changed delay:250ms, search" hx-target="#hb-nav-results" hx-sync="this:replace">
+</form>
+
+      <div id="hb-nav-results" class="hb-nav-results" aria-live="polite"></div>
+      <a class="grp" href="/edufamcs-demo/handbook/recsys/">Классика: 1992–2012</a>
+      
+      <a class="" href="/edufamcs-demo/handbook/recsys/nepersonalnye-i-kontentnye/">Неперсонализированные и контентные рекомендации</a>
+      
+      <a class="cur" href="/edufamcs-demo/handbook/recsys/kollaborativnaya-filtraciya-po-sosedyam/" aria-current="page">Коллаборативная фильтрация по соседям</a>
+      
+      <a class="" href="/edufamcs-demo/handbook/recsys/matrichnye-razlozheniya-als/">Матричные разложения и ALS</a>
+      
+      <a class="" href="/edufamcs-demo/handbook/recsys/neyavnyj-fidbek-bpr/">Неявный фидбэк: BPR, WARP и негативы</a>
+      
+    </aside>
+
+    <article class="hb-main">
+      <nav class="crumbs" aria-label="Навигация"><a href="/edufamcs-demo/handbook/">Хендбук</a><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-chev"/></svg><a href="/edufamcs-demo/handbook/recsys/">Рекомендательные системы</a></nav>
+      <h1 class="h1">Коллаборативная фильтрация по соседям</h1>
+      <div class="hb-meta">
+        
+        
+        <span><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-clock"/></svg>12&nbsp;мин</span>
+        <span class="hb-authors"><span class="avatar sm" title="Артем Лебедевич">АЛ</span>Артем Лебедевич</span>
+        <span><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-edit"/></svg>9 ноября 2026</span>
+        
+        
+      </div>
+
+      
+      <details class="hb-mtoc">
+        <summary><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-list"/></svg>Содержание<svg class="ico sm" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-chev-down"/></svg></summary>
+        <a class="l2" href="#история-от-tapestry-до-amazon">История: от Tapestry до Amazon</a><a class="l2" href="#user-based-cf">User-based CF</a><a class="l2" href="#меры-сходства">Меры сходства</a><a class="l3" href="#shrinkage-борьба-с-малым-пересечением">Shrinkage: борьба с малым пересечением</a><a class="l2" href="#item-based-cf">Item-based CF</a><a class="l2" href="#slope-one">Slope One</a><a class="l2" href="#неявный-фидбэк">Неявный фидбэк</a><a class="l3" href="#сложность">Сложность</a><a class="l2" href="#почему-knn-сильный-бейзлайн">Почему kNN — сильный бейзлайн</a><a class="l2" href="#что-ломается-на-практике">Что ломается на практике</a><a class="l2" href="#что-почитать">Что почитать</a>
+      </details>
+      
+
+      <div class="prose"><p>Контентные методы (<a href="/edufamcs-demo/handbook/recsys/nepersonalnye-i-kontentnye/" rel="noopener noreferrer nofollow">предыдущая статья</a>) упираются в качество описаний и не видят неочевидных связей. Идея коллаборативной фильтрации (collaborative filtering, CF) — отказаться от признаков объектов и использовать только поведение: если вам и Васе нравилось одно и то же, то остальное, что нравится Васе, вероятно понравится и вам.</p>
+<h2 id="история-от-tapestry-до-amazon">История: от Tapestry до Amazon</h2>
+<ul>
+<li><strong>Tapestry (Goldberg, Nichols, Oki, Terry; Xerox PARC, 1992).</strong> Система фильтрации почты и сетевых групп, в которой люди аннотировали сообщения, а фильтры задавались по аннотациям коллег («покажи письма, которые одобрил Иван»). Здесь появился термин <em>collaborative filtering</em>, но «коллег» выбирал сам пользователь.</li>
+<li><strong>GroupLens (Resnick et al., 1994).</strong> Автоматизировал выбор: оценки новостей Usenet сопоставлялись между пользователями, схожесть считалась корреляцией Пирсона, а прогноз строился по взвешенным отклонениям соседей. Так родился user-based kNN.</li>
+<li><strong>Ringo (Shardanand &amp; Maes, 1995).</strong> То же для музыки: рекомендации исполнителей по оценкам людей с похожим вкусом.</li>
+<li><strong>Item-based CF (Sarwar, Karypis, Konstan, Riedl, 2001).</strong> Проблема user-based: пользователей миллионы, их вкусы меняются, и поиск соседей среди них слишком дорог для онлайн-режима. Идея — считать сходство между <strong>объектами</strong>: каталог меняется медленнее, а объект имеет сотни оценок, а не десятки.</li>
+<li><strong>Amazon item-to-item (Linden, Smith, York, 2003).</strong> Масштабирование на десятки миллионов клиентов и миллионы товаров: таблица «похожих товаров» строится офлайн, онлайн остаётся поиск по таблице за миллисекунды. Ретроспектива авторов — <em>Two Decades of Recommender Systems at Amazon.com</em> (Smith &amp; Linden, 2017): каркас item-to-item за двадцать лет сохранился, а улучшали в основном меру связанности товаров (сравнение наблюдаемого числа совместных покупок с ожидаемым при независимости) и учёт времени и контекста.</li>
+</ul>
+<h2 id="user-based-cf">User-based CF</h2>
+<p>Пусть <span class="tex">R</span> — матрица оценок, <span class="tex">I_u</span> — объекты, оценённые пользователем <span class="tex">u</span>, <span class="tex">\bar r_u</span> — его средняя оценка, <span class="tex">N_k(u)</span> — <span class="tex">k</span> наиболее похожих на него пользователей, оценивших <span class="tex">i</span>. Прогноз:</p>
+<div class="tex tex-block">\hat r_{ui} = \bar r_u + \frac{\sum_{v\in N_k(u)} \mathrm{sim}(u,v)\,(r_{vi}-\bar r_v)}{\sum_{v\in N_k(u)} |\mathrm{sim}(u,v)|}</div>
+<p>Центрирование по <span class="tex">\bar r_v</span> нужно, потому что один пользователь «строгий» (ставит 3 за отличный фильм), а другой — щедрый. Без центрирования соседи смешивают шкалу с вкусом.</p>
+<h2 id="меры-сходства">Меры сходства</h2>
+<p>Для пары векторов оценок:</p>
+<ul>
+<li><strong>Косинус:</strong> <span class="tex">\cos(u,v)=\dfrac{\sum_i r_{ui}r_{vi}}{\sqrt{\sum_i r_{ui}^2}\sqrt{\sum_i r_{vi}^2}}</span>. Неоценённое считается нулём — для неявных данных это нормально, для явных искажает.</li>
+<li><strong>Корреляция Пирсона:</strong> то же самое после центрирования, по общим объектам <span class="tex">I_u\cap I_v</span>:
+<span class="tex">\dfrac{\sum_{i}(r_{ui}-\bar r_u)(r_{vi}-\bar r_v)}{\sqrt{\sum_i (r_{ui}-\bar r_u)^2}\sqrt{\sum_i (r_{vi}-\bar r_v)^2}}</span>.</li>
+<li><strong>Adjusted cosine</strong> для item-item (Sarwar et al.): косинус между столбцами, где из каждой оценки вычтено среднее <strong>пользователя</strong> (а не объекта), поскольку именно оно убирает различие шкал.</li>
+<li><strong>Жаккар</strong> для бинарных данных: <span class="tex">J(A,B)=\dfrac{|A\cap B|}{|A\cup B|}</span>, где <span class="tex">A,B</span> — множества пользователей (или объектов).</li>
+</ul>
+<h3 id="shrinkage-борьба-с-малым-пересечением">Shrinkage: борьба с малым пересечением</h3>
+<p>Корреляция по двум общим объектам может быть равна 1 просто случайно. Поэтому сходство сжимают:</p>
+<div class="tex tex-block">\mathrm{sim}'(i,j) = \frac{n_{ij}}{n_{ij}+\lambda}\,\mathrm{sim}(i,j)</div>
+<p>где <span class="tex">n_{ij}</span> — число общих пользователей, <span class="tex">\lambda</span> — от десятков до сотни. При малом <span class="tex">n_{ij}</span> сходство уменьшается почти до нуля, при большом — не меняется. Это то же самое «стягивание к априору», что в байесовском среднем из статьи про <a href="/edufamcs-demo/handbook/recsys/nepersonalnye-i-kontentnye/" rel="noopener noreferrer nofollow">неперсонализированные методы</a>.</p>
+<h2 id="item-based-cf">Item-based CF</h2>
+<p>Прогноз симметричен, но суммируется по объектам, которые пользователь уже оценил:</p>
+<div class="tex tex-block">\hat r_{ui} = \frac{\sum_{j\in N_k(i)\cap I_u} \mathrm{sim}(i,j)\, r_{uj}}{\sum_{j\in N_k(i)\cap I_u} |\mathrm{sim}(i,j)|}</div>
+<p>Почему item-item обычно лучше user-user:</p>
+<ol>
+<li><strong>Устойчивость.</strong> Объект собирает сотни оценок и его сходства стабильны; профиль пользователя разреженный и меняется.</li>
+<li><strong>Масштаб.</strong> Объектов обычно меньше, чем пользователей, и матрицу сходств <span class="tex">|I|\times|I|</span> можно предрасчитать и хранить только топ-<span class="tex">k</span> соседей в строке. Онлайн-запрос — взять объекты истории и слить их списки соседей.</li>
+<li><strong>Объяснимость:</strong> «потому что вы смотрели X».</li>
+</ol>
+<p><strong>Пример на пальцах.</strong> Четыре покупателя, четыре товара (1 — ноутбук, 2 — мышь, 3 — коврик, 4 — чайник). Аня купила 1 и 2, Борис — 1, 2, 3, Вика — 2 и 3, Гоша — 1 и 4. Множества покупателей: <span class="tex">U_1=\{А,Б,Г\}</span>, <span class="tex">U_2=\{А,Б,В\}</span>, <span class="tex">U_3=\{Б,В\}</span>, <span class="tex">U_4=\{Г\}</span>. Косинусы на бинарных данных (формула ниже): <span class="tex">\mathrm{sim}(1,2)=2/\sqrt{3\cdot3}\approx0{,}67</span>, <span class="tex">\mathrm{sim}(1,3)=1/\sqrt{6}\approx0{,}41</span>, <span class="tex">\mathrm{sim}(1,4)=1/\sqrt{3}\approx0{,}58</span>, <span class="tex">\mathrm{sim}(2,3)=2/\sqrt{6}\approx0{,}82</span>. Новый покупатель взял ноутбук — получает мышь (0,67), затем чайник (0,58) и коврик (0,41). Чайник обошёл коврик, хотя оба связаны с ноутбуком через одного покупателя: косинус делит на популярность, а чайник реже. На таких сходствах по одному-двум общим пользователям и держится шум длинного хвоста. Shrinkage с <span class="tex">\lambda=2</span> уменьшает <span class="tex">\mathrm{sim}(1,4)</span> втрое (до 0,19), а подтверждённое двумя покупателями <span class="tex">\mathrm{sim}(1,2)</span> — только вдвое (до 0,33). На реальных данных <span class="tex">n_{ij}</span> различаются от единиц до тысяч, и порядок соседей после shrinkage меняется заметно.</p>
+<h2 id="slope-one">Slope One</h2>
+<p>Lemire &amp; Maclachlan (2005) — предельно простой метод: для пары объектов <span class="tex">(i,j)</span> считается средняя разность оценок среди пользователей, оценивших оба, <span class="tex">\mathrm{dev}(i,j)=\mathrm{mean}(r_{ui}-r_{uj})</span>, а прогноз — <span class="tex">\hat r_{ui}=\mathrm{mean}_{j\in I_u}\bigl(r_{uj}+\mathrm{dev}(i,j)\bigr)</span> (взвешенно по числу общих пользователей). Один «параметр» на пару, нет подбора гиперпараметров, легко обновлять онлайн. Исторически интересен как пример того, что простая линейная поправка конкурирует со сложными схемами.</p>
+<h2 id="неявный-фидбэк">Неявный фидбэк</h2>
+<p>С кликами и покупками оценок нет, есть бинарная матрица <span class="tex">R\in\{0,1\}^{|U|\times|I|}</span> (или веса событий). Сходство между объектами строится на <strong>совстречаемости</strong> <span class="tex">C=R^\top R</span>: <span class="tex">C_{ij}</span> — число пользователей, взаимодействовавших с обоими. Сырые счётчики несравнимы: популярные объекты имеют большие <span class="tex">C_{ij}</span> со всеми. Нормировки:</p>
+<ul>
+<li><strong>Косинус:</strong> <span class="tex">\mathrm{sim}(i,j)=\dfrac{C_{ij}}{\sqrt{C_{ii}C_{jj}}}</span> — в бинарном случае это <span class="tex">\dfrac{|U_i\cap U_j|}{\sqrt{|U_i||U_j|}}</span>.</li>
+<li><strong>Обобщённая нормировка</strong> <span class="tex">\dfrac{C_{ij}}{C_{ii}^{\,\alpha}C_{jj}^{\,1-\alpha}}</span>, где <span class="tex">i</span> — кандидат, <span class="tex">j</span> — объект из истории. При <span class="tex">\alpha=0{,}5</span> это косинус; при <span class="tex">\alpha=0</span> — ровно условная вероятность <span class="tex">P(i\mid j)=C_{ij}/C_{jj}</span>, которая не штрафует популярность кандидата и тянет к хитам; при <span class="tex">\alpha\to1</span> — <span class="tex">P(j\mid i)</span>, которая сильно штрафует популярные кандидаты и поднимает хвост.</li>
+<li><strong>TF-IDF и BM25-взвешивание матрицы.</strong> Пользователи с огромной историей (боты, оптовики) вносят много пар и мало информации. Поэтому перед произведением матрицу взвешивают по аналогии с поиском, где объект — «документ», а пользователь — «терм»: элемент <span class="tex">(u,i)</span> умножают на IDF пользователя <span class="tex">\log(|I|/|I_u|)</span>, так что длинные истории весят меньше. BM25 вдобавок насыщает вес повторных событий и нормирует на «длину документа» — популярность объекта. Так устроены <code>tfidf_weight</code>, <code>bm25_weight</code> и модели <code>CosineRecommender</code>, <code>TFIDFRecommender</code>, <code>BM25Recommender</code> в библиотеке <code>implicit</code>. BM25-версия — хороший бейзлайн. Заметьте: умножать столбцы на вес объекта перед косинусом бесполезно, масштаб столбца сократится при нормировке; работает только взвешивание строк.</li>
+<li><strong>Обрезка до топ-<span class="tex">k</span> соседей.</strong> Для каждого объекта оставляют <span class="tex">k</span> (50–200) лучших соседей; остальные зануляют. Это резко сокращает память и убирает шум длинного хвоста.</li>
+</ul>
+<p>Скор объекта для пользователя: <span class="tex">\hat s_{ui}=\sum_{j\in I_u} w_{uj}\,\mathrm{sim}(i,j)</span>, т.е. <span class="tex">\hat s_u = S\, r_u</span>, где <span class="tex">S</span> — разреженная матрица сходств. Из рекомендаций исключают уже просмотренное.</p>
+<h3 id="сложность">Сложность</h3>
+<p>Наивный подсчёт <span class="tex">R^\top R</span> стоит <span class="tex">O\bigl(\sum_u n_u^2\bigr)</span>, где <span class="tex">n_u</span> — длина истории: пользователь с 10 тыс. событий даёт <span class="tex">10^8</span> пар. Поэтому: (1) обрезают историю до последних <span class="tex">m</span> событий; (2) убирают пользователей с аномально большой историей; (3) считают блоками по строкам с немедленной обрезкой до топ-<span class="tex">k</span> (так делает <code>implicit</code>); (4) используют разреженные матрицы, а не плотные.</p>
+<div class="code"><div class="code-head"><span class="lang">python</span></div><pre><code><span class="tok-k">import</span> numpy <span class="tok-k">as</span> np<span class="tok-p">,</span> scipy.sparse <span class="tok-k">as</span> sp
+<span class="tok-k">from</span> sklearn.preprocessing <span class="tok-k">import</span> normalize
+
+<span class="tok-k">def</span> <span class="tok-f">fit_item_knn</span><span class="tok-p">(</span>R<span class="tok-p">:</span> sp<span class="tok-p">.</span>csr_matrix<span class="tok-p">,</span> k<span class="tok-p">=</span><span class="tok-n">100</span><span class="tok-p">)</span><span class="tok-p">:</span>
+    <span class="tok-s">"""R: пользователи x объекты (бинарная или веса). Возвращает разреженную S (объекты x объекты)."""</span>
+    n_items <span class="tok-p">=</span> R<span class="tok-p">.</span>shape<span class="tok-p">[</span><span class="tok-n">1</span><span class="tok-p">]</span>
+    n_u <span class="tok-p">=</span> np<span class="tok-p">.</span>asarray<span class="tok-p">(</span>R<span class="tok-p">.</span>astype<span class="tok-p">(</span><span class="tok-f">bool</span><span class="tok-p">)</span><span class="tok-p">.</span>sum<span class="tok-p">(</span>axis<span class="tok-p">=</span><span class="tok-n">1</span><span class="tok-p">)</span><span class="tok-p">)</span><span class="tok-p">.</span>ravel<span class="tok-p">(</span><span class="tok-p">)</span>   <span class="tok-c"># длина истории каждого пользователя</span>
+    idf_u <span class="tok-p">=</span> np<span class="tok-p">.</span>log<span class="tok-p">(</span><span class="tok-p">(</span><span class="tok-n">1</span> <span class="tok-p">+</span> n_items<span class="tok-p">)</span> <span class="tok-p">/</span> <span class="tok-p">(</span><span class="tok-n">1</span> <span class="tok-p">+</span> n_u<span class="tok-p">)</span><span class="tok-p">)</span>    <span class="tok-c"># IDF пользователя: длинные истории весят меньше</span>
+    Rw <span class="tok-p">=</span> sp<span class="tok-p">.</span>diags<span class="tok-p">(</span>idf_u<span class="tok-p">)</span> <span class="tok-p">@</span> R                     <span class="tok-c"># взвешиваем строки; вес столбца косинус всё равно сократит</span>
+    Rn <span class="tok-p">=</span> normalize<span class="tok-p">(</span>Rw<span class="tok-p">,</span> norm<span class="tok-p">=</span><span class="tok-s">"</span><span class="tok-s">l2</span><span class="tok-s">"</span><span class="tok-p">,</span> axis<span class="tok-p">=</span><span class="tok-n">0</span><span class="tok-p">)</span>        <span class="tok-c"># единичная норма столбцов -&gt; скалярное произведение = косинус</span>
+    S <span class="tok-p">=</span> <span class="tok-p">(</span>Rn<span class="tok-p">.</span>T <span class="tok-p">@</span> Rn<span class="tok-p">)</span><span class="tok-p">.</span>tocsr<span class="tok-p">(</span><span class="tok-p">)</span>                      <span class="tok-c"># объекты x объекты, разреженно</span>
+    S<span class="tok-p">.</span>setdiag<span class="tok-p">(</span><span class="tok-n">0</span><span class="tok-p">)</span>
+    S<span class="tok-p">.</span>eliminate_zeros<span class="tok-p">(</span><span class="tok-p">)</span>
+    indptr<span class="tok-p">,</span> indices<span class="tok-p">,</span> data <span class="tok-p">=</span> <span class="tok-p">[</span><span class="tok-n">0</span><span class="tok-p">]</span><span class="tok-p">,</span> <span class="tok-p">[</span><span class="tok-p">]</span><span class="tok-p">,</span> <span class="tok-p">[</span><span class="tok-p">]</span>
+    <span class="tok-k">for</span> i <span class="tok-k">in</span> <span class="tok-f">range</span><span class="tok-p">(</span>S<span class="tok-p">.</span>shape<span class="tok-p">[</span><span class="tok-n">0</span><span class="tok-p">]</span><span class="tok-p">)</span><span class="tok-p">:</span>                  <span class="tok-c"># топ-k соседей в каждой строке</span>
+        a<span class="tok-p">,</span> b <span class="tok-p">=</span> S<span class="tok-p">.</span>indptr<span class="tok-p">[</span>i<span class="tok-p">]</span><span class="tok-p">,</span> S<span class="tok-p">.</span>indptr<span class="tok-p">[</span>i <span class="tok-p">+</span> <span class="tok-n">1</span><span class="tok-p">]</span>
+        d<span class="tok-p">,</span> c <span class="tok-p">=</span> S<span class="tok-p">.</span>data<span class="tok-p">[</span>a<span class="tok-p">:</span>b<span class="tok-p">]</span><span class="tok-p">,</span> S<span class="tok-p">.</span>indices<span class="tok-p">[</span>a<span class="tok-p">:</span>b<span class="tok-p">]</span>
+        <span class="tok-k">if</span> <span class="tok-f">len</span><span class="tok-p">(</span>d<span class="tok-p">)</span> <span class="tok-p">&gt;</span> k<span class="tok-p">:</span>
+            top <span class="tok-p">=</span> np<span class="tok-p">.</span>argpartition<span class="tok-p">(</span><span class="tok-p">-</span>d<span class="tok-p">,</span> k<span class="tok-p">)</span><span class="tok-p">[</span><span class="tok-p">:</span>k<span class="tok-p">]</span>
+            d<span class="tok-p">,</span> c <span class="tok-p">=</span> d<span class="tok-p">[</span>top<span class="tok-p">]</span><span class="tok-p">,</span> c<span class="tok-p">[</span>top<span class="tok-p">]</span>
+        indices<span class="tok-p">.</span>extend<span class="tok-p">(</span>c<span class="tok-p">)</span><span class="tok-p">;</span> data<span class="tok-p">.</span>extend<span class="tok-p">(</span>d<span class="tok-p">)</span><span class="tok-p">;</span> indptr<span class="tok-p">.</span>append<span class="tok-p">(</span><span class="tok-f">len</span><span class="tok-p">(</span>indices<span class="tok-p">)</span><span class="tok-p">)</span>
+    <span class="tok-k">return</span> sp<span class="tok-p">.</span>csr_matrix<span class="tok-p">(</span><span class="tok-p">(</span>data<span class="tok-p">,</span> indices<span class="tok-p">,</span> indptr<span class="tok-p">)</span><span class="tok-p">,</span> shape<span class="tok-p">=</span>S<span class="tok-p">.</span>shape<span class="tok-p">)</span>
+
+<span class="tok-k">def</span> <span class="tok-f">recommend</span><span class="tok-p">(</span>S<span class="tok-p">,</span> R<span class="tok-p">,</span> u<span class="tok-p">,</span> n<span class="tok-p">=</span><span class="tok-n">10</span><span class="tok-p">)</span><span class="tok-p">:</span>
+    scores <span class="tok-p">=</span> <span class="tok-p">(</span>S <span class="tok-p">@</span> R<span class="tok-p">[</span>u<span class="tok-p">]</span><span class="tok-p">.</span>T<span class="tok-p">)</span><span class="tok-p">.</span>toarray<span class="tok-p">(</span><span class="tok-p">)</span><span class="tok-p">.</span>ravel<span class="tok-p">(</span><span class="tok-p">)</span>      <span class="tok-c"># sum_j sim(i, j) * r_uj</span>
+    scores<span class="tok-p">[</span>R<span class="tok-p">[</span>u<span class="tok-p">]</span><span class="tok-p">.</span>indices<span class="tok-p">]</span> <span class="tok-p">=</span> <span class="tok-p">-</span>np<span class="tok-p">.</span>inf               <span class="tok-c"># маскируем просмотренное</span>
+    top <span class="tok-p">=</span> np<span class="tok-p">.</span>argpartition<span class="tok-p">(</span><span class="tok-p">-</span>scores<span class="tok-p">,</span> n<span class="tok-p">)</span><span class="tok-p">[</span><span class="tok-p">:</span>n<span class="tok-p">]</span>
+    <span class="tok-k">return</span> top<span class="tok-p">[</span>np<span class="tok-p">.</span>argsort<span class="tok-p">(</span><span class="tok-p">-</span>scores<span class="tok-p">[</span>top<span class="tok-p">]</span><span class="tok-p">)</span><span class="tok-p">]</span>
+</code></pre></div>
+<p>Перед использованием на проде проверьте валидацию по времени, как в <a href="/edufamcs-demo/handbook/recsys/oflajn-metriki/" rel="noopener noreferrer nofollow">статье про метрики</a>.</p>
+<h2 id="почему-knn-сильный-бейзлайн">Почему kNN — сильный бейзлайн</h2>
+<p>Ferrari Dacrema, Cremonesi и Jannach (2019, <em>Are We Really Making Much Progress?</em>) взяли 18 нейросетевых методов с топ-конференций, воспроизвести смогли 7, и 6 из них часто проигрывали хорошо настроенным соседским методам (item-kNN, user-kNN) и простым <a href="/edufamcs-demo/handbook/recsys/grafovye-modeli/" rel="noopener noreferrer nofollow">графовым моделям</a> на случайных блужданиях. Причины: kNN почти не переобучается, имеет мало гиперпараметров (<span class="tex">k</span>, нормировка, shrinkage) и использует всю информацию о совстречаемости без аппроксимации низким рангом. Практический вывод: любой нейросетевой метод нужно сравнивать с item-kNN, настроенным с тем же бюджетом. Дальше в истории: ту же совстречаемость обучают как параметры в <a href="/edufamcs-demo/handbook/recsys/slim-i-ease/" rel="noopener noreferrer nofollow">SLIM и EASE</a>, а низкоранговая версия — <a href="/edufamcs-demo/handbook/recsys/matrichnye-razlozheniya-als/" rel="noopener noreferrer nofollow">матричные разложения</a>.</p>
+<h2 id="что-ломается-на-практике">Что ломается на практике</h2>
+<ul>
+<li><strong>Популярные объекты</strong> доминируют в соседях: нужна нормировка по популярности (BM25, <span class="tex">\alpha&gt;0{,}5</span> в обобщённом косинусе).</li>
+<li><strong>Длинный хвост</strong> остаётся без соседей: для редких объектов совстречаемость случайна — shrinkage и минимальный порог <span class="tex">n_{ij}</span>.</li>
+<li><strong>Холодный старт:</strong> новый объект не имеет строки в <span class="tex">S</span> до следующего пересчёта; новый пользователь с одним событием получает рекомендации по одному объекту.</li>
+<li><strong>Вычислительная стоимость</strong> растёт квадратично с длиной истории: следите за выбросами.</li>
+<li><strong>Свежесть таблицы:</strong> <span class="tex">S</span> считают офлайн, интервал пересчёта (час, сутки) задаёт, насколько быстро реагируют рекомендации; в ленте новостей этого мало.</li>
+<li><strong>Повторы:</strong> в e-commerce рекомендовать только что купленный холодильник бессмысленно, а в продуктовых — естественно; решайте это правилом, а не моделью.</li>
+</ul>
+<h2 id="что-почитать">Что почитать</h2>
+<ul>
+<li>Goldberg D. et al. <em>Using collaborative filtering to weave an information tapestry</em>, CACM 1992 — https://doi.org/10.1145/138859.138867</li>
+<li>Resnick P. et al. <em>GroupLens: An Open Architecture for Collaborative Filtering of Netnews</em>, CSCW 1994 — https://doi.org/10.1145/192844.192905</li>
+<li>Sarwar B., Karypis G., Konstan J., Riedl J. <em>Item-based Collaborative Filtering Recommendation Algorithms</em>, WWW 2001 — https://doi.org/10.1145/371920.372071</li>
+<li>Linden G., Smith B., York J. <em>Amazon.com Recommendations: Item-to-Item Collaborative Filtering</em>, IEEE Internet Computing, 2003 — https://doi.org/10.1109/MIC.2003.1167344</li>
+<li>Smith B., Linden G. <em>Two Decades of Recommender Systems at Amazon.com</em>, IEEE Internet Computing, 2017 — https://doi.org/10.1109/MIC.2017.72</li>
+<li>Lemire D., Maclachlan A. <em>Slope One Predictors for Online Rating-Based Collaborative Filtering</em>, SDM 2005 — https://arxiv.org/abs/cs/0702144</li>
+<li>Ferrari Dacrema M., Cremonesi P., Jannach D. <em>Are We Really Making Much Progress?</em>, RecSys 2019 — https://arxiv.org/abs/1907.06902</li>
+<li>DeepRecSys, семинар 2 — https://youtu.be/q55mPzvw-AM; MTS «Your first recsys», часть 3 (коллаборативная фильтрация, implicit и LightFM) — https://youtu.be/GC0K27AZ_Pg</li>
+</ul>
+</div>
+      
+
+      
+      <nav class="pager" aria-label="Соседние статьи">
+        <a href="/edufamcs-demo/handbook/recsys/nepersonalnye-i-kontentnye/"><span><svg class="ico sm" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-arrow-left"/></svg>Назад</span>Неперсонализированные и контентные рекомендации</a>
+        <a href="/edufamcs-demo/handbook/recsys/matrichnye-razlozheniya-als/"><span>Дальше<svg class="ico sm" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-arrow"/></svg></span>Матричные разложения и ALS</a>
+      </nav>
+      
+    </article>
+
+    <aside class="hb-toc" aria-label="На этой странице">
+      <a class="l2" href="#история-от-tapestry-до-amazon">История: от Tapestry до Amazon</a><a class="l2" href="#user-based-cf">User-based CF</a><a class="l2" href="#меры-сходства">Меры сходства</a><a class="l3" href="#shrinkage-борьба-с-малым-пересечением">Shrinkage: борьба с малым пересечением</a><a class="l2" href="#item-based-cf">Item-based CF</a><a class="l2" href="#slope-one">Slope One</a><a class="l2" href="#неявный-фидбэк">Неявный фидбэк</a><a class="l3" href="#сложность">Сложность</a><a class="l2" href="#почему-knn-сильный-бейзлайн">Почему kNN — сильный бейзлайн</a><a class="l2" href="#что-ломается-на-практике">Что ломается на практике</a><a class="l2" href="#что-почитать">Что почитать</a>
+    </aside>
+  </div>
+</div>
+
+
+</main>
+
+<footer class="ftr" data-theme="dark">
+  <svg class="sym fern" viewBox="0 0 40.5 65.02" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#fern"/></svg>
+  <div class="container">
+    <div class="ftr-row">
+      <a href="/edufamcs-demo/" aria-label="EDU FAMCS — главная"><img src="/edufamcs-demo/static/brand/logo/logo-edu-dark.svg" alt="EDU FAMCS" width="196" height="40"></a>
+      <ul class="ftr-links">
+        <li><a href="/edufamcs-demo/#courses">Курсы</a></li>
+        <li><a href="/edufamcs-demo/ml/">Машинное обучение</a></li>
+        <li><a href="/edufamcs-demo/handbook/">Хендбук</a></li>
+        <li><a href="/edufamcs-demo/news/">Новости</a></li>
+        <li><a href="/edufamcs-demo/people/">Авторы</a></li>
+        <li><a href="/edufamcs-demo/about/">О&nbsp;нас</a></li>
+        <li><a href="/edufamcs-demo/propose/">Предложить или исправить</a></li>
+        <li><a href="/edufamcs-demo/privacy/">Конфиденциальность</a></li>
+      </ul>
+    </div>
+    <div class="ftr-big" aria-hidden="true">EDU<span class="d">·</span>FAMCS</div>
+    <p class="ftr-copy">© 2026 EDU FAMCS · Минск</p>
+  </div>
+</footer>
+
+<div class="toasts-region" aria-live="polite" id="toasts">
+
+</div>
+
+</body>
+</html>

@@ -1,0 +1,267 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Производные, градиенты и оптимизация · EDU FAMCS</title>
+<meta name="description" content="Производные, градиенты и оптимизация — Математическая база. Хендбук ML-курса ФПМИ.">
+<meta name="theme-color" content="#060A16">
+<meta name="robots" content="noindex, nofollow">
+<meta name="htmx-config" content='{"allowEval":false,"includeIndicatorStyles":false,"historyCacheSize":0,"selfRequestsOnly":true}'>
+<meta name="katex-js" content="/edufamcs-demo/static/vendor/katex/katex.min.js">
+<meta name="katex-css" content="/edufamcs-demo/static/vendor/katex/katex.min.css">
+<link rel="icon" href="/edufamcs-demo/static/brand/logo/favicon-16.svg" type="image/svg+xml" sizes="16x16">
+<link rel="icon" href="/edufamcs-demo/static/brand/logo/favicon.svg" type="image/svg+xml" sizes="any">
+<link rel="preload" href="/edufamcs-demo/static/brand/fonts/manrope-cyrillic-400.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/edufamcs-demo/static/brand/fonts/unbounded-cyrillic-800.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="/edufamcs-demo/static/brand/fonts.css">
+<link rel="stylesheet" href="/edufamcs-demo/static/brand/tokens.css">
+<link rel="stylesheet" href="/edufamcs-demo/static/brand/components.css">
+<link rel="stylesheet" href="/edufamcs-demo/static/css/site.css">
+<link rel="stylesheet" href="/edufamcs-demo/static/css/hub.css">
+<link rel="stylesheet" href="/edufamcs-demo/static/css/about.css">
+<link rel="stylesheet" href="/edufamcs-demo/static/handbook/handbook.css">
+<script src="/edufamcs-demo/static/js/theme.js"></script>
+<script src="/edufamcs-demo/static/vendor/htmx/htmx.min.js" defer></script>
+<script src="/edufamcs-demo/static/vendor/alpine/alpine-csp.min.js" defer></script>
+<script src="/edufamcs-demo/static/js/site.js" defer></script>
+<script src="/edufamcs-demo/static/handbook/handbook.js" defer></script>
+</head>
+<body class="" hx-headers='{"X-CSRFToken": "Md3HbT7eqUhe1pJtYuzn3HXOpDnB6k8gbXCLVRUBlLFngYUcvHiv0ctTXlt6EuQ0"}'>
+<a class="skip" href="#main">К содержанию</a>
+<div class="demo-bar" role="note">Демо-версия для отзывов: вход, запись на курсы и формы здесь не работают.</div>
+
+<header class="hdr">
+  <div class="container">
+    <a class="brand" href="/edufamcs-demo/" aria-label="EDU FAMCS — главная">
+      <span class="full"><img class="only-light" src="/edufamcs-demo/static/brand/logo/logo-edu-light.svg" alt="EDU FAMCS" width="196" height="40"><img class="only-dark" src="/edufamcs-demo/static/brand/logo/logo-edu-dark.svg" alt="EDU FAMCS" width="196" height="40"></span>
+      <span class="short"><img class="only-light" src="/edufamcs-demo/static/brand/logo/logo-edu-light.svg" alt="EDU FAMCS" height="30"><img class="only-dark" src="/edufamcs-demo/static/brand/logo/logo-edu-dark.svg" alt="EDU FAMCS" height="30"></span>
+    </a>
+    <nav class="nav" id="main-nav" aria-label="Основная навигация">
+      <a href="/edufamcs-demo/#courses">Курсы</a>
+      <a href="/edufamcs-demo/ml/" >Машинное обучение</a>
+      
+      <a href="/edufamcs-demo/handbook/" aria-current="page">Хендбук</a>
+      <a href="/edufamcs-demo/news/" >Новости</a>
+      <a href="/edufamcs-demo/people/" >Авторы</a>
+      <a href="/edufamcs-demo/about/" >О&nbsp;нас</a>
+    </nav>
+    <div class="hdr-actions">
+      
+      <a class="btn btn-outline btn-login" href="/edufamcs-demo/accounts/login/?next=/handbook/math/gradienty-i-optimizaciya/">Войти</a>
+      
+      <button class="icon-btn menu-btn" type="button" aria-label="Меню" aria-expanded="false" aria-controls="main-nav"><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-menu"/></svg></button>
+    </div>
+  </div>
+</header>
+
+<main id="main">
+
+
+
+<div class="container hb-page hb-tone">
+  <div class="hb">
+    <aside class="hb-nav" aria-label="Статьи раздела">
+      
+<form class="hb-search" action="/edufamcs-demo/handbook/search/" method="get" role="search">
+  <svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-search"/></svg>
+  <input class="input" type="search" name="q" value="" placeholder="Поиск по хендбуку" aria-label="Поиск по хендбуку" autocomplete="off" maxlength="120"
+    hx-get="/edufamcs-demo/handbook/search/" hx-trigger="input changed delay:250ms, search" hx-target="#hb-nav-results" hx-sync="this:replace">
+</form>
+
+      <div id="hb-nav-results" class="hb-nav-results" aria-live="polite"></div>
+      <a class="grp" href="/edufamcs-demo/handbook/math/">Линейная алгебра и анализ</a>
+      
+      <a class="" href="/edufamcs-demo/handbook/math/vektory-i-matricy/">Векторы, матрицы и нормы</a>
+      
+      <a class="" href="/edufamcs-demo/handbook/math/sobstvennye-vektory-i-svd/">Собственные векторы и сингулярное разложение</a>
+      
+      <a class="cur" href="/edufamcs-demo/handbook/math/gradienty-i-optimizaciya/" aria-current="page">Производные, градиенты и оптимизация</a>
+      
+    </aside>
+
+    <article class="hb-main">
+      <nav class="crumbs" aria-label="Навигация"><a href="/edufamcs-demo/handbook/">Хендбук</a><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-chev"/></svg><a href="/edufamcs-demo/handbook/math/">Математическая база</a></nav>
+      <h1 class="h1">Производные, градиенты и оптимизация</h1>
+      <div class="hb-meta">
+        
+        
+        <span><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-clock"/></svg>12&nbsp;мин</span>
+        <span class="hb-authors"><span class="avatar sm" title="Артем Лебедевич">АЛ</span>Артем Лебедевич</span>
+        <span><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-edit"/></svg>9 ноября 2026</span>
+        
+        
+      </div>
+
+      
+      <details class="hb-mtoc">
+        <summary><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-list"/></svg>Содержание<svg class="ico sm" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-chev-down"/></svg></summary>
+        <a class="l2" href="#производная-градиент-якобиан-гессиан">Производная, градиент, якобиан, гессиан</a><a class="l2" href="#правило-цепочки">Правило цепочки</a><a class="l2" href="#шпаргалка-матричного-дифференцирования">Шпаргалка матричного дифференцирования</a><a class="l2" href="#выпуклость">Выпуклость</a><a class="l2" href="#градиентный-спуск">Градиентный спуск</a><a class="l2" href="#условная-оптимизация">Условная оптимизация</a><a class="l2" href="#проверка-градиента-и-код">Проверка градиента и код</a><a class="l2" href="#ловушки">Ловушки</a><a class="l2" href="#что-почитать">Что почитать</a>
+      </details>
+      
+
+      <div class="prose"><p>Обучение модели — это минимизация функции потерь <span class="tex">L(w)</span> по параметрам <span class="tex">w</span>. Аналитическое решение есть у линейной регрессии и почти ни у чего больше; всё остальное — итерационные методы, которые используют производные. Эта глава — минимум матанализа и оптимизации, на котором стоят логистическая регрессия, бустинг и обратное распространение.</p>
+<h2 id="производная-градиент-якобиан-гессиан">Производная, градиент, якобиан, гессиан</h2>
+<p>Производная <span class="tex">f'(x)</span> — коэффициент наилучшей линейной аппроксимации: <span class="tex">f(x+h)=f(x)+f'(x)h+o(h)</span>. Для функции многих переменных <span class="tex">f:\mathbb{R}^d\to\mathbb{R}</span> частные производные собираются в <strong>градиент</strong></p>
+<div class="tex tex-block">\nabla f(x)=\Big(\frac{\partial f}{\partial x_1},\dots,\frac{\partial f}{\partial x_d}\Big)^\top,\qquad f(x+h)=f(x)+\langle\nabla f(x),h\rangle+o(\|h\|).</div>
+<p>Производная по направлению единичного <span class="tex">u</span> равна <span class="tex">\langle\nabla f,u\rangle=\|\nabla f\|\cos\theta</span>, максимальна при <span class="tex">u\parallel\nabla f</span>. Поэтому градиент — направление наискорейшего роста, а <span class="tex">-\nabla f</span> — наискорейшего убывания; он ортогонален линиям уровня, а в точке минимума равен нулю (необходимое условие экстремума).</p>
+<p>Для векторной функции <span class="tex">F:\mathbb{R}^d\to\mathbb{R}^m</span> <strong>якобиан</strong> <span class="tex">J_F\in\mathbb{R}^{m\times d}</span> состоит из <span class="tex">\partial F_i/\partial x_j</span> и задаёт линейную аппроксимацию <span class="tex">F(x+h)\approx F(x)+J_Fh</span>. <strong>Гессиан</strong> <span class="tex">H_f=\big(\partial^2f/\partial x_i\partial x_j\big)</span> — матрица вторых производных, симметричная, если <span class="tex">f</span> дважды непрерывно дифференцируема. Ряд Тейлора до второго порядка:</p>
+<div class="tex tex-block">f(x+h)\approx f(x)+\nabla f(x)^\top h+\tfrac12h^\top H_f(x)\,h.</div>
+<p>В критической точке (<span class="tex">\nabla f=0</span>) тип определяют знаки собственных значений гессиана (<a href="/edufamcs-demo/handbook/math/sobstvennye-vektory-i-svd/" rel="noopener noreferrer nofollow">спектральная теорема</a>): <span class="tex">H\succ0</span> — строгий минимум, <span class="tex">H\prec0</span> — строгий максимум, собственные значения разных знаков — седло; если есть нулевые, второго порядка не хватает. В многомерных нейросетях седловые точки встречаются намного чаще плохих локальных минимумов (Dauphin et al., 2014).</p>
+<h2 id="правило-цепочки">Правило цепочки</h2>
+<p>Для композиции <span class="tex">L(w)=f(g(w))</span> якобианы перемножаются: <span class="tex">J_{f\circ g}=J_f\cdot J_g</span>. Для скаляра <span class="tex">L</span> и цепочки слоёв <span class="tex">x\to h_1\to h_2\to L</span> градиент по параметрам первого слоя считают, начиная с выхода: сначала <span class="tex">\partial L/\partial h_2</span>, затем <span class="tex">\partial L/\partial h_1=\big(\partial h_2/\partial h_1\big)^\top\partial L/\partial h_2</span>, и так назад. На каждом шаге матрица умножается на вектор, а не на матрицу — поэтому обход с конца дешевле. Это и есть <strong>обратное распространение</strong> (reverse-mode autodiff): стоимость вычисления всего градиента — константа, умноженная на стоимость прямого прохода, независимо от числа параметров. Детали и вычислительный граф — в главе <a href="/edufamcs-demo/handbook/dl/obratnoe-rasprostranenie-oshibki/" rel="noopener noreferrer nofollow">об обратном распространении</a>.</p>
+<h2 id="шпаргалка-матричного-дифференцирования">Шпаргалка матричного дифференцирования</h2>
+<p>Выводить градиенты удобнее всего через дифференциал <span class="tex">dL=\langle\nabla L,dw\rangle</span>. Результаты, которые стоит знать наизусть (все градиенты — по <span class="tex">w</span>):</p>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>Функция</th>
+<th>Градиент</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><span class="tex">a^\top w</span></td>
+<td><span class="tex">a</span></td>
+</tr>
+<tr>
+<td><span class="tex">w^\top Aw</span></td>
+<td><span class="tex">(A+A^\top)w</span>, при симметричной <span class="tex">A</span> — <span class="tex">2Aw</span></td>
+</tr>
+<tr>
+<td><span class="tex">\lVert w\rVert_2^2</span></td>
+<td><span class="tex">2w</span></td>
+</tr>
+<tr>
+<td><span class="tex">\lVert Xw-y\rVert_2^2</span></td>
+<td><span class="tex">2X^\top(Xw-y)</span></td>
+</tr>
+<tr>
+<td><span class="tex">\sigma(z)=\frac1{1+e^{-z}}</span></td>
+<td><span class="tex">\sigma'=\sigma(1-\sigma)</span></td>
+</tr>
+<tr>
+<td><span class="tex">\mathrm{LSE}(z)=\ln\sum_je^{z_j}</span></td>
+<td><span class="tex">\mathrm{softmax}(z)</span></td>
+</tr>
+</tbody>
+</table></div>
+<p>Вывод строки про МНК: <span class="tex">L=(Xw-y)^\top(Xw-y)</span>, <span class="tex">dL=2(Xw-y)^\top X\,dw</span>, откуда <span class="tex">\nabla L=2X^\top(Xw-y)</span>. Приравнивая к нулю, получаем нормальные уравнения из <a href="/edufamcs-demo/handbook/math/vektory-i-matricy/" rel="noopener noreferrer nofollow">первой главы</a>. Для логистической регрессии с <span class="tex">\hat p=\sigma(w^\top x)</span> и log-loss <span class="tex">\ell=-y\ln\hat p-(1-y)\ln(1-\hat p)</span> выкладка сокращается до <span class="tex">\nabla_w\ell=(\hat p-y)\,x</span> — разность предсказания и ответа, умноженная на признаки; то же верно для softmax-кросс-энтропии: <span class="tex">\partial\ell/\partial z=\mathrm{softmax}(z)-e_y</span>. Ради устойчивости <span class="tex">\ln\sum e^{z_j}</span> считают как <span class="tex">m+\ln\sum e^{z_j-m}</span>, <span class="tex">m=\max z</span>.</p>
+<h2 id="выпуклость">Выпуклость</h2>
+<p>Множество выпукло, если вместе с двумя точками содержит соединяющий их отрезок. Функция <span class="tex">f</span> <strong>выпукла</strong>, если <span class="tex">f(\alpha x+(1-\alpha)y)\le\alpha f(x)+(1-\alpha)f(y)</span>; для дважды дифференцируемой это то же, что <span class="tex">H_f\succeq0</span> везде. Главное свойство: у выпуклой функции любой локальный минимум глобален, а множество минимумов выпукло. Если <span class="tex">H\succeq\mu I</span> (<span class="tex">\mu&gt;0</span>), функция <strong>сильно выпукла</strong> и минимум единственен.</p>
+<ul>
+<li>MSE линейной модели выпукла: гессиан <span class="tex">2X^\top X\succeq0</span>. Строго выпукла при <span class="tex">\mathrm{rank}\,X=d</span>.</li>
+<li>Log-loss логистической регрессии выпукла по <span class="tex">w</span>: гессиан <span class="tex">X^\top\mathrm{diag}\big(\hat p_i(1-\hat p_i)\big)X\succeq0</span>.</li>
+<li><span class="tex">L_1</span>- и <span class="tex">L_2</span>-штрафы выпуклы, так что Lasso и Ridge остаются выпуклыми задачами. <span class="tex">L_2</span>-штраф <span class="tex">\lambda\|w\|^2</span> добавляет к гессиану <span class="tex">2\lambda I</span> и делает задачу сильно выпуклой даже при вырожденной <span class="tex">X^\top X</span>; <span class="tex">L_1</span> этого не даёт, и решение Lasso может быть неединственным.</li>
+<li>Нейросети невыпуклы по параметрам (симметрии перестановки нейронов, нелинейности). Гарантий глобального минимума нет, но на практике достаточно хороших локальных; как именно — открытый предмет теории.</li>
+</ul>
+<h2 id="градиентный-спуск">Градиентный спуск</h2>
+<p>Итерация</p>
+<div class="tex tex-block">w_{t+1}=w_t-\eta\,\nabla L(w_t),</div>
+<p>предложена Коши в 1847 году для решения систем уравнений. Шаг <span class="tex">\eta</span> (learning rate) — ключевой гиперпараметр. Разберём квадратичную модель <span class="tex">L(w)=\tfrac12w^\top Aw-b^\top w</span>, <span class="tex">A\succ0</span> — к ней сводится окрестность любого минимума. Ошибка <span class="tex">e_t=w_t-w^*</span> удовлетворяет <span class="tex">e_{t+1}=(I-\eta A)e_t</span>, то есть в собственном базисе компонента <span class="tex">i</span> умножается на <span class="tex">1-\eta\lambda_i</span> каждый шаг. Сходимость требует <span class="tex">|1-\eta\lambda_i|&lt;1</span> для всех <span class="tex">i</span>, то есть <span class="tex">\eta&lt;2/\lambda_{\max}</span>. Оптимальный шаг <span class="tex">\eta=2/(\lambda_{\max}+\lambda_{\min})</span> даёт скорость <span class="tex">\frac{\kappa-1}{\kappa+1}</span> на итерацию, где <span class="tex">\kappa=\lambda_{\max}/\lambda_{\min}</span> — число обусловленности. При <span class="tex">\kappa=1000</span> даже с оптимальным шагом нужно около 1150 итераций на каждый порядок точности (в общем случае — порядка <span class="tex">\kappa</span>): эллиптические «овраги» заставляют траекторию зигзагом бегать поперёк. Поэтому нормализация признаков обычно ускоряет сходимость — она уменьшает <span class="tex">\kappa</span> матрицы <span class="tex">X^\top X</span>.</p>
+<p><strong>Стохастический градиентный спуск.</strong> Для <span class="tex">L(w)=\frac1n\sum_i\ell_i(w)</span> точный градиент стоит <span class="tex">O(n)</span>. Робинс и Монро (1951) показали, что можно брать несмещённую оценку по случайному объекту или <strong>мини-батчу</strong> из <span class="tex">B</span> объектов: <span class="tex">g_t=\frac1B\sum_{i\in\mathcal{B}}\nabla\ell_i(w_t)</span>, <span class="tex">\mathbb{E}\,g_t=\nabla L</span>. Стандартное отклонение оценки убывает как <span class="tex">1/\sqrt B</span>. Условия сходимости на убывающий шаг: <span class="tex">\sum\eta_t=\infty</span>, <span class="tex">\sum\eta_t^2&lt;\infty</span>. На практике шумной оценки достаточно и часто выгодно: шум помогает выбираться из седел.</p>
+<p><strong>Импульс.</strong> Метод тяжёлого шарика (Polyak, 1964): <span class="tex">v_{t+1}=\mu v_t+\nabla L(w_t)</span>, <span class="tex">w_{t+1}=w_t-\eta v_{t+1}</span>. Накопленная скорость гасит зигзаги и ускоряет движение вдоль дна оврага. На квадратичной функции при подобранных <span class="tex">\eta,\mu</span> множитель за шаг становится <span class="tex">\frac{\sqrt\kappa-1}{\sqrt\kappa+1}</span>: число итераций растёт как <span class="tex">\sqrt\kappa</span>, а не <span class="tex">\kappa</span> (при <span class="tex">\kappa=1000</span> — около 36 на порядок точности вместо 1150). Для произвольных сильно выпуклых функций у тяжёлого шарика такой гарантии нет. Нестеров (1983) считает градиент в «упреждающей» точке <span class="tex">w_t-\eta\mu v_t</span> и получает оптимальную оценку <span class="tex">O(1/t^2)</span> для гладких выпуклых функций, а для сильно выпуклых — число итераций порядка <span class="tex">\sqrt\kappa</span> на порядок точности. Адаптивные методы (AdaGrad 2011, RMSProp 2012, Adam 2014) нормируют шаг по каждой координате на историю градиентов; их разбирают в главе <a href="/edufamcs-demo/handbook/dl/optimizatory-i-regulyarizaciya/" rel="noopener noreferrer nofollow">об оптимизаторах</a>.</p>
+<p><strong>Метод Ньютона</strong> использует вторую производную: <span class="tex">w_{t+1}=w_t-H^{-1}\nabla L(w_t)</span> — минимум квадратичной аппроксимации Тейлора. На квадратичной функции сходится за один шаг независимо от <span class="tex">\kappa</span>, вблизи минимума — квадратично. Цена: хранение и обращение гессиана <span class="tex">O(d^2)</span> памяти и <span class="tex">O(d^3)</span> времени, а вдали от минимума <span class="tex">H</span> может быть не положительно определён. Поэтому в классическом ML Ньютон работает на малых <span class="tex">d</span> (IRLS для логистической регрессии), а на больших — квазиньютоновские L-BFGS, которые строят приближение <span class="tex">H^{-1}</span> по последним градиентам.</p>
+<h2 id="условная-оптимизация">Условная оптимизация</h2>
+<p>Задача <span class="tex">\min f(x)</span> при <span class="tex">g(x)=0</span>. В точке условного оптимума градиент <span class="tex">f</span> не может иметь составляющей вдоль допустимой поверхности, то есть <span class="tex">\nabla f=-\lambda\nabla g</span>. Эквивалентно: стационарна <strong>функция Лагранжа</strong> <span class="tex">\mathcal{L}(x,\lambda)=f(x)+\lambda g(x)</span> по <span class="tex">x</span> и <span class="tex">\lambda</span>. Пример: максимум <span class="tex">x^\top Ax</span> при <span class="tex">\|x\|=1</span> даёт <span class="tex">Ax=\lambda x</span> — собственный вектор, так что PCA — условная оптимизация.</p>
+<p>Для ограничений-неравенств <span class="tex">g_j(x)\le0</span> множители <span class="tex">\lambda_j\ge0</span>, а необходимые условия оптимальности (при условиях регулярности ограничений, например Слейтера для выпуклых задач) — <strong>условия Каруша–Куна–Таккера (KKT)</strong>: стационарность <span class="tex">\nabla f+\sum\lambda_j\nabla g_j=0</span>, допустимость, <span class="tex">\lambda_j\ge0</span> и <strong>дополняющая нежёсткость</strong> <span class="tex">\lambda_jg_j(x)=0</span>: если ограничение неактивно, его множитель нулевой. Для выпуклых задач KKT ещё и достаточны. Применение — в <a href="/edufamcs-demo/handbook/classic/metod-opornyh-vektorov/" rel="noopener noreferrer nofollow">методе опорных векторов</a>: ненулевые множители только у объектов на границе полосы и, в варианте с мягким зазором, внутри неё или по неверную сторону; они и называются опорными. Двойственная задача зависит от данных лишь через скалярные произведения, что открывает ядра.</p>
+<h2 id="проверка-градиента-и-код">Проверка градиента и код</h2>
+<p>Любой вручную выведенный градиент проверяют <strong>конечными разностями</strong>: <span class="tex">\frac{L(w+\varepsilon e_i)-L(w-\varepsilon e_i)}{2\varepsilon}</span> с <span class="tex">\varepsilon\approx10^{-5}</span> и сравнивают относительную ошибку (ожидается <span class="tex">&lt;10^{-6}</span> в float64). Центральная разность имеет ошибку <span class="tex">O(\varepsilon^2)</span> против <span class="tex">O(\varepsilon)</span> у односторонней.</p>
+<div class="code"><div class="code-head"><span class="lang">python</span></div><pre><code><span class="tok-k">import</span> numpy <span class="tok-k">as</span> np
+
+rng <span class="tok-p">=</span> np<span class="tok-p">.</span>random<span class="tok-p">.</span>default_rng<span class="tok-p">(</span><span class="tok-n">1</span><span class="tok-p">)</span>
+n<span class="tok-p">,</span> d <span class="tok-p">=</span> <span class="tok-n">500</span><span class="tok-p">,</span> <span class="tok-n">3</span>
+X <span class="tok-p">=</span> rng<span class="tok-p">.</span>normal<span class="tok-p">(</span>size<span class="tok-p">=</span><span class="tok-p">(</span>n<span class="tok-p">,</span> d<span class="tok-p">)</span><span class="tok-p">)</span> <span class="tok-p">*</span> np<span class="tok-p">.</span>array<span class="tok-p">(</span><span class="tok-p">[</span><span class="tok-n">1.0</span><span class="tok-p">,</span> <span class="tok-n">3.0</span><span class="tok-p">,</span> <span class="tok-n">0.3</span><span class="tok-p">]</span><span class="tok-p">)</span>    <span class="tok-c"># разный масштаб -&gt; плохая обусловленность</span>
+y <span class="tok-p">=</span> X <span class="tok-p">@</span> np<span class="tok-p">.</span>array<span class="tok-p">(</span><span class="tok-p">[</span><span class="tok-n">1.0</span><span class="tok-p">,</span> <span class="tok-p">-</span><span class="tok-n">2.0</span><span class="tok-p">,</span> <span class="tok-n">4.0</span><span class="tok-p">]</span><span class="tok-p">)</span> <span class="tok-p">+</span> <span class="tok-n">0.1</span> <span class="tok-p">*</span> rng<span class="tok-p">.</span>normal<span class="tok-p">(</span>size<span class="tok-p">=</span>n<span class="tok-p">)</span>
+
+loss <span class="tok-p">=</span> <span class="tok-k">lambda</span> w<span class="tok-p">:</span> np<span class="tok-p">.</span>mean<span class="tok-p">(</span><span class="tok-p">(</span>X <span class="tok-p">@</span> w <span class="tok-p">-</span> y<span class="tok-p">)</span> <span class="tok-p">*</span><span class="tok-p">*</span> <span class="tok-n">2</span><span class="tok-p">)</span>
+grad <span class="tok-p">=</span> <span class="tok-k">lambda</span> w<span class="tok-p">:</span> <span class="tok-n">2</span> <span class="tok-p">/</span> n <span class="tok-p">*</span> X<span class="tok-p">.</span>T <span class="tok-p">@</span> <span class="tok-p">(</span>X <span class="tok-p">@</span> w <span class="tok-p">-</span> y<span class="tok-p">)</span>
+
+<span class="tok-c"># проверка градиента</span>
+w0 <span class="tok-p">=</span> rng<span class="tok-p">.</span>normal<span class="tok-p">(</span>size<span class="tok-p">=</span>d<span class="tok-p">)</span>
+num <span class="tok-p">=</span> np<span class="tok-p">.</span>array<span class="tok-p">(</span><span class="tok-p">[</span><span class="tok-p">(</span>loss<span class="tok-p">(</span>w0 <span class="tok-p">+</span> <span class="tok-n">1e-6</span> <span class="tok-p">*</span> e<span class="tok-p">)</span> <span class="tok-p">-</span> loss<span class="tok-p">(</span>w0 <span class="tok-p">-</span> <span class="tok-n">1e-6</span> <span class="tok-p">*</span> e<span class="tok-p">)</span><span class="tok-p">)</span> <span class="tok-p">/</span> <span class="tok-n">2e-6</span> <span class="tok-k">for</span> e <span class="tok-k">in</span> np<span class="tok-p">.</span>eye<span class="tok-p">(</span>d<span class="tok-p">)</span><span class="tok-p">]</span><span class="tok-p">)</span>
+<span class="tok-f">print</span><span class="tok-p">(</span>np<span class="tok-p">.</span>abs<span class="tok-p">(</span>num <span class="tok-p">-</span> grad<span class="tok-p">(</span>w0<span class="tok-p">)</span><span class="tok-p">)</span><span class="tok-p">.</span>max<span class="tok-p">(</span><span class="tok-p">)</span> <span class="tok-p">/</span> np<span class="tok-p">.</span>abs<span class="tok-p">(</span>num<span class="tok-p">)</span><span class="tok-p">.</span>max<span class="tok-p">(</span><span class="tok-p">)</span><span class="tok-p">)</span>    <span class="tok-c"># ~1e-9</span>
+
+w_star <span class="tok-p">=</span> np<span class="tok-p">.</span>linalg<span class="tok-p">.</span>lstsq<span class="tok-p">(</span>X<span class="tok-p">,</span> y<span class="tok-p">,</span> rcond<span class="tok-p">=</span><span class="tok-k">None</span><span class="tok-p">)</span><span class="tok-p">[</span><span class="tok-n">0</span><span class="tok-p">]</span>               <span class="tok-c"># аналитика</span>
+lam <span class="tok-p">=</span> np<span class="tok-p">.</span>linalg<span class="tok-p">.</span>eigvalsh<span class="tok-p">(</span><span class="tok-n">2</span> <span class="tok-p">/</span> n <span class="tok-p">*</span> X<span class="tok-p">.</span>T <span class="tok-p">@</span> X<span class="tok-p">)</span>
+<span class="tok-f">print</span><span class="tok-p">(</span><span class="tok-s">"</span><span class="tok-s">kappa =</span><span class="tok-s">"</span><span class="tok-p">,</span> lam<span class="tok-p">[</span><span class="tok-p">-</span><span class="tok-n">1</span><span class="tok-p">]</span> <span class="tok-p">/</span> lam<span class="tok-p">[</span><span class="tok-n">0</span><span class="tok-p">]</span><span class="tok-p">,</span> <span class="tok-s">"</span><span class="tok-s"> 2/lam_max =</span><span class="tok-s">"</span><span class="tok-p">,</span> <span class="tok-n">2</span> <span class="tok-p">/</span> lam<span class="tok-p">[</span><span class="tok-p">-</span><span class="tok-n">1</span><span class="tok-p">]</span><span class="tok-p">)</span>
+
+<span class="tok-k">def</span> <span class="tok-f">gd</span><span class="tok-p">(</span>eta<span class="tok-p">,</span> steps<span class="tok-p">=</span><span class="tok-n">500</span><span class="tok-p">)</span><span class="tok-p">:</span>
+    w<span class="tok-p">,</span> path <span class="tok-p">=</span> np<span class="tok-p">.</span>zeros<span class="tok-p">(</span>d<span class="tok-p">)</span><span class="tok-p">,</span> <span class="tok-p">[</span><span class="tok-p">]</span>
+    <span class="tok-k">for</span> _ <span class="tok-k">in</span> <span class="tok-f">range</span><span class="tok-p">(</span>steps<span class="tok-p">)</span><span class="tok-p">:</span>
+        w <span class="tok-p">=</span> w <span class="tok-p">-</span> eta <span class="tok-p">*</span> grad<span class="tok-p">(</span>w<span class="tok-p">)</span>
+        path<span class="tok-p">.</span>append<span class="tok-p">(</span>np<span class="tok-p">.</span>linalg<span class="tok-p">.</span>norm<span class="tok-p">(</span>w <span class="tok-p">-</span> w_star<span class="tok-p">)</span><span class="tok-p">)</span>
+    <span class="tok-k">return</span> np<span class="tok-p">.</span>array<span class="tok-p">(</span>path<span class="tok-p">)</span>
+
+<span class="tok-k">for</span> eta <span class="tok-k">in</span> <span class="tok-p">(</span><span class="tok-n">0.005</span><span class="tok-p">,</span> <span class="tok-n">0.02</span><span class="tok-p">,</span> <span class="tok-n">0.1</span><span class="tok-p">,</span> <span class="tok-n">0.12</span><span class="tok-p">)</span><span class="tok-p">:</span>
+    p <span class="tok-p">=</span> gd<span class="tok-p">(</span>eta<span class="tok-p">)</span>
+    <span class="tok-f">print</span><span class="tok-p">(</span><span class="tok-s">f</span><span class="tok-s">"</span><span class="tok-s">eta=</span><span class="tok-s">{</span>eta<span class="tok-s">}</span><span class="tok-s">: ||w-w*|| после 500 шагов = </span><span class="tok-s">{</span>p<span class="tok-p">[</span><span class="tok-p">-</span><span class="tok-n">1</span><span class="tok-p">]</span><span class="tok-s">:</span><span class="tok-s">.2e</span><span class="tok-s">}</span><span class="tok-s">"</span><span class="tok-p">)</span>
+</code></pre></div>
+<p>Здесь <span class="tex">\kappa\approx92</span> и <span class="tex">2/\lambda_{\max}\approx0{,}114</span>: при <span class="tex">\eta=0{,}12</span> траектория расходится, при <span class="tex">\eta=0{,}1</span> ошибка за 500 шагов падает до <span class="tex">2{,}5\cdot10^{-4}</span>, а при малых <span class="tex">\eta</span> спуск застревает вдоль направления с малым <span class="tex">\lambda</span>. Постройте <code>p</code> на логарифмической оси: на квадратичной функции это (асимптотически) прямая с наклоном <span class="tex">\log\max_i|1-\eta\lambda_i|</span>; при оптимальном шаге он равен <span class="tex">\log\frac{\kappa-1}{\kappa+1}</span>. Если перед обучением стандартизировать столбцы <span class="tex">X</span>, <span class="tex">\kappa</span> упадёт почти до единицы, и тот же <span class="tex">\eta=0{,}1</span> достигнет той же точности примерно за 50 шагов вместо 500.</p>
+<h2 id="ловушки">Ловушки</h2>
+<ul>
+<li><strong>Масштаб признаков.</strong> Один и тот же <span class="tex">\eta</span> годится для стандартизированных признаков и не годится для сырых.</li>
+<li><strong>Взрыв и затухание градиентов.</strong> Произведение якобианов растёт или убывает экспоненциально с глубиной; лечат нормализацией, остаточными связями, clipping.</li>
+<li><strong>Забытый множитель.</strong> Градиент суммы против градиента среднего отличается в <span class="tex">n</span> раз — отсюда «учится при <span class="tex">\eta=10^{-6}</span> и не учится при <span class="tex">10^{-3}</span>».</li>
+<li><strong>Численно неустойчивые формулы.</strong> <span class="tex">\ln\sigma(z)=-\ln(1+e^{-z})</span> и <span class="tex">\ln\sum e^z</span> считают через <code>np.logaddexp(0, -z)</code> и <code>scipy.special.logsumexp</code>, а не в лоб: <span class="tex">e^{-z}</span> переполняется уже при <span class="tex">z\approx-710</span>.</li>
+<li><strong>Сходимость по loss — не по весам.</strong> При плохой обусловленности <span class="tex">L</span> уже на плато, а <span class="tex">w</span> ещё далеко от <span class="tex">w^*</span>.</li>
+<li><strong>Невыпуклость.</strong> Результат зависит от инициализации и порядка батчей; фиксируйте seed и сравнивайте несколько запусков.</li>
+</ul>
+<h2 id="что-почитать">Что почитать</h2>
+<ul>
+<li>S. Boyd, L. Vandenberghe. <em>Convex Optimization</em>. Cambridge UP, 2004 — свободно на <a href="https://web.stanford.edu/~boyd/cvxbook/" rel="noopener noreferrer nofollow">web.stanford.edu/~boyd/cvxbook</a>.</li>
+<li>H. Robbins, S. Monro. <em>A Stochastic Approximation Method</em>. Annals of Mathematical Statistics, 1951.</li>
+<li>B. Polyak. <em>Some methods of speeding up the convergence of iteration methods</em>. USSR Comput. Math. and Math. Physics, 1964.</li>
+<li>Yu. Nesterov. <em>A method for solving the convex programming problem with convergence rate <span class="tex">O(1/k^2)</span></em>. Doklady AN SSSR, 1983.</li>
+<li>S. Ruder. <em>An overview of gradient descent optimization algorithms</em>, 2016 — <a href="https://arxiv.org/abs/1609.04747" rel="noopener noreferrer nofollow">arxiv.org/abs/1609.04747</a>.</li>
+<li>Y. Dauphin et al. <em>Identifying and attacking the saddle point problem in high-dimensional non-convex optimization</em>. NeurIPS, 2014 — <a href="https://arxiv.org/abs/1406.2572" rel="noopener noreferrer nofollow">arxiv.org/abs/1406.2572</a>.</li>
+<li>Учебник ШАД Яндекса: теормин «Матричное дифференцирование» — <a href="https://contest.yandex.ru/tracks/ml/mathematical-foundations/matrix-calculus" rel="noopener noreferrer nofollow">contest.yandex.ru/tracks/ml/mathematical-foundations/matrix-calculus</a> и глава «Оптимизация в ML» — <a href="https://contest.yandex.ru/tracks/ml/optimization-in-machine-learning/optimization-in-machine-learning" rel="noopener noreferrer nofollow">contest.yandex.ru/tracks/ml/optimization-in-machine-learning</a>.</li>
+<li>Хендбук Яндекса «Математика для анализа данных», «Градиентные методы» и «Методы второго порядка и условная оптимизация» — <a href="https://contest.yandex.ru/tracks/math/mathematical-analysis/gradient-methods" rel="noopener noreferrer nofollow">contest.yandex.ru/tracks/math/mathematical-analysis</a>.</li>
+</ul>
+</div>
+      
+
+      
+      <nav class="pager" aria-label="Соседние статьи">
+        <a href="/edufamcs-demo/handbook/math/sobstvennye-vektory-i-svd/"><span><svg class="ico sm" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-arrow-left"/></svg>Назад</span>Собственные векторы и сингулярное разложение</a>
+        <a href="/edufamcs-demo/handbook/math/teoriya-veroyatnostej/"><span>Дальше<svg class="ico sm" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-arrow"/></svg></span>Теория вероятностей</a>
+      </nav>
+      
+    </article>
+
+    <aside class="hb-toc" aria-label="На этой странице">
+      <a class="l2" href="#производная-градиент-якобиан-гессиан">Производная, градиент, якобиан, гессиан</a><a class="l2" href="#правило-цепочки">Правило цепочки</a><a class="l2" href="#шпаргалка-матричного-дифференцирования">Шпаргалка матричного дифференцирования</a><a class="l2" href="#выпуклость">Выпуклость</a><a class="l2" href="#градиентный-спуск">Градиентный спуск</a><a class="l2" href="#условная-оптимизация">Условная оптимизация</a><a class="l2" href="#проверка-градиента-и-код">Проверка градиента и код</a><a class="l2" href="#ловушки">Ловушки</a><a class="l2" href="#что-почитать">Что почитать</a>
+    </aside>
+  </div>
+</div>
+
+
+</main>
+
+<footer class="ftr" data-theme="dark">
+  <svg class="sym fern" viewBox="0 0 40.5 65.02" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#fern"/></svg>
+  <div class="container">
+    <div class="ftr-row">
+      <a href="/edufamcs-demo/" aria-label="EDU FAMCS — главная"><img src="/edufamcs-demo/static/brand/logo/logo-edu-dark.svg" alt="EDU FAMCS" width="196" height="40"></a>
+      <ul class="ftr-links">
+        <li><a href="/edufamcs-demo/#courses">Курсы</a></li>
+        <li><a href="/edufamcs-demo/ml/">Машинное обучение</a></li>
+        <li><a href="/edufamcs-demo/handbook/">Хендбук</a></li>
+        <li><a href="/edufamcs-demo/news/">Новости</a></li>
+        <li><a href="/edufamcs-demo/people/">Авторы</a></li>
+        <li><a href="/edufamcs-demo/about/">О&nbsp;нас</a></li>
+        <li><a href="/edufamcs-demo/propose/">Предложить или исправить</a></li>
+        <li><a href="/edufamcs-demo/privacy/">Конфиденциальность</a></li>
+      </ul>
+    </div>
+    <div class="ftr-big" aria-hidden="true">EDU<span class="d">·</span>FAMCS</div>
+    <p class="ftr-copy">© 2026 EDU FAMCS · Минск</p>
+  </div>
+</footer>
+
+<div class="toasts-region" aria-live="polite" id="toasts">
+
+</div>
+
+</body>
+</html>

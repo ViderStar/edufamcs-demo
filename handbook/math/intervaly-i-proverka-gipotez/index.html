@@ -1,0 +1,313 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Доверительные интервалы и проверка гипотез · EDU FAMCS</title>
+<meta name="description" content="Доверительные интервалы и проверка гипотез — Математическая база. Хендбук ML-курса ФПМИ.">
+<meta name="theme-color" content="#060A16">
+<meta name="robots" content="noindex, nofollow">
+<meta name="htmx-config" content='{"allowEval":false,"includeIndicatorStyles":false,"historyCacheSize":0,"selfRequestsOnly":true}'>
+<meta name="katex-js" content="/edufamcs-demo/static/vendor/katex/katex.min.js">
+<meta name="katex-css" content="/edufamcs-demo/static/vendor/katex/katex.min.css">
+<link rel="icon" href="/edufamcs-demo/static/brand/logo/favicon-16.svg" type="image/svg+xml" sizes="16x16">
+<link rel="icon" href="/edufamcs-demo/static/brand/logo/favicon.svg" type="image/svg+xml" sizes="any">
+<link rel="preload" href="/edufamcs-demo/static/brand/fonts/manrope-cyrillic-400.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/edufamcs-demo/static/brand/fonts/unbounded-cyrillic-800.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="/edufamcs-demo/static/brand/fonts.css">
+<link rel="stylesheet" href="/edufamcs-demo/static/brand/tokens.css">
+<link rel="stylesheet" href="/edufamcs-demo/static/brand/components.css">
+<link rel="stylesheet" href="/edufamcs-demo/static/css/site.css">
+<link rel="stylesheet" href="/edufamcs-demo/static/css/hub.css">
+<link rel="stylesheet" href="/edufamcs-demo/static/css/about.css">
+<link rel="stylesheet" href="/edufamcs-demo/static/handbook/handbook.css">
+<script src="/edufamcs-demo/static/js/theme.js"></script>
+<script src="/edufamcs-demo/static/vendor/htmx/htmx.min.js" defer></script>
+<script src="/edufamcs-demo/static/vendor/alpine/alpine-csp.min.js" defer></script>
+<script src="/edufamcs-demo/static/js/site.js" defer></script>
+<script src="/edufamcs-demo/static/handbook/handbook.js" defer></script>
+</head>
+<body class="" hx-headers='{"X-CSRFToken": "LBIJFhJOSPzz7d2UytuKCW3awaNGHM7ealhNpfwbNGXImMdD5GdSzrzf4STbfWPY"}'>
+<a class="skip" href="#main">К содержанию</a>
+<div class="demo-bar" role="note">Демо-версия для отзывов: вход, запись на курсы и формы здесь не работают.</div>
+
+<header class="hdr">
+  <div class="container">
+    <a class="brand" href="/edufamcs-demo/" aria-label="EDU FAMCS — главная">
+      <span class="full"><img class="only-light" src="/edufamcs-demo/static/brand/logo/logo-edu-light.svg" alt="EDU FAMCS" width="196" height="40"><img class="only-dark" src="/edufamcs-demo/static/brand/logo/logo-edu-dark.svg" alt="EDU FAMCS" width="196" height="40"></span>
+      <span class="short"><img class="only-light" src="/edufamcs-demo/static/brand/logo/logo-edu-light.svg" alt="EDU FAMCS" height="30"><img class="only-dark" src="/edufamcs-demo/static/brand/logo/logo-edu-dark.svg" alt="EDU FAMCS" height="30"></span>
+    </a>
+    <nav class="nav" id="main-nav" aria-label="Основная навигация">
+      <a href="/edufamcs-demo/#courses">Курсы</a>
+      <a href="/edufamcs-demo/ml/" >Машинное обучение</a>
+      
+      <a href="/edufamcs-demo/handbook/" aria-current="page">Хендбук</a>
+      <a href="/edufamcs-demo/news/" >Новости</a>
+      <a href="/edufamcs-demo/people/" >Авторы</a>
+      <a href="/edufamcs-demo/about/" >О&nbsp;нас</a>
+    </nav>
+    <div class="hdr-actions">
+      
+      <a class="btn btn-outline btn-login" href="/edufamcs-demo/accounts/login/?next=/handbook/math/intervaly-i-proverka-gipotez/">Войти</a>
+      
+      <button class="icon-btn menu-btn" type="button" aria-label="Меню" aria-expanded="false" aria-controls="main-nav"><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-menu"/></svg></button>
+    </div>
+  </div>
+</header>
+
+<main id="main">
+
+
+
+<div class="container hb-page hb-tone">
+  <div class="hb">
+    <aside class="hb-nav" aria-label="Статьи раздела">
+      
+<form class="hb-search" action="/edufamcs-demo/handbook/search/" method="get" role="search">
+  <svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-search"/></svg>
+  <input class="input" type="search" name="q" value="" placeholder="Поиск по хендбуку" aria-label="Поиск по хендбуку" autocomplete="off" maxlength="120"
+    hx-get="/edufamcs-demo/handbook/search/" hx-trigger="input changed delay:250ms, search" hx-target="#hb-nav-results" hx-sync="this:replace">
+</form>
+
+      <div id="hb-nav-results" class="hb-nav-results" aria-live="polite"></div>
+      <a class="grp" href="/edufamcs-demo/handbook/math/">Вероятность и статистика</a>
+      
+      <a class="" href="/edufamcs-demo/handbook/math/teoriya-veroyatnostej/">Теория вероятностей</a>
+      
+      <a class="" href="/edufamcs-demo/handbook/math/ocenki-parametrov-i-mmp/">Оценки параметров и метод максимального правдоподобия</a>
+      
+      <a class="cur" href="/edufamcs-demo/handbook/math/intervaly-i-proverka-gipotez/" aria-current="page">Доверительные интервалы и проверка гипотез</a>
+      
+    </aside>
+
+    <article class="hb-main">
+      <nav class="crumbs" aria-label="Навигация"><a href="/edufamcs-demo/handbook/">Хендбук</a><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-chev"/></svg><a href="/edufamcs-demo/handbook/math/">Математическая база</a></nav>
+      <h1 class="h1">Доверительные интервалы и проверка гипотез</h1>
+      <div class="hb-meta">
+        
+        
+        <span><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-clock"/></svg>11&nbsp;мин</span>
+        <span class="hb-authors"><span class="avatar sm" title="Артем Лебедевич">АЛ</span>Артем Лебедевич</span>
+        <span><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-edit"/></svg>9 ноября 2026</span>
+        
+        
+      </div>
+
+      
+      <details class="hb-mtoc">
+        <summary><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-list"/></svg>Содержание<svg class="ico sm" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-chev-down"/></svg></summary>
+        <a class="l2" href="#доверительный-интервал">Доверительный интервал</a><a class="l3" href="#интервал-для-среднего">Интервал для среднего</a><a class="l2" href="#проверка-гипотез">Проверка гипотез</a><a class="l3" href="#как-p-value-читают-неверно">Как p-value читают неверно</a><a class="l3" href="#мощность-и-размер-выборки">Мощность и размер выборки</a><a class="l2" href="#стандартные-критерии">Стандартные критерии</a><a class="l2" href="#множественные-сравнения">Множественные сравнения</a><a class="l2" href="#бутстрап-интервалы-и-ab-тесты">Бутстрап-интервалы и A/B-тесты</a><a class="l2" href="#код">Код</a><a class="l2" href="#ловушки">Ловушки</a><a class="l2" href="#что-почитать">Что почитать</a>
+      </details>
+      
+
+      <div class="prose"><p>Точечная оценка без указания точности почти бесполезна: «конверсия выросла на 0,3 п.п.» — это сигнал или шум? Доверительные интервалы и проверка гипотез дают формальный ответ. Тот же аппарат решает, выкатывать ли новую модель рекомендаций по итогам A/B-теста, и является частью ежедневной работы ML-инженера.</p>
+<h2 id="доверительный-интервал">Доверительный интервал</h2>
+<p><strong>Доверительный интервал</strong> уровня <span class="tex">1-\alpha</span> для параметра <span class="tex">\theta</span> — пара статистик <span class="tex">\big(\underline\theta(X),\overline\theta(X)\big)</span>, для которой</p>
+<div class="tex tex-block">P\big(\underline\theta(X)&lt;\theta&lt;\overline\theta(X)\big)\ge1-\alpha.</div>
+<p>Случаен здесь интервал, а не параметр. Частотная интерпретация: если повторять эксперимент много раз и каждый раз строить интервал уровня 95%, около 95% интервалов накроют истинное <span class="tex">\theta</span>. Утверждение «с вероятностью 95% параметр лежит в этом конкретном интервале» формально неверно: после наблюдения интервал фиксирован, и параметр либо внутри, либо нет. (Такое утверждение допустимо лишь для байесовского «достоверного» интервала с априорным распределением.)</p>
+<h3 id="интервал-для-среднего">Интервал для среднего</h3>
+<p>Выборка <span class="tex">x_1,\dots,x_n\sim\mathcal{N}(\mu,\sigma^2)</span>.</p>
+<p><strong>Известная <span class="tex">\sigma</span>.</strong> Статистика <span class="tex">\sqrt n(\bar x-\mu)/\sigma\sim\mathcal{N}(0,1)</span>, значит</p>
+<div class="tex tex-block">\mu\in\Big(\bar x-z_{1-\alpha/2}\tfrac{\sigma}{\sqrt n},\ \bar x+z_{1-\alpha/2}\tfrac{\sigma}{\sqrt n}\Big),\quad z_{0{,}975}\approx1{,}96.</div>
+<p><strong>Неизвестная <span class="tex">\sigma</span></strong> (обычный случай). Заменяем её на <span class="tex">s</span>, но статистика <span class="tex">\sqrt n(\bar x-\mu)/s</span> уже не нормальна: она имеет <strong>распределение Стьюдента</strong> <span class="tex">t_{n-1}</span> — отношение стандартной нормальной величины к независимой от неё <span class="tex">\sqrt{\chi^2_{n-1}/(n-1)}</span> (для нормальной выборки <span class="tex">\bar x</span> и <span class="tex">s^2</span> независимы — теорема Фишера). У него тяжелее хвосты, так как <span class="tex">s</span> тоже случайно:</p>
+<div class="tex tex-block">\mu\in\Big(\bar x-t_{n-1,1-\alpha/2}\tfrac{s}{\sqrt n},\ \bar x+t_{n-1,1-\alpha/2}\tfrac{s}{\sqrt n}\Big).</div>
+<p>При <span class="tex">n=10</span> квантиль <span class="tex">t_{9,0{,}975}=2{,}26</span>, при <span class="tex">n=30</span> — <span class="tex">2{,}05</span>, при <span class="tex">n\to\infty</span> стремится к <span class="tex">1{,}96</span>. Вывод точной формулы использует нормальность выборки; для не слишком скошенных данных при большом <span class="tex">n</span> по ЦПТ (<a href="/edufamcs-demo/handbook/math/teoriya-veroyatnostej/" rel="noopener noreferrer nofollow">теория вероятностей</a>) интервал остаётся приблизительно верным.</p>
+<p><strong>Интервал для дисперсии.</strong> Статистика <span class="tex">(n-1)s^2/\sigma^2\sim\chi^2_{n-1}</span> — распределена как сумма квадратов <span class="tex">n-1</span> (а не <span class="tex">n</span>: одна степень свободы ушла на <span class="tex">\bar x</span>) независимых стандартных нормальных величин. Отсюда, обозначая через <span class="tex">\chi^2_{n-1,q}</span> квантиль уровня <span class="tex">q</span>,</p>
+<div class="tex tex-block">\sigma^2\in\Big(\frac{(n-1)s^2}{\chi^2_{n-1,1-\alpha/2}},\ \frac{(n-1)s^2}{\chi^2_{n-1,\alpha/2}}\Big).</div>
+<p>Интервал несимметричен и очень чувствителен к ненормальности выборки.</p>
+<p><strong>Интервал для доли</strong> (CTR, конверсия): нормальная аппроксимация <span class="tex">\hat p\pm z\sqrt{\hat p(1-\hat p)/n}</span> плохо работает при малых <span class="tex">n</span> и <span class="tex">p</span> у границ; лучше интервал Уилсона (Wilson, 1927; <code>statsmodels.stats.proportion.proportion_confint(..., method='wilson')</code>).</p>
+<h2 id="проверка-гипотез">Проверка гипотез</h2>
+<p><strong>Статистическая гипотеза</strong> — предположение о распределении данных. Формулируют две: <strong>нулевую</strong> <span class="tex">H_0</span> (обычно «эффекта нет») и <strong>альтернативу</strong> <span class="tex">H_1</span>. По выборке вычисляют <strong>статистику критерия</strong> <span class="tex">T</span>, чьё распределение при <span class="tex">H_0</span> известно. Решение принимают по её значению: нулевую отвергают, если <span class="tex">T</span> оказалась в маловероятной при <span class="tex">H_0</span> области.</p>
+<p>Возможны две ошибки:</p>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th></th>
+<th><span class="tex">H_0</span> верна</th>
+<th><span class="tex">H_0</span> неверна</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Отвергли <span class="tex">H_0</span></td>
+<td>ошибка I рода, вероятность <span class="tex">\alpha</span> (ложная тревога)</td>
+<td>верное решение, <strong>мощность</strong> <span class="tex">1-\beta</span></td>
+</tr>
+<tr>
+<td>Не отвергли <span class="tex">H_0</span></td>
+<td>верное решение</td>
+<td>ошибка II рода, вероятность <span class="tex">\beta</span> (пропуск эффекта)</td>
+</tr>
+</tbody>
+</table></div>
+<p><strong>Уровень значимости</strong> <span class="tex">\alpha</span> (как правило, <span class="tex">0{,}05</span>) выбирается заранее и задаёт допустимую вероятность ошибки I рода. <strong>p-value</strong> — вероятность при условии <span class="tex">H_0</span> получить значение статистики не менее экстремальное, чем наблюдённое. Если <span class="tex">p&lt;\alpha</span>, <span class="tex">H_0</span> отвергается. Тест Колмогорова из ноутбука лекции — типичный пример: <span class="tex">T=\sqrt n\sup_x|F_n(x)-F_0(x)|</span>, а p-value — хвост распределения Колмогорова. Это распределение выведено для полностью заданной непрерывной <span class="tex">F_0</span>; если параметры <span class="tex">F_0</span> оценены по той же выборке (как <span class="tex">\hat\lambda</span> в ноутбуке) или <span class="tex">F_0</span> дискретна (Пуассон), тест становится консервативным, и p-value завышено — нужна поправка Лиллиефорса или параметрический бутстрап.</p>
+<h3 id="как-p-value-читают-неверно">Как p-value читают неверно</h3>
+<ul>
+<li><strong>Это не вероятность <span class="tex">H_0</span>.</strong> <span class="tex">p=0{,}03</span> не означает «с вероятностью 97% эффект есть»: <span class="tex">P(\text{данные}\mid H_0)\neq P(H_0\mid\text{данные})</span>, и для обратного нужен априорный <span class="tex">P(H_0)</span> (та же логика, что в формуле Байеса с редкой болезнью).</li>
+<li><strong>Значимость — не важность.</strong> На огромной выборке ничтожная разница даёт <span class="tex">p&lt;10^{-10}</span>; значимость не равна важности. Всегда смотрите на эффект и его интервал.</li>
+<li><strong><span class="tex">p&gt;\alpha</span> — не доказательство отсутствия эффекта,</strong> а лишь отсутствие свидетельств. Возможно, мощности не хватило.</li>
+<li><strong>p-value случайно.</strong> При верной <span class="tex">H_0</span> и непрерывной статистике оно равномерно на <span class="tex">[0,1]</span>: 5% экспериментов «значимы» просто по случайности.</li>
+</ul>
+<h3 id="мощность-и-размер-выборки">Мощность и размер выборки</h3>
+<p>Мощность <span class="tex">1-\beta</span> — вероятность обнаружить эффект данного размера. Она растёт с размером эффекта <span class="tex">\delta</span>, с <span class="tex">n</span>, с <span class="tex">\alpha</span> и падает с шумом <span class="tex">\sigma</span>. Для сравнения двух средних с равными группами по <span class="tex">n</span> приблизительно</p>
+<div class="tex tex-block">n=\frac{2\,(z_{1-\alpha/2}+z_{1-\beta})^2\,\sigma^2}{\delta^2}\quad\text{на группу}.</div>
+<p>При <span class="tex">\alpha=0{,}05</span>, мощности <span class="tex">0{,}8</span> получаем <span class="tex">(1{,}96+0{,}84)^2\cdot2\approx15{,}7</span>, то есть <span class="tex">n\approx15{,}7\,\sigma^2/\delta^2</span>. Эффект вдвое меньше требует в 4 раза больше данных. Размер выборки рассчитывают <strong>до</strong> эксперимента, исходя из <strong>минимального детектируемого эффекта</strong> (MDE, minimum detectable effect) — наименьшего эффекта, который имеет смысл для бизнеса, — а не подгоняют по ходу.</p>
+<h2 id="стандартные-критерии">Стандартные критерии</h2>
+<p>Критерии из ноутбука лекции 4 (нормальность, дисперсии, средние, корреляция) и несколько соседних — с условиями применимости:</p>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>Задача</th>
+<th>Критерий</th>
+<th>Допущения</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>нормальность</td>
+<td>Шапиро–Уилк (<code>shapiro</code>)</td>
+<td>на больших <span class="tex">n</span> отвергает из-за малейших отклонений — смотрите QQ-график</td>
+</tr>
+<tr>
+<td>равенство дисперсий</td>
+<td>Левене (<code>levene</code>), F-критерий</td>
+<td>F-критерий очень чувствителен к ненормальности, Левене устойчивее</td>
+</tr>
+<tr>
+<td>равенство средних, 2 выборки</td>
+<td>t-тест Уэлча (<code>ttest_ind(equal_var=False)</code>)</td>
+<td>примерная нормальность средних; дисперсии могут различаться</td>
+</tr>
+<tr>
+<td>парные наблюдения</td>
+<td>парный t-тест (<code>ttest_rel</code>)</td>
+<td>нормальность разностей</td>
+</tr>
+<tr>
+<td>сравнение без нормальности</td>
+<td>Манна–Уитни (<code>mannwhitneyu</code>)</td>
+<td>независимость; проверяет <span class="tex">P(X&gt;Y)=\tfrac12</span> (сдвиг распределений), а не равенство средних</td>
+</tr>
+<tr>
+<td>независимость категорий</td>
+<td><span class="tex">\chi^2</span> на таблице сопряжённости (<code>chi2_contingency</code>)</td>
+<td>ожидаемые частоты <span class="tex">\ge5</span></td>
+</tr>
+<tr>
+<td>линейная связь</td>
+<td>значимость корреляции Пирсона (<code>pearsonr</code>)</td>
+<td>двумерная нормальность; ранговый вариант — <code>spearmanr</code></td>
+</tr>
+</tbody>
+</table></div>
+<p><strong>t-тест Уэлча</strong> для двух выборок: <span class="tex">t=\dfrac{\bar x_1-\bar x_2}{\sqrt{s_1^2/n_1+s_2^2/n_2}}</span> с приближённым числом степеней свободы по Уэлчу–Саттертвейту. Классический тест Стьюдента требует <span class="tex">\sigma_1=\sigma_2</span>; Уэлч этого не требует и почти ничего не теряет при равенстве, поэтому по умолчанию берут его. Проверка равенства дисперсий перед t-тестом как обязательный «шаг 1» — устаревшая практика: двухэтапная процедура сама искажает уровень значимости.</p>
+<h2 id="множественные-сравнения">Множественные сравнения</h2>
+<p>Если проверить 20 независимых гипотез при <span class="tex">\alpha=0{,}05</span> и все <span class="tex">H_0</span> верны, вероятность хотя бы одной ложной тревоги — <span class="tex">1-0{,}95^{20}\approx64\%</span>. Это важно при тестировании множества метрик, сегментов, вариантов. Две защиты:</p>
+<ul>
+<li><strong>Бонферрони</strong>: отвергать при <span class="tex">p_i&lt;\alpha/m</span>. Контролирует вероятность хотя бы одной ошибки (FWER); консервативна при больших <span class="tex">m</span>.</li>
+<li><strong>Бенджамини–Хохберг</strong> (1995): отсортировать <span class="tex">p_{(1)}\le\dots\le p_{(m)}</span>, найти наибольшее <span class="tex">k</span> с <span class="tex">p_{(k)}\le\frac km\alpha</span> и отвергнуть первые <span class="tex">k</span> гипотез. Контролирует долю ложных открытий (FDR) — разумный выбор при сотнях гипотез и допустимой доле ложных срабатываний. Реализация: <code>statsmodels.stats.multitest.multipletests(p, method='fdr_bh')</code>.</li>
+</ul>
+<p>Другой способ нарваться на ту же проблему — «подглядывание»: проверять p-value каждый день и остановить тест, когда оно упало ниже <span class="tex">0{,}05</span>. Уровень ошибки I рода при этом растёт в разы; нужна заранее фиксированная длительность либо последовательные критерии.</p>
+<h2 id="бутстрап-интервалы-и-ab-тесты">Бутстрап-интервалы и A/B-тесты</h2>
+<p>Когда распределение статистики неизвестно (медиана, отношение метрик, AUC), используйте процентильный бутстрап из <a href="/edufamcs-demo/handbook/math/ocenki-parametrov-i-mmp/" rel="noopener noreferrer nofollow">предыдущей главы</a>: 2,5% и 97,5% квантили распределения <span class="tex">T^*</span>. Для разности метрик в A/B ресэмплируют пользователей в каждой группе, пересчитывают метрику и берут интервал разности: если он не содержит нуля, эффект значим примерно на уровне 5%.</p>
+<p>В A/B-тестах <a href="/edufamcs-demo/handbook/recsys/prodakshen-i-ab-testy/" rel="noopener noreferrer nofollow">рекомендательной системы</a> работает та же схема: <span class="tex">H_0</span> — «модели одинаковы по целевой метрике», рандомизация по пользователям, MDE и длительность определяются до старта, решение — по интервалу эффекта и guardrail-метрикам. Специфика: метрики на уровне пользователя с выбросами (чек), зависимость событий одного пользователя (считайте на уровне пользователя, не события), CUPED (Deng et al., 2013) — снижение дисперсии за счёт ковариаты из периода до эксперимента.</p>
+<h2 id="код">Код</h2>
+<div class="code"><div class="code-head"><span class="lang">python</span></div><pre><code><span class="tok-k">import</span> numpy <span class="tok-k">as</span> np
+<span class="tok-k">from</span> scipy <span class="tok-k">import</span> stats
+
+rng <span class="tok-p">=</span> np<span class="tok-p">.</span>random<span class="tok-p">.</span>default_rng<span class="tok-p">(</span><span class="tok-n">0</span><span class="tok-p">)</span>
+a <span class="tok-p">=</span> rng<span class="tok-p">.</span>lognormal<span class="tok-p">(</span><span class="tok-n">3.00</span><span class="tok-p">,</span> <span class="tok-n">0.8</span><span class="tok-p">,</span> <span class="tok-n">4000</span><span class="tok-p">)</span>      <span class="tok-c"># контроль: чеки</span>
+b <span class="tok-p">=</span> rng<span class="tok-p">.</span>lognormal<span class="tok-p">(</span><span class="tok-n">3.03</span><span class="tok-p">,</span> <span class="tok-n">0.8</span><span class="tok-p">,</span> <span class="tok-n">4000</span><span class="tok-p">)</span>      <span class="tok-c"># тест: эффект ~+3%</span>
+
+<span class="tok-c"># t-интервал для среднего</span>
+m<span class="tok-p">,</span> se <span class="tok-p">=</span> a<span class="tok-p">.</span>mean<span class="tok-p">(</span><span class="tok-p">)</span><span class="tok-p">,</span> stats<span class="tok-p">.</span>sem<span class="tok-p">(</span>a<span class="tok-p">)</span>
+<span class="tok-f">print</span><span class="tok-p">(</span>stats<span class="tok-p">.</span>t<span class="tok-p">.</span>interval<span class="tok-p">(</span><span class="tok-n">0.95</span><span class="tok-p">,</span> df<span class="tok-p">=</span><span class="tok-f">len</span><span class="tok-p">(</span>a<span class="tok-p">)</span> <span class="tok-p">-</span> <span class="tok-n">1</span><span class="tok-p">,</span> loc<span class="tok-p">=</span>m<span class="tok-p">,</span> scale<span class="tok-p">=</span>se<span class="tok-p">)</span><span class="tok-p">)</span>
+
+<span class="tok-c"># тест Уэлча и Манна–Уитни</span>
+<span class="tok-f">print</span><span class="tok-p">(</span>stats<span class="tok-p">.</span>ttest_ind<span class="tok-p">(</span>b<span class="tok-p">,</span> a<span class="tok-p">,</span> equal_var<span class="tok-p">=</span><span class="tok-k">False</span><span class="tok-p">)</span><span class="tok-p">)</span>
+<span class="tok-f">print</span><span class="tok-p">(</span>stats<span class="tok-p">.</span>mannwhitneyu<span class="tok-p">(</span>b<span class="tok-p">,</span> a<span class="tok-p">,</span> alternative<span class="tok-p">=</span><span class="tok-s">"</span><span class="tok-s">two-sided</span><span class="tok-s">"</span><span class="tok-p">)</span><span class="tok-p">)</span>
+<span class="tok-f">print</span><span class="tok-p">(</span>stats<span class="tok-p">.</span>shapiro<span class="tok-p">(</span>a<span class="tok-p">[</span><span class="tok-p">:</span><span class="tok-n">500</span><span class="tok-p">]</span><span class="tok-p">)</span><span class="tok-p">.</span>pvalue<span class="tok-p">)</span>    <span class="tok-c"># нормальность чеков отвергается</span>
+
+<span class="tok-c"># бутстрап-интервал разности средних</span>
+d <span class="tok-p">=</span> <span class="tok-p">[</span>rng<span class="tok-p">.</span>choice<span class="tok-p">(</span>b<span class="tok-p">,</span> b<span class="tok-p">.</span>size<span class="tok-p">)</span><span class="tok-p">.</span>mean<span class="tok-p">(</span><span class="tok-p">)</span> <span class="tok-p">-</span> rng<span class="tok-p">.</span>choice<span class="tok-p">(</span>a<span class="tok-p">,</span> a<span class="tok-p">.</span>size<span class="tok-p">)</span><span class="tok-p">.</span>mean<span class="tok-p">(</span><span class="tok-p">)</span> <span class="tok-k">for</span> _ <span class="tok-k">in</span> <span class="tok-f">range</span><span class="tok-p">(</span><span class="tok-n">3000</span><span class="tok-p">)</span><span class="tok-p">]</span>
+<span class="tok-f">print</span><span class="tok-p">(</span>np<span class="tok-p">.</span>percentile<span class="tok-p">(</span>d<span class="tok-p">,</span> <span class="tok-p">[</span><span class="tok-n">2.5</span><span class="tok-p">,</span> <span class="tok-n">97.5</span><span class="tok-p">]</span><span class="tok-p">)</span><span class="tok-p">)</span>
+
+<span class="tok-c"># размер выборки на группу для эффекта delta при sigma, alpha=0.05, мощность 0.8</span>
+<span class="tok-k">def</span> <span class="tok-f">n_per_group</span><span class="tok-p">(</span>delta<span class="tok-p">,</span> sigma<span class="tok-p">,</span> alpha<span class="tok-p">=</span><span class="tok-n">0.05</span><span class="tok-p">,</span> power<span class="tok-p">=</span><span class="tok-n">0.8</span><span class="tok-p">)</span><span class="tok-p">:</span>
+    z <span class="tok-p">=</span> stats<span class="tok-p">.</span>norm<span class="tok-p">.</span>ppf<span class="tok-p">(</span><span class="tok-n">1</span> <span class="tok-p">-</span> alpha <span class="tok-p">/</span> <span class="tok-n">2</span><span class="tok-p">)</span> <span class="tok-p">+</span> stats<span class="tok-p">.</span>norm<span class="tok-p">.</span>ppf<span class="tok-p">(</span>power<span class="tok-p">)</span>
+    <span class="tok-k">return</span> <span class="tok-f">int</span><span class="tok-p">(</span>np<span class="tok-p">.</span>ceil<span class="tok-p">(</span><span class="tok-n">2</span> <span class="tok-p">*</span> <span class="tok-p">(</span>z <span class="tok-p">*</span> sigma <span class="tok-p">/</span> delta<span class="tok-p">)</span> <span class="tok-p">*</span><span class="tok-p">*</span> <span class="tok-n">2</span><span class="tok-p">)</span><span class="tok-p">)</span>
+<span class="tok-f">print</span><span class="tok-p">(</span>n_per_group<span class="tok-p">(</span>delta<span class="tok-p">=</span><span class="tok-n">0.5</span><span class="tok-p">,</span> sigma<span class="tok-p">=</span><span class="tok-n">10</span><span class="tok-p">)</span><span class="tok-p">)</span>                 <span class="tok-c"># ~ 6280 на группу</span>
+
+<span class="tok-c"># множественные сравнения</span>
+<span class="tok-k">from</span> statsmodels.stats.multitest <span class="tok-k">import</span> multipletests   <span class="tok-c"># statsmodels нужен отдельно</span>
+p <span class="tok-p">=</span> np<span class="tok-p">.</span>array<span class="tok-p">(</span><span class="tok-p">[</span><span class="tok-n">0.001</span><span class="tok-p">,</span> <span class="tok-n">0.008</span><span class="tok-p">,</span> <span class="tok-n">0.039</span><span class="tok-p">,</span> <span class="tok-n">0.041</span><span class="tok-p">,</span> <span class="tok-n">0.2</span><span class="tok-p">,</span> <span class="tok-n">0.7</span><span class="tok-p">]</span><span class="tok-p">)</span>
+<span class="tok-f">print</span><span class="tok-p">(</span>multipletests<span class="tok-p">(</span>p<span class="tok-p">,</span> alpha<span class="tok-p">=</span><span class="tok-n">0.05</span><span class="tok-p">,</span> method<span class="tok-p">=</span><span class="tok-s">"</span><span class="tok-s">fdr_bh</span><span class="tok-s">"</span><span class="tok-p">)</span><span class="tok-p">[</span><span class="tok-n">0</span><span class="tok-p">]</span><span class="tok-p">)</span>
+</code></pre></div>
+<h2 id="ловушки">Ловушки</h2>
+<ul>
+<li><strong>Интерпретация интервала как «вероятности параметра».</strong> Формулируйте так: «интервал построен методом, накрывающим параметр в 95% повторов».</li>
+<li><strong>Применение t-теста к тяжёлохвостым данным</strong> с малым <span class="tex">n</span>: проверьте QQ-график, возьмите бутстрап или лог-преобразование.</li>
+<li><strong>Игнорирование зависимости.</strong> Несколько записей одного пользователя завышают <span class="tex">n</span> и сужают интервал; усредняйте по пользователю или применяйте кластерные ошибки.</li>
+<li><strong>Тест после просмотра данных.</strong> Выбор гипотезы по графику обесценивает p-value.</li>
+<li><strong>Несколько метрик и сегментов без поправки.</strong> «Нашли значимый эффект у мобильных пользователей из Гродно» при 40 срезах — шум.</li>
+<li><strong>Критерий Колмогорова с оценёнными параметрами.</strong> Подставили <span class="tex">\hat\lambda</span> по той же выборке — p-value завышено; используйте Лиллиефорса или параметрический бутстрап.</li>
+<li><strong>Односторонний тест, выбранный постфактум.</strong> Направление гипотезы фиксируется до наблюдения данных.</li>
+<li><strong>Значимо, но бесполезно.</strong> Сочетайте p-value с MDE, размером эффекта и бизнес-порогом.</li>
+</ul>
+<h2 id="что-почитать">Что почитать</h2>
+<ul>
+<li>Student (W. Gosset). <em>The probable error of a mean</em>. Biometrika, 1908.</li>
+<li>Y. Benjamini, Y. Hochberg. <em>Controlling the false discovery rate: a practical and powerful approach to multiple testing</em>. JRSS B, 1995.</li>
+<li>R. Wasserstein, N. Lazar. <em>The ASA's statement on p-values: context, process, and purpose</em>. The American Statistician, 2016.</li>
+<li>R. Kohavi, D. Tang, Y. Xu. <em>Trustworthy Online Controlled Experiments</em>. Cambridge UP, 2020.</li>
+<li>A. Deng, Y. Xu, R. Kohavi, T. Walker. <em>Improving the sensitivity of online controlled experiments by utilizing pre-experiment data</em>. WSDM, 2013 — CUPED.</li>
+<li>H. Lilliefors. <em>On the Kolmogorov–Smirnov test for normality with mean and variance unknown</em>. JASA, 1967.</li>
+<li>Ноутбук лекции 4 курса ML ФПМИ БГУ <code>math.stat2.ipynb</code> — интервалы для нормальной выборки и тесты нормальности, дисперсий, средних, корреляции.</li>
+</ul>
+</div>
+      
+
+      
+      <nav class="pager" aria-label="Соседние статьи">
+        <a href="/edufamcs-demo/handbook/math/ocenki-parametrov-i-mmp/"><span><svg class="ico sm" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-arrow-left"/></svg>Назад</span>Оценки параметров и метод максимального правдоподобия</a>
+        
+      </nav>
+      
+    </article>
+
+    <aside class="hb-toc" aria-label="На этой странице">
+      <a class="l2" href="#доверительный-интервал">Доверительный интервал</a><a class="l3" href="#интервал-для-среднего">Интервал для среднего</a><a class="l2" href="#проверка-гипотез">Проверка гипотез</a><a class="l3" href="#как-p-value-читают-неверно">Как p-value читают неверно</a><a class="l3" href="#мощность-и-размер-выборки">Мощность и размер выборки</a><a class="l2" href="#стандартные-критерии">Стандартные критерии</a><a class="l2" href="#множественные-сравнения">Множественные сравнения</a><a class="l2" href="#бутстрап-интервалы-и-ab-тесты">Бутстрап-интервалы и A/B-тесты</a><a class="l2" href="#код">Код</a><a class="l2" href="#ловушки">Ловушки</a><a class="l2" href="#что-почитать">Что почитать</a>
+    </aside>
+  </div>
+</div>
+
+
+</main>
+
+<footer class="ftr" data-theme="dark">
+  <svg class="sym fern" viewBox="0 0 40.5 65.02" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#fern"/></svg>
+  <div class="container">
+    <div class="ftr-row">
+      <a href="/edufamcs-demo/" aria-label="EDU FAMCS — главная"><img src="/edufamcs-demo/static/brand/logo/logo-edu-dark.svg" alt="EDU FAMCS" width="196" height="40"></a>
+      <ul class="ftr-links">
+        <li><a href="/edufamcs-demo/#courses">Курсы</a></li>
+        <li><a href="/edufamcs-demo/ml/">Машинное обучение</a></li>
+        <li><a href="/edufamcs-demo/handbook/">Хендбук</a></li>
+        <li><a href="/edufamcs-demo/news/">Новости</a></li>
+        <li><a href="/edufamcs-demo/people/">Авторы</a></li>
+        <li><a href="/edufamcs-demo/about/">О&nbsp;нас</a></li>
+        <li><a href="/edufamcs-demo/propose/">Предложить или исправить</a></li>
+        <li><a href="/edufamcs-demo/privacy/">Конфиденциальность</a></li>
+      </ul>
+    </div>
+    <div class="ftr-big" aria-hidden="true">EDU<span class="d">·</span>FAMCS</div>
+    <p class="ftr-copy">© 2026 EDU FAMCS · Минск</p>
+  </div>
+</footer>
+
+<div class="toasts-region" aria-live="polite" id="toasts">
+
+</div>
+
+</body>
+</html>

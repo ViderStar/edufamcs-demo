@@ -1,0 +1,276 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>RAG: поиск для языковых моделей · EDU FAMCS</title>
+<meta name="description" content="RAG: поиск для языковых моделей — Поиск. Хендбук ML-курса ФПМИ.">
+<meta name="theme-color" content="#060A16">
+<meta name="robots" content="noindex, nofollow">
+<meta name="htmx-config" content='{"allowEval":false,"includeIndicatorStyles":false,"historyCacheSize":0,"selfRequestsOnly":true}'>
+<meta name="katex-js" content="/edufamcs-demo/static/vendor/katex/katex.min.js">
+<meta name="katex-css" content="/edufamcs-demo/static/vendor/katex/katex.min.css">
+<link rel="icon" href="/edufamcs-demo/static/brand/logo/favicon-16.svg" type="image/svg+xml" sizes="16x16">
+<link rel="icon" href="/edufamcs-demo/static/brand/logo/favicon.svg" type="image/svg+xml" sizes="any">
+<link rel="preload" href="/edufamcs-demo/static/brand/fonts/manrope-cyrillic-400.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/edufamcs-demo/static/brand/fonts/unbounded-cyrillic-800.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="/edufamcs-demo/static/brand/fonts.css">
+<link rel="stylesheet" href="/edufamcs-demo/static/brand/tokens.css">
+<link rel="stylesheet" href="/edufamcs-demo/static/brand/components.css">
+<link rel="stylesheet" href="/edufamcs-demo/static/css/site.css">
+<link rel="stylesheet" href="/edufamcs-demo/static/css/hub.css">
+<link rel="stylesheet" href="/edufamcs-demo/static/css/about.css">
+<link rel="stylesheet" href="/edufamcs-demo/static/handbook/handbook.css">
+<script src="/edufamcs-demo/static/js/theme.js"></script>
+<script src="/edufamcs-demo/static/vendor/htmx/htmx.min.js" defer></script>
+<script src="/edufamcs-demo/static/vendor/alpine/alpine-csp.min.js" defer></script>
+<script src="/edufamcs-demo/static/js/site.js" defer></script>
+<script src="/edufamcs-demo/static/handbook/handbook.js" defer></script>
+</head>
+<body class="" hx-headers='{"X-CSRFToken": "rSVazTWs7sds7NDfER0G6cQOQRNiCw93QCuejRJP2jBBmmOYb4JO3HmTozTNaGRN"}'>
+<a class="skip" href="#main">К содержанию</a>
+<div class="demo-bar" role="note">Демо-версия для отзывов: вход, запись на курсы и формы здесь не работают.</div>
+
+<header class="hdr">
+  <div class="container">
+    <a class="brand" href="/edufamcs-demo/" aria-label="EDU FAMCS — главная">
+      <span class="full"><img class="only-light" src="/edufamcs-demo/static/brand/logo/logo-edu-light.svg" alt="EDU FAMCS" width="196" height="40"><img class="only-dark" src="/edufamcs-demo/static/brand/logo/logo-edu-dark.svg" alt="EDU FAMCS" width="196" height="40"></span>
+      <span class="short"><img class="only-light" src="/edufamcs-demo/static/brand/logo/logo-edu-light.svg" alt="EDU FAMCS" height="30"><img class="only-dark" src="/edufamcs-demo/static/brand/logo/logo-edu-dark.svg" alt="EDU FAMCS" height="30"></span>
+    </a>
+    <nav class="nav" id="main-nav" aria-label="Основная навигация">
+      <a href="/edufamcs-demo/#courses">Курсы</a>
+      <a href="/edufamcs-demo/ml/" >Машинное обучение</a>
+      
+      <a href="/edufamcs-demo/handbook/" aria-current="page">Хендбук</a>
+      <a href="/edufamcs-demo/news/" >Новости</a>
+      <a href="/edufamcs-demo/people/" >Авторы</a>
+      <a href="/edufamcs-demo/about/" >О&nbsp;нас</a>
+    </nav>
+    <div class="hdr-actions">
+      
+      <a class="btn btn-outline btn-login" href="/edufamcs-demo/accounts/login/?next=/handbook/retrieval/rag/">Войти</a>
+      
+      <button class="icon-btn menu-btn" type="button" aria-label="Меню" aria-expanded="false" aria-controls="main-nav"><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-menu"/></svg></button>
+    </div>
+  </div>
+</header>
+
+<main id="main">
+
+
+
+<div class="container hb-page s-recsys">
+  <div class="hb">
+    <aside class="hb-nav" aria-label="Статьи раздела">
+      
+<form class="hb-search" action="/edufamcs-demo/handbook/search/" method="get" role="search">
+  <svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-search"/></svg>
+  <input class="input" type="search" name="q" value="" placeholder="Поиск по хендбуку" aria-label="Поиск по хендбуку" autocomplete="off" maxlength="120"
+    hx-get="/edufamcs-demo/handbook/search/" hx-trigger="input changed delay:250ms, search" hx-target="#hb-nav-results" hx-sync="this:replace">
+</form>
+
+      <div id="hb-nav-results" class="hb-nav-results" aria-live="polite"></div>
+      <a class="grp" href="/edufamcs-demo/handbook/retrieval/">Поиск в эпоху LLM</a>
+      
+      <a class="cur" href="/edufamcs-demo/handbook/retrieval/rag/" aria-current="page">RAG: поиск для языковых моделей</a>
+      
+      <a class="" href="/edufamcs-demo/handbook/retrieval/generativnyj-poisk/">Генеративный поиск: модель как индекс</a>
+      
+      <a class="" href="/edufamcs-demo/handbook/retrieval/agentnyj-poisk/">Рассуждающий и агентный поиск: 2025–2026</a>
+      
+    </aside>
+
+    <article class="hb-main">
+      <nav class="crumbs" aria-label="Навигация"><a href="/edufamcs-demo/handbook/">Хендбук</a><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-chev"/></svg><a href="/edufamcs-demo/handbook/retrieval/">Поиск</a></nav>
+      <h1 class="h1">RAG: поиск для языковых моделей</h1>
+      <div class="hb-meta">
+        
+        
+        <span><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-clock"/></svg>13&nbsp;мин</span>
+        <span class="hb-authors"><span class="avatar sm" title="Артем Лебедевич">АЛ</span>Артем Лебедевич</span>
+        <span><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-edit"/></svg>9 ноября 2026</span>
+        
+        
+      </div>
+
+      
+      <details class="hb-mtoc">
+        <summary><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-list"/></svg>Содержание<svg class="ico sm" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-chev-down"/></svg></summary>
+        <a class="l2" href="#зачем">Зачем</a><a class="l2" href="#история">История</a><a class="l2" href="#конвейер">Конвейер</a><a class="l3" href="#разбиение-на-фрагменты-chunking">Разбиение на фрагменты (chunking)</a><a class="l3" href="#поиск-и-переранжирование">Поиск и переранжирование</a><a class="l3" href="#сборка-контекста-и-промпт">Сборка контекста и промпт</a><a class="l2" href="#улучшения">Улучшения</a><a class="l2" href="#где-rag-ломается">Где RAG ломается</a><a class="l2" href="#оценка">Оценка</a><a class="l2" href="#продакшен">Продакшен</a><a class="l2" href="#код-минимальный-rag">Код: минимальный RAG</a><a class="l2" href="#что-почитать">Что почитать</a>
+      </details>
+      
+
+      <div class="prose"><p>Языковая модель знает то, что видела при обучении, и ничего больше. <strong>RAG</strong> (retrieval-augmented generation) — архитектура, в которой перед генерацией ответа система находит нужные документы и кладёт их в контекст модели. Это поиск, у которого пользователем стала LLM, а выдачей — не десять ссылок, а несколько фрагментов текста.</p>
+<h2 id="зачем">Зачем</h2>
+<ul>
+<li><strong>Дата отсечения знаний.</strong> Модель не знает событий после обучения; индекс можно обновлять каждый час.</li>
+<li><strong>Галлюцинации.</strong> Когда ответ есть в контексте, модель реже выдумывает; а когда её просят опираться только на источники, можно потребовать «не знаю».</li>
+<li><strong>Приватные данные.</strong> Внутренняя документация, тикеты, договоры нельзя вшить в веса публичной модели, а в индекс — можно, с разграничением прав.</li>
+<li><strong>Цитирование и проверяемость.</strong> Ответ со ссылками на фрагменты можно проверить; ответ из весов — нельзя.</li>
+<li><strong>Цена обновления.</strong> Поправить документ в индексе дешевле, чем дообучать модель.</li>
+</ul>
+<p>RAG не заменяет дообучение: он добавляет <em>знания</em>, но плохо меняет <em>поведение и стиль</em>. Ориентир: фактам — RAG, формату и тону — fine-tuning.</p>
+<h2 id="история">История</h2>
+<ul>
+<li><strong>REALM</strong> (Guu et al., 2020): предобучение языковой модели, где перед предсказанием замаскированного слова обучаемый ретривер достаёт документ из Википедии; градиент течёт и в ретривер.</li>
+<li><strong>RAG</strong> (Lewis et al., 2020): seq2seq-модель BART + DPR-ретривер, документ — латентная переменная, по которой маргинализуют (вариант RAG-Sequence): <span class="tex">p(y\mid x) \approx \sum_{z \in \text{top-}k} p_\eta(z\mid x)\, p_\theta(y\mid x, z)</span>, где <span class="tex">p_\eta(z \mid x) \propto \exp\big(E_d(z)^\top E_q(x)\big)</span>, а сумма по всему корпусу заменена суммой по top-<span class="tex">k</span>. В варианте RAG-Token маргинализуют на каждом токене, и разные токены ответа могут опираться на разные документы. Энкодер запросов дообучается вместе с генератором, индекс документов заморожен. Название и схему закрепила именно эта работа.</li>
+<li><strong>FiD</strong> (Izacard &amp; Grave, 2020, Fusion-in-Decoder): каждый найденный абзац кодируется вместе с вопросом независимо, декодер смотрит на конкатенацию всех представлений. Стоимость растёт линейно по числу абзацев, и это позволило использовать 50–100 фрагментов вместо нескольких.</li>
+<li><strong>RETRO</strong> (Borgeaud et al., 2021, DeepMind): ретривер встроен в архитектуру — замороженный BERT-ретривер находит соседей для каждого куска текста, модель смотрит на них через chunked cross-attention; с базой в 2 трлн токенов RETRO сопоставим с GPT-3 и Jurassic-1 на Pile при в 25 раз меньшем числе параметров.</li>
+<li><strong>2022–2023</strong>: появление сильных LLM, которым достаточно положить найденное в промпт («in-context RAG»). Ретривер и генератор снова независимы, и именно эта схема стала промышленной: любая LLM по API плюс свой индекс.</li>
+</ul>
+<p>Центральная идея переехала от «обучать ретривер вместе с генератором» к «собрать конвейер из готовых частей и инженерно настроить каждую».</p>
+<h2 id="конвейер">Конвейер</h2>
+<div class="code"><div class="code-head"><span class="lang">code</span></div><pre><code>документы → разбиение на фрагменты → эмбеддинги + BM25-индекс
+запрос → [переписывание] → гибридный поиск → переранжирование → сборка контекста → LLM → ответ с цитатами
+</code></pre></div>
+<h3 id="разбиение-на-фрагменты-chunking">Разбиение на фрагменты (chunking)</h3>
+<p>Фрагмент — единица индексации. Он должен быть достаточно коротким, чтобы эмбеддинг не размывался, и достаточно длинным, чтобы быть понятным без окружения.</p>
+<ul>
+<li><strong>Размер</strong>: 200–500 токенов — разумный старт; для справочных текстов с фактами лучше короче, для рассуждений — длиннее. Подбирается на разметке, не «по интуиции».</li>
+<li><strong>Перекрытие</strong> 10–20%: чтобы мысль на границе не потерялась.</li>
+<li><strong>По структуре</strong>: резать по заголовкам, абзацам, пунктам списков, ячейкам таблиц, а не по числу символов; хранить заголовки родительских разделов как метаданные или префикс.</li>
+<li><strong>Parent-document</strong>: индексировать маленькие фрагменты для точности поиска, а в контекст отдавать родительский раздел для полноты.</li>
+<li><strong>Контекстуализация</strong> (<a href="https://www.anthropic.com/news/contextual-retrieval" rel="noopener noreferrer nofollow">Contextual Retrieval</a>, Anthropic, сентябрь 2024): перед индексацией модель добавляет к каждому фрагменту 1–2 предложения о том, откуда он, — «Это из отчёта ACME за Q2 2023; выручка…». Фрагмент «рост составил 3%» без этого непонятен вообще. По внутренним замерам авторов, доля промахов в топ-20 снизилась на 35% только с контекстными эмбеддингами, на 49% вместе с контекстным BM25 и на 67% с переранжированием поверх. Это заявление компании на её наборах, а не рецензируемая статья: перепроверяйте на своих данных. Цена — один LLM-вызов на фрагмент при индексации (снижается кэшированием префикса документа).</li>
+</ul>
+<h3 id="поиск-и-переранжирование">Поиск и переранжирование</h3>
+<p>Базовый рецепт — тот же, что в главе про <a href="/edufamcs-demo/handbook/retrieval/plotnyj-i-gibridnyj-poisk/" rel="noopener noreferrer nofollow">плотный и гибридный поиск</a>: BM25 + плотный эмбеддинг → RRF → cross-encoder на топ-50 → оставляем 5–10. Индекс — <a href="/edufamcs-demo/handbook/retrieval/vektornye-indeksy/" rel="noopener noreferrer nofollow">векторный</a> (HNSW) рядом с обратным. Лексическая часть особенно важна для идентификаторов и терминов предметной области.</p>
+<h3 id="сборка-контекста-и-промпт">Сборка контекста и промпт</h3>
+<ul>
+<li>Нумеровать источники, подписывать метаданные (название, дата, раздел).</li>
+<li>Требовать цитаты вида <code>[2]</code> и ответа «в источниках нет информации», если её нет.</li>
+<li>Не класть в контекст всё подряд: больше фрагментов — не всегда лучше (см. ниже про lost in the middle).</li>
+<li>Явно разделять инструкции и данные: найденный текст — недоверенный ввод; в нём могут быть инструкции («игнорируй предыдущие указания») — <strong>prompt injection через документ</strong>.</li>
+</ul>
+<h2 id="улучшения">Улучшения</h2>
+<p><strong>Переписывание запроса.</strong> Пользователь пишет «а сколько это стоит?» — без истории диалога поиск бессилен. LLM превращает реплику в самостоятельный запрос; может сгенерировать несколько вариантов (multi-query) и слить выдачи через RRF.</p>
+<p><strong>HyDE</strong> (Gao et al., 2022): LLM пишет <em>гипотетический</em> документ-ответ (фактически он может быть неверным), и эмбеддится он, а не запрос. Такой текст ближе по стилю и словарю к документам корпуса, чем короткий вопрос. Помогает при нехватке разметки, но платит задержкой и риском увести поиск галлюцинацией.</p>
+<p><strong>Многошаговый поиск.</strong> Вопрос «какой город родины режиссёра фильма X больше по населению» требует цепочки: найти режиссёра, его родину, потом население. Конвейер повторяет «поиск → рассуждение → новый запрос» (IRCoT, агентный поиск — отдельная <a href="/edufamcs-demo/handbook/retrieval/agentnyj-poisk/" rel="noopener noreferrer nofollow">глава</a>).</p>
+<p><strong>Self-RAG</strong> (Asai et al., 2023): модель обучена выдавать специальные токены-рефлексии — «нужен ли поиск», «релевантен ли найденный фрагмент», «подтверждает ли он генерацию», — и сама решает, когда искать и что игнорировать.</p>
+<p><strong>CRAG</strong> (Yan et al., 2024, Corrective RAG): лёгкий оценщик качества поиска; при плохой выдаче система отбрасывает её и идёт в веб-поиск, а при хорошей — фильтрует фрагменты до нужных полос текста.</p>
+<p><strong>GraphRAG</strong> (Edge et al., 2024, Microsoft): для вопросов по всему корпусу («каковы главные темы?»), на которые ответ не лежит ни в одном фрагменте. Из текста LLM извлекает граф сущностей и связей, граф кластеризуется (Leiden), для сообществ заранее пишутся сводки, ответ собирается по сводкам. Дорого: индексация требует LLM-вызова на каждый фрагмент и сводку, на больших корпусах это тысячи и десятки тысяч вызовов. Выигрыш авторы показывают именно на «глобальных» вопросах; для точечных фактов обычный RAG дешевле и обычно достаточен.</p>
+<h2 id="где-rag-ломается">Где RAG ломается</h2>
+<ul>
+<li><strong>Lost in the middle</strong> (Liu et al., 2023): качество ответа зависит от позиции нужного фрагмента в контексте — лучше всего начало и конец, хуже середина (U-образная кривая). Практика: меньше фрагментов, лучшие — в начало и конец, переранжирование перед сборкой.</li>
+<li><strong>Противоречивые и устаревшие источники.</strong> Индекс содержит версию политики 2021 и 2024 года; модель смешивает. Нужны даты в метаданных, правило «новее важнее», дедупликация версий.</li>
+<li><strong>Нужный фрагмент не найден.</strong> Это самый частый случай и он невидим в ответе: модель отвечает уверенно на основе соседнего текста. Поэтому качество поиска измеряется отдельно.</li>
+<li><strong>Модель игнорирует контекст</strong> или, наоборот, слепо верит нерелевантному. Конфликт между знаниями в весах и в контексте разрешается непредсказуемо.</li>
+<li><strong>Длинный контекст против RAG.</strong> Современные модели принимают сотни тысяч токенов; можно положить в промпт весь документ. Для одного документа это часто лучше (нет ошибок поиска). Но для корпусов в миллионы токенов, при требованиях к цене и задержке (стоимость растёт линейно по длине контекста на каждый запрос), при необходимости разграничения прав и свежести RAG остаётся. Чаще всего это не альтернативы: RAG находит документы, длинный контекст вмещает их целиком.</li>
+</ul>
+<h2 id="оценка">Оценка</h2>
+<p>Оценивать нужно <strong>две части отдельно</strong>, иначе непонятно, что чинить.</p>
+<p><strong>Поиск.</strong> Размечаем для набора вопросов, в каких фрагментах лежит ответ. Метрики: recall@k по фрагментам (попал ли нужный в то, что видит модель), MRR/NDCG — как в обычном поиске.</p>
+<p><strong>Ответ.</strong> Метрики без эталонного текста (LLM как судья):</p>
+<ul>
+<li><em>faithfulness</em> — каждое ли утверждение ответа подтверждено контекстом;</li>
+<li><em>answer relevance</em> — отвечает ли ответ на заданный вопрос;</li>
+<li><em>context precision/recall</em> — доля полезного в найденном и покрытие нужного.</li>
+</ul>
+<p>Эти метрики формализованы во фреймворках <strong>RAGAS</strong> (Es et al., 2023) и <strong>ARES</strong> (Saad-Falcon et al., 2023, обучаются небольшие судьи на синтетических данных и калибруются на малой человеческой разметке с доверительными интервалами). Судья — тоже модель со своими смещениями (предпочтение длинных ответов, своего стиля), поэтому его калибруют на человеческой разметке. На уровне сообщества оценку RAG стандартизирует трек <strong>TREC RAG</strong> (2024–2025): ответы с цитатами по большому корпусу, оценка охвата информационных «нагетов» и корректности ссылок.</p>
+<p>Рабочая последовательность: собрать 100–300 реальных вопросов (из логов, от экспертов), разметить источники, фиксировать метрики поиска и ответа при каждом изменении (размер фрагмента, модель эмбеддингов, переранжировщик, промпт).</p>
+<h2 id="продакшен">Продакшен</h2>
+<ul>
+<li><strong>Права доступа.</strong> Фильтровать по ACL <em>в поиске</em> (метаданные в индексе), а не в ответе. Иначе LLM увидит документ, который пользователь видеть не должен, и перескажет его.</li>
+<li><strong>Свежесть.</strong> Инкрементальная индексация, TTL, удаление вместе с исходным документом; версия модели эмбеддингов привязана к версии индекса.</li>
+<li><strong>Кэш.</strong> Кэш эмбеддингов запросов, кэш ответов на частые вопросы (семантический кэш с высоким порогом сходства — осторожно: схожий вопрос с другим смыслом даст чужой ответ), кэш префикса промпта у провайдера.</li>
+<li><strong>Стоимость и задержка.</strong> Цена = эмбеддинг запроса + поиск + переранжирование + токены контекста на входе LLM. Часто основную долю составляют входные токены: 10 фрагментов по 400 токенов — 4000 токенов на каждый запрос.</li>
+<li><strong>Наблюдаемость.</strong> Логировать запрос, найденные фрагменты, ответ, клики/оценки — без этого невозможно разобрать, чем плох ответ.</li>
+<li><strong>Безопасность.</strong> Prompt injection через документы; утечки персональных данных в индексе; запрет выполнения действий по тексту из источников без подтверждения.</li>
+</ul>
+<h2 id="код-минимальный-rag">Код: минимальный RAG</h2>
+<div class="code"><div class="code-head"><span class="lang">python</span></div><pre><code><span class="tok-k">import</span> os
+<span class="tok-k">import</span> numpy <span class="tok-k">as</span> np
+<span class="tok-k">from</span> collections <span class="tok-k">import</span> defaultdict
+<span class="tok-k">from</span> rank_bm25 <span class="tok-k">import</span> BM25Okapi
+<span class="tok-k">from</span> sentence_transformers <span class="tok-k">import</span> SentenceTransformer
+<span class="tok-k">from</span> anthropic <span class="tok-k">import</span> Anthropic            <span class="tok-c"># любой клиент LLM: схема та же</span>
+
+docs <span class="tok-p">=</span> <span class="tok-p">[</span><span class="tok-p">.</span><span class="tok-p">.</span><span class="tok-p">.</span><span class="tok-p">]</span>                               <span class="tok-c"># список фрагментов (строки)</span>
+tok <span class="tok-p">=</span> <span class="tok-k">lambda</span> s<span class="tok-p">:</span> s<span class="tok-p">.</span>lower<span class="tok-p">(</span><span class="tok-p">)</span><span class="tok-p">.</span>split<span class="tok-p">(</span><span class="tok-p">)</span>
+
+emb <span class="tok-p">=</span> SentenceTransformer<span class="tok-p">(</span><span class="tok-s">"</span><span class="tok-s">intfloat/multilingual-e5-base</span><span class="tok-s">"</span><span class="tok-p">)</span>
+doc_vecs <span class="tok-p">=</span> emb<span class="tok-p">.</span>encode<span class="tok-p">(</span><span class="tok-p">[</span><span class="tok-s">"</span><span class="tok-s">passage: </span><span class="tok-s">"</span> <span class="tok-p">+</span> d <span class="tok-k">for</span> d <span class="tok-k">in</span> docs<span class="tok-p">]</span><span class="tok-p">,</span> normalize_embeddings<span class="tok-p">=</span><span class="tok-k">True</span><span class="tok-p">)</span>
+bm25 <span class="tok-p">=</span> BM25Okapi<span class="tok-p">(</span><span class="tok-p">[</span>tok<span class="tok-p">(</span>d<span class="tok-p">)</span> <span class="tok-k">for</span> d <span class="tok-k">in</span> docs<span class="tok-p">]</span><span class="tok-p">)</span>
+
+<span class="tok-k">def</span> <span class="tok-f">rrf</span><span class="tok-p">(</span>rankings<span class="tok-p">,</span> k<span class="tok-p">=</span><span class="tok-n">60</span><span class="tok-p">)</span><span class="tok-p">:</span>
+    score <span class="tok-p">=</span> defaultdict<span class="tok-p">(</span><span class="tok-f">float</span><span class="tok-p">)</span>
+    <span class="tok-k">for</span> r <span class="tok-k">in</span> rankings<span class="tok-p">:</span>
+        <span class="tok-k">for</span> rank<span class="tok-p">,</span> i <span class="tok-k">in</span> <span class="tok-f">enumerate</span><span class="tok-p">(</span>r<span class="tok-p">,</span> <span class="tok-n">1</span><span class="tok-p">)</span><span class="tok-p">:</span>
+            score<span class="tok-p">[</span>i<span class="tok-p">]</span> <span class="tok-p">+</span><span class="tok-p">=</span> <span class="tok-n">1</span> <span class="tok-p">/</span> <span class="tok-p">(</span>k <span class="tok-p">+</span> rank<span class="tok-p">)</span>
+    <span class="tok-k">return</span> <span class="tok-f">sorted</span><span class="tok-p">(</span>score<span class="tok-p">,</span> key<span class="tok-p">=</span>score<span class="tok-p">.</span>get<span class="tok-p">,</span> reverse<span class="tok-p">=</span><span class="tok-k">True</span><span class="tok-p">)</span>
+
+<span class="tok-k">def</span> <span class="tok-f">retrieve</span><span class="tok-p">(</span>query<span class="tok-p">,</span> top<span class="tok-p">=</span><span class="tok-n">5</span><span class="tok-p">,</span> pool<span class="tok-p">=</span><span class="tok-n">50</span><span class="tok-p">)</span><span class="tok-p">:</span>
+    dense <span class="tok-p">=</span> <span class="tok-p">(</span>doc_vecs <span class="tok-p">@</span> emb<span class="tok-p">.</span>encode<span class="tok-p">(</span><span class="tok-s">"</span><span class="tok-s">query: </span><span class="tok-s">"</span> <span class="tok-p">+</span> query<span class="tok-p">,</span> normalize_embeddings<span class="tok-p">=</span><span class="tok-k">True</span><span class="tok-p">)</span><span class="tok-p">)</span><span class="tok-p">.</span>argsort<span class="tok-p">(</span><span class="tok-p">)</span><span class="tok-p">[</span><span class="tok-p">:</span><span class="tok-p">:</span><span class="tok-p">-</span><span class="tok-n">1</span><span class="tok-p">]</span><span class="tok-p">[</span><span class="tok-p">:</span>pool<span class="tok-p">]</span>
+    lex <span class="tok-p">=</span> np<span class="tok-p">.</span>argsort<span class="tok-p">(</span><span class="tok-p">-</span>bm25<span class="tok-p">.</span>get_scores<span class="tok-p">(</span>tok<span class="tok-p">(</span>query<span class="tok-p">)</span><span class="tok-p">)</span><span class="tok-p">)</span><span class="tok-p">[</span><span class="tok-p">:</span>pool<span class="tok-p">]</span>
+    <span class="tok-k">return</span> rrf<span class="tok-p">(</span><span class="tok-p">[</span>dense<span class="tok-p">.</span>tolist<span class="tok-p">(</span><span class="tok-p">)</span><span class="tok-p">,</span> lex<span class="tok-p">.</span>tolist<span class="tok-p">(</span><span class="tok-p">)</span><span class="tok-p">]</span><span class="tok-p">)</span><span class="tok-p">[</span><span class="tok-p">:</span>top<span class="tok-p">]</span>
+
+client <span class="tok-p">=</span> Anthropic<span class="tok-p">(</span>api_key<span class="tok-p">=</span>os<span class="tok-p">.</span>environ<span class="tok-p">[</span><span class="tok-s">"</span><span class="tok-s">ANTHROPIC_API_KEY</span><span class="tok-s">"</span><span class="tok-p">]</span><span class="tok-p">)</span>   <span class="tok-c"># ключ только из переменной окружения</span>
+
+<span class="tok-k">def</span> <span class="tok-f">answer</span><span class="tok-p">(</span>query<span class="tok-p">)</span><span class="tok-p">:</span>
+    ids <span class="tok-p">=</span> retrieve<span class="tok-p">(</span>query<span class="tok-p">)</span>
+    context <span class="tok-p">=</span> <span class="tok-s">"</span><span class="tok-s">\n</span><span class="tok-s">\n</span><span class="tok-s">"</span><span class="tok-p">.</span>join<span class="tok-p">(</span><span class="tok-s">f</span><span class="tok-s">"</span><span class="tok-s">[</span><span class="tok-s">{</span>n<span class="tok-s">}</span><span class="tok-s">] </span><span class="tok-s">{</span>docs<span class="tok-p">[</span>i<span class="tok-p">]</span><span class="tok-s">}</span><span class="tok-s">"</span> <span class="tok-k">for</span> n<span class="tok-p">,</span> i <span class="tok-k">in</span> <span class="tok-f">enumerate</span><span class="tok-p">(</span>ids<span class="tok-p">,</span> <span class="tok-n">1</span><span class="tok-p">)</span><span class="tok-p">)</span>
+    prompt <span class="tok-p">=</span> <span class="tok-p">(</span>
+        <span class="tok-s">"</span><span class="tok-s">Отвечай только по источникам ниже. Ссылайся на них как [1], [2]. </span><span class="tok-s">"</span>
+        <span class="tok-s">"</span><span class="tok-s">Если ответа в источниках нет, скажи об этом.</span><span class="tok-s">\n</span><span class="tok-s">"</span>
+        <span class="tok-s">f</span><span class="tok-s">"</span><span class="tok-s">&lt;источники&gt;</span><span class="tok-s">\n</span><span class="tok-s">{</span>context<span class="tok-s">}</span><span class="tok-s">\n</span><span class="tok-s">&lt;/источники&gt;</span><span class="tok-s">\n</span><span class="tok-s">\n</span><span class="tok-s">Вопрос: </span><span class="tok-s">{</span>query<span class="tok-s">}</span><span class="tok-s">"</span>
+    <span class="tok-p">)</span>
+    msg <span class="tok-p">=</span> client<span class="tok-p">.</span>messages<span class="tok-p">.</span>create<span class="tok-p">(</span>model<span class="tok-p">=</span>os<span class="tok-p">.</span>environ<span class="tok-p">.</span>get<span class="tok-p">(</span><span class="tok-s">"</span><span class="tok-s">LLM_MODEL</span><span class="tok-s">"</span><span class="tok-p">,</span> <span class="tok-s">"</span><span class="tok-s">claude-opus-5-5</span><span class="tok-s">"</span><span class="tok-p">)</span><span class="tok-p">,</span>
+                                 max_tokens<span class="tok-p">=</span><span class="tok-n">500</span><span class="tok-p">,</span> messages<span class="tok-p">=</span><span class="tok-p">[</span><span class="tok-p">{</span><span class="tok-s">"</span><span class="tok-s">role</span><span class="tok-s">"</span><span class="tok-p">:</span> <span class="tok-s">"</span><span class="tok-s">user</span><span class="tok-s">"</span><span class="tok-p">,</span> <span class="tok-s">"</span><span class="tok-s">content</span><span class="tok-s">"</span><span class="tok-p">:</span> prompt<span class="tok-p">}</span><span class="tok-p">]</span><span class="tok-p">)</span>
+    <span class="tok-k">return</span> msg<span class="tok-p">.</span>content<span class="tok-p">[</span><span class="tok-n">0</span><span class="tok-p">]</span><span class="tok-p">.</span>text<span class="tok-p">,</span> ids
+</code></pre></div>
+<p>Эти сорок строк — база; всё остальное (чанкинг по структуре, ACL, оценка, кэш) добавляется вокруг неё. Модель задаётся переменной окружения, а не зашита в код, потому что имена моделей устаревают быстрее индекса.</p>
+<h2 id="что-почитать">Что почитать</h2>
+<ul>
+<li>Lewis et al., <a href="https://arxiv.org/abs/2005.11401" rel="noopener noreferrer nofollow">Retrieval-Augmented Generation for Knowledge-Intensive NLP Tasks</a>, 2020; Guu et al., <a href="https://arxiv.org/abs/2002.08909" rel="noopener noreferrer nofollow">REALM</a>, 2020; Izacard, Grave, <a href="https://arxiv.org/abs/2007.01282" rel="noopener noreferrer nofollow">Fusion-in-Decoder</a>, 2020.</li>
+<li>Borgeaud et al., <a href="https://arxiv.org/abs/2112.04426" rel="noopener noreferrer nofollow">Improving language models by retrieving from trillions of tokens (RETRO)</a>, 2021.</li>
+<li>Liu et al., <a href="https://arxiv.org/abs/2307.03172" rel="noopener noreferrer nofollow">Lost in the Middle</a>, 2023; Asai et al., <a href="https://arxiv.org/abs/2310.11511" rel="noopener noreferrer nofollow">Self-RAG</a>, 2023; Yan et al., <a href="https://arxiv.org/abs/2401.15884" rel="noopener noreferrer nofollow">Corrective RAG</a>, 2024.</li>
+<li>Edge et al., <a href="https://arxiv.org/abs/2404.16130" rel="noopener noreferrer nofollow">From Local to Global: A Graph RAG Approach</a>, 2024; Gao et al., <a href="https://arxiv.org/abs/2212.10496" rel="noopener noreferrer nofollow">Precise Zero-Shot Dense Retrieval without Relevance Labels (HyDE)</a>, 2022.</li>
+<li>Es et al., <a href="https://arxiv.org/abs/2309.15217" rel="noopener noreferrer nofollow">RAGAS</a>, 2023; Saad-Falcon et al., <a href="https://arxiv.org/abs/2311.09476" rel="noopener noreferrer nofollow">ARES</a>, 2023.</li>
+<li>Gao et al., <a href="https://arxiv.org/abs/2312.10997" rel="noopener noreferrer nofollow">Retrieval-Augmented Generation for LLMs: A Survey</a>, 2023.</li>
+</ul>
+</div>
+      
+
+      
+      <nav class="pager" aria-label="Соседние статьи">
+        <a href="/edufamcs-demo/handbook/retrieval/vektornye-indeksy/"><span><svg class="ico sm" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-arrow-left"/></svg>Назад</span>Векторные индексы: HNSW, IVF, PQ</a>
+        <a href="/edufamcs-demo/handbook/retrieval/generativnyj-poisk/"><span>Дальше<svg class="ico sm" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-arrow"/></svg></span>Генеративный поиск: модель как индекс</a>
+      </nav>
+      
+    </article>
+
+    <aside class="hb-toc" aria-label="На этой странице">
+      <a class="l2" href="#зачем">Зачем</a><a class="l2" href="#история">История</a><a class="l2" href="#конвейер">Конвейер</a><a class="l3" href="#разбиение-на-фрагменты-chunking">Разбиение на фрагменты (chunking)</a><a class="l3" href="#поиск-и-переранжирование">Поиск и переранжирование</a><a class="l3" href="#сборка-контекста-и-промпт">Сборка контекста и промпт</a><a class="l2" href="#улучшения">Улучшения</a><a class="l2" href="#где-rag-ломается">Где RAG ломается</a><a class="l2" href="#оценка">Оценка</a><a class="l2" href="#продакшен">Продакшен</a><a class="l2" href="#код-минимальный-rag">Код: минимальный RAG</a><a class="l2" href="#что-почитать">Что почитать</a>
+    </aside>
+  </div>
+</div>
+
+
+</main>
+
+<footer class="ftr" data-theme="dark">
+  <svg class="sym fern" viewBox="0 0 40.5 65.02" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#fern"/></svg>
+  <div class="container">
+    <div class="ftr-row">
+      <a href="/edufamcs-demo/" aria-label="EDU FAMCS — главная"><img src="/edufamcs-demo/static/brand/logo/logo-edu-dark.svg" alt="EDU FAMCS" width="196" height="40"></a>
+      <ul class="ftr-links">
+        <li><a href="/edufamcs-demo/#courses">Курсы</a></li>
+        <li><a href="/edufamcs-demo/ml/">Машинное обучение</a></li>
+        <li><a href="/edufamcs-demo/handbook/">Хендбук</a></li>
+        <li><a href="/edufamcs-demo/news/">Новости</a></li>
+        <li><a href="/edufamcs-demo/people/">Авторы</a></li>
+        <li><a href="/edufamcs-demo/about/">О&nbsp;нас</a></li>
+        <li><a href="/edufamcs-demo/propose/">Предложить или исправить</a></li>
+        <li><a href="/edufamcs-demo/privacy/">Конфиденциальность</a></li>
+      </ul>
+    </div>
+    <div class="ftr-big" aria-hidden="true">EDU<span class="d">·</span>FAMCS</div>
+    <p class="ftr-copy">© 2026 EDU FAMCS · Минск</p>
+  </div>
+</footer>
+
+<div class="toasts-region" aria-live="polite" id="toasts">
+
+</div>
+
+</body>
+</html>

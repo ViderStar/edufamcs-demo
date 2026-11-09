@@ -1,0 +1,232 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Хендбук · EDU FAMCS</title>
+<meta name="description" content="Открытая теория ML-курса ФПМИ: рекомендации, поиск, разборы типовых ошибок.">
+<meta name="theme-color" content="#060A16">
+<meta name="robots" content="noindex, nofollow">
+<meta name="htmx-config" content='{"allowEval":false,"includeIndicatorStyles":false,"historyCacheSize":0,"selfRequestsOnly":true}'>
+<meta name="katex-js" content="/edufamcs-demo/static/vendor/katex/katex.min.js">
+<meta name="katex-css" content="/edufamcs-demo/static/vendor/katex/katex.min.css">
+<link rel="icon" href="/edufamcs-demo/static/brand/logo/favicon-16.svg" type="image/svg+xml" sizes="16x16">
+<link rel="icon" href="/edufamcs-demo/static/brand/logo/favicon.svg" type="image/svg+xml" sizes="any">
+<link rel="preload" href="/edufamcs-demo/static/brand/fonts/manrope-cyrillic-400.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/edufamcs-demo/static/brand/fonts/unbounded-cyrillic-800.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="/edufamcs-demo/static/brand/fonts.css">
+<link rel="stylesheet" href="/edufamcs-demo/static/brand/tokens.css">
+<link rel="stylesheet" href="/edufamcs-demo/static/brand/components.css">
+<link rel="stylesheet" href="/edufamcs-demo/static/css/site.css">
+<link rel="stylesheet" href="/edufamcs-demo/static/css/hub.css">
+<link rel="stylesheet" href="/edufamcs-demo/static/css/about.css">
+<link rel="stylesheet" href="/edufamcs-demo/static/handbook/handbook.css">
+<script src="/edufamcs-demo/static/js/theme.js"></script>
+<script src="/edufamcs-demo/static/vendor/htmx/htmx.min.js" defer></script>
+<script src="/edufamcs-demo/static/vendor/alpine/alpine-csp.min.js" defer></script>
+<script src="/edufamcs-demo/static/js/site.js" defer></script>
+
+</head>
+<body class="" hx-headers='{"X-CSRFToken": "PLO0gxe4Jo3AmW2VwOfnSOg7moGD3Opaevn40v1rEfrJBvdE31YvPjMcU6M8BY7U"}'>
+<a class="skip" href="#main">К содержанию</a>
+<div class="demo-bar" role="note">Демо-версия для отзывов: вход, запись на курсы и формы здесь не работают.</div>
+
+<header class="hdr">
+  <div class="container">
+    <a class="brand" href="/edufamcs-demo/" aria-label="EDU FAMCS — главная">
+      <span class="full"><img class="only-light" src="/edufamcs-demo/static/brand/logo/logo-edu-light.svg" alt="EDU FAMCS" width="196" height="40"><img class="only-dark" src="/edufamcs-demo/static/brand/logo/logo-edu-dark.svg" alt="EDU FAMCS" width="196" height="40"></span>
+      <span class="short"><img class="only-light" src="/edufamcs-demo/static/brand/logo/logo-edu-light.svg" alt="EDU FAMCS" height="30"><img class="only-dark" src="/edufamcs-demo/static/brand/logo/logo-edu-dark.svg" alt="EDU FAMCS" height="30"></span>
+    </a>
+    <nav class="nav" id="main-nav" aria-label="Основная навигация">
+      <a href="/edufamcs-demo/#courses">Курсы</a>
+      <a href="/edufamcs-demo/ml/" >Машинное обучение</a>
+      
+      <a href="/edufamcs-demo/handbook/" aria-current="page">Хендбук</a>
+      <a href="/edufamcs-demo/news/" >Новости</a>
+      <a href="/edufamcs-demo/people/" >Авторы</a>
+      <a href="/edufamcs-demo/about/" >О&nbsp;нас</a>
+    </nav>
+    <div class="hdr-actions">
+      
+      <a class="btn btn-outline btn-login" href="/edufamcs-demo/accounts/login/?next=/handbook/">Войти</a>
+      
+      <button class="icon-btn menu-btn" type="button" aria-label="Меню" aria-expanded="false" aria-controls="main-nav"><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-menu"/></svg></button>
+    </div>
+  </div>
+</header>
+
+<main id="main">
+
+
+
+<div class="container page hb-index">
+  <div class="hb-hero">
+    <h1 class="display-l">Хендбук</h1>
+    <p class="lead">Теория курсов от&nbsp;основ до&nbsp;2026 года. Бесплатно, после входа через GitHub или Google.</p>
+    
+<form class="hb-search big" action="/edufamcs-demo/handbook/search/" method="get" role="search">
+  <svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-search"/></svg>
+  <input class="input" type="search" name="q" value="" placeholder="Поиск по хендбуку" aria-label="Поиск по хендбуку" autocomplete="off" maxlength="120"
+    hx-get="/edufamcs-demo/handbook/search/" hx-trigger="input changed delay:250ms, search" hx-target="#hb-results" hx-sync="this:replace">
+</form>
+
+  </div>
+  <div id="hb-results" class="hb-results" aria-live="polite"></div>
+
+  
+  <div class="streams hb-tiles">
+    
+    <a class="stream-card hb-tile hb-tone" href="/edufamcs-demo/handbook/math/">
+      <div class="stream-art"><span class="idx">01</span>
+
+<svg viewBox="0 0 220 120" aria-hidden="true">
+  <g fill="none" stroke="currentColor" stroke-width="1.5"><path d="M20 14 h80 a10 10 0 0 1 10 10 v90 a10 10 0 0 0 -10 -10 h-80 z"/><path d="M200 14 h-80 a10 10 0 0 0 -10 10 v90 a10 10 0 0 1 10 -10 h80 z"/></g>
+  <g fill="currentColor"><rect x="32" y="32" width="56" height="7" rx="3.5"/><rect x="32" y="48" width="44" height="7" rx="3.5" opacity=".3"/><rect x="32" y="64" width="50" height="7" rx="3.5" opacity=".3"/><rect x="132" y="32" width="56" height="7" rx="3.5" opacity=".3"/><rect x="132" y="48" width="38" height="7" rx="3.5" opacity=".3"/></g>
+  <rect x="132" y="64" width="48" height="7" rx="3.5" fill="var(--accent)"/>
+</svg>
+
+</div>
+      <div class="stream-body">
+        <h2 class="h3">Математическая база</h2>
+        <div class="stream-meta"><span><b>6 статей</b></span><span class="link-arrow"><svg class="ico sm" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-arrow"/></svg></span></div>
+      </div>
+    </a>
+    
+    <a class="stream-card hb-tile hb-tone" href="/edufamcs-demo/handbook/classic/">
+      <div class="stream-art"><span class="idx">02</span>
+
+<svg viewBox="0 0 220 120" aria-hidden="true">
+  <g fill="none" stroke="currentColor" stroke-width="1.5"><path d="M20 14 h80 a10 10 0 0 1 10 10 v90 a10 10 0 0 0 -10 -10 h-80 z"/><path d="M200 14 h-80 a10 10 0 0 0 -10 10 v90 a10 10 0 0 1 10 -10 h80 z"/></g>
+  <g fill="currentColor"><rect x="32" y="32" width="56" height="7" rx="3.5"/><rect x="32" y="48" width="44" height="7" rx="3.5" opacity=".3"/><rect x="32" y="64" width="50" height="7" rx="3.5" opacity=".3"/><rect x="132" y="32" width="56" height="7" rx="3.5" opacity=".3"/><rect x="132" y="48" width="38" height="7" rx="3.5" opacity=".3"/></g>
+  <rect x="132" y="64" width="48" height="7" rx="3.5" fill="var(--accent)"/>
+</svg>
+
+</div>
+      <div class="stream-body">
+        <h2 class="h3">Классическое машинное обучение</h2>
+        <div class="stream-meta"><span><b>12 статей</b></span><span class="link-arrow"><svg class="ico sm" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-arrow"/></svg></span></div>
+      </div>
+    </a>
+    
+    <a class="stream-card hb-tile hb-tone" href="/edufamcs-demo/handbook/dl/">
+      <div class="stream-art"><span class="idx">03</span>
+
+<svg viewBox="0 0 220 120" aria-hidden="true">
+  <g fill="none" stroke="currentColor" stroke-width="1.5"><path d="M20 14 h80 a10 10 0 0 1 10 10 v90 a10 10 0 0 0 -10 -10 h-80 z"/><path d="M200 14 h-80 a10 10 0 0 0 -10 10 v90 a10 10 0 0 1 10 -10 h80 z"/></g>
+  <g fill="currentColor"><rect x="32" y="32" width="56" height="7" rx="3.5"/><rect x="32" y="48" width="44" height="7" rx="3.5" opacity=".3"/><rect x="32" y="64" width="50" height="7" rx="3.5" opacity=".3"/><rect x="132" y="32" width="56" height="7" rx="3.5" opacity=".3"/><rect x="132" y="48" width="38" height="7" rx="3.5" opacity=".3"/></g>
+  <rect x="132" y="64" width="48" height="7" rx="3.5" fill="var(--accent)"/>
+</svg>
+
+</div>
+      <div class="stream-body">
+        <h2 class="h3">Введение в глубокое обучение</h2>
+        <div class="stream-meta"><span><b>6 статей</b></span><span class="link-arrow"><svg class="ico sm" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-arrow"/></svg></span></div>
+      </div>
+    </a>
+    
+    <a class="stream-card hb-tile s-recsys" href="/edufamcs-demo/handbook/recsys/">
+      <div class="stream-art"><span class="idx">04</span>
+
+<svg viewBox="0 0 220 120" aria-hidden="true">
+  <defs><pattern id="hb-pm" width="20" height="20" patternUnits="userSpaceOnUse"><rect x="3" y="3" width="14" height="14" rx="4" fill="currentColor" opacity=".16"/></pattern></defs>
+  <rect width="220" height="120" fill="url(#hb-pm)"/>
+  <g fill="currentColor"><rect x="43" y="3" width="14" height="14" rx="4"/><rect x="123" y="23" width="14" height="14" rx="4"/><rect x="23" y="43" width="14" height="14" rx="4"/><rect x="163" y="43" width="14" height="14" rx="4"/><rect x="83" y="63" width="14" height="14" rx="4"/><rect x="183" y="83" width="14" height="14" rx="4"/><rect x="63" y="103" width="14" height="14" rx="4"/></g>
+  <rect x="1" y="61" width="218" height="18" rx="6" fill="none" stroke="currentColor" stroke-width="1.5"/>
+  <g fill="var(--accent)"><rect x="143" y="63" width="14" height="14" rx="4"/><rect x="43" y="63" width="14" height="14" rx="4" opacity=".55"/></g>
+</svg>
+
+</div>
+      <div class="stream-body">
+        <h2 class="h3">Рекомендательные системы</h2>
+        <div class="stream-meta"><span><b>17 статей</b></span><span class="link-arrow"><svg class="ico sm" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-arrow"/></svg></span></div>
+      </div>
+    </a>
+    
+    <a class="stream-card hb-tile s-recsys" href="/edufamcs-demo/handbook/retrieval/">
+      <div class="stream-art"><span class="idx">05</span>
+
+<svg viewBox="0 0 220 120" aria-hidden="true">
+  <g fill="currentColor">
+    <rect x="4" y="8" width="46" height="18" rx="9"/>
+    <rect x="62" y="12" width="10" height="10" rx="3" opacity=".3"/><rect x="78" y="12" width="10" height="10" rx="3" opacity=".3"/><rect x="94" y="12" width="10" height="10" rx="3" opacity=".3"/><rect x="110" y="12" width="10" height="10" rx="3" opacity=".3"/>
+    <rect x="4" y="38" width="62" height="18" rx="9" opacity=".25"/>
+    <rect x="78" y="42" width="10" height="10" rx="3" opacity=".3"/><rect x="94" y="42" width="10" height="10" rx="3" opacity=".3"/>
+    <rect x="4" y="68" width="36" height="18" rx="9"/>
+    <rect x="62" y="72" width="10" height="10" rx="3" opacity=".3"/><rect x="110" y="72" width="10" height="10" rx="3" opacity=".3"/><rect x="126" y="72" width="10" height="10" rx="3" opacity=".3"/>
+    <rect x="4" y="98" width="54" height="18" rx="9" opacity=".25"/>
+    <rect x="94" y="102" width="10" height="10" rx="3" opacity=".3"/><rect x="142" y="102" width="10" height="10" rx="3" opacity=".3"/>
+  </g>
+  <rect x="58" y="4" width="66" height="84" rx="8" fill="none" stroke="currentColor" stroke-width="1.5" stroke-dasharray="3 4" opacity=".55"/>
+  <rect x="62" y="12" width="10" height="10" rx="3" fill="var(--accent)"/><rect x="62" y="72" width="10" height="10" rx="3" fill="var(--accent)"/>
+  <circle cx="178" cy="46" r="24" fill="none" stroke="currentColor" stroke-width="5"/>
+  <path d="M195 63 L214 82" stroke="currentColor" stroke-width="8" stroke-linecap="round"/>
+</svg>
+
+</div>
+      <div class="stream-body">
+        <h2 class="h3">Поиск</h2>
+        <div class="stream-meta"><span><b>10 статей</b></span><span class="link-arrow"><svg class="ico sm" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-arrow"/></svg></span></div>
+      </div>
+    </a>
+    
+    <a class="stream-card hb-tile hb-tone" href="/edufamcs-demo/handbook/mistakes/">
+      <div class="stream-art"><span class="idx">06</span>
+
+<svg viewBox="0 0 220 120" aria-hidden="true">
+  <g fill="none" stroke="currentColor" stroke-width="1.5">
+    <rect x="1" y="4" width="150" height="30" rx="8" opacity=".5"/>
+    <rect x="1" y="44" width="150" height="30" rx="8"/>
+    <rect x="1" y="84" width="150" height="30" rx="8" opacity=".5"/>
+  </g>
+  <g fill="currentColor">
+    <rect x="12" y="15" width="40" height="8" rx="4" opacity=".25"/><rect x="58" y="15" width="64" height="8" rx="4" opacity=".25"/>
+    <rect x="12" y="55" width="28" height="8" rx="4"/><rect x="46" y="55" width="54" height="8" rx="4" opacity=".55"/>
+    <rect x="12" y="95" width="56" height="8" rx="4" opacity=".25"/><rect x="74" y="95" width="30" height="8" rx="4" opacity=".25"/>
+  </g>
+  <path d="M106 52 q10 -8 20 0 t20 0" fill="none" stroke="var(--accent)" stroke-width="2.4" stroke-linecap="round"/>
+  <path d="M106 66 q10 -8 20 0 t20 0" fill="none" stroke="var(--accent)" stroke-width="2.4" stroke-linecap="round" opacity=".55"/>
+  <circle cx="190" cy="59" r="24" fill="currentColor"/>
+  <path d="M190 46 v16" stroke="var(--on-stream)" stroke-width="4.5" stroke-linecap="round"/><circle cx="190" cy="71" r="2.8" fill="var(--on-stream)"/>
+</svg>
+
+</div>
+      <div class="stream-body">
+        <h2 class="h3">Типовые ошибки</h2>
+        <div class="stream-meta"><span><b>149 статей</b></span><span class="link-arrow"><svg class="ico sm" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-arrow"/></svg></span></div>
+      </div>
+    </a>
+    
+  </div>
+  
+</div>
+
+
+</main>
+
+<footer class="ftr" data-theme="dark">
+  <svg class="sym fern" viewBox="0 0 40.5 65.02" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#fern"/></svg>
+  <div class="container">
+    <div class="ftr-row">
+      <a href="/edufamcs-demo/" aria-label="EDU FAMCS — главная"><img src="/edufamcs-demo/static/brand/logo/logo-edu-dark.svg" alt="EDU FAMCS" width="196" height="40"></a>
+      <ul class="ftr-links">
+        <li><a href="/edufamcs-demo/#courses">Курсы</a></li>
+        <li><a href="/edufamcs-demo/ml/">Машинное обучение</a></li>
+        <li><a href="/edufamcs-demo/handbook/">Хендбук</a></li>
+        <li><a href="/edufamcs-demo/news/">Новости</a></li>
+        <li><a href="/edufamcs-demo/people/">Авторы</a></li>
+        <li><a href="/edufamcs-demo/about/">О&nbsp;нас</a></li>
+        <li><a href="/edufamcs-demo/propose/">Предложить или исправить</a></li>
+        <li><a href="/edufamcs-demo/privacy/">Конфиденциальность</a></li>
+      </ul>
+    </div>
+    <div class="ftr-big" aria-hidden="true">EDU<span class="d">·</span>FAMCS</div>
+    <p class="ftr-copy">© 2026 EDU FAMCS · Минск</p>
+  </div>
+</footer>
+
+<div class="toasts-region" aria-live="polite" id="toasts">
+
+</div>
+
+</body>
+</html>

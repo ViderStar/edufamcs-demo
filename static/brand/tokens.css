@@ -1,0 +1,250 @@
+/* ML FAMCS — дизайн-токены курса машинного обучения ФПМИ БГУ.
+   ЕДИНСТВЕННОЕ место, где заданы hex. Канон и правила — brand-tokens.md.
+   tokens.json генерируется из этого файла: scripts/tokens_to_json.py.
+
+   Темы: светлая — по умолчанию; тёмная — <html data-theme="dark">, либо системная,
+   если data-theme не задан. <html data-theme="light"> фиксирует светлую (слайды, сертификат).
+   data-theme на любом элементе делает его «островом» своей темы (герой, подвал — всегда ночь). */
+
+:root{
+  /* ── 1. Примитивы. Не зависят от темы. В компонентах — только семантика из п. 2 ── */
+
+  /* БГУ: основные цвета брендбука */
+  --bsu-navy:#0A3470;        /* логотип, заголовки на светлом, глубокий фон */
+  --bsu-blue:#144E9D;        /* ссылки на светлом, первая серия графиков */
+  --bsu-blue-mid:#3076AF;    /* вторичный синий, плитки, графики */
+  --bsu-teal:#7BB8BF;        /* второй цвет «Восьмирога», данные на тёмном */
+  --bsu-ochre:#D9CBA0;       /* тёплые подложки, разделители; не для текста */
+
+  /* Студенческий актив ФПМИ: енот */
+  --orange:#F6A513;          /* единственный яркий акцент: заливки, CTA, точка в знаке */
+  --orange-hi:#FFB83D;       /* hover на тёмном */
+  --orange-lo:#E39609;       /* hover/pressed на светлом */
+  --orange-ink:#955800;      /* «оранжевый текст» на светлом — 5,7:1 на белом, ≥ 4,6:1 на мягкой подложке */
+  --cream:#FFF4E4;           /* подложка енота, тёплые плашки */
+  --raccoon:#141414;         /* исходный чёрный енота; текст на оранжевом */
+
+  /* Нейтральные: светлая бумага */
+  --paper:#FFFFFF;
+  --paper-canvas:#F7F8FA;
+  --paper-2:#F0F2F6;
+  --paper-line:#E3E6ED;
+  --paper-line-strong:#CBD1DC;
+  --ink:#0B1222;             /* текст на светлом, 18,7:1 */
+  --ink-2:#394257;
+  --ink-muted:#5A6478;       /* подписи, 5,9:1 на белом */
+  --ink-faint:#8A93A6;       /* ТОЛЬКО не-смысловое: плейсхолдер, неактивное, декор (3,1:1). Информация — --ink-muted */
+
+  /* Нейтральные: ночь (тёмная база с синим подтоном БГУ) */
+  --night-deep:#04060D;      /* «под ночью»: код в тёмной теме, хром деки */
+  --night:#060A16;
+  --night-glow:#0A1430;      /* верх градиента обложек */
+  --night-1:#0B1121;
+  --night-2:#111A2E;
+  --night-3:#18233B;
+  --night-line:#1D2740;
+  --night-line-strong:#2B3754;
+  --snow:#E8ECF4;            /* текст на ночи, 16,5:1 */
+  --snow-2:#C3CAD8;
+  --snow-muted:#98A2B6;      /* 7,6:1 */
+  --snow-faint:#808AA0;       /* мелкие подписи на ночи: ≥ 4,5:1 до --night-3 */
+  --sky-300:#8DB6F5;         /* ссылки и info на ночи */
+
+  /* Потоки курса: -600 — на светлом (≥ 4,5:1 и к белому, и к своей мягкой подложке), -300 — на ночи (≥ 8:1) */
+  --recsys-600:#2A63B7; --recsys-300:#78A9F0;   /* RecSys + Search — синий из #3076AF */
+  --nlp-600:#0C6E77;    --nlp-300:#5CC4CC;      /* NLP / LLM — бирюза из #7BB8BF */
+  --ts-600:#764AB2;     --ts-300:#B898EC;       /* Time Series — фиолет из #493953 */
+  --agents-600:#4F6C18; --agents-300:#B6CE5E;   /* Агенты — олива/лайм из #4E6625 / #CBD970 */
+  --cv-600:#A3364F;     --cv-300:#F28FA3;       /* резерв: CV — бордо из #63162A */
+  --mlops-600:#7D5C0E;  --mlops-300:#D9CBA0;    /* резерв: MLOps — охра */
+
+  /* Статусы */
+  --green-600:#167347; --green-300:#5CD69A;
+  --red-600:#B93232;   --red-300:#FF8A80;
+
+  /* ── 2. Шрифты и шкала ── */
+  --font-display:'Unbounded','Manrope',system-ui,sans-serif;
+  --font-sans:'Manrope',system-ui,-apple-system,'Segoe UI',Roboto,Arial,sans-serif;
+  --font-mono:'JetBrains Mono',ui-monospace,'SF Mono',Menlo,Consolas,monospace;
+  --font-math:'STIX Two Math','Cambria Math','Latin Modern Math','Times New Roman',serif;
+
+  --fs-display-2xl:clamp(44px,7vw,104px);  /* Unbounded 800 — hero лендинга */
+  --fs-display-xl:clamp(36px,5vw,72px);    /* Unbounded 800 — 404, большие цифры */
+  --fs-display-l:clamp(30px,3.4vw,48px);   /* Unbounded 700 — заголовок секции лендинга */
+  --fs-display-m:clamp(22px,2.2vw,30px);   /* Unbounded 700 — короткие заголовки, номера */
+  --fs-h1:clamp(30px,3vw,40px);            /* Manrope 800 */
+  --fs-h2:clamp(24px,2.2vw,30px);          /* Manrope 800 */
+  --fs-h3:20px;                            /* Manrope 700 */
+  --fs-h4:17px;                            /* Manrope 700 */
+  --fs-body-l:18px;
+  --fs-body:16px;
+  --fs-sm:14px;
+  --fs-xs:13px;
+  --fs-caps:11.5px;                        /* Manrope 700, прописные, трекинг .08em */
+  --fs-code:14px;
+
+  --lh-display:1.02; --lh-tight:1.15; --lh-snug:1.3; --lh-body:1.6;
+  --ls-display:-.035em; --ls-tight:-.02em; --ls-caps:.08em;
+
+  /* ── 3. Сетка, отступы, радиусы, движение ── */
+  --sp-1:4px; --sp-2:8px; --sp-3:12px; --sp-4:16px; --sp-5:20px; --sp-6:24px;
+  --sp-8:32px; --sp-10:40px; --sp-12:48px; --sp-16:64px; --sp-20:80px; --sp-24:96px; --sp-32:128px;
+  --container:1200px; --container-text:720px;
+  --gutter:clamp(16px,4vw,40px);
+  --header-h:64px;
+
+  --r-xs:6px; --r-sm:8px; --r-md:12px; --r-lg:16px; --r-xl:24px; --r-2xl:32px; --r-pill:999px;
+
+  --ease:cubic-bezier(.2,.7,.2,1);
+  --dur-1:120ms; --dur-2:200ms; --dur-3:360ms;
+  --z-header:50; --z-toast:80; --z-modal:90;
+
+  /* Фирменные поверхности — одинаковы в обеих темах */
+  --mesh-night:
+    radial-gradient(70% 90% at 92% 0%,rgba(48,118,175,.55),transparent 60%),
+    radial-gradient(45% 60% at 78% 100%,rgba(246,165,19,.22),transparent 70%),
+    radial-gradient(60% 80% at 0% 0%,rgba(20,78,157,.45),transparent 65%),
+    linear-gradient(180deg,var(--night-glow) 0%,var(--night) 100%);
+  --grain:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 1 0 0 0 0 1 0 0 0 0 1 0 0 0 .55 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+
+}
+
+/* ── 4. Семантика: светлая тема. [data-theme="light"] работает и на вложенном блоке ── */
+:root,[data-theme="light"]{
+  color-scheme:light;
+  --bg:var(--paper-canvas);
+  --surface:var(--paper);
+  --surface-2:var(--paper-2);
+  --surface-sunk:#EBEEF3;
+  --line:var(--paper-line);
+  --line-strong:var(--paper-line-strong);
+  --text:var(--ink);
+  --text-2:var(--ink-2);
+  --muted:var(--ink-muted);
+  --faint:var(--ink-faint);
+  --heading:var(--bsu-navy);
+  --link:var(--bsu-blue);
+  --accent:var(--orange);
+  --accent-hover:var(--orange-lo);
+  --on-accent:var(--raccoon);
+  --accent-ink:var(--orange-ink);
+  --accent-soft:rgba(246,165,19,.14);
+  --focus:var(--bsu-blue);
+  --brand-fill:var(--bsu-navy);            /* «тёмная» плашка бренда: синяя на светлом */
+  --on-brand-fill:#FFFFFF;
+  --code-bg:var(--night-1);                      /* код всегда на ночи — обе темы */
+  --code-text:#E3E8F2;
+
+  --ok:var(--green-600);   --ok-soft:rgba(22,115,71,.10);
+  --warn:var(--orange-ink);--warn-soft:rgba(246,165,19,.16);
+  --err:var(--red-600);    --err-soft:rgba(201,54,54,.09);
+  --info:var(--bsu-blue);  --info-soft:rgba(20,78,157,.08);
+
+  --s-recsys:var(--recsys-600); --s-recsys-soft:rgba(42,99,183,.10);
+  --s-nlp:var(--nlp-600);       --s-nlp-soft:rgba(12,110,119,.10);
+  --s-ts:var(--ts-600);         --s-ts-soft:rgba(122,77,184,.10);
+  --s-agents:var(--agents-600); --s-agents-soft:rgba(79,108,24,.11);
+  --s-cv:var(--cv-600);         --s-cv-soft:rgba(163,54,79,.09);
+  --s-mlops:var(--mlops-600);   --s-mlops-soft:rgba(131,96,15,.11);
+  --on-stream:#FFFFFF;
+
+  --e-1:0 1px 2px rgba(11,18,34,.05),0 1px 1px rgba(11,18,34,.03);
+  --e-2:0 1px 2px rgba(11,18,34,.04),0 10px 28px -12px rgba(11,18,34,.16);
+  --e-3:0 2px 6px rgba(11,18,34,.06),0 24px 56px -16px rgba(11,18,34,.28);
+  --focus-ring:0 0 0 2px var(--surface),0 0 0 4px var(--focus);
+}
+
+/* ── 5. Семантика: тёмная тема (ночь) ──
+   Атрибут можно ставить на любой блок: <footer data-theme="dark"> — тёмный остров на светлой странице.
+   Блок продублирован ниже для системной темы — правь оба одинаково. */
+[data-theme="dark"]{
+  color-scheme:dark;
+  --bg:var(--night);
+  --surface:var(--night-1);
+  --surface-2:var(--night-2);
+  --surface-sunk:var(--night-deep);
+  --line:var(--night-line);
+  --line-strong:var(--night-line-strong);
+  --text:var(--snow);
+  --text-2:var(--snow-2);
+  --muted:var(--snow-muted);
+  --faint:var(--snow-faint);
+  --heading:#FFFFFF;
+  --link:var(--sky-300);
+  --accent:var(--orange);
+  --accent-hover:var(--orange-hi);
+  --on-accent:var(--raccoon);
+  --accent-ink:var(--orange);
+  --accent-soft:rgba(246,165,19,.14);
+  --focus:var(--orange);
+  --brand-fill:var(--night-3);
+  --on-brand-fill:#FFFFFF;
+  --code-bg:var(--night-deep);
+  --code-text:#E3E8F2;
+
+  --ok:var(--green-300);   --ok-soft:rgba(92,214,154,.12);
+  --warn:var(--orange);    --warn-soft:rgba(246,165,19,.14);
+  --err:var(--red-300);    --err-soft:rgba(255,138,128,.12);
+  --info:var(--sky-300);   --info-soft:rgba(141,182,245,.12);
+
+  --s-recsys:var(--recsys-300); --s-recsys-soft:rgba(120,169,240,.14);
+  --s-nlp:var(--nlp-300);       --s-nlp-soft:rgba(92,196,204,.13);
+  --s-ts:var(--ts-300);         --s-ts-soft:rgba(184,152,236,.14);
+  --s-agents:var(--agents-300); --s-agents-soft:rgba(182,206,94,.13);
+  --s-cv:var(--cv-300);         --s-cv-soft:rgba(242,143,163,.13);
+  --s-mlops:var(--mlops-300);   --s-mlops-soft:rgba(217,203,160,.13);
+  --on-stream:var(--night);
+
+  --e-1:0 1px 0 rgba(255,255,255,.03) inset,0 1px 2px rgba(0,0,0,.4);
+  --e-2:0 1px 0 rgba(255,255,255,.04) inset,0 12px 32px -12px rgba(0,0,0,.7);
+  --e-3:0 1px 0 rgba(255,255,255,.05) inset,0 28px 64px -16px rgba(0,0,0,.8);
+}
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme="light"]){
+    color-scheme:dark;
+    --bg:var(--night);
+    --surface:var(--night-1);
+    --surface-2:var(--night-2);
+    --surface-sunk:var(--night-deep);
+    --line:var(--night-line);
+    --line-strong:var(--night-line-strong);
+    --text:var(--snow);
+    --text-2:var(--snow-2);
+    --muted:var(--snow-muted);
+    --faint:var(--snow-faint);
+    --heading:#FFFFFF;
+    --link:var(--sky-300);
+    --accent:var(--orange);
+    --accent-hover:var(--orange-hi);
+    --on-accent:var(--raccoon);
+    --accent-ink:var(--orange);
+    --accent-soft:rgba(246,165,19,.14);
+    --focus:var(--orange);
+    --brand-fill:var(--night-3);
+    --on-brand-fill:#FFFFFF;
+    --code-bg:var(--night-deep);
+    --code-text:#E3E8F2;
+    --ok:var(--green-300);   --ok-soft:rgba(92,214,154,.12);
+    --warn:var(--orange);    --warn-soft:rgba(246,165,19,.14);
+    --err:var(--red-300);    --err-soft:rgba(255,138,128,.12);
+    --info:var(--sky-300);   --info-soft:rgba(141,182,245,.12);
+    --s-recsys:var(--recsys-300); --s-recsys-soft:rgba(120,169,240,.14);
+    --s-nlp:var(--nlp-300);       --s-nlp-soft:rgba(92,196,204,.13);
+    --s-ts:var(--ts-300);         --s-ts-soft:rgba(184,152,236,.14);
+    --s-agents:var(--agents-300); --s-agents-soft:rgba(182,206,94,.13);
+    --s-cv:var(--cv-300);         --s-cv-soft:rgba(242,143,163,.13);
+    --s-mlops:var(--mlops-300);   --s-mlops-soft:rgba(217,203,160,.13);
+    --on-stream:var(--night);
+    --e-1:0 1px 0 rgba(255,255,255,.03) inset,0 1px 2px rgba(0,0,0,.4);
+    --e-2:0 1px 0 rgba(255,255,255,.04) inset,0 12px 32px -12px rgba(0,0,0,.7);
+    --e-3:0 1px 0 rgba(255,255,255,.05) inset,0 28px 64px -16px rgba(0,0,0,.8);
+  }
+}
+
+/* ── 6. Поток как контекст: класс на любом контейнере задаёт --stream* для потомков ── */
+.s-recsys{--stream:var(--s-recsys);--stream-soft:var(--s-recsys-soft)}
+.s-nlp{--stream:var(--s-nlp);--stream-soft:var(--s-nlp-soft)}
+.s-ts{--stream:var(--s-ts);--stream-soft:var(--s-ts-soft)}
+.s-agents{--stream:var(--s-agents);--stream-soft:var(--s-agents-soft)}
+.s-cv{--stream:var(--s-cv);--stream-soft:var(--s-cv-soft)}
+.s-mlops{--stream:var(--s-mlops);--stream-soft:var(--s-mlops-soft)}

@@ -1,0 +1,240 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Нейросетевые рекомендации: two-tower, negative sampling, ANN · EDU FAMCS</title>
+<meta name="description" content="Нейросетевые рекомендации: two-tower, negative sampling, ANN — Рекомендательные системы. Хендбук ML-курса ФПМИ.">
+<meta name="theme-color" content="#060A16">
+<meta name="robots" content="noindex, nofollow">
+<meta name="htmx-config" content='{"allowEval":false,"includeIndicatorStyles":false,"historyCacheSize":0,"selfRequestsOnly":true}'>
+<meta name="katex-js" content="/edufamcs-demo/static/vendor/katex/katex.min.js">
+<meta name="katex-css" content="/edufamcs-demo/static/vendor/katex/katex.min.css">
+<link rel="icon" href="/edufamcs-demo/static/brand/logo/favicon-16.svg" type="image/svg+xml" sizes="16x16">
+<link rel="icon" href="/edufamcs-demo/static/brand/logo/favicon.svg" type="image/svg+xml" sizes="any">
+<link rel="preload" href="/edufamcs-demo/static/brand/fonts/manrope-cyrillic-400.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/edufamcs-demo/static/brand/fonts/unbounded-cyrillic-800.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="/edufamcs-demo/static/brand/fonts.css">
+<link rel="stylesheet" href="/edufamcs-demo/static/brand/tokens.css">
+<link rel="stylesheet" href="/edufamcs-demo/static/brand/components.css">
+<link rel="stylesheet" href="/edufamcs-demo/static/css/site.css">
+<link rel="stylesheet" href="/edufamcs-demo/static/css/hub.css">
+<link rel="stylesheet" href="/edufamcs-demo/static/css/about.css">
+<link rel="stylesheet" href="/edufamcs-demo/static/handbook/handbook.css">
+<script src="/edufamcs-demo/static/js/theme.js"></script>
+<script src="/edufamcs-demo/static/vendor/htmx/htmx.min.js" defer></script>
+<script src="/edufamcs-demo/static/vendor/alpine/alpine-csp.min.js" defer></script>
+<script src="/edufamcs-demo/static/js/site.js" defer></script>
+<script src="/edufamcs-demo/static/handbook/handbook.js" defer></script>
+</head>
+<body class="" hx-headers='{"X-CSRFToken": "RNapwgh8kvlDMED9X88g6pzezAd0akMngxJtge4vfmJM1dOSulRo3U5j7ijvIuu7"}'>
+<a class="skip" href="#main">К содержанию</a>
+<div class="demo-bar" role="note">Демо-версия для отзывов: вход, запись на курсы и формы здесь не работают.</div>
+
+<header class="hdr">
+  <div class="container">
+    <a class="brand" href="/edufamcs-demo/" aria-label="EDU FAMCS — главная">
+      <span class="full"><img class="only-light" src="/edufamcs-demo/static/brand/logo/logo-edu-light.svg" alt="EDU FAMCS" width="196" height="40"><img class="only-dark" src="/edufamcs-demo/static/brand/logo/logo-edu-dark.svg" alt="EDU FAMCS" width="196" height="40"></span>
+      <span class="short"><img class="only-light" src="/edufamcs-demo/static/brand/logo/logo-edu-light.svg" alt="EDU FAMCS" height="30"><img class="only-dark" src="/edufamcs-demo/static/brand/logo/logo-edu-dark.svg" alt="EDU FAMCS" height="30"></span>
+    </a>
+    <nav class="nav" id="main-nav" aria-label="Основная навигация">
+      <a href="/edufamcs-demo/#courses">Курсы</a>
+      <a href="/edufamcs-demo/ml/" >Машинное обучение</a>
+      
+      <a href="/edufamcs-demo/handbook/" aria-current="page">Хендбук</a>
+      <a href="/edufamcs-demo/news/" >Новости</a>
+      <a href="/edufamcs-demo/people/" >Авторы</a>
+      <a href="/edufamcs-demo/about/" >О&nbsp;нас</a>
+    </nav>
+    <div class="hdr-actions">
+      
+      <a class="btn btn-outline btn-login" href="/edufamcs-demo/accounts/login/?next=/handbook/recsys/two-tower-ann/">Войти</a>
+      
+      <button class="icon-btn menu-btn" type="button" aria-label="Меню" aria-expanded="false" aria-controls="main-nav"><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-menu"/></svg></button>
+    </div>
+  </div>
+</header>
+
+<main id="main">
+
+
+
+<div class="container hb-page s-recsys">
+  <div class="hb">
+    <aside class="hb-nav" aria-label="Статьи раздела">
+      
+<form class="hb-search" action="/edufamcs-demo/handbook/search/" method="get" role="search">
+  <svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-search"/></svg>
+  <input class="input" type="search" name="q" value="" placeholder="Поиск по хендбуку" aria-label="Поиск по хендбуку" autocomplete="off" maxlength="120"
+    hx-get="/edufamcs-demo/handbook/search/" hx-trigger="input changed delay:250ms, search" hx-target="#hb-nav-results" hx-sync="this:replace">
+</form>
+
+      <div id="hb-nav-results" class="hb-nav-results" aria-live="polite"></div>
+      <a class="grp" href="/edufamcs-demo/handbook/recsys/">Линейные и нейросетевые модели: 2011–2023</a>
+      
+      <a class="" href="/edufamcs-demo/handbook/recsys/slim-i-ease/">Линейные item-item модели: SLIM и EASE</a>
+      
+      <a class="" href="/edufamcs-demo/handbook/recsys/ctr-modeli/">Модели CTR: от логрегрессии до DCN и DIN</a>
+      
+      <a class="cur" href="/edufamcs-demo/handbook/recsys/two-tower-ann/" aria-current="page">Нейросетевые рекомендации: two-tower, negative sampling, ANN</a>
+      
+      <a class="" href="/edufamcs-demo/handbook/recsys/posledovatelnye-modeli/">Последовательные модели: GRU4Rec, SASRec, BERT4Rec</a>
+      
+      <a class="" href="/edufamcs-demo/handbook/recsys/grafovye-modeli/">Графовые модели: от случайных блужданий до LightGCN</a>
+      
+    </aside>
+
+    <article class="hb-main">
+      <nav class="crumbs" aria-label="Навигация"><a href="/edufamcs-demo/handbook/">Хендбук</a><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-chev"/></svg><a href="/edufamcs-demo/handbook/recsys/">Рекомендательные системы</a></nav>
+      <h1 class="h1">Нейросетевые рекомендации: two-tower, negative sampling, ANN</h1>
+      <div class="hb-meta">
+        
+        
+        <span><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-clock"/></svg>11&nbsp;мин</span>
+        <span class="hb-authors"><span class="avatar sm" title="Артем Лебедевич">АЛ</span>Артем Лебедевич</span>
+        <span><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-edit"/></svg>9 ноября 2026</span>
+        
+        
+      </div>
+
+      
+      <details class="hb-mtoc">
+        <summary><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-list"/></svg>Содержание<svg class="ico sm" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-chev-down"/></svg></summary>
+        <a class="l2" href="#откуда-это-взялось">Откуда это взялось</a><a class="l2" href="#архитектура">Архитектура</a><a class="l2" href="#обучение-и-негативы">Обучение и негативы</a><a class="l2" href="#поиск-ближайших-соседей-ann">Поиск ближайших соседей (ANN)</a><a class="l2" href="#практика-обучение-и-выдача">Практика: обучение и выдача</a><a class="l2" href="#где-это-работает">Где это работает</a><a class="l2" href="#что-почитать">Что почитать</a>
+      </details>
+      
+
+      <div class="prose"><p>Матричное разложение хранит отдельный вектор для каждого ID и ничего не знает о признаках. Двухбашенная модель (two-tower, dual encoder) обобщает эту идею: векторы пользователя и объекта не хранятся в таблице, а <strong>вычисляются</strong> нейросетями из признаков.</p>
+<h2 id="откуда-это-взялось">Откуда это взялось</h2>
+<ul>
+<li>
+<p><strong>DSSM</strong> (Huang et al., Microsoft, CIKM 2013). Deep Structured Semantic Model придумали для веб-поиска: две сети переводят запрос и документ в общее пространство, релевантность — косинус, обучение — softmax по одному кликнутому документу и нескольким случайным. Прародитель всей линии: две независимые башни, сходство в конце, негативы из других примеров. Для рекомендаций структуру перенесли заменой «запроса» на пользователя.</p>
+</li>
+<li>
+<p><strong>YouTube DNN</strong> (Covington, Adams, Sargin, RecSys 2016). Эмбеддинги просмотренных видео и поисковых запросов усредняются, к ним добавляются регион, устройство, пол и возраст пользователя; всё идёт в MLP, выход — вектор пользователя. Отдельной башни объекта там ещё нет: вектор видео — это строка весов выходного softmax, но схема «вектор пользователя · вектор объекта + поиск ближайших на выдаче» уже та же. Обучение — softmax по миллионам видео, посчитанный на выборке негативов. Важные находки: прогнозировать <strong>следующий</strong> просмотр, а не случайный из истории (иначе утечка будущего); подмешивать «возраст примера» как признак, чтобы свежесть не терялась; ограничивать число примеров на пользователя, чтобы активные не доминировали. Второй этап (ранжирование) был отдельной сетью — тем самым закреплена <a href="/edufamcs-demo/handbook/recsys/kandidaty-i-ranzhirovanie/" rel="noopener noreferrer nofollow">двухстадийная схема</a>.</p>
+</li>
+<li>
+<p><strong>Смещение сэмплирования.</strong> Когда негативы берутся из того же батча, популярные объекты встречаются в роли негативов чаще, и модель их несправедливо штрафует. Yi et al. (Google, RecSys 2019) вывели поправку logQ: если <span class="tex">Q(i)</span> — вероятность объекта попасть в батч, то</p>
+<div class="tex tex-block">s^{c}(u,i) = s(u,i) - \log Q(i).</div>
+<p>Вероятность <span class="tex">Q(i)</span> оценивают онлайн по частоте появления объекта в потоке обучающих данных (скользящая оценка по шагам между его появлениями), потому что поток нестационарен.</p>
+</li>
+<li>
+<p><strong>Mixed negative sampling</strong> (Yang et al., Google, WWW 2020 companion). Негативы только из батча покрывают лишь популярные объекты; поэтому к ним добавляют равномерный сэмпл из всего каталога и применяют logQ к обеим частям. Холодные и редкие объекты начинают получать градиент.</p>
+</li>
+</ul>
+<p>Двухбашенные сети тем самым прошли путь от поисковой модели 2013 года до стандартного кандидатогенератора 2016–2020 и остаются им в большинстве систем.</p>
+<h2 id="архитектура">Архитектура</h2>
+<p>Две независимые сети — башня пользователя <span class="tex">f_\theta</span> и башня объекта <span class="tex">g_\phi</span> — отображают свои входы в общее пространство размерности <span class="tex">d</span>:</p>
+<div class="tex tex-block">s(u, i) = \langle f_\theta(u),\, g_\phi(i) \rangle \quad \text{или} \quad s(u, i) = \frac{f_\theta(u)^\top g_\phi(i)}{\|f_\theta(u)\|\,\|g_\phi(i)\|} .</div>
+<p>На вход башне пользователя подают эмбеддинг ID, демографию, контекст запроса и, что важнее всего, <strong>историю</strong>: последние <span class="tex">n</span> объектов, усреднённые или пропущенные через GRU или трансформер. Башня объекта получает ID, категорию, цену, эмбеддинг текста или картинки. Благодаря признакам модель может построить вектор для нового объекта, которого не было в обучении, — это частично решает холодный старт.</p>
+<p>Ключевое свойство — башни <strong>не взаимодействуют</strong> до скалярного произведения. Поэтому векторы всех объектов можно посчитать заранее, положить в индекс, а во время запроса считать только один вектор пользователя и искать ближайших соседей. Плата за это — выразительность: модель не может учесть тонкие взаимодействия признаков пользователя и объекта, их добирает ранжирующая модель на второй стадии.</p>
+<h2 id="обучение-и-негативы">Обучение и негативы</h2>
+<p>Положительные примеры — наблюдаемые пары <span class="tex">(u, i^+)</span>: клик, покупка, досмотр. Отрицательных в неявных данных нет, их приходится <strong>сэмплировать</strong>. Классическая функция потерь — sampled softmax: для каждого положительного примера берём <span class="tex">m</span> негативов <span class="tex">i_1^-, \dots, i_m^-</span> и максимизируем вероятность выбрать правильный объект:</p>
+<div class="tex tex-block">\mathcal{L} = -\log \frac{\exp\big(s(u, i^+)/\tau\big)}{\exp\big(s(u, i^+)/\tau\big) + \sum_{j=1}^{m} \exp\big(s(u, i_j^-)/\tau\big)}</div>
+<p>Температура <span class="tex">\tau</span> управляет «остротой» распределения; при косинусной близости обычно берут <span class="tex">\tau \approx 0{,}05</span>. Альтернатива — попарная потеря BPR: <span class="tex">-\log \sigma\big(s(u, i^+) - s(u, i^-)\big)</span>.</p>
+<p>Откуда брать негативы (поправка <span class="tex">-\log Q(i)</span> нужна всегда, когда негативы берутся не равномерно: смещённая выборка завышает вклад популярных объектов в знаменатель softmax):</p>
+<ul>
+<li><strong>Равномерно из каталога.</strong> Просто, но большинство негативов тривиальны: модель быстро учится отличать купленный смартфон от случайного ведра краски и дальше не растёт.</li>
+<li><strong>Пропорционально популярности</strong>, например <span class="tex">P(i) \propto \mathrm{freq}(i)^{0{,}75}</span>, как в word2vec. Популярные объекты — более трудные негативы.</li>
+<li><strong>In-batch negatives.</strong> В батче из <span class="tex">B</span> пар каждый объект служит негативом для остальных <span class="tex">B - 1</span> пользователей. Это почти бесплатно: матрица скоров <span class="tex">B \times B</span> считается одним умножением. Но объекты в батче попадают туда пропорционально популярности, и модель штрафует популярное слишком сильно. Исправление — <strong>logQ-коррекция</strong>: из скора вычитают логарифм вероятности попасть в батч, <span class="tex">s'(u, i) = s(u, i) - \log Q(i)</span> (Yi et al., 2019).</li>
+<li><strong>Hard negatives</strong> — объекты, которые текущая модель ставит высоко, но с которыми пользователь не взаимодействовал. Сильно ускоряют обучение, но опасны: среди «трудных негативов» много на самом деле релевантных объектов, которые человек просто не увидел. Их смешивают с простыми негативами, а не используют в одиночку.</li>
+</ul>
+<div class="code"><div class="code-head"><span class="lang">python</span></div><pre><code><span class="tok-k">import</span> torch
+<span class="tok-k">import</span> torch.nn.functional <span class="tok-k">as</span> F
+
+<span class="tok-k">def</span> <span class="tok-f">in_batch_loss</span><span class="tok-p">(</span>user_vec<span class="tok-p">,</span> item_vec<span class="tok-p">,</span> log_q<span class="tok-p">,</span> tau<span class="tok-p">=</span><span class="tok-n">0.05</span><span class="tok-p">)</span><span class="tok-p">:</span>
+    <span class="tok-s">"""user_vec, item_vec: [B, d], i-я строка — положительная пара; log_q: [B]."""</span>
+    u <span class="tok-p">=</span> F<span class="tok-p">.</span>normalize<span class="tok-p">(</span>user_vec<span class="tok-p">,</span> dim<span class="tok-p">=</span><span class="tok-p">-</span><span class="tok-n">1</span><span class="tok-p">)</span>
+    v <span class="tok-p">=</span> F<span class="tok-p">.</span>normalize<span class="tok-p">(</span>item_vec<span class="tok-p">,</span> dim<span class="tok-p">=</span><span class="tok-p">-</span><span class="tok-n">1</span><span class="tok-p">)</span>
+    logits <span class="tok-p">=</span> u <span class="tok-p">@</span> v<span class="tok-p">.</span>T <span class="tok-p">/</span> tau <span class="tok-p">-</span> log_q<span class="tok-p">[</span><span class="tok-k">None</span><span class="tok-p">,</span> <span class="tok-p">:</span><span class="tok-p">]</span>      <span class="tok-c"># logQ-коррекция популярности</span>
+    labels <span class="tok-p">=</span> torch<span class="tok-p">.</span>arange<span class="tok-p">(</span><span class="tok-f">len</span><span class="tok-p">(</span>u<span class="tok-p">)</span><span class="tok-p">,</span> device<span class="tok-p">=</span>u<span class="tok-p">.</span>device<span class="tok-p">)</span>
+    <span class="tok-k">return</span> F<span class="tok-p">.</span>cross_entropy<span class="tok-p">(</span>logits<span class="tok-p">,</span> labels<span class="tok-p">)</span>
+</code></pre></div>
+<h2 id="поиск-ближайших-соседей-ann">Поиск ближайших соседей (ANN)</h2>
+<p>Подробное устройство индексов — в <a href="/edufamcs-demo/handbook/retrieval/vektornye-indeksy/" rel="noopener noreferrer nofollow">/handbook/retrieval/vektornye-indeksy/</a>; здесь только то, что нужно для рекомендаций.</p>
+<p>После обучения задача рекомендации сводится к поиску: найти <span class="tex">k</span> объектов с максимальным <span class="tex">\langle q, v_i \rangle</span> для вектора запроса <span class="tex">q</span>. Точный перебор стоит <span class="tex">O(|I| \cdot d)</span> на запрос — при десяти миллионах объектов и <span class="tex">d = 128</span> это больше миллиарда операций, слишком медленно для онлайна. Поэтому используют приближённый поиск (approximate nearest neighbours), жертвуя небольшой долей точности ради скорости в сотни раз.</p>
+<ul>
+<li><strong>IVF (inverted file).</strong> Векторы кластеризуются k-means на <span class="tex">n_\text{list}</span> кластеров. При запросе смотрим только <span class="tex">n_\text{probe}</span> ближайших кластеров. Больше <span class="tex">n_\text{probe}</span> — точнее и медленнее.</li>
+<li><strong>PQ (product quantization).</strong> Вектор режется на <span class="tex">M</span> кусков, каждый кодируется номером ближайшего центроида. Память падает в десятки раз, расстояния считаются по таблицам. Часто комбинируют с IVF (IVF-PQ).</li>
+<li><strong>HNSW.</strong> Многоуровневый граф «малого мира»: жадно идём по рёбрам от входной точки к соседям, всё ближе к запросу. Даёт отличный баланс скорости и точности, но требует много памяти.</li>
+</ul>
+<p>Качество ANN-индекса измеряют как <strong>recall@k относительно точного поиска</strong>: какая доля настоящих топ-<span class="tex">k</span> соседей нашлась. Для рекомендаций обычно достаточно <span class="tex">0{,}95</span> — разница теряется на фоне ошибки самой модели.</p>
+<p>Если модель обучена на косинусной близости, векторы нормируют, и поиск по скалярному произведению совпадает с поиском по косинусу. Без нормировки (maximum inner product search) объекты с большой нормой — часто популярные — начинают доминировать в выдаче.</p>
+<div class="code"><div class="code-head"><span class="lang">python</span></div><pre><code><span class="tok-k">import</span> faiss
+<span class="tok-k">import</span> numpy <span class="tok-k">as</span> np
+
+item_vecs <span class="tok-p">=</span> np<span class="tok-p">.</span>ascontiguousarray<span class="tok-p">(</span>item_vecs<span class="tok-p">,</span> dtype<span class="tok-p">=</span><span class="tok-s">"</span><span class="tok-s">float32</span><span class="tok-s">"</span><span class="tok-p">)</span>
+user_vecs <span class="tok-p">=</span> np<span class="tok-p">.</span>ascontiguousarray<span class="tok-p">(</span>user_vecs<span class="tok-p">,</span> dtype<span class="tok-p">=</span><span class="tok-s">"</span><span class="tok-s">float32</span><span class="tok-s">"</span><span class="tok-p">)</span>
+faiss<span class="tok-p">.</span>normalize_L2<span class="tok-p">(</span>item_vecs<span class="tok-p">)</span>                  <span class="tok-c"># нормировка на месте: и объекты,</span>
+faiss<span class="tok-p">.</span>normalize_L2<span class="tok-p">(</span>user_vecs<span class="tok-p">)</span>                  <span class="tok-c"># и запросы, иначе это уже не косинус</span>
+index <span class="tok-p">=</span> faiss<span class="tok-p">.</span>IndexHNSWFlat<span class="tok-p">(</span>item_vecs<span class="tok-p">.</span>shape<span class="tok-p">[</span><span class="tok-n">1</span><span class="tok-p">]</span><span class="tok-p">,</span> <span class="tok-n">32</span><span class="tok-p">,</span> faiss<span class="tok-p">.</span>METRIC_INNER_PRODUCT<span class="tok-p">)</span>
+index<span class="tok-p">.</span>add<span class="tok-p">(</span>item_vecs<span class="tok-p">)</span>
+index<span class="tok-p">.</span>hnsw<span class="tok-p">.</span>efSearch <span class="tok-p">=</span> <span class="tok-n">128</span>                      <span class="tok-c"># больше — точнее и медленнее</span>
+scores<span class="tok-p">,</span> ids <span class="tok-p">=</span> index<span class="tok-p">.</span>search<span class="tok-p">(</span>user_vecs<span class="tok-p">,</span> <span class="tok-n">200</span><span class="tok-p">)</span>     <span class="tok-c"># 200 кандидатов на пользователя</span>
+</code></pre></div>
+<h2 id="практика-обучение-и-выдача">Практика: обучение и выдача</h2>
+<ul>
+<li><strong>logQ — только при обучении.</strong> Поправка компенсирует способ выборки негативов. При выдаче скор считают без неё, иначе в топ полезут редкие объекты. Если популярного всё равно слишком много, частичную поправку <span class="tex">s(u,i) - \alpha \log Q(i)</span> с <span class="tex">\alpha \in [0, 1]</span> подбирают отдельно, по онлайн-метрикам.</li>
+<li><strong>Размер батча.</strong> С in-batch негативами качество растёт вместе с батчем: негативов больше, оценка знаменателя softmax точнее. Типичны батчи в тысячи и десятки тысяч пар. Если память не позволяет, держат очередь векторов объектов из предыдущих батчей (как в MoCo): они немного устарели, но почти бесплатны.</li>
+<li><strong>Свежесть.</strong> Векторы объектов пересчитывают и переиндексируют по расписанию (раз в часы или сутки), а вектор пользователя считают онлайн при каждом запросе из последних действий — модель реагирует на только что сделанные клики без переобучения. Обе башни при этом обязаны быть одной версии: векторы старой башни объектов несовместимы с новой башней пользователя, поэтому модель и индекс выкатывают вместе.</li>
+<li><strong>Несколько интересов.</strong> Один вектор плохо описывает человека, который интересуется и кулинарией, и автомобилями: средний вектор оказывается «между» интересами и находит ни то ни другое. Multi-interest модели выдают несколько векторов пользователя и делают несколько ANN-запросов: MIND (Li et al., Alibaba, CIKM 2019) выделяет интересы динамической маршрутизацией, PinnerSage (Pal et al., Pinterest, KDD 2020) кластеризует историю и берёт представителя каждого кластера.</li>
+<li><strong>Оценка.</strong> Офлайн смотрят Recall@<span class="tex">N</span> на отложенном по времени периоде: какая доля будущих взаимодействий попала в <span class="tex">N</span> кандидатов (см. <a href="/edufamcs-demo/handbook/recsys/oflajn-metriki/" rel="noopener noreferrer nofollow">офлайн-метрики</a>). Recall самого ANN-индекса меряют отдельно, чтобы не путать ошибку модели с ошибкой поиска. Итоговая польза видна только в связке с ранжировщиком: кандидат, который ранжировщик всё равно не поднимет в топ, ничего не даёт.</li>
+</ul>
+<h2 id="где-это-работает">Где это работает</h2>
+<p>Двухбашенная модель — стандартный способ <strong>генерации кандидатов</strong> в крупных системах: YouTube, Pinterest, маркетплейсы. Она быстро сужает каталог с миллионов до сотен объектов, учитывает признаки и свежую историю пользователя и легко обновляется. Финальный порядок затем определяет более тяжёлая <a href="/edufamcs-demo/handbook/recsys/ctr-modeli/" rel="noopener noreferrer nofollow">ранжирующая модель</a> — об этом статья про <a href="/edufamcs-demo/handbook/recsys/kandidaty-i-ranzhirovanie/" rel="noopener noreferrer nofollow">двухстадийную схему</a>.</p>
+<h2 id="что-почитать">Что почитать</h2>
+<ul>
+<li>Huang et al. <em>Learning Deep Structured Semantic Models for Web Search using Clickthrough Data</em>, CIKM 2013 — <a href="https://www.microsoft.com/en-us/research/publication/learning-deep-structured-semantic-models-for-web-search-using-clickthrough-data/" rel="noopener noreferrer nofollow">страница Microsoft Research</a>.</li>
+<li>Covington, Adams, Sargin. <a href="https://research.google/pubs/deep-neural-networks-for-youtube-recommendations/" rel="noopener noreferrer nofollow"><em>Deep Neural Networks for YouTube Recommendations</em></a>, RecSys 2016.</li>
+<li>Yi et al. <em>Sampling-Bias-Corrected Neural Modeling for Large Corpus Item Recommendations</em>, RecSys 2019; Yang et al. <em>Mixed Negative Sampling for Learning Two-tower Neural Networks in Recommendations</em>, WWW 2020 (companion).</li>
+<li>Li et al. <a href="https://arxiv.org/abs/1904.08030" rel="noopener noreferrer nofollow"><em>Multi-Interest Network with Dynamic Routing for Recommendation at Tmall</em></a>, CIKM 2019; Pal et al. <a href="https://arxiv.org/abs/2007.03634" rel="noopener noreferrer nofollow"><em>PinnerSage</em></a>, KDD 2020.</li>
+<li>Курс DeepRecSys: двухбашенные нейросети (<a href="https://www.youtube.com/watch?v=XQDGaW4xwWs" rel="noopener noreferrer nofollow">лекция 3</a>, <a href="https://www.youtube.com/watch?v=Ial_HfWEZBM" rel="noopener noreferrer nofollow">лекция 4</a>), практические аспекты обучения (<a href="https://www.youtube.com/watch?v=WBDq10D9zoU" rel="noopener noreferrer nofollow">семинар 4</a>).</li>
+<li>ODS: нейросетевая матричная факторизация и DSSM — <a href="https://www.youtube.com/watch?v=IznR42dGH-c" rel="noopener noreferrer nofollow">теория (Глеб Волохов)</a>, <a href="https://www.youtube.com/watch?v=BssyfbDCxvU" rel="noopener noreferrer nofollow">практика (Владимир Грановский)</a>.</li>
+</ul>
+</div>
+      
+
+      
+      <nav class="pager" aria-label="Соседние статьи">
+        <a href="/edufamcs-demo/handbook/recsys/ctr-modeli/"><span><svg class="ico sm" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-arrow-left"/></svg>Назад</span>Модели CTR: от логрегрессии до DCN и DIN</a>
+        <a href="/edufamcs-demo/handbook/recsys/posledovatelnye-modeli/"><span>Дальше<svg class="ico sm" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-arrow"/></svg></span>Последовательные модели: GRU4Rec, SASRec, BERT4Rec</a>
+      </nav>
+      
+    </article>
+
+    <aside class="hb-toc" aria-label="На этой странице">
+      <a class="l2" href="#откуда-это-взялось">Откуда это взялось</a><a class="l2" href="#архитектура">Архитектура</a><a class="l2" href="#обучение-и-негативы">Обучение и негативы</a><a class="l2" href="#поиск-ближайших-соседей-ann">Поиск ближайших соседей (ANN)</a><a class="l2" href="#практика-обучение-и-выдача">Практика: обучение и выдача</a><a class="l2" href="#где-это-работает">Где это работает</a><a class="l2" href="#что-почитать">Что почитать</a>
+    </aside>
+  </div>
+</div>
+
+
+</main>
+
+<footer class="ftr" data-theme="dark">
+  <svg class="sym fern" viewBox="0 0 40.5 65.02" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#fern"/></svg>
+  <div class="container">
+    <div class="ftr-row">
+      <a href="/edufamcs-demo/" aria-label="EDU FAMCS — главная"><img src="/edufamcs-demo/static/brand/logo/logo-edu-dark.svg" alt="EDU FAMCS" width="196" height="40"></a>
+      <ul class="ftr-links">
+        <li><a href="/edufamcs-demo/#courses">Курсы</a></li>
+        <li><a href="/edufamcs-demo/ml/">Машинное обучение</a></li>
+        <li><a href="/edufamcs-demo/handbook/">Хендбук</a></li>
+        <li><a href="/edufamcs-demo/news/">Новости</a></li>
+        <li><a href="/edufamcs-demo/people/">Авторы</a></li>
+        <li><a href="/edufamcs-demo/about/">О&nbsp;нас</a></li>
+        <li><a href="/edufamcs-demo/propose/">Предложить или исправить</a></li>
+        <li><a href="/edufamcs-demo/privacy/">Конфиденциальность</a></li>
+      </ul>
+    </div>
+    <div class="ftr-big" aria-hidden="true">EDU<span class="d">·</span>FAMCS</div>
+    <p class="ftr-copy">© 2026 EDU FAMCS · Минск</p>
+  </div>
+</footer>
+
+<div class="toasts-region" aria-live="polite" id="toasts">
+
+</div>
+
+</body>
+</html>

@@ -1,0 +1,420 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Первый сезон · Машинное обучение · EDU FAMCS</title>
+<meta name="description" content="Машинное обучение, Первый сезон: Математическая база, классический ML и гостевые лекции">
+<meta name="theme-color" content="#060A16">
+<meta name="robots" content="noindex, nofollow">
+<meta name="htmx-config" content='{"allowEval":false,"includeIndicatorStyles":false,"historyCacheSize":0,"selfRequestsOnly":true}'>
+<meta name="katex-js" content="/edufamcs-demo/static/vendor/katex/katex.min.js">
+<meta name="katex-css" content="/edufamcs-demo/static/vendor/katex/katex.min.css">
+<link rel="icon" href="/edufamcs-demo/static/brand/logo/favicon-16.svg" type="image/svg+xml" sizes="16x16">
+<link rel="icon" href="/edufamcs-demo/static/brand/logo/favicon.svg" type="image/svg+xml" sizes="any">
+<link rel="preload" href="/edufamcs-demo/static/brand/fonts/manrope-cyrillic-400.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/edufamcs-demo/static/brand/fonts/unbounded-cyrillic-800.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="/edufamcs-demo/static/brand/fonts.css">
+<link rel="stylesheet" href="/edufamcs-demo/static/brand/tokens.css">
+<link rel="stylesheet" href="/edufamcs-demo/static/brand/components.css">
+<link rel="stylesheet" href="/edufamcs-demo/static/css/site.css">
+<link rel="stylesheet" href="/edufamcs-demo/static/css/hub.css">
+<link rel="stylesheet" href="/edufamcs-demo/static/css/about.css">
+<link rel="stylesheet" href="/edufamcs-demo/static/pages/pages.css">
+<script src="/edufamcs-demo/static/js/theme.js"></script>
+<script src="/edufamcs-demo/static/vendor/htmx/htmx.min.js" defer></script>
+<script src="/edufamcs-demo/static/vendor/alpine/alpine-csp.min.js" defer></script>
+<script src="/edufamcs-demo/static/js/site.js" defer></script>
+
+</head>
+<body class="" hx-headers='{"X-CSRFToken": "OjMgtCfAokQWQSzsE1kQHkQCwdH5Hc0Ld3lkdA2Xjbe55rKbbe3YEPmH4VNAfmIv"}'>
+<a class="skip" href="#main">К содержанию</a>
+<div class="demo-bar" role="note">Демо-версия для отзывов: вход, запись на курсы и формы здесь не работают.</div>
+
+<header class="hdr">
+  <div class="container">
+    <a class="brand" href="/edufamcs-demo/" aria-label="EDU FAMCS — главная">
+      <span class="full"><img class="only-light" src="/edufamcs-demo/static/brand/logo/logo-edu-light.svg" alt="EDU FAMCS" width="196" height="40"><img class="only-dark" src="/edufamcs-demo/static/brand/logo/logo-edu-dark.svg" alt="EDU FAMCS" width="196" height="40"></span>
+      <span class="short"><img class="only-light" src="/edufamcs-demo/static/brand/logo/logo-edu-light.svg" alt="EDU FAMCS" height="30"><img class="only-dark" src="/edufamcs-demo/static/brand/logo/logo-edu-dark.svg" alt="EDU FAMCS" height="30"></span>
+    </a>
+    <nav class="nav" id="main-nav" aria-label="Основная навигация">
+      <a href="/edufamcs-demo/#courses">Курсы</a>
+      <a href="/edufamcs-demo/ml/" aria-current="page">Машинное обучение</a>
+      
+      <a href="/edufamcs-demo/handbook/" >Хендбук</a>
+      <a href="/edufamcs-demo/news/" >Новости</a>
+      <a href="/edufamcs-demo/people/" >Авторы</a>
+      <a href="/edufamcs-demo/about/" >О&nbsp;нас</a>
+    </nav>
+    <div class="hdr-actions">
+      
+      <a class="btn btn-outline btn-login" href="/edufamcs-demo/accounts/login/?next=/ml/seasons/1/">Войти</a>
+      
+      <button class="icon-btn menu-btn" type="button" aria-label="Меню" aria-expanded="false" aria-controls="main-nav"><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-menu"/></svg></button>
+    </div>
+  </div>
+</header>
+
+<main id="main">
+
+
+
+<div class="container page">
+  <section class="band season-hero" data-theme="dark" aria-labelledby="season-t">
+    <svg class="sym fern" viewBox="0 0 40.5 65.02" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#fern"/></svg>
+    <span class="big" aria-hidden="true">01</span>
+    <a class="hero-back" href="/edufamcs-demo/ml/"><svg class="ico sm" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-arrow-left"/></svg>Машинное обучение</a>
+    <h1 id="season-t" class="display-xl">Первый сезон</h1>
+    <p class="lead">Математическая база, классический ML и гостевые лекции</p>
+    <div class="hpills"><span class="hpill"><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-cal"/></svg>март — май 2025</span></div>
+    
+    <div class="row">
+      <a class="btn btn-glass" href="https://github.com/ScienceSUFAMCS/science-famcs-ml" rel="noopener" target="_blank"><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-github"/></svg>Материалы</a>
+      
+    </div>
+    
+  </section>
+
+  
+
+  
+  <div class="nums"><div><b>23</b><span>занятия</span></div><div><b>6</b><span>гостевых встреч</span></div><div><b>4</b><span>домашки</span></div></div>
+  
+
+  
+
+  
+  <section class="section tight" aria-labelledby="team-t">
+    <div class="sec-title"><h2 id="team-t" class="display-l">Вели</h2></div>
+    <div class="team">
+      
+      <div class="member s-recsys">
+        <span class="face"><img src="/edufamcs-demo/media/people/person-1.jpg" alt="" loading="lazy"></span>
+        <div><h3 class="h3"><a href="/edufamcs-demo/people/artem-lebedevich/">Артем Лебедевич</a></h3></div>
+      </div>
+      
+      <div class="member s-nlp">
+        <span class="face"><img src="/edufamcs-demo/media/people/person-4.jpg" alt="" loading="lazy"></span>
+        <div><h3 class="h3"><a href="/edufamcs-demo/people/timofey-bovt/">Тимофей Бовт</a></h3></div>
+      </div>
+      
+    </div>
+  </section>
+  
+
+  
+  <section class="section tight" aria-labelledby="prog-t">
+    <div class="sec-title"><h2 id="prog-t" class="display-l">Программа</h2></div>
+    <ol class="prog">
+      
+      <li>
+        <span class="n">01</span>
+        <time datetime="2025-03-01">01.03</time>
+        <span class="t">Основы линейной алгебры и математического анализа</span>
+        <span class="ic">
+          
+          
+        </span>
+      </li>
+      
+      <li>
+        <span class="n">02</span>
+        <time datetime="2025-03-04">04.03</time>
+        <span class="t">Основы теории вероятностей</span>
+        <span class="ic">
+          
+          
+        </span>
+      </li>
+      
+      <li>
+        <span class="n">03</span>
+        <time datetime="2025-03-11">11.03</time>
+        <span class="t">Основы математической статистики 1</span>
+        <span class="ic">
+          
+          
+        </span>
+      </li>
+      
+      <li>
+        <span class="n">04</span>
+        <time datetime="2025-03-15">15.03</time>
+        <span class="t">Основы математической статистики 2</span>
+        <span class="ic">
+          <span title="Домашка"><svg class="ico sm" role="img" aria-label="Домашка"><use href="/edufamcs-demo/static/brand/icons.svg#i-file"/></svg></span>
+          
+        </span>
+      </li>
+      
+      <li>
+        <span class="n">05</span>
+        <time datetime="2025-03-18">18.03</time>
+        <span class="t">Предварительный анализ данных</span>
+        <span class="ic">
+          <span title="Домашка"><svg class="ico sm" role="img" aria-label="Домашка"><use href="/edufamcs-demo/static/brand/icons.svg#i-file"/></svg></span>
+          <a href="https://youtu.be/-60BZOVtElQ?feature=shared" rel="noopener" target="_blank" title="Запись"><svg class="ico sm" role="img" aria-label="Запись"><use href="/edufamcs-demo/static/brand/icons.svg#i-play"/></svg></a>
+        </span>
+      </li>
+      
+      <li>
+        <span class="n">06</span>
+        <time datetime="2025-03-22">22.03</time>
+        <span class="t">Основные понятия машинного обучения</span>
+        <span class="ic">
+          
+          <a href="https://youtu.be/r_NFsDiCygY?feature=shared" rel="noopener" target="_blank" title="Запись"><svg class="ico sm" role="img" aria-label="Запись"><use href="/edufamcs-demo/static/brand/icons.svg#i-play"/></svg></a>
+        </span>
+      </li>
+      
+      <li>
+        <span class="n">07</span>
+        <time datetime="2025-03-25">25.03</time>
+        <span class="t">Линейная регрессия (лекция)</span>
+        <span class="ic">
+          
+          <a href="https://youtu.be/nmM98SZzp1E?feature=shared" rel="noopener" target="_blank" title="Запись"><svg class="ico sm" role="img" aria-label="Запись"><use href="/edufamcs-demo/static/brand/icons.svg#i-play"/></svg></a>
+        </span>
+      </li>
+      
+      <li>
+        <span class="n">08</span>
+        <time datetime="2025-03-29">29.03</time>
+        <span class="t">Линейная регрессия (семинар)</span>
+        <span class="ic">
+          <span title="Домашка"><svg class="ico sm" role="img" aria-label="Домашка"><use href="/edufamcs-demo/static/brand/icons.svg#i-file"/></svg></span>
+          <a href="https://youtu.be/8RPlzBIwE38" rel="noopener" target="_blank" title="Запись"><svg class="ico sm" role="img" aria-label="Запись"><use href="/edufamcs-demo/static/brand/icons.svg#i-play"/></svg></a>
+        </span>
+      </li>
+      
+      <li>
+        <span class="n">09</span>
+        <time datetime="2025-04-02">02.04</time>
+        <span class="t">Логистическая регрессия, оценки качества классификации (лекция)</span>
+        <span class="ic">
+          
+          <a href="https://youtu.be/9eioa89s_aw?feature=shared" rel="noopener" target="_blank" title="Запись"><svg class="ico sm" role="img" aria-label="Запись"><use href="/edufamcs-demo/static/brand/icons.svg#i-play"/></svg></a>
+        </span>
+      </li>
+      
+      <li>
+        <span class="n">10</span>
+        <time datetime="2025-04-08">08.04</time>
+        <span class="t">Логистическая регрессия (семинар)</span>
+        <span class="ic">
+          
+          <a href="https://youtu.be/g5lJ9oVnqGg?feature=shared" rel="noopener" target="_blank" title="Запись"><svg class="ico sm" role="img" aria-label="Запись"><use href="/edufamcs-demo/static/brand/icons.svg#i-play"/></svg></a>
+        </span>
+      </li>
+      
+      <li>
+        <span class="n">11</span>
+        <time datetime="2025-04-09">09.04</time>
+        <span class="t">Метод опорных векторов (лекция+семинар)</span>
+        <span class="ic">
+          <span title="Домашка"><svg class="ico sm" role="img" aria-label="Домашка"><use href="/edufamcs-demo/static/brand/icons.svg#i-file"/></svg></span>
+          <a href="https://www.youtube.com/watch?v=nu9XjoU5flE" rel="noopener" target="_blank" title="Запись"><svg class="ico sm" role="img" aria-label="Запись"><use href="/edufamcs-demo/static/brand/icons.svg#i-play"/></svg></a>
+        </span>
+      </li>
+      
+      <li>
+        <span class="n">12</span>
+        <time datetime="2025-04-12">12.04</time>
+        <span class="t">Метод ближайших соседей (лекция+семинар)</span>
+        <span class="ic">
+          
+          
+        </span>
+      </li>
+      
+      <li>
+        <span class="n">13</span>
+        <time datetime="2025-04-15">15.04</time>
+        <span class="t">Наивный байесовский классификатор (лекция+семинар)</span>
+        <span class="ic">
+          
+          <a href="https://www.youtube.com/watch?v=S5yE56bD5Nk" rel="noopener" target="_blank" title="Запись"><svg class="ico sm" role="img" aria-label="Запись"><use href="/edufamcs-demo/static/brand/icons.svg#i-play"/></svg></a>
+        </span>
+      </li>
+      
+      <li>
+        <span class="n">14</span>
+        <time datetime="2025-04-19">19.04</time>
+        <span class="t">Деревья решений (лекция)</span>
+        <span class="ic">
+          
+          <a href="https://youtu.be/BYwjJgTdCnI?feature=shared" rel="noopener" target="_blank" title="Запись"><svg class="ico sm" role="img" aria-label="Запись"><use href="/edufamcs-demo/static/brand/icons.svg#i-play"/></svg></a>
+        </span>
+      </li>
+      
+      <li>
+        <span class="n">15</span>
+        <time datetime="2025-04-22">22.04</time>
+        <span class="t">Деревья решений (семинар)</span>
+        <span class="ic">
+          
+          <a href="https://youtu.be/wEZE3i5NNAk?si=A_-g4mHsDFFHgFHU" rel="noopener" target="_blank" title="Запись"><svg class="ico sm" role="img" aria-label="Запись"><use href="/edufamcs-demo/static/brand/icons.svg#i-play"/></svg></a>
+        </span>
+      </li>
+      
+      <li>
+        <span class="n">16</span>
+        <time datetime="2025-04-26">26.04</time>
+        <span class="t">Ансамбли и бустинг (лекция)</span>
+        <span class="ic">
+          
+          <a href="https://youtu.be/2M51U-8BfVU?feature=shared" rel="noopener" target="_blank" title="Запись"><svg class="ico sm" role="img" aria-label="Запись"><use href="/edufamcs-demo/static/brand/icons.svg#i-play"/></svg></a>
+        </span>
+      </li>
+      
+      <li>
+        <span class="n">17</span>
+        <time datetime="2025-05-03">03.05</time>
+        <span class="t">Ансамбли и бустинг (семинар)</span>
+        <span class="ic">
+          
+          <a href="https://youtu.be/bMfuNUwtjU0?si=vp32eR6UGIJSmER-" rel="noopener" target="_blank" title="Запись"><svg class="ico sm" role="img" aria-label="Запись"><use href="/edufamcs-demo/static/brand/icons.svg#i-play"/></svg></a>
+        </span>
+      </li>
+      
+      <li class="guest-row">
+        <span class="n">18</span>
+        <time datetime="2025-05-06">06.05</time>
+        <span class="t">Прогнозирование биржевых и валютных котировок<small>Константин Бичун</small></span>
+        <span class="ic">
+          
+          <a href="https://www.youtube.com/watch?v=SY7Kh658Bvk" rel="noopener" target="_blank" title="Запись"><svg class="ico sm" role="img" aria-label="Запись"><use href="/edufamcs-demo/static/brand/icons.svg#i-play"/></svg></a>
+        </span>
+      </li>
+      
+      <li class="guest-row">
+        <span class="n">19</span>
+        <time datetime="2025-05-13">13.05</time>
+        <span class="t">Введение в компьютерное зрение<small>Никита Киселев</small></span>
+        <span class="ic">
+          
+          <a href="https://www.youtube.com/watch?v=_kM-eJWOAVs" rel="noopener" target="_blank" title="Запись"><svg class="ico sm" role="img" aria-label="Запись"><use href="/edufamcs-demo/static/brand/icons.svg#i-play"/></svg></a>
+        </span>
+      </li>
+      
+      <li class="guest-row">
+        <span class="n">20</span>
+        <time datetime="2025-05-17">17.05</time>
+        <span class="t">Введение в MLOps<small>Елизавета Авсянник</small></span>
+        <span class="ic">
+          
+          
+        </span>
+      </li>
+      
+      <li class="guest-row">
+        <span class="n">21</span>
+        <time datetime="2025-05-20">20.05</time>
+        <span class="t">Введение в NLP<small>Екатерина Данькова</small></span>
+        <span class="ic">
+          
+          
+        </span>
+      </li>
+      
+      <li class="guest-row">
+        <span class="n">22</span>
+        <time datetime="2025-05-27">27.05</time>
+        <span class="t">Введение в рекомендательные системы<small>Кирилл Ляхнович</small></span>
+        <span class="ic">
+          
+          
+        </span>
+      </li>
+      
+      <li class="guest-row">
+        <span class="n">23</span>
+        <time datetime="2025-05-27">27.05</time>
+        <span class="t">Логистическая регрессия в задаче кредитного скоринга<small>Елизавета Гиро</small></span>
+        <span class="ic">
+          
+          
+        </span>
+      </li>
+      
+    </ol>
+  </section>
+  
+
+  
+  <section class="section tight" aria-labelledby="guests-t">
+    <div class="sec-title"><h2 id="guests-t" class="display-l">Гости</h2></div>
+    <div class="guests">
+      
+      <div class="guest">
+        <span class="face">КБ</span>
+        <div><b><a href="/edufamcs-demo/people/konstantin-bichun/">Константин Бичун</a></b><span>Прогнозирование биржевых и валютных котировок</span></div>
+      </div>
+      
+      <div class="guest">
+        <span class="face"><img src="/edufamcs-demo/media/people/person-9.jpg" alt="" loading="lazy"></span>
+        <div><b><a href="/edufamcs-demo/people/nikita-kiselev/">Никита Киселев</a></b><span>Введение в компьютерное зрение</span></div>
+      </div>
+      
+      <div class="guest">
+        <span class="face">ЕА</span>
+        <div><b><a href="/edufamcs-demo/people/elizaveta-avsyannik/">Елизавета Авсянник</a></b><span>Введение в MLOps</span></div>
+      </div>
+      
+      <div class="guest">
+        <span class="face">ЕД</span>
+        <div><b><a href="/edufamcs-demo/people/ekaterina-dankova/">Екатерина Данькова</a></b><span>Введение в NLP</span></div>
+      </div>
+      
+      <div class="guest">
+        <span class="face">КЛ</span>
+        <div><b><a href="/edufamcs-demo/people/kirill-lyakhnovich/">Кирилл Ляхнович</a></b><span>Введение в рекомендательные системы</span></div>
+      </div>
+      
+      <div class="guest">
+        <span class="face">ЕГ</span>
+        <div><b><a href="/edufamcs-demo/people/elizaveta-giro/">Елизавета Гиро</a></b><span>Логистическая регрессия в задаче кредитного скоринга</span></div>
+      </div>
+      
+    </div>
+  </section>
+  
+
+  
+  <nav class="season-pager" aria-label="Другие сезоны">
+    
+    <a class="nx" href="/edufamcs-demo/ml/seasons/2/">Второй сезон<svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-arrow"/></svg></a>
+  </nav>
+  
+</div>
+
+
+</main>
+
+<footer class="ftr" data-theme="dark">
+  <svg class="sym fern" viewBox="0 0 40.5 65.02" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#fern"/></svg>
+  <div class="container">
+    <div class="ftr-row">
+      <a href="/edufamcs-demo/" aria-label="EDU FAMCS — главная"><img src="/edufamcs-demo/static/brand/logo/logo-edu-dark.svg" alt="EDU FAMCS" width="196" height="40"></a>
+      <ul class="ftr-links">
+        <li><a href="/edufamcs-demo/#courses">Курсы</a></li>
+        <li><a href="/edufamcs-demo/ml/">Машинное обучение</a></li>
+        <li><a href="/edufamcs-demo/handbook/">Хендбук</a></li>
+        <li><a href="/edufamcs-demo/news/">Новости</a></li>
+        <li><a href="/edufamcs-demo/people/">Авторы</a></li>
+        <li><a href="/edufamcs-demo/about/">О&nbsp;нас</a></li>
+        <li><a href="/edufamcs-demo/propose/">Предложить или исправить</a></li>
+        <li><a href="/edufamcs-demo/privacy/">Конфиденциальность</a></li>
+      </ul>
+    </div>
+    <div class="ftr-big" aria-hidden="true">EDU<span class="d">·</span>FAMCS</div>
+    <p class="ftr-copy">© 2026 EDU FAMCS · Минск</p>
+  </div>
+</footer>
+
+<div class="toasts-region" aria-live="polite" id="toasts">
+
+</div>
+
+</body>
+</html>

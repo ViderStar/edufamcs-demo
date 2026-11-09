@@ -1,0 +1,275 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Логистическая регрессия и метрики классификации · EDU FAMCS</title>
+<meta name="description" content="Логистическая регрессия и метрики классификации — Классическое машинное обучение. Хендбук ML-курса ФПМИ.">
+<meta name="theme-color" content="#060A16">
+<meta name="robots" content="noindex, nofollow">
+<meta name="htmx-config" content='{"allowEval":false,"includeIndicatorStyles":false,"historyCacheSize":0,"selfRequestsOnly":true}'>
+<meta name="katex-js" content="/edufamcs-demo/static/vendor/katex/katex.min.js">
+<meta name="katex-css" content="/edufamcs-demo/static/vendor/katex/katex.min.css">
+<link rel="icon" href="/edufamcs-demo/static/brand/logo/favicon-16.svg" type="image/svg+xml" sizes="16x16">
+<link rel="icon" href="/edufamcs-demo/static/brand/logo/favicon.svg" type="image/svg+xml" sizes="any">
+<link rel="preload" href="/edufamcs-demo/static/brand/fonts/manrope-cyrillic-400.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/edufamcs-demo/static/brand/fonts/unbounded-cyrillic-800.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="/edufamcs-demo/static/brand/fonts.css">
+<link rel="stylesheet" href="/edufamcs-demo/static/brand/tokens.css">
+<link rel="stylesheet" href="/edufamcs-demo/static/brand/components.css">
+<link rel="stylesheet" href="/edufamcs-demo/static/css/site.css">
+<link rel="stylesheet" href="/edufamcs-demo/static/css/hub.css">
+<link rel="stylesheet" href="/edufamcs-demo/static/css/about.css">
+<link rel="stylesheet" href="/edufamcs-demo/static/handbook/handbook.css">
+<script src="/edufamcs-demo/static/js/theme.js"></script>
+<script src="/edufamcs-demo/static/vendor/htmx/htmx.min.js" defer></script>
+<script src="/edufamcs-demo/static/vendor/alpine/alpine-csp.min.js" defer></script>
+<script src="/edufamcs-demo/static/js/site.js" defer></script>
+<script src="/edufamcs-demo/static/handbook/handbook.js" defer></script>
+</head>
+<body class="" hx-headers='{"X-CSRFToken": "5KFSB18IFv441KznDeQAPHYDSU3S08xSuueWlZV5AmsdgjK6arzIMcuIqC9nyifC"}'>
+<a class="skip" href="#main">К содержанию</a>
+<div class="demo-bar" role="note">Демо-версия для отзывов: вход, запись на курсы и формы здесь не работают.</div>
+
+<header class="hdr">
+  <div class="container">
+    <a class="brand" href="/edufamcs-demo/" aria-label="EDU FAMCS — главная">
+      <span class="full"><img class="only-light" src="/edufamcs-demo/static/brand/logo/logo-edu-light.svg" alt="EDU FAMCS" width="196" height="40"><img class="only-dark" src="/edufamcs-demo/static/brand/logo/logo-edu-dark.svg" alt="EDU FAMCS" width="196" height="40"></span>
+      <span class="short"><img class="only-light" src="/edufamcs-demo/static/brand/logo/logo-edu-light.svg" alt="EDU FAMCS" height="30"><img class="only-dark" src="/edufamcs-demo/static/brand/logo/logo-edu-dark.svg" alt="EDU FAMCS" height="30"></span>
+    </a>
+    <nav class="nav" id="main-nav" aria-label="Основная навигация">
+      <a href="/edufamcs-demo/#courses">Курсы</a>
+      <a href="/edufamcs-demo/ml/" >Машинное обучение</a>
+      
+      <a href="/edufamcs-demo/handbook/" aria-current="page">Хендбук</a>
+      <a href="/edufamcs-demo/news/" >Новости</a>
+      <a href="/edufamcs-demo/people/" >Авторы</a>
+      <a href="/edufamcs-demo/about/" >О&nbsp;нас</a>
+    </nav>
+    <div class="hdr-actions">
+      
+      <a class="btn btn-outline btn-login" href="/edufamcs-demo/accounts/login/?next=/handbook/classic/logisticheskaya-regressiya-i-metriki/">Войти</a>
+      
+      <button class="icon-btn menu-btn" type="button" aria-label="Меню" aria-expanded="false" aria-controls="main-nav"><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-menu"/></svg></button>
+    </div>
+  </div>
+</header>
+
+<main id="main">
+
+
+
+<div class="container hb-page hb-tone">
+  <div class="hb">
+    <aside class="hb-nav" aria-label="Статьи раздела">
+      
+<form class="hb-search" action="/edufamcs-demo/handbook/search/" method="get" role="search">
+  <svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-search"/></svg>
+  <input class="input" type="search" name="q" value="" placeholder="Поиск по хендбуку" aria-label="Поиск по хендбуку" autocomplete="off" maxlength="120"
+    hx-get="/edufamcs-demo/handbook/search/" hx-trigger="input changed delay:250ms, search" hx-target="#hb-nav-results" hx-sync="this:replace">
+</form>
+
+      <div id="hb-nav-results" class="hb-nav-results" aria-live="polite"></div>
+      <a class="grp" href="/edufamcs-demo/handbook/classic/">Базовые модели</a>
+      
+      <a class="" href="/edufamcs-demo/handbook/classic/knn-i-naivnyj-bajes/">Метод ближайших соседей и наивный Байес</a>
+      
+      <a class="" href="/edufamcs-demo/handbook/classic/linejnaya-regressiya/">Линейная регрессия</a>
+      
+      <a class="cur" href="/edufamcs-demo/handbook/classic/logisticheskaya-regressiya-i-metriki/" aria-current="page">Логистическая регрессия и метрики классификации</a>
+      
+      <a class="" href="/edufamcs-demo/handbook/classic/metod-opornyh-vektorov/">Метод опорных векторов</a>
+      
+    </aside>
+
+    <article class="hb-main">
+      <nav class="crumbs" aria-label="Навигация"><a href="/edufamcs-demo/handbook/">Хендбук</a><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-chev"/></svg><a href="/edufamcs-demo/handbook/classic/">Классическое машинное обучение</a></nav>
+      <h1 class="h1">Логистическая регрессия и метрики классификации</h1>
+      <div class="hb-meta">
+        
+        
+        <span><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-clock"/></svg>10&nbsp;мин</span>
+        <span class="hb-authors"><span class="avatar sm" title="Артем Лебедевич">АЛ</span>Артем Лебедевич</span>
+        <span><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-edit"/></svg>9 ноября 2026</span>
+        
+        
+      </div>
+
+      
+      <details class="hb-mtoc">
+        <summary><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-list"/></svg>Содержание<svg class="ico sm" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-chev-down"/></svg></summary>
+        <a class="l2" href="#постановка-и-логистическая-функция">Постановка и логистическая функция</a><a class="l2" href="#правдоподобие-и-кросс-энтропия">Правдоподобие и кросс-энтропия</a><a class="l2" href="#регуляризация-и-нелинейность">Регуляризация и нелинейность</a><a class="l2" href="#многоклассовость">Многоклассовость</a><a class="l2" href="#метрики-классификации">Метрики классификации</a><a class="l3" href="#матрица-ошибок">Матрица ошибок</a><a class="l3" href="#roc-и-auc">ROC и AUC</a><a class="l3" href="#pr-кривая">PR-кривая</a><a class="l3" href="#порог-и-бизнес-цель">Порог и бизнес-цель</a><a class="l3" href="#log-loss-и-калибровка">Log-loss и калибровка</a><a class="l3" href="#усреднение-для-многоклассовых-задач">Усреднение для многоклассовых задач</a><a class="l2" href="#код">Код</a><a class="l2" href="#практика-и-типичные-ошибки">Практика и типичные ошибки</a><a class="l2" href="#что-почитать">Что почитать</a>
+      </details>
+      
+
+      <div class="prose"><p>Логистическая регрессия — линейная модель для классификации, которая предсказывает <strong>вероятность</strong> класса. Логит-модель в статистике восходит к работам 1940–50-х, а Д. Кокс (1958) оформил регрессию для бинарного исхода в том виде, в каком мы её знаем. Модель остаётся рабочей лошадкой скоринга, кликов и медицины: обучается быстро, обычно даёт неплохо откалиброванные вероятности и интерпретируемые веса. Вторая половина главы — метрики: выбрать модель по accuracy в задаче с дисбалансом значит не заметить, что она бесполезна.</p>
+<h2 id="постановка-и-логистическая-функция">Постановка и логистическая функция</h2>
+<p>Бинарная классификация: <span class="tex">y\in\{0,1\}</span>. Линейная оценка <span class="tex">z=w^\top x+b</span> принимает любые вещественные значения; чтобы получить вероятность, пропускаем её через сигмоиду:</p>
+<div class="tex tex-block">\sigma(z)=\frac{1}{1+e^{-z}},\qquad P(y=1\mid x)=\sigma(w^\top x+b).</div>
+<p>Свойства, которые используются постоянно:</p>
+<ul>
+<li><span class="tex">\sigma(z)\in(0,1)</span>, <span class="tex">\sigma(0)=\tfrac12</span>, <span class="tex">\sigma(-z)=1-\sigma(z)</span>;</li>
+<li>производная <span class="tex">\sigma'(z)=\sigma(z)\big(1-\sigma(z)\big)</span> — выражается через саму функцию;</li>
+<li>обратная функция — <strong>логит</strong>: <span class="tex">\ln\frac{p}{1-p}=w^\top x+b</span>. Линейна не вероятность, а логарифм шансов: увеличение <span class="tex">x_j</span> на единицу умножает шансы на <span class="tex">e^{w_j}</span> (так читают коэффициенты).</li>
+</ul>
+<p>Граница решений <span class="tex">w^\top x+b=0</span> — гиперплоскость, поэтому модель линейна как классификатор.</p>
+<h2 id="правдоподобие-и-кросс-энтропия">Правдоподобие и кросс-энтропия</h2>
+<p>Для одного объекта <span class="tex">P(y\mid x)=p^y(1-p)^{1-y}</span>, <span class="tex">p=\sigma(w^\top x)</span>. Правдоподобие выборки — произведение по независимым объектам; логарифм превращает его в сумму, а знак минус — в потерю:</p>
+<div class="tex tex-block">L(w)=-\frac1n\sum_{i=1}^n\Big[y_i\ln p_i+(1-y_i)\ln(1-p_i)\Big],\quad p_i=\sigma(w^\top x_i).</div>
+<p>Это <strong>бинарная кросс-энтропия</strong> (log-loss), поэтому обучение логистической регрессии = метод максимального правдоподобия. Деление на <span class="tex">n</span> — нормировка, не влияющая на минимум. Потеря выпукла по <span class="tex">w</span> и сильно штрафует уверенные ошибки: предсказание <span class="tex">p=0{,}01</span> при <span class="tex">y=1</span> стоит <span class="tex">\approx 4{,}6</span>.</p>
+<p><strong>Градиент.</strong> Благодаря <span class="tex">\sigma'=\sigma(1-\sigma)</span> всё сокращается:</p>
+<div class="tex tex-block">\nabla_w L=\frac1nX^\top\big(\sigma(Xw)-y\big).</div>
+<p>Форма совпадает с градиентом MSE для линейной регрессии: «признаки на остаток». Аналитического решения нет (уравнение <span class="tex">\nabla L=0</span> нелинейно по <span class="tex">w</span>), поэтому применяют градиентный спуск, SGD или методы второго порядка (Ньютон/IRLS, L-BFGS — по умолчанию в sklearn). Масштабирование признаков ускоряет сходимость.</p>
+<h2 id="регуляризация-и-нелинейность">Регуляризация и нелинейность</h2>
+<p>Если классы линейно разделимы, оптимум без регуляризации достигается при <span class="tex">\|w\|\to\infty</span> (вероятности стремятся к 0 и 1), и обучение не сходится. Добавляют штраф; в sklearn целевая функция записана так:</p>
+<div class="tex tex-block">C\sum_{i=1}^n\ell_i(w)+\tfrac12\|w\|_2^2\quad\Longleftrightarrow\quad L(w)+\frac{1}{2Cn}\|w\|_2^2,</div>
+<p>где <span class="tex">\ell_i</span> — log-loss на <span class="tex">i</span>-м объекте, а <strong><span class="tex">C</span> — обратная сила регуляризации</strong> (меньше <span class="tex">C</span> — сильнее штраф). Из-за суммы, а не среднего, при том же <span class="tex">C</span> регуляризация слабеет с ростом <span class="tex">n</span>. Свободный член не штрафуется. Есть <span class="tex">\ell_1</span> (разрежённость) и Elastic Net.</p>
+<p>Для <strong>линейно неразделимых</strong> выборок добавляют нелинейные признаки — полиномиальные, сплайны, взаимодействия: граница остаётся линейной в расширенном пространстве и нелинейной в исходном. Для сложных зависимостей применяют деревья, бустинг, ядровые методы.</p>
+<h2 id="многоклассовость">Многоклассовость</h2>
+<ul>
+<li><strong>Softmax</strong> (мультиномиальная логистическая регрессия): <span class="tex">P(y=k\mid x)=\dfrac{e^{w_k^\top x}}{\sum_m e^{w_m^\top x}}</span>, потеря — категориальная кросс-энтропия. Вероятности согласованы и суммируются в 1. Стандарт для нейросетей.</li>
+<li><strong>One-vs-All (OvR)</strong>: <span class="tex">K</span> бинарных классификаторов «класс <span class="tex">k</span> против остальных», выбираем максимум оценки. Просто, но оценки несравнимы по масштабу.</li>
+<li><strong>One-vs-One (OvO)</strong>: <span class="tex">K(K-1)/2</span> классификаторов на парах, голосование. Каждый обучается на малой подвыборке; так устроен многоклассовый <code>SVC</code> (libsvm).</li>
+</ul>
+<h2 id="метрики-классификации">Метрики классификации</h2>
+<h3 id="матрица-ошибок">Матрица ошибок</h3>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th></th>
+<th>предсказан 1</th>
+<th>предсказан 0</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>факт 1</td>
+<td>TP</td>
+<td>FN</td>
+</tr>
+<tr>
+<td>факт 0</td>
+<td>FP</td>
+<td>TN</td>
+</tr>
+</tbody>
+</table></div>
+<p><strong>Accuracy</strong> <span class="tex">=\dfrac{TP+TN}{n}</span> — доля верных ответов. При дисбалансе она обманчива: при 1% мошенничества модель «никогда не мошенник» имеет accuracy 0,99 и нулевую пользу.</p>
+<p><strong>Precision</strong> <span class="tex">=\dfrac{TP}{TP+FP}</span> — какая доля отмеченных положительными действительно положительна. <strong>Recall</strong> (полнота, TPR) <span class="tex">=\dfrac{TP}{TP+FN}</span> — какую долю положительных мы нашли. Они конфликтуют: снижая порог, растим recall и теряем precision.</p>
+<p><strong>F1</strong> — гармоническое среднее: <span class="tex">F_1=\dfrac{2PR}{P+R}</span>. Обобщение <span class="tex">F_\beta=\dfrac{(1+\beta^2)PR}{\beta^2P+R}</span>: <span class="tex">\beta&gt;1</span> усиливает вес recall. Гармоническое среднее наказывает перекос: при <span class="tex">P=1,R=0{,}01</span> арифметическое среднее <span class="tex">\approx0{,}5</span>, F1 <span class="tex">\approx0{,}02</span>.</p>
+<h3 id="roc-и-auc">ROC и AUC</h3>
+<p>Классификатор выдаёт оценку <span class="tex">s(x)</span>, класс получается пороговой обработкой. <strong>ROC-кривая</strong> — график <span class="tex">\mathrm{TPR}</span> против <span class="tex">\mathrm{FPR}=\frac{FP}{FP+TN}</span> при всех порогах. Диагональ — случайный классификатор. <strong>ROC-AUC</strong> — площадь под кривой, и у неё вероятностный смысл:</p>
+<div class="tex tex-block">\mathrm{AUC}=P\big(s(x^+)&gt;s(x^-)\big)+\tfrac12P\big(s(x^+)=s(x^-)\big),</div>
+<p>то есть вероятность, что случайный положительный объект получит оценку выше случайного отрицательного (статистика Манна–Уитни). AUC зависит только от упорядочивания, не чувствителен к монотонным преобразованиям оценки и к калибровке, и инвариантен к балансу классов в смысле определения. Но при сильном дисбалансе даже малый FPR означает огромное число ложных срабатываний, а AUC этого не показывает.</p>
+<h3 id="pr-кривая">PR-кривая</h3>
+<p><strong>PR-кривая</strong> — precision против recall. Она учитывает долю положительных: у случайной модели precision равна доле позитива, а не 0,5. <strong>Average precision</strong> <span class="tex">=\sum_k (R_k-R_{k-1})P_k</span> — ступенчатая оценка площади под ней (без линейной интерполяции, которая завышала бы площадь). Для редкого положительного класса PR-кривая информативнее ROC.</p>
+<h3 id="порог-и-бизнес-цель">Порог и бизнес-цель</h3>
+<p>Порог 0,5 — не закон. Его выбирают исходя из цены ошибок: при стоимости пропуска мошенничества <span class="tex">c_{FN}</span> и ложной тревоги <span class="tex">c_{FP}</span> оптимальный порог по вероятности <span class="tex">\tau=\dfrac{c_{FP}}{c_{FP}+c_{FN}}</span> (для калиброванных вероятностей). Либо фиксируют ограничение («precision не ниже 0,9») и максимизируют recall, либо выбирают порог по F-мере на валидации. Порог подбирают на валидации, не на тесте.</p>
+<h3 id="log-loss-и-калибровка">Log-loss и калибровка</h3>
+<p><strong>Log-loss</strong> оценивает качество самих вероятностей и штрафует уверенные ошибки. <strong>Калибровка</strong> — соответствие предсказанных вероятностей реальным частотам: среди объектов с <span class="tex">p\approx0{,}7</span> положительными должно быть около 70%. Проверяют <strong>reliability diagram</strong>: по оси <span class="tex">x</span> — средняя предсказанная вероятность в корзине, по <span class="tex">y</span> — доля положительных; идеал — диагональ. Логистическая регрессия обычно хорошо калибрована, а случайный лес, SVM и наивный Байес — нет. Калибровка нужна, когда вероятность используют как число (ожидаемая прибыль, ранжирование по <span class="tex">p\cdot\text{цена}</span>). Методы: <strong>Platt scaling</strong> (Platt, 1999) — логистическая регрессия над оценкой <span class="tex">s</span>: <span class="tex">p=\sigma(As+B)</span>; <strong>изотоническая регрессия</strong> — монотонная кусочно-постоянная функция, гибче, но требует больше данных (иначе переобучается). Калибровку обучают на отдельной выборке или кросс-валидацией.</p>
+<h3 id="усреднение-для-многоклассовых-задач">Усреднение для многоклассовых задач</h3>
+<p><strong>Macro</strong>: метрика считается по каждому классу, затем простое среднее — все классы равны, редкие важны. <strong>Micro</strong>: суммируются TP, FP, FN по всем классам — по сути accuracy для одной метки на объект, доминируют крупные классы. <strong>Weighted</strong>: среднее с весами по поддержке класса.</p>
+<h2 id="код">Код</h2>
+<div class="code"><div class="code-head"><span class="lang">python</span></div><pre><code><span class="tok-k">import</span> numpy <span class="tok-k">as</span> np
+<span class="tok-k">from</span> sklearn.calibration <span class="tok-k">import</span> CalibrationDisplay
+<span class="tok-k">from</span> sklearn.datasets <span class="tok-k">import</span> make_classification
+<span class="tok-k">from</span> sklearn.linear_model <span class="tok-k">import</span> LogisticRegression
+<span class="tok-k">from</span> sklearn.metrics <span class="tok-k">import</span> <span class="tok-p">(</span>average_precision_score<span class="tok-p">,</span> classification_report<span class="tok-p">,</span>
+                             log_loss<span class="tok-p">,</span> precision_recall_curve<span class="tok-p">,</span> roc_auc_score<span class="tok-p">)</span>
+<span class="tok-k">from</span> sklearn.model_selection <span class="tok-k">import</span> train_test_split
+<span class="tok-k">from</span> sklearn.pipeline <span class="tok-k">import</span> make_pipeline
+<span class="tok-k">from</span> sklearn.preprocessing <span class="tok-k">import</span> StandardScaler
+
+X<span class="tok-p">,</span> y <span class="tok-p">=</span> make_classification<span class="tok-p">(</span>n_samples<span class="tok-p">=</span><span class="tok-n">20000</span><span class="tok-p">,</span> n_features<span class="tok-p">=</span><span class="tok-n">20</span><span class="tok-p">,</span> n_informative<span class="tok-p">=</span><span class="tok-n">6</span><span class="tok-p">,</span>
+                           weights<span class="tok-p">=</span><span class="tok-p">[</span><span class="tok-n">0.97</span><span class="tok-p">,</span> <span class="tok-n">0.03</span><span class="tok-p">]</span><span class="tok-p">,</span> flip_y<span class="tok-p">=</span><span class="tok-n">0.01</span><span class="tok-p">,</span> random_state<span class="tok-p">=</span><span class="tok-n">0</span><span class="tok-p">)</span>
+X_tr<span class="tok-p">,</span> X_te<span class="tok-p">,</span> y_tr<span class="tok-p">,</span> y_te <span class="tok-p">=</span> train_test_split<span class="tok-p">(</span>X<span class="tok-p">,</span> y<span class="tok-p">,</span> stratify<span class="tok-p">=</span>y<span class="tok-p">,</span> test_size<span class="tok-p">=</span><span class="tok-n">0.3</span><span class="tok-p">,</span> random_state<span class="tok-p">=</span><span class="tok-n">0</span><span class="tok-p">)</span>
+X_tr<span class="tok-p">,</span> X_val<span class="tok-p">,</span> y_tr<span class="tok-p">,</span> y_val <span class="tok-p">=</span> train_test_split<span class="tok-p">(</span>X_tr<span class="tok-p">,</span> y_tr<span class="tok-p">,</span> stratify<span class="tok-p">=</span>y_tr<span class="tok-p">,</span> test_size<span class="tok-p">=</span><span class="tok-n">0.25</span><span class="tok-p">,</span> random_state<span class="tok-p">=</span><span class="tok-n">0</span><span class="tok-p">)</span>
+
+clf <span class="tok-p">=</span> make_pipeline<span class="tok-p">(</span>StandardScaler<span class="tok-p">(</span><span class="tok-p">)</span><span class="tok-p">,</span> LogisticRegression<span class="tok-p">(</span>C<span class="tok-p">=</span><span class="tok-n">1.0</span><span class="tok-p">,</span> max_iter<span class="tok-p">=</span><span class="tok-n">1000</span><span class="tok-p">)</span><span class="tok-p">)</span>
+clf<span class="tok-p">.</span>fit<span class="tok-p">(</span>X_tr<span class="tok-p">,</span> y_tr<span class="tok-p">)</span>
+
+<span class="tok-c"># порог под цель подбираем на валидации: максимальный recall при precision &gt;= 0.5</span>
+p_val <span class="tok-p">=</span> clf<span class="tok-p">.</span>predict_proba<span class="tok-p">(</span>X_val<span class="tok-p">)</span><span class="tok-p">[</span><span class="tok-p">:</span><span class="tok-p">,</span> <span class="tok-n">1</span><span class="tok-p">]</span>
+prec<span class="tok-p">,</span> rec<span class="tok-p">,</span> thr <span class="tok-p">=</span> precision_recall_curve<span class="tok-p">(</span>y_val<span class="tok-p">,</span> p_val<span class="tok-p">)</span>
+ok <span class="tok-p">=</span> prec<span class="tok-p">[</span><span class="tok-p">:</span><span class="tok-p">-</span><span class="tok-n">1</span><span class="tok-p">]</span> <span class="tok-p">&gt;</span><span class="tok-p">=</span> <span class="tok-n">0.5</span>
+t <span class="tok-p">=</span> thr<span class="tok-p">[</span>ok<span class="tok-p">]</span><span class="tok-p">[</span>np<span class="tok-p">.</span>argmax<span class="tok-p">(</span>rec<span class="tok-p">[</span><span class="tok-p">:</span><span class="tok-p">-</span><span class="tok-n">1</span><span class="tok-p">]</span><span class="tok-p">[</span>ok<span class="tok-p">]</span><span class="tok-p">)</span><span class="tok-p">]</span> <span class="tok-k">if</span> ok<span class="tok-p">.</span>any<span class="tok-p">(</span><span class="tok-p">)</span> <span class="tok-k">else</span> <span class="tok-n">0.5</span>
+<span class="tok-f">print</span><span class="tok-p">(</span><span class="tok-s">"</span><span class="tok-s">порог</span><span class="tok-s">"</span><span class="tok-p">,</span> t<span class="tok-p">)</span>
+
+<span class="tok-c"># тест трогаем один раз: метрики ранжирования, вероятностей и выбранного порога;</span>
+<span class="tok-c"># precision на тесте может оказаться чуть ниже 0.5 — это честная оценка, порог выбран на другой выборке</span>
+p <span class="tok-p">=</span> clf<span class="tok-p">.</span>predict_proba<span class="tok-p">(</span>X_te<span class="tok-p">)</span><span class="tok-p">[</span><span class="tok-p">:</span><span class="tok-p">,</span> <span class="tok-n">1</span><span class="tok-p">]</span>
+<span class="tok-f">print</span><span class="tok-p">(</span><span class="tok-s">"</span><span class="tok-s">ROC-AUC</span><span class="tok-s">"</span><span class="tok-p">,</span> roc_auc_score<span class="tok-p">(</span>y_te<span class="tok-p">,</span> p<span class="tok-p">)</span><span class="tok-p">,</span> <span class="tok-s">"</span><span class="tok-s">AP</span><span class="tok-s">"</span><span class="tok-p">,</span> average_precision_score<span class="tok-p">(</span>y_te<span class="tok-p">,</span> p<span class="tok-p">)</span><span class="tok-p">,</span>
+      <span class="tok-s">"</span><span class="tok-s">logloss</span><span class="tok-s">"</span><span class="tok-p">,</span> log_loss<span class="tok-p">(</span>y_te<span class="tok-p">,</span> p<span class="tok-p">)</span><span class="tok-p">)</span>
+<span class="tok-f">print</span><span class="tok-p">(</span>classification_report<span class="tok-p">(</span>y_te<span class="tok-p">,</span> <span class="tok-p">(</span>p <span class="tok-p">&gt;</span><span class="tok-p">=</span> t<span class="tok-p">)</span><span class="tok-p">.</span>astype<span class="tok-p">(</span><span class="tok-f">int</span><span class="tok-p">)</span><span class="tok-p">)</span><span class="tok-p">)</span>
+
+CalibrationDisplay<span class="tok-p">.</span>from_estimator<span class="tok-p">(</span>clf<span class="tok-p">,</span> X_te<span class="tok-p">,</span> y_te<span class="tok-p">,</span> n_bins<span class="tok-p">=</span><span class="tok-n">10</span><span class="tok-p">)</span>   <span class="tok-c"># reliability diagram</span>
+</code></pre></div>
+<h2 id="практика-и-типичные-ошибки">Практика и типичные ошибки</h2>
+<ul>
+<li><strong>Accuracy при дисбалансе</strong>: всегда сравнивайте с константным бейзлайном, смотрите precision/recall и PR-кривую.</li>
+<li><strong>Порог 0,5 по умолчанию.</strong> <code>predict</code> использует его; в продакшене порог — отдельный параметр, зафиксированный на валидации под бизнес-цель.</li>
+<li><strong><code>class_weight='balanced'</code> меняет калибровку.</strong> Вероятности смещаются; после перевзвешивания нужна повторная калибровка.</li>
+<li><strong>Подбор порога и калибровка на тесте</strong> — утечка; нужна отдельная выборка.</li>
+<li><strong>Сравнение моделей по ROC-AUC на разных выборках</strong> и при смене распределения: метрика зависит от состава положительных и отрицательных.</li>
+<li><strong>Регуляризация без масштабирования</strong> признаков: штраф зависит от единиц измерения.</li>
+<li><strong>Номинальные категории, закодированные числами</strong> 1, 2, 3: модель увидит порядок и «расстояния», которых нет; нужен one-hot или target encoding.</li>
+<li><strong>Дрейф калибровки</strong>: доля положительных изменилась — вероятности «поплыли» при неизменном AUC.</li>
+<li>Вопросы собеседований: вывод градиента, почему кросс-энтропия, а не MSE (MSE с сигмоидой невыпукла и даёт затухающий градиент), вероятностный смысл AUC, когда PR лучше ROC.</li>
+</ul>
+<h2 id="что-почитать">Что почитать</h2>
+<ul>
+<li>D. R. Cox, <em>The Regression Analysis of Binary Sequences</em>, JRSS B, 20(2), 1958.</li>
+<li>J. Platt, <em>Probabilistic Outputs for Support Vector Machines and Comparisons to Regularized Likelihood Methods</em>, в сб. <em>Advances in Large Margin Classifiers</em>, MIT Press, 1999.</li>
+<li>A. Niculescu-Mizil, R. Caruana, <em>Predicting Good Probabilities with Supervised Learning</em>, ICML, 2005 — какие модели калиброваны и как это чинить.</li>
+<li>T. Fawcett, <em>An introduction to ROC analysis</em>, Pattern Recognition Letters, 27(8), 2006.</li>
+<li>Документация scikit-learn: <a href="https://scikit-learn.org/stable/modules/calibration.html" rel="noopener noreferrer nofollow">Probability calibration</a>, <a href="https://scikit-learn.org/stable/modules/model_evaluation.html" rel="noopener noreferrer nofollow">Model evaluation</a>.</li>
+<li>Учебник по машинному обучению Яндекса: <a href="https://education.yandex.ru/handbook/ml/article/metriki-klassifikacii-i-regressii" rel="noopener noreferrer nofollow">Метрики классификации и регрессии</a>, <a href="https://education.yandex.ru/handbook/ml/article/kak-ocenivat-veroyatnosti" rel="noopener noreferrer nofollow">Как оценивать вероятности</a>.</li>
+<li>Видео первого сезона: лекция <a href="https://youtu.be/9eioa89s_aw" rel="noopener noreferrer nofollow">youtu.be/9eioa89s_aw</a>, семинар <a href="https://youtu.be/g5lJ9oVnqGg" rel="noopener noreferrer nofollow">youtu.be/g5lJ9oVnqGg</a>.</li>
+</ul>
+</div>
+      
+
+      
+      <nav class="pager" aria-label="Соседние статьи">
+        <a href="/edufamcs-demo/handbook/classic/linejnaya-regressiya/"><span><svg class="ico sm" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-arrow-left"/></svg>Назад</span>Линейная регрессия</a>
+        <a href="/edufamcs-demo/handbook/classic/metod-opornyh-vektorov/"><span>Дальше<svg class="ico sm" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-arrow"/></svg></span>Метод опорных векторов</a>
+      </nav>
+      
+    </article>
+
+    <aside class="hb-toc" aria-label="На этой странице">
+      <a class="l2" href="#постановка-и-логистическая-функция">Постановка и логистическая функция</a><a class="l2" href="#правдоподобие-и-кросс-энтропия">Правдоподобие и кросс-энтропия</a><a class="l2" href="#регуляризация-и-нелинейность">Регуляризация и нелинейность</a><a class="l2" href="#многоклассовость">Многоклассовость</a><a class="l2" href="#метрики-классификации">Метрики классификации</a><a class="l3" href="#матрица-ошибок">Матрица ошибок</a><a class="l3" href="#roc-и-auc">ROC и AUC</a><a class="l3" href="#pr-кривая">PR-кривая</a><a class="l3" href="#порог-и-бизнес-цель">Порог и бизнес-цель</a><a class="l3" href="#log-loss-и-калибровка">Log-loss и калибровка</a><a class="l3" href="#усреднение-для-многоклассовых-задач">Усреднение для многоклассовых задач</a><a class="l2" href="#код">Код</a><a class="l2" href="#практика-и-типичные-ошибки">Практика и типичные ошибки</a><a class="l2" href="#что-почитать">Что почитать</a>
+    </aside>
+  </div>
+</div>
+
+
+</main>
+
+<footer class="ftr" data-theme="dark">
+  <svg class="sym fern" viewBox="0 0 40.5 65.02" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#fern"/></svg>
+  <div class="container">
+    <div class="ftr-row">
+      <a href="/edufamcs-demo/" aria-label="EDU FAMCS — главная"><img src="/edufamcs-demo/static/brand/logo/logo-edu-dark.svg" alt="EDU FAMCS" width="196" height="40"></a>
+      <ul class="ftr-links">
+        <li><a href="/edufamcs-demo/#courses">Курсы</a></li>
+        <li><a href="/edufamcs-demo/ml/">Машинное обучение</a></li>
+        <li><a href="/edufamcs-demo/handbook/">Хендбук</a></li>
+        <li><a href="/edufamcs-demo/news/">Новости</a></li>
+        <li><a href="/edufamcs-demo/people/">Авторы</a></li>
+        <li><a href="/edufamcs-demo/about/">О&nbsp;нас</a></li>
+        <li><a href="/edufamcs-demo/propose/">Предложить или исправить</a></li>
+        <li><a href="/edufamcs-demo/privacy/">Конфиденциальность</a></li>
+      </ul>
+    </div>
+    <div class="ftr-big" aria-hidden="true">EDU<span class="d">·</span>FAMCS</div>
+    <p class="ftr-copy">© 2026 EDU FAMCS · Минск</p>
+  </div>
+</footer>
+
+<div class="toasts-region" aria-live="polite" id="toasts">
+
+</div>
+
+</body>
+</html>

@@ -1,0 +1,278 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Обучение ранжированию · EDU FAMCS</title>
+<meta name="description" content="Обучение ранжированию — Поиск. Хендбук ML-курса ФПМИ.">
+<meta name="theme-color" content="#060A16">
+<meta name="robots" content="noindex, nofollow">
+<meta name="htmx-config" content='{"allowEval":false,"includeIndicatorStyles":false,"historyCacheSize":0,"selfRequestsOnly":true}'>
+<meta name="katex-js" content="/edufamcs-demo/static/vendor/katex/katex.min.js">
+<meta name="katex-css" content="/edufamcs-demo/static/vendor/katex/katex.min.css">
+<link rel="icon" href="/edufamcs-demo/static/brand/logo/favicon-16.svg" type="image/svg+xml" sizes="16x16">
+<link rel="icon" href="/edufamcs-demo/static/brand/logo/favicon.svg" type="image/svg+xml" sizes="any">
+<link rel="preload" href="/edufamcs-demo/static/brand/fonts/manrope-cyrillic-400.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/edufamcs-demo/static/brand/fonts/unbounded-cyrillic-800.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="/edufamcs-demo/static/brand/fonts.css">
+<link rel="stylesheet" href="/edufamcs-demo/static/brand/tokens.css">
+<link rel="stylesheet" href="/edufamcs-demo/static/brand/components.css">
+<link rel="stylesheet" href="/edufamcs-demo/static/css/site.css">
+<link rel="stylesheet" href="/edufamcs-demo/static/css/hub.css">
+<link rel="stylesheet" href="/edufamcs-demo/static/css/about.css">
+<link rel="stylesheet" href="/edufamcs-demo/static/handbook/handbook.css">
+<script src="/edufamcs-demo/static/js/theme.js"></script>
+<script src="/edufamcs-demo/static/vendor/htmx/htmx.min.js" defer></script>
+<script src="/edufamcs-demo/static/vendor/alpine/alpine-csp.min.js" defer></script>
+<script src="/edufamcs-demo/static/js/site.js" defer></script>
+<script src="/edufamcs-demo/static/handbook/handbook.js" defer></script>
+</head>
+<body class="" hx-headers='{"X-CSRFToken": "LGcRqo92Nwi0K0hHt7TpeRaMxXK8beI8aqLVamWpInG9Zzsq0kCxbmGR5FQDJoqS"}'>
+<a class="skip" href="#main">К содержанию</a>
+<div class="demo-bar" role="note">Демо-версия для отзывов: вход, запись на курсы и формы здесь не работают.</div>
+
+<header class="hdr">
+  <div class="container">
+    <a class="brand" href="/edufamcs-demo/" aria-label="EDU FAMCS — главная">
+      <span class="full"><img class="only-light" src="/edufamcs-demo/static/brand/logo/logo-edu-light.svg" alt="EDU FAMCS" width="196" height="40"><img class="only-dark" src="/edufamcs-demo/static/brand/logo/logo-edu-dark.svg" alt="EDU FAMCS" width="196" height="40"></span>
+      <span class="short"><img class="only-light" src="/edufamcs-demo/static/brand/logo/logo-edu-light.svg" alt="EDU FAMCS" height="30"><img class="only-dark" src="/edufamcs-demo/static/brand/logo/logo-edu-dark.svg" alt="EDU FAMCS" height="30"></span>
+    </a>
+    <nav class="nav" id="main-nav" aria-label="Основная навигация">
+      <a href="/edufamcs-demo/#courses">Курсы</a>
+      <a href="/edufamcs-demo/ml/" >Машинное обучение</a>
+      
+      <a href="/edufamcs-demo/handbook/" aria-current="page">Хендбук</a>
+      <a href="/edufamcs-demo/news/" >Новости</a>
+      <a href="/edufamcs-demo/people/" >Авторы</a>
+      <a href="/edufamcs-demo/about/" >О&nbsp;нас</a>
+    </nav>
+    <div class="hdr-actions">
+      
+      <a class="btn btn-outline btn-login" href="/edufamcs-demo/accounts/login/?next=/handbook/retrieval/learning-to-rank/">Войти</a>
+      
+      <button class="icon-btn menu-btn" type="button" aria-label="Меню" aria-expanded="false" aria-controls="main-nav"><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-menu"/></svg></button>
+    </div>
+  </div>
+</header>
+
+<main id="main">
+
+
+
+<div class="container hb-page s-recsys">
+  <div class="hb">
+    <aside class="hb-nav" aria-label="Статьи раздела">
+      
+<form class="hb-search" action="/edufamcs-demo/handbook/search/" method="get" role="search">
+  <svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-search"/></svg>
+  <input class="input" type="search" name="q" value="" placeholder="Поиск по хендбуку" aria-label="Поиск по хендбуку" autocomplete="off" maxlength="120"
+    hx-get="/edufamcs-demo/handbook/search/" hx-trigger="input changed delay:250ms, search" hx-target="#hb-nav-results" hx-sync="this:replace">
+</form>
+
+      <div id="hb-nav-results" class="hb-nav-results" aria-live="polite"></div>
+      <a class="grp" href="/edufamcs-demo/handbook/retrieval/">Классический поиск</a>
+      
+      <a class="" href="/edufamcs-demo/handbook/retrieval/bm25-invertirovannyj-indeks/">BM25 и инвертированный индекс</a>
+      
+      <a class="" href="/edufamcs-demo/handbook/retrieval/ocenka-kachestva-poiska/">Оценка качества поиска</a>
+      
+      <a class="cur" href="/edufamcs-demo/handbook/retrieval/learning-to-rank/" aria-current="page">Обучение ранжированию</a>
+      
+      <a class="" href="/edufamcs-demo/handbook/retrieval/ponimanie-zaprosa/">Понимание запроса</a>
+      
+    </aside>
+
+    <article class="hb-main">
+      <nav class="crumbs" aria-label="Навигация"><a href="/edufamcs-demo/handbook/">Хендбук</a><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-chev"/></svg><a href="/edufamcs-demo/handbook/retrieval/">Поиск</a></nav>
+      <h1 class="h1">Обучение ранжированию</h1>
+      <div class="hb-meta">
+        
+        
+        <span><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-clock"/></svg>14&nbsp;мин</span>
+        <span class="hb-authors"><span class="avatar sm" title="Артем Лебедевич">АЛ</span>Артем Лебедевич</span>
+        <span><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-edit"/></svg>9 ноября 2026</span>
+        
+        
+      </div>
+
+      
+      <details class="hb-mtoc">
+        <summary><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-list"/></svg>Содержание<svg class="ico sm" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-chev-down"/></svg></summary>
+        <a class="l2" href="#признаки-пары-запросдокумент">Признаки пары запрос–документ</a><a class="l2" href="#три-подхода">Три подхода</a><a class="l3" href="#pointwise">Pointwise</a><a class="l3" href="#pairwise">Pairwise</a><a class="l3" href="#listwise">Listwise</a><a class="l2" href="#lambdarank-и-lambdamart">LambdaRank и LambdaMART</a><a class="l2" href="#реализации">Реализации</a><a class="l2" href="#обучение-на-кликах-без-смещения">Обучение на кликах без смещения</a><a class="l2" href="#нейросетевой-ltr">Нейросетевой LTR</a><a class="l2" href="#ловушки">Ловушки</a><a class="l2" href="#что-почитать">Что почитать</a>
+      </details>
+      
+
+      <div class="prose"><p>BM25 даёт один сигнал — лексическое совпадение. Реальная релевантность зависит от десятков факторов: где совпало слово (заголовок или хвост страницы), насколько документ авторитетен, свежий ли он, как на него кликали. К началу 2000-х поисковики вручную подбирали формулы вроде «0,7·BM25 + 0,2·PageRank + ...», и такая настройка перестала масштабироваться на сотни признаков. <strong>Learning to Rank (LTR)</strong> заменяет ручную формулу моделью, обученной на данных: на вход — вектор признаков пары «запрос–документ», на выходе — скор, по которому документы сортируются. Общая схема двухстадийного ранжирования и место LTR в ней описаны в разделе рекомендаций — <a href="/edufamcs-demo/handbook/recsys/kandidaty-i-ranzhirovanie/" rel="noopener noreferrer nofollow">кандидаты и ранжирование</a>. Здесь — алгоритмы и их вывод.</p>
+<h2 id="признаки-пары-запросдокумент">Признаки пары запрос–документ</h2>
+<p>Типичные группы признаков:</p>
+<ul>
+<li><strong>Запрос–документ:</strong> BM25 и TF-IDF по каждому полю отдельно (заголовок, описание, анкорные тексты, URL), доля слов запроса в поле, совпадение фразы, минимальное расстояние между словами запроса в документе, косинус эмбеддингов.</li>
+<li><strong>Документ (не зависит от запроса):</strong> длина, возраст, качество — например <strong>PageRank</strong> (Brin, Page, 1998), стационарное распределение случайного блуждания по ссылочному графу; для товаров — рейтинг, число отзывов, наличие.</li>
+<li><strong>Запрос:</strong> длина, тип, частота запроса.</li>
+<li><strong>Поведение:</strong> CTR документа по этому запросу, доля «длинных» кликов, доля возвратов на выдачу. Поправки на позиции здесь обязательны (см. ниже).</li>
+<li><strong>Свежесть:</strong> время с публикации или обновления.</li>
+</ul>
+<p>Классические датасеты — LETOR 4.0 (Microsoft, 46 признаков), MSLR-WEB30K (136 признаков, градуированные оценки 0–4), Yahoo! LTR (700 признаков). Разметка — как в <a href="/edufamcs-demo/handbook/retrieval/ocenka-kachestva-poiska/" rel="noopener noreferrer nofollow">оценке качества поиска</a>.</p>
+<h2 id="три-подхода">Три подхода</h2>
+<p>Данные сгруппированы по запросам: для запроса <span class="tex">q</span> есть список документов <span class="tex">d_1, \dots, d_n</span> с признаками <span class="tex">x_i</span> и оценками <span class="tex">y_i</span>. Модель <span class="tex">f</span> выдаёт скор <span class="tex">s_i = f(x_i)</span>. Различаются подходы тем, что считают объектом обучения.</p>
+<h3 id="pointwise">Pointwise</h3>
+<p>Каждый документ — независимый пример: регрессия на <span class="tex">y_i</span> (MSE) или классификация по уровням. Просто и работает как бейзлайн, но функция потерь не связана с порядком: модель, ошибающаяся на одинаковую величину в топе и в хвосте, штрафуется одинаково, а запросы с большим числом документов доминируют.</p>
+<h3 id="pairwise">Pairwise</h3>
+<p>Объект обучения — пара документов одного запроса, где <span class="tex">y_i &gt; y_j</span>. Нужно, чтобы <span class="tex">s_i &gt; s_j</span>.</p>
+<p><strong>RankSVM</strong> (Joachims, 2002) — линейный SVM на разностях признаков <span class="tex">x_i - x_j</span> с hinge-потерями. Главная идея работы: пары можно извлекать из кликов — если пользователь кликнул на документ ниже непрокликанного, это сигнал предпочтения.</p>
+<p><strong>RankNet</strong> (Burges et al., 2005) моделирует вероятность того, что <span class="tex">i</span> лучше <span class="tex">j</span>, логистической функцией разности скоров:</p>
+<div class="tex tex-block">P_{ij} = \frac{1}{1 + e^{-\sigma (s_i - s_j)}},</div>
+<p>где <span class="tex">\sigma&gt;0</span> — параметр формы сигмоиды (здесь это число, а не функция). Целевая вероятность <span class="tex">\bar P_{ij}\in\{0, \tfrac12, 1\}</span> (по оценкам <span class="tex">y_i, y_j</span>). Потери — кросс-энтропия:</p>
+<div class="tex tex-block">C_{ij} = -\bar P_{ij}\log P_{ij} - (1-\bar P_{ij})\log(1-P_{ij}).</div>
+<p>Для пары, где <span class="tex">i</span> лучше <span class="tex">j</span> (<span class="tex">\bar P_{ij}=1</span>), это <span class="tex">C_{ij} = \log(1 + e^{-\sigma(s_i - s_j)})</span>. Градиент по <span class="tex">s_i</span>:</p>
+<div class="tex tex-block">\frac{\partial C_{ij}}{\partial s_i} = -\frac{\sigma}{1 + e^{\sigma(s_i - s_j)}} =: \lambda_{ij}, \qquad \frac{\partial C_{ij}}{\partial s_j} = -\lambda_{ij}.</div>
+<p>Шаг градиентного спуска толкает <span class="tex">s_i</span> вверх, а <span class="tex">s_j</span> вниз, и тем сильнее, чем хуже нарушен порядок: при <span class="tex">s_i \ll s_j</span> модуль <span class="tex">\lambda_{ij}</span> близок к <span class="tex">\sigma</span>, а для правильно упорядоченной пары с большим отрывом — к нулю. Проблема pairwise: все пары равноправны, хотя ошибка в паре «позиция 1 vs 2» дороже, чем «позиция 90 vs 91», а метрика (NDCG) смотрит на вершину. Запросы с большим числом документов дают квадратичное число пар.</p>
+<h3 id="listwise">Listwise</h3>
+<p>Объект обучения — весь список. <strong>ListNet</strong> (Cao et al., 2007) превращает скоры и оценки в распределения на «первый в списке» через softmax и минимизирует кросс-энтропию между ними:</p>
+<div class="tex tex-block">P_s(i) = \frac{e^{s_i}}{\sum_k e^{s_k}}, \qquad \mathcal{L} = -\sum_i P_y(i) \log P_s(i).</div>
+<p><strong>ListMLE</strong> (Xia et al., 2008) максимизирует правдоподобие правильной перестановки <span class="tex">\pi</span> по модели Плакетта–Льюса: <span class="tex">P(\pi\mid s)=\prod_{i=1}^n \frac{e^{s_{\pi(i)}}}{\sum_{k\ge i} e^{s_{\pi(k)}}}</span>. Обе потери — гладкие суррогаты, но они не оптимизируют NDCG напрямую: NDCG кусочно-постоянна по скорам (меняется только при смене порядка), и её градиент почти везде равен нулю.</p>
+<h2 id="lambdarank-и-lambdamart">LambdaRank и LambdaMART</h2>
+<p>Ключевое наблюдение Burges, Ragno, Le (2006): для обучения модели не нужна функция потерь, нужны <strong>градиенты</strong> — «силы», с которыми нужно двигать документы. Пусть градиенты RankNet умножаются на изменение метрики при обмене этих документов местами:</p>
+<div class="tex tex-block">\lambda_{ij} = \frac{-\sigma}{1 + e^{\sigma (s_i - s_j)}} \cdot |\Delta \mathrm{NDCG}_{ij}|,</div>
+<p>где <span class="tex">|\Delta\mathrm{NDCG}_{ij}|</span> — модуль изменения NDCG, если поменять <span class="tex">i</span> и <span class="tex">j</span> местами в текущем ранжировании. Итоговая «сила» на документ <span class="tex">i</span>: <span class="tex">\lambda_i = \sum_{j: y_i &gt; y_j}\lambda_{ij} - \sum_{j: y_j &gt; y_i}\lambda_{ji}</span>. Пары у вершины списка и пары с разными оценками (например 4 vs 0) получают больший вес, пары в хвосте — малый. Обмен 1-го и 2-го документов меняет NDCG сильно, 50-го и 51-го — почти нет, поэтому оптимизируется то, что видит пользователь. Функцию потерь, градиент которой равен <span class="tex">\lambda</span>, авторы не выписывали: λ задаются напрямую. Donmez, Svore, Burges (2009) эмпирически показали, что процедура приходит в локальный оптимум самой NDCG, а Wang et al. (2018, LambdaLoss) дали теоретическое обоснование: LambdaRank — частный случай их вероятностного фреймворка с корректно определённой функцией потерь, которая ограничивает потерю NDCG сверху (грубо; там же предложены более точные границы).</p>
+<p><strong>LambdaMART</strong> (Burges, 2010) — то же, но вместо нейросети модель — <strong>градиентный бустинг над деревьями</strong> (MART): каждое следующее дерево аппроксимирует <span class="tex">\lambda_i</span> как «остатки», а значения в листьях подбирают шагом Ньютона, используя вторые производные. Деревья естественно работают с гетерогенными признаками разного масштаба, пропусками и нелинейными взаимодействиями, поэтому в Yahoo! Learning to Rank Challenge (2010) основной трек выиграл ансамбль на основе LambdaMART (команда Burges), и метод надолго стал стандартом индустрии. Второй трек, на перенос обучения между данными, выиграл YetiRank Яндекса (о нём ниже). Устройство бустинга и деревьев — <a href="/edufamcs-demo/handbook/classic/gradientnyj-busting/" rel="noopener noreferrer nofollow">градиентный бустинг</a>.</p>
+<p>В России параллельную линию вёл Яндекс: <strong>MatrixNet</strong> — бустинг над симметричными (oblivious) деревьями, на нём работал поисковый ранжировщик; <strong>YetiRank</strong> (Gulin, Kuralenok, Pavlov, 2011) — pairwise-метод с особым выбором пар и весов по позициям, ставший основой ранжирующих режимов CatBoost. Симметричные деревья быстро применяются (табличный лукап вместо ветвлений) и устойчивы к переобучению.</p>
+<h2 id="реализации">Реализации</h2>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>Библиотека</th>
+<th>Режим</th>
+<th>Особенность</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>LightGBM</td>
+<td><code>objective="lambdarank"</code></td>
+<td>быстрый, <code>lambdarank_truncation_level</code>, <code>eval_at=[k]</code></td>
+</tr>
+<tr>
+<td>XGBoost</td>
+<td><code>rank:ndcg</code>, <code>rank:pairwise</code>, <code>rank:map</code></td>
+<td>GPU, <code>lambdarank_pair_method</code>, нормировка на запрос</td>
+</tr>
+<tr>
+<td>CatBoost</td>
+<td><code>YetiRank</code>, <code>YetiRankPairwise</code>, <code>QuerySoftMax</code>, <code>PairLogit</code></td>
+<td>симметричные деревья, категориальные признаки из коробки</td>
+</tr>
+</tbody>
+</table></div>
+<p>Что важно для всех:</p>
+<ul>
+<li><strong>Группы.</strong> Данные должны быть отсортированы по запросам, и библиотеке передаётся размер группы каждого запроса (<code>group</code>) либо <code>group_id</code> — иначе бустинг будет сравнивать документы разных запросов.</li>
+<li><strong>Метка.</strong> Градуированные целые 0..4. В LightGBM gain задаётся списком <code>label_gain</code>, по умолчанию <span class="tex">2^{\mathrm{rel}} - 1</span> для меток от 0 до 30; при большем числе уровней список задают вручную.</li>
+<li><strong>Валидация</strong> считается по NDCG@k на отложенных запросах, а не документах: разбиение по запросам.</li>
+<li>Запросы без различий в оценках (все нули или все единицы) вклада в обучение не дают.</li>
+</ul>
+<div class="code"><div class="code-head"><span class="lang">python</span></div><pre><code><span class="tok-k">import</span> numpy <span class="tok-k">as</span> np
+<span class="tok-k">import</span> lightgbm <span class="tok-k">as</span> lgb
+<span class="tok-k">from</span> sklearn.model_selection <span class="tok-k">import</span> GroupShuffleSplit
+
+<span class="tok-c"># X: (n_docs, n_features), y: градуированные оценки 0..4, qid: id запроса для каждой строки</span>
+X <span class="tok-p">=</span> np<span class="tok-p">.</span>random<span class="tok-p">.</span>rand<span class="tok-p">(</span><span class="tok-n">1000</span><span class="tok-p">,</span> <span class="tok-n">20</span><span class="tok-p">)</span>
+y <span class="tok-p">=</span> np<span class="tok-p">.</span>random<span class="tok-p">.</span>randint<span class="tok-p">(</span><span class="tok-n">0</span><span class="tok-p">,</span> <span class="tok-n">5</span><span class="tok-p">,</span> <span class="tok-n">1000</span><span class="tok-p">)</span>
+qid <span class="tok-p">=</span> np<span class="tok-p">.</span>repeat<span class="tok-p">(</span>np<span class="tok-p">.</span>arange<span class="tok-p">(</span><span class="tok-n">100</span><span class="tok-p">)</span><span class="tok-p">,</span> <span class="tok-n">10</span><span class="tok-p">)</span>
+
+gss <span class="tok-p">=</span> GroupShuffleSplit<span class="tok-p">(</span>n_splits<span class="tok-p">=</span><span class="tok-n">1</span><span class="tok-p">,</span> test_size<span class="tok-p">=</span><span class="tok-n">0.2</span><span class="tok-p">,</span> random_state<span class="tok-p">=</span><span class="tok-n">0</span><span class="tok-p">)</span>
+tr<span class="tok-p">,</span> va <span class="tok-p">=</span> <span class="tok-f">next</span><span class="tok-p">(</span>gss<span class="tok-p">.</span>split<span class="tok-p">(</span>X<span class="tok-p">,</span> y<span class="tok-p">,</span> groups<span class="tok-p">=</span>qid<span class="tok-p">)</span><span class="tok-p">)</span>
+
+<span class="tok-k">def</span> <span class="tok-f">group_sizes</span><span class="tok-p">(</span>q<span class="tok-p">)</span><span class="tok-p">:</span>             <span class="tok-c"># q должен быть отсортирован по запросам</span>
+    _<span class="tok-p">,</span> counts <span class="tok-p">=</span> np<span class="tok-p">.</span>unique<span class="tok-p">(</span>q<span class="tok-p">,</span> return_counts<span class="tok-p">=</span><span class="tok-k">True</span><span class="tok-p">)</span>
+    <span class="tok-k">return</span> counts
+
+ranker <span class="tok-p">=</span> lgb<span class="tok-p">.</span>LGBMRanker<span class="tok-p">(</span>
+    objective<span class="tok-p">=</span><span class="tok-s">"</span><span class="tok-s">lambdarank</span><span class="tok-s">"</span><span class="tok-p">,</span> n_estimators<span class="tok-p">=</span><span class="tok-n">500</span><span class="tok-p">,</span> learning_rate<span class="tok-p">=</span><span class="tok-n">0.05</span><span class="tok-p">,</span>
+    num_leaves<span class="tok-p">=</span><span class="tok-n">31</span><span class="tok-p">,</span> min_child_samples<span class="tok-p">=</span><span class="tok-n">20</span><span class="tok-p">,</span> lambdarank_truncation_level<span class="tok-p">=</span><span class="tok-n">10</span><span class="tok-p">,</span>
+<span class="tok-p">)</span>
+ranker<span class="tok-p">.</span>fit<span class="tok-p">(</span>
+    X<span class="tok-p">[</span>tr<span class="tok-p">]</span><span class="tok-p">,</span> y<span class="tok-p">[</span>tr<span class="tok-p">]</span><span class="tok-p">,</span> group<span class="tok-p">=</span>group_sizes<span class="tok-p">(</span>qid<span class="tok-p">[</span>tr<span class="tok-p">]</span><span class="tok-p">)</span><span class="tok-p">,</span>
+    eval_set<span class="tok-p">=</span><span class="tok-p">[</span><span class="tok-p">(</span>X<span class="tok-p">[</span>va<span class="tok-p">]</span><span class="tok-p">,</span> y<span class="tok-p">[</span>va<span class="tok-p">]</span><span class="tok-p">)</span><span class="tok-p">]</span><span class="tok-p">,</span> eval_group<span class="tok-p">=</span><span class="tok-p">[</span>group_sizes<span class="tok-p">(</span>qid<span class="tok-p">[</span>va<span class="tok-p">]</span><span class="tok-p">)</span><span class="tok-p">]</span><span class="tok-p">,</span>
+    eval_at<span class="tok-p">=</span><span class="tok-p">[</span><span class="tok-n">5</span><span class="tok-p">,</span> <span class="tok-n">10</span><span class="tok-p">]</span><span class="tok-p">,</span> callbacks<span class="tok-p">=</span><span class="tok-p">[</span>lgb<span class="tok-p">.</span>early_stopping<span class="tok-p">(</span><span class="tok-n">50</span><span class="tok-p">)</span><span class="tok-p">]</span><span class="tok-p">,</span>
+<span class="tok-p">)</span>
+scores <span class="tok-p">=</span> ranker<span class="tok-p">.</span>predict<span class="tok-p">(</span>X<span class="tok-p">[</span>va<span class="tok-p">]</span><span class="tok-p">)</span>   <span class="tok-c"># сортируем внутри каждого запроса по убыванию</span>
+</code></pre></div>
+<h2 id="обучение-на-кликах-без-смещения">Обучение на кликах без смещения</h2>
+<p>Клики дешевле разметки, но смещены позицией (<a href="/edufamcs-demo/handbook/retrieval/ocenka-kachestva-poiska/" rel="noopener noreferrer nofollow">клики и модели кликов</a>). Если обучать модель на кликах как на метках, она выучит «то, что обычно стоит наверху», и замкнёт петлю обратной связи. <strong>Unbiased Learning to Rank</strong> (Joachims, Swaminathan, Schnabel, 2017) исправляет смещение через <strong>Inverse Propensity Scoring</strong>. Допущение: клик <span class="tex">c=1</span> происходит, если документ просмотрен (<span class="tex">o=1</span>) и релевантен (<span class="tex">r=1</span>), а вероятность просмотра зависит от позиции <span class="tex">k</span> — это <strong>propensity</strong> <span class="tex">p_k = P(o=1\mid k)</span>. Тогда <span class="tex">\mathbb{E}[c/p_k] = P(r=1)</span>, и можно использовать клики с весом <span class="tex">1/p_k</span>: клики на нижних позициях — редкие и информативные — получают больший вес.</p>
+<div class="tex tex-block">\hat{\mathcal{L}}_{\mathrm{IPS}} = \sum_{(q,d)\,:\,c=1} \frac{\ell(q, d)}{p_{k(q,d)}}.</div>
+<p>Оценка пропенсити — главная практическая сложность:</p>
+<ul>
+<li><strong>Рандомизация</strong> (swap-эксперименты): на малой доле трафика меняем документы местами и сравниваем CTR одного документа на позициях <span class="tex">k</span> и <span class="tex">1</span> — отношение даёт <span class="tex">p_k/p_1</span>. Метод надёжный, но стоит качества выдачи на этом трафике; мягче — менять местами только соседние позиции. Agarwal et al. (2019) показали, как получать такие «интервенции» без отдельной рандомизации: из логов нескольких ранжировщиков, которые в разное время ставили один и тот же документ на разные позиции.</li>
+<li><strong>EM</strong> на логах без рандомизации (Wang et al., 2018; Ai et al., 2018, Dual Learning Algorithm): совместно оцениваются модель релевантности и propensity. Требует, чтобы документы встречались на разных позициях в разных запросах — иначе не идентифицируется.</li>
+</ul>
+<p>Практические подвохи: малые <span class="tex">p_k</span> дают взрывную дисперсию (клипуют вес сверху), сигнал о том, что пользователь <em>не</em> кликнул на просмотренный документ, при этом теряется (для него есть иные корректировки), а в реальном вебе просмотр зависит ещё и от привлекательности соседних сниппетов, а не только от позиции.</p>
+<h2 id="нейросетевой-ltr">Нейросетевой LTR</h2>
+<p>Деревья на табличных признаках долго оставались лучше нейросетей; на LETOR и MSLR-WEB30K LambdaMART и сейчас конкурентен. Qin et al. (2021) показали, что прежние нейросетевые LTR-модели проигрывали хорошо настроенному LightGBM, а догнать его удаётся лишь при аккуратной нормировке признаков, аугментации данных и self-attention по списку. Нейросетевое LTR — это та же постановка с теми же потерями (pairwise, listwise, LambdaLoss), но <span class="tex">f</span> — MLP или Transformer на списке. <strong>TF-Ranking</strong> (Pasumarthi et al., 2019, Google) — библиотека на TensorFlow с набором таких потерь и метрик; кроме скоров по отдельным документам в ней есть групповые скоринговые функции, которые видят несколько документов списка сразу. Преимущество — можно подавать в ту же модель сырые эмбеддинги и тексты, обучать end-to-end вместе с языковой моделью, как в <a href="/edufamcs-demo/handbook/retrieval/nejrosetevoe-ranzhirovanie/" rel="noopener noreferrer nofollow">нейросетевом ранжировании</a>. На практике бустинг остаётся быстрым надёжным финальным слоем, который объединяет выход нейросети с «обычными» признаками (свежесть, клики, цена).</p>
+<h2 id="ловушки">Ловушки</h2>
+<ul>
+<li><strong>Утечка по запросам.</strong> Случайный сплит по документам при обучении на запросах приводит к завышенной метрике; делите по запросам (и по времени, если признаки зависят от кликов).</li>
+<li><strong>Признаки из кликов — источник петли.</strong> CTR документа из прошлой выдачи уже зависит от того, где он стоял. Нормируйте CTR на ожидаемый для позиции или используйте только показы с рандомизацией.</li>
+<li><strong>Тренировочный и боевой контекст различаются.</strong> Модель, обученная на документах из топ-100 BM25, будет работать на этих же кандидатах; подавать ей документы из другого генератора кандидатов нельзя без переобучения.</li>
+<li><strong>Метрики оптимизируют не ту цель.</strong> Рост NDCG@10 по разметке не гарантирует роста конверсии — проверяйте в A/B.</li>
+<li><strong>Задержка.</strong> 500 деревьев на 100 документов — миллисекунды, но сотни признаков нужно ещё достать из хранилища; признак «число кликов за 30 дней» требует онлайн-хранилища (feature store), и это часто узкое место.</li>
+<li><strong>На собеседовании</strong> спрашивают: чем LambdaRank отличается от RankNet (веса <span class="tex">|\Delta\mathrm{NDCG}|</span>, градиент без явной функции потерь), почему NDCG нельзя оптимизировать градиентным спуском напрямую, почему нужны группы в LightGBM.</li>
+</ul>
+<h2 id="что-почитать">Что почитать</h2>
+<ul>
+<li>Burges C. From RankNet to LambdaRank to LambdaMART: An Overview, Microsoft Research Technical Report MSR-TR-2010-82, 2010 — лучший вводный текст по этой линии: https://www.microsoft.com/en-us/research/publication/from-ranknet-to-lambdarank-to-lambdamart-an-overview/</li>
+<li>Joachims T. Optimizing Search Engines using Clickthrough Data, KDD 2002 — RankSVM.</li>
+<li>Joachims T., Swaminathan A., Schnabel T. Unbiased Learning-to-Rank with Biased Feedback, 2017: https://arxiv.org/abs/1608.04468</li>
+<li>Pasumarthi R. et al. TF-Ranking: Scalable TensorFlow Library for Learning-to-Rank, 2019: https://arxiv.org/abs/1812.00073</li>
+<li>Chapelle O., Chang Y. Yahoo! Learning to Rank Challenge Overview, JMLR W&amp;CP 14, 2011.</li>
+<li>Wang X. et al. The LambdaLoss Framework for Ranking Metric Optimization, CIKM 2018 — что на самом деле оптимизирует LambdaRank.</li>
+<li>Qin Z. et al. Are Neural Rankers still Outperformed by Gradient Boosted Decision Trees?, ICLR 2021.</li>
+<li>Lyzhin I., Ustimenko A., Gulin A., Prokhorenkova L. Which Tricks Are Important for Learning to Rank?, ICML 2023 — сравнение LambdaMART, YetiRank и их вариантов: https://arxiv.org/abs/2204.01500</li>
+</ul>
+</div>
+      
+
+      
+      <nav class="pager" aria-label="Соседние статьи">
+        <a href="/edufamcs-demo/handbook/retrieval/ocenka-kachestva-poiska/"><span><svg class="ico sm" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-arrow-left"/></svg>Назад</span>Оценка качества поиска</a>
+        <a href="/edufamcs-demo/handbook/retrieval/ponimanie-zaprosa/"><span>Дальше<svg class="ico sm" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-arrow"/></svg></span>Понимание запроса</a>
+      </nav>
+      
+    </article>
+
+    <aside class="hb-toc" aria-label="На этой странице">
+      <a class="l2" href="#признаки-пары-запросдокумент">Признаки пары запрос–документ</a><a class="l2" href="#три-подхода">Три подхода</a><a class="l3" href="#pointwise">Pointwise</a><a class="l3" href="#pairwise">Pairwise</a><a class="l3" href="#listwise">Listwise</a><a class="l2" href="#lambdarank-и-lambdamart">LambdaRank и LambdaMART</a><a class="l2" href="#реализации">Реализации</a><a class="l2" href="#обучение-на-кликах-без-смещения">Обучение на кликах без смещения</a><a class="l2" href="#нейросетевой-ltr">Нейросетевой LTR</a><a class="l2" href="#ловушки">Ловушки</a><a class="l2" href="#что-почитать">Что почитать</a>
+    </aside>
+  </div>
+</div>
+
+
+</main>
+
+<footer class="ftr" data-theme="dark">
+  <svg class="sym fern" viewBox="0 0 40.5 65.02" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#fern"/></svg>
+  <div class="container">
+    <div class="ftr-row">
+      <a href="/edufamcs-demo/" aria-label="EDU FAMCS — главная"><img src="/edufamcs-demo/static/brand/logo/logo-edu-dark.svg" alt="EDU FAMCS" width="196" height="40"></a>
+      <ul class="ftr-links">
+        <li><a href="/edufamcs-demo/#courses">Курсы</a></li>
+        <li><a href="/edufamcs-demo/ml/">Машинное обучение</a></li>
+        <li><a href="/edufamcs-demo/handbook/">Хендбук</a></li>
+        <li><a href="/edufamcs-demo/news/">Новости</a></li>
+        <li><a href="/edufamcs-demo/people/">Авторы</a></li>
+        <li><a href="/edufamcs-demo/about/">О&nbsp;нас</a></li>
+        <li><a href="/edufamcs-demo/propose/">Предложить или исправить</a></li>
+        <li><a href="/edufamcs-demo/privacy/">Конфиденциальность</a></li>
+      </ul>
+    </div>
+    <div class="ftr-big" aria-hidden="true">EDU<span class="d">·</span>FAMCS</div>
+    <p class="ftr-copy">© 2026 EDU FAMCS · Минск</p>
+  </div>
+</footer>
+
+<div class="toasts-region" aria-live="polite" id="toasts">
+
+</div>
+
+</body>
+</html>

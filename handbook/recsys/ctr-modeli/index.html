@@ -1,0 +1,319 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Модели CTR: от логрегрессии до DCN и DIN · EDU FAMCS</title>
+<meta name="description" content="Модели CTR: от логрегрессии до DCN и DIN — Рекомендательные системы. Хендбук ML-курса ФПМИ.">
+<meta name="theme-color" content="#060A16">
+<meta name="robots" content="noindex, nofollow">
+<meta name="htmx-config" content='{"allowEval":false,"includeIndicatorStyles":false,"historyCacheSize":0,"selfRequestsOnly":true}'>
+<meta name="katex-js" content="/edufamcs-demo/static/vendor/katex/katex.min.js">
+<meta name="katex-css" content="/edufamcs-demo/static/vendor/katex/katex.min.css">
+<link rel="icon" href="/edufamcs-demo/static/brand/logo/favicon-16.svg" type="image/svg+xml" sizes="16x16">
+<link rel="icon" href="/edufamcs-demo/static/brand/logo/favicon.svg" type="image/svg+xml" sizes="any">
+<link rel="preload" href="/edufamcs-demo/static/brand/fonts/manrope-cyrillic-400.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/edufamcs-demo/static/brand/fonts/unbounded-cyrillic-800.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="/edufamcs-demo/static/brand/fonts.css">
+<link rel="stylesheet" href="/edufamcs-demo/static/brand/tokens.css">
+<link rel="stylesheet" href="/edufamcs-demo/static/brand/components.css">
+<link rel="stylesheet" href="/edufamcs-demo/static/css/site.css">
+<link rel="stylesheet" href="/edufamcs-demo/static/css/hub.css">
+<link rel="stylesheet" href="/edufamcs-demo/static/css/about.css">
+<link rel="stylesheet" href="/edufamcs-demo/static/handbook/handbook.css">
+<script src="/edufamcs-demo/static/js/theme.js"></script>
+<script src="/edufamcs-demo/static/vendor/htmx/htmx.min.js" defer></script>
+<script src="/edufamcs-demo/static/vendor/alpine/alpine-csp.min.js" defer></script>
+<script src="/edufamcs-demo/static/js/site.js" defer></script>
+<script src="/edufamcs-demo/static/handbook/handbook.js" defer></script>
+</head>
+<body class="" hx-headers='{"X-CSRFToken": "9AHOI1OXbKU71cehcOWdTISRCKgCQZcqykgSsZBk6BiggLp0J1FlQdoWasm7o9Ua"}'>
+<a class="skip" href="#main">К содержанию</a>
+<div class="demo-bar" role="note">Демо-версия для отзывов: вход, запись на курсы и формы здесь не работают.</div>
+
+<header class="hdr">
+  <div class="container">
+    <a class="brand" href="/edufamcs-demo/" aria-label="EDU FAMCS — главная">
+      <span class="full"><img class="only-light" src="/edufamcs-demo/static/brand/logo/logo-edu-light.svg" alt="EDU FAMCS" width="196" height="40"><img class="only-dark" src="/edufamcs-demo/static/brand/logo/logo-edu-dark.svg" alt="EDU FAMCS" width="196" height="40"></span>
+      <span class="short"><img class="only-light" src="/edufamcs-demo/static/brand/logo/logo-edu-light.svg" alt="EDU FAMCS" height="30"><img class="only-dark" src="/edufamcs-demo/static/brand/logo/logo-edu-dark.svg" alt="EDU FAMCS" height="30"></span>
+    </a>
+    <nav class="nav" id="main-nav" aria-label="Основная навигация">
+      <a href="/edufamcs-demo/#courses">Курсы</a>
+      <a href="/edufamcs-demo/ml/" >Машинное обучение</a>
+      
+      <a href="/edufamcs-demo/handbook/" aria-current="page">Хендбук</a>
+      <a href="/edufamcs-demo/news/" >Новости</a>
+      <a href="/edufamcs-demo/people/" >Авторы</a>
+      <a href="/edufamcs-demo/about/" >О&nbsp;нас</a>
+    </nav>
+    <div class="hdr-actions">
+      
+      <a class="btn btn-outline btn-login" href="/edufamcs-demo/accounts/login/?next=/handbook/recsys/ctr-modeli/">Войти</a>
+      
+      <button class="icon-btn menu-btn" type="button" aria-label="Меню" aria-expanded="false" aria-controls="main-nav"><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-menu"/></svg></button>
+    </div>
+  </div>
+</header>
+
+<main id="main">
+
+
+
+<div class="container hb-page s-recsys">
+  <div class="hb">
+    <aside class="hb-nav" aria-label="Статьи раздела">
+      
+<form class="hb-search" action="/edufamcs-demo/handbook/search/" method="get" role="search">
+  <svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-search"/></svg>
+  <input class="input" type="search" name="q" value="" placeholder="Поиск по хендбуку" aria-label="Поиск по хендбуку" autocomplete="off" maxlength="120"
+    hx-get="/edufamcs-demo/handbook/search/" hx-trigger="input changed delay:250ms, search" hx-target="#hb-nav-results" hx-sync="this:replace">
+</form>
+
+      <div id="hb-nav-results" class="hb-nav-results" aria-live="polite"></div>
+      <a class="grp" href="/edufamcs-demo/handbook/recsys/">Линейные и нейросетевые модели: 2011–2023</a>
+      
+      <a class="" href="/edufamcs-demo/handbook/recsys/slim-i-ease/">Линейные item-item модели: SLIM и EASE</a>
+      
+      <a class="cur" href="/edufamcs-demo/handbook/recsys/ctr-modeli/" aria-current="page">Модели CTR: от логрегрессии до DCN и DIN</a>
+      
+      <a class="" href="/edufamcs-demo/handbook/recsys/two-tower-ann/">Нейросетевые рекомендации: two-tower, negative sampling, ANN</a>
+      
+      <a class="" href="/edufamcs-demo/handbook/recsys/posledovatelnye-modeli/">Последовательные модели: GRU4Rec, SASRec, BERT4Rec</a>
+      
+      <a class="" href="/edufamcs-demo/handbook/recsys/grafovye-modeli/">Графовые модели: от случайных блужданий до LightGCN</a>
+      
+    </aside>
+
+    <article class="hb-main">
+      <nav class="crumbs" aria-label="Навигация"><a href="/edufamcs-demo/handbook/">Хендбук</a><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-chev"/></svg><a href="/edufamcs-demo/handbook/recsys/">Рекомендательные системы</a></nav>
+      <h1 class="h1">Модели CTR: от логрегрессии до DCN и DIN</h1>
+      <div class="hb-meta">
+        
+        
+        <span><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-clock"/></svg>16&nbsp;мин</span>
+        <span class="hb-authors"><span class="avatar sm" title="Артем Лебедевич">АЛ</span>Артем Лебедевич</span>
+        <span><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-edit"/></svg>9 ноября 2026</span>
+        
+        
+      </div>
+
+      
+      <details class="hb-mtoc">
+        <summary><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-list"/></svg>Содержание<svg class="ico sm" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-chev-down"/></svg></summary>
+        <a class="l2" href="#постановка">Постановка</a><a class="l2" href="#логрегрессия-hashing-trick-и-ftrl-20092013">Логрегрессия, hashing trick и FTRL (2009–2013)</a><a class="l2" href="#factorization-machines-2010">Factorization Machines (2010)</a><a class="l2" href="#глубокие-модели-20162021">Глубокие модели (2016–2021)</a><a class="l2" href="#поведенческие-последовательности">Поведенческие последовательности</a><a class="l2" href="#многозадачность">Многозадачность</a><a class="l2" href="#числовые-признаки-и-эмбеддинги">Числовые признаки и эмбеддинги</a><a class="l2" href="#метрики">Метрики</a><a class="l2" href="#подводные-камни">Подводные камни</a><a class="l2" href="#что-дальше-масштабирование-ранжирования">Что дальше: масштабирование ранжирования</a><a class="l2" href="#что-почитать">Что почитать</a>
+      </details>
+      
+
+      <div class="prose"><p>Модели матричной факторизации и EASE отвечают на вопрос «что из каталога подойдёт пользователю». Ранжирование внутри уже собранного списка — другая задача: для каждой пары (пользователь, объект, контекст) надо оценить <strong>вероятность целевого события</strong> — клика, покупки, досмотра. Эта задача выросла из онлайн-рекламы, где вероятность клика напрямую входит в цену показа, поэтому её называют CTR/CVR-предсказанием. Вход — десятки категориальных признаков с миллионами значений (id пользователя, id объявления, площадка, город, устройство), плюс небольшое число числовых. Это определяет всё устройство моделей ниже.</p>
+<h2 id="постановка">Постановка</h2>
+<p>Пример — вектор признаков <span class="tex">x</span>, метка <span class="tex">y \in \{0,1\}</span>. Модель выдаёт <span class="tex">\hat p = P(y=1 \mid x)</span>, обучается на log-loss:</p>
+<div class="tex tex-block">\mathcal{L} = -\frac1N\sum_n \big[y_n \log \hat p_n + (1-y_n)\log(1-\hat p_n)\big].</div>
+<p>Категориальные признаки кодируются one-hot и склеиваются в разреженный вектор длиной <span class="tex">n</span> от миллионов до миллиардов. Дальше все модели разбираются по тому, <strong>как они учитывают взаимодействия признаков</strong>: «реклама чехла для iPhone» важна только пользователю с iPhone, и эта связь не лежит ни в одном признаке по отдельности.</p>
+<h2 id="логрегрессия-hashing-trick-и-ftrl-20092013">Логрегрессия, hashing trick и FTRL (2009–2013)</h2>
+<p>Базовая модель — <span class="tex">\hat p = \sigma(w_0 + \sum_i w_i x_i)</span>. Взаимодействия добавляют вручную: комбинации «город × устройство», «категория × час». Это работает, но число комбинаций взрывается, а инженеры тратят месяцы на отбор.</p>
+<p><strong>Hashing trick</strong> (Weinberger et al., 2009). Вместо словаря значений признака берётся хеш: индекс веса <span class="tex">= h(\text{имя признака} \,\|\, \text{значение}) \bmod M</span>. Память фиксирована (<span class="tex">M \sim 2^{24}</span>–<span class="tex">2^{30}</span>), новые значения не требуют перестройки словаря, ценой коллизий. Коллизии — компромисс: при <span class="tex">M \gg</span> числа частых значений вред невелик.</p>
+<p><strong>FTRL-Proximal</strong> (McMahan et al., 2013, <em>Ad Click Prediction: a View from the Trenches</em>, Google). Онлайн-оптимизатор для логрегрессии с <span class="tex">\ell_1</span> и <span class="tex">\ell_2</span>: хорошо даёт разреженность весов (нули экономят память) и работает в потоке данных. В той же статье описаны практики, которые оказались долговечнее самого алгоритма: отдельный шаг обучения для каждого признака (AdaGrad-подобный), отбрасывание редких значений вероятностно, калибровка предсказаний, оценка через нормализованные метрики.</p>
+<p><strong>GBDT + LR</strong> (He et al., 2014, Facebook). Деревья градиентного бустинга преобразуют признаки: номер листа каждого дерева становится one-hot признаком для логрегрессии. Деревья находят нелинейные комбинации, логрегрессия обучается онлайн и быстро обновляется. Подход закрепил идею «автоматические взаимодействия вместо ручных», но категориальные признаки высокой кардинальности (id пользователя, id объявления) деревья напрямую обрабатывают плохо — их заменяют счётчиками вроде исторического CTR объявления.</p>
+<h2 id="factorization-machines-2010">Factorization Machines (2010)</h2>
+<p>Steffen Rendle предложил вместо явных весов пар <span class="tex">w_{ij}</span> ввести каждому признаку вектор <span class="tex">v_i \in \mathbb{R}^k</span> и моделировать взаимодействие скалярным произведением:</p>
+<div class="tex tex-block">\hat y(x) = w_0 + \sum_{i=1}^n w_i x_i + \sum_{i=1}^{n}\sum_{j=i+1}^{n} \langle v_i, v_j\rangle\, x_i x_j .</div>
+<p>Две причины, почему это работает на разреженных данных: параметров <span class="tex">O(nk)</span> вместо <span class="tex">O(n^2)</span>, а главное — пара <span class="tex">(i,j)</span>, которой ни разу не было в обучении, получает оценку через другие пары, содержащие <span class="tex">i</span> и <span class="tex">j</span>. MF — частный случай: если активны только два признака, «id пользователя» <span class="tex">u</span> и «id объекта» <span class="tex">i</span>, формула превращается в <span class="tex">w_0 + w_u + w_i + \langle v_u, v_i\rangle</span> — матричное разложение со смещениями.</p>
+<p><strong>Трюк <span class="tex">O(kn)</span>.</strong> Прямая сумма по парам стоит <span class="tex">O(kn^2)</span>. Но</p>
+<div class="tex tex-block">\sum_{i&lt;j}\langle v_i,v_j\rangle x_i x_j = \frac12\sum_{f=1}^k\Big[\Big(\sum_{i} v_{if}x_i\Big)^2 - \sum_i v_{if}^2 x_i^2\Big].</div>
+<p>Вывод: <span class="tex">\big(\sum_i a_i\big)^2 = \sum_i a_i^2 + 2\sum_{i&lt;j}a_ia_j</span> для <span class="tex">a_i = v_{if}x_i</span>. Из-за разреженности <span class="tex">x</span> суммы идут только по ненулевым признакам, и стоимость <span class="tex">O(k\,\bar n)</span>, где <span class="tex">\bar n</span> — число активных признаков (обычно 20–100).</p>
+<p><strong>FFM</strong> (Juan et al., 2016) — Field-aware FM: каждый признак имеет отдельный вектор для каждого поля («город», «устройство»), и взаимодействие <span class="tex">\langle v_{i,f_j}, v_{j,f_i}\rangle</span>. Параметров в <span class="tex">F</span> раз больше, качество выше; FFM выигрывала соревнования Criteo и Avazu 2014–2015.</p>
+<div class="code"><div class="code-head"><span class="lang">python</span></div><pre><code><span class="tok-k">import</span> torch<span class="tok-p">,</span> torch.nn <span class="tok-k">as</span> nn
+
+<span class="tok-k">class</span> <span class="tok-f">FM</span><span class="tok-p">(</span>nn<span class="tok-p">.</span>Module<span class="tok-p">)</span><span class="tok-p">:</span>
+    <span class="tok-k">def</span> <span class="tok-f">__init__</span><span class="tok-p">(</span><span class="tok-f">self</span><span class="tok-p">,</span> n_features<span class="tok-p">,</span> k<span class="tok-p">=</span><span class="tok-n">16</span><span class="tok-p">)</span><span class="tok-p">:</span>
+        <span class="tok-f">super</span><span class="tok-p">(</span><span class="tok-p">)</span><span class="tok-p">.</span><span class="tok-f">__init__</span><span class="tok-p">(</span><span class="tok-p">)</span>
+        <span class="tok-f">self</span><span class="tok-p">.</span>w0 <span class="tok-p">=</span> nn<span class="tok-p">.</span>Parameter<span class="tok-p">(</span>torch<span class="tok-p">.</span>zeros<span class="tok-p">(</span><span class="tok-n">1</span><span class="tok-p">)</span><span class="tok-p">)</span>
+        <span class="tok-f">self</span><span class="tok-p">.</span>w <span class="tok-p">=</span> nn<span class="tok-p">.</span>Embedding<span class="tok-p">(</span>n_features<span class="tok-p">,</span> <span class="tok-n">1</span><span class="tok-p">)</span>
+        <span class="tok-f">self</span><span class="tok-p">.</span>v <span class="tok-p">=</span> nn<span class="tok-p">.</span>Embedding<span class="tok-p">(</span>n_features<span class="tok-p">,</span> k<span class="tok-p">)</span>
+        nn<span class="tok-p">.</span>init<span class="tok-p">.</span>normal_<span class="tok-p">(</span><span class="tok-f">self</span><span class="tok-p">.</span>v<span class="tok-p">.</span>weight<span class="tok-p">,</span> std<span class="tok-p">=</span><span class="tok-n">0.01</span><span class="tok-p">)</span><span class="tok-p">;</span> nn<span class="tok-p">.</span>init<span class="tok-p">.</span>zeros_<span class="tok-p">(</span><span class="tok-f">self</span><span class="tok-p">.</span>w<span class="tok-p">.</span>weight<span class="tok-p">)</span>
+
+    <span class="tok-k">def</span> <span class="tok-f">forward</span><span class="tok-p">(</span><span class="tok-f">self</span><span class="tok-p">,</span> idx<span class="tok-p">,</span> val<span class="tok-p">)</span><span class="tok-p">:</span>
+        <span class="tok-s">"""idx: [B, m] индексы активных признаков, val: [B, m] значения (1 для one-hot)."""</span>
+        lin <span class="tok-p">=</span> <span class="tok-f">self</span><span class="tok-p">.</span>w0 <span class="tok-p">+</span> <span class="tok-p">(</span><span class="tok-f">self</span><span class="tok-p">.</span>w<span class="tok-p">(</span>idx<span class="tok-p">)</span><span class="tok-p">.</span>squeeze<span class="tok-p">(</span><span class="tok-p">-</span><span class="tok-n">1</span><span class="tok-p">)</span> <span class="tok-p">*</span> val<span class="tok-p">)</span><span class="tok-p">.</span>sum<span class="tok-p">(</span><span class="tok-n">1</span><span class="tok-p">)</span>
+        vx <span class="tok-p">=</span> <span class="tok-f">self</span><span class="tok-p">.</span>v<span class="tok-p">(</span>idx<span class="tok-p">)</span> <span class="tok-p">*</span> val<span class="tok-p">.</span>unsqueeze<span class="tok-p">(</span><span class="tok-p">-</span><span class="tok-n">1</span><span class="tok-p">)</span>                <span class="tok-c"># [B, m, k]</span>
+        inter <span class="tok-p">=</span> <span class="tok-n">0.5</span> <span class="tok-p">*</span> <span class="tok-p">(</span>vx<span class="tok-p">.</span>sum<span class="tok-p">(</span><span class="tok-n">1</span><span class="tok-p">)</span> <span class="tok-p">*</span><span class="tok-p">*</span> <span class="tok-n">2</span> <span class="tok-p">-</span> <span class="tok-p">(</span>vx <span class="tok-p">*</span><span class="tok-p">*</span> <span class="tok-n">2</span><span class="tok-p">)</span><span class="tok-p">.</span>sum<span class="tok-p">(</span><span class="tok-n">1</span><span class="tok-p">)</span><span class="tok-p">)</span><span class="tok-p">.</span>sum<span class="tok-p">(</span><span class="tok-p">-</span><span class="tok-n">1</span><span class="tok-p">)</span>
+        <span class="tok-k">return</span> lin <span class="tok-p">+</span> inter                                  <span class="tok-c"># логит</span>
+</code></pre></div>
+<h2 id="глубокие-модели-20162021">Глубокие модели (2016–2021)</h2>
+<p>Идея: взять эмбеддинги признаков и пропустить через MLP. Эмбеддинги нужны, потому что сеть не умеет работать с вектором длины в миллионы: каждое поле превращается в плотный вектор размерности 8–64, векторы конкатенируются и идут в полносвязные слои. MLP теоретически выучит любые взаимодействия, но на практике делает это неэффективно (Beutel et al., 2018; Rendle et al., 2020 показали, что скалярное произведение MLP выучить непросто). Поэтому в архитектурах появляется <strong>явный</strong> блок взаимодействий.</p>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>Модель</th>
+<th>Год</th>
+<th>Явная часть</th>
+<th>Глубокая часть</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Wide &amp; Deep (Google Play)</td>
+<td>2016</td>
+<td>логрегрессия на ручных кросс-признаках</td>
+<td>MLP над эмбеддингами</td>
+</tr>
+<tr>
+<td>DeepFM</td>
+<td>2017</td>
+<td>FM, делящая эмбеддинги с MLP</td>
+<td>MLP</td>
+</tr>
+<tr>
+<td>DCN</td>
+<td>2017</td>
+<td>cross-сеть: взаимодействия растущей степени</td>
+<td>MLP</td>
+</tr>
+<tr>
+<td>xDeepFM</td>
+<td>2018</td>
+<td>CIN: векторные взаимодействия</td>
+<td>MLP</td>
+</tr>
+<tr>
+<td>AutoInt</td>
+<td>2019</td>
+<td>multi-head self-attention над полями</td>
+<td>—</td>
+</tr>
+<tr>
+<td>DCN-V2</td>
+<td>2021</td>
+<td>cross-сеть с матрицами, low-rank</td>
+<td>MLP, параллельно или последовательно</td>
+</tr>
+</tbody>
+</table></div>
+<p><strong>Wide &amp; Deep</strong> (Cheng et al., 2016). «Wide» часть запоминает конкретные комбинации (установил приложение A → показывали B), «deep» обобщает. Обучаются совместно. Минус — wide-признаки пишутся руками. <strong>DeepFM</strong> (Guo et al., 2017) заменил wide-часть на FM, которая делит эмбеддинги с глубокой частью, — ручная инженерия исчезла.</p>
+<p><strong>DCN и DCN-V2.</strong> Cross-слой строит взаимодействия, повышая степень на каждом слое. Вход <span class="tex">x_0</span> — конкатенация эмбеддингов, затем</p>
+<div class="tex tex-block">x_{l+1} = x_0 \odot (W_l x_l + b_l) + x_l .</div>
+<p>Умножение на <span class="tex">x_0</span> на каждом слое добавляет по одному порядку взаимодействия: после <span class="tex">L</span> слоёв получаются все произведения признаков до степени <span class="tex">L+1</span>, а остаточная связь <span class="tex">+x_l</span> сохраняет низшие порядки. В DCN (2017) <span class="tex">W_l</span> был вектором (<span class="tex">x_{l+1} = x_0 x_l^\top w_l + b_l + x_l</span>), что ограничивало выразительность; DCN-V2 (Wang et al., 2021) заменил его матрицей, а чтобы удержать стоимость, раскладывает <span class="tex">W_l \approx U_l V_l^\top</span> ранга <span class="tex">r \ll d</span> или использует смесь таких низкоранговых экспертов. По словам авторов, DCN-V2 дал значимый прирост и офлайн-точности, и онлайн-метрик во многих системах ранжирования Google, а смесь низкоранговых слоёв — лучший компромисс между качеством и стоимостью.</p>
+<div class="code"><div class="code-head"><span class="lang">python</span></div><pre><code><span class="tok-k">class</span> <span class="tok-f">CrossLayerV2</span><span class="tok-p">(</span>nn<span class="tok-p">.</span>Module<span class="tok-p">)</span><span class="tok-p">:</span>
+    <span class="tok-k">def</span> <span class="tok-f">__init__</span><span class="tok-p">(</span><span class="tok-f">self</span><span class="tok-p">,</span> d<span class="tok-p">,</span> rank<span class="tok-p">=</span><span class="tok-k">None</span><span class="tok-p">)</span><span class="tok-p">:</span>
+        <span class="tok-f">super</span><span class="tok-p">(</span><span class="tok-p">)</span><span class="tok-p">.</span><span class="tok-f">__init__</span><span class="tok-p">(</span><span class="tok-p">)</span>
+        <span class="tok-f">self</span><span class="tok-p">.</span>low <span class="tok-p">=</span> rank <span class="tok-k">is</span> <span class="tok-k">not</span> <span class="tok-k">None</span>
+        <span class="tok-k">if</span> <span class="tok-f">self</span><span class="tok-p">.</span>low<span class="tok-p">:</span>
+            <span class="tok-f">self</span><span class="tok-p">.</span>U <span class="tok-p">=</span> nn<span class="tok-p">.</span>Linear<span class="tok-p">(</span>d<span class="tok-p">,</span> rank<span class="tok-p">,</span> bias<span class="tok-p">=</span><span class="tok-k">False</span><span class="tok-p">)</span><span class="tok-p">;</span> <span class="tok-f">self</span><span class="tok-p">.</span>V <span class="tok-p">=</span> nn<span class="tok-p">.</span>Linear<span class="tok-p">(</span>rank<span class="tok-p">,</span> d<span class="tok-p">)</span>
+        <span class="tok-k">else</span><span class="tok-p">:</span>
+            <span class="tok-f">self</span><span class="tok-p">.</span>W <span class="tok-p">=</span> nn<span class="tok-p">.</span>Linear<span class="tok-p">(</span>d<span class="tok-p">,</span> d<span class="tok-p">)</span>
+
+    <span class="tok-k">def</span> <span class="tok-f">forward</span><span class="tok-p">(</span><span class="tok-f">self</span><span class="tok-p">,</span> x0<span class="tok-p">,</span> xl<span class="tok-p">)</span><span class="tok-p">:</span>
+        z <span class="tok-p">=</span> <span class="tok-f">self</span><span class="tok-p">.</span>V<span class="tok-p">(</span><span class="tok-f">self</span><span class="tok-p">.</span>U<span class="tok-p">(</span>xl<span class="tok-p">)</span><span class="tok-p">)</span> <span class="tok-k">if</span> <span class="tok-f">self</span><span class="tok-p">.</span>low <span class="tok-k">else</span> <span class="tok-f">self</span><span class="tok-p">.</span>W<span class="tok-p">(</span>xl<span class="tok-p">)</span>
+        <span class="tok-k">return</span> x0 <span class="tok-p">*</span> z <span class="tok-p">+</span> xl
+
+<span class="tok-k">class</span> <span class="tok-f">DCNV2</span><span class="tok-p">(</span>nn<span class="tok-p">.</span>Module<span class="tok-p">)</span><span class="tok-p">:</span>
+    <span class="tok-k">def</span> <span class="tok-f">__init__</span><span class="tok-p">(</span><span class="tok-f">self</span><span class="tok-p">,</span> d_in<span class="tok-p">,</span> n_cross<span class="tok-p">=</span><span class="tok-n">3</span><span class="tok-p">,</span> rank<span class="tok-p">=</span><span class="tok-n">64</span><span class="tok-p">,</span> hidden<span class="tok-p">=</span><span class="tok-p">(</span><span class="tok-n">512</span><span class="tok-p">,</span> <span class="tok-n">256</span><span class="tok-p">)</span><span class="tok-p">)</span><span class="tok-p">:</span>
+        <span class="tok-f">super</span><span class="tok-p">(</span><span class="tok-p">)</span><span class="tok-p">.</span><span class="tok-f">__init__</span><span class="tok-p">(</span><span class="tok-p">)</span>
+        <span class="tok-f">self</span><span class="tok-p">.</span>cross <span class="tok-p">=</span> nn<span class="tok-p">.</span>ModuleList<span class="tok-p">(</span><span class="tok-p">[</span>CrossLayerV2<span class="tok-p">(</span>d_in<span class="tok-p">,</span> rank<span class="tok-p">)</span> <span class="tok-k">for</span> _ <span class="tok-k">in</span> <span class="tok-f">range</span><span class="tok-p">(</span>n_cross<span class="tok-p">)</span><span class="tok-p">]</span><span class="tok-p">)</span>
+        layers<span class="tok-p">,</span> d <span class="tok-p">=</span> <span class="tok-p">[</span><span class="tok-p">]</span><span class="tok-p">,</span> d_in
+        <span class="tok-k">for</span> h <span class="tok-k">in</span> hidden<span class="tok-p">:</span> layers <span class="tok-p">+</span><span class="tok-p">=</span> <span class="tok-p">[</span>nn<span class="tok-p">.</span>Linear<span class="tok-p">(</span>d<span class="tok-p">,</span> h<span class="tok-p">)</span><span class="tok-p">,</span> nn<span class="tok-p">.</span>ReLU<span class="tok-p">(</span><span class="tok-p">)</span><span class="tok-p">]</span><span class="tok-p">;</span> d <span class="tok-p">=</span> h
+        <span class="tok-f">self</span><span class="tok-p">.</span>deep <span class="tok-p">=</span> nn<span class="tok-p">.</span>Sequential<span class="tok-p">(</span><span class="tok-p">*</span>layers<span class="tok-p">)</span>
+        <span class="tok-f">self</span><span class="tok-p">.</span>head <span class="tok-p">=</span> nn<span class="tok-p">.</span>Linear<span class="tok-p">(</span>d_in <span class="tok-p">+</span> hidden<span class="tok-p">[</span><span class="tok-p">-</span><span class="tok-n">1</span><span class="tok-p">]</span><span class="tok-p">,</span> <span class="tok-n">1</span><span class="tok-p">)</span>        <span class="tok-c"># параллельная структура</span>
+
+    <span class="tok-k">def</span> <span class="tok-f">forward</span><span class="tok-p">(</span><span class="tok-f">self</span><span class="tok-p">,</span> x0<span class="tok-p">)</span><span class="tok-p">:</span>
+        xl <span class="tok-p">=</span> x0
+        <span class="tok-k">for</span> layer <span class="tok-k">in</span> <span class="tok-f">self</span><span class="tok-p">.</span>cross<span class="tok-p">:</span> xl <span class="tok-p">=</span> layer<span class="tok-p">(</span>x0<span class="tok-p">,</span> xl<span class="tok-p">)</span>
+        <span class="tok-k">return</span> <span class="tok-f">self</span><span class="tok-p">.</span>head<span class="tok-p">(</span>torch<span class="tok-p">.</span>cat<span class="tok-p">(</span><span class="tok-p">[</span>xl<span class="tok-p">,</span> <span class="tok-f">self</span><span class="tok-p">.</span>deep<span class="tok-p">(</span>x0<span class="tok-p">)</span><span class="tok-p">]</span><span class="tok-p">,</span> <span class="tok-p">-</span><span class="tok-n">1</span><span class="tok-p">)</span><span class="tok-p">)</span><span class="tok-p">.</span>squeeze<span class="tok-p">(</span><span class="tok-p">-</span><span class="tok-n">1</span><span class="tok-p">)</span>
+</code></pre></div>
+<p><strong>AutoInt</strong> (Song et al., 2019) трактует поля как токены и применяет к ним self-attention; веса внимания показывают, какие пары полей важны.</p>
+<h2 id="поведенческие-последовательности">Поведенческие последовательности</h2>
+<p>Главный признак пользователя — его история. Усреднение эмбеддингов (sum pooling) теряет то, что <strong>для разных целевых объектов важны разные элементы истории</strong>: для кандидата-кроссовок история с рюкзаками и обувью важнее истории про бытовую химию.</p>
+<p><strong>DIN</strong> (Zhou et al., 2018, Alibaba). Target attention: вес элемента истории <span class="tex">e_j</span> зависит от кандидата <span class="tex">e_t</span>:</p>
+<div class="tex tex-block">v_u(t) = \sum_{j=1}^{H} a(e_j, e_t)\, e_j, \qquad a(e_j,e_t) = \mathrm{MLP}\big([e_j,\ e_t,\ e_j\odot e_t,\ e_j - e_t]\big).</div>
+<p>Вес не нормируют softmax'ом, чтобы сохранить «интенсивность» интереса (много релевантных кликов — больше сигнал). Здесь же авторы ввели активацию Dice и регуляризацию с учётом мини-батча: <span class="tex">\ell_2</span>-штраф считается только по эмбеддингам признаков, встретившихся в батче, с поправкой на их частоту. Как следствие, пользователь больше не описывается одним вектором — вектор пересчитывается для каждого кандидата, а значит, <strong>такую модель нельзя использовать для ANN-поиска</strong> (как двухбашенную), только для ранжирования.</p>
+<p>Дальше:</p>
+<ul>
+<li><strong>DIEN</strong> (Zhou et al., 2019): GRU извлекает интересы из последовательности, а AUGRU моделирует их эволюцию относительно целевого объекта.</li>
+<li><strong>BST</strong> (Chen et al., 2019, Alibaba): трансформер над историей и кандидатом.</li>
+<li><strong>SIM</strong> (Pi et al., 2020): история в десятки тысяч событий слишком длинна для внимания по всем элементам. Двухступенчатая схема: General Search Unit быстро отбирает из истории релевантные элементы (по категории или по близости эмбеддингов), Exact Search Unit применяет к ним внимание. Работает в проде рекламы Alibaba.</li>
+</ul>
+<h2 id="многозадачность">Многозадачность</h2>
+<p>В реальной системе нужны несколько целей одновременно: клик, добавление в корзину, покупка, досмотр. Отдельные модели дороги и не делятся знанием.</p>
+<ul>
+<li><strong>ESMM</strong> (Ma et al., 2018). Конверсия наблюдается только после клика, и модель CVR, обученная на кликах, смещена (sample selection bias) на показах. Идея: обучать на всём пространстве показов <span class="tex">p(\text{click}\wedge\text{conv}) = p(\text{click})\,p(\text{conv}\mid\text{click})</span> через две общих по эмбеддингам сети.</li>
+<li><strong>MMoE</strong> (Ma et al., KDD 2018, Google). Несколько экспертов, у каждой задачи — своя «воротная» сеть, выбирающая смесь экспертов. Меньше страдает, когда цели слабо связаны.</li>
+<li><strong>PLE</strong> (Tang et al., RecSys 2020, Tencent). Разделяет экспертов на общих и специфичных для задачи, и строит несколько уровней таких блоков: убирает «качели» (одна задача улучшается за счёт другой).</li>
+</ul>
+<h2 id="числовые-признаки-и-эмбеддинги">Числовые признаки и эмбеддинги</h2>
+<p>Нейросети плохо работают с сырыми числами: цена от 10 до 10 000, распределение с тяжёлым хвостом. Обычные приёмы — log-преобразование и квантильная нормализация. Gorishniy et al. (2022) показали, что <strong>кодирование числа в вектор</strong> (embeddings for numerical features) заметно улучшает MLP и трансформеры на табличных данных: <em>piecewise linear encoding</em> делит диапазон на <span class="tex">T</span> бинов по квантилям и кодирует число вектором <span class="tex">(e_1,\dots,e_T)</span>, где <span class="tex">e_t = 0</span>, если <span class="tex">x</span> левее бина, <span class="tex">1</span>, если правее, и доля пройденной ширины внутри бина:</p>
+<div class="tex tex-block">e_t = \begin{cases}0 &amp; x &lt; b_{t-1}\\ 1 &amp; x \ge b_t \\ (x - b_{t-1})/(b_t - b_{t-1}) &amp; \text{иначе}\end{cases}</div>
+<p>Затем этот вектор линейным слоем переводят в эмбеддинг признака. Для категориальных признаков главная статья расходов памяти — таблицы эмбеддингов. <strong>Unified embeddings</strong> (Coleman et al., 2023, Google) заменяют отдельную таблицу на каждый признак одной общей таблицей с мультихешированием: все признаки хешируются в одну матрицу, размер которой подбирается одним гиперпараметром. Так проще настраивать, а память распределяется между признаками автоматически.</p>
+<h2 id="метрики">Метрики</h2>
+<ul>
+<li><strong>Log-loss</strong> — основной критерий обучения, но на нём трудно сравнивать разные срезы.</li>
+<li><strong>Normalized entropy (NE)</strong> (He et al., 2014): log-loss, делённый на log-loss «базовой» константы-предсказания <span class="tex">\bar p</span> (доля положительных): <span class="tex">\mathrm{NE} = \mathcal{L} / \big(-\bar p\log\bar p - (1-\bar p)\log(1-\bar p)\big)</span>. Значение меньше 1 означает, что модель лучше константы; нормировка делает метрику гораздо менее чувствительной к базовому CTR, поэтому её можно сравнивать между срезами и днями.</li>
+<li><strong>AUC</strong> — качество разделения; <strong>GAUC</strong> — AUC, усреднённый по пользователям с весами по числу показов. Для рекомендаций GAUC ближе к реальной задаче, потому что сравнения «внутри пользователя» важнее, чем «между пользователями».</li>
+<li><strong>Калибровка</strong>: средний предсказанный CTR должен совпадать с реальным (ECE, кривая надёжности). Если предсказание входит в аукцион или умножается на другую оценку, калибровка не менее важна, чем AUC. Исправляют изотонической регрессией или масштабированием Платта.</li>
+<li>Прирост AUC на 0,001 (0,1 п. п.) в рекламе уже считается заметным, но подтверждать его нужно онлайн: офлайн-AUC плохо отражает эффект на выдаче.</li>
+</ul>
+<h2 id="подводные-камни">Подводные камни</h2>
+<ul>
+<li><strong>Смещение показов.</strong> Обучающие данные — только то, что показала предыдущая модель; позиция показа влияет на клик больше, чем объект. Позицию добавляют как признак при обучении и фиксируют при выдаче или учат отдельную модель позиционного смещения.</li>
+<li><strong>Утечка по времени.</strong> Признаки «CTR объекта за всё время» считаются без события-цели в окне; всегда считать «до момента показа».</li>
+<li><strong>Отрицательные примеры.</strong> Показы без кликов — сильный дисбаланс (CTR 1–5 %); негативы подсэмплируют, а затем <strong>корректируют вероятность</strong>: <span class="tex">p = q/(q + (1-q)/w)</span>, где <span class="tex">q</span> — предсказание модели, обученной на подсэмплированных данных, а <span class="tex">w</span> — доля оставленных негативов. Вывод: подсэмплирование делит шансы <span class="tex">p/(1-p)</span> на <span class="tex">w</span>, значит <span class="tex">q/(1-q) = p/\big(w(1-p)\big)</span>.</li>
+<li><strong>Холодные значения</strong> в хешированных таблицах: редкие значения лучше обучать через общий «unknown»-бакет или <code>min_count</code>.</li>
+<li><strong>Latency.</strong> Ранжировщик вызывается на сотни кандидатов за десятки миллисекунд; поэтому с DIN нельзя ходить за каждой историей из базы — признак читают из онлайн-хранилища.</li>
+</ul>
+<h2 id="что-дальше-масштабирование-ранжирования">Что дальше: масштабирование ранжирования</h2>
+<p>К 2024 году индустрия пришла к вопросу: что даёт больше качества — новая архитектура взаимодействий или просто больший размер модели? Wukong (Meta, 2024, <a href="https://arxiv.org/abs/2403.02545" rel="noopener noreferrer nofollow">arXiv:2403.02545</a>) показал степенной закон масштабирования для ранжирования на стеке факторизационных блоков, RankMixer (ByteDance, 2025, <a href="https://arxiv.org/abs/2507.15551" rel="noopener noreferrer nofollow">arXiv:2507.15551</a>) заменил внимание на «смешивание токенов» с эффективным использованием GPU. Эту линию продолжают <a href="/edufamcs-demo/handbook/recsys/generativnye-rekomendateli/" rel="noopener noreferrer nofollow">генеративные рекомендатели</a>. Где именно в системе стоит CTR-модель и чем её кормят — в главе о <a href="/edufamcs-demo/handbook/recsys/kandidaty-i-ranzhirovanie/" rel="noopener noreferrer nofollow">двухстадийной схеме</a>.</p>
+<h2 id="что-почитать">Что почитать</h2>
+<ul>
+<li>Rendle. <em>Factorization Machines</em>, ICDM 2010 (DOI 10.1109/ICDM.2010.127).</li>
+<li>McMahan et al. <em>Ad Click Prediction: a View from the Trenches</em>, KDD 2013; He et al. <em>Practical Lessons from Predicting Clicks on Ads at Facebook</em>, 2014.</li>
+<li>Cheng et al. <a href="https://arxiv.org/abs/1606.07792" rel="noopener noreferrer nofollow"><em>Wide &amp; Deep</em></a>, 2016; Guo et al. <a href="https://arxiv.org/abs/1703.04247" rel="noopener noreferrer nofollow"><em>DeepFM</em></a>, 2017; Wang et al. <a href="https://arxiv.org/abs/1708.05123" rel="noopener noreferrer nofollow"><em>DCN</em></a>, 2017 и <a href="https://arxiv.org/abs/2008.13535" rel="noopener noreferrer nofollow"><em>DCN V2</em></a>, 2021.</li>
+<li>Zhou et al. <a href="https://arxiv.org/abs/1706.06978" rel="noopener noreferrer nofollow"><em>Deep Interest Network</em></a>, 2018; Pi et al. <a href="https://arxiv.org/abs/2006.05639" rel="noopener noreferrer nofollow"><em>SIM</em></a>, 2020.</li>
+<li>Gorishniy et al. <a href="https://arxiv.org/abs/2203.05556" rel="noopener noreferrer nofollow"><em>On Embeddings for Numerical Features in Tabular Deep Learning</em></a>, 2022; Coleman et al. <a href="https://arxiv.org/abs/2305.12102" rel="noopener noreferrer nofollow"><em>Unified Embedding</em></a>, 2023.</li>
+<li>Курс DeepRecSys: лекции 5–6 про нейросетевое ранжирование (<a href="https://www.youtube.com/watch?v=SovgKG_QZpM" rel="noopener noreferrer nofollow">1</a>, <a href="https://www.youtube.com/watch?v=JeX3HzfDyTY" rel="noopener noreferrer nofollow">2</a>), гостевая лекция Яндекса о ранжировании в рекламной сети (<a href="https://www.youtube.com/watch?v=O8BrA5hT7bY" rel="noopener noreferrer nofollow">видео</a>).</li>
+</ul>
+</div>
+      
+
+      
+      <nav class="pager" aria-label="Соседние статьи">
+        <a href="/edufamcs-demo/handbook/recsys/slim-i-ease/"><span><svg class="ico sm" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-arrow-left"/></svg>Назад</span>Линейные item-item модели: SLIM и EASE</a>
+        <a href="/edufamcs-demo/handbook/recsys/two-tower-ann/"><span>Дальше<svg class="ico sm" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-arrow"/></svg></span>Нейросетевые рекомендации: two-tower, negative sampling, ANN</a>
+      </nav>
+      
+    </article>
+
+    <aside class="hb-toc" aria-label="На этой странице">
+      <a class="l2" href="#постановка">Постановка</a><a class="l2" href="#логрегрессия-hashing-trick-и-ftrl-20092013">Логрегрессия, hashing trick и FTRL (2009–2013)</a><a class="l2" href="#factorization-machines-2010">Factorization Machines (2010)</a><a class="l2" href="#глубокие-модели-20162021">Глубокие модели (2016–2021)</a><a class="l2" href="#поведенческие-последовательности">Поведенческие последовательности</a><a class="l2" href="#многозадачность">Многозадачность</a><a class="l2" href="#числовые-признаки-и-эмбеддинги">Числовые признаки и эмбеддинги</a><a class="l2" href="#метрики">Метрики</a><a class="l2" href="#подводные-камни">Подводные камни</a><a class="l2" href="#что-дальше-масштабирование-ранжирования">Что дальше: масштабирование ранжирования</a><a class="l2" href="#что-почитать">Что почитать</a>
+    </aside>
+  </div>
+</div>
+
+
+</main>
+
+<footer class="ftr" data-theme="dark">
+  <svg class="sym fern" viewBox="0 0 40.5 65.02" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#fern"/></svg>
+  <div class="container">
+    <div class="ftr-row">
+      <a href="/edufamcs-demo/" aria-label="EDU FAMCS — главная"><img src="/edufamcs-demo/static/brand/logo/logo-edu-dark.svg" alt="EDU FAMCS" width="196" height="40"></a>
+      <ul class="ftr-links">
+        <li><a href="/edufamcs-demo/#courses">Курсы</a></li>
+        <li><a href="/edufamcs-demo/ml/">Машинное обучение</a></li>
+        <li><a href="/edufamcs-demo/handbook/">Хендбук</a></li>
+        <li><a href="/edufamcs-demo/news/">Новости</a></li>
+        <li><a href="/edufamcs-demo/people/">Авторы</a></li>
+        <li><a href="/edufamcs-demo/about/">О&nbsp;нас</a></li>
+        <li><a href="/edufamcs-demo/propose/">Предложить или исправить</a></li>
+        <li><a href="/edufamcs-demo/privacy/">Конфиденциальность</a></li>
+      </ul>
+    </div>
+    <div class="ftr-big" aria-hidden="true">EDU<span class="d">·</span>FAMCS</div>
+    <p class="ftr-copy">© 2026 EDU FAMCS · Минск</p>
+  </div>
+</footer>
+
+<div class="toasts-region" aria-live="polite" id="toasts">
+
+</div>
+
+</body>
+</html>

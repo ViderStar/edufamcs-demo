@@ -1,0 +1,296 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Снижение размерности: PCA, t-SNE, UMAP · EDU FAMCS</title>
+<meta name="description" content="Снижение размерности: PCA, t-SNE, UMAP — Классическое машинное обучение. Хендбук ML-курса ФПМИ.">
+<meta name="theme-color" content="#060A16">
+<meta name="robots" content="noindex, nofollow">
+<meta name="htmx-config" content='{"allowEval":false,"includeIndicatorStyles":false,"historyCacheSize":0,"selfRequestsOnly":true}'>
+<meta name="katex-js" content="/edufamcs-demo/static/vendor/katex/katex.min.js">
+<meta name="katex-css" content="/edufamcs-demo/static/vendor/katex/katex.min.css">
+<link rel="icon" href="/edufamcs-demo/static/brand/logo/favicon-16.svg" type="image/svg+xml" sizes="16x16">
+<link rel="icon" href="/edufamcs-demo/static/brand/logo/favicon.svg" type="image/svg+xml" sizes="any">
+<link rel="preload" href="/edufamcs-demo/static/brand/fonts/manrope-cyrillic-400.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/edufamcs-demo/static/brand/fonts/unbounded-cyrillic-800.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="/edufamcs-demo/static/brand/fonts.css">
+<link rel="stylesheet" href="/edufamcs-demo/static/brand/tokens.css">
+<link rel="stylesheet" href="/edufamcs-demo/static/brand/components.css">
+<link rel="stylesheet" href="/edufamcs-demo/static/css/site.css">
+<link rel="stylesheet" href="/edufamcs-demo/static/css/hub.css">
+<link rel="stylesheet" href="/edufamcs-demo/static/css/about.css">
+<link rel="stylesheet" href="/edufamcs-demo/static/handbook/handbook.css">
+<script src="/edufamcs-demo/static/js/theme.js"></script>
+<script src="/edufamcs-demo/static/vendor/htmx/htmx.min.js" defer></script>
+<script src="/edufamcs-demo/static/vendor/alpine/alpine-csp.min.js" defer></script>
+<script src="/edufamcs-demo/static/js/site.js" defer></script>
+<script src="/edufamcs-demo/static/handbook/handbook.js" defer></script>
+</head>
+<body class="" hx-headers='{"X-CSRFToken": "Vd0S5gCt5bODIGYyVqBiDW63yLuDBASIkXzWPepQ02cMXf9hsDkqArC86tA89KAs"}'>
+<a class="skip" href="#main">К содержанию</a>
+<div class="demo-bar" role="note">Демо-версия для отзывов: вход, запись на курсы и формы здесь не работают.</div>
+
+<header class="hdr">
+  <div class="container">
+    <a class="brand" href="/edufamcs-demo/" aria-label="EDU FAMCS — главная">
+      <span class="full"><img class="only-light" src="/edufamcs-demo/static/brand/logo/logo-edu-light.svg" alt="EDU FAMCS" width="196" height="40"><img class="only-dark" src="/edufamcs-demo/static/brand/logo/logo-edu-dark.svg" alt="EDU FAMCS" width="196" height="40"></span>
+      <span class="short"><img class="only-light" src="/edufamcs-demo/static/brand/logo/logo-edu-light.svg" alt="EDU FAMCS" height="30"><img class="only-dark" src="/edufamcs-demo/static/brand/logo/logo-edu-dark.svg" alt="EDU FAMCS" height="30"></span>
+    </a>
+    <nav class="nav" id="main-nav" aria-label="Основная навигация">
+      <a href="/edufamcs-demo/#courses">Курсы</a>
+      <a href="/edufamcs-demo/ml/" >Машинное обучение</a>
+      
+      <a href="/edufamcs-demo/handbook/" aria-current="page">Хендбук</a>
+      <a href="/edufamcs-demo/news/" >Новости</a>
+      <a href="/edufamcs-demo/people/" >Авторы</a>
+      <a href="/edufamcs-demo/about/" >О&nbsp;нас</a>
+    </nav>
+    <div class="hdr-actions">
+      
+      <a class="btn btn-outline btn-login" href="/edufamcs-demo/accounts/login/?next=/handbook/classic/snizhenie-razmernosti/">Войти</a>
+      
+      <button class="icon-btn menu-btn" type="button" aria-label="Меню" aria-expanded="false" aria-controls="main-nav"><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-menu"/></svg></button>
+    </div>
+  </div>
+</header>
+
+<main id="main">
+
+
+
+<div class="container hb-page hb-tone">
+  <div class="hb">
+    <aside class="hb-nav" aria-label="Статьи раздела">
+      
+<form class="hb-search" action="/edufamcs-demo/handbook/search/" method="get" role="search">
+  <svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-search"/></svg>
+  <input class="input" type="search" name="q" value="" placeholder="Поиск по хендбуку" aria-label="Поиск по хендбуку" autocomplete="off" maxlength="120"
+    hx-get="/edufamcs-demo/handbook/search/" hx-trigger="input changed delay:250ms, search" hx-target="#hb-nav-results" hx-sync="this:replace">
+</form>
+
+      <div id="hb-nav-results" class="hb-nav-results" aria-live="polite"></div>
+      <a class="grp" href="/edufamcs-demo/handbook/classic/">Обучение без учителя</a>
+      
+      <a class="" href="/edufamcs-demo/handbook/classic/klasterizaciya/">Кластеризация: k-means, иерархическая, DBSCAN</a>
+      
+      <a class="cur" href="/edufamcs-demo/handbook/classic/snizhenie-razmernosti/" aria-current="page">Снижение размерности: PCA, t-SNE, UMAP</a>
+      
+    </aside>
+
+    <article class="hb-main">
+      <nav class="crumbs" aria-label="Навигация"><a href="/edufamcs-demo/handbook/">Хендбук</a><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-chev"/></svg><a href="/edufamcs-demo/handbook/classic/">Классическое машинное обучение</a></nav>
+      <h1 class="h1">Снижение размерности: PCA, t-SNE, UMAP</h1>
+      <div class="hb-meta">
+        
+        
+        <span><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-clock"/></svg>12&nbsp;мин</span>
+        <span class="hb-authors"><span class="avatar sm" title="Артем Лебедевич">АЛ</span>Артем Лебедевич</span>
+        <span><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-edit"/></svg>9 ноября 2026</span>
+        
+        
+      </div>
+
+      
+      <details class="hb-mtoc">
+        <summary><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-list"/></svg>Содержание<svg class="ico sm" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-chev-down"/></svg></summary>
+        <a class="l2" href="#проклятие-размерности">Проклятие размерности</a><a class="l2" href="#pca">PCA</a><a class="l3" href="#объяснённая-дисперсия-и-выбор">Объяснённая дисперсия и выбор k</a><a class="l3" href="#loadings-и-интерпретация">Loadings и интерпретация</a><a class="l3" href="#ограничения-pca">Ограничения PCA</a><a class="l2" href="#t-sne">t-SNE</a><a class="l2" href="#umap">UMAP</a><a class="l2" href="#когда-что-использовать">Когда что использовать</a><a class="l2" href="#код">Код</a><a class="l2" href="#ловушки">Ловушки</a><a class="l2" href="#что-почитать">Что почитать</a>
+      </details>
+      
+
+      <div class="prose"><p>Снижение размерности отображает объекты из <span class="tex">\mathbb{R}^d</span> в <span class="tex">\mathbb{R}^k</span>, <span class="tex">k \ll d</span>, сохраняя главное в их структуре. Причин четыре:</p>
+<ol>
+<li><strong>Визуализация.</strong> Человек видит 2–3 измерения; проекция на плоскость — единственный способ «посмотреть» на данные с сотнями признаков.</li>
+<li><strong>Шум.</strong> Малоинформативные направления часто несут преимущественно шум; их отбрасывание работает как регуляризация.</li>
+<li><strong>Скорость и память.</strong> Меньше признаков — быстрее обучение и поиск ближайших соседей, дешевле хранение.</li>
+<li><strong>Мультиколлинеарность.</strong> Коррелированные признаки делают линейные модели неустойчивыми; главные компоненты некоррелированы по построению.</li>
+</ol>
+<h2 id="проклятие-размерности">Проклятие размерности</h2>
+<p>В высоких размерностях интуиция расстояний ломается. Объём единичного шара стремится к нулю, а почти вся масса равномерного распределения в кубе уходит к границе; расстояния между случайными точками концентрируются вокруг среднего: при независимых одинаково распределённых признаках отношение <span class="tex">\frac{d_{\max}-d_{\min}}{d_{\min}}\to 0</span> с ростом размерности (Beyer et al., 1999). Значит, «ближайший сосед» почти не отличается от «самого далёкого», а плотность оценивать нечем. Чтобы покрыть пространство с той же густотой, нужно экспоненциально больше точек. Поэтому kNN, кластеризация по расстоянию и ядерные методы деградируют с ростом <span class="tex">d</span>, а сжатие данных до их «внутренней» размерности (на самом деле данные лежат на низкоразмерном многообразии) помогает.</p>
+<h2 id="pca">PCA</h2>
+<p><strong>Метод главных компонент</strong> (Pearson, 1901; Hotelling, 1933) ищет ортогональный базис, в котором первые оси сохраняют максимум дисперсии. Пусть <span class="tex">X\in\mathbb{R}^{n\times d}</span> центрирована (вычтено среднее по столбцам). Первое направление — единичный вектор <span class="tex">w_1</span>, максимизирующий дисперсию проекции:</p>
+<div class="tex tex-block">w_1 = \arg\max_{\|w\|=1} \frac{1}{n-1}\|Xw\|^2 = \arg\max_{\|w\|=1} w^\top \Sigma w, \qquad \Sigma=\frac{1}{n-1}X^\top X .</div>
+<p>Лагранжиан <span class="tex">w^\top\Sigma w-\lambda(w^\top w-1)</span> даёт <span class="tex">\Sigma w=\lambda w</span>: <span class="tex">w_1</span> — собственный вектор ковариационной матрицы с наибольшим собственным значением <span class="tex">\lambda_1</span>, а само <span class="tex">\lambda_1</span> — дисперсия вдоль него. Следующие компоненты — собственные векторы по убыванию <span class="tex">\lambda</span>, ортогональные предыдущим. Эквивалентная формулировка — минимизация ошибки реконструкции <span class="tex">\|X - XW_kW_k^\top\|_F^2</span>: проекция на <span class="tex">k</span> главных направлений — наилучшее линейное приближение ранга <span class="tex">k</span>.</p>
+<p><strong>Вычисление через SVD</strong> (подробнее — <a href="/edufamcs-demo/handbook/math/sobstvennye-vektory-i-svd/" rel="noopener noreferrer nofollow">собственные векторы и SVD</a>). Разложение <span class="tex">X = U S V^\top</span>: столбцы <span class="tex">V</span> — главные направления, а собственные значения <span class="tex">\lambda_j = s_j^2/(n-1)</span>. Ковариационную матрицу явно строить не нужно (она <span class="tex">d\times d</span> и хуже обусловлена): sklearn использует SVD, а для больших данных — рандомизированный (<code>svd_solver="randomized"</code>) или инкрементальный (<code>IncrementalPCA</code>) варианты. Проекция: <span class="tex">Z = XW_k \in \mathbb{R}^{n\times k}</span>.</p>
+<h3 id="объяснённая-дисперсия-и-выбор">Объяснённая дисперсия и выбор <span class="tex">k</span></h3>
+<p>Доля дисперсии, приходящаяся на компоненту <span class="tex">j</span> (explained variance ratio):</p>
+<div class="tex tex-block">\mathrm{EVR}_j = \frac{\lambda_j}{\sum_{i=1}^{d}\lambda_i}, \qquad \mathrm{CumEVR}_k=\sum_{j=1}^{k}\mathrm{EVR}_j .</div>
+<p>Число компонент выбирают одним из способов: минимальное <span class="tex">k</span>, при котором <span class="tex">\mathrm{CumEVR}_k \ge \theta</span> (0,90–0,95); «локоть» на scree plot (график <span class="tex">\lambda_j</span>); правило Кайзера для стандартизованных данных (<span class="tex">\lambda_j&gt;1</span>); качество последующей модели при кросс-валидации. В sklearn <code>PCA(n_components=0.95)</code> выбирает <span class="tex">k</span> сам.</p>
+<h3 id="loadings-и-интерпретация">Loadings и интерпретация</h3>
+<p><strong>Loadings</strong> — элементы векторов <span class="tex">w_j</span> (иногда умноженные на <span class="tex">\sqrt{\lambda_j}</span>; для стандартизованных признаков это корреляции признаков с компонентой). Большие по модулю loadings показывают, какие исходные признаки формируют компоненту: например, первая компонента на данных о недвижимости с положительными loadings у площади, числа комнат и стоимости читается как «размер». Знак компоненты не определён (можно умножить на <span class="tex">-1</span>). Для интерпретации рисуют биплот: точки в осях PC1–PC2 и стрелки признаков.</p>
+<h3 id="ограничения-pca">Ограничения PCA</h3>
+<ul>
+<li><strong>Стандартизация обязательна.</strong> Дисперсия зависит от единиц измерения, и признак с большим масштабом захватит первую компоненту. Перед PCA — <code>StandardScaler</code>. Исключение — признаки в одной шкале (пиксели).</li>
+<li><strong>Линейность.</strong> PCA не распутает многообразия: «швейцарский рулон» проецируется в пятно.</li>
+<li><strong>Дисперсия ≠ информативность.</strong> Направление с малой дисперсией может быть как раз тем, что различает классы; PCA не использует метки (для этого — LDA).</li>
+<li>Чувствительность к выбросам (они раздувают дисперсию); устойчивые варианты — Robust PCA.</li>
+<li>Компоненты — линейные комбинации всех признаков, поэтому теряют прямую интерпретируемость исходных столбцов.</li>
+<li>Центрирование и масштабирование надо обучать только на трейне (внутри Pipeline), иначе утечка.</li>
+</ul>
+<h2 id="t-sne">t-SNE</h2>
+<p>PCA сохраняет глобальную дисперсию, но для визуализации кластеров нужны нелинейные методы, сохраняющие <strong>локальные соседства</strong>. t-SNE (van der Maaten &amp; Hinton, 2008) делает это через сопоставление распределений вероятностей соседства.</p>
+<p>В исходном пространстве для каждой точки <span class="tex">x_i</span> определяется гауссово распределение на соседях:</p>
+<div class="tex tex-block">p_{j\mid i}=\frac{\exp(-\|x_i-x_j\|^2/2\sigma_i^2)}{\sum_{k\ne i}\exp(-\|x_i-x_k\|^2/2\sigma_i^2)}, \qquad p_{ij}=\frac{p_{j\mid i}+p_{i\mid j}}{2n}.</div>
+<p>Ширина <span class="tex">\sigma_i</span> подбирается бинарным поиском так, чтобы <strong>перплексия</strong> <span class="tex">2^{H(P_i)}</span> равнялась заданному значению (обычно 5–50) — это «эффективное число соседей». В низкоразмерном пространстве (<span class="tex">\mathbb{R}^2</span> или <span class="tex">\mathbb{R}^3</span>) для точек <span class="tex">y_i</span> задаются сходства с тяжёлыми хвостами — t-распределение Стьюдента с одной степенью свободы:</p>
+<div class="tex tex-block">q_{ij}=\frac{(1+\|y_i-y_j\|^2)^{-1}}{\sum_{k\ne l}(1+\|y_k-y_l\|^2)^{-1}} .</div>
+<p>Положения <span class="tex">y_i</span> находятся градиентным спуском по расхождению Кульбака–Лейблера <span class="tex">\mathrm{KL}(P\|Q)=\sum_{i\ne j}p_{ij}\log\frac{p_{ij}}{q_{ij}}</span>. Тяжёлые хвосты решают «проблему скученности» (crowding problem): в низкой размерности нет места для всех умеренно далёких точек, и хвосты позволяют им отодвинуться друг от друга. Несимметричность KL сильно штрафует за разнесение близких точек (большие <span class="tex">p_{ij}</span>, малые <span class="tex">q_{ij}</span>) и мало — за сближение далёких.</p>
+<p><strong>Что нельзя читать по картинке t-SNE.</strong></p>
+<ul>
+<li><strong>Размеры кластеров</strong>: расстояния нормируются по локальной плотности, плотные и разреженные кластеры выглядят одинаково.</li>
+<li><strong>Расстояния между кластерами и их взаимное расположение</strong>: глобальная структура не сохраняется, близкие на картинке кластеры не обязательно близки в данных.</li>
+<li><strong>Реальность кластеров</strong>: при малой перплексии рисуются «кластеры» из шума, при большой — склеиваются настоящие. Нужно смотреть несколько значений перплексии (distill.pub/2016/misread-tsne).</li>
+<li><strong>Воспроизводимость</strong>: результат зависит от инициализации и <code>random_state</code> (PCA-инициализация стабильнее случайной).</li>
+</ul>
+<p>Дополнительные ограничения: вычисление дорого (точный алгоритм — <span class="tex">O(n^2)</span>, приближение Barnes–Hut — <span class="tex">O(n\log n)</span>, FFT-интерполяция в FIt-SNE и openTSNE — около <span class="tex">O(n)</span>), а в sklearn нет <code>transform</code> для новых точек (openTSNE умеет встраивать их в готовую карту, но это всё равно не полноценная параметрическая модель). Поэтому t-SNE — инструмент визуализации, но не препроцессинг для моделей.</p>
+<h2 id="umap">UMAP</h2>
+<p>UMAP (McInnes, Healy, Melville, 2018) строит похожую картинку иначе. Сначала в исходном пространстве для каждой точки считается граф <span class="tex">n_{\text{neighbors}}</span> ближайших соседей; рёбрам приписываются «нечёткие» веса, зависящие от расстояния до ближайшего соседа (так каждая точка гарантированно соединена хотя бы с одним объектом), после чего графы симметризуются как нечёткое объединение множеств. Затем ищется низкоразмерное расположение, граф которого как можно ближе к исходному (минимизируется кросс-энтропия между нечёткими графами) стохастическим градиентным спуском с притягивающими силами для рёбер и отталкивающими для случайных пар. Теоретическая база — топология и риманова геометрия (нечёткие симплициальные множества, предположение о равномерном распределении данных на многообразии), но на практике это «быстрый граф соседей плюс силовая раскладка».</p>
+<p>Ключевые параметры:</p>
+<ul>
+<li><code>n_neighbors</code> — размер локальной окрестности: малое значение подчёркивает локальные детали, большое сохраняет глобальную структуру (по умолчанию 15);</li>
+<li><code>min_dist</code> — насколько плотно можно упаковывать точки на выходе: малое значение даёт плотные скопления, большое — «размазанную» картинку.</li>
+</ul>
+<p>По сравнению с t-SNE UMAP быстрее (особенно на десятках и сотнях тысяч точек) и обычно лучше сохраняет глобальную структуру. Впрочем, Kobak &amp; Linderman (2021) показали, что это преимущество во многом даёт инициализация (у UMAP — спектральная, у старого t-SNE — случайная): t-SNE с PCA-инициализацией сохраняет глобальную структуру сопоставимо. Расстояния между кластерами в UMAP тоже нельзя интерпретировать количественно. UMAP допускает размерность выхода больше 2 и умеет <code>transform</code> для новых точек, поэтому его используют как препроцессинг перед кластеризацией (HDBSCAN на UMAP-эмбеддингах — популярная связка). Минус — зависимость результата от гиперпараметров и случайности: не следует делать выводы по единственной картинке.</p>
+<h2 id="когда-что-использовать">Когда что использовать</h2>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>Метод</th>
+<th>Тип</th>
+<th>Сохраняет</th>
+<th>Новые точки</th>
+<th>Скорость</th>
+<th>Применение</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>PCA</td>
+<td>линейный</td>
+<td>глобальную дисперсию</td>
+<td>да (<code>transform</code>)</td>
+<td>очень высокая</td>
+<td>препроцессинг, шум, мультиколлинеарность, быстрый взгляд</td>
+</tr>
+<tr>
+<td>t-SNE</td>
+<td>нелинейный</td>
+<td>локальные соседства</td>
+<td>нет</td>
+<td>низкая</td>
+<td>только визуализация 2D/3D</td>
+</tr>
+<tr>
+<td>UMAP</td>
+<td>нелинейный</td>
+<td>локальные + часть глобальных</td>
+<td>да</td>
+<td>высокая</td>
+<td>визуализация, препроцессинг для кластеризации</td>
+</tr>
+</tbody>
+</table></div>
+<p>Рекомендованный пайплайн для визуализации высокоразмерных данных: стандартизация → PCA до 30–50 компонент (убирает шум и ускоряет следующий шаг) → t-SNE или UMAP до 2D → раскраска по известным меткам или признакам для проверки.</p>
+<h2 id="код">Код</h2>
+<div class="code"><div class="code-head"><span class="lang">python</span></div><pre><code><span class="tok-k">import</span> matplotlib.pyplot <span class="tok-k">as</span> plt
+<span class="tok-k">import</span> numpy <span class="tok-k">as</span> np
+<span class="tok-k">import</span> umap
+<span class="tok-k">from</span> sklearn.datasets <span class="tok-k">import</span> load_digits
+<span class="tok-k">from</span> sklearn.decomposition <span class="tok-k">import</span> PCA
+<span class="tok-k">from</span> sklearn.manifold <span class="tok-k">import</span> TSNE
+<span class="tok-k">from</span> sklearn.pipeline <span class="tok-k">import</span> make_pipeline
+<span class="tok-k">from</span> sklearn.preprocessing <span class="tok-k">import</span> StandardScaler
+
+X<span class="tok-p">,</span> y <span class="tok-p">=</span> load_digits<span class="tok-p">(</span>return_X_y<span class="tok-p">=</span><span class="tok-k">True</span><span class="tok-p">)</span>           <span class="tok-c"># 1797 x 64</span>
+Xs <span class="tok-p">=</span> StandardScaler<span class="tok-p">(</span><span class="tok-p">)</span><span class="tok-p">.</span>fit_transform<span class="tok-p">(</span>X<span class="tok-p">)</span>
+
+pca <span class="tok-p">=</span> PCA<span class="tok-p">(</span><span class="tok-p">)</span><span class="tok-p">.</span>fit<span class="tok-p">(</span>Xs<span class="tok-p">)</span>
+cum <span class="tok-p">=</span> np<span class="tok-p">.</span>cumsum<span class="tok-p">(</span>pca<span class="tok-p">.</span>explained_variance_ratio_<span class="tok-p">)</span>
+k95 <span class="tok-p">=</span> <span class="tok-f">int</span><span class="tok-p">(</span>np<span class="tok-p">.</span>searchsorted<span class="tok-p">(</span>cum<span class="tok-p">,</span> <span class="tok-n">0.95</span><span class="tok-p">)</span> <span class="tok-p">+</span> <span class="tok-n">1</span><span class="tok-p">)</span>
+<span class="tok-f">print</span><span class="tok-p">(</span><span class="tok-s">"</span><span class="tok-s">компонент для 95</span><span class="tok-s">%</span><span class="tok-s"> дисперсии:</span><span class="tok-s">"</span><span class="tok-p">,</span> k95<span class="tok-p">)</span>
+
+Z_pca <span class="tok-p">=</span> PCA<span class="tok-p">(</span>n_components<span class="tok-p">=</span><span class="tok-n">2</span><span class="tok-p">)</span><span class="tok-p">.</span>fit_transform<span class="tok-p">(</span>Xs<span class="tok-p">)</span>
+Z_tsne <span class="tok-p">=</span> TSNE<span class="tok-p">(</span>n_components<span class="tok-p">=</span><span class="tok-n">2</span><span class="tok-p">,</span> perplexity<span class="tok-p">=</span><span class="tok-n">30</span><span class="tok-p">,</span> init<span class="tok-p">=</span><span class="tok-s">"</span><span class="tok-s">pca</span><span class="tok-s">"</span><span class="tok-p">,</span> random_state<span class="tok-p">=</span><span class="tok-n">0</span><span class="tok-p">)</span><span class="tok-p">.</span>fit_transform<span class="tok-p">(</span>Xs<span class="tok-p">)</span>
+Z_umap <span class="tok-p">=</span> umap<span class="tok-p">.</span>UMAP<span class="tok-p">(</span>n_neighbors<span class="tok-p">=</span><span class="tok-n">15</span><span class="tok-p">,</span> min_dist<span class="tok-p">=</span><span class="tok-n">0.1</span><span class="tok-p">,</span> random_state<span class="tok-p">=</span><span class="tok-n">0</span><span class="tok-p">)</span><span class="tok-p">.</span>fit_transform<span class="tok-p">(</span>Xs<span class="tok-p">)</span>
+
+fig<span class="tok-p">,</span> axes <span class="tok-p">=</span> plt<span class="tok-p">.</span>subplots<span class="tok-p">(</span><span class="tok-n">1</span><span class="tok-p">,</span> <span class="tok-n">3</span><span class="tok-p">,</span> figsize<span class="tok-p">=</span><span class="tok-p">(</span><span class="tok-n">15</span><span class="tok-p">,</span> <span class="tok-n">4.5</span><span class="tok-p">)</span><span class="tok-p">)</span>
+<span class="tok-k">for</span> ax<span class="tok-p">,</span> Z<span class="tok-p">,</span> name <span class="tok-k">in</span> <span class="tok-f">zip</span><span class="tok-p">(</span>axes<span class="tok-p">,</span> <span class="tok-p">[</span>Z_pca<span class="tok-p">,</span> Z_tsne<span class="tok-p">,</span> Z_umap<span class="tok-p">]</span><span class="tok-p">,</span> <span class="tok-p">[</span><span class="tok-s">"</span><span class="tok-s">PCA</span><span class="tok-s">"</span><span class="tok-p">,</span> <span class="tok-s">"</span><span class="tok-s">t-SNE</span><span class="tok-s">"</span><span class="tok-p">,</span> <span class="tok-s">"</span><span class="tok-s">UMAP</span><span class="tok-s">"</span><span class="tok-p">]</span><span class="tok-p">)</span><span class="tok-p">:</span>
+    ax<span class="tok-p">.</span>scatter<span class="tok-p">(</span>Z<span class="tok-p">[</span><span class="tok-p">:</span><span class="tok-p">,</span> <span class="tok-n">0</span><span class="tok-p">]</span><span class="tok-p">,</span> Z<span class="tok-p">[</span><span class="tok-p">:</span><span class="tok-p">,</span> <span class="tok-n">1</span><span class="tok-p">]</span><span class="tok-p">,</span> c<span class="tok-p">=</span>y<span class="tok-p">,</span> cmap<span class="tok-p">=</span><span class="tok-s">"</span><span class="tok-s">tab10</span><span class="tok-s">"</span><span class="tok-p">,</span> s<span class="tok-p">=</span><span class="tok-n">6</span><span class="tok-p">)</span>
+    ax<span class="tok-p">.</span>set_title<span class="tok-p">(</span>name<span class="tok-p">)</span>
+plt<span class="tok-p">.</span>show<span class="tok-p">(</span><span class="tok-p">)</span>
+
+<span class="tok-c"># loadings первой компоненты: какие признаки её формируют</span>
+loadings <span class="tok-p">=</span> pca<span class="tok-p">.</span>components_<span class="tok-p">[</span><span class="tok-n">0</span><span class="tok-p">]</span> <span class="tok-p">*</span> np<span class="tok-p">.</span>sqrt<span class="tok-p">(</span>pca<span class="tok-p">.</span>explained_variance_<span class="tok-p">[</span><span class="tok-n">0</span><span class="tok-p">]</span><span class="tok-p">)</span>
+<span class="tok-f">print</span><span class="tok-p">(</span>np<span class="tok-p">.</span>argsort<span class="tok-p">(</span><span class="tok-p">-</span>np<span class="tok-p">.</span>abs<span class="tok-p">(</span>loadings<span class="tok-p">)</span><span class="tok-p">)</span><span class="tok-p">[</span><span class="tok-p">:</span><span class="tok-n">5</span><span class="tok-p">]</span><span class="tok-p">)</span>
+
+<span class="tok-c"># PCA внутри Pipeline: масштабирование и проекция обучаются только на трейне</span>
+<span class="tok-k">from</span> sklearn.linear_model <span class="tok-k">import</span> LogisticRegression
+<span class="tok-k">from</span> sklearn.model_selection <span class="tok-k">import</span> cross_val_score
+clf <span class="tok-p">=</span> make_pipeline<span class="tok-p">(</span>StandardScaler<span class="tok-p">(</span><span class="tok-p">)</span><span class="tok-p">,</span> PCA<span class="tok-p">(</span><span class="tok-n">0.95</span><span class="tok-p">)</span><span class="tok-p">,</span> LogisticRegression<span class="tok-p">(</span>max_iter<span class="tok-p">=</span><span class="tok-n">2000</span><span class="tok-p">)</span><span class="tok-p">)</span>
+<span class="tok-f">print</span><span class="tok-p">(</span>cross_val_score<span class="tok-p">(</span>clf<span class="tok-p">,</span> X<span class="tok-p">,</span> y<span class="tok-p">,</span> cv<span class="tok-p">=</span><span class="tok-n">5</span><span class="tok-p">)</span><span class="tok-p">.</span>mean<span class="tok-p">(</span><span class="tok-p">)</span><span class="tok-p">)</span>
+</code></pre></div>
+<p>На <code>digits</code> PCA разделяет несколько цифр, но смешивает остальные, t-SNE и UMAP обычно показывают десять хорошо разделённых скоплений. Это не означает, что классификатор на 2D-проекции будет хорош: проекция оптимизирована под картинку, а не под метки.</p>
+<h2 id="ловушки">Ловушки</h2>
+<ul>
+<li><strong>Не обучайте t-SNE/UMAP на всём датасете, а потом делите на трейн и тест</strong>, если используете эмбеддинги как признаки: структура теста просочится в трейн. UMAP с <code>transform</code> для этого годится, t-SNE — нет.</li>
+<li><strong>Не интерпретируйте оси</strong> t-SNE/UMAP (они не имеют смысла) и не измеряйте по ним расстояния.</li>
+<li><strong>PCA без стандартизации</strong> на разнородных признаках — классическая ошибка.</li>
+<li><strong>Кластеризация после t-SNE</strong> даёт артефакты: плотности искажены. Если нужно кластеризовать — делайте это в исходном пространстве или в PCA/UMAP с умеренным числом компонент.</li>
+<li>Категориальные признаки в PCA бессмысленны без кодирования (для них — MCA или эмбеддинги).</li>
+<li>На интервью спрашивают: вывод PCA через ковариацию и собственные векторы; связь с SVD; как выбрать <span class="tex">k</span>; зачем нужна стандартизация; чем t-SNE отличается от PCA; почему нельзя сравнивать размеры кластеров на t-SNE.</li>
+</ul>
+<h2 id="что-почитать">Что почитать</h2>
+<ul>
+<li>Pearson K. <em>On lines and planes of closest fit to systems of points in space</em>, 1901; Hotelling H. <em>Analysis of a complex of statistical variables into principal components</em>, 1933.</li>
+<li>van der Maaten L., Hinton G. <em>Visualizing Data using t-SNE</em>, JMLR, 2008: https://www.jmlr.org/papers/v9/vandermaaten08a.html</li>
+<li>Wattenberg M., Viégas F., Johnson I. <em>How to Use t-SNE Effectively</em>, Distill, 2016: https://distill.pub/2016/misread-tsne/</li>
+<li>McInnes L., Healy J., Melville J. <em>UMAP: Uniform Manifold Approximation and Projection for Dimension Reduction</em>, 2018: https://arxiv.org/abs/1802.03426</li>
+<li>Документация UMAP, «How UMAP Works» и «Parameters»: https://umap-learn.readthedocs.io</li>
+<li>Kobak D., Linderman G. <em>Initialization is critical for preserving global data structure in both t-SNE and UMAP</em>, Nature Biotechnology, 2021: https://doi.org/10.1038/s41587-020-00809-z</li>
+</ul>
+</div>
+      
+
+      
+      <nav class="pager" aria-label="Соседние статьи">
+        <a href="/edufamcs-demo/handbook/classic/klasterizaciya/"><span><svg class="ico sm" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-arrow-left"/></svg>Назад</span>Кластеризация: k-means, иерархическая, DBSCAN</a>
+        
+      </nav>
+      
+    </article>
+
+    <aside class="hb-toc" aria-label="На этой странице">
+      <a class="l2" href="#проклятие-размерности">Проклятие размерности</a><a class="l2" href="#pca">PCA</a><a class="l3" href="#объяснённая-дисперсия-и-выбор">Объяснённая дисперсия и выбор k</a><a class="l3" href="#loadings-и-интерпретация">Loadings и интерпретация</a><a class="l3" href="#ограничения-pca">Ограничения PCA</a><a class="l2" href="#t-sne">t-SNE</a><a class="l2" href="#umap">UMAP</a><a class="l2" href="#когда-что-использовать">Когда что использовать</a><a class="l2" href="#код">Код</a><a class="l2" href="#ловушки">Ловушки</a><a class="l2" href="#что-почитать">Что почитать</a>
+    </aside>
+  </div>
+</div>
+
+
+</main>
+
+<footer class="ftr" data-theme="dark">
+  <svg class="sym fern" viewBox="0 0 40.5 65.02" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#fern"/></svg>
+  <div class="container">
+    <div class="ftr-row">
+      <a href="/edufamcs-demo/" aria-label="EDU FAMCS — главная"><img src="/edufamcs-demo/static/brand/logo/logo-edu-dark.svg" alt="EDU FAMCS" width="196" height="40"></a>
+      <ul class="ftr-links">
+        <li><a href="/edufamcs-demo/#courses">Курсы</a></li>
+        <li><a href="/edufamcs-demo/ml/">Машинное обучение</a></li>
+        <li><a href="/edufamcs-demo/handbook/">Хендбук</a></li>
+        <li><a href="/edufamcs-demo/news/">Новости</a></li>
+        <li><a href="/edufamcs-demo/people/">Авторы</a></li>
+        <li><a href="/edufamcs-demo/about/">О&nbsp;нас</a></li>
+        <li><a href="/edufamcs-demo/propose/">Предложить или исправить</a></li>
+        <li><a href="/edufamcs-demo/privacy/">Конфиденциальность</a></li>
+      </ul>
+    </div>
+    <div class="ftr-big" aria-hidden="true">EDU<span class="d">·</span>FAMCS</div>
+    <p class="ftr-copy">© 2026 EDU FAMCS · Минск</p>
+  </div>
+</footer>
+
+<div class="toasts-region" aria-live="polite" id="toasts">
+
+</div>
+
+</body>
+</html>

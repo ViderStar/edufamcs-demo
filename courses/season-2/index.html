@@ -1,0 +1,404 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Сезон 2 · Классический ML · EDU FAMCS</title>
+<meta name="description" content="19 занятий весны 2026: от EDA и KNN до бустинга, кластеризации и нейросетей.">
+<meta name="theme-color" content="#060A16">
+<meta name="robots" content="noindex, nofollow">
+<meta name="htmx-config" content='{"allowEval":false,"includeIndicatorStyles":false,"historyCacheSize":0,"selfRequestsOnly":true}'>
+<meta name="katex-js" content="/edufamcs-demo/static/vendor/katex/katex.min.js">
+<meta name="katex-css" content="/edufamcs-demo/static/vendor/katex/katex.min.css">
+<link rel="icon" href="/edufamcs-demo/static/brand/logo/favicon-16.svg" type="image/svg+xml" sizes="16x16">
+<link rel="icon" href="/edufamcs-demo/static/brand/logo/favicon.svg" type="image/svg+xml" sizes="any">
+<link rel="preload" href="/edufamcs-demo/static/brand/fonts/manrope-cyrillic-400.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/edufamcs-demo/static/brand/fonts/unbounded-cyrillic-800.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="/edufamcs-demo/static/brand/fonts.css">
+<link rel="stylesheet" href="/edufamcs-demo/static/brand/tokens.css">
+<link rel="stylesheet" href="/edufamcs-demo/static/brand/components.css">
+<link rel="stylesheet" href="/edufamcs-demo/static/css/site.css">
+<link rel="stylesheet" href="/edufamcs-demo/static/css/hub.css">
+<link rel="stylesheet" href="/edufamcs-demo/static/css/about.css">
+<link rel="stylesheet" href="/edufamcs-demo/static/courses/courses.css">
+<script src="/edufamcs-demo/static/js/theme.js"></script>
+<script src="/edufamcs-demo/static/vendor/htmx/htmx.min.js" defer></script>
+<script src="/edufamcs-demo/static/vendor/alpine/alpine-csp.min.js" defer></script>
+<script src="/edufamcs-demo/static/js/site.js" defer></script>
+
+</head>
+<body class="" hx-headers='{"X-CSRFToken": "Ln5qOH6U64b9kiaatLD4rS8uNmnQqhrVa7EuyFTh1VzizRlT0YmconEzl4tlYr9F"}'>
+<a class="skip" href="#main">К содержанию</a>
+<div class="demo-bar" role="note">Демо-версия для отзывов: вход, запись на курсы и формы здесь не работают.</div>
+
+<header class="hdr">
+  <div class="container">
+    <a class="brand" href="/edufamcs-demo/" aria-label="EDU FAMCS — главная">
+      <span class="full"><img class="only-light" src="/edufamcs-demo/static/brand/logo/logo-edu-light.svg" alt="EDU FAMCS" width="196" height="40"><img class="only-dark" src="/edufamcs-demo/static/brand/logo/logo-edu-dark.svg" alt="EDU FAMCS" width="196" height="40"></span>
+      <span class="short"><img class="only-light" src="/edufamcs-demo/static/brand/logo/logo-edu-light.svg" alt="EDU FAMCS" height="30"><img class="only-dark" src="/edufamcs-demo/static/brand/logo/logo-edu-dark.svg" alt="EDU FAMCS" height="30"></span>
+    </a>
+    <nav class="nav" id="main-nav" aria-label="Основная навигация">
+      <a href="/edufamcs-demo/#courses">Курсы</a>
+      <a href="/edufamcs-demo/ml/" >Машинное обучение</a>
+      
+      <a href="/edufamcs-demo/handbook/" >Хендбук</a>
+      <a href="/edufamcs-demo/news/" >Новости</a>
+      <a href="/edufamcs-demo/people/" >Авторы</a>
+      <a href="/edufamcs-demo/about/" >О&nbsp;нас</a>
+    </nav>
+    <div class="hdr-actions">
+      
+      <a class="btn btn-outline btn-login" href="/edufamcs-demo/accounts/login/?next=/courses/season-2/">Войти</a>
+      
+      <button class="icon-btn menu-btn" type="button" aria-label="Меню" aria-expanded="false" aria-controls="main-nav"><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-menu"/></svg></button>
+    </div>
+  </div>
+</header>
+
+<main id="main">
+
+
+<div class="container hero-wrap">
+  <section class="chero" data-theme="dark" aria-labelledby="course-t">
+    <svg class="sym hero-fern" viewBox="0 0 40.5 65.02" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#fern"/></svg>
+    <div>
+      <h1 id="course-t" class="display-xl">Сезон 2 · Классический ML</h1>
+      <p class="lead">19 занятий весны 2026: от EDA и KNN до бустинга, кластеризации и нейросетей.</p>
+      <span class="pill">архив</span>
+      <div class="hero-cta">
+        
+          <a class="btn btn-primary btn-lg" href="/edufamcs-demo/accounts/login/?next=/courses/season-2/">Войти и&nbsp;записаться<svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-arrow"/></svg></a>
+        
+      </div>
+      <div class="stats">
+        <div class="stat"><b>4</b><span>модуля</span></div>
+        <div class="stat"><b>19</b><span>уроков</span></div>
+        <div class="stat"><b><svg class="ico lg" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-unlock"/></svg></b><span>всё открыто</span></div>
+      </div>
+    </div>
+    <div class="chero-art" aria-hidden="true">
+      <div class="ring r3"></div><div class="ring"></div><div class="ring r2"></div>
+      <div class="seal-glow"></div><img class="seal" src="/edufamcs-demo/static/brand/logo/raccoon-seal-blue.svg" alt="">
+    </div>
+  </section>
+</div>
+
+
+<div class="container page pt0">
+  <div class="mods">
+    
+    
+    <section class="mod s-classic" id="m-basics" aria-labelledby="mt-4">
+      <div class="mod-h">
+        <div class="mod-art"><span class="idx">01</span><svg class="art" viewBox="0 0 220 120" aria-hidden="true"><g fill="currentColor" opacity=".22"><circle cx="20" cy="96" r="5"/><circle cx="38" cy="78" r="5"/><circle cx="30" cy="58" r="5"/><circle cx="56" cy="92" r="5"/><circle cx="62" cy="66" r="5"/><circle cx="80" cy="84" r="5"/><circle cx="48" cy="40" r="5"/><circle cx="88" cy="56" r="5"/><circle cx="104" cy="98" r="5"/></g><g fill="currentColor"><rect x="122" y="18" width="10" height="10" rx="3"/><rect x="150" y="34" width="10" height="10" rx="3"/><rect x="176" y="14" width="10" height="10" rx="3"/><rect x="196" y="40" width="10" height="10" rx="3"/><rect x="162" y="60" width="10" height="10" rx="3"/><rect x="132" y="48" width="10" height="10" rx="3"/><rect x="190" y="74" width="10" height="10" rx="3"/></g><path d="M70 120 L190 0" stroke="var(--accent)" stroke-width="2.2" stroke-linecap="round"/><path d="M50 120 L170 0 M90 120 L210 0" stroke="currentColor" stroke-opacity=".3" stroke-dasharray="3 5"/></svg>
+</div>
+        <div class="mod-b">
+          <h2 class="h3" id="mt-4">Введение и данные</h2>
+          <div class="row">
+            
+            <span class="badge">3&nbsp;урока</span>
+            
+            <span class="people"><span class="committee"><span class="avatar sm">АЛ</span></span>Артем Лебедевич, Павел Кашмель</span>
+            
+          </div>
+        </div>
+        
+      </div>
+      <ol class="lsns">
+        
+        <li>
+          <a class="lsn" href="/edufamcs-demo/courses/season-2/basics/01-intro/">
+            <span class="mk">1</span>
+            
+            <span class="t">История, инструменты и основные задачи</span>
+            <span class="d"><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-cal"/></svg>2 марта</span>
+            
+          </a>
+        </li>
+        
+        <li>
+          <a class="lsn" href="/edufamcs-demo/courses/season-2/basics/02-eda/">
+            <span class="mk">2</span>
+            
+            <span class="t">Разведочный анализ данных (EDA)</span>
+            <span class="d"><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-cal"/></svg>5 марта</span>
+            
+          </a>
+        </li>
+        
+        <li>
+          <a class="lsn" href="/edufamcs-demo/courses/season-2/basics/03-knn/">
+            <span class="mk">3</span>
+            
+            <span class="t">Метод ближайших соседей (KNN)</span>
+            <span class="d"><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-cal"/></svg>9 марта</span>
+            
+          </a>
+        </li>
+        
+      </ol>
+    </section>
+    
+    
+    
+    <section class="mod s-classic" id="m-linear" aria-labelledby="mt-5">
+      <div class="mod-h">
+        <div class="mod-art"><span class="idx">02</span><svg class="art" viewBox="0 0 220 120" aria-hidden="true"><g fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="160" cy="60" r="52" opacity=".18"/><circle cx="160" cy="60" r="36" opacity=".3"/><circle cx="160" cy="60" r="20" opacity=".5"/></g><circle cx="160" cy="60" r="8" fill="var(--accent)"/><g fill="currentColor" opacity=".35"><circle cx="30" cy="30" r="4"/><circle cx="60" cy="80" r="4"/><circle cx="90" cy="40" r="4"/></g></svg>
+</div>
+        <div class="mod-b">
+          <h2 class="h3" id="mt-5">Линейные и вероятностные модели</h2>
+          <div class="row">
+            
+            <span class="badge">5&nbsp;уроков</span>
+            
+            <span class="people"><span class="committee"><span class="avatar sm">АЛ</span></span>Артем Лебедевич, Иван Горохов, Павел Кашмель</span>
+            
+          </div>
+        </div>
+        
+      </div>
+      <ol class="lsns">
+        
+        <li>
+          <a class="lsn" href="/edufamcs-demo/courses/season-2/linear/04-linreg-theory/">
+            <span class="mk">1</span>
+            
+            <span class="t">Линейная регрессия: теория</span>
+            <span class="d"><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-cal"/></svg>12 марта</span>
+            
+          </a>
+        </li>
+        
+        <li>
+          <a class="lsn" href="/edufamcs-demo/courses/season-2/linear/05-linreg-practice/">
+            <span class="mk">2</span>
+            
+            <span class="t">Линейная регрессия: практика</span>
+            <span class="d"><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-cal"/></svg>16 марта</span>
+            
+          </a>
+        </li>
+        
+        <li>
+          <a class="lsn" href="/edufamcs-demo/courses/season-2/linear/06-logreg-theory/">
+            <span class="mk">3</span>
+            
+            <span class="t">Логистическая регрессия и оценки качества классификации: теория</span>
+            <span class="d"><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-cal"/></svg>23 марта</span>
+            
+          </a>
+        </li>
+        
+        <li>
+          <a class="lsn" href="/edufamcs-demo/courses/season-2/linear/07-logreg-practice/">
+            <span class="mk">4</span>
+            
+            <span class="t">Логистическая регрессия: практика</span>
+            <span class="d"><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-cal"/></svg>26 марта</span>
+            
+          </a>
+        </li>
+        
+        <li>
+          <a class="lsn" href="/edufamcs-demo/courses/season-2/linear/08-naive-bayes/">
+            <span class="mk">5</span>
+            
+            <span class="t">Наивный Байес: лекция и практика</span>
+            <span class="d"><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-cal"/></svg>30 марта</span>
+            
+          </a>
+        </li>
+        
+      </ol>
+    </section>
+    
+    
+    
+    <section class="mod s-classic" id="m-trees" aria-labelledby="mt-6">
+      <div class="mod-h">
+        <div class="mod-art"><span class="idx">03</span><svg class="art" viewBox="0 0 220 120" aria-hidden="true"><g stroke="currentColor" stroke-opacity=".14"><path d="M0 30h220M0 60h220M0 90h220"/></g><path d="M0 86 L18 74 L34 80 L52 58 L68 66 L86 44 L102 52 L120 36 L136 48 L140 46 L140 120 L0 120Z" fill="currentColor" opacity=".12"/><path d="M140 40 L160 26 L180 34 L200 16 L220 22 L220 62 L200 58 L180 72 L160 64 L140 54Z" fill="currentColor" opacity=".1"/><path d="M0 86 L18 74 L34 80 L52 58 L68 66 L86 44 L102 52 L120 36 L136 48 L140 46" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linejoin="round"/><path d="M140 46 L160 44 L180 52 L200 36 L220 42" fill="none" stroke="var(--accent)" stroke-width="2.2" stroke-dasharray="5 5" stroke-linejoin="round"/><circle cx="140" cy="46" r="4.5" fill="var(--accent)"/><path d="M140 6v114" stroke="currentColor" stroke-opacity=".35" stroke-dasharray="2 4"/></svg>
+</div>
+        <div class="mod-b">
+          <h2 class="h3" id="mt-6">Деревья, SVM и ансамбли</h2>
+          <div class="row">
+            
+            <span class="badge">6&nbsp;уроков</span>
+            
+            <span class="people"><span class="committee"><span class="avatar sm">АЛ</span></span>Артем Лебедевич, Иван Горохов, Павел Кашмель</span>
+            
+          </div>
+        </div>
+        
+      </div>
+      <ol class="lsns">
+        
+        <li>
+          <a class="lsn" href="/edufamcs-demo/courses/season-2/trees/09-trees/">
+            <span class="mk">1</span>
+            
+            <span class="t">Деревья решений: лекция и практика</span>
+            <span class="d"><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-cal"/></svg>2 апреля</span>
+            
+          </a>
+        </li>
+        
+        <li>
+          <a class="lsn" href="/edufamcs-demo/courses/season-2/trees/10-svm/">
+            <span class="mk">2</span>
+            
+            <span class="t">Метод опорных векторов (SVM)</span>
+            <span class="d"><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-cal"/></svg>6 апреля</span>
+            
+          </a>
+        </li>
+        
+        <li>
+          <a class="lsn" href="/edufamcs-demo/courses/season-2/trees/11-ensembles/">
+            <span class="mk">3</span>
+            
+            <span class="t">Ансамбли: лекция</span>
+            <span class="d"><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-cal"/></svg>9 апреля</span>
+            
+          </a>
+        </li>
+        
+        <li>
+          <a class="lsn" href="/edufamcs-demo/courses/season-2/trees/12-boosting-theory/">
+            <span class="mk">4</span>
+            
+            <span class="t">Градиентный бустинг: лекция</span>
+            <span class="d"><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-cal"/></svg>13 апреля</span>
+            
+          </a>
+        </li>
+        
+        <li>
+          <a class="lsn" href="/edufamcs-demo/courses/season-2/trees/13-boosting-practice/">
+            <span class="mk">5</span>
+            
+            <span class="t">Градиентный бустинг: практика</span>
+            <span class="d"><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-cal"/></svg>16 апреля</span>
+            
+          </a>
+        </li>
+        
+        <li>
+          <a class="lsn" href="/edufamcs-demo/courses/season-2/trees/14-tuning-interpretability/">
+            <span class="mk">6</span>
+            
+            <span class="t">Подбор гиперпараметров и интерпретируемость моделей</span>
+            <span class="d"><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-cal"/></svg>23 апреля</span>
+            
+          </a>
+        </li>
+        
+      </ol>
+    </section>
+    
+    
+    
+    <section class="mod s-classic" id="m-unsupervised" aria-labelledby="mt-7">
+      <div class="mod-h">
+        <div class="mod-art"><span class="idx">04</span><svg class="art" viewBox="0 0 220 120" aria-hidden="true"><g fill="currentColor" opacity=".16"><rect x="3" y="3" width="14" height="14" rx="4"/><rect x="23" y="3" width="14" height="14" rx="4"/><rect x="63" y="3" width="14" height="14" rx="4"/><rect x="83" y="3" width="14" height="14" rx="4"/><rect x="103" y="3" width="14" height="14" rx="4"/><rect x="143" y="3" width="14" height="14" rx="4"/><rect x="163" y="3" width="14" height="14" rx="4"/><rect x="183" y="3" width="14" height="14" rx="4"/><rect x="203" y="3" width="14" height="14" rx="4"/><rect x="3" y="23" width="14" height="14" rx="4"/><rect x="23" y="23" width="14" height="14" rx="4"/><rect x="43" y="23" width="14" height="14" rx="4"/><rect x="63" y="23" width="14" height="14" rx="4"/><rect x="83" y="23" width="14" height="14" rx="4"/><rect x="103" y="23" width="14" height="14" rx="4"/><rect x="143" y="23" width="14" height="14" rx="4"/><rect x="163" y="23" width="14" height="14" rx="4"/><rect x="183" y="23" width="14" height="14" rx="4"/><rect x="203" y="23" width="14" height="14" rx="4"/><rect x="3" y="43" width="14" height="14" rx="4"/><rect x="43" y="43" width="14" height="14" rx="4"/><rect x="63" y="43" width="14" height="14" rx="4"/><rect x="83" y="43" width="14" height="14" rx="4"/><rect x="103" y="43" width="14" height="14" rx="4"/><rect x="123" y="43" width="14" height="14" rx="4"/><rect x="143" y="43" width="14" height="14" rx="4"/><rect x="183" y="43" width="14" height="14" rx="4"/><rect x="203" y="43" width="14" height="14" rx="4"/><rect x="3" y="63" width="14" height="14" rx="4"/><rect x="23" y="63" width="14" height="14" rx="4"/><rect x="63" y="63" width="14" height="14" rx="4"/><rect x="103" y="63" width="14" height="14" rx="4"/><rect x="123" y="63" width="14" height="14" rx="4"/><rect x="163" y="63" width="14" height="14" rx="4"/><rect x="183" y="63" width="14" height="14" rx="4"/><rect x="203" y="63" width="14" height="14" rx="4"/><rect x="3" y="83" width="14" height="14" rx="4"/><rect x="23" y="83" width="14" height="14" rx="4"/><rect x="43" y="83" width="14" height="14" rx="4"/><rect x="63" y="83" width="14" height="14" rx="4"/><rect x="83" y="83" width="14" height="14" rx="4"/><rect x="103" y="83" width="14" height="14" rx="4"/><rect x="123" y="83" width="14" height="14" rx="4"/><rect x="143" y="83" width="14" height="14" rx="4"/><rect x="163" y="83" width="14" height="14" rx="4"/><rect x="203" y="83" width="14" height="14" rx="4"/><rect x="3" y="103" width="14" height="14" rx="4"/><rect x="23" y="103" width="14" height="14" rx="4"/><rect x="43" y="103" width="14" height="14" rx="4"/><rect x="83" y="103" width="14" height="14" rx="4"/><rect x="103" y="103" width="14" height="14" rx="4"/><rect x="123" y="103" width="14" height="14" rx="4"/><rect x="143" y="103" width="14" height="14" rx="4"/><rect x="163" y="103" width="14" height="14" rx="4"/><rect x="183" y="103" width="14" height="14" rx="4"/><rect x="203" y="103" width="14" height="14" rx="4"/></g><g fill="currentColor"><rect x="43" y="3" width="14" height="14" rx="4"/><rect x="123" y="23" width="14" height="14" rx="4"/><rect x="23" y="43" width="14" height="14" rx="4"/><rect x="163" y="43" width="14" height="14" rx="4"/><rect x="83" y="63" width="14" height="14" rx="4"/><rect x="183" y="83" width="14" height="14" rx="4"/><rect x="63" y="103" width="14" height="14" rx="4"/></g><rect x="1" y="61" width="218" height="18" rx="6" fill="none" stroke="currentColor" stroke-width="1.5"/><g fill="var(--accent)"><rect x="143" y="63" width="14" height="14" rx="4"/><rect x="43" y="63" width="14" height="14" rx="4" opacity=".55"/></g></svg>
+</div>
+        <div class="mod-b">
+          <h2 class="h3" id="mt-7">Без учителя и нейросети</h2>
+          <div class="row">
+            
+            <span class="badge">5&nbsp;уроков</span>
+            
+            <span class="people"><span class="committee"><span class="avatar sm">ИГ</span></span>Иван Горохов, Павел Кашмель, Алексей Толстиков</span>
+            
+          </div>
+        </div>
+        
+      </div>
+      <ol class="lsns">
+        
+        <li>
+          <a class="lsn" href="/edufamcs-demo/courses/season-2/unsupervised/15-modern-ml/">
+            <span class="mk">1</span>
+            
+            <span class="t">Современный ML: что, куда и зачем</span>
+            <span class="d"><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-cal"/></svg>27 апреля</span>
+            
+          </a>
+        </li>
+        
+        <li>
+          <a class="lsn" href="/edufamcs-demo/courses/season-2/unsupervised/16-clustering/">
+            <span class="mk">2</span>
+            
+            <span class="t">Кластеризация</span>
+            <span class="d"><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-cal"/></svg>30 апреля</span>
+            
+          </a>
+        </li>
+        
+        <li>
+          <a class="lsn" href="/edufamcs-demo/courses/season-2/unsupervised/17-dbscan/">
+            <span class="mk">3</span>
+            
+            <span class="t">Кластеризация II: DBSCAN и плотностной подход</span>
+            <span class="d"><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-cal"/></svg>4 мая</span>
+            
+          </a>
+        </li>
+        
+        <li>
+          <a class="lsn" href="/edufamcs-demo/courses/season-2/unsupervised/18-dim-reduction/">
+            <span class="mk">4</span>
+            
+            <span class="t">Снижение размерности: PCA, t-SNE, UMAP</span>
+            <span class="d"><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-cal"/></svg>7 мая</span>
+            
+          </a>
+        </li>
+        
+        <li>
+          <a class="lsn" href="/edufamcs-demo/courses/season-2/unsupervised/19-neural-nets/">
+            <span class="mk">5</span>
+            
+            <span class="t">Введение в нейронные сети</span>
+            <span class="d"><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-cal"/></svg>11 мая</span>
+            
+          </a>
+        </li>
+        
+      </ol>
+    </section>
+    
+    
+  </div>
+</div>
+
+
+</main>
+
+<footer class="ftr" data-theme="dark">
+  <svg class="sym fern" viewBox="0 0 40.5 65.02" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#fern"/></svg>
+  <div class="container">
+    <div class="ftr-row">
+      <a href="/edufamcs-demo/" aria-label="EDU FAMCS — главная"><img src="/edufamcs-demo/static/brand/logo/logo-edu-dark.svg" alt="EDU FAMCS" width="196" height="40"></a>
+      <ul class="ftr-links">
+        <li><a href="/edufamcs-demo/#courses">Курсы</a></li>
+        <li><a href="/edufamcs-demo/ml/">Машинное обучение</a></li>
+        <li><a href="/edufamcs-demo/handbook/">Хендбук</a></li>
+        <li><a href="/edufamcs-demo/news/">Новости</a></li>
+        <li><a href="/edufamcs-demo/people/">Авторы</a></li>
+        <li><a href="/edufamcs-demo/about/">О&nbsp;нас</a></li>
+        <li><a href="/edufamcs-demo/propose/">Предложить или исправить</a></li>
+        <li><a href="/edufamcs-demo/privacy/">Конфиденциальность</a></li>
+      </ul>
+    </div>
+    <div class="ftr-big" aria-hidden="true">EDU<span class="d">·</span>FAMCS</div>
+    <p class="ftr-copy">© 2026 EDU FAMCS · Минск</p>
+  </div>
+</footer>
+
+<div class="toasts-region" aria-live="polite" id="toasts">
+
+</div>
+
+</body>
+</html>

@@ -1,0 +1,310 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Что такое машинное обучение · EDU FAMCS</title>
+<meta name="description" content="Что такое машинное обучение — Классическое машинное обучение. Хендбук ML-курса ФПМИ.">
+<meta name="theme-color" content="#060A16">
+<meta name="robots" content="noindex, nofollow">
+<meta name="htmx-config" content='{"allowEval":false,"includeIndicatorStyles":false,"historyCacheSize":0,"selfRequestsOnly":true}'>
+<meta name="katex-js" content="/edufamcs-demo/static/vendor/katex/katex.min.js">
+<meta name="katex-css" content="/edufamcs-demo/static/vendor/katex/katex.min.css">
+<link rel="icon" href="/edufamcs-demo/static/brand/logo/favicon-16.svg" type="image/svg+xml" sizes="16x16">
+<link rel="icon" href="/edufamcs-demo/static/brand/logo/favicon.svg" type="image/svg+xml" sizes="any">
+<link rel="preload" href="/edufamcs-demo/static/brand/fonts/manrope-cyrillic-400.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/edufamcs-demo/static/brand/fonts/unbounded-cyrillic-800.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="/edufamcs-demo/static/brand/fonts.css">
+<link rel="stylesheet" href="/edufamcs-demo/static/brand/tokens.css">
+<link rel="stylesheet" href="/edufamcs-demo/static/brand/components.css">
+<link rel="stylesheet" href="/edufamcs-demo/static/css/site.css">
+<link rel="stylesheet" href="/edufamcs-demo/static/css/hub.css">
+<link rel="stylesheet" href="/edufamcs-demo/static/css/about.css">
+<link rel="stylesheet" href="/edufamcs-demo/static/handbook/handbook.css">
+<script src="/edufamcs-demo/static/js/theme.js"></script>
+<script src="/edufamcs-demo/static/vendor/htmx/htmx.min.js" defer></script>
+<script src="/edufamcs-demo/static/vendor/alpine/alpine-csp.min.js" defer></script>
+<script src="/edufamcs-demo/static/js/site.js" defer></script>
+<script src="/edufamcs-demo/static/handbook/handbook.js" defer></script>
+</head>
+<body class="" hx-headers='{"X-CSRFToken": "YfllqqZ6TFnWZcZAcEe1pWS2VzdaM0dZnZUpaoMtOwL5eLajJRX9mro7thjFkaVJ"}'>
+<a class="skip" href="#main">К содержанию</a>
+<div class="demo-bar" role="note">Демо-версия для отзывов: вход, запись на курсы и формы здесь не работают.</div>
+
+<header class="hdr">
+  <div class="container">
+    <a class="brand" href="/edufamcs-demo/" aria-label="EDU FAMCS — главная">
+      <span class="full"><img class="only-light" src="/edufamcs-demo/static/brand/logo/logo-edu-light.svg" alt="EDU FAMCS" width="196" height="40"><img class="only-dark" src="/edufamcs-demo/static/brand/logo/logo-edu-dark.svg" alt="EDU FAMCS" width="196" height="40"></span>
+      <span class="short"><img class="only-light" src="/edufamcs-demo/static/brand/logo/logo-edu-light.svg" alt="EDU FAMCS" height="30"><img class="only-dark" src="/edufamcs-demo/static/brand/logo/logo-edu-dark.svg" alt="EDU FAMCS" height="30"></span>
+    </a>
+    <nav class="nav" id="main-nav" aria-label="Основная навигация">
+      <a href="/edufamcs-demo/#courses">Курсы</a>
+      <a href="/edufamcs-demo/ml/" >Машинное обучение</a>
+      
+      <a href="/edufamcs-demo/handbook/" aria-current="page">Хендбук</a>
+      <a href="/edufamcs-demo/news/" >Новости</a>
+      <a href="/edufamcs-demo/people/" >Авторы</a>
+      <a href="/edufamcs-demo/about/" >О&nbsp;нас</a>
+    </nav>
+    <div class="hdr-actions">
+      
+      <a class="btn btn-outline btn-login" href="/edufamcs-demo/accounts/login/?next=/handbook/classic/chto-takoe-ml/">Войти</a>
+      
+      <button class="icon-btn menu-btn" type="button" aria-label="Меню" aria-expanded="false" aria-controls="main-nav"><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-menu"/></svg></button>
+    </div>
+  </div>
+</header>
+
+<main id="main">
+
+
+
+<div class="container hb-page hb-tone">
+  <div class="hb">
+    <aside class="hb-nav" aria-label="Статьи раздела">
+      
+<form class="hb-search" action="/edufamcs-demo/handbook/search/" method="get" role="search">
+  <svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-search"/></svg>
+  <input class="input" type="search" name="q" value="" placeholder="Поиск по хендбуку" aria-label="Поиск по хендбуку" autocomplete="off" maxlength="120"
+    hx-get="/edufamcs-demo/handbook/search/" hx-trigger="input changed delay:250ms, search" hx-target="#hb-nav-results" hx-sync="this:replace">
+</form>
+
+      <div id="hb-nav-results" class="hb-nav-results" aria-live="polite"></div>
+      <a class="grp" href="/edufamcs-demo/handbook/classic/">Основы</a>
+      
+      <a class="cur" href="/edufamcs-demo/handbook/classic/chto-takoe-ml/" aria-current="page">Что такое машинное обучение</a>
+      
+      <a class="" href="/edufamcs-demo/handbook/classic/razvedochnyj-analiz-dannyh/">Разведочный анализ данных</a>
+      
+    </aside>
+
+    <article class="hb-main">
+      <nav class="crumbs" aria-label="Навигация"><a href="/edufamcs-demo/handbook/">Хендбук</a><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-chev"/></svg><a href="/edufamcs-demo/handbook/classic/">Классическое машинное обучение</a></nav>
+      <h1 class="h1">Что такое машинное обучение</h1>
+      <div class="hb-meta">
+        
+        
+        <span><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-clock"/></svg>10&nbsp;мин</span>
+        <span class="hb-authors"><span class="avatar sm" title="Артем Лебедевич">АЛ</span>Артем Лебедевич</span>
+        <span><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-edit"/></svg>9 ноября 2026</span>
+        
+        
+      </div>
+
+      
+      <details class="hb-mtoc">
+        <summary><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-list"/></svg>Содержание<svg class="ico sm" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-chev-down"/></svg></summary>
+        <a class="l2" href="#короткая-история">Короткая история</a><a class="l2" href="#виды-задач">Виды задач</a><a class="l2" href="#язык-постановки">Язык постановки</a><a class="l2" href="#обобщение-недо--и-переобучение">Обобщение: недо- и переобучение</a><a class="l2" href="#как-честно-оценить-качество">Как честно оценить качество</a><a class="l3" href="#утечки-данных">Утечки данных</a><a class="l2" href="#код-pipeline-и-кросс-валидация">Код: Pipeline и кросс-валидация</a><a class="l2" href="#пайплайн-проекта">Пайплайн проекта</a><a class="l2" href="#практика-и-типичные-ошибки">Практика и типичные ошибки</a><a class="l2" href="#что-почитать">Что почитать</a>
+      </details>
+      
+
+      <div class="prose"><p>Классическая программа — это правила, написанные человеком: на входе данные, на выходе ответ. Машинное обучение переворачивает схему: на входе <strong>данные и ответы</strong>, на выходе <strong>правила</strong>, которые затем применяют к новым данным. Это имеет смысл там, где правила не удаётся записать руками (распознать рукописную цифру, оценить вероятность дефолта, отранжировать ленту), но есть много примеров правильного поведения.</p>
+<p>Формально чаще всего цитируют Т. Митчелла (1997): программа учится на опыте <span class="tex">E</span> в отношении класса задач <span class="tex">T</span> и меры качества <span class="tex">P</span>, если её качество на <span class="tex">T</span>, измеренное <span class="tex">P</span>, растёт с опытом <span class="tex">E</span>. Более раннюю формулировку — «способность компьютера учиться без явного программирования» — обычно приписывают А. Сэмюэлу, автору самообучающейся программы для шашек (1959; дословно этой фразы в его статье нет, но идея та же); на ней построена первая лекция курса. Практическое следствие определения Митчелла: прежде чем выбирать модель, нужно ответить на три вопроса — какая задача, какие данные, чем измеряем успех.</p>
+<h2 id="короткая-история">Короткая история</h2>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>Год</th>
+<th>Событие</th>
+<th>Что оно закрыло</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1950</td>
+<td>Тест Тьюринга</td>
+<td>Постановка вопроса «может ли машина думать»</td>
+</tr>
+<tr>
+<td>1957</td>
+<td>Перцептрон Розенблатта</td>
+<td>Первая обучаемая модель нейрона</td>
+</tr>
+<tr>
+<td>1986</td>
+<td>Обратное распространение (Румельхарт, Хинтон, Уильямс)</td>
+<td>Обучение многослойных сетей</td>
+</tr>
+<tr>
+<td>1997</td>
+<td>Deep Blue обыгрывает Каспарова</td>
+<td>Поиск + ручные эвристики побеждают чемпиона</td>
+</tr>
+<tr>
+<td>1998</td>
+<td>LeNet и MNIST</td>
+<td>Свёрточные сети читают цифры, появляется стандартный бенчмарк</td>
+</tr>
+<tr>
+<td>2006</td>
+<td>«Глубокое обучение» (Хинтон)</td>
+<td>Предобучение глубоких сетей</td>
+</tr>
+<tr>
+<td>2012</td>
+<td>AlexNet</td>
+<td>GPU + большие данные: скачок на ImageNet</td>
+</tr>
+<tr>
+<td>2014</td>
+<td>GAN (Гудфеллоу)</td>
+<td>Генеративные модели</td>
+</tr>
+<tr>
+<td>2016</td>
+<td>AlphaGo</td>
+<td>Обучение с подкреплением + сети в го</td>
+</tr>
+<tr>
+<td>2017</td>
+<td>Трансформер</td>
+<td>Внимание вместо рекуррентности</td>
+</tr>
+<tr>
+<td>2022–2024</td>
+<td>ChatGPT и LLM</td>
+<td>Масштабирование языковых моделей до массового продукта</td>
+</tr>
+</tbody>
+</table></div>
+<p>Классические модели этого раздела (kNN, регрессии, SVM, деревья, бустинг) никуда не делись: на табличных данных бустинг по-прежнему обычно сильнее нейросетей, а линейные модели — стандартный бейзлайн.</p>
+<h2 id="виды-задач">Виды задач</h2>
+<ul>
+<li><strong>С учителем.</strong> Для объектов известны ответы. <em>Регрессия</em> — ответ вещественный (цена, спрос); <em>классификация</em> — метка класса (спам, дефолт); <em>ранжирование</em> — нужен порядок объектов (выдача, лента).</li>
+<li><strong>Без учителя.</strong> Ответов нет: <em>кластеризация</em> (найти группы), <em>снижение размерности</em> (сжать признаки с минимальной потерей структуры), поиск аномалий.</li>
+<li><strong>С подкреплением.</strong> Агент действует в среде и получает награду, задача — политика, максимизирующая суммарную награду.</li>
+</ul>
+<h2 id="язык-постановки">Язык постановки</h2>
+<ul>
+<li><strong>Объект</strong> <span class="tex">x_i \in \mathcal{X}</span> описывается вектором <strong>признаков</strong>; матрица <span class="tex">X \in \mathbb{R}^{n\times d}</span>, <span class="tex">n</span> объектов, <span class="tex">d</span> признаков.</li>
+<li><strong>Целевая переменная</strong> <span class="tex">y_i</span> (таргет).</li>
+<li><strong>Модель</strong> <span class="tex">a(x;\theta)</span> — функция из семейства, параметризованного <span class="tex">\theta</span>.</li>
+<li><strong>Функция потерь</strong> <span class="tex">L(y, a)</span> — цена ошибки на одном объекте: <span class="tex">(y-a)^2</span> для регрессии, логистическая потеря для классификации.</li>
+<li><strong>Эмпирический риск</strong> — средняя потеря на обучающей выборке:</li>
+</ul>
+<div class="tex tex-block">\hat R(\theta)=\frac1n\sum_{i=1}^n L\big(y_i,\,a(x_i;\theta)\big)\to\min_\theta .</div>
+<p>Настоящая цель — <strong>истинный риск</strong> <span class="tex">R(\theta)=\mathbb{E}_{(x,y)}L(y,a(x;\theta))</span> на новых данных. Эмпирический риск обученной модели — его оптимистичная (заниженная) оценка: параметры подгоняли именно под эти <span class="tex">n</span> точек. Весь аппарат валидации ниже существует ради честной оценки <span class="tex">R</span>.</p>
+<h2 id="обобщение-недо--и-переобучение">Обобщение: недо- и переобучение</h2>
+<p>Модель слишком простая — <strong>недообучение</strong>: ошибка высока и на обучении, и на новых данных. Слишком гибкая — <strong>переобучение</strong>: на обучении ошибка почти нулевая, на новых данных большая, потому что модель запомнила шум.</p>
+<p>Это формализует разложение <strong>bias–variance</strong>. Пусть <span class="tex">y=f(x)+\varepsilon</span>, <span class="tex">\mathbb{E}\varepsilon=0</span>, <span class="tex">\mathrm{Var}\,\varepsilon=\sigma^2</span>, а модель <span class="tex">a</span> обучена на случайной выборке. Для квадратичной потери в фиксированной точке <span class="tex">x</span>:</p>
+<div class="tex tex-block">\mathbb{E}\,(y-a(x))^2=\underbrace{\big(f(x)-\mathbb{E}\,a(x)\big)^2}_{\text{bias}^2}+\underbrace{\mathbb{E}\big(a(x)-\mathbb{E}\,a(x)\big)^2}_{\text{variance}}+\underbrace{\sigma^2}_{\text{шум}}</div>
+<p>Смещение — систематическая ошибка семейства моделей (прямая не опишет параболу). Разброс — чувствительность к конкретной обучающей выборке. Шум не убирается никакой моделью. Усложняя модель, мы уменьшаем смещение и увеличиваем разброс; оптимум — между ними. За порогом интерполяции, когда параметров больше, чем объектов, U-образная кривая может снова пойти вниз — <strong>double descent</strong> (Belkin et al., 2019); его наблюдали у широких сетей, случайных признаков и даже у линейной регрессии с решением минимальной нормы. В обычном режиме классических моделей (подбор <span class="tex">k</span>, глубины дерева, силы регуляризации) U-образная картина остаётся хорошим ориентиром.</p>
+<p><strong>Кривые обучения</strong> — ошибка на train и validation как функция размера обучающей выборки. Обе ошибки высоки и кривые сошлись — недообучение: нужна более богатая модель или признаки, новые данные не помогут. Большой зазор (train намного лучше validation) — переобучение: помогают данные, регуляризация, упрощение модели.</p>
+<h2 id="как-честно-оценить-качество">Как честно оценить качество</h2>
+<p>Данные делят на три части: <strong>train</strong> (подбор параметров), <strong>validation</strong> (выбор модели и гиперпараметров), <strong>test</strong> (одна финальная оценка; после неё модель не трогают, иначе тест превращается в валидацию).</p>
+<p><strong>K-fold кросс-валидация.</strong> Выборка делится на <span class="tex">K</span> частей, каждая по очереди — валидационная, остальные — обучающая; результат — среднее и разброс по фолдам. Это экономит данные и даёт оценку дисперсии. Варианты:</p>
+<ul>
+<li><strong>Стратифицированная</strong> — сохраняет долю классов в каждом фолде; обязательна при дисбалансе.</li>
+<li><strong>По времени</strong> (<code>TimeSeriesSplit</code>) — обучаемся на прошлом, проверяем на будущем. Случайное перемешивание временных данных даёт завышенное качество: модель «видит будущее».</li>
+<li><strong>По группам</strong> (<code>GroupKFold</code>) — все записи одного пользователя/пациента/товара попадают в один фолд. Иначе модель узнаёт пользователя по признакам и качество завышено.</li>
+</ul>
+<h3 id="утечки-данных">Утечки данных</h3>
+<p><strong>Утечка</strong> — информация, недоступная в момент предсказания, попала в обучение. Метрики выглядят отлично, в продакшене всё рушится.</p>
+<ul>
+<li><em>Target leakage</em>: признак вычисляется из таргета или после него (поле «дата закрытия кредита» при предсказании дефолта, «сумма возврата» при предсказании отмены заказа).</li>
+<li><em>Препроцессинг до сплита</em>: масштабирование, заполнение пропусков, отбор признаков или target encoding, посчитанные на всей выборке, подмешивают статистики валидации в обучение.</li>
+<li>Дубликаты объектов, попавшие и в train, и в test.</li>
+<li>Неправильное разбиение (случайное вместо временного/групповое).</li>
+</ul>
+<p>Защита от второго пункта — <code>Pipeline</code>: все преобразования обучаются внутри каждого фолда только на его обучающей части.</p>
+<h2 id="код-pipeline-и-кросс-валидация">Код: Pipeline и кросс-валидация</h2>
+<div class="code"><div class="code-head"><span class="lang">python</span></div><pre><code><span class="tok-k">from</span> sklearn.datasets <span class="tok-k">import</span> load_breast_cancer
+<span class="tok-k">from</span> sklearn.model_selection <span class="tok-k">import</span> StratifiedKFold<span class="tok-p">,</span> cross_val_score<span class="tok-p">,</span> train_test_split
+<span class="tok-k">from</span> sklearn.pipeline <span class="tok-k">import</span> Pipeline
+<span class="tok-k">from</span> sklearn.preprocessing <span class="tok-k">import</span> StandardScaler
+<span class="tok-k">from</span> sklearn.linear_model <span class="tok-k">import</span> LogisticRegression
+<span class="tok-k">from</span> sklearn.metrics <span class="tok-k">import</span> roc_auc_score
+
+X<span class="tok-p">,</span> y <span class="tok-p">=</span> load_breast_cancer<span class="tok-p">(</span>return_X_y<span class="tok-p">=</span><span class="tok-k">True</span><span class="tok-p">)</span>
+X_dev<span class="tok-p">,</span> X_test<span class="tok-p">,</span> y_dev<span class="tok-p">,</span> y_test <span class="tok-p">=</span> train_test_split<span class="tok-p">(</span>
+    X<span class="tok-p">,</span> y<span class="tok-p">,</span> test_size<span class="tok-p">=</span><span class="tok-n">0.2</span><span class="tok-p">,</span> stratify<span class="tok-p">=</span>y<span class="tok-p">,</span> random_state<span class="tok-p">=</span><span class="tok-n">42</span>
+<span class="tok-p">)</span>
+
+pipe <span class="tok-p">=</span> Pipeline<span class="tok-p">(</span><span class="tok-p">[</span>
+    <span class="tok-p">(</span><span class="tok-s">"</span><span class="tok-s">scale</span><span class="tok-s">"</span><span class="tok-p">,</span> StandardScaler<span class="tok-p">(</span><span class="tok-p">)</span><span class="tok-p">)</span><span class="tok-p">,</span>          <span class="tok-c"># обучается внутри каждого фолда</span>
+    <span class="tok-p">(</span><span class="tok-s">"</span><span class="tok-s">clf</span><span class="tok-s">"</span><span class="tok-p">,</span> LogisticRegression<span class="tok-p">(</span>max_iter<span class="tok-p">=</span><span class="tok-n">1000</span><span class="tok-p">)</span><span class="tok-p">)</span><span class="tok-p">,</span>
+<span class="tok-p">]</span><span class="tok-p">)</span>
+cv <span class="tok-p">=</span> StratifiedKFold<span class="tok-p">(</span>n_splits<span class="tok-p">=</span><span class="tok-n">5</span><span class="tok-p">,</span> shuffle<span class="tok-p">=</span><span class="tok-k">True</span><span class="tok-p">,</span> random_state<span class="tok-p">=</span><span class="tok-n">42</span><span class="tok-p">)</span>
+scores <span class="tok-p">=</span> cross_val_score<span class="tok-p">(</span>pipe<span class="tok-p">,</span> X_dev<span class="tok-p">,</span> y_dev<span class="tok-p">,</span> cv<span class="tok-p">=</span>cv<span class="tok-p">,</span> scoring<span class="tok-p">=</span><span class="tok-s">"</span><span class="tok-s">roc_auc</span><span class="tok-s">"</span><span class="tok-p">)</span>
+<span class="tok-f">print</span><span class="tok-p">(</span><span class="tok-s">f</span><span class="tok-s">"</span><span class="tok-s">ROC-AUC: </span><span class="tok-s">{</span>scores<span class="tok-p">.</span>mean<span class="tok-p">(</span><span class="tok-p">)</span><span class="tok-s">:</span><span class="tok-s">.3f</span><span class="tok-s">}</span><span class="tok-s"> ± </span><span class="tok-s">{</span>scores<span class="tok-p">.</span>std<span class="tok-p">(</span><span class="tok-p">)</span><span class="tok-s">:</span><span class="tok-s">.3f</span><span class="tok-s">}</span><span class="tok-s">"</span><span class="tok-p">)</span>
+
+pipe<span class="tok-p">.</span>fit<span class="tok-p">(</span>X_dev<span class="tok-p">,</span> y_dev<span class="tok-p">)</span>                    <span class="tok-c"># финал: один раз на тесте, та же метрика</span>
+<span class="tok-f">print</span><span class="tok-p">(</span><span class="tok-s">"</span><span class="tok-s">test ROC-AUC:</span><span class="tok-s">"</span><span class="tok-p">,</span> roc_auc_score<span class="tok-p">(</span>y_test<span class="tok-p">,</span> pipe<span class="tok-p">.</span>predict_proba<span class="tok-p">(</span>X_test<span class="tok-p">)</span><span class="tok-p">[</span><span class="tok-p">:</span><span class="tok-p">,</span> <span class="tok-n">1</span><span class="tok-p">]</span><span class="tok-p">)</span><span class="tok-p">)</span>
+</code></pre></div>
+<p>Если масштабировать <code>X_dev</code> до <code>cross_val_score</code>, получится именно утечка из предыдущего раздела — маленькая, но систематическая.</p>
+<h2 id="пайплайн-проекта">Пайплайн проекта</h2>
+<ol>
+<li>Постановка: бизнес-цель → ML-задача → метрика, согласованная с целью.</li>
+<li>Данные и <a href="/edufamcs-demo/handbook/classic/razvedochnyj-analiz-dannyh/" rel="noopener noreferrer nofollow">разведочный анализ</a>.</li>
+<li>Схема валидации (до любых экспериментов!) и бейзлайн: константа, правило, линейная модель.</li>
+<li>Признаки, модели, подбор гиперпараметров.</li>
+<li>Анализ ошибок, финальная оценка на тесте.</li>
+<li>Выкатка, мониторинг дрейфа данных, переобучение.</li>
+</ol>
+<p>Инструменты: NumPy (массивы), pandas (таблицы), scikit-learn (модели и пайплайны), Jupyter (эксперименты), git (воспроизводимость — фиксируйте код, сиды и версии данных).</p>
+<h2 id="практика-и-типичные-ошибки">Практика и типичные ошибки</h2>
+<ul>
+<li><strong>Нет бейзлайна.</strong> Без константной и простой модели невозможно понять, много ли даёт сложная. Для классификации с 95% одного класса accuracy константы — 0,95.</li>
+<li><strong>Тест как валидация.</strong> Многократно подбирать гиперпараметры по тесту значит переобучиться на него.</li>
+<li><strong>Разбиение не отражает продакшен.</strong> Если модель будет применяться к будущим пользователям, делить нужно по времени или по группам.</li>
+<li><strong>Игнорирование дисперсии.</strong> Разница <span class="tex">0{,}002</span> между моделями при std по фолдам <span class="tex">0{,}01</span> — шум. Фиксируйте сид и сравнивайте на одних и тех же фолдах.</li>
+<li><strong>Метрика не равна цели.</strong> Хорошая RMSE не гарантирует прибыли; метрику выбирают до экспериментов.</li>
+</ul>
+<p><strong>No free lunch</strong> (Wolpert, 1996): усреднённо по всем возможным задачам ни один алгоритм не лучше другого. Следовательно, выбор модели — это выбор предположений о данных (гладкость, линейность, независимость), и проверять их нужно экспериментом на честной валидации.</p>
+<h2 id="что-почитать">Что почитать</h2>
+<ul>
+<li>T. Mitchell, <em>Machine Learning</em>, 1997 — источник определения: <a href="https://www.cs.cmu.edu/~tom/mlbook.html" rel="noopener noreferrer nofollow">cs.cmu.edu/~tom/mlbook.html</a>.</li>
+<li>T. Hastie, R. Tibshirani, J. Friedman, <em>The Elements of Statistical Learning</em>, 2-е изд., 2009 — гл. 2 и 7 (bias–variance, валидация): <a href="https://hastie.su.domains/ElemStatLearn/" rel="noopener noreferrer nofollow">hastie.su.domains/ElemStatLearn</a>.</li>
+<li>D. Wolpert, <em>The Lack of A Priori Distinctions Between Learning Algorithms</em>, Neural Computation, 8(7), 1996.</li>
+<li>M. Belkin, D. Hsu, S. Ma, S. Mandal, <em>Reconciling modern machine-learning practice and the classical bias–variance trade-off</em>, PNAS, 116(32), 2019 — double descent.</li>
+<li>Документация scikit-learn, раздел Cross-validation: <a href="https://scikit-learn.org/stable/modules/cross_validation.html" rel="noopener noreferrer nofollow">scikit-learn.org/stable/modules/cross_validation.html</a>.</li>
+<li>Учебник по машинному обучению Яндекса: <a href="https://education.yandex.ru/handbook/ml" rel="noopener noreferrer nofollow">education.yandex.ru/handbook/ml</a>.</li>
+<li>Видеолекция первого сезона «Основные понятия ML»: <a href="https://youtu.be/r_NFsDiCygY" rel="noopener noreferrer nofollow">youtu.be/r_NFsDiCygY</a>.</li>
+</ul>
+</div>
+      
+
+      
+      <nav class="pager" aria-label="Соседние статьи">
+        <i></i>
+        <a href="/edufamcs-demo/handbook/classic/razvedochnyj-analiz-dannyh/"><span>Дальше<svg class="ico sm" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-arrow"/></svg></span>Разведочный анализ данных</a>
+      </nav>
+      
+    </article>
+
+    <aside class="hb-toc" aria-label="На этой странице">
+      <a class="l2" href="#короткая-история">Короткая история</a><a class="l2" href="#виды-задач">Виды задач</a><a class="l2" href="#язык-постановки">Язык постановки</a><a class="l2" href="#обобщение-недо--и-переобучение">Обобщение: недо- и переобучение</a><a class="l2" href="#как-честно-оценить-качество">Как честно оценить качество</a><a class="l3" href="#утечки-данных">Утечки данных</a><a class="l2" href="#код-pipeline-и-кросс-валидация">Код: Pipeline и кросс-валидация</a><a class="l2" href="#пайплайн-проекта">Пайплайн проекта</a><a class="l2" href="#практика-и-типичные-ошибки">Практика и типичные ошибки</a><a class="l2" href="#что-почитать">Что почитать</a>
+    </aside>
+  </div>
+</div>
+
+
+</main>
+
+<footer class="ftr" data-theme="dark">
+  <svg class="sym fern" viewBox="0 0 40.5 65.02" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#fern"/></svg>
+  <div class="container">
+    <div class="ftr-row">
+      <a href="/edufamcs-demo/" aria-label="EDU FAMCS — главная"><img src="/edufamcs-demo/static/brand/logo/logo-edu-dark.svg" alt="EDU FAMCS" width="196" height="40"></a>
+      <ul class="ftr-links">
+        <li><a href="/edufamcs-demo/#courses">Курсы</a></li>
+        <li><a href="/edufamcs-demo/ml/">Машинное обучение</a></li>
+        <li><a href="/edufamcs-demo/handbook/">Хендбук</a></li>
+        <li><a href="/edufamcs-demo/news/">Новости</a></li>
+        <li><a href="/edufamcs-demo/people/">Авторы</a></li>
+        <li><a href="/edufamcs-demo/about/">О&nbsp;нас</a></li>
+        <li><a href="/edufamcs-demo/propose/">Предложить или исправить</a></li>
+        <li><a href="/edufamcs-demo/privacy/">Конфиденциальность</a></li>
+      </ul>
+    </div>
+    <div class="ftr-big" aria-hidden="true">EDU<span class="d">·</span>FAMCS</div>
+    <p class="ftr-copy">© 2026 EDU FAMCS · Минск</p>
+  </div>
+</footer>
+
+<div class="toasts-region" aria-live="polite" id="toasts">
+
+</div>
+
+</body>
+</html>

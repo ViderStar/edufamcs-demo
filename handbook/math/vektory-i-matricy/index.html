@@ -1,0 +1,240 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Векторы, матрицы и нормы · EDU FAMCS</title>
+<meta name="description" content="Векторы, матрицы и нормы — Математическая база. Хендбук ML-курса ФПМИ.">
+<meta name="theme-color" content="#060A16">
+<meta name="robots" content="noindex, nofollow">
+<meta name="htmx-config" content='{"allowEval":false,"includeIndicatorStyles":false,"historyCacheSize":0,"selfRequestsOnly":true}'>
+<meta name="katex-js" content="/edufamcs-demo/static/vendor/katex/katex.min.js">
+<meta name="katex-css" content="/edufamcs-demo/static/vendor/katex/katex.min.css">
+<link rel="icon" href="/edufamcs-demo/static/brand/logo/favicon-16.svg" type="image/svg+xml" sizes="16x16">
+<link rel="icon" href="/edufamcs-demo/static/brand/logo/favicon.svg" type="image/svg+xml" sizes="any">
+<link rel="preload" href="/edufamcs-demo/static/brand/fonts/manrope-cyrillic-400.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/edufamcs-demo/static/brand/fonts/unbounded-cyrillic-800.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="/edufamcs-demo/static/brand/fonts.css">
+<link rel="stylesheet" href="/edufamcs-demo/static/brand/tokens.css">
+<link rel="stylesheet" href="/edufamcs-demo/static/brand/components.css">
+<link rel="stylesheet" href="/edufamcs-demo/static/css/site.css">
+<link rel="stylesheet" href="/edufamcs-demo/static/css/hub.css">
+<link rel="stylesheet" href="/edufamcs-demo/static/css/about.css">
+<link rel="stylesheet" href="/edufamcs-demo/static/handbook/handbook.css">
+<script src="/edufamcs-demo/static/js/theme.js"></script>
+<script src="/edufamcs-demo/static/vendor/htmx/htmx.min.js" defer></script>
+<script src="/edufamcs-demo/static/vendor/alpine/alpine-csp.min.js" defer></script>
+<script src="/edufamcs-demo/static/js/site.js" defer></script>
+<script src="/edufamcs-demo/static/handbook/handbook.js" defer></script>
+</head>
+<body class="" hx-headers='{"X-CSRFToken": "vyiVB6AEl29uk3Ar7gvkFk6AqmxIJjtYUiRZl4n1gTxDzCLaEtesCPCFY4DdhtbI"}'>
+<a class="skip" href="#main">К содержанию</a>
+<div class="demo-bar" role="note">Демо-версия для отзывов: вход, запись на курсы и формы здесь не работают.</div>
+
+<header class="hdr">
+  <div class="container">
+    <a class="brand" href="/edufamcs-demo/" aria-label="EDU FAMCS — главная">
+      <span class="full"><img class="only-light" src="/edufamcs-demo/static/brand/logo/logo-edu-light.svg" alt="EDU FAMCS" width="196" height="40"><img class="only-dark" src="/edufamcs-demo/static/brand/logo/logo-edu-dark.svg" alt="EDU FAMCS" width="196" height="40"></span>
+      <span class="short"><img class="only-light" src="/edufamcs-demo/static/brand/logo/logo-edu-light.svg" alt="EDU FAMCS" height="30"><img class="only-dark" src="/edufamcs-demo/static/brand/logo/logo-edu-dark.svg" alt="EDU FAMCS" height="30"></span>
+    </a>
+    <nav class="nav" id="main-nav" aria-label="Основная навигация">
+      <a href="/edufamcs-demo/#courses">Курсы</a>
+      <a href="/edufamcs-demo/ml/" >Машинное обучение</a>
+      
+      <a href="/edufamcs-demo/handbook/" aria-current="page">Хендбук</a>
+      <a href="/edufamcs-demo/news/" >Новости</a>
+      <a href="/edufamcs-demo/people/" >Авторы</a>
+      <a href="/edufamcs-demo/about/" >О&nbsp;нас</a>
+    </nav>
+    <div class="hdr-actions">
+      
+      <a class="btn btn-outline btn-login" href="/edufamcs-demo/accounts/login/?next=/handbook/math/vektory-i-matricy/">Войти</a>
+      
+      <button class="icon-btn menu-btn" type="button" aria-label="Меню" aria-expanded="false" aria-controls="main-nav"><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-menu"/></svg></button>
+    </div>
+  </div>
+</header>
+
+<main id="main">
+
+
+
+<div class="container hb-page hb-tone">
+  <div class="hb">
+    <aside class="hb-nav" aria-label="Статьи раздела">
+      
+<form class="hb-search" action="/edufamcs-demo/handbook/search/" method="get" role="search">
+  <svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-search"/></svg>
+  <input class="input" type="search" name="q" value="" placeholder="Поиск по хендбуку" aria-label="Поиск по хендбуку" autocomplete="off" maxlength="120"
+    hx-get="/edufamcs-demo/handbook/search/" hx-trigger="input changed delay:250ms, search" hx-target="#hb-nav-results" hx-sync="this:replace">
+</form>
+
+      <div id="hb-nav-results" class="hb-nav-results" aria-live="polite"></div>
+      <a class="grp" href="/edufamcs-demo/handbook/math/">Линейная алгебра и анализ</a>
+      
+      <a class="cur" href="/edufamcs-demo/handbook/math/vektory-i-matricy/" aria-current="page">Векторы, матрицы и нормы</a>
+      
+      <a class="" href="/edufamcs-demo/handbook/math/sobstvennye-vektory-i-svd/">Собственные векторы и сингулярное разложение</a>
+      
+      <a class="" href="/edufamcs-demo/handbook/math/gradienty-i-optimizaciya/">Производные, градиенты и оптимизация</a>
+      
+    </aside>
+
+    <article class="hb-main">
+      <nav class="crumbs" aria-label="Навигация"><a href="/edufamcs-demo/handbook/">Хендбук</a><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-chev"/></svg><a href="/edufamcs-demo/handbook/math/">Математическая база</a></nav>
+      <h1 class="h1">Векторы, матрицы и нормы</h1>
+      <div class="hb-meta">
+        
+        
+        <span><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-clock"/></svg>11&nbsp;мин</span>
+        <span class="hb-authors"><span class="avatar sm" title="Артем Лебедевич">АЛ</span>Артем Лебедевич</span>
+        <span><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-edit"/></svg>9 ноября 2026</span>
+        
+        
+      </div>
+
+      
+      <details class="hb-mtoc">
+        <summary><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-list"/></svg>Содержание<svg class="ico sm" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-chev-down"/></svg></summary>
+        <a class="l2" href="#векторное-пространство">Векторное пространство</a><a class="l2" href="#скалярное-произведение-длина-угол">Скалярное произведение, длина, угол</a><a class="l2" href="#нормы-и-метрики">Нормы и метрики</a><a class="l2" href="#матрица-как-оператор">Матрица как оператор</a><a class="l2" href="#системы-и-метод-наименьших-квадратов">Системы Ax=b и метод наименьших квадратов</a><a class="l2" href="#разреженные-матрицы">Разреженные матрицы</a><a class="l2" href="#ловушки">Ловушки</a><a class="l2" href="#что-почитать">Что почитать</a>
+      </details>
+      
+
+      <div class="prose"><p>Любой объект в машинном обучении сначала превращают в вектор признаков: пользователь — в строку из возраста, числа заказов и доли ночных сессий, картинка — в массив пикселей, текст — в частоты слов. Набор из <span class="tex">n</span> объектов с <span class="tex">d</span> признаками складывается в <strong>матрицу данных</strong> <span class="tex">X \in \mathbb{R}^{n \times d}</span>: строка — объект, столбец — признак. Почти вся классическая ML-математика — это вопросы о том, как устроена эта матрица и что происходит при умножении на неё.</p>
+<h2 id="векторное-пространство">Векторное пространство</h2>
+<p>Множество <span class="tex">V</span> с операциями сложения и умножения на число называется <strong>векторным пространством</strong>, если эти операции подчиняются восьми аксиомам (ассоциативность, коммутативность, нулевой и противоположный элемент, дистрибутивность и т. д.). Для практики достаточно <span class="tex">\mathbb{R}^d</span>, но аксиоматика нужна, чтобы увидеть векторы там, где их не ждёшь: многочлены степени <span class="tex">\le k</span>, непрерывные функции на отрезке <span class="tex">C[a,b]</span> — тоже векторные пространства.</p>
+<p><strong>Линейная комбинация</strong> векторов <span class="tex">v_1,\dots,v_k</span> — это <span class="tex">\sum_i \alpha_i v_i</span>. Множество всех линейных комбинаций — <strong>линейная оболочка</strong> <span class="tex">\mathrm{span}(v_1,\dots,v_k)</span>. Система <strong>линейно независима</strong>, если нулевая комбинация возможна только при всех <span class="tex">\alpha_i = 0</span>; иначе один из векторов выражается через остальные, то есть несёт избыточную информацию. <strong>Базис</strong> — линейно независимая система, порождающая всё пространство; число векторов в ней — <strong>размерность</strong>. Любой вектор раскладывается по базису единственным образом.</p>
+<p><strong>Ранг</strong> системы векторов — размерность её оболочки. <strong>Ранг матрицы</strong> <span class="tex">\mathrm{rank}\,A</span> — максимальное число линейно независимых столбцов; он равен максимальному числу независимых строк и порядку наибольшего ненулевого минора («базисного минора», как в лекции). В ML ранг — это число реально независимых признаков. Если столбец <span class="tex">X</span> — линейная комбинация других (например, цена в рублях и в долларах), <span class="tex">\mathrm{rank}\,X &lt; d</span>, и линейная регрессия теряет единственность решения: это <strong>мультиколлинеарность</strong>.</p>
+<h2 id="скалярное-произведение-длина-угол">Скалярное произведение, длина, угол</h2>
+<p>Скалярное произведение в <span class="tex">\mathbb{R}^d</span>:</p>
+<div class="tex tex-block">\langle x, y\rangle = \sum_{i=1}^d x_i y_i = x^\top y = \|x\|_2\,\|y\|_2 \cos\theta.</div>
+<p>Последнее равенство задаёт угол <span class="tex">\theta</span> между векторами. Отсюда <strong>косинусная близость</strong> <span class="tex">\cos\theta = \frac{\langle x,y\rangle}{\|x\|\|y\|}</span> — основная мера сходства в текстах и эмбеддингах: она игнорирует длину и сравнивает только направление. Векторы <strong>ортогональны</strong>, если <span class="tex">\langle x,y\rangle = 0</span>; система из попарно ортогональных единичных векторов — <strong>ортонормированная</strong>, с ней всё считается проще всего (координаты вектора — просто скалярные произведения с базисными).</p>
+<p><strong>Проекция</strong> вектора <span class="tex">b</span> на прямую, заданную <span class="tex">a</span>:</p>
+<div class="tex tex-block">\mathrm{proj}_a b = \frac{\langle a, b\rangle}{\langle a, a\rangle}\, a.</div>
+<p>Остаток <span class="tex">b - \mathrm{proj}_a b</span> ортогонален <span class="tex">a</span>. Это частный случай общего факта: ближайшая к <span class="tex">b</span> точка подпространства — ортогональная проекция, а разность ортогональна всему подпространству. Ниже он превратится в линейную регрессию.</p>
+<h2 id="нормы-и-метрики">Нормы и метрики</h2>
+<p><strong>Норма</strong> <span class="tex">\|\cdot\|</span> — функция с тремя свойствами: <span class="tex">\|x\|=0 \iff x=0</span>; <span class="tex">\|\alpha x\| = |\alpha|\|x\|</span>; неравенство треугольника <span class="tex">\|x+y\| \le \|x\|+\|y\|</span>. Основное семейство:</p>
+<div class="tex tex-block">\|x\|_p = \Big(\sum_i |x_i|^p\Big)^{1/p},\quad \|x\|_\infty = \max_i |x_i|.</div>
+<ul>
+<li><span class="tex">p=1</span>: сумма модулей, манхэттенская. Устойчива к выбросам, в регуляризации порождает <strong>разреженные</strong> веса.</li>
+<li><span class="tex">p=2</span>: евклидова длина, <span class="tex">\|x\|_2^2 = \langle x,x\rangle</span>. Гладкая, дифференцируемая всюду, в регуляризации даёт <strong>сжатие</strong> весов без обнуления.</li>
+<li><span class="tex">p=\infty</span>: максимальная координата.</li>
+<li>«Норма» <span class="tex">\|x\|_0</span> — число ненулевых координат — нормой не является (нарушена однородность), но именно её приближает <span class="tex">L_1</span>.</li>
+</ul>
+<p>Норма порождает <strong>метрику</strong> <span class="tex">\rho(x,y)=\|x-y\|</span>. Общее определение: <span class="tex">\rho</span> — метрика, если <span class="tex">\rho(x,y)\ge 0</span> и <span class="tex">=0</span> только при <span class="tex">x=y</span>, <span class="tex">\rho(x,y)=\rho(y,x)</span>, <span class="tex">\rho(x,z)\le\rho(x,y)+\rho(y,z)</span>. Множество с метрикой — <strong>метрическое пространство</strong>. Расстояние Минковского <span class="tex">\rho_p(x,y)=\|x-y\|_p</span> — метрика при <span class="tex">p\ge1</span>; при <span class="tex">p&lt;1</span> неравенство треугольника нарушается. Косинусное «расстояние» <span class="tex">1-\cos\theta</span> метрикой тоже не является, зато для нормированных векторов <span class="tex">\|x-y\|_2^2 = 2(1-\cos\theta)</span>, и ранжирование по ним совпадает.</p>
+<p>Выбор метрики — гиперпараметр. В <a href="/edufamcs-demo/handbook/classic/knn-i-naivnyj-bajes/" rel="noopener noreferrer nofollow">kNN</a> он напрямую определяет, кто «сосед»; в регуляризации — форму допустимой области весов. Ромб <span class="tex">\|w\|_1\le r</span> имеет острые вершины на осях, и оптимум чаще падает в них, обнуляя координаты; шар <span class="tex">\|w\|_2\le r</span> гладкий. Это геометрическое объяснение того, почему Lasso отбирает признаки, а Ridge нет. Ещё один эффект — <strong>проклятие размерности</strong>: при большом <span class="tex">d</span> и слабо зависимых координатах расстояния от точки до ближайшего и до дальнего соседа сближаются (Beyer et al., 1999), и <span class="tex">L_2</span> перестаёт различать близкое и далёкое; помогает снижение размерности (<a href="/edufamcs-demo/handbook/classic/snizhenie-razmernosti/" rel="noopener noreferrer nofollow">PCA</a>) или косинусная мера на эмбеддингах.</p>
+<h2 id="матрица-как-оператор">Матрица как оператор</h2>
+<p>Матрица <span class="tex">A\in\mathbb{R}^{m\times n}</span> задаёт линейное отображение <span class="tex">x\mapsto Ax</span> из <span class="tex">\mathbb{R}^n</span> в <span class="tex">\mathbb{R}^m</span>: <span class="tex">A(\alpha x+\beta y)=\alpha Ax+\beta Ay</span>. Столбцы <span class="tex">A</span> — образы базисных векторов, а <span class="tex">Ax</span> — линейная комбинация столбцов с коэффициентами <span class="tex">x</span>. Отсюда:</p>
+<ul>
+<li><strong>Умножение матриц — композиция операторов</strong>: <span class="tex">(AB)x = A(Bx)</span>. Некоммутативность <span class="tex">AB\ne BA</span> — просто порядок применения. Слой нейросети без нелинейности — ровно такой оператор.</li>
+<li><strong>Транспонирование</strong>: <span class="tex">\langle Ax, y\rangle = \langle x, A^\top y\rangle</span>, <span class="tex">(AB)^\top = B^\top A^\top</span>.</li>
+<li><strong>Обратная матрица</strong> <span class="tex">A^{-1}</span> существует для квадратной <span class="tex">A</span> тогда и только тогда, когда <span class="tex">\mathrm{rank}\,A=n</span>, то есть оператор ничего не «схлопывает».</li>
+<li><strong>Определитель</strong> <span class="tex">\det A</span> — коэффициент изменения объёма: единичный куб переходит в параллелепипед объёма <span class="tex">|\det A|</span>, знак отражает смену ориентации. <span class="tex">\det A=0</span> — оператор уменьшает размерность, обратной нет. <span class="tex">\det(AB)=\det A\det B</span>.</li>
+<li><strong>Образ и ядро</strong>: <span class="tex">\mathrm{im}\,A</span> — пространство столбцов (размерность <span class="tex">\mathrm{rank}\,A</span>), <span class="tex">\ker A=\{x: Ax=0\}</span>, и <span class="tex">\dim\ker A = n-\mathrm{rank}\,A</span>.</li>
+</ul>
+<p>Смена базиса записывается матрицей перехода <span class="tex">P</span>: в новом базисе оператор имеет матрицу <span class="tex">P^{-1}AP</span>. Выбрать базис, в котором <span class="tex">A</span> диагональна, — задача следующей главы про <a href="/edufamcs-demo/handbook/math/sobstvennye-vektory-i-svd/" rel="noopener noreferrer nofollow">собственные векторы и SVD</a>.</p>
+<h2 id="системы-и-метод-наименьших-квадратов">Системы <span class="tex">Ax=b</span> и метод наименьших квадратов</h2>
+<p>Система <span class="tex">Ax=b</span> разрешима тогда и только тогда, когда <span class="tex">b\in\mathrm{im}\,A</span>. Если <span class="tex">A</span> квадратная и обратимая, <span class="tex">x=A^{-1}b</span> — но на практике обратную матрицу явно не строят: <code>np.linalg.solve</code> быстрее и точнее.</p>
+<p>В ML система почти всегда <strong>переопределённая</strong>: <span class="tex">n</span> объектов, <span class="tex">d\ll n</span> параметров, и <span class="tex">y\notin\mathrm{im}\,X</span> — точно решить нельзя. Ищем <span class="tex">w</span>, при котором <span class="tex">Xw</span> ближайшее к <span class="tex">y</span> в евклидовой норме:</p>
+<div class="tex tex-block">\hat w = \arg\min_w \|Xw-y\|_2^2.</div>
+<p>Геометрия решает задачу без производных. Ближайшая к <span class="tex">y</span> точка подпространства <span class="tex">\mathrm{im}\,X</span> — ортогональная проекция <span class="tex">\hat y=X\hat w</span>, а невязка <span class="tex">y-X\hat w</span> ортогональна каждому столбцу <span class="tex">X</span>:</p>
+<div class="tex tex-block">X^\top (y - X\hat w)=0 \;\Longrightarrow\; X^\top X\,\hat w = X^\top y \;\Longrightarrow\; \hat w=(X^\top X)^{-1}X^\top y.</div>
+<p>Это <strong>нормальные уравнения</strong>. Матрица <span class="tex">X^\top X</span> обратима ровно тогда, когда <span class="tex">\mathrm{rank}\,X=d</span>, то есть при отсутствии мультиколлинеарности. Матрица <span class="tex">H=X(X^\top X)^{-1}X^\top</span> — проектор («hat matrix»), <span class="tex">\hat y=Hy</span>. Полный разбор модели, статистических свойств оценки и регуляризации — в <a href="/edufamcs-demo/handbook/classic/linejnaya-regressiya/" rel="noopener noreferrer nofollow">линейной регрессии</a>; производная того же функционала — в главе про <a href="/edufamcs-demo/handbook/math/gradienty-i-optimizaciya/" rel="noopener noreferrer nofollow">градиенты</a>.</p>
+<div class="code"><div class="code-head"><span class="lang">python</span></div><pre><code><span class="tok-k">import</span> numpy <span class="tok-k">as</span> np
+
+rng <span class="tok-p">=</span> np<span class="tok-p">.</span>random<span class="tok-p">.</span>default_rng<span class="tok-p">(</span><span class="tok-n">0</span><span class="tok-p">)</span>
+n<span class="tok-p">,</span> d <span class="tok-p">=</span> <span class="tok-n">1000</span><span class="tok-p">,</span> <span class="tok-n">5</span>
+X <span class="tok-p">=</span> rng<span class="tok-p">.</span>normal<span class="tok-p">(</span>size<span class="tok-p">=</span><span class="tok-p">(</span>n<span class="tok-p">,</span> d<span class="tok-p">)</span><span class="tok-p">)</span>
+w_true <span class="tok-p">=</span> np<span class="tok-p">.</span>array<span class="tok-p">(</span><span class="tok-p">[</span><span class="tok-n">2.0</span><span class="tok-p">,</span> <span class="tok-p">-</span><span class="tok-n">1.0</span><span class="tok-p">,</span> <span class="tok-n">0.0</span><span class="tok-p">,</span> <span class="tok-n">0.5</span><span class="tok-p">,</span> <span class="tok-n">3.0</span><span class="tok-p">]</span><span class="tok-p">)</span>
+y <span class="tok-p">=</span> X <span class="tok-p">@</span> w_true <span class="tok-p">+</span> <span class="tok-n">0.3</span> <span class="tok-p">*</span> rng<span class="tok-p">.</span>normal<span class="tok-p">(</span>size<span class="tok-p">=</span>n<span class="tok-p">)</span>
+
+<span class="tok-c"># 1) нормальные уравнения: solve, а не inv</span>
+w_ne <span class="tok-p">=</span> np<span class="tok-p">.</span>linalg<span class="tok-p">.</span>solve<span class="tok-p">(</span>X<span class="tok-p">.</span>T <span class="tok-p">@</span> X<span class="tok-p">,</span> X<span class="tok-p">.</span>T <span class="tok-p">@</span> y<span class="tok-p">)</span>
+<span class="tok-c"># 2) lstsq — через SVD, устойчив к плохой обусловленности и вырожденности</span>
+w_ls<span class="tok-p">,</span> res<span class="tok-p">,</span> rank<span class="tok-p">,</span> sv <span class="tok-p">=</span> np<span class="tok-p">.</span>linalg<span class="tok-p">.</span>lstsq<span class="tok-p">(</span>X<span class="tok-p">,</span> y<span class="tok-p">,</span> rcond<span class="tok-p">=</span><span class="tok-k">None</span><span class="tok-p">)</span>
+<span class="tok-f">print</span><span class="tok-p">(</span>np<span class="tok-p">.</span>allclose<span class="tok-p">(</span>w_ne<span class="tok-p">,</span> w_ls<span class="tok-p">)</span><span class="tok-p">,</span> rank<span class="tok-p">)</span>
+
+<span class="tok-c"># невязка ортогональна столбцам X</span>
+<span class="tok-f">print</span><span class="tok-p">(</span>np<span class="tok-p">.</span>abs<span class="tok-p">(</span>X<span class="tok-p">.</span>T <span class="tok-p">@</span> <span class="tok-p">(</span>y <span class="tok-p">-</span> X <span class="tok-p">@</span> w_ls<span class="tok-p">)</span><span class="tok-p">)</span><span class="tok-p">.</span>max<span class="tok-p">(</span><span class="tok-p">)</span><span class="tok-p">)</span>          <span class="tok-c"># ~1e-12</span>
+
+<span class="tok-c"># косинусная близость и нормы</span>
+a<span class="tok-p">,</span> b <span class="tok-p">=</span> X<span class="tok-p">[</span><span class="tok-n">0</span><span class="tok-p">]</span><span class="tok-p">,</span> X<span class="tok-p">[</span><span class="tok-n">1</span><span class="tok-p">]</span>
+cos <span class="tok-p">=</span> a <span class="tok-p">@</span> b <span class="tok-p">/</span> <span class="tok-p">(</span>np<span class="tok-p">.</span>linalg<span class="tok-p">.</span>norm<span class="tok-p">(</span>a<span class="tok-p">)</span> <span class="tok-p">*</span> np<span class="tok-p">.</span>linalg<span class="tok-p">.</span>norm<span class="tok-p">(</span>b<span class="tok-p">)</span><span class="tok-p">)</span>
+<span class="tok-f">print</span><span class="tok-p">(</span>cos<span class="tok-p">,</span> np<span class="tok-p">.</span>linalg<span class="tok-p">.</span>norm<span class="tok-p">(</span>a<span class="tok-p">,</span> <span class="tok-n">1</span><span class="tok-p">)</span><span class="tok-p">,</span> np<span class="tok-p">.</span>linalg<span class="tok-p">.</span>norm<span class="tok-p">(</span>a<span class="tok-p">,</span> np<span class="tok-p">.</span>inf<span class="tok-p">)</span><span class="tok-p">)</span>
+</code></pre></div>
+<h2 id="разреженные-матрицы">Разреженные матрицы</h2>
+<p>Матрица пользователь–товар в рекомендациях имеет <span class="tex">10^6\times10^6</span> ячеек, из которых заполнено доли процента; плотный массив занял бы терабайты. <strong>CSR</strong> (compressed sparse row) хранит три массива: значения ненулей, их номера столбцов и смещения начал строк. Границы строки находятся за <span class="tex">O(1)</span>, сама строка читается за число её ненулей, произведение матрицы на вектор — за <span class="tex">O(\mathrm{nnz})</span>. CSC устроен симметрично по столбцам; COO (тройки «строка, столбец, значение») удобен для сборки. Те же структуры — у bag-of-words и one-hot-признаков. Применение к рекомендациям разобрано в <a href="/edufamcs-demo/handbook/recsys/zadacha-i-dannye/" rel="noopener noreferrer nofollow">задаче рекомендаций</a>.</p>
+<div class="code"><div class="code-head"><span class="lang">python</span></div><pre><code><span class="tok-k">import</span> numpy <span class="tok-k">as</span> np
+<span class="tok-k">import</span> scipy.sparse <span class="tok-k">as</span> sp
+rng <span class="tok-p">=</span> np<span class="tok-p">.</span>random<span class="tok-p">.</span>default_rng<span class="tok-p">(</span><span class="tok-n">0</span><span class="tok-p">)</span>
+nnz <span class="tok-p">=</span> <span class="tok-n">500_000</span>
+R <span class="tok-p">=</span> sp<span class="tok-p">.</span>csr_matrix<span class="tok-p">(</span><span class="tok-p">(</span>np<span class="tok-p">.</span>ones<span class="tok-p">(</span>nnz<span class="tok-p">)</span><span class="tok-p">,</span> <span class="tok-p">(</span>rng<span class="tok-p">.</span>integers<span class="tok-p">(</span><span class="tok-n">0</span><span class="tok-p">,</span> <span class="tok-n">100_000</span><span class="tok-p">,</span> nnz<span class="tok-p">)</span><span class="tok-p">,</span> rng<span class="tok-p">.</span>integers<span class="tok-p">(</span><span class="tok-n">0</span><span class="tok-p">,</span> <span class="tok-n">50_000</span><span class="tok-p">,</span> nnz<span class="tok-p">)</span><span class="tok-p">)</span><span class="tok-p">)</span><span class="tok-p">,</span>
+                  shape<span class="tok-p">=</span><span class="tok-p">(</span><span class="tok-n">100_000</span><span class="tok-p">,</span> <span class="tok-n">50_000</span><span class="tok-p">)</span><span class="tok-p">)</span>     <span class="tok-c"># повторные пары (строка, столбец) суммируются</span>
+<span class="tok-f">print</span><span class="tok-p">(</span>R<span class="tok-p">.</span>nnz<span class="tok-p">,</span> R<span class="tok-p">.</span>data<span class="tok-p">.</span>nbytes <span class="tok-p">+</span> R<span class="tok-p">.</span>indices<span class="tok-p">.</span>nbytes <span class="tok-p">+</span> R<span class="tok-p">.</span>indptr<span class="tok-p">.</span>nbytes<span class="tok-p">)</span>   <span class="tok-c"># ~6.4 МБ вместо 40 ГБ плотно</span>
+v <span class="tok-p">=</span> np<span class="tok-p">.</span>ones<span class="tok-p">(</span>R<span class="tok-p">.</span>shape<span class="tok-p">[</span><span class="tok-n">1</span><span class="tok-p">]</span><span class="tok-p">)</span>
+<span class="tok-f">print</span><span class="tok-p">(</span><span class="tok-p">(</span>R <span class="tok-p">@</span> v<span class="tok-p">)</span><span class="tok-p">.</span>shape<span class="tok-p">)</span>          <span class="tok-c"># быстрое умножение без плотной матрицы</span>
+</code></pre></div>
+<h2 id="ловушки">Ловушки</h2>
+<ul>
+<li><strong><code>np.linalg.inv</code> в формуле регрессии.</strong> Число обусловленности <span class="tex">X^\top X</span> — квадрат числа обусловленности <span class="tex">X</span>, так что нормальные уравнения теряют вдвое больше значащих цифр, чем <code>lstsq</code>/QR/SVD. Подробнее — в следующей главе.</li>
+<li><strong>Масштаб признаков.</strong> <span class="tex">L_p</span>-расстояния и регуляризация чувствительны к единицам измерения: признак в сантиметрах задавит признак в километрах. Стандартизация обязательна для kNN, Ridge/Lasso, SVM.</li>
+<li><strong>Densify по ошибке.</strong> <code>.toarray()</code> или <code>X - X.mean(0)</code> на разреженной матрице превращает её в плотную; центрирование разреженных данных делают неявно.</li>
+<li><strong>Косинус против евклида.</strong> Для ненормированных эмбеддингов результаты kNN различаются; нормируйте один раз и используйте скалярное произведение.</li>
+<li><strong>Путаница форм.</strong> Вектор формы <code>(n,)</code> и <code>(n,1)</code> в numpy ведут себя по-разному при <code>@</code> и broadcasting; на собеседованиях любят спрашивать форму результата <code>X.T @ X</code>, <code>X @ w</code>, <code>a[:,None] - b[None,:]</code>.</li>
+</ul>
+<h2 id="что-почитать">Что почитать</h2>
+<ul>
+<li>G. Strang. <em>Introduction to Linear Algebra</em> (5th ed., Wellesley–Cambridge Press, 2016) и открытый курс MIT 18.06 — <a href="https://ocw.mit.edu/courses/18-06-linear-algebra-spring-2010/" rel="noopener noreferrer nofollow">ocw.mit.edu/courses/18-06-linear-algebra-spring-2010</a>.</li>
+<li>Хендбук Яндекса «Математика для анализа данных», глава «Линейная алгебра»: векторы, матрицы, системы, проекции и ортогональность — <a href="https://contest.yandex.ru/tracks/math/linear-algebra/chapter-overview" rel="noopener noreferrer nofollow">contest.yandex.ru/tracks/math/linear-algebra</a>.</li>
+<li>K. Beyer, J. Goldstein, R. Ramakrishnan, U. Shaft. <em>When is "nearest neighbor" meaningful?</em> ICDT, 1999 — о проклятии размерности для поиска соседей.</li>
+<li>M. Deisenroth, A. Faisal, C. Ong. <em>Mathematics for Machine Learning</em> (Cambridge UP, 2020), главы 2–3 — <a href="https://mml-book.com" rel="noopener noreferrer nofollow">mml-book.com</a>.</li>
+<li>Лекция 1 курса ML ФПМИ БГУ «Основы линейной алгебры и математического анализа» и теорминимумы 1–3 второго сезона (матрицы и определители, векторные пространства, начала функционального анализа — метрические пространства).</li>
+<li>G. Golub, C. Van Loan. <em>Matrix Computations</em> (4th ed., 2013) — когда нужны детали численной устойчивости.</li>
+</ul>
+</div>
+      
+
+      
+      <nav class="pager" aria-label="Соседние статьи">
+        <i></i>
+        <a href="/edufamcs-demo/handbook/math/sobstvennye-vektory-i-svd/"><span>Дальше<svg class="ico sm" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-arrow"/></svg></span>Собственные векторы и сингулярное разложение</a>
+      </nav>
+      
+    </article>
+
+    <aside class="hb-toc" aria-label="На этой странице">
+      <a class="l2" href="#векторное-пространство">Векторное пространство</a><a class="l2" href="#скалярное-произведение-длина-угол">Скалярное произведение, длина, угол</a><a class="l2" href="#нормы-и-метрики">Нормы и метрики</a><a class="l2" href="#матрица-как-оператор">Матрица как оператор</a><a class="l2" href="#системы-и-метод-наименьших-квадратов">Системы Ax=b и метод наименьших квадратов</a><a class="l2" href="#разреженные-матрицы">Разреженные матрицы</a><a class="l2" href="#ловушки">Ловушки</a><a class="l2" href="#что-почитать">Что почитать</a>
+    </aside>
+  </div>
+</div>
+
+
+</main>
+
+<footer class="ftr" data-theme="dark">
+  <svg class="sym fern" viewBox="0 0 40.5 65.02" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#fern"/></svg>
+  <div class="container">
+    <div class="ftr-row">
+      <a href="/edufamcs-demo/" aria-label="EDU FAMCS — главная"><img src="/edufamcs-demo/static/brand/logo/logo-edu-dark.svg" alt="EDU FAMCS" width="196" height="40"></a>
+      <ul class="ftr-links">
+        <li><a href="/edufamcs-demo/#courses">Курсы</a></li>
+        <li><a href="/edufamcs-demo/ml/">Машинное обучение</a></li>
+        <li><a href="/edufamcs-demo/handbook/">Хендбук</a></li>
+        <li><a href="/edufamcs-demo/news/">Новости</a></li>
+        <li><a href="/edufamcs-demo/people/">Авторы</a></li>
+        <li><a href="/edufamcs-demo/about/">О&nbsp;нас</a></li>
+        <li><a href="/edufamcs-demo/propose/">Предложить или исправить</a></li>
+        <li><a href="/edufamcs-demo/privacy/">Конфиденциальность</a></li>
+      </ul>
+    </div>
+    <div class="ftr-big" aria-hidden="true">EDU<span class="d">·</span>FAMCS</div>
+    <p class="ftr-copy">© 2026 EDU FAMCS · Минск</p>
+  </div>
+</footer>
+
+<div class="toasts-region" aria-live="polite" id="toasts">
+
+</div>
+
+</body>
+</html>

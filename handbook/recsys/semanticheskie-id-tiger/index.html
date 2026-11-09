@@ -1,0 +1,348 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Семантические ID и генеративный retrieval: TIGER · EDU FAMCS</title>
+<meta name="description" content="Семантические ID и генеративный retrieval: TIGER — Рекомендательные системы. Хендбук ML-курса ФПМИ.">
+<meta name="theme-color" content="#060A16">
+<meta name="robots" content="noindex, nofollow">
+<meta name="htmx-config" content='{"allowEval":false,"includeIndicatorStyles":false,"historyCacheSize":0,"selfRequestsOnly":true}'>
+<meta name="katex-js" content="/edufamcs-demo/static/vendor/katex/katex.min.js">
+<meta name="katex-css" content="/edufamcs-demo/static/vendor/katex/katex.min.css">
+<link rel="icon" href="/edufamcs-demo/static/brand/logo/favicon-16.svg" type="image/svg+xml" sizes="16x16">
+<link rel="icon" href="/edufamcs-demo/static/brand/logo/favicon.svg" type="image/svg+xml" sizes="any">
+<link rel="preload" href="/edufamcs-demo/static/brand/fonts/manrope-cyrillic-400.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/edufamcs-demo/static/brand/fonts/unbounded-cyrillic-800.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="/edufamcs-demo/static/brand/fonts.css">
+<link rel="stylesheet" href="/edufamcs-demo/static/brand/tokens.css">
+<link rel="stylesheet" href="/edufamcs-demo/static/brand/components.css">
+<link rel="stylesheet" href="/edufamcs-demo/static/css/site.css">
+<link rel="stylesheet" href="/edufamcs-demo/static/css/hub.css">
+<link rel="stylesheet" href="/edufamcs-demo/static/css/about.css">
+<link rel="stylesheet" href="/edufamcs-demo/static/handbook/handbook.css">
+<script src="/edufamcs-demo/static/js/theme.js"></script>
+<script src="/edufamcs-demo/static/vendor/htmx/htmx.min.js" defer></script>
+<script src="/edufamcs-demo/static/vendor/alpine/alpine-csp.min.js" defer></script>
+<script src="/edufamcs-demo/static/js/site.js" defer></script>
+<script src="/edufamcs-demo/static/handbook/handbook.js" defer></script>
+</head>
+<body class="" hx-headers='{"X-CSRFToken": "BZmskUVLu7AKiesy9ijPSXcSoohyP8nh0JVw4SI8pYYTxNDhGv2XPsIXW6n3ni51"}'>
+<a class="skip" href="#main">К содержанию</a>
+<div class="demo-bar" role="note">Демо-версия для отзывов: вход, запись на курсы и формы здесь не работают.</div>
+
+<header class="hdr">
+  <div class="container">
+    <a class="brand" href="/edufamcs-demo/" aria-label="EDU FAMCS — главная">
+      <span class="full"><img class="only-light" src="/edufamcs-demo/static/brand/logo/logo-edu-light.svg" alt="EDU FAMCS" width="196" height="40"><img class="only-dark" src="/edufamcs-demo/static/brand/logo/logo-edu-dark.svg" alt="EDU FAMCS" width="196" height="40"></span>
+      <span class="short"><img class="only-light" src="/edufamcs-demo/static/brand/logo/logo-edu-light.svg" alt="EDU FAMCS" height="30"><img class="only-dark" src="/edufamcs-demo/static/brand/logo/logo-edu-dark.svg" alt="EDU FAMCS" height="30"></span>
+    </a>
+    <nav class="nav" id="main-nav" aria-label="Основная навигация">
+      <a href="/edufamcs-demo/#courses">Курсы</a>
+      <a href="/edufamcs-demo/ml/" >Машинное обучение</a>
+      
+      <a href="/edufamcs-demo/handbook/" aria-current="page">Хендбук</a>
+      <a href="/edufamcs-demo/news/" >Новости</a>
+      <a href="/edufamcs-demo/people/" >Авторы</a>
+      <a href="/edufamcs-demo/about/" >О&nbsp;нас</a>
+    </nav>
+    <div class="hdr-actions">
+      
+      <a class="btn btn-outline btn-login" href="/edufamcs-demo/accounts/login/?next=/handbook/recsys/semanticheskie-id-tiger/">Войти</a>
+      
+      <button class="icon-btn menu-btn" type="button" aria-label="Меню" aria-expanded="false" aria-controls="main-nav"><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-menu"/></svg></button>
+    </div>
+  </div>
+</header>
+
+<main id="main">
+
+
+
+<div class="container hb-page s-recsys">
+  <div class="hb">
+    <aside class="hb-nav" aria-label="Статьи раздела">
+      
+<form class="hb-search" action="/edufamcs-demo/handbook/search/" method="get" role="search">
+  <svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-search"/></svg>
+  <input class="input" type="search" name="q" value="" placeholder="Поиск по хендбуку" aria-label="Поиск по хендбуку" autocomplete="off" maxlength="120"
+    hx-get="/edufamcs-demo/handbook/search/" hx-trigger="input changed delay:250ms, search" hx-target="#hb-nav-results" hx-sync="this:replace">
+</form>
+
+      <div id="hb-nav-results" class="hb-nav-results" aria-live="polite"></div>
+      <a class="grp" href="/edufamcs-demo/handbook/recsys/">Генеративная эра: 2023–2026</a>
+      
+      <a class="cur" href="/edufamcs-demo/handbook/recsys/semanticheskie-id-tiger/" aria-current="page">Семантические ID и генеративный retrieval: TIGER</a>
+      
+      <a class="" href="/edufamcs-demo/handbook/recsys/generativnye-rekomendateli/">Генеративные рекомендатели на масштабе: HSTU, OneRec и наследники</a>
+      
+      <a class="" href="/edufamcs-demo/handbook/recsys/llm-v-rekomendaciyah/">Большие языковые модели в рекомендациях</a>
+      
+    </aside>
+
+    <article class="hb-main">
+      <nav class="crumbs" aria-label="Навигация"><a href="/edufamcs-demo/handbook/">Хендбук</a><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-chev"/></svg><a href="/edufamcs-demo/handbook/recsys/">Рекомендательные системы</a></nav>
+      <h1 class="h1">Семантические ID и генеративный retrieval: TIGER</h1>
+      <div class="hb-meta">
+        
+        
+        <span><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-clock"/></svg>17&nbsp;мин</span>
+        <span class="hb-authors"><span class="avatar sm" title="Артем Лебедевич">АЛ</span>Артем Лебедевич</span>
+        <span><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-edit"/></svg>9 ноября 2026</span>
+        
+        
+      </div>
+
+      
+      <details class="hb-mtoc">
+        <summary><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-list"/></svg>Содержание<svg class="ico sm" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-chev-down"/></svg></summary>
+        <a class="l2" href="#идея-и-место-в-истории">Идея и место в истории</a><a class="l2" href="#семантические-id-остаточная-квантизация">Семантические ID: остаточная квантизация</a><a class="l3" href="#код-остаточная-квантизация-через-k-means-и-trie-допустимых-префиксов">Код: остаточная квантизация через k-means и trie допустимых префиксов</a><a class="l2" href="#tiger-генеративный-retrieval">TIGER: генеративный retrieval</a><a class="l2" href="#развитие-20232025">Развитие 2023–2025</a><a class="l3" href="#сводная-таблица">Сводная таблица</a><a class="l2" href="#трезвый-взгляд-20252026">Трезвый взгляд (2025–2026)</a><a class="l2" href="#вопросы-на-собеседованиях">Вопросы на собеседованиях</a><a class="l2" href="#что-почитать">Что почитать</a>
+      </details>
+      
+
+      <div class="prose"><p>Классический рекомендатель (ALS, двухбашенная сеть, SASRec) устроен одинаково: у каждого объекта есть вектор в таблице эмбеддингов, а предсказание — скалярное произведение вектора пользователя с этой таблицей плюс ANN-поиск. У подхода два структурных недостатка. Таблица растёт вместе с каталогом (миллиарды видео × сотни чисел). И у нового объекта вектора нет, пока не накопится история. В 2023 году команда Google предложила другой интерфейс: <strong>не искать ближайший вектор, а генерировать идентификатор следующего объекта токен за токеном</strong>, как язык-модель генерирует слова. Условием работы стало, чтобы идентификатор был не случайным номером, а осмысленной последовательностью кодов — <strong>семантическим ID</strong>.</p>
+<p>Для читателя, знакомого с поиском: идея родственна генеративному поиску из главы <a href="/edufamcs-demo/handbook/retrieval/generativnyj-poisk/" rel="noopener noreferrer nofollow">«Генеративный поиск»</a> (там модель генерирует идентификаторы документов), только вместо запроса на входе — история действий пользователя.</p>
+<h2 id="идея-и-место-в-истории">Идея и место в истории</h2>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>Этап</th>
+<th>Идентификатор объекта</th>
+<th>Что не решено</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>ALS, двухбашенные сети (2008–2019)</td>
+<td>строка таблицы эмбеддингов</td>
+<td>память растёт с каталогом, холодный старт</td>
+</tr>
+<tr>
+<td>SASRec, BERT4Rec (2018–2019)</td>
+<td>то же, но вход — последовательность</td>
+<td>то же; выход — softmax по всему каталогу</td>
+</tr>
+<tr>
+<td>Семантические ID, TIGER (2023)</td>
+<td>кортеж кодов <span class="tex">(c_1,\dots,c_L)</span></td>
+<td>точность на популярном, коллизии</td>
+</tr>
+</tbody>
+</table></div>
+<p>Главное изменение — <strong>выходной слой</strong>. Вместо softmax по <span class="tex">|I|=10^6</span>–<span class="tex">10^9</span> объектов модель выдаёт <span class="tex">L</span> распределений по небольшому алфавиту (например, 256 кодов на уровень). Три уровня по 256 кодов адресуют <span class="tex">256^3 \approx 16{,}7</span> млн объектов, четыре — <span class="tex">4{,}3</span> млрд, а таблицы эмбеддингов кодов занимают доли мегабайта (в TIGER — <span class="tex">3 \times 256</span> векторов размерности 32, около 100 КБ во float32).</p>
+<h2 id="семантические-id-остаточная-квантизация">Семантические ID: остаточная квантизация</h2>
+<p>Нужно превратить вектор объекта <span class="tex">z \in \mathbb{R}^d</span> — контентный эмбеддинг (из текстового энкодера по названию, описанию, категории или из аудио/видео-модели) или, как в RQ-VAE ниже, его сжатое латентное представление — в короткую последовательность дискретных кодов, где <strong>похожие объекты имеют общий префикс</strong>. Для этого используют <strong>остаточную квантизацию</strong>: на каждом уровне <span class="tex">l</span> есть свой словарь <span class="tex">\{e^l_k\}_{k=1}^{K}</span>, и кодируется остаток предыдущего уровня.</p>
+<div class="tex tex-block">r_0 = z, \qquad c_l = \arg\min_{k}\,\lVert r_{l-1} - e^{l}_k\rVert, \qquad r_l = r_{l-1} - e^{l}_{c_l}, \qquad l=1,\dots,L.</div>
+<p>Приближение объекта — сумма выбранных векторов <span class="tex">\hat z = \sum_l e^l_{c_l}</span>. Первый код задаёт «крупную» категорию (комедия / документалистика), второй — подтип внутри неё, дальше — детали; отсюда порядок «от общего к частному». Сама остаточная (многоступенчатая) векторная квантизация — старая идея сжатия сигналов, известная с 1980-х и позже применявшаяся в приближённом поиске соседей. В нейросетевом виде её популяризовали аудиокодек SoundStream (Zeghidour et al., arXiv 2021) и <strong>RQ-VAE</strong> (Lee et al., CVPR 2022, генерация изображений); TIGER ссылается на обе работы. RQ-VAE — это энкодер <span class="tex">z=\mathrm{Enc}(x)</span>, остаточный квантизатор и декодер <span class="tex">\mathrm{Dec}(\hat z)</span>, обученные совместно с потерей</p>
+<div class="tex tex-block">\mathcal{L}= \underbrace{\lVert x-\mathrm{Dec}(\hat z)\rVert^2}_{\text{реконструкция}} + \sum_{l=1}^{L}\Big(\lVert \mathrm{sg}[r_{l-1}]-e^l_{c_l}\rVert^2+\beta\,\lVert r_{l-1}-\mathrm{sg}[e^l_{c_l}]\rVert^2\Big),</div>
+<p>где <span class="tex">\mathrm{sg}</span> — stop-gradient, а второе слагаемое — обычная для VQ-VAE потеря «подтягивания» словарей к остаткам и энкодера к словарям. Для устойчивости словари инициализируют k-means по первому батчу, иначе значительная часть кодов «умирает» (codebook collapse).</p>
+<p><strong>Альтернатива без обучения VAE.</strong> Иерархический (или остаточный) <strong>k-means</strong> по контентным эмбеддингам: на каждом уровне кластеризуем остатки. Это тот же алгоритм с той же формулой, но без декодера и без риска «мёртвых» кодов. В ряде сравнений он не уступает RQ-VAE, а универсально лучшей схемы, по воспроизводимым исследованиям, нет (см. раздел о трезвом взгляде ниже).</p>
+<p><strong>Коллизии.</strong> Два разных объекта могут получить один и тот же кортеж <span class="tex">(c_1,\dots,c_L)</span>. В TIGER добавляется ещё один токен <span class="tex">c_{L+1}</span> — порядковый номер объекта среди тех, у кого код совпал: однозначность гарантирована, а лишний токен несёт ноль смысла (по сути, это случайный хвост). Слишком много коллизий — сигнал, что кодов или уровней мало.</p>
+<h3 id="код-остаточная-квантизация-через-k-means-и-trie-допустимых-префиксов">Код: остаточная квантизация через k-means и trie допустимых префиксов</h3>
+<div class="code"><div class="code-head"><span class="lang">python</span></div><pre><code><span class="tok-k">import</span> numpy <span class="tok-k">as</span> np
+<span class="tok-k">from</span> sklearn.cluster <span class="tok-k">import</span> KMeans
+
+<span class="tok-k">def</span> <span class="tok-f">fit_rq</span><span class="tok-p">(</span>Z<span class="tok-p">,</span> levels<span class="tok-p">=</span><span class="tok-n">3</span><span class="tok-p">,</span> k<span class="tok-p">=</span><span class="tok-n">16</span><span class="tok-p">,</span> seed<span class="tok-p">=</span><span class="tok-n">0</span><span class="tok-p">)</span><span class="tok-p">:</span>
+    <span class="tok-s">"""Остаточная квантизация: на каждом уровне k-means по остаткам."""</span>
+    codebooks<span class="tok-p">,</span> codes<span class="tok-p">,</span> R <span class="tok-p">=</span> <span class="tok-p">[</span><span class="tok-p">]</span><span class="tok-p">,</span> <span class="tok-p">[</span><span class="tok-p">]</span><span class="tok-p">,</span> Z<span class="tok-p">.</span>copy<span class="tok-p">(</span><span class="tok-p">)</span>
+    <span class="tok-k">for</span> _ <span class="tok-k">in</span> <span class="tok-f">range</span><span class="tok-p">(</span>levels<span class="tok-p">)</span><span class="tok-p">:</span>
+        km <span class="tok-p">=</span> KMeans<span class="tok-p">(</span>k<span class="tok-p">,</span> n_init<span class="tok-p">=</span><span class="tok-n">4</span><span class="tok-p">,</span> random_state<span class="tok-p">=</span>seed<span class="tok-p">)</span><span class="tok-p">.</span>fit<span class="tok-p">(</span>R<span class="tok-p">)</span>
+        c <span class="tok-p">=</span> km<span class="tok-p">.</span>predict<span class="tok-p">(</span>R<span class="tok-p">)</span>
+        codebooks<span class="tok-p">.</span>append<span class="tok-p">(</span>km<span class="tok-p">.</span>cluster_centers_<span class="tok-p">)</span>
+        codes<span class="tok-p">.</span>append<span class="tok-p">(</span>c<span class="tok-p">)</span>
+        R <span class="tok-p">=</span> R <span class="tok-p">-</span> km<span class="tok-p">.</span>cluster_centers_<span class="tok-p">[</span>c<span class="tok-p">]</span>          <span class="tok-c"># r_l = r_{l-1} - e_{c_l}</span>
+    <span class="tok-k">return</span> codebooks<span class="tok-p">,</span> np<span class="tok-p">.</span>stack<span class="tok-p">(</span>codes<span class="tok-p">,</span> <span class="tok-n">1</span><span class="tok-p">)</span><span class="tok-p">,</span> R
+
+<span class="tok-k">def</span> <span class="tok-f">add_dedup_token</span><span class="tok-p">(</span>codes<span class="tok-p">)</span><span class="tok-p">:</span>
+    <span class="tok-s">"""Коллизии: (L+1)-й токен — порядковый номер среди объектов с тем же кодом."""</span>
+    seen<span class="tok-p">,</span> out <span class="tok-p">=</span> <span class="tok-p">{</span><span class="tok-p">}</span><span class="tok-p">,</span> <span class="tok-p">[</span><span class="tok-p">]</span>
+    <span class="tok-k">for</span> row <span class="tok-k">in</span> <span class="tok-f">map</span><span class="tok-p">(</span><span class="tok-f">tuple</span><span class="tok-p">,</span> codes<span class="tok-p">)</span><span class="tok-p">:</span>
+        j <span class="tok-p">=</span> seen<span class="tok-p">.</span>get<span class="tok-p">(</span>row<span class="tok-p">,</span> <span class="tok-n">0</span><span class="tok-p">)</span><span class="tok-p">;</span> seen<span class="tok-p">[</span>row<span class="tok-p">]</span> <span class="tok-p">=</span> j <span class="tok-p">+</span> <span class="tok-n">1</span>
+        out<span class="tok-p">.</span>append<span class="tok-p">(</span>row <span class="tok-p">+</span> <span class="tok-p">(</span>j<span class="tok-p">,</span><span class="tok-p">)</span><span class="tok-p">)</span>
+    <span class="tok-k">return</span> np<span class="tok-p">.</span>array<span class="tok-p">(</span>out<span class="tok-p">)</span>
+
+<span class="tok-k">def</span> <span class="tok-f">build_trie</span><span class="tok-p">(</span>sids<span class="tok-p">)</span><span class="tok-p">:</span>
+    trie <span class="tok-p">=</span> <span class="tok-p">{</span><span class="tok-p">}</span>
+    <span class="tok-k">for</span> s <span class="tok-k">in</span> sids<span class="tok-p">:</span>
+        node <span class="tok-p">=</span> trie
+        <span class="tok-k">for</span> tok <span class="tok-k">in</span> s<span class="tok-p">:</span>
+            node <span class="tok-p">=</span> node<span class="tok-p">.</span>setdefault<span class="tok-p">(</span><span class="tok-f">int</span><span class="tok-p">(</span>tok<span class="tok-p">)</span><span class="tok-p">,</span> <span class="tok-p">{</span><span class="tok-p">}</span><span class="tok-p">)</span>
+    <span class="tok-k">return</span> trie
+
+<span class="tok-k">def</span> <span class="tok-f">allowed_next</span><span class="tok-p">(</span>trie<span class="tok-p">,</span> prefix<span class="tok-p">)</span><span class="tok-p">:</span>
+    <span class="tok-s">"""Какие токены допустимы после префикса — маска для ограниченного декодирования."""</span>
+    node <span class="tok-p">=</span> trie
+    <span class="tok-k">for</span> tok <span class="tok-k">in</span> prefix<span class="tok-p">:</span>
+        node <span class="tok-p">=</span> node<span class="tok-p">.</span>get<span class="tok-p">(</span>tok<span class="tok-p">)</span>
+        <span class="tok-k">if</span> node <span class="tok-k">is</span> <span class="tok-k">None</span><span class="tok-p">:</span>
+            <span class="tok-k">return</span> <span class="tok-p">[</span><span class="tok-p">]</span>
+    <span class="tok-k">return</span> <span class="tok-f">sorted</span><span class="tok-p">(</span>node<span class="tok-p">)</span>
+
+Z <span class="tok-p">=</span> np<span class="tok-p">.</span>random<span class="tok-p">.</span>default_rng<span class="tok-p">(</span><span class="tok-n">0</span><span class="tok-p">)</span><span class="tok-p">.</span>normal<span class="tok-p">(</span>size<span class="tok-p">=</span><span class="tok-p">(</span><span class="tok-n">2000</span><span class="tok-p">,</span> <span class="tok-n">32</span><span class="tok-p">)</span><span class="tok-p">)</span>      <span class="tok-c"># в жизни — текстовые эмбеддинги</span>
+codebooks<span class="tok-p">,</span> codes<span class="tok-p">,</span> R <span class="tok-p">=</span> fit_rq<span class="tok-p">(</span>Z<span class="tok-p">)</span>
+<span class="tok-f">print</span><span class="tok-p">(</span><span class="tok-s">"</span><span class="tok-s">доля невязки:</span><span class="tok-s">"</span><span class="tok-p">,</span> <span class="tok-p">(</span>R <span class="tok-p">*</span><span class="tok-p">*</span> <span class="tok-n">2</span><span class="tok-p">)</span><span class="tok-p">.</span>sum<span class="tok-p">(</span><span class="tok-p">)</span> <span class="tok-p">/</span> <span class="tok-p">(</span>Z <span class="tok-p">*</span><span class="tok-p">*</span> <span class="tok-n">2</span><span class="tok-p">)</span><span class="tok-p">.</span>sum<span class="tok-p">(</span><span class="tok-p">)</span><span class="tok-p">)</span>
+sids <span class="tok-p">=</span> add_dedup_token<span class="tok-p">(</span>codes<span class="tok-p">)</span>
+trie <span class="tok-p">=</span> build_trie<span class="tok-p">(</span>sids<span class="tok-p">)</span>
+<span class="tok-f">print</span><span class="tok-p">(</span>allowed_next<span class="tok-p">(</span>trie<span class="tok-p">,</span> <span class="tok-p">[</span><span class="tok-f">int</span><span class="tok-p">(</span>sids<span class="tok-p">[</span><span class="tok-n">0</span><span class="tok-p">]</span><span class="tok-p">[</span><span class="tok-n">0</span><span class="tok-p">]</span><span class="tok-p">)</span><span class="tok-p">]</span><span class="tok-p">)</span><span class="tok-p">)</span>
+</code></pre></div>
+<p>На случайных гауссовых данных остаётся около 63% дисперсии (шум плохо сжимается), а у настоящих текстовых эмбеддингов структура есть, и невязка заметно меньше. Коллизии появляются даже при запасе ячеек: 2000 объектов на трёх уровнях по 16 кодов (4096 ячеек) занимают около 1600 различных кортежей, примерно треть объектов делит ячейку с кем-то ещё, а дополнительный токен доходит до 4. Кластеры k-means неравномерны, поэтому ячеек нужно заметно больше, чем объектов.</p>
+<h2 id="tiger-генеративный-retrieval">TIGER: генеративный retrieval</h2>
+<p><strong>TIGER</strong> (<em>Recommender Systems with Generative Retrieval</em>, Rajput et al., Google, NeurIPS 2023, <a href="https://arxiv.org/abs/2305.05065" rel="noopener noreferrer nofollow">arXiv:2305.05065</a>) — первая работа, показавшая этот рецепт целиком.</p>
+<p><strong>Конвейер.</strong></p>
+<ol>
+<li>Для каждого объекта берут контентный эмбеддинг (в статье — предобученный текстовый энкодер по названию, цене, бренду, категории) и квантуют его через RQ-VAE в кортеж из трёх кодов + токен против коллизий.</li>
+<li>История пользователя <span class="tex">i_1,\dots,i_n</span> превращается в последовательность токенов: SID первого объекта, затем второго и т. д.</li>
+<li><strong>Seq2seq-трансформер</strong> (T5-подобный encoder–decoder) обучается по токенам SID последнего объекта <span class="tex">i_{n+1}</span> при условии истории — обычная кросс-энтропия, как в языковой модели.</li>
+<li>На инференсе <strong>beam search</strong> порождает несколько кортежей, которые декодируют обратно в объекты; ширина луча — число кандидатов.</li>
+</ol>
+<p><strong>Невалидные ID и ограниченное декодирование.</strong> Модель может сгенерировать последовательность кодов, которой нет ни у одного объекта («призрак»). В исходной статье TIGER маски не было: для топ-10 доля невалидных ID составила 0,1–1,6% в зависимости от датасета, и авторы предложили просто расширить луч и отфильтровать лишнее. В последующих работах стандартом стало <strong>ограниченное декодирование</strong>: на каждом шаге допустимы только токены, которые продолжают некоторый реальный префикс из словаря SID, — то есть обход <strong>trie</strong> (префиксного дерева), как в коде выше. Тогда несуществующих выдач нет вовсе, цена — небольшая надстройка над beam search.</p>
+<p><strong>Результаты и честная оценка.</strong> На трёх датасетах Amazon Reviews (Beauty, Sports, Toys) TIGER в статье превзошёл SASRec, BERT4Rec, S³-Rec, P5 и другие бейзлайны по Recall@5/10 и NDCG@5/10. Относительный выигрыш над лучшим бейзлайном — от +0,15% (Recall@10 на Beauty) до +29% (NDCG@5 на Beauty); по NDCG прирост заметнее, чем по Recall. Оговорки: (а) каталоги — 12–18 тыс. объектов, средняя длина истории 8–9 действий, это далеко от промышленного масштаба; (б) числа бейзлайнов взяты из более ранней работы (S³-Rec), где SASRec обучался в исходной конфигурации с бинарной кросс-энтропией и сэмплированными негативами, а SASRec с полной кросс-энтропией заметно сильнее (см. <a href="/edufamcs-demo/handbook/recsys/posledovatelnye-modeli/" rel="noopener noreferrer nofollow">последовательные модели</a>); (в) онлайн-A/B в статье нет.</p>
+<p><strong>Холодные объекты.</strong> Авторы исключили 5% тестовых объектов из обучения и показали, что TIGER может их рекомендовать — но не прямой генерацией: к кандидатам подмешивают невиданные объекты, у которых первые три кода совпали со сгенерированным SID, а гиперпараметр <span class="tex">\varepsilon</span> ограничивает их долю в выдаче. Сравнение шло только с kNN в том же семантическом пространстве. Более поздняя проверка в контролируемых условиях (LIGER, 2024, см. ниже) показала, что без такой подмешки TIGER почти никогда не порождает холодные объекты (Recall@10 около нуля на трёх из четырёх датасетов): модель переобучается на объекты, виденные при обучении.</p>
+<p><strong>Плюсы.</strong></p>
+<ul>
+<li>Память не растёт с каталогом: словари кодов малы; никакой огромной таблицы эмбеддингов.</li>
+<li>Новый объект получает SID по контенту сразу, без накопления истории, и наследует статистику объектов с тем же префиксом. Чтобы он реально попал в выдачу, нужна явная подмешка по префиксу (см. выше): сама модель холодные объекты почти не генерирует.</li>
+<li>Обмен статистикой между похожими объектами: объекты одной тематики делят префикс, и редкие объекты учатся вместе с частыми (своего рода регуляризация).</li>
+<li>Единый интерфейс «последовательность → последовательность» без отдельной ANN-инфраструктуры.</li>
+</ul>
+<p><strong>Минусы.</strong></p>
+<ul>
+<li>В контролируемых сравнениях генеративный retrieval по общему качеству уступает плотному retrieval с выделенными эмбеддингами (LIGER): у кортежа общие префиксы с десятками других объектов, и «различить» два очень похожих хита сложнее.</li>
+<li>Качество упирается в токенизацию: плохой SID необратимо теряет информацию. Дрейф каталога требует перекодирования, а любое изменение словарей ломает обученную модель.</li>
+<li>Инференс — авторегрессия с beam search: <span class="tex">L{+}1</span> последовательных шагов декодера и ширина луча <span class="tex">B</span>; задержка выше, чем у одного скалярного произведения с ANN.</li>
+<li>Скрытая цена контентного энкодера: SID не может быть лучше эмбеддинга, из которого получен.</li>
+</ul>
+<h2 id="развитие-20232025">Развитие 2023–2025</h2>
+<ul>
+<li><strong>SID в ранжировании YouTube</strong> (Singh et al., 2024, <em>Better Generalization with Semantic IDs: A Case Study in Ranking for Recommendations</em>, <a href="https://arxiv.org/abs/2306.08121" rel="noopener noreferrer nofollow">arXiv:2306.08121</a>, RecSys 2024). Не генерация, а замена случайных хэшей ID на SID внутри обычной ранжирующей модели: она лучше обобщается на новые и редкие видео без потерь на общем качестве. Показательный пример того, что SID полезны и в классической архитектуре; префикс-n-граммы и SentencePiece-разбиение SID работают как «субслова» для объектов.</li>
+<li><strong>LC-Rec</strong> (Zheng et al., 2024, <em>Adapting Large Language Models by Integrating Collaborative Semantics for Recommendation</em>, <a href="https://arxiv.org/abs/2311.09049" rel="noopener noreferrer nofollow">arXiv:2311.09049</a>, ICDE 2024). Словарь LLM расширяется токенами SID; модель дообучается на задачах, сопоставляющих SID с текстом и историей. Это мост к главе про LLM.</li>
+<li><strong>LIGER</strong> (Yang et al., Meta и Висконсинский университет, 2024, <em>Unifying Generative and Dense Retrieval for Sequential Recommendation</em>, <a href="https://arxiv.org/abs/2411.18814" rel="noopener noreferrer nofollow">arXiv:2411.18814</a>). Сначала честное сравнение в одинаковых условиях: на академических датасетах плотный последовательный retrieval сильнее TIGER и по общему качеству, и особенно на холодных объектах, которые TIGER почти не порождает. Затем гибрид: генеративная часть beam search'ем выдаёт около 20 кандидатов, к ним добавляются холодные объекты, а плотная часть (сравнение выхода энкодера с текстовыми представлениями объектов) их ранжирует. Это сокращает разрыв с плотным retrieval и закрывает холодный старт; авторы подчёркивают, что выводы получены на небольших бенчмарках.</li>
+<li><strong>ActionPiece</strong> (Hou et al., Google DeepMind, ICML 2025, <a href="https://arxiv.org/abs/2502.13581" rel="noopener noreferrer nofollow">arXiv:2502.13581</a>). Токенизирует не объект, а <strong>действие</strong> (набор признаков события) и объединяет часто встречающиеся совместные признаки в токены, как BPE, причём слияние зависит от соседних действий (контекстная токенизация).</li>
+</ul>
+<h3 id="сводная-таблица">Сводная таблица</h3>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>Модель</th>
+<th>Компания</th>
+<th>Год, площадка</th>
+<th>Что генерирует / роль SID</th>
+<th>Масштаб и оценка</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>TIGER</td>
+<td>Google</td>
+<td>2023, NeurIPS</td>
+<td>SID следующего объекта, T5 seq2seq</td>
+<td>публичные датасеты Amazon; онлайн-A/B в статье нет</td>
+</tr>
+<tr>
+<td>SID в ранжировании</td>
+<td>Google / YouTube</td>
+<td>2023 (arXiv), RecSys 2024</td>
+<td>не генерирует: SID вместо хэш-ID в ранкере</td>
+<td>продакшен-данные YouTube; приросты в обобщении на новые видео</td>
+</tr>
+<tr>
+<td>LC-Rec</td>
+<td>Renmin Univ. / академия</td>
+<td>2023 (arXiv), ICDE 2024</td>
+<td>SID как токены словаря LLM</td>
+<td>академические датасеты</td>
+</tr>
+<tr>
+<td>LIGER</td>
+<td>Meta</td>
+<td>2024, arXiv</td>
+<td>SID-кандидаты + плотное ранжирование (гибрид)</td>
+<td>академические датасеты; TIGER почти не находит холодные объекты</td>
+</tr>
+<tr>
+<td>ActionPiece</td>
+<td>Google DeepMind</td>
+<td>2025, ICML</td>
+<td>токены действий (контекстный BPE)</td>
+<td>академические датасеты</td>
+</tr>
+<tr>
+<td>GLIDE</td>
+<td>Spotify</td>
+<td>2026, <a href="https://arxiv.org/abs/2603.17540" rel="noopener noreferrer nofollow">arXiv:2603.17540</a> (KDD 2026 — по блогу Spotify Research, по трудам не сверено)</td>
+<td>SID подкастов по инструкции, бэкбон на базе Llama 3.2 1B</td>
+<td>A/B на миллионах пользователей: до +5,4% «непривычных» прослушиваний подкастов, до +14,3% открытия новых шоу</td>
+</tr>
+</tbody>
+</table></div>
+<h2 id="трезвый-взгляд-20252026">Трезвый взгляд (2025–2026)</h2>
+<p>Академический энтузиазм сменился сравнениями в одинаковых условиях.</p>
+<ul>
+<li><strong>Масштабирование.</strong> <em>Understanding Generative Recommendation with Semantic IDs from a Model-scaling View</em> (Liu, Collins, Tang, Zhao, Shah, Ju, <a href="https://arxiv.org/abs/2509.25522" rel="noopener noreferrer nofollow">arXiv:2509.25522</a>, принята на KDD 2026): рост энкодера, квантизатора и самой рекомендательной модели в SID-подходе быстро упирается в потолок; авторы связывают это с ограниченной ёмкостью SID. LLM, используемая напрямую как рекомендатель (диапазон моделей от 44M до 14B параметров), масштабируется лучше — до 20% выше лучшего SID-подхода по их измерениям. Вывод, что SID — промежуточное звено, а не окончательная архитектура, спорен (сравнение сделано на академических датасетах), но он объясняет интерес к LLM-рекомендателям из <a href="/edufamcs-demo/handbook/recsys/llm-v-rekomendaciyah/" rel="noopener noreferrer nofollow">главы 17</a>.</li>
+<li><strong>Что делает SID хорошим.</strong> <em>What Makes a Good Semantic ID for Generative Recommendation? A Reproducibility Study</em> (Chen, Fu, Zhao, Zhao, Ren, <a href="https://arxiv.org/abs/2609.24430" rel="noopener noreferrer nofollow">arXiv:2609.24430</a>, SIGIR-AP 2026): эффект выбора схемы SID немонотонен, универсально лучшей нет, RQ-VAE и OPQ работают нестабильно по датасетам, сбалансированность кодов первого уровня — полезная диагностика, но не предсказатель качества, а удлинение SID или увеличение бэкбона не всегда помогает.</li>
+<li><strong>Обзоры.</strong> <a href="https://www.preprints.org/manuscript/202605.0619" rel="noopener noreferrer nofollow">«A Modular Survey for Semantic ID-Based Generative Recommendation»</a> (Hu et al., Preprints.org, май 2026, с открытым тулбоксом UniGenRec для контролируемых абляций по этапам конвейера) и <a href="https://www.preprints.org/manuscript/202609.1676" rel="noopener noreferrer nofollow">«Generative Recommendation in Dynamic Catalogs: A Survey of Item Admission, Semantic ID Evolution, and Model Adaptation»</a> (Preprints.org, сентябрь 2026: как быть с SID, когда объекты добавляются и меняются после обучения). Это препринты без рецензирования, их полезно читать как карты области, не как доказательства.</li>
+</ul>
+<p>Практический вывод для небольшой команды: SID — разумный инструмент, когда нужны <strong>холодные объекты</strong> и <strong>компактная память</strong> (огромный каталог, быстро меняющийся ассортимент, ограничение на размер индекса). Если каталог — сотни тысяч объектов и данных хватает, SASRec/EASE + бустинг (глава <a href="/edufamcs-demo/handbook/recsys/kandidaty-i-ranzhirovanie/" rel="noopener noreferrer nofollow">«Двухстадийная схема»</a>) проще, быстрее и сопоставимы по точности.</p>
+<h2 id="вопросы-на-собеседованиях">Вопросы на собеседованиях</h2>
+<ul>
+<li><em>Зачем остаточная, а не одноуровневая квантизация?</em> Один уровень на <span class="tex">K^L</span> кодов потребовал бы словарь размера <span class="tex">K^L</span> с непосильным k-means; остаточная схема достигает той же ёмкости суммой <span class="tex">L\cdot K</span> векторов, а иерархия кодов получается автоматически.</li>
+<li><em>Как обрабатываются коллизии и что делать, если их много?</em> Дополнительный токен; увеличить <span class="tex">K</span> или <span class="tex">L</span>; перекластеризовать с учётом баланса.</li>
+<li><em>Почему нужно ограниченное декодирование?</em> Иначе beam search выдаёт кортежи, не соответствующие ни одному объекту. Маска по trie исключает это.</li>
+<li><em>Чем TIGER отличается от SASRec?</em> Целевая переменная: у SASRec — индекс объекта (softmax по каталогу), у TIGER — последовательность кодов; поэтому разные память, холодный старт и стоимость инференса.</li>
+<li><em>Что сломается при смене энкодера контента?</em> Все SID изменятся, и обученную модель придётся пересоздавать; это главный операционный риск подхода.</li>
+</ul>
+<h2 id="что-почитать">Что почитать</h2>
+<ul>
+<li>Rajput et al. <em>Recommender Systems with Generative Retrieval</em>. NeurIPS 2023 (<a href="https://arxiv.org/abs/2305.05065" rel="noopener noreferrer nofollow">arXiv:2305.05065</a>).</li>
+<li>Zeghidour et al. <em>SoundStream: An End-to-End Neural Audio Codec</em>. IEEE/ACM TASLP, 2022 (<a href="https://arxiv.org/abs/2107.03312" rel="noopener noreferrer nofollow">arXiv:2107.03312</a>, 2021); Lee et al. <em>Autoregressive Image Generation using Residual Quantization</em>. CVPR 2022 (<a href="https://arxiv.org/abs/2203.01941" rel="noopener noreferrer nofollow">arXiv:2203.01941</a>) — RQ-VAE.</li>
+<li>Singh et al. <em>Better Generalization with Semantic IDs</em> (<a href="https://arxiv.org/abs/2306.08121" rel="noopener noreferrer nofollow">arXiv:2306.08121</a>); Yang et al. <em>Unifying Generative and Dense Retrieval for Sequential Recommendation</em> (<a href="https://arxiv.org/abs/2411.18814" rel="noopener noreferrer nofollow">arXiv:2411.18814</a>); Hou et al. <em>ActionPiece</em> (<a href="https://arxiv.org/abs/2502.13581" rel="noopener noreferrer nofollow">arXiv:2502.13581</a>).</li>
+<li>Liu et al. <em>Understanding Generative Recommendation with Semantic IDs from a Model-scaling View</em> (<a href="https://arxiv.org/abs/2509.25522" rel="noopener noreferrer nofollow">arXiv:2509.25522</a>); Chen et al. <em>What Makes a Good Semantic ID…</em> (<a href="https://arxiv.org/abs/2609.24430" rel="noopener noreferrer nofollow">arXiv:2609.24430</a>).</li>
+<li>Видео курса: <a href="https://youtu.be/BbWTrvwaejg" rel="noopener noreferrer nofollow">DeepRecSys, лекция 12: Generative Recommendations</a>, <a href="https://youtu.be/CW0X_rY7wzs" rel="noopener noreferrer nofollow">семинар 12: TIGER, generative retrieval</a>.</li>
+</ul>
+</div>
+      
+
+      
+      <nav class="pager" aria-label="Соседние статьи">
+        <a href="/edufamcs-demo/handbook/recsys/prodakshen-i-ab-testy/"><span><svg class="ico sm" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-arrow-left"/></svg>Назад</span>Рекомендации в продакшене: A/B-тесты и эксплуатация</a>
+        <a href="/edufamcs-demo/handbook/recsys/generativnye-rekomendateli/"><span>Дальше<svg class="ico sm" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-arrow"/></svg></span>Генеративные рекомендатели на масштабе: HSTU, OneRec и наследники</a>
+      </nav>
+      
+    </article>
+
+    <aside class="hb-toc" aria-label="На этой странице">
+      <a class="l2" href="#идея-и-место-в-истории">Идея и место в истории</a><a class="l2" href="#семантические-id-остаточная-квантизация">Семантические ID: остаточная квантизация</a><a class="l3" href="#код-остаточная-квантизация-через-k-means-и-trie-допустимых-префиксов">Код: остаточная квантизация через k-means и trie допустимых префиксов</a><a class="l2" href="#tiger-генеративный-retrieval">TIGER: генеративный retrieval</a><a class="l2" href="#развитие-20232025">Развитие 2023–2025</a><a class="l3" href="#сводная-таблица">Сводная таблица</a><a class="l2" href="#трезвый-взгляд-20252026">Трезвый взгляд (2025–2026)</a><a class="l2" href="#вопросы-на-собеседованиях">Вопросы на собеседованиях</a><a class="l2" href="#что-почитать">Что почитать</a>
+    </aside>
+  </div>
+</div>
+
+
+</main>
+
+<footer class="ftr" data-theme="dark">
+  <svg class="sym fern" viewBox="0 0 40.5 65.02" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#fern"/></svg>
+  <div class="container">
+    <div class="ftr-row">
+      <a href="/edufamcs-demo/" aria-label="EDU FAMCS — главная"><img src="/edufamcs-demo/static/brand/logo/logo-edu-dark.svg" alt="EDU FAMCS" width="196" height="40"></a>
+      <ul class="ftr-links">
+        <li><a href="/edufamcs-demo/#courses">Курсы</a></li>
+        <li><a href="/edufamcs-demo/ml/">Машинное обучение</a></li>
+        <li><a href="/edufamcs-demo/handbook/">Хендбук</a></li>
+        <li><a href="/edufamcs-demo/news/">Новости</a></li>
+        <li><a href="/edufamcs-demo/people/">Авторы</a></li>
+        <li><a href="/edufamcs-demo/about/">О&nbsp;нас</a></li>
+        <li><a href="/edufamcs-demo/propose/">Предложить или исправить</a></li>
+        <li><a href="/edufamcs-demo/privacy/">Конфиденциальность</a></li>
+      </ul>
+    </div>
+    <div class="ftr-big" aria-hidden="true">EDU<span class="d">·</span>FAMCS</div>
+    <p class="ftr-copy">© 2026 EDU FAMCS · Минск</p>
+  </div>
+</footer>
+
+<div class="toasts-region" aria-live="polite" id="toasts">
+
+</div>
+
+</body>
+</html>

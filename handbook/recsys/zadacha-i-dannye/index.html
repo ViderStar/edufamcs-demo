@@ -1,0 +1,246 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Задача рекомендаций и данные · EDU FAMCS</title>
+<meta name="description" content="Задача рекомендаций и данные — Рекомендательные системы. Хендбук ML-курса ФПМИ.">
+<meta name="theme-color" content="#060A16">
+<meta name="robots" content="noindex, nofollow">
+<meta name="htmx-config" content='{"allowEval":false,"includeIndicatorStyles":false,"historyCacheSize":0,"selfRequestsOnly":true}'>
+<meta name="katex-js" content="/edufamcs-demo/static/vendor/katex/katex.min.js">
+<meta name="katex-css" content="/edufamcs-demo/static/vendor/katex/katex.min.css">
+<link rel="icon" href="/edufamcs-demo/static/brand/logo/favicon-16.svg" type="image/svg+xml" sizes="16x16">
+<link rel="icon" href="/edufamcs-demo/static/brand/logo/favicon.svg" type="image/svg+xml" sizes="any">
+<link rel="preload" href="/edufamcs-demo/static/brand/fonts/manrope-cyrillic-400.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/edufamcs-demo/static/brand/fonts/unbounded-cyrillic-800.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="/edufamcs-demo/static/brand/fonts.css">
+<link rel="stylesheet" href="/edufamcs-demo/static/brand/tokens.css">
+<link rel="stylesheet" href="/edufamcs-demo/static/brand/components.css">
+<link rel="stylesheet" href="/edufamcs-demo/static/css/site.css">
+<link rel="stylesheet" href="/edufamcs-demo/static/css/hub.css">
+<link rel="stylesheet" href="/edufamcs-demo/static/css/about.css">
+<link rel="stylesheet" href="/edufamcs-demo/static/handbook/handbook.css">
+<script src="/edufamcs-demo/static/js/theme.js"></script>
+<script src="/edufamcs-demo/static/vendor/htmx/htmx.min.js" defer></script>
+<script src="/edufamcs-demo/static/vendor/alpine/alpine-csp.min.js" defer></script>
+<script src="/edufamcs-demo/static/js/site.js" defer></script>
+<script src="/edufamcs-demo/static/handbook/handbook.js" defer></script>
+</head>
+<body class="" hx-headers='{"X-CSRFToken": "NTsE5VW7E6HfItP1y3CkxOLyDxJe9KNVcD1IPTJuzX5oX20K5glsujhDbfPJHUvF"}'>
+<a class="skip" href="#main">К содержанию</a>
+<div class="demo-bar" role="note">Демо-версия для отзывов: вход, запись на курсы и формы здесь не работают.</div>
+
+<header class="hdr">
+  <div class="container">
+    <a class="brand" href="/edufamcs-demo/" aria-label="EDU FAMCS — главная">
+      <span class="full"><img class="only-light" src="/edufamcs-demo/static/brand/logo/logo-edu-light.svg" alt="EDU FAMCS" width="196" height="40"><img class="only-dark" src="/edufamcs-demo/static/brand/logo/logo-edu-dark.svg" alt="EDU FAMCS" width="196" height="40"></span>
+      <span class="short"><img class="only-light" src="/edufamcs-demo/static/brand/logo/logo-edu-light.svg" alt="EDU FAMCS" height="30"><img class="only-dark" src="/edufamcs-demo/static/brand/logo/logo-edu-dark.svg" alt="EDU FAMCS" height="30"></span>
+    </a>
+    <nav class="nav" id="main-nav" aria-label="Основная навигация">
+      <a href="/edufamcs-demo/#courses">Курсы</a>
+      <a href="/edufamcs-demo/ml/" >Машинное обучение</a>
+      
+      <a href="/edufamcs-demo/handbook/" aria-current="page">Хендбук</a>
+      <a href="/edufamcs-demo/news/" >Новости</a>
+      <a href="/edufamcs-demo/people/" >Авторы</a>
+      <a href="/edufamcs-demo/about/" >О&nbsp;нас</a>
+    </nav>
+    <div class="hdr-actions">
+      
+      <a class="btn btn-outline btn-login" href="/edufamcs-demo/accounts/login/?next=/handbook/recsys/zadacha-i-dannye/">Войти</a>
+      
+      <button class="icon-btn menu-btn" type="button" aria-label="Меню" aria-expanded="false" aria-controls="main-nav"><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-menu"/></svg></button>
+    </div>
+  </div>
+</header>
+
+<main id="main">
+
+
+
+<div class="container hb-page s-recsys">
+  <div class="hb">
+    <aside class="hb-nav" aria-label="Статьи раздела">
+      
+<form class="hb-search" action="/edufamcs-demo/handbook/search/" method="get" role="search">
+  <svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-search"/></svg>
+  <input class="input" type="search" name="q" value="" placeholder="Поиск по хендбуку" aria-label="Поиск по хендбуку" autocomplete="off" maxlength="120"
+    hx-get="/edufamcs-demo/handbook/search/" hx-trigger="input changed delay:250ms, search" hx-target="#hb-nav-results" hx-sync="this:replace">
+</form>
+
+      <div id="hb-nav-results" class="hb-nav-results" aria-live="polite"></div>
+      <a class="grp" href="/edufamcs-demo/handbook/recsys/">Постановка и оценка</a>
+      
+      <a class="cur" href="/edufamcs-demo/handbook/recsys/zadacha-i-dannye/" aria-current="page">Задача рекомендаций и данные</a>
+      
+      <a class="" href="/edufamcs-demo/handbook/recsys/oflajn-metriki/">Офлайн-метрики: Precision@k, Recall@k, MAP, NDCG</a>
+      
+    </aside>
+
+    <article class="hb-main">
+      <nav class="crumbs" aria-label="Навигация"><a href="/edufamcs-demo/handbook/">Хендбук</a><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-chev"/></svg><a href="/edufamcs-demo/handbook/recsys/">Рекомендательные системы</a></nav>
+      <h1 class="h1">Задача рекомендаций и данные</h1>
+      <div class="hb-meta">
+        
+        
+        <span><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-clock"/></svg>10&nbsp;мин</span>
+        <span class="hb-authors"><span class="avatar sm" title="Артем Лебедевич">АЛ</span>Артем Лебедевич</span>
+        <span><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-edit"/></svg>9 ноября 2026</span>
+        
+        
+      </div>
+
+      
+      <details class="hb-mtoc">
+        <summary><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-list"/></svg>Содержание<svg class="ico sm" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-chev-down"/></svg></summary>
+        <a class="l2" href="#карта-раздела-от-tapestry-до-генеративных-моделей">Карта раздела: от Tapestry до генеративных моделей</a><a class="l2" href="#публичные-датасеты">Публичные датасеты</a><a class="l2" href="#матрица-взаимодействий">Матрица взаимодействий</a><a class="l2" href="#явный-и-неявный-фидбэк">Явный и неявный фидбэк</a><a class="l2" href="#смещения-в-данных">Смещения в данных</a><a class="l2" href="#холодный-старт">Холодный старт</a><a class="l2" href="#что-считать-успехом">Что считать успехом</a><a class="l2" href="#бейзлайны-которые-надо-побить">Бейзлайны, которые надо побить</a><a class="l2" href="#что-почитать">Что почитать</a>
+      </details>
+      
+
+      <div class="prose"><p>Рекомендательная система отвечает на вопрос: какие объекты из каталога показать конкретному человеку прямо сейчас, чтобы он с ними провзаимодействовал — купил, посмотрел, дослушал. Каталог огромный (миллионы товаров, треков, статей), а места на экране — десяток позиций. Поэтому рекомендации — это всегда задача <strong>ранжирования</strong>: из множества объектов <span class="tex">I</span> для пользователя <span class="tex">u</span> выбрать упорядоченный список длины <span class="tex">k</span>.</p>
+<h2 id="карта-раздела-от-tapestry-до-генеративных-моделей">Карта раздела: от Tapestry до генеративных моделей</h2>
+<p>Раздел устроен как история, в которой каждый метод чинит слабое место предыдущего.</p>
+<ul>
+<li><strong>1992–1994.</strong> Система Tapestry (Goldberg et al., Xerox PARC, 1992) ввела термин <em>collaborative filtering</em>: письма фильтруются по аннотациям коллег. GroupLens (Resnick et al., 1994) автоматизировала идею для новостей Usenet — «похожие пользователи» считались по оценкам. Об этом — в статье про <a href="/edufamcs-demo/handbook/recsys/kollaborativnaya-filtraciya-po-sosedyam/" rel="noopener noreferrer nofollow">соседские методы</a>. Ступенью ниже стоят <a href="/edufamcs-demo/handbook/recsys/nepersonalnye-i-kontentnye/" rel="noopener noreferrer nofollow">неперсонализированные и контентные</a> рекомендации — бейзлайн для всего остального.</li>
+<li><strong>2001–2003.</strong> Item-based CF (Sarwar et al., 2001) и item-to-item Amazon (Linden, Smith, York, 2003) сделали соседей масштабируемыми: сходства считаются офлайн между товарами, а не онлайн между миллионами людей.</li>
+<li><strong>2006–2009. Netflix Prize.</strong> Конкурс на улучшение RMSE на 10% разогнал матричные разложения: FunkSVD, смещения, SVD++, timeSVD++ — см. <a href="/edufamcs-demo/handbook/recsys/matrichnye-razlozheniya-als/" rel="noopener noreferrer nofollow">матричные разложения и ALS</a>. Победивший ансамбль в прод так и не пошёл: Netflix внедрил две модели из промежуточного приза 2007 года, а к финалу уже переходил на стриминг, где вместо оценок — неявные сигналы.</li>
+<li><strong>2008–2016.</strong> Неявный фидбэк становится основным: iALS (2008), BPR (2009), WARP (2011), эмбеддинги из сессий (prod2vec, item2vec) — <a href="/edufamcs-demo/handbook/recsys/neyavnyj-fidbek-bpr/" rel="noopener noreferrer nofollow">статья про неявный фидбэк</a>. Линейные модели <a href="/edufamcs-demo/handbook/recsys/slim-i-ease/" rel="noopener noreferrer nofollow">SLIM и EASE</a> (2011, 2019) остаются сильными бейзлайнами до сих пор.</li>
+<li><strong>2016–2020.</strong> Нейросети: <a href="/edufamcs-demo/handbook/recsys/ctr-modeli/" rel="noopener noreferrer nofollow">CTR-модели</a> для ранжирования, <a href="/edufamcs-demo/handbook/recsys/two-tower-ann/" rel="noopener noreferrer nofollow">двухбашенные модели</a> и YouTube DNN (2016) для отбора кандидатов, <a href="/edufamcs-demo/handbook/recsys/posledovatelnye-modeli/" rel="noopener noreferrer nofollow">последовательные модели</a> (GRU4Rec, SASRec, BERT4Rec), <a href="/edufamcs-demo/handbook/recsys/grafovye-modeli/" rel="noopener noreferrer nofollow">графовые модели</a> от случайных блужданий до LightGCN.</li>
+<li><strong>Система целиком.</strong> <a href="/edufamcs-demo/handbook/recsys/kandidaty-i-ranzhirovanie/" rel="noopener noreferrer nofollow">Двухстадийная схема</a> «кандидаты → ранжирование», <a href="/edufamcs-demo/handbook/recsys/holodnyj-start-i-bandity/" rel="noopener noreferrer nofollow">холодный старт и бандиты</a>, <a href="/edufamcs-demo/handbook/recsys/prodakshen-i-ab-testy/" rel="noopener noreferrer nofollow">продакшен и A/B-тесты</a>.</li>
+<li><strong>2023–2026.</strong> Генеративные рекомендации: объекты кодируются <a href="/edufamcs-demo/handbook/recsys/semanticheskie-id-tiger/" rel="noopener noreferrer nofollow">семантическими ID</a>, а следующий объект порождается авторегрессионно (TIGER, Rajput et al., 2023); трансформеры масштабируют на логах по образцу языковых моделей (<a href="/edufamcs-demo/handbook/recsys/generativnye-rekomendateli/" rel="noopener noreferrer nofollow">HSTU и наследники</a>, Zhai et al., 2024); отдельная ветка — <a href="/edufamcs-demo/handbook/recsys/llm-v-rekomendaciyah/" rel="noopener noreferrer nofollow">LLM в рекомендациях</a>.</li>
+</ul>
+<p>Метрики и методология оценки — в <a href="/edufamcs-demo/handbook/recsys/oflajn-metriki/" rel="noopener noreferrer nofollow">следующей статье</a>.</p>
+<h2 id="публичные-датасеты">Публичные датасеты</h2>
+<p>Для обучения и сравнений используют несколько стандартных наборов, у каждого свои особенности.</p>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>Датасет</th>
+<th>Что внутри</th>
+<th>Масштаб</th>
+<th>Особенности</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>MovieLens (Harper &amp; Konstan, 2015)</td>
+<td>явные оценки фильмов 1–5 (с версии 10M — с шагом 0,5)</td>
+<td>от 100 тыс. (100K) до 32 млн (32M) оценок; популярны 1M и 20M</td>
+<td>чистый, но явный фидбэк; при бинаризации ведёт себя как неявный; де-факто стандарт учебных экспериментов</td>
+</tr>
+<tr>
+<td>Netflix Prize (2006)</td>
+<td>оценки 1–5 с датой</td>
+<td>~100 млн оценок, ~480 тыс. пользователей, ~17,8 тыс. фильмов</td>
+<td>после работы о деанонимизации (Narayanan &amp; Shmatikov, 2008) и иска Netflix прекратил распространять данные; встречается в основном в статьях тех лет</td>
+</tr>
+<tr>
+<td>Amazon Reviews (McAuley et al.; версия 2023)</td>
+<td>отзывы, оценки, метаданные товаров</td>
+<td>сотни миллионов отзывов по десяткам категорий</td>
+<td>есть тексты и метаданные — удобно для контентных и мультимодальных моделей</td>
+</tr>
+<tr>
+<td>Yambda (Яндекс Музыка, 2025)</td>
+<td>прослушивания, лайки/дизлайки, unlike, аудио-эмбеддинги</td>
+<td>~4,8 млрд событий</td>
+<td>неявный фидбэк в индустриальном масштабе, есть версии 50M и 500M; флаг <code>is_organic</code> отделяет события, пришедшие из рекомендаций; хорош для бенчмарка по времени</td>
+</tr>
+</tbody>
+</table></div>
+<p>Практические замечания. MovieLens — это явные оценки, и результаты на нём плохо переносятся на ленты и музыку, где доминирует неявный сигнал. На публичных наборах обычно нет контекста и позиции показа, поэтому эффекты смещений из раздела ниже в них не измерить. Yambda ценен тем, что сплит делается по глобальному времени (последние дни — тест), как в проде, а не по случайным событиям. Обсуждение бенчмарка есть в <a href="https://youtu.be/q55mPzvw-AM" rel="noopener noreferrer nofollow">семинаре DeepRecSys</a>.</p>
+<h2 id="матрица-взаимодействий">Матрица взаимодействий</h2>
+<p>Базовая структура данных — матрица <span class="tex">R \in \mathbb{R}^{|U| \times |I|}</span>, где строки — пользователи, столбцы — объекты, а в ячейке <span class="tex">r_{ui}</span> записан сигнал о взаимодействии. Матрица чудовищно разреженная: в типичном e-commerce заполнено меньше <span class="tex">0{,}1\%</span> ячеек. Хранить её нужно в разреженном формате (CSR/COO), а не как плотный массив:</p>
+<div class="code"><div class="code-head"><span class="lang">python</span></div><pre><code><span class="tok-k">import</span> scipy.sparse <span class="tok-k">as</span> sp
+
+<span class="tok-c"># users, items — целочисленные индексы, weights — сила сигнала</span>
+R <span class="tok-p">=</span> sp<span class="tok-p">.</span>csr_matrix<span class="tok-p">(</span><span class="tok-p">(</span>weights<span class="tok-p">,</span> <span class="tok-p">(</span>users<span class="tok-p">,</span> items<span class="tok-p">)</span><span class="tok-p">)</span><span class="tok-p">,</span> shape<span class="tok-p">=</span><span class="tok-p">(</span>n_users<span class="tok-p">,</span> n_items<span class="tok-p">)</span><span class="tok-p">)</span>
+<span class="tok-f">print</span><span class="tok-p">(</span><span class="tok-s">f</span><span class="tok-s">"</span><span class="tok-s">плотность: </span><span class="tok-s">{</span>R<span class="tok-p">.</span>nnz <span class="tok-p">/</span> <span class="tok-p">(</span>n_users <span class="tok-p">*</span> n_items<span class="tok-p">)</span><span class="tok-s">:</span><span class="tok-s">.5%</span><span class="tok-s">}</span><span class="tok-s">"</span><span class="tok-p">)</span>
+</code></pre></div>
+<p>Помимо матрицы, почти всегда есть <strong>контекст</strong> (время, устройство, страница, позиция в выдаче) и <strong>признаки</strong> пользователей и объектов (категория, цена, текст описания, возраст аккаунта). Чисто коллаборативные методы смотрят только на <span class="tex">R</span>, контентные — на признаки, гибридные используют и то и другое.</p>
+<h2 id="явный-и-неявный-фидбэк">Явный и неявный фидбэк</h2>
+<p><strong>Явный фидбэк</strong> (explicit) — пользователь сам сообщил своё отношение: оценка фильму от 1 до 5, лайк или дизлайк, отзыв. Такой сигнал понятен по смыслу, но его мало: оценки ставит небольшая доля людей, и ставят их чаще под впечатлением — очень хорошим или очень плохим.</p>
+<p><strong>Неявный фидбэк</strong> (implicit) — то, что мы наблюдаем из поведения: клики, просмотры карточки, добавления в корзину, покупки, время прослушивания. Его на порядки больше, но у него три особенности, которые надо держать в голове:</p>
+<ol>
+<li><strong>Нет отрицательных примеров.</strong> Отсутствие клика не значит «не понравилось» — человек мог просто не увидеть объект. Ноль в матрице — это смесь «не интересно» и «не знаю».</li>
+<li><strong>Сигнал зашумлён.</strong> Клик бывает случайным, а покупка подарка ничего не говорит о вкусах покупателя.</li>
+<li><strong>Сигналы разной силы.</strong> Покупка весит больше, чем просмотр; прослушанный до конца трек — больше, чем пропущенный через три секунды. На практике события переводят в веса, например <span class="tex">w = 1</span> за просмотр, <span class="tex">w = 5</span> за корзину, <span class="tex">w = 20</span> за покупку, и подбирают веса по валидации.</li>
+</ol>
+<p>Удобно разделять <strong>предпочтение</strong> <span class="tex">p_{ui} = [r_{ui} &gt; 0]</span> (было ли взаимодействие) и <strong>уверенность</strong> <span class="tex">c_{ui} = 1 + \alpha r_{ui}</span> (насколько мы верим в это предпочтение). На этой идее построен неявный ALS — о нём в статье про матричные разложения.</p>
+<h2 id="смещения-в-данных">Смещения в данных</h2>
+<p>Логи собраны не в вакууме: пользователь видел то, что ему показала прошлая версия системы. Отсюда:</p>
+<ul>
+<li><strong>position bias</strong> — первые позиции кликают чаще независимо от качества;</li>
+<li><strong>popularity bias</strong> — популярные объекты собирают больше сигнала, модель рекомендует их ещё чаще, и разрыв растёт (петля обратной связи);</li>
+<li><strong>selection bias</strong> — у объектов, которые никогда не показывались, нет шанса получить взаимодействия.</li>
+</ul>
+<p>Полностью убрать эти эффекты из офлайн-данных нельзя, но их важно помнить при обучении (например, понижать вес популярных объектов в негативном сэмплинге) и при оценке (смотреть не только на точность, но и на покрытие каталога).</p>
+<h2 id="холодный-старт">Холодный старт</h2>
+<p>Коллаборативные методы опираются на историю, а её у новых пользователей, новых объектов и новой системы нет. Суть решений: для нового пользователя — популярное в его контексте и онбординг, для нового объекта — контентные признаки и принудительное исследование (exploration), для новой системы — правила и сбор данных. Подробности и алгоритмы (в том числе бандиты) — в статье <a href="/edufamcs-demo/handbook/recsys/holodnyj-start-i-bandity/" rel="noopener noreferrer nofollow">Холодный старт и бандиты</a>.</p>
+<h2 id="что-считать-успехом">Что считать успехом</h2>
+<p>Офлайн-метрики (Precision@k, NDCG и другие) показывают, насколько хорошо модель восстанавливает отложенные взаимодействия. Но бизнес интересует другое: выручка, удержание, время в продукте. Связь между ними неочевидна, поэтому финальное решение принимают по <strong>A/B-тесту</strong>, а офлайн-оценка служит фильтром: какие модели вообще стоит туда пускать. Об офлайн-метриках и правильной валидации — в следующей статье.</p>
+<h2 id="бейзлайны-которые-надо-побить">Бейзлайны, которые надо побить</h2>
+<p>Прежде чем обучать что-то сложное, посчитайте простые решения: популярное за последнее окно, популярное в сегменте, «с этим покупают», повторные покупки. Они удивительно сильны. Разбор — в статье <a href="/edufamcs-demo/handbook/recsys/nepersonalnye-i-kontentnye/" rel="noopener noreferrer nofollow">Неперсонализированные и контентные рекомендации</a>.</p>
+<div class="code"><div class="code-head"><span class="lang">python</span></div><pre><code><span class="tok-k">import</span> pandas <span class="tok-k">as</span> pd
+
+recent <span class="tok-p">=</span> events<span class="tok-p">[</span>events<span class="tok-p">.</span>ts <span class="tok-p">&gt;</span><span class="tok-p">=</span> events<span class="tok-p">.</span>ts<span class="tok-p">.</span>max<span class="tok-p">(</span><span class="tok-p">)</span> <span class="tok-p">-</span> pd<span class="tok-p">.</span>Timedelta<span class="tok-p">(</span>days<span class="tok-p">=</span><span class="tok-n">7</span><span class="tok-p">)</span><span class="tok-p">]</span>
+top <span class="tok-p">=</span> recent<span class="tok-p">.</span>item_id<span class="tok-p">.</span>value_counts<span class="tok-p">(</span><span class="tok-p">)</span><span class="tok-p">.</span>index<span class="tok-p">[</span><span class="tok-p">:</span><span class="tok-n">10</span><span class="tok-p">]</span><span class="tok-p">.</span>tolist<span class="tok-p">(</span><span class="tok-p">)</span>   <span class="tok-c"># бейзлайн «популярное за неделю»</span>
+</code></pre></div>
+<p>Если модель не обгоняет «популярное за неделю» на честной валидации по времени, ошибка почти наверняка в данных или в схеме оценки, а не в архитектуре.</p>
+<h2 id="что-почитать">Что почитать</h2>
+<ul>
+<li>Goldberg D., Nichols D., Oki B., Terry D. <em>Using collaborative filtering to weave an information tapestry</em>, CACM, 1992 — https://doi.org/10.1145/138859.138867</li>
+<li>Resnick P. et al. <em>GroupLens: An open architecture for collaborative filtering of netnews</em>, CSCW, 1994 — https://doi.org/10.1145/192844.192905</li>
+<li>Harper F.M., Konstan J.A. <em>The MovieLens Datasets: History and Context</em>, ACM TiiS, 2015 — https://doi.org/10.1145/2827872</li>
+<li>Ploshkin A. et al. <em>Yambda-5B — A Large-Scale Multi-modal Dataset for Ranking And Retrieval</em>, 2025 — https://arxiv.org/abs/2505.22238 (датасет: https://huggingface.co/datasets/yandex/yambda)</li>
+<li>Hou Y. et al. <em>Bridging Language and Items for Retrieval and Recommendation</em> (Amazon Reviews 2023), 2024 — https://arxiv.org/abs/2403.03952</li>
+<li>Лекции DeepRecSys: введение — https://youtu.be/bIc58LpxLrs; мини-курс MTS «Your First Recommendation System», часть 1 — https://youtu.be/M65RLMfEsaM; Учебник по ML от ШАД Яндекса, глава 9 «Рекомендательные системы» — https://contest.yandex.ru/tracks/ml/recommender-systems/introduction-to-recommender-systems</li>
+</ul>
+</div>
+      
+
+      
+      <nav class="pager" aria-label="Соседние статьи">
+        <i></i>
+        <a href="/edufamcs-demo/handbook/recsys/oflajn-metriki/"><span>Дальше<svg class="ico sm" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-arrow"/></svg></span>Офлайн-метрики: Precision@k, Recall@k, MAP, NDCG</a>
+      </nav>
+      
+    </article>
+
+    <aside class="hb-toc" aria-label="На этой странице">
+      <a class="l2" href="#карта-раздела-от-tapestry-до-генеративных-моделей">Карта раздела: от Tapestry до генеративных моделей</a><a class="l2" href="#публичные-датасеты">Публичные датасеты</a><a class="l2" href="#матрица-взаимодействий">Матрица взаимодействий</a><a class="l2" href="#явный-и-неявный-фидбэк">Явный и неявный фидбэк</a><a class="l2" href="#смещения-в-данных">Смещения в данных</a><a class="l2" href="#холодный-старт">Холодный старт</a><a class="l2" href="#что-считать-успехом">Что считать успехом</a><a class="l2" href="#бейзлайны-которые-надо-побить">Бейзлайны, которые надо побить</a><a class="l2" href="#что-почитать">Что почитать</a>
+    </aside>
+  </div>
+</div>
+
+
+</main>
+
+<footer class="ftr" data-theme="dark">
+  <svg class="sym fern" viewBox="0 0 40.5 65.02" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#fern"/></svg>
+  <div class="container">
+    <div class="ftr-row">
+      <a href="/edufamcs-demo/" aria-label="EDU FAMCS — главная"><img src="/edufamcs-demo/static/brand/logo/logo-edu-dark.svg" alt="EDU FAMCS" width="196" height="40"></a>
+      <ul class="ftr-links">
+        <li><a href="/edufamcs-demo/#courses">Курсы</a></li>
+        <li><a href="/edufamcs-demo/ml/">Машинное обучение</a></li>
+        <li><a href="/edufamcs-demo/handbook/">Хендбук</a></li>
+        <li><a href="/edufamcs-demo/news/">Новости</a></li>
+        <li><a href="/edufamcs-demo/people/">Авторы</a></li>
+        <li><a href="/edufamcs-demo/about/">О&nbsp;нас</a></li>
+        <li><a href="/edufamcs-demo/propose/">Предложить или исправить</a></li>
+        <li><a href="/edufamcs-demo/privacy/">Конфиденциальность</a></li>
+      </ul>
+    </div>
+    <div class="ftr-big" aria-hidden="true">EDU<span class="d">·</span>FAMCS</div>
+    <p class="ftr-copy">© 2026 EDU FAMCS · Минск</p>
+  </div>
+</footer>
+
+<div class="toasts-region" aria-live="polite" id="toasts">
+
+</div>
+
+</body>
+</html>

@@ -1,0 +1,229 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Последовательности: эмбеддинги и рекуррентные сети · EDU FAMCS</title>
+<meta name="description" content="Последовательности: эмбеддинги и рекуррентные сети — Введение в глубокое обучение. Хендбук ML-курса ФПМИ.">
+<meta name="theme-color" content="#060A16">
+<meta name="robots" content="noindex, nofollow">
+<meta name="htmx-config" content='{"allowEval":false,"includeIndicatorStyles":false,"historyCacheSize":0,"selfRequestsOnly":true}'>
+<meta name="katex-js" content="/edufamcs-demo/static/vendor/katex/katex.min.js">
+<meta name="katex-css" content="/edufamcs-demo/static/vendor/katex/katex.min.css">
+<link rel="icon" href="/edufamcs-demo/static/brand/logo/favicon-16.svg" type="image/svg+xml" sizes="16x16">
+<link rel="icon" href="/edufamcs-demo/static/brand/logo/favicon.svg" type="image/svg+xml" sizes="any">
+<link rel="preload" href="/edufamcs-demo/static/brand/fonts/manrope-cyrillic-400.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/edufamcs-demo/static/brand/fonts/unbounded-cyrillic-800.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="/edufamcs-demo/static/brand/fonts.css">
+<link rel="stylesheet" href="/edufamcs-demo/static/brand/tokens.css">
+<link rel="stylesheet" href="/edufamcs-demo/static/brand/components.css">
+<link rel="stylesheet" href="/edufamcs-demo/static/css/site.css">
+<link rel="stylesheet" href="/edufamcs-demo/static/css/hub.css">
+<link rel="stylesheet" href="/edufamcs-demo/static/css/about.css">
+<link rel="stylesheet" href="/edufamcs-demo/static/handbook/handbook.css">
+<script src="/edufamcs-demo/static/js/theme.js"></script>
+<script src="/edufamcs-demo/static/vendor/htmx/htmx.min.js" defer></script>
+<script src="/edufamcs-demo/static/vendor/alpine/alpine-csp.min.js" defer></script>
+<script src="/edufamcs-demo/static/js/site.js" defer></script>
+<script src="/edufamcs-demo/static/handbook/handbook.js" defer></script>
+</head>
+<body class="" hx-headers='{"X-CSRFToken": "QniLGOtaAkxpkU9GmVXIG9qvS66DfbBff7RPqMgxvbVyztkpT8GQDEWAqOc8NljZ"}'>
+<a class="skip" href="#main">К содержанию</a>
+<div class="demo-bar" role="note">Демо-версия для отзывов: вход, запись на курсы и формы здесь не работают.</div>
+
+<header class="hdr">
+  <div class="container">
+    <a class="brand" href="/edufamcs-demo/" aria-label="EDU FAMCS — главная">
+      <span class="full"><img class="only-light" src="/edufamcs-demo/static/brand/logo/logo-edu-light.svg" alt="EDU FAMCS" width="196" height="40"><img class="only-dark" src="/edufamcs-demo/static/brand/logo/logo-edu-dark.svg" alt="EDU FAMCS" width="196" height="40"></span>
+      <span class="short"><img class="only-light" src="/edufamcs-demo/static/brand/logo/logo-edu-light.svg" alt="EDU FAMCS" height="30"><img class="only-dark" src="/edufamcs-demo/static/brand/logo/logo-edu-dark.svg" alt="EDU FAMCS" height="30"></span>
+    </a>
+    <nav class="nav" id="main-nav" aria-label="Основная навигация">
+      <a href="/edufamcs-demo/#courses">Курсы</a>
+      <a href="/edufamcs-demo/ml/" >Машинное обучение</a>
+      
+      <a href="/edufamcs-demo/handbook/" aria-current="page">Хендбук</a>
+      <a href="/edufamcs-demo/news/" >Новости</a>
+      <a href="/edufamcs-demo/people/" >Авторы</a>
+      <a href="/edufamcs-demo/about/" >О&nbsp;нас</a>
+    </nav>
+    <div class="hdr-actions">
+      
+      <a class="btn btn-outline btn-login" href="/edufamcs-demo/accounts/login/?next=/handbook/dl/posledovatelnosti-i-rnn/">Войти</a>
+      
+      <button class="icon-btn menu-btn" type="button" aria-label="Меню" aria-expanded="false" aria-controls="main-nav"><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-menu"/></svg></button>
+    </div>
+  </div>
+</header>
+
+<main id="main">
+
+
+
+<div class="container hb-page hb-tone">
+  <div class="hb">
+    <aside class="hb-nav" aria-label="Статьи раздела">
+      
+<form class="hb-search" action="/edufamcs-demo/handbook/search/" method="get" role="search">
+  <svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-search"/></svg>
+  <input class="input" type="search" name="q" value="" placeholder="Поиск по хендбуку" aria-label="Поиск по хендбуку" autocomplete="off" maxlength="120"
+    hx-get="/edufamcs-demo/handbook/search/" hx-trigger="input changed delay:250ms, search" hx-target="#hb-nav-results" hx-sync="this:replace">
+</form>
+
+      <div id="hb-nav-results" class="hb-nav-results" aria-live="polite"></div>
+      <a class="grp" href="/edufamcs-demo/handbook/dl/">Архитектуры</a>
+      
+      <a class="" href="/edufamcs-demo/handbook/dl/svertochnye-seti/">Свёрточные сети</a>
+      
+      <a class="cur" href="/edufamcs-demo/handbook/dl/posledovatelnosti-i-rnn/" aria-current="page">Последовательности: эмбеддинги и рекуррентные сети</a>
+      
+      <a class="" href="/edufamcs-demo/handbook/dl/vnimanie-i-transformery/">Внимание и трансформеры</a>
+      
+    </aside>
+
+    <article class="hb-main">
+      <nav class="crumbs" aria-label="Навигация"><a href="/edufamcs-demo/handbook/">Хендбук</a><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-chev"/></svg><a href="/edufamcs-demo/handbook/dl/">Введение в глубокое обучение</a></nav>
+      <h1 class="h1">Последовательности: эмбеддинги и рекуррентные сети</h1>
+      <div class="hb-meta">
+        
+        
+        <span><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-clock"/></svg>12&nbsp;мин</span>
+        <span class="hb-authors"><span class="avatar sm" title="Артем Лебедевич">АЛ</span>Артем Лебедевич</span>
+        <span><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-edit"/></svg>9 ноября 2026</span>
+        
+        
+      </div>
+
+      
+      <details class="hb-mtoc">
+        <summary><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-list"/></svg>Содержание<svg class="ico sm" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-chev-down"/></svg></summary>
+        <a class="l2" href="#токены-и-эмбеддинги">Токены и эмбеддинги</a><a class="l2" href="#рекуррентная-сеть">Рекуррентная сеть</a><a class="l2" href="#проблема-длинных-зависимостей">Проблема длинных зависимостей</a><a class="l2" href="#lstm-и-gru">LSTM и GRU</a><a class="l2" href="#seq2seq-и-внимание">Seq2seq и внимание</a><a class="l2" href="#в-рекомендациях">В рекомендациях</a><a class="l2" href="#код-nnembedding-nnlstm">Код: nn.Embedding + nn.LSTM</a><a class="l2" href="#практика-и-подводные-камни">Практика и подводные камни</a><a class="l2" href="#что-почитать">Что почитать</a>
+      </details>
+      
+
+      <div class="prose"><p>Многие данные — упорядоченные последовательности переменной длины: слова в предложении, действия пользователя в сессии, показания датчика, ноты. Для MLP нужен вход фиксированной длины, а для свёрток — сетка. Последовательности требуют двух вещей: способа превратить дискретные символы в векторы (эмбеддинги) и способа читать вход шаг за шагом, накапливая состояние (рекуррентные сети). Эта статья — о том и другом, и о том, где они упёрлись в потолок.</p>
+<h2 id="токены-и-эмбеддинги">Токены и эмбеддинги</h2>
+<p>Текст сначала разбивают на <strong>токены</strong>: слова, символы или части слов (BPE, WordPiece — стандарт в современных моделях). Каждому токену из словаря <span class="tex">V</span> присваивается номер. Самое простое представление — <strong>one-hot</strong> вектор длины <span class="tex">|V|</span>. У него два недостатка: огромная размерность (сотни тысяч) и полное отсутствие смысла — «кошка» и «котёнок» так же далеки друг от друга, как «кошка» и «налог».</p>
+<p><strong>Эмбеддинг</strong> — плотный вектор <span class="tex">e_w\in\mathbb R^{d}</span>, <span class="tex">d\sim100</span>–<span class="tex">1000</span>, строка обучаемой матрицы <span class="tex">E\in\mathbb R^{|V|\times d}</span>. Умножение one-hot на <span class="tex">E</span> — это просто выбор строки, поэтому в PyTorch слой <code>nn.Embedding(|V|, d)</code> — таблица поиска, а не матричное умножение. Весь вопрос в том, как обучить <span class="tex">E</span> так, чтобы геометрия отражала смысл.</p>
+<p><strong>word2vec</strong> (Миколов и соавторы, 2013) опирается на дистрибутивную гипотезу: слова с похожим контекстом близки по смыслу. В варианте <strong>skip-gram</strong> по слову <span class="tex">w</span> предсказываются слова <span class="tex">c</span> из окна вокруг него. Полный softmax по всему словарю дорог, поэтому во второй статье тех же авторов (Миколов и соавторы, 2013, NeurIPS) предложен <strong>negative sampling</strong>: для пар «слово–реальный контекст» максимизируют <span class="tex">\log\sigma(u_c^\top v_w)</span>, а для <span class="tex">K</span> случайных слов <span class="tex">c'</span> из шумового распределения — <span class="tex">\log\sigma(-u_{c'}^\top v_w)</span>:</p>
+<div class="tex tex-block">\ell=-\log\sigma(u_c^\top v_w)-\sum_{k=1}^K\log\sigma(-u_{c_k'}^\top v_w).</div>
+<p>Побочный результат — арифметика смыслов: <span class="tex">v_{\text{king}}-v_{\text{man}}+v_{\text{woman}}\approx v_{\text{queen}}</span>. <strong>GloVe</strong> (Пеннингтон, Сохер, Мэннинг, 2014) приходит к похожему результату иначе: факторизует логарифм матрицы совместной встречаемости слов. Идея близка к матричным разложениям из рекомендаций.</p>
+<p><strong>Тот же приём для товаров.</strong> Заменим слова на товары, а предложения на сессии пользователей — и получим <strong>item2vec</strong> (Barkan и Koenigstein, 2016) и родственные prod2vec-подходы: товары, встречающиеся в одних сессиях, получают близкие эмбеддинги. Это один из рабочих способов получить признаки и кандидатов для рекомендаций; как он стыкуется с неявным фидбэком — в статье <a href="/edufamcs-demo/handbook/recsys/neyavnyj-fidbek-bpr/" rel="noopener noreferrer nofollow">про неявный фидбэк и BPR</a>.</p>
+<p>Статические эмбеддинги имеют предел: «замок» (castle) и «замок» (lock) получают один вектор. Контекстуальные представления (ELMo на LSTM, затем BERT на трансформере) дают разный вектор слову в разных предложениях — это следующий шаг.</p>
+<h2 id="рекуррентная-сеть">Рекуррентная сеть</h2>
+<p>Идея: читать последовательность <span class="tex">x_1,\dots,x_T</span> по одному элементу, поддерживая <strong>скрытое состояние</strong> <span class="tex">h_t</span> — сжатую память о прочитанном. На каждом шаге применяется одна и та же функция с одними и теми же весами:</p>
+<div class="tex tex-block">h_t=\tanh\big(W h_{t-1}+U x_t+b\big),\qquad h_0=0.</div>
+<p>Выход зависит от задачи: для классификации последовательности — Linear от последнего <span class="tex">h_T</span> (или среднего/максимума по всем <span class="tex">h_t</span>), для разметки токенов — Linear от каждого <span class="tex">h_t</span>, для генерации — распределение следующего токена из <span class="tex">h_t</span>. Разделение весов по времени делает число параметров независимым от длины — так же, как в свёртке оно не зависит от размера картинки.</p>
+<p><strong>Обучение — BPTT</strong> (backpropagation through time): сеть «разворачивают» по времени в глубокий граф с <span class="tex">T</span> слоями, у которых общие веса, и применяют обычный backprop. Градиент по общему <span class="tex">W</span> суммируется по всем шагам (то самое <code>+=</code>). Ту же развёртку на практике обрывают: <strong>truncated BPTT</strong> считает градиент по окнам длиной 50–200 шагов.</p>
+<h2 id="проблема-длинных-зависимостей">Проблема длинных зависимостей</h2>
+<p>В развёрнутом графе градиент от <span class="tex">h_T</span> к <span class="tex">h_k</span> — произведение якобианов <span class="tex">\prod_{t=k+1}^{T}\frac{\partial h_t}{\partial h_{t-1}}=\prod_{t=k+1}^{T} \mathrm{diag}\big(\tanh'(a_t)\big)\,W</span>, где <span class="tex">a_t=Wh_{t-1}+Ux_t+b</span>. Если наибольшее сингулярное число <span class="tex">W</span> меньше 1, то (с учётом <span class="tex">\tanh'\le1</span>) градиент гарантированно затухает экспоненциально по длине. Если оно больше 1, градиент <strong>может</strong> взорваться: это необходимое, но не достаточное условие (Pascanu и соавторы, 2013). Хохрайтер (1991) и Бенджио и соавторы (1994) показали, что это фундаментальное ограничение: градиентным спуском простую RNN очень трудно научить зависимостям на дистанции больше 10–20 шагов. Взрыв лечится клиппингом градиента, затухание требует изменения архитектуры.</p>
+<h2 id="lstm-и-gru">LSTM и GRU</h2>
+<p><strong>LSTM</strong> (Хохрайтер, Шмидхубер, 1997) вводит отдельную ячейку памяти <span class="tex">c_t</span> и <strong>вентили</strong> (сигмоиды в <span class="tex">(0,1)</span>), которые управляют потоком информации. В исходной версии вентиля забывания не было, его добавили Герс, Шмидхубер и Камминс (2000); ниже — современная форма с тремя вентилями. С конкатенацией <span class="tex">[h_{t-1},x_t]</span> как входом:</p>
+<div class="tex tex-block">\begin{aligned}
+f_t&amp;=\sigma(W_f[h_{t-1},x_t]+b_f) &amp;&amp;\text{(забыть)}\\
+i_t&amp;=\sigma(W_i[h_{t-1},x_t]+b_i) &amp;&amp;\text{(записать)}\\
+\tilde c_t&amp;=\tanh(W_c[h_{t-1},x_t]+b_c) &amp;&amp;\text{(кандидат)}\\
+c_t&amp;=f_t\odot c_{t-1}+i_t\odot\tilde c_t\\
+o_t&amp;=\sigma(W_o[h_{t-1},x_t]+b_o) &amp;&amp;\text{(прочитать)}\\
+h_t&amp;=o_t\odot\tanh(c_t)
+\end{aligned}</div>
+<p>Ключевая строка — <span class="tex">c_t=f_t\odot c_{t-1}+\dots</span>: состояние обновляется <strong>аддитивно</strong>, и по прямому пути <span class="tex">\partial c_t/\partial c_{t-1}=\mathrm{diag}(f_t)</span>. Когда <span class="tex">f_t\approx1</span>, градиент идёт по ячейке почти без затухания (та же «магистраль», что позже появилась в highway-сетях и остаточных связях). Вентили учатся решать, что сохранять надолго. На практике <span class="tex">b_f</span> инициализируют положительным (например, 1), чтобы сеть сначала «помнила» (Jozefowicz и соавторы, 2015).</p>
+<p><strong>GRU</strong> (Чо и соавторы, 2014) упрощает схему: два вентиля (обновления <span class="tex">z_t</span> и сброса <span class="tex">r_t</span>) и нет отдельной ячейки, <span class="tex">h_t=(1-z_t)\odot h_{t-1}+z_t\odot\tilde h_t</span> (в документации PyTorch роли <span class="tex">z_t</span> и <span class="tex">1-z_t</span> переставлены, суть та же). Весовых блоков три вместо четырёх, то есть параметров на четверть меньше, скорость выше, а качество на большинстве задач сопоставимо с LSTM (Chung и соавторы, 2014).</p>
+<p><strong>Варианты.</strong> <em>Двунаправленная</em> сеть (<code>bidirectional=True</code>) читает последовательность в обе стороны и конкатенирует состояния — подходит для задач, где доступен весь текст сразу (классификация, разметка), но не для генерации. <em>Многослойная</em> (<code>num_layers&gt;1</code>) подаёт <span class="tex">h_t</span> одного слоя на вход следующего. Обычно 2 слоя и dropout между ними.</p>
+<h2 id="seq2seq-и-внимание">Seq2seq и внимание</h2>
+<p>Для задач «последовательность → последовательность» (перевод, суммаризация) Суцкевер и соавторы (2014) предложили <strong>seq2seq</strong>: энкодер-LSTM сжимает всё предложение в один вектор — финальное состояние, а декодер-LSTM генерирует по нему ответ токен за токеном. Узкое место очевидно: вся информация предложения проходит через вектор фиксированной длины, и, как показали Чо и соавторы (2014), качество такого энкодера-декодера заметно падает с ростом длины предложения.</p>
+<p><strong>Внимание Баданау</strong> (Bahdanau, Cho, Bengio, 2014) его снимает: на каждом шаге декодирования строится взвешенная сумма <strong>всех</strong> состояний энкодера, <span class="tex">c_t=\sum_j\alpha_{tj}h_j</span>, а веса <span class="tex">\alpha_{tj}=\text{softmax}_j\,s(d_{t-1},h_j)</span> говорят, на какие слова исходного предложения сейчас смотреть. Декодер получил возможность «подсмотреть» нужное место вместо сжатой памяти. Эта же идея, возведённая в принцип и избавленная от рекуррентности, станет трансформером: см. следующую статью <a href="/edufamcs-demo/handbook/dl/vnimanie-i-transformery/" rel="noopener noreferrer nofollow">про внимание</a>.</p>
+<p>Фундаментальный недостаток RNN и после LSTM остаётся: обработка <strong>последовательная</strong>. Состояние <span class="tex">h_t</span> нельзя посчитать, не вычислив <span class="tex">h_{t-1}</span>, поэтому на GPU обучение плохо параллелится, а путь информации между далёкими позициями всё ещё длинный. Трансформеры убрали именно это.</p>
+<h2 id="в-рекомендациях">В рекомендациях</h2>
+<p>Последовательность действий пользователя — естественный кандидат на RNN. <strong>GRU4Rec</strong> (Хидаши и соавторы, 2016) впервые применил GRU к сессионным рекомендациям: на вход подаются эмбеддинги просмотренных товаров, на выходе — скоры по каталогу для следующего. В исходной статье он обошёл item-kNN, который смотрит только на последний клик, и показал, что порядок событий несёт сигнал. Позже Ludewig и Jannach (2018) показали, что хорошо настроенные соседские методы по сессиям конкурируют с GRU4Rec, — честное сравнение с простыми бейзлайнами здесь обязательно. Подробнее об этой ветке, о SASRec и BERT4Rec — в статье <a href="/edufamcs-demo/handbook/recsys/posledovatelnye-modeli/" rel="noopener noreferrer nofollow">про последовательные модели</a>. Лекция 7 курса DeepRecSys «Sequential Recommenders» как раз проводит эту линию от RNN до трансформеров: <a href="https://www.youtube.com/watch?v=LATI_HsAnkk" rel="noopener noreferrer nofollow">LATI_HsAnkk</a>.</p>
+<h2 id="код-nnembedding-nnlstm">Код: nn.Embedding + nn.LSTM</h2>
+<div class="code"><div class="code-head"><span class="lang">python</span></div><pre><code><span class="tok-k">import</span> torch
+<span class="tok-k">from</span> torch <span class="tok-k">import</span> nn
+<span class="tok-k">from</span> torch.nn.utils.rnn <span class="tok-k">import</span> pack_padded_sequence
+
+<span class="tok-k">class</span> <span class="tok-f">TextClassifier</span><span class="tok-p">(</span>nn<span class="tok-p">.</span>Module<span class="tok-p">)</span><span class="tok-p">:</span>
+    <span class="tok-k">def</span> <span class="tok-f">__init__</span><span class="tok-p">(</span><span class="tok-f">self</span><span class="tok-p">,</span> vocab_size<span class="tok-p">,</span> n_classes<span class="tok-p">,</span> emb<span class="tok-p">=</span><span class="tok-n">128</span><span class="tok-p">,</span> hidden<span class="tok-p">=</span><span class="tok-n">128</span><span class="tok-p">)</span><span class="tok-p">:</span>
+        <span class="tok-f">super</span><span class="tok-p">(</span><span class="tok-p">)</span><span class="tok-p">.</span><span class="tok-f">__init__</span><span class="tok-p">(</span><span class="tok-p">)</span>
+        <span class="tok-f">self</span><span class="tok-p">.</span>emb <span class="tok-p">=</span> nn<span class="tok-p">.</span>Embedding<span class="tok-p">(</span>vocab_size<span class="tok-p">,</span> emb<span class="tok-p">,</span> padding_idx<span class="tok-p">=</span><span class="tok-n">0</span><span class="tok-p">)</span>       <span class="tok-c"># 0 = &lt;pad&gt;</span>
+        <span class="tok-f">self</span><span class="tok-p">.</span>rnn <span class="tok-p">=</span> nn<span class="tok-p">.</span>LSTM<span class="tok-p">(</span>emb<span class="tok-p">,</span> hidden<span class="tok-p">,</span> num_layers<span class="tok-p">=</span><span class="tok-n">2</span><span class="tok-p">,</span> batch_first<span class="tok-p">=</span><span class="tok-k">True</span><span class="tok-p">,</span>
+                           bidirectional<span class="tok-p">=</span><span class="tok-k">True</span><span class="tok-p">,</span> dropout<span class="tok-p">=</span><span class="tok-n">0.3</span><span class="tok-p">)</span>
+        <span class="tok-f">self</span><span class="tok-p">.</span>drop <span class="tok-p">=</span> nn<span class="tok-p">.</span>Dropout<span class="tok-p">(</span><span class="tok-n">0.3</span><span class="tok-p">)</span>
+        <span class="tok-f">self</span><span class="tok-p">.</span>out <span class="tok-p">=</span> nn<span class="tok-p">.</span>Linear<span class="tok-p">(</span><span class="tok-n">2</span> <span class="tok-p">*</span> hidden<span class="tok-p">,</span> n_classes<span class="tok-p">)</span>
+
+    <span class="tok-k">def</span> <span class="tok-f">forward</span><span class="tok-p">(</span><span class="tok-f">self</span><span class="tok-p">,</span> tokens<span class="tok-p">,</span> lengths<span class="tok-p">)</span><span class="tok-p">:</span>                <span class="tok-c"># tokens: (B, T), lengths: (B,)</span>
+        x <span class="tok-p">=</span> <span class="tok-f">self</span><span class="tok-p">.</span>drop<span class="tok-p">(</span><span class="tok-f">self</span><span class="tok-p">.</span>emb<span class="tok-p">(</span>tokens<span class="tok-p">)</span><span class="tok-p">)</span>                 <span class="tok-c"># (B, T, emb)</span>
+        packed <span class="tok-p">=</span> pack_padded_sequence<span class="tok-p">(</span>x<span class="tok-p">,</span> lengths<span class="tok-p">.</span>cpu<span class="tok-p">(</span><span class="tok-p">)</span><span class="tok-p">,</span> batch_first<span class="tok-p">=</span><span class="tok-k">True</span><span class="tok-p">,</span> enforce_sorted<span class="tok-p">=</span><span class="tok-k">False</span><span class="tok-p">)</span>
+        _<span class="tok-p">,</span> <span class="tok-p">(</span>h<span class="tok-p">,</span> _<span class="tok-p">)</span> <span class="tok-p">=</span> <span class="tok-f">self</span><span class="tok-p">.</span>rnn<span class="tok-p">(</span>packed<span class="tok-p">)</span>                    <span class="tok-c"># h: (layers*2, B, hidden)</span>
+        feat <span class="tok-p">=</span> torch<span class="tok-p">.</span>cat<span class="tok-p">(</span><span class="tok-p">[</span>h<span class="tok-p">[</span><span class="tok-p">-</span><span class="tok-n">2</span><span class="tok-p">]</span><span class="tok-p">,</span> h<span class="tok-p">[</span><span class="tok-p">-</span><span class="tok-n">1</span><span class="tok-p">]</span><span class="tok-p">]</span><span class="tok-p">,</span> dim<span class="tok-p">=</span><span class="tok-n">1</span><span class="tok-p">)</span>         <span class="tok-c"># последний слой: прямое + обратное</span>
+        <span class="tok-k">return</span> <span class="tok-f">self</span><span class="tok-p">.</span>out<span class="tok-p">(</span><span class="tok-f">self</span><span class="tok-p">.</span>drop<span class="tok-p">(</span>feat<span class="tok-p">)</span><span class="tok-p">)</span>                <span class="tok-c"># логиты</span>
+
+model <span class="tok-p">=</span> TextClassifier<span class="tok-p">(</span>vocab_size<span class="tok-p">=</span><span class="tok-n">20_000</span><span class="tok-p">,</span> n_classes<span class="tok-p">=</span><span class="tok-n">3</span><span class="tok-p">)</span>
+tokens <span class="tok-p">=</span> torch<span class="tok-p">.</span>randint<span class="tok-p">(</span><span class="tok-n">1</span><span class="tok-p">,</span> <span class="tok-n">20_000</span><span class="tok-p">,</span> <span class="tok-p">(</span><span class="tok-n">4</span><span class="tok-p">,</span> <span class="tok-n">12</span><span class="tok-p">)</span><span class="tok-p">)</span>
+lengths <span class="tok-p">=</span> torch<span class="tok-p">.</span>tensor<span class="tok-p">(</span><span class="tok-p">[</span><span class="tok-n">12</span><span class="tok-p">,</span> <span class="tok-n">9</span><span class="tok-p">,</span> <span class="tok-n">7</span><span class="tok-p">,</span> <span class="tok-n">3</span><span class="tok-p">]</span><span class="tok-p">)</span>
+<span class="tok-f">print</span><span class="tok-p">(</span>model<span class="tok-p">(</span>tokens<span class="tok-p">,</span> lengths<span class="tok-p">)</span><span class="tok-p">.</span>shape<span class="tok-p">)</span>                     <span class="tok-c"># torch.Size([4, 3])</span>
+</code></pre></div>
+<p><code>pack_padded_sequence</code> не даёт сети читать паддинг, поэтому последнее состояние относится к реальному последнему токену, а не к нулям.</p>
+<h2 id="практика-и-подводные-камни">Практика и подводные камни</h2>
+<ul>
+<li><strong>Паддинг и маски.</strong> Батч из последовательностей разной длины дополняют до общей; без <code>pack_padded_sequence</code> или маски потеря и состояние искажаются паддингом. Сортируйте по длине (bucketing), чтобы не считать лишние нули.</li>
+<li><strong>Размер словаря.</strong> Слишком большой словарь — разреженные эмбеддинги редких слов и переобучение; подслова (BPE) решают проблему и обрабатывают слова, которых не было в обучении.</li>
+<li><strong>Предобученные эмбеддинги</strong> на малых данных помогают; на больших — обучаемые с нуля обычно не хуже.</li>
+<li><strong>Утечки по времени.</strong> Для логов и рядов разбивайте выборку по времени, а не случайно; будущие события не должны попасть в признаки прошлого.</li>
+<li><strong>Взрыв градиента</strong>: <code>clip_grad_norm_</code> (1–5) для RNN — по умолчанию.</li>
+<li><strong>Что спрашивают на интервью</strong>: почему RNN не помнит далёкое прошлое, чем LSTM лучше, что делают вентили, чем GRU отличается от LSTM, зачем внимание, чем BPTT отличается от обычного backprop.</li>
+</ul>
+<p>Материалы курса: лекция первого сезона «Введение в NLP» (Екатерина Данькова) — задачи NLP, пословная разметка, неоднозначность слов; на её фоне полезно понимать, зачем нужны контекстные представления.</p>
+<h2 id="что-почитать">Что почитать</h2>
+<ul>
+<li>Mikolov et al., <em>Efficient Estimation of Word Representations in Vector Space</em>, 2013: <a href="https://arxiv.org/abs/1301.3781" rel="noopener noreferrer nofollow">arxiv.org/abs/1301.3781</a>; <em>Distributed Representations of Words and Phrases and their Compositionality</em> (negative sampling), NeurIPS 2013: <a href="https://arxiv.org/abs/1310.4546" rel="noopener noreferrer nofollow">arxiv.org/abs/1310.4546</a>; Pennington, Socher, Manning, <em>GloVe</em>, EMNLP 2014: <a href="https://aclanthology.org/D14-1162/" rel="noopener noreferrer nofollow">aclanthology.org/D14-1162</a>.</li>
+<li>Hochreiter, Schmidhuber, <em>Long Short-Term Memory</em>, 1997: <a href="https://doi.org/10.1162/neco.1997.9.8.1735" rel="noopener noreferrer nofollow">doi.org/10.1162/neco.1997.9.8.1735</a>; Gers, Schmidhuber, Cummins, <em>Learning to Forget: Continual Prediction with LSTM</em>, 2000: <a href="https://doi.org/10.1162/089976600300015015" rel="noopener noreferrer nofollow">doi.org/10.1162/089976600300015015</a>; Pascanu, Mikolov, Bengio, <em>On the difficulty of training recurrent neural networks</em>, ICML 2013: <a href="https://arxiv.org/abs/1211.5063" rel="noopener noreferrer nofollow">arxiv.org/abs/1211.5063</a>; Cho et al., <em>Learning Phrase Representations using RNN Encoder-Decoder</em>, 2014 (GRU): <a href="https://arxiv.org/abs/1406.1078" rel="noopener noreferrer nofollow">arxiv.org/abs/1406.1078</a>.</li>
+<li>Sutskever, Vinyals, Le, <em>Sequence to Sequence Learning with Neural Networks</em>, 2014: <a href="https://arxiv.org/abs/1409.3215" rel="noopener noreferrer nofollow">arxiv.org/abs/1409.3215</a>; Cho et al., <em>On the Properties of Neural Machine Translation: Encoder-Decoder Approaches</em>, 2014: <a href="https://arxiv.org/abs/1409.1259" rel="noopener noreferrer nofollow">arxiv.org/abs/1409.1259</a>; Bahdanau, Cho, Bengio, <em>Neural Machine Translation by Jointly Learning to Align and Translate</em>, 2014: <a href="https://arxiv.org/abs/1409.0473" rel="noopener noreferrer nofollow">arxiv.org/abs/1409.0473</a>.</li>
+<li>Hidasi et al., <em>Session-based Recommendations with Recurrent Neural Networks</em>, ICLR 2016: <a href="https://arxiv.org/abs/1511.06939" rel="noopener noreferrer nofollow">arxiv.org/abs/1511.06939</a>; Ludewig, Jannach, <em>Evaluation of Session-based Recommendation Algorithms</em>, 2018: <a href="https://arxiv.org/abs/1803.09587" rel="noopener noreferrer nofollow">arxiv.org/abs/1803.09587</a>.</li>
+<li>Olah, <em>Understanding LSTM Networks</em>: <a href="https://colah.github.io/posts/2015-08-Understanding-LSTMs/" rel="noopener noreferrer nofollow">colah.github.io/posts/2015-08-Understanding-LSTMs</a>; Яндекс Образование, «Нейросети для работы с последовательностями»: <a href="https://contest.yandex.ru/tracks/ml/deep-learning-architectures/neural-networks-for-sequences" rel="noopener noreferrer nofollow">contest.yandex.ru/tracks/ml/deep-learning-architectures/neural-networks-for-sequences</a>.</li>
+</ul>
+</div>
+      
+
+      
+      <nav class="pager" aria-label="Соседние статьи">
+        <a href="/edufamcs-demo/handbook/dl/svertochnye-seti/"><span><svg class="ico sm" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-arrow-left"/></svg>Назад</span>Свёрточные сети</a>
+        <a href="/edufamcs-demo/handbook/dl/vnimanie-i-transformery/"><span>Дальше<svg class="ico sm" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-arrow"/></svg></span>Внимание и трансформеры</a>
+      </nav>
+      
+    </article>
+
+    <aside class="hb-toc" aria-label="На этой странице">
+      <a class="l2" href="#токены-и-эмбеддинги">Токены и эмбеддинги</a><a class="l2" href="#рекуррентная-сеть">Рекуррентная сеть</a><a class="l2" href="#проблема-длинных-зависимостей">Проблема длинных зависимостей</a><a class="l2" href="#lstm-и-gru">LSTM и GRU</a><a class="l2" href="#seq2seq-и-внимание">Seq2seq и внимание</a><a class="l2" href="#в-рекомендациях">В рекомендациях</a><a class="l2" href="#код-nnembedding-nnlstm">Код: nn.Embedding + nn.LSTM</a><a class="l2" href="#практика-и-подводные-камни">Практика и подводные камни</a><a class="l2" href="#что-почитать">Что почитать</a>
+    </aside>
+  </div>
+</div>
+
+
+</main>
+
+<footer class="ftr" data-theme="dark">
+  <svg class="sym fern" viewBox="0 0 40.5 65.02" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#fern"/></svg>
+  <div class="container">
+    <div class="ftr-row">
+      <a href="/edufamcs-demo/" aria-label="EDU FAMCS — главная"><img src="/edufamcs-demo/static/brand/logo/logo-edu-dark.svg" alt="EDU FAMCS" width="196" height="40"></a>
+      <ul class="ftr-links">
+        <li><a href="/edufamcs-demo/#courses">Курсы</a></li>
+        <li><a href="/edufamcs-demo/ml/">Машинное обучение</a></li>
+        <li><a href="/edufamcs-demo/handbook/">Хендбук</a></li>
+        <li><a href="/edufamcs-demo/news/">Новости</a></li>
+        <li><a href="/edufamcs-demo/people/">Авторы</a></li>
+        <li><a href="/edufamcs-demo/about/">О&nbsp;нас</a></li>
+        <li><a href="/edufamcs-demo/propose/">Предложить или исправить</a></li>
+        <li><a href="/edufamcs-demo/privacy/">Конфиденциальность</a></li>
+      </ul>
+    </div>
+    <div class="ftr-big" aria-hidden="true">EDU<span class="d">·</span>FAMCS</div>
+    <p class="ftr-copy">© 2026 EDU FAMCS · Минск</p>
+  </div>
+</footer>
+
+<div class="toasts-region" aria-live="polite" id="toasts">
+
+</div>
+
+</body>
+</html>

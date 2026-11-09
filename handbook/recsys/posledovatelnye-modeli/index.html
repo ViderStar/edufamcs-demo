@@ -1,0 +1,291 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Последовательные модели: GRU4Rec, SASRec, BERT4Rec · EDU FAMCS</title>
+<meta name="description" content="Последовательные модели: GRU4Rec, SASRec, BERT4Rec — Рекомендательные системы. Хендбук ML-курса ФПМИ.">
+<meta name="theme-color" content="#060A16">
+<meta name="robots" content="noindex, nofollow">
+<meta name="htmx-config" content='{"allowEval":false,"includeIndicatorStyles":false,"historyCacheSize":0,"selfRequestsOnly":true}'>
+<meta name="katex-js" content="/edufamcs-demo/static/vendor/katex/katex.min.js">
+<meta name="katex-css" content="/edufamcs-demo/static/vendor/katex/katex.min.css">
+<link rel="icon" href="/edufamcs-demo/static/brand/logo/favicon-16.svg" type="image/svg+xml" sizes="16x16">
+<link rel="icon" href="/edufamcs-demo/static/brand/logo/favicon.svg" type="image/svg+xml" sizes="any">
+<link rel="preload" href="/edufamcs-demo/static/brand/fonts/manrope-cyrillic-400.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/edufamcs-demo/static/brand/fonts/unbounded-cyrillic-800.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="/edufamcs-demo/static/brand/fonts.css">
+<link rel="stylesheet" href="/edufamcs-demo/static/brand/tokens.css">
+<link rel="stylesheet" href="/edufamcs-demo/static/brand/components.css">
+<link rel="stylesheet" href="/edufamcs-demo/static/css/site.css">
+<link rel="stylesheet" href="/edufamcs-demo/static/css/hub.css">
+<link rel="stylesheet" href="/edufamcs-demo/static/css/about.css">
+<link rel="stylesheet" href="/edufamcs-demo/static/handbook/handbook.css">
+<script src="/edufamcs-demo/static/js/theme.js"></script>
+<script src="/edufamcs-demo/static/vendor/htmx/htmx.min.js" defer></script>
+<script src="/edufamcs-demo/static/vendor/alpine/alpine-csp.min.js" defer></script>
+<script src="/edufamcs-demo/static/js/site.js" defer></script>
+<script src="/edufamcs-demo/static/handbook/handbook.js" defer></script>
+</head>
+<body class="" hx-headers='{"X-CSRFToken": "kVJn0yIph1LDQyJSZIFrvcKSqiagcK4OJFirKwvMcS9M57UBwVozsHgXY0gLKUMy"}'>
+<a class="skip" href="#main">К содержанию</a>
+<div class="demo-bar" role="note">Демо-версия для отзывов: вход, запись на курсы и формы здесь не работают.</div>
+
+<header class="hdr">
+  <div class="container">
+    <a class="brand" href="/edufamcs-demo/" aria-label="EDU FAMCS — главная">
+      <span class="full"><img class="only-light" src="/edufamcs-demo/static/brand/logo/logo-edu-light.svg" alt="EDU FAMCS" width="196" height="40"><img class="only-dark" src="/edufamcs-demo/static/brand/logo/logo-edu-dark.svg" alt="EDU FAMCS" width="196" height="40"></span>
+      <span class="short"><img class="only-light" src="/edufamcs-demo/static/brand/logo/logo-edu-light.svg" alt="EDU FAMCS" height="30"><img class="only-dark" src="/edufamcs-demo/static/brand/logo/logo-edu-dark.svg" alt="EDU FAMCS" height="30"></span>
+    </a>
+    <nav class="nav" id="main-nav" aria-label="Основная навигация">
+      <a href="/edufamcs-demo/#courses">Курсы</a>
+      <a href="/edufamcs-demo/ml/" >Машинное обучение</a>
+      
+      <a href="/edufamcs-demo/handbook/" aria-current="page">Хендбук</a>
+      <a href="/edufamcs-demo/news/" >Новости</a>
+      <a href="/edufamcs-demo/people/" >Авторы</a>
+      <a href="/edufamcs-demo/about/" >О&nbsp;нас</a>
+    </nav>
+    <div class="hdr-actions">
+      
+      <a class="btn btn-outline btn-login" href="/edufamcs-demo/accounts/login/?next=/handbook/recsys/posledovatelnye-modeli/">Войти</a>
+      
+      <button class="icon-btn menu-btn" type="button" aria-label="Меню" aria-expanded="false" aria-controls="main-nav"><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-menu"/></svg></button>
+    </div>
+  </div>
+</header>
+
+<main id="main">
+
+
+
+<div class="container hb-page s-recsys">
+  <div class="hb">
+    <aside class="hb-nav" aria-label="Статьи раздела">
+      
+<form class="hb-search" action="/edufamcs-demo/handbook/search/" method="get" role="search">
+  <svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-search"/></svg>
+  <input class="input" type="search" name="q" value="" placeholder="Поиск по хендбуку" aria-label="Поиск по хендбуку" autocomplete="off" maxlength="120"
+    hx-get="/edufamcs-demo/handbook/search/" hx-trigger="input changed delay:250ms, search" hx-target="#hb-nav-results" hx-sync="this:replace">
+</form>
+
+      <div id="hb-nav-results" class="hb-nav-results" aria-live="polite"></div>
+      <a class="grp" href="/edufamcs-demo/handbook/recsys/">Линейные и нейросетевые модели: 2011–2023</a>
+      
+      <a class="" href="/edufamcs-demo/handbook/recsys/slim-i-ease/">Линейные item-item модели: SLIM и EASE</a>
+      
+      <a class="" href="/edufamcs-demo/handbook/recsys/ctr-modeli/">Модели CTR: от логрегрессии до DCN и DIN</a>
+      
+      <a class="" href="/edufamcs-demo/handbook/recsys/two-tower-ann/">Нейросетевые рекомендации: two-tower, negative sampling, ANN</a>
+      
+      <a class="cur" href="/edufamcs-demo/handbook/recsys/posledovatelnye-modeli/" aria-current="page">Последовательные модели: GRU4Rec, SASRec, BERT4Rec</a>
+      
+      <a class="" href="/edufamcs-demo/handbook/recsys/grafovye-modeli/">Графовые модели: от случайных блужданий до LightGCN</a>
+      
+    </aside>
+
+    <article class="hb-main">
+      <nav class="crumbs" aria-label="Навигация"><a href="/edufamcs-demo/handbook/">Хендбук</a><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-chev"/></svg><a href="/edufamcs-demo/handbook/recsys/">Рекомендательные системы</a></nav>
+      <h1 class="h1">Последовательные модели: GRU4Rec, SASRec, BERT4Rec</h1>
+      <div class="hb-meta">
+        
+        
+        <span><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-clock"/></svg>13&nbsp;мин</span>
+        <span class="hb-authors"><span class="avatar sm" title="Артем Лебедевич">АЛ</span>Артем Лебедевич</span>
+        <span><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-edit"/></svg>9 ноября 2026</span>
+        
+        
+      </div>
+
+      
+      <details class="hb-mtoc">
+        <summary><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-list"/></svg>Содержание<svg class="ico sm" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-chev-down"/></svg></summary>
+        <a class="l2" href="#марковские-цепи-и-fpmc-2010">Марковские цепи и FPMC (2010)</a><a class="l2" href="#gru4rec-2016">GRU4Rec (2016)</a><a class="l2" href="#sasrec-2018">SASRec (2018)</a><a class="l2" href="#bert4rec-2019">BERT4Rec (2019)</a><a class="l2" href="#спор-о-воспроизводимости">Спор о воспроизводимости</a><a class="l2" href="#код-sasrec-на-pytorch">Код: SASRec на PyTorch</a><a class="l2" href="#оценка-подвох-с-разбиением">Оценка: подвох с разбиением</a><a class="l2" href="#промышленные-модели">Промышленные модели</a><a class="l2" href="#что-дальше">Что дальше</a><a class="l2" href="#подводные-камни">Подводные камни</a><a class="l2" href="#что-почитать">Что почитать</a>
+      </details>
+      
+
+      <div class="prose"><p>Матричное разложение, EASE и двухбашенные сети с усреднённой историей рассматривают историю пользователя как <strong>множество</strong>. Но порядок несёт сигнал: после покупки телефона вероятнее чехол, чем второй телефон; после первой серии нужна вторая; в сессии «футболка → футболка → футболка» следующий клик почти наверняка тоже футболка. Последовательные рекомендательные модели ставят задачу <strong>next-item prediction</strong>: по упорядоченной истории <span class="tex">s_u = (i_1, \dots, i_t)</span> предсказать <span class="tex">i_{t+1}</span>.</p>
+<p>Отдельный частный случай — <strong>session-based рекомендации</strong>: пользователь анонимен (нет id и долгой истории), есть только последовательность кликов текущей сессии. Классические методы здесь непригодны — нечего факторизовать.</p>
+<h2 id="марковские-цепи-и-fpmc-2010">Марковские цепи и FPMC (2010)</h2>
+<p>Самая простая модель порядка — цепь Маркова первого порядка: <span class="tex">P(i_{t+1}=j \mid i_t=i)</span> оценивается частотой переходов в логах, это матрица <span class="tex">|I|\times|I|</span> (и, по сути, item-kNN с направленным сходством). Rendle, Freudenthaler и Schmidt-Thieme (WWW 2010) соединили её с матричным разложением в модели <strong>FPMC</strong> (Factorizing Personalized Markov Chains):</p>
+<div class="tex tex-block">\hat x_{u,t+1}(j) = \langle p_u, q_j \rangle + \langle a_{i_t}, b_j \rangle,</div>
+<p>где первое слагаемое — долгосрочные вкусы пользователя, второе — факторизованная матрица переходов от последнего объекта. Ограничения очевидны: учитывается только последний шаг (или корзина), а вся история сжата в один объект.</p>
+<h2 id="gru4rec-2016">GRU4Rec (2016)</h2>
+<p>Hidasi и соавторы (ICLR 2016) применили рекуррентную сеть к session-based задаче. Сессия подаётся в GRU по одному объекту: <span class="tex">h_t = \mathrm{GRU}(e_{i_t}, h_{t-1})</span>, выход — скоры по всему каталогу <span class="tex">\hat r = W h_t</span>. Идеи, которые оказались важнее самой GRU:</p>
+<ul>
+<li><strong>Session-parallel mini-batches.</strong> Сессии разной длины нельзя дополнять нулями без больших потерь: подают <span class="tex">B</span> сессий параллельно, и когда одна закончилась, на её место ставят следующую, сбрасывая скрытое состояние.</li>
+<li><strong>Сэмплирование негативов внутри батча</strong>: для каждого примера негативами служат следующие объекты других сессий батча. Это та же идея, что in-batch negatives в двухбашенных моделях, и ей сопутствует то же смещение популярности.</li>
+<li><strong>Ранжирующие потери вместо кросс-энтропии</strong>: BPR <span class="tex">-\log\sigma(r_{+} - r_{-})</span> и TOP1 <span class="tex">\sigma(r_{-}-r_{+}) + \sigma(r_{-}^2)</span>.</li>
+</ul>
+<p>Позже Hidasi и Karatzoglou (CIKM 2018, <em>Recurrent Neural Networks with Top-k Gains</em>) показали, что при большом числе негативов градиент BPR и TOP1 «затухает»: большинство негативов легко отделимы, и среднее по ним сглаживает сигнал. Предложены <strong>BPR-max</strong> и <strong>TOP1-max</strong> — потери, использующие softmax-веса негативов, так что вклад определяется самыми сильными из них; плюс рост числа негативов за счёт дополнительной выборки. Это дало прирост в десятки процентов по MRR на их датасетах и закрепило идею: <em>потеря важна не меньше архитектуры</em>.</p>
+<p><strong>Caser</strong> (Tang, Wang, WSDM 2018) трактует матрицу эмбеддингов последних <span class="tex">L</span> объектов как изображение и применяет горизонтальные и вертикальные свёртки. Сегодня применяется редко, но помнить стоит: показал, что CNN работает для коротких последовательностей.</p>
+<h2 id="sasrec-2018">SASRec (2018)</h2>
+<p>Kang и McAuley (ICDM 2018) перенесли в рекомендации механизм самовнимания: каждый элемент истории смотрит на все предыдущие и сам выбирает, какие важны. RNN сжимает всё прошлое в одно состояние фиксированного размера, а внимание — нет.</p>
+<p>Вход: эмбеддинги объектов плюс позиционные эмбеддинги <span class="tex">X = [e_{i_1}+p_1, \dots, e_{i_t}+p_t]</span>. Слой causal self-attention:</p>
+<div class="tex tex-block">\mathrm{Attn}(X) = \mathrm{softmax}\!\Big(\frac{(XW_Q)(XW_K)^\top}{\sqrt d} + M\Big)\,XW_V, \qquad M_{ab} = \begin{cases}0 &amp; b \le a\\ -\infty &amp; b &gt; a\end{cases}.</div>
+<p>Маска <span class="tex">M</span> запрещает смотреть в будущее. За вниманием идут FFN, остаточные связи и LayerNorm, как в обычном трансформере. На выходе позиции <span class="tex">a</span> — вектор <span class="tex">h_a</span>, который сравнивается со всеми эмбеддингами объектов: <span class="tex">r_{a,j} = \langle h_a, e_j \rangle</span>; обучение идёт <strong>на каждой позиции одновременно</strong>: <span class="tex">h_a</span> должен предсказывать <span class="tex">i_{a+1}</span>. Одна последовательность даёт <span class="tex">t</span> обучающих примеров за один проход.</p>
+<p>Оригинальная SASRec использовала бинарную кросс-энтропию (BCE) с одним случайным негативом на позицию: <span class="tex">-\log\sigma(r_{a,i_{a+1}}) - \log(1-\sigma(r_{a,j^-}))</span>.</p>
+<h2 id="bert4rec-2019">BERT4Rec (2019)</h2>
+<p>Sun et al. (CIKM 2019) предложили двунаправленный вариант: случайная доля <span class="tex">\rho</span> объектов заменяется токеном <code>[MASK]</code>, модель восстанавливает их, глядя в обе стороны (как BERT, cloze-задача). Доля <span class="tex">\rho</span> — гиперпараметр: в статье от 0,2 на плотных MovieLens до 0,4–0,6 на более разреженных датасетах. Аргумент: контекст справа тоже несёт информацию о том, что пользователь хочет сейчас, а двунаправленность даёт больше обучающих сигналов на последовательность. На момент выхода BERT4Rec значительно побеждал SASRec на четырёх датасетах, и «используйте BERT4Rec» стало почти правилом.</p>
+<p>Для инференса к концу последовательности дописывают <code>[MASK]</code> и читают его выход. Здесь возникает несоответствие: обучали на масках внутри, применяют — на последнем элементе; поэтому в обучение добавляют примеры, где маскируется именно последний элемент.</p>
+<h2 id="спор-о-воспроизводимости">Спор о воспроизводимости</h2>
+<p>Дальше история повторяет сюжет из статьи про <a href="/edufamcs-demo/handbook/recsys/slim-i-ease/" rel="noopener noreferrer nofollow">линейные модели</a>.</p>
+<ul>
+<li><strong>Petrov, Macdonald (RecSys 2022)</strong> — систематический обзор и воспроизведение BERT4Rec. Сравнения BERT4Rec с SASRec в последующих статьях противоречат друг другу. Оригинальный код с конфигурацией по умолчанию не воспроизводит результаты статьи; воспроизводит, если обучать до 30 раз дольше. Вывод: BERT4Rec действительно силён, но только при достаточно долгом обучении. Собственная реализация авторов на Hugging Face Transformers воспроизводит исходные результаты на трёх датасетах из четырёх и сходится до 95 % быстрее.</li>
+<li><strong>Klenitskiy, Vasilev (RecSys 2023)</strong> — <em>Turning Dross Into Gold Loss: is BERT4Rec really better than SASRec?</em>. Ключевое наблюдение: BERT4Rec обучается с <strong>полной кросс-энтропией по каталогу</strong> (softmax по всем объектам), а SASRec в оригинальной версии — с BCE и одним негативом. Если обучить SASRec тоже на полной кросс-энтропии, он сравнивается с BERT4Rec или превосходит его, обучаясь в разы быстрее. То есть выигрыш давала потеря, а не двунаправленность.</li>
+<li><strong>gSASRec (Petrov, Macdonald, RecSys 2023).</strong> Если каталог так велик, что полный softmax не помещается в память, нужна выборка негативов, а она приводит к <strong>завышению уверенности</strong> (overconfidence): в обучающих данных доля положительных завышена, и модель переоценивает их вероятности, плохо различая объекты в самом топе. По мнению авторов, именно это, а не двунаправленность, объясняет отставание SASRec от BERT4Rec. Они вводят <strong>gBCE</strong> — BCE, где вероятность положительного возводится в степень <span class="tex">\beta</span>, зависящую от доли выбранных негативов <span class="tex">\alpha = k/(|I|-1)</span> (<span class="tex">k</span> — число негативов) и параметра калибровки. gSASRec (больше негативов + gBCE) обгоняет BERT4Rec — на MovieLens-1M +9,5 % NDCG при −73 % времени обучения — и, в отличие от него, применим к каталогам больше миллиона объектов.</li>
+</ul>
+<p>Практические выводы:</p>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>Потеря</th>
+<th>Память</th>
+<th>Качество</th>
+<th>Когда</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>BCE, 1 негатив</td>
+<td><span class="tex">O(Bt)</span></td>
+<td>низкое</td>
+<td>исторический бейзлайн</td>
+</tr>
+<tr>
+<td>Полная CE по каталогу</td>
+<td><span class="tex">O(Bt\,\lvert I\rvert)</span></td>
+<td>высокое</td>
+<td>каталог до сотен тысяч объектов</td>
+</tr>
+<tr>
+<td>Сэмплированный softmax + logQ</td>
+<td><span class="tex">O(Bt\,k)</span></td>
+<td>хорошее при больших <span class="tex">k</span></td>
+<td>большие каталоги, популярностное смещение</td>
+</tr>
+<tr>
+<td>gBCE</td>
+<td><span class="tex">O(Bt\,k)</span></td>
+<td>высокое при сотнях негативов</td>
+<td>большие каталоги</td>
+</tr>
+</tbody>
+</table></div>
+<h2 id="код-sasrec-на-pytorch">Код: SASRec на PyTorch</h2>
+<div class="code"><div class="code-head"><span class="lang">python</span></div><pre><code><span class="tok-k">import</span> torch<span class="tok-p">,</span> torch.nn <span class="tok-k">as</span> nn<span class="tok-p">,</span> torch.nn.functional <span class="tok-k">as</span> F
+
+<span class="tok-k">class</span> <span class="tok-f">SASRec</span><span class="tok-p">(</span>nn<span class="tok-p">.</span>Module<span class="tok-p">)</span><span class="tok-p">:</span>
+    <span class="tok-k">def</span> <span class="tok-f">__init__</span><span class="tok-p">(</span><span class="tok-f">self</span><span class="tok-p">,</span> n_items<span class="tok-p">,</span> d<span class="tok-p">=</span><span class="tok-n">64</span><span class="tok-p">,</span> n_layers<span class="tok-p">=</span><span class="tok-n">2</span><span class="tok-p">,</span> n_heads<span class="tok-p">=</span><span class="tok-n">2</span><span class="tok-p">,</span> max_len<span class="tok-p">=</span><span class="tok-n">50</span><span class="tok-p">,</span> dropout<span class="tok-p">=</span><span class="tok-n">0.2</span><span class="tok-p">)</span><span class="tok-p">:</span>
+        <span class="tok-f">super</span><span class="tok-p">(</span><span class="tok-p">)</span><span class="tok-p">.</span><span class="tok-f">__init__</span><span class="tok-p">(</span><span class="tok-p">)</span>
+        <span class="tok-f">self</span><span class="tok-p">.</span>item <span class="tok-p">=</span> nn<span class="tok-p">.</span>Embedding<span class="tok-p">(</span>n_items <span class="tok-p">+</span> <span class="tok-n">1</span><span class="tok-p">,</span> d<span class="tok-p">,</span> padding_idx<span class="tok-p">=</span><span class="tok-n">0</span><span class="tok-p">)</span>   <span class="tok-c"># 0 — паддинг</span>
+        <span class="tok-f">self</span><span class="tok-p">.</span>pos <span class="tok-p">=</span> nn<span class="tok-p">.</span>Embedding<span class="tok-p">(</span>max_len<span class="tok-p">,</span> d<span class="tok-p">)</span>
+        layer <span class="tok-p">=</span> nn<span class="tok-p">.</span>TransformerEncoderLayer<span class="tok-p">(</span>d<span class="tok-p">,</span> n_heads<span class="tok-p">,</span> <span class="tok-n">4</span> <span class="tok-p">*</span> d<span class="tok-p">,</span> dropout<span class="tok-p">,</span>
+                                           batch_first<span class="tok-p">=</span><span class="tok-k">True</span><span class="tok-p">,</span> norm_first<span class="tok-p">=</span><span class="tok-k">True</span><span class="tok-p">)</span>
+        <span class="tok-f">self</span><span class="tok-p">.</span>enc <span class="tok-p">=</span> nn<span class="tok-p">.</span>TransformerEncoder<span class="tok-p">(</span>layer<span class="tok-p">,</span> n_layers<span class="tok-p">)</span>
+        <span class="tok-f">self</span><span class="tok-p">.</span>norm <span class="tok-p">=</span> nn<span class="tok-p">.</span>LayerNorm<span class="tok-p">(</span>d<span class="tok-p">)</span>
+
+    <span class="tok-k">def</span> <span class="tok-f">forward</span><span class="tok-p">(</span><span class="tok-f">self</span><span class="tok-p">,</span> seq<span class="tok-p">)</span><span class="tok-p">:</span>                                       <span class="tok-c"># seq: [B, L], 0 — паддинг справа</span>
+        B<span class="tok-p">,</span> L <span class="tok-p">=</span> seq<span class="tok-p">.</span>shape
+        x <span class="tok-p">=</span> <span class="tok-f">self</span><span class="tok-p">.</span>item<span class="tok-p">(</span>seq<span class="tok-p">)</span> <span class="tok-p">*</span> <span class="tok-p">(</span><span class="tok-f">self</span><span class="tok-p">.</span>item<span class="tok-p">.</span>embedding_dim <span class="tok-p">*</span><span class="tok-p">*</span> <span class="tok-n">0.5</span><span class="tok-p">)</span>
+        x <span class="tok-p">=</span> x <span class="tok-p">+</span> <span class="tok-f">self</span><span class="tok-p">.</span>pos<span class="tok-p">(</span>torch<span class="tok-p">.</span>arange<span class="tok-p">(</span>L<span class="tok-p">,</span> device<span class="tok-p">=</span>seq<span class="tok-p">.</span>device<span class="tok-p">)</span><span class="tok-p">)</span>
+        causal <span class="tok-p">=</span> torch<span class="tok-p">.</span>triu<span class="tok-p">(</span>torch<span class="tok-p">.</span>ones<span class="tok-p">(</span>L<span class="tok-p">,</span> L<span class="tok-p">,</span> device<span class="tok-p">=</span>seq<span class="tok-p">.</span>device<span class="tok-p">,</span> dtype<span class="tok-p">=</span>torch<span class="tok-p">.</span>bool<span class="tok-p">)</span><span class="tok-p">,</span> <span class="tok-n">1</span><span class="tok-p">)</span>
+        h <span class="tok-p">=</span> <span class="tok-f">self</span><span class="tok-p">.</span>enc<span class="tok-p">(</span>x<span class="tok-p">,</span> mask<span class="tok-p">=</span>causal<span class="tok-p">)</span>                              <span class="tok-c"># паддинг «в будущем», маска не нужна</span>
+        <span class="tok-k">return</span> <span class="tok-f">self</span><span class="tok-p">.</span>norm<span class="tok-p">(</span>h<span class="tok-p">)</span>                                       <span class="tok-c"># [B, L, d]</span>
+
+    <span class="tok-k">def</span> <span class="tok-f">loss</span><span class="tok-p">(</span><span class="tok-f">self</span><span class="tok-p">,</span> seq<span class="tok-p">,</span> target<span class="tok-p">)</span><span class="tok-p">:</span>
+        <span class="tok-s">"""target[b, a] = следующий объект после seq[b, a], 0 — игнорировать."""</span>
+        h <span class="tok-p">=</span> <span class="tok-f">self</span><span class="tok-p">(</span>seq<span class="tok-p">)</span>                                             <span class="tok-c"># [B, L, d]</span>
+        logits <span class="tok-p">=</span> h <span class="tok-p">@</span> <span class="tok-f">self</span><span class="tok-p">.</span>item<span class="tok-p">.</span>weight<span class="tok-p">.</span>T                           <span class="tok-c"># [B, L, n_items+1], полный softmax</span>
+        logits<span class="tok-p">[</span><span class="tok-p">.</span><span class="tok-p">.</span><span class="tok-p">.</span><span class="tok-p">,</span> <span class="tok-n">0</span><span class="tok-p">]</span> <span class="tok-p">=</span> <span class="tok-p">-</span><span class="tok-n">1e9</span>                                     <span class="tok-c"># паддинг не предсказываем</span>
+        <span class="tok-k">return</span> F<span class="tok-p">.</span>cross_entropy<span class="tok-p">(</span>logits<span class="tok-p">.</span>flatten<span class="tok-p">(</span><span class="tok-n">0</span><span class="tok-p">,</span> <span class="tok-n">1</span><span class="tok-p">)</span><span class="tok-p">,</span> target<span class="tok-p">.</span>flatten<span class="tok-p">(</span><span class="tok-p">)</span><span class="tok-p">,</span> ignore_index<span class="tok-p">=</span><span class="tok-n">0</span><span class="tok-p">)</span>
+
+<span class="tok-f">@torch</span><span class="tok-p">.</span>no_grad<span class="tok-p">(</span><span class="tok-p">)</span>
+<span class="tok-k">def</span> <span class="tok-f">recommend</span><span class="tok-p">(</span>model<span class="tok-p">,</span> seq<span class="tok-p">,</span> seen_mask<span class="tok-p">,</span> k<span class="tok-p">=</span><span class="tok-n">20</span><span class="tok-p">)</span><span class="tok-p">:</span>
+    last <span class="tok-p">=</span> <span class="tok-p">(</span>seq <span class="tok-p">!=</span> <span class="tok-n">0</span><span class="tok-p">)</span><span class="tok-p">.</span>sum<span class="tok-p">(</span><span class="tok-n">1</span><span class="tok-p">)</span> <span class="tok-p">-</span> <span class="tok-n">1</span>                                  <span class="tok-c"># индекс последнего события</span>
+    h <span class="tok-p">=</span> model<span class="tok-p">(</span>seq<span class="tok-p">)</span><span class="tok-p">[</span>torch<span class="tok-p">.</span>arange<span class="tok-p">(</span><span class="tok-f">len</span><span class="tok-p">(</span>seq<span class="tok-p">)</span><span class="tok-p">,</span> device<span class="tok-p">=</span>seq<span class="tok-p">.</span>device<span class="tok-p">)</span><span class="tok-p">,</span> last<span class="tok-p">]</span>
+    scores <span class="tok-p">=</span> h <span class="tok-p">@</span> model<span class="tok-p">.</span>item<span class="tok-p">.</span>weight<span class="tok-p">.</span>T
+    scores<span class="tok-p">[</span><span class="tok-p">:</span><span class="tok-p">,</span> <span class="tok-n">0</span><span class="tok-p">]</span> <span class="tok-p">=</span> <span class="tok-p">-</span><span class="tok-n">1e9</span>
+    scores<span class="tok-p">.</span>masked_fill_<span class="tok-p">(</span>seen_mask<span class="tok-p">,</span> <span class="tok-p">-</span><span class="tok-n">1e9</span><span class="tok-p">)</span>                          <span class="tok-c"># [B, n_items+1] булева маска просмотренного</span>
+    <span class="tok-k">return</span> scores<span class="tok-p">.</span>topk<span class="tok-p">(</span>k<span class="tok-p">,</span> dim<span class="tok-p">=</span><span class="tok-p">-</span><span class="tok-n">1</span><span class="tok-p">)</span><span class="tok-p">.</span>indices
+</code></pre></div>
+<p>Паддинг стоит справа: тогда реальные события никогда не смотрят на паддинг — он «в будущем» и закрыт причинной маской, отдельная маска паддинга не нужна, а состояние пользователя берут из последней непустой позиции. С паддингом слева понадобился бы <code>src_key_padding_mask</code>, и тут частая ошибка: у позиций паддинга все ключи оказываются закрыты. В свежих версиях PyTorch обучение это переживает, а в режиме <code>eval</code> быстрый путь <code>nn.TransformerEncoder</code> возвращает NaN во всех позициях — модель ломается только на выдаче. При больших <span class="tex">|I|</span> строка <code>logits = h @ ...</code> — главная трата памяти; её заменяют сэмплированием или gBCE.</p>
+<h2 id="оценка-подвох-с-разбиением">Оценка: подвох с разбиением</h2>
+<ul>
+<li><strong>Leave-one-out.</strong> Последний объект каждого пользователя идёт в тест, предпоследний — в валидацию. Просто, но тестовые события разных пользователей лежат в разное время: модель обучается на «будущем» других пользователей. Ошибка тонкая: утечка искажает метрики и может менять порядок моделей (Ji et al., TOIS 2023).</li>
+<li><strong>Глобальный временной сплит.</strong> Общая временная отсечка <span class="tex">T</span>: до — обучение, после — валидация и тест. Так работает продакшен; метрики ниже, зато честные. Обязательно убирать из теста объекты, увиденные пользователем раньше, если рекомендации не про повторные покупки.</li>
+<li>Метрики — полноранговые (HR@k, NDCG@k по всему каталогу), а не <strong>сэмплированные</strong> (100 случайных негативов): Krichene и Rendle (2020) показали, что сэмплированные метрики смещены и могут менять порядок моделей.</li>
+<li>Сравнение — против настроенного SASRec с полной CE и против сильного «непоследовательного» бейзлайна.</li>
+</ul>
+<h2 id="промышленные-модели">Промышленные модели</h2>
+<ul>
+<li><strong>PinnerFormer</strong> (Pancha et al., Pinterest, KDD 2022). Трансформер над историей действий пользователя (клики, сохранения), выдаёт вектор пользователя. Ключевое отличие от next-item: цель — <strong>долгосрочные</strong> действия в следующие 14 дней (не следующий клик), а потеря — dense all-action: все будущие позитивы за окно. Пересчёт эмбеддингов делается раз в день пакетно, не в реальном времени, что дешевле и стабильнее; по словам авторов, такая цель заметно сокращает разрыв между дневными и realtime-эмбеддингами.</li>
+<li><strong>TransAct</strong> (Xia et al., Pinterest, KDD 2023). Дополнение для реального времени: трансформер над последними 100 действиями пользователя внутри ранжировщика ленты Homefeed, работающий вместе с дневным PinnerFormer. Вместе они покрывают долгие и короткие интересы.</li>
+</ul>
+<h2 id="что-дальше">Что дальше</h2>
+<p>SASRec и родственные модели обучаются предсказывать следующий объект по каталогу из сотен тысяч id. Следующий шаг — масштабирование того же подхода на миллиарды событий и совместное моделирование ранжирования: HSTU (Meta, 2024) и ARGUS (Яндекс, 2025) рассматривают рекомендации как генеративную задачу над последовательностями действий; об этом — в главе о <a href="/edufamcs-demo/handbook/recsys/generativnye-rekomendateli/" rel="noopener noreferrer nofollow">генеративных рекомендателях</a>.</p>
+<h2 id="подводные-камни">Подводные камни</h2>
+<ul>
+<li><strong>Повторные объекты.</strong> В музыке и видео пользователи возвращаются к прежнему; если маскировать просмотренное, модель теряет сильный сигнал. Решение зависит от домена.</li>
+<li><strong>Длина истории.</strong> Типичные <code>max_len</code> — 50–200; длиннее — квадратичная память внимания. Для длинных историй применяют сжатие и отбор (как <a href="/edufamcs-demo/handbook/recsys/ctr-modeli/" rel="noopener noreferrer nofollow">SIM</a>).</li>
+<li><strong>Время между событиями.</strong> Порядок без временных интервалов — грубая модель; добавляют эмбеддинги временных промежутков (TiSASRec).</li>
+<li><strong>Признаки объектов.</strong> Чистый ID-SASRec игнорирует категорию, цену, тип события; в продакшене к эмбеддингу объекта добавляют признаки.</li>
+<li><strong>Холодные объекты</strong> не имеют эмбеддинга; нужны контентные признаки.</li>
+</ul>
+<h2 id="что-почитать">Что почитать</h2>
+<ul>
+<li>Rendle, Freudenthaler, Schmidt-Thieme. <em>Factorizing Personalized Markov Chains for Next-Basket Recommendation</em>, WWW 2010.</li>
+<li>Hidasi et al. <a href="https://arxiv.org/abs/1511.06939" rel="noopener noreferrer nofollow"><em>Session-based Recommendations with Recurrent Neural Networks</em></a>, ICLR 2016; Hidasi, Karatzoglou. <a href="https://arxiv.org/abs/1706.03847" rel="noopener noreferrer nofollow"><em>Recurrent Neural Networks with Top-k Gains for Session-based Recommendations</em></a>, CIKM 2018.</li>
+<li>Kang, McAuley. <a href="https://arxiv.org/abs/1808.09781" rel="noopener noreferrer nofollow"><em>Self-Attentive Sequential Recommendation</em></a>, ICDM 2018; Sun et al. <a href="https://arxiv.org/abs/1904.06690" rel="noopener noreferrer nofollow"><em>BERT4Rec</em></a>, CIKM 2019.</li>
+<li>Petrov, Macdonald. <a href="https://arxiv.org/abs/2207.07483" rel="noopener noreferrer nofollow"><em>A Systematic Review and Replicability Study of BERT4Rec</em></a>, 2022; Klenitskiy, Vasilev. <a href="https://arxiv.org/abs/2309.07602" rel="noopener noreferrer nofollow"><em>Turning Dross Into Gold Loss</em></a>, 2023; Petrov, Macdonald. <a href="https://arxiv.org/abs/2308.07192" rel="noopener noreferrer nofollow"><em>gSASRec</em></a>, 2023.</li>
+<li>Ji et al. <a href="https://arxiv.org/abs/2010.11060" rel="noopener noreferrer nofollow"><em>A Critical Study on Data Leakage in Recommender System Offline Evaluation</em></a>, TOIS 2023; Krichene, Rendle. <em>On Sampled Metrics for Item Recommendation</em>, KDD 2020.</li>
+<li>Pancha et al. <a href="https://arxiv.org/abs/2205.04507" rel="noopener noreferrer nofollow"><em>PinnerFormer</em></a>, KDD 2022; Xia et al. <a href="https://arxiv.org/abs/2306.00248" rel="noopener noreferrer nofollow"><em>TransAct</em></a>, KDD 2023.</li>
+<li>Курс DeepRecSys: <a href="https://www.youtube.com/watch?v=LATI_HsAnkk" rel="noopener noreferrer nofollow">лекция 7 про Sequential Recommenders</a>, <a href="https://www.youtube.com/watch?v=7hYJqQkWfMs" rel="noopener noreferrer nofollow">семинар 7 про PinnerFormer и TransAct</a>, <a href="https://www.youtube.com/watch?v=6OSjw4upu3g" rel="noopener noreferrer nofollow">лекция 13: исследования Sber AI Lab (Васильев) — разбор BERT4Rec vs SASRec</a>.</li>
+</ul>
+</div>
+      
+
+      
+      <nav class="pager" aria-label="Соседние статьи">
+        <a href="/edufamcs-demo/handbook/recsys/two-tower-ann/"><span><svg class="ico sm" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-arrow-left"/></svg>Назад</span>Нейросетевые рекомендации: two-tower, negative sampling, ANN</a>
+        <a href="/edufamcs-demo/handbook/recsys/grafovye-modeli/"><span>Дальше<svg class="ico sm" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-arrow"/></svg></span>Графовые модели: от случайных блужданий до LightGCN</a>
+      </nav>
+      
+    </article>
+
+    <aside class="hb-toc" aria-label="На этой странице">
+      <a class="l2" href="#марковские-цепи-и-fpmc-2010">Марковские цепи и FPMC (2010)</a><a class="l2" href="#gru4rec-2016">GRU4Rec (2016)</a><a class="l2" href="#sasrec-2018">SASRec (2018)</a><a class="l2" href="#bert4rec-2019">BERT4Rec (2019)</a><a class="l2" href="#спор-о-воспроизводимости">Спор о воспроизводимости</a><a class="l2" href="#код-sasrec-на-pytorch">Код: SASRec на PyTorch</a><a class="l2" href="#оценка-подвох-с-разбиением">Оценка: подвох с разбиением</a><a class="l2" href="#промышленные-модели">Промышленные модели</a><a class="l2" href="#что-дальше">Что дальше</a><a class="l2" href="#подводные-камни">Подводные камни</a><a class="l2" href="#что-почитать">Что почитать</a>
+    </aside>
+  </div>
+</div>
+
+
+</main>
+
+<footer class="ftr" data-theme="dark">
+  <svg class="sym fern" viewBox="0 0 40.5 65.02" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#fern"/></svg>
+  <div class="container">
+    <div class="ftr-row">
+      <a href="/edufamcs-demo/" aria-label="EDU FAMCS — главная"><img src="/edufamcs-demo/static/brand/logo/logo-edu-dark.svg" alt="EDU FAMCS" width="196" height="40"></a>
+      <ul class="ftr-links">
+        <li><a href="/edufamcs-demo/#courses">Курсы</a></li>
+        <li><a href="/edufamcs-demo/ml/">Машинное обучение</a></li>
+        <li><a href="/edufamcs-demo/handbook/">Хендбук</a></li>
+        <li><a href="/edufamcs-demo/news/">Новости</a></li>
+        <li><a href="/edufamcs-demo/people/">Авторы</a></li>
+        <li><a href="/edufamcs-demo/about/">О&nbsp;нас</a></li>
+        <li><a href="/edufamcs-demo/propose/">Предложить или исправить</a></li>
+        <li><a href="/edufamcs-demo/privacy/">Конфиденциальность</a></li>
+      </ul>
+    </div>
+    <div class="ftr-big" aria-hidden="true">EDU<span class="d">·</span>FAMCS</div>
+    <p class="ftr-copy">© 2026 EDU FAMCS · Минск</p>
+  </div>
+</footer>
+
+<div class="toasts-region" aria-live="polite" id="toasts">
+
+</div>
+
+</body>
+</html>

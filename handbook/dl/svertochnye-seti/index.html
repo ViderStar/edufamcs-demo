@@ -1,0 +1,302 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Свёрточные сети · EDU FAMCS</title>
+<meta name="description" content="Свёрточные сети — Введение в глубокое обучение. Хендбук ML-курса ФПМИ.">
+<meta name="theme-color" content="#060A16">
+<meta name="robots" content="noindex, nofollow">
+<meta name="htmx-config" content='{"allowEval":false,"includeIndicatorStyles":false,"historyCacheSize":0,"selfRequestsOnly":true}'>
+<meta name="katex-js" content="/edufamcs-demo/static/vendor/katex/katex.min.js">
+<meta name="katex-css" content="/edufamcs-demo/static/vendor/katex/katex.min.css">
+<link rel="icon" href="/edufamcs-demo/static/brand/logo/favicon-16.svg" type="image/svg+xml" sizes="16x16">
+<link rel="icon" href="/edufamcs-demo/static/brand/logo/favicon.svg" type="image/svg+xml" sizes="any">
+<link rel="preload" href="/edufamcs-demo/static/brand/fonts/manrope-cyrillic-400.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/edufamcs-demo/static/brand/fonts/unbounded-cyrillic-800.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="/edufamcs-demo/static/brand/fonts.css">
+<link rel="stylesheet" href="/edufamcs-demo/static/brand/tokens.css">
+<link rel="stylesheet" href="/edufamcs-demo/static/brand/components.css">
+<link rel="stylesheet" href="/edufamcs-demo/static/css/site.css">
+<link rel="stylesheet" href="/edufamcs-demo/static/css/hub.css">
+<link rel="stylesheet" href="/edufamcs-demo/static/css/about.css">
+<link rel="stylesheet" href="/edufamcs-demo/static/handbook/handbook.css">
+<script src="/edufamcs-demo/static/js/theme.js"></script>
+<script src="/edufamcs-demo/static/vendor/htmx/htmx.min.js" defer></script>
+<script src="/edufamcs-demo/static/vendor/alpine/alpine-csp.min.js" defer></script>
+<script src="/edufamcs-demo/static/js/site.js" defer></script>
+<script src="/edufamcs-demo/static/handbook/handbook.js" defer></script>
+</head>
+<body class="" hx-headers='{"X-CSRFToken": "KOGil4tyVnLLL5RO0DtsJaSjtHFRz81n9yfm52gVQe9U0E2xxQcAGFoo1pLm7iJ7"}'>
+<a class="skip" href="#main">К содержанию</a>
+<div class="demo-bar" role="note">Демо-версия для отзывов: вход, запись на курсы и формы здесь не работают.</div>
+
+<header class="hdr">
+  <div class="container">
+    <a class="brand" href="/edufamcs-demo/" aria-label="EDU FAMCS — главная">
+      <span class="full"><img class="only-light" src="/edufamcs-demo/static/brand/logo/logo-edu-light.svg" alt="EDU FAMCS" width="196" height="40"><img class="only-dark" src="/edufamcs-demo/static/brand/logo/logo-edu-dark.svg" alt="EDU FAMCS" width="196" height="40"></span>
+      <span class="short"><img class="only-light" src="/edufamcs-demo/static/brand/logo/logo-edu-light.svg" alt="EDU FAMCS" height="30"><img class="only-dark" src="/edufamcs-demo/static/brand/logo/logo-edu-dark.svg" alt="EDU FAMCS" height="30"></span>
+    </a>
+    <nav class="nav" id="main-nav" aria-label="Основная навигация">
+      <a href="/edufamcs-demo/#courses">Курсы</a>
+      <a href="/edufamcs-demo/ml/" >Машинное обучение</a>
+      
+      <a href="/edufamcs-demo/handbook/" aria-current="page">Хендбук</a>
+      <a href="/edufamcs-demo/news/" >Новости</a>
+      <a href="/edufamcs-demo/people/" >Авторы</a>
+      <a href="/edufamcs-demo/about/" >О&nbsp;нас</a>
+    </nav>
+    <div class="hdr-actions">
+      
+      <a class="btn btn-outline btn-login" href="/edufamcs-demo/accounts/login/?next=/handbook/dl/svertochnye-seti/">Войти</a>
+      
+      <button class="icon-btn menu-btn" type="button" aria-label="Меню" aria-expanded="false" aria-controls="main-nav"><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-menu"/></svg></button>
+    </div>
+  </div>
+</header>
+
+<main id="main">
+
+
+
+<div class="container hb-page hb-tone">
+  <div class="hb">
+    <aside class="hb-nav" aria-label="Статьи раздела">
+      
+<form class="hb-search" action="/edufamcs-demo/handbook/search/" method="get" role="search">
+  <svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-search"/></svg>
+  <input class="input" type="search" name="q" value="" placeholder="Поиск по хендбуку" aria-label="Поиск по хендбуку" autocomplete="off" maxlength="120"
+    hx-get="/edufamcs-demo/handbook/search/" hx-trigger="input changed delay:250ms, search" hx-target="#hb-nav-results" hx-sync="this:replace">
+</form>
+
+      <div id="hb-nav-results" class="hb-nav-results" aria-live="polite"></div>
+      <a class="grp" href="/edufamcs-demo/handbook/dl/">Архитектуры</a>
+      
+      <a class="cur" href="/edufamcs-demo/handbook/dl/svertochnye-seti/" aria-current="page">Свёрточные сети</a>
+      
+      <a class="" href="/edufamcs-demo/handbook/dl/posledovatelnosti-i-rnn/">Последовательности: эмбеддинги и рекуррентные сети</a>
+      
+      <a class="" href="/edufamcs-demo/handbook/dl/vnimanie-i-transformery/">Внимание и трансформеры</a>
+      
+    </aside>
+
+    <article class="hb-main">
+      <nav class="crumbs" aria-label="Навигация"><a href="/edufamcs-demo/handbook/">Хендбук</a><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-chev"/></svg><a href="/edufamcs-demo/handbook/dl/">Введение в глубокое обучение</a></nav>
+      <h1 class="h1">Свёрточные сети</h1>
+      <div class="hb-meta">
+        
+        
+        <span><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-clock"/></svg>11&nbsp;мин</span>
+        <span class="hb-authors"><span class="avatar sm" title="Артем Лебедевич">АЛ</span>Артем Лебедевич</span>
+        <span><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-edit"/></svg>9 ноября 2026</span>
+        
+        
+      </div>
+
+      
+      <details class="hb-mtoc">
+        <summary><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-list"/></svg>Содержание<svg class="ico sm" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-chev-down"/></svg></summary>
+        <a class="l2" href="#изображение-как-тензор-и-почему-не-mlp">Изображение как тензор и почему не MLP</a><a class="l2" href="#операция-свёртки">Операция свёртки</a><a class="l2" href="#пулинг-и-рецептивное-поле">Пулинг и рецептивное поле</a><a class="l2" href="#иерархия-признаков">Иерархия признаков</a><a class="l2" href="#история-архитектур">История архитектур</a><a class="l2" href="#transfer-learning">Transfer learning</a><a class="l2" href="#детекция-и-сегментация">Детекция и сегментация</a><a class="l2" href="#код-маленькая-cnn-и-fine-tuning">Код: маленькая CNN и fine-tuning</a><a class="l2" href="#практика-и-подводные-камни">Практика и подводные камни</a><a class="l2" href="#что-почитать">Что почитать</a>
+      </details>
+      
+
+      <div class="prose"><p>До 2012 года задачи компьютерного зрения в основном решали не нейросетями: на изображении вручную считали признаки (например, SIFT или HOG — гистограммы направлений градиентов яркости), а поверх обучали SVM или бустинг. Свёрточные сети существовали с 1990-х и даже читали рукописные цифры на банковских чеках, но на больших натуральных изображениях уступали классическим конвейерам. Всё изменилось, когда свёрточная сеть AlexNet выиграла ImageNet с огромным отрывом. Сейчас признаки не проектируют, а <strong>учат</strong>, и свёртка — основной инструмент для этого.</p>
+<h2 id="изображение-как-тензор-и-почему-не-mlp">Изображение как тензор и почему не MLP</h2>
+<p>Цветная картинка — тензор <span class="tex">C\times H\times W</span> (каналы × высота × ширина), для RGB <span class="tex">C=3</span>, значения пикселей в <span class="tex">[0,255]</span> нормируют. Чёрно-белая картинка MNIST — одна матрица <span class="tex">1\times28\times28</span> (в лекции — <span class="tex">32\times32</span>, как в LeNet).</p>
+<p>Полносвязная сеть требует растянуть картинку в вектор, и это ломает задачу:</p>
+<ol>
+<li><strong>Слишком много параметров.</strong> Картинка <span class="tex">224\times224\times3</span> — 150 528 входов; один слой на 1000 нейронов — 150 млн весов. Такая сеть переобучается и не помещается в память.</li>
+<li><strong>Теряется пространственная структура.</strong> Соседние пиксели связаны, но для MLP порядок входов не имеет значения: перемешайте пиксели одной и той же перестановкой во всей выборке, и качество не изменится.</li>
+<li><strong>Нет инвариантности к сдвигу.</strong> Кошка в левом углу и в правом для MLP — разные входы, и признак «ухо кошки» приходится учить отдельно для каждой позиции.</li>
+</ol>
+<p>Свёртка закладывает в архитектуру два предположения: <strong>локальность</strong> (полезные признаки определяются небольшой окрестностью) и <strong>разделение весов</strong> (один и тот же детектор применяется во всех позициях).</p>
+<h2 id="операция-свёртки">Операция свёртки</h2>
+<p>Ядро <span class="tex">K\in\mathbb R^{k\times k}</span> скользит по изображению, в каждой позиции считая сумму поэлементных произведений (формально в DL это взаимная корреляция, но все её называют свёрткой):</p>
+<div class="tex tex-block">Y_{ij}=\sum_{u=0}^{k-1}\sum_{v=0}^{k-1}K_{uv}\,X_{i+u,\,j+v}+b.</div>
+<p>Для многоканального входа ядро — тензор <span class="tex">k\times k\times C_{in}</span>, один фильтр даёт один выходной канал; <span class="tex">C_{out}</span> фильтров дают карту признаков с <span class="tex">C_{out}</span> каналами.</p>
+<p>Параметры, которые надо знать:</p>
+<ul>
+<li><strong>Шаг</strong> (stride) <span class="tex">s</span> — на сколько пикселей сдвигается ядро. <span class="tex">s=2</span> уменьшает карту вдвое.</li>
+<li><strong>Паддинг</strong> (padding) <span class="tex">p</span> — рамка из нулей по краям; <span class="tex">p=\lfloor k/2\rfloor</span> при <span class="tex">s=1</span> сохраняет размер («same»).</li>
+<li><strong>Каналы</strong> <span class="tex">C_{in}\to C_{out}</span>.</li>
+</ul>
+<p>Размер выхода по одной стороне:</p>
+<div class="tex tex-block">n_{out}=\Big\lfloor\frac{n+2p-k}{s}\Big\rfloor+1.</div>
+<p>Например, <span class="tex">n=32</span>, <span class="tex">k=5</span>, <span class="tex">p=0</span>, <span class="tex">s=1</span> дают 28. Число параметров слоя</p>
+<div class="tex tex-block">k^2\cdot C_{in}\cdot C_{out}+C_{out},</div>
+<p>и <strong>не зависит от размера изображения</strong>: свёртка <span class="tex">3\times3</span> из 64 в 128 каналов — <span class="tex">3\cdot3\cdot64\cdot128+128=73\,856</span> параметров, сколько бы пикселей ни было. Это и есть разделение весов.</p>
+<p>Свёртка <strong>эквивариантна</strong> к сдвигу: сдвинули вход — сдвинулась карта признаков. Инвариантность (к тому, где именно в кадре объект) получается дальше за счёт пулинга и глобального усреднения.</p>
+<p>Частные случаи: свёртка <span class="tex">1\times1</span> — это Linear по каналам в каждой точке (меняет число каналов, дёшево); depthwise-свёртка применяет по одному ядру на канал и используется в мобильных сетях (MobileNet) для экономии параметров.</p>
+<h2 id="пулинг-и-рецептивное-поле">Пулинг и рецептивное поле</h2>
+<p><strong>Пулинг</strong> уменьшает карту, агрегируя окна: max-pooling <span class="tex">2\times2</span> берёт максимум, average — среднее. Он даёт небольшую устойчивость к сдвигам и сокращает вычисления. Сегодня его часто заменяют свёрткой с шагом 2, а в конце сети делают <strong>global average pooling</strong> — усредняют карту по пространству в один вектор на канал, и это заменяет огромные полносвязные слои.</p>
+<p><strong>Рецептивное поле</strong> нейрона — область входа, влияющая на его значение. Один слой <span class="tex">3\times3</span> видит <span class="tex">3\times3</span>, два подряд — <span class="tex">5\times5</span>, три — <span class="tex">7\times7</span>; пулинг и шаг ускоряют рост. Поэтому стек из маленьких свёрток эквивалентен по охвату одной большой, но имеет меньше параметров (<span class="tex">3\cdot 3^2C^2=27C^2</span> против <span class="tex">49C^2</span> у одной <span class="tex">7\times7</span>) и больше нелинейностей — идея VGG.</p>
+<h2 id="иерархия-признаков">Иерархия признаков</h2>
+<p>Типичный блок: <code>Conv → (BatchNorm) → ReLU</code>, затем пулинг, и так несколько раз; в конце — Linear-голова с softmax. Чем глубже слой, тем больше его рецептивное поле и тем абстрактнее признаки: первые слои реагируют на границы и цвета, средние — на текстуры и простые формы, глубокие — на части и целые объекты. Нигде это не задавалось вручную — иерархия получается из обучения на задаче классификации. Поэтому представления, выученные на одной задаче, переносятся на другие (см. transfer learning ниже).</p>
+<h2 id="история-архитектур">История архитектур</h2>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>Год</th>
+<th>Архитектура</th>
+<th>Что принесла</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1980</td>
+<td>Неокогнитрон (Фукусима)</td>
+<td>иерархия «простых» и «сложных» клеток, прообраз свёртки и пулинга, обучение без учителя</td>
+</tr>
+<tr>
+<td>1998</td>
+<td>LeNet-5 (Лекун и соавторы)</td>
+<td>свёртки + пулинг + backprop, распознавание рукописных цифр (чеки)</td>
+</tr>
+<tr>
+<td>2012</td>
+<td>AlexNet (Крижевский, Суцкевер, Хинтон)</td>
+<td>8 слоёв (5 свёрточных + 3 полносвязных), ReLU, dropout, аугментации, обучение на двух GPU; top-5 ошибка на ILSVRC-2012 15,3 % против 26,2 % у второго места</td>
+</tr>
+<tr>
+<td>2014</td>
+<td>VGG (Симонян, Зиссерман)</td>
+<td>только свёртки <span class="tex">3\times3</span>, глубина 16–19 слоёв</td>
+</tr>
+<tr>
+<td>2014</td>
+<td>GoogLeNet / Inception (Сегеди и соавторы)</td>
+<td>22 слоя, параллельные ветви с разными ядрами, свёртки <span class="tex">1\times1</span> для экономии</td>
+</tr>
+<tr>
+<td>2015</td>
+<td>ResNet (Хе и соавторы)</td>
+<td>остаточные связи <span class="tex">h+F(h)</span>, 152 слоя; ансамбль дал 3,57 % top-5 ошибки на ILSVRC-2015</td>
+</tr>
+<tr>
+<td>2019</td>
+<td>EfficientNet (Тан, Ле)</td>
+<td>составное масштабирование глубины, ширины и разрешения</td>
+</tr>
+<tr>
+<td>2020</td>
+<td>ViT (Досовицкий и соавторы)</td>
+<td>трансформер над патчами <span class="tex">16\times16</span>; см. статью про <a href="/edufamcs-demo/handbook/dl/vnimanie-i-transformery/" rel="noopener noreferrer nofollow">внимание и трансформеры</a></td>
+</tr>
+</tbody>
+</table></div>
+<p>Для AlexNet решающими были три вещи сразу: большой размеченный датасет (обучающая часть ILSVRC — около 1,2 млн изображений в 1000 классах), вычисления на GPU и ReLU. Дальше схема была простой: глубина росла (8 → 19 → 22 → 152 слоя), но без остаточных связей после 20–30 слоёв более глубокая сеть начинала давать худшее качество даже на обучающей выборке. ResNet убрал это ограничение (<a href="/edufamcs-demo/handbook/dl/obratnoe-rasprostranenie-oshibki/" rel="noopener noreferrer nofollow">почему, см. в статье про backprop</a>).</p>
+<h2 id="transfer-learning">Transfer learning</h2>
+<p>Обучать сеть на ImageNet с нуля вам не нужно: ранние слои выучили универсальные признаки (границы, текстуры). Типичный сценарий для небольшого набора данных:</p>
+<ol>
+<li>Берём сеть, предобученную на ImageNet, и заменяем последний слой под свои <span class="tex">C</span> классов.</li>
+<li>Сначала обучаем <strong>только голову</strong> (остальные слои заморожены, <code>requires_grad=False</code>), с обычным <span class="tex">\eta</span>.</li>
+<li>Затем <strong>размораживаем</strong> всё или верхние блоки и дообучаем с малым <span class="tex">\eta</span> (<span class="tex">10^{-5}</span>–<span class="tex">10^{-4}</span>, у головы можно выше).</li>
+</ol>
+<p>Чем меньше данных и чем ближе ваша область к ImageNet, тем больше слоёв стоит заморозить. Важно применять к входу ту же нормализацию, на которой сеть обучали (для torchvision — средние и стандартные отклонения ImageNet).</p>
+<p><strong>Аугментации</strong>: случайный кроп и отражение, цветовой джиттер, <code>RandAugment</code>, <code>Mixup</code>/<code>CutMix</code>. Они применяются только к обучающей выборке, а на валидации — детерминированный ресайз и центральный кроп. Аугментация должна сохранять метку: поворот на 180° превращает «6» в «9», а отражение текста и цифр делает их нечитаемыми.</p>
+<h2 id="детекция-и-сегментация">Детекция и сегментация</h2>
+<p>Классификация даёт одну метку на картинку. <strong>Детекция</strong> выдаёт набор рамок с классами (семейства R-CNN, YOLO, SSD), <strong>семантическая сегментация</strong> — метку класса для каждого пикселя. Для сегментации стандартна U-Net (Роннебергер и соавторы, 2015): энкодер сжимает изображение, декодер восстанавливает разрешение, а skip-связи передают детали напрямую из энкодера в декодер; сеть родилась в биомедицинской сегментации и в исходной статье обучалась всего на 30 размеченных снимках (с сильными аугментациями). Сегодня те же задачи решают и трансформеры (DETR, SAM), но свёрточные бэкбоны остаются рабочей лошадкой, особенно когда важны скорость и мобильное железо.</p>
+<h2 id="код-маленькая-cnn-и-fine-tuning">Код: маленькая CNN и fine-tuning</h2>
+<div class="code"><div class="code-head"><span class="lang">python</span></div><pre><code><span class="tok-k">import</span> torch
+<span class="tok-k">from</span> torch <span class="tok-k">import</span> nn
+
+<span class="tok-k">class</span> <span class="tok-f">SmallCNN</span><span class="tok-p">(</span>nn<span class="tok-p">.</span>Module<span class="tok-p">)</span><span class="tok-p">:</span>                       <span class="tok-c"># CIFAR-10: вход 3x32x32</span>
+    <span class="tok-k">def</span> <span class="tok-f">__init__</span><span class="tok-p">(</span><span class="tok-f">self</span><span class="tok-p">,</span> n_classes<span class="tok-p">=</span><span class="tok-n">10</span><span class="tok-p">)</span><span class="tok-p">:</span>
+        <span class="tok-f">super</span><span class="tok-p">(</span><span class="tok-p">)</span><span class="tok-p">.</span><span class="tok-f">__init__</span><span class="tok-p">(</span><span class="tok-p">)</span>
+        <span class="tok-k">def</span> <span class="tok-f">block</span><span class="tok-p">(</span>cin<span class="tok-p">,</span> cout<span class="tok-p">)</span><span class="tok-p">:</span>
+            <span class="tok-k">return</span> nn<span class="tok-p">.</span>Sequential<span class="tok-p">(</span>
+                nn<span class="tok-p">.</span>Conv2d<span class="tok-p">(</span>cin<span class="tok-p">,</span> cout<span class="tok-p">,</span> <span class="tok-n">3</span><span class="tok-p">,</span> padding<span class="tok-p">=</span><span class="tok-n">1</span><span class="tok-p">)</span><span class="tok-p">,</span> nn<span class="tok-p">.</span>BatchNorm2d<span class="tok-p">(</span>cout<span class="tok-p">)</span><span class="tok-p">,</span> nn<span class="tok-p">.</span>ReLU<span class="tok-p">(</span><span class="tok-p">)</span><span class="tok-p">,</span>
+                nn<span class="tok-p">.</span>MaxPool2d<span class="tok-p">(</span><span class="tok-n">2</span><span class="tok-p">)</span><span class="tok-p">)</span>
+        <span class="tok-f">self</span><span class="tok-p">.</span>features <span class="tok-p">=</span> nn<span class="tok-p">.</span>Sequential<span class="tok-p">(</span>block<span class="tok-p">(</span><span class="tok-n">3</span><span class="tok-p">,</span> <span class="tok-n">32</span><span class="tok-p">)</span><span class="tok-p">,</span> block<span class="tok-p">(</span><span class="tok-n">32</span><span class="tok-p">,</span> <span class="tok-n">64</span><span class="tok-p">)</span><span class="tok-p">,</span> block<span class="tok-p">(</span><span class="tok-n">64</span><span class="tok-p">,</span> <span class="tok-n">128</span><span class="tok-p">)</span><span class="tok-p">)</span>  <span class="tok-c"># 32-&gt;16-&gt;8-&gt;4</span>
+        <span class="tok-f">self</span><span class="tok-p">.</span>head <span class="tok-p">=</span> nn<span class="tok-p">.</span>Sequential<span class="tok-p">(</span>nn<span class="tok-p">.</span>AdaptiveAvgPool2d<span class="tok-p">(</span><span class="tok-n">1</span><span class="tok-p">)</span><span class="tok-p">,</span> nn<span class="tok-p">.</span>Flatten<span class="tok-p">(</span><span class="tok-p">)</span><span class="tok-p">,</span> nn<span class="tok-p">.</span>Linear<span class="tok-p">(</span><span class="tok-n">128</span><span class="tok-p">,</span> n_classes<span class="tok-p">)</span><span class="tok-p">)</span>
+
+    <span class="tok-k">def</span> <span class="tok-f">forward</span><span class="tok-p">(</span><span class="tok-f">self</span><span class="tok-p">,</span> x<span class="tok-p">)</span><span class="tok-p">:</span>
+        <span class="tok-k">return</span> <span class="tok-f">self</span><span class="tok-p">.</span>head<span class="tok-p">(</span><span class="tok-f">self</span><span class="tok-p">.</span>features<span class="tok-p">(</span>x<span class="tok-p">)</span><span class="tok-p">)</span>
+
+model <span class="tok-p">=</span> SmallCNN<span class="tok-p">(</span><span class="tok-p">)</span>
+<span class="tok-f">print</span><span class="tok-p">(</span>model<span class="tok-p">(</span>torch<span class="tok-p">.</span>randn<span class="tok-p">(</span><span class="tok-n">8</span><span class="tok-p">,</span> <span class="tok-n">3</span><span class="tok-p">,</span> <span class="tok-n">32</span><span class="tok-p">,</span> <span class="tok-n">32</span><span class="tok-p">)</span><span class="tok-p">)</span><span class="tok-p">.</span>shape<span class="tok-p">)</span>    <span class="tok-c"># torch.Size([8, 10])</span>
+</code></pre></div>
+<p>Дообучение предобученной модели из torchvision:</p>
+<div class="code"><div class="code-head"><span class="lang">python</span></div><pre><code><span class="tok-k">import</span> torchvision
+<span class="tok-k">from</span> torchvision.models <span class="tok-k">import</span> resnet18<span class="tok-p">,</span> ResNet18_Weights
+
+weights <span class="tok-p">=</span> ResNet18_Weights<span class="tok-p">.</span>DEFAULT
+model <span class="tok-p">=</span> resnet18<span class="tok-p">(</span>weights<span class="tok-p">=</span>weights<span class="tok-p">)</span>
+preprocess <span class="tok-p">=</span> weights<span class="tok-p">.</span>transforms<span class="tok-p">(</span><span class="tok-p">)</span>                <span class="tok-c"># ресайз и нормализация как при обучении</span>
+
+<span class="tok-k">for</span> p <span class="tok-k">in</span> model<span class="tok-p">.</span>parameters<span class="tok-p">(</span><span class="tok-p">)</span><span class="tok-p">:</span>                     <span class="tok-c"># этап 1: заморозить всё</span>
+    p<span class="tok-p">.</span>requires_grad <span class="tok-p">=</span> <span class="tok-k">False</span>
+model<span class="tok-p">.</span>fc <span class="tok-p">=</span> nn<span class="tok-p">.</span>Linear<span class="tok-p">(</span>model<span class="tok-p">.</span>fc<span class="tok-p">.</span>in_features<span class="tok-p">,</span> <span class="tok-n">5</span><span class="tok-p">)</span>    <span class="tok-c"># новая голова под 5 классов</span>
+
+opt <span class="tok-p">=</span> torch<span class="tok-p">.</span>optim<span class="tok-p">.</span>AdamW<span class="tok-p">(</span>model<span class="tok-p">.</span>fc<span class="tok-p">.</span>parameters<span class="tok-p">(</span><span class="tok-p">)</span><span class="tok-p">,</span> lr<span class="tok-p">=</span><span class="tok-n">1e-3</span><span class="tok-p">)</span>
+<span class="tok-c"># ...обучить голову, затем разморозить:</span>
+<span class="tok-k">for</span> p <span class="tok-k">in</span> model<span class="tok-p">.</span>parameters<span class="tok-p">(</span><span class="tok-p">)</span><span class="tok-p">:</span>
+    p<span class="tok-p">.</span>requires_grad <span class="tok-p">=</span> <span class="tok-k">True</span>
+opt <span class="tok-p">=</span> torch<span class="tok-p">.</span>optim<span class="tok-p">.</span>AdamW<span class="tok-p">(</span>model<span class="tok-p">.</span>parameters<span class="tok-p">(</span><span class="tok-p">)</span><span class="tok-p">,</span> lr<span class="tok-p">=</span><span class="tok-n">1e-4</span><span class="tok-p">)</span>
+</code></pre></div>
+<p>Для замороженных частей с BatchNorm переведите их в <code>eval()</code>, иначе статистики нормализации продолжат обновляться по маленькому батчу.</p>
+<h2 id="практика-и-подводные-камни">Практика и подводные камни</h2>
+<ul>
+<li><strong>Порядок осей.</strong> PyTorch ждёт <code>(B, C, H, W)</code>, а PIL и numpy дают <code>(H, W, C)</code>; <code>ToTensor</code> переставляет их и масштабирует в <span class="tex">[0,1]</span>.</li>
+<li><strong>Размер изображения в голове.</strong> Если голова — <code>Linear</code> после <code>Flatten</code>, она привязана к разрешению входа; <code>AdaptiveAvgPool2d</code> снимает это ограничение.</li>
+<li><strong>Дисбаланс классов и утечки</strong>: кадры одного объекта или пациента не должны попасть и в train, и в val (иначе метрики завышены); для классов с малой долей используйте взвешенную потерю и метрики вроде PR-AUC.</li>
+<li><strong>Сдвиг распределения</strong>: сеть, обученная на студийных фото, ломается на снимках с телефона. Проверяйте на данных из реального источника.</li>
+<li><strong>Что спрашивают на интервью</strong>: формула размера выхода и числа параметров, роль пулинга, зачем остаточные связи, чем fine-tuning отличается от feature extraction.</li>
+<li><strong>Мост к рекомендациям и поиску.</strong> Эмбеддинги изображений из предобученной сети — готовые контентные признаки товаров для <a href="/edufamcs-demo/handbook/recsys/holodnyj-start-i-bandity/" rel="noopener noreferrer nofollow">холодного старта в рекомендациях</a> и для кандидатов в <a href="/edufamcs-demo/handbook/recsys/kandidaty-i-ranzhirovanie/" rel="noopener noreferrer nofollow">двухстадийной схеме</a>; а картинка и текст в одном пространстве — основа мультимодального <a href="/edufamcs-demo/handbook/retrieval/plotnyj-i-gibridnyj-poisk/" rel="noopener noreferrer nofollow">плотного поиска</a>.</li>
+</ul>
+<p>Материалы курса: лекция первого сезона «Введение в компьютерное зрение» (Никита Киселёв), запись <a href="https://www.youtube.com/watch?v=_kM-eJWOAVs" rel="noopener noreferrer nofollow">_kM-eJWOAVs</a>, и гостевая встреча второго сезона 28.05.2026 «Как компьютер учится смотреть: основы CV».</p>
+<h2 id="что-почитать">Что почитать</h2>
+<ul>
+<li>LeCun, Bottou, Bengio, Haffner, <em>Gradient-Based Learning Applied to Document Recognition</em>, Proceedings of the IEEE, 1998: <a href="https://doi.org/10.1109/5.726791" rel="noopener noreferrer nofollow">doi.org/10.1109/5.726791</a>.</li>
+<li>Krizhevsky, Sutskever, Hinton, <em>ImageNet Classification with Deep Convolutional Neural Networks</em>, NeurIPS 2012: <a href="https://papers.nips.cc/paper/2012/hash/c399862d3b9d6b76c8436e924a68c45b-Abstract.html" rel="noopener noreferrer nofollow">papers.nips.cc/paper/2012/hash/c399862d3b9d6b76c8436e924a68c45b-Abstract.html</a>.</li>
+<li>Simonyan, Zisserman, <em>Very Deep Convolutional Networks</em> (VGG), 2014: <a href="https://arxiv.org/abs/1409.1556" rel="noopener noreferrer nofollow">arxiv.org/abs/1409.1556</a>; He et al., <em>Deep Residual Learning for Image Recognition</em>, 2015: <a href="https://arxiv.org/abs/1512.03385" rel="noopener noreferrer nofollow">arxiv.org/abs/1512.03385</a>.</li>
+<li>Ronneberger, Fischer, Brox, <em>U-Net</em>, 2015: <a href="https://arxiv.org/abs/1505.04597" rel="noopener noreferrer nofollow">arxiv.org/abs/1505.04597</a>; Dosovitskiy et al., <em>An Image is Worth 16x16 Words</em> (ViT), 2020: <a href="https://arxiv.org/abs/2010.11929" rel="noopener noreferrer nofollow">arxiv.org/abs/2010.11929</a>.</li>
+<li>Конспекты Stanford CS231n: <a href="https://cs231n.github.io/convolutional-networks/" rel="noopener noreferrer nofollow">cs231n.github.io</a>; Яндекс Образование, «Свёрточные нейросети»: <a href="https://contest.yandex.ru/tracks/ml/deep-learning-architectures/convolutional-neural-networks" rel="noopener noreferrer nofollow">contest.yandex.ru/tracks/ml/deep-learning-architectures/convolutional-neural-networks</a>.</li>
+</ul>
+</div>
+      
+
+      
+      <nav class="pager" aria-label="Соседние статьи">
+        <a href="/edufamcs-demo/handbook/dl/optimizatory-i-regulyarizaciya/"><span><svg class="ico sm" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-arrow-left"/></svg>Назад</span>Оптимизаторы, регуляризация и практика обучения</a>
+        <a href="/edufamcs-demo/handbook/dl/posledovatelnosti-i-rnn/"><span>Дальше<svg class="ico sm" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-arrow"/></svg></span>Последовательности: эмбеддинги и рекуррентные сети</a>
+      </nav>
+      
+    </article>
+
+    <aside class="hb-toc" aria-label="На этой странице">
+      <a class="l2" href="#изображение-как-тензор-и-почему-не-mlp">Изображение как тензор и почему не MLP</a><a class="l2" href="#операция-свёртки">Операция свёртки</a><a class="l2" href="#пулинг-и-рецептивное-поле">Пулинг и рецептивное поле</a><a class="l2" href="#иерархия-признаков">Иерархия признаков</a><a class="l2" href="#история-архитектур">История архитектур</a><a class="l2" href="#transfer-learning">Transfer learning</a><a class="l2" href="#детекция-и-сегментация">Детекция и сегментация</a><a class="l2" href="#код-маленькая-cnn-и-fine-tuning">Код: маленькая CNN и fine-tuning</a><a class="l2" href="#практика-и-подводные-камни">Практика и подводные камни</a><a class="l2" href="#что-почитать">Что почитать</a>
+    </aside>
+  </div>
+</div>
+
+
+</main>
+
+<footer class="ftr" data-theme="dark">
+  <svg class="sym fern" viewBox="0 0 40.5 65.02" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#fern"/></svg>
+  <div class="container">
+    <div class="ftr-row">
+      <a href="/edufamcs-demo/" aria-label="EDU FAMCS — главная"><img src="/edufamcs-demo/static/brand/logo/logo-edu-dark.svg" alt="EDU FAMCS" width="196" height="40"></a>
+      <ul class="ftr-links">
+        <li><a href="/edufamcs-demo/#courses">Курсы</a></li>
+        <li><a href="/edufamcs-demo/ml/">Машинное обучение</a></li>
+        <li><a href="/edufamcs-demo/handbook/">Хендбук</a></li>
+        <li><a href="/edufamcs-demo/news/">Новости</a></li>
+        <li><a href="/edufamcs-demo/people/">Авторы</a></li>
+        <li><a href="/edufamcs-demo/about/">О&nbsp;нас</a></li>
+        <li><a href="/edufamcs-demo/propose/">Предложить или исправить</a></li>
+        <li><a href="/edufamcs-demo/privacy/">Конфиденциальность</a></li>
+      </ul>
+    </div>
+    <div class="ftr-big" aria-hidden="true">EDU<span class="d">·</span>FAMCS</div>
+    <p class="ftr-copy">© 2026 EDU FAMCS · Минск</p>
+  </div>
+</footer>
+
+<div class="toasts-region" aria-live="polite" id="toasts">
+
+</div>
+
+</body>
+</html>

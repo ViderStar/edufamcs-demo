@@ -1,0 +1,268 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Неперсонализированные и контентные рекомендации · EDU FAMCS</title>
+<meta name="description" content="Неперсонализированные и контентные рекомендации — Рекомендательные системы. Хендбук ML-курса ФПМИ.">
+<meta name="theme-color" content="#060A16">
+<meta name="robots" content="noindex, nofollow">
+<meta name="htmx-config" content='{"allowEval":false,"includeIndicatorStyles":false,"historyCacheSize":0,"selfRequestsOnly":true}'>
+<meta name="katex-js" content="/edufamcs-demo/static/vendor/katex/katex.min.js">
+<meta name="katex-css" content="/edufamcs-demo/static/vendor/katex/katex.min.css">
+<link rel="icon" href="/edufamcs-demo/static/brand/logo/favicon-16.svg" type="image/svg+xml" sizes="16x16">
+<link rel="icon" href="/edufamcs-demo/static/brand/logo/favicon.svg" type="image/svg+xml" sizes="any">
+<link rel="preload" href="/edufamcs-demo/static/brand/fonts/manrope-cyrillic-400.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/edufamcs-demo/static/brand/fonts/unbounded-cyrillic-800.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="/edufamcs-demo/static/brand/fonts.css">
+<link rel="stylesheet" href="/edufamcs-demo/static/brand/tokens.css">
+<link rel="stylesheet" href="/edufamcs-demo/static/brand/components.css">
+<link rel="stylesheet" href="/edufamcs-demo/static/css/site.css">
+<link rel="stylesheet" href="/edufamcs-demo/static/css/hub.css">
+<link rel="stylesheet" href="/edufamcs-demo/static/css/about.css">
+<link rel="stylesheet" href="/edufamcs-demo/static/handbook/handbook.css">
+<script src="/edufamcs-demo/static/js/theme.js"></script>
+<script src="/edufamcs-demo/static/vendor/htmx/htmx.min.js" defer></script>
+<script src="/edufamcs-demo/static/vendor/alpine/alpine-csp.min.js" defer></script>
+<script src="/edufamcs-demo/static/js/site.js" defer></script>
+<script src="/edufamcs-demo/static/handbook/handbook.js" defer></script>
+</head>
+<body class="" hx-headers='{"X-CSRFToken": "NvORQ3LOn8Hp7nKztJpKi3nRSAWFYOPacfnVA1ybiZ5ymWVi0W8SfyTWqi2awYxU"}'>
+<a class="skip" href="#main">К содержанию</a>
+<div class="demo-bar" role="note">Демо-версия для отзывов: вход, запись на курсы и формы здесь не работают.</div>
+
+<header class="hdr">
+  <div class="container">
+    <a class="brand" href="/edufamcs-demo/" aria-label="EDU FAMCS — главная">
+      <span class="full"><img class="only-light" src="/edufamcs-demo/static/brand/logo/logo-edu-light.svg" alt="EDU FAMCS" width="196" height="40"><img class="only-dark" src="/edufamcs-demo/static/brand/logo/logo-edu-dark.svg" alt="EDU FAMCS" width="196" height="40"></span>
+      <span class="short"><img class="only-light" src="/edufamcs-demo/static/brand/logo/logo-edu-light.svg" alt="EDU FAMCS" height="30"><img class="only-dark" src="/edufamcs-demo/static/brand/logo/logo-edu-dark.svg" alt="EDU FAMCS" height="30"></span>
+    </a>
+    <nav class="nav" id="main-nav" aria-label="Основная навигация">
+      <a href="/edufamcs-demo/#courses">Курсы</a>
+      <a href="/edufamcs-demo/ml/" >Машинное обучение</a>
+      
+      <a href="/edufamcs-demo/handbook/" aria-current="page">Хендбук</a>
+      <a href="/edufamcs-demo/news/" >Новости</a>
+      <a href="/edufamcs-demo/people/" >Авторы</a>
+      <a href="/edufamcs-demo/about/" >О&nbsp;нас</a>
+    </nav>
+    <div class="hdr-actions">
+      
+      <a class="btn btn-outline btn-login" href="/edufamcs-demo/accounts/login/?next=/handbook/recsys/nepersonalnye-i-kontentnye/">Войти</a>
+      
+      <button class="icon-btn menu-btn" type="button" aria-label="Меню" aria-expanded="false" aria-controls="main-nav"><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-menu"/></svg></button>
+    </div>
+  </div>
+</header>
+
+<main id="main">
+
+
+
+<div class="container hb-page s-recsys">
+  <div class="hb">
+    <aside class="hb-nav" aria-label="Статьи раздела">
+      
+<form class="hb-search" action="/edufamcs-demo/handbook/search/" method="get" role="search">
+  <svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-search"/></svg>
+  <input class="input" type="search" name="q" value="" placeholder="Поиск по хендбуку" aria-label="Поиск по хендбуку" autocomplete="off" maxlength="120"
+    hx-get="/edufamcs-demo/handbook/search/" hx-trigger="input changed delay:250ms, search" hx-target="#hb-nav-results" hx-sync="this:replace">
+</form>
+
+      <div id="hb-nav-results" class="hb-nav-results" aria-live="polite"></div>
+      <a class="grp" href="/edufamcs-demo/handbook/recsys/">Классика: 1992–2012</a>
+      
+      <a class="cur" href="/edufamcs-demo/handbook/recsys/nepersonalnye-i-kontentnye/" aria-current="page">Неперсонализированные и контентные рекомендации</a>
+      
+      <a class="" href="/edufamcs-demo/handbook/recsys/kollaborativnaya-filtraciya-po-sosedyam/">Коллаборативная фильтрация по соседям</a>
+      
+      <a class="" href="/edufamcs-demo/handbook/recsys/matrichnye-razlozheniya-als/">Матричные разложения и ALS</a>
+      
+      <a class="" href="/edufamcs-demo/handbook/recsys/neyavnyj-fidbek-bpr/">Неявный фидбэк: BPR, WARP и негативы</a>
+      
+    </aside>
+
+    <article class="hb-main">
+      <nav class="crumbs" aria-label="Навигация"><a href="/edufamcs-demo/handbook/">Хендбук</a><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-chev"/></svg><a href="/edufamcs-demo/handbook/recsys/">Рекомендательные системы</a></nav>
+      <h1 class="h1">Неперсонализированные и контентные рекомендации</h1>
+      <div class="hb-meta">
+        
+        
+        <span><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-clock"/></svg>11&nbsp;мин</span>
+        <span class="hb-authors"><span class="avatar sm" title="Артем Лебедевич">АЛ</span>Артем Лебедевич</span>
+        <span><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-edit"/></svg>9 ноября 2026</span>
+        
+        
+      </div>
+
+      
+      <details class="hb-mtoc">
+        <summary><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-list"/></svg>Содержание<svg class="ico sm" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-chev-down"/></svg></summary>
+        <a class="l2" href="#топ-популярного-и-его-окна">Топ популярного и его окна</a><a class="l3" href="#тренды-с-затуханием">Тренды с затуханием</a><a class="l3" href="#популярность-по-сегментам">Популярность по сегментам</a><a class="l3" href="#повторы-и-личный-топ">Повторы и личный топ</a><a class="l2" href="#средний-рейтинг-и-малые-выборки">Средний рейтинг и малые выборки</a><a class="l2" href="#с-этим-покупают-ассоциативные-правила">«С этим покупают»: ассоциативные правила</a><a class="l2" href="#контентные-рекомендации">Контентные рекомендации</a><a class="l3" href="#профиль-объекта">Профиль объекта</a><a class="l3" href="#профиль-пользователя">Профиль пользователя</a><a class="l3" href="#современный-вариант-эмбеддинги">Современный вариант: эмбеддинги</a><a class="l3" href="#плюсы-и-минусы">Плюсы и минусы</a><a class="l3" href="#гибриды">Гибриды</a><a class="l2" href="#что-ломается-на-практике">Что ломается на практике</a><a class="l2" href="#что-почитать">Что почитать</a>
+      </details>
+      
+
+      <div class="prose"><p>Это первая ступень лестницы: решения, которым не нужна история конкретного пользователя или даже матрица взаимодействий целиком. Они важны по трём причинам. Во-первых, это бейзлайн, который обязана побить любая модель (см. <a href="/edufamcs-demo/handbook/recsys/zadacha-i-dannye/" rel="noopener noreferrer nofollow">постановку задачи</a>). Во-вторых, это единственное, что работает при холодном старте (<a href="/edufamcs-demo/handbook/recsys/holodnyj-start-i-bandity/" rel="noopener noreferrer nofollow">холодный старт и бандиты</a>). В-третьих, их версии живут в проде внутри кандидатов любой сложной системы. Дальше в истории появятся <a href="/edufamcs-demo/handbook/recsys/kollaborativnaya-filtraciya-po-sosedyam/" rel="noopener noreferrer nofollow">соседи</a>, которые добавят персонализацию, но заплатят за неё данными.</p>
+<h2 id="топ-популярного-и-его-окна">Топ популярного и его окна</h2>
+<p>Самый простой рекомендатель: для всех одинаковый список объектов с наибольшим числом взаимодействий. Он решает «что вообще хорошо» и бесплатен, но:</p>
+<ul>
+<li>«Популярное за всё время» застывает: старые хиты вечно в топе. Нужно окно (7 или 14 дней) или затухание.</li>
+<li>Одинаковый список у всех ограничивает покрытие и порождает петлю обратной связи (popularity bias).</li>
+<li>Вес события должен отражать силу сигнала: покупка тяжелее просмотра.</li>
+</ul>
+<h3 id="тренды-с-затуханием">Тренды с затуханием</h3>
+<p>Вместо жёсткого окна каждому событию <span class="tex">e</span> с типом <span class="tex">w_e</span> и временем <span class="tex">t_e</span> дают вес, экспоненциально убывающий со временем:</p>
+<div class="tex tex-block">\mathrm{score}_i = \sum_{e \in E_i} w_e \cdot \exp\bigl(-\lambda\,(t_{\mathrm{now}} - t_e)\bigr), \qquad \lambda = \frac{\ln 2}{T_{1/2}}</div>
+<p>Параметр <span class="tex">T_{1/2}</span> — период полураспада: событие недельной давности весит вдвое меньше, если <span class="tex">T_{1/2}</span> равен неделе. Выбирается по валидации во времени: для новостей это часы, для фильмов — недели. Счёт можно обновлять инкрементально: хранить <span class="tex">s_i</span> и время последнего обновления, а при новом событии умножать на <span class="tex">\exp(-\lambda\Delta t)</span> и прибавлять вес.</p>
+<div class="code"><div class="code-head"><span class="lang">python</span></div><pre><code><span class="tok-k">import</span> numpy <span class="tok-k">as</span> np<span class="tok-p">,</span> pandas <span class="tok-k">as</span> pd
+
+<span class="tok-k">def</span> <span class="tok-f">trending</span><span class="tok-p">(</span>events<span class="tok-p">:</span> pd<span class="tok-p">.</span>DataFrame<span class="tok-p">,</span> now<span class="tok-p">,</span> half_life_days<span class="tok-p">=</span><span class="tok-n">7.0</span><span class="tok-p">,</span> weights<span class="tok-p">=</span><span class="tok-k">None</span><span class="tok-p">,</span> k<span class="tok-p">=</span><span class="tok-n">10</span><span class="tok-p">)</span><span class="tok-p">:</span>
+    <span class="tok-s">"""events: user_id, item_id, ts (datetime), event (str)."""</span>
+    weights <span class="tok-p">=</span> weights <span class="tok-k">or</span> <span class="tok-p">{</span><span class="tok-s">"</span><span class="tok-s">view</span><span class="tok-s">"</span><span class="tok-p">:</span> <span class="tok-n">1</span><span class="tok-p">,</span> <span class="tok-s">"</span><span class="tok-s">cart</span><span class="tok-s">"</span><span class="tok-p">:</span> <span class="tok-n">5</span><span class="tok-p">,</span> <span class="tok-s">"</span><span class="tok-s">buy</span><span class="tok-s">"</span><span class="tok-p">:</span> <span class="tok-n">20</span><span class="tok-p">}</span>
+    lam <span class="tok-p">=</span> np<span class="tok-p">.</span>log<span class="tok-p">(</span><span class="tok-n">2</span><span class="tok-p">)</span> <span class="tok-p">/</span> half_life_days
+    age <span class="tok-p">=</span> <span class="tok-p">(</span>now <span class="tok-p">-</span> events<span class="tok-p">.</span>ts<span class="tok-p">)</span><span class="tok-p">.</span>dt<span class="tok-p">.</span>total_seconds<span class="tok-p">(</span><span class="tok-p">)</span> <span class="tok-p">/</span> <span class="tok-n">86400</span>
+    w <span class="tok-p">=</span> events<span class="tok-p">.</span>event<span class="tok-p">.</span>map<span class="tok-p">(</span>weights<span class="tok-p">)</span><span class="tok-p">.</span>fillna<span class="tok-p">(</span><span class="tok-n">0</span><span class="tok-p">)</span> <span class="tok-p">*</span> np<span class="tok-p">.</span>exp<span class="tok-p">(</span><span class="tok-p">-</span>lam <span class="tok-p">*</span> age<span class="tok-p">)</span>
+    <span class="tok-k">return</span> w<span class="tok-p">.</span>groupby<span class="tok-p">(</span>events<span class="tok-p">.</span>item_id<span class="tok-p">)</span><span class="tok-p">.</span>sum<span class="tok-p">(</span><span class="tok-p">)</span><span class="tok-p">.</span>nlargest<span class="tok-p">(</span>k<span class="tok-p">)</span>
+</code></pre></div>
+<h3 id="популярность-по-сегментам">Популярность по сегментам</h3>
+<p>Один шаг к персонализации без обучения: считать топ отдельно по сегментам — регион, категория, устройство, время суток, возрастная группа. Для пользователя берут топ его сегмента. Если в сегменте мало данных, список сглаживают общим топом: <span class="tex">\mathrm{score}_i^{seg} + \beta\,\mathrm{score}_i^{global}</span>. Следите за размером сегментов: на тонких сегментах топ определяется шумом.</p>
+<h3 id="повторы-и-личный-топ">Повторы и личный топ</h3>
+<p>В продуктовом ритейле, музыке и сериалах заметная доля событий — повторы: молоко покупают каждую неделю, любимый трек слушают снова. Тогда сильный бейзлайн — <strong>личный топ</strong>: объекты из истории самого пользователя, отсортированные по тому же затухающему счёту, что и тренды, но посчитанному только по его событиям. Хвост списка добивают общим или сегментным топом. Для товаров с регулярным циклом (корм, линзы) полезен ещё и интервал: поднимать объект, когда с последней покупки прошло примерно столько, сколько у этого пользователя обычно проходит между покупками. В категориях длительного пользования (холодильник, телефон) повторы, наоборот, вредны, и купленное убирают правилом. Перед тем как маскировать в метриках всё просмотренное, посмотрите, какая доля тестовых событий — повторы: если она велика, маска выбросит самый лёгкий и самый полезный сигнал.</p>
+<h2 id="средний-рейтинг-и-малые-выборки">Средний рейтинг и малые выборки</h2>
+<p>Для явных оценок напрашивается сортировка по среднему. Проблема: у объекта с одной пятёркой среднее 5,0, у объекта с тысячей оценок и средним 4,8 — меньше. Нужно учитывать число оценок.</p>
+<p><strong>Байесовское среднее</strong> (формула IMDb weighted rating) стягивает среднее объекта к глобальному среднему тем сильнее, чем меньше у объекта оценок:</p>
+<div class="tex tex-block">\mathrm{WR} = \frac{v}{v+m}\,R + \frac{m}{v+m}\,C</div>
+<p>где <span class="tex">R</span> — среднее оценок объекта, <span class="tex">v</span> — число его оценок, <span class="tex">C</span> — среднее по всему каталогу, <span class="tex">m</span> — «вес априорной информации» (сколько оценок нужно, чтобы доверять объекту наполовину). Это апостериорное среднее при нормальном приоре с центром <span class="tex">C</span>; ровно та же идея ещё раз всплывёт как смещения <span class="tex">b_i</span> с регуляризацией в <a href="/edufamcs-demo/handbook/recsys/matrichnye-razlozheniya-als/" rel="noopener noreferrer nofollow">матричных разложениях</a>. Параметр <span class="tex">m</span> выбирают, например, как квантиль распределения <span class="tex">v</span> или по валидации.</p>
+<p>Для бинарных оценок (лайк/дизлайк, «полезный отзыв») применяют <strong>нижнюю границу доверительного интервала Уилсона</strong> (Wilson, 1927) для доли положительных <span class="tex">\hat p = \text{likes}/n</span>:</p>
+<div class="tex tex-block">\mathrm{LB} = \frac{\hat p + \frac{z^2}{2n} - z\sqrt{\frac{\hat p(1-\hat p)}{n} + \frac{z^2}{4n^2}}}{1 + \frac{z^2}{n}}</div>
+<p><span class="tex">z</span> — квантиль нормального распределения (1,96 для 95%). Объект с 1 лайком из 1 получит низкую границу (около 0,2), а с 900 из 1000 — около 0,88. Сортировка по LB — консервативный ранжировщик: «в худшем случае правдоподобная доля лайков». Побочный эффект: новые объекты систематически занижены, поэтому для них нужно исследование, а не только LB.</p>
+<h2 id="с-этим-покупают-ассоциативные-правила">«С этим покупают»: ассоциативные правила</h2>
+<p>Следующий шаг: связь между объектами. Задача market basket analysis: в корзинах (транзакциях) найти правила <span class="tex">A \Rightarrow B</span>. Agrawal, Imieliński, Swami (1993) поставили задачу, алгоритм Apriori (Agrawal &amp; Srikant, 1994) решил её за счёт свойства антимонотонности: если набор нечаст, то нечасты и все его надмножества. Метрики правила:</p>
+<div class="tex tex-block">\mathrm{support}(A\Rightarrow B)=P(A,B),\quad
+\mathrm{confidence}=P(B\mid A),\quad
+\mathrm{lift}=\frac{P(B\mid A)}{P(B)}</div>
+<p>Support отсекает редкое, confidence — условная вероятность, но она предвзята к популярным <span class="tex">B</span> (молоко покупают с чем угодно). Lift нормирует на популярность: <span class="tex">\mathrm{lift}\approx 1</span> — независимость, <span class="tex">&gt;1</span> — положительная связь. Для рекомендаций обычно берут правила с высоким lift при достаточном support.</p>
+<p>Для пар объектов считаются счётчики совместной встречаемости <span class="tex">C_{ij}</span> — это ровно недиагональные элементы <span class="tex">R^\top R</span>, откуда один шаг до <a href="/edufamcs-demo/handbook/recsys/kollaborativnaya-filtraciya-po-sosedyam/" rel="noopener noreferrer nofollow">item-based соседей</a>. Подводные камни: сверхпопулярные объекты (пакет, бананы) связаны со всем — их приходится отсекать или нормировать; сезонность и промо создают ложные ассоциации; пары дополняющих товаров (чехол к телефону) и заменителей (другой телефон) требуют разной логики.</p>
+<h2 id="контентные-рекомендации">Контентные рекомендации</h2>
+<p>Идея контентного подхода (content-based): рекомендуем то, что похоже по <strong>описанию</strong> на понравившееся ранее. Матрица взаимодействий не нужна — нужны признаки объектов.</p>
+<h3 id="профиль-объекта">Профиль объекта</h3>
+<p>Объект превращается в вектор:</p>
+<ul>
+<li><strong>Текст</strong> (название, описание) — TF-IDF: частота терма в документе, умноженная на <span class="tex">\log(N/\mathrm{df})</span>, чтобы редкие слова весили больше (то же, что в <a href="/edufamcs-demo/handbook/search/bm25-invertirovannyj-indeks/" rel="noopener noreferrer nofollow">BM25</a>).</li>
+<li><strong>Категории и атрибуты</strong> — one-hot или мультихот (бренд, жанр, автор), нормированные и взвешенные.</li>
+<li><strong>Числовые признаки</strong> — цена, год, длительность: после масштабирования или биннинга.</li>
+</ul>
+<h3 id="профиль-пользователя">Профиль пользователя</h3>
+<p>Простейший вариант — взвешенное среднее векторов объектов, с которыми он взаимодействовал:</p>
+<div class="tex tex-block">p_u = \frac{\sum_{i\in I_u} w_{ui}\, v_i}{\sum_{i\in I_u} w_{ui}}, \qquad
+\hat s_{ui} = \cos(p_u, v_i) = \frac{p_u^\top v_i}{\|p_u\|\,\|v_i\|}</div>
+<p>Веса <span class="tex">w_{ui}</span> — сила сигнала и свежесть (то же экспоненциальное затухание, что выше). Для «похожих товаров» профиль пользователя не нужен: берут ближайших соседей объекта по косинусу.</p>
+<div class="code"><div class="code-head"><span class="lang">python</span></div><pre><code><span class="tok-k">from</span> sklearn.feature_extraction.text <span class="tok-k">import</span> TfidfVectorizer
+<span class="tok-k">from</span> sklearn.preprocessing <span class="tok-k">import</span> normalize
+<span class="tok-k">import</span> numpy <span class="tok-k">as</span> np
+
+tfidf <span class="tok-p">=</span> TfidfVectorizer<span class="tok-p">(</span>min_df<span class="tok-p">=</span><span class="tok-n">2</span><span class="tok-p">,</span> max_df<span class="tok-p">=</span><span class="tok-n">0.5</span><span class="tok-p">,</span> ngram_range<span class="tok-p">=</span><span class="tok-p">(</span><span class="tok-n">1</span><span class="tok-p">,</span> <span class="tok-n">2</span><span class="tok-p">)</span><span class="tok-p">,</span> sublinear_tf<span class="tok-p">=</span><span class="tok-k">True</span><span class="tok-p">)</span>
+V <span class="tok-p">=</span> normalize<span class="tok-p">(</span>tfidf<span class="tok-p">.</span>fit_transform<span class="tok-p">(</span>items<span class="tok-p">.</span>title <span class="tok-p">+</span> <span class="tok-s">"</span> <span class="tok-s">"</span> <span class="tok-p">+</span> items<span class="tok-p">.</span>description<span class="tok-p">)</span><span class="tok-p">)</span>  <span class="tok-c"># строки единичной нормы</span>
+
+<span class="tok-k">def</span> <span class="tok-f">similar_items</span><span class="tok-p">(</span>i<span class="tok-p">,</span> k<span class="tok-p">=</span><span class="tok-n">10</span><span class="tok-p">)</span><span class="tok-p">:</span>
+    sims <span class="tok-p">=</span> <span class="tok-p">(</span>V <span class="tok-p">@</span> V<span class="tok-p">[</span>i<span class="tok-p">]</span><span class="tok-p">.</span>T<span class="tok-p">)</span><span class="tok-p">.</span>toarray<span class="tok-p">(</span><span class="tok-p">)</span><span class="tok-p">.</span>ravel<span class="tok-p">(</span><span class="tok-p">)</span>      <span class="tok-c"># косинус = скалярное произведение нормированных</span>
+    sims<span class="tok-p">[</span>i<span class="tok-p">]</span> <span class="tok-p">=</span> <span class="tok-p">-</span><span class="tok-n">1</span>                               <span class="tok-c"># сам объект не рекомендуем</span>
+    <span class="tok-k">return</span> np<span class="tok-p">.</span>argsort<span class="tok-p">(</span><span class="tok-p">-</span>sims<span class="tok-p">)</span><span class="tok-p">[</span><span class="tok-p">:</span>k<span class="tok-p">]</span>
+</code></pre></div>
+<p>На больших каталогах вместо полного произведения используют приближённый поиск ближайших соседей (ANN), см. <a href="/edufamcs-demo/handbook/recsys/two-tower-ann/" rel="noopener noreferrer nofollow">двухбашенные модели</a>.</p>
+<h3 id="современный-вариант-эмбеддинги">Современный вариант: эмбеддинги</h3>
+<p>TF-IDF не знает синонимов: «ноутбук» и «лэптоп» — разные термы. Сейчас вместо него берут плотные эмбеддинги: sentence-encoders для текста (SBERT, multilingual-e5, BGE-M3; для русского есть и отдельные энкодеры на основе ruBERT) и CLIP (Radford et al., 2021) для картинок, который кладёт изображения и тексты в общее пространство. Тогда «похожие товары» считаются как ближайшие по косинусу в этом пространстве, возможен поиск по картинке и по тексту одной моделью. Эмбеддинги контента также используются как признаки для решения <a href="/edufamcs-demo/handbook/recsys/holodnyj-start-i-bandity/" rel="noopener noreferrer nofollow">холодного старта</a> в коллаборативных моделях.</p>
+<h3 id="плюсы-и-минусы">Плюсы и минусы</h3>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>Плюсы</th>
+<th>Минусы</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Работает для новых объектов без истории</td>
+<td>Сверхспециализация: рекомендует то же самое, «пузырь фильтров»</td>
+</tr>
+<tr>
+<td>Объяснимость: «потому что вам понравилось X»</td>
+<td>Качество упирается в признаки; плохие описания — плохие рекомендации</td>
+</tr>
+<tr>
+<td>Не нужны данные других пользователей</td>
+<td>Не ловит неочевидные связи («подгузники и пиво» — по контенту не видно)</td>
+</tr>
+<tr>
+<td>Независим от популярности</td>
+<td>Нужен пользователь с историей: профиль строится по ней</td>
+</tr>
+</tbody>
+</table></div>
+<h3 id="гибриды">Гибриды</h3>
+<p>Контент и коллаборатив дополняют друг друга. Основные схемы: <strong>взвешенная смесь</strong> оценок; <strong>переключение</strong> (контент, пока у объекта мало взаимодействий, затем коллаборатив); <strong>контентные признаки внутри коллаборативной модели</strong> (LightFM, двухбашенные сети); <strong>контентные эмбеддинги как инициализация</strong> векторов новых объектов. Фактически современные <a href="/edufamcs-demo/handbook/recsys/kandidaty-i-ranzhirovanie/" rel="noopener noreferrer nofollow">двухстадийные системы</a> — это гибрид, где разные источники кандидатов (популярное, контентные, коллаборативные) сливаются и ранжируются одной моделью.</p>
+<h2 id="что-ломается-на-практике">Что ломается на практике</h2>
+<ul>
+<li><strong>Популярное и персональное нужно сравнивать на одном сплите.</strong> Если бейзлайн «популярное за неделю» считать по данным, включающим тестовый период, он завышен.</li>
+<li><strong>Нормализация TF-IDF по каталогу</strong> устаревает: IDF пересчитывают периодически, а при обновлении словаря перестраивают все векторы.</li>
+<li><strong>Пользователь с двумя интересами</strong> (детские книги и детективы): средний вектор их смешивает и указывает в никуда. Исправление — несколько векторов-интересов (кластеризация объектов пользователя) или поиск по каждому объекту истории отдельно.</li>
+<li><strong>Дубли и вариации товара</strong> (цвет, размер) забивают выдачу; нужна дедупликация по карточке.</li>
+<li>На собеседованиях часто спрашивают: «почему среднее по рейтингу — плохой ранжировщик?», «чем lift отличается от confidence?», «как рекомендовать новый товар?».</li>
+</ul>
+<h2 id="что-почитать">Что почитать</h2>
+<ul>
+<li>Agrawal R., Imieliński T., Swami A. <em>Mining association rules between sets of items in large databases</em>, SIGMOD 1993 — https://doi.org/10.1145/170035.170072</li>
+<li>Agrawal R., Srikant R. <em>Fast Algorithms for Mining Association Rules</em> (Apriori), VLDB 1994 — https://www.vldb.org/conf/1994/P487.PDF</li>
+<li>Pazzani M., Billsus D. <em>Content-Based Recommendation Systems</em>, в сб. <em>The Adaptive Web</em>, 2007 — https://doi.org/10.1007/978-3-540-72079-9_10</li>
+<li>Lops P., de Gemmis M., Semeraro G. <em>Content-based Recommender Systems: State of the Art and Trends</em>, в сб. <em>Recommender Systems Handbook</em>, 2011 — https://doi.org/10.1007/978-0-387-85820-3_3</li>
+<li>Radford A. et al. <em>Learning Transferable Visual Models From Natural Language Supervision</em> (CLIP), 2021 — https://arxiv.org/abs/2103.00020</li>
+<li>Учебник по ML от ШАД Яндекса, 9.3 «Контентные рекомендации» — https://contest.yandex.ru/tracks/ml/recommender-systems/content-based-recommendations</li>
+<li>Мини-курс MTS «Your first recsys»: часть 1 — https://youtu.be/M65RLMfEsaM, часть 2 (валидация, метрики и бейзлайны) — https://youtu.be/CleTDxTjQ24; введение DeepRecSys — https://youtu.be/bIc58LpxLrs</li>
+</ul>
+</div>
+      
+
+      
+      <nav class="pager" aria-label="Соседние статьи">
+        <a href="/edufamcs-demo/handbook/recsys/oflajn-metriki/"><span><svg class="ico sm" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-arrow-left"/></svg>Назад</span>Офлайн-метрики: Precision@k, Recall@k, MAP, NDCG</a>
+        <a href="/edufamcs-demo/handbook/recsys/kollaborativnaya-filtraciya-po-sosedyam/"><span>Дальше<svg class="ico sm" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-arrow"/></svg></span>Коллаборативная фильтрация по соседям</a>
+      </nav>
+      
+    </article>
+
+    <aside class="hb-toc" aria-label="На этой странице">
+      <a class="l2" href="#топ-популярного-и-его-окна">Топ популярного и его окна</a><a class="l3" href="#тренды-с-затуханием">Тренды с затуханием</a><a class="l3" href="#популярность-по-сегментам">Популярность по сегментам</a><a class="l3" href="#повторы-и-личный-топ">Повторы и личный топ</a><a class="l2" href="#средний-рейтинг-и-малые-выборки">Средний рейтинг и малые выборки</a><a class="l2" href="#с-этим-покупают-ассоциативные-правила">«С этим покупают»: ассоциативные правила</a><a class="l2" href="#контентные-рекомендации">Контентные рекомендации</a><a class="l3" href="#профиль-объекта">Профиль объекта</a><a class="l3" href="#профиль-пользователя">Профиль пользователя</a><a class="l3" href="#современный-вариант-эмбеддинги">Современный вариант: эмбеддинги</a><a class="l3" href="#плюсы-и-минусы">Плюсы и минусы</a><a class="l3" href="#гибриды">Гибриды</a><a class="l2" href="#что-ломается-на-практике">Что ломается на практике</a><a class="l2" href="#что-почитать">Что почитать</a>
+    </aside>
+  </div>
+</div>
+
+
+</main>
+
+<footer class="ftr" data-theme="dark">
+  <svg class="sym fern" viewBox="0 0 40.5 65.02" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#fern"/></svg>
+  <div class="container">
+    <div class="ftr-row">
+      <a href="/edufamcs-demo/" aria-label="EDU FAMCS — главная"><img src="/edufamcs-demo/static/brand/logo/logo-edu-dark.svg" alt="EDU FAMCS" width="196" height="40"></a>
+      <ul class="ftr-links">
+        <li><a href="/edufamcs-demo/#courses">Курсы</a></li>
+        <li><a href="/edufamcs-demo/ml/">Машинное обучение</a></li>
+        <li><a href="/edufamcs-demo/handbook/">Хендбук</a></li>
+        <li><a href="/edufamcs-demo/news/">Новости</a></li>
+        <li><a href="/edufamcs-demo/people/">Авторы</a></li>
+        <li><a href="/edufamcs-demo/about/">О&nbsp;нас</a></li>
+        <li><a href="/edufamcs-demo/propose/">Предложить или исправить</a></li>
+        <li><a href="/edufamcs-demo/privacy/">Конфиденциальность</a></li>
+      </ul>
+    </div>
+    <div class="ftr-big" aria-hidden="true">EDU<span class="d">·</span>FAMCS</div>
+    <p class="ftr-copy">© 2026 EDU FAMCS · Минск</p>
+  </div>
+</footer>
+
+<div class="toasts-region" aria-live="polite" id="toasts">
+
+</div>
+
+</body>
+</html>

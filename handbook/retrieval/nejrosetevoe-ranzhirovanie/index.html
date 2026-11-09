@@ -1,0 +1,297 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Нейросетевое ранжирование: cross-encoder, ColBERT, SPLADE · EDU FAMCS</title>
+<meta name="description" content="Нейросетевое ранжирование: cross-encoder, ColBERT, SPLADE — Поиск. Хендбук ML-курса ФПМИ.">
+<meta name="theme-color" content="#060A16">
+<meta name="robots" content="noindex, nofollow">
+<meta name="htmx-config" content='{"allowEval":false,"includeIndicatorStyles":false,"historyCacheSize":0,"selfRequestsOnly":true}'>
+<meta name="katex-js" content="/edufamcs-demo/static/vendor/katex/katex.min.js">
+<meta name="katex-css" content="/edufamcs-demo/static/vendor/katex/katex.min.css">
+<link rel="icon" href="/edufamcs-demo/static/brand/logo/favicon-16.svg" type="image/svg+xml" sizes="16x16">
+<link rel="icon" href="/edufamcs-demo/static/brand/logo/favicon.svg" type="image/svg+xml" sizes="any">
+<link rel="preload" href="/edufamcs-demo/static/brand/fonts/manrope-cyrillic-400.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/edufamcs-demo/static/brand/fonts/unbounded-cyrillic-800.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="/edufamcs-demo/static/brand/fonts.css">
+<link rel="stylesheet" href="/edufamcs-demo/static/brand/tokens.css">
+<link rel="stylesheet" href="/edufamcs-demo/static/brand/components.css">
+<link rel="stylesheet" href="/edufamcs-demo/static/css/site.css">
+<link rel="stylesheet" href="/edufamcs-demo/static/css/hub.css">
+<link rel="stylesheet" href="/edufamcs-demo/static/css/about.css">
+<link rel="stylesheet" href="/edufamcs-demo/static/handbook/handbook.css">
+<script src="/edufamcs-demo/static/js/theme.js"></script>
+<script src="/edufamcs-demo/static/vendor/htmx/htmx.min.js" defer></script>
+<script src="/edufamcs-demo/static/vendor/alpine/alpine-csp.min.js" defer></script>
+<script src="/edufamcs-demo/static/js/site.js" defer></script>
+<script src="/edufamcs-demo/static/handbook/handbook.js" defer></script>
+</head>
+<body class="" hx-headers='{"X-CSRFToken": "uYphfZ4tnjG1NkvEJLtHDk6adfkTgefaTIYlZXRQia4a2TGngYcPAPCfLXqoOoXU"}'>
+<a class="skip" href="#main">К содержанию</a>
+<div class="demo-bar" role="note">Демо-версия для отзывов: вход, запись на курсы и формы здесь не работают.</div>
+
+<header class="hdr">
+  <div class="container">
+    <a class="brand" href="/edufamcs-demo/" aria-label="EDU FAMCS — главная">
+      <span class="full"><img class="only-light" src="/edufamcs-demo/static/brand/logo/logo-edu-light.svg" alt="EDU FAMCS" width="196" height="40"><img class="only-dark" src="/edufamcs-demo/static/brand/logo/logo-edu-dark.svg" alt="EDU FAMCS" width="196" height="40"></span>
+      <span class="short"><img class="only-light" src="/edufamcs-demo/static/brand/logo/logo-edu-light.svg" alt="EDU FAMCS" height="30"><img class="only-dark" src="/edufamcs-demo/static/brand/logo/logo-edu-dark.svg" alt="EDU FAMCS" height="30"></span>
+    </a>
+    <nav class="nav" id="main-nav" aria-label="Основная навигация">
+      <a href="/edufamcs-demo/#courses">Курсы</a>
+      <a href="/edufamcs-demo/ml/" >Машинное обучение</a>
+      
+      <a href="/edufamcs-demo/handbook/" aria-current="page">Хендбук</a>
+      <a href="/edufamcs-demo/news/" >Новости</a>
+      <a href="/edufamcs-demo/people/" >Авторы</a>
+      <a href="/edufamcs-demo/about/" >О&nbsp;нас</a>
+    </nav>
+    <div class="hdr-actions">
+      
+      <a class="btn btn-outline btn-login" href="/edufamcs-demo/accounts/login/?next=/handbook/retrieval/nejrosetevoe-ranzhirovanie/">Войти</a>
+      
+      <button class="icon-btn menu-btn" type="button" aria-label="Меню" aria-expanded="false" aria-controls="main-nav"><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-menu"/></svg></button>
+    </div>
+  </div>
+</header>
+
+<main id="main">
+
+
+
+<div class="container hb-page s-recsys">
+  <div class="hb">
+    <aside class="hb-nav" aria-label="Статьи раздела">
+      
+<form class="hb-search" action="/edufamcs-demo/handbook/search/" method="get" role="search">
+  <svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-search"/></svg>
+  <input class="input" type="search" name="q" value="" placeholder="Поиск по хендбуку" aria-label="Поиск по хендбуку" autocomplete="off" maxlength="120"
+    hx-get="/edufamcs-demo/handbook/search/" hx-trigger="input changed delay:250ms, search" hx-target="#hb-nav-results" hx-sync="this:replace">
+</form>
+
+      <div id="hb-nav-results" class="hb-nav-results" aria-live="polite"></div>
+      <a class="grp" href="/edufamcs-demo/handbook/retrieval/">Нейросетевой поиск</a>
+      
+      <a class="" href="/edufamcs-demo/handbook/retrieval/plotnyj-i-gibridnyj-poisk/">Плотный и гибридный поиск</a>
+      
+      <a class="cur" href="/edufamcs-demo/handbook/retrieval/nejrosetevoe-ranzhirovanie/" aria-current="page">Нейросетевое ранжирование: cross-encoder, ColBERT, SPLADE</a>
+      
+      <a class="" href="/edufamcs-demo/handbook/retrieval/vektornye-indeksy/">Векторные индексы: HNSW, IVF, PQ</a>
+      
+    </aside>
+
+    <article class="hb-main">
+      <nav class="crumbs" aria-label="Навигация"><a href="/edufamcs-demo/handbook/">Хендбук</a><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-chev"/></svg><a href="/edufamcs-demo/handbook/retrieval/">Поиск</a></nav>
+      <h1 class="h1">Нейросетевое ранжирование: cross-encoder, ColBERT, SPLADE</h1>
+      <div class="hb-meta">
+        
+        
+        <span><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-clock"/></svg>16&nbsp;мин</span>
+        <span class="hb-authors"><span class="avatar sm" title="Артем Лебедевич">АЛ</span>Артем Лебедевич</span>
+        <span><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-edit"/></svg>9 ноября 2026</span>
+        
+        
+      </div>
+
+      
+      <details class="hb-mtoc">
+        <summary><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-list"/></svg>Содержание<svg class="ico sm" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-chev-down"/></svg></summary>
+        <a class="l2" href="#до-bert-нейро-ir-20132018">До BERT: нейро-IR 2013–2018</a><a class="l2" href="#2019-monobert-и-cross-encoder">2019: monoBERT и cross-encoder</a><a class="l3" href="#трудные-негативы-и-дистилляция">Трудные негативы и дистилляция</a><a class="l2" href="#позднее-взаимодействие-colbert">Позднее взаимодействие: ColBERT</a><a class="l2" href="#обученный-разреженный-поиск">Обученный разреженный поиск</a><a class="l2" href="#сравнение-подходов">Сравнение подходов</a><a class="l2" href="#llm-ранжировщики">LLM-ранжировщики</a><a class="l2" href="#код-переранжирование-топ-100-bm25">Код: переранжирование топ-100 BM25</a><a class="l2" href="#ловушки">Ловушки</a><a class="l2" href="#что-почитать">Что почитать</a>
+      </details>
+      
+
+      <div class="prose"><p>Классический поиск сопоставляет слова; обучение ранжированию (<a href="/edufamcs-demo/handbook/retrieval/learning-to-rank/" rel="noopener noreferrer nofollow">LTR</a>) комбинирует готовые признаки. Нейросетевой поиск пробует научиться понимать пару «запрос–документ» напрямую по тексту. История этой линии — это череда компромиссов между тремя величинами: <strong>качество</strong>, <strong>задержка</strong> и <strong>память/стоимость индекса</strong>. Bi-encoder и cross-encoder как базовые понятия разобраны в <a href="/edufamcs-demo/handbook/retrieval/plotnyj-i-gibridnyj-poisk/" rel="noopener noreferrer nofollow">плотном и гибридном поиске</a>; здесь — что было до них и что появилось между ними.</p>
+<h2 id="до-bert-нейро-ir-20132018">До BERT: нейро-IR 2013–2018</h2>
+<ul>
+<li><strong>DSSM</strong> (Huang et al., 2013, Microsoft): две башни, каждая переводит текст (хеширование триграмм символов, затем MLP) в вектор; релевантность — косинус; обучение на кликах из Bing. Фактически первый bi-encoder. Ограничение: представление запроса и документа сжимается в один вектор, точные совпадения терминов теряются.</li>
+<li><strong>DRMM</strong> (Guo et al., 2016) отказался от сжатия: строится матрица косинусов между словами запроса и документа, по каждому слову запроса — гистограмма сходств с словами документа, затем сеть с весами важности слов запроса. Идея: релевантность — это <strong>паттерн взаимодействия</strong>, а не расстояние между векторами.</li>
+<li><strong>KNRM</strong> (Xiong et al., 2017) сделал гистограммы дифференцируемыми: ядра <span class="tex">K_k(x)=\exp\bigl(-\tfrac{(x-\mu_k)^2}{2\sigma_k^2}\bigr)</span> мягко «считают» слова документа, чьё сходство со словом запроса <span class="tex">q_i</span> около <span class="tex">\mu_k</span>:</li>
+</ul>
+<div class="tex tex-block">\phi(q, d) = \sum_{i} \log \sum_{j} K_k\bigl(\cos(\vec q_i, \vec d_j)\bigr), \qquad k = 1..K,</div>
+<p>а выход — линейный слой над <span class="tex">\phi</span>. Это небольшие сети поверх статических эмбеддингов слов; на коротких запросах и больших коллекциях они давали умеренный выигрыш против BM25+LTR и не всегда его превосходили. Lin (2019) показал, что значительная часть заявленных улучшений тех лет получена сравнением со слабо настроенными бейзлайнами: против хорошо настроенного BM25 с RM3 прирост часто исчезал. Перелом случился с предобученными трансформерами.</p>
+<h2 id="2019-monobert-и-cross-encoder">2019: monoBERT и cross-encoder</h2>
+<p><strong>monoBERT</strong> (Nogueira, Cho, 2019): на вход BERT подаётся <code>[CLS] запрос [SEP] документ [SEP]</code>, вектор <code>[CLS]</code> идёт в линейный слой, выход — вероятность релевантности. Обучение — кросс-энтропия на размеченных парах MS MARCO. Все слова запроса и документа видят друг друга через self-attention на каждом слое — <strong>полное взаимодействие</strong>. Результат: MRR@10 на MS MARCO (dev) вырос с 0,187 (BM25) до 0,365 у BERT-large — почти вдвое и заметно выше всех нейросетевых моделей до него. Это и есть <strong>cross-encoder</strong>.</p>
+<p>Цена: скор считается только вместе с документом, ничего не предвычисляется. Каждая пара — отдельный прогон BERT по сотням токенов: на GPU это от единиц до десятков миллисекунд на пару, и переранжирование 1000 кандидатов моделью BERT-base занимает секунды. Прогнать так миллионы документов нереально. Поэтому cross-encoder стоит вторым этапом после дешёвого генератора кандидатов (BM25 или bi-encoder): ранжирование топ-100–1000.</p>
+<p>Развитие линии:</p>
+<ul>
+<li><strong>duoBERT</strong> (Nogueira et al., 2019): pairwise-версия — модель смотрит на запрос и <strong>два</strong> документа и предсказывает, какой лучше; даёт прирост, но стоит <span class="tex">O(k^2)</span> прогонов, поэтому применяется к малому топу (первые 30–50) после monoBERT: конвейер из нескольких стадий.</li>
+<li><strong>monoT5</strong> (Nogueira et al., 2020): seq2seq-модель T5 дообучается генерировать слово «true»/«false» для входа <code>Query: ... Document: ... Relevant:</code>; скор — вероятность «true» среди «true»/«false». Масштабирование модели (T5-3B) давало устойчивый прирост и хорошо переносилось на другие домены (BEIR): большие cross-encoder'ы — самые сильные zero-shot ранжировщики до эпохи LLM.</li>
+</ul>
+<h3 id="трудные-негативы-и-дистилляция">Трудные негативы и дистилляция</h3>
+<p>Как обучать? Положительный пример для запроса один, а отрицательных миллионы. Случайные негативы слишком лёгкие: модель выучит различать тематику, но не нюансы. Стандартное решение — <strong>трудные негативы</strong>: документы, которые BM25 или другая модель ставит высоко, но которые нерелевантны. Но здесь ловушка: в MS MARCO разметка разрежена, и «трудный негатив» часто оказывается неразмеченным позитивом (false negative). Частая практика: брать негативы из рангов 10–200 первой стадии, а не из топ-10, и фильтровать кросс-энкодером.</p>
+<p><strong>Дистилляция</strong> переносит знания «дорогого» учителя в «дешёвого» студента. Hofstätter et al. (2020) предложили <strong>Margin-MSE</strong>: студент (bi-encoder или ColBERT) учится воспроизводить не абсолютные скоры, а <strong>разницу</strong> скоров учителя (cross-encoder) на положительном и отрицательном примерах:</p>
+<div class="tex tex-block">\mathcal{L}_{\mathrm{MarginMSE}} = \bigl(s_S(q,d^+) - s_S(q,d^-) - [s_T(q,d^+) - s_T(q,d^-)]\bigr)^2.</div>
+<p>Абсолютные шкалы скоров учителя и студента не совпадают, а разности — сопоставимы. Дистилляция из ансамбля cross-encoder'ов — теперь стандартный рецепт обучения почти всех сильных retriever'ов.</p>
+<h2 id="позднее-взаимодействие-colbert">Позднее взаимодействие: ColBERT</h2>
+<p>Cross-encoder точен, но не предвычисляем; bi-encoder быстр, но весь документ сжат в один вектор. <strong>ColBERT</strong> (Khattab, Zaharia, 2020) — промежуточный вариант, <strong>late interaction</strong>: запрос и документ кодируются независимо, но получают не один вектор, а по вектору на каждый токен. Релевантность — сумма по токенам запроса лучшего (максимального) совпадения с токенами документа:</p>
+<div class="tex tex-block">s(q, d) = \sum_{i=1}^{|q|} \max_{j=1..|d|} \; E_{q_i}^{\top} E_{d_j},</div>
+<p>где <span class="tex">E</span> — нормированные вектора токенов (размерность 128, обученные линейной проекцией выхода BERT). Это <strong>MaxSim</strong>: каждое слово запроса «ищет» самое похожее слово документа. Свойства:</p>
+<ul>
+<li>Векторы токенов документа считаются <strong>офлайн</strong> и хранятся в индексе — как у bi-encoder; на запросе кодируется только запрос.</li>
+<li>Поиск: либо ANN по токенным векторам запроса (для каждого <span class="tex">q_i</span> находят ближайшие токены документов, из них формируют кандидатов, и для кандидатов точно считают MaxSim), либо переранжирование кандидатов BM25.</li>
+<li>Качество на MS MARCO близко к BERT-cross-encoder'у (MRR@10 ≈ 0,35–0,36), а по оценке авторов модель работает на два порядка быстрее и требует на четыре порядка меньше FLOPs на запрос: десятки миллисекунд против секунд на переранжирование 1000 кандидатов.</li>
+<li>Бонус: интерпретируемость — видно, какое слово документа «ответило» на каждое слово запроса — и лучшая точность по редким терминам, чем у одновекторных.</li>
+</ul>
+<p>Цена — <strong>память</strong>: вместо одного вектора на документ — по вектору на каждый токен, то есть десятки–сотни векторов. Для MS MARCO (8,8 млн абзацев) индекс ColBERT 2020 года занимал 154 ГиБ.</p>
+<p><strong>ColBERTv2</strong> (Santhanam et al., 2022) решает проблему памяти двумя ходами: (1) <strong>остаточное сжатие</strong> — векторы кластеризуются в центроиды (k-means), каждый токен хранится как идентификатор ближайшего центроида плюс остаток <span class="tex">e - c</span>, квантованный до 1–2 бит на координату; индекс сжимается в 6–10 раз (16 или 25 ГиБ на MS MARCO — меньше, чем одновекторный индекс в float32); (2) <strong>дистилляция из cross-encoder</strong> с трудными негативами — качество выше (MRR@10 ≈ 0,397 на MS MARCO) и устойчивее к смене домена. <strong>PLAID</strong> (Santhanam et al., 2022) ускоряет поиск: сначала кандидаты отбираются по центроидам (вместо полных векторов), нерелевантные центроиды отсекаются, и точный MaxSim считается лишь для небольшого набора. По данным авторов, это до 7 раз быстрее исходного ColBERTv2 на GPU и до 45 раз на CPU при том же качестве.</p>
+<p><strong>ColPali</strong> (Faysse et al., 2024) переносит идею на страницы документов как изображения. Вместо OCR и разбиения на текст страница PDF (таблицы, схемы, вёрстка) подаётся vision-language модели (PaliGemma); патчи изображения получают векторы, которые сравниваются с токенами запроса через тот же MaxSim. Бенчмарк ViDoRe показал, что такой подход обходит OCR-конвейеры на визуально насыщенных документах. Минус тот же: около тысячи векторов на страницу (по одному на патч).</p>
+<h2 id="обученный-разреженный-поиск">Обученный разреженный поиск</h2>
+<p>Другая сторона компромисса: сохранить инвертированный индекс (быстрый, дешёвый, понятный инженерам, существующая инфраструктура Lucene/Elasticsearch), но заменить вес терма — вычисленный из статистики — на <strong>обученный</strong>.</p>
+<ul>
+<li><strong>DeepCT</strong> (Dai, Callan, 2019): BERT предсказывает для каждого слова документа его «важность» для запросов, которые на этот документ отвечают; вместо <span class="tex">tf</span> в индекс идёт предсказанный вес. Это улучшает BM25, но словарь остаётся прежним — слов, которых нет в документе, не появится.</li>
+<li><strong>SPLADE</strong> (Formal et al., 2021): модель выдаёт разреженный вектор длиной в <strong>словарь</strong> BERT (~30 тысяч измерений) и <strong>расширяет</strong> документ: добавляет термы, которых в тексте нет, но которые семантически близки. Для токена <span class="tex">i</span> MLM-голова BERT даёт логиты <span class="tex">w_{ij}</span> по словарным термам <span class="tex">j</span>; вес терма <span class="tex">j</span> во всём тексте:</li>
+</ul>
+<div class="tex tex-block">w_j = \sum_{i=1}^{|t|} \log\bigl(1 + \mathrm{ReLU}(w_{ij})\bigr).</div>
+<p><span class="tex">\mathrm{ReLU}</span> обнуляет большинство термов (разреженность), <span class="tex">\log(1+\cdot)</span> подавляет доминирование отдельных термов — это обученный аналог насыщения <span class="tex">k_1</span> в BM25. Релевантность — скалярное произведение разреженных векторов запроса и документа:</p>
+<div class="tex tex-block">s(q,d) = \sum_{j \in V} w_j^{q} \, w_j^{d}.</div>
+<p>Обучение — контрастивная кросс-энтропия по негативам в батче и трудным негативам плюс <strong>регуляризация FLOPS</strong>, чтобы разреженность была достаточной для быстрого индекса:</p>
+<div class="tex tex-block">\ell_{\mathrm{FLOPS}} = \sum_{j \in V} \bar a_j^{\,2}, \qquad \bar a_j = \frac{1}{N}\sum_{k=1}^N w_j^{(d_k)},</div>
+<p>где <span class="tex">\bar a_j</span> — средний вес терма <span class="tex">j</span> по батчу. Сумма квадратов минимальна, когда активность распределена равномерно по словарю: штраф бьёт по термам, которые активируются у всех документов подряд (длинные posting lists), и тем самым напрямую уменьшает ожидаемое число операций на запрос. Коэффициенты регуляризации для запроса и документа разные: запросы делают ещё разреженнее.</p>
+<p><strong>SPLADE-v2</strong> (Formal et al., 2021) заменил сумму по токенам на максимум (<span class="tex">w_j = \max_i \log(1+\mathrm{ReLU}(w_{ij}))</span>) и добавил дистилляцию Margin-MSE из cross-encoder'а; <strong>SPLADE-v3</strong> (Lassance et al., 2024) — переработанное обучение: MRR@10 на MS MARCO dev выше 0,40, качество сравнимо с переранжированием cross-encoder'ом. На BEIR SPLADE-семейство конкурирует с лучшими плотными моделями и хорошо обобщается на новые домены. Расширение терминов («ноутбук» дополняется «лэптоп», «компьютер») решает словарный разрыв без отдельного индекса эмбеддингов, а вес каждого терма можно прочитать глазами. Всё это работает на <strong>обычном инвертированном индексе</strong>: Lucene, Elasticsearch (тип поля <code>sparse_vector</code>), OpenSearch (neural sparse search), Pyserini; специализированный индекс Seismic ускоряет именно такие обученные веса.</p>
+<p>Подвохи: расширенные документы имеют сотни ненулевых термов — posting lists длиннее, чем у BM25, индекс больше и тяжелее на частых термах; запросы тоже расширяются, поэтому задержка выше BM25. Если задержка критична, от нейросетевого кодирования запроса отказываются: запрос — это просто его токены с фиксированными весами, а вся работа остаётся на стороне документа (варианты SPLADE-doc и inference-free модели).</p>
+<h2 id="сравнение-подходов">Сравнение подходов</h2>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>Подход</th>
+<th>Качество (в домене MS MARCO)</th>
+<th>Zero-shot (BEIR)</th>
+<th>Задержка</th>
+<th>Память индекса</th>
+<th>Что предвычисляется</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>BM25</td>
+<td>базовое (MRR@10 ≈ 0,19)</td>
+<td>сильное для простоты</td>
+<td>единицы мс на CPU</td>
+<td>маленький</td>
+<td>статистика термов</td>
+</tr>
+<tr>
+<td>Bi-encoder (один вектор)</td>
+<td>хорошее (≈ 0,33–0,39)</td>
+<td>у ранних моделей часто слабее BM25, у современных (E5, BGE) выше</td>
+<td>единицы–десятки мс (ANN)</td>
+<td>1 вектор × документ</td>
+<td>вектор документа</td>
+</tr>
+<tr>
+<td>Late interaction (ColBERT)</td>
+<td>очень хорошее (≈ 0,36–0,40)</td>
+<td>устойчивое</td>
+<td>десятки мс</td>
+<td>без сжатия на порядок больше bi-encoder, после сжатия ColBERTv2 — того же порядка</td>
+<td>токенные векторы</td>
+</tr>
+<tr>
+<td>Learned sparse (SPLADE)</td>
+<td>хорошее–очень хорошее (≈ 0,36–0,40)</td>
+<td>устойчивое</td>
+<td>единицы–десятки мс на CPU</td>
+<td>умеренный, больше BM25</td>
+<td>веса термов</td>
+</tr>
+<tr>
+<td>Cross-encoder</td>
+<td>лучшее (≈ 0,40+ для крупных)</td>
+<td>лучшее среди небольших моделей</td>
+<td>миллисекунды <strong>на каждый документ</strong>, сотни мс и больше на топ-100</td>
+<td>не нужна</td>
+<td>ничего</td>
+</tr>
+</tbody>
+</table></div>
+<p>Числа ориентировочные: они зависят от размера модели, дистилляции, оборудования и версии бенчмарка; смотрите оригинальные статьи и leaderboards. Практическая каскадная схема: гибридный первый этап (BM25 + dense или SPLADE) → переранжирование cross-encoder'ом → по необходимости LLM-ранжировщик на малом топе. Как объединять сигналы — в <a href="/edufamcs-demo/handbook/retrieval/plotnyj-i-gibridnyj-poisk/" rel="noopener noreferrer nofollow">плотном и гибридном поиске</a>.</p>
+<h2 id="llm-ранжировщики">LLM-ранжировщики</h2>
+<p>С 2023 года cross-encoder'ом становится сама большая языковая модель: она получает запрос и документ(ы) и выдаёт релевантность: pointwise (скор пары, как у дообученной RankLLaMA, или вероятность ответа «Да»), pairwise (PRP: какой из двух документов лучше) или listwise (RankGPT, RankZephyr: модель переставляет окно из 20 документов, окно скользит по списку снизу вверх). Они лучше на трудных запросах, требующих рассуждения, и хорошо работают zero-shot, но на порядки дороже по задержке и деньгам. Им посвящён отдельный разбор — <a href="/edufamcs-demo/handbook/retrieval/agentnyj-poisk/" rel="noopener noreferrer nofollow">рассуждающий и агентный поиск</a>.</p>
+<h2 id="код-переранжирование-топ-100-bm25">Код: переранжирование топ-100 BM25</h2>
+<div class="code"><div class="code-head"><span class="lang">python</span></div><pre><code><span class="tok-k">from</span> rank_bm25 <span class="tok-k">import</span> BM25Okapi
+<span class="tok-k">from</span> sentence_transformers <span class="tok-k">import</span> CrossEncoder
+
+<span class="tok-c"># 1. первая стадия: BM25 (токенизация и лемматизация — как в статье про BM25)</span>
+corpus <span class="tok-p">=</span> <span class="tok-p">[</span><span class="tok-s">"</span><span class="tok-s">ALS раскладывает матрицу взаимодействий</span><span class="tok-s">"</span><span class="tok-p">,</span> <span class="tok-s">"</span><span class="tok-s">BM25 — вероятностная функция ранжирования</span><span class="tok-s">"</span><span class="tok-p">,</span>
+          <span class="tok-s">"</span><span class="tok-s">Cross-encoder кодирует пару запрос и документ вместе</span><span class="tok-s">"</span><span class="tok-p">]</span>
+tok <span class="tok-p">=</span> <span class="tok-k">lambda</span> s<span class="tok-p">:</span> s<span class="tok-p">.</span>lower<span class="tok-p">(</span><span class="tok-p">)</span><span class="tok-p">.</span>split<span class="tok-p">(</span><span class="tok-p">)</span>
+bm25 <span class="tok-p">=</span> BM25Okapi<span class="tok-p">(</span><span class="tok-p">[</span>tok<span class="tok-p">(</span>d<span class="tok-p">)</span> <span class="tok-k">for</span> d <span class="tok-k">in</span> corpus<span class="tok-p">]</span><span class="tok-p">)</span>
+
+query <span class="tok-p">=</span> <span class="tok-s">"</span><span class="tok-s">как работает cross-encoder</span><span class="tok-s">"</span>
+scores <span class="tok-p">=</span> bm25<span class="tok-p">.</span>get_scores<span class="tok-p">(</span>tok<span class="tok-p">(</span>query<span class="tok-p">)</span><span class="tok-p">)</span>
+top <span class="tok-p">=</span> <span class="tok-f">sorted</span><span class="tok-p">(</span><span class="tok-f">range</span><span class="tok-p">(</span><span class="tok-f">len</span><span class="tok-p">(</span>corpus<span class="tok-p">)</span><span class="tok-p">)</span><span class="tok-p">,</span> key<span class="tok-p">=</span><span class="tok-k">lambda</span> i<span class="tok-p">:</span> <span class="tok-p">-</span>scores<span class="tok-p">[</span>i<span class="tok-p">]</span><span class="tok-p">)</span><span class="tok-p">[</span><span class="tok-p">:</span><span class="tok-n">100</span><span class="tok-p">]</span>
+
+<span class="tok-c"># 2. вторая стадия: cross-encoder</span>
+model <span class="tok-p">=</span> CrossEncoder<span class="tok-p">(</span><span class="tok-s">"</span><span class="tok-s">cross-encoder/mmarco-mMiniLMv2-L12-H384-v1</span><span class="tok-s">"</span><span class="tok-p">,</span> max_length<span class="tok-p">=</span><span class="tok-n">512</span><span class="tok-p">)</span>
+pairs <span class="tok-p">=</span> <span class="tok-p">[</span><span class="tok-p">(</span>query<span class="tok-p">,</span> corpus<span class="tok-p">[</span>i<span class="tok-p">]</span><span class="tok-p">)</span> <span class="tok-k">for</span> i <span class="tok-k">in</span> top<span class="tok-p">]</span>
+ce_scores <span class="tok-p">=</span> model<span class="tok-p">.</span>predict<span class="tok-p">(</span>pairs<span class="tok-p">,</span> batch_size<span class="tok-p">=</span><span class="tok-n">32</span><span class="tok-p">)</span>      <span class="tok-c"># один скор на пару</span>
+
+reranked <span class="tok-p">=</span> <span class="tok-p">[</span>top<span class="tok-p">[</span>i<span class="tok-p">]</span> <span class="tok-k">for</span> i <span class="tok-k">in</span> <span class="tok-f">sorted</span><span class="tok-p">(</span><span class="tok-f">range</span><span class="tok-p">(</span><span class="tok-f">len</span><span class="tok-p">(</span>top<span class="tok-p">)</span><span class="tok-p">)</span><span class="tok-p">,</span> key<span class="tok-p">=</span><span class="tok-k">lambda</span> k<span class="tok-p">:</span> <span class="tok-p">-</span>ce_scores<span class="tok-p">[</span>k<span class="tok-p">]</span><span class="tok-p">)</span><span class="tok-p">]</span>
+<span class="tok-f">print</span><span class="tok-p">(</span><span class="tok-p">[</span>corpus<span class="tok-p">[</span>i<span class="tok-p">]</span> <span class="tok-k">for</span> i <span class="tok-k">in</span> reranked<span class="tok-p">]</span><span class="tok-p">)</span>
+</code></pre></div>
+<p>Модель <code>mmarco-mMiniLMv2-L12-H384-v1</code> — многоязычная (в том числе русский), обученная на переведённом MS MARCO; для русскоязычных коллекций сверяйтесь с ruMTEB и своей разметкой (см. <a href="/edufamcs-demo/handbook/retrieval/ocenka-kachestva-poiska/" rel="noopener noreferrer nofollow">оценку качества</a>). Для файнтюна своего cross-encoder'а нужны пары с трудными негативами и потери вроде BCE или MarginMSE.</p>
+<h2 id="ловушки">Ловушки</h2>
+<ul>
+<li><strong>Потери на первой стадии.</strong> Если релевантный документ не попал в топ-100 BM25, cross-encoder его не увидит. Мерьте Recall@100 первой стадии отдельно от NDCG@10 всего пайплайна.</li>
+<li><strong>Обрезка по длине.</strong> BERT принимает ~512 токенов. Длинный документ режут на пассажи и берут максимум по пассажам (MaxP); иначе релевантная часть может не поместиться.</li>
+<li><strong>Смещения MS MARCO.</strong> Модель, дообученная на MS MARCO, хорошо отвечает на вопросы-«что/как», хуже — на навигационные и каталожные запросы. Проверяйте на своих логах.</li>
+<li><strong>Задержка хвоста.</strong> Средняя задержка скрывает p99: батчируйте, ограничивайте топ, используйте дистиллированные модели (MiniLM) и квантизацию.</li>
+<li><strong>Ложные негативы</strong> при обучении: дообучение на неразмеченных позитивах как на негативах ухудшает модель.</li>
+<li><strong>На собеседовании</strong> спрашивают: почему cross-encoder нельзя использовать для первичного поиска; как устроен MaxSim и сколько он стоит по памяти; почему в SPLADE используется <span class="tex">\log(1+\mathrm{ReLU})</span> и FLOPS-регуляризация; когда лучше ColBERT, а когда SPLADE.</li>
+</ul>
+<h2 id="что-почитать">Что почитать</h2>
+<ul>
+<li>Nogueira R., Cho K. Passage Re-ranking with BERT, 2019: https://arxiv.org/abs/1901.04085</li>
+<li>Khattab O., Zaharia M. ColBERT: Efficient and Effective Passage Search via Contextualized Late Interaction over BERT, 2020: https://arxiv.org/abs/2004.12832</li>
+<li>Santhanam K. et al. ColBERTv2: Effective and Efficient Retrieval via Lightweight Late Interaction, 2022: https://arxiv.org/abs/2112.01488</li>
+<li>Formal T., Piwowarski B., Clinchant S. SPLADE: Sparse Lexical and Expansion Model for First Stage Ranking, 2021: https://arxiv.org/abs/2107.05720</li>
+<li>Hofstätter S. et al. Improving Efficient Neural Ranking Models with Cross-Architecture Knowledge Distillation, 2020: https://arxiv.org/abs/2010.02666</li>
+<li>Lin J. The Neural Hype and Comparisons Against Weak Baselines, SIGIR Forum, 2019 — полезный скептический взгляд на историю нейро-IR.</li>
+</ul>
+</div>
+      
+
+      
+      <nav class="pager" aria-label="Соседние статьи">
+        <a href="/edufamcs-demo/handbook/retrieval/plotnyj-i-gibridnyj-poisk/"><span><svg class="ico sm" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-arrow-left"/></svg>Назад</span>Плотный и гибридный поиск</a>
+        <a href="/edufamcs-demo/handbook/retrieval/vektornye-indeksy/"><span>Дальше<svg class="ico sm" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-arrow"/></svg></span>Векторные индексы: HNSW, IVF, PQ</a>
+      </nav>
+      
+    </article>
+
+    <aside class="hb-toc" aria-label="На этой странице">
+      <a class="l2" href="#до-bert-нейро-ir-20132018">До BERT: нейро-IR 2013–2018</a><a class="l2" href="#2019-monobert-и-cross-encoder">2019: monoBERT и cross-encoder</a><a class="l3" href="#трудные-негативы-и-дистилляция">Трудные негативы и дистилляция</a><a class="l2" href="#позднее-взаимодействие-colbert">Позднее взаимодействие: ColBERT</a><a class="l2" href="#обученный-разреженный-поиск">Обученный разреженный поиск</a><a class="l2" href="#сравнение-подходов">Сравнение подходов</a><a class="l2" href="#llm-ранжировщики">LLM-ранжировщики</a><a class="l2" href="#код-переранжирование-топ-100-bm25">Код: переранжирование топ-100 BM25</a><a class="l2" href="#ловушки">Ловушки</a><a class="l2" href="#что-почитать">Что почитать</a>
+    </aside>
+  </div>
+</div>
+
+
+</main>
+
+<footer class="ftr" data-theme="dark">
+  <svg class="sym fern" viewBox="0 0 40.5 65.02" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#fern"/></svg>
+  <div class="container">
+    <div class="ftr-row">
+      <a href="/edufamcs-demo/" aria-label="EDU FAMCS — главная"><img src="/edufamcs-demo/static/brand/logo/logo-edu-dark.svg" alt="EDU FAMCS" width="196" height="40"></a>
+      <ul class="ftr-links">
+        <li><a href="/edufamcs-demo/#courses">Курсы</a></li>
+        <li><a href="/edufamcs-demo/ml/">Машинное обучение</a></li>
+        <li><a href="/edufamcs-demo/handbook/">Хендбук</a></li>
+        <li><a href="/edufamcs-demo/news/">Новости</a></li>
+        <li><a href="/edufamcs-demo/people/">Авторы</a></li>
+        <li><a href="/edufamcs-demo/about/">О&nbsp;нас</a></li>
+        <li><a href="/edufamcs-demo/propose/">Предложить или исправить</a></li>
+        <li><a href="/edufamcs-demo/privacy/">Конфиденциальность</a></li>
+      </ul>
+    </div>
+    <div class="ftr-big" aria-hidden="true">EDU<span class="d">·</span>FAMCS</div>
+    <p class="ftr-copy">© 2026 EDU FAMCS · Минск</p>
+  </div>
+</footer>
+
+<div class="toasts-region" aria-live="polite" id="toasts">
+
+</div>
+
+</body>
+</html>

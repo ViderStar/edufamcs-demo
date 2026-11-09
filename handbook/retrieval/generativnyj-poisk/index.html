@@ -1,0 +1,327 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Генеративный поиск: модель как индекс · EDU FAMCS</title>
+<meta name="description" content="Генеративный поиск: модель как индекс — Поиск. Хендбук ML-курса ФПМИ.">
+<meta name="theme-color" content="#060A16">
+<meta name="robots" content="noindex, nofollow">
+<meta name="htmx-config" content='{"allowEval":false,"includeIndicatorStyles":false,"historyCacheSize":0,"selfRequestsOnly":true}'>
+<meta name="katex-js" content="/edufamcs-demo/static/vendor/katex/katex.min.js">
+<meta name="katex-css" content="/edufamcs-demo/static/vendor/katex/katex.min.css">
+<link rel="icon" href="/edufamcs-demo/static/brand/logo/favicon-16.svg" type="image/svg+xml" sizes="16x16">
+<link rel="icon" href="/edufamcs-demo/static/brand/logo/favicon.svg" type="image/svg+xml" sizes="any">
+<link rel="preload" href="/edufamcs-demo/static/brand/fonts/manrope-cyrillic-400.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/edufamcs-demo/static/brand/fonts/unbounded-cyrillic-800.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="/edufamcs-demo/static/brand/fonts.css">
+<link rel="stylesheet" href="/edufamcs-demo/static/brand/tokens.css">
+<link rel="stylesheet" href="/edufamcs-demo/static/brand/components.css">
+<link rel="stylesheet" href="/edufamcs-demo/static/css/site.css">
+<link rel="stylesheet" href="/edufamcs-demo/static/css/hub.css">
+<link rel="stylesheet" href="/edufamcs-demo/static/css/about.css">
+<link rel="stylesheet" href="/edufamcs-demo/static/handbook/handbook.css">
+<script src="/edufamcs-demo/static/js/theme.js"></script>
+<script src="/edufamcs-demo/static/vendor/htmx/htmx.min.js" defer></script>
+<script src="/edufamcs-demo/static/vendor/alpine/alpine-csp.min.js" defer></script>
+<script src="/edufamcs-demo/static/js/site.js" defer></script>
+<script src="/edufamcs-demo/static/handbook/handbook.js" defer></script>
+</head>
+<body class="" hx-headers='{"X-CSRFToken": "CkZLBZJR9f8LgyZcEqKJ4n95896IioFU14yPlXwe46wUv7aVbDtR1SFaGRcdQynE"}'>
+<a class="skip" href="#main">К содержанию</a>
+<div class="demo-bar" role="note">Демо-версия для отзывов: вход, запись на курсы и формы здесь не работают.</div>
+
+<header class="hdr">
+  <div class="container">
+    <a class="brand" href="/edufamcs-demo/" aria-label="EDU FAMCS — главная">
+      <span class="full"><img class="only-light" src="/edufamcs-demo/static/brand/logo/logo-edu-light.svg" alt="EDU FAMCS" width="196" height="40"><img class="only-dark" src="/edufamcs-demo/static/brand/logo/logo-edu-dark.svg" alt="EDU FAMCS" width="196" height="40"></span>
+      <span class="short"><img class="only-light" src="/edufamcs-demo/static/brand/logo/logo-edu-light.svg" alt="EDU FAMCS" height="30"><img class="only-dark" src="/edufamcs-demo/static/brand/logo/logo-edu-dark.svg" alt="EDU FAMCS" height="30"></span>
+    </a>
+    <nav class="nav" id="main-nav" aria-label="Основная навигация">
+      <a href="/edufamcs-demo/#courses">Курсы</a>
+      <a href="/edufamcs-demo/ml/" >Машинное обучение</a>
+      
+      <a href="/edufamcs-demo/handbook/" aria-current="page">Хендбук</a>
+      <a href="/edufamcs-demo/news/" >Новости</a>
+      <a href="/edufamcs-demo/people/" >Авторы</a>
+      <a href="/edufamcs-demo/about/" >О&nbsp;нас</a>
+    </nav>
+    <div class="hdr-actions">
+      
+      <a class="btn btn-outline btn-login" href="/edufamcs-demo/accounts/login/?next=/handbook/retrieval/generativnyj-poisk/">Войти</a>
+      
+      <button class="icon-btn menu-btn" type="button" aria-label="Меню" aria-expanded="false" aria-controls="main-nav"><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-menu"/></svg></button>
+    </div>
+  </div>
+</header>
+
+<main id="main">
+
+
+
+<div class="container hb-page s-recsys">
+  <div class="hb">
+    <aside class="hb-nav" aria-label="Статьи раздела">
+      
+<form class="hb-search" action="/edufamcs-demo/handbook/search/" method="get" role="search">
+  <svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-search"/></svg>
+  <input class="input" type="search" name="q" value="" placeholder="Поиск по хендбуку" aria-label="Поиск по хендбуку" autocomplete="off" maxlength="120"
+    hx-get="/edufamcs-demo/handbook/search/" hx-trigger="input changed delay:250ms, search" hx-target="#hb-nav-results" hx-sync="this:replace">
+</form>
+
+      <div id="hb-nav-results" class="hb-nav-results" aria-live="polite"></div>
+      <a class="grp" href="/edufamcs-demo/handbook/retrieval/">Поиск в эпоху LLM</a>
+      
+      <a class="" href="/edufamcs-demo/handbook/retrieval/rag/">RAG: поиск для языковых моделей</a>
+      
+      <a class="cur" href="/edufamcs-demo/handbook/retrieval/generativnyj-poisk/" aria-current="page">Генеративный поиск: модель как индекс</a>
+      
+      <a class="" href="/edufamcs-demo/handbook/retrieval/agentnyj-poisk/">Рассуждающий и агентный поиск: 2025–2026</a>
+      
+    </aside>
+
+    <article class="hb-main">
+      <nav class="crumbs" aria-label="Навигация"><a href="/edufamcs-demo/handbook/">Хендбук</a><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-chev"/></svg><a href="/edufamcs-demo/handbook/retrieval/">Поиск</a></nav>
+      <h1 class="h1">Генеративный поиск: модель как индекс</h1>
+      <div class="hb-meta">
+        
+        
+        <span><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-clock"/></svg>16&nbsp;мин</span>
+        <span class="hb-authors"><span class="avatar sm" title="Артем Лебедевич">АЛ</span>Артем Лебедевич</span>
+        <span><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-edit"/></svg>9 ноября 2026</span>
+        
+        
+      </div>
+
+      
+      <details class="hb-mtoc">
+        <summary><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-list"/></svg>Содержание<svg class="ico sm" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-chev-down"/></svg></summary>
+        <a class="l2" href="#идея-поиск-как-seq2seq">Идея: поиск как seq2seq</a><a class="l2" href="#хроника">Хроника</a><a class="l2" href="#дизайн-идентификатора">Дизайн идентификатора</a><a class="l3" href="#ограниченное-декодирование">Ограниченное декодирование</a><a class="l2" href="#код-игрушечный-dsi">Код: игрушечный DSI</a><a class="l2" href="#проблемы">Проблемы</a><a class="l2" href="#что-показали-новые-обзоры-и-эксперименты-20242025">Что показали новые обзоры и эксперименты (2024–2025)</a><a class="l2" href="#что-запомнить-для-собеседования">Что запомнить для собеседования</a><a class="l2" href="#что-почитать">Что почитать</a>
+      </details>
+      
+
+      <div class="prose"><p>У термина «генеративный поиск» два разных смысла, и их постоянно путают.</p>
+<ol>
+<li><strong>Generative retrieval (GR)</strong> — модель сама <em>генерирует идентификатор документа</em> по запросу. Индекса нет: корпус «запомнен» в параметрах трансформера. Это исследовательское направление 2020–2025.</li>
+<li><strong>Генеративные поисковые ответы</strong> — поисковик показывает не десять ссылок, а связный текст от LLM с цитатами (AI Overviews, Perplexity, режимы ответа в Яндексе и Bing). Технически это <a href="/edufamcs-demo/handbook/retrieval/rag/" rel="noopener noreferrer nofollow">RAG</a> поверх обычного поиска; всё, что сказано там про разбиение, поиск и оценку, применимо.</li>
+</ol>
+<p>Оба смысла вместе меняют экономику сайтов: если ответ собирается из выдачи, что делать владельцу страницы? Отсюда <strong>generative engine optimization (GEO)</strong> — Aggarwal et al., 2024 (KDD): авторы предложили бенчмарк и показали, что приёмы вроде цитат, статистики и ссылок на источники в тексте повышают видимость страницы в ответе генеративной системы на десятки процентов (до 40% в их постановке), тогда как «набивка» ключевыми словами из SEO почти не работает. Это уже не про алгоритмы поиска, а про то, что генеративный интерфейс ломает привычную метрику «позиция в выдаче»; дальше глава про смысл (1).</p>
+<h2 id="идея-поиск-как-seq2seq">Идея: поиск как seq2seq</h2>
+<p>Классический конвейер: запрос → эмбеддинг → ближайшие соседи в индексе → документы. Индекс — отдельный артефакт, обучение энкодера и индексация разделены, а обучаемая часть не оптимизируется под метрику ранжирования напрямую.</p>
+<p>GR переформулирует задачу как</p>
+<div class="tex tex-block">p_\theta(\mathrm{docid}\mid q) = \prod_{t=1}^{T} p_\theta\big(c_t \mid q, c_{&lt;t}\big),</div>
+<p>где <span class="tex">c_1,\dots,c_T</span> — токены идентификатора документа. Обучение — обычная кросс-энтропия по паре «запрос → docid». Выдача — beam search: <span class="tex">k</span> лучших лучей дают ранжированный список. Всё «знание о корпусе» находится в весах, а не в векторной базе.</p>
+<p>Привлекательность: end-to-end оптимизация, нет разрыва между индексацией и ранжированием, нет ANN; запрос «взаимодействует» с корпусом через все слои модели, а не через одно скалярное произведение двух заранее посчитанных векторов. Цена — всё, что описано в разделе о проблемах.</p>
+<p>Обучают DSI-подобную модель на двух типах пар одновременно: <strong>индексация</strong> «текст документа → docid» (так корпус попадает в веса) и <strong>поиск</strong> «запрос → docid»,</p>
+<div class="tex tex-block">\mathcal{L} = \sum_{d \in \mathcal{D}} -\log p_\theta\big(\mathrm{docid}(d) \mid \text{текст } d\big) \;+\; \sum_{(q, d^+)} -\log p_\theta\big(\mathrm{docid}(d^+) \mid q\big).</div>
+<p>Размеченные запросы есть лишь для малой доли документов, а документ и запрос выглядят по-разному (длинный текст против трёх слов). Поэтому к каждому документу генерируют синтетические запросы (docT5query) и добавляют их во вторую сумму; как покажет раздел о масштабе, именно это оказалось самым важным приёмом.</p>
+<h2 id="хроника">Хроника</h2>
+<p><strong>GENRE</strong> (De Cao et al., 2020). Entity linking и retrieval сущностей: модель (BART) генерирует <em>название страницы Википедии</em> авторегрессивно, ограничиваясь существующими названиями через trie. На 20+ наборах (разрешение неоднозначности сущностей, entity linking, поиск страниц в KILT) GENRE получил state-of-the-art или близкие результаты при доле памяти плотных систем: параметры зависят от размера словаря, а не от числа сущностей, и новую сущность можно добавить, просто дописав её название в trie. Работа показала и важность ограниченного декодирования: без него модель придумывает несуществующие названия.</p>
+<p><strong>DSI</strong> (Tay et al., 2022, <em>Transformer Memory as a Differentiable Search Index</em>). Один T5 учится двум задачам: «индексация» — документ → docid, «поиск» — запрос → docid. Сравнили атомарные docid (отдельный токен на документ), наивные строковые (номер документа как строка) и семантически структурированные (путь в иерархической кластеризации). При обучении с разметкой лучшими оказались семантические: на NQ-320k у DSI размера 11B Hits@1 40,4 против 24,3 у dual encoder'а на T5 того же размера; в zero-shot (только индексация, без пар «запрос → docid») лучше атомарные. На всех трёх размерах корпуса (NQ-10k, 100k, 320k) DSI обошёл dual encoder'ы.</p>
+<p><strong>NCI</strong> (Wang et al., 2022, <em>Neural Corpus Indexer</em>). Развитие DSI: префиксно-осведомлённый декодер, иерархические семантические docid от k-means по эмбеддингам, синтетические запросы к документам (docT5query) для расширения обучающих данных и консистентная регуляризация. По заявлению авторов (NeurIPS 2022), +21,4% относительного прироста Recall@1 на NQ-320k к лучшему бейзлайну. Последующие проверки (см. Pradeep et al. ниже) показали, что значительная часть выигрыша приходится на синтетические запросы, а архитектурные приёмы при учёте вычислений окупаются хуже.</p>
+<p><strong>SEAL</strong> (Bevilacqua et al., 2022, <em>Autoregressive Search Engines</em>). Идентификатор документа — <em>любая n-грамма из его текста</em>. Модель генерирует n-граммы, а <strong>FM-индекс</strong> (суффиксный массив со сжатием) обеспечивает ограниченное декодирование: допускаются только строки, реально встречающиеся в корпусе, и по ним же считается, какие документы содержат n-грамму. Документ ранжируется по набору сгенерированных n-грамм, которые он содержит: их скоры модели комбинируются с частотой n-граммы в корпусе (редкие n-граммы весомее — та же идея, что IDF в BM25). На KILT SEAL обошёл прежние авторегрессионные подходы и классические ретриверы при заметно меньшей памяти. Здесь индекс есть, но он служит ограничением декодирования, а не хранилищем векторов.</p>
+<h2 id="дизайн-идентификатора">Дизайн идентификатора</h2>
+<p>Выбор docid — главное инженерное решение GR.</p>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>тип</th>
+<th>пример</th>
+<th>плюсы</th>
+<th>минусы</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>атомарные</td>
+<td>новый токен на документ</td>
+<td>просто</td>
+<td>словарь размера <span class="tex">N</span>, не масштабируется, нет обобщения</td>
+</tr>
+<tr>
+<td>семантические иерархические</td>
+<td>путь в дереве k-means: <code>3-17-5-2</code></td>
+<td>близкие документы делят префикс, декодирование эффективно</td>
+<td>ошибка на раннем уровне необратима, кластеры надо перестраивать</td>
+</tr>
+<tr>
+<td>URL / заголовок</td>
+<td><code>wikipedia.org/Minsk</code></td>
+<td>модель уже знает текст</td>
+<td>неоднозначность, нет у всех корпусов</td>
+</tr>
+<tr>
+<td>n-граммы</td>
+<td>подстроки текста (SEAL)</td>
+<td>без обучения кодирования, естественно</td>
+<td>нужен FM-индекс, много лучей</td>
+</tr>
+<tr>
+<td>обученные кодбуки</td>
+<td>residual quantization (RQ-VAE)</td>
+<td>компактно, обучается под задачу</td>
+<td>сложнее обучение, коллизии кодов</td>
+</tr>
+</tbody>
+</table></div>
+<p>Последний вариант — идеология, перенесённая в рекомендации: см. <a href="/edufamcs-demo/handbook/recsys/semanticheskie-id-tiger/" rel="noopener noreferrer nofollow">семантические ID и TIGER</a>. TIGER (Google, 2023) берёт RQ-VAE по эмбеддингам контента товара и обучает трансформер предсказывать следующий товар как последовательность кодов; формально это тот же GR, где «запрос» — история пользователя. Конструкции GR и семантических ID в рекомендациях — одно семейство.</p>
+<h3 id="ограниченное-декодирование">Ограниченное декодирование</h3>
+<p>Модель не должна выдавать несуществующий docid. Допустимые идентификаторы кладём в <strong>trie</strong> (префиксное дерево); на каждом шаге генерации маскируем логиты токенов, которые не продолжают ни одного допустимого префикса.</p>
+<div class="tex tex-block">\tilde p(c_t \mid c_{&lt;t}, q) \propto p(c_t \mid c_{&lt;t}, q)\cdot \mathbb{1}\big[c_{&lt;t}c_t \in \mathrm{Prefixes}(\mathcal{D})\big].</div>
+<p>Ограничение гарантирует валидность, но не правильность: модель всё ещё может с уверенностью выбрать неверную ветку.</p>
+<h2 id="код-игрушечный-dsi">Код: игрушечный DSI</h2>
+<p>Минимальная демонстрация трёх компонентов: иерархический docid, trie допустимых путей и beam search под ограничением. Вместо декодера трансформера — логистические регрессии по tf-idf: в каждом узле дерева своя, она предсказывает следующий разряд docid. Последний разряд — номер документа внутри листа, он делает docid уникальным (как токен против коллизий в TIGER). Логика ограниченного beam search — настоящая.</p>
+<div class="code"><div class="code-head"><span class="lang">python</span></div><pre><code><span class="tok-k">import</span> numpy <span class="tok-k">as</span> np
+<span class="tok-k">from</span> sklearn.feature_extraction.text <span class="tok-k">import</span> TfidfVectorizer
+<span class="tok-k">from</span> sklearn.cluster <span class="tok-k">import</span> KMeans
+<span class="tok-k">from</span> sklearn.linear_model <span class="tok-k">import</span> LogisticRegression
+
+docs <span class="tok-p">=</span> <span class="tok-p">[</span><span class="tok-s">"</span><span class="tok-s">gradient descent for neural networks</span><span class="tok-s">"</span><span class="tok-p">,</span> <span class="tok-s">"</span><span class="tok-s">bm25 inverted index search</span><span class="tok-s">"</span><span class="tok-p">,</span>
+        <span class="tok-s">"</span><span class="tok-s">matrix factorization for recommendations</span><span class="tok-s">"</span><span class="tok-p">,</span> <span class="tok-s">"</span><span class="tok-s">hnsw graph nearest neighbors search</span><span class="tok-s">"</span><span class="tok-p">,</span>
+        <span class="tok-s">"</span><span class="tok-s">transformers attention language model</span><span class="tok-s">"</span><span class="tok-p">,</span> <span class="tok-s">"</span><span class="tok-s">als implicit feedback recommendations</span><span class="tok-s">"</span><span class="tok-p">,</span>
+        <span class="tok-s">"</span><span class="tok-s">product quantization for vector search</span><span class="tok-s">"</span><span class="tok-p">,</span> <span class="tok-s">"</span><span class="tok-s">learning to rank with gradient boosting</span><span class="tok-s">"</span><span class="tok-p">]</span>
+vec <span class="tok-p">=</span> TfidfVectorizer<span class="tok-p">(</span><span class="tok-p">)</span><span class="tok-p">.</span>fit<span class="tok-p">(</span>docs<span class="tok-p">)</span>
+X <span class="tok-p">=</span> vec<span class="tok-p">.</span>transform<span class="tok-p">(</span>docs<span class="tok-p">)</span>
+
+<span class="tok-c"># 1) Иерархический docid: k-means по уровням, последний разряд — номер документа в листе</span>
+docid <span class="tok-p">=</span> <span class="tok-p">{</span><span class="tok-p">}</span>
+<span class="tok-k">def</span> <span class="tok-f">assign</span><span class="tok-p">(</span>idx<span class="tok-p">,</span> prefix<span class="tok-p">=</span><span class="tok-p">(</span><span class="tok-p">)</span><span class="tok-p">,</span> depth<span class="tok-p">=</span><span class="tok-n">2</span><span class="tok-p">,</span> k<span class="tok-p">=</span><span class="tok-n">2</span><span class="tok-p">)</span><span class="tok-p">:</span>
+    <span class="tok-k">if</span> depth <span class="tok-p">==</span> <span class="tok-n">0</span> <span class="tok-k">or</span> <span class="tok-f">len</span><span class="tok-p">(</span>idx<span class="tok-p">)</span> <span class="tok-p">&lt;</span><span class="tok-p">=</span> k<span class="tok-p">:</span>
+        <span class="tok-k">for</span> pos<span class="tok-p">,</span> i <span class="tok-k">in</span> <span class="tok-f">enumerate</span><span class="tok-p">(</span>idx<span class="tok-p">)</span><span class="tok-p">:</span>
+            docid<span class="tok-p">[</span><span class="tok-f">int</span><span class="tok-p">(</span>i<span class="tok-p">)</span><span class="tok-p">]</span> <span class="tok-p">=</span> prefix <span class="tok-p">+</span> <span class="tok-p">(</span>pos<span class="tok-p">,</span><span class="tok-p">)</span>
+        <span class="tok-k">return</span>
+    labels <span class="tok-p">=</span> KMeans<span class="tok-p">(</span>k<span class="tok-p">,</span> n_init<span class="tok-p">=</span><span class="tok-n">10</span><span class="tok-p">,</span> random_state<span class="tok-p">=</span><span class="tok-n">0</span><span class="tok-p">)</span><span class="tok-p">.</span>fit_predict<span class="tok-p">(</span>X<span class="tok-p">[</span>idx<span class="tok-p">]</span><span class="tok-p">)</span>
+    <span class="tok-k">for</span> c <span class="tok-k">in</span> np<span class="tok-p">.</span>unique<span class="tok-p">(</span>labels<span class="tok-p">)</span><span class="tok-p">:</span>
+        assign<span class="tok-p">(</span>idx<span class="tok-p">[</span>labels <span class="tok-p">==</span> c<span class="tok-p">]</span><span class="tok-p">,</span> prefix <span class="tok-p">+</span> <span class="tok-p">(</span><span class="tok-f">int</span><span class="tok-p">(</span>c<span class="tok-p">)</span><span class="tok-p">,</span><span class="tok-p">)</span><span class="tok-p">,</span> depth <span class="tok-p">-</span> <span class="tok-n">1</span><span class="tok-p">,</span> k<span class="tok-p">)</span>
+assign<span class="tok-p">(</span>np<span class="tok-p">.</span>arange<span class="tok-p">(</span><span class="tok-f">len</span><span class="tok-p">(</span>docs<span class="tok-p">)</span><span class="tok-p">)</span><span class="tok-p">)</span>
+
+<span class="tok-c"># 2) trie допустимых docid: лист хранит номер документа</span>
+trie <span class="tok-p">=</span> <span class="tok-p">{</span><span class="tok-p">}</span>
+<span class="tok-k">for</span> i<span class="tok-p">,</span> code <span class="tok-k">in</span> docid<span class="tok-p">.</span>items<span class="tok-p">(</span><span class="tok-p">)</span><span class="tok-p">:</span>
+    node <span class="tok-p">=</span> trie
+    <span class="tok-k">for</span> c <span class="tok-k">in</span> code<span class="tok-p">:</span>
+        node <span class="tok-p">=</span> node<span class="tok-p">.</span>setdefault<span class="tok-p">(</span>c<span class="tok-p">,</span> <span class="tok-p">{</span><span class="tok-p">}</span><span class="tok-p">)</span>
+    node<span class="tok-p">[</span><span class="tok-s">"</span><span class="tok-s">_doc</span><span class="tok-s">"</span><span class="tok-p">]</span> <span class="tok-p">=</span> i
+
+<span class="tok-k">def</span> <span class="tok-f">node_at</span><span class="tok-p">(</span>prefix<span class="tok-p">)</span><span class="tok-p">:</span>
+    node <span class="tok-p">=</span> trie
+    <span class="tok-k">for</span> c <span class="tok-k">in</span> prefix<span class="tok-p">:</span>
+        node <span class="tok-p">=</span> node<span class="tok-p">[</span>c<span class="tok-p">]</span>
+    <span class="tok-k">return</span> node
+
+<span class="tok-c"># 3) "модель": в каждом узле с несколькими детьми — классификатор "текст -&gt; следующий разряд"</span>
+models <span class="tok-p">=</span> <span class="tok-p">{</span><span class="tok-p">}</span>
+<span class="tok-k">def</span> <span class="tok-f">fit</span><span class="tok-p">(</span>prefix<span class="tok-p">=</span><span class="tok-p">(</span><span class="tok-p">)</span><span class="tok-p">)</span><span class="tok-p">:</span>
+    codes <span class="tok-p">=</span> <span class="tok-p">[</span>c <span class="tok-k">for</span> c <span class="tok-k">in</span> node_at<span class="tok-p">(</span>prefix<span class="tok-p">)</span> <span class="tok-k">if</span> c <span class="tok-p">!=</span> <span class="tok-s">"</span><span class="tok-s">_doc</span><span class="tok-s">"</span><span class="tok-p">]</span>
+    <span class="tok-k">if</span> <span class="tok-f">len</span><span class="tok-p">(</span>codes<span class="tok-p">)</span> <span class="tok-p">&gt;</span> <span class="tok-n">1</span><span class="tok-p">:</span>
+        rows <span class="tok-p">=</span> <span class="tok-p">[</span>i <span class="tok-k">for</span> i<span class="tok-p">,</span> code <span class="tok-k">in</span> docid<span class="tok-p">.</span>items<span class="tok-p">(</span><span class="tok-p">)</span> <span class="tok-k">if</span> code<span class="tok-p">[</span><span class="tok-p">:</span><span class="tok-f">len</span><span class="tok-p">(</span>prefix<span class="tok-p">)</span><span class="tok-p">]</span> <span class="tok-p">==</span> prefix<span class="tok-p">]</span>
+        models<span class="tok-p">[</span>prefix<span class="tok-p">]</span> <span class="tok-p">=</span> LogisticRegression<span class="tok-p">(</span>C<span class="tok-p">=</span><span class="tok-n">10</span><span class="tok-p">,</span> max_iter<span class="tok-p">=</span><span class="tok-n">1000</span><span class="tok-p">)</span><span class="tok-p">.</span>fit<span class="tok-p">(</span>
+            X<span class="tok-p">[</span>rows<span class="tok-p">]</span><span class="tok-p">,</span> <span class="tok-p">[</span>docid<span class="tok-p">[</span>i<span class="tok-p">]</span><span class="tok-p">[</span><span class="tok-f">len</span><span class="tok-p">(</span>prefix<span class="tok-p">)</span><span class="tok-p">]</span> <span class="tok-k">for</span> i <span class="tok-k">in</span> rows<span class="tok-p">]</span><span class="tok-p">)</span>
+    <span class="tok-k">for</span> c <span class="tok-k">in</span> codes<span class="tok-p">:</span>
+        fit<span class="tok-p">(</span>prefix <span class="tok-p">+</span> <span class="tok-p">(</span>c<span class="tok-p">,</span><span class="tok-p">)</span><span class="tok-p">)</span>
+fit<span class="tok-p">(</span><span class="tok-p">)</span>
+
+<span class="tok-k">def</span> <span class="tok-f">next_logp</span><span class="tok-p">(</span>prefix<span class="tok-p">,</span> qx<span class="tok-p">)</span><span class="tok-p">:</span>
+    <span class="tok-s">"""log p(c_t | q, c_&lt;t) только для допустимых продолжений — это и есть маска trie"""</span>
+    codes <span class="tok-p">=</span> <span class="tok-p">[</span>c <span class="tok-k">for</span> c <span class="tok-k">in</span> node_at<span class="tok-p">(</span>prefix<span class="tok-p">)</span> <span class="tok-k">if</span> c <span class="tok-p">!=</span> <span class="tok-s">"</span><span class="tok-s">_doc</span><span class="tok-s">"</span><span class="tok-p">]</span>
+    <span class="tok-k">if</span> <span class="tok-f">len</span><span class="tok-p">(</span>codes<span class="tok-p">)</span> <span class="tok-p">==</span> <span class="tok-n">1</span><span class="tok-p">:</span>
+        <span class="tok-k">return</span> <span class="tok-p">{</span>codes<span class="tok-p">[</span><span class="tok-n">0</span><span class="tok-p">]</span><span class="tok-p">:</span> <span class="tok-n">0.0</span><span class="tok-p">}</span>
+    m <span class="tok-p">=</span> models<span class="tok-p">[</span>prefix<span class="tok-p">]</span>
+    lp <span class="tok-p">=</span> m<span class="tok-p">.</span>predict_log_proba<span class="tok-p">(</span>qx<span class="tok-p">)</span><span class="tok-p">[</span><span class="tok-n">0</span><span class="tok-p">]</span>
+    <span class="tok-k">return</span> <span class="tok-p">{</span>c<span class="tok-p">:</span> lp<span class="tok-p">[</span><span class="tok-f">list</span><span class="tok-p">(</span>m<span class="tok-p">.</span>classes_<span class="tok-p">)</span><span class="tok-p">.</span>index<span class="tok-p">(</span>c<span class="tok-p">)</span><span class="tok-p">]</span> <span class="tok-k">for</span> c <span class="tok-k">in</span> codes<span class="tok-p">}</span>
+
+<span class="tok-k">def</span> <span class="tok-f">constrained_beam</span><span class="tok-p">(</span>qx<span class="tok-p">,</span> beam<span class="tok-p">=</span><span class="tok-n">3</span><span class="tok-p">)</span><span class="tok-p">:</span>
+    beams<span class="tok-p">,</span> done <span class="tok-p">=</span> <span class="tok-p">[</span><span class="tok-p">(</span><span class="tok-p">(</span><span class="tok-p">)</span><span class="tok-p">,</span> <span class="tok-n">0.0</span><span class="tok-p">)</span><span class="tok-p">]</span><span class="tok-p">,</span> <span class="tok-p">[</span><span class="tok-p">]</span>
+    <span class="tok-k">while</span> beams<span class="tok-p">:</span>
+        cand <span class="tok-p">=</span> <span class="tok-p">[</span><span class="tok-p">]</span>
+        <span class="tok-k">for</span> prefix<span class="tok-p">,</span> lp <span class="tok-k">in</span> beams<span class="tok-p">:</span>
+            node <span class="tok-p">=</span> node_at<span class="tok-p">(</span>prefix<span class="tok-p">)</span>
+            <span class="tok-k">if</span> <span class="tok-s">"</span><span class="tok-s">_doc</span><span class="tok-s">"</span> <span class="tok-k">in</span> node<span class="tok-p">:</span>                       <span class="tok-c"># дошли до листа: docid сгенерирован целиком</span>
+                done<span class="tok-p">.</span>append<span class="tok-p">(</span><span class="tok-p">(</span>node<span class="tok-p">[</span><span class="tok-s">"</span><span class="tok-s">_doc</span><span class="tok-s">"</span><span class="tok-p">]</span><span class="tok-p">,</span> lp<span class="tok-p">)</span><span class="tok-p">)</span>
+                <span class="tok-k">continue</span>
+            cand <span class="tok-p">+</span><span class="tok-p">=</span> <span class="tok-p">[</span><span class="tok-p">(</span>prefix <span class="tok-p">+</span> <span class="tok-p">(</span>c<span class="tok-p">,</span><span class="tok-p">)</span><span class="tok-p">,</span> lp <span class="tok-p">+</span> l<span class="tok-p">)</span> <span class="tok-k">for</span> c<span class="tok-p">,</span> l <span class="tok-k">in</span> next_logp<span class="tok-p">(</span>prefix<span class="tok-p">,</span> qx<span class="tok-p">)</span><span class="tok-p">.</span>items<span class="tok-p">(</span><span class="tok-p">)</span><span class="tok-p">]</span>
+        beams <span class="tok-p">=</span> <span class="tok-f">sorted</span><span class="tok-p">(</span>cand<span class="tok-p">,</span> key<span class="tok-p">=</span><span class="tok-k">lambda</span> t<span class="tok-p">:</span> <span class="tok-p">-</span>t<span class="tok-p">[</span><span class="tok-n">1</span><span class="tok-p">]</span><span class="tok-p">)</span><span class="tok-p">[</span><span class="tok-p">:</span>beam<span class="tok-p">]</span>
+    <span class="tok-k">return</span> <span class="tok-f">sorted</span><span class="tok-p">(</span>done<span class="tok-p">,</span> key<span class="tok-p">=</span><span class="tok-k">lambda</span> t<span class="tok-p">:</span> <span class="tok-p">-</span>t<span class="tok-p">[</span><span class="tok-n">1</span><span class="tok-p">]</span><span class="tok-p">)</span>
+
+q <span class="tok-p">=</span> vec<span class="tok-p">.</span>transform<span class="tok-p">(</span><span class="tok-p">[</span><span class="tok-s">"</span><span class="tok-s">hnsw graph for nearest neighbors search</span><span class="tok-s">"</span><span class="tok-p">]</span><span class="tok-p">)</span>
+<span class="tok-f">print</span><span class="tok-p">(</span><span class="tok-p">[</span><span class="tok-p">(</span>docs<span class="tok-p">[</span>i<span class="tok-p">]</span><span class="tok-p">,</span> <span class="tok-f">round</span><span class="tok-p">(</span><span class="tok-f">float</span><span class="tok-p">(</span>s<span class="tok-p">)</span><span class="tok-p">,</span> <span class="tok-n">2</span><span class="tok-p">)</span><span class="tok-p">)</span> <span class="tok-k">for</span> i<span class="tok-p">,</span> s <span class="tok-k">in</span> constrained_beam<span class="tok-p">(</span>q<span class="tok-p">)</span><span class="tok-p">]</span><span class="tok-p">)</span>
+</code></pre></div>
+<p>Скор документа — сумма логарифмов вероятностей разрядов его docid, то есть <span class="tex">\log p_\theta(\mathrm{docid} \mid q)</span> из формулы выше; узлы с единственным ребёнком дают вклад <span class="tex">0</span>. В настоящем DSI роль классификаторов играет один декодер трансформера, общий для всех узлов; логика trie и маскирования та же. Научная задача — как обучить этот декодер так, чтобы он «запомнил» корпус.</p>
+<h2 id="проблемы">Проблемы</h2>
+<p><strong>Добавление документов.</strong> Нейросеть не умеет «вставлять запись». Новый документ нужно (а) дообучить, рискуя забыть старые (катастрофическое забывание), или (б) переобучить всю модель. <strong>DSI++</strong> (Mehta et al., 2022, EMNLP 2023) показывает: при последовательном добавлении новых документов модель заметно забывает старые. Помогают оптимизация к более «плоским» минимумам потерь и генеративная память — псевдозапросы к старым документам, которые подмешивают при доиндексации. <strong>IncDSI</strong> (Kishore et al., 2023) добавляет документ за 20–50 мс без переобучения: задача ставится как условная оптимизация с минимальным изменением параметров (по сути, подбирается вектор нового docid в выходном слое при замороженной модели). Решения неполны: плотный индекс добавляет вектор без всякой оптимизации и не трогает остальные, у GR каждое добавление меняет модель.</p>
+<p><strong>Масштаб.</strong> До 2023 года GR оценивали на корпусах порядка 100 тыс. документов (NQ-320k, подвыборки MS MARCO). Вопрос «что будет на миллионах» поставлен в <em>How Does Generative Retrieval Scale to Millions of Passages?</em> (Pradeep et al., 2023): эксперименты на полном MS MARCO (8,8 млн абзацев) с моделями до 11 млрд параметров. Выводы: GR конкурентен с сильными dual encoder'ами на малых корпусах, но масштабирование до миллионов остаётся нерешённой задачей; главное — синтетические запросы как представление документа при индексации; предложенные ранее архитектурные модификации перестают окупаться, если учитывать вычисления; наивный рост числа параметров быстро упирается в предел.</p>
+<p><strong>Эффективность.</strong> Beam search на каждый запрос — это <span class="tex">T</span> последовательных шагов декодера по <span class="tex">b</span> лучей каждый (плюс проход энкодера); чтобы получить топ-100, нужно <span class="tex">b \ge 100</span>, и это дороже одного эмбеддинга + ANN. Индексация — обучение, дни GPU, а не минуты.</p>
+<p><strong>Объяснимость и контроль.</strong> Нет скора релевантности в привычном виде, нельзя отфильтровать по атрибутам «в индексе», сложно отладить.</p>
+<h2 id="что-показали-новые-обзоры-и-эксперименты-20242025">Что показали новые обзоры и эксперименты (2024–2025)</h2>
+<p>Здесь важна честность оценок: результаты зависят от корпуса, метрики и настройки бейзлайна.</p>
+<ul>
+<li><strong>Обзор</strong> <em>From Matching to Generation: A Survey on Generative Information Retrieval</em> (Li et al., arXiv 2404.14851): делит область на две ветви — генеративный поиск документов (GR, эта глава) и надёжную генерацию ответов (RAG и родственные подходы) — и систематизирует для GR обучение и архитектуры, docid, инкрементальное добавление документов и оценку. Хорошая карта литературы для входа в тему; список работ ведётся в <a href="https://github.com/RUC-NLPIR/GenIR-Survey" rel="noopener noreferrer nofollow">репозитории обзора</a>.</li>
+<li><strong>Законы масштабирования</strong> (Cai et al., arXiv 2503.18941, SIGIR 2025, <em>Exploring Training and Inference Scaling Laws in Generative Retrieval</em>): качество растёт с размером модели, объёмом данных и вычислениями на выводе, и эти факторы дополняют друг друга; методы с n-граммными идентификаторами (как SEAL) лучше всего согласуются с законами масштабирования; декодерные LLaMA стабильно превосходят T5. Для сравнения методов предложена непрерывная метрика на основе contrastive entropy и потерь генерации, а не дискретный Recall.</li>
+<li><strong>Does Generative Retrieval Overcome the Limitations of Dense Retrieval?</strong> (Zhang et al., arXiv 2509.22116, 2025): теоретические доводы в пользу GR — глобально нормированная цель (softmax по всему корпусу, а не по батчу) вместо локально нормированной у dense, и представимость, растущая с числом параметров, вместо ограничения низким рангом. Контролируемые эксперименты на NQ и MS MARCO подтверждают часть этих доводов, но авторы подчёркивают, что GR не превосходит DR универсально.</li>
+</ul>
+<p>Итог для практики: GR — активная исследовательская область с интересными свойствами (универсальный интерфейс, end-to-end обучение), но в промышленных системах поиска по большим меняющимся корпусам доминируют dense, sparse и гибриды с переранжированием. Там, где GR прижился, это <em>рекомендации</em>: каталог ограничен, docid можно учить вместе с моделью, а слои Semantic ID переиспользуются между задачами.</p>
+<h2 id="что-запомнить-для-собеседования">Что запомнить для собеседования</h2>
+<ul>
+<li>GR = seq2seq «запрос → docid» + ограниченный beam search по trie; в отличие от RAG, не добавляет контекст к генерации, а <em>заменяет</em> индекс.</li>
+<li>Выбор docid определяет всё: атомарные, иерархические, текстовые, обученные.</li>
+<li>Главные слабости: обновление корпуса и масштаб. Эти же слабости объясняют, почему dense retrieval остаётся стандартом.</li>
+<li>В рекомендациях та же идея работает как TIGER с семантическими ID.</li>
+</ul>
+<h2 id="что-почитать">Что почитать</h2>
+<ul>
+<li>Tay et al., <a href="https://arxiv.org/abs/2202.06991" rel="noopener noreferrer nofollow">Transformer Memory as a Differentiable Search Index</a>, 2022.</li>
+<li>De Cao et al., <a href="https://arxiv.org/abs/2010.00904" rel="noopener noreferrer nofollow">Autoregressive Entity Retrieval (GENRE)</a>, 2020; Bevilacqua et al., <a href="https://arxiv.org/abs/2204.10628" rel="noopener noreferrer nofollow">Autoregressive Search Engines (SEAL)</a>, 2022; Wang et al., <a href="https://arxiv.org/abs/2206.02743" rel="noopener noreferrer nofollow">A Neural Corpus Indexer</a>, 2022.</li>
+<li>Pradeep et al., <a href="https://arxiv.org/abs/2305.11841" rel="noopener noreferrer nofollow">How Does Generative Retrieval Scale to Millions of Passages?</a>, 2023.</li>
+<li>Mehta et al., <a href="https://arxiv.org/abs/2212.09744" rel="noopener noreferrer nofollow">DSI++: Updating Transformer Memory with New Documents</a>, EMNLP 2023; Kishore et al., <a href="https://arxiv.org/abs/2307.10323" rel="noopener noreferrer nofollow">IncDSI: Incrementally Updatable Document Retrieval</a>, 2023.</li>
+<li>Cai et al., <a href="https://arxiv.org/abs/2503.18941" rel="noopener noreferrer nofollow">Exploring Training and Inference Scaling Laws in Generative Retrieval</a>, SIGIR 2025.</li>
+<li>Li et al., <a href="https://arxiv.org/abs/2404.14851" rel="noopener noreferrer nofollow">From Matching to Generation: A Survey on Generative Information Retrieval</a>, 2024; Zhang et al., <a href="https://arxiv.org/abs/2509.22116" rel="noopener noreferrer nofollow">Does Generative Retrieval Overcome the Limitations of Dense Retrieval?</a>, 2025.</li>
+<li>Aggarwal et al., <a href="https://arxiv.org/abs/2311.09735" rel="noopener noreferrer nofollow">GEO: Generative Engine Optimization</a>, KDD 2024.</li>
+<li>Видео: DeepRecSys, семинар 12 — <a href="https://www.youtube.com/watch?v=CW0X_rY7wzs" rel="noopener noreferrer nofollow">разбор TIGER и generative retrieval</a>.</li>
+</ul>
+</div>
+      
+
+      
+      <nav class="pager" aria-label="Соседние статьи">
+        <a href="/edufamcs-demo/handbook/retrieval/rag/"><span><svg class="ico sm" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-arrow-left"/></svg>Назад</span>RAG: поиск для языковых моделей</a>
+        <a href="/edufamcs-demo/handbook/retrieval/agentnyj-poisk/"><span>Дальше<svg class="ico sm" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-arrow"/></svg></span>Рассуждающий и агентный поиск: 2025–2026</a>
+      </nav>
+      
+    </article>
+
+    <aside class="hb-toc" aria-label="На этой странице">
+      <a class="l2" href="#идея-поиск-как-seq2seq">Идея: поиск как seq2seq</a><a class="l2" href="#хроника">Хроника</a><a class="l2" href="#дизайн-идентификатора">Дизайн идентификатора</a><a class="l3" href="#ограниченное-декодирование">Ограниченное декодирование</a><a class="l2" href="#код-игрушечный-dsi">Код: игрушечный DSI</a><a class="l2" href="#проблемы">Проблемы</a><a class="l2" href="#что-показали-новые-обзоры-и-эксперименты-20242025">Что показали новые обзоры и эксперименты (2024–2025)</a><a class="l2" href="#что-запомнить-для-собеседования">Что запомнить для собеседования</a><a class="l2" href="#что-почитать">Что почитать</a>
+    </aside>
+  </div>
+</div>
+
+
+</main>
+
+<footer class="ftr" data-theme="dark">
+  <svg class="sym fern" viewBox="0 0 40.5 65.02" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#fern"/></svg>
+  <div class="container">
+    <div class="ftr-row">
+      <a href="/edufamcs-demo/" aria-label="EDU FAMCS — главная"><img src="/edufamcs-demo/static/brand/logo/logo-edu-dark.svg" alt="EDU FAMCS" width="196" height="40"></a>
+      <ul class="ftr-links">
+        <li><a href="/edufamcs-demo/#courses">Курсы</a></li>
+        <li><a href="/edufamcs-demo/ml/">Машинное обучение</a></li>
+        <li><a href="/edufamcs-demo/handbook/">Хендбук</a></li>
+        <li><a href="/edufamcs-demo/news/">Новости</a></li>
+        <li><a href="/edufamcs-demo/people/">Авторы</a></li>
+        <li><a href="/edufamcs-demo/about/">О&nbsp;нас</a></li>
+        <li><a href="/edufamcs-demo/propose/">Предложить или исправить</a></li>
+        <li><a href="/edufamcs-demo/privacy/">Конфиденциальность</a></li>
+      </ul>
+    </div>
+    <div class="ftr-big" aria-hidden="true">EDU<span class="d">·</span>FAMCS</div>
+    <p class="ftr-copy">© 2026 EDU FAMCS · Минск</p>
+  </div>
+</footer>
+
+<div class="toasts-region" aria-live="polite" id="toasts">
+
+</div>
+
+</body>
+</html>

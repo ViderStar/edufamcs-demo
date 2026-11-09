@@ -1,0 +1,234 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Ансамбли и случайный лес · EDU FAMCS</title>
+<meta name="description" content="Ансамбли и случайный лес — Классическое машинное обучение. Хендбук ML-курса ФПМИ.">
+<meta name="theme-color" content="#060A16">
+<meta name="robots" content="noindex, nofollow">
+<meta name="htmx-config" content='{"allowEval":false,"includeIndicatorStyles":false,"historyCacheSize":0,"selfRequestsOnly":true}'>
+<meta name="katex-js" content="/edufamcs-demo/static/vendor/katex/katex.min.js">
+<meta name="katex-css" content="/edufamcs-demo/static/vendor/katex/katex.min.css">
+<link rel="icon" href="/edufamcs-demo/static/brand/logo/favicon-16.svg" type="image/svg+xml" sizes="16x16">
+<link rel="icon" href="/edufamcs-demo/static/brand/logo/favicon.svg" type="image/svg+xml" sizes="any">
+<link rel="preload" href="/edufamcs-demo/static/brand/fonts/manrope-cyrillic-400.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/edufamcs-demo/static/brand/fonts/unbounded-cyrillic-800.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="/edufamcs-demo/static/brand/fonts.css">
+<link rel="stylesheet" href="/edufamcs-demo/static/brand/tokens.css">
+<link rel="stylesheet" href="/edufamcs-demo/static/brand/components.css">
+<link rel="stylesheet" href="/edufamcs-demo/static/css/site.css">
+<link rel="stylesheet" href="/edufamcs-demo/static/css/hub.css">
+<link rel="stylesheet" href="/edufamcs-demo/static/css/about.css">
+<link rel="stylesheet" href="/edufamcs-demo/static/handbook/handbook.css">
+<script src="/edufamcs-demo/static/js/theme.js"></script>
+<script src="/edufamcs-demo/static/vendor/htmx/htmx.min.js" defer></script>
+<script src="/edufamcs-demo/static/vendor/alpine/alpine-csp.min.js" defer></script>
+<script src="/edufamcs-demo/static/js/site.js" defer></script>
+<script src="/edufamcs-demo/static/handbook/handbook.js" defer></script>
+</head>
+<body class="" hx-headers='{"X-CSRFToken": "FAN9mUcaz3w0ck2tP5d8pWptRMkSum4s4kmd6SZxuUU9rTdcmiWgmrVypuqn2wMc"}'>
+<a class="skip" href="#main">К содержанию</a>
+<div class="demo-bar" role="note">Демо-версия для отзывов: вход, запись на курсы и формы здесь не работают.</div>
+
+<header class="hdr">
+  <div class="container">
+    <a class="brand" href="/edufamcs-demo/" aria-label="EDU FAMCS — главная">
+      <span class="full"><img class="only-light" src="/edufamcs-demo/static/brand/logo/logo-edu-light.svg" alt="EDU FAMCS" width="196" height="40"><img class="only-dark" src="/edufamcs-demo/static/brand/logo/logo-edu-dark.svg" alt="EDU FAMCS" width="196" height="40"></span>
+      <span class="short"><img class="only-light" src="/edufamcs-demo/static/brand/logo/logo-edu-light.svg" alt="EDU FAMCS" height="30"><img class="only-dark" src="/edufamcs-demo/static/brand/logo/logo-edu-dark.svg" alt="EDU FAMCS" height="30"></span>
+    </a>
+    <nav class="nav" id="main-nav" aria-label="Основная навигация">
+      <a href="/edufamcs-demo/#courses">Курсы</a>
+      <a href="/edufamcs-demo/ml/" >Машинное обучение</a>
+      
+      <a href="/edufamcs-demo/handbook/" aria-current="page">Хендбук</a>
+      <a href="/edufamcs-demo/news/" >Новости</a>
+      <a href="/edufamcs-demo/people/" >Авторы</a>
+      <a href="/edufamcs-demo/about/" >О&nbsp;нас</a>
+    </nav>
+    <div class="hdr-actions">
+      
+      <a class="btn btn-outline btn-login" href="/edufamcs-demo/accounts/login/?next=/handbook/classic/ansambli-i-sluchajnyj-les/">Войти</a>
+      
+      <button class="icon-btn menu-btn" type="button" aria-label="Меню" aria-expanded="false" aria-controls="main-nav"><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-menu"/></svg></button>
+    </div>
+  </div>
+</header>
+
+<main id="main">
+
+
+
+<div class="container hb-page hb-tone">
+  <div class="hb">
+    <aside class="hb-nav" aria-label="Статьи раздела">
+      
+<form class="hb-search" action="/edufamcs-demo/handbook/search/" method="get" role="search">
+  <svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-search"/></svg>
+  <input class="input" type="search" name="q" value="" placeholder="Поиск по хендбуку" aria-label="Поиск по хендбуку" autocomplete="off" maxlength="120"
+    hx-get="/edufamcs-demo/handbook/search/" hx-trigger="input changed delay:250ms, search" hx-target="#hb-nav-results" hx-sync="this:replace">
+</form>
+
+      <div id="hb-nav-results" class="hb-nav-results" aria-live="polite"></div>
+      <a class="grp" href="/edufamcs-demo/handbook/classic/">Деревья, ансамбли и настройка</a>
+      
+      <a class="" href="/edufamcs-demo/handbook/classic/derevya-reshenij/">Деревья решений</a>
+      
+      <a class="cur" href="/edufamcs-demo/handbook/classic/ansambli-i-sluchajnyj-les/" aria-current="page">Ансамбли и случайный лес</a>
+      
+      <a class="" href="/edufamcs-demo/handbook/classic/gradientnyj-busting/">Градиентный бустинг</a>
+      
+      <a class="" href="/edufamcs-demo/handbook/classic/giperparametry-i-interpretiruemost/">Подбор гиперпараметров и интерпретируемость</a>
+      
+    </aside>
+
+    <article class="hb-main">
+      <nav class="crumbs" aria-label="Навигация"><a href="/edufamcs-demo/handbook/">Хендбук</a><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-chev"/></svg><a href="/edufamcs-demo/handbook/classic/">Классическое машинное обучение</a></nav>
+      <h1 class="h1">Ансамбли и случайный лес</h1>
+      <div class="hb-meta">
+        
+        
+        <span><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-clock"/></svg>10&nbsp;мин</span>
+        <span class="hb-authors"><span class="avatar sm" title="Артем Лебедевич">АЛ</span>Артем Лебедевич</span>
+        <span><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-edit"/></svg>9 ноября 2026</span>
+        
+        
+      </div>
+
+      
+      <details class="hb-mtoc">
+        <summary><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-list"/></svg>Содержание<svg class="ico sm" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-chev-down"/></svg></summary>
+        <a class="l2" href="#почему-усреднение-помогает">Почему усреднение помогает</a><a class="l2" href="#бутстрап-и-бэггинг">Бутстрап и бэггинг</a><a class="l2" href="#случайный-лес">Случайный лес</a><a class="l3" href="#oob-оценка">OOB-оценка</a><a class="l3" href="#гиперпараметры">Гиперпараметры</a><a class="l3" href="#лес-как-адаптивные-соседи">Лес как адаптивные соседи</a><a class="l3" href="#важность-признаков">Важность признаков</a><a class="l2" href="#голосование-блендинг-стекинг">Голосование, блендинг, стекинг</a><a class="l2" href="#ловушки">Ловушки</a><a class="l2" href="#что-почитать">Что почитать</a>
+      </details>
+      
+
+      <div class="prose"><p>Одно глубокое дерево имеет малое смещение и огромный разброс. Идея ансамбля: обучить много таких моделей и усреднить ответы. Если ошибки моделей не идеально коррелированы, усреднение уменьшает разброс, почти не трогая смещение. Эта статья — про параллельные ансамбли (бэггинг, случайный лес, стекинг); последовательный вариант, бустинг, разобран в <a href="/edufamcs-demo/handbook/classic/gradientnyj-busting/" rel="noopener noreferrer nofollow">следующей статье</a>.</p>
+<h2 id="почему-усреднение-помогает">Почему усреднение помогает</h2>
+<p>Напомним разложение ошибки (MSE) на смещение, разброс и неустранимый шум: <span class="tex">\mathbb{E}(y - a(x))^2 = \text{bias}^2 + \text{variance} + \sigma_\varepsilon^2</span>. Возьмём ансамбль <span class="tex">A(x)=\frac1M\sum_{m=1}^M b_m(x)</span> из <span class="tex">M</span> базовых моделей, обученных на разных выборках. Пусть у каждой модели дисперсия предсказания <span class="tex">\sigma^2</span>, а попарная корреляция предсказаний <span class="tex">\rho</span>. Тогда</p>
+<div class="tex tex-block">\mathrm{Var}\,A(x) = \rho\,\sigma^2 + \frac{1-\rho}{M}\,\sigma^2 .</div>
+<p>Смещение ансамбля равно смещению отдельной модели (все <span class="tex">b_m</span> одинаково распределены). Второе слагаемое убывает с <span class="tex">M</span>, первое — нет: при <span class="tex">M\to\infty</span> разброс упирается в <span class="tex">\rho\sigma^2</span>. Например, при <span class="tex">\rho=0{,}3</span> десять моделей дают <span class="tex">0{,}37\sigma^2</span>, сто — <span class="tex">0{,}307\sigma^2</span>: после первых десятков моделей выигрыш почти исчерпан, дальше помогает только снижение <span class="tex">\rho</span>. Отсюда два следствия. Первое: базовые модели должны быть <strong>сильными по смещению</strong> (глубокие деревья, а не пни) — усреднением смещение не лечится. Второе: главный рычаг — <strong>декорреляция</strong> моделей, то есть снижение <span class="tex">\rho</span>; её и обеспечивают бутстрап и случайные подпространства признаков.</p>
+<h2 id="бутстрап-и-бэггинг">Бутстрап и бэггинг</h2>
+<p><strong>Бутстрап</strong> (Efron, 1979): из выборки размера <span class="tex">n</span> берут <span class="tex">n</span> объектов с возвращением. Вероятность, что конкретный объект не попал в выборку, <span class="tex">(1-1/n)^n \to e^{-1} \approx 0{,}368</span>: примерно треть объектов в каждой подвыборке отсутствует, а уникальных остаётся около 63 %.</p>
+<p><strong>Бэггинг</strong> (bootstrap aggregating, Breiman, 1996): обучить <span class="tex">b_m</span> на <span class="tex">m</span>-й бутстрап-выборке, итоговый ответ — среднее (регрессия) или голосование/усреднение вероятностей (классификация). Особенно полезен для нестабильных алгоритмов (деревья), бесполезен для стабильных (линейные модели, kNN с большим <span class="tex">k</span>).</p>
+<p><strong>Случайные подпространства</strong> (Ho, 1998): каждая модель видит случайное подмножество признаков. Идея в том же: сделать модели различными.</p>
+<h2 id="случайный-лес">Случайный лес</h2>
+<p>Случайный лес (Breiman, 2001) = бэггинг глубоких деревьев + <strong>случайное подмножество признаков в каждом сплите</strong>:</p>
+<div class="code"><div class="code-head"><span class="lang">code</span></div><pre><code>для m = 1..M:
+    Z_m = бутстрап-выборка из обучающей
+    вырастить дерево b_m на Z_m до (почти) чистых листьев:
+        в каждой вершине выбрать случайно k из d признаков,
+        найти лучший сплит только среди них
+ответ: среднее b_m (регрессия) или усреднение вероятностей (классификация)
+</code></pre></div>
+<p>Ключевое отличие от бэггинга: если в данных есть один очень сильный признак, то в обычном бэггинге он стоит в корне каждого дерева, деревья похожи, <span class="tex">\rho</span> высока. Выбор <span class="tex">k &lt; d</span> вынуждает деревья использовать и другие признаки и снижает <span class="tex">\rho</span> ценой небольшого роста смещения каждого дерева.</p>
+<p><strong>Extra Trees</strong> (Geurts, Ernst, Wehenkel, 2006): порог сплита выбирается не оптимально, а случайно — равномерно между минимумом и максимумом признака в вершине — для каждого из <span class="tex">k</span> признаков, после чего берётся лучший из кандидатов. Обычно без бутстрапа (по всей выборке). Деревья ещё менее коррелированы и строятся быстрее, смещение чуть выше; на шумных данных часто не хуже леса.</p>
+<h3 id="oob-оценка">OOB-оценка</h3>
+<p>Каждое дерево не видело около 37 % объектов. Для объекта <span class="tex">x_i</span> усредним предсказания только тех деревьев, в чьи выборки он не попал, — получится честный прогноз без отложенной выборки. Метрика на таких прогнозах — <strong>out-of-bag</strong> оценка: по смыслу близка к кросс-валидации, но достаётся почти бесплатно, без повторного обучения. В sklearn: <code>oob_score=True</code>, <code>oob_decision_function_</code>. Оговорка: OOB предполагает i.i.d. объекты; для временных данных и групп (несколько строк одного пользователя) она завышает качество — нужна валидация по времени или по группам.</p>
+<h3 id="гиперпараметры">Гиперпараметры</h3>
+<ul>
+<li><strong>Число деревьев <span class="tex">M</span>.</strong> Увеличение не приводит к переобучению: ошибка выходит на плато (разброс упирается в <span class="tex">\rho\sigma^2</span>). Ставят столько, сколько позволяет время (200–1000), смотрят на кривую OOB-ошибки.</li>
+<li><strong><code>max_features</code>.</strong> Главный рычаг. Классическая рекомендация Бреймана: <span class="tex">\sqrt d</span> для классификации, <span class="tex">d/3</span> для регрессии; в sklearn у классификатора по умолчанию <span class="tex">\sqrt d</span>, а у регрессора все признаки (<code>1.0</code>) — то есть обычный бэггинг, это стоит настроить. Мало признаков — выше смещение, ниже корреляция; много — наоборот. При большом числе шумовых признаков оптимум смещается к большим значениям.</li>
+<li><strong>Глубина и <code>min_samples_leaf</code>.</strong> В отличие от одиночного дерева, лес устойчив к глубоким деревьям; ограничение глубины экономит память (глубокий лес на миллионе строк весит гигабайты) и немного сглаживает модель.</li>
+<li><strong><code>max_samples</code></strong> — размер бутстрап-выборки; уменьшение ускоряет обучение и снижает корреляцию.</li>
+</ul>
+<h3 id="лес-как-адаптивные-соседи">Лес как адаптивные соседи</h3>
+<p>Лес можно записать как взвешенный kNN: ответ для <span class="tex">x</span> — <span class="tex">\sum_i w_i(x) y_i</span>, где вес объекта <span class="tex">x_i</span> — доля деревьев, в которых <span class="tex">x</span> и <span class="tex">x_i</span> попали в один лист (с нормировкой по размеру листа). В обычном kNN метрика фиксирована и все признаки равноценны; в лесе «соседство» определяется выученными разбиениями и отбрасывает неинформативные признаки. Это объясняет и силу леса на табличных данных, и его слабость: как и у kNN, у него нет экстраполяции — ответ всегда лежит в выпуклой оболочке обучающих меток.</p>
+<h3 id="важность-признаков">Важность признаков</h3>
+<p>Встроенная MDI — усреднённый по деревьям прирост критерия; она бесплатна, но смещена в пользу признаков с высокой кардинальностью и считается на трейне. <strong>Permutation importance</strong> (Breiman, 2001): перемешать значения признака <span class="tex">j</span> на отложенной (или OOB) выборке и измерить падение метрики. Она учитывает реальное влияние на качество, но при сильно коррелированных признаках делит важность между ними или занижает её (модель берёт значение у «двойника»). Подробнее — в <a href="/edufamcs-demo/handbook/classic/giperparametry-i-interpretiruemost/" rel="noopener noreferrer nofollow">статье про интерпретируемость</a>.</p>
+<h2 id="голосование-блендинг-стекинг">Голосование, блендинг, стекинг</h2>
+<p>Ансамбли можно строить из разнородных моделей (линейная, лес, бустинг, нейросеть): ошибки таких моделей разнообразнее, чем у копий одного алгоритма.</p>
+<ul>
+<li><strong>Голосование.</strong> Hard — большинство классов; soft — среднее вероятностей (обычно лучше, нужны откалиброванные вероятности). Веса подбирают по отложенной выборке.</li>
+<li><strong>Блендинг.</strong> Мета-модель (часто линейная или логистическая регрессия) обучается на предсказаниях базовых моделей на отдельной отложенной части данных. Просто, но тратит данные.</li>
+<li><strong>Стекинг</strong> (Wolpert, 1992): то же, но мета-признаки строятся для всего трейна по схеме <strong>out-of-fold</strong> (OOF): для каждой из <span class="tex">K</span> частей предсказание получено моделью, не видевшей эту часть. Для теста базовые модели берут либо усреднённые по фолдам, либо переобученные на всём трейне.</li>
+</ul>
+<p><strong>Как нельзя.</strong> Нельзя обучить базовые модели на всём трейне и учить мета-модель на их предсказаниях для того же трейна: глубокий лес почти идеально предсказывает собственный трейн, мета-модель увидит «безошибочный» признак, выставит ему огромный вес и провалится на тесте. Это утечка, и именно её убирает OOF-схема. Второй источник утечки — подбор гиперпараметров мета-модели на тех же фолдах без вложенной валидации.</p>
+<div class="code"><div class="code-head"><span class="lang">python</span></div><pre><code><span class="tok-k">from</span> sklearn.datasets <span class="tok-k">import</span> make_classification
+<span class="tok-k">from</span> sklearn.ensemble <span class="tok-k">import</span> RandomForestClassifier<span class="tok-p">,</span> StackingClassifier<span class="tok-p">,</span> ExtraTreesClassifier
+<span class="tok-k">from</span> sklearn.linear_model <span class="tok-k">import</span> LogisticRegression
+<span class="tok-k">from</span> sklearn.model_selection <span class="tok-k">import</span> cross_val_score<span class="tok-p">,</span> train_test_split
+<span class="tok-k">from</span> sklearn.pipeline <span class="tok-k">import</span> make_pipeline
+<span class="tok-k">from</span> sklearn.preprocessing <span class="tok-k">import</span> StandardScaler
+
+X<span class="tok-p">,</span> y <span class="tok-p">=</span> make_classification<span class="tok-p">(</span><span class="tok-n">5000</span><span class="tok-p">,</span> <span class="tok-n">30</span><span class="tok-p">,</span> n_informative<span class="tok-p">=</span><span class="tok-n">8</span><span class="tok-p">,</span> flip_y<span class="tok-p">=</span><span class="tok-n">0.05</span><span class="tok-p">,</span> random_state<span class="tok-p">=</span><span class="tok-n">0</span><span class="tok-p">)</span>
+X_tr<span class="tok-p">,</span> X_te<span class="tok-p">,</span> y_tr<span class="tok-p">,</span> y_te <span class="tok-p">=</span> train_test_split<span class="tok-p">(</span>X<span class="tok-p">,</span> y<span class="tok-p">,</span> stratify<span class="tok-p">=</span>y<span class="tok-p">,</span> random_state<span class="tok-p">=</span><span class="tok-n">0</span><span class="tok-p">)</span>
+
+rf <span class="tok-p">=</span> RandomForestClassifier<span class="tok-p">(</span>n_estimators<span class="tok-p">=</span><span class="tok-n">500</span><span class="tok-p">,</span> max_features<span class="tok-p">=</span><span class="tok-s">"</span><span class="tok-s">sqrt</span><span class="tok-s">"</span><span class="tok-p">,</span>
+                            min_samples_leaf<span class="tok-p">=</span><span class="tok-n">2</span><span class="tok-p">,</span> oob_score<span class="tok-p">=</span><span class="tok-k">True</span><span class="tok-p">,</span> n_jobs<span class="tok-p">=</span><span class="tok-p">-</span><span class="tok-n">1</span><span class="tok-p">,</span> random_state<span class="tok-p">=</span><span class="tok-n">0</span><span class="tok-p">)</span>
+rf<span class="tok-p">.</span>fit<span class="tok-p">(</span>X_tr<span class="tok-p">,</span> y_tr<span class="tok-p">)</span>
+<span class="tok-f">print</span><span class="tok-p">(</span><span class="tok-s">"</span><span class="tok-s">OOB acc:</span><span class="tok-s">"</span><span class="tok-p">,</span> rf<span class="tok-p">.</span>oob_score_<span class="tok-p">,</span> <span class="tok-s">"</span><span class="tok-s">test acc:</span><span class="tok-s">"</span><span class="tok-p">,</span> rf<span class="tok-p">.</span>score<span class="tok-p">(</span>X_te<span class="tok-p">,</span> y_te<span class="tok-p">)</span><span class="tok-p">)</span>
+
+stack <span class="tok-p">=</span> StackingClassifier<span class="tok-p">(</span>
+    estimators<span class="tok-p">=</span><span class="tok-p">[</span><span class="tok-p">(</span><span class="tok-s">"</span><span class="tok-s">rf</span><span class="tok-s">"</span><span class="tok-p">,</span> rf<span class="tok-p">)</span><span class="tok-p">,</span> <span class="tok-p">(</span><span class="tok-s">"</span><span class="tok-s">et</span><span class="tok-s">"</span><span class="tok-p">,</span> ExtraTreesClassifier<span class="tok-p">(</span><span class="tok-n">500</span><span class="tok-p">,</span> n_jobs<span class="tok-p">=</span><span class="tok-p">-</span><span class="tok-n">1</span><span class="tok-p">,</span> random_state<span class="tok-p">=</span><span class="tok-n">0</span><span class="tok-p">)</span><span class="tok-p">)</span><span class="tok-p">,</span>
+                <span class="tok-p">(</span><span class="tok-s">"</span><span class="tok-s">lr</span><span class="tok-s">"</span><span class="tok-p">,</span> make_pipeline<span class="tok-p">(</span>StandardScaler<span class="tok-p">(</span><span class="tok-p">)</span><span class="tok-p">,</span> LogisticRegression<span class="tok-p">(</span>max_iter<span class="tok-p">=</span><span class="tok-n">1000</span><span class="tok-p">)</span><span class="tok-p">)</span><span class="tok-p">)</span><span class="tok-p">]</span><span class="tok-p">,</span>
+    final_estimator<span class="tok-p">=</span>LogisticRegression<span class="tok-p">(</span><span class="tok-p">)</span><span class="tok-p">,</span>
+    cv<span class="tok-p">=</span><span class="tok-n">5</span><span class="tok-p">,</span>                      <span class="tok-c"># OOF-предсказания для мета-модели</span>
+    stack_method<span class="tok-p">=</span><span class="tok-s">"</span><span class="tok-s">predict_proba</span><span class="tok-s">"</span><span class="tok-p">,</span>
+<span class="tok-p">)</span>
+<span class="tok-f">print</span><span class="tok-p">(</span><span class="tok-s">"</span><span class="tok-s">stack CV acc:</span><span class="tok-s">"</span><span class="tok-p">,</span> cross_val_score<span class="tok-p">(</span>stack<span class="tok-p">,</span> X_tr<span class="tok-p">,</span> y_tr<span class="tok-p">,</span> cv<span class="tok-p">=</span><span class="tok-n">3</span><span class="tok-p">)</span><span class="tok-p">.</span>mean<span class="tok-p">(</span><span class="tok-p">)</span><span class="tok-p">)</span>
+</code></pre></div>
+<h2 id="ловушки">Ловушки</h2>
+<ul>
+<li>Лес не экстраполирует и плохо работает на разреженных высокоразмерных данных (тексты): там выигрывают линейные модели.</li>
+<li>Модель большая: тысячи глубоких деревьев дают медленный инференс, а на миллионах строк каждое дерево до чистых листьев весит десятки мегабайт; для продакшена ограничивают глубину или переходят на бустинг.</li>
+<li><strong>Вероятности не откалиброваны.</strong> Усреднение голосов деревьев редко даёт значения около 0 и 1, поэтому вероятности леса сжаты к середине (Niculescu-Mizil &amp; Caruana, 2005). Если важны сами вероятности (скоринг, ставки в аукционе), нужна калибровка: <code>CalibratedClassifierCV</code>, изотоническая или Платта.</li>
+<li>Корреляция признаков не ломает прогноз, но размывает важности.</li>
+<li>Стекинг приносит доли процента и усложняет сопровождение: прежде чем строить его, убедитесь, что базовые модели действительно различны (посмотрите на корреляцию их ошибок).</li>
+<li>На собеседовании спрашивают: формулу дисперсии ансамбля; чем лес отличается от бэггинга; почему больше деревьев не переобучает; что такое OOB; почему стекинг на предсказаниях трейна течёт.</li>
+</ul>
+<h2 id="что-почитать">Что почитать</h2>
+<ul>
+<li>Breiman L. <em>Bagging Predictors</em>, Machine Learning, 1996.</li>
+<li>Breiman L. <em>Random Forests</em>, Machine Learning, 2001: https://link.springer.com/article/10.1023/A:1010933404324</li>
+<li>Geurts P., Ernst D., Wehenkel L. <em>Extremely randomized trees</em>, Machine Learning, 2006.</li>
+<li>Wolpert D. <em>Stacked Generalization</em>, Neural Networks, 1992.</li>
+<li>Хендбук Яндекса, «Ансамбли в машинном обучении»: https://education.yandex.ru/handbook/ml/article/ansambli-v-mashinnom-obuchenii</li>
+<li>Хендбук Яндекса, «Разложение ошибки на смещение и разброс»: https://education.yandex.ru/handbook/ml/article/bias-variance-decomposition</li>
+</ul>
+</div>
+      
+
+      
+      <nav class="pager" aria-label="Соседние статьи">
+        <a href="/edufamcs-demo/handbook/classic/derevya-reshenij/"><span><svg class="ico sm" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-arrow-left"/></svg>Назад</span>Деревья решений</a>
+        <a href="/edufamcs-demo/handbook/classic/gradientnyj-busting/"><span>Дальше<svg class="ico sm" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-arrow"/></svg></span>Градиентный бустинг</a>
+      </nav>
+      
+    </article>
+
+    <aside class="hb-toc" aria-label="На этой странице">
+      <a class="l2" href="#почему-усреднение-помогает">Почему усреднение помогает</a><a class="l2" href="#бутстрап-и-бэггинг">Бутстрап и бэггинг</a><a class="l2" href="#случайный-лес">Случайный лес</a><a class="l3" href="#oob-оценка">OOB-оценка</a><a class="l3" href="#гиперпараметры">Гиперпараметры</a><a class="l3" href="#лес-как-адаптивные-соседи">Лес как адаптивные соседи</a><a class="l3" href="#важность-признаков">Важность признаков</a><a class="l2" href="#голосование-блендинг-стекинг">Голосование, блендинг, стекинг</a><a class="l2" href="#ловушки">Ловушки</a><a class="l2" href="#что-почитать">Что почитать</a>
+    </aside>
+  </div>
+</div>
+
+
+</main>
+
+<footer class="ftr" data-theme="dark">
+  <svg class="sym fern" viewBox="0 0 40.5 65.02" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#fern"/></svg>
+  <div class="container">
+    <div class="ftr-row">
+      <a href="/edufamcs-demo/" aria-label="EDU FAMCS — главная"><img src="/edufamcs-demo/static/brand/logo/logo-edu-dark.svg" alt="EDU FAMCS" width="196" height="40"></a>
+      <ul class="ftr-links">
+        <li><a href="/edufamcs-demo/#courses">Курсы</a></li>
+        <li><a href="/edufamcs-demo/ml/">Машинное обучение</a></li>
+        <li><a href="/edufamcs-demo/handbook/">Хендбук</a></li>
+        <li><a href="/edufamcs-demo/news/">Новости</a></li>
+        <li><a href="/edufamcs-demo/people/">Авторы</a></li>
+        <li><a href="/edufamcs-demo/about/">О&nbsp;нас</a></li>
+        <li><a href="/edufamcs-demo/propose/">Предложить или исправить</a></li>
+        <li><a href="/edufamcs-demo/privacy/">Конфиденциальность</a></li>
+      </ul>
+    </div>
+    <div class="ftr-big" aria-hidden="true">EDU<span class="d">·</span>FAMCS</div>
+    <p class="ftr-copy">© 2026 EDU FAMCS · Минск</p>
+  </div>
+</footer>
+
+<div class="toasts-region" aria-live="polite" id="toasts">
+
+</div>
+
+</body>
+</html>

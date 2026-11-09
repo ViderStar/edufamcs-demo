@@ -1,0 +1,284 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Оценка качества поиска · EDU FAMCS</title>
+<meta name="description" content="Оценка качества поиска — Поиск. Хендбук ML-курса ФПМИ.">
+<meta name="theme-color" content="#060A16">
+<meta name="robots" content="noindex, nofollow">
+<meta name="htmx-config" content='{"allowEval":false,"includeIndicatorStyles":false,"historyCacheSize":0,"selfRequestsOnly":true}'>
+<meta name="katex-js" content="/edufamcs-demo/static/vendor/katex/katex.min.js">
+<meta name="katex-css" content="/edufamcs-demo/static/vendor/katex/katex.min.css">
+<link rel="icon" href="/edufamcs-demo/static/brand/logo/favicon-16.svg" type="image/svg+xml" sizes="16x16">
+<link rel="icon" href="/edufamcs-demo/static/brand/logo/favicon.svg" type="image/svg+xml" sizes="any">
+<link rel="preload" href="/edufamcs-demo/static/brand/fonts/manrope-cyrillic-400.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/edufamcs-demo/static/brand/fonts/unbounded-cyrillic-800.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="/edufamcs-demo/static/brand/fonts.css">
+<link rel="stylesheet" href="/edufamcs-demo/static/brand/tokens.css">
+<link rel="stylesheet" href="/edufamcs-demo/static/brand/components.css">
+<link rel="stylesheet" href="/edufamcs-demo/static/css/site.css">
+<link rel="stylesheet" href="/edufamcs-demo/static/css/hub.css">
+<link rel="stylesheet" href="/edufamcs-demo/static/css/about.css">
+<link rel="stylesheet" href="/edufamcs-demo/static/handbook/handbook.css">
+<script src="/edufamcs-demo/static/js/theme.js"></script>
+<script src="/edufamcs-demo/static/vendor/htmx/htmx.min.js" defer></script>
+<script src="/edufamcs-demo/static/vendor/alpine/alpine-csp.min.js" defer></script>
+<script src="/edufamcs-demo/static/js/site.js" defer></script>
+<script src="/edufamcs-demo/static/handbook/handbook.js" defer></script>
+</head>
+<body class="" hx-headers='{"X-CSRFToken": "tm1WfDDsN15aLfwkLpO2zlNYbH4hGGbxS6A0ZBqPIStj0OH3iCxawQj3JpaMeQTh"}'>
+<a class="skip" href="#main">К содержанию</a>
+<div class="demo-bar" role="note">Демо-версия для отзывов: вход, запись на курсы и формы здесь не работают.</div>
+
+<header class="hdr">
+  <div class="container">
+    <a class="brand" href="/edufamcs-demo/" aria-label="EDU FAMCS — главная">
+      <span class="full"><img class="only-light" src="/edufamcs-demo/static/brand/logo/logo-edu-light.svg" alt="EDU FAMCS" width="196" height="40"><img class="only-dark" src="/edufamcs-demo/static/brand/logo/logo-edu-dark.svg" alt="EDU FAMCS" width="196" height="40"></span>
+      <span class="short"><img class="only-light" src="/edufamcs-demo/static/brand/logo/logo-edu-light.svg" alt="EDU FAMCS" height="30"><img class="only-dark" src="/edufamcs-demo/static/brand/logo/logo-edu-dark.svg" alt="EDU FAMCS" height="30"></span>
+    </a>
+    <nav class="nav" id="main-nav" aria-label="Основная навигация">
+      <a href="/edufamcs-demo/#courses">Курсы</a>
+      <a href="/edufamcs-demo/ml/" >Машинное обучение</a>
+      
+      <a href="/edufamcs-demo/handbook/" aria-current="page">Хендбук</a>
+      <a href="/edufamcs-demo/news/" >Новости</a>
+      <a href="/edufamcs-demo/people/" >Авторы</a>
+      <a href="/edufamcs-demo/about/" >О&nbsp;нас</a>
+    </nav>
+    <div class="hdr-actions">
+      
+      <a class="btn btn-outline btn-login" href="/edufamcs-demo/accounts/login/?next=/handbook/retrieval/ocenka-kachestva-poiska/">Войти</a>
+      
+      <button class="icon-btn menu-btn" type="button" aria-label="Меню" aria-expanded="false" aria-controls="main-nav"><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-menu"/></svg></button>
+    </div>
+  </div>
+</header>
+
+<main id="main">
+
+
+
+<div class="container hb-page s-recsys">
+  <div class="hb">
+    <aside class="hb-nav" aria-label="Статьи раздела">
+      
+<form class="hb-search" action="/edufamcs-demo/handbook/search/" method="get" role="search">
+  <svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-search"/></svg>
+  <input class="input" type="search" name="q" value="" placeholder="Поиск по хендбуку" aria-label="Поиск по хендбуку" autocomplete="off" maxlength="120"
+    hx-get="/edufamcs-demo/handbook/search/" hx-trigger="input changed delay:250ms, search" hx-target="#hb-nav-results" hx-sync="this:replace">
+</form>
+
+      <div id="hb-nav-results" class="hb-nav-results" aria-live="polite"></div>
+      <a class="grp" href="/edufamcs-demo/handbook/retrieval/">Классический поиск</a>
+      
+      <a class="" href="/edufamcs-demo/handbook/retrieval/bm25-invertirovannyj-indeks/">BM25 и инвертированный индекс</a>
+      
+      <a class="cur" href="/edufamcs-demo/handbook/retrieval/ocenka-kachestva-poiska/" aria-current="page">Оценка качества поиска</a>
+      
+      <a class="" href="/edufamcs-demo/handbook/retrieval/learning-to-rank/">Обучение ранжированию</a>
+      
+      <a class="" href="/edufamcs-demo/handbook/retrieval/ponimanie-zaprosa/">Понимание запроса</a>
+      
+    </aside>
+
+    <article class="hb-main">
+      <nav class="crumbs" aria-label="Навигация"><a href="/edufamcs-demo/handbook/">Хендбук</a><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-chev"/></svg><a href="/edufamcs-demo/handbook/retrieval/">Поиск</a></nav>
+      <h1 class="h1">Оценка качества поиска</h1>
+      <div class="hb-meta">
+        
+        
+        <span><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-clock"/></svg>15&nbsp;мин</span>
+        <span class="hb-authors"><span class="avatar sm" title="Артем Лебедевич">АЛ</span>Артем Лебедевич</span>
+        <span><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-edit"/></svg>9 ноября 2026</span>
+        
+        
+      </div>
+
+      
+      <details class="hb-mtoc">
+        <summary><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-list"/></svg>Содержание<svg class="ico sm" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-chev-down"/></svg></summary>
+        <a class="l2" href="#парадигма-кранфилда">Парадигма Кранфилда</a><a class="l2" href="#как-размечают">Как размечают</a><a class="l2" href="#метрики-поискового-уклона">Метрики поискового уклона</a><a class="l2" href="#бенчмарки">Бенчмарки</a><a class="l2" href="#клики-как-сигнал">Клики как сигнал</a><a class="l2" href="#онлайн-оценка">Онлайн-оценка</a><a class="l2" href="#llm-как-асессор">LLM как асессор</a><a class="l2" href="#код">Код</a><a class="l2" href="#ловушки">Ловушки</a><a class="l2" href="#что-почитать">Что почитать</a>
+      </details>
+      
+
+      <div class="prose"><p>Любое улучшение поиска начинается с вопроса «по какому числу мы поймём, что стало лучше?». Релевантность — не свойство документа, а отношение между запросом, документом и намерением человека, поэтому её приходится либо разметить руками, либо вывести из поведения пользователей, либо (с 2023 года) поручить языковой модели. Определения базовых метрик ранжирования уже разобраны в рекомендациях — <a href="/edufamcs-demo/handbook/recsys/oflajn-metriki/" rel="noopener noreferrer nofollow">офлайн-метрики</a>. Здесь — то, что специфично для поиска: откуда берутся оценки релевантности, какие бенчмарки есть, как работать с кликами и как выкатывать изменения.</p>
+<h2 id="парадигма-кранфилда">Парадигма Кранфилда</h2>
+<p>Первые измерения качества поиска провёл Сирил Клеверден в Кранфилде в 1960-х. Схема дожила до наших дней почти без изменений: фиксируется <strong>тестовая коллекция</strong> из трёх частей — корпус документов, набор запросов (topics) и <strong>qrels</strong> — оценки релевантности пар «запрос–документ». Система выдаёт ранжирование (run), метрика сравнивает его с qrels. Преимущество — воспроизводимость: два алгоритма сравниваются на одних и тех же данных без участия людей в каждом эксперименте. Цена — стоимость разметки и вопрос, насколько фиксированные запросы и оценки похожи на реальный трафик.</p>
+<p>Главная проблема: разметить все пары невозможно. Корпус из миллиона документов и 50 запросов — это 50 миллионов пар. Решение, введённое конференцией <strong>TREC</strong> (NIST, с 1992 года), — <strong>пулинг</strong>: берутся топ-<span class="tex">k</span> документов (обычно 100) от каждой из участвующих в конкурсе систем, объединяются в пул, и асессоры размечают только его. Всё, что вне пула, считается нерелевантным. Следствие, о котором забывают: если новая система находит релевантные документы, которых не нашёл никто из участников, она будет несправедливо наказана метрикой. Коллекция «стареет» вместе с развитием методов, и это одна из причин, почему нейросетевые модели 2019+ плохо оцениваются на старых коллекциях.</p>
+<h2 id="как-размечают">Как размечают</h2>
+<p>Бинарной релевантности («да/нет») мало: разница между точным ответом и «в целом по теме» теряется. Поэтому используют <strong>градуированные оценки</strong>, чаще всего 4 уровня:</p>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>Оценка</th>
+<th>Смысл</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>3 — perfect</td>
+<td>документ полностью отвечает на запрос (для навигационных — искомая страница)</td>
+</tr>
+<tr>
+<td>2 — highly relevant</td>
+<td>отвечает, но с недостатками или неполно</td>
+</tr>
+<tr>
+<td>1 — related</td>
+<td>по теме, но на вопрос не отвечает</td>
+</tr>
+<tr>
+<td>0 — irrelevant</td>
+<td>не относится к теме</td>
+</tr>
+</tbody>
+</table></div>
+<p>Качество разметки определяется <strong>инструкцией для асессоров</strong>: что считать намерением запроса, как оценивать дубли, устаревшую информацию, спам, товар не в наличии. Для неоднозначного запроса («ягуар») инструкция должна говорить, какие значения учитывать. Качество разметки измеряют <strong>согласием асессоров</strong>. Простая доля совпадений завышена, потому что часть совпадений случайна; поэтому используют каппу Коэна для двух асессоров:</p>
+<div class="tex tex-block">\kappa = \frac{p_o - p_e}{1 - p_e},</div>
+<p>где <span class="tex">p_o</span> — наблюдаемая доля совпавших оценок, <span class="tex">p_e</span> — доля совпадений, ожидаемая при независимых оценках с теми же частотами меток. Для нескольких асессоров применяют каппу Фляйсса или альфу Криппендорфа. Для поисковой релевантности согласие обычно лишь умеренное (каппа порядка 0,4–0,6, на подробной градуированной шкале бывает и ниже): задача субъективна по своей природе. Практический вывод: потолок качества системы ограничен согласием людей, а различия метрик в пределах шума разметки интерпретировать нельзя.</p>
+<h2 id="метрики-поискового-уклона">Метрики поискового уклона</h2>
+<p>Пусть <span class="tex">\mathrm{rel}_j</span> — оценка релевантности документа на позиции <span class="tex">j</span>.</p>
+<p><strong>MRR</strong> (mean reciprocal rank) — для задач, где нужен один правильный ответ (навигационный запрос, QA):</p>
+<div class="tex tex-block">\mathrm{MRR} = \frac{1}{|Q|}\sum_{q \in Q} \frac{1}{\mathrm{rank}_q},</div>
+<p>где <span class="tex">\mathrm{rank}_q</span> — позиция первого релевантного документа. Это основная метрика MS MARCO (MRR@10).</p>
+<p><strong>MAP</strong> — среднее по запросам от average precision, <span class="tex">\mathrm{AP}_q = \frac{1}{R_q}\sum_{j} P@j \cdot \mathrm{rel}_j</span> для бинарных оценок, где <span class="tex">R_q</span> — число релевантных документов. Подходит, когда релевантных документов много и важно найти все.</p>
+<p><strong>NDCG</strong> (Järvelin, Kekäläinen, 2002) — главная метрика для градуированных оценок:</p>
+<div class="tex tex-block">\mathrm{DCG}@k = \sum_{j=1}^{k} \frac{2^{\mathrm{rel}_j} - 1}{\log_2(j+1)}, \qquad
+\mathrm{NDCG}@k = \frac{\mathrm{DCG}@k}{\mathrm{IDCG}@k}.</div>
+<p>Экспоненциальный числитель делает «идеальный» документ намного ценнее «связанного»; логарифмический знаменатель — дисконт за позицию. Экспоненциальный gain <span class="tex">2^{\mathrm{rel}_j} - 1</span> ввели Burges et al. (2005); в исходной статье Järvelin и Kekäläinen gain равен самой оценке <span class="tex">\mathrm{rel}_j</span>. Нормировка на идеальную перестановку позволяет усреднять по запросам. Это главная метрика BEIR и ранжирования в веб-поиске. Сама NDCG кусочно-постоянна и градиента не имеет, но изменение NDCG при обмене двух документов местами, <span class="tex">|\Delta \mathrm{NDCG}|</span>, служит весом пар в LambdaRank — см. <a href="/edufamcs-demo/handbook/retrieval/learning-to-rank/" rel="noopener noreferrer nofollow">обучение ранжированию</a>.</p>
+<p><strong>ERR</strong> (expected reciprocal rank; Chapelle et al., 2009) строится на модели поведения: пользователь просматривает выдачу сверху вниз, на позиции <span class="tex">j</span> удовлетворяется с вероятностью <span class="tex">R_j = \frac{2^{\mathrm{rel}_j}-1}{2^{g_{\max}}}</span> (где <span class="tex">g_{\max}</span> — высшая оценка шкалы) и останавливается; иначе идёт дальше. Метрика — ожидаемая обратная позиция остановки:</p>
+<div class="tex tex-block">\mathrm{ERR} = \sum_{j=1}^{k} \frac{1}{j} R_j \prod_{i&lt;j}(1 - R_i).</div>
+<p>В отличие от NDCG, документ на позиции 5 получает меньше, если выше уже есть хороший: пользователь, скорее всего, остановился раньше. Вклад документа зависит от того, что стоит над ним (содержательную избыточность, то есть дубли, метрика при этом не видит). ERR была основной метрикой Yahoo! Learning to Rank Challenge.</p>
+<p>Всегда фиксируйте <span class="tex">k</span>: NDCG@10 и NDCG@100 измеряют разное (качество первой страницы против качества кандидатов для следующей стадии). Для первичного поиска, за которым идёт переранжирование, важнее <strong>Recall@100/1000</strong>: то, что потеряно на первой стадии, уже не вернуть.</p>
+<h2 id="бенчмарки">Бенчмарки</h2>
+<ul>
+<li><strong>MS MARCO</strong> (Bajaj et al., 2016) — 8,8 млн абзацев и ~1 млн реальных запросов из Bing, разметка разрежена (в среднем около одного релевантного на запрос). Дал достаточно данных для обучения нейросетей и стал точкой отсчёта нейросетевого ранжирования 2019 года. Побочный эффект: модели переобучаются под его особенности, а ложно-отрицательные (неразмеченные релевантные) искажают оценку.</li>
+<li><strong>BEIR</strong> (Thakur et al., 2021) — 18 датасетов разных доменов (научные статьи, StackExchange, фактчекинг, биомедицина) для оценки <strong>zero-shot</strong>: модель обучена на MS MARCO, оценивается на других данных. Главный результат: плотные модели, лучшие на MS MARCO, часто проигрывали BM25 вне домена; BM25 оказался сильным и дешёвым бейзлайном. Именно BEIR сделал нормой проверку на обобщение.</li>
+<li><strong>MTEB</strong> (Muennighoff et al., 2022) — бенчмарк текстовых эмбеддингов: 8 типов задач (поиск, классификация, кластеризация, STS и др.) на 58 датасетах; поисковая часть опирается на BEIR. <strong>MMTEB</strong> (Enevoldsen et al., 2025) расширяет его до более чем 500 задач на 250+ языках.</li>
+<li><strong>ruMTEB</strong> (Snegirev et al., 2024) — русскоязычное расширение MTEB: семь категорий задач, включая поиск и переранжирование. Главный публичный ориентир для выбора русскоязычного эмбеддера, но на нём, как и на любом публичном бенчмарке, нужно помнить об утечках: модели часто видели обучающие части датасетов.</li>
+</ul>
+<p>Правило: публичный бенчмарк отбирает кандидатов, а выбор делается на <strong>собственном</strong> наборе запросов и разметки. Даже 200–300 запросов с градуированной разметкой полезнее лидерборда, потому что отражают ваш корпус и ваши намерения.</p>
+<h2 id="клики-как-сигнал">Клики как сигнал</h2>
+<p>Разметка дорога, а клики бесплатны и их миллионы. Но клик — не оценка релевантности. Главное искажение — <strong>позиционная предвзятость</strong>: на первую позицию кликают чаще просто потому, что её видят. Документ, поднятый с 5-го места на 1-е, получит больше кликов без изменения релевантности. Поэтому сырой CTR документа в выдаче сравнивать нельзя. <strong>Модели кликов</strong> разделяют релевантность и вероятность просмотра:</p>
+<ul>
+<li><strong>Position-based model (PBM).</strong> Клик происходит, если документ просмотрен и привлекателен: <span class="tex">P(C_j = 1) = P(E_j=1)\cdot P(R_d = 1)</span>, где вероятность просмотра <span class="tex">P(E_j=1)=\theta_j</span> зависит только от позиции <span class="tex">j</span>. Параметры <span class="tex">\theta_j</span> и привлекательность документа оцениваются EM-алгоритмом по логам.</li>
+<li><strong>Каскадная модель</strong> (Craswell et al., 2008): пользователь просматривает документы сверху вниз, кликает на первый привлекательный и уходит. Следствие: документы выше первого клика просмотрены и отвергнуты (сильный сигнал нерелевантности), документы ниже — не просмотрены (сигнала нет). Модель не описывает сессии с несколькими кликами.</li>
+<li><strong>DBN</strong> (Dynamic Bayesian Network; Chapelle, Zhang, 2009): различает <em>привлекательность</em> сниппета (привело к клику) и <em>удовлетворённость</em> страницей после клика (пользователь остановился или продолжил поиск). После клика на неудовлетворительный документ пользователь с некоторой вероятностью <span class="tex">\gamma</span> продолжает просмотр. Это разделение важно: кликают по заманчивому заголовку, а релевантность определяется тем, что находится на странице.</li>
+</ul>
+<p>Практический вывод: клики используют либо как <strong>признаки</strong> и целевые метки в обучении ранжирования с поправкой на позицию (см. <a href="/edufamcs-demo/handbook/retrieval/learning-to-rank/" rel="noopener noreferrer nofollow">обучение ранжированию</a>), либо для оценки через interleaving, но не как прямую метку «релевантно».</p>
+<h2 id="онлайн-оценка">Онлайн-оценка</h2>
+<p>Офлайн-метрики — фильтр, решение принимает онлайн-эксперимент.</p>
+<p><strong>A/B-тест</strong> сравнивает системы на разных группах пользователей по продуктовым метрикам. Для поиска полезны:</p>
+<ul>
+<li>доля запросов с кликом (click-through rate на уровне запроса) и доля запросов с кликом в топ-3;</li>
+<li><strong>доля пустых выдач</strong> (zero results rate) и доля запросов, после которых пользователь ушёл;</li>
+<li><strong>частота переформулировок</strong>: если пользователь сразу меняет запрос, выдача его не устроила;</li>
+<li>время до первого клика, глубина просмотра;</li>
+<li>для e-commerce — конверсия в покупку и выручка на сессию, но они шумные и требуют много трафика.</li>
+</ul>
+<p><strong>Interleaving</strong> (Joachims, 2002) сравнивает два ранжирования внутри одной выдачи: результаты двух систем смешиваются в один список, а победителем объявляется система, чьи документы получили больше кликов. Каждый пользователь сам сравнивает две системы, и межпользовательская дисперсия уходит. Поэтому interleaving заметно чувствительнее A/B: в опубликованных сравнениях для того же вывода хватало трафика на один-два порядка меньше. <strong>Team-draft interleaving</strong> (Radlinski et al., 2008) делает смешивание справедливым: как при подборе команд, системы по очереди (порядок случайный) выбирают свой лучший ещё не взятый документ, а для каждой позиции запоминается, чей это документ. Клик засчитывается той системе, которая «вставила» документ.</p>
+<p>Ограничения: interleaving сравнивает только ранжирования, но не оценивает изменения интерфейса, сниппетов или скорости и не даёт абсолютных значений продуктовых метрик. Поэтому типичный процесс: офлайн-метрика → interleaving на малом трафике → A/B на продуктовых метриках.</p>
+<h2 id="llm-как-асессор">LLM как асессор</h2>
+<p>Размечать людьми дорого и долго (недели на цикл), а языковые модели с 2023 года размечают релевантность с согласием с людьми, близким к согласию людей между собой. Thomas et al. (2024, команда Bing) показали, что промпт с описанием намерения и градуированной шкалой даёт метки, по качеству сопоставимые с метками обычных асессоров, и значительно дешевле. <strong>UMBRELA</strong> (Upadhyay et al., 2024) — открытое воспроизведение этой схемы на базе GPT-4o: на треках TREC Deep Learning 2019–2023 рейтинг систем по LLM-оценкам сильно коррелирует с рейтингом по оценкам асессоров NIST. В TREC RAG 2024 UMBRELA применяли как помощника при разметке релевантности.</p>
+<p>Риски:</p>
+<ol>
+<li><strong>Цикличность.</strong> Если LLM оценивает выдачу, которую же LLM и переранжировала, модель будет предпочитать свой стиль — метрика растёт, качество для человека нет. Нужны разные модели для оценки и для системы и регулярная сверка с человеческой разметкой.</li>
+<li><strong>Смещения</strong> — предпочтение длинных ответов, склонность к «в целом релевантно», зависимость от формулировки промпта и порядка документов.</li>
+<li><strong>Дрейф.</strong> Версия модели меняется, оценки сдвигаются; фиксируйте версию и держите контрольный набор, размеченный людьми.</li>
+<li>Подходит для <strong>ранжирования систем</strong> (какая лучше), хуже — для абсолютных значений метрик и для редких, специфичных доменов.</li>
+</ol>
+<p>Рабочий протокол: человек размечает 200–500 пар, вы подбираете промпт по согласию с этой разметкой, затем LLM размечает остальное.</p>
+<h2 id="код">Код</h2>
+<p><code>ranx</code> считает метрики и проверяет статистическую значимость; <code>pytrec_eval</code> — быстрая обёртка над эталонной реализацией <code>trec_eval</code>.</p>
+<div class="code"><div class="code-head"><span class="lang">python</span></div><pre><code><span class="tok-k">from</span> ranx <span class="tok-k">import</span> Qrels<span class="tok-p">,</span> Run<span class="tok-p">,</span> evaluate<span class="tok-p">,</span> compare
+
+qrels <span class="tok-p">=</span> Qrels<span class="tok-p">.</span>from_dict<span class="tok-p">(</span><span class="tok-p">{</span>
+    <span class="tok-s">"</span><span class="tok-s">q1</span><span class="tok-s">"</span><span class="tok-p">:</span> <span class="tok-p">{</span><span class="tok-s">"</span><span class="tok-s">d1</span><span class="tok-s">"</span><span class="tok-p">:</span> <span class="tok-n">3</span><span class="tok-p">,</span> <span class="tok-s">"</span><span class="tok-s">d4</span><span class="tok-s">"</span><span class="tok-p">:</span> <span class="tok-n">1</span><span class="tok-p">}</span><span class="tok-p">,</span>
+    <span class="tok-s">"</span><span class="tok-s">q2</span><span class="tok-s">"</span><span class="tok-p">:</span> <span class="tok-p">{</span><span class="tok-s">"</span><span class="tok-s">d2</span><span class="tok-s">"</span><span class="tok-p">:</span> <span class="tok-n">2</span><span class="tok-p">}</span><span class="tok-p">,</span>
+<span class="tok-p">}</span><span class="tok-p">)</span>
+run_bm25 <span class="tok-p">=</span> Run<span class="tok-p">.</span>from_dict<span class="tok-p">(</span><span class="tok-p">{</span>
+    <span class="tok-s">"</span><span class="tok-s">q1</span><span class="tok-s">"</span><span class="tok-p">:</span> <span class="tok-p">{</span><span class="tok-s">"</span><span class="tok-s">d1</span><span class="tok-s">"</span><span class="tok-p">:</span> <span class="tok-n">12.1</span><span class="tok-p">,</span> <span class="tok-s">"</span><span class="tok-s">d2</span><span class="tok-s">"</span><span class="tok-p">:</span> <span class="tok-n">9.0</span><span class="tok-p">,</span> <span class="tok-s">"</span><span class="tok-s">d4</span><span class="tok-s">"</span><span class="tok-p">:</span> <span class="tok-n">7.3</span><span class="tok-p">}</span><span class="tok-p">,</span>
+    <span class="tok-s">"</span><span class="tok-s">q2</span><span class="tok-s">"</span><span class="tok-p">:</span> <span class="tok-p">{</span><span class="tok-s">"</span><span class="tok-s">d3</span><span class="tok-s">"</span><span class="tok-p">:</span> <span class="tok-n">8.0</span><span class="tok-p">,</span> <span class="tok-s">"</span><span class="tok-s">d2</span><span class="tok-s">"</span><span class="tok-p">:</span> <span class="tok-n">5.5</span><span class="tok-p">}</span><span class="tok-p">,</span>
+<span class="tok-p">}</span><span class="tok-p">,</span> name<span class="tok-p">=</span><span class="tok-s">"</span><span class="tok-s">bm25</span><span class="tok-s">"</span><span class="tok-p">)</span>
+run_rerank <span class="tok-p">=</span> Run<span class="tok-p">.</span>from_dict<span class="tok-p">(</span><span class="tok-p">{</span>
+    <span class="tok-s">"</span><span class="tok-s">q1</span><span class="tok-s">"</span><span class="tok-p">:</span> <span class="tok-p">{</span><span class="tok-s">"</span><span class="tok-s">d1</span><span class="tok-s">"</span><span class="tok-p">:</span> <span class="tok-n">0.9</span><span class="tok-p">,</span> <span class="tok-s">"</span><span class="tok-s">d4</span><span class="tok-s">"</span><span class="tok-p">:</span> <span class="tok-n">0.7</span><span class="tok-p">,</span> <span class="tok-s">"</span><span class="tok-s">d2</span><span class="tok-s">"</span><span class="tok-p">:</span> <span class="tok-n">0.1</span><span class="tok-p">}</span><span class="tok-p">,</span>
+    <span class="tok-s">"</span><span class="tok-s">q2</span><span class="tok-s">"</span><span class="tok-p">:</span> <span class="tok-p">{</span><span class="tok-s">"</span><span class="tok-s">d2</span><span class="tok-s">"</span><span class="tok-p">:</span> <span class="tok-n">0.8</span><span class="tok-p">,</span> <span class="tok-s">"</span><span class="tok-s">d3</span><span class="tok-s">"</span><span class="tok-p">:</span> <span class="tok-n">0.3</span><span class="tok-p">}</span><span class="tok-p">,</span>
+<span class="tok-p">}</span><span class="tok-p">,</span> name<span class="tok-p">=</span><span class="tok-s">"</span><span class="tok-s">rerank</span><span class="tok-s">"</span><span class="tok-p">)</span>
+
+<span class="tok-f">print</span><span class="tok-p">(</span>evaluate<span class="tok-p">(</span>qrels<span class="tok-p">,</span> run_bm25<span class="tok-p">,</span> <span class="tok-p">[</span><span class="tok-s">"</span><span class="tok-s">ndcg@10</span><span class="tok-s">"</span><span class="tok-p">,</span> <span class="tok-s">"</span><span class="tok-s">mrr@10</span><span class="tok-s">"</span><span class="tok-p">,</span> <span class="tok-s">"</span><span class="tok-s">recall@100</span><span class="tok-s">"</span><span class="tok-p">]</span><span class="tok-p">)</span><span class="tok-p">)</span>
+
+<span class="tok-c"># парный t-тест по запросам; для нескольких систем — stat_test="tukey"</span>
+<span class="tok-c"># (Tukey HSD учитывает множественные сравнения). На двух запросах тест, конечно, бессмыслен.</span>
+report <span class="tok-p">=</span> compare<span class="tok-p">(</span>qrels<span class="tok-p">,</span> <span class="tok-p">[</span>run_bm25<span class="tok-p">,</span> run_rerank<span class="tok-p">]</span><span class="tok-p">,</span>
+                 metrics<span class="tok-p">=</span><span class="tok-p">[</span><span class="tok-s">"</span><span class="tok-s">ndcg@10</span><span class="tok-s">"</span><span class="tok-p">,</span> <span class="tok-s">"</span><span class="tok-s">mrr@10</span><span class="tok-s">"</span><span class="tok-p">]</span><span class="tok-p">,</span> stat_test<span class="tok-p">=</span><span class="tok-s">"</span><span class="tok-s">student</span><span class="tok-s">"</span><span class="tok-p">,</span>
+                 max_p<span class="tok-p">=</span><span class="tok-n">0.05</span><span class="tok-p">)</span>
+<span class="tok-f">print</span><span class="tok-p">(</span>report<span class="tok-p">)</span>
+</code></pre></div>
+<h2 id="ловушки">Ловушки</h2>
+<ul>
+<li><strong>Документы без оценки считаются нерелевантными.</strong> После смены модели в выдаче появляются непомеченные документы, и NDCG падает или растёт случайно. Решение: доразметить топ новой системы (в том числе LLM) или смотреть на долю непомеченных документов в топ-10 (<em>judged@10</em>).</li>
+<li><strong>Усреднение по запросам скрывает хвост.</strong> Смотрите на метрики по сегментам: частотные и редкие запросы, короткие и длинные, навигационные и информационные. Улучшение в среднем может означать провал на редких запросах.</li>
+<li><strong>Разные формулы под одним именем.</strong> <code>trec_eval</code> и <code>ndcg</code> в ranx берут линейный gain <span class="tex">\mathrm{rel}_j</span>, а LightGBM и <code>ndcg_burges</code> в ranx — экспоненциальный <span class="tex">2^{\mathrm{rel}_j} - 1</span>. На градуированной разметке числа расходятся; в отчёте указывайте инструмент и вариант.</li>
+<li><strong>Значимость.</strong> На 50 запросах разница в 0,01 NDCG — шум. Используйте парный t-тест или bootstrap по запросам, а не по документам.</li>
+<li><strong>Утечка бенчмарка.</strong> Модель, обученная на тестовых частях BEIR/MTEB, показывает завышенный результат; сверяйте со своей выборкой.</li>
+<li><strong>Метрика не равна пользе.</strong> Высокий NDCG при 8% пустых выдач — плохой поиск. Смотрите вместе с продуктовыми метриками.</li>
+</ul>
+<h2 id="что-почитать">Что почитать</h2>
+<ul>
+<li>Järvelin K., Kekäläinen J. Cumulated Gain-Based Evaluation of IR Techniques, 2002 — определение NDCG.</li>
+<li>Chapelle O. et al. Expected Reciprocal Rank for Graded Relevance, 2009; Chapelle O., Zhang Y. A Dynamic Bayesian Network Click Model for Web Search Ranking, 2009.</li>
+<li>Thakur N. et al. BEIR: A Heterogenous Benchmark for Zero-shot Evaluation of Information Retrieval Models, 2021: https://arxiv.org/abs/2104.08663</li>
+<li>Muennighoff N. et al. MTEB: Massive Text Embedding Benchmark, 2022: https://arxiv.org/abs/2210.07316</li>
+<li>Thomas P. et al. Large Language Models can Accurately Predict Searcher Preferences, 2024: https://arxiv.org/abs/2309.10621</li>
+<li>Radlinski F., Kurup M., Joachims T. How Does Clickthrough Data Reflect Retrieval Quality?, 2008 (team-draft interleaving).</li>
+<li>Upadhyay S. et al. UMBRELA: UMbrela is the (Open-Source Reproduction of the) Bing RELevance Assessor, 2024: https://arxiv.org/abs/2406.06519</li>
+<li>Видео: Михаил Хасыков, «Дополнительные методы оценки качества рекомендаций» (ODS): https://www.youtube.com/watch?v=sI95Y02YD14 — доклад про рекомендации, но многие приёмы онлайн- и офлайн-оценки переносятся на поиск.</li>
+</ul>
+</div>
+      
+
+      
+      <nav class="pager" aria-label="Соседние статьи">
+        <a href="/edufamcs-demo/handbook/retrieval/bm25-invertirovannyj-indeks/"><span><svg class="ico sm" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-arrow-left"/></svg>Назад</span>BM25 и инвертированный индекс</a>
+        <a href="/edufamcs-demo/handbook/retrieval/learning-to-rank/"><span>Дальше<svg class="ico sm" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-arrow"/></svg></span>Обучение ранжированию</a>
+      </nav>
+      
+    </article>
+
+    <aside class="hb-toc" aria-label="На этой странице">
+      <a class="l2" href="#парадигма-кранфилда">Парадигма Кранфилда</a><a class="l2" href="#как-размечают">Как размечают</a><a class="l2" href="#метрики-поискового-уклона">Метрики поискового уклона</a><a class="l2" href="#бенчмарки">Бенчмарки</a><a class="l2" href="#клики-как-сигнал">Клики как сигнал</a><a class="l2" href="#онлайн-оценка">Онлайн-оценка</a><a class="l2" href="#llm-как-асессор">LLM как асессор</a><a class="l2" href="#код">Код</a><a class="l2" href="#ловушки">Ловушки</a><a class="l2" href="#что-почитать">Что почитать</a>
+    </aside>
+  </div>
+</div>
+
+
+</main>
+
+<footer class="ftr" data-theme="dark">
+  <svg class="sym fern" viewBox="0 0 40.5 65.02" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#fern"/></svg>
+  <div class="container">
+    <div class="ftr-row">
+      <a href="/edufamcs-demo/" aria-label="EDU FAMCS — главная"><img src="/edufamcs-demo/static/brand/logo/logo-edu-dark.svg" alt="EDU FAMCS" width="196" height="40"></a>
+      <ul class="ftr-links">
+        <li><a href="/edufamcs-demo/#courses">Курсы</a></li>
+        <li><a href="/edufamcs-demo/ml/">Машинное обучение</a></li>
+        <li><a href="/edufamcs-demo/handbook/">Хендбук</a></li>
+        <li><a href="/edufamcs-demo/news/">Новости</a></li>
+        <li><a href="/edufamcs-demo/people/">Авторы</a></li>
+        <li><a href="/edufamcs-demo/about/">О&nbsp;нас</a></li>
+        <li><a href="/edufamcs-demo/propose/">Предложить или исправить</a></li>
+        <li><a href="/edufamcs-demo/privacy/">Конфиденциальность</a></li>
+      </ul>
+    </div>
+    <div class="ftr-big" aria-hidden="true">EDU<span class="d">·</span>FAMCS</div>
+    <p class="ftr-copy">© 2026 EDU FAMCS · Минск</p>
+  </div>
+</footer>
+
+<div class="toasts-region" aria-live="polite" id="toasts">
+
+</div>
+
+</body>
+</html>

@@ -1,0 +1,246 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Поиск — хендбук · EDU FAMCS</title>
+<meta name="description" content="От BM25 и learning to rank до плотного, гибридного и агентного поиска.">
+<meta name="theme-color" content="#060A16">
+<meta name="robots" content="noindex, nofollow">
+<meta name="htmx-config" content='{"allowEval":false,"includeIndicatorStyles":false,"historyCacheSize":0,"selfRequestsOnly":true}'>
+<meta name="katex-js" content="/edufamcs-demo/static/vendor/katex/katex.min.js">
+<meta name="katex-css" content="/edufamcs-demo/static/vendor/katex/katex.min.css">
+<link rel="icon" href="/edufamcs-demo/static/brand/logo/favicon-16.svg" type="image/svg+xml" sizes="16x16">
+<link rel="icon" href="/edufamcs-demo/static/brand/logo/favicon.svg" type="image/svg+xml" sizes="any">
+<link rel="preload" href="/edufamcs-demo/static/brand/fonts/manrope-cyrillic-400.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/edufamcs-demo/static/brand/fonts/unbounded-cyrillic-800.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="/edufamcs-demo/static/brand/fonts.css">
+<link rel="stylesheet" href="/edufamcs-demo/static/brand/tokens.css">
+<link rel="stylesheet" href="/edufamcs-demo/static/brand/components.css">
+<link rel="stylesheet" href="/edufamcs-demo/static/css/site.css">
+<link rel="stylesheet" href="/edufamcs-demo/static/css/hub.css">
+<link rel="stylesheet" href="/edufamcs-demo/static/css/about.css">
+<link rel="stylesheet" href="/edufamcs-demo/static/handbook/handbook.css">
+<script src="/edufamcs-demo/static/js/theme.js"></script>
+<script src="/edufamcs-demo/static/vendor/htmx/htmx.min.js" defer></script>
+<script src="/edufamcs-demo/static/vendor/alpine/alpine-csp.min.js" defer></script>
+<script src="/edufamcs-demo/static/js/site.js" defer></script>
+
+</head>
+<body class="" hx-headers='{"X-CSRFToken": "fjscMiPA8T4SyfYbtCFrLZVeOj6fHk8RE31gwgCX3Ks1NO9U0PozIurjm1cKfuQB"}'>
+<a class="skip" href="#main">К содержанию</a>
+<div class="demo-bar" role="note">Демо-версия для отзывов: вход, запись на курсы и формы здесь не работают.</div>
+
+<header class="hdr">
+  <div class="container">
+    <a class="brand" href="/edufamcs-demo/" aria-label="EDU FAMCS — главная">
+      <span class="full"><img class="only-light" src="/edufamcs-demo/static/brand/logo/logo-edu-light.svg" alt="EDU FAMCS" width="196" height="40"><img class="only-dark" src="/edufamcs-demo/static/brand/logo/logo-edu-dark.svg" alt="EDU FAMCS" width="196" height="40"></span>
+      <span class="short"><img class="only-light" src="/edufamcs-demo/static/brand/logo/logo-edu-light.svg" alt="EDU FAMCS" height="30"><img class="only-dark" src="/edufamcs-demo/static/brand/logo/logo-edu-dark.svg" alt="EDU FAMCS" height="30"></span>
+    </a>
+    <nav class="nav" id="main-nav" aria-label="Основная навигация">
+      <a href="/edufamcs-demo/#courses">Курсы</a>
+      <a href="/edufamcs-demo/ml/" >Машинное обучение</a>
+      
+      <a href="/edufamcs-demo/handbook/" aria-current="page">Хендбук</a>
+      <a href="/edufamcs-demo/news/" >Новости</a>
+      <a href="/edufamcs-demo/people/" >Авторы</a>
+      <a href="/edufamcs-demo/about/" >О&nbsp;нас</a>
+    </nav>
+    <div class="hdr-actions">
+      
+      <a class="btn btn-outline btn-login" href="/edufamcs-demo/accounts/login/?next=/handbook/retrieval/">Войти</a>
+      
+      <button class="icon-btn menu-btn" type="button" aria-label="Меню" aria-expanded="false" aria-controls="main-nav"><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-menu"/></svg></button>
+    </div>
+  </div>
+</header>
+
+<main id="main">
+
+
+
+<div class="container page s-recsys">
+  <header class="hb-sec-head">
+    <div>
+      <nav class="crumbs" aria-label="Навигация"><a href="/edufamcs-demo/handbook/">Хендбук</a><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-chev"/></svg><span>Поиск</span></nav>
+      <h1 class="display-l">Поиск</h1>
+      <p class="lead">От BM25 и learning to rank до плотного, гибридного и агентного поиска.</p>
+    </div>
+    <div class="hb-sec-art" aria-hidden="true">
+
+<svg viewBox="0 0 220 120" aria-hidden="true">
+  <g fill="currentColor">
+    <rect x="4" y="8" width="46" height="18" rx="9"/>
+    <rect x="62" y="12" width="10" height="10" rx="3" opacity=".3"/><rect x="78" y="12" width="10" height="10" rx="3" opacity=".3"/><rect x="94" y="12" width="10" height="10" rx="3" opacity=".3"/><rect x="110" y="12" width="10" height="10" rx="3" opacity=".3"/>
+    <rect x="4" y="38" width="62" height="18" rx="9" opacity=".25"/>
+    <rect x="78" y="42" width="10" height="10" rx="3" opacity=".3"/><rect x="94" y="42" width="10" height="10" rx="3" opacity=".3"/>
+    <rect x="4" y="68" width="36" height="18" rx="9"/>
+    <rect x="62" y="72" width="10" height="10" rx="3" opacity=".3"/><rect x="110" y="72" width="10" height="10" rx="3" opacity=".3"/><rect x="126" y="72" width="10" height="10" rx="3" opacity=".3"/>
+    <rect x="4" y="98" width="54" height="18" rx="9" opacity=".25"/>
+    <rect x="94" y="102" width="10" height="10" rx="3" opacity=".3"/><rect x="142" y="102" width="10" height="10" rx="3" opacity=".3"/>
+  </g>
+  <rect x="58" y="4" width="66" height="84" rx="8" fill="none" stroke="currentColor" stroke-width="1.5" stroke-dasharray="3 4" opacity=".55"/>
+  <rect x="62" y="12" width="10" height="10" rx="3" fill="var(--accent)"/><rect x="62" y="72" width="10" height="10" rx="3" fill="var(--accent)"/>
+  <circle cx="178" cy="46" r="24" fill="none" stroke="currentColor" stroke-width="5"/>
+  <path d="M195 63 L214 82" stroke="currentColor" stroke-width="8" stroke-linecap="round"/>
+</svg>
+
+</div>
+  </header>
+
+  
+  
+  <section class="hb-group">
+    <h2 class="h3 hb-group-t">Классический поиск</h2>
+    <ol class="hb-list">
+      
+      <li><a class="hb-item" href="/edufamcs-demo/handbook/retrieval/bm25-invertirovannyj-indeks/">
+        <span class="n">01</span>
+        <span class="t">BM25 и инвертированный индекс</span>
+        <span class="m">
+          
+          
+          <svg class="ico sm" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-arrow"/></svg>
+        </span>
+      </a></li>
+      
+      <li><a class="hb-item" href="/edufamcs-demo/handbook/retrieval/ocenka-kachestva-poiska/">
+        <span class="n">02</span>
+        <span class="t">Оценка качества поиска</span>
+        <span class="m">
+          
+          
+          <svg class="ico sm" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-arrow"/></svg>
+        </span>
+      </a></li>
+      
+      <li><a class="hb-item" href="/edufamcs-demo/handbook/retrieval/learning-to-rank/">
+        <span class="n">03</span>
+        <span class="t">Обучение ранжированию</span>
+        <span class="m">
+          
+          
+          <svg class="ico sm" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-arrow"/></svg>
+        </span>
+      </a></li>
+      
+      <li><a class="hb-item" href="/edufamcs-demo/handbook/retrieval/ponimanie-zaprosa/">
+        <span class="n">04</span>
+        <span class="t">Понимание запроса</span>
+        <span class="m">
+          
+          
+          <svg class="ico sm" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-arrow"/></svg>
+        </span>
+      </a></li>
+      
+    </ol>
+  </section>
+  
+  <section class="hb-group">
+    <h2 class="h3 hb-group-t">Нейросетевой поиск</h2>
+    <ol class="hb-list">
+      
+      <li><a class="hb-item" href="/edufamcs-demo/handbook/retrieval/plotnyj-i-gibridnyj-poisk/">
+        <span class="n">01</span>
+        <span class="t">Плотный и гибридный поиск</span>
+        <span class="m">
+          
+          
+          <svg class="ico sm" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-arrow"/></svg>
+        </span>
+      </a></li>
+      
+      <li><a class="hb-item" href="/edufamcs-demo/handbook/retrieval/nejrosetevoe-ranzhirovanie/">
+        <span class="n">02</span>
+        <span class="t">Нейросетевое ранжирование: cross-encoder, ColBERT, SPLADE</span>
+        <span class="m">
+          
+          
+          <svg class="ico sm" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-arrow"/></svg>
+        </span>
+      </a></li>
+      
+      <li><a class="hb-item" href="/edufamcs-demo/handbook/retrieval/vektornye-indeksy/">
+        <span class="n">03</span>
+        <span class="t">Векторные индексы: HNSW, IVF, PQ</span>
+        <span class="m">
+          
+          
+          <svg class="ico sm" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-arrow"/></svg>
+        </span>
+      </a></li>
+      
+    </ol>
+  </section>
+  
+  <section class="hb-group">
+    <h2 class="h3 hb-group-t">Поиск в эпоху LLM</h2>
+    <ol class="hb-list">
+      
+      <li><a class="hb-item" href="/edufamcs-demo/handbook/retrieval/rag/">
+        <span class="n">01</span>
+        <span class="t">RAG: поиск для языковых моделей</span>
+        <span class="m">
+          
+          
+          <svg class="ico sm" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-arrow"/></svg>
+        </span>
+      </a></li>
+      
+      <li><a class="hb-item" href="/edufamcs-demo/handbook/retrieval/generativnyj-poisk/">
+        <span class="n">02</span>
+        <span class="t">Генеративный поиск: модель как индекс</span>
+        <span class="m">
+          
+          
+          <svg class="ico sm" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-arrow"/></svg>
+        </span>
+      </a></li>
+      
+      <li><a class="hb-item" href="/edufamcs-demo/handbook/retrieval/agentnyj-poisk/">
+        <span class="n">03</span>
+        <span class="t">Рассуждающий и агентный поиск: 2025–2026</span>
+        <span class="m">
+          
+          
+          <svg class="ico sm" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-arrow"/></svg>
+        </span>
+      </a></li>
+      
+    </ol>
+  </section>
+  
+  
+</div>
+
+
+</main>
+
+<footer class="ftr" data-theme="dark">
+  <svg class="sym fern" viewBox="0 0 40.5 65.02" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#fern"/></svg>
+  <div class="container">
+    <div class="ftr-row">
+      <a href="/edufamcs-demo/" aria-label="EDU FAMCS — главная"><img src="/edufamcs-demo/static/brand/logo/logo-edu-dark.svg" alt="EDU FAMCS" width="196" height="40"></a>
+      <ul class="ftr-links">
+        <li><a href="/edufamcs-demo/#courses">Курсы</a></li>
+        <li><a href="/edufamcs-demo/ml/">Машинное обучение</a></li>
+        <li><a href="/edufamcs-demo/handbook/">Хендбук</a></li>
+        <li><a href="/edufamcs-demo/news/">Новости</a></li>
+        <li><a href="/edufamcs-demo/people/">Авторы</a></li>
+        <li><a href="/edufamcs-demo/about/">О&nbsp;нас</a></li>
+        <li><a href="/edufamcs-demo/propose/">Предложить или исправить</a></li>
+        <li><a href="/edufamcs-demo/privacy/">Конфиденциальность</a></li>
+      </ul>
+    </div>
+    <div class="ftr-big" aria-hidden="true">EDU<span class="d">·</span>FAMCS</div>
+    <p class="ftr-copy">© 2026 EDU FAMCS · Минск</p>
+  </div>
+</footer>
+
+<div class="toasts-region" aria-live="polite" id="toasts">
+
+</div>
+
+</body>
+</html>

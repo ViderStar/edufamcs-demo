@@ -1,0 +1,261 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Деревья решений · EDU FAMCS</title>
+<meta name="description" content="Деревья решений — Классическое машинное обучение. Хендбук ML-курса ФПМИ.">
+<meta name="theme-color" content="#060A16">
+<meta name="robots" content="noindex, nofollow">
+<meta name="htmx-config" content='{"allowEval":false,"includeIndicatorStyles":false,"historyCacheSize":0,"selfRequestsOnly":true}'>
+<meta name="katex-js" content="/edufamcs-demo/static/vendor/katex/katex.min.js">
+<meta name="katex-css" content="/edufamcs-demo/static/vendor/katex/katex.min.css">
+<link rel="icon" href="/edufamcs-demo/static/brand/logo/favicon-16.svg" type="image/svg+xml" sizes="16x16">
+<link rel="icon" href="/edufamcs-demo/static/brand/logo/favicon.svg" type="image/svg+xml" sizes="any">
+<link rel="preload" href="/edufamcs-demo/static/brand/fonts/manrope-cyrillic-400.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/edufamcs-demo/static/brand/fonts/unbounded-cyrillic-800.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="/edufamcs-demo/static/brand/fonts.css">
+<link rel="stylesheet" href="/edufamcs-demo/static/brand/tokens.css">
+<link rel="stylesheet" href="/edufamcs-demo/static/brand/components.css">
+<link rel="stylesheet" href="/edufamcs-demo/static/css/site.css">
+<link rel="stylesheet" href="/edufamcs-demo/static/css/hub.css">
+<link rel="stylesheet" href="/edufamcs-demo/static/css/about.css">
+<link rel="stylesheet" href="/edufamcs-demo/static/handbook/handbook.css">
+<script src="/edufamcs-demo/static/js/theme.js"></script>
+<script src="/edufamcs-demo/static/vendor/htmx/htmx.min.js" defer></script>
+<script src="/edufamcs-demo/static/vendor/alpine/alpine-csp.min.js" defer></script>
+<script src="/edufamcs-demo/static/js/site.js" defer></script>
+<script src="/edufamcs-demo/static/handbook/handbook.js" defer></script>
+</head>
+<body class="" hx-headers='{"X-CSRFToken": "04JRa2QmJQDC4qsEbVbIkUtZJMYHSyFrpOiVU0DJEH1LjZDnI8UQhpZ4hu4cqInb"}'>
+<a class="skip" href="#main">К содержанию</a>
+<div class="demo-bar" role="note">Демо-версия для отзывов: вход, запись на курсы и формы здесь не работают.</div>
+
+<header class="hdr">
+  <div class="container">
+    <a class="brand" href="/edufamcs-demo/" aria-label="EDU FAMCS — главная">
+      <span class="full"><img class="only-light" src="/edufamcs-demo/static/brand/logo/logo-edu-light.svg" alt="EDU FAMCS" width="196" height="40"><img class="only-dark" src="/edufamcs-demo/static/brand/logo/logo-edu-dark.svg" alt="EDU FAMCS" width="196" height="40"></span>
+      <span class="short"><img class="only-light" src="/edufamcs-demo/static/brand/logo/logo-edu-light.svg" alt="EDU FAMCS" height="30"><img class="only-dark" src="/edufamcs-demo/static/brand/logo/logo-edu-dark.svg" alt="EDU FAMCS" height="30"></span>
+    </a>
+    <nav class="nav" id="main-nav" aria-label="Основная навигация">
+      <a href="/edufamcs-demo/#courses">Курсы</a>
+      <a href="/edufamcs-demo/ml/" >Машинное обучение</a>
+      
+      <a href="/edufamcs-demo/handbook/" aria-current="page">Хендбук</a>
+      <a href="/edufamcs-demo/news/" >Новости</a>
+      <a href="/edufamcs-demo/people/" >Авторы</a>
+      <a href="/edufamcs-demo/about/" >О&nbsp;нас</a>
+    </nav>
+    <div class="hdr-actions">
+      
+      <a class="btn btn-outline btn-login" href="/edufamcs-demo/accounts/login/?next=/handbook/classic/derevya-reshenij/">Войти</a>
+      
+      <button class="icon-btn menu-btn" type="button" aria-label="Меню" aria-expanded="false" aria-controls="main-nav"><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-menu"/></svg></button>
+    </div>
+  </div>
+</header>
+
+<main id="main">
+
+
+
+<div class="container hb-page hb-tone">
+  <div class="hb">
+    <aside class="hb-nav" aria-label="Статьи раздела">
+      
+<form class="hb-search" action="/edufamcs-demo/handbook/search/" method="get" role="search">
+  <svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-search"/></svg>
+  <input class="input" type="search" name="q" value="" placeholder="Поиск по хендбуку" aria-label="Поиск по хендбуку" autocomplete="off" maxlength="120"
+    hx-get="/edufamcs-demo/handbook/search/" hx-trigger="input changed delay:250ms, search" hx-target="#hb-nav-results" hx-sync="this:replace">
+</form>
+
+      <div id="hb-nav-results" class="hb-nav-results" aria-live="polite"></div>
+      <a class="grp" href="/edufamcs-demo/handbook/classic/">Деревья, ансамбли и настройка</a>
+      
+      <a class="cur" href="/edufamcs-demo/handbook/classic/derevya-reshenij/" aria-current="page">Деревья решений</a>
+      
+      <a class="" href="/edufamcs-demo/handbook/classic/ansambli-i-sluchajnyj-les/">Ансамбли и случайный лес</a>
+      
+      <a class="" href="/edufamcs-demo/handbook/classic/gradientnyj-busting/">Градиентный бустинг</a>
+      
+      <a class="" href="/edufamcs-demo/handbook/classic/giperparametry-i-interpretiruemost/">Подбор гиперпараметров и интерпретируемость</a>
+      
+    </aside>
+
+    <article class="hb-main">
+      <nav class="crumbs" aria-label="Навигация"><a href="/edufamcs-demo/handbook/">Хендбук</a><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-chev"/></svg><a href="/edufamcs-demo/handbook/classic/">Классическое машинное обучение</a></nav>
+      <h1 class="h1">Деревья решений</h1>
+      <div class="hb-meta">
+        
+        
+        <span><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-clock"/></svg>10&nbsp;мин</span>
+        <span class="hb-authors"><span class="avatar sm" title="Артем Лебедевич">АЛ</span>Артем Лебедевич</span>
+        <span><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-edit"/></svg>9 ноября 2026</span>
+        
+        
+      </div>
+
+      
+      <details class="hb-mtoc">
+        <summary><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-list"/></svg>Содержание<svg class="ico sm" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-chev-down"/></svg></summary>
+        <a class="l2" href="#жадное-построение">Жадное построение</a><a class="l2" href="#критерии-неоднородности">Критерии неоднородности</a><a class="l2" href="#остановка-и-обрезка">Остановка и обрезка</a><a class="l2" href="#что-умеет-и-чего-не-умеет-дерево">Что умеет и чего не умеет дерево</a><a class="l2" href="#важность-признаков-mdi">Важность признаков (MDI)</a><a class="l2" href="#код">Код</a><a class="l2" href="#ловушки">Ловушки</a><a class="l2" href="#что-почитать">Что почитать</a>
+      </details>
+      
+
+      <div class="prose"><p>Дерево решений — модель, которую можно прочитать как набор правил «если–то». Внутренние узлы содержат <strong>предикаты</strong> вида <span class="tex">x_j \le t</span> (для категорий — <span class="tex">x_j \in A</span>), листья — <strong>константные</strong> предсказания: класс или вероятности для классификации, среднее для регрессии. Прогноз для объекта получается спуском от корня к листу. Дерево — кусочно-постоянная функция: пространство признаков разбито на прямоугольники (оси-параллельные ящики), в каждом ответ постоянен.</p>
+<p>Сами по себе деревья редко выигрывают на соревнованиях, но на них построены случайный лес и градиентный бустинг — главные рабочие модели для табличных данных. Поэтому устройство дерева нужно знать досконально.</p>
+<h2 id="жадное-построение">Жадное построение</h2>
+<p>Найти оптимальное дерево минимального размера — NP-полная задача (Hyafil &amp; Rivest, 1976), поэтому используется жадная рекурсивная процедура (CART, Breiman, Friedman, Olshen, Stone, 1984; ID3, Quinlan, 1986; C4.5, Quinlan, 1993):</p>
+<ol>
+<li>Для вершины с множеством объектов <span class="tex">R</span> перебрать все признаки <span class="tex">j</span> и все пороги <span class="tex">t</span> (середины между соседними значениями отсортированного признака).</li>
+<li>Выбрать разбиение <span class="tex">R \to R_L, R_R</span>, максимизирующее прирост качества.</li>
+<li>Повторить рекурсивно для <span class="tex">R_L</span> и <span class="tex">R_R</span>, пока не сработал критерий остановки; в листе записать константу.</li>
+</ol>
+<p>Жадность означает, что выбор в корне не пересматривается: лучший локальный сплит не обязан давать лучшее дерево. Классический пример — XOR: ни один признак по отдельности не уменьшает неопределённость, и первый сплит выбирается почти случайно.</p>
+<h2 id="критерии-неоднородности">Критерии неоднородности</h2>
+<p>Пусть в вершине доля класса <span class="tex">k</span> равна <span class="tex">p_k</span>. Мера неоднородности <span class="tex">H(R)</span> должна быть нулевой для «чистой» вершины:</p>
+<div class="tex tex-block">H_{\text{Gini}}(R) = 1 - \sum_k p_k^2, \qquad
+H_{\text{entropy}}(R) = -\sum_k p_k \log p_k .</div>
+<p>Джини — вероятность ошибки, если метку объекта угадывать случайно по распределению <span class="tex">p_k</span> в вершине. Энтропия — средняя «неожиданность» метки. Обе функции вогнутые и максимальны при равномерном распределении классов (для двух классов — при <span class="tex">p=0{,}5</span>); на практике деревья по ним почти не различаются (в sklearn по умолчанию Джини: нет логарифма, быстрее).</p>
+<p>Качество разбиения — <strong>прирост информации</strong> (information gain), то есть уменьшение взвешенной неоднородности:</p>
+<div class="tex tex-block">\Delta H = H(R) - \frac{|R_L|}{|R|}H(R_L) - \frac{|R_R|}{|R|}H(R_R).</div>
+<p><strong>Пример.</strong> В вершине 10 объектов, 5 положительных и 5 отрицательных: <span class="tex">H_{\text{Gini}} = 1 - 0{,}5^2 - 0{,}5^2 = 0{,}5</span>. Сплит A отправляет влево 4 объекта (все положительные), вправо 6 (1 положительный, 5 отрицательных): <span class="tex">H(R_L)=0</span>, <span class="tex">H(R_R)=1-(1/6)^2-(5/6)^2=10/36\approx0{,}278</span>, прирост <span class="tex">0{,}5 - 0{,}6\cdot0{,}278 \approx 0{,}333</span>. Сплит B делит выборку на <span class="tex">(3{+},2{-})</span> и <span class="tex">(2{+},3{-})</span>: в обеих частях <span class="tex">H=1-0{,}6^2-0{,}4^2=0{,}48</span>, прирост всего <span class="tex">0{,}02</span>. С энтропией (в битах) порядок тот же: <span class="tex">0{,}61</span> против <span class="tex">0{,}03</span>. Дерево выберет A.</p>
+<p>Для регрессии <span class="tex">H</span> — это дисперсия ответов в вершине, то есть MSE относительно среднего <span class="tex">\bar y_R</span>: <span class="tex">H(R)=\frac{1}{|R|}\sum_{i\in R}(y_i-\bar y_R)^2</span>. Константа листа — <span class="tex">\bar y_R</span> (для MAE — медиана). C4.5 использует отношение прироста к энтропии самого разбиения (gain ratio), чтобы не поощрять признаки с огромным числом значений; ID3 умел только категориальные признаки, CART ввёл бинарные сплиты по порогу и регрессию.</p>
+<p><strong>Категориальный признак</strong> с <span class="tex">q</span> значениями допускает <span class="tex">2^{q-1}-1</span> бинарных разбиений «подмножество категорий — остальные», полный перебор невозможен уже при <span class="tex">q \approx 30</span>. Для регрессии с MSE и бинарной классификации он и не нужен: достаточно упорядочить категории по среднему таргету (доле класса 1) и перебрать <span class="tex">q-1</span> порогов в этом порядке — оптимальное разбиение гарантированно среди них (Fisher, 1958; Breiman et al., 1984). На этом приёме построена нативная обработка категорий в LightGBM. Цена — переобучение на редких категориях: их среднее шумное, поэтому вводят минимальное число объектов на категорию и сглаживание.</p>
+<h2 id="остановка-и-обрезка">Остановка и обрезка</h2>
+<p>Дерево, выращенное до чистых листьев, идеально запоминает трейн: на каждый объект находится свой лист. Ограничения задают гиперпараметрами:</p>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>Параметр</th>
+<th>Смысл</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>max_depth</code></td>
+<td>максимальная глубина</td>
+</tr>
+<tr>
+<td><code>min_samples_split</code></td>
+<td>минимум объектов в вершине для сплита</td>
+</tr>
+<tr>
+<td><code>min_samples_leaf</code></td>
+<td>минимум объектов в листе</td>
+</tr>
+<tr>
+<td><code>max_leaf_nodes</code></td>
+<td>число листьев (рост «лучший первым»)</td>
+</tr>
+<tr>
+<td><code>min_impurity_decrease</code></td>
+<td>минимальный прирост для сплита</td>
+</tr>
+</tbody>
+</table></div>
+<p>Это <strong>пре-обрезка</strong> (pre-pruning): быстро, но близоруко — сплит с нулевым приростом может открыть полезные сплиты ниже (опять XOR). Альтернатива — вырастить полное дерево и <strong>обрезать</strong> его (post-pruning). В CART это cost-complexity pruning: для дерева <span class="tex">T</span> с <span class="tex">|T|</span> листьями минимизируется</p>
+<div class="tex tex-block">R_\alpha(T) = R(T) + \alpha |T|,</div>
+<p>где <span class="tex">R(T)</span> — ошибка на трейне. Растущему <span class="tex">\alpha \ge 0</span> соответствует последовательность вложенных поддеревьев (каждый раз схлопывается «самая слабая» ветвь); <span class="tex">\alpha</span> выбирают по кросс-валидации. В sklearn: <code>ccp_alpha</code> и <code>cost_complexity_pruning_path</code>.</p>
+<h2 id="что-умеет-и-чего-не-умеет-дерево">Что умеет и чего не умеет дерево</h2>
+<p><strong>Плюсы.</strong> Не нужна нормировка и масштабирование: сплит инвариантен к монотонным преобразованиям признака. Нелинейности и взаимодействия признаков ловятся автоматически. Смешанные типы признаков. Пропуски: C4.5 раздаёт объект по ветвям с весами; CART использует суррогатные сплиты; в sklearn с версии 1.3 NaN поддержаны напрямую при <code>splitter="best"</code> (объекты с пропуском уходят в ту сторону, где критерий лучше; в случайном лесе — с 1.4); LightGBM и XGBoost учат «сторону по умолчанию» для пропусков. Категории: в sklearn нужно кодировать (one-hot, порядковое), LightGBM и CatBoost работают с ними нативно. Наконец, интерпретируемость: путь до листа — понятное правило.</p>
+<p><strong>Минусы.</strong></p>
+<ul>
+<li><strong>Не экстраполирует.</strong> За пределами обучающего диапазона прогноз равен значению крайнего листа — константе. Для трендов и временных рядов это критично.</li>
+<li><strong>Кусочно-постоянная граница.</strong> Чтобы описать диагональную границу <span class="tex">x_1 = x_2</span>, нужна лесенка из многих ступеней; повернув данные, можно резко ухудшить дерево.</li>
+<li><strong>Высокий разброс и нестабильность.</strong> Небольшое изменение выборки меняет сплит в корне, а с ним — всю структуру ниже. У глубокого дерева низкое смещение, но огромная дисперсия; это прямая мотивация ансамблей: усреднение множества деревьев гасит разброс (см. <a href="/edufamcs-demo/handbook/classic/ansambli-i-sluchajnyj-les/" rel="noopener noreferrer nofollow">ансамбли и случайный лес</a>).</li>
+<li><strong>Жадность и перебор.</strong> Сложность построения порядка <span class="tex">O(d \cdot n \log n)</span> на уровень; при больших данных используют гистограммные деревья (LightGBM, <code>HistGradientBoosting</code>).</li>
+</ul>
+<h2 id="важность-признаков-mdi">Важность признаков (MDI)</h2>
+<p>Mean Decrease in Impurity — суммарный прирост критерия по всем сплитам дерева на признаке <span class="tex">j</span>, взвешенный долей объектов в вершине и нормированный к единице. Считается бесплатно после обучения (<code>feature_importances_</code>), но смещена: признаки с многими уникальными значениями (непрерывные, ID-подобные) получают больше шансов найти «случайно хороший» порог, и их важность завышается; к тому же MDI считается на трейне и отражает переобученные сплиты. Надёжнее — permutation importance на отложенной выборке (см. <a href="/edufamcs-demo/handbook/classic/giperparametry-i-interpretiruemost/" rel="noopener noreferrer nofollow">подбор гиперпараметров и интерпретируемость</a>). Если в данных есть шумовой признак с уникальным значением на строку, MDI часто поставит его выше реальных.</p>
+<h2 id="код">Код</h2>
+<div class="code"><div class="code-head"><span class="lang">python</span></div><pre><code><span class="tok-k">import</span> numpy <span class="tok-k">as</span> np
+<span class="tok-k">from</span> sklearn.datasets <span class="tok-k">import</span> load_breast_cancer
+<span class="tok-k">from</span> sklearn.model_selection <span class="tok-k">import</span> GridSearchCV<span class="tok-p">,</span> train_test_split
+<span class="tok-k">from</span> sklearn.tree <span class="tok-k">import</span> DecisionTreeClassifier<span class="tok-p">,</span> export_text<span class="tok-p">,</span> plot_tree
+<span class="tok-k">import</span> matplotlib.pyplot <span class="tok-k">as</span> plt
+
+X<span class="tok-p">,</span> y <span class="tok-p">=</span> load_breast_cancer<span class="tok-p">(</span>return_X_y<span class="tok-p">=</span><span class="tok-k">True</span><span class="tok-p">,</span> as_frame<span class="tok-p">=</span><span class="tok-k">True</span><span class="tok-p">)</span>
+X_tr<span class="tok-p">,</span> X_te<span class="tok-p">,</span> y_tr<span class="tok-p">,</span> y_te <span class="tok-p">=</span> train_test_split<span class="tok-p">(</span>X<span class="tok-p">,</span> y<span class="tok-p">,</span> test_size<span class="tok-p">=</span><span class="tok-n">0.25</span><span class="tok-p">,</span> stratify<span class="tok-p">=</span>y<span class="tok-p">,</span> random_state<span class="tok-p">=</span><span class="tok-n">0</span><span class="tok-p">)</span>
+
+search <span class="tok-p">=</span> GridSearchCV<span class="tok-p">(</span>
+    DecisionTreeClassifier<span class="tok-p">(</span>random_state<span class="tok-p">=</span><span class="tok-n">0</span><span class="tok-p">)</span><span class="tok-p">,</span>
+    <span class="tok-p">{</span><span class="tok-s">"</span><span class="tok-s">max_depth</span><span class="tok-s">"</span><span class="tok-p">:</span> <span class="tok-f">range</span><span class="tok-p">(</span><span class="tok-n">1</span><span class="tok-p">,</span> <span class="tok-n">11</span><span class="tok-p">)</span><span class="tok-p">,</span> <span class="tok-s">"</span><span class="tok-s">min_samples_leaf</span><span class="tok-s">"</span><span class="tok-p">:</span> <span class="tok-p">[</span><span class="tok-n">1</span><span class="tok-p">,</span> <span class="tok-n">5</span><span class="tok-p">,</span> <span class="tok-n">20</span><span class="tok-p">]</span><span class="tok-p">}</span><span class="tok-p">,</span>
+    cv<span class="tok-p">=</span><span class="tok-n">5</span><span class="tok-p">,</span> scoring<span class="tok-p">=</span><span class="tok-s">"</span><span class="tok-s">roc_auc</span><span class="tok-s">"</span><span class="tok-p">,</span>
+<span class="tok-p">)</span><span class="tok-p">.</span>fit<span class="tok-p">(</span>X_tr<span class="tok-p">,</span> y_tr<span class="tok-p">)</span>
+<span class="tok-f">print</span><span class="tok-p">(</span>search<span class="tok-p">.</span>best_params_<span class="tok-p">,</span> search<span class="tok-p">.</span>best_score_<span class="tok-p">,</span> search<span class="tok-p">.</span>score<span class="tok-p">(</span>X_te<span class="tok-p">,</span> y_te<span class="tok-p">)</span><span class="tok-p">)</span>
+
+tree <span class="tok-p">=</span> search<span class="tok-p">.</span>best_estimator_
+<span class="tok-f">print</span><span class="tok-p">(</span>export_text<span class="tok-p">(</span>tree<span class="tok-p">,</span> feature_names<span class="tok-p">=</span><span class="tok-f">list</span><span class="tok-p">(</span>X<span class="tok-p">.</span>columns<span class="tok-p">)</span><span class="tok-p">,</span> max_depth<span class="tok-p">=</span><span class="tok-n">3</span><span class="tok-p">)</span><span class="tok-p">)</span>   <span class="tok-c"># правила текстом</span>
+plot_tree<span class="tok-p">(</span>tree<span class="tok-p">,</span> feature_names<span class="tok-p">=</span>X<span class="tok-p">.</span>columns<span class="tok-p">,</span> class_names<span class="tok-p">=</span><span class="tok-p">[</span><span class="tok-s">"</span><span class="tok-s">malignant</span><span class="tok-s">"</span><span class="tok-p">,</span> <span class="tok-s">"</span><span class="tok-s">benign</span><span class="tok-s">"</span><span class="tok-p">]</span><span class="tok-p">,</span>
+          filled<span class="tok-p">=</span><span class="tok-k">True</span><span class="tok-p">,</span> max_depth<span class="tok-p">=</span><span class="tok-n">3</span><span class="tok-p">)</span>
+plt<span class="tok-p">.</span>show<span class="tok-p">(</span><span class="tok-p">)</span>
+
+<span class="tok-c"># путь обрезки по cost-complexity</span>
+path <span class="tok-p">=</span> DecisionTreeClassifier<span class="tok-p">(</span>random_state<span class="tok-p">=</span><span class="tok-n">0</span><span class="tok-p">)</span><span class="tok-p">.</span>cost_complexity_pruning_path<span class="tok-p">(</span>X_tr<span class="tok-p">,</span> y_tr<span class="tok-p">)</span>
+<span class="tok-f">print</span><span class="tok-p">(</span>path<span class="tok-p">.</span>ccp_alphas<span class="tok-p">[</span><span class="tok-p">:</span><span class="tok-n">5</span><span class="tok-p">]</span><span class="tok-p">,</span> path<span class="tok-p">.</span>impurities<span class="tok-p">[</span><span class="tok-p">:</span><span class="tok-n">5</span><span class="tok-p">]</span><span class="tok-p">)</span>
+</code></pre></div>
+<p>Кривая «глубина → качество» на CV обычно растёт до небольшой глубины (3–6) и затем падает: это классическая иллюстрация компромисса смещения и разброса. Дерево глубины 1 называют пнём (decision stump); такие слабые модели — классическая база AdaBoost, а в градиентном бустинге обычно берут деревья глубины 3–8.</p>
+<h2 id="ловушки">Ловушки</h2>
+<ul>
+<li><strong>Утечка через ID и время.</strong> Дерево легко выучит идентификатор или дату; проверяйте, что признаки доступны на момент предсказания.</li>
+<li><strong>Дисбаланс классов.</strong> Отделение небольшой группы редких объектов даёт малый прирост критерия, и почти все листья предсказывают мажоритарный класс; используйте <code>class_weight="balanced"</code> и метрики PR-AUC/F1, а не accuracy.</li>
+<li><strong>Вероятности из листа грубые.</strong> Доля класса в листе с тремя объектами — плохая оценка вероятности; нужны <code>min_samples_leaf</code> и калибровка.</li>
+<li><strong>Интервью.</strong> Частые вопросы: чем Джини отличается от энтропии; почему дерево не требует нормализации; как оно ведёт себя за пределами обучающих данных; почему глубокое дерево переобучается; чем MDI хуже permutation importance.</li>
+</ul>
+<h2 id="что-почитать">Что почитать</h2>
+<ul>
+<li>Breiman L., Friedman J., Olshen R., Stone C. <em>Classification and Regression Trees</em>, 1984 — оригинальная книга про CART и cost-complexity pruning.</li>
+<li>Quinlan J. R. <em>Induction of Decision Trees</em>, Machine Learning, 1986 (ID3) и <em>C4.5: Programs for Machine Learning</em>, 1993.</li>
+<li>Хендбук Яндекса по машинному обучению, «Решающие деревья»: https://education.yandex.ru/handbook/ml/article/reshayushchiye-derevya</li>
+<li>Документация scikit-learn, Decision Trees: https://scikit-learn.org/stable/modules/tree.html</li>
+<li>Hastie T., Tibshirani R., Friedman J. <em>The Elements of Statistical Learning</em>, гл. 9.2 — деревья, суррогатные сплиты, обрезка: https://hastie.su.domains/ElemStatLearn/</li>
+<li>Strobl C. et al. <em>Bias in random forest variable importance measures</em>, BMC Bioinformatics, 2007 — о смещении MDI.</li>
+</ul>
+</div>
+      
+
+      
+      <nav class="pager" aria-label="Соседние статьи">
+        <a href="/edufamcs-demo/handbook/classic/metod-opornyh-vektorov/"><span><svg class="ico sm" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-arrow-left"/></svg>Назад</span>Метод опорных векторов</a>
+        <a href="/edufamcs-demo/handbook/classic/ansambli-i-sluchajnyj-les/"><span>Дальше<svg class="ico sm" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-arrow"/></svg></span>Ансамбли и случайный лес</a>
+      </nav>
+      
+    </article>
+
+    <aside class="hb-toc" aria-label="На этой странице">
+      <a class="l2" href="#жадное-построение">Жадное построение</a><a class="l2" href="#критерии-неоднородности">Критерии неоднородности</a><a class="l2" href="#остановка-и-обрезка">Остановка и обрезка</a><a class="l2" href="#что-умеет-и-чего-не-умеет-дерево">Что умеет и чего не умеет дерево</a><a class="l2" href="#важность-признаков-mdi">Важность признаков (MDI)</a><a class="l2" href="#код">Код</a><a class="l2" href="#ловушки">Ловушки</a><a class="l2" href="#что-почитать">Что почитать</a>
+    </aside>
+  </div>
+</div>
+
+
+</main>
+
+<footer class="ftr" data-theme="dark">
+  <svg class="sym fern" viewBox="0 0 40.5 65.02" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#fern"/></svg>
+  <div class="container">
+    <div class="ftr-row">
+      <a href="/edufamcs-demo/" aria-label="EDU FAMCS — главная"><img src="/edufamcs-demo/static/brand/logo/logo-edu-dark.svg" alt="EDU FAMCS" width="196" height="40"></a>
+      <ul class="ftr-links">
+        <li><a href="/edufamcs-demo/#courses">Курсы</a></li>
+        <li><a href="/edufamcs-demo/ml/">Машинное обучение</a></li>
+        <li><a href="/edufamcs-demo/handbook/">Хендбук</a></li>
+        <li><a href="/edufamcs-demo/news/">Новости</a></li>
+        <li><a href="/edufamcs-demo/people/">Авторы</a></li>
+        <li><a href="/edufamcs-demo/about/">О&nbsp;нас</a></li>
+        <li><a href="/edufamcs-demo/propose/">Предложить или исправить</a></li>
+        <li><a href="/edufamcs-demo/privacy/">Конфиденциальность</a></li>
+      </ul>
+    </div>
+    <div class="ftr-big" aria-hidden="true">EDU<span class="d">·</span>FAMCS</div>
+    <p class="ftr-copy">© 2026 EDU FAMCS · Минск</p>
+  </div>
+</footer>
+
+<div class="toasts-region" aria-live="polite" id="toasts">
+
+</div>
+
+</body>
+</html>

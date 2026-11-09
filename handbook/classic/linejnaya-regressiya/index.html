@@ -1,0 +1,279 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Линейная регрессия · EDU FAMCS</title>
+<meta name="description" content="Линейная регрессия — Классическое машинное обучение. Хендбук ML-курса ФПМИ.">
+<meta name="theme-color" content="#060A16">
+<meta name="robots" content="noindex, nofollow">
+<meta name="htmx-config" content='{"allowEval":false,"includeIndicatorStyles":false,"historyCacheSize":0,"selfRequestsOnly":true}'>
+<meta name="katex-js" content="/edufamcs-demo/static/vendor/katex/katex.min.js">
+<meta name="katex-css" content="/edufamcs-demo/static/vendor/katex/katex.min.css">
+<link rel="icon" href="/edufamcs-demo/static/brand/logo/favicon-16.svg" type="image/svg+xml" sizes="16x16">
+<link rel="icon" href="/edufamcs-demo/static/brand/logo/favicon.svg" type="image/svg+xml" sizes="any">
+<link rel="preload" href="/edufamcs-demo/static/brand/fonts/manrope-cyrillic-400.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/edufamcs-demo/static/brand/fonts/unbounded-cyrillic-800.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="/edufamcs-demo/static/brand/fonts.css">
+<link rel="stylesheet" href="/edufamcs-demo/static/brand/tokens.css">
+<link rel="stylesheet" href="/edufamcs-demo/static/brand/components.css">
+<link rel="stylesheet" href="/edufamcs-demo/static/css/site.css">
+<link rel="stylesheet" href="/edufamcs-demo/static/css/hub.css">
+<link rel="stylesheet" href="/edufamcs-demo/static/css/about.css">
+<link rel="stylesheet" href="/edufamcs-demo/static/handbook/handbook.css">
+<script src="/edufamcs-demo/static/js/theme.js"></script>
+<script src="/edufamcs-demo/static/vendor/htmx/htmx.min.js" defer></script>
+<script src="/edufamcs-demo/static/vendor/alpine/alpine-csp.min.js" defer></script>
+<script src="/edufamcs-demo/static/js/site.js" defer></script>
+<script src="/edufamcs-demo/static/handbook/handbook.js" defer></script>
+</head>
+<body class="" hx-headers='{"X-CSRFToken": "YiPMkh2k4L0OlUysRgTYdzRpdGaBsUMPn2oQ4fPHZCoXAtJbotC6a4nuLog604uz"}'>
+<a class="skip" href="#main">К содержанию</a>
+<div class="demo-bar" role="note">Демо-версия для отзывов: вход, запись на курсы и формы здесь не работают.</div>
+
+<header class="hdr">
+  <div class="container">
+    <a class="brand" href="/edufamcs-demo/" aria-label="EDU FAMCS — главная">
+      <span class="full"><img class="only-light" src="/edufamcs-demo/static/brand/logo/logo-edu-light.svg" alt="EDU FAMCS" width="196" height="40"><img class="only-dark" src="/edufamcs-demo/static/brand/logo/logo-edu-dark.svg" alt="EDU FAMCS" width="196" height="40"></span>
+      <span class="short"><img class="only-light" src="/edufamcs-demo/static/brand/logo/logo-edu-light.svg" alt="EDU FAMCS" height="30"><img class="only-dark" src="/edufamcs-demo/static/brand/logo/logo-edu-dark.svg" alt="EDU FAMCS" height="30"></span>
+    </a>
+    <nav class="nav" id="main-nav" aria-label="Основная навигация">
+      <a href="/edufamcs-demo/#courses">Курсы</a>
+      <a href="/edufamcs-demo/ml/" >Машинное обучение</a>
+      
+      <a href="/edufamcs-demo/handbook/" aria-current="page">Хендбук</a>
+      <a href="/edufamcs-demo/news/" >Новости</a>
+      <a href="/edufamcs-demo/people/" >Авторы</a>
+      <a href="/edufamcs-demo/about/" >О&nbsp;нас</a>
+    </nav>
+    <div class="hdr-actions">
+      
+      <a class="btn btn-outline btn-login" href="/edufamcs-demo/accounts/login/?next=/handbook/classic/linejnaya-regressiya/">Войти</a>
+      
+      <button class="icon-btn menu-btn" type="button" aria-label="Меню" aria-expanded="false" aria-controls="main-nav"><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-menu"/></svg></button>
+    </div>
+  </div>
+</header>
+
+<main id="main">
+
+
+
+<div class="container hb-page hb-tone">
+  <div class="hb">
+    <aside class="hb-nav" aria-label="Статьи раздела">
+      
+<form class="hb-search" action="/edufamcs-demo/handbook/search/" method="get" role="search">
+  <svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-search"/></svg>
+  <input class="input" type="search" name="q" value="" placeholder="Поиск по хендбуку" aria-label="Поиск по хендбуку" autocomplete="off" maxlength="120"
+    hx-get="/edufamcs-demo/handbook/search/" hx-trigger="input changed delay:250ms, search" hx-target="#hb-nav-results" hx-sync="this:replace">
+</form>
+
+      <div id="hb-nav-results" class="hb-nav-results" aria-live="polite"></div>
+      <a class="grp" href="/edufamcs-demo/handbook/classic/">Базовые модели</a>
+      
+      <a class="" href="/edufamcs-demo/handbook/classic/knn-i-naivnyj-bajes/">Метод ближайших соседей и наивный Байес</a>
+      
+      <a class="cur" href="/edufamcs-demo/handbook/classic/linejnaya-regressiya/" aria-current="page">Линейная регрессия</a>
+      
+      <a class="" href="/edufamcs-demo/handbook/classic/logisticheskaya-regressiya-i-metriki/">Логистическая регрессия и метрики классификации</a>
+      
+      <a class="" href="/edufamcs-demo/handbook/classic/metod-opornyh-vektorov/">Метод опорных векторов</a>
+      
+    </aside>
+
+    <article class="hb-main">
+      <nav class="crumbs" aria-label="Навигация"><a href="/edufamcs-demo/handbook/">Хендбук</a><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-chev"/></svg><a href="/edufamcs-demo/handbook/classic/">Классическое машинное обучение</a></nav>
+      <h1 class="h1">Линейная регрессия</h1>
+      <div class="hb-meta">
+        
+        
+        <span><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-clock"/></svg>9&nbsp;мин</span>
+        <span class="hb-authors"><span class="avatar sm" title="Артем Лебедевич">АЛ</span>Артем Лебедевич</span>
+        <span><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-edit"/></svg>9 ноября 2026</span>
+        
+        
+      </div>
+
+      
+      <details class="hb-mtoc">
+        <summary><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-list"/></svg>Содержание<svg class="ico sm" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-chev-down"/></svg></summary>
+        <a class="l2" href="#модель-и-функция-потерь">Модель и функция потерь</a><a class="l2" href="#аналитическое-решение">Аналитическое решение</a><a class="l2" href="#предположения-и-остатки">Предположения и остатки</a><a class="l2" href="#мультиколлинеарность">Мультиколлинеарность</a><a class="l2" href="#регуляризация">Регуляризация</a><a class="l2" href="#признаки">Признаки</a><a class="l2" href="#метрики-регрессии">Метрики регрессии</a><a class="l2" href="#код">Код</a><a class="l2" href="#практика-и-типичные-ошибки">Практика и типичные ошибки</a><a class="l2" href="#что-почитать">Что почитать</a>
+      </details>
+      
+
+      <div class="prose"><p>Линейная регрессия — самая старая и самая используемая модель: метод наименьших квадратов опубликовал Лежандр (1805), обосновал вероятностно Гаусс (1809, при предположении о нормальном шуме). Она быстро обучается, интерпретируема и служит бейзлайном для регрессии; а её идеи — функция потерь, регуляризация, градиентный спуск — лежат в основе логистической регрессии, SVM и нейросетей.</p>
+<h2 id="модель-и-функция-потерь">Модель и функция потерь</h2>
+<p>Предсказание — линейная комбинация признаков:</p>
+<div class="tex tex-block">a(x)=w^\top x+b=\sum_{j=1}^d w_jx_j+b .</div>
+<p>Свободный член обычно убирают, добавляя к <span class="tex">X</span> столбец из единиц. Обучение — минимизация среднеквадратичной ошибки:</p>
+<div class="tex tex-block">\mathrm{MSE}(w)=\frac1n\|Xw-y\|_2^2\to\min_w .</div>
+<p>Интуиция: мы ищем гиперплоскость, минимизирующую сумму квадратов вертикальных отклонений точек. Квадрат сильно штрафует крупные ошибки; квадрат линейной функции от <span class="tex">w</span> — выпуклая гладкая квадратичная форма, поэтому любой стационарный минимум глобальный и решение выписывается явно.</p>
+<h2 id="аналитическое-решение">Аналитическое решение</h2>
+<p>Градиент <span class="tex">\nabla_w \frac1n\|Xw-y\|^2=\frac2nX^\top(Xw-y)</span>. Приравнивая нулю, получаем нормальные уравнения:</p>
+<div class="tex tex-block">X^\top Xw=X^\top y\ \Rightarrow\ w^*=(X^\top X)^{-1}X^\top y .</div>
+<p><strong>Геометрия.</strong> Столбцы <span class="tex">X</span> порождают подпространство в <span class="tex">\mathbb R^n</span>. Вектор предсказаний <span class="tex">\hat y=Xw^*</span> — ортогональная проекция <span class="tex">y</span> на это подпространство: <span class="tex">\hat y=Hy</span>, <span class="tex">H=X(X^\top X)^{-1}X^\top</span> (проекционная матрица), остаток <span class="tex">e=y-\hat y</span> ортогонален всем столбцам: <span class="tex">X^\top e=0</span>. Если среди столбцов есть константный, отсюда следует, что остатки имеют нулевое среднее и, значит, выборочно некоррелированы с каждым признаком; без свободного члена верна только ортогональность.</p>
+<p><strong>Вычисление.</strong> Формировать и обращать <span class="tex">X^\top X</span> в лоб — плохая идея: <span class="tex">\kappa(X^\top X)=\kappa(X)^2</span>, число обусловленности возводится в квадрат. Применяют QR или SVD-разложение (<code>np.linalg.lstsq</code>, <code>LinearRegression</code>). Сложность около <span class="tex">O(nd^2)</span>.</p>
+<p><strong>Градиентный спуск и SGD.</strong> Когда <span class="tex">d</span> или <span class="tex">n</span> велики, пользуются итеративным обновлением</p>
+<div class="tex tex-block">w\leftarrow w-\eta\,\tfrac2nX^\top(Xw-y).</div>
+<p>SGD считает градиент по мини-батчу и масштабируется на потоковые данные (<code>SGDRegressor</code>). Для сходимости признаки нужно масштабировать: при разных шкалах овраги функции потерь вытянуты и спуск зигзагообразен.</p>
+<h2 id="предположения-и-остатки">Предположения и остатки</h2>
+<p>Теорема Гаусса–Маркова: если <span class="tex">y=Xw+\varepsilon</span>, <span class="tex">\mathbb E\varepsilon=0</span>, ошибки некоррелированы и имеют одинаковую дисперсию <span class="tex">\sigma^2</span> (гомоскедастичность), а <span class="tex">X</span> имеет полный ранг, то оценка МНК — наилучшая среди <strong>линейных несмещённых</strong> (BLUE). Нормальность ошибок для этого не нужна, но нужна для точных доверительных интервалов и <span class="tex">t</span>-тестов коэффициентов; при нормальных ошибках МНК совпадает с максимумом правдоподобия.</p>
+<p>Проверять предположения нужно по <strong>остаткам</strong> <span class="tex">e_i=y_i-\hat y_i</span>:</p>
+<ul>
+<li>график остатков против предсказаний: структура (парабола) — нелинейность, расширяющийся «веер» — гетероскедастичность;</li>
+<li>Q–Q-график остатков — нормальность;</li>
+<li>остатки по времени — автокорреляция;</li>
+<li>большие остатки и высокие значения <span class="tex">H_{ii}</span> (leverage) — влиятельные точки.</li>
+</ul>
+<h2 id="мультиколлинеарность">Мультиколлинеарность</h2>
+<p>Если признаки почти линейно зависимы, матрица <span class="tex">X^\top X</span> плохо обусловлена: определитель близок к нулю, обратная матрица содержит огромные числа, и небольшие изменения данных радикально меняют <span class="tex">w</span>. Предсказания при этом могут оставаться хорошими, а вот <strong>интерпретация коэффициентов теряется</strong>: знак может оказаться «неправильным». Диагностика: матрица корреляций, число обусловленности, VIF. Лечение: удалить/объединить признаки, PCA, регуляризация.</p>
+<h2 id="регуляризация">Регуляризация</h2>
+<p>Идея: добавить к потере штраф за большие веса, обменяв небольшое смещение на значительное снижение разброса.</p>
+<p><strong>Ridge</strong> (Hoerl &amp; Kennard, 1970): штраф <span class="tex">\lambda\|w\|_2^2</span>.</p>
+<div class="tex tex-block">\min_w\ \|Xw-y\|^2+\lambda\|w\|_2^2\ \Rightarrow\ w^*=(X^\top X+\lambda I)^{-1}X^\top y .</div>
+<p>Добавка <span class="tex">\lambda I</span> делает матрицу положительно определённой при любом <span class="tex">\lambda&gt;0</span> и стабилизирует решение; веса сжимаются к нулю, но не обращаются в нуль точно.</p>
+<p><strong>Lasso</strong> (Tibshirani, 1996): штраф <span class="tex">\lambda\|w\|_1=\lambda\sum|w_j|</span>. Закрытого решения нет (негладкий штраф), но задача выпукла и решается координатным спуском. Особенность — <strong>разреженность</strong>: часть весов становится ровно нулём, то есть Lasso одновременно отбирает признаки. При группе сильно коррелированных признаков выбирает один произвольно.</p>
+<p><strong>Elastic Net</strong> (Zou &amp; Hastie, 2005): <span class="tex">\lambda\big(\rho\|w\|_1+\tfrac{1-\rho}2\|w\|_2^2\big)</span> — разреженность Lasso плюс стабильность Ridge в группах коррелированных признаков.</p>
+<p><strong>Геометрическая картина.</strong> Задачу со штрафом можно записать как минимизацию потерь при ограничении <span class="tex">\|w\|_p\le t</span>. Линии уровня MSE — эллипсы вокруг решения МНК; ограничение <span class="tex">\ell_2</span> — круг, <span class="tex">\ell_1</span> — ромб с вершинами на осях. Эллипс чаще касается ромба в вершине, где часть координат равна нулю — отсюда разреженность. В байесовской трактовке Ridge — априорное нормальное распределение на веса, Lasso — лапласовское.</p>
+<p>Параметр <span class="tex">\lambda</span> (в sklearn <code>alpha</code>) подбирают кросс-валидацией; признаки перед регуляризацией <strong>обязательно масштабируют</strong>, иначе штраф зависит от единиц измерения. Свободный член не штрафуют.</p>
+<h2 id="признаки">Признаки</h2>
+<ul>
+<li><strong>Масштабирование</strong> — <code>StandardScaler</code>; обязательно для регуляризации и градиентных методов.</li>
+<li><strong>Категории</strong> — one-hot (с удалением одного уровня при отсутствии регуляризации, иначе матрица вырождена).</li>
+<li><strong>Полиномиальные признаки</strong> <span class="tex">x_1x_2, x_1^2,\dots</span> делают модель нелинейной по <span class="tex">x</span>, оставаясь линейной по <span class="tex">w</span>; число признаков растёт как <span class="tex">\binom{d+p}{p}</span>, без регуляризации неизбежно переобучение.</li>
+<li><strong>Логарифм таргета</strong> для положительного скошенного <span class="tex">y</span> (цены): модель становится мультипликативной, а ошибки — относительными. Не забудьте обратное преобразование: при симметричном шуме в логарифмах <span class="tex">\exp(\widehat{\log y})</span> оценивает условную медиану, а не среднее; для лог-нормального шума среднее больше в <span class="tex">e^{\sigma^2/2}</span> раз.</li>
+</ul>
+<h2 id="метрики-регрессии">Метрики регрессии</h2>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>Метрика</th>
+<th>Формула</th>
+<th>Свойства</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>MSE</td>
+<td><span class="tex">\frac1n\sum(y_i-a_i)^2</span></td>
+<td>сильно штрафует выбросы; та же функция, что в обучении</td>
+</tr>
+<tr>
+<td>RMSE</td>
+<td><span class="tex">\sqrt{\mathrm{MSE}}</span></td>
+<td>в единицах таргета</td>
+</tr>
+<tr>
+<td>MAE</td>
+<td><span class="tex">\frac1n\sum\lvert y_i-a_i\rvert</span></td>
+<td>устойчива к выбросам, оценивает медиану</td>
+</tr>
+<tr>
+<td>MAPE</td>
+<td><span class="tex">\frac1n\sum\lvert\frac{y_i-a_i}{y_i}\rvert</span></td>
+<td>относительная; нестабильна при <span class="tex">y_i\approx0</span>; асимметрична: ошибка занижения не больше 100%, завышения — не ограничена, поэтому оптимизация MAPE тянет прогноз вниз</td>
+</tr>
+<tr>
+<td><span class="tex">R^2</span></td>
+<td><span class="tex">1-\frac{\sum(y_i-a_i)^2}{\sum(y_i-\bar y)^2}</span></td>
+<td>доля объяснённой дисперсии; 0 — как константа-среднее, может быть отрицательным</td>
+</tr>
+</tbody>
+</table></div>
+<p>Оптимальный прогноз для MSE — условное среднее, для MAE — условная медиана; выбор метрики — выбор того, что вы предсказываете. <strong>Huber loss</strong> — квадратичная при <span class="tex">|r|\le\delta</span> и линейная дальше: сохраняет гладкость, но не даёт выбросам доминировать (<code>HuberRegressor</code>).</p>
+<h2 id="код">Код</h2>
+<div class="code"><div class="code-head"><span class="lang">python</span></div><pre><code><span class="tok-k">import</span> numpy <span class="tok-k">as</span> np
+<span class="tok-k">from</span> sklearn.datasets <span class="tok-k">import</span> make_regression
+<span class="tok-k">from</span> sklearn.linear_model <span class="tok-k">import</span> LinearRegression<span class="tok-p">,</span> Ridge<span class="tok-p">,</span> Lasso<span class="tok-p">,</span> lasso_path
+<span class="tok-k">from</span> sklearn.model_selection <span class="tok-k">import</span> cross_val_score
+<span class="tok-k">from</span> sklearn.pipeline <span class="tok-k">import</span> make_pipeline
+<span class="tok-k">from</span> sklearn.preprocessing <span class="tok-k">import</span> StandardScaler
+
+X<span class="tok-p">,</span> y <span class="tok-p">=</span> make_regression<span class="tok-p">(</span>n_samples<span class="tok-p">=</span><span class="tok-n">300</span><span class="tok-p">,</span> n_features<span class="tok-p">=</span><span class="tok-n">30</span><span class="tok-p">,</span> n_informative<span class="tok-p">=</span><span class="tok-n">5</span><span class="tok-p">,</span> noise<span class="tok-p">=</span><span class="tok-n">10</span><span class="tok-p">,</span> random_state<span class="tok-p">=</span><span class="tok-n">0</span><span class="tok-p">)</span>
+
+<span class="tok-c"># сверка аналитического решения с sklearn</span>
+Xb <span class="tok-p">=</span> np<span class="tok-p">.</span>c_<span class="tok-p">[</span>np<span class="tok-p">.</span>ones<span class="tok-p">(</span><span class="tok-f">len</span><span class="tok-p">(</span>X<span class="tok-p">)</span><span class="tok-p">)</span><span class="tok-p">,</span> X<span class="tok-p">]</span>
+w_lstsq <span class="tok-p">=</span> np<span class="tok-p">.</span>linalg<span class="tok-p">.</span>lstsq<span class="tok-p">(</span>Xb<span class="tok-p">,</span> y<span class="tok-p">,</span> rcond<span class="tok-p">=</span><span class="tok-k">None</span><span class="tok-p">)</span><span class="tok-p">[</span><span class="tok-n">0</span><span class="tok-p">]</span>
+lr <span class="tok-p">=</span> LinearRegression<span class="tok-p">(</span><span class="tok-p">)</span><span class="tok-p">.</span>fit<span class="tok-p">(</span>X<span class="tok-p">,</span> y<span class="tok-p">)</span>
+<span class="tok-k">assert</span> np<span class="tok-p">.</span>allclose<span class="tok-p">(</span>w_lstsq<span class="tok-p">[</span><span class="tok-n">1</span><span class="tok-p">:</span><span class="tok-p">]</span><span class="tok-p">,</span> lr<span class="tok-p">.</span>coef_<span class="tok-p">)</span> <span class="tok-k">and</span> np<span class="tok-p">.</span>isclose<span class="tok-p">(</span>w_lstsq<span class="tok-p">[</span><span class="tok-n">0</span><span class="tok-p">]</span><span class="tok-p">,</span> lr<span class="tok-p">.</span>intercept_<span class="tok-p">)</span>
+
+<span class="tok-k">for</span> name<span class="tok-p">,</span> model <span class="tok-k">in</span> <span class="tok-p">{</span><span class="tok-s">"</span><span class="tok-s">ols</span><span class="tok-s">"</span><span class="tok-p">:</span> LinearRegression<span class="tok-p">(</span><span class="tok-p">)</span><span class="tok-p">,</span> <span class="tok-s">"</span><span class="tok-s">ridge</span><span class="tok-s">"</span><span class="tok-p">:</span> Ridge<span class="tok-p">(</span>alpha<span class="tok-p">=</span><span class="tok-n">10</span><span class="tok-p">)</span><span class="tok-p">,</span> <span class="tok-s">"</span><span class="tok-s">lasso</span><span class="tok-s">"</span><span class="tok-p">:</span> Lasso<span class="tok-p">(</span>alpha<span class="tok-p">=</span><span class="tok-n">1.0</span><span class="tok-p">)</span><span class="tok-p">}</span><span class="tok-p">.</span>items<span class="tok-p">(</span><span class="tok-p">)</span><span class="tok-p">:</span>
+    pipe <span class="tok-p">=</span> make_pipeline<span class="tok-p">(</span>StandardScaler<span class="tok-p">(</span><span class="tok-p">)</span><span class="tok-p">,</span> model<span class="tok-p">)</span>
+    s <span class="tok-p">=</span> <span class="tok-p">-</span>cross_val_score<span class="tok-p">(</span>pipe<span class="tok-p">,</span> X<span class="tok-p">,</span> y<span class="tok-p">,</span> cv<span class="tok-p">=</span><span class="tok-n">5</span><span class="tok-p">,</span> scoring<span class="tok-p">=</span><span class="tok-s">"</span><span class="tok-s">neg_root_mean_squared_error</span><span class="tok-s">"</span><span class="tok-p">)</span>
+    <span class="tok-f">print</span><span class="tok-p">(</span><span class="tok-s">f</span><span class="tok-s">"</span><span class="tok-s">{</span>name<span class="tok-s">}</span><span class="tok-s">: RMSE </span><span class="tok-s">{</span>s<span class="tok-p">.</span>mean<span class="tok-p">(</span><span class="tok-p">)</span><span class="tok-s">:</span><span class="tok-s">.2f</span><span class="tok-s">}</span><span class="tok-s"> ± </span><span class="tok-s">{</span>s<span class="tok-p">.</span>std<span class="tok-p">(</span><span class="tok-p">)</span><span class="tok-s">:</span><span class="tok-s">.2f</span><span class="tok-s">}</span><span class="tok-s">"</span><span class="tok-p">)</span>
+
+<span class="tok-c"># путь коэффициентов Lasso от alpha</span>
+Xs <span class="tok-p">=</span> StandardScaler<span class="tok-p">(</span><span class="tok-p">)</span><span class="tok-p">.</span>fit_transform<span class="tok-p">(</span>X<span class="tok-p">)</span>
+alphas<span class="tok-p">,</span> coefs<span class="tok-p">,</span> _ <span class="tok-p">=</span> lasso_path<span class="tok-p">(</span>Xs<span class="tok-p">,</span> y <span class="tok-p">-</span> y<span class="tok-p">.</span>mean<span class="tok-p">(</span><span class="tok-p">)</span><span class="tok-p">)</span>
+<span class="tok-c"># coefs: (n_features, n_alphas); на графике веса по очереди уходят в ноль при росте alpha</span>
+<span class="tok-f">print</span><span class="tok-p">(</span><span class="tok-s">"</span><span class="tok-s">ненулевых весов при минимальном и максимальном alpha:</span><span class="tok-s">"</span><span class="tok-p">,</span>
+      <span class="tok-p">(</span>coefs<span class="tok-p">[</span><span class="tok-p">:</span><span class="tok-p">,</span> <span class="tok-p">-</span><span class="tok-n">1</span><span class="tok-p">]</span> <span class="tok-p">!=</span> <span class="tok-n">0</span><span class="tok-p">)</span><span class="tok-p">.</span>sum<span class="tok-p">(</span><span class="tok-p">)</span><span class="tok-p">,</span> <span class="tok-p">(</span>coefs<span class="tok-p">[</span><span class="tok-p">:</span><span class="tok-p">,</span> <span class="tok-n">0</span><span class="tok-p">]</span> <span class="tok-p">!=</span> <span class="tok-n">0</span><span class="tok-p">)</span><span class="tok-p">.</span>sum<span class="tok-p">(</span><span class="tok-p">)</span><span class="tok-p">)</span>
+</code></pre></div>
+<h2 id="практика-и-типичные-ошибки">Практика и типичные ошибки</h2>
+<ul>
+<li><strong>Регуляризация без масштабирования</strong>: штраф бьёт по признакам с малой шкалой несправедливо.</li>
+<li><strong>Интерпретация коэффициентов при коллинеарности.</strong> Веса в линейной модели с коррелированными признаками нестабильны; смотрите на устойчивость по бутстрепу.</li>
+<li><strong>Экстраполяция.</strong> Линейная модель уверенно предсказывает значения вне диапазона обучения, где зависимость уже не линейна.</li>
+<li><strong>Утечка при масштабировании и подборе <span class="tex">\lambda</span></strong> — только внутри пайплайна.</li>
+<li><strong><span class="tex">R^2</span> на train как мера качества</strong>: растёт при добавлении любых признаков, используйте валидацию.</li>
+<li><strong>Метрика, не соответствующая цели</strong>: MAPE для спроса с нулями, MSE при тяжёлых хвостах.</li>
+<li>Вопросы собеседований: вывод нормальных уравнений, почему Lasso разрежен, когда <span class="tex">X^\top X</span> вырождена, чем отличается Ridge от PCA-регрессии.</li>
+</ul>
+<h2 id="что-почитать">Что почитать</h2>
+<ul>
+<li>T. Hastie, R. Tibshirani, J. Friedman, <em>The Elements of Statistical Learning</em>, гл. 3 (Linear Methods for Regression): <a href="https://hastie.su.domains/ElemStatLearn/" rel="noopener noreferrer nofollow">hastie.su.domains/ElemStatLearn</a>.</li>
+<li>A. Hoerl, R. Kennard, <em>Ridge regression: biased estimation for nonorthogonal problems</em>, Technometrics, 12(1), 1970.</li>
+<li>R. Tibshirani, <em>Regression shrinkage and selection via the lasso</em>, JRSS B, 58(1), 1996.</li>
+<li>H. Zou, T. Hastie, <em>Regularization and variable selection via the elastic net</em>, JRSS B, 67(2), 2005.</li>
+<li>Документация scikit-learn, Linear Models: <a href="https://scikit-learn.org/stable/modules/linear_model.html" rel="noopener noreferrer nofollow">scikit-learn.org/stable/modules/linear_model.html</a>.</li>
+<li>Учебник по машинному обучению Яндекса, глава про линейные модели: <a href="https://education.yandex.ru/handbook/ml/article/linear-models" rel="noopener noreferrer nofollow">education.yandex.ru/handbook/ml/article/linear-models</a>.</li>
+<li>Видео первого сезона: лекция <a href="https://youtu.be/nmM98SZzp1E" rel="noopener noreferrer nofollow">youtu.be/nmM98SZzp1E</a>, семинар <a href="https://youtu.be/8RPlzBIwE38" rel="noopener noreferrer nofollow">youtu.be/8RPlzBIwE38</a>.</li>
+</ul>
+</div>
+      
+
+      
+      <nav class="pager" aria-label="Соседние статьи">
+        <a href="/edufamcs-demo/handbook/classic/knn-i-naivnyj-bajes/"><span><svg class="ico sm" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-arrow-left"/></svg>Назад</span>Метод ближайших соседей и наивный Байес</a>
+        <a href="/edufamcs-demo/handbook/classic/logisticheskaya-regressiya-i-metriki/"><span>Дальше<svg class="ico sm" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-arrow"/></svg></span>Логистическая регрессия и метрики классификации</a>
+      </nav>
+      
+    </article>
+
+    <aside class="hb-toc" aria-label="На этой странице">
+      <a class="l2" href="#модель-и-функция-потерь">Модель и функция потерь</a><a class="l2" href="#аналитическое-решение">Аналитическое решение</a><a class="l2" href="#предположения-и-остатки">Предположения и остатки</a><a class="l2" href="#мультиколлинеарность">Мультиколлинеарность</a><a class="l2" href="#регуляризация">Регуляризация</a><a class="l2" href="#признаки">Признаки</a><a class="l2" href="#метрики-регрессии">Метрики регрессии</a><a class="l2" href="#код">Код</a><a class="l2" href="#практика-и-типичные-ошибки">Практика и типичные ошибки</a><a class="l2" href="#что-почитать">Что почитать</a>
+    </aside>
+  </div>
+</div>
+
+
+</main>
+
+<footer class="ftr" data-theme="dark">
+  <svg class="sym fern" viewBox="0 0 40.5 65.02" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#fern"/></svg>
+  <div class="container">
+    <div class="ftr-row">
+      <a href="/edufamcs-demo/" aria-label="EDU FAMCS — главная"><img src="/edufamcs-demo/static/brand/logo/logo-edu-dark.svg" alt="EDU FAMCS" width="196" height="40"></a>
+      <ul class="ftr-links">
+        <li><a href="/edufamcs-demo/#courses">Курсы</a></li>
+        <li><a href="/edufamcs-demo/ml/">Машинное обучение</a></li>
+        <li><a href="/edufamcs-demo/handbook/">Хендбук</a></li>
+        <li><a href="/edufamcs-demo/news/">Новости</a></li>
+        <li><a href="/edufamcs-demo/people/">Авторы</a></li>
+        <li><a href="/edufamcs-demo/about/">О&nbsp;нас</a></li>
+        <li><a href="/edufamcs-demo/propose/">Предложить или исправить</a></li>
+        <li><a href="/edufamcs-demo/privacy/">Конфиденциальность</a></li>
+      </ul>
+    </div>
+    <div class="ftr-big" aria-hidden="true">EDU<span class="d">·</span>FAMCS</div>
+    <p class="ftr-copy">© 2026 EDU FAMCS · Минск</p>
+  </div>
+</footer>
+
+<div class="toasts-region" aria-live="polite" id="toasts">
+
+</div>
+
+</body>
+</html>

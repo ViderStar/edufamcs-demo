@@ -1,0 +1,268 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>BM25 и инвертированный индекс · EDU FAMCS</title>
+<meta name="description" content="BM25 и инвертированный индекс — Поиск. Хендбук ML-курса ФПМИ.">
+<meta name="theme-color" content="#060A16">
+<meta name="robots" content="noindex, nofollow">
+<meta name="htmx-config" content='{"allowEval":false,"includeIndicatorStyles":false,"historyCacheSize":0,"selfRequestsOnly":true}'>
+<meta name="katex-js" content="/edufamcs-demo/static/vendor/katex/katex.min.js">
+<meta name="katex-css" content="/edufamcs-demo/static/vendor/katex/katex.min.css">
+<link rel="icon" href="/edufamcs-demo/static/brand/logo/favicon-16.svg" type="image/svg+xml" sizes="16x16">
+<link rel="icon" href="/edufamcs-demo/static/brand/logo/favicon.svg" type="image/svg+xml" sizes="any">
+<link rel="preload" href="/edufamcs-demo/static/brand/fonts/manrope-cyrillic-400.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/edufamcs-demo/static/brand/fonts/unbounded-cyrillic-800.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="/edufamcs-demo/static/brand/fonts.css">
+<link rel="stylesheet" href="/edufamcs-demo/static/brand/tokens.css">
+<link rel="stylesheet" href="/edufamcs-demo/static/brand/components.css">
+<link rel="stylesheet" href="/edufamcs-demo/static/css/site.css">
+<link rel="stylesheet" href="/edufamcs-demo/static/css/hub.css">
+<link rel="stylesheet" href="/edufamcs-demo/static/css/about.css">
+<link rel="stylesheet" href="/edufamcs-demo/static/handbook/handbook.css">
+<script src="/edufamcs-demo/static/js/theme.js"></script>
+<script src="/edufamcs-demo/static/vendor/htmx/htmx.min.js" defer></script>
+<script src="/edufamcs-demo/static/vendor/alpine/alpine-csp.min.js" defer></script>
+<script src="/edufamcs-demo/static/js/site.js" defer></script>
+<script src="/edufamcs-demo/static/handbook/handbook.js" defer></script>
+</head>
+<body class="" hx-headers='{"X-CSRFToken": "fGl54l1uHvd2B1L40XArMVWTvluOVTM7EqU9OjORCmBbQAWNxajzJqsY33Ajt3uR"}'>
+<a class="skip" href="#main">К содержанию</a>
+<div class="demo-bar" role="note">Демо-версия для отзывов: вход, запись на курсы и формы здесь не работают.</div>
+
+<header class="hdr">
+  <div class="container">
+    <a class="brand" href="/edufamcs-demo/" aria-label="EDU FAMCS — главная">
+      <span class="full"><img class="only-light" src="/edufamcs-demo/static/brand/logo/logo-edu-light.svg" alt="EDU FAMCS" width="196" height="40"><img class="only-dark" src="/edufamcs-demo/static/brand/logo/logo-edu-dark.svg" alt="EDU FAMCS" width="196" height="40"></span>
+      <span class="short"><img class="only-light" src="/edufamcs-demo/static/brand/logo/logo-edu-light.svg" alt="EDU FAMCS" height="30"><img class="only-dark" src="/edufamcs-demo/static/brand/logo/logo-edu-dark.svg" alt="EDU FAMCS" height="30"></span>
+    </a>
+    <nav class="nav" id="main-nav" aria-label="Основная навигация">
+      <a href="/edufamcs-demo/#courses">Курсы</a>
+      <a href="/edufamcs-demo/ml/" >Машинное обучение</a>
+      
+      <a href="/edufamcs-demo/handbook/" aria-current="page">Хендбук</a>
+      <a href="/edufamcs-demo/news/" >Новости</a>
+      <a href="/edufamcs-demo/people/" >Авторы</a>
+      <a href="/edufamcs-demo/about/" >О&nbsp;нас</a>
+    </nav>
+    <div class="hdr-actions">
+      
+      <a class="btn btn-outline btn-login" href="/edufamcs-demo/accounts/login/?next=/handbook/retrieval/bm25-invertirovannyj-indeks/">Войти</a>
+      
+      <button class="icon-btn menu-btn" type="button" aria-label="Меню" aria-expanded="false" aria-controls="main-nav"><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-menu"/></svg></button>
+    </div>
+  </div>
+</header>
+
+<main id="main">
+
+
+
+<div class="container hb-page s-recsys">
+  <div class="hb">
+    <aside class="hb-nav" aria-label="Статьи раздела">
+      
+<form class="hb-search" action="/edufamcs-demo/handbook/search/" method="get" role="search">
+  <svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-search"/></svg>
+  <input class="input" type="search" name="q" value="" placeholder="Поиск по хендбуку" aria-label="Поиск по хендбуку" autocomplete="off" maxlength="120"
+    hx-get="/edufamcs-demo/handbook/search/" hx-trigger="input changed delay:250ms, search" hx-target="#hb-nav-results" hx-sync="this:replace">
+</form>
+
+      <div id="hb-nav-results" class="hb-nav-results" aria-live="polite"></div>
+      <a class="grp" href="/edufamcs-demo/handbook/retrieval/">Классический поиск</a>
+      
+      <a class="cur" href="/edufamcs-demo/handbook/retrieval/bm25-invertirovannyj-indeks/" aria-current="page">BM25 и инвертированный индекс</a>
+      
+      <a class="" href="/edufamcs-demo/handbook/retrieval/ocenka-kachestva-poiska/">Оценка качества поиска</a>
+      
+      <a class="" href="/edufamcs-demo/handbook/retrieval/learning-to-rank/">Обучение ранжированию</a>
+      
+      <a class="" href="/edufamcs-demo/handbook/retrieval/ponimanie-zaprosa/">Понимание запроса</a>
+      
+    </aside>
+
+    <article class="hb-main">
+      <nav class="crumbs" aria-label="Навигация"><a href="/edufamcs-demo/handbook/">Хендбук</a><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-chev"/></svg><a href="/edufamcs-demo/handbook/retrieval/">Поиск</a></nav>
+      <h1 class="h1">BM25 и инвертированный индекс</h1>
+      <div class="hb-meta">
+        
+        
+        <span><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-clock"/></svg>12&nbsp;мин</span>
+        <span class="hb-authors"><span class="avatar sm" title="Артем Лебедевич">АЛ</span>Артем Лебедевич</span>
+        <span><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-edit"/></svg>9 ноября 2026</span>
+        
+        
+      </div>
+
+      
+      <details class="hb-mtoc">
+        <summary><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-list"/></svg>Содержание<svg class="ico sm" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-chev-down"/></svg></summary>
+        <a class="l2" href="#откуда-это-взялось">Откуда это взялось</a><a class="l2" href="#подготовка-текста">Подготовка текста</a><a class="l2" href="#инвертированный-индекс">Инвертированный индекс</a><a class="l2" href="#от-tf-idf-к-bm25">От TF-IDF к BM25</a><a class="l3" href="#откуда-берётся-idf">Откуда берётся IDF</a><a class="l3" href="#пример-на-числах">Пример на числах</a><a class="l2" href="#поля-и-бусты">Поля и бусты</a><a class="l2" href="#ограничения-лексического-поиска">Ограничения лексического поиска</a><a class="l2" href="#что-почитать">Что почитать</a>
+      </details>
+      
+
+      <div class="prose"><p>Поиск отличается от рекомендаций тем, что у пользователя есть явный запрос <span class="tex">q</span>, и задача — упорядочить документы по релевантности этому запросу. Классический лексический поиск сравнивает слова запроса и документа. Он до сих пор остаётся сильным бейзлайном и обязательной частью гибридных систем: точно находит редкие термины, артикулы, имена и коды, где нейросети ошибаются.</p>
+<h2 id="откуда-это-взялось">Откуда это взялось</h2>
+<p>Идеи BM25 старше интернета. В 1960-х Джерард Солтон строит систему SMART, а в статье Salton, Wong, Yang (1975) формулирует <strong>векторную модель</strong>: документ и запрос — векторы в пространстве термов, релевантность — косинус угла между ними, веса — TF-IDF. Саму идею IDF (терм весит тем больше, чем в меньшем числе документов встречается) предложила Карен Спарк Джонс (Spärck Jones, 1972). Параллельно развивается <strong>вероятностная модель</strong>: Robertson и Spärck Jones (1976) выводят вес терма из вероятностей его появления в релевантных и нерелевантных документах, и без разметки этот вес сводится к логарифмическому IDF (вывод ниже). Чистая вероятностная модель не учитывала частоту терма и длину документа. Это починили в системе Okapi: на конференции TREC-3 (Robertson et al., 1994) показали формулу, где частота насыщается, а длина нормируется — это и есть BM25 («Best Match 25», 25 — номер варианта весовой схемы). Для документов с полями Robertson, Zaragoza и Taylor (2004) предложили <strong>BM25F</strong>: частоты по полям складываются с весами до применения насыщения, и заголовок не «насыщается» отдельно от тела.</p>
+<p>Дальше BM25 просто оказался трудно превзойти: на BEIR (см. <a href="/edufamcs-demo/handbook/retrieval/ocenka-kachestva-poiska/" rel="noopener noreferrer nofollow">оценку качества поиска</a>) он до сих пор конкурентен многим нейросетям вне их обучающего домена. Вариант Lucene с <code>ln(1 + ...)</code> в IDF исправляет исходную формулу, которая могла давать отрицательный вес очень частым термам. В Lucene, Elasticsearch и OpenSearch BM25 — функция сходства по умолчанию (с версии Lucene 6 / Elasticsearch 5; до этого был TF-IDF), <span class="tex">k_1</span> и <span class="tex">b</span> задаются в настройках индекса на каждое поле. Запрос <code>combined_fields</code> в Elasticsearch реализует BM25F, а <code>multi_match</code> с типом <code>cross_fields</code> — более грубое приближение: он смешивает между полями только статистику IDF.</p>
+<h2 id="подготовка-текста">Подготовка текста</h2>
+<p>Перед индексацией текст превращают в последовательность <strong>термов</strong>:</p>
+<ol>
+<li><strong>Токенизация</strong> — разбить на слова, аккуратно обработав дефисы, числа, артикулы вроде <code>iphone-15</code>.</li>
+<li><strong>Нормализация</strong> — нижний регистр, <code>ё → е</code>, удаление диакритики.</li>
+<li><strong>Лемматизация или стемминг.</strong> В русском у слова десятки форм: «матрица», «матрицы», «матрицей». Лемматизатор (pymorphy3) приводит их к словарной форме, стеммер (Snowball) отрезает окончания. Без этого запрос «разложение матрицы» не найдёт документ, где написано «разложением матриц». Однокоренные слова разных частей речи («рекомендация» и «рекомендательный») ни лемматизатор, ни стеммер обычно не склеивают — это уже работа синонимов или эмбеддингов.</li>
+<li><strong>Стоп-слова</strong> — предлоги и союзы иногда удаляют, но осторожно: в запросе «быть или не быть» они и есть смысл.</li>
+</ol>
+<p>Запрос проходит <strong>ту же самую</strong> обработку, иначе термы не совпадут.</p>
+<h2 id="инвертированный-индекс">Инвертированный индекс</h2>
+<p>Прямой индекс хранит для документа список его слов. Для поиска нужен обратный: для каждого терма — список документов, где он встречается (<strong>posting list</strong>), обычно с частотой и позициями:</p>
+<div class="code"><div class="code-head"><span class="lang">code</span></div><pre><code>матриц   → [(d3, tf=4), (d17, tf=1), (d42, tf=7)]
+разложен → [(d3, tf=2), (d42, tf=3)]
+als      → [(d42, tf=5)]
+</code></pre></div>
+<p>Списки отсортированы по ID документа. Тогда запрос из нескольких термов обрабатывается слиянием отсортированных списков за линейное время: пересечение для «И», объединение для «ИЛИ». Позиции нужны для фразового поиска и учёта близости слов. Чтобы списки занимали меньше места, хранят не сами ID, а разности между соседними (они маленькие) и сжимают их переменной длиной кода.</p>
+<p>Главное свойство индекса: время ответа зависит от длины posting lists термов запроса, а не от размера всей коллекции. Для частых термов и топ-<span class="tex">k</span> запросов используют алгоритмы досрочного отсечения (WAND, MaxScore), которые не досчитывают документы, заведомо не попадающие в топ.</p>
+<h2 id="от-tf-idf-к-bm25">От TF-IDF к BM25</h2>
+<p>Интуиция: документ релевантнее, если терм запроса встречается в нём <strong>часто</strong> (term frequency) и если терм <strong>редкий</strong> в коллекции (inverse document frequency) — слово «алгоритм» встречается везде и мало говорит, слово «ALS» — точный сигнал.</p>
+<p>TF-IDF просто перемножает эти величины, но у него две проблемы. Во-первых, вклад частоты растёт линейно: документ, где слово повторено 50 раз, получает огромный скор, хотя после нескольких упоминаний релевантность почти не растёт. Во-вторых, длинные документы выигрывают просто потому, что в них больше слов.</p>
+<p>BM25 (Robertson, Spärck Jones и соавторы) решает обе проблемы. Для запроса <span class="tex">Q = \{q_1, \dots, q_n\}</span> и документа <span class="tex">D</span>:</p>
+<div class="tex tex-block">\mathrm{score}(D, Q) = \sum_{q \in Q} \mathrm{IDF}(q) \cdot
+\frac{f(q, D)\,(k_1 + 1)}{f(q, D) + k_1 \left(1 - b + b \dfrac{|D|}{\mathrm{avgdl}}\right)}</div>
+<p>где <span class="tex">f(q, D)</span> — частота терма в документе, <span class="tex">|D|</span> — длина документа в термах, <span class="tex">\mathrm{avgdl}</span> — средняя длина по коллекции. IDF в варианте Lucene:</p>
+<div class="tex tex-block">\mathrm{IDF}(q) = \ln\left(1 + \frac{N - n(q) + 0{,}5}{n(q) + 0{,}5}\right),</div>
+<p>где <span class="tex">N</span> — число документов, <span class="tex">n(q)</span> — сколько из них содержат терм.</p>
+<h3 id="откуда-берётся-idf">Откуда берётся IDF</h3>
+<p>Логарифм в IDF не подобран «на глаз»: он выводится из вероятностной модели (binary independence model). Будем ранжировать документы по отношению шансов <span class="tex">P(R\mid D)/P(\bar R\mid D)</span>, где <span class="tex">R</span> — событие «документ релевантен». Представим документ бинарным вектором «терм есть / терма нет» и предположим, что при фиксированной релевантности термы независимы. Обозначим <span class="tex">p_t = P(t \in D \mid R)</span> и <span class="tex">u_t = P(t \in D \mid \bar R)</span>. После логарифмирования и отбрасывания слагаемых, одинаковых для всех документов, остаётся сумма по термам запроса, которые есть в документе:</p>
+<div class="tex tex-block">\log\frac{P(R\mid D)}{P(\bar R\mid D)} \stackrel{\mathrm{rank}}{=} \sum_{t \in Q \cap D} \log\frac{p_t\,(1-u_t)}{u_t\,(1-p_t)}.</div>
+<p>Это <strong>вес Робертсона — Спарк Джонс</strong>. Если из <span class="tex">R</span> известных релевантных документов терм содержат <span class="tex">r_t</span>, сглаженные оценки равны <span class="tex">p_t = \frac{r_t + 0{,}5}{R + 1}</span> и <span class="tex">u_t = \frac{n(t) - r_t + 0{,}5}{N - R + 1}</span>. Без разметки (<span class="tex">R = r_t = 0</span>) получаем <span class="tex">p_t = 1/2</span>, а нерелевантной считается вся коллекция, и вес превращается в</p>
+<div class="tex tex-block">w_t = \log\frac{N - n(t) + 0{,}5}{n(t) + 0{,}5} \approx \log\frac{N}{n(t)}.</div>
+<p>Это и есть IDF. Если терм встречается больше чем в половине документов, вес отрицателен: формально наличие такого терма — довод <em>против</em> релевантности. Для ранжирования это неудобно, поэтому Lucene добавляет единицу под логарифмом. Заметьте, чего в модели нет: частоты терма и длины документа, ведь вектор бинарный. BM25 добавляет их отдельно: насыщение по <span class="tex">f</span> — простое приближение модели «двух пуассонов» (Harter, 1975; Robertson, Walker, 1994), где терм в документе либо «элитный» (документ о нём), либо случайный.</p>
+<p>Что делают параметры:</p>
+<ul>
+<li><strong><span class="tex">k_1</span> — насыщение частоты.</strong> При <span class="tex">f \to \infty</span> дробь стремится к <span class="tex">k_1 + 1</span>, а не к бесконечности: десятое упоминание терма добавляет намного меньше первого. При <span class="tex">k_1 = 0</span> частота вообще не важна, учитывается только факт вхождения. Типичные значения — от <span class="tex">1{,}2</span> до <span class="tex">2</span>.</li>
+<li><strong><span class="tex">b</span> — нормировка длины.</strong> При <span class="tex">b = 1</span> частота полностью нормируется на относительную длину документа, при <span class="tex">b = 0</span> длина игнорируется. Стандартно <span class="tex">b = 0{,}75</span>.</li>
+</ul>
+<p>Значения по умолчанию (<span class="tex">k_1 = 1{,}2</span>, <span class="tex">b = 0{,}75</span>) хороши для статей; для коротких текстов вроде названий товаров <span class="tex">b</span> часто уменьшают.</p>
+<h3 id="пример-на-числах">Пример на числах</h3>
+<p>Пусть <span class="tex">N = 1000</span>, <span class="tex">k_1 = 1{,}2</span>, <span class="tex">b = 0{,}75</span>. Терм «als» встречается в 10 документах, «алгоритм» — в 400. Тогда <span class="tex">\mathrm{IDF}(\text{als}) = \ln(1 + 990{,}5/10{,}5) \approx 4{,}56</span>, а <span class="tex">\mathrm{IDF}(\text{алгоритм}) = \ln(1 + 600{,}5/400{,}5) \approx 0{,}92</span>. Частотная часть формулы (дробь без IDF) для разных <span class="tex">f</span> и длин документа:</p>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th><span class="tex">f(q, D)</span></th>
+<th>1</th>
+<th>2</th>
+<th>5</th>
+<th>20</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>документ вдвое короче среднего</td>
+<td>1,26</td>
+<td>1,60</td>
+<td>1,91</td>
+<td>2,12</td>
+</tr>
+<tr>
+<td>документ средней длины</td>
+<td>1,00</td>
+<td>1,38</td>
+<td>1,77</td>
+<td>2,08</td>
+</tr>
+<tr>
+<td>документ вдвое длиннее среднего</td>
+<td>0,71</td>
+<td>1,07</td>
+<td>1,55</td>
+<td>1,99</td>
+</tr>
+</tbody>
+</table></div>
+<p>Что видно из таблицы. Насыщение: второе упоминание добавляет 0,38, а двадцатое почти ничего, и предел — <span class="tex">k_1 + 1 = 2{,}2</span>. Нормировка: два упоминания в документе вдвое длиннее среднего стоят почти как одно в документе средней длины. Редкость важнее частоты: одно упоминание «als» (<span class="tex">4{,}56 \cdot 1{,}00</span>) весит больше, чем двадцать упоминаний «алгоритма» (<span class="tex">0{,}92 \cdot 2{,}08 \approx 1{,}9</span>).</p>
+<div class="code"><div class="code-head"><span class="lang">python</span></div><pre><code><span class="tok-k">import</span> math
+<span class="tok-k">from</span> collections <span class="tok-k">import</span> Counter
+
+<span class="tok-k">def</span> <span class="tok-f">bm25_scores</span><span class="tok-p">(</span>query_terms<span class="tok-p">,</span> docs<span class="tok-p">,</span> k1<span class="tok-p">=</span><span class="tok-n">1.2</span><span class="tok-p">,</span> b<span class="tok-p">=</span><span class="tok-n">0.75</span><span class="tok-p">)</span><span class="tok-p">:</span>
+    <span class="tok-s">"""docs — список документов, каждый — список термов после нормализации."""</span>
+    N <span class="tok-p">=</span> <span class="tok-f">len</span><span class="tok-p">(</span>docs<span class="tok-p">)</span>
+    avgdl <span class="tok-p">=</span> <span class="tok-f">sum</span><span class="tok-p">(</span><span class="tok-f">len</span><span class="tok-p">(</span>d<span class="tok-p">)</span> <span class="tok-k">for</span> d <span class="tok-k">in</span> docs<span class="tok-p">)</span> <span class="tok-p">/</span> N
+    df <span class="tok-p">=</span> Counter<span class="tok-p">(</span>t <span class="tok-k">for</span> d <span class="tok-k">in</span> docs <span class="tok-k">for</span> t <span class="tok-k">in</span> <span class="tok-f">set</span><span class="tok-p">(</span>d<span class="tok-p">)</span><span class="tok-p">)</span>
+    scores <span class="tok-p">=</span> <span class="tok-p">[</span><span class="tok-p">]</span>
+    <span class="tok-k">for</span> d <span class="tok-k">in</span> docs<span class="tok-p">:</span>
+        tf<span class="tok-p">,</span> s <span class="tok-p">=</span> Counter<span class="tok-p">(</span>d<span class="tok-p">)</span><span class="tok-p">,</span> <span class="tok-n">0.0</span>
+        <span class="tok-k">for</span> q <span class="tok-k">in</span> query_terms<span class="tok-p">:</span>
+            <span class="tok-k">if</span> q <span class="tok-k">not</span> <span class="tok-k">in</span> tf<span class="tok-p">:</span>
+                <span class="tok-k">continue</span>
+            idf <span class="tok-p">=</span> math<span class="tok-p">.</span>log<span class="tok-p">(</span><span class="tok-n">1</span> <span class="tok-p">+</span> <span class="tok-p">(</span>N <span class="tok-p">-</span> df<span class="tok-p">[</span>q<span class="tok-p">]</span> <span class="tok-p">+</span> <span class="tok-n">0.5</span><span class="tok-p">)</span> <span class="tok-p">/</span> <span class="tok-p">(</span>df<span class="tok-p">[</span>q<span class="tok-p">]</span> <span class="tok-p">+</span> <span class="tok-n">0.5</span><span class="tok-p">)</span><span class="tok-p">)</span>
+            s <span class="tok-p">+</span><span class="tok-p">=</span> idf <span class="tok-p">*</span> tf<span class="tok-p">[</span>q<span class="tok-p">]</span> <span class="tok-p">*</span> <span class="tok-p">(</span>k1 <span class="tok-p">+</span> <span class="tok-n">1</span><span class="tok-p">)</span> <span class="tok-p">/</span> <span class="tok-p">(</span>tf<span class="tok-p">[</span>q<span class="tok-p">]</span> <span class="tok-p">+</span> k1 <span class="tok-p">*</span> <span class="tok-p">(</span><span class="tok-n">1</span> <span class="tok-p">-</span> b <span class="tok-p">+</span> b <span class="tok-p">*</span> <span class="tok-f">len</span><span class="tok-p">(</span>d<span class="tok-p">)</span> <span class="tok-p">/</span> avgdl<span class="tok-p">)</span><span class="tok-p">)</span>
+        scores<span class="tok-p">.</span>append<span class="tok-p">(</span>s<span class="tok-p">)</span>
+    <span class="tok-k">return</span> scores
+</code></pre></div>
+<p>На практике BM25 считает поисковый движок — Elasticsearch и OpenSearch используют его по умолчанию, в Python для экспериментов есть <code>rank_bm25</code> и <code>bm25s</code>.</p>
+<h2 id="поля-и-бусты">Поля и бусты</h2>
+<p>Документ обычно состоит из полей: заголовок, описание, категория, бренд. Совпадение в заголовке важнее, чем в описании, поэтому считают BM25 по каждому полю отдельно и складывают с весами (или используют BM25F, где частоты взвешиваются до насыщения). Сверху добавляют бусты за свежесть, популярность и наличие товара.</p>
+<h2 id="ограничения-лексического-поиска">Ограничения лексического поиска</h2>
+<ul>
+<li><strong>Словарный разрыв.</strong> Запрос «ноутбук» не найдёт документ, где написано только «лэптоп». Частично помогают синонимы и расширение запроса.</li>
+<li><strong>Опечатки.</strong> Нужны отдельные механизмы: исправление по расстоянию Левенштейна, n-граммы символов.</li>
+<li><strong>Нет понимания смысла.</strong> «Фильмы, похожие на Интерстеллар» — для BM25 просто набор слов.</li>
+</ul>
+<p>Часть ограничений снимается обработкой запроса ещё до похода в индекс: исправление опечаток, синонимы, переписывание запроса — см. <a href="/edufamcs-demo/handbook/retrieval/ponimanie-zaprosa/" rel="noopener noreferrer nofollow">понимание запроса</a>. Остальное закрывает плотный поиск на эмбеддингах, но лучшие результаты почти всегда даёт сочетание — <a href="/edufamcs-demo/handbook/retrieval/plotnyj-i-gibridnyj-poisk/" rel="noopener noreferrer nofollow">плотный и гибридный поиск</a>. Идея «веса термов, но выученные» развита в SPLADE: это обученный разреженный поиск на том же инвертированном индексе, см. <a href="/edufamcs-demo/handbook/retrieval/nejrosetevoe-ranzhirovanie/" rel="noopener noreferrer nofollow">нейросетевое ранжирование</a>. Как измерять, стало ли лучше, — в статье <a href="/edufamcs-demo/handbook/retrieval/ocenka-kachestva-poiska/" rel="noopener noreferrer nofollow">оценка качества поиска</a>.</p>
+<h2 id="что-почитать">Что почитать</h2>
+<ul>
+<li>Robertson S., Zaragoza H. The Probabilistic Relevance Framework: BM25 and Beyond, 2009 — стандартный обзор: https://www.staff.city.ac.uk/~sbrp622/papers/foundations_bm25_review.pdf</li>
+<li>Manning C., Raghavan P., Schütze H. Introduction to Information Retrieval, 2008, главы 1, 5, 6 — индекс, сжатие, TF-IDF: https://nlp.stanford.edu/IR-book/</li>
+<li>Robertson S. et al. Okapi at TREC-3, 1994 — первая публикация BM25.</li>
+<li>Spärck Jones K. A Statistical Interpretation of Term Specificity and Its Application in Retrieval, Journal of Documentation, 1972 — откуда IDF.</li>
+<li>Robertson S., Zaragoza H., Taylor M. Simple BM25 Extension to Multiple Weighted Fields, CIKM 2004 — BM25F.</li>
+<li>Документация Elasticsearch, раздел Similarity module — параметры <span class="tex">k_1</span> и <span class="tex">b</span> на практике.</li>
+</ul>
+</div>
+      
+
+      
+      <nav class="pager" aria-label="Соседние статьи">
+        <i></i>
+        <a href="/edufamcs-demo/handbook/retrieval/ocenka-kachestva-poiska/"><span>Дальше<svg class="ico sm" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-arrow"/></svg></span>Оценка качества поиска</a>
+      </nav>
+      
+    </article>
+
+    <aside class="hb-toc" aria-label="На этой странице">
+      <a class="l2" href="#откуда-это-взялось">Откуда это взялось</a><a class="l2" href="#подготовка-текста">Подготовка текста</a><a class="l2" href="#инвертированный-индекс">Инвертированный индекс</a><a class="l2" href="#от-tf-idf-к-bm25">От TF-IDF к BM25</a><a class="l3" href="#откуда-берётся-idf">Откуда берётся IDF</a><a class="l3" href="#пример-на-числах">Пример на числах</a><a class="l2" href="#поля-и-бусты">Поля и бусты</a><a class="l2" href="#ограничения-лексического-поиска">Ограничения лексического поиска</a><a class="l2" href="#что-почитать">Что почитать</a>
+    </aside>
+  </div>
+</div>
+
+
+</main>
+
+<footer class="ftr" data-theme="dark">
+  <svg class="sym fern" viewBox="0 0 40.5 65.02" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#fern"/></svg>
+  <div class="container">
+    <div class="ftr-row">
+      <a href="/edufamcs-demo/" aria-label="EDU FAMCS — главная"><img src="/edufamcs-demo/static/brand/logo/logo-edu-dark.svg" alt="EDU FAMCS" width="196" height="40"></a>
+      <ul class="ftr-links">
+        <li><a href="/edufamcs-demo/#courses">Курсы</a></li>
+        <li><a href="/edufamcs-demo/ml/">Машинное обучение</a></li>
+        <li><a href="/edufamcs-demo/handbook/">Хендбук</a></li>
+        <li><a href="/edufamcs-demo/news/">Новости</a></li>
+        <li><a href="/edufamcs-demo/people/">Авторы</a></li>
+        <li><a href="/edufamcs-demo/about/">О&nbsp;нас</a></li>
+        <li><a href="/edufamcs-demo/propose/">Предложить или исправить</a></li>
+        <li><a href="/edufamcs-demo/privacy/">Конфиденциальность</a></li>
+      </ul>
+    </div>
+    <div class="ftr-big" aria-hidden="true">EDU<span class="d">·</span>FAMCS</div>
+    <p class="ftr-copy">© 2026 EDU FAMCS · Минск</p>
+  </div>
+</footer>
+
+<div class="toasts-region" aria-live="polite" id="toasts">
+
+</div>
+
+</body>
+</html>

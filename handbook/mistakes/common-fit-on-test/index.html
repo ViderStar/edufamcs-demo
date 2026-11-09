@@ -1,0 +1,199 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Преобразование обучено на тестовой выборке · EDU FAMCS</title>
+<meta name="description" content="Преобразование обучено на тестовой выборке — Типовые ошибки. Хендбук ML-курса ФПМИ.">
+<meta name="theme-color" content="#060A16">
+<meta name="robots" content="noindex, nofollow">
+<meta name="htmx-config" content='{"allowEval":false,"includeIndicatorStyles":false,"historyCacheSize":0,"selfRequestsOnly":true}'>
+<meta name="katex-js" content="/edufamcs-demo/static/vendor/katex/katex.min.js">
+<meta name="katex-css" content="/edufamcs-demo/static/vendor/katex/katex.min.css">
+<link rel="icon" href="/edufamcs-demo/static/brand/logo/favicon-16.svg" type="image/svg+xml" sizes="16x16">
+<link rel="icon" href="/edufamcs-demo/static/brand/logo/favicon.svg" type="image/svg+xml" sizes="any">
+<link rel="preload" href="/edufamcs-demo/static/brand/fonts/manrope-cyrillic-400.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/edufamcs-demo/static/brand/fonts/unbounded-cyrillic-800.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="/edufamcs-demo/static/brand/fonts.css">
+<link rel="stylesheet" href="/edufamcs-demo/static/brand/tokens.css">
+<link rel="stylesheet" href="/edufamcs-demo/static/brand/components.css">
+<link rel="stylesheet" href="/edufamcs-demo/static/css/site.css">
+<link rel="stylesheet" href="/edufamcs-demo/static/css/hub.css">
+<link rel="stylesheet" href="/edufamcs-demo/static/css/about.css">
+<link rel="stylesheet" href="/edufamcs-demo/static/handbook/handbook.css">
+<script src="/edufamcs-demo/static/js/theme.js"></script>
+<script src="/edufamcs-demo/static/vendor/htmx/htmx.min.js" defer></script>
+<script src="/edufamcs-demo/static/vendor/alpine/alpine-csp.min.js" defer></script>
+<script src="/edufamcs-demo/static/js/site.js" defer></script>
+<script src="/edufamcs-demo/static/handbook/handbook.js" defer></script>
+</head>
+<body class="" hx-headers='{"X-CSRFToken": "jRN0EAaVjgSFGFroRZjxGXZCU6ipSFSoIBm4oyXie7gOVeC7oc2FDsvHsOoUqPA8"}'>
+<a class="skip" href="#main">К содержанию</a>
+<div class="demo-bar" role="note">Демо-версия для отзывов: вход, запись на курсы и формы здесь не работают.</div>
+
+<header class="hdr">
+  <div class="container">
+    <a class="brand" href="/edufamcs-demo/" aria-label="EDU FAMCS — главная">
+      <span class="full"><img class="only-light" src="/edufamcs-demo/static/brand/logo/logo-edu-light.svg" alt="EDU FAMCS" width="196" height="40"><img class="only-dark" src="/edufamcs-demo/static/brand/logo/logo-edu-dark.svg" alt="EDU FAMCS" width="196" height="40"></span>
+      <span class="short"><img class="only-light" src="/edufamcs-demo/static/brand/logo/logo-edu-light.svg" alt="EDU FAMCS" height="30"><img class="only-dark" src="/edufamcs-demo/static/brand/logo/logo-edu-dark.svg" alt="EDU FAMCS" height="30"></span>
+    </a>
+    <nav class="nav" id="main-nav" aria-label="Основная навигация">
+      <a href="/edufamcs-demo/#courses">Курсы</a>
+      <a href="/edufamcs-demo/ml/" >Машинное обучение</a>
+      
+      <a href="/edufamcs-demo/handbook/" aria-current="page">Хендбук</a>
+      <a href="/edufamcs-demo/news/" >Новости</a>
+      <a href="/edufamcs-demo/people/" >Авторы</a>
+      <a href="/edufamcs-demo/about/" >О&nbsp;нас</a>
+    </nav>
+    <div class="hdr-actions">
+      
+      <a class="btn btn-outline btn-login" href="/edufamcs-demo/accounts/login/?next=/handbook/mistakes/common-fit-on-test/">Войти</a>
+      
+      <button class="icon-btn menu-btn" type="button" aria-label="Меню" aria-expanded="false" aria-controls="main-nav"><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-menu"/></svg></button>
+    </div>
+  </div>
+</header>
+
+<main id="main">
+
+
+
+<div class="container hb-page hb-tone hb-notoc">
+  <div class="hb">
+    <aside class="hb-nav" aria-label="Статьи раздела">
+      
+<form class="hb-search" action="/edufamcs-demo/handbook/search/" method="get" role="search">
+  <svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-search"/></svg>
+  <input class="input" type="search" name="q" value="" placeholder="Поиск по хендбуку" aria-label="Поиск по хендбуку" autocomplete="off" maxlength="120"
+    hx-get="/edufamcs-demo/handbook/search/" hx-trigger="input changed delay:250ms, search" hx-target="#hb-nav-results" hx-sync="this:replace">
+</form>
+
+      <div id="hb-nav-results" class="hb-nav-results" aria-live="polite"></div>
+      <a class="grp" href="/edufamcs-demo/handbook/mistakes/">Общие ошибки</a>
+      
+      <a class="" href="/edufamcs-demo/handbook/mistakes/common-show-without-call/">plt.show написан без скобок</a>
+      
+      <a class="" href="/edufamcs-demo/handbook/mistakes/common-absolute-path/">Абсолютный путь к данным</a>
+      
+      <a class="" href="/edufamcs-demo/handbook/mistakes/common-nothing-done/">В ноутбуке нет заполненного кода</a>
+      
+      <a class="" href="/edufamcs-demo/handbook/mistakes/common-secret-in-repo/">В репозитории лежит ключ доступа</a>
+      
+      <a class="" href="/edufamcs-demo/handbook/mistakes/common-no-own-conclusions/">Весь текст в работе — из шаблона</a>
+      
+      <a class="" href="/edufamcs-demo/handbook/mistakes/common-conclusions-in-code-comments/">Выводы написаны комментариями в ячейке кода</a>
+      
+      <a class="" href="/edufamcs-demo/handbook/mistakes/common-text-contradicts-output/">Выводы расходятся с результатами в ноутбуке</a>
+      
+      <a class="" href="/edufamcs-demo/handbook/mistakes/common-no-effect-call/">Вызов не меняет данные и результат не сохраняется</a>
+      
+      <a class="" href="/edufamcs-demo/handbook/mistakes/common-no-seed/">Не зафиксирован seed</a>
+      
+      <a class="" href="/edufamcs-demo/handbook/mistakes/common-no-conclusions/">Нет текстовых выводов</a>
+      
+      <a class="" href="/edufamcs-demo/handbook/mistakes/common-execution-out-of-order/">Ноутбук не выполняется сверху вниз</a>
+      
+      <a class="" href="/edufamcs-demo/handbook/mistakes/common-undefined-name/">Ноутбук не запустится с нуля: имя нигде не определено</a>
+      
+      <a class="" href="/edufamcs-demo/handbook/mistakes/common-notebook-unreadable/">Ноутбук не открывается</a>
+      
+      <a class="" href="/edufamcs-demo/handbook/mistakes/common-error-output/">Ноутбук падает с ошибкой</a>
+      
+      <a class="" href="/edufamcs-demo/handbook/mistakes/common-not-executed/">Ноутбук сохранён без запуска</a>
+      
+      <a class="" href="/edufamcs-demo/handbook/mistakes/common-blank-template-cells/">Остались незаполненные ячейки задания</a>
+      
+      <a class="" href="/edufamcs-demo/handbook/mistakes/common-prompt-injection-attempt/">Попытка обмануть автоматическую проверку</a>
+      
+      <a class="" href="/edufamcs-demo/handbook/mistakes/common-warnings-suppressed/">Предупреждения отключены глобально</a>
+      
+      <a class="" href="/edufamcs-demo/handbook/mistakes/common-fit-before-split/">Преобразование обучено до разделения выборки</a>
+      
+      <a class="cur" href="/edufamcs-demo/handbook/mistakes/common-fit-on-test/" aria-current="page">Преобразование обучено на тестовой выборке</a>
+      
+      <a class="" href="/edufamcs-demo/handbook/mistakes/common-split-without-seed/">Разбиение выборки не зафиксировано</a>
+      
+      <a class="" href="/edufamcs-demo/handbook/mistakes/common-partially-executed/">Часть ячеек не выполнена</a>
+      
+    </aside>
+
+    <article class="hb-main">
+      <nav class="crumbs" aria-label="Навигация"><a href="/edufamcs-demo/handbook/">Хендбук</a><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-chev"/></svg><a href="/edufamcs-demo/handbook/mistakes/">Типовые ошибки</a></nav>
+      <h1 class="h1">Преобразование обучено на тестовой выборке</h1>
+      <div class="hb-meta">
+        
+        <span class="badge err dot">критично</span>
+        <span><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-clock"/></svg>1&nbsp;мин</span>
+        
+        <span><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-edit"/></svg>9 ноября 2026</span>
+        <a class="hb-src" href="https://github.com/ScienceSUFAMCS/science-famcs-ml/blob/main/season_2/%D0%A2%D0%B8%D0%BF%D0%BE%D0%B2%D1%8B%D0%B5_%D0%BE%D1%88%D0%B8%D0%B1%D0%BA%D0%B8/common/fit_on_test.md" rel="noopener" target="_blank"><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-github"/></svg>Источник</a>
+        
+      </div>
+
+      
+
+      <div class="prose"><p><strong>Что не так.</strong> На тесте вызван <code>fit</code> или <code>fit_transform</code> вместо <code>transform</code>.
+Типовая строка: <code>X_test_scaled = scaler.fit_transform(X_test)</code>.</p>
+<p><strong>Почему это важно.</strong> Тест перестаёт быть тестом. Признаки теста
+масштабируются по его собственным среднему и дисперсии, то есть модель
+получает данные в другой системе координат, чем при обучении, — и одновременно
+вы используете статистику теста, которую в реальности знать не могли. Оценка
+качества становится недостоверной в обе стороны.</p>
+<p><strong>Как надо.</strong> На тесте — только <code>transform</code>, объект уже обучен на train:</p>
+<div class="code"><div class="code-head"><span class="lang">python</span></div><pre><code>scaler <span class="tok-p">=</span> StandardScaler<span class="tok-p">(</span><span class="tok-p">)</span>
+X_train_scaled <span class="tok-p">=</span> scaler<span class="tok-p">.</span>fit_transform<span class="tok-p">(</span>X_train<span class="tok-p">)</span>
+X_test_scaled <span class="tok-p">=</span> scaler<span class="tok-p">.</span>transform<span class="tok-p">(</span>X_test<span class="tok-p">)</span>     <span class="tok-c"># без fit</span>
+</code></pre></div>
+<p><strong>Почитать:</strong></p>
+<ul>
+<li><a href="https://education.yandex.ru/handbook/ml/article/kross-validaciya" rel="noopener noreferrer nofollow">Кросс-валидация</a></li>
+<li><a href="https://scikit-learn.org/stable/common_pitfalls.html#data-leakage" rel="noopener noreferrer nofollow">sklearn: Pipeline и утечки</a></li>
+</ul>
+</div>
+      
+
+      
+      <nav class="pager" aria-label="Соседние статьи">
+        <a href="/edufamcs-demo/handbook/mistakes/common-fit-before-split/"><span><svg class="ico sm" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-arrow-left"/></svg>Назад</span>Преобразование обучено до разделения выборки</a>
+        <a href="/edufamcs-demo/handbook/mistakes/common-split-without-seed/"><span>Дальше<svg class="ico sm" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-arrow"/></svg></span>Разбиение выборки не зафиксировано</a>
+      </nav>
+      
+    </article>
+
+    <aside class="hb-toc" aria-label="На этой странице">
+      
+    </aside>
+  </div>
+</div>
+
+
+</main>
+
+<footer class="ftr" data-theme="dark">
+  <svg class="sym fern" viewBox="0 0 40.5 65.02" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#fern"/></svg>
+  <div class="container">
+    <div class="ftr-row">
+      <a href="/edufamcs-demo/" aria-label="EDU FAMCS — главная"><img src="/edufamcs-demo/static/brand/logo/logo-edu-dark.svg" alt="EDU FAMCS" width="196" height="40"></a>
+      <ul class="ftr-links">
+        <li><a href="/edufamcs-demo/#courses">Курсы</a></li>
+        <li><a href="/edufamcs-demo/ml/">Машинное обучение</a></li>
+        <li><a href="/edufamcs-demo/handbook/">Хендбук</a></li>
+        <li><a href="/edufamcs-demo/news/">Новости</a></li>
+        <li><a href="/edufamcs-demo/people/">Авторы</a></li>
+        <li><a href="/edufamcs-demo/about/">О&nbsp;нас</a></li>
+        <li><a href="/edufamcs-demo/propose/">Предложить или исправить</a></li>
+        <li><a href="/edufamcs-demo/privacy/">Конфиденциальность</a></li>
+      </ul>
+    </div>
+    <div class="ftr-big" aria-hidden="true">EDU<span class="d">·</span>FAMCS</div>
+    <p class="ftr-copy">© 2026 EDU FAMCS · Минск</p>
+  </div>
+</footer>
+
+<div class="toasts-region" aria-live="polite" id="toasts">
+
+</div>
+
+</body>
+</html>

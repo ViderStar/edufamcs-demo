@@ -1,0 +1,39 @@
+/* Certificates: verify page states and the learner's certificate cards. Tokens only. */
+
+/* Verify */
+.cv{border-radius:var(--r-xl);border:1px solid var(--line);box-shadow:var(--e-2)}
+.cv .verify-card .h2{color:var(--heading)}
+.cv-name{margin-top:10px;font:800 clamp(22px,4.2vw,30px)/1.15 var(--font-sans);letter-spacing:-.02em;color:var(--text);text-wrap:balance}
+.cv-streams{display:flex;flex-wrap:wrap;gap:6px}
+.cv-streams .badge{height:auto;min-height:24px;white-space:normal;padding-block:3px}
+.cv.is-revoked{background:radial-gradient(60% 60% at 50% 0%,var(--err-soft),transparent 70%),var(--surface)}
+.cv.is-revoked .shield{background:var(--err);box-shadow:0 0 0 8px var(--err-soft)}
+.cv.is-revoked .kv dd{color:var(--muted)}
+.cv .cert-thumb div{display:flex;align-items:center}
+@media (max-width:480px){.cv .kv{grid-template-columns:1fr;gap:2px}.cv .kv dd{margin-bottom:10px}}
+
+/* My certificates */
+.cert-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,340px),1fr));gap:clamp(18px,3vw,28px)}
+.cert-card{display:flex;flex-direction:column;gap:14px}
+.cert-sheet{position:relative;display:grid;grid-template-columns:1fr 31%;aspect-ratio:297/210;padding:3.2%;border-radius:var(--r-lg);
+  background:var(--paper);border:1px solid var(--line);box-shadow:var(--e-2);overflow:hidden;text-decoration:none;color:var(--ink);
+  transition:transform .2s ease,box-shadow .2s ease}
+.cert-sheet:hover{transform:translateY(-3px)}
+.cs-paper{position:relative;display:flex;flex-direction:column;justify-content:center;gap:6px;padding:0 8% 0 11%;min-width:0}
+.cs-paper::before{content:"";position:absolute;left:0;top:0;bottom:0;width:3.4%;min-width:4px;border-radius:99px;background:var(--orange)}
+.cs-title{font:800 clamp(16px,4.6vw,22px)/1 var(--font-display);letter-spacing:-.035em;color:var(--bsu-navy)}
+.cs-name{font:800 clamp(13px,3.4vw,16px)/1.15 var(--font-sans);letter-spacing:-.02em;color:var(--ink);margin-top:6px;
+  display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+.cs-streams{display:flex;flex-wrap:wrap;gap:4px 10px;margin-top:4px}
+.cs-stream{display:inline-flex;align-items:center;gap:5px;font:700 11px/1.3 var(--font-sans);color:var(--stream,var(--bsu-navy))}
+.cs-stream::before{content:"";width:6px;height:6px;border-radius:50%;background:currentColor;flex:none}
+.cs-night{position:relative;display:grid;place-items:center;border-radius:calc(var(--r-lg) - 6px);background:var(--mesh-night);overflow:hidden;isolation:isolate}
+.cs-night::before{content:"";position:absolute;inset:0;z-index:-1;background:var(--grain);opacity:.12;mix-blend-mode:overlay}
+.cs-night img{width:66%;height:auto}
+.cs-stamp{position:absolute;left:34%;top:50%;transform:translate(-50%,-50%) rotate(-12deg);padding:4px 12px;border:2px solid var(--err);border-radius:8px;
+  font:800 14px/1 var(--font-display);letter-spacing:.06em;text-transform:uppercase;color:var(--err);background:var(--paper)}
+.cert-card.is-revoked .cs-paper,.cert-card.is-revoked .cs-night{filter:grayscale(.85);opacity:.75}
+.cert-meta{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:10px 16px}
+.cert-meta b{display:block;color:var(--text);font-size:15px;line-height:1.3}
+.cert-meta span{color:var(--muted);font-size:14px}
+.cert-meta .row{display:flex;gap:8px;flex-wrap:wrap}

@@ -1,0 +1,533 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Рекомендательные системы и поиск · EDU FAMCS</title>
+<meta name="description" content="История рекомендаций и поиска от классики до генеративных моделей 2025–2026. В своём темпе, глава за главой.">
+<meta name="theme-color" content="#060A16">
+<meta name="robots" content="noindex, nofollow">
+<meta name="htmx-config" content='{"allowEval":false,"includeIndicatorStyles":false,"historyCacheSize":0,"selfRequestsOnly":true}'>
+<meta name="katex-js" content="/edufamcs-demo/static/vendor/katex/katex.min.js">
+<meta name="katex-css" content="/edufamcs-demo/static/vendor/katex/katex.min.css">
+<link rel="icon" href="/edufamcs-demo/static/brand/logo/favicon-16.svg" type="image/svg+xml" sizes="16x16">
+<link rel="icon" href="/edufamcs-demo/static/brand/logo/favicon.svg" type="image/svg+xml" sizes="any">
+<link rel="preload" href="/edufamcs-demo/static/brand/fonts/manrope-cyrillic-400.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/edufamcs-demo/static/brand/fonts/unbounded-cyrillic-800.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="/edufamcs-demo/static/brand/fonts.css">
+<link rel="stylesheet" href="/edufamcs-demo/static/brand/tokens.css">
+<link rel="stylesheet" href="/edufamcs-demo/static/brand/components.css">
+<link rel="stylesheet" href="/edufamcs-demo/static/css/site.css">
+<link rel="stylesheet" href="/edufamcs-demo/static/css/hub.css">
+<link rel="stylesheet" href="/edufamcs-demo/static/css/about.css">
+<link rel="stylesheet" href="/edufamcs-demo/static/courses/courses.css">
+<script src="/edufamcs-demo/static/js/theme.js"></script>
+<script src="/edufamcs-demo/static/vendor/htmx/htmx.min.js" defer></script>
+<script src="/edufamcs-demo/static/vendor/alpine/alpine-csp.min.js" defer></script>
+<script src="/edufamcs-demo/static/js/site.js" defer></script>
+
+</head>
+<body class="" hx-headers='{"X-CSRFToken": "PoAlizJOnMUo6jWzqD9UllZ7jl9YD2t8e89p2xwbiDixlS7iXQS2iQvcR3ftbcbS"}'>
+<a class="skip" href="#main">К содержанию</a>
+<div class="demo-bar" role="note">Демо-версия для отзывов: вход, запись на курсы и формы здесь не работают.</div>
+
+<header class="hdr">
+  <div class="container">
+    <a class="brand" href="/edufamcs-demo/" aria-label="EDU FAMCS — главная">
+      <span class="full"><img class="only-light" src="/edufamcs-demo/static/brand/logo/logo-edu-light.svg" alt="EDU FAMCS" width="196" height="40"><img class="only-dark" src="/edufamcs-demo/static/brand/logo/logo-edu-dark.svg" alt="EDU FAMCS" width="196" height="40"></span>
+      <span class="short"><img class="only-light" src="/edufamcs-demo/static/brand/logo/logo-edu-light.svg" alt="EDU FAMCS" height="30"><img class="only-dark" src="/edufamcs-demo/static/brand/logo/logo-edu-dark.svg" alt="EDU FAMCS" height="30"></span>
+    </a>
+    <nav class="nav" id="main-nav" aria-label="Основная навигация">
+      <a href="/edufamcs-demo/#courses">Курсы</a>
+      <a href="/edufamcs-demo/ml/" >Машинное обучение</a>
+      
+      <a href="/edufamcs-demo/handbook/" >Хендбук</a>
+      <a href="/edufamcs-demo/news/" >Новости</a>
+      <a href="/edufamcs-demo/people/" >Авторы</a>
+      <a href="/edufamcs-demo/about/" >О&nbsp;нас</a>
+    </nav>
+    <div class="hdr-actions">
+      
+      <a class="btn btn-outline btn-login" href="/edufamcs-demo/accounts/login/?next=/courses/recsys-search/">Войти</a>
+      
+      <button class="icon-btn menu-btn" type="button" aria-label="Меню" aria-expanded="false" aria-controls="main-nav"><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-menu"/></svg></button>
+    </div>
+  </div>
+</header>
+
+<main id="main">
+
+
+<div class="container hero-wrap">
+  <section class="chero" data-theme="dark" aria-labelledby="course-t">
+    <svg class="sym hero-fern" viewBox="0 0 40.5 65.02" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#fern"/></svg>
+    <div>
+      <h1 id="course-t" class="display-xl">Рекомендательные системы и поиск</h1>
+      <p class="lead">История рекомендаций и поиска от классики до генеративных моделей 2025–2026. В своём темпе, глава за главой.</p>
+      
+      <div class="hero-cta">
+        
+          <a class="btn btn-primary btn-lg" href="/edufamcs-demo/accounts/login/?next=/courses/recsys-search/">Войти и&nbsp;записаться<svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-arrow"/></svg></a>
+        
+      </div>
+      <div class="stats">
+        <div class="stat"><b>8</b><span>модулей</span></div>
+        <div class="stat"><b>27</b><span>уроков</span></div>
+        
+      </div>
+    </div>
+    <div class="chero-art" aria-hidden="true">
+      <div class="ring r3"></div><div class="ring"></div><div class="ring r2"></div>
+      <div class="seal-glow"></div><img class="seal" src="/edufamcs-demo/static/brand/logo/raccoon-seal-blue.svg" alt="">
+    </div>
+  </section>
+</div>
+
+
+<div class="container page pt0">
+  <div class="mods">
+    
+    
+    <section class="mod s-recsys" id="m-recsys-1" aria-labelledby="mt-11">
+      <div class="mod-h">
+        <div class="mod-art"><span class="idx">01</span><svg class="art" viewBox="0 0 220 120" aria-hidden="true"><g fill="currentColor" opacity=".16"><rect x="3" y="3" width="14" height="14" rx="4"/><rect x="23" y="3" width="14" height="14" rx="4"/><rect x="63" y="3" width="14" height="14" rx="4"/><rect x="83" y="3" width="14" height="14" rx="4"/><rect x="103" y="3" width="14" height="14" rx="4"/><rect x="143" y="3" width="14" height="14" rx="4"/><rect x="163" y="3" width="14" height="14" rx="4"/><rect x="183" y="3" width="14" height="14" rx="4"/><rect x="203" y="3" width="14" height="14" rx="4"/><rect x="3" y="23" width="14" height="14" rx="4"/><rect x="23" y="23" width="14" height="14" rx="4"/><rect x="43" y="23" width="14" height="14" rx="4"/><rect x="63" y="23" width="14" height="14" rx="4"/><rect x="83" y="23" width="14" height="14" rx="4"/><rect x="103" y="23" width="14" height="14" rx="4"/><rect x="143" y="23" width="14" height="14" rx="4"/><rect x="163" y="23" width="14" height="14" rx="4"/><rect x="183" y="23" width="14" height="14" rx="4"/><rect x="203" y="23" width="14" height="14" rx="4"/><rect x="3" y="43" width="14" height="14" rx="4"/><rect x="43" y="43" width="14" height="14" rx="4"/><rect x="63" y="43" width="14" height="14" rx="4"/><rect x="83" y="43" width="14" height="14" rx="4"/><rect x="103" y="43" width="14" height="14" rx="4"/><rect x="123" y="43" width="14" height="14" rx="4"/><rect x="143" y="43" width="14" height="14" rx="4"/><rect x="183" y="43" width="14" height="14" rx="4"/><rect x="203" y="43" width="14" height="14" rx="4"/><rect x="3" y="63" width="14" height="14" rx="4"/><rect x="23" y="63" width="14" height="14" rx="4"/><rect x="63" y="63" width="14" height="14" rx="4"/><rect x="103" y="63" width="14" height="14" rx="4"/><rect x="123" y="63" width="14" height="14" rx="4"/><rect x="163" y="63" width="14" height="14" rx="4"/><rect x="183" y="63" width="14" height="14" rx="4"/><rect x="203" y="63" width="14" height="14" rx="4"/><rect x="3" y="83" width="14" height="14" rx="4"/><rect x="23" y="83" width="14" height="14" rx="4"/><rect x="43" y="83" width="14" height="14" rx="4"/><rect x="63" y="83" width="14" height="14" rx="4"/><rect x="83" y="83" width="14" height="14" rx="4"/><rect x="103" y="83" width="14" height="14" rx="4"/><rect x="123" y="83" width="14" height="14" rx="4"/><rect x="143" y="83" width="14" height="14" rx="4"/><rect x="163" y="83" width="14" height="14" rx="4"/><rect x="203" y="83" width="14" height="14" rx="4"/><rect x="3" y="103" width="14" height="14" rx="4"/><rect x="23" y="103" width="14" height="14" rx="4"/><rect x="43" y="103" width="14" height="14" rx="4"/><rect x="83" y="103" width="14" height="14" rx="4"/><rect x="103" y="103" width="14" height="14" rx="4"/><rect x="123" y="103" width="14" height="14" rx="4"/><rect x="143" y="103" width="14" height="14" rx="4"/><rect x="163" y="103" width="14" height="14" rx="4"/><rect x="183" y="103" width="14" height="14" rx="4"/><rect x="203" y="103" width="14" height="14" rx="4"/></g><g fill="currentColor"><rect x="43" y="3" width="14" height="14" rx="4"/><rect x="123" y="23" width="14" height="14" rx="4"/><rect x="23" y="43" width="14" height="14" rx="4"/><rect x="163" y="43" width="14" height="14" rx="4"/><rect x="83" y="63" width="14" height="14" rx="4"/><rect x="183" y="83" width="14" height="14" rx="4"/><rect x="63" y="103" width="14" height="14" rx="4"/></g><rect x="1" y="61" width="218" height="18" rx="6" fill="none" stroke="currentColor" stroke-width="1.5"/><g fill="var(--accent)"><rect x="143" y="63" width="14" height="14" rx="4"/><rect x="43" y="63" width="14" height="14" rx="4" opacity=".55"/></g></svg>
+</div>
+        <div class="mod-b">
+          <h2 class="h3" id="mt-11">Постановка и оценка</h2>
+          <div class="row">
+            
+            <span class="badge">2&nbsp;урока</span>
+            
+          </div>
+        </div>
+        
+      </div>
+      <ol class="lsns">
+        
+        <li>
+          <a class="lsn" href="/edufamcs-demo/courses/recsys-search/recsys-1/zadacha-i-dannye/">
+            <span class="mk">1</span>
+            
+            <span class="t">Задача рекомендаций и данные</span>
+            
+          </a>
+        </li>
+        
+        <li>
+          <a class="lsn" href="/edufamcs-demo/courses/recsys-search/recsys-1/oflajn-metriki/">
+            <span class="mk">2</span>
+            
+            <span class="t">Офлайн-метрики: Precision@k, Recall@k, MAP, NDCG</span>
+            
+          </a>
+        </li>
+        
+      </ol>
+    </section>
+    
+    
+    
+    <section class="mod s-recsys" id="m-recsys-2" aria-labelledby="mt-12">
+      <div class="mod-h">
+        <div class="mod-art"><span class="idx">02</span><svg class="art" viewBox="0 0 220 120" aria-hidden="true"><g fill="currentColor" opacity=".16"><rect x="3" y="3" width="14" height="14" rx="4"/><rect x="23" y="3" width="14" height="14" rx="4"/><rect x="63" y="3" width="14" height="14" rx="4"/><rect x="83" y="3" width="14" height="14" rx="4"/><rect x="103" y="3" width="14" height="14" rx="4"/><rect x="143" y="3" width="14" height="14" rx="4"/><rect x="163" y="3" width="14" height="14" rx="4"/><rect x="183" y="3" width="14" height="14" rx="4"/><rect x="203" y="3" width="14" height="14" rx="4"/><rect x="3" y="23" width="14" height="14" rx="4"/><rect x="23" y="23" width="14" height="14" rx="4"/><rect x="43" y="23" width="14" height="14" rx="4"/><rect x="63" y="23" width="14" height="14" rx="4"/><rect x="83" y="23" width="14" height="14" rx="4"/><rect x="103" y="23" width="14" height="14" rx="4"/><rect x="143" y="23" width="14" height="14" rx="4"/><rect x="163" y="23" width="14" height="14" rx="4"/><rect x="183" y="23" width="14" height="14" rx="4"/><rect x="203" y="23" width="14" height="14" rx="4"/><rect x="3" y="43" width="14" height="14" rx="4"/><rect x="43" y="43" width="14" height="14" rx="4"/><rect x="63" y="43" width="14" height="14" rx="4"/><rect x="83" y="43" width="14" height="14" rx="4"/><rect x="103" y="43" width="14" height="14" rx="4"/><rect x="123" y="43" width="14" height="14" rx="4"/><rect x="143" y="43" width="14" height="14" rx="4"/><rect x="183" y="43" width="14" height="14" rx="4"/><rect x="203" y="43" width="14" height="14" rx="4"/><rect x="3" y="63" width="14" height="14" rx="4"/><rect x="23" y="63" width="14" height="14" rx="4"/><rect x="63" y="63" width="14" height="14" rx="4"/><rect x="103" y="63" width="14" height="14" rx="4"/><rect x="123" y="63" width="14" height="14" rx="4"/><rect x="163" y="63" width="14" height="14" rx="4"/><rect x="183" y="63" width="14" height="14" rx="4"/><rect x="203" y="63" width="14" height="14" rx="4"/><rect x="3" y="83" width="14" height="14" rx="4"/><rect x="23" y="83" width="14" height="14" rx="4"/><rect x="43" y="83" width="14" height="14" rx="4"/><rect x="63" y="83" width="14" height="14" rx="4"/><rect x="83" y="83" width="14" height="14" rx="4"/><rect x="103" y="83" width="14" height="14" rx="4"/><rect x="123" y="83" width="14" height="14" rx="4"/><rect x="143" y="83" width="14" height="14" rx="4"/><rect x="163" y="83" width="14" height="14" rx="4"/><rect x="203" y="83" width="14" height="14" rx="4"/><rect x="3" y="103" width="14" height="14" rx="4"/><rect x="23" y="103" width="14" height="14" rx="4"/><rect x="43" y="103" width="14" height="14" rx="4"/><rect x="83" y="103" width="14" height="14" rx="4"/><rect x="103" y="103" width="14" height="14" rx="4"/><rect x="123" y="103" width="14" height="14" rx="4"/><rect x="143" y="103" width="14" height="14" rx="4"/><rect x="163" y="103" width="14" height="14" rx="4"/><rect x="183" y="103" width="14" height="14" rx="4"/><rect x="203" y="103" width="14" height="14" rx="4"/></g><g fill="currentColor"><rect x="43" y="3" width="14" height="14" rx="4"/><rect x="123" y="23" width="14" height="14" rx="4"/><rect x="23" y="43" width="14" height="14" rx="4"/><rect x="163" y="43" width="14" height="14" rx="4"/><rect x="83" y="63" width="14" height="14" rx="4"/><rect x="183" y="83" width="14" height="14" rx="4"/><rect x="63" y="103" width="14" height="14" rx="4"/></g><rect x="1" y="61" width="218" height="18" rx="6" fill="none" stroke="currentColor" stroke-width="1.5"/><g fill="var(--accent)"><rect x="143" y="63" width="14" height="14" rx="4"/><rect x="43" y="63" width="14" height="14" rx="4" opacity=".55"/></g></svg>
+</div>
+        <div class="mod-b">
+          <h2 class="h3" id="mt-12">Классика: 1992–2012</h2>
+          <div class="row">
+            
+            <span class="badge">4&nbsp;урока</span>
+            
+          </div>
+        </div>
+        
+      </div>
+      <ol class="lsns">
+        
+        <li>
+          <a class="lsn" href="/edufamcs-demo/courses/recsys-search/recsys-2/nepersonalnye-i-kontentnye/">
+            <span class="mk">1</span>
+            
+            <span class="t">Неперсонализированные и контентные рекомендации</span>
+            
+          </a>
+        </li>
+        
+        <li>
+          <a class="lsn" href="/edufamcs-demo/courses/recsys-search/recsys-2/kollaborativnaya-filtraciya-po-sosedyam/">
+            <span class="mk">2</span>
+            
+            <span class="t">Коллаборативная фильтрация по соседям</span>
+            
+          </a>
+        </li>
+        
+        <li>
+          <a class="lsn" href="/edufamcs-demo/courses/recsys-search/recsys-2/matrichnye-razlozheniya-als/">
+            <span class="mk">3</span>
+            
+            <span class="t">Матричные разложения и ALS</span>
+            
+          </a>
+        </li>
+        
+        <li>
+          <a class="lsn" href="/edufamcs-demo/courses/recsys-search/recsys-2/neyavnyj-fidbek-bpr/">
+            <span class="mk">4</span>
+            
+            <span class="t">Неявный фидбэк: BPR, WARP и негативы</span>
+            
+          </a>
+        </li>
+        
+      </ol>
+    </section>
+    
+    
+    
+    <section class="mod s-recsys" id="m-recsys-3" aria-labelledby="mt-13">
+      <div class="mod-h">
+        <div class="mod-art"><span class="idx">03</span><svg class="art" viewBox="0 0 220 120" aria-hidden="true"><g fill="currentColor" opacity=".16"><rect x="3" y="3" width="14" height="14" rx="4"/><rect x="23" y="3" width="14" height="14" rx="4"/><rect x="63" y="3" width="14" height="14" rx="4"/><rect x="83" y="3" width="14" height="14" rx="4"/><rect x="103" y="3" width="14" height="14" rx="4"/><rect x="143" y="3" width="14" height="14" rx="4"/><rect x="163" y="3" width="14" height="14" rx="4"/><rect x="183" y="3" width="14" height="14" rx="4"/><rect x="203" y="3" width="14" height="14" rx="4"/><rect x="3" y="23" width="14" height="14" rx="4"/><rect x="23" y="23" width="14" height="14" rx="4"/><rect x="43" y="23" width="14" height="14" rx="4"/><rect x="63" y="23" width="14" height="14" rx="4"/><rect x="83" y="23" width="14" height="14" rx="4"/><rect x="103" y="23" width="14" height="14" rx="4"/><rect x="143" y="23" width="14" height="14" rx="4"/><rect x="163" y="23" width="14" height="14" rx="4"/><rect x="183" y="23" width="14" height="14" rx="4"/><rect x="203" y="23" width="14" height="14" rx="4"/><rect x="3" y="43" width="14" height="14" rx="4"/><rect x="43" y="43" width="14" height="14" rx="4"/><rect x="63" y="43" width="14" height="14" rx="4"/><rect x="83" y="43" width="14" height="14" rx="4"/><rect x="103" y="43" width="14" height="14" rx="4"/><rect x="123" y="43" width="14" height="14" rx="4"/><rect x="143" y="43" width="14" height="14" rx="4"/><rect x="183" y="43" width="14" height="14" rx="4"/><rect x="203" y="43" width="14" height="14" rx="4"/><rect x="3" y="63" width="14" height="14" rx="4"/><rect x="23" y="63" width="14" height="14" rx="4"/><rect x="63" y="63" width="14" height="14" rx="4"/><rect x="103" y="63" width="14" height="14" rx="4"/><rect x="123" y="63" width="14" height="14" rx="4"/><rect x="163" y="63" width="14" height="14" rx="4"/><rect x="183" y="63" width="14" height="14" rx="4"/><rect x="203" y="63" width="14" height="14" rx="4"/><rect x="3" y="83" width="14" height="14" rx="4"/><rect x="23" y="83" width="14" height="14" rx="4"/><rect x="43" y="83" width="14" height="14" rx="4"/><rect x="63" y="83" width="14" height="14" rx="4"/><rect x="83" y="83" width="14" height="14" rx="4"/><rect x="103" y="83" width="14" height="14" rx="4"/><rect x="123" y="83" width="14" height="14" rx="4"/><rect x="143" y="83" width="14" height="14" rx="4"/><rect x="163" y="83" width="14" height="14" rx="4"/><rect x="203" y="83" width="14" height="14" rx="4"/><rect x="3" y="103" width="14" height="14" rx="4"/><rect x="23" y="103" width="14" height="14" rx="4"/><rect x="43" y="103" width="14" height="14" rx="4"/><rect x="83" y="103" width="14" height="14" rx="4"/><rect x="103" y="103" width="14" height="14" rx="4"/><rect x="123" y="103" width="14" height="14" rx="4"/><rect x="143" y="103" width="14" height="14" rx="4"/><rect x="163" y="103" width="14" height="14" rx="4"/><rect x="183" y="103" width="14" height="14" rx="4"/><rect x="203" y="103" width="14" height="14" rx="4"/></g><g fill="currentColor"><rect x="43" y="3" width="14" height="14" rx="4"/><rect x="123" y="23" width="14" height="14" rx="4"/><rect x="23" y="43" width="14" height="14" rx="4"/><rect x="163" y="43" width="14" height="14" rx="4"/><rect x="83" y="63" width="14" height="14" rx="4"/><rect x="183" y="83" width="14" height="14" rx="4"/><rect x="63" y="103" width="14" height="14" rx="4"/></g><rect x="1" y="61" width="218" height="18" rx="6" fill="none" stroke="currentColor" stroke-width="1.5"/><g fill="var(--accent)"><rect x="143" y="63" width="14" height="14" rx="4"/><rect x="43" y="63" width="14" height="14" rx="4" opacity=".55"/></g></svg>
+</div>
+        <div class="mod-b">
+          <h2 class="h3" id="mt-13">Линейные и нейросетевые модели: 2011–2023</h2>
+          <div class="row">
+            
+            <span class="badge">5&nbsp;уроков</span>
+            
+          </div>
+        </div>
+        
+      </div>
+      <ol class="lsns">
+        
+        <li>
+          <a class="lsn" href="/edufamcs-demo/courses/recsys-search/recsys-3/slim-i-ease/">
+            <span class="mk">1</span>
+            
+            <span class="t">Линейные item-item модели: SLIM и EASE</span>
+            
+          </a>
+        </li>
+        
+        <li>
+          <a class="lsn" href="/edufamcs-demo/courses/recsys-search/recsys-3/ctr-modeli/">
+            <span class="mk">2</span>
+            
+            <span class="t">Модели CTR: от логрегрессии до DCN и DIN</span>
+            
+          </a>
+        </li>
+        
+        <li>
+          <a class="lsn" href="/edufamcs-demo/courses/recsys-search/recsys-3/two-tower-ann/">
+            <span class="mk">3</span>
+            
+            <span class="t">Нейросетевые рекомендации: two-tower, negative sampling, ANN</span>
+            
+          </a>
+        </li>
+        
+        <li>
+          <a class="lsn" href="/edufamcs-demo/courses/recsys-search/recsys-3/posledovatelnye-modeli/">
+            <span class="mk">4</span>
+            
+            <span class="t">Последовательные модели: GRU4Rec, SASRec, BERT4Rec</span>
+            
+          </a>
+        </li>
+        
+        <li>
+          <a class="lsn" href="/edufamcs-demo/courses/recsys-search/recsys-3/grafovye-modeli/">
+            <span class="mk">5</span>
+            
+            <span class="t">Графовые модели: от случайных блужданий до LightGCN</span>
+            
+          </a>
+        </li>
+        
+      </ol>
+    </section>
+    
+    
+    
+    <section class="mod s-recsys" id="m-recsys-4" aria-labelledby="mt-14">
+      <div class="mod-h">
+        <div class="mod-art"><span class="idx">04</span><svg class="art" viewBox="0 0 220 120" aria-hidden="true"><g fill="currentColor" opacity=".16"><rect x="3" y="3" width="14" height="14" rx="4"/><rect x="23" y="3" width="14" height="14" rx="4"/><rect x="63" y="3" width="14" height="14" rx="4"/><rect x="83" y="3" width="14" height="14" rx="4"/><rect x="103" y="3" width="14" height="14" rx="4"/><rect x="143" y="3" width="14" height="14" rx="4"/><rect x="163" y="3" width="14" height="14" rx="4"/><rect x="183" y="3" width="14" height="14" rx="4"/><rect x="203" y="3" width="14" height="14" rx="4"/><rect x="3" y="23" width="14" height="14" rx="4"/><rect x="23" y="23" width="14" height="14" rx="4"/><rect x="43" y="23" width="14" height="14" rx="4"/><rect x="63" y="23" width="14" height="14" rx="4"/><rect x="83" y="23" width="14" height="14" rx="4"/><rect x="103" y="23" width="14" height="14" rx="4"/><rect x="143" y="23" width="14" height="14" rx="4"/><rect x="163" y="23" width="14" height="14" rx="4"/><rect x="183" y="23" width="14" height="14" rx="4"/><rect x="203" y="23" width="14" height="14" rx="4"/><rect x="3" y="43" width="14" height="14" rx="4"/><rect x="43" y="43" width="14" height="14" rx="4"/><rect x="63" y="43" width="14" height="14" rx="4"/><rect x="83" y="43" width="14" height="14" rx="4"/><rect x="103" y="43" width="14" height="14" rx="4"/><rect x="123" y="43" width="14" height="14" rx="4"/><rect x="143" y="43" width="14" height="14" rx="4"/><rect x="183" y="43" width="14" height="14" rx="4"/><rect x="203" y="43" width="14" height="14" rx="4"/><rect x="3" y="63" width="14" height="14" rx="4"/><rect x="23" y="63" width="14" height="14" rx="4"/><rect x="63" y="63" width="14" height="14" rx="4"/><rect x="103" y="63" width="14" height="14" rx="4"/><rect x="123" y="63" width="14" height="14" rx="4"/><rect x="163" y="63" width="14" height="14" rx="4"/><rect x="183" y="63" width="14" height="14" rx="4"/><rect x="203" y="63" width="14" height="14" rx="4"/><rect x="3" y="83" width="14" height="14" rx="4"/><rect x="23" y="83" width="14" height="14" rx="4"/><rect x="43" y="83" width="14" height="14" rx="4"/><rect x="63" y="83" width="14" height="14" rx="4"/><rect x="83" y="83" width="14" height="14" rx="4"/><rect x="103" y="83" width="14" height="14" rx="4"/><rect x="123" y="83" width="14" height="14" rx="4"/><rect x="143" y="83" width="14" height="14" rx="4"/><rect x="163" y="83" width="14" height="14" rx="4"/><rect x="203" y="83" width="14" height="14" rx="4"/><rect x="3" y="103" width="14" height="14" rx="4"/><rect x="23" y="103" width="14" height="14" rx="4"/><rect x="43" y="103" width="14" height="14" rx="4"/><rect x="83" y="103" width="14" height="14" rx="4"/><rect x="103" y="103" width="14" height="14" rx="4"/><rect x="123" y="103" width="14" height="14" rx="4"/><rect x="143" y="103" width="14" height="14" rx="4"/><rect x="163" y="103" width="14" height="14" rx="4"/><rect x="183" y="103" width="14" height="14" rx="4"/><rect x="203" y="103" width="14" height="14" rx="4"/></g><g fill="currentColor"><rect x="43" y="3" width="14" height="14" rx="4"/><rect x="123" y="23" width="14" height="14" rx="4"/><rect x="23" y="43" width="14" height="14" rx="4"/><rect x="163" y="43" width="14" height="14" rx="4"/><rect x="83" y="63" width="14" height="14" rx="4"/><rect x="183" y="83" width="14" height="14" rx="4"/><rect x="63" y="103" width="14" height="14" rx="4"/></g><rect x="1" y="61" width="218" height="18" rx="6" fill="none" stroke="currentColor" stroke-width="1.5"/><g fill="var(--accent)"><rect x="143" y="63" width="14" height="14" rx="4"/><rect x="43" y="63" width="14" height="14" rx="4" opacity=".55"/></g></svg>
+</div>
+        <div class="mod-b">
+          <h2 class="h3" id="mt-14">Рекомендательная система целиком</h2>
+          <div class="row">
+            
+            <span class="badge">3&nbsp;урока</span>
+            
+          </div>
+        </div>
+        
+      </div>
+      <ol class="lsns">
+        
+        <li>
+          <a class="lsn" href="/edufamcs-demo/courses/recsys-search/recsys-4/kandidaty-i-ranzhirovanie/">
+            <span class="mk">1</span>
+            
+            <span class="t">Двухстадийная схема: кандидаты → ранжирование</span>
+            
+          </a>
+        </li>
+        
+        <li>
+          <a class="lsn" href="/edufamcs-demo/courses/recsys-search/recsys-4/holodnyj-start-i-bandity/">
+            <span class="mk">2</span>
+            
+            <span class="t">Холодный старт, исследование и бандиты</span>
+            
+          </a>
+        </li>
+        
+        <li>
+          <a class="lsn" href="/edufamcs-demo/courses/recsys-search/recsys-4/prodakshen-i-ab-testy/">
+            <span class="mk">3</span>
+            
+            <span class="t">Рекомендации в продакшене: A/B-тесты и эксплуатация</span>
+            
+          </a>
+        </li>
+        
+      </ol>
+    </section>
+    
+    
+    
+    <section class="mod s-recsys" id="m-recsys-5" aria-labelledby="mt-15">
+      <div class="mod-h">
+        <div class="mod-art"><span class="idx">05</span><svg class="art" viewBox="0 0 220 120" aria-hidden="true"><g fill="currentColor" opacity=".16"><rect x="3" y="3" width="14" height="14" rx="4"/><rect x="23" y="3" width="14" height="14" rx="4"/><rect x="63" y="3" width="14" height="14" rx="4"/><rect x="83" y="3" width="14" height="14" rx="4"/><rect x="103" y="3" width="14" height="14" rx="4"/><rect x="143" y="3" width="14" height="14" rx="4"/><rect x="163" y="3" width="14" height="14" rx="4"/><rect x="183" y="3" width="14" height="14" rx="4"/><rect x="203" y="3" width="14" height="14" rx="4"/><rect x="3" y="23" width="14" height="14" rx="4"/><rect x="23" y="23" width="14" height="14" rx="4"/><rect x="43" y="23" width="14" height="14" rx="4"/><rect x="63" y="23" width="14" height="14" rx="4"/><rect x="83" y="23" width="14" height="14" rx="4"/><rect x="103" y="23" width="14" height="14" rx="4"/><rect x="143" y="23" width="14" height="14" rx="4"/><rect x="163" y="23" width="14" height="14" rx="4"/><rect x="183" y="23" width="14" height="14" rx="4"/><rect x="203" y="23" width="14" height="14" rx="4"/><rect x="3" y="43" width="14" height="14" rx="4"/><rect x="43" y="43" width="14" height="14" rx="4"/><rect x="63" y="43" width="14" height="14" rx="4"/><rect x="83" y="43" width="14" height="14" rx="4"/><rect x="103" y="43" width="14" height="14" rx="4"/><rect x="123" y="43" width="14" height="14" rx="4"/><rect x="143" y="43" width="14" height="14" rx="4"/><rect x="183" y="43" width="14" height="14" rx="4"/><rect x="203" y="43" width="14" height="14" rx="4"/><rect x="3" y="63" width="14" height="14" rx="4"/><rect x="23" y="63" width="14" height="14" rx="4"/><rect x="63" y="63" width="14" height="14" rx="4"/><rect x="103" y="63" width="14" height="14" rx="4"/><rect x="123" y="63" width="14" height="14" rx="4"/><rect x="163" y="63" width="14" height="14" rx="4"/><rect x="183" y="63" width="14" height="14" rx="4"/><rect x="203" y="63" width="14" height="14" rx="4"/><rect x="3" y="83" width="14" height="14" rx="4"/><rect x="23" y="83" width="14" height="14" rx="4"/><rect x="43" y="83" width="14" height="14" rx="4"/><rect x="63" y="83" width="14" height="14" rx="4"/><rect x="83" y="83" width="14" height="14" rx="4"/><rect x="103" y="83" width="14" height="14" rx="4"/><rect x="123" y="83" width="14" height="14" rx="4"/><rect x="143" y="83" width="14" height="14" rx="4"/><rect x="163" y="83" width="14" height="14" rx="4"/><rect x="203" y="83" width="14" height="14" rx="4"/><rect x="3" y="103" width="14" height="14" rx="4"/><rect x="23" y="103" width="14" height="14" rx="4"/><rect x="43" y="103" width="14" height="14" rx="4"/><rect x="83" y="103" width="14" height="14" rx="4"/><rect x="103" y="103" width="14" height="14" rx="4"/><rect x="123" y="103" width="14" height="14" rx="4"/><rect x="143" y="103" width="14" height="14" rx="4"/><rect x="163" y="103" width="14" height="14" rx="4"/><rect x="183" y="103" width="14" height="14" rx="4"/><rect x="203" y="103" width="14" height="14" rx="4"/></g><g fill="currentColor"><rect x="43" y="3" width="14" height="14" rx="4"/><rect x="123" y="23" width="14" height="14" rx="4"/><rect x="23" y="43" width="14" height="14" rx="4"/><rect x="163" y="43" width="14" height="14" rx="4"/><rect x="83" y="63" width="14" height="14" rx="4"/><rect x="183" y="83" width="14" height="14" rx="4"/><rect x="63" y="103" width="14" height="14" rx="4"/></g><rect x="1" y="61" width="218" height="18" rx="6" fill="none" stroke="currentColor" stroke-width="1.5"/><g fill="var(--accent)"><rect x="143" y="63" width="14" height="14" rx="4"/><rect x="43" y="63" width="14" height="14" rx="4" opacity=".55"/></g></svg>
+</div>
+        <div class="mod-b">
+          <h2 class="h3" id="mt-15">Генеративная эра: 2023–2026</h2>
+          <div class="row">
+            
+            <span class="badge">3&nbsp;урока</span>
+            
+          </div>
+        </div>
+        
+      </div>
+      <ol class="lsns">
+        
+        <li>
+          <a class="lsn" href="/edufamcs-demo/courses/recsys-search/recsys-5/semanticheskie-id-tiger/">
+            <span class="mk">1</span>
+            
+            <span class="t">Семантические ID и генеративный retrieval: TIGER</span>
+            
+          </a>
+        </li>
+        
+        <li>
+          <a class="lsn" href="/edufamcs-demo/courses/recsys-search/recsys-5/generativnye-rekomendateli/">
+            <span class="mk">2</span>
+            
+            <span class="t">Генеративные рекомендатели на масштабе: HSTU, OneRec и наследники</span>
+            
+          </a>
+        </li>
+        
+        <li>
+          <a class="lsn" href="/edufamcs-demo/courses/recsys-search/recsys-5/llm-v-rekomendaciyah/">
+            <span class="mk">3</span>
+            
+            <span class="t">Большие языковые модели в рекомендациях</span>
+            
+          </a>
+        </li>
+        
+      </ol>
+    </section>
+    
+    
+    
+    <section class="mod s-recsys" id="m-retrieval-1" aria-labelledby="mt-16">
+      <div class="mod-h">
+        <div class="mod-art"><span class="idx">06</span><svg class="art" viewBox="0 0 220 120" aria-hidden="true"><g fill="currentColor" opacity=".16"><rect x="3" y="3" width="14" height="14" rx="4"/><rect x="23" y="3" width="14" height="14" rx="4"/><rect x="63" y="3" width="14" height="14" rx="4"/><rect x="83" y="3" width="14" height="14" rx="4"/><rect x="103" y="3" width="14" height="14" rx="4"/><rect x="143" y="3" width="14" height="14" rx="4"/><rect x="163" y="3" width="14" height="14" rx="4"/><rect x="183" y="3" width="14" height="14" rx="4"/><rect x="203" y="3" width="14" height="14" rx="4"/><rect x="3" y="23" width="14" height="14" rx="4"/><rect x="23" y="23" width="14" height="14" rx="4"/><rect x="43" y="23" width="14" height="14" rx="4"/><rect x="63" y="23" width="14" height="14" rx="4"/><rect x="83" y="23" width="14" height="14" rx="4"/><rect x="103" y="23" width="14" height="14" rx="4"/><rect x="143" y="23" width="14" height="14" rx="4"/><rect x="163" y="23" width="14" height="14" rx="4"/><rect x="183" y="23" width="14" height="14" rx="4"/><rect x="203" y="23" width="14" height="14" rx="4"/><rect x="3" y="43" width="14" height="14" rx="4"/><rect x="43" y="43" width="14" height="14" rx="4"/><rect x="63" y="43" width="14" height="14" rx="4"/><rect x="83" y="43" width="14" height="14" rx="4"/><rect x="103" y="43" width="14" height="14" rx="4"/><rect x="123" y="43" width="14" height="14" rx="4"/><rect x="143" y="43" width="14" height="14" rx="4"/><rect x="183" y="43" width="14" height="14" rx="4"/><rect x="203" y="43" width="14" height="14" rx="4"/><rect x="3" y="63" width="14" height="14" rx="4"/><rect x="23" y="63" width="14" height="14" rx="4"/><rect x="63" y="63" width="14" height="14" rx="4"/><rect x="103" y="63" width="14" height="14" rx="4"/><rect x="123" y="63" width="14" height="14" rx="4"/><rect x="163" y="63" width="14" height="14" rx="4"/><rect x="183" y="63" width="14" height="14" rx="4"/><rect x="203" y="63" width="14" height="14" rx="4"/><rect x="3" y="83" width="14" height="14" rx="4"/><rect x="23" y="83" width="14" height="14" rx="4"/><rect x="43" y="83" width="14" height="14" rx="4"/><rect x="63" y="83" width="14" height="14" rx="4"/><rect x="83" y="83" width="14" height="14" rx="4"/><rect x="103" y="83" width="14" height="14" rx="4"/><rect x="123" y="83" width="14" height="14" rx="4"/><rect x="143" y="83" width="14" height="14" rx="4"/><rect x="163" y="83" width="14" height="14" rx="4"/><rect x="203" y="83" width="14" height="14" rx="4"/><rect x="3" y="103" width="14" height="14" rx="4"/><rect x="23" y="103" width="14" height="14" rx="4"/><rect x="43" y="103" width="14" height="14" rx="4"/><rect x="83" y="103" width="14" height="14" rx="4"/><rect x="103" y="103" width="14" height="14" rx="4"/><rect x="123" y="103" width="14" height="14" rx="4"/><rect x="143" y="103" width="14" height="14" rx="4"/><rect x="163" y="103" width="14" height="14" rx="4"/><rect x="183" y="103" width="14" height="14" rx="4"/><rect x="203" y="103" width="14" height="14" rx="4"/></g><g fill="currentColor"><rect x="43" y="3" width="14" height="14" rx="4"/><rect x="123" y="23" width="14" height="14" rx="4"/><rect x="23" y="43" width="14" height="14" rx="4"/><rect x="163" y="43" width="14" height="14" rx="4"/><rect x="83" y="63" width="14" height="14" rx="4"/><rect x="183" y="83" width="14" height="14" rx="4"/><rect x="63" y="103" width="14" height="14" rx="4"/></g><rect x="1" y="61" width="218" height="18" rx="6" fill="none" stroke="currentColor" stroke-width="1.5"/><g fill="var(--accent)"><rect x="143" y="63" width="14" height="14" rx="4"/><rect x="43" y="63" width="14" height="14" rx="4" opacity=".55"/></g></svg>
+</div>
+        <div class="mod-b">
+          <h2 class="h3" id="mt-16">Классический поиск</h2>
+          <div class="row">
+            
+            <span class="badge">4&nbsp;урока</span>
+            
+          </div>
+        </div>
+        
+      </div>
+      <ol class="lsns">
+        
+        <li>
+          <a class="lsn" href="/edufamcs-demo/courses/recsys-search/retrieval-1/bm25-invertirovannyj-indeks/">
+            <span class="mk">1</span>
+            
+            <span class="t">BM25 и инвертированный индекс</span>
+            
+          </a>
+        </li>
+        
+        <li>
+          <a class="lsn" href="/edufamcs-demo/courses/recsys-search/retrieval-1/ocenka-kachestva-poiska/">
+            <span class="mk">2</span>
+            
+            <span class="t">Оценка качества поиска</span>
+            
+          </a>
+        </li>
+        
+        <li>
+          <a class="lsn" href="/edufamcs-demo/courses/recsys-search/retrieval-1/learning-to-rank/">
+            <span class="mk">3</span>
+            
+            <span class="t">Обучение ранжированию</span>
+            
+          </a>
+        </li>
+        
+        <li>
+          <a class="lsn" href="/edufamcs-demo/courses/recsys-search/retrieval-1/ponimanie-zaprosa/">
+            <span class="mk">4</span>
+            
+            <span class="t">Понимание запроса</span>
+            
+          </a>
+        </li>
+        
+      </ol>
+    </section>
+    
+    
+    
+    <section class="mod s-recsys" id="m-retrieval-2" aria-labelledby="mt-17">
+      <div class="mod-h">
+        <div class="mod-art"><span class="idx">07</span><svg class="art" viewBox="0 0 220 120" aria-hidden="true"><g fill="currentColor" opacity=".16"><rect x="3" y="3" width="14" height="14" rx="4"/><rect x="23" y="3" width="14" height="14" rx="4"/><rect x="63" y="3" width="14" height="14" rx="4"/><rect x="83" y="3" width="14" height="14" rx="4"/><rect x="103" y="3" width="14" height="14" rx="4"/><rect x="143" y="3" width="14" height="14" rx="4"/><rect x="163" y="3" width="14" height="14" rx="4"/><rect x="183" y="3" width="14" height="14" rx="4"/><rect x="203" y="3" width="14" height="14" rx="4"/><rect x="3" y="23" width="14" height="14" rx="4"/><rect x="23" y="23" width="14" height="14" rx="4"/><rect x="43" y="23" width="14" height="14" rx="4"/><rect x="63" y="23" width="14" height="14" rx="4"/><rect x="83" y="23" width="14" height="14" rx="4"/><rect x="103" y="23" width="14" height="14" rx="4"/><rect x="143" y="23" width="14" height="14" rx="4"/><rect x="163" y="23" width="14" height="14" rx="4"/><rect x="183" y="23" width="14" height="14" rx="4"/><rect x="203" y="23" width="14" height="14" rx="4"/><rect x="3" y="43" width="14" height="14" rx="4"/><rect x="43" y="43" width="14" height="14" rx="4"/><rect x="63" y="43" width="14" height="14" rx="4"/><rect x="83" y="43" width="14" height="14" rx="4"/><rect x="103" y="43" width="14" height="14" rx="4"/><rect x="123" y="43" width="14" height="14" rx="4"/><rect x="143" y="43" width="14" height="14" rx="4"/><rect x="183" y="43" width="14" height="14" rx="4"/><rect x="203" y="43" width="14" height="14" rx="4"/><rect x="3" y="63" width="14" height="14" rx="4"/><rect x="23" y="63" width="14" height="14" rx="4"/><rect x="63" y="63" width="14" height="14" rx="4"/><rect x="103" y="63" width="14" height="14" rx="4"/><rect x="123" y="63" width="14" height="14" rx="4"/><rect x="163" y="63" width="14" height="14" rx="4"/><rect x="183" y="63" width="14" height="14" rx="4"/><rect x="203" y="63" width="14" height="14" rx="4"/><rect x="3" y="83" width="14" height="14" rx="4"/><rect x="23" y="83" width="14" height="14" rx="4"/><rect x="43" y="83" width="14" height="14" rx="4"/><rect x="63" y="83" width="14" height="14" rx="4"/><rect x="83" y="83" width="14" height="14" rx="4"/><rect x="103" y="83" width="14" height="14" rx="4"/><rect x="123" y="83" width="14" height="14" rx="4"/><rect x="143" y="83" width="14" height="14" rx="4"/><rect x="163" y="83" width="14" height="14" rx="4"/><rect x="203" y="83" width="14" height="14" rx="4"/><rect x="3" y="103" width="14" height="14" rx="4"/><rect x="23" y="103" width="14" height="14" rx="4"/><rect x="43" y="103" width="14" height="14" rx="4"/><rect x="83" y="103" width="14" height="14" rx="4"/><rect x="103" y="103" width="14" height="14" rx="4"/><rect x="123" y="103" width="14" height="14" rx="4"/><rect x="143" y="103" width="14" height="14" rx="4"/><rect x="163" y="103" width="14" height="14" rx="4"/><rect x="183" y="103" width="14" height="14" rx="4"/><rect x="203" y="103" width="14" height="14" rx="4"/></g><g fill="currentColor"><rect x="43" y="3" width="14" height="14" rx="4"/><rect x="123" y="23" width="14" height="14" rx="4"/><rect x="23" y="43" width="14" height="14" rx="4"/><rect x="163" y="43" width="14" height="14" rx="4"/><rect x="83" y="63" width="14" height="14" rx="4"/><rect x="183" y="83" width="14" height="14" rx="4"/><rect x="63" y="103" width="14" height="14" rx="4"/></g><rect x="1" y="61" width="218" height="18" rx="6" fill="none" stroke="currentColor" stroke-width="1.5"/><g fill="var(--accent)"><rect x="143" y="63" width="14" height="14" rx="4"/><rect x="43" y="63" width="14" height="14" rx="4" opacity=".55"/></g></svg>
+</div>
+        <div class="mod-b">
+          <h2 class="h3" id="mt-17">Нейросетевой поиск</h2>
+          <div class="row">
+            
+            <span class="badge">3&nbsp;урока</span>
+            
+          </div>
+        </div>
+        
+      </div>
+      <ol class="lsns">
+        
+        <li>
+          <a class="lsn" href="/edufamcs-demo/courses/recsys-search/retrieval-2/plotnyj-i-gibridnyj-poisk/">
+            <span class="mk">1</span>
+            
+            <span class="t">Плотный и гибридный поиск</span>
+            
+          </a>
+        </li>
+        
+        <li>
+          <a class="lsn" href="/edufamcs-demo/courses/recsys-search/retrieval-2/nejrosetevoe-ranzhirovanie/">
+            <span class="mk">2</span>
+            
+            <span class="t">Нейросетевое ранжирование: cross-encoder, ColBERT, SPLADE</span>
+            
+          </a>
+        </li>
+        
+        <li>
+          <a class="lsn" href="/edufamcs-demo/courses/recsys-search/retrieval-2/vektornye-indeksy/">
+            <span class="mk">3</span>
+            
+            <span class="t">Векторные индексы: HNSW, IVF, PQ</span>
+            
+          </a>
+        </li>
+        
+      </ol>
+    </section>
+    
+    
+    
+    <section class="mod s-recsys" id="m-retrieval-3" aria-labelledby="mt-18">
+      <div class="mod-h">
+        <div class="mod-art"><span class="idx">08</span><svg class="art" viewBox="0 0 220 120" aria-hidden="true"><g fill="currentColor" opacity=".16"><rect x="3" y="3" width="14" height="14" rx="4"/><rect x="23" y="3" width="14" height="14" rx="4"/><rect x="63" y="3" width="14" height="14" rx="4"/><rect x="83" y="3" width="14" height="14" rx="4"/><rect x="103" y="3" width="14" height="14" rx="4"/><rect x="143" y="3" width="14" height="14" rx="4"/><rect x="163" y="3" width="14" height="14" rx="4"/><rect x="183" y="3" width="14" height="14" rx="4"/><rect x="203" y="3" width="14" height="14" rx="4"/><rect x="3" y="23" width="14" height="14" rx="4"/><rect x="23" y="23" width="14" height="14" rx="4"/><rect x="43" y="23" width="14" height="14" rx="4"/><rect x="63" y="23" width="14" height="14" rx="4"/><rect x="83" y="23" width="14" height="14" rx="4"/><rect x="103" y="23" width="14" height="14" rx="4"/><rect x="143" y="23" width="14" height="14" rx="4"/><rect x="163" y="23" width="14" height="14" rx="4"/><rect x="183" y="23" width="14" height="14" rx="4"/><rect x="203" y="23" width="14" height="14" rx="4"/><rect x="3" y="43" width="14" height="14" rx="4"/><rect x="43" y="43" width="14" height="14" rx="4"/><rect x="63" y="43" width="14" height="14" rx="4"/><rect x="83" y="43" width="14" height="14" rx="4"/><rect x="103" y="43" width="14" height="14" rx="4"/><rect x="123" y="43" width="14" height="14" rx="4"/><rect x="143" y="43" width="14" height="14" rx="4"/><rect x="183" y="43" width="14" height="14" rx="4"/><rect x="203" y="43" width="14" height="14" rx="4"/><rect x="3" y="63" width="14" height="14" rx="4"/><rect x="23" y="63" width="14" height="14" rx="4"/><rect x="63" y="63" width="14" height="14" rx="4"/><rect x="103" y="63" width="14" height="14" rx="4"/><rect x="123" y="63" width="14" height="14" rx="4"/><rect x="163" y="63" width="14" height="14" rx="4"/><rect x="183" y="63" width="14" height="14" rx="4"/><rect x="203" y="63" width="14" height="14" rx="4"/><rect x="3" y="83" width="14" height="14" rx="4"/><rect x="23" y="83" width="14" height="14" rx="4"/><rect x="43" y="83" width="14" height="14" rx="4"/><rect x="63" y="83" width="14" height="14" rx="4"/><rect x="83" y="83" width="14" height="14" rx="4"/><rect x="103" y="83" width="14" height="14" rx="4"/><rect x="123" y="83" width="14" height="14" rx="4"/><rect x="143" y="83" width="14" height="14" rx="4"/><rect x="163" y="83" width="14" height="14" rx="4"/><rect x="203" y="83" width="14" height="14" rx="4"/><rect x="3" y="103" width="14" height="14" rx="4"/><rect x="23" y="103" width="14" height="14" rx="4"/><rect x="43" y="103" width="14" height="14" rx="4"/><rect x="83" y="103" width="14" height="14" rx="4"/><rect x="103" y="103" width="14" height="14" rx="4"/><rect x="123" y="103" width="14" height="14" rx="4"/><rect x="143" y="103" width="14" height="14" rx="4"/><rect x="163" y="103" width="14" height="14" rx="4"/><rect x="183" y="103" width="14" height="14" rx="4"/><rect x="203" y="103" width="14" height="14" rx="4"/></g><g fill="currentColor"><rect x="43" y="3" width="14" height="14" rx="4"/><rect x="123" y="23" width="14" height="14" rx="4"/><rect x="23" y="43" width="14" height="14" rx="4"/><rect x="163" y="43" width="14" height="14" rx="4"/><rect x="83" y="63" width="14" height="14" rx="4"/><rect x="183" y="83" width="14" height="14" rx="4"/><rect x="63" y="103" width="14" height="14" rx="4"/></g><rect x="1" y="61" width="218" height="18" rx="6" fill="none" stroke="currentColor" stroke-width="1.5"/><g fill="var(--accent)"><rect x="143" y="63" width="14" height="14" rx="4"/><rect x="43" y="63" width="14" height="14" rx="4" opacity=".55"/></g></svg>
+</div>
+        <div class="mod-b">
+          <h2 class="h3" id="mt-18">Поиск в эпоху LLM</h2>
+          <div class="row">
+            
+            <span class="badge">3&nbsp;урока</span>
+            
+          </div>
+        </div>
+        
+      </div>
+      <ol class="lsns">
+        
+        <li>
+          <a class="lsn" href="/edufamcs-demo/courses/recsys-search/retrieval-3/rag/">
+            <span class="mk">1</span>
+            
+            <span class="t">RAG: поиск для языковых моделей</span>
+            
+          </a>
+        </li>
+        
+        <li>
+          <a class="lsn" href="/edufamcs-demo/courses/recsys-search/retrieval-3/generativnyj-poisk/">
+            <span class="mk">2</span>
+            
+            <span class="t">Генеративный поиск: модель как индекс</span>
+            
+          </a>
+        </li>
+        
+        <li>
+          <a class="lsn" href="/edufamcs-demo/courses/recsys-search/retrieval-3/agentnyj-poisk/">
+            <span class="mk">3</span>
+            
+            <span class="t">Рассуждающий и агентный поиск: 2025–2026</span>
+            
+          </a>
+        </li>
+        
+      </ol>
+    </section>
+    
+    
+  </div>
+</div>
+
+
+</main>
+
+<footer class="ftr" data-theme="dark">
+  <svg class="sym fern" viewBox="0 0 40.5 65.02" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#fern"/></svg>
+  <div class="container">
+    <div class="ftr-row">
+      <a href="/edufamcs-demo/" aria-label="EDU FAMCS — главная"><img src="/edufamcs-demo/static/brand/logo/logo-edu-dark.svg" alt="EDU FAMCS" width="196" height="40"></a>
+      <ul class="ftr-links">
+        <li><a href="/edufamcs-demo/#courses">Курсы</a></li>
+        <li><a href="/edufamcs-demo/ml/">Машинное обучение</a></li>
+        <li><a href="/edufamcs-demo/handbook/">Хендбук</a></li>
+        <li><a href="/edufamcs-demo/news/">Новости</a></li>
+        <li><a href="/edufamcs-demo/people/">Авторы</a></li>
+        <li><a href="/edufamcs-demo/about/">О&nbsp;нас</a></li>
+        <li><a href="/edufamcs-demo/propose/">Предложить или исправить</a></li>
+        <li><a href="/edufamcs-demo/privacy/">Конфиденциальность</a></li>
+      </ul>
+    </div>
+    <div class="ftr-big" aria-hidden="true">EDU<span class="d">·</span>FAMCS</div>
+    <p class="ftr-copy">© 2026 EDU FAMCS · Минск</p>
+  </div>
+</footer>
+
+<div class="toasts-region" aria-live="polite" id="toasts">
+
+</div>
+
+</body>
+</html>

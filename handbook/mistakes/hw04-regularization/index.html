@@ -1,0 +1,175 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Нет регуляризации · EDU FAMCS</title>
+<meta name="description" content="Нет регуляризации — Типовые ошибки. Хендбук ML-курса ФПМИ.">
+<meta name="theme-color" content="#060A16">
+<meta name="robots" content="noindex, nofollow">
+<meta name="htmx-config" content='{"allowEval":false,"includeIndicatorStyles":false,"historyCacheSize":0,"selfRequestsOnly":true}'>
+<meta name="katex-js" content="/edufamcs-demo/static/vendor/katex/katex.min.js">
+<meta name="katex-css" content="/edufamcs-demo/static/vendor/katex/katex.min.css">
+<link rel="icon" href="/edufamcs-demo/static/brand/logo/favicon-16.svg" type="image/svg+xml" sizes="16x16">
+<link rel="icon" href="/edufamcs-demo/static/brand/logo/favicon.svg" type="image/svg+xml" sizes="any">
+<link rel="preload" href="/edufamcs-demo/static/brand/fonts/manrope-cyrillic-400.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/edufamcs-demo/static/brand/fonts/unbounded-cyrillic-800.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="/edufamcs-demo/static/brand/fonts.css">
+<link rel="stylesheet" href="/edufamcs-demo/static/brand/tokens.css">
+<link rel="stylesheet" href="/edufamcs-demo/static/brand/components.css">
+<link rel="stylesheet" href="/edufamcs-demo/static/css/site.css">
+<link rel="stylesheet" href="/edufamcs-demo/static/css/hub.css">
+<link rel="stylesheet" href="/edufamcs-demo/static/css/about.css">
+<link rel="stylesheet" href="/edufamcs-demo/static/handbook/handbook.css">
+<script src="/edufamcs-demo/static/js/theme.js"></script>
+<script src="/edufamcs-demo/static/vendor/htmx/htmx.min.js" defer></script>
+<script src="/edufamcs-demo/static/vendor/alpine/alpine-csp.min.js" defer></script>
+<script src="/edufamcs-demo/static/js/site.js" defer></script>
+<script src="/edufamcs-demo/static/handbook/handbook.js" defer></script>
+</head>
+<body class="" hx-headers='{"X-CSRFToken": "gg80Kkki55y8LnvEaKuddmvsNGvotf2EF0H4ui7F0WWh0WGnHXdlaR1xloBT1pKo"}'>
+<a class="skip" href="#main">К содержанию</a>
+<div class="demo-bar" role="note">Демо-версия для отзывов: вход, запись на курсы и формы здесь не работают.</div>
+
+<header class="hdr">
+  <div class="container">
+    <a class="brand" href="/edufamcs-demo/" aria-label="EDU FAMCS — главная">
+      <span class="full"><img class="only-light" src="/edufamcs-demo/static/brand/logo/logo-edu-light.svg" alt="EDU FAMCS" width="196" height="40"><img class="only-dark" src="/edufamcs-demo/static/brand/logo/logo-edu-dark.svg" alt="EDU FAMCS" width="196" height="40"></span>
+      <span class="short"><img class="only-light" src="/edufamcs-demo/static/brand/logo/logo-edu-light.svg" alt="EDU FAMCS" height="30"><img class="only-dark" src="/edufamcs-demo/static/brand/logo/logo-edu-dark.svg" alt="EDU FAMCS" height="30"></span>
+    </a>
+    <nav class="nav" id="main-nav" aria-label="Основная навигация">
+      <a href="/edufamcs-demo/#courses">Курсы</a>
+      <a href="/edufamcs-demo/ml/" >Машинное обучение</a>
+      
+      <a href="/edufamcs-demo/handbook/" aria-current="page">Хендбук</a>
+      <a href="/edufamcs-demo/news/" >Новости</a>
+      <a href="/edufamcs-demo/people/" >Авторы</a>
+      <a href="/edufamcs-demo/about/" >О&nbsp;нас</a>
+    </nav>
+    <div class="hdr-actions">
+      
+      <a class="btn btn-outline btn-login" href="/edufamcs-demo/accounts/login/?next=/handbook/mistakes/hw04-regularization/">Войти</a>
+      
+      <button class="icon-btn menu-btn" type="button" aria-label="Меню" aria-expanded="false" aria-controls="main-nav"><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-menu"/></svg></button>
+    </div>
+  </div>
+</header>
+
+<main id="main">
+
+
+
+<div class="container hb-page hb-tone hb-notoc">
+  <div class="hb">
+    <aside class="hb-nav" aria-label="Статьи раздела">
+      
+<form class="hb-search" action="/edufamcs-demo/handbook/search/" method="get" role="search">
+  <svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-search"/></svg>
+  <input class="input" type="search" name="q" value="" placeholder="Поиск по хендбуку" aria-label="Поиск по хендбуку" autocomplete="off" maxlength="120"
+    hx-get="/edufamcs-demo/handbook/search/" hx-trigger="input changed delay:250ms, search" hx-target="#hb-nav-results" hx-sync="this:replace">
+</form>
+
+      <div id="hb-nav-results" class="hb-nav-results" aria-live="polite"></div>
+      <a class="grp" href="/edufamcs-demo/handbook/mistakes/">ДЗ 4 · Линейная регрессия</a>
+      
+      <a class="" href="/edufamcs-demo/handbook/mistakes/hw04-metric-choice-justified/">Выбор метрик не обоснован</a>
+      
+      <a class="" href="/edufamcs-demo/handbook/mistakes/hw04-model/">Не обучена линейная модель</a>
+      
+      <a class="" href="/edufamcs-demo/handbook/mistakes/hw04-metrics/">Не хватает метрик регрессии</a>
+      
+      <a class="" href="/edufamcs-demo/handbook/mistakes/hw04-baseline/">Нет базового решения для сравнения</a>
+      
+      <a class="" href="/edufamcs-demo/handbook/mistakes/hw04-eda/">Нет предварительного анализа данных</a>
+      
+      <a class="" href="/edufamcs-demo/handbook/mistakes/hw04-feature-engineering/">Нет работы с признаками</a>
+      
+      <a class="" href="/edufamcs-demo/handbook/mistakes/hw04-split/">Нет разделения выборки</a>
+      
+      <a class="cur" href="/edufamcs-demo/handbook/mistakes/hw04-regularization/" aria-current="page">Нет регуляризации</a>
+      
+      <a class="" href="/edufamcs-demo/handbook/mistakes/hw04-scaling/">Признаки не масштабированы</a>
+      
+      <a class="" href="/edufamcs-demo/handbook/mistakes/hw04-reads-as-research/">Работа не читается как исследование</a>
+      
+    </aside>
+
+    <article class="hb-main">
+      <nav class="crumbs" aria-label="Навигация"><a href="/edufamcs-demo/handbook/">Хендбук</a><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-chev"/></svg><a href="/edufamcs-demo/handbook/mistakes/">Типовые ошибки</a></nav>
+      <h1 class="h1">Нет регуляризации</h1>
+      <div class="hb-meta">
+        
+        <span class="badge stream dot">серьёзно</span>
+        <span><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-clock"/></svg>1&nbsp;мин</span>
+        
+        <span><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-edit"/></svg>9 ноября 2026</span>
+        <a class="hb-src" href="https://github.com/ScienceSUFAMCS/science-famcs-ml/blob/main/season_2/%D0%A2%D0%B8%D0%BF%D0%BE%D0%B2%D1%8B%D0%B5_%D0%BE%D1%88%D0%B8%D0%B1%D0%BA%D0%B8/hw04/regularization.md" rel="noopener" target="_blank"><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-github"/></svg>Источник</a>
+        
+      </div>
+
+      
+
+      <div class="prose"><p><strong>Что не так.</strong> Обучена только обычная линейная регрессия, Ridge/Lasso не
+пробовали.</p>
+<p><strong>Почему это важно.</strong> Задание разбирало проблему мультиколлинеарности: когда
+признаки линейно зависимы, матрица <code>XᵀX</code> вырождена, коэффициенты МНК
+разлетаются до огромных значений и становятся неустойчивыми. Ridge добавляет
+<code>α‖w‖²</code> и лечит именно это; Lasso вдобавок зануляет часть коэффициентов
+и работает как отбор признаков.</p>
+<p><strong>Как надо.</strong></p>
+<div class="code"><div class="code-head"><span class="lang">python</span></div><pre><code><span class="tok-k">for</span> alpha <span class="tok-k">in</span> <span class="tok-p">[</span><span class="tok-n">0.01</span><span class="tok-p">,</span> <span class="tok-n">0.1</span><span class="tok-p">,</span> <span class="tok-n">1</span><span class="tok-p">,</span> <span class="tok-n">10</span><span class="tok-p">,</span> <span class="tok-n">100</span><span class="tok-p">]</span><span class="tok-p">:</span>
+    m <span class="tok-p">=</span> make_pipeline<span class="tok-p">(</span>StandardScaler<span class="tok-p">(</span><span class="tok-p">)</span><span class="tok-p">,</span> Ridge<span class="tok-p">(</span>alpha<span class="tok-p">=</span>alpha<span class="tok-p">)</span><span class="tok-p">)</span>
+    <span class="tok-f">print</span><span class="tok-p">(</span>alpha<span class="tok-p">,</span> cross_val_score<span class="tok-p">(</span>m<span class="tok-p">,</span> X_train<span class="tok-p">,</span> y_train<span class="tok-p">,</span> cv<span class="tok-p">=</span><span class="tok-n">5</span><span class="tok-p">,</span> scoring<span class="tok-p">=</span><span class="tok-s">"</span><span class="tok-s">r2</span><span class="tok-s">"</span><span class="tok-p">)</span><span class="tok-p">.</span>mean<span class="tok-p">(</span><span class="tok-p">)</span><span class="tok-p">)</span>
+</code></pre></div>
+<p><strong>Почитать:</strong></p>
+<ul>
+<li><a href="https://github.com/ScienceSUFAMCS/science-famcs-ml/tree/main/season_2/%D0%94%D0%BE%D0%BC%D0%B0%D1%88%D0%BD%D0%B8%D0%B5_%D0%B7%D0%B0%D0%B4%D0%B0%D0%BD%D0%B8%D1%8F/04_%D0%9B%D0%B8%D0%BD%D0%B5%D0%B9%D0%BD%D0%B0%D1%8F_%D1%80%D0%B5%D0%B3%D1%80%D0%B5%D1%81%D1%81%D0%B8%D1%8F" rel="noopener noreferrer nofollow">Задание HW04</a></li>
+<li><a href="https://education.yandex.ru/handbook/ml/article/linear-models" rel="noopener noreferrer nofollow">Линейные модели</a></li>
+</ul>
+</div>
+      
+
+      
+      <nav class="pager" aria-label="Соседние статьи">
+        <a href="/edufamcs-demo/handbook/mistakes/hw04-split/"><span><svg class="ico sm" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-arrow-left"/></svg>Назад</span>Нет разделения выборки</a>
+        <a href="/edufamcs-demo/handbook/mistakes/hw04-scaling/"><span>Дальше<svg class="ico sm" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-arrow"/></svg></span>Признаки не масштабированы</a>
+      </nav>
+      
+    </article>
+
+    <aside class="hb-toc" aria-label="На этой странице">
+      
+    </aside>
+  </div>
+</div>
+
+
+</main>
+
+<footer class="ftr" data-theme="dark">
+  <svg class="sym fern" viewBox="0 0 40.5 65.02" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#fern"/></svg>
+  <div class="container">
+    <div class="ftr-row">
+      <a href="/edufamcs-demo/" aria-label="EDU FAMCS — главная"><img src="/edufamcs-demo/static/brand/logo/logo-edu-dark.svg" alt="EDU FAMCS" width="196" height="40"></a>
+      <ul class="ftr-links">
+        <li><a href="/edufamcs-demo/#courses">Курсы</a></li>
+        <li><a href="/edufamcs-demo/ml/">Машинное обучение</a></li>
+        <li><a href="/edufamcs-demo/handbook/">Хендбук</a></li>
+        <li><a href="/edufamcs-demo/news/">Новости</a></li>
+        <li><a href="/edufamcs-demo/people/">Авторы</a></li>
+        <li><a href="/edufamcs-demo/about/">О&nbsp;нас</a></li>
+        <li><a href="/edufamcs-demo/propose/">Предложить или исправить</a></li>
+        <li><a href="/edufamcs-demo/privacy/">Конфиденциальность</a></li>
+      </ul>
+    </div>
+    <div class="ftr-big" aria-hidden="true">EDU<span class="d">·</span>FAMCS</div>
+    <p class="ftr-copy">© 2026 EDU FAMCS · Минск</p>
+  </div>
+</footer>
+
+<div class="toasts-region" aria-live="polite" id="toasts">
+
+</div>
+
+</body>
+</html>

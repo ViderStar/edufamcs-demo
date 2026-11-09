@@ -1,0 +1,258 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Градиентный бустинг · EDU FAMCS</title>
+<meta name="description" content="Градиентный бустинг — Классическое машинное обучение. Хендбук ML-курса ФПМИ.">
+<meta name="theme-color" content="#060A16">
+<meta name="robots" content="noindex, nofollow">
+<meta name="htmx-config" content='{"allowEval":false,"includeIndicatorStyles":false,"historyCacheSize":0,"selfRequestsOnly":true}'>
+<meta name="katex-js" content="/edufamcs-demo/static/vendor/katex/katex.min.js">
+<meta name="katex-css" content="/edufamcs-demo/static/vendor/katex/katex.min.css">
+<link rel="icon" href="/edufamcs-demo/static/brand/logo/favicon-16.svg" type="image/svg+xml" sizes="16x16">
+<link rel="icon" href="/edufamcs-demo/static/brand/logo/favicon.svg" type="image/svg+xml" sizes="any">
+<link rel="preload" href="/edufamcs-demo/static/brand/fonts/manrope-cyrillic-400.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/edufamcs-demo/static/brand/fonts/unbounded-cyrillic-800.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="/edufamcs-demo/static/brand/fonts.css">
+<link rel="stylesheet" href="/edufamcs-demo/static/brand/tokens.css">
+<link rel="stylesheet" href="/edufamcs-demo/static/brand/components.css">
+<link rel="stylesheet" href="/edufamcs-demo/static/css/site.css">
+<link rel="stylesheet" href="/edufamcs-demo/static/css/hub.css">
+<link rel="stylesheet" href="/edufamcs-demo/static/css/about.css">
+<link rel="stylesheet" href="/edufamcs-demo/static/handbook/handbook.css">
+<script src="/edufamcs-demo/static/js/theme.js"></script>
+<script src="/edufamcs-demo/static/vendor/htmx/htmx.min.js" defer></script>
+<script src="/edufamcs-demo/static/vendor/alpine/alpine-csp.min.js" defer></script>
+<script src="/edufamcs-demo/static/js/site.js" defer></script>
+<script src="/edufamcs-demo/static/handbook/handbook.js" defer></script>
+</head>
+<body class="" hx-headers='{"X-CSRFToken": "js4G7l7DFDlyYRdHMz3R9QuB35lAfR96IcDKRjU0AuJHdqoqjMMZ6l0GBNr5N1RQ"}'>
+<a class="skip" href="#main">К содержанию</a>
+<div class="demo-bar" role="note">Демо-версия для отзывов: вход, запись на курсы и формы здесь не работают.</div>
+
+<header class="hdr">
+  <div class="container">
+    <a class="brand" href="/edufamcs-demo/" aria-label="EDU FAMCS — главная">
+      <span class="full"><img class="only-light" src="/edufamcs-demo/static/brand/logo/logo-edu-light.svg" alt="EDU FAMCS" width="196" height="40"><img class="only-dark" src="/edufamcs-demo/static/brand/logo/logo-edu-dark.svg" alt="EDU FAMCS" width="196" height="40"></span>
+      <span class="short"><img class="only-light" src="/edufamcs-demo/static/brand/logo/logo-edu-light.svg" alt="EDU FAMCS" height="30"><img class="only-dark" src="/edufamcs-demo/static/brand/logo/logo-edu-dark.svg" alt="EDU FAMCS" height="30"></span>
+    </a>
+    <nav class="nav" id="main-nav" aria-label="Основная навигация">
+      <a href="/edufamcs-demo/#courses">Курсы</a>
+      <a href="/edufamcs-demo/ml/" >Машинное обучение</a>
+      
+      <a href="/edufamcs-demo/handbook/" aria-current="page">Хендбук</a>
+      <a href="/edufamcs-demo/news/" >Новости</a>
+      <a href="/edufamcs-demo/people/" >Авторы</a>
+      <a href="/edufamcs-demo/about/" >О&nbsp;нас</a>
+    </nav>
+    <div class="hdr-actions">
+      
+      <a class="btn btn-outline btn-login" href="/edufamcs-demo/accounts/login/?next=/handbook/classic/gradientnyj-busting/">Войти</a>
+      
+      <button class="icon-btn menu-btn" type="button" aria-label="Меню" aria-expanded="false" aria-controls="main-nav"><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-menu"/></svg></button>
+    </div>
+  </div>
+</header>
+
+<main id="main">
+
+
+
+<div class="container hb-page hb-tone">
+  <div class="hb">
+    <aside class="hb-nav" aria-label="Статьи раздела">
+      
+<form class="hb-search" action="/edufamcs-demo/handbook/search/" method="get" role="search">
+  <svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-search"/></svg>
+  <input class="input" type="search" name="q" value="" placeholder="Поиск по хендбуку" aria-label="Поиск по хендбуку" autocomplete="off" maxlength="120"
+    hx-get="/edufamcs-demo/handbook/search/" hx-trigger="input changed delay:250ms, search" hx-target="#hb-nav-results" hx-sync="this:replace">
+</form>
+
+      <div id="hb-nav-results" class="hb-nav-results" aria-live="polite"></div>
+      <a class="grp" href="/edufamcs-demo/handbook/classic/">Деревья, ансамбли и настройка</a>
+      
+      <a class="" href="/edufamcs-demo/handbook/classic/derevya-reshenij/">Деревья решений</a>
+      
+      <a class="" href="/edufamcs-demo/handbook/classic/ansambli-i-sluchajnyj-les/">Ансамбли и случайный лес</a>
+      
+      <a class="cur" href="/edufamcs-demo/handbook/classic/gradientnyj-busting/" aria-current="page">Градиентный бустинг</a>
+      
+      <a class="" href="/edufamcs-demo/handbook/classic/giperparametry-i-interpretiruemost/">Подбор гиперпараметров и интерпретируемость</a>
+      
+    </aside>
+
+    <article class="hb-main">
+      <nav class="crumbs" aria-label="Навигация"><a href="/edufamcs-demo/handbook/">Хендбук</a><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-chev"/></svg><a href="/edufamcs-demo/handbook/classic/">Классическое машинное обучение</a></nav>
+      <h1 class="h1">Градиентный бустинг</h1>
+      <div class="hb-meta">
+        
+        
+        <span><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-clock"/></svg>11&nbsp;мин</span>
+        <span class="hb-authors"><span class="avatar sm" title="Артем Лебедевич">АЛ</span>Артем Лебедевич</span>
+        <span><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-edit"/></svg>9 ноября 2026</span>
+        
+        
+      </div>
+
+      
+      <details class="hb-mtoc">
+        <summary><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-list"/></svg>Содержание<svg class="ico sm" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-chev-down"/></svg></summary>
+        <a class="l2" href="#от-adaboost-к-градиенту">От AdaBoost к градиенту</a><a class="l2" href="#бустинг-как-градиентный-спуск-в-пространстве-функций">Бустинг как градиентный спуск в пространстве функций</a><a class="l2" href="#регуляризация">Регуляризация</a><a class="l2" href="#ньютоновский-шаг-и-xgboost">Ньютоновский шаг и XGBoost</a><a class="l2" href="#lightgbm">LightGBM</a><a class="l2" href="#catboost">CatBoost</a><a class="l2" href="#что-подбирать-и-в-каком-порядке">Что подбирать и в каком порядке</a><a class="l2" href="#код">Код</a><a class="l2" href="#почему-gbdt-всё-ещё-сильнее-нейросетей-на-таблицах">Почему GBDT всё ещё сильнее нейросетей на таблицах</a><a class="l2" href="#ловушки">Ловушки</a><a class="l2" href="#что-почитать">Что почитать</a>
+      </details>
+      
+
+      <div class="prose"><p>Бэггинг строит независимые глубокие деревья и гасит разброс. <strong>Бустинг</strong> действует наоборот: строит последовательность простых моделей (неглубоких деревьев), каждая из которых исправляет ошибки предыдущих, и тем самым уменьшает смещение. Градиентный бустинг над деревьями (GBDT) — на 2026 год основной инструмент для табличных данных: XGBoost, LightGBM и CatBoost стоят за огромной долей продакшен-моделей на таблицах, решений на Kaggle и ранжирования в поиске и рекомендациях.</p>
+<h2 id="от-adaboost-к-градиенту">От AdaBoost к градиенту</h2>
+<p><strong>AdaBoost</strong> (Freund &amp; Schapire, 1997) для классификации: каждый следующий слабый классификатор обучается на выборке, где веса неправильно классифицированных объектов увеличены, а итоговый ответ — взвешенное голосование. Позже выяснилось (Friedman, Hastie, Tibshirani, 2000), что AdaBoost минимизирует экспоненциальную функцию потерь пошаговым добавлением моделей. Это дало обобщение: тот же приём годится для любой дифференцируемой потери. Так появился <strong>градиентный бустинг</strong> (Friedman, 2001).</p>
+<h2 id="бустинг-как-градиентный-спуск-в-пространстве-функций">Бустинг как градиентный спуск в пространстве функций</h2>
+<p>Хотим модель <span class="tex">a_M(x)=a_0(x)+\sum_{m=1}^{M}\eta\, h_m(x)</span>, минимизирующую <span class="tex">\sum_i L(y_i, a(x_i))</span>. Представим значения <span class="tex">a(x_i)</span> на обучающих объектах как вектор параметров и сделаем шаг антиградиента по нему. На шаге <span class="tex">m</span>:</p>
+<ol>
+<li>Вычислить <strong>псевдоостатки</strong>
+<span class="tex tex-block">r_i^{(m)} = -\left.\frac{\partial L(y_i, a)}{\partial a}\right|_{a=a_{m-1}(x_i)} .</span></li>
+<li>Обучить дерево <span class="tex">h_m</span> на выборке <span class="tex">\{(x_i, r_i^{(m)})\}</span> (регрессия с MSE): оно аппроксимирует антиградиент как функцию от <span class="tex">x</span> и тем самым переносит его на новые объекты.</li>
+<li>Обновить <span class="tex">a_m(x) = a_{m-1}(x) + \eta\, h_m(x)</span>, где <span class="tex">\eta \in (0,1]</span> — скорость обучения (shrinkage).</li>
+</ol>
+<p>Начальное приближение <span class="tex">a_0</span> — константа, минимизирующая потерю (среднее для MSE, логарифм шансов для log-loss).</p>
+<p>В исходном алгоритме Фридмана между шагами 2 и 3 есть уточнение: структура дерева (области-листья <span class="tex">R_{jm}</span>) берётся из подгонки к антиградиенту, а значения в листьях пересчитываются под саму потерю, <span class="tex">c_{jm}=\arg\min_c \sum_{x_i\in R_{jm}} L\big(y_i, a_{m-1}(x_i)+c\big)</span>. Для MSE это просто среднее остатков в листе, для MAE — медиана, для log-loss — один шаг Ньютона. XGBoost доводит эту идею до конца: вторая производная участвует и в выборе структуры дерева (ниже).</p>
+<p><strong>Два частных случая, которые стоит знать наизусть.</strong></p>
+<ul>
+<li>MSE, <span class="tex">L=\tfrac12(y-a)^2</span>: <span class="tex">r_i = y_i - a_{m-1}(x_i)</span> — обычные <strong>остатки</strong>. Бустинг буквально доучивает ошибки.</li>
+<li>Log-loss для бинарной метки, <span class="tex">a</span> — логит, <span class="tex">p=\sigma(a)</span>: <span class="tex">r_i = y_i - p_i</span>. Тот же вид: разность метки и текущей вероятности.</li>
+</ul>
+<p>Благодаря этому бустинг работает с любой дифференцируемой потерей: Huber (устойчивость к выбросам), квантильная потеря, Poisson, и — в ранжировании — попарные и списочные потери (см. <a href="/edufamcs-demo/handbook/retrieval/learning-to-rank/" rel="noopener noreferrer nofollow">Learning to Rank</a>).</p>
+<h2 id="регуляризация">Регуляризация</h2>
+<p>Бустинг переобучается: чем больше деревьев, тем лучше ошибка на трейне, а на валидации кривая проходит минимум и растёт. Основные средства:</p>
+<ul>
+<li><strong>Shrinkage</strong> <span class="tex">\eta</span>: маленький шаг (0,01–0,1) требует больше деревьев, но почти всегда лучше обобщает. Эмпирическое правило: уменьшать <span class="tex">\eta</span> и увеличивать число итераций, пока позволяет бюджет времени.</li>
+<li><strong>Стохастический бустинг</strong> (Friedman, 2002): каждое дерево строится на случайной подвыборке объектов (<code>subsample</code> 0,5–0,8); современные библиотеки добавили и подвыборку признаков (<code>colsample_*</code>). Это снижает корреляцию деревьев (как в лесе) и ускоряет обучение.</li>
+<li><strong>Ограничение деревьев</strong>: глубина 3–8, <code>min_child_samples</code>, L2-регуляризация листьев.</li>
+<li><strong>Ранняя остановка</strong>: следить за метрикой на отложенной выборке и остановиться, если она не улучшается <span class="tex">N</span> итераций; выбранное число деревьев — по сути гиперпараметр, подбираемый автоматически.</li>
+</ul>
+<h2 id="ньютоновский-шаг-и-xgboost">Ньютоновский шаг и XGBoost</h2>
+<p>XGBoost (Chen &amp; Guestrin, 2016) использует разложение потери до второго порядка. Пусть <span class="tex">g_i = \partial_a L(y_i, a_{m-1}(x_i))</span>, <span class="tex">h_i = \partial^2_a L(y_i, a_{m-1}(x_i))</span>. Новое дерево обозначим <span class="tex">f</span> (чтобы не путать с гессианом <span class="tex">h_i</span>): у него <span class="tex">T</span> листьев с весами <span class="tex">w_j</span>, и <span class="tex">f(x_i)=w_j</span> для объектов листа <span class="tex">j</span>. Целевая функция с регуляризацией, без слагаемых, не зависящих от <span class="tex">f</span>:</p>
+<div class="tex tex-block">\mathcal{L}^{(m)} \approx \sum_{i} \left[g_i f(x_i) + \tfrac12 h_i f(x_i)^2\right] + \gamma T + \tfrac12 \lambda \sum_{j=1}^{T} w_j^2 .</div>
+<p>Для листа <span class="tex">j</span> с множеством объектов <span class="tex">I_j</span> обозначим <span class="tex">G_j=\sum_{i\in I_j} g_i</span>, <span class="tex">H_j=\sum_{i\in I_j} h_i</span>. Минимум по <span class="tex">w_j</span> достигается при</p>
+<div class="tex tex-block">w_j^* = -\frac{G_j}{H_j + \lambda}, \qquad \mathcal{L}^* = -\tfrac12\sum_j \frac{G_j^2}{H_j+\lambda} + \gamma T .</div>
+<p>Значит, качество структуры дерева считается по суммам <span class="tex">G, H</span>, а выигрыш от сплита листа на левую и правую части:</p>
+<div class="tex tex-block">\text{gain} = \tfrac12\left[\frac{G_L^2}{H_L+\lambda} + \frac{G_R^2}{H_R+\lambda} - \frac{(G_L+G_R)^2}{H_L+H_R+\lambda}\right] - \gamma .</div>
+<p>Если gain отрицателен, сплит не делается: <span class="tex">\gamma</span> работает как встроенная обрезка. Вес листа — это шаг Ньютона, он регуляризован <span class="tex">\lambda</span>, поэтому листья с малым числом объектов (малое <span class="tex">H</span>) получают осторожные значения. Остальной вклад XGBoost — инженерный: поиск сплитов по предварительно отсортированным признакам и приближённым квантилям, поддержка разреженных данных и пропусков (learned default direction), кэш-дружелюбная реализация, параллелизм.</p>
+<h2 id="lightgbm">LightGBM</h2>
+<p>LightGBM (Ke et al., Microsoft, 2017) ускоряет обучение практически без потери качества:</p>
+<ul>
+<li><strong>Гистограммный алгоритм</strong>: признаки квантуются в корзины (по умолчанию до 255, <code>max_bin</code>), сплиты ищутся по гистограммам градиентов; гистограмму соседа можно получить вычитанием из гистограммы родителя.</li>
+<li><strong>Leaf-wise рост</strong>: растёт лист с максимальным gain, а не весь уровень. При том же числе листьев ошибка ниже, но дерево может стать глубоким и несбалансированным; главный параметр — <code>num_leaves</code>, а не <code>max_depth</code>.</li>
+<li><strong>GOSS</strong> (gradient-based one-side sampling): оставляет объекты с наибольшими <span class="tex">|g_i|</span> и случайную долю остальных, умножая вес последних на <span class="tex">(1-a)/b</span> для сохранения распределения.</li>
+<li><strong>EFB</strong> (exclusive feature bundling): взаимоисключающие разреженные признаки (например, one-hot) склеиваются в один.</li>
+</ul>
+<h2 id="catboost">CatBoost</h2>
+<p>CatBoost (Prokhorenkova et al., Яндекс, 2018) решает две проблемы <strong>сдвига предсказаний</strong> (prediction shift): градиенты считаются на тех же объектах, на которых модель уже обучена, а целевая кодировка категорий использует метку самого объекта.</p>
+<ul>
+<li><strong>Ordered target statistics</strong>: категория кодируется средним таргета только по объектам, расположенным <em>раньше</em> в случайной перестановке, — метка текущего объекта в его собственный признак не попадает.</li>
+<li><strong>Ordered boosting</strong>: оценка остатка для объекта строится моделью, не видевшей этот объект.</li>
+<li><strong>Симметричные (oblivious) деревья</strong>: на каждом уровне один и тот же предикат для всех вершин. Дерево глубины <span class="tex">D</span> задаётся <span class="tex">D</span> парами «признак–порог», предсказание — индекс в таблице из <span class="tex">2^D</span> значений; инференс очень быстрый, а структура — сильный регуляризатор.</li>
+</ul>
+<p>CatBoost сильнее остальных «из коробки» на данных с категориями и хорош при почти нулевой настройке; LightGBM — самый быстрый на больших данных; XGBoost — самый «классический» и стабильный в интеграциях.</p>
+<h2 id="что-подбирать-и-в-каком-порядке">Что подбирать и в каком порядке</h2>
+<ol>
+<li>Зафиксировать большой <code>n_estimators</code>, <span class="tex">\eta \approx 0{,}05</span>–<span class="tex">0{,}1</span>, включить early stopping на валидации.</li>
+<li>Сложность дерева: <code>num_leaves</code> (LightGBM) или <code>max_depth</code> (XGBoost, 4–8; CatBoost <code>depth</code> 6–10), <code>min_child_samples</code>/<code>min_child_weight</code>.</li>
+<li>Стохастичность: <code>subsample</code>, <code>colsample_bytree</code>.</li>
+<li>Регуляризация: <code>lambda_l2</code>, <code>gamma</code>/<code>min_split_gain</code>.</li>
+<li>В конце уменьшить <span class="tex">\eta</span> в 2–5 раз и пересчитать число деревьев.</li>
+</ol>
+<p>Подбор — random search или Optuna (см. <a href="/edufamcs-demo/handbook/classic/giperparametry-i-interpretiruemost/" rel="noopener noreferrer nofollow">гиперпараметры и интерпретируемость</a>).</p>
+<h2 id="код">Код</h2>
+<div class="code"><div class="code-head"><span class="lang">python</span></div><pre><code><span class="tok-k">import</span> lightgbm <span class="tok-k">as</span> lgb
+<span class="tok-k">from</span> catboost <span class="tok-k">import</span> CatBoostClassifier
+<span class="tok-k">from</span> sklearn.datasets <span class="tok-k">import</span> make_classification
+<span class="tok-k">from</span> sklearn.metrics <span class="tok-k">import</span> roc_auc_score
+<span class="tok-k">from</span> sklearn.model_selection <span class="tok-k">import</span> train_test_split
+
+X<span class="tok-p">,</span> y <span class="tok-p">=</span> make_classification<span class="tok-p">(</span><span class="tok-n">20000</span><span class="tok-p">,</span> <span class="tok-n">40</span><span class="tok-p">,</span> n_informative<span class="tok-p">=</span><span class="tok-n">10</span><span class="tok-p">,</span> random_state<span class="tok-p">=</span><span class="tok-n">0</span><span class="tok-p">)</span>
+<span class="tok-c"># трейн / валидация (для ранней остановки) / тест (для отчёта)</span>
+X_tr<span class="tok-p">,</span> X_te<span class="tok-p">,</span> y_tr<span class="tok-p">,</span> y_te <span class="tok-p">=</span> train_test_split<span class="tok-p">(</span>X<span class="tok-p">,</span> y<span class="tok-p">,</span> test_size<span class="tok-p">=</span><span class="tok-n">0.2</span><span class="tok-p">,</span> stratify<span class="tok-p">=</span>y<span class="tok-p">,</span> random_state<span class="tok-p">=</span><span class="tok-n">0</span><span class="tok-p">)</span>
+X_tr<span class="tok-p">,</span> X_val<span class="tok-p">,</span> y_tr<span class="tok-p">,</span> y_val <span class="tok-p">=</span> train_test_split<span class="tok-p">(</span>X_tr<span class="tok-p">,</span> y_tr<span class="tok-p">,</span> test_size<span class="tok-p">=</span><span class="tok-n">0.2</span><span class="tok-p">,</span> stratify<span class="tok-p">=</span>y_tr<span class="tok-p">,</span> random_state<span class="tok-p">=</span><span class="tok-n">0</span><span class="tok-p">)</span>
+
+lgbm <span class="tok-p">=</span> lgb<span class="tok-p">.</span>LGBMClassifier<span class="tok-p">(</span>n_estimators<span class="tok-p">=</span><span class="tok-n">5000</span><span class="tok-p">,</span> learning_rate<span class="tok-p">=</span><span class="tok-n">0.05</span><span class="tok-p">,</span> num_leaves<span class="tok-p">=</span><span class="tok-n">31</span><span class="tok-p">,</span>
+                          subsample<span class="tok-p">=</span><span class="tok-n">0.8</span><span class="tok-p">,</span> subsample_freq<span class="tok-p">=</span><span class="tok-n">1</span><span class="tok-p">,</span> colsample_bytree<span class="tok-p">=</span><span class="tok-n">0.8</span><span class="tok-p">,</span>
+                          reg_lambda<span class="tok-p">=</span><span class="tok-n">1.0</span><span class="tok-p">,</span> min_child_samples<span class="tok-p">=</span><span class="tok-n">30</span><span class="tok-p">,</span> verbose<span class="tok-p">=</span><span class="tok-p">-</span><span class="tok-n">1</span><span class="tok-p">)</span>
+<span class="tok-c"># в свежих LightGBM вместо eval_set можно передать eval_X=..., eval_y=...</span>
+lgbm<span class="tok-p">.</span>fit<span class="tok-p">(</span>X_tr<span class="tok-p">,</span> y_tr<span class="tok-p">,</span> eval_set<span class="tok-p">=</span><span class="tok-p">[</span><span class="tok-p">(</span>X_val<span class="tok-p">,</span> y_val<span class="tok-p">)</span><span class="tok-p">]</span><span class="tok-p">,</span> eval_metric<span class="tok-p">=</span><span class="tok-s">"</span><span class="tok-s">auc</span><span class="tok-s">"</span><span class="tok-p">,</span>
+         callbacks<span class="tok-p">=</span><span class="tok-p">[</span>lgb<span class="tok-p">.</span>early_stopping<span class="tok-p">(</span><span class="tok-n">100</span><span class="tok-p">)</span><span class="tok-p">,</span> lgb<span class="tok-p">.</span>log_evaluation<span class="tok-p">(</span><span class="tok-n">0</span><span class="tok-p">)</span><span class="tok-p">]</span><span class="tok-p">)</span>
+<span class="tok-f">print</span><span class="tok-p">(</span><span class="tok-s">"</span><span class="tok-s">LGBM</span><span class="tok-s">"</span><span class="tok-p">,</span> lgbm<span class="tok-p">.</span>best_iteration_<span class="tok-p">,</span> roc_auc_score<span class="tok-p">(</span>y_te<span class="tok-p">,</span> lgbm<span class="tok-p">.</span>predict_proba<span class="tok-p">(</span>X_te<span class="tok-p">)</span><span class="tok-p">[</span><span class="tok-p">:</span><span class="tok-p">,</span> <span class="tok-n">1</span><span class="tok-p">]</span><span class="tok-p">)</span><span class="tok-p">)</span>
+
+cat <span class="tok-p">=</span> CatBoostClassifier<span class="tok-p">(</span>iterations<span class="tok-p">=</span><span class="tok-n">5000</span><span class="tok-p">,</span> learning_rate<span class="tok-p">=</span><span class="tok-n">0.05</span><span class="tok-p">,</span> depth<span class="tok-p">=</span><span class="tok-n">6</span><span class="tok-p">,</span>
+                         eval_metric<span class="tok-p">=</span><span class="tok-s">"</span><span class="tok-s">AUC</span><span class="tok-s">"</span><span class="tok-p">,</span> early_stopping_rounds<span class="tok-p">=</span><span class="tok-n">100</span><span class="tok-p">,</span> verbose<span class="tok-p">=</span><span class="tok-n">0</span><span class="tok-p">)</span>
+cat<span class="tok-p">.</span>fit<span class="tok-p">(</span>X_tr<span class="tok-p">,</span> y_tr<span class="tok-p">,</span> eval_set<span class="tok-p">=</span><span class="tok-p">(</span>X_val<span class="tok-p">,</span> y_val<span class="tok-p">)</span><span class="tok-p">)</span>
+<span class="tok-f">print</span><span class="tok-p">(</span><span class="tok-s">"</span><span class="tok-s">Cat</span><span class="tok-s">"</span><span class="tok-p">,</span> cat<span class="tok-p">.</span>get_best_iteration<span class="tok-p">(</span><span class="tok-p">)</span><span class="tok-p">,</span> roc_auc_score<span class="tok-p">(</span>y_te<span class="tok-p">,</span> cat<span class="tok-p">.</span>predict_proba<span class="tok-p">(</span>X_te<span class="tok-p">)</span><span class="tok-p">[</span><span class="tok-p">:</span><span class="tok-p">,</span> <span class="tok-n">1</span><span class="tok-p">]</span><span class="tok-p">)</span><span class="tok-p">)</span>
+</code></pre></div>
+<p>Важное замечание: валидационная выборка для ранней остановки не должна быть той же, по которой вы потом отчитываетесь о качестве — иначе оценка оптимистична. Поэтому в коде три части: на <code>X_val</code> выбирается число деревьев, на <code>X_te</code> считается итоговая метрика (альтернатива — вложенная кросс-валидация).</p>
+<h2 id="почему-gbdt-всё-ещё-сильнее-нейросетей-на-таблицах">Почему GBDT всё ещё сильнее нейросетей на таблицах</h2>
+<p>Grinsztajn, Oyallon, Varoquaux (2022) на 45 наборах данных показали, что деревья (лес, бустинг) остаются state of the art для табличных данных среднего размера (около 10 тыс. объектов). Причины: таблицы содержат неинформативные признаки, не инвариантны к вращению пространства, а целевые функции часто негладкие, что неудобно для MLP. С тех пор появились табличные трансформеры и in-context модели: TabPFN (Hollmann et al., Nature, 2025) — трансформер, предобученный на миллионах синтетических задач, который решает новую небольшую табличную задачу одним прямым проходом (in-context, без градиентного обучения) и, по бенчмарку авторов, на выборках до 10 тыс. строк превосходит GBDT, настроенные часами. На больших данных и в задачах с жёсткими требованиями к задержке бустинг пока остаётся рабочей лошадкой; разумная практика 2026 года — начинать с GBDT и сравнивать с табличной фундаментальной моделью.</p>
+<h2 id="ловушки">Ловушки</h2>
+<ul>
+<li><strong>Утечка в категориальных кодировках</strong>: target encoding без OOF-схемы (CatBoost делает это сам).</li>
+<li><strong>Early stopping на тесте</strong> — завышенная метрика.</li>
+<li><strong>Дрейф</strong>: бустинг не экстраполирует (как и дерево) и плохо переживает сдвиг распределения; следите за признаками, зависящими от времени.</li>
+<li><strong>Монотонные ограничения</strong> (<code>monotone_constraints</code>) — недорогой способ вложить бизнес-знание и стабилизировать модель.</li>
+<li>На собеседовании: вывод псевдоостатков для log-loss; в чём разница между градиентным бустингом и XGBoost (второй порядок, регуляризация листьев); leaf-wise против level-wise; почему маленький <span class="tex">\eta</span> лучше.</li>
+</ul>
+<h2 id="что-почитать">Что почитать</h2>
+<ul>
+<li>Friedman J. <em>Greedy Function Approximation: A Gradient Boosting Machine</em>, Annals of Statistics, 2001.</li>
+<li>Friedman J. <em>Stochastic Gradient Boosting</em>, 2002; Freund Y., Schapire R. <em>A Decision-Theoretic Generalization of On-Line Learning and an Application to Boosting</em>, 1997.</li>
+<li>Chen T., Guestrin C. <em>XGBoost: A Scalable Tree Boosting System</em>, KDD 2016: https://arxiv.org/abs/1603.02754</li>
+<li>Ke G. et al. <em>LightGBM: A Highly Efficient Gradient Boosting Decision Tree</em>, NeurIPS 2017.</li>
+<li>Prokhorenkova L. et al. <em>CatBoost: unbiased boosting with categorical features</em>, NeurIPS 2018: https://arxiv.org/abs/1706.09516</li>
+<li>Grinsztajn L. et al. <em>Why do tree-based models still outperform deep learning on typical tabular data?</em>, NeurIPS 2022: https://arxiv.org/abs/2207.08815</li>
+<li>Hollmann N. et al. <em>Accurate predictions on small data with a tabular foundation model</em>, Nature, 2025: https://doi.org/10.1038/s41586-024-08328-6</li>
+<li>Хендбук Яндекса, «Градиентный бустинг»: https://education.yandex.ru/handbook/ml/article/gradientnyj-busting</li>
+</ul>
+</div>
+      
+
+      
+      <nav class="pager" aria-label="Соседние статьи">
+        <a href="/edufamcs-demo/handbook/classic/ansambli-i-sluchajnyj-les/"><span><svg class="ico sm" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-arrow-left"/></svg>Назад</span>Ансамбли и случайный лес</a>
+        <a href="/edufamcs-demo/handbook/classic/giperparametry-i-interpretiruemost/"><span>Дальше<svg class="ico sm" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-arrow"/></svg></span>Подбор гиперпараметров и интерпретируемость</a>
+      </nav>
+      
+    </article>
+
+    <aside class="hb-toc" aria-label="На этой странице">
+      <a class="l2" href="#от-adaboost-к-градиенту">От AdaBoost к градиенту</a><a class="l2" href="#бустинг-как-градиентный-спуск-в-пространстве-функций">Бустинг как градиентный спуск в пространстве функций</a><a class="l2" href="#регуляризация">Регуляризация</a><a class="l2" href="#ньютоновский-шаг-и-xgboost">Ньютоновский шаг и XGBoost</a><a class="l2" href="#lightgbm">LightGBM</a><a class="l2" href="#catboost">CatBoost</a><a class="l2" href="#что-подбирать-и-в-каком-порядке">Что подбирать и в каком порядке</a><a class="l2" href="#код">Код</a><a class="l2" href="#почему-gbdt-всё-ещё-сильнее-нейросетей-на-таблицах">Почему GBDT всё ещё сильнее нейросетей на таблицах</a><a class="l2" href="#ловушки">Ловушки</a><a class="l2" href="#что-почитать">Что почитать</a>
+    </aside>
+  </div>
+</div>
+
+
+</main>
+
+<footer class="ftr" data-theme="dark">
+  <svg class="sym fern" viewBox="0 0 40.5 65.02" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#fern"/></svg>
+  <div class="container">
+    <div class="ftr-row">
+      <a href="/edufamcs-demo/" aria-label="EDU FAMCS — главная"><img src="/edufamcs-demo/static/brand/logo/logo-edu-dark.svg" alt="EDU FAMCS" width="196" height="40"></a>
+      <ul class="ftr-links">
+        <li><a href="/edufamcs-demo/#courses">Курсы</a></li>
+        <li><a href="/edufamcs-demo/ml/">Машинное обучение</a></li>
+        <li><a href="/edufamcs-demo/handbook/">Хендбук</a></li>
+        <li><a href="/edufamcs-demo/news/">Новости</a></li>
+        <li><a href="/edufamcs-demo/people/">Авторы</a></li>
+        <li><a href="/edufamcs-demo/about/">О&nbsp;нас</a></li>
+        <li><a href="/edufamcs-demo/propose/">Предложить или исправить</a></li>
+        <li><a href="/edufamcs-demo/privacy/">Конфиденциальность</a></li>
+      </ul>
+    </div>
+    <div class="ftr-big" aria-hidden="true">EDU<span class="d">·</span>FAMCS</div>
+    <p class="ftr-copy">© 2026 EDU FAMCS · Минск</p>
+  </div>
+</footer>
+
+<div class="toasts-region" aria-live="polite" id="toasts">
+
+</div>
+
+</body>
+</html>

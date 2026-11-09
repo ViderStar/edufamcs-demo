@@ -1,0 +1,265 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Офлайн-метрики: Precision@k, Recall@k, MAP, NDCG · EDU FAMCS</title>
+<meta name="description" content="Офлайн-метрики: Precision@k, Recall@k, MAP, NDCG — Рекомендательные системы. Хендбук ML-курса ФПМИ.">
+<meta name="theme-color" content="#060A16">
+<meta name="robots" content="noindex, nofollow">
+<meta name="htmx-config" content='{"allowEval":false,"includeIndicatorStyles":false,"historyCacheSize":0,"selfRequestsOnly":true}'>
+<meta name="katex-js" content="/edufamcs-demo/static/vendor/katex/katex.min.js">
+<meta name="katex-css" content="/edufamcs-demo/static/vendor/katex/katex.min.css">
+<link rel="icon" href="/edufamcs-demo/static/brand/logo/favicon-16.svg" type="image/svg+xml" sizes="16x16">
+<link rel="icon" href="/edufamcs-demo/static/brand/logo/favicon.svg" type="image/svg+xml" sizes="any">
+<link rel="preload" href="/edufamcs-demo/static/brand/fonts/manrope-cyrillic-400.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/edufamcs-demo/static/brand/fonts/unbounded-cyrillic-800.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="/edufamcs-demo/static/brand/fonts.css">
+<link rel="stylesheet" href="/edufamcs-demo/static/brand/tokens.css">
+<link rel="stylesheet" href="/edufamcs-demo/static/brand/components.css">
+<link rel="stylesheet" href="/edufamcs-demo/static/css/site.css">
+<link rel="stylesheet" href="/edufamcs-demo/static/css/hub.css">
+<link rel="stylesheet" href="/edufamcs-demo/static/css/about.css">
+<link rel="stylesheet" href="/edufamcs-demo/static/handbook/handbook.css">
+<script src="/edufamcs-demo/static/js/theme.js"></script>
+<script src="/edufamcs-demo/static/vendor/htmx/htmx.min.js" defer></script>
+<script src="/edufamcs-demo/static/vendor/alpine/alpine-csp.min.js" defer></script>
+<script src="/edufamcs-demo/static/js/site.js" defer></script>
+<script src="/edufamcs-demo/static/handbook/handbook.js" defer></script>
+</head>
+<body class="" hx-headers='{"X-CSRFToken": "AJvb0NrX6iPwUSmOBq4RXM9vzZJrbFoGZt4fKLek19dF9rxx8DNZUhFA7HPWJP6q"}'>
+<a class="skip" href="#main">К содержанию</a>
+<div class="demo-bar" role="note">Демо-версия для отзывов: вход, запись на курсы и формы здесь не работают.</div>
+
+<header class="hdr">
+  <div class="container">
+    <a class="brand" href="/edufamcs-demo/" aria-label="EDU FAMCS — главная">
+      <span class="full"><img class="only-light" src="/edufamcs-demo/static/brand/logo/logo-edu-light.svg" alt="EDU FAMCS" width="196" height="40"><img class="only-dark" src="/edufamcs-demo/static/brand/logo/logo-edu-dark.svg" alt="EDU FAMCS" width="196" height="40"></span>
+      <span class="short"><img class="only-light" src="/edufamcs-demo/static/brand/logo/logo-edu-light.svg" alt="EDU FAMCS" height="30"><img class="only-dark" src="/edufamcs-demo/static/brand/logo/logo-edu-dark.svg" alt="EDU FAMCS" height="30"></span>
+    </a>
+    <nav class="nav" id="main-nav" aria-label="Основная навигация">
+      <a href="/edufamcs-demo/#courses">Курсы</a>
+      <a href="/edufamcs-demo/ml/" >Машинное обучение</a>
+      
+      <a href="/edufamcs-demo/handbook/" aria-current="page">Хендбук</a>
+      <a href="/edufamcs-demo/news/" >Новости</a>
+      <a href="/edufamcs-demo/people/" >Авторы</a>
+      <a href="/edufamcs-demo/about/" >О&nbsp;нас</a>
+    </nav>
+    <div class="hdr-actions">
+      
+      <a class="btn btn-outline btn-login" href="/edufamcs-demo/accounts/login/?next=/handbook/recsys/oflajn-metriki/">Войти</a>
+      
+      <button class="icon-btn menu-btn" type="button" aria-label="Меню" aria-expanded="false" aria-controls="main-nav"><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-menu"/></svg></button>
+    </div>
+  </div>
+</header>
+
+<main id="main">
+
+
+
+<div class="container hb-page s-recsys">
+  <div class="hb">
+    <aside class="hb-nav" aria-label="Статьи раздела">
+      
+<form class="hb-search" action="/edufamcs-demo/handbook/search/" method="get" role="search">
+  <svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-search"/></svg>
+  <input class="input" type="search" name="q" value="" placeholder="Поиск по хендбуку" aria-label="Поиск по хендбуку" autocomplete="off" maxlength="120"
+    hx-get="/edufamcs-demo/handbook/search/" hx-trigger="input changed delay:250ms, search" hx-target="#hb-nav-results" hx-sync="this:replace">
+</form>
+
+      <div id="hb-nav-results" class="hb-nav-results" aria-live="polite"></div>
+      <a class="grp" href="/edufamcs-demo/handbook/recsys/">Постановка и оценка</a>
+      
+      <a class="" href="/edufamcs-demo/handbook/recsys/zadacha-i-dannye/">Задача рекомендаций и данные</a>
+      
+      <a class="cur" href="/edufamcs-demo/handbook/recsys/oflajn-metriki/" aria-current="page">Офлайн-метрики: Precision@k, Recall@k, MAP, NDCG</a>
+      
+    </aside>
+
+    <article class="hb-main">
+      <nav class="crumbs" aria-label="Навигация"><a href="/edufamcs-demo/handbook/">Хендбук</a><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-chev"/></svg><a href="/edufamcs-demo/handbook/recsys/">Рекомендательные системы</a></nav>
+      <h1 class="h1">Офлайн-метрики: Precision@k, Recall@k, MAP, NDCG</h1>
+      <div class="hb-meta">
+        
+        
+        <span><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-clock"/></svg>11&nbsp;мин</span>
+        <span class="hb-authors"><span class="avatar sm" title="Артем Лебедевич">АЛ</span>Артем Лебедевич</span>
+        <span><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-edit"/></svg>9 ноября 2026</span>
+        
+        
+      </div>
+
+      
+      <details class="hb-mtoc">
+        <summary><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-list"/></svg>Содержание<svg class="ico sm" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-chev-down"/></svg></summary>
+        <a class="l2" href="#precisionk-и-recallk">Precision@k и Recall@k</a><a class="l2" href="#mapk">MAP@k</a><a class="l2" href="#ndcgk">NDCG@k</a><a class="l2" href="#hitratek">HitRate@k</a><a class="l2" href="#не-только-точность-покрытие-и-новизна">Не только точность: покрытие и новизна</a><a class="l2" href="#ловушки-оценки">Ловушки оценки</a><a class="l3" href="#сэмплированные-метрики">Сэмплированные метрики</a><a class="l3" href="#утечки-данных">Утечки данных</a><a class="l3" href="#воспроизводимость-сравнений">Воспроизводимость сравнений</a><a class="l2" href="#валидация-по-времени">Валидация по времени</a><a class="l2" href="#как-читать-результаты">Как читать результаты</a><a class="l2" href="#что-почитать">Что почитать</a>
+      </details>
+      
+
+      <div class="prose"><p>Рекомендатель выдаёт пользователю упорядоченный список из <span class="tex">k</span> объектов. Офлайн-оценка отвечает на вопрос: насколько хорошо этот список угадывает то, с чем пользователь провзаимодействовал в отложенном периоде. Обозначим через <span class="tex">L_u = (i_1, \dots, i_k)</span> выдачу для пользователя <span class="tex">u</span>, через <span class="tex">T_u</span> — множество релевантных объектов из теста, а через <span class="tex">\mathrm{rel}_j \in \{0, 1\}</span> — релевантен ли объект на позиции <span class="tex">j</span>.</p>
+<h2 id="precisionk-и-recallk">Precision@k и Recall@k</h2>
+<div class="tex tex-block">\mathrm{Precision@}k = \frac{|L_u \cap T_u|}{k}, \qquad \mathrm{Recall@}k = \frac{|L_u \cap T_u|}{|T_u|}</div>
+<p>Precision отвечает на вопрос «какая доля показанного оказалась полезной», recall — «какую долю полезного мы нашли». Обе метрики не смотрят на порядок внутри топа: попадание на первую и на десятую позицию весит одинаково. Recall@k удобен для оценки <strong>генерации кандидатов</strong>, где важно не потерять релевантное в первых сотнях позиций. Метрики усредняют по пользователям; пользователей без единого объекта в тесте из усреднения исключают.</p>
+<p>У пользователей с одним тестовым объектом Precision@10 не может быть больше <span class="tex">0{,}1</span>, поэтому иногда используют нормированный вариант с <span class="tex">\min(k, |T_u|)</span> в знаменателе.</p>
+<h2 id="mapk">MAP@k</h2>
+<p>Average Precision учитывает порядок: он усредняет precision на тех позициях, где было попадание.</p>
+<div class="tex tex-block">\mathrm{AP@}k(u) = \frac{1}{\min(k, |T_u|)} \sum_{j=1}^{k} \mathrm{Precision@}j \cdot \mathrm{rel}_j,
+\qquad
+\mathrm{MAP@}k = \frac{1}{|U|} \sum_{u} \mathrm{AP@}k(u)</div>
+<p>Если у пользователя один тестовый объект и он стоит на первом месте, <span class="tex">\mathrm{AP} = 1</span>; на пятом — <span class="tex">0{,}2</span>. Близкая метрика для случая «нужен один правильный ответ» — <strong>MRR</strong>, средний обратный ранг первого попадания: <span class="tex">\mathrm{MRR} = \frac{1}{|U|}\sum_u \frac{1}{\mathrm{rank}_u}</span>.</p>
+<h2 id="ndcgk">NDCG@k</h2>
+<p>NDCG работает и с градуированной релевантностью (покупка важнее клика) и мягко штрафует за низкие позиции через логарифмическое дисконтирование:</p>
+<div class="tex tex-block">\mathrm{DCG@}k = \sum_{j=1}^{k} \frac{2^{g_j} - 1}{\log_2(j + 1)},
+\qquad
+\mathrm{NDCG@}k = \frac{\mathrm{DCG@}k}{\mathrm{IDCG@}k}</div>
+<p>где <span class="tex">g_j</span> — оценка релевантности объекта на позиции <span class="tex">j</span>, а <span class="tex">\mathrm{IDCG@}k</span> — DCG идеальной выдачи (тестовые объекты, отсортированные по убыванию <span class="tex">g</span>). Нормировка приводит метрику к отрезку <span class="tex">[0, 1]</span> и делает её сравнимой между пользователями с разным числом релевантных объектов. Для бинарной релевантности числитель равен просто <span class="tex">\mathrm{rel}_j</span>.</p>
+<div class="code"><div class="code-head"><span class="lang">python</span></div><pre><code><span class="tok-k">import</span> numpy <span class="tok-k">as</span> np
+
+<span class="tok-k">def</span> <span class="tok-f">ndcg_at_k</span><span class="tok-p">(</span>recommended<span class="tok-p">,</span> relevant<span class="tok-p">,</span> k<span class="tok-p">=</span><span class="tok-n">10</span><span class="tok-p">)</span><span class="tok-p">:</span>
+    <span class="tok-s">"""recommended — список id по убыванию скора, relevant — множество id из теста."""</span>
+    gains <span class="tok-p">=</span> np<span class="tok-p">.</span>array<span class="tok-p">(</span><span class="tok-p">[</span><span class="tok-n">1.0</span> <span class="tok-k">if</span> i <span class="tok-k">in</span> relevant <span class="tok-k">else</span> <span class="tok-n">0.0</span> <span class="tok-k">for</span> i <span class="tok-k">in</span> recommended<span class="tok-p">[</span><span class="tok-p">:</span>k<span class="tok-p">]</span><span class="tok-p">]</span><span class="tok-p">)</span>
+    discounts <span class="tok-p">=</span> <span class="tok-n">1.0</span> <span class="tok-p">/</span> np<span class="tok-p">.</span>log2<span class="tok-p">(</span>np<span class="tok-p">.</span>arange<span class="tok-p">(</span><span class="tok-n">2</span><span class="tok-p">,</span> k <span class="tok-p">+</span> <span class="tok-n">2</span><span class="tok-p">)</span><span class="tok-p">)</span>
+    dcg <span class="tok-p">=</span> <span class="tok-p">(</span>gains <span class="tok-p">*</span> discounts<span class="tok-p">[</span><span class="tok-p">:</span> <span class="tok-f">len</span><span class="tok-p">(</span>gains<span class="tok-p">)</span><span class="tok-p">]</span><span class="tok-p">)</span><span class="tok-p">.</span>sum<span class="tok-p">(</span><span class="tok-p">)</span>
+    idcg <span class="tok-p">=</span> discounts<span class="tok-p">[</span><span class="tok-p">:</span> <span class="tok-f">min</span><span class="tok-p">(</span><span class="tok-f">len</span><span class="tok-p">(</span>relevant<span class="tok-p">)</span><span class="tok-p">,</span> k<span class="tok-p">)</span><span class="tok-p">]</span><span class="tok-p">.</span>sum<span class="tok-p">(</span><span class="tok-p">)</span>
+    <span class="tok-k">return</span> dcg <span class="tok-p">/</span> idcg <span class="tok-k">if</span> idcg <span class="tok-p">&gt;</span> <span class="tok-n">0</span> <span class="tok-k">else</span> <span class="tok-n">0.0</span>
+</code></pre></div>
+<p><strong>Пример.</strong> Выдача из пяти объектов, в тесте у пользователя три объекта, попадания на позициях 1 и 4:</p>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>Метрика</th>
+<th>Расчёт</th>
+<th>Значение</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Precision@5</td>
+<td><span class="tex">2/5</span></td>
+<td><span class="tex">0{,}4</span></td>
+</tr>
+<tr>
+<td>Recall@5</td>
+<td><span class="tex">2/3</span></td>
+<td><span class="tex">0{,}67</span></td>
+</tr>
+<tr>
+<td>AP@5</td>
+<td><span class="tex">\frac{1}{3}\bigl(1 + \frac{2}{4}\bigr)</span></td>
+<td><span class="tex">0{,}5</span></td>
+</tr>
+<tr>
+<td>RR (обратный ранг)</td>
+<td><span class="tex">1/1</span></td>
+<td><span class="tex">1</span></td>
+</tr>
+<tr>
+<td>NDCG@5</td>
+<td><span class="tex">\dfrac{1 + 1/\log_2 5}{1 + 1/\log_2 3 + 1/\log_2 4} = \dfrac{1{,}43}{2{,}13}</span></td>
+<td><span class="tex">0{,}67</span></td>
+</tr>
+</tbody>
+</table></div>
+<p>Если те же два попадания стоят на позициях 4 и 5, precision и recall не изменятся, а AP упадёт до <span class="tex">\frac{1}{3}\bigl(\frac14 + \frac25\bigr) \approx 0{,}22</span>, RR — до <span class="tex">0{,}25</span>. Именно чувствительность к порядку отличает ранжирующие метрики от «мешка» попаданий.</p>
+<h2 id="hitratek">HitRate@k</h2>
+<p>Когда у пользователя в тесте один объект (leave-one-out, следующий клик), Recall@k вырождается в <strong>HitRate@k</strong> — долю пользователей, у которых этот объект попал в топ-<span class="tex">k</span>:</p>
+<div class="tex tex-block">\mathrm{HitRate@}k = \frac{1}{|U|}\sum_u [\,|L_u \cap T_u| &gt; 0\,]</div>
+<p>В более общем смысле HitRate — это доля пользователей хотя бы с одним попаданием.</p>
+<p><strong>AUC</strong> смотрит на весь список, а не только на топ: это доля пар «релевантный — нерелевантный», упорядоченных верно,</p>
+<div class="tex tex-block">\mathrm{AUC}(u) = \frac{1}{|T_u|\,|I^-_u|}\sum_{i\in T_u}\sum_{j\in I^-_u}\bigl[\hat s_{ui} &gt; \hat s_{uj}\bigr],</div>
+<p>где <span class="tex">I^-_u</span> — объекты, с которыми пользователь не взаимодействовал. Перестановка в хвосте каталога весит столько же, сколько перестановка в топе, поэтому для оценки выдачи AUC грубоват. Зато его гладкая версия — это функция потерь <a href="/edufamcs-demo/handbook/recsys/neyavnyj-fidbek-bpr/" rel="noopener noreferrer nofollow">BPR</a>. Для одного тестового объекта связь с остальными метриками простая: <span class="tex">\mathrm{HitRate@}k = \mathrm{Recall@}k = k\cdot\mathrm{Precision@}k</span>, а MRR отличается от неё лишь тем, что учитывает позицию первого попадания (<span class="tex">1/\mathrm{rank}</span>), и потому менее грубая. NDCG@k при одном релевантном объекте равен <span class="tex">1/\log_2(\mathrm{rank}+1)</span> при попадании в топ-<span class="tex">k</span>.</p>
+<h2 id="не-только-точность-покрытие-и-новизна">Не только точность: покрытие и новизна</h2>
+<p>Модель, которая всем рекомендует десять самых популярных товаров, может иметь приличный NDCG и быть бесполезной. Поэтому рядом с метриками точности смотрят на свойства выдачи.</p>
+<p><strong>Покрытие каталога</strong> (coverage) — доля объектов, которые попали хотя бы в одну выдачу:</p>
+<div class="tex tex-block">\mathrm{Coverage@}k = \frac{\left|\bigcup_{u} L_u\right|}{|I|}</div>
+<p><strong>Новизна</strong> (novelty) — насколько непопулярны рекомендованные объекты. Если <span class="tex">\mathrm{pop}(i)</span> — доля пользователей, взаимодействовавших с <span class="tex">i</span> в обучении, то</p>
+<div class="tex tex-block">\mathrm{Novelty@}k = \frac{1}{|U|\,k} \sum_{u} \sum_{i \in L_u} -\log_2 \mathrm{pop}(i)</div>
+<p>Рекомендовать известный всем хит — мало информации, редкий объект — много. Ещё полезны <strong>разнообразие внутри списка</strong> (intra-list diversity — средняя попарная непохожесть объектов в выдаче) и доля объектов, которые пользователь уже видел или покупал.</p>
+<h2 id="ловушки-оценки">Ловушки оценки</h2>
+<h3 id="сэмплированные-метрики">Сэмплированные метрики</h3>
+<p>Считать ранг среди всего каталога дорого, поэтому в ранних нейросетевых статьях (в том числе в NCF, 2017) принято оценивать так: к тестовому объекту добавить сотню случайных негативов и смотреть, на каком месте он оказался. Krichene &amp; Rendle (2020, <em>On Sampled Metrics for Item Recommendation</em>) показали, что такие метрики <strong>несостоятельны</strong>: они не сохраняют порядок моделей, а значит, победитель по сэмплированной метрике может проиграть по полной. Причина видна на HitRate@10 среди 100 сэмплов: попадание засчитывается, если тестовый объект выше примерно 90% случайных негативов, то есть если он в верхних ~10% <strong>всего каталога</strong>. На каталоге из <span class="tex">10^5</span> объектов это «топ-10 000», а не топ-10. Сэмплированная метрика ведёт себя скорее как AUC, и модель, которая хорошо отделяет релевантное от массы, но плохо упорядочивает верхушку, выигрывает несправедливо. Поправки существуют, но проще всего считать метрики по <strong>всему каталогу</strong> (матричным умножением на GPU — это быстро) и маскировать уже просмотренное.</p>
+<h3 id="утечки-данных">Утечки данных</h3>
+<p>Ji et al. (2023, <em>A Critical Study on Data Leakage in Recommender System Offline Evaluation</em>) показали: случайный сплит и leave-one-out по пользователю допускают <strong>утечку из будущего</strong> — модель обучается на событиях, которые произошли после тестовых, и видит будущую популярность и будущие связи между объектами. Утечка меняет не только величину метрики, но и <strong>порядок</strong> моделей. Рецепт: глобальный временной сплит (один момент <span class="tex">T</span> для всех, как в разделе ниже), а при leave-one-out — следить, чтобы в обучении не оказалось событий позже тестового ни у кого другого. Отдельная утечка — признаки, посчитанные по всему периоду (популярность, средний рейтинг).</p>
+<h3 id="воспроизводимость-сравнений">Воспроизводимость сравнений</h3>
+<p>Ferrari Dacrema, Cremonesi, Jannach (2019, <em>Are We Really Making Much Progress?</em>) взяли 18 нейросетевых методов с топ-конференций. С разумными усилиями воспроизвести удалось 7. Шесть из них часто проигрывали простым, хорошо настроенным эвристикам: соседским и графовым методам. Седьмой (Mult-VAE) бейзлайны обгонял, но не стабильно обгонял настроенную линейную модель SLIM. Урок для практики: бейзлайны нужно <strong>настраивать с тем же бюджетом</strong>, что и новую модель; фиксировать сплит и seed; сообщать доверительные интервалы (бутстрап по пользователям), а не одну цифру.</p>
+<h2 id="валидация-по-времени">Валидация по времени</h2>
+<p>Самая частая ошибка в рекомендациях — <strong>случайный сплит</strong> взаимодействий на train и test. Он подглядывает в будущее: модель учится на событиях, произошедших позже тестовых, и видит популярность объектов, которой на момент «прогноза» ещё не было. Метрики выходят завышенными, иногда в разы, а сравнение моделей — неверным.</p>
+<p>Правильная схема повторяет то, как модель будет работать в проде:</p>
+<ol>
+<li>Выбираем момент <span class="tex">T</span>. Всё до <span class="tex">T</span> — обучение, интервал <span class="tex">[T, T + \Delta)</span> — тест (например, одна неделя).</li>
+<li>Оцениваем только пользователей, которые есть в обучении (и отдельно — холодных, если это важно).</li>
+<li>Из тестовых релевантных объектов обычно убирают уже купленные до <span class="tex">T</span>, если продукт их повторно не рекомендует.</li>
+<li>Для подбора гиперпараметров делаем ещё одно окно раньше: train до <span class="tex">T - \Delta</span>, валидация <span class="tex">[T - \Delta, T)</span>, а финальную модель переобучаем на всём до <span class="tex">T</span>.</li>
+</ol>
+<div class="code"><div class="code-head"><span class="lang">python</span></div><pre><code><span class="tok-k">import</span> pandas <span class="tok-k">as</span> pd
+
+T <span class="tok-p">=</span> events<span class="tok-p">.</span>ts<span class="tok-p">.</span>max<span class="tok-p">(</span><span class="tok-p">)</span> <span class="tok-p">-</span> pd<span class="tok-p">.</span>Timedelta<span class="tok-p">(</span>days<span class="tok-p">=</span><span class="tok-n">7</span><span class="tok-p">)</span>
+train <span class="tok-p">=</span> events<span class="tok-p">[</span>events<span class="tok-p">.</span>ts <span class="tok-p">&lt;</span> T<span class="tok-p">]</span>
+test <span class="tok-p">=</span> events<span class="tok-p">[</span><span class="tok-p">(</span>events<span class="tok-p">.</span>ts <span class="tok-p">&gt;</span><span class="tok-p">=</span> T<span class="tok-p">)</span> <span class="tok-p">&amp;</span> events<span class="tok-p">.</span>user_id<span class="tok-p">.</span>isin<span class="tok-p">(</span>train<span class="tok-p">.</span>user_id<span class="tok-p">.</span>unique<span class="tok-p">(</span><span class="tok-p">)</span><span class="tok-p">)</span><span class="tok-p">]</span>
+</code></pre></div>
+<p>Несколько последовательных окон (скользящая валидация) дают оценку разброса метрики: если улучшение меньше разницы между соседними неделями, радоваться рано.</p>
+<h2 id="как-читать-результаты">Как читать результаты</h2>
+<ul>
+<li>Сравнивайте модели <strong>на одном и том же</strong> наборе пользователей и одном <span class="tex">k</span>.</li>
+<li>Всегда кладите рядом бейзлайн «популярное за последнее окно».</li>
+<li>Смотрите на точность и покрытие вместе: рост NDCG ценой падения coverage вдвое — повод задуматься.</li>
+<li>Офлайн-метрика — фильтр перед A/B-тестом, а не замена ему. Онлайн-метрики, дизайн A/B и ловушки онлайн-оценки — в статье <a href="/edufamcs-demo/handbook/recsys/prodakshen-i-ab-testy/" rel="noopener noreferrer nofollow">Продакшен и A/B-тесты</a>.</li>
+<li>Метрики из этой статьи — это точка отсчёта для сравнения методов дальше: <a href="/edufamcs-demo/handbook/recsys/kollaborativnaya-filtraciya-po-sosedyam/" rel="noopener noreferrer nofollow">соседей</a>, <a href="/edufamcs-demo/handbook/recsys/matrichnye-razlozheniya-als/" rel="noopener noreferrer nofollow">ALS</a>, <a href="/edufamcs-demo/handbook/recsys/neyavnyj-fidbek-bpr/" rel="noopener noreferrer nofollow">BPR</a>.</li>
+</ul>
+<h2 id="что-почитать">Что почитать</h2>
+<ul>
+<li>Krichene W., Rendle S. <em>On Sampled Metrics for Item Recommendation</em>, KDD 2020 — https://doi.org/10.1145/3394486.3403226</li>
+<li>Ji Y. et al. <em>A Critical Study on Data Leakage in Recommender System Offline Evaluation</em>, ACM TOIS, 2023 — https://arxiv.org/abs/2010.11060</li>
+<li>Ferrari Dacrema M., Cremonesi P., Jannach D. <em>Are We Really Making Much Progress? A Worrying Analysis of Recent Neural Recommendation Approaches</em>, RecSys 2019 — https://arxiv.org/abs/1907.06902</li>
+<li>Järvelin K., Kekäläinen J. <em>Cumulated gain-based evaluation of IR techniques</em>, 2002 (NDCG) — https://doi.org/10.1145/582415.582418</li>
+<li>DeepRecSys, семинар 1: метрики и данные — https://youtu.be/hO6fl7B2q8c; Хасыков, дополнительные методы оценки — https://youtu.be/sI95Y02YD14; семинар 3, рексистемы глазами исследователя — https://youtu.be/tnrw1quaZF0</li>
+</ul>
+</div>
+      
+
+      
+      <nav class="pager" aria-label="Соседние статьи">
+        <a href="/edufamcs-demo/handbook/recsys/zadacha-i-dannye/"><span><svg class="ico sm" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-arrow-left"/></svg>Назад</span>Задача рекомендаций и данные</a>
+        <a href="/edufamcs-demo/handbook/recsys/nepersonalnye-i-kontentnye/"><span>Дальше<svg class="ico sm" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-arrow"/></svg></span>Неперсонализированные и контентные рекомендации</a>
+      </nav>
+      
+    </article>
+
+    <aside class="hb-toc" aria-label="На этой странице">
+      <a class="l2" href="#precisionk-и-recallk">Precision@k и Recall@k</a><a class="l2" href="#mapk">MAP@k</a><a class="l2" href="#ndcgk">NDCG@k</a><a class="l2" href="#hitratek">HitRate@k</a><a class="l2" href="#не-только-точность-покрытие-и-новизна">Не только точность: покрытие и новизна</a><a class="l2" href="#ловушки-оценки">Ловушки оценки</a><a class="l3" href="#сэмплированные-метрики">Сэмплированные метрики</a><a class="l3" href="#утечки-данных">Утечки данных</a><a class="l3" href="#воспроизводимость-сравнений">Воспроизводимость сравнений</a><a class="l2" href="#валидация-по-времени">Валидация по времени</a><a class="l2" href="#как-читать-результаты">Как читать результаты</a><a class="l2" href="#что-почитать">Что почитать</a>
+    </aside>
+  </div>
+</div>
+
+
+</main>
+
+<footer class="ftr" data-theme="dark">
+  <svg class="sym fern" viewBox="0 0 40.5 65.02" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#fern"/></svg>
+  <div class="container">
+    <div class="ftr-row">
+      <a href="/edufamcs-demo/" aria-label="EDU FAMCS — главная"><img src="/edufamcs-demo/static/brand/logo/logo-edu-dark.svg" alt="EDU FAMCS" width="196" height="40"></a>
+      <ul class="ftr-links">
+        <li><a href="/edufamcs-demo/#courses">Курсы</a></li>
+        <li><a href="/edufamcs-demo/ml/">Машинное обучение</a></li>
+        <li><a href="/edufamcs-demo/handbook/">Хендбук</a></li>
+        <li><a href="/edufamcs-demo/news/">Новости</a></li>
+        <li><a href="/edufamcs-demo/people/">Авторы</a></li>
+        <li><a href="/edufamcs-demo/about/">О&nbsp;нас</a></li>
+        <li><a href="/edufamcs-demo/propose/">Предложить или исправить</a></li>
+        <li><a href="/edufamcs-demo/privacy/">Конфиденциальность</a></li>
+      </ul>
+    </div>
+    <div class="ftr-big" aria-hidden="true">EDU<span class="d">·</span>FAMCS</div>
+    <p class="ftr-copy">© 2026 EDU FAMCS · Минск</p>
+  </div>
+</footer>
+
+<div class="toasts-region" aria-live="polite" id="toasts">
+
+</div>
+
+</body>
+</html>

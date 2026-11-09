@@ -1,0 +1,258 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Холодный старт, исследование и бандиты · EDU FAMCS</title>
+<meta name="description" content="Холодный старт, исследование и бандиты — Рекомендательные системы. Хендбук ML-курса ФПМИ.">
+<meta name="theme-color" content="#060A16">
+<meta name="robots" content="noindex, nofollow">
+<meta name="htmx-config" content='{"allowEval":false,"includeIndicatorStyles":false,"historyCacheSize":0,"selfRequestsOnly":true}'>
+<meta name="katex-js" content="/edufamcs-demo/static/vendor/katex/katex.min.js">
+<meta name="katex-css" content="/edufamcs-demo/static/vendor/katex/katex.min.css">
+<link rel="icon" href="/edufamcs-demo/static/brand/logo/favicon-16.svg" type="image/svg+xml" sizes="16x16">
+<link rel="icon" href="/edufamcs-demo/static/brand/logo/favicon.svg" type="image/svg+xml" sizes="any">
+<link rel="preload" href="/edufamcs-demo/static/brand/fonts/manrope-cyrillic-400.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/edufamcs-demo/static/brand/fonts/unbounded-cyrillic-800.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="/edufamcs-demo/static/brand/fonts.css">
+<link rel="stylesheet" href="/edufamcs-demo/static/brand/tokens.css">
+<link rel="stylesheet" href="/edufamcs-demo/static/brand/components.css">
+<link rel="stylesheet" href="/edufamcs-demo/static/css/site.css">
+<link rel="stylesheet" href="/edufamcs-demo/static/css/hub.css">
+<link rel="stylesheet" href="/edufamcs-demo/static/css/about.css">
+<link rel="stylesheet" href="/edufamcs-demo/static/handbook/handbook.css">
+<script src="/edufamcs-demo/static/js/theme.js"></script>
+<script src="/edufamcs-demo/static/vendor/htmx/htmx.min.js" defer></script>
+<script src="/edufamcs-demo/static/vendor/alpine/alpine-csp.min.js" defer></script>
+<script src="/edufamcs-demo/static/js/site.js" defer></script>
+<script src="/edufamcs-demo/static/handbook/handbook.js" defer></script>
+</head>
+<body class="" hx-headers='{"X-CSRFToken": "NKg65JMEJ5nn6WQYbaOxJXmP2TfvqKGhcuPaPHz1EWLwlv1HInxFGsSUABl0YUo1"}'>
+<a class="skip" href="#main">К содержанию</a>
+<div class="demo-bar" role="note">Демо-версия для отзывов: вход, запись на курсы и формы здесь не работают.</div>
+
+<header class="hdr">
+  <div class="container">
+    <a class="brand" href="/edufamcs-demo/" aria-label="EDU FAMCS — главная">
+      <span class="full"><img class="only-light" src="/edufamcs-demo/static/brand/logo/logo-edu-light.svg" alt="EDU FAMCS" width="196" height="40"><img class="only-dark" src="/edufamcs-demo/static/brand/logo/logo-edu-dark.svg" alt="EDU FAMCS" width="196" height="40"></span>
+      <span class="short"><img class="only-light" src="/edufamcs-demo/static/brand/logo/logo-edu-light.svg" alt="EDU FAMCS" height="30"><img class="only-dark" src="/edufamcs-demo/static/brand/logo/logo-edu-dark.svg" alt="EDU FAMCS" height="30"></span>
+    </a>
+    <nav class="nav" id="main-nav" aria-label="Основная навигация">
+      <a href="/edufamcs-demo/#courses">Курсы</a>
+      <a href="/edufamcs-demo/ml/" >Машинное обучение</a>
+      
+      <a href="/edufamcs-demo/handbook/" aria-current="page">Хендбук</a>
+      <a href="/edufamcs-demo/news/" >Новости</a>
+      <a href="/edufamcs-demo/people/" >Авторы</a>
+      <a href="/edufamcs-demo/about/" >О&nbsp;нас</a>
+    </nav>
+    <div class="hdr-actions">
+      
+      <a class="btn btn-outline btn-login" href="/edufamcs-demo/accounts/login/?next=/handbook/recsys/holodnyj-start-i-bandity/">Войти</a>
+      
+      <button class="icon-btn menu-btn" type="button" aria-label="Меню" aria-expanded="false" aria-controls="main-nav"><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-menu"/></svg></button>
+    </div>
+  </div>
+</header>
+
+<main id="main">
+
+
+
+<div class="container hb-page s-recsys">
+  <div class="hb">
+    <aside class="hb-nav" aria-label="Статьи раздела">
+      
+<form class="hb-search" action="/edufamcs-demo/handbook/search/" method="get" role="search">
+  <svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-search"/></svg>
+  <input class="input" type="search" name="q" value="" placeholder="Поиск по хендбуку" aria-label="Поиск по хендбуку" autocomplete="off" maxlength="120"
+    hx-get="/edufamcs-demo/handbook/search/" hx-trigger="input changed delay:250ms, search" hx-target="#hb-nav-results" hx-sync="this:replace">
+</form>
+
+      <div id="hb-nav-results" class="hb-nav-results" aria-live="polite"></div>
+      <a class="grp" href="/edufamcs-demo/handbook/recsys/">Рекомендательная система целиком</a>
+      
+      <a class="" href="/edufamcs-demo/handbook/recsys/kandidaty-i-ranzhirovanie/">Двухстадийная схема: кандидаты → ранжирование</a>
+      
+      <a class="cur" href="/edufamcs-demo/handbook/recsys/holodnyj-start-i-bandity/" aria-current="page">Холодный старт, исследование и бандиты</a>
+      
+      <a class="" href="/edufamcs-demo/handbook/recsys/prodakshen-i-ab-testy/">Рекомендации в продакшене: A/B-тесты и эксплуатация</a>
+      
+    </aside>
+
+    <article class="hb-main">
+      <nav class="crumbs" aria-label="Навигация"><a href="/edufamcs-demo/handbook/">Хендбук</a><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-chev"/></svg><a href="/edufamcs-demo/handbook/recsys/">Рекомендательные системы</a></nav>
+      <h1 class="h1">Холодный старт, исследование и бандиты</h1>
+      <div class="hb-meta">
+        
+        
+        <span><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-clock"/></svg>17&nbsp;мин</span>
+        <span class="hb-authors"><span class="avatar sm" title="Артем Лебедевич">АЛ</span>Артем Лебедевич</span>
+        <span><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-edit"/></svg>9 ноября 2026</span>
+        
+        
+      </div>
+
+      
+      <details class="hb-mtoc">
+        <summary><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-list"/></svg>Содержание<svg class="ico sm" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-chev-down"/></svg></summary>
+        <a class="l2" href="#холодный-старт">Холодный старт</a><a class="l2" href="#исследование-и-эксплуатация">Исследование и эксплуатация</a><a class="l2" href="#многорукие-бандиты">Многорукие бандиты</a><a class="l3" href="#ε-greedy">ε-greedy</a><a class="l3" href="#ucb1">UCB1</a><a class="l3" href="#thompson-sampling">Thompson sampling</a><a class="l3" href="#симуляция">Симуляция</a><a class="l2" href="#контекстные-бандиты-linucb">Контекстные бандиты: LinUCB</a><a class="l2" href="#офлайн-оценка-политик">Офлайн-оценка политик</a><a class="l2" href="#rl-взгляд-reinforce-в-youtube">RL-взгляд: REINFORCE в YouTube</a><a class="l2" href="#практика-исследования-в-продакшене">Практика исследования в продакшене</a><a class="l2" href="#ошибки-и-вопросы-на-собеседованиях">Ошибки и вопросы на собеседованиях</a><a class="l2" href="#что-почитать">Что почитать</a>
+      </details>
+      
+
+      <div class="prose"><p>Всё, что мы строили до этой главы (ALS, двухбашенные сети, ранжирование), учится на логе прошлых взаимодействий. Лог — это не «истина о вкусах», а <strong>след предыдущей рекомендательной политики</strong>: пользователь мог кликнуть только на то, что ему показали. Из этого вытекают две проблемы. Для новых пользователей и объектов лога нет вовсе — это <strong>холодный старт</strong>. Для старых лог смещён тем, что система показывала раньше, — это <strong>петля обратной связи</strong>, и разорвать её можно только осознанным <strong>исследованием</strong> (exploration). Формальный аппарат для исследования — многорукие бандиты, а их продолжение на последовательности решений — обучение с подкреплением.</p>
+<h2 id="холодный-старт">Холодный старт</h2>
+<p>Кратко повторим постановку из главы <a href="/edufamcs-demo/handbook/recsys/zadacha-i-dannye/" rel="noopener noreferrer nofollow">«Задача рекомендаций и данные»</a>: у нового пользователя нет истории, у нового объекта нет взаимодействий, и коллаборативные эмбеддинги для них не определены. Рабочие приёмы:</p>
+<ul>
+<li><strong>Пользователь без истории.</strong> Популярное в сегменте (регион, устройство, источник трафика), короткая анкета интересов при регистрации, быстрая адаптация по первым 3–5 кликам внутри сессии. Сессионные модели и item-to-item работают уже после первого действия.</li>
+<li><strong>Объект без взаимодействий.</strong> Нужно отобразить <strong>контент</strong> (текст, картинка, категория, цена, аудио) в то же пространство, где живут коллаборативные эмбеддинги. Самый простой способ: обучить регрессию <span class="tex">f(\text{content}_i) \to \mathbf{v}_i</span> на старых объектах, у которых <span class="tex">\mathbf{v}_i</span> уже есть (из ALS или двухбашенной модели), и применять её к новым. Двухбашенная архитектура делает это естественно: контентные признаки сразу входят в башню объекта.</li>
+<li><strong>DropoutNet</strong> (Volkovs, Yu, Poutanen, NeurIPS 2017). Скрытая проблема предыдущего подхода: модель, обученная на «тёплых» объектах, привыкает опираться на коллаборативный вход. DropoutNet при обучении случайно <strong>зануляет</strong> коллаборативную часть входа (с некоторой вероятностью целиком), заставляя сеть извлекать из контента всё, что можно. Вычитать ничего не нужно: на инференсе у холодного объекта коллаборативный вход просто нулевой, и сеть к этому уже приучена. Идея «обучаться в условиях искусственно созданного холодного старта» применяется повсеместно.</li>
+<li><strong>Мета-обучение</strong> (MeLU, Lee et al., KDD 2019): параметры модели обучают так, чтобы после нескольких градиентных шагов на 3–5 взаимодействиях нового пользователя она давала хорошие рекомендации (по духу MAML). Красиво, но в индустрии встречается редко: дорого, а сильный контентный базис и бустинг дают сопоставимый результат проще.</li>
+<li><strong>Исследование.</strong> Единственный способ быстро <em>узнать</em> про новый объект — показать его. Об этом остаток главы.</li>
+</ul>
+<h2 id="исследование-и-эксплуатация">Исследование и эксплуатация</h2>
+<p>Если всегда показывать то, что по текущим оценкам лучше всего (<strong>exploit</strong>), система никогда не узнает, что объект, который она ни разу не показывала, на самом деле лучше. Если показывать случайное (<strong>explore</strong>), мы теряем клики. Баланс между ними — дилемма explore/exploit.</p>
+<p>Петля обратной связи делает проблему острее: объект получает показы → клики → высокую оценку → ещё больше показов. Начавшие с неудачного старта хорошие объекты тонут навсегда, а популярные становятся популярнее (popularity bias; подробнее в <a href="/edufamcs-demo/handbook/recsys/prodakshen-i-ab-testy/" rel="noopener noreferrer nofollow">главе об эксплуатации</a>). Исследование ломает эту петлю, поставляя данные о том, что система иначе не увидела бы.</p>
+<h2 id="многорукие-бандиты">Многорукие бандиты</h2>
+<p><strong>Постановка.</strong> Есть <span class="tex">K</span> «ручек» (объектов, баннеров, вариантов блока). На шаге <span class="tex">t</span> выбираем ручку <span class="tex">a_t</span> и получаем награду <span class="tex">r_t \in [0,1]</span> (клик). У ручки <span class="tex">a</span> неизвестное среднее <span class="tex">\mu_a</span>. Лучшая ручка имеет <span class="tex">\mu^* = \max_a \mu_a</span>. Качество алгоритма меряют <strong>регретом</strong> — недополученной наградой по сравнению с оракулом, всегда выбирающим лучшую ручку:</p>
+<div class="tex tex-block">R_T = T\mu^* - \sum_{t=1}^{T} \mu_{a_t}.</div>
+<p>Наивные стратегии дают линейный регрет <span class="tex">R_T = \Theta(T)</span>: всегда эксплуатировать после небольшого пробного периода — рискованно (с постоянной вероятностью застрянем на неверной ручке), всегда исследовать — гарантированно терять. Разумные алгоритмы добиваются <span class="tex">R_T = O(\log T)</span>, и лучше по порядку нельзя: по нижней границе Лай–Роббинса (1985) у любого состоятельного алгоритма <span class="tex">R_T = \Omega(\log T)</span>.</p>
+<h3 id="ε-greedy">ε-greedy</h3>
+<p>С вероятностью <span class="tex">\varepsilon</span> выбираем случайную ручку, иначе — ручку с лучшей оценкой <span class="tex">\hat\mu_a = s_a / n_a</span> (<span class="tex">s_a</span> — сумма наград, <span class="tex">n_a</span> — число выборов). Реализация на пять строк, но при постоянном <span class="tex">\varepsilon</span> регрет линеен (мы вечно тратим долю <span class="tex">\varepsilon</span> на заведомо плохие ручки). Убывающий <span class="tex">\varepsilon_t \sim 1/t</span> исправляет это при известных зазорах. Главное практическое преимущество — простота и управляемость: «5% показов — исследование» легко объяснить продакт-менеджеру.</p>
+<h3 id="ucb1">UCB1</h3>
+<p>Принцип <strong>оптимизма в условиях неопределённости</strong>: для каждой ручки строим верхнюю доверительную границу и выбираем ручку с наибольшей. Auer, Cesa-Bianchi, Fischer (2002):</p>
+<div class="tex tex-block">a_t = \arg\max_a \left( \hat\mu_a + \sqrt{\frac{2\ln t}{n_a}} \right).</div>
+<p>Второе слагаемое — полуширина доверительного интервала из неравенства Хёфдинга: чем реже ручку выбирали, тем шире интервал и тем сильнее «бонус за неизвестность». Ручка, которую долго не пробовали, рано или поздно выигрывает по границе. Алгоритм детерминирован, не имеет параметров и даёт <span class="tex">R_T = O(\sum_a \frac{\ln T}{\Delta_a})</span>, где <span class="tex">\Delta_a = \mu^* - \mu_a</span>. На практике константу под корнем часто подбирают (бонус на реальных CTR порядка 0,05 слишком велик, и UCB1 «в лоб» исследует дольше нужного).</p>
+<h3 id="thompson-sampling">Thompson sampling</h3>
+<p>Байесовский подход. Для бернуллиевских наград берём сопряжённое априорное распределение <span class="tex">\mu_a \sim \mathrm{Beta}(\alpha_a, \beta_a)</span> (начинаем с <span class="tex">\mathrm{Beta}(1,1)</span> — равномерное). На каждом шаге <strong>сэмплируем</strong> <span class="tex">\tilde\mu_a \sim \mathrm{Beta}(\alpha_a,\beta_a)</span> для каждой ручки, выбираем <span class="tex">a_t = \arg\max_a \tilde\mu_a</span> и обновляем апостериор: при клике <span class="tex">\alpha_a \mathrel{+}= 1</span>, иначе <span class="tex">\beta_a \mathrel{+}= 1</span>.</p>
+<p>Объекты с неопределённой оценкой имеют широкое распределение и иногда выигрывают сэмплирование — это и есть исследование; по мере накопления данных распределения сужаются. Идея предложена Томпсоном ещё в 1933 году для клинических испытаний; интерес к ней вернулся после эмпирических работ Chapelle &amp; Li (NIPS 2011), показавших, что на рекламных данных она обычно не хуже UCB и устойчивее. Преимущества для продакшена: нет гиперпараметров, естественно работает с <strong>отложенной обратной связью</strong> (апостериор можно обновлять пачками) и легко распараллеливается.</p>
+<h3 id="симуляция">Симуляция</h3>
+<p>Сравним три алгоритма на пяти ручках с реальными для рекламы CTR (4–10%).</p>
+<div class="code"><div class="code-head"><span class="lang">python</span></div><pre><code><span class="tok-k">import</span> numpy <span class="tok-k">as</span> np
+<span class="tok-k">import</span> matplotlib.pyplot <span class="tok-k">as</span> plt
+
+rng <span class="tok-p">=</span> np<span class="tok-p">.</span>random<span class="tok-p">.</span>default_rng<span class="tok-p">(</span><span class="tok-n">0</span><span class="tok-p">)</span>
+p <span class="tok-p">=</span> np<span class="tok-p">.</span>array<span class="tok-p">(</span><span class="tok-p">[</span><span class="tok-n">0.04</span><span class="tok-p">,</span> <span class="tok-n">0.05</span><span class="tok-p">,</span> <span class="tok-n">0.06</span><span class="tok-p">,</span> <span class="tok-n">0.08</span><span class="tok-p">,</span> <span class="tok-n">0.10</span><span class="tok-p">]</span><span class="tok-p">)</span>   <span class="tok-c"># истинные CTR ручек</span>
+T<span class="tok-p">,</span> runs<span class="tok-p">,</span> K <span class="tok-p">=</span> <span class="tok-n">20_000</span><span class="tok-p">,</span> <span class="tok-n">20</span><span class="tok-p">,</span> <span class="tok-f">len</span><span class="tok-p">(</span>p<span class="tok-p">)</span>
+
+<span class="tok-k">def</span> <span class="tok-f">run</span><span class="tok-p">(</span>policy<span class="tok-p">)</span><span class="tok-p">:</span>
+    regret <span class="tok-p">=</span> np<span class="tok-p">.</span>zeros<span class="tok-p">(</span>T<span class="tok-p">)</span>
+    <span class="tok-k">for</span> _ <span class="tok-k">in</span> <span class="tok-f">range</span><span class="tok-p">(</span>runs<span class="tok-p">)</span><span class="tok-p">:</span>
+        n<span class="tok-p">,</span> s <span class="tok-p">=</span> np<span class="tok-p">.</span>zeros<span class="tok-p">(</span>K<span class="tok-p">)</span><span class="tok-p">,</span> np<span class="tok-p">.</span>zeros<span class="tok-p">(</span>K<span class="tok-p">)</span>
+        a_<span class="tok-p">,</span> b_ <span class="tok-p">=</span> np<span class="tok-p">.</span>ones<span class="tok-p">(</span>K<span class="tok-p">)</span><span class="tok-p">,</span> np<span class="tok-p">.</span>ones<span class="tok-p">(</span>K<span class="tok-p">)</span>          <span class="tok-c"># Beta(1, 1) для Томпсона</span>
+        reg <span class="tok-p">=</span> <span class="tok-n">0.0</span>
+        <span class="tok-k">for</span> t <span class="tok-k">in</span> <span class="tok-f">range</span><span class="tok-p">(</span><span class="tok-n">1</span><span class="tok-p">,</span> T <span class="tok-p">+</span> <span class="tok-n">1</span><span class="tok-p">)</span><span class="tok-p">:</span>
+            <span class="tok-k">if</span> policy <span class="tok-p">==</span> <span class="tok-s">"</span><span class="tok-s">eps</span><span class="tok-s">"</span><span class="tok-p">:</span>
+                a <span class="tok-p">=</span> rng<span class="tok-p">.</span>integers<span class="tok-p">(</span>K<span class="tok-p">)</span> <span class="tok-k">if</span> rng<span class="tok-p">.</span>random<span class="tok-p">(</span><span class="tok-p">)</span> <span class="tok-p">&lt;</span> <span class="tok-n">0.05</span> <span class="tok-k">or</span> n<span class="tok-p">.</span>min<span class="tok-p">(</span><span class="tok-p">)</span> <span class="tok-p">==</span> <span class="tok-n">0</span> <span class="tok-k">else</span> np<span class="tok-p">.</span>argmax<span class="tok-p">(</span>s <span class="tok-p">/</span> n<span class="tok-p">)</span>
+            <span class="tok-k">elif</span> policy <span class="tok-p">==</span> <span class="tok-s">"</span><span class="tok-s">ucb</span><span class="tok-s">"</span><span class="tok-p">:</span>
+                a <span class="tok-p">=</span> np<span class="tok-p">.</span>argmin<span class="tok-p">(</span>n<span class="tok-p">)</span> <span class="tok-k">if</span> n<span class="tok-p">.</span>min<span class="tok-p">(</span><span class="tok-p">)</span> <span class="tok-p">==</span> <span class="tok-n">0</span> <span class="tok-k">else</span> np<span class="tok-p">.</span>argmax<span class="tok-p">(</span>s <span class="tok-p">/</span> n <span class="tok-p">+</span> np<span class="tok-p">.</span>sqrt<span class="tok-p">(</span><span class="tok-n">2</span> <span class="tok-p">*</span> np<span class="tok-p">.</span>log<span class="tok-p">(</span>t<span class="tok-p">)</span> <span class="tok-p">/</span> n<span class="tok-p">)</span><span class="tok-p">)</span>
+            <span class="tok-k">else</span><span class="tok-p">:</span>
+                a <span class="tok-p">=</span> np<span class="tok-p">.</span>argmax<span class="tok-p">(</span>rng<span class="tok-p">.</span>beta<span class="tok-p">(</span>a_<span class="tok-p">,</span> b_<span class="tok-p">)</span><span class="tok-p">)</span>
+            r <span class="tok-p">=</span> rng<span class="tok-p">.</span>random<span class="tok-p">(</span><span class="tok-p">)</span> <span class="tok-p">&lt;</span> p<span class="tok-p">[</span>a<span class="tok-p">]</span>
+            n<span class="tok-p">[</span>a<span class="tok-p">]</span> <span class="tok-p">+</span><span class="tok-p">=</span> <span class="tok-n">1</span><span class="tok-p">;</span> s<span class="tok-p">[</span>a<span class="tok-p">]</span> <span class="tok-p">+</span><span class="tok-p">=</span> r<span class="tok-p">;</span> a_<span class="tok-p">[</span>a<span class="tok-p">]</span> <span class="tok-p">+</span><span class="tok-p">=</span> r<span class="tok-p">;</span> b_<span class="tok-p">[</span>a<span class="tok-p">]</span> <span class="tok-p">+</span><span class="tok-p">=</span> <span class="tok-n">1</span> <span class="tok-p">-</span> r
+            reg <span class="tok-p">+</span><span class="tok-p">=</span> p<span class="tok-p">.</span>max<span class="tok-p">(</span><span class="tok-p">)</span> <span class="tok-p">-</span> p<span class="tok-p">[</span>a<span class="tok-p">]</span>
+            regret<span class="tok-p">[</span>t <span class="tok-p">-</span> <span class="tok-n">1</span><span class="tok-p">]</span> <span class="tok-p">+</span><span class="tok-p">=</span> reg
+    <span class="tok-k">return</span> regret <span class="tok-p">/</span> runs
+
+<span class="tok-k">for</span> name<span class="tok-p">,</span> label <span class="tok-k">in</span> <span class="tok-p">[</span><span class="tok-p">(</span><span class="tok-s">"</span><span class="tok-s">eps</span><span class="tok-s">"</span><span class="tok-p">,</span> <span class="tok-s">"</span><span class="tok-s">ε-greedy (ε=0.05)</span><span class="tok-s">"</span><span class="tok-p">)</span><span class="tok-p">,</span> <span class="tok-p">(</span><span class="tok-s">"</span><span class="tok-s">ucb</span><span class="tok-s">"</span><span class="tok-p">,</span> <span class="tok-s">"</span><span class="tok-s">UCB1</span><span class="tok-s">"</span><span class="tok-p">)</span><span class="tok-p">,</span> <span class="tok-p">(</span><span class="tok-s">"</span><span class="tok-s">ts</span><span class="tok-s">"</span><span class="tok-p">,</span> <span class="tok-s">"</span><span class="tok-s">Thompson</span><span class="tok-s">"</span><span class="tok-p">)</span><span class="tok-p">]</span><span class="tok-p">:</span>
+    plt<span class="tok-p">.</span>plot<span class="tok-p">(</span>run<span class="tok-p">(</span>name<span class="tok-p">)</span><span class="tok-p">,</span> label<span class="tok-p">=</span>label<span class="tok-p">)</span>
+plt<span class="tok-p">.</span>xlabel<span class="tok-p">(</span><span class="tok-s">"</span><span class="tok-s">шаг t</span><span class="tok-s">"</span><span class="tok-p">)</span><span class="tok-p">;</span> plt<span class="tok-p">.</span>ylabel<span class="tok-p">(</span><span class="tok-s">"</span><span class="tok-s">накопленный регрет</span><span class="tok-s">"</span><span class="tok-p">)</span><span class="tok-p">;</span> plt<span class="tok-p">.</span>legend<span class="tok-p">(</span><span class="tok-p">)</span><span class="tok-p">;</span> plt<span class="tok-p">.</span>show<span class="tok-p">(</span><span class="tok-p">)</span>
+</code></pre></div>
+<p>Что получается при этом сиде (накопленный регрет к шагу 20 000, среднее по 20 прогонам): Томпсон ≈ 60, ε-greedy ≈ 160, UCB1 ≈ 400. Томпсон быстро сходится к лучшей ручке, и его кривая почти выходит на плато. У ε-greedy регрет в пределе растёт линейно с наклоном <span class="tex">\approx \varepsilon\,\overline{\Delta}</span>, где <span class="tex">\overline{\Delta}</span> — средний зазор по ручкам: доля <span class="tex">\varepsilon</span> показов всегда уходит на случайные ручки. Самый поучительный результат у UCB1: асимптотически он логарифмический, но на этом горизонте <strong>хуже ε-greedy</strong>. Бонус <span class="tex">\sqrt{2\ln t/n_a}</span> рассчитан на награды в <span class="tex">[0,1]</span> и при <span class="tex">t = 2\cdot 10^4</span>, <span class="tex">n_a = 1000</span> равен <span class="tex">\approx 0{,}14</span>, а зазоры между ручками — 0,02–0,06. Пока бонус не сожмётся до масштаба зазоров (это <span class="tex">n_a \sim 2\ln t/\Delta_a^2</span>: от тысяч до десятков тысяч показов на ручку), UCB1 исследует почти равномерно. Лечат это уменьшением константы под корнем или вариантами, учитывающими малую дисперсию бернуллиевских наград (UCB1-Tuned из той же статьи Auer et al., KL-UCB). Общий урок: при зазорах в доли процента CTR всем алгоритмам нужны десятки тысяч показов, а на редких событиях (покупки) бандит учится ещё медленнее.</p>
+<h2 id="контекстные-бандиты-linucb">Контекстные бандиты: LinUCB</h2>
+<p>Ручки в рекомендациях — объекты, а оптимальный объект зависит от пользователя и контекста <span class="tex">x_t</span>. <strong>Контекстный бандит</strong>: на шаге <span class="tex">t</span> видим контекст <span class="tex">x_t</span> (признаки пары пользователь–объект), выбираем действие, получаем награду. В LinUCB (Li, Chu, Langford, Schapire, WWW 2010; блок новостей на главной Yahoo!) ожидаемая награда линейна по признакам: <span class="tex">\mathbb{E}[r \mid x_{t,a}] = x_{t,a}^\top \theta_a</span>. Оценка — ридж-регрессия на историю ручки <span class="tex">a</span> (<span class="tex">A_a = I + \sum x x^\top</span>, <span class="tex">b_a = \sum r\,x</span>, <span class="tex">\hat\theta_a = A_a^{-1} b_a</span>), а выбор с бонусом за неопределённость в направлении <span class="tex">x</span>:</p>
+<div class="tex tex-block">a_t = \arg\max_a \left( x_{t,a}^\top \hat\theta_a + \alpha \sqrt{x_{t,a}^\top A_a^{-1} x_{t,a}} \right).</div>
+<p>Бонус велик там, где в направлении <span class="tex">x</span> данных мало. На логах Yahoo! LinUCB дал +12,5% кликов по сравнению со стандартным бандитом без контекста, и разрыв рос по мере того, как данных становилось меньше, то есть именно на холодном старте. Поскольку новый объект — это просто новая ручка с признаками, LinUCB используют для слотов новинок.</p>
+<h2 id="офлайн-оценка-политик">Офлайн-оценка политик</h2>
+<p>Главная сложность: как проверить новую политику <span class="tex">\pi</span> <strong>до</strong> выкатки, имея лог политики <span class="tex">\mu</span> (то, что работало в проде)? Обычный офлайн-замер, где метрика считается на логах, отвечает на вопрос «угадала ли модель то, что показывала старая система», а не «сколько кликов получила бы новая». Это тема <strong>офлайн-оценки политик</strong> (off-policy evaluation, OPE).</p>
+<p><strong>Replay</strong> (Li, Chu, Langford, Wang, WSDM 2011). Если старая политика выбирала объекты <em>равномерно случайно</em>, то берём из лога только те шаги, где выбор <span class="tex">\pi</span> совпал с выбором лога, и усредняем награду. Оценка несмещённая, но выбрасывает долю <span class="tex">1 - 1/K</span> данных, а случайные логи нужны (то есть где-то должно быть исследование).</p>
+<p><strong>IPS</strong> (inverse propensity scoring). Для произвольного логирующего распределения <span class="tex">\mu(a \mid x)</span> доля, с которой <span class="tex">\pi</span> выбрала бы то же действие, взвешивает награду:</p>
+<div class="tex tex-block">\hat V_{\text{IPS}}(\pi) = \frac{1}{n}\sum_{i=1}^{n} r_i \,\frac{\pi(a_i \mid x_i)}{\mu(a_i \mid x_i)}.</div>
+<p>Если <span class="tex">\mu(a\mid x) &gt; 0</span> везде, где <span class="tex">\pi(a\mid x)&gt;0</span> (покрытие), оценка несмещённая: <span class="tex">\mathbb{E}_{\mu}\!\left[r\,\tfrac{\pi}{\mu}\right] = \mathbb{E}_{\pi}[r]</span>. Цена — дисперсия: если <span class="tex">\mu</span> редко выбирал то, что любит <span class="tex">\pi</span>, веса огромны. Отсюда практика: <strong>логировать propensity</strong> <span class="tex">\mu(a_i\mid x_i)</span> в момент показа (иначе его потом не восстановить), клиппировать веса (<span class="tex">\min(w, M)</span>) и держать минимальную вероятность показа у каждого кандидата.</p>
+<p><strong>SNIPS</strong> (self-normalized IPS) нормирует на сумму весов: <span class="tex">\hat V = \sum r_i w_i / \sum w_i</span>. Платим небольшим смещением (оно исчезает с ростом <span class="tex">n</span>), получаем существенно меньшую дисперсию и правильную реакцию на сдвиг наград: если ко всем <span class="tex">r_i</span> прибавить константу, SNIPS сдвинется ровно на неё, а IPS — нет. На практике SNIPS почти всегда лучше простого IPS.</p>
+<p><strong>Doubly robust</strong> (Dudík, Langford, Li, ICML 2011) совмещает IPS с моделью награды <span class="tex">\hat r(x,a)</span>:</p>
+<div class="tex tex-block">\hat V_{\text{DR}} = \frac{1}{n}\sum_i \Big[ \hat r(x_i,\pi) + \frac{\pi(a_i\mid x_i)}{\mu(a_i\mid x_i)}\big(r_i - \hat r(x_i,a_i)\big) \Big], \quad \hat r(x,\pi)=\sum_a \pi(a\mid x)\hat r(x,a).</div>
+<p>Оценка состоятельна, если верна <em>хотя бы одна</em> из двух частей (модель награды или propensity) — отсюда «дважды надёжная» — и при хорошей модели награды имеет меньшую дисперсию, чем IPS.</p>
+<div class="code"><div class="code-head"><span class="lang">python</span></div><pre><code><span class="tok-k">def</span> <span class="tok-f">ips_snips</span><span class="tok-p">(</span>r<span class="tok-p">,</span> pi_prob<span class="tok-p">,</span> mu_prob<span class="tok-p">,</span> clip<span class="tok-p">=</span><span class="tok-n">20.0</span><span class="tok-p">)</span><span class="tok-p">:</span>
+    <span class="tok-s">"""r — награды, pi_prob/mu_prob — вероятности залогированного действия при новой/старой политике."""</span>
+    w <span class="tok-p">=</span> np<span class="tok-p">.</span>minimum<span class="tok-p">(</span>pi_prob <span class="tok-p">/</span> mu_prob<span class="tok-p">,</span> clip<span class="tok-p">)</span>
+    <span class="tok-k">return</span> <span class="tok-p">(</span>w <span class="tok-p">*</span> r<span class="tok-p">)</span><span class="tok-p">.</span>mean<span class="tok-p">(</span><span class="tok-p">)</span><span class="tok-p">,</span> <span class="tok-p">(</span>w <span class="tok-p">*</span> r<span class="tok-p">)</span><span class="tok-p">.</span>sum<span class="tok-p">(</span><span class="tok-p">)</span> <span class="tok-p">/</span> w<span class="tok-p">.</span>sum<span class="tok-p">(</span><span class="tok-p">)</span>
+</code></pre></div>
+<h2 id="rl-взгляд-reinforce-в-youtube">RL-взгляд: REINFORCE в YouTube</h2>
+<p>Бандит оптимизирует мгновенную награду. Но рекомендация меняет состояние пользователя (что он увидит дальше, насколько вовлечётся), и выгодно оптимизировать долгосрочный результат — суммарное время просмотра за сессию. Это постановка обучения с подкреплением. Chen, Beutel, Covington, Jain, Belletti, Chi (Google/YouTube, WSDM 2019) <em>Top-K Off-Policy Correction for a REINFORCE Recommender System</em> масштабировали метод REINFORCE на каталог из миллионов видео и столкнулись ровно с проблемой этой главы: данные собраны <strong>другой</strong> политикой (смесью предыдущих версий рекомендателя). Политику <span class="tex">\pi_\theta</span> обучают по градиенту</p>
+<div class="tex tex-block">\nabla_\theta J = \mathbb{E}_{\mu}\!\left[\frac{\pi_\theta(a\mid s)}{\mu(a\mid s)}\; R\;\nabla_\theta \log \pi_\theta(a\mid s)\right],</div>
+<p>где поправка <span class="tex">\pi_\theta/\mu</span> — тот самый importance weight из IPS, а вероятность <span class="tex">\mu</span> оценивается отдельной сетью по логу. Вторая особенность — рекомендуется <strong>набор из <span class="tex">K</span> объектов</strong>, а не один; авторы выводят поправку top-<span class="tex">K</span>, которая уменьшает вес объектов, уже вероятно попавших в список. Третья — они показали пользу исследования для политики. По отчёту авторов, внедрение дало значимый прирост пользовательской вовлечённости в живых экспериментах; не стоит ожидать его воспроизведения вне масштаба YouTube. Дальнейшее развитие этой линии — генеративные рекомендатели с RL-выравниванием, см. главы 16–17.</p>
+<h2 id="практика-исследования-в-продакшене">Практика исследования в продакшене</h2>
+<p>В большинстве систем нет «чистого» бандита, а есть набор простых механизмов:</p>
+<ul>
+<li><strong>Слоты для новинок.</strong> В выдаче резервируют 1–2 позиции (например, 3, 7) под объекты младше <span class="tex">N</span> дней или с числом показов меньше порога; на них идёт Thompson или просто равномерный показ до накопления <span class="tex">\sim</span> 100–1000 показов.</li>
+<li><strong>Буст свежего.</strong> Добавка к скору, убывающая с возрастом объекта; согласуется с естественной скоростью устаревания в категории (новости — часы, книги — годы).</li>
+<li><strong>Ограничение доли исследования.</strong> Бюджет <span class="tex">\varepsilon</span> — несколько процентов показов, контролируемый guardrail-метриками (CTR, выручка на сессию). Исследование стоит денег: его надо планировать как расход.</li>
+<li><strong>Сегментация исследования.</strong> Исследовать на пользователях, которые терпимы к шуму (высокая активность), а не на новых посетителях.</li>
+<li><strong>Логировать propensity всегда.</strong> Даже если сегодня офлайн-оценка не нужна, завтра она понадобится; дописать вероятности в лог постфактум невозможно.</li>
+</ul>
+<h2 id="ошибки-и-вопросы-на-собеседованиях">Ошибки и вопросы на собеседованиях</h2>
+<ul>
+<li><strong>Нестационарность.</strong> CTR объекта дрейфует (сезонность, усталость от баннера). Классический бандит с накоплением статистики за всё время «залипает» на устаревших оценках; нужны скользящее окно или дисконтирование (для Томпсона — уменьшать <span class="tex">\alpha,\beta</span> с коэффициентом <span class="tex">\gamma&lt;1</span>).</li>
+<li><strong>Отложенная и редкая награда.</strong> Конверсия приходит через часы, клик — мгновенно; оптимизировать по клику — значит получить кликбейт. Выбирайте награду, совпадающую с north star (см. главу про A/B).</li>
+<li><strong>Объект ≠ ручка.</strong> При миллионах объектов бандит без контекста не сходится; нужен контекстный подход или иерархия (сначала категория, затем объект).</li>
+<li><strong>IPS при детерминированном логе.</strong> Если старая политика была детерминирована (<span class="tex">\mu \in \{0,1\}</span>), IPS бесполезен: нет покрытия. Нужна хотя бы небольшая рандомизация.</li>
+<li><strong>Вопрос «чем бандит отличается от A/B-теста».</strong> A/B распределяет трафик поровну на фиксированный срок и даёт надёжную оценку разницы; бандит перераспределяет трафик адаптивно, минимизируя потери, но оценки эффекта смещены и менее надёжны для выводов о причинности. Для выбора одного из нескольких вариантов дизайна, где важна цена потерь, бандит; для принятия решения о выкатке — A/B.</li>
+<li><strong>Вопрос «почему Thompson обычно лучше UCB на практике».</strong> Не завышает бонус в худшем случае и естественно рандомизирован (что удобно для логирования propensity: <span class="tex">\mu(a\mid x)</span> можно оценить сэмплированием).</li>
+</ul>
+<h2 id="что-почитать">Что почитать</h2>
+<ul>
+<li>Auer, Cesa-Bianchi, Fischer. <em>Finite-time Analysis of the Multiarmed Bandit Problem</em>. Machine Learning, 2002 — UCB1 и доказательство логарифмического регрета.</li>
+<li>Li, Chu, Langford, Schapire. <em>A Contextual-Bandit Approach to Personalized News Article Recommendation</em>. WWW 2010 (<a href="https://arxiv.org/abs/1003.0146" rel="noopener noreferrer nofollow">arXiv:1003.0146</a>) — LinUCB.</li>
+<li>Dudík, Langford, Li. <em>Doubly Robust Policy Evaluation and Learning</em>. ICML 2011 (<a href="https://arxiv.org/abs/1103.4601" rel="noopener noreferrer nofollow">arXiv:1103.4601</a>).</li>
+<li>Chen, Beutel, Covington, Jain, Belletti, Chi. <em>Top-K Off-Policy Correction for a REINFORCE Recommender System</em>. WSDM 2019 (<a href="https://arxiv.org/abs/1812.02353" rel="noopener noreferrer nofollow">arXiv:1812.02353</a>).</li>
+<li>Lattimore, Szepesvári. <em>Bandit Algorithms</em> (2020) — свободно доступный учебник, <a href="https://tor-lattimore.com/downloads/book/book.pdf" rel="noopener noreferrer nofollow">tor-lattimore.com/downloads/book/book.pdf</a>.</li>
+<li>Видео курса: <a href="https://youtu.be/pL80qvtB3dY" rel="noopener noreferrer nofollow">лекция 10: exploration и бандитные алгоритмы</a>, <a href="https://youtu.be/If1uocYfq7c" rel="noopener noreferrer nofollow">семинар 10: бандиты в YouTube</a>, <a href="https://youtu.be/1-cnv2OOkuw" rel="noopener noreferrer nofollow">лекция 11: от next item prediction к RL</a>, <a href="https://youtu.be/U-KBYvhjPbc" rel="noopener noreferrer nofollow">семинар 11: REINFORCE в YouTube</a>.</li>
+</ul>
+</div>
+      
+
+      
+      <nav class="pager" aria-label="Соседние статьи">
+        <a href="/edufamcs-demo/handbook/recsys/kandidaty-i-ranzhirovanie/"><span><svg class="ico sm" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-arrow-left"/></svg>Назад</span>Двухстадийная схема: кандидаты → ранжирование</a>
+        <a href="/edufamcs-demo/handbook/recsys/prodakshen-i-ab-testy/"><span>Дальше<svg class="ico sm" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-arrow"/></svg></span>Рекомендации в продакшене: A/B-тесты и эксплуатация</a>
+      </nav>
+      
+    </article>
+
+    <aside class="hb-toc" aria-label="На этой странице">
+      <a class="l2" href="#холодный-старт">Холодный старт</a><a class="l2" href="#исследование-и-эксплуатация">Исследование и эксплуатация</a><a class="l2" href="#многорукие-бандиты">Многорукие бандиты</a><a class="l3" href="#ε-greedy">ε-greedy</a><a class="l3" href="#ucb1">UCB1</a><a class="l3" href="#thompson-sampling">Thompson sampling</a><a class="l3" href="#симуляция">Симуляция</a><a class="l2" href="#контекстные-бандиты-linucb">Контекстные бандиты: LinUCB</a><a class="l2" href="#офлайн-оценка-политик">Офлайн-оценка политик</a><a class="l2" href="#rl-взгляд-reinforce-в-youtube">RL-взгляд: REINFORCE в YouTube</a><a class="l2" href="#практика-исследования-в-продакшене">Практика исследования в продакшене</a><a class="l2" href="#ошибки-и-вопросы-на-собеседованиях">Ошибки и вопросы на собеседованиях</a><a class="l2" href="#что-почитать">Что почитать</a>
+    </aside>
+  </div>
+</div>
+
+
+</main>
+
+<footer class="ftr" data-theme="dark">
+  <svg class="sym fern" viewBox="0 0 40.5 65.02" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#fern"/></svg>
+  <div class="container">
+    <div class="ftr-row">
+      <a href="/edufamcs-demo/" aria-label="EDU FAMCS — главная"><img src="/edufamcs-demo/static/brand/logo/logo-edu-dark.svg" alt="EDU FAMCS" width="196" height="40"></a>
+      <ul class="ftr-links">
+        <li><a href="/edufamcs-demo/#courses">Курсы</a></li>
+        <li><a href="/edufamcs-demo/ml/">Машинное обучение</a></li>
+        <li><a href="/edufamcs-demo/handbook/">Хендбук</a></li>
+        <li><a href="/edufamcs-demo/news/">Новости</a></li>
+        <li><a href="/edufamcs-demo/people/">Авторы</a></li>
+        <li><a href="/edufamcs-demo/about/">О&nbsp;нас</a></li>
+        <li><a href="/edufamcs-demo/propose/">Предложить или исправить</a></li>
+        <li><a href="/edufamcs-demo/privacy/">Конфиденциальность</a></li>
+      </ul>
+    </div>
+    <div class="ftr-big" aria-hidden="true">EDU<span class="d">·</span>FAMCS</div>
+    <p class="ftr-copy">© 2026 EDU FAMCS · Минск</p>
+  </div>
+</footer>
+
+<div class="toasts-region" aria-live="polite" id="toasts">
+
+</div>
+
+</body>
+</html>

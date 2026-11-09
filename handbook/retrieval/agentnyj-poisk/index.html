@@ -1,0 +1,301 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Рассуждающий и агентный поиск: 2025–2026 · EDU FAMCS</title>
+<meta name="description" content="Рассуждающий и агентный поиск: 2025–2026 — Поиск. Хендбук ML-курса ФПМИ.">
+<meta name="theme-color" content="#060A16">
+<meta name="robots" content="noindex, nofollow">
+<meta name="htmx-config" content='{"allowEval":false,"includeIndicatorStyles":false,"historyCacheSize":0,"selfRequestsOnly":true}'>
+<meta name="katex-js" content="/edufamcs-demo/static/vendor/katex/katex.min.js">
+<meta name="katex-css" content="/edufamcs-demo/static/vendor/katex/katex.min.css">
+<link rel="icon" href="/edufamcs-demo/static/brand/logo/favicon-16.svg" type="image/svg+xml" sizes="16x16">
+<link rel="icon" href="/edufamcs-demo/static/brand/logo/favicon.svg" type="image/svg+xml" sizes="any">
+<link rel="preload" href="/edufamcs-demo/static/brand/fonts/manrope-cyrillic-400.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/edufamcs-demo/static/brand/fonts/unbounded-cyrillic-800.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="/edufamcs-demo/static/brand/fonts.css">
+<link rel="stylesheet" href="/edufamcs-demo/static/brand/tokens.css">
+<link rel="stylesheet" href="/edufamcs-demo/static/brand/components.css">
+<link rel="stylesheet" href="/edufamcs-demo/static/css/site.css">
+<link rel="stylesheet" href="/edufamcs-demo/static/css/hub.css">
+<link rel="stylesheet" href="/edufamcs-demo/static/css/about.css">
+<link rel="stylesheet" href="/edufamcs-demo/static/handbook/handbook.css">
+<script src="/edufamcs-demo/static/js/theme.js"></script>
+<script src="/edufamcs-demo/static/vendor/htmx/htmx.min.js" defer></script>
+<script src="/edufamcs-demo/static/vendor/alpine/alpine-csp.min.js" defer></script>
+<script src="/edufamcs-demo/static/js/site.js" defer></script>
+<script src="/edufamcs-demo/static/handbook/handbook.js" defer></script>
+</head>
+<body class="" hx-headers='{"X-CSRFToken": "7P3Iws1nQbTL5mOJ6shb66S0Y7sKFcxdwzCMgqOKL2hUkVZsDF0j3Bo5wPyfdmfX"}'>
+<a class="skip" href="#main">К содержанию</a>
+<div class="demo-bar" role="note">Демо-версия для отзывов: вход, запись на курсы и формы здесь не работают.</div>
+
+<header class="hdr">
+  <div class="container">
+    <a class="brand" href="/edufamcs-demo/" aria-label="EDU FAMCS — главная">
+      <span class="full"><img class="only-light" src="/edufamcs-demo/static/brand/logo/logo-edu-light.svg" alt="EDU FAMCS" width="196" height="40"><img class="only-dark" src="/edufamcs-demo/static/brand/logo/logo-edu-dark.svg" alt="EDU FAMCS" width="196" height="40"></span>
+      <span class="short"><img class="only-light" src="/edufamcs-demo/static/brand/logo/logo-edu-light.svg" alt="EDU FAMCS" height="30"><img class="only-dark" src="/edufamcs-demo/static/brand/logo/logo-edu-dark.svg" alt="EDU FAMCS" height="30"></span>
+    </a>
+    <nav class="nav" id="main-nav" aria-label="Основная навигация">
+      <a href="/edufamcs-demo/#courses">Курсы</a>
+      <a href="/edufamcs-demo/ml/" >Машинное обучение</a>
+      
+      <a href="/edufamcs-demo/handbook/" aria-current="page">Хендбук</a>
+      <a href="/edufamcs-demo/news/" >Новости</a>
+      <a href="/edufamcs-demo/people/" >Авторы</a>
+      <a href="/edufamcs-demo/about/" >О&nbsp;нас</a>
+    </nav>
+    <div class="hdr-actions">
+      
+      <a class="btn btn-outline btn-login" href="/edufamcs-demo/accounts/login/?next=/handbook/retrieval/agentnyj-poisk/">Войти</a>
+      
+      <button class="icon-btn menu-btn" type="button" aria-label="Меню" aria-expanded="false" aria-controls="main-nav"><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-menu"/></svg></button>
+    </div>
+  </div>
+</header>
+
+<main id="main">
+
+
+
+<div class="container hb-page s-recsys">
+  <div class="hb">
+    <aside class="hb-nav" aria-label="Статьи раздела">
+      
+<form class="hb-search" action="/edufamcs-demo/handbook/search/" method="get" role="search">
+  <svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-search"/></svg>
+  <input class="input" type="search" name="q" value="" placeholder="Поиск по хендбуку" aria-label="Поиск по хендбуку" autocomplete="off" maxlength="120"
+    hx-get="/edufamcs-demo/handbook/search/" hx-trigger="input changed delay:250ms, search" hx-target="#hb-nav-results" hx-sync="this:replace">
+</form>
+
+      <div id="hb-nav-results" class="hb-nav-results" aria-live="polite"></div>
+      <a class="grp" href="/edufamcs-demo/handbook/retrieval/">Поиск в эпоху LLM</a>
+      
+      <a class="" href="/edufamcs-demo/handbook/retrieval/rag/">RAG: поиск для языковых моделей</a>
+      
+      <a class="" href="/edufamcs-demo/handbook/retrieval/generativnyj-poisk/">Генеративный поиск: модель как индекс</a>
+      
+      <a class="cur" href="/edufamcs-demo/handbook/retrieval/agentnyj-poisk/" aria-current="page">Рассуждающий и агентный поиск: 2025–2026</a>
+      
+    </aside>
+
+    <article class="hb-main">
+      <nav class="crumbs" aria-label="Навигация"><a href="/edufamcs-demo/handbook/">Хендбук</a><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-chev"/></svg><a href="/edufamcs-demo/handbook/retrieval/">Поиск</a></nav>
+      <h1 class="h1">Рассуждающий и агентный поиск: 2025–2026</h1>
+      <div class="hb-meta">
+        
+        
+        <span><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-clock"/></svg>17&nbsp;мин</span>
+        <span class="hb-authors"><span class="avatar sm" title="Артем Лебедевич">АЛ</span>Артем Лебедевич</span>
+        <span><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-edit"/></svg>9 ноября 2026</span>
+        
+        
+      </div>
+
+      
+      <details class="hb-mtoc">
+        <summary><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-list"/></svg>Содержание<svg class="ico sm" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-chev-down"/></svg></summary>
+        <a class="l2" href="#llm-как-ранжировщик">LLM как ранжировщик</a><a class="l2" href="#задачи-требующие-рассуждения-bright">Задачи, требующие рассуждения: BRIGHT</a><a class="l2" href="#рассуждающие-переранжировщики-и-ретриверы">Рассуждающие переранжировщики и ретриверы</a><a class="l2" href="#предел-одного-вектора">Предел одного вектора</a><a class="l2" href="#агентный-поиск">Агентный поиск</a><a class="l2" href="#стоимость-и-задержка">Стоимость и задержка</a><a class="l2" href="#что-не-меняется">Что не меняется</a><a class="l2" href="#код-цикл-агента">Код: цикл агента</a><a class="l2" href="#что-запомнить">Что запомнить</a><a class="l2" href="#что-почитать">Что почитать</a>
+      </details>
+      
+
+      <div class="prose"><p>Последняя глава — самая подвижная. Часть цитируемых работ вышла в 2025 году, и они ещё проходят проверку сообществом: где результат спорный, это сказано прямо. Тема одна: LLM перестаёт быть только потребителем найденного (как в <a href="/edufamcs-demo/handbook/retrieval/rag/" rel="noopener noreferrer nofollow">RAG</a>) и становится участником поиска — ранжирует, рассуждает о запросе, сама решает, что искать дальше.</p>
+<h2 id="llm-как-ранжировщик">LLM как ранжировщик</h2>
+<p>Cross-encoder (см. <a href="/edufamcs-demo/handbook/retrieval/plotnyj-i-gibridnyj-poisk/" rel="noopener noreferrer nofollow">плотный и гибридный поиск</a>) оценивает пару «запрос — документ» отдельно (pointwise). У больших LLM есть то, чего у BERT-класса нет: общее понимание мира и способность сравнивать документы друг с другом.</p>
+<p><strong>RankGPT</strong> (Sun et al., 2023). Listwise-переранжирование промптом: модели показывают сразу 20 фрагментов с номерами и просят выдать порядок вида <code>[3] &gt; [1] &gt; [2] …</code>. Контекст ограничен, поэтому используется <strong>скользящее окно</strong>: идём с конца списка топ-100 окнами по 20 с шагом 10, постепенно «поднимая» лучшие вверх (как пузырьковая сортировка по окнам). С GPT-4 такой подход на TREC DL и BEIR оказался конкурентен supervised-переранжировщикам, а местами лучше, не обучаясь ничему под задачу; там же показано, что перестановки ChatGPT можно дистиллировать в модель на 440M, которая на BEIR обходит supervised-модель на 3B. Минусы: стоимость и задержка (последовательные генерации, 8–10 вызовов на запрос), чувствительность к порядку подачи, закрытая модель.</p>
+<p><strong>RankZephyr</strong> (Pradeep et al., 2023) и RankVicuna — дистилляция поведения RankGPT/GPT-4 в открытую 7B-модель: учитель выдаёт перестановки, ученик имитирует. Открытая модель сопоставима с GPT-4 на ряде бенчмарков, и можно запускать у себя.</p>
+<p><strong>FIRST</strong> (Reddy et al., 2024). Узкое место listwise — генерация длинной перестановки токен за токеном. Идея: порядок можно прочитать из логитов <strong>первого</strong> сгенерированного идентификатора — логит идентификатора <span class="tex">i</span> на первой позиции служит скором его релевантности, и сортировка кандидатов по этим логитам даёт перестановку. Один шаг декодирования вместо генерации всего списка, по заявлению авторов — ускорение вывода на 50% без потери качества на BEIR; при обучении добавлена learning-to-rank потеря, сильнее штрафующая ошибки на верхних позициях. Показывает, что часть вычислений LLM-ранжировщика была лишней.</p>
+<p>Современная практика: небольшой cross-encoder на всё, LLM-переранжирование — на узкий топ-20 и для сложных запросов. Вопрос «что сильнее» без цены и задержки смысла не имеет.</p>
+<h2 id="задачи-требующие-рассуждения-bright">Задачи, требующие рассуждения: BRIGHT</h2>
+<p>Бенчмарки вроде BEIR проверяют в основном лексическое и семантическое соответствие. Но запрос на StackExchange «почему мой код падает при …» требует догадаться, что документ — страница про конкретный алгоритм, где совпадений слов почти нет.</p>
+<p><strong>BRIGHT</strong> (Su et al., 2024, ICLR 2025) — 1384 реальных запросов из экономики, психологии, математики, программирования, где релевантность требует рассуждения. Показательная цифра: SFR-Embedding-Mistral, лидер MTEB с 59,0 по поиску, получил на BRIGHT всего 18,3 nDCG@10. Явное рассуждение о запросе (LLM сначала пишет ход решения, затем он используется как запрос) давало прирост до 12,2 пункта nDCG@10. Вывод: бенчмарки на сопоставление (BEIR, MTEB) почти не измеряют способность находить документы, связь которых с запросом надо вывести, и лидерство на них не переносится на такие задачи.</p>
+<h2 id="рассуждающие-переранжировщики-и-ретриверы">Рассуждающие переранжировщики и ретриверы</h2>
+<p>После DeepSeek-R1 (2025) возникла идея: если модель «думает вслух» перед ответом, пусть так же ранжирует.</p>
+<p><strong>Rank1</strong> (Weller et al., arXiv 2502.18418, COLM 2025). Pointwise-переранжировщик: сначала цепочка рассуждений, затем вердикт «релевантно / нет». Обучен дистилляцией: собрано более 600 тыс. трасс R1 на запросах и абзацах MS MARCO, на них обычным SFT дообучены модели Qwen2.5 на 7B, 14B и 32B (в абляциях и меньше, до 0,5B). На BRIGHT средний nDCG@10 Rank1-7B составляет 27,5 против 13,9 у RankLLaMA-7B — рост почти вдвое; модели сильны и на наборах со следованием инструкциям. Авторы честно сообщают о негативном результате: принудительное удлинение рассуждения (простой budget forcing, как в s1) <em>не</em> улучшило, а в пробных экспериментах ухудшило метрики. Гипотеза авторов: ранжирование по BRIGHT требует куда меньше рассуждений, чем олимпиадная математика, на которой такие приёмы работают. Практический вывод: длиннее думать — не значит лучше.</p>
+<p><strong>ReasonRank</strong> (Liu et al., 2025; принято на ACL 2026). Listwise-вариант: синтез обучающих данных с разметкой R1 из разных доменов, двухэтапное обучение (холодный старт SFT, затем RL с многоаспектной наградой за качество перестановки). По заявлению авторов, значимо превосходит базовые модели на BRIGHT и BEIR при заметно меньшей задержке, чем pointwise-рассуждающий Rank1: рассуждение пишется одно на всё окно кандидатов, а не отдельное для каждого документа.</p>
+<p><strong>ReasonIR</strong> (Shao et al., 2025). Ретривер, а не переранжировщик: ReasonIR-8B обучен на синтетических данных, где для каждого документа генерируются <em>сложный</em> запрос и правдоподобный, но бесполезный трудный негатив. На BRIGHT — 29,9 nDCG@10 без переранжировщика и 36,9 с ним (рекорд на момент публикации); качество растёт с длиной и информативностью переписанного LLM запроса, то есть ретривер умеет пользоваться вычислениями на выводе. Это возврат идеи ANCE (трудные негативы) на новом уровне.</p>
+<p><strong>Спорный результат.</strong> Jedidi, Chuang, Glass, Lin (<em>Don't "Overthink" Passage Reranking: Is Reasoning Truly Necessary?</em>, arXiv 2505.16886) сравнили pointwise-ранжировщики с рассуждением и без него при одинаковом обучении. Результат: обычный ранжировщик в целом <em>лучше</em> рассуждающего, а та же рассуждающая модель с <em>отключённым</em> на выводе рассуждением оказалась эффективнее, чем с включённым. Объяснение авторов: рассуждение толкает оценки к крайностям («точно релевантно» / «точно нет»), и теряется частичная релевантность, а pointwise-ранжировщику она как раз и нужна для сортировки. Как это согласовать с Rank1? Rank1 сравнивали с моделями, обученными по другим рецептам и на других данных, а здесь сравнение контролируемое — поэтому выигрыш Rank1 нельзя целиком приписать рассуждению. Осторожная формулировка на ноябрь 2026: рассуждение может помогать там, где связь запроса с документом надо вывести (BRIGHT), и сомнительно там, где хватает сопоставления; цена — сотни токенов на каждый документ.</p>
+<h2 id="предел-одного-вектора">Предел одного вектора</h2>
+<p><strong>On the Theoretical Limitations of Embedding-Based Retrieval</strong> (Weller, Boratko, Naim, Lee; arXiv 2508.21038, ICLR 2026). Утверждение: число различных подмножеств топ-<span class="tex">k</span>, которые модель с эмбеддингами размерности <span class="tex">d</span> способна вернуть хотя бы для некоторого запроса, ограничено функцией от <span class="tex">d</span>. Интуиция: каждый документ — точка, запрос — направление; топ-<span class="tex">k</span> выбирается по скалярным произведениям, и каждому подмножеству нужен «свой» запрос.</p>
+<p>В актуальной версии статьи (v2, март 2026) граница выводится упаковкой шаров. Пусть документы <span class="tex">v_1, \dots, v_n</span> и запросы — единичные векторы в <span class="tex">\mathbb{R}^d</span>, и каждое <span class="tex">k</span>-подмножество <span class="tex">S</span> реализуется с зазором <span class="tex">\gamma &gt; 0</span>: найдётся запрос <span class="tex">u_S</span>, для которого <span class="tex">\min_{i \in S} \langle u_S, v_i\rangle \ge \max_{j \notin S} \langle u_S, v_j\rangle + 2\gamma</span>. Возьмём два разных подмножества <span class="tex">S \ne T</span> и документы <span class="tex">i \in S \setminus T</span>, <span class="tex">j \in T \setminus S</span>. Тогда <span class="tex">\langle u_S, v_i - v_j\rangle \ge 2\gamma</span> и <span class="tex">\langle u_T, v_j - v_i\rangle \ge 2\gamma</span>; складывая, получаем <span class="tex">\langle u_S - u_T, v_i - v_j\rangle \ge 4\gamma</span>, а по Коши–Буняковскому с <span class="tex">\|v_i - v_j\| \le 2</span> — <span class="tex">\|u_S - u_T\| \ge 2\gamma</span>. Значит, шары радиуса <span class="tex">\gamma</span> вокруг <span class="tex">\binom{n}{k}</span> запросов не пересекаются и все лежат в шаре радиуса <span class="tex">1 + \gamma</span>; сравнение объёмов даёт</p>
+<div class="tex tex-block">\binom{n}{k}\,\gamma^d \le (1 + \gamma)^d
+\quad\Longrightarrow\quad
+d \;\ge\; \frac{\log \binom{n}{k}}{\log(1 + 1/\gamma)} \;\approx\; \frac{k \log(en/k)}{\log(1 + 1/\gamma)} \quad (n \gg k).</div>
+<p>При <span class="tex">\gamma = 0{,}1</span> это, по таблице авторов, <span class="tex">d \ge 425</span> для <span class="tex">n = 10^6</span>, <span class="tex">k = 100</span> и <span class="tex">d \ge 3296</span> для <span class="tex">k = 1000</span> — это нижняя граница, реальной модели, обученной градиентным спуском, нужно больше. Первая версия статьи использовала более слабую оценку через знаковый ранг матрицы релевантности. Авторы проверили и эмпирически, что предел не «слабость обучения»: даже когда векторы оптимизируются напрямую на тестовых данных (free embedding, <span class="tex">k = 2</span>), для каждой размерности есть критическое число документов, после которого все пары уже не реализуются.</p>
+<p>Затем авторы построили датасет <strong>LIMIT</strong>: 50 тыс. коротких «профилей» людей («Джон любит квокк и яблоки»), 1000 запросов вида «кто любит яблоки?», по два релевантных документа на запрос. Задача тривиальна для человека, но требует различать много комбинаций. На полном LIMIT Recall@100 у Gemini Embedding (размерность 3072) — 10%, у Qwen3-Embedding (4096) — около 5%, у мультивекторного GTE-ModernColBERT — 55%, у BM25 — 94%.</p>
+<p>Следствия:</p>
+<ul>
+<li><strong>Мультивекторные модели</strong> (ColBERT, jina-embeddings-v4 в мультивекторном режиме): вектор на каждый токен документа и MaxSim вместо одного скалярного произведения резко увеличивают выразимость.</li>
+<li><strong>Разреженные модели</strong> (BM25, SPLADE): формально это тоже один вектор, но размерность — размер словаря (десятки тысяч и больше), поэтому граница практически не мешает.</li>
+<li><strong>Переранжирование</strong>: решает проблему на втором шаге (в статье Gemini 2.5 Pro, получив все 46 документов малой версии LIMIT, ответил верно на все 1000 запросов), но кандидаты уже должны попасть в топ-<span class="tex">N</span>.</li>
+<li><strong>Рост размерности</strong> отодвигает границу, но правая часть растёт с <span class="tex">k \log n</span>, а цена — память и скорость индекса.</li>
+</ul>
+<p><strong>Критика и оговорки.</strong> (1) LIMIT — синтетический стресс-тест; его запросы далеки от типичных поисковых и состоят из комбинаторных пересечений, которые в реальных логах редки. Провал на LIMIT не означает провал на вашем продукте. (2) Теоретический предел касается <em>всех возможных</em> топ-<span class="tex">k</span> подмножеств; реальным корпусам нужен маленький их фрагмент. (3) Эмбеддинги в реальных системах работают в паре с лексическим поиском и переранжированием — предел им уже частично обходят. (4) Качественный вывод («одного вектора мало для всего») надёжнее, чем численные оценки границ. Практический вывод от этого не меняется: гибрид и переранжирование — не временная мера, а структурный ответ.</p>
+<h2 id="агентный-поиск">Агентный поиск</h2>
+<p>Поиск становится циклом: модель думает, формулирует запрос, читает найденное, решает, достаточно ли.</p>
+<p><strong>ReAct</strong> (Yao et al., 2022). Чередование <code>Thought → Action → Observation</code>: модель рассуждает, вызывает инструмент (поиск), видит результат, рассуждает дальше. Базовый шаблон всех агентов.</p>
+<p><strong>IRCoT</strong> (Trivedi et al., 2022). Для многошаговых вопросов каждая новая мысль цепочки рассуждений используется как запрос к ретриверу: рассуждение направляет поиск, результат поиска продолжает рассуждение. На HotpotQA, 2WikiMultihopQA, MuSiQue и IIRC с GPT-3 — до 21 пункта по качеству поиска и до 15 по качеству ответа относительно одношагового «найти и прочитать».</p>
+<p><strong>Search-R1</strong> (Jin et al., arXiv 2503.09516, 2025). Агент обучается <em>с подкреплением</em>: модель (Qwen2.5-3B/7B) генерирует рассуждение и поисковые запросы в тегах, поиск возвращает фрагменты, награда — только за правильность итогового ответа (outcome reward). Два технических решения: <strong>маскирование найденных токенов</strong> в потере (градиент идёт только по сгенерированному моделью, а не по скопированному из выдачи — иначе обучение нестабильно) и простая награда без процессного судьи. Сообщённый эффект на 7 QA-наборах: +41% (Qwen2.5-7B) и +20% (Qwen2.5-3B) к RAG-бейзлайнам. Оговорки: проценты — относительный прирост над бейзлайнами, а не абсолютный; датасеты — QA с короткими ответами, где награду по точному совпадению легко проверить. Перенос на открытые задачи без проверяемой награды (отчёты, советы) в работе не показан.</p>
+<p><strong>Deep research (конец 2024 — 2025).</strong> Продукты Google, OpenAI, Perplexity и др.: агент работает минуты, делает десятки поисков и чтений страниц, строит план, пишет отчёт со ссылками. Внутри — тот же цикл с большим числом шагов и долгим контекстом; о деталях обучения компании сообщают скупо (OpenAI, например, писала об RL на задачах веб-поиска). Оценка — <strong>BrowseComp</strong> (Wei et al., OpenAI, 2025): 1266 вопросов, ответ на которые трудно найти, но легко проверить («сколько-то…, где-то…, кем-то…» — короткая строка). Он измеряет упорство и креативность поиска, но не качество длинных отчётов и не неоднозначные запросы. Поэтому высокий балл на BrowseComp ≠ хороший исследователь.</p>
+<h2 id="стоимость-и-задержка">Стоимость и задержка</h2>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>режим</th>
+<th>LLM-вызовы</th>
+<th>задержка</th>
+<th>когда</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>BM25 + dense + RRF</td>
+<td>0</td>
+<td>десятки мс</td>
+<td>всегда как база</td>
+</tr>
+<tr>
+<td>+ cross-encoder на топ-50</td>
+<td>0 (малая модель)</td>
+<td>100–300 мс</td>
+<td>почти всегда</td>
+</tr>
+<tr>
+<td>+ LLM-переранжирование топ-20</td>
+<td>1–10</td>
+<td>1–10 с</td>
+<td>сложные запросы</td>
+</tr>
+<tr>
+<td>RAG</td>
+<td>1</td>
+<td>1–5 с</td>
+<td>ответы на вопросы</td>
+</tr>
+<tr>
+<td>агент, до <span class="tex">T</span> шагов</td>
+<td><span class="tex">T</span></td>
+<td>10 с – минуты</td>
+<td>вопросы, требующие многих источников</td>
+</tr>
+</tbody>
+</table></div>
+<p>Нужны ограничения: лимит шагов, лимит токенов, таймаут, кэш запросов, детектор зацикливания (одинаковые запросы подряд). Суммарная цена растёт квадратично по числу шагов: на шаге <span class="tex">t</span> модель заново читает всю историю длины <span class="tex">\sim t \cdot L</span> (где <span class="tex">L</span> — токены одного наблюдения), и сумма по <span class="tex">T</span> шагам даёт <span class="tex">\sim L T^2 / 2</span> входных токенов. Поэтому сжимайте наблюдения и кэшируйте префикс истории.</p>
+<h2 id="что-не-меняется">Что не меняется</h2>
+<p>Инструменты под агентом — всё те же: BM25 для точных совпадений, плотный поиск для смысла, переранжирование для точности, фильтры для прав. Агент надстраивает «что искать и когда остановиться», но качество ответа ограничено качеством базового поиска: если нужный документ не находится ни одним инструментом, цикл не поможет, он лишь потратит больше токенов. Поэтому инвестиции в разметку, оценку (recall@k) и индексацию окупаются раньше, чем в агента.</p>
+<h2 id="код-цикл-агента">Код: цикл агента</h2>
+<p>Сокращённый вариант; ключ — только из переменной окружения, поиск — <code>retrieve</code> из главы про RAG.</p>
+<div class="code"><div class="code-head"><span class="lang">python</span></div><pre><code><span class="tok-k">import</span> os<span class="tok-p">,</span> json<span class="tok-p">,</span> re
+<span class="tok-k">from</span> anthropic <span class="tok-k">import</span> Anthropic
+
+client <span class="tok-p">=</span> Anthropic<span class="tok-p">(</span>api_key<span class="tok-p">=</span>os<span class="tok-p">.</span>environ<span class="tok-p">[</span><span class="tok-s">"</span><span class="tok-s">ANTHROPIC_API_KEY</span><span class="tok-s">"</span><span class="tok-p">]</span><span class="tok-p">)</span>
+MODEL <span class="tok-p">=</span> os<span class="tok-p">.</span>environ<span class="tok-p">.</span>get<span class="tok-p">(</span><span class="tok-s">"</span><span class="tok-s">LLM_MODEL</span><span class="tok-s">"</span><span class="tok-p">,</span> <span class="tok-s">"</span><span class="tok-s">claude-opus-5-5</span><span class="tok-s">"</span><span class="tok-p">)</span>
+MAX_STEPS <span class="tok-p">=</span> <span class="tok-n">5</span>
+
+SYSTEM <span class="tok-p">=</span> <span class="tok-p">(</span>
+    <span class="tok-s">"</span><span class="tok-s">Ты отвечаешь на вопрос, используя поиск. На каждом шаге выведи ровно одну строку JSON:</span><span class="tok-s">\n</span><span class="tok-s">"</span>
+    <span class="tok-s">'</span><span class="tok-s">{</span><span class="tok-s">"</span><span class="tok-s">thought</span><span class="tok-s">"</span><span class="tok-s">: </span><span class="tok-s">"</span><span class="tok-s">...</span><span class="tok-s">"</span><span class="tok-s">, </span><span class="tok-s">"</span><span class="tok-s">action</span><span class="tok-s">"</span><span class="tok-s">: </span><span class="tok-s">"</span><span class="tok-s">search</span><span class="tok-s">"</span><span class="tok-s">, </span><span class="tok-s">"</span><span class="tok-s">query</span><span class="tok-s">"</span><span class="tok-s">: </span><span class="tok-s">"</span><span class="tok-s">...</span><span class="tok-s">"</span><span class="tok-s">}  или</span><span class="tok-s">\n</span><span class="tok-s">'</span>
+    <span class="tok-s">'</span><span class="tok-s">{</span><span class="tok-s">"</span><span class="tok-s">thought</span><span class="tok-s">"</span><span class="tok-s">: </span><span class="tok-s">"</span><span class="tok-s">...</span><span class="tok-s">"</span><span class="tok-s">, </span><span class="tok-s">"</span><span class="tok-s">action</span><span class="tok-s">"</span><span class="tok-s">: </span><span class="tok-s">"</span><span class="tok-s">answer</span><span class="tok-s">"</span><span class="tok-s">, </span><span class="tok-s">"</span><span class="tok-s">text</span><span class="tok-s">"</span><span class="tok-s">: </span><span class="tok-s">"</span><span class="tok-s">... [1][2]</span><span class="tok-s">"</span><span class="tok-s">}</span><span class="tok-s">\n</span><span class="tok-s">'</span>
+    <span class="tok-s">"</span><span class="tok-s">Отвечай только по найденным источникам; если их мало, ищи другим запросом.</span><span class="tok-s">"</span>
+<span class="tok-p">)</span>
+
+<span class="tok-k">def</span> <span class="tok-f">parse</span><span class="tok-p">(</span>text<span class="tok-p">)</span><span class="tok-p">:</span>
+    <span class="tok-k">try</span><span class="tok-p">:</span>
+        act <span class="tok-p">=</span> json<span class="tok-p">.</span>loads<span class="tok-p">(</span>re<span class="tok-p">.</span>search<span class="tok-p">(</span><span class="tok-s">r</span><span class="tok-s">"</span><span class="tok-s">\</span><span class="tok-s">{</span><span class="tok-s">.*</span><span class="tok-s">\</span><span class="tok-s">}</span><span class="tok-s">"</span><span class="tok-p">,</span> text<span class="tok-p">,</span> re<span class="tok-p">.</span>S<span class="tok-p">)</span><span class="tok-p">.</span>group<span class="tok-p">(</span><span class="tok-n">0</span><span class="tok-p">)</span><span class="tok-p">)</span>
+    <span class="tok-k">except</span> <span class="tok-p">(</span>AttributeError<span class="tok-p">,</span> json<span class="tok-p">.</span>JSONDecodeError<span class="tok-p">)</span><span class="tok-p">:</span>
+        act <span class="tok-p">=</span> <span class="tok-p">{</span><span class="tok-p">}</span>
+    <span class="tok-k">if</span> act<span class="tok-p">.</span>get<span class="tok-p">(</span><span class="tok-s">"</span><span class="tok-s">action</span><span class="tok-s">"</span><span class="tok-p">)</span> <span class="tok-p">==</span> <span class="tok-s">"</span><span class="tok-s">search</span><span class="tok-s">"</span> <span class="tok-k">and</span> act<span class="tok-p">.</span>get<span class="tok-p">(</span><span class="tok-s">"</span><span class="tok-s">query</span><span class="tok-s">"</span><span class="tok-p">)</span><span class="tok-p">:</span>
+        <span class="tok-k">return</span> act
+    <span class="tok-k">return</span> <span class="tok-p">{</span><span class="tok-s">"</span><span class="tok-s">action</span><span class="tok-s">"</span><span class="tok-p">:</span> <span class="tok-s">"</span><span class="tok-s">answer</span><span class="tok-s">"</span><span class="tok-p">,</span> <span class="tok-s">"</span><span class="tok-s">text</span><span class="tok-s">"</span><span class="tok-p">:</span> act<span class="tok-p">.</span>get<span class="tok-p">(</span><span class="tok-s">"</span><span class="tok-s">text</span><span class="tok-s">"</span><span class="tok-p">,</span> text<span class="tok-p">)</span><span class="tok-p">}</span>   <span class="tok-c"># нарушен формат — считаем текст ответом</span>
+
+<span class="tok-k">def</span> <span class="tok-f">agent</span><span class="tok-p">(</span>question<span class="tok-p">,</span> retrieve<span class="tok-p">,</span> docs<span class="tok-p">)</span><span class="tok-p">:</span>
+    messages <span class="tok-p">=</span> <span class="tok-p">[</span><span class="tok-p">{</span><span class="tok-s">"</span><span class="tok-s">role</span><span class="tok-s">"</span><span class="tok-p">:</span> <span class="tok-s">"</span><span class="tok-s">user</span><span class="tok-s">"</span><span class="tok-p">,</span> <span class="tok-s">"</span><span class="tok-s">content</span><span class="tok-s">"</span><span class="tok-p">:</span> question<span class="tok-p">}</span><span class="tok-p">]</span>
+    seen_queries<span class="tok-p">,</span> sources <span class="tok-p">=</span> <span class="tok-f">set</span><span class="tok-p">(</span><span class="tok-p">)</span><span class="tok-p">,</span> <span class="tok-p">[</span><span class="tok-p">]</span>
+    <span class="tok-k">for</span> step <span class="tok-k">in</span> <span class="tok-f">range</span><span class="tok-p">(</span>MAX_STEPS<span class="tok-p">)</span><span class="tok-p">:</span>
+        msg <span class="tok-p">=</span> client<span class="tok-p">.</span>messages<span class="tok-p">.</span>create<span class="tok-p">(</span>model<span class="tok-p">=</span>MODEL<span class="tok-p">,</span> max_tokens<span class="tok-p">=</span><span class="tok-n">400</span><span class="tok-p">,</span> system<span class="tok-p">=</span>SYSTEM<span class="tok-p">,</span> messages<span class="tok-p">=</span>messages<span class="tok-p">)</span>
+        text <span class="tok-p">=</span> msg<span class="tok-p">.</span>content<span class="tok-p">[</span><span class="tok-n">0</span><span class="tok-p">]</span><span class="tok-p">.</span>text
+        act <span class="tok-p">=</span> parse<span class="tok-p">(</span>text<span class="tok-p">)</span>
+        <span class="tok-k">if</span> act<span class="tok-p">[</span><span class="tok-s">"</span><span class="tok-s">action</span><span class="tok-s">"</span><span class="tok-p">]</span> <span class="tok-p">==</span> <span class="tok-s">"</span><span class="tok-s">answer</span><span class="tok-s">"</span><span class="tok-p">:</span>
+            <span class="tok-k">return</span> act<span class="tok-p">[</span><span class="tok-s">"</span><span class="tok-s">text</span><span class="tok-s">"</span><span class="tok-p">]</span><span class="tok-p">,</span> sources
+        q <span class="tok-p">=</span> act<span class="tok-p">[</span><span class="tok-s">"</span><span class="tok-s">query</span><span class="tok-s">"</span><span class="tok-p">]</span>
+        <span class="tok-k">if</span> q <span class="tok-k">in</span> seen_queries<span class="tok-p">:</span>                              <span class="tok-c"># защита от зацикливания</span>
+            messages <span class="tok-p">+</span><span class="tok-p">=</span> <span class="tok-p">[</span><span class="tok-p">{</span><span class="tok-s">"</span><span class="tok-s">role</span><span class="tok-s">"</span><span class="tok-p">:</span> <span class="tok-s">"</span><span class="tok-s">assistant</span><span class="tok-s">"</span><span class="tok-p">,</span> <span class="tok-s">"</span><span class="tok-s">content</span><span class="tok-s">"</span><span class="tok-p">:</span> text<span class="tok-p">}</span><span class="tok-p">,</span>
+                         <span class="tok-p">{</span><span class="tok-s">"</span><span class="tok-s">role</span><span class="tok-s">"</span><span class="tok-p">:</span> <span class="tok-s">"</span><span class="tok-s">user</span><span class="tok-s">"</span><span class="tok-p">,</span> <span class="tok-s">"</span><span class="tok-s">content</span><span class="tok-s">"</span><span class="tok-p">:</span> <span class="tok-s">"</span><span class="tok-s">Этот запрос уже был. Сформулируй новый или ответь.</span><span class="tok-s">"</span><span class="tok-p">}</span><span class="tok-p">]</span>
+            <span class="tok-k">continue</span>
+        seen_queries<span class="tok-p">.</span>add<span class="tok-p">(</span>q<span class="tok-p">)</span>
+        ids <span class="tok-p">=</span> retrieve<span class="tok-p">(</span>q<span class="tok-p">,</span> top<span class="tok-p">=</span><span class="tok-n">4</span><span class="tok-p">)</span>
+        obs <span class="tok-p">=</span> <span class="tok-s">"</span><span class="tok-s">\n</span><span class="tok-s">"</span><span class="tok-p">.</span>join<span class="tok-p">(</span><span class="tok-s">f</span><span class="tok-s">"</span><span class="tok-s">[</span><span class="tok-s">{</span><span class="tok-f">len</span><span class="tok-p">(</span>sources<span class="tok-p">)</span><span class="tok-p">+</span>n<span class="tok-p">+</span><span class="tok-n">1</span><span class="tok-s">}</span><span class="tok-s">] </span><span class="tok-s">{</span>docs<span class="tok-p">[</span>i<span class="tok-p">]</span><span class="tok-p">[</span><span class="tok-p">:</span><span class="tok-n">600</span><span class="tok-p">]</span><span class="tok-s">}</span><span class="tok-s">"</span> <span class="tok-k">for</span> n<span class="tok-p">,</span> i <span class="tok-k">in</span> <span class="tok-f">enumerate</span><span class="tok-p">(</span>ids<span class="tok-p">)</span><span class="tok-p">)</span>
+        sources <span class="tok-p">+</span><span class="tok-p">=</span> ids
+        messages <span class="tok-p">+</span><span class="tok-p">=</span> <span class="tok-p">[</span><span class="tok-p">{</span><span class="tok-s">"</span><span class="tok-s">role</span><span class="tok-s">"</span><span class="tok-p">:</span> <span class="tok-s">"</span><span class="tok-s">assistant</span><span class="tok-s">"</span><span class="tok-p">,</span> <span class="tok-s">"</span><span class="tok-s">content</span><span class="tok-s">"</span><span class="tok-p">:</span> text<span class="tok-p">}</span><span class="tok-p">,</span>
+                     <span class="tok-p">{</span><span class="tok-s">"</span><span class="tok-s">role</span><span class="tok-s">"</span><span class="tok-p">:</span> <span class="tok-s">"</span><span class="tok-s">user</span><span class="tok-s">"</span><span class="tok-p">,</span> <span class="tok-s">"</span><span class="tok-s">content</span><span class="tok-s">"</span><span class="tok-p">:</span> <span class="tok-s">f</span><span class="tok-s">"</span><span class="tok-s">Результаты поиска:</span><span class="tok-s">\n</span><span class="tok-s">{</span>obs<span class="tok-s">}</span><span class="tok-s">"</span><span class="tok-p">}</span><span class="tok-p">]</span>
+    <span class="tok-c"># лимит шагов исчерпан — принудительный ответ по собранному</span>
+    messages<span class="tok-p">.</span>append<span class="tok-p">(</span><span class="tok-p">{</span><span class="tok-s">"</span><span class="tok-s">role</span><span class="tok-s">"</span><span class="tok-p">:</span> <span class="tok-s">"</span><span class="tok-s">user</span><span class="tok-s">"</span><span class="tok-p">,</span> <span class="tok-s">"</span><span class="tok-s">content</span><span class="tok-s">"</span><span class="tok-p">:</span> <span class="tok-s">"</span><span class="tok-s">Лимит поисков исчерпан. Дай лучший ответ по найденному.</span><span class="tok-s">"</span><span class="tok-p">}</span><span class="tok-p">)</span>
+    final <span class="tok-p">=</span> client<span class="tok-p">.</span>messages<span class="tok-p">.</span>create<span class="tok-p">(</span>model<span class="tok-p">=</span>MODEL<span class="tok-p">,</span> max_tokens<span class="tok-p">=</span><span class="tok-n">400</span><span class="tok-p">,</span> system<span class="tok-p">=</span>SYSTEM<span class="tok-p">,</span> messages<span class="tok-p">=</span>messages<span class="tok-p">)</span>
+    <span class="tok-k">return</span> parse<span class="tok-p">(</span>final<span class="tok-p">.</span>content<span class="tok-p">[</span><span class="tok-n">0</span><span class="tok-p">]</span><span class="tok-p">.</span>text<span class="tok-p">)</span><span class="tok-p">.</span>get<span class="tok-p">(</span><span class="tok-s">"</span><span class="tok-s">text</span><span class="tok-s">"</span><span class="tok-p">,</span> final<span class="tok-p">.</span>content<span class="tok-p">[</span><span class="tok-n">0</span><span class="tok-p">]</span><span class="tok-p">.</span>text<span class="tok-p">)</span><span class="tok-p">,</span> sources
+</code></pre></div>
+<p>В боевой версии вместо разбора JSON используют нативный tool use API провайдера, считают токены и ставят общий бюджет на запрос.</p>
+<h2 id="что-запомнить">Что запомнить</h2>
+<ul>
+<li>RankGPT → RankZephyr → FIRST: LLM ранжирует listwise; дистилляция и сокращение генерации снижают цену.</li>
+<li>BRIGHT показал: эмбеддеры, сильные на MTEB, слабы там, где нужно рассуждение. Rank1 и ReasonIR отвечают рассуждающими моделями; спорность — Don't "Overthink": рассуждение не всегда нужно.</li>
+<li>Предел одного вектора (LIMIT) — аргумент в пользу гибрида и переранжирования, но тест синтетический.</li>
+<li>Агентный поиск = цикл «подумать → запрос → прочитать → ответить» (ReAct, IRCoT, Search-R1); база — по-прежнему BM25 + dense + реранкер.</li>
+</ul>
+<h2 id="что-почитать">Что почитать</h2>
+<ul>
+<li>Sun et al., <a href="https://arxiv.org/abs/2304.09542" rel="noopener noreferrer nofollow">Is ChatGPT Good at Search? Investigating LLMs as Re-Ranking Agents (RankGPT)</a>, 2023; Reddy et al., <a href="https://arxiv.org/abs/2406.15657" rel="noopener noreferrer nofollow">FIRST</a>, 2024.</li>
+<li>Pradeep et al., <a href="https://arxiv.org/abs/2309.15088" rel="noopener noreferrer nofollow">RankVicuna</a>, 2023; Pradeep et al., <a href="https://arxiv.org/abs/2312.02724" rel="noopener noreferrer nofollow">RankZephyr</a>, 2023.</li>
+<li>Su et al., <a href="https://arxiv.org/abs/2407.12883" rel="noopener noreferrer nofollow">BRIGHT</a>, ICLR 2025; Weller et al., <a href="https://arxiv.org/abs/2502.18418" rel="noopener noreferrer nofollow">Rank1</a>, COLM 2025; Jedidi et al., <a href="https://arxiv.org/abs/2505.16886" rel="noopener noreferrer nofollow">Don't "Overthink" Passage Reranking</a>, 2025.</li>
+<li>Liu et al., <a href="https://arxiv.org/abs/2508.07050" rel="noopener noreferrer nofollow">ReasonRank</a>, ACL 2026; Shao et al., <a href="https://arxiv.org/abs/2504.20595" rel="noopener noreferrer nofollow">ReasonIR</a>, 2025.</li>
+<li>Weller et al., <a href="https://arxiv.org/abs/2508.21038" rel="noopener noreferrer nofollow">On the Theoretical Limitations of Embedding-Based Retrieval</a>, ICLR 2026.</li>
+<li>Yao et al., <a href="https://arxiv.org/abs/2210.03629" rel="noopener noreferrer nofollow">ReAct</a>, 2022; Trivedi et al., <a href="https://arxiv.org/abs/2212.10509" rel="noopener noreferrer nofollow">IRCoT</a>, 2022; Jin et al., <a href="https://arxiv.org/abs/2503.09516" rel="noopener noreferrer nofollow">Search-R1</a>, 2025.</li>
+<li>Wei et al., <a href="https://arxiv.org/abs/2504.12516" rel="noopener noreferrer nofollow">BrowseComp</a>, 2025.</li>
+</ul>
+</div>
+      
+
+      
+      <nav class="pager" aria-label="Соседние статьи">
+        <a href="/edufamcs-demo/handbook/retrieval/generativnyj-poisk/"><span><svg class="ico sm" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-arrow-left"/></svg>Назад</span>Генеративный поиск: модель как индекс</a>
+        
+      </nav>
+      
+    </article>
+
+    <aside class="hb-toc" aria-label="На этой странице">
+      <a class="l2" href="#llm-как-ранжировщик">LLM как ранжировщик</a><a class="l2" href="#задачи-требующие-рассуждения-bright">Задачи, требующие рассуждения: BRIGHT</a><a class="l2" href="#рассуждающие-переранжировщики-и-ретриверы">Рассуждающие переранжировщики и ретриверы</a><a class="l2" href="#предел-одного-вектора">Предел одного вектора</a><a class="l2" href="#агентный-поиск">Агентный поиск</a><a class="l2" href="#стоимость-и-задержка">Стоимость и задержка</a><a class="l2" href="#что-не-меняется">Что не меняется</a><a class="l2" href="#код-цикл-агента">Код: цикл агента</a><a class="l2" href="#что-запомнить">Что запомнить</a><a class="l2" href="#что-почитать">Что почитать</a>
+    </aside>
+  </div>
+</div>
+
+
+</main>
+
+<footer class="ftr" data-theme="dark">
+  <svg class="sym fern" viewBox="0 0 40.5 65.02" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#fern"/></svg>
+  <div class="container">
+    <div class="ftr-row">
+      <a href="/edufamcs-demo/" aria-label="EDU FAMCS — главная"><img src="/edufamcs-demo/static/brand/logo/logo-edu-dark.svg" alt="EDU FAMCS" width="196" height="40"></a>
+      <ul class="ftr-links">
+        <li><a href="/edufamcs-demo/#courses">Курсы</a></li>
+        <li><a href="/edufamcs-demo/ml/">Машинное обучение</a></li>
+        <li><a href="/edufamcs-demo/handbook/">Хендбук</a></li>
+        <li><a href="/edufamcs-demo/news/">Новости</a></li>
+        <li><a href="/edufamcs-demo/people/">Авторы</a></li>
+        <li><a href="/edufamcs-demo/about/">О&nbsp;нас</a></li>
+        <li><a href="/edufamcs-demo/propose/">Предложить или исправить</a></li>
+        <li><a href="/edufamcs-demo/privacy/">Конфиденциальность</a></li>
+      </ul>
+    </div>
+    <div class="ftr-big" aria-hidden="true">EDU<span class="d">·</span>FAMCS</div>
+    <p class="ftr-copy">© 2026 EDU FAMCS · Минск</p>
+  </div>
+</footer>
+
+<div class="toasts-region" aria-live="polite" id="toasts">
+
+</div>
+
+</body>
+</html>

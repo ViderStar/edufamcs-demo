@@ -1,0 +1,242 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Рекомендации в продакшене: A/B-тесты и эксплуатация · EDU FAMCS</title>
+<meta name="description" content="Рекомендации в продакшене: A/B-тесты и эксплуатация — Рекомендательные системы. Хендбук ML-курса ФПМИ.">
+<meta name="theme-color" content="#060A16">
+<meta name="robots" content="noindex, nofollow">
+<meta name="htmx-config" content='{"allowEval":false,"includeIndicatorStyles":false,"historyCacheSize":0,"selfRequestsOnly":true}'>
+<meta name="katex-js" content="/edufamcs-demo/static/vendor/katex/katex.min.js">
+<meta name="katex-css" content="/edufamcs-demo/static/vendor/katex/katex.min.css">
+<link rel="icon" href="/edufamcs-demo/static/brand/logo/favicon-16.svg" type="image/svg+xml" sizes="16x16">
+<link rel="icon" href="/edufamcs-demo/static/brand/logo/favicon.svg" type="image/svg+xml" sizes="any">
+<link rel="preload" href="/edufamcs-demo/static/brand/fonts/manrope-cyrillic-400.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/edufamcs-demo/static/brand/fonts/unbounded-cyrillic-800.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="/edufamcs-demo/static/brand/fonts.css">
+<link rel="stylesheet" href="/edufamcs-demo/static/brand/tokens.css">
+<link rel="stylesheet" href="/edufamcs-demo/static/brand/components.css">
+<link rel="stylesheet" href="/edufamcs-demo/static/css/site.css">
+<link rel="stylesheet" href="/edufamcs-demo/static/css/hub.css">
+<link rel="stylesheet" href="/edufamcs-demo/static/css/about.css">
+<link rel="stylesheet" href="/edufamcs-demo/static/handbook/handbook.css">
+<script src="/edufamcs-demo/static/js/theme.js"></script>
+<script src="/edufamcs-demo/static/vendor/htmx/htmx.min.js" defer></script>
+<script src="/edufamcs-demo/static/vendor/alpine/alpine-csp.min.js" defer></script>
+<script src="/edufamcs-demo/static/js/site.js" defer></script>
+<script src="/edufamcs-demo/static/handbook/handbook.js" defer></script>
+</head>
+<body class="" hx-headers='{"X-CSRFToken": "APS7EjDf8sDtIqNkJyOlXM9Fve2cOyOJZzrbohqC3j1CXZY3gLxtUhFK3W8HmIwt"}'>
+<a class="skip" href="#main">К содержанию</a>
+<div class="demo-bar" role="note">Демо-версия для отзывов: вход, запись на курсы и формы здесь не работают.</div>
+
+<header class="hdr">
+  <div class="container">
+    <a class="brand" href="/edufamcs-demo/" aria-label="EDU FAMCS — главная">
+      <span class="full"><img class="only-light" src="/edufamcs-demo/static/brand/logo/logo-edu-light.svg" alt="EDU FAMCS" width="196" height="40"><img class="only-dark" src="/edufamcs-demo/static/brand/logo/logo-edu-dark.svg" alt="EDU FAMCS" width="196" height="40"></span>
+      <span class="short"><img class="only-light" src="/edufamcs-demo/static/brand/logo/logo-edu-light.svg" alt="EDU FAMCS" height="30"><img class="only-dark" src="/edufamcs-demo/static/brand/logo/logo-edu-dark.svg" alt="EDU FAMCS" height="30"></span>
+    </a>
+    <nav class="nav" id="main-nav" aria-label="Основная навигация">
+      <a href="/edufamcs-demo/#courses">Курсы</a>
+      <a href="/edufamcs-demo/ml/" >Машинное обучение</a>
+      
+      <a href="/edufamcs-demo/handbook/" aria-current="page">Хендбук</a>
+      <a href="/edufamcs-demo/news/" >Новости</a>
+      <a href="/edufamcs-demo/people/" >Авторы</a>
+      <a href="/edufamcs-demo/about/" >О&nbsp;нас</a>
+    </nav>
+    <div class="hdr-actions">
+      
+      <a class="btn btn-outline btn-login" href="/edufamcs-demo/accounts/login/?next=/handbook/recsys/prodakshen-i-ab-testy/">Войти</a>
+      
+      <button class="icon-btn menu-btn" type="button" aria-label="Меню" aria-expanded="false" aria-controls="main-nav"><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-menu"/></svg></button>
+    </div>
+  </div>
+</header>
+
+<main id="main">
+
+
+
+<div class="container hb-page s-recsys">
+  <div class="hb">
+    <aside class="hb-nav" aria-label="Статьи раздела">
+      
+<form class="hb-search" action="/edufamcs-demo/handbook/search/" method="get" role="search">
+  <svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-search"/></svg>
+  <input class="input" type="search" name="q" value="" placeholder="Поиск по хендбуку" aria-label="Поиск по хендбуку" autocomplete="off" maxlength="120"
+    hx-get="/edufamcs-demo/handbook/search/" hx-trigger="input changed delay:250ms, search" hx-target="#hb-nav-results" hx-sync="this:replace">
+</form>
+
+      <div id="hb-nav-results" class="hb-nav-results" aria-live="polite"></div>
+      <a class="grp" href="/edufamcs-demo/handbook/recsys/">Рекомендательная система целиком</a>
+      
+      <a class="" href="/edufamcs-demo/handbook/recsys/kandidaty-i-ranzhirovanie/">Двухстадийная схема: кандидаты → ранжирование</a>
+      
+      <a class="" href="/edufamcs-demo/handbook/recsys/holodnyj-start-i-bandity/">Холодный старт, исследование и бандиты</a>
+      
+      <a class="cur" href="/edufamcs-demo/handbook/recsys/prodakshen-i-ab-testy/" aria-current="page">Рекомендации в продакшене: A/B-тесты и эксплуатация</a>
+      
+    </aside>
+
+    <article class="hb-main">
+      <nav class="crumbs" aria-label="Навигация"><a href="/edufamcs-demo/handbook/">Хендбук</a><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-chev"/></svg><a href="/edufamcs-demo/handbook/recsys/">Рекомендательные системы</a></nav>
+      <h1 class="h1">Рекомендации в продакшене: A/B-тесты и эксплуатация</h1>
+      <div class="hb-meta">
+        
+        
+        <span><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-clock"/></svg>14&nbsp;мин</span>
+        <span class="hb-authors"><span class="avatar sm" title="Артем Лебедевич">АЛ</span>Артем Лебедевич</span>
+        <span><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-edit"/></svg>9 ноября 2026</span>
+        
+        
+      </div>
+
+      
+      <details class="hb-mtoc">
+        <summary><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-list"/></svg>Содержание<svg class="ico sm" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-chev-down"/></svg></summary>
+        <a class="l2" href="#онлайн-метрики">Онлайн-метрики</a><a class="l2" href="#дизайн-ab-теста">Дизайн A/B-теста</a><a class="l2" href="#cuped-уменьшаем-дисперсию">CUPED: уменьшаем дисперсию</a><a class="l2" href="#типичные-ошибки-анализа">Типичные ошибки анализа</a><a class="l2" href="#interleaving">Interleaving</a><a class="l2" href="#разрыв-офлайн-и-онлайн">Разрыв офлайн и онлайн</a><a class="l2" href="#эксплуатация">Эксплуатация</a><a class="l2" href="#бизнес-эффект">Бизнес-эффект</a><a class="l2" href="#что-почитать">Что почитать</a>
+      </details>
+      
+
+      <div class="prose"><p>Офлайн-метрики (глава <a href="/edufamcs-demo/handbook/recsys/oflajn-metriki/" rel="noopener noreferrer nofollow">«Метрики»</a>) отвечают на вопрос «насколько модель предсказывает прошлое». Бизнес интересует другое: что случится с кликами, заказами и удержанием, когда модель увидят живые пользователи. На этот вопрос отвечает только онлайн-эксперимент. Эта глава — про то, как его провести без самообмана, и про то, что ещё должно работать вокруг модели, чтобы она давала эффект неделями, а не в день выкатки.</p>
+<h2 id="онлайн-метрики">Онлайн-метрики</h2>
+<p>Метрики образуют иерархию:</p>
+<ul>
+<li><strong>North star</strong> — одна метрика, отражающая долгосрочную ценность: удержание на 28-й день, число заказов на пользователя, суммарное время прослушивания. Её трудно сдвинуть быстро и шумно измерять.</li>
+<li><strong>Прокси-метрики</strong> — быстрые и чувствительные: CTR (клики / показы), конверсия в покупку или добавление в корзину, глубина просмотра. Их сдвиг не гарантирует сдвига north star: рост CTR достигается кликбейтом и ухудшает удержание.</li>
+<li><strong>Guardrail-метрики</strong> — то, что нельзя ухудшить: задержка ответа, доля пустых выдач, доля возвратов, жалобы, выручка на сессию, доля продавца-монополиста. Эксперимент «выигрывает», только если прокси выросла, а ни одна guardrail не просела значимо.</li>
+</ul>
+<p>Стоит различать <strong>метрику на показ</strong> (CTR) и <strong>на пользователя</strong> (клики на пользователя за неделю). Первая считается как отношение, и наивный t-тест по показам нарушает независимость: показы одного пользователя коррелированы. Корректно: агрегировать до единицы рандомизации (пользователя) и сравнивать средние по пользователям либо применять дельта-метод для отношений.</p>
+<h2 id="дизайн-ab-теста">Дизайн A/B-теста</h2>
+<p><strong>Единица рандомизации.</strong> Обычно пользователь (а не сессия и не показ): иначе один человек увидит обе версии, а пользовательские эффекты «протекут» между группами. Назначение должно быть детерминированным: <code>hash(user_id + salt) mod 100</code>, где <code>salt</code> разный у разных экспериментов, чтобы группы разных тестов не коррелировали.</p>
+<p><strong>Гипотеза и размер выборки.</strong> Нулевая гипотеза: эффекта нет. Задаём уровень значимости <span class="tex">\alpha=0{,}05</span>, мощность <span class="tex">1-\beta = 0{,}8</span> и <strong>минимально значимый эффект</strong> <span class="tex">\Delta</span> (в абсолютных единицах метрики). Для разности средних с дисперсией <span class="tex">\sigma^2</span> в каждой группе (подробности — в главе <a href="/edufamcs-demo/handbook/math/intervaly-i-proverka-gipotez/" rel="noopener noreferrer nofollow">«Доверительные интервалы и проверка гипотез»</a>):</p>
+<div class="tex tex-block">n \approx \frac{2\,(z_{1-\alpha/2} + z_{1-\beta})^2\,\sigma^2}{\Delta^2} = \frac{2\,(1{,}96+0{,}84)^2\,\sigma^2}{\Delta^2} \approx \frac{16\,\sigma^2}{\Delta^2}\ \text{на группу.}</div>
+<p>Из формулы следует жёсткая экономика: чтобы обнаружить эффект вдвое меньше, нужна выборка вчетверо больше. Пример: CTR 5% (<span class="tex">\sigma^2 \approx 0{,}05\cdot 0{,}95 = 0{,}0475</span> на показ), хотим заметить <span class="tex">\Delta = 0{,}25</span> п. п. (относительно +5%): <span class="tex">n \approx 16 \cdot 0{,}0475 / 0{,}0025^2 \approx 120\,000</span> показов на группу (на уровне пользователей — больше, из-за корреляции). Для редких событий вроде покупок нужны миллионы пользователей. Поэтому заметить прирост в десятые доли процента могут только крупные компании, а в небольших магазинах многие тесты недостаточно мощны: эффект может быть, но выборка его не покажет.</p>
+<p><strong>Анализ.</strong> Для среднего по пользователям — t-тест Уэлча; для разности долей — z-тест; для тяжёлых хвостов (выручка) — бутстрап или трансформации (винзоризация), потому что несколько «китов» двигают среднее. Всегда отчитывайтесь <strong>доверительным интервалом</strong> разности, а не одним p-value: интервал показывает, исключён ли хотя бы практически значимый эффект.</p>
+<h2 id="cuped-уменьшаем-дисперсию">CUPED: уменьшаем дисперсию</h2>
+<p>Из формулы для <span class="tex">n</span> видно, что вместо увеличения выборки можно уменьшить <span class="tex">\sigma^2</span>. <strong>CUPED</strong> (Controlled-experiment Using Pre-Experiment Data, Deng, Xu, Kohavi, Walker; Microsoft, WSDM 2013) использует метрику пользователя до эксперимента как ковариату. Пусть <span class="tex">Y</span> — метрика во время теста, <span class="tex">X</span> — та же (или коррелированная) метрика до теста. Определим</p>
+<div class="tex tex-block">Y' = Y - \theta\,(X - \mathbb{E}X), \qquad \theta = \frac{\operatorname{cov}(X,Y)}{\operatorname{var}(X)}.</div>
+<p>Так как <span class="tex">X</span> определена до рандомизации, она не зависит от группы, и <span class="tex">\mathbb{E}Y'</span> в группах отличается так же, как <span class="tex">\mathbb{E}Y</span>: оценка эффекта остаётся несмещённой. Дисперсия:</p>
+<div class="tex tex-block">\operatorname{var}(Y') = \operatorname{var}(Y)\,(1-\rho^2), \qquad \rho=\operatorname{corr}(X,Y),</div>
+<p>поэтому при <span class="tex">\rho=0{,}7</span> дисперсия падает вдвое, а время теста или трафик — тоже вдвое. Выбор <span class="tex">\theta</span> — это коэффициент регрессии <span class="tex">Y</span> на <span class="tex">X</span>, то есть оптимум по МНК. Практические детали: <span class="tex">\theta</span> считают по объединённой выборке обеих групп; пользователям без истории подставляют среднее (нулевая поправка); лучшие ковариаты — предэкспериментальная версия той же метрики за 1–4 недели.</p>
+<div class="code"><div class="code-head"><span class="lang">python</span></div><pre><code><span class="tok-k">import</span> numpy <span class="tok-k">as</span> np
+<span class="tok-k">from</span> scipy <span class="tok-k">import</span> stats
+
+rng <span class="tok-p">=</span> np<span class="tok-p">.</span>random<span class="tok-p">.</span>default_rng<span class="tok-p">(</span><span class="tok-n">1</span><span class="tok-p">)</span>
+n <span class="tok-p">=</span> <span class="tok-n">20_000</span>
+x <span class="tok-p">=</span> rng<span class="tok-p">.</span>gamma<span class="tok-p">(</span><span class="tok-n">2.0</span><span class="tok-p">,</span> <span class="tok-n">5.0</span><span class="tok-p">,</span> <span class="tok-n">2</span> <span class="tok-p">*</span> n<span class="tok-p">)</span>                    <span class="tok-c"># метрика до эксперимента</span>
+y <span class="tok-p">=</span> <span class="tok-n">0.8</span> <span class="tok-p">*</span> x <span class="tok-p">+</span> rng<span class="tok-p">.</span>normal<span class="tok-p">(</span><span class="tok-n">0</span><span class="tok-p">,</span> <span class="tok-n">6</span><span class="tok-p">,</span> <span class="tok-n">2</span> <span class="tok-p">*</span> n<span class="tok-p">)</span>             <span class="tok-c"># метрика во время эксперимента</span>
+group <span class="tok-p">=</span> np<span class="tok-p">.</span>r_<span class="tok-p">[</span>np<span class="tok-p">.</span>zeros<span class="tok-p">(</span>n<span class="tok-p">)</span><span class="tok-p">,</span> np<span class="tok-p">.</span>ones<span class="tok-p">(</span>n<span class="tok-p">)</span><span class="tok-p">]</span><span class="tok-p">.</span>astype<span class="tok-p">(</span><span class="tok-f">bool</span><span class="tok-p">)</span>
+y <span class="tok-p">=</span> y <span class="tok-p">+</span> <span class="tok-n">0.15</span> <span class="tok-p">*</span> group                              <span class="tok-c"># истинный эффект +0.15</span>
+
+<span class="tok-k">def</span> <span class="tok-f">diff_ci</span><span class="tok-p">(</span>y<span class="tok-p">,</span> g<span class="tok-p">,</span> alpha<span class="tok-p">=</span><span class="tok-n">0.05</span><span class="tok-p">)</span><span class="tok-p">:</span>
+    a<span class="tok-p">,</span> b <span class="tok-p">=</span> y<span class="tok-p">[</span>g<span class="tok-p">]</span><span class="tok-p">,</span> y<span class="tok-p">[</span><span class="tok-p">~</span>g<span class="tok-p">]</span>
+    d <span class="tok-p">=</span> a<span class="tok-p">.</span>mean<span class="tok-p">(</span><span class="tok-p">)</span> <span class="tok-p">-</span> b<span class="tok-p">.</span>mean<span class="tok-p">(</span><span class="tok-p">)</span>
+    se <span class="tok-p">=</span> np<span class="tok-p">.</span>sqrt<span class="tok-p">(</span>a<span class="tok-p">.</span>var<span class="tok-p">(</span>ddof<span class="tok-p">=</span><span class="tok-n">1</span><span class="tok-p">)</span> <span class="tok-p">/</span> <span class="tok-f">len</span><span class="tok-p">(</span>a<span class="tok-p">)</span> <span class="tok-p">+</span> b<span class="tok-p">.</span>var<span class="tok-p">(</span>ddof<span class="tok-p">=</span><span class="tok-n">1</span><span class="tok-p">)</span> <span class="tok-p">/</span> <span class="tok-f">len</span><span class="tok-p">(</span>b<span class="tok-p">)</span><span class="tok-p">)</span>
+    z <span class="tok-p">=</span> stats<span class="tok-p">.</span>norm<span class="tok-p">.</span>ppf<span class="tok-p">(</span><span class="tok-n">1</span> <span class="tok-p">-</span> alpha <span class="tok-p">/</span> <span class="tok-n">2</span><span class="tok-p">)</span>
+    <span class="tok-k">return</span> d<span class="tok-p">,</span> <span class="tok-p">(</span>d <span class="tok-p">-</span> z <span class="tok-p">*</span> se<span class="tok-p">,</span> d <span class="tok-p">+</span> z <span class="tok-p">*</span> se<span class="tok-p">)</span>
+
+theta <span class="tok-p">=</span> np<span class="tok-p">.</span>cov<span class="tok-p">(</span>x<span class="tok-p">,</span> y<span class="tok-p">)</span><span class="tok-p">[</span><span class="tok-n">0</span><span class="tok-p">,</span> <span class="tok-n">1</span><span class="tok-p">]</span> <span class="tok-p">/</span> x<span class="tok-p">.</span>var<span class="tok-p">(</span>ddof<span class="tok-p">=</span><span class="tok-n">1</span><span class="tok-p">)</span>
+y_cuped <span class="tok-p">=</span> y <span class="tok-p">-</span> theta <span class="tok-p">*</span> <span class="tok-p">(</span>x <span class="tok-p">-</span> x<span class="tok-p">.</span>mean<span class="tok-p">(</span><span class="tok-p">)</span><span class="tok-p">)</span>
+
+<span class="tok-f">print</span><span class="tok-p">(</span><span class="tok-s">"</span><span class="tok-s">обычный:</span><span class="tok-s">"</span><span class="tok-p">,</span> diff_ci<span class="tok-p">(</span>y<span class="tok-p">,</span> group<span class="tok-p">)</span><span class="tok-p">)</span>
+<span class="tok-f">print</span><span class="tok-p">(</span><span class="tok-s">"</span><span class="tok-s">CUPED  :</span><span class="tok-s">"</span><span class="tok-p">,</span> diff_ci<span class="tok-p">(</span>y_cuped<span class="tok-p">,</span> group<span class="tok-p">)</span><span class="tok-p">)</span>
+<span class="tok-f">print</span><span class="tok-p">(</span><span class="tok-s">"</span><span class="tok-s">снижение дисперсии:</span><span class="tok-s">"</span><span class="tok-p">,</span> <span class="tok-n">1</span> <span class="tok-p">-</span> y_cuped<span class="tok-p">.</span>var<span class="tok-p">(</span><span class="tok-p">)</span> <span class="tok-p">/</span> y<span class="tok-p">.</span>var<span class="tok-p">(</span><span class="tok-p">)</span><span class="tok-p">)</span>
+</code></pre></div>
+<p>На этой синтетике <span class="tex">\rho^2 \approx 0{,}47</span>, интервал для эффекта сужается примерно в <span class="tex">1/\sqrt{1-\rho^2} \approx 1{,}37</span> раза (с <span class="tex">\pm0{,}16</span> до <span class="tex">\pm0{,}12</span>). Обратите внимание: сам эффект на конкретной выборке сдвинулся (0,21 → 0,18) — это шум оценки, а не смещение; ширина интервала — вот что улучшилось.</p>
+<h2 id="типичные-ошибки-анализа">Типичные ошибки анализа</h2>
+<ul>
+<li><strong>SRM (sample ratio mismatch).</strong> Если задумано 50/50, а в данных 50,4/49,6 при миллионах пользователей, это почти всегда баг (сломанная рандомизация, ботов фильтруют по-разному в группах, потери логов в одной ветке). Проверяйте <span class="tex">\chi^2</span>-тестом на долю групп <strong>до</strong> анализа метрик; при срабатывании результат считать недействительным.</li>
+<li><strong>Подглядывание (peeking).</strong> Если смотреть p-value каждый день и остановиться, как только <span class="tex">p&lt;0{,}05</span>, реальная частота ложных срабатываний растёт с числом проверок: при ежедневных взглядах в течение нескольких недель — с 5% до 20–30%. Решения: фиксированный срок и размер, либо последовательные тесты (alpha-spending, mSPRT).</li>
+<li><strong>Множественные сравнения.</strong> 20 метрик на уровне 5% дают в среднем одну «значимую» случайно. Заранее объявляйте одну основную метрику, остальные — вторичные с поправкой (Бонферрони, Холм, FDR).</li>
+<li><strong>Эффект новизны и привыкания.</strong> Новый блок привлекает любопытство первые дни, и CTR падает к концу недели; наоборот, пользователям нужно время привыкнуть к смене интерфейса. Минимум неделя (чтобы покрыть будни и выходные), для долгосрочных метрик — дольше; смотрите динамику эффекта по дням.</li>
+<li><strong>Сетевые эффекты и интерференция.</strong> В маркетплейсе группы конкурируют за один и тот же товар и бюджет продавцов; в соцсети влияние распространяется по связям. Тогда пользовательская рандомизация даёт смещённую оценку; используют рандомизацию по кластерам, регионам или переключение по времени (switchback).</li>
+<li><strong>Выброс «китов».</strong> Пара гигантских заказов ломает среднюю выручку; применяйте винзоризацию (срез на 99-м перцентиле) и бутстрап.</li>
+</ul>
+<h2 id="interleaving">Interleaving</h2>
+<p>A/B-тест рекомендаций сравнивает два ранжирования, но шума много. <strong>Interleaving</strong> (Chapelle, Joachims, Radlinski, Yue; ACM TOIS 2012, <em>Large-Scale Validation and Analysis of Interleaved Search Evaluation</em>) смешивает выдачи двух моделей в <strong>один</strong> список, показывает его каждому пользователю, а победитель определяется по кликам. В <strong>team-draft</strong> схеме два «капитана» по очереди (жребий в каждом раунде решает, кто выбирает первым) берут из своего ранжирования самый высокий объект, которого ещё нет в общем списке, и помечают его своей командой; победитель на пользователе — команда с бо́льшим числом кликов. Метод намного чувствительнее A/B: в отчётах компаний (веб-поиск, Netflix, DoorDash) называют выигрыш в 10–100 раз по числу пользователей, нужных для того же вывода, — точный множитель зависит от задачи. Причина в том, что каждый пользователь сравнивает обе модели сам с собой, и межпользовательский разброс уходит из сравнения. Ограничения: подходит только для списков, где позиции сопоставимы, и измеряет <em>предпочтение</em>, а не метрики бизнеса (выручку, удержание), поэтому после interleaving всё равно идёт финальный A/B на меньшем числе вариантов.</p>
+<p>Фундаментальный текст по всему направлению — Kohavi, Tang, Xu, <em>Trustworthy Online Controlled Experiments</em> (Cambridge University Press, 2020): правила дизайна, SRM, длительность, «закон Туймана» (чем интереснее результат, тем вероятнее ошибка в данных).</p>
+<h2 id="разрыв-офлайн-и-онлайн">Разрыв офлайн и онлайн</h2>
+<p>Модель с лучшим NDCG@10 офлайн нередко проигрывает онлайн. Причины:</p>
+<ul>
+<li><strong>Смещение лога.</strong> Офлайн-данные собраны старой политикой; модель, предлагающая непоказывавшееся, «штрафуется» отсутствием меток (глава <a href="/edufamcs-demo/handbook/recsys/holodnyj-start-i-bandity/" rel="noopener noreferrer nofollow">«Холодный старт, исследование и бандиты»</a>).</li>
+<li><strong>Метрика ≠ цель.</strong> NDCG по кликам не учитывает разнообразие, новизну и усталость.</li>
+<li><strong>Задержка и устаревание.</strong> Тяжёлая модель дольше отвечает и реже переобучается.</li>
+<li><strong>Эффект обратной связи.</strong> Сама рекомендация меняет поведение.</li>
+</ul>
+<p>Поэтому офлайн-метрики работают как <strong>фильтр</strong>: они отсеивают заведомо плохие модели дёшево и быстро, а победителя определяет A/B. Сильная корреляция офлайн→онлайн — это то, что нужно проверять и накапливать: «в 6 из 10 тестов за год рост NDCG предсказал рост CTR» — реальный и полезный показатель зрелости процесса.</p>
+<h2 id="эксплуатация">Эксплуатация</h2>
+<p><strong>Логирование.</strong> Фундамент всего: для каждого показа пишем пользователя, объект, <strong>позицию</strong>, блок, версию модели, вероятность показа (propensity), признаки на момент показа, и отдельным событием — клик. Позиция критична: клик зависит от неё сильнее, чем от релевантности (position bias); без неё обучение на кликах учит предпочитать то, что уже стояло наверху.</p>
+<p><strong>Петли обратной связи и popularity bias.</strong> Chaney, Stewart, Engelhardt (RecSys 2018, <em>How Algorithmic Confounding in Recommendation Systems Increases Homogeneity and Decreases Utility</em>) показали симуляциями, что обучение на логах собственных рекомендаций гомогенизирует пользователей и снижает полезность: система всё сильнее видит то, что сама показала. Противоядия — исследование, дебайасинг по позиции, ограничения на долю популярного.</p>
+<p><strong>Регулярное переобучение.</strong> Вкусы дрейфуют, каталог меняется: модели кандидатов обновляют раз в сутки-неделю, лёгкие признаки популярности и свежести — каждые минуты-часы. Частота выбирается по скорости устаревания метрики, а не «как получится».</p>
+<p><strong>Feature store и train/serve skew.</strong> Самая распространённая причина «онлайн хуже офлайна» — признаки при обучении и при обслуживании считаются разными кодами (или с разной свежестью: офлайн — на конец дня, онлайн — на момент запроса, и обучение «подсматривает в будущее»). Лечение: единая реализация признака, <strong>point-in-time</strong> корректные выгрузки и логирование признаков, реально поданных в модель, с последующей сверкой.</p>
+<p><strong>Бюджет задержки и кэширование.</strong> У рекомендаций на странице бюджет — сотни миллисекунд на всё, из них на ранжирование приходится десятки. Отсюда воронка (глава <a href="/edufamcs-demo/handbook/recsys/kandidaty-i-ranzhirovanie/" rel="noopener noreferrer nofollow">«Двухстадийная схема»</a>), ANN вместо полного перебора, предвычисление эмбеддингов пользователей и кэш готовых выдач для горячих сегментов (с TTL и инвалидацией по цене/наличию). Квантизация и дистилляция тяжёлой модели в лёгкую — ходовые способы уложиться в бюджет.</p>
+<p><strong>Мониторинг.</strong> Следить нужно не только за здоровьем сервиса, но и за качеством данных и выдачи:</p>
+<ul>
+<li>дрейф признаков и распределения скоров (PSI, KS);</li>
+<li><strong>покрытие каталога</strong> (доля объектов, получивших хоть один показ), доля пустых или фолбэк-выдач;</li>
+<li>доля рекомендаций, пришедших из каждого источника кандидатов;</li>
+<li>свежесть данных и признаков (лаг пайплайна);</li>
+<li>онлайн-метрики на удерживаемой контрольной группе («холдаут» без рекомендаций или со старой моделью), чтобы мерить совокупный эффект системы месяцами.</li>
+</ul>
+<p><strong>Технический долг.</strong> Sculley et al. (NIPS 2015, <em>Hidden Technical Debt in Machine Learning Systems</em>) перечисляют то, что ломает ML-системы: запутанность («изменение одной вещи меняет всё», CACE), необъявленные потребители выходов модели, петли обратной связи, склеенный из скриптов код, нестабильные входные сигналы. Совет Zinkevich (<em>Rules of Machine Learning</em>, Google): сначала простая модель и хорошая инфраструктура логирования и метрик, лишь потом сложные модели; первое правило — «не бойтесь запускать продукт без ML». Для рекомендаций это значит: популярное + item-to-item + аккуратный A/B часто дают большую часть эффекта.</p>
+<h2 id="бизнес-эффект">Бизнес-эффект</h2>
+<p>Чаще всего измеримый эффект рекомендаций — доля выручки, пришедшая с рекомендательных блоков, прирост конверсии и среднего чека, рост удержания. Типичные для индустрии заявления — единицы процентов на зрелой системе и десятки процентов на «никаких рекомендаций → любые рекомендации»; приросты от замены одной модели на более сложную чаще лежат в диапазоне <strong>десятых долей процента</strong> и заметны лишь на огромных объёмах трафика (глава про генеративные рекомендатели). Закладывайте это в приоритеты: инвестиция в логирование, свежесть данных или исправление train/serve skew нередко окупается лучше новой архитектуры.</p>
+<h2 id="что-почитать">Что почитать</h2>
+<ul>
+<li>Kohavi, Tang, Xu. <em>Trustworthy Online Controlled Experiments: A Practical Guide to A/B Testing</em>. Cambridge University Press, 2020.</li>
+<li>Deng, Xu, Kohavi, Walker. <em>Improving the Sensitivity of Online Controlled Experiments by Utilizing Pre-Experiment Data</em>. WSDM 2013 (CUPED).</li>
+<li>Chapelle, Joachims, Radlinski, Yue. <em>Large-Scale Validation and Analysis of Interleaved Search Evaluation</em>. ACM TOIS, 2012.</li>
+<li>Chaney, Stewart, Engelhardt. <em>How Algorithmic Confounding in Recommendation Systems Increases Homogeneity and Decreases Utility</em>. RecSys 2018 (<a href="https://arxiv.org/abs/1710.11214" rel="noopener noreferrer nofollow">arXiv:1710.11214</a>).</li>
+<li>Sculley et al. <em>Hidden Technical Debt in Machine Learning Systems</em>. NIPS 2015; Zinkevich. <em>Rules of Machine Learning</em> (<a href="https://developers.google.com/machine-learning/guides/rules-of-ml" rel="noopener noreferrer nofollow">developers.google.com/machine-learning/guides/rules-of-ml</a>).</li>
+<li>Видео курса: <a href="https://youtu.be/xPqHxf7nsg8" rel="noopener noreferrer nofollow">Ильдар Сафило: бизнес-эффект от рекомендаций</a>, <a href="https://youtu.be/nOg8z-CfJP4" rel="noopener noreferrer nofollow">Эмилий Фельдман: рекомендации в проде</a>, <a href="https://youtu.be/VGLW6_rTzOM" rel="noopener noreferrer nofollow">Александр Бутенко: ускорение рекомендаций в проде</a>, <a href="https://youtu.be/2CLyLE3oOTQ" rel="noopener noreferrer nofollow">DeepRecSys, лекция 2: ML-дизайн рекомендательных систем</a>, <a href="https://youtu.be/pwIY24AXWKY" rel="noopener noreferrer nofollow">семинар 8: RecSys Challenge 2025</a>.</li>
+</ul>
+</div>
+      
+
+      
+      <nav class="pager" aria-label="Соседние статьи">
+        <a href="/edufamcs-demo/handbook/recsys/holodnyj-start-i-bandity/"><span><svg class="ico sm" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-arrow-left"/></svg>Назад</span>Холодный старт, исследование и бандиты</a>
+        <a href="/edufamcs-demo/handbook/recsys/semanticheskie-id-tiger/"><span>Дальше<svg class="ico sm" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-arrow"/></svg></span>Семантические ID и генеративный retrieval: TIGER</a>
+      </nav>
+      
+    </article>
+
+    <aside class="hb-toc" aria-label="На этой странице">
+      <a class="l2" href="#онлайн-метрики">Онлайн-метрики</a><a class="l2" href="#дизайн-ab-теста">Дизайн A/B-теста</a><a class="l2" href="#cuped-уменьшаем-дисперсию">CUPED: уменьшаем дисперсию</a><a class="l2" href="#типичные-ошибки-анализа">Типичные ошибки анализа</a><a class="l2" href="#interleaving">Interleaving</a><a class="l2" href="#разрыв-офлайн-и-онлайн">Разрыв офлайн и онлайн</a><a class="l2" href="#эксплуатация">Эксплуатация</a><a class="l2" href="#бизнес-эффект">Бизнес-эффект</a><a class="l2" href="#что-почитать">Что почитать</a>
+    </aside>
+  </div>
+</div>
+
+
+</main>
+
+<footer class="ftr" data-theme="dark">
+  <svg class="sym fern" viewBox="0 0 40.5 65.02" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#fern"/></svg>
+  <div class="container">
+    <div class="ftr-row">
+      <a href="/edufamcs-demo/" aria-label="EDU FAMCS — главная"><img src="/edufamcs-demo/static/brand/logo/logo-edu-dark.svg" alt="EDU FAMCS" width="196" height="40"></a>
+      <ul class="ftr-links">
+        <li><a href="/edufamcs-demo/#courses">Курсы</a></li>
+        <li><a href="/edufamcs-demo/ml/">Машинное обучение</a></li>
+        <li><a href="/edufamcs-demo/handbook/">Хендбук</a></li>
+        <li><a href="/edufamcs-demo/news/">Новости</a></li>
+        <li><a href="/edufamcs-demo/people/">Авторы</a></li>
+        <li><a href="/edufamcs-demo/about/">О&nbsp;нас</a></li>
+        <li><a href="/edufamcs-demo/propose/">Предложить или исправить</a></li>
+        <li><a href="/edufamcs-demo/privacy/">Конфиденциальность</a></li>
+      </ul>
+    </div>
+    <div class="ftr-big" aria-hidden="true">EDU<span class="d">·</span>FAMCS</div>
+    <p class="ftr-copy">© 2026 EDU FAMCS · Минск</p>
+  </div>
+</footer>
+
+<div class="toasts-region" aria-live="polite" id="toasts">
+
+</div>
+
+</body>
+</html>

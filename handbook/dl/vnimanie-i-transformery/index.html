@@ -1,0 +1,239 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Внимание и трансформеры · EDU FAMCS</title>
+<meta name="description" content="Внимание и трансформеры — Введение в глубокое обучение. Хендбук ML-курса ФПМИ.">
+<meta name="theme-color" content="#060A16">
+<meta name="robots" content="noindex, nofollow">
+<meta name="htmx-config" content='{"allowEval":false,"includeIndicatorStyles":false,"historyCacheSize":0,"selfRequestsOnly":true}'>
+<meta name="katex-js" content="/edufamcs-demo/static/vendor/katex/katex.min.js">
+<meta name="katex-css" content="/edufamcs-demo/static/vendor/katex/katex.min.css">
+<link rel="icon" href="/edufamcs-demo/static/brand/logo/favicon-16.svg" type="image/svg+xml" sizes="16x16">
+<link rel="icon" href="/edufamcs-demo/static/brand/logo/favicon.svg" type="image/svg+xml" sizes="any">
+<link rel="preload" href="/edufamcs-demo/static/brand/fonts/manrope-cyrillic-400.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/edufamcs-demo/static/brand/fonts/unbounded-cyrillic-800.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="/edufamcs-demo/static/brand/fonts.css">
+<link rel="stylesheet" href="/edufamcs-demo/static/brand/tokens.css">
+<link rel="stylesheet" href="/edufamcs-demo/static/brand/components.css">
+<link rel="stylesheet" href="/edufamcs-demo/static/css/site.css">
+<link rel="stylesheet" href="/edufamcs-demo/static/css/hub.css">
+<link rel="stylesheet" href="/edufamcs-demo/static/css/about.css">
+<link rel="stylesheet" href="/edufamcs-demo/static/handbook/handbook.css">
+<script src="/edufamcs-demo/static/js/theme.js"></script>
+<script src="/edufamcs-demo/static/vendor/htmx/htmx.min.js" defer></script>
+<script src="/edufamcs-demo/static/vendor/alpine/alpine-csp.min.js" defer></script>
+<script src="/edufamcs-demo/static/js/site.js" defer></script>
+<script src="/edufamcs-demo/static/handbook/handbook.js" defer></script>
+</head>
+<body class="" hx-headers='{"X-CSRFToken": "BBngitaJCN4RaS7hqsgv3XOGNyUkWnS20lWk2rX6xEs0pri0XFZD0skLlg0PuxAM"}'>
+<a class="skip" href="#main">К содержанию</a>
+<div class="demo-bar" role="note">Демо-версия для отзывов: вход, запись на курсы и формы здесь не работают.</div>
+
+<header class="hdr">
+  <div class="container">
+    <a class="brand" href="/edufamcs-demo/" aria-label="EDU FAMCS — главная">
+      <span class="full"><img class="only-light" src="/edufamcs-demo/static/brand/logo/logo-edu-light.svg" alt="EDU FAMCS" width="196" height="40"><img class="only-dark" src="/edufamcs-demo/static/brand/logo/logo-edu-dark.svg" alt="EDU FAMCS" width="196" height="40"></span>
+      <span class="short"><img class="only-light" src="/edufamcs-demo/static/brand/logo/logo-edu-light.svg" alt="EDU FAMCS" height="30"><img class="only-dark" src="/edufamcs-demo/static/brand/logo/logo-edu-dark.svg" alt="EDU FAMCS" height="30"></span>
+    </a>
+    <nav class="nav" id="main-nav" aria-label="Основная навигация">
+      <a href="/edufamcs-demo/#courses">Курсы</a>
+      <a href="/edufamcs-demo/ml/" >Машинное обучение</a>
+      
+      <a href="/edufamcs-demo/handbook/" aria-current="page">Хендбук</a>
+      <a href="/edufamcs-demo/news/" >Новости</a>
+      <a href="/edufamcs-demo/people/" >Авторы</a>
+      <a href="/edufamcs-demo/about/" >О&nbsp;нас</a>
+    </nav>
+    <div class="hdr-actions">
+      
+      <a class="btn btn-outline btn-login" href="/edufamcs-demo/accounts/login/?next=/handbook/dl/vnimanie-i-transformery/">Войти</a>
+      
+      <button class="icon-btn menu-btn" type="button" aria-label="Меню" aria-expanded="false" aria-controls="main-nav"><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-menu"/></svg></button>
+    </div>
+  </div>
+</header>
+
+<main id="main">
+
+
+
+<div class="container hb-page hb-tone">
+  <div class="hb">
+    <aside class="hb-nav" aria-label="Статьи раздела">
+      
+<form class="hb-search" action="/edufamcs-demo/handbook/search/" method="get" role="search">
+  <svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-search"/></svg>
+  <input class="input" type="search" name="q" value="" placeholder="Поиск по хендбуку" aria-label="Поиск по хендбуку" autocomplete="off" maxlength="120"
+    hx-get="/edufamcs-demo/handbook/search/" hx-trigger="input changed delay:250ms, search" hx-target="#hb-nav-results" hx-sync="this:replace">
+</form>
+
+      <div id="hb-nav-results" class="hb-nav-results" aria-live="polite"></div>
+      <a class="grp" href="/edufamcs-demo/handbook/dl/">Архитектуры</a>
+      
+      <a class="" href="/edufamcs-demo/handbook/dl/svertochnye-seti/">Свёрточные сети</a>
+      
+      <a class="" href="/edufamcs-demo/handbook/dl/posledovatelnosti-i-rnn/">Последовательности: эмбеддинги и рекуррентные сети</a>
+      
+      <a class="cur" href="/edufamcs-demo/handbook/dl/vnimanie-i-transformery/" aria-current="page">Внимание и трансформеры</a>
+      
+    </aside>
+
+    <article class="hb-main">
+      <nav class="crumbs" aria-label="Навигация"><a href="/edufamcs-demo/handbook/">Хендбук</a><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-chev"/></svg><a href="/edufamcs-demo/handbook/dl/">Введение в глубокое обучение</a></nav>
+      <h1 class="h1">Внимание и трансформеры</h1>
+      <div class="hb-meta">
+        
+        
+        <span><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-clock"/></svg>12&nbsp;мин</span>
+        <span class="hb-authors"><span class="avatar sm" title="Артем Лебедевич">АЛ</span>Артем Лебедевич</span>
+        <span><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-edit"/></svg>9 ноября 2026</span>
+        
+        
+      </div>
+
+      
+      <details class="hb-mtoc">
+        <summary><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-list"/></svg>Содержание<svg class="ico sm" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-chev-down"/></svg></summary>
+        <a class="l2" href="#внимание-как-мягкий-поиск">Внимание как мягкий поиск</a><a class="l2" href="#позиции">Позиции</a><a class="l2" href="#блок-трансформера">Блок трансформера</a><a class="l2" href="#стоимость">Стоимость</a><a class="l2" href="#семейства-моделей">Семейства моделей</a><a class="l2" href="#мосты-к-рекомендациям-и-поиску">Мосты к рекомендациям и поиску</a><a class="l2" href="#код-self-attention-и-готовый-слой">Код: self-attention и готовый слой</a><a class="l2" href="#практика-и-подводные-камни">Практика и подводные камни</a><a class="l2" href="#что-почитать">Что почитать</a>
+      </details>
+      
+
+      <div class="prose"><p>Трансформер (Васвани и соавторы, 2017, «Attention Is All You Need») убрал из архитектуры рекуррентность и оставил только внимание. Выигрыш двойной: все позиции последовательности обрабатываются параллельно, а информация между любыми двумя позициями передаётся за один шаг, а не через сотни. За несколько лет архитектура вытеснила RNN в текстах и затем распространилась на изображения, звук, рекомендации и поиск.</p>
+<h2 id="внимание-как-мягкий-поиск">Внимание как мягкий поиск</h2>
+<p>Представьте словарь: есть пары «ключ — значение», по запросу находится значение с совпавшим ключом. Внимание — <strong>мягкая</strong> версия этого: запрос сравнивается со всеми ключами, и в ответ возвращается взвешенная сумма значений, где вес тем больше, чем сильнее ключ похож на запрос.</p>
+<p>Пусть <span class="tex">Q\in\mathbb R^{n\times d_k}</span> (запросы), <span class="tex">K\in\mathbb R^{m\times d_k}</span> (ключи), <span class="tex">V\in\mathbb R^{m\times d_v}</span> (значения). <strong>Scaled dot-product attention</strong>:</p>
+<div class="tex tex-block">\text{Attention}(Q,K,V)=\text{softmax}\!\Big(\frac{QK^\top}{\sqrt{d_k}}\Big)V.</div>
+<p>Разберём по частям. <span class="tex">QK^\top</span> — матрица сходств «запрос × ключ», <span class="tex">n\times m</span>. Softmax по строкам превращает сходства в веса, сумма которых равна 1. Умножение на <span class="tex">V</span> — взвешенное усреднение значений. Деление на <span class="tex">\sqrt{d_k}</span> нужно потому, что скалярное произведение двух случайных векторов размерности <span class="tex">d_k</span> с независимыми компонентами (среднее 0, дисперсия 1) имеет дисперсию <span class="tex">d_k</span>: без масштаба логиты растут, softmax насыщается в почти one-hot и градиент пропадает (те же вопросы, что с сигмоидой в статье про <a href="/edufamcs-demo/handbook/dl/nejron-i-mnogoslojnyj-perceptron/" rel="noopener noreferrer nofollow">нейрон и MLP</a>).</p>
+<p><strong>Self-attention</strong>: запросы, ключи и значения получаются из одной и той же последовательности <span class="tex">X\in\mathbb R^{T\times d}</span> линейными проекциями <span class="tex">Q=XW_Q</span>, <span class="tex">K=XW_K</span>, <span class="tex">V=XW_V</span>. Каждый токен «спрашивает» всех остальных и собирает информацию из тех, кто ему нужен: местоимение — из существительного, к которому оно относится. Итоговое представление токена учитывает весь контекст — это и есть контекстуализация, которой не хватало word2vec.</p>
+<p><strong>Multi-head</strong>: вместо одного внимания считают <span class="tex">h</span> параллельных «голов» с меньшей размерностью <span class="tex">d_k=d/h</span> и разными проекциями, затем конкатенируют и пропускают через <span class="tex">W_O</span>. Каждая голова может специализироваться на своём типе связей (синтаксис, соседние слова, редкие сущности), а суммарная стоимость остаётся прежней.</p>
+<h2 id="позиции">Позиции</h2>
+<p>Внимание без маски не различает порядок: если перемешать токены, выход каждого токена не изменится, просто переставятся строки (эквивариантность к перестановкам; в этом смысле внимание — оператор над множеством). Порядок надо добавить явно.</p>
+<ul>
+<li><strong>Синусоидальные кодировки</strong> (оригинальная статья): к эмбеддингу токена прибавляется вектор <span class="tex">PE_{pos,2i}=\sin(pos/10000^{2i/d})</span>, <span class="tex">PE_{pos,2i+1}=\cos(\cdot)</span>. Не обучается; авторы надеялись на экстраполяцию на длины, которых не было при обучении, но на практике она слабая.</li>
+<li><strong>Обучаемые</strong> позиционные эмбеддинги (BERT, GPT-2): таблица на <span class="tex">T_{max}</span> позиций. Просто, но длина ограничена.</li>
+<li><strong>RoPE</strong> (Су и соавторы, 2021): вращает <span class="tex">q</span> и <span class="tex">k</span> на угол, пропорциональный позиции, так что скалярное произведение зависит только от <strong>относительного</strong> расстояния. Сегодня стандарт в большинстве открытых языковых моделей.</li>
+</ul>
+<h2 id="блок-трансформера">Блок трансформера</h2>
+<p>Стандартный блок состоит из двух подслоёв, у каждого остаточная связь и нормализация:</p>
+<div class="tex tex-block">h'=h+\text{MHA}(\text{LN}(h)),\qquad h''=h'+\text{FFN}(\text{LN}(h')),</div>
+<p>где <span class="tex">\text{FFN}(x)=W_2\,\sigma(W_1x)</span>, внутренняя размерность обычно <span class="tex">4d</span>; активация в оригинале ReLU, в BERT и GPT — GELU, в современных LLM — вентильная SwiGLU. Здесь нормализация стоит <strong>перед</strong> подслоем (<strong>pre-norm</strong>) — такая версия обучается стабильнее и менее требовательна к warmup (Xiong и соавторы, 2020); в оригинале была post-norm, <span class="tex">h'=\text{LN}(h+\text{MHA}(h))</span>. Остаточные связи и LayerNorm решают те же проблемы затухания градиентов, что разобраны в статье <a href="/edufamcs-demo/handbook/dl/obratnoe-rasprostranenie-oshibki/" rel="noopener noreferrer nofollow">про backprop</a>; именно они позволяют складывать десятки и сотни блоков. Внимание перемешивает информацию <strong>между</strong> позициями, FFN обрабатывает каждую позицию <strong>независимо</strong> и хранит большую часть параметров модели.</p>
+<p><strong>Энкодер и декодер.</strong> В энкодере каждый токен видит всех (двунаправленное внимание). В декодере используется <strong>causal mask</strong>: токен <span class="tex">t</span> видит только позиции <span class="tex">\le t</span> — в матрицу сходств перед softmax на запрещённые места ставят <span class="tex">-\infty</span>. Это нужно, чтобы при обучении на всей последовательности сразу сеть не подглядывала в будущее, а при генерации поведение совпадало с обучением. В оригинальной схеме перевода есть ещё <strong>cross-attention</strong>: запросы идут из декодера, ключи и значения — из энкодера (по роли то же, что внимание Баданау, только скалярное, а не аддитивное; см. <a href="/edufamcs-demo/handbook/dl/posledovatelnosti-i-rnn/" rel="noopener noreferrer nofollow">статью про RNN</a>).</p>
+<h2 id="стоимость">Стоимость</h2>
+<p>Матрица <span class="tex">QK^\top</span> имеет размер <span class="tex">T\times T</span>, поэтому время и память внимания — <span class="tex">O(T^2d)</span>, где <span class="tex">T</span> — длина последовательности. Для коротких текстов это не проблема, для тысяч токенов — узкое место. Ответы разные: разреженное и локальное внимание, линейные аппроксимации, а самый практичный — <strong>FlashAttention</strong> (Дао и соавторы, 2022): точное внимание без изменения математики, но с блочным вычислением в быстрой памяти GPU и без материализации матрицы <span class="tex">T\times T</span> в основной; даёт ускорение в разы и линейную по <span class="tex">T</span> память. Во время генерации декодер сохраняет ключи и значения прошлых токенов (<strong>KV-cache</strong>), чтобы не пересчитывать их заново.</p>
+<h2 id="семейства-моделей">Семейства моделей</h2>
+<ul>
+<li><strong>BERT</strong> (Девлин и соавторы, 2018): энкодер, обучается как <strong>masked LM</strong> — выбираются 15 % токенов (80 % из них заменяются на <code>[MASK]</code>, 10 % на случайный токен, 10 % остаются), и их нужно восстановить по двустороннему контексту. Затем дообучается под задачу (классификация, поиск ответа, ранжирование). Хорош, когда нужен «понимающий» вектор текста.</li>
+<li><strong>GPT</strong> (Рэдфорд и соавторы, 2018, 2019; GPT-3 — Браун и соавторы, 2020): декодер, обучается предсказывать <strong>следующий токен</strong> по предыдущим. Эта простая задача на огромных корпусах даёт модель, которая генерирует текст и, начиная с GPT-3, решает новые задачи по нескольким примерам прямо в контексте (in-context learning).</li>
+<li><strong>ViT</strong> (Досовицкий и соавторы, 2020): картинка режется на патчи <span class="tex">16\times16</span>, каждый патч — линейный слой в токен, дальше обычный энкодер. При предобучении на очень больших наборах (JFT-300M) превосходит свёрточные сети, а на одном ImageNet без сильной регуляризации уступает им (см. <a href="/edufamcs-demo/handbook/dl/svertochnye-seti/" rel="noopener noreferrer nofollow">статью про CNN</a>).</li>
+</ul>
+<p><strong>Законы масштабирования</strong> (Каплан и соавторы, 2020): потери предсказуемо падают как степенная функция от числа параметров, объёма данных и вычислений. Хоффман и соавторы (2022, Chinchilla) уточнили, что при фиксированном бюджете вычислений модель и данные надо увеличивать вместе (порядка 20 токенов на параметр), а не гнаться за размером при том же объёме данных. Отсюда индустриальная логика последних лет: масштабировать и предобучать на неразмеченных данных, а затем дообучать.</p>
+<p><strong>Дообучение и LoRA.</strong> Полный fine-tuning большой модели требует хранить градиенты и состояния оптимизатора для всех весов. <strong>LoRA</strong> (Ху и соавторы, 2021) замораживает исходные веса <span class="tex">W</span> и обучает только низкоранговую добавку <span class="tex">\Delta W=BA</span>, <span class="tex">A\in\mathbb R^{r\times d}</span>, <span class="tex">B\in\mathbb R^{d\times r}</span>, <span class="tex">r\sim8</span>–<span class="tex">64</span>. <span class="tex">B</span> инициализируют нулём, поэтому в начале дообучения модель совпадает с исходной. Обучаемых параметров на порядки меньше, а после обучения добавку можно влить в <span class="tex">W</span> без потери скорости инференса.</p>
+<h2 id="мосты-к-рекомендациям-и-поиску">Мосты к рекомендациям и поиску</h2>
+<ul>
+<li><strong>Последовательные рекомендации.</strong> SASRec (Канг и Маколей, 2018) — декодер с causal mask по истории пользователя, предсказывающий следующий товар; BERT4Rec (Сунь и соавторы, 2019) — маскированный вариант. Об их плюсах и о том, где они ломаются, — в статье <a href="/edufamcs-demo/handbook/recsys/posledovatelnye-modeli/" rel="noopener noreferrer nofollow">про последовательные модели</a>.</li>
+<li><strong>Поиск и ранжирование.</strong> Cross-encoder подаёт в BERT запрос и документ вместе, и self-attention напрямую сопоставляет их слова: точнее всего, но дорого, поэтому применяется для переранжирования десятков кандидатов. Bi-encoder кодирует запрос и документ отдельно и ищет по векторам — это та же двухбашенная схема, что в рекомендациях. Подробнее — в статье <a href="/edufamcs-demo/handbook/retrieval/nejrosetevoe-ranzhirovanie/" rel="noopener noreferrer nofollow">про нейросетевое ранжирование</a>.</li>
+<li><strong>Генеративные рекомендатели.</strong> Идея GPT перенесена на рекомендации: товары кодируются дискретными семантическими идентификаторами, модель генерирует идентификатор следующего товара токен за токеном. См. <a href="/edufamcs-demo/handbook/recsys/semanticheskie-id-tiger/" rel="noopener noreferrer nofollow">семантические ID и TIGER</a> и <a href="/edufamcs-demo/handbook/recsys/generativnye-rekomendateli/" rel="noopener noreferrer nofollow">генеративные рекомендатели на масштабе</a>; обзор направления — лекция 12 DeepRecSys «Генеративные рекомендации»: <a href="https://www.youtube.com/watch?v=BbWTrvwaejg" rel="noopener noreferrer nofollow">BbWTrvwaejg</a>.</li>
+</ul>
+<h2 id="код-self-attention-и-готовый-слой">Код: self-attention и готовый слой</h2>
+<p>Многоголовое self-attention в PyTorch в два десятка строк:</p>
+<div class="code"><div class="code-head"><span class="lang">python</span></div><pre><code><span class="tok-k">import</span> math<span class="tok-p">,</span> torch
+<span class="tok-k">from</span> torch <span class="tok-k">import</span> nn
+<span class="tok-k">import</span> torch.nn.functional <span class="tok-k">as</span> F
+
+<span class="tok-k">class</span> <span class="tok-f">SelfAttention</span><span class="tok-p">(</span>nn<span class="tok-p">.</span>Module<span class="tok-p">)</span><span class="tok-p">:</span>
+    <span class="tok-k">def</span> <span class="tok-f">__init__</span><span class="tok-p">(</span><span class="tok-f">self</span><span class="tok-p">,</span> d_model<span class="tok-p">,</span> n_heads<span class="tok-p">,</span> causal<span class="tok-p">=</span><span class="tok-k">False</span><span class="tok-p">)</span><span class="tok-p">:</span>
+        <span class="tok-f">super</span><span class="tok-p">(</span><span class="tok-p">)</span><span class="tok-p">.</span><span class="tok-f">__init__</span><span class="tok-p">(</span><span class="tok-p">)</span>
+        <span class="tok-k">assert</span> d_model <span class="tok-p">%</span> n_heads <span class="tok-p">==</span> <span class="tok-n">0</span>
+        <span class="tok-f">self</span><span class="tok-p">.</span>h<span class="tok-p">,</span> <span class="tok-f">self</span><span class="tok-p">.</span>dk<span class="tok-p">,</span> <span class="tok-f">self</span><span class="tok-p">.</span>causal <span class="tok-p">=</span> n_heads<span class="tok-p">,</span> d_model <span class="tok-p">/</span><span class="tok-p">/</span> n_heads<span class="tok-p">,</span> causal
+        <span class="tok-f">self</span><span class="tok-p">.</span>qkv <span class="tok-p">=</span> nn<span class="tok-p">.</span>Linear<span class="tok-p">(</span>d_model<span class="tok-p">,</span> <span class="tok-n">3</span> <span class="tok-p">*</span> d_model<span class="tok-p">)</span>
+        <span class="tok-f">self</span><span class="tok-p">.</span>proj <span class="tok-p">=</span> nn<span class="tok-p">.</span>Linear<span class="tok-p">(</span>d_model<span class="tok-p">,</span> d_model<span class="tok-p">)</span>
+
+    <span class="tok-k">def</span> <span class="tok-f">forward</span><span class="tok-p">(</span><span class="tok-f">self</span><span class="tok-p">,</span> x<span class="tok-p">)</span><span class="tok-p">:</span>                                       <span class="tok-c"># x: (B, T, d_model)</span>
+        B<span class="tok-p">,</span> T<span class="tok-p">,</span> _ <span class="tok-p">=</span> x<span class="tok-p">.</span>shape
+        q<span class="tok-p">,</span> k<span class="tok-p">,</span> v <span class="tok-p">=</span> <span class="tok-f">self</span><span class="tok-p">.</span>qkv<span class="tok-p">(</span>x<span class="tok-p">)</span><span class="tok-p">.</span>view<span class="tok-p">(</span>B<span class="tok-p">,</span> T<span class="tok-p">,</span> <span class="tok-n">3</span><span class="tok-p">,</span> <span class="tok-f">self</span><span class="tok-p">.</span>h<span class="tok-p">,</span> <span class="tok-f">self</span><span class="tok-p">.</span>dk<span class="tok-p">)</span><span class="tok-p">.</span>permute<span class="tok-p">(</span><span class="tok-n">2</span><span class="tok-p">,</span> <span class="tok-n">0</span><span class="tok-p">,</span> <span class="tok-n">3</span><span class="tok-p">,</span> <span class="tok-n">1</span><span class="tok-p">,</span> <span class="tok-n">4</span><span class="tok-p">)</span>
+        scores <span class="tok-p">=</span> q <span class="tok-p">@</span> k<span class="tok-p">.</span>transpose<span class="tok-p">(</span><span class="tok-p">-</span><span class="tok-n">2</span><span class="tok-p">,</span> <span class="tok-p">-</span><span class="tok-n">1</span><span class="tok-p">)</span> <span class="tok-p">/</span> math<span class="tok-p">.</span>sqrt<span class="tok-p">(</span><span class="tok-f">self</span><span class="tok-p">.</span>dk<span class="tok-p">)</span>   <span class="tok-c"># (B, h, T, T)</span>
+        <span class="tok-k">if</span> <span class="tok-f">self</span><span class="tok-p">.</span>causal<span class="tok-p">:</span>
+            mask <span class="tok-p">=</span> torch<span class="tok-p">.</span>triu<span class="tok-p">(</span>torch<span class="tok-p">.</span>ones<span class="tok-p">(</span>T<span class="tok-p">,</span> T<span class="tok-p">,</span> dtype<span class="tok-p">=</span>torch<span class="tok-p">.</span>bool<span class="tok-p">,</span> device<span class="tok-p">=</span>x<span class="tok-p">.</span>device<span class="tok-p">)</span><span class="tok-p">,</span> diagonal<span class="tok-p">=</span><span class="tok-n">1</span><span class="tok-p">)</span>
+            scores <span class="tok-p">=</span> scores<span class="tok-p">.</span>masked_fill<span class="tok-p">(</span>mask<span class="tok-p">,</span> <span class="tok-f">float</span><span class="tok-p">(</span><span class="tok-s">"</span><span class="tok-s">-inf</span><span class="tok-s">"</span><span class="tok-p">)</span><span class="tok-p">)</span>
+        out <span class="tok-p">=</span> F<span class="tok-p">.</span>softmax<span class="tok-p">(</span>scores<span class="tok-p">,</span> dim<span class="tok-p">=</span><span class="tok-p">-</span><span class="tok-n">1</span><span class="tok-p">)</span> <span class="tok-p">@</span> v                     <span class="tok-c"># (B, h, T, dk)</span>
+        <span class="tok-k">return</span> <span class="tok-f">self</span><span class="tok-p">.</span>proj<span class="tok-p">(</span>out<span class="tok-p">.</span>transpose<span class="tok-p">(</span><span class="tok-n">1</span><span class="tok-p">,</span> <span class="tok-n">2</span><span class="tok-p">)</span><span class="tok-p">.</span>reshape<span class="tok-p">(</span>B<span class="tok-p">,</span> T<span class="tok-p">,</span> <span class="tok-p">-</span><span class="tok-n">1</span><span class="tok-p">)</span><span class="tok-p">)</span>
+</code></pre></div>
+<p>В практике используйте встроенные блоки, которые уже содержат FlashAttention-подобные ядра:</p>
+<div class="code"><div class="code-head"><span class="lang">python</span></div><pre><code>layer <span class="tok-p">=</span> nn<span class="tok-p">.</span>TransformerEncoderLayer<span class="tok-p">(</span>d_model<span class="tok-p">=</span><span class="tok-n">256</span><span class="tok-p">,</span> nhead<span class="tok-p">=</span><span class="tok-n">8</span><span class="tok-p">,</span> dim_feedforward<span class="tok-p">=</span><span class="tok-n">1024</span><span class="tok-p">,</span>
+                                   dropout<span class="tok-p">=</span><span class="tok-n">0.1</span><span class="tok-p">,</span> activation<span class="tok-p">=</span><span class="tok-s">"</span><span class="tok-s">gelu</span><span class="tok-s">"</span><span class="tok-p">,</span>
+                                   batch_first<span class="tok-p">=</span><span class="tok-k">True</span><span class="tok-p">,</span> norm_first<span class="tok-p">=</span><span class="tok-k">True</span><span class="tok-p">)</span>    <span class="tok-c"># pre-norm</span>
+encoder <span class="tok-p">=</span> nn<span class="tok-p">.</span>TransformerEncoder<span class="tok-p">(</span>layer<span class="tok-p">,</span> num_layers<span class="tok-p">=</span><span class="tok-n">4</span><span class="tok-p">)</span>
+
+x <span class="tok-p">=</span> torch<span class="tok-p">.</span>randn<span class="tok-p">(</span><span class="tok-n">32</span><span class="tok-p">,</span> <span class="tok-n">50</span><span class="tok-p">,</span> <span class="tok-n">256</span><span class="tok-p">)</span>
+pad <span class="tok-p">=</span> torch<span class="tok-p">.</span>zeros<span class="tok-p">(</span><span class="tok-n">32</span><span class="tok-p">,</span> <span class="tok-n">50</span><span class="tok-p">,</span> dtype<span class="tok-p">=</span>torch<span class="tok-p">.</span>bool<span class="tok-p">)</span><span class="tok-p">;</span> pad<span class="tok-p">[</span><span class="tok-p">:</span><span class="tok-p">,</span> <span class="tok-n">40</span><span class="tok-p">:</span><span class="tok-p">]</span> <span class="tok-p">=</span> <span class="tok-k">True</span>          <span class="tok-c"># True = паддинг</span>
+h <span class="tok-p">=</span> encoder<span class="tok-p">(</span>x<span class="tok-p">,</span> src_key_padding_mask<span class="tok-p">=</span>pad<span class="tok-p">)</span>                                 <span class="tok-c"># (32, 50, 256)</span>
+<span class="tok-c"># декодерный режим: encoder(x, mask=nn.Transformer.generate_square_subsequent_mask(50), is_causal=True)</span>
+</code></pre></div>
+<p>Низкоуровневая функция <code>F.scaled_dot_product_attention(q, k, v, is_causal=True)</code> делает то же, что наш код, но быстрее.</p>
+<h2 id="практика-и-подводные-камни">Практика и подводные камни</h2>
+<ul>
+<li><strong>Позиции и длина.</strong> Модель, обученная на длине 512, плохо работает на 4096, и RoPE сам по себе этого не решает: проверяйте экстраполяцию, растягивайте позиции (position interpolation, YaRN) и дообучайте на длинных контекстах.</li>
+<li><strong>Паддинг.</strong> Нужна маска паддинга во внимании, иначе токены собирают информацию из паддинга; перепутанная семантика <code>True</code> в маске — частый баг. В <code>nn.MultiheadAttention</code> и <code>nn.Transformer*</code> <code>True</code> в <code>key_padding_mask</code> значит «игнорировать», а в булевой <code>attn_mask</code> у <code>F.scaled_dot_product_attention</code> — наоборот, «участвует во внимании».</li>
+<li><strong>Обучение.</strong> Трансформеру нужны warmup и AdamW с клиппингом градиента (см. статью про <a href="/edufamcs-demo/handbook/dl/optimizatory-i-regulyarizaciya/" rel="noopener noreferrer nofollow">оптимизаторы</a>); при отсутствии warmup потери часто расходятся в самом начале.</li>
+<li><strong>Данные.</strong> Трансформеры хуже свёрток и RNN на малых данных: у них слабее индуктивные смещения. Возьмите предобученную модель, а не учите с нуля.</li>
+<li><strong>Затраты.</strong> Память под KV-cache растёт линейно с длиной и размером батча и часто определяет, сколько запросов вы обслужите одновременно.</li>
+<li><strong>Что спрашивают на интервью</strong>: формулу attention и зачем <span class="tex">\sqrt{d_k}</span>; чем self-attention отличается от cross-attention; что такое causal mask; сложность по длине; зачем остаточные связи и LayerNorm; чем BERT отличается от GPT.</li>
+</ul>
+<h2 id="что-почитать">Что почитать</h2>
+<ul>
+<li>Vaswani et al., <em>Attention Is All You Need</em>, 2017: <a href="https://arxiv.org/abs/1706.03762" rel="noopener noreferrer nofollow">arxiv.org/abs/1706.03762</a>; код с комментариями — <a href="https://nlp.seas.harvard.edu/annotated-transformer/" rel="noopener noreferrer nofollow">The Annotated Transformer</a>.</li>
+<li>Devlin et al., <em>BERT</em>, 2018: <a href="https://arxiv.org/abs/1810.04805" rel="noopener noreferrer nofollow">arxiv.org/abs/1810.04805</a>; Radford et al., <em>Language Models are Unsupervised Multitask Learners</em> (GPT-2), 2019: <a href="https://cdn.openai.com/better-language-models/language_models_are_unsupervised_multitask_learners.pdf" rel="noopener noreferrer nofollow">PDF на cdn.openai.com</a>; Brown et al., <em>Language Models are Few-Shot Learners</em> (GPT-3), 2020: <a href="https://arxiv.org/abs/2005.14165" rel="noopener noreferrer nofollow">arxiv.org/abs/2005.14165</a>.</li>
+<li>Xiong et al., <em>On Layer Normalization in the Transformer Architecture</em>, ICML 2020: <a href="https://arxiv.org/abs/2002.04745" rel="noopener noreferrer nofollow">arxiv.org/abs/2002.04745</a>.</li>
+<li>Kaplan et al., <em>Scaling Laws for Neural Language Models</em>, 2020: <a href="https://arxiv.org/abs/2001.08361" rel="noopener noreferrer nofollow">arxiv.org/abs/2001.08361</a>; Hoffmann et al., <em>Training Compute-Optimal Large Language Models</em>, 2022: <a href="https://arxiv.org/abs/2203.15556" rel="noopener noreferrer nofollow">arxiv.org/abs/2203.15556</a>.</li>
+<li>Su et al., <em>RoFormer: Rotary Position Embedding</em>, 2021: <a href="https://arxiv.org/abs/2104.09864" rel="noopener noreferrer nofollow">arxiv.org/abs/2104.09864</a>; Dao et al., <em>FlashAttention</em>, 2022: <a href="https://arxiv.org/abs/2205.14135" rel="noopener noreferrer nofollow">arxiv.org/abs/2205.14135</a>; Hu et al., <em>LoRA</em>, 2021: <a href="https://arxiv.org/abs/2106.09685" rel="noopener noreferrer nofollow">arxiv.org/abs/2106.09685</a>.</li>
+<li>Яндекс Образование, «Трансформеры»: <a href="https://contest.yandex.ru/tracks/ml/deep-learning-architectures/transformers" rel="noopener noreferrer nofollow">contest.yandex.ru/tracks/ml/deep-learning-architectures/transformers</a>.</li>
+</ul>
+</div>
+      
+
+      
+      <nav class="pager" aria-label="Соседние статьи">
+        <a href="/edufamcs-demo/handbook/dl/posledovatelnosti-i-rnn/"><span><svg class="ico sm" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-arrow-left"/></svg>Назад</span>Последовательности: эмбеддинги и рекуррентные сети</a>
+        
+      </nav>
+      
+    </article>
+
+    <aside class="hb-toc" aria-label="На этой странице">
+      <a class="l2" href="#внимание-как-мягкий-поиск">Внимание как мягкий поиск</a><a class="l2" href="#позиции">Позиции</a><a class="l2" href="#блок-трансформера">Блок трансформера</a><a class="l2" href="#стоимость">Стоимость</a><a class="l2" href="#семейства-моделей">Семейства моделей</a><a class="l2" href="#мосты-к-рекомендациям-и-поиску">Мосты к рекомендациям и поиску</a><a class="l2" href="#код-self-attention-и-готовый-слой">Код: self-attention и готовый слой</a><a class="l2" href="#практика-и-подводные-камни">Практика и подводные камни</a><a class="l2" href="#что-почитать">Что почитать</a>
+    </aside>
+  </div>
+</div>
+
+
+</main>
+
+<footer class="ftr" data-theme="dark">
+  <svg class="sym fern" viewBox="0 0 40.5 65.02" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#fern"/></svg>
+  <div class="container">
+    <div class="ftr-row">
+      <a href="/edufamcs-demo/" aria-label="EDU FAMCS — главная"><img src="/edufamcs-demo/static/brand/logo/logo-edu-dark.svg" alt="EDU FAMCS" width="196" height="40"></a>
+      <ul class="ftr-links">
+        <li><a href="/edufamcs-demo/#courses">Курсы</a></li>
+        <li><a href="/edufamcs-demo/ml/">Машинное обучение</a></li>
+        <li><a href="/edufamcs-demo/handbook/">Хендбук</a></li>
+        <li><a href="/edufamcs-demo/news/">Новости</a></li>
+        <li><a href="/edufamcs-demo/people/">Авторы</a></li>
+        <li><a href="/edufamcs-demo/about/">О&nbsp;нас</a></li>
+        <li><a href="/edufamcs-demo/propose/">Предложить или исправить</a></li>
+        <li><a href="/edufamcs-demo/privacy/">Конфиденциальность</a></li>
+      </ul>
+    </div>
+    <div class="ftr-big" aria-hidden="true">EDU<span class="d">·</span>FAMCS</div>
+    <p class="ftr-copy">© 2026 EDU FAMCS · Минск</p>
+  </div>
+</footer>
+
+<div class="toasts-region" aria-live="polite" id="toasts">
+
+</div>
+
+</body>
+</html>

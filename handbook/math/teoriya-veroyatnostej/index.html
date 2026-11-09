@@ -1,0 +1,300 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Теория вероятностей · EDU FAMCS</title>
+<meta name="description" content="Теория вероятностей — Математическая база. Хендбук ML-курса ФПМИ.">
+<meta name="theme-color" content="#060A16">
+<meta name="robots" content="noindex, nofollow">
+<meta name="htmx-config" content='{"allowEval":false,"includeIndicatorStyles":false,"historyCacheSize":0,"selfRequestsOnly":true}'>
+<meta name="katex-js" content="/edufamcs-demo/static/vendor/katex/katex.min.js">
+<meta name="katex-css" content="/edufamcs-demo/static/vendor/katex/katex.min.css">
+<link rel="icon" href="/edufamcs-demo/static/brand/logo/favicon-16.svg" type="image/svg+xml" sizes="16x16">
+<link rel="icon" href="/edufamcs-demo/static/brand/logo/favicon.svg" type="image/svg+xml" sizes="any">
+<link rel="preload" href="/edufamcs-demo/static/brand/fonts/manrope-cyrillic-400.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/edufamcs-demo/static/brand/fonts/unbounded-cyrillic-800.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="/edufamcs-demo/static/brand/fonts.css">
+<link rel="stylesheet" href="/edufamcs-demo/static/brand/tokens.css">
+<link rel="stylesheet" href="/edufamcs-demo/static/brand/components.css">
+<link rel="stylesheet" href="/edufamcs-demo/static/css/site.css">
+<link rel="stylesheet" href="/edufamcs-demo/static/css/hub.css">
+<link rel="stylesheet" href="/edufamcs-demo/static/css/about.css">
+<link rel="stylesheet" href="/edufamcs-demo/static/handbook/handbook.css">
+<script src="/edufamcs-demo/static/js/theme.js"></script>
+<script src="/edufamcs-demo/static/vendor/htmx/htmx.min.js" defer></script>
+<script src="/edufamcs-demo/static/vendor/alpine/alpine-csp.min.js" defer></script>
+<script src="/edufamcs-demo/static/js/site.js" defer></script>
+<script src="/edufamcs-demo/static/handbook/handbook.js" defer></script>
+</head>
+<body class="" hx-headers='{"X-CSRFToken": "c9B5p64415VbwuLOJcBrifDArt9nmmNlBTa994RrWWjkL3WxgpkzfK9FZbfSUwv5"}'>
+<a class="skip" href="#main">К содержанию</a>
+<div class="demo-bar" role="note">Демо-версия для отзывов: вход, запись на курсы и формы здесь не работают.</div>
+
+<header class="hdr">
+  <div class="container">
+    <a class="brand" href="/edufamcs-demo/" aria-label="EDU FAMCS — главная">
+      <span class="full"><img class="only-light" src="/edufamcs-demo/static/brand/logo/logo-edu-light.svg" alt="EDU FAMCS" width="196" height="40"><img class="only-dark" src="/edufamcs-demo/static/brand/logo/logo-edu-dark.svg" alt="EDU FAMCS" width="196" height="40"></span>
+      <span class="short"><img class="only-light" src="/edufamcs-demo/static/brand/logo/logo-edu-light.svg" alt="EDU FAMCS" height="30"><img class="only-dark" src="/edufamcs-demo/static/brand/logo/logo-edu-dark.svg" alt="EDU FAMCS" height="30"></span>
+    </a>
+    <nav class="nav" id="main-nav" aria-label="Основная навигация">
+      <a href="/edufamcs-demo/#courses">Курсы</a>
+      <a href="/edufamcs-demo/ml/" >Машинное обучение</a>
+      
+      <a href="/edufamcs-demo/handbook/" aria-current="page">Хендбук</a>
+      <a href="/edufamcs-demo/news/" >Новости</a>
+      <a href="/edufamcs-demo/people/" >Авторы</a>
+      <a href="/edufamcs-demo/about/" >О&nbsp;нас</a>
+    </nav>
+    <div class="hdr-actions">
+      
+      <a class="btn btn-outline btn-login" href="/edufamcs-demo/accounts/login/?next=/handbook/math/teoriya-veroyatnostej/">Войти</a>
+      
+      <button class="icon-btn menu-btn" type="button" aria-label="Меню" aria-expanded="false" aria-controls="main-nav"><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-menu"/></svg></button>
+    </div>
+  </div>
+</header>
+
+<main id="main">
+
+
+
+<div class="container hb-page hb-tone">
+  <div class="hb">
+    <aside class="hb-nav" aria-label="Статьи раздела">
+      
+<form class="hb-search" action="/edufamcs-demo/handbook/search/" method="get" role="search">
+  <svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-search"/></svg>
+  <input class="input" type="search" name="q" value="" placeholder="Поиск по хендбуку" aria-label="Поиск по хендбуку" autocomplete="off" maxlength="120"
+    hx-get="/edufamcs-demo/handbook/search/" hx-trigger="input changed delay:250ms, search" hx-target="#hb-nav-results" hx-sync="this:replace">
+</form>
+
+      <div id="hb-nav-results" class="hb-nav-results" aria-live="polite"></div>
+      <a class="grp" href="/edufamcs-demo/handbook/math/">Вероятность и статистика</a>
+      
+      <a class="cur" href="/edufamcs-demo/handbook/math/teoriya-veroyatnostej/" aria-current="page">Теория вероятностей</a>
+      
+      <a class="" href="/edufamcs-demo/handbook/math/ocenki-parametrov-i-mmp/">Оценки параметров и метод максимального правдоподобия</a>
+      
+      <a class="" href="/edufamcs-demo/handbook/math/intervaly-i-proverka-gipotez/">Доверительные интервалы и проверка гипотез</a>
+      
+    </aside>
+
+    <article class="hb-main">
+      <nav class="crumbs" aria-label="Навигация"><a href="/edufamcs-demo/handbook/">Хендбук</a><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-chev"/></svg><a href="/edufamcs-demo/handbook/math/">Математическая база</a></nav>
+      <h1 class="h1">Теория вероятностей</h1>
+      <div class="hb-meta">
+        
+        
+        <span><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-clock"/></svg>10&nbsp;мин</span>
+        <span class="hb-authors"><span class="avatar sm" title="Артем Лебедевич">АЛ</span>Артем Лебедевич</span>
+        <span><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-edit"/></svg>9 ноября 2026</span>
+        
+        
+      </div>
+
+      
+      <details class="hb-mtoc">
+        <summary><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-list"/></svg>Содержание<svg class="ico sm" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-chev-down"/></svg></summary>
+        <a class="l2" href="#вероятностное-пространство">Вероятностное пространство</a><a class="l2" href="#условная-вероятность-и-формула-байеса">Условная вероятность и формула Байеса</a><a class="l2" href="#случайные-величины-и-распределения">Случайные величины и распределения</a><a class="l2" href="#математическое-ожидание-дисперсия-ковариация">Математическое ожидание, дисперсия, ковариация</a><a class="l2" href="#закон-больших-чисел-и-цпт">Закон больших чисел и ЦПТ</a><a class="l2" href="#информация-энтропия-кросс-энтропия">Информация, энтропия, кросс-энтропия</a><a class="l2" href="#код">Код</a><a class="l2" href="#ловушки">Ловушки</a><a class="l2" href="#что-почитать">Что почитать</a>
+      </details>
+      
+
+      <div class="prose"><p>Данные зашумлены, выборка случайна, предсказание модели — это оценка, а не истина. Теория вероятностей даёт язык, на котором формулируются функции потерь (log-loss), классификаторы (наивный Байес), доверительные интервалы и A/B-тесты. Глава следует плану лекции 2 курса: события и вероятность, условная вероятность и формула Байеса, случайные величины, моментные характеристики, многомерный случай; в конце — информационные меры, из которых выводится кросс-энтропия.</p>
+<h2 id="вероятностное-пространство">Вероятностное пространство</h2>
+<p>Эксперимент описывается тройкой <span class="tex">(\Omega,\mathcal{F},P)</span>: <strong>пространство элементарных исходов</strong> <span class="tex">\Omega</span>, <strong>σ-алгебра</strong> событий <span class="tex">\mathcal{F}</span> (семейство подмножеств <span class="tex">\Omega</span>, содержащее <span class="tex">\Omega</span> и замкнутое относительно дополнения и счётных объединений) и <strong>вероятностная мера</strong> <span class="tex">P</span>. В <strong>классической</strong> схеме <span class="tex">\Omega</span> конечно, исходы равновозможны, и <span class="tex">P(A)=|A|/|\Omega|</span>. Общий случай описывает аксиоматика Колмогорова (1933):</p>
+<ol>
+<li><span class="tex">P(A)\ge0</span> для любого события <span class="tex">A</span>;</li>
+<li><span class="tex">P(\Omega)=1</span>;</li>
+<li>для попарно несовместных <span class="tex">A_i</span>: <span class="tex">P\big(\bigcup_iA_i\big)=\sum_iP(A_i)</span>.</li>
+</ol>
+<p>Отсюда <span class="tex">P(\bar A)=1-P(A)</span>, <span class="tex">P(A\cup B)=P(A)+P(B)-P(A\cap B)</span>. σ-алгебра нужна потому, что на континуальных пространствах не всякому подмножеству можно согласованно приписать вероятность (классический пример — неизмеримое множество Витали), и вероятность задают только на «хороших» множествах. В практике ML её можно держать в голове как «любые разумные события».</p>
+<h2 id="условная-вероятность-и-формула-байеса">Условная вероятность и формула Байеса</h2>
+<p><strong>Условная вероятность</strong> события <span class="tex">A</span> при условии <span class="tex">B</span>, <span class="tex">P(B)&gt;0</span>:</p>
+<div class="tex tex-block">P(A\mid B)=\frac{P(A\cap B)}{P(B)}.</div>
+<p>Переписав, получаем <strong>теорему умножения</strong> <span class="tex">P(A\cap B)=P(A\mid B)P(B)</span> и её цепное обобщение <span class="tex">P(A_1\cap\dots\cap A_n)=P(A_1)P(A_2\mid A_1)\cdots P(A_n\mid A_1\dots A_{n-1})</span> — основа авторегрессионных языковых моделей. События <strong>независимы</strong>, если <span class="tex">P(A\cap B)=P(A)P(B)</span>, то есть <span class="tex">P(A\mid B)=P(A)</span>.</p>
+<p>Пусть <span class="tex">H_1,\dots,H_k</span> — разбиение <span class="tex">\Omega</span> (попарно несовместны, в сумме дают всё). <strong>Формула полной вероятности</strong>: <span class="tex">P(A)=\sum_jP(A\mid H_j)P(H_j)</span>. <strong>Формула Байеса</strong>:</p>
+<div class="tex tex-block">P(H_i\mid A)=\frac{P(A\mid H_i)\,P(H_i)}{\sum_jP(A\mid H_j)\,P(H_j)}.</div>
+<p>Апостериорная вероятность гипотезы пропорциональна произведению правдоподобия <span class="tex">P(A\mid H_i)</span> на априорную <span class="tex">P(H_i)</span>.</p>
+<p><strong>Пример: редкая болезнь и точный тест.</strong> Болезнь у 1 из 1000. Тест даёт положительный результат у больного с вероятностью <span class="tex">0{,}99</span> (чувствительность) и ложноположительный у здорового с вероятностью <span class="tex">0{,}05</span>. Тест положителен — какова вероятность болезни?</p>
+<div class="tex tex-block">P(\text{б}\mid +)=\frac{0{,}99\cdot0{,}001}{0{,}99\cdot0{,}001+0{,}05\cdot0{,}999}\approx\frac{0{,}00099}{0{,}0509}\approx0{,}019.</div>
+<p>Меньше 2%, хотя тест «на 99% точный». Из 1000 человек один больной (положителен почти наверняка) и около 50 здоровых получат ложный плюс. Ошибка в рассуждении — игнорирование априорной вероятности (base rate neglect). Ровно этот эффект делает бессмысленной accuracy в задачах с редкими классами — мошенничество, дефолты, отток — и заставляет смотреть на precision/recall.</p>
+<p>Для классификации Байес даёт <span class="tex">P(y\mid x)\propto P(x\mid y)P(y)</span>; <strong>наивный Байес</strong> добавляет допущение условной независимости признаков <span class="tex">P(x\mid y)=\prod_jP(x_j\mid y)</span> — см. <a href="/edufamcs-demo/handbook/classic/knn-i-naivnyj-bajes/" rel="noopener noreferrer nofollow">kNN и наивный Байес</a>. Допущение почти всегда неверно, но модель остаётся рабочей при малых данных.</p>
+<h2 id="случайные-величины-и-распределения">Случайные величины и распределения</h2>
+<p><strong>Случайная величина</strong> — измеримая функция <span class="tex">\xi:\Omega\to\mathbb{R}</span>. Её закон задаёт <strong>функция распределения</strong> <span class="tex">F(x)=P(\xi\le x)</span>: неубывающая, непрерывная справа, от 0 до 1. Для <strong>дискретных</strong> величин — функция вероятности <span class="tex">p(k)=P(\xi=k)</span> (PMF); для <strong>непрерывных</strong> — плотность <span class="tex">f(x)=F'(x)</span> (PDF), <span class="tex">P(a&lt;\xi\le b)=\int_a^bf(x)\,dx</span>. Плотность — не вероятность и может превышать 1; вероятность в точке равна нулю.</p>
+<p>Распределения, которые встречаются постоянно:</p>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>Распределение</th>
+<th>Модель</th>
+<th>PMF / PDF</th>
+<th><span class="tex">\mathbb{E}\xi</span></th>
+<th><span class="tex">\mathrm{Var}\,\xi</span></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Бернулли<span class="tex">(p)</span></td>
+<td>клик / не клик</td>
+<td><span class="tex">p^k(1-p)^{1-k}</span></td>
+<td><span class="tex">p</span></td>
+<td><span class="tex">p(1-p)</span></td>
+</tr>
+<tr>
+<td>Биномиальное<span class="tex">(n,p)</span></td>
+<td>число кликов из <span class="tex">n</span> показов</td>
+<td><span class="tex">\binom nk p^k(1-p)^{n-k}</span></td>
+<td><span class="tex">np</span></td>
+<td><span class="tex">np(1-p)</span></td>
+</tr>
+<tr>
+<td>Пуассона<span class="tex">(\lambda)</span></td>
+<td>число событий за период</td>
+<td><span class="tex">\frac{\lambda^ke^{-\lambda}}{k!}</span></td>
+<td><span class="tex">\lambda</span></td>
+<td><span class="tex">\lambda</span></td>
+</tr>
+<tr>
+<td>Равномерное<span class="tex">[a,b]</span></td>
+<td>случайный выбор</td>
+<td><span class="tex">\frac1{b-a}</span></td>
+<td><span class="tex">\frac{a+b}2</span></td>
+<td><span class="tex">\frac{(b-a)^2}{12}</span></td>
+</tr>
+<tr>
+<td>Экспоненциальное<span class="tex">(\lambda)</span></td>
+<td>время до события</td>
+<td><span class="tex">\lambda e^{-\lambda x}</span></td>
+<td><span class="tex">1/\lambda</span></td>
+<td><span class="tex">1/\lambda^2</span></td>
+</tr>
+<tr>
+<td>Нормальное<span class="tex">(\mu,\sigma^2)</span></td>
+<td>суммы малых вкладов, шум</td>
+<td><span class="tex">\frac1{\sigma\sqrt{2\pi}}e^{-\frac{(x-\mu)^2}{2\sigma^2}}</span></td>
+<td><span class="tex">\mu</span></td>
+<td><span class="tex">\sigma^2</span></td>
+</tr>
+</tbody>
+</table></div>
+<p>Нормальное распределение выделено центральной предельной теоремой (ниже) и тем, что оно максимизирует дифференциальную энтропию при заданных среднем и дисперсии. <strong>Многомерное нормальное</strong> <span class="tex">\mathcal{N}(\mu,\Sigma)</span> имеет плотность</p>
+<div class="tex tex-block">f(x)=\frac{1}{(2\pi)^{d/2}|\Sigma|^{1/2}}\exp\Big(-\tfrac12(x-\mu)^\top\Sigma^{-1}(x-\mu)\Big),</div>
+<p>линии уровня — эллипсоиды с осями вдоль собственных векторов <span class="tex">\Sigma</span> (<a href="/edufamcs-demo/handbook/math/sobstvennye-vektory-i-svd/" rel="noopener noreferrer nofollow">связь с PCA</a>); любая линейная комбинация координат тоже нормальна, и для нормального вектора некоррелированность координат эквивалентна независимости.</p>
+<h2 id="математическое-ожидание-дисперсия-ковариация">Математическое ожидание, дисперсия, ковариация</h2>
+<p><strong>Матожидание</strong> <span class="tex">\mathbb{E}\xi=\sum_kk\,p(k)</span> или <span class="tex">\int xf(x)\,dx</span> — центр масс распределения. Оно линейно всегда, даже при зависимости: <span class="tex">\mathbb{E}(a\xi+b\eta)=a\mathbb{E}\xi+b\mathbb{E}\eta</span>. <strong>Дисперсия</strong> <span class="tex">\mathrm{Var}\,\xi=\mathbb{E}(\xi-\mathbb{E}\xi)^2=\mathbb{E}\xi^2-(\mathbb{E}\xi)^2</span>, <span class="tex">\mathrm{Var}(a\xi+b)=a^2\mathrm{Var}\,\xi</span>; <strong>стандартное отклонение</strong> <span class="tex">\sigma=\sqrt{\mathrm{Var}}</span> измеряется в единицах величины. Для независимых слагаемых дисперсии складываются: <span class="tex">\mathrm{Var}\sum\xi_i=\sum\mathrm{Var}\,\xi_i</span>; для среднего <span class="tex">n</span> независимых одинаковых величин <span class="tex">\mathrm{Var}\,\bar\xi=\sigma^2/n</span> — основа того, что точность растёт как <span class="tex">\sqrt n</span>.</p>
+<p><strong>Ковариация</strong> и <strong>корреляция Пирсона</strong>:</p>
+<div class="tex tex-block">\mathrm{Cov}(\xi,\eta)=\mathbb{E}\big[(\xi-\mathbb{E}\xi)(\eta-\mathbb{E}\eta)\big],\qquad\rho=\frac{\mathrm{Cov}(\xi,\eta)}{\sigma_\xi\sigma_\eta}\in[-1,1].</div>
+<p><span class="tex">|\rho|=1</span> тогда и только тогда, когда <span class="tex">\eta=a\xi+b</span>. Для вектора <span class="tex">\xi\in\mathbb{R}^d</span> ковариационная матрица <span class="tex">\Sigma_{ij}=\mathrm{Cov}(\xi_i,\xi_j)</span> симметрична и положительно полуопределена, <span class="tex">\mathrm{Var}(a^\top\xi)=a^\top\Sigma a</span>.</p>
+<p><strong>Независимые величины некоррелированы, обратное неверно.</strong> Классический контрпример: <span class="tex">\xi\sim\mathcal{N}(0,1)</span>, <span class="tex">\eta=\xi^2</span>. Они жёстко зависимы, но <span class="tex">\mathrm{Cov}=\mathbb{E}\xi^3-\mathbb{E}\xi\,\mathbb{E}\xi^2=0</span>. Пирсон ловит только линейную связь; для монотонной нелинейной используют ранговую корреляцию Спирмена, для произвольной — взаимную информацию.</p>
+<h2 id="закон-больших-чисел-и-цпт">Закон больших чисел и ЦПТ</h2>
+<p>Пусть <span class="tex">\xi_1,\xi_2,\dots</span> — независимые одинаково распределённые с <span class="tex">\mathbb{E}\xi=\mu</span>, <span class="tex">\mathrm{Var}\,\xi=\sigma^2&lt;\infty</span>, <span class="tex">\bar\xi_n=\frac1n\sum\xi_i</span>.</p>
+<p><strong>Закон больших чисел</strong>: <span class="tex">\bar\xi_n\to\mu</span> по вероятности (слабый ЗБЧ), и почти наверное (усиленный). Это оправдывает оценку матожидания по выборке и, например, оценку CTR как доли кликов.</p>
+<p><strong>Центральная предельная теорема</strong>: распределение <span class="tex">\sqrt n\,(\bar\xi_n-\mu)/\sigma</span> сходится к <span class="tex">\mathcal{N}(0,1)</span> независимо от исходного распределения. Практический смысл: при <span class="tex">n</span> порядка десятков–сотен среднее приблизительно нормально с центром <span class="tex">\mu</span> и стандартной ошибкой <span class="tex">\sigma/\sqrt n</span>, откуда <span class="tex">\mu\approx\bar\xi_n\pm1{,}96\,\sigma/\sqrt n</span> с вероятностью 95%. На этом стоят доверительные интервалы и z-тест в A/B (<a href="/edufamcs-demo/handbook/math/intervaly-i-proverka-gipotez/" rel="noopener noreferrer nofollow">следующие главы</a>). Скорость сходимости зависит от асимметрии и «тяжести» хвостов (неравенство Берри–Эссеена): для редких долей (CTR в доли процента) и средних чеков с выбросами <span class="tex">n</span> нужно сильно больше, а при бесконечной дисперсии (распределение Коши) ЦПТ не работает вовсе.</p>
+<h2 id="информация-энтропия-кросс-энтропия">Информация, энтропия, кросс-энтропия</h2>
+<p><strong>Энтропия</strong> дискретного распределения <span class="tex">p</span> — средняя неожиданность исхода:</p>
+<div class="tex tex-block">H(p)=-\sum_kp_k\ln p_k.</div>
+<p>Максимальна у равномерного, нулевая у вырожденного. <strong>Кросс-энтропия</strong> распределения <span class="tex">p</span> относительно модели <span class="tex">q</span> и <strong>KL-дивергенция</strong>:</p>
+<div class="tex tex-block">H(p,q)=-\sum_kp_k\ln q_k,\qquad D_{KL}(p\|q)=\sum_kp_k\ln\frac{p_k}{q_k}=H(p,q)-H(p)\ge0.</div>
+<p><span class="tex">D_{KL}=0</span> только при <span class="tex">p=q</span>; она несимметрична, поэтому не метрика. Пусть <span class="tex">p</span> — истинное (эмпирическое) распределение меток, <span class="tex">q_\theta</span> — предсказание модели. Поскольку <span class="tex">H(p)</span> от параметров не зависит, минимизация <span class="tex">D_{KL}(p\|q_\theta)</span> эквивалентна минимизации <span class="tex">H(p,q_\theta)</span>. Для бинарной метки <span class="tex">y\in\{0,1\}</span> с <span class="tex">\hat p=q_\theta(y=1\mid x)</span>, усредняя по выборке:</p>
+<div class="tex tex-block">\mathcal{L}=-\frac1n\sum_i\big[y_i\ln\hat p_i+(1-y_i)\ln(1-\hat p_i)\big].</div>
+<p>Это <strong>log-loss</strong>. Для <span class="tex">K</span> классов — категориальная кросс-энтропия <span class="tex">-\frac1n\sum_i\ln\hat p_{i,y_i}</span>, где <span class="tex">\hat p</span> получен softmax. Почему именно она — ответ даёт метод максимального правдоподобия: <a href="/edufamcs-demo/handbook/math/ocenki-parametrov-i-mmp/" rel="noopener noreferrer nofollow">следующая глава</a> показывает, что log-loss есть минус логарифм правдоподобия модели Бернулли. Также <span class="tex">I(\xi;\eta)=D_{KL}\big(p_{\xi\eta}\|p_\xi p_\eta\big)</span> — <strong>взаимная информация</strong>, нулевая тогда и только тогда, когда величины независимы; при отборе признаков она ловит и нелинейные связи, которые пропускает корреляция.</p>
+<h2 id="код">Код</h2>
+<div class="code"><div class="code-head"><span class="lang">python</span></div><pre><code><span class="tok-k">import</span> numpy <span class="tok-k">as</span> np
+<span class="tok-k">from</span> scipy <span class="tok-k">import</span> stats
+
+rng <span class="tok-p">=</span> np<span class="tok-p">.</span>random<span class="tok-p">.</span>default_rng<span class="tok-p">(</span><span class="tok-n">0</span><span class="tok-p">)</span>
+
+<span class="tok-c"># 1) Байес: редкая болезнь</span>
+prior<span class="tok-p">,</span> sens<span class="tok-p">,</span> fpr <span class="tok-p">=</span> <span class="tok-n">1e-3</span><span class="tok-p">,</span> <span class="tok-n">0.99</span><span class="tok-p">,</span> <span class="tok-n">0.05</span>
+post <span class="tok-p">=</span> sens <span class="tok-p">*</span> prior <span class="tok-p">/</span> <span class="tok-p">(</span>sens <span class="tok-p">*</span> prior <span class="tok-p">+</span> fpr <span class="tok-p">*</span> <span class="tok-p">(</span><span class="tok-n">1</span> <span class="tok-p">-</span> prior<span class="tok-p">)</span><span class="tok-p">)</span>
+<span class="tok-f">print</span><span class="tok-p">(</span><span class="tok-s">f</span><span class="tok-s">"</span><span class="tok-s">P(болен | +) = </span><span class="tok-s">{</span>post<span class="tok-s">:</span><span class="tok-s">.4f</span><span class="tok-s">}</span><span class="tok-s">"</span><span class="tok-p">)</span>
+
+<span class="tok-c"># 2) ЦПТ: средние из сильно скошенного распределения</span>
+<span class="tok-k">for</span> n <span class="tok-k">in</span> <span class="tok-p">(</span><span class="tok-n">2</span><span class="tok-p">,</span> <span class="tok-n">10</span><span class="tok-p">,</span> <span class="tok-n">50</span><span class="tok-p">,</span> <span class="tok-n">500</span><span class="tok-p">)</span><span class="tok-p">:</span>
+    means <span class="tok-p">=</span> rng<span class="tok-p">.</span>exponential<span class="tok-p">(</span>scale<span class="tok-p">=</span><span class="tok-n">1.0</span><span class="tok-p">,</span> size<span class="tok-p">=</span><span class="tok-p">(</span><span class="tok-n">20_000</span><span class="tok-p">,</span> n<span class="tok-p">)</span><span class="tok-p">)</span><span class="tok-p">.</span>mean<span class="tok-p">(</span>axis<span class="tok-p">=</span><span class="tok-n">1</span><span class="tok-p">)</span>
+    z <span class="tok-p">=</span> <span class="tok-p">(</span>means <span class="tok-p">-</span> <span class="tok-n">1.0</span><span class="tok-p">)</span> <span class="tok-p">*</span> np<span class="tok-p">.</span>sqrt<span class="tok-p">(</span>n<span class="tok-p">)</span> <span class="tok-p">/</span> <span class="tok-n">1.0</span>                  <span class="tok-c"># mu = sigma = 1</span>
+    <span class="tok-f">print</span><span class="tok-p">(</span>n<span class="tok-p">,</span> <span class="tok-s">f</span><span class="tok-s">"</span><span class="tok-s">skew=</span><span class="tok-s">{</span>stats<span class="tok-p">.</span>skew<span class="tok-p">(</span>z<span class="tok-p">)</span><span class="tok-s">:</span><span class="tok-s">+.2f</span><span class="tok-s">}</span><span class="tok-s">"</span><span class="tok-p">,</span>
+          <span class="tok-s">f</span><span class="tok-s">"</span><span class="tok-s">P(|z|&gt;1.96)=</span><span class="tok-s">{</span>np<span class="tok-p">.</span>mean<span class="tok-p">(</span>np<span class="tok-p">.</span>abs<span class="tok-p">(</span>z<span class="tok-p">)</span> <span class="tok-p">&gt;</span> <span class="tok-n">1.96</span><span class="tok-p">)</span><span class="tok-s">:</span><span class="tok-s">.3f</span><span class="tok-s">}</span><span class="tok-s">"</span><span class="tok-p">)</span>  <span class="tok-c"># -&gt; 0.05</span>
+
+<span class="tok-c"># 3) Многомерное нормальное и ковариация</span>
+Sigma <span class="tok-p">=</span> np<span class="tok-p">.</span>array<span class="tok-p">(</span><span class="tok-p">[</span><span class="tok-p">[</span><span class="tok-n">2.0</span><span class="tok-p">,</span> <span class="tok-n">1.2</span><span class="tok-p">]</span><span class="tok-p">,</span> <span class="tok-p">[</span><span class="tok-n">1.2</span><span class="tok-p">,</span> <span class="tok-n">1.0</span><span class="tok-p">]</span><span class="tok-p">]</span><span class="tok-p">)</span>
+X <span class="tok-p">=</span> stats<span class="tok-p">.</span>multivariate_normal<span class="tok-p">(</span>mean<span class="tok-p">=</span><span class="tok-p">[</span><span class="tok-n">0</span><span class="tok-p">,</span> <span class="tok-n">0</span><span class="tok-p">]</span><span class="tok-p">,</span> cov<span class="tok-p">=</span>Sigma<span class="tok-p">)</span><span class="tok-p">.</span>rvs<span class="tok-p">(</span><span class="tok-n">100_000</span><span class="tok-p">,</span> random_state<span class="tok-p">=</span><span class="tok-n">0</span><span class="tok-p">)</span>
+<span class="tok-f">print</span><span class="tok-p">(</span>np<span class="tok-p">.</span>cov<span class="tok-p">(</span>X<span class="tok-p">.</span>T<span class="tok-p">)</span><span class="tok-p">.</span>round<span class="tok-p">(</span><span class="tok-n">2</span><span class="tok-p">)</span><span class="tok-p">,</span> np<span class="tok-p">.</span>corrcoef<span class="tok-p">(</span>X<span class="tok-p">.</span>T<span class="tok-p">)</span><span class="tok-p">[</span><span class="tok-n">0</span><span class="tok-p">,</span> <span class="tok-n">1</span><span class="tok-p">]</span><span class="tok-p">.</span>round<span class="tok-p">(</span><span class="tok-n">3</span><span class="tok-p">)</span><span class="tok-p">)</span>
+
+<span class="tok-c"># 4) Кросс-энтропия и KL</span>
+p <span class="tok-p">=</span> np<span class="tok-p">.</span>array<span class="tok-p">(</span><span class="tok-p">[</span><span class="tok-n">0.7</span><span class="tok-p">,</span> <span class="tok-n">0.2</span><span class="tok-p">,</span> <span class="tok-n">0.1</span><span class="tok-p">]</span><span class="tok-p">)</span><span class="tok-p">;</span> q <span class="tok-p">=</span> np<span class="tok-p">.</span>array<span class="tok-p">(</span><span class="tok-p">[</span><span class="tok-n">0.5</span><span class="tok-p">,</span> <span class="tok-n">0.3</span><span class="tok-p">,</span> <span class="tok-n">0.2</span><span class="tok-p">]</span><span class="tok-p">)</span>
+H<span class="tok-p">,</span> CE <span class="tok-p">=</span> stats<span class="tok-p">.</span>entropy<span class="tok-p">(</span>p<span class="tok-p">)</span><span class="tok-p">,</span> <span class="tok-p">-</span><span class="tok-p">(</span>p <span class="tok-p">*</span> np<span class="tok-p">.</span>log<span class="tok-p">(</span>q<span class="tok-p">)</span><span class="tok-p">)</span><span class="tok-p">.</span>sum<span class="tok-p">(</span><span class="tok-p">)</span>
+<span class="tok-f">print</span><span class="tok-p">(</span>H<span class="tok-p">,</span> CE<span class="tok-p">,</span> stats<span class="tok-p">.</span>entropy<span class="tok-p">(</span>p<span class="tok-p">,</span> q<span class="tok-p">)</span><span class="tok-p">,</span> np<span class="tok-p">.</span>isclose<span class="tok-p">(</span>CE <span class="tok-p">-</span> H<span class="tok-p">,</span> stats<span class="tok-p">.</span>entropy<span class="tok-p">(</span>p<span class="tok-p">,</span> q<span class="tok-p">)</span><span class="tok-p">)</span><span class="tok-p">)</span>
+
+<span class="tok-c"># 5) некоррелированность != независимость</span>
+x <span class="tok-p">=</span> rng<span class="tok-p">.</span>normal<span class="tok-p">(</span>size<span class="tok-p">=</span><span class="tok-n">100_000</span><span class="tok-p">)</span><span class="tok-p">;</span> y <span class="tok-p">=</span> x <span class="tok-p">*</span><span class="tok-p">*</span> <span class="tok-n">2</span>
+<span class="tok-f">print</span><span class="tok-p">(</span>np<span class="tok-p">.</span>corrcoef<span class="tok-p">(</span>x<span class="tok-p">,</span> y<span class="tok-p">)</span><span class="tok-p">[</span><span class="tok-n">0</span><span class="tok-p">,</span> <span class="tok-n">1</span><span class="tok-p">]</span><span class="tok-p">)</span>    <span class="tok-c"># ~0, хотя y — функция x</span>
+</code></pre></div>
+<p>Первая строка вывода — <span class="tex">0{,}019</span>. В пункте 2 асимметрия <code>skew</code> уходит к нулю с ростом <span class="tex">n</span> (у экспоненциального распределения она равна 2, у среднего <span class="tex">n</span> величин — <span class="tex">2/\sqrt n</span>), а доля выходов за <span class="tex">\pm1{,}96</span> приближается к <span class="tex">0{,}05</span>.</p>
+<h2 id="ловушки">Ловушки</h2>
+<ul>
+<li><strong>Base rate neglect.</strong> Читайте метрики вместе с долей классов; считайте апостериорные вероятности, а не только правдоподобия.</li>
+<li><strong>«Независимы», потому что корреляция 0.</strong> Проверяйте через графики и взаимную информацию, а не только Пирсоном.</li>
+<li><strong>Корреляция — не причинность</strong> и очень чувствительна к выбросам: пара экстремальных точек может дать <span class="tex">\rho\approx0{,}9</span> на облаке без всякой связи.</li>
+<li><strong>Нормальность по умолчанию.</strong> Доходы, чеки, время сессии — тяжёлые хвосты; среднее нестабильно, смотрите медиану и логарифм.</li>
+<li><strong>Плотность как вероятность.</strong> Значения PDF выше 1 — не ошибка; в правдоподобии это нормально, но сравнивать плотности разных масштабов нельзя.</li>
+<li><strong>Нули в логарифмах.</strong> <span class="tex">\ln0</span> в кросс-энтропии — обрезайте предсказания (<span class="tex">\varepsilon=10^{-15}</span>) или считайте из логитов.</li>
+<li><strong>Accuracy вместо калибровки.</strong> log-loss наказывает за уверенные ошибки сильнее accuracy; модель с хорошей точностью может выдавать плохо откалиброванные вероятности.</li>
+</ul>
+<h2 id="что-почитать">Что почитать</h2>
+<ul>
+<li>А. Н. Колмогоров. <em>Основные понятия теории вероятностей</em>. 1936 (нем. оригинал — <em>Grundbegriffe der Wahrscheinlichkeitsrechnung</em>, 1933).</li>
+<li>W. Feller. <em>An Introduction to Probability Theory and Its Applications</em>, vol. 1, 3rd ed. Wiley, 1968.</li>
+<li>C. Shannon. <em>A Mathematical Theory of Communication</em>. Bell System Technical Journal, 1948.</li>
+<li>Хендбук Яндекса «Математика для анализа данных», глава «Теория вероятностей» (от вероятностного пространства до энтропии и KL) — <a href="https://contest.yandex.ru/tracks/math/probability-theory/chapter-overview" rel="noopener noreferrer nofollow">contest.yandex.ru/tracks/math/probability-theory</a>.</li>
+<li>J. Blitzstein, J. Hwang. <em>Introduction to Probability</em>, 2nd ed. CRC Press, 2019 — книга к курсу Harvard Stat 110; курс — <a href="https://stat110.hsites.harvard.edu/" rel="noopener noreferrer nofollow">stat110.hsites.harvard.edu</a>.</li>
+<li>Лекция 2 курса ML ФПМИ БГУ «Основы теории вероятностей» (Т. Бовт).</li>
+</ul>
+</div>
+      
+
+      
+      <nav class="pager" aria-label="Соседние статьи">
+        <a href="/edufamcs-demo/handbook/math/gradienty-i-optimizaciya/"><span><svg class="ico sm" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-arrow-left"/></svg>Назад</span>Производные, градиенты и оптимизация</a>
+        <a href="/edufamcs-demo/handbook/math/ocenki-parametrov-i-mmp/"><span>Дальше<svg class="ico sm" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-arrow"/></svg></span>Оценки параметров и метод максимального правдоподобия</a>
+      </nav>
+      
+    </article>
+
+    <aside class="hb-toc" aria-label="На этой странице">
+      <a class="l2" href="#вероятностное-пространство">Вероятностное пространство</a><a class="l2" href="#условная-вероятность-и-формула-байеса">Условная вероятность и формула Байеса</a><a class="l2" href="#случайные-величины-и-распределения">Случайные величины и распределения</a><a class="l2" href="#математическое-ожидание-дисперсия-ковариация">Математическое ожидание, дисперсия, ковариация</a><a class="l2" href="#закон-больших-чисел-и-цпт">Закон больших чисел и ЦПТ</a><a class="l2" href="#информация-энтропия-кросс-энтропия">Информация, энтропия, кросс-энтропия</a><a class="l2" href="#код">Код</a><a class="l2" href="#ловушки">Ловушки</a><a class="l2" href="#что-почитать">Что почитать</a>
+    </aside>
+  </div>
+</div>
+
+
+</main>
+
+<footer class="ftr" data-theme="dark">
+  <svg class="sym fern" viewBox="0 0 40.5 65.02" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#fern"/></svg>
+  <div class="container">
+    <div class="ftr-row">
+      <a href="/edufamcs-demo/" aria-label="EDU FAMCS — главная"><img src="/edufamcs-demo/static/brand/logo/logo-edu-dark.svg" alt="EDU FAMCS" width="196" height="40"></a>
+      <ul class="ftr-links">
+        <li><a href="/edufamcs-demo/#courses">Курсы</a></li>
+        <li><a href="/edufamcs-demo/ml/">Машинное обучение</a></li>
+        <li><a href="/edufamcs-demo/handbook/">Хендбук</a></li>
+        <li><a href="/edufamcs-demo/news/">Новости</a></li>
+        <li><a href="/edufamcs-demo/people/">Авторы</a></li>
+        <li><a href="/edufamcs-demo/about/">О&nbsp;нас</a></li>
+        <li><a href="/edufamcs-demo/propose/">Предложить или исправить</a></li>
+        <li><a href="/edufamcs-demo/privacy/">Конфиденциальность</a></li>
+      </ul>
+    </div>
+    <div class="ftr-big" aria-hidden="true">EDU<span class="d">·</span>FAMCS</div>
+    <p class="ftr-copy">© 2026 EDU FAMCS · Минск</p>
+  </div>
+</footer>
+
+<div class="toasts-region" aria-live="polite" id="toasts">
+
+</div>
+
+</body>
+</html>

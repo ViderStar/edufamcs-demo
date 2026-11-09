@@ -1,0 +1,501 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>iOS · EDU FAMCS</title>
+<meta name="description" content="iOS: От Swift до своего приложения в App Store">
+<meta name="theme-color" content="#060A16">
+<meta name="robots" content="noindex, nofollow">
+<meta name="htmx-config" content='{"allowEval":false,"includeIndicatorStyles":false,"historyCacheSize":0,"selfRequestsOnly":true}'>
+<meta name="katex-js" content="/edufamcs-demo/static/vendor/katex/katex.min.js">
+<meta name="katex-css" content="/edufamcs-demo/static/vendor/katex/katex.min.css">
+<link rel="icon" href="/edufamcs-demo/static/brand/logo/favicon-16.svg" type="image/svg+xml" sizes="16x16">
+<link rel="icon" href="/edufamcs-demo/static/brand/logo/favicon.svg" type="image/svg+xml" sizes="any">
+<link rel="preload" href="/edufamcs-demo/static/brand/fonts/manrope-cyrillic-400.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/edufamcs-demo/static/brand/fonts/unbounded-cyrillic-800.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="/edufamcs-demo/static/brand/fonts.css">
+<link rel="stylesheet" href="/edufamcs-demo/static/brand/tokens.css">
+<link rel="stylesheet" href="/edufamcs-demo/static/brand/components.css">
+<link rel="stylesheet" href="/edufamcs-demo/static/css/site.css">
+<link rel="stylesheet" href="/edufamcs-demo/static/css/hub.css">
+<link rel="stylesheet" href="/edufamcs-demo/static/css/about.css">
+<link rel="stylesheet" href="/edufamcs-demo/static/pages/pages.css">
+<script src="/edufamcs-demo/static/js/theme.js"></script>
+<script src="/edufamcs-demo/static/vendor/htmx/htmx.min.js" defer></script>
+<script src="/edufamcs-demo/static/vendor/alpine/alpine-csp.min.js" defer></script>
+<script src="/edufamcs-demo/static/js/site.js" defer></script>
+
+</head>
+<body class="pg-course" hx-headers='{"X-CSRFToken": "7AFfg2XuwcGMcYjhDXGZxqwNJ55yAB3Iwkej00KRr34Vrxu0aap7uV2ShNb38LLs"}'>
+<a class="skip" href="#main">К содержанию</a>
+<div class="demo-bar" role="note">Демо-версия для отзывов: вход, запись на курсы и формы здесь не работают.</div>
+
+<header class="hdr">
+  <div class="container">
+    <a class="brand" href="/edufamcs-demo/" aria-label="EDU FAMCS — главная">
+      <span class="full"><img class="only-light" src="/edufamcs-demo/static/brand/logo/logo-edu-light.svg" alt="EDU FAMCS" width="196" height="40"><img class="only-dark" src="/edufamcs-demo/static/brand/logo/logo-edu-dark.svg" alt="EDU FAMCS" width="196" height="40"></span>
+      <span class="short"><img class="only-light" src="/edufamcs-demo/static/brand/logo/logo-edu-light.svg" alt="EDU FAMCS" height="30"><img class="only-dark" src="/edufamcs-demo/static/brand/logo/logo-edu-dark.svg" alt="EDU FAMCS" height="30"></span>
+    </a>
+    <nav class="nav" id="main-nav" aria-label="Основная навигация">
+      <a href="/edufamcs-demo/#courses">Курсы</a>
+      <a href="/edufamcs-demo/ml/" >Машинное обучение</a>
+      
+      <a href="/edufamcs-demo/handbook/" >Хендбук</a>
+      <a href="/edufamcs-demo/news/" >Новости</a>
+      <a href="/edufamcs-demo/people/" >Авторы</a>
+      <a href="/edufamcs-demo/about/" >О&nbsp;нас</a>
+    </nav>
+    <div class="hdr-actions">
+      
+      <a class="btn btn-outline btn-login" href="/edufamcs-demo/accounts/login/?next=/ios/">Войти</a>
+      
+      <button class="icon-btn menu-btn" type="button" aria-label="Меню" aria-expanded="false" aria-controls="main-nav"><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-menu"/></svg></button>
+    </div>
+  </div>
+</header>
+
+<main id="main">
+
+
+<div class="container hero-wrap">
+  <section class="hero prog-hero c-ios" data-theme="dark" aria-labelledby="prog-t">
+    <svg class="sym hero-fern" viewBox="0 0 40.5 65.02" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#fern"/></svg>
+    <div>
+      <h1 id="prog-t" class="display-xl">iOS<span class="dot">.</span></h1>
+      <p class="lead">От Swift до своего приложения в App Store</p>
+      
+      <div class="hpills">
+        <span class="hpill status-finished"><i class="dot"></i>завершён</span>
+        <span class="hpill"><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-pin"/></svg>очно</span>
+        <span class="hpill"><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-cal"/></svg>весна 2025</span>
+        <span class="hpill"><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-clock"/></svg>3 месяца</span>
+        <span class="hpill"><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-list"/></svg>24 занятия, 2 в неделю</span>
+      </div>
+      
+      
+    </div>
+    <div class="hero-art prog-art-hero" aria-hidden="true">
+      
+
+<svg class="art-svg" viewBox="0 0 400 240" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+  <g transform="translate(78 44) rotate(-9 42 90)"><rect width="84" height="180" rx="16" fill="currentColor" opacity=".14" stroke="currentColor" stroke-opacity=".5" stroke-width="2"/><rect x="28" y="8" width="28" height="7" rx="3.5" fill="currentColor" opacity=".5"/><rect x="12" y="34" width="60" height="38" rx="9" fill="currentColor" opacity=".3"/><rect x="12" y="82" width="60" height="9" rx="4.5" fill="currentColor" opacity=".3"/><rect x="12" y="98" width="40" height="9" rx="4.5" fill="currentColor" opacity=".3"/></g>
+  <g transform="translate(278 44) rotate(9 42 90)"><rect width="84" height="180" rx="16" fill="currentColor" opacity=".14" stroke="currentColor" stroke-opacity=".5" stroke-width="2"/><rect x="28" y="8" width="28" height="7" rx="3.5" fill="currentColor" opacity=".5"/><circle cx="42" cy="62" r="20" fill="currentColor" opacity=".3"/><rect x="12" y="104" width="60" height="9" rx="4.5" fill="currentColor" opacity=".3"/><rect x="12" y="120" width="32" height="9" rx="4.5" fill="currentColor" opacity=".3"/></g>
+  <g transform="translate(150 18)"><rect width="100" height="204" rx="20" fill="var(--night-2)" stroke="currentColor" stroke-width="2.5"/><rect x="34" y="10" width="32" height="8" rx="4" fill="currentColor"/>
+    <rect x="14" y="36" width="72" height="56" rx="12" fill="currentColor" opacity=".22"/><circle cx="50" cy="64" r="14" fill="var(--accent)"/>
+    <rect x="14" y="104" width="72" height="10" rx="5" fill="currentColor" opacity=".7"/><rect x="14" y="122" width="48" height="10" rx="5" fill="currentColor" opacity=".35"/>
+    <rect x="14" y="152" width="72" height="30" rx="15" fill="currentColor"/></g>
+</svg>
+
+
+    </div>
+  </section>
+</div>
+
+
+
+<section class="section tight" aria-labelledby="goal-t">
+  <div class="container">
+    <h2 id="goal-t" class="display-m prog-goal">Фундамент для старта в профессии iOS-разработчика: Swift, UIKit и SwiftUI, сеть, архитектура, тесты</h2>
+    <ul class="outcomes"><li><svg class="ico sm" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-check"/></svg>Своё приложение в App Store</li><li><svg class="ico sm" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-check"/></svg>Финальный проект и защита</li><li><svg class="ico sm" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-check"/></svg>Сертификат</li></ul>
+  </div>
+</section>
+
+
+
+
+
+<section class="section tight" aria-labelledby="authors-t">
+  <div class="container">
+    <div class="sec-title"><h2 id="authors-t" class="display-l">Авторы</h2></div>
+    <div class="ab-team">
+<a class="ab-member s-recsys" href="/edufamcs-demo/people/gleb-klyga/">
+  <span class="ab-face"><img src="/edufamcs-demo/media/people/person-15.jpg" alt="" loading="lazy"></span>
+  <span class="nm">Глеб Клыга</span>
+  <span class="hd">iOS-разработчик, автор курса по iOS</span>
+</a>
+</div>
+  </div>
+</section>
+
+
+
+
+
+
+
+<section class="section tight" aria-labelledby="pn-t">
+  <div class="container">
+    <div class="sec-title"><h2 id="pn-t" class="display-l">Новости</h2><a class="link-arrow" href="/edufamcs-demo/news/">Все<svg class="ico sm" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-arrow"/></svg></a></div>
+    <div class="ev-list"></div>
+    <div class="news-grid">
+      
+<a class="news-card nk-news" href="/edufamcs-demo/news/#n10">
+  
+  <span class="nk-ic" role="img" aria-label="новость"><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-bell"/></svg></span>
+  <time datetime="2025-03-21T12:00:00+03:00">21 марта</time>
+  <h3 class="h3">Курс по iOS-разработке</h3>
+</a>
+
+    </div>
+  </div>
+</section>
+
+
+
+<section class="section tight" aria-labelledby="more-t">
+  <div class="container">
+    <div class="sec-title"><h2 id="more-t" class="display-l">Другие курсы</h2><a class="link-arrow" href="/edufamcs-demo/#courses">Все<svg class="ico sm" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-arrow"/></svg></a></div>
+    <div class="prog-grid">
+<a class="prog-card c-backend-go" href="/edufamcs-demo/backend-go/">
+  <div class="prog-art" data-theme="dark">
+    <span class="badge dot status-running ok">идёт</span>
+    
+
+<svg class="art-svg" viewBox="0 0 400 240" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+  <defs><pattern id="be-dots" width="20" height="20" patternUnits="userSpaceOnUse"><circle cx="10" cy="10" r="1.3" fill="currentColor" opacity=".25"/></pattern></defs>
+  <rect width="400" height="240" fill="url(#be-dots)"/>
+  <g fill="none" stroke="currentColor" stroke-width="2" opacity=".55">
+    <path d="M96 120H150"/><path d="M250 104C282 104 282 62 312 62"/><path d="M250 136C282 136 282 178 312 178"/><path d="M200 158V198"/><path d="M342 90V150" stroke-dasharray="3 5"/>
+  </g>
+  <rect x="24" y="90" width="72" height="60" rx="14" fill="currentColor" opacity=".16"/>
+  <path d="M44 112l14 8-14 8M66 130h16" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+  <rect x="150" y="80" width="100" height="80" rx="20" fill="currentColor"/>
+  <g fill="var(--night)" opacity=".5"><rect x="168" y="100" width="64" height="8" rx="4"/><rect x="168" y="116" width="44" height="8" rx="4"/></g>
+  <circle cx="226" cy="140" r="7" fill="var(--accent)"/>
+  <g fill="currentColor"><ellipse cx="342" cy="52" rx="30" ry="10" opacity=".35"/><path d="M312 52v22c0 6 13 10 30 10s30-4 30-10V52c0 6-13 10-30 10s-30-4-30-10z" opacity=".6"/></g>
+  <rect x="312" y="164" width="60" height="30" rx="10" fill="currentColor" opacity=".6"/><rect x="322" y="174" width="26" height="10" rx="5" fill="var(--night)" opacity=".5"/>
+  <circle cx="200" cy="208" r="12" fill="currentColor" opacity=".35"/>
+  <circle cx="122" cy="120" r="5" fill="var(--accent)"/>
+</svg>
+
+
+  </div>
+  <div class="prog-body" >
+    <h3 class="h2">Бэкенд на Go</h3>
+    
+    <div class="prog-meta">
+      
+      <span class="badge outline">5 октября 2026</span>
+      
+    </div>
+    <span class="go" aria-hidden="true"><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-arrow"/></svg></span>
+  </div>
+</a>
+
+<a class="prog-card c-analysis" href="/edufamcs-demo/analysis/">
+  <div class="prog-art" data-theme="dark">
+    <span class="badge dot status-upcoming">скоро</span>
+    
+
+<svg class="art-svg" viewBox="0 0 400 240" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+  <g fill="none" stroke="currentColor" stroke-width="2" opacity=".55"><path d="M110 120H150M250 120H282M302 100V62H262M302 140V178H262"/></g>
+  <rect x="30" y="94" width="80" height="52" rx="26" fill="currentColor" opacity=".2" stroke="currentColor" stroke-width="2"/>
+  <rect x="150" y="88" width="100" height="64" rx="12" fill="currentColor"/>
+  <g fill="var(--night)" opacity=".5"><rect x="166" y="104" width="68" height="8" rx="4"/><rect x="166" y="120" width="46" height="8" rx="4"/></g>
+  <path d="M302 98l22 22-22 22-22-22z" fill="var(--accent)"/>
+  <rect x="182" y="40" width="80" height="44" rx="10" fill="currentColor" opacity=".35"/>
+  <rect x="182" y="156" width="80" height="44" rx="10" fill="currentColor" opacity=".35"/>
+  <g fill="none" stroke="currentColor" stroke-width="2" opacity=".35"><rect x="330" y="30" width="50" height="34" rx="6"/><path d="M330 42h50M346 42v22"/></g>
+  <circle cx="70" cy="120" r="8" fill="var(--accent)"/>
+</svg>
+
+
+  </div>
+  <div class="prog-body" >
+    <h3 class="h2">Системный анализ</h3>
+    
+    <div class="prog-meta">
+      
+      <span class="badge outline">11 ноября 2026</span>
+      
+    </div>
+    <span class="go" aria-hidden="true"><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-arrow"/></svg></span>
+  </div>
+</a>
+
+<a class="prog-card c-gamedev" href="/edufamcs-demo/gamedev/">
+  <div class="prog-art" data-theme="dark">
+    <span class="badge dot status-upcoming">скоро</span>
+    
+
+<svg class="art-svg" viewBox="0 0 400 240" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+  <defs><pattern id="gd-grid" width="16" height="16" patternUnits="userSpaceOnUse"><rect x=".5" y=".5" width="15" height="15" fill="none" stroke="currentColor" stroke-opacity=".12"/></pattern></defs>
+  <rect width="400" height="240" fill="url(#gd-grid)"/>
+  <path d="M32 48h16v16H32zM48 48h16v16H48zM336 64h16v16h-16zM352 64h16v16h-16zM368 64h16v16h-16zM304 144h16v16h-16z" fill="currentColor" opacity=".35"/>
+  <path d="M144 48h16v16h-16zM240 48h16v16h-16zM160 64h16v16h-16zM224 64h16v16h-16zM144 80h112v16h-112zM128 96h32v16h-32zM176 96h48v16h-48zM240 96h32v16h-32zM112 112h48v16h-48zM176 112h48v16h-48zM240 112h48v16h-48zM112 128h16v16h-16zM144 128h112v16h-112zM272 128h16v16h-16zM112 144h16v16h-16zM144 144h16v16h-16zM240 144h16v16h-16zM272 144h16v16h-16zM160 160h32v16h-32zM208 160h32v16h-32z" fill="currentColor"/>
+  <path d="M160 112h16v16h-16zM224 112h16v16h-16z" fill="var(--accent)"/>
+  <path d="M192 16h16v16h-16zM192 48h16v16h-16z" fill="var(--accent)"/>
+  <path d="M0 208h400v32H0z" fill="currentColor" opacity=".16"/><path d="M0 208h400v16H0z" fill="currentColor" opacity=".3"/>
+</svg>
+
+
+  </div>
+  <div class="prog-body" >
+    <h3 class="h2">Геймдев</h3>
+    
+    <div class="prog-meta">
+      
+      <span class="badge outline">февраль 2027</span>
+      
+    </div>
+    <span class="go" aria-hidden="true"><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-arrow"/></svg></span>
+  </div>
+</a>
+
+<a class="prog-card c-ml" href="/edufamcs-demo/ml/">
+  <div class="prog-art" data-theme="dark">
+    <span class="badge dot status-upcoming">скоро</span>
+    
+
+<div class="ml-mosaic" aria-hidden="true">
+  <div class="s-recsys">
+
+<svg viewBox="0 0 220 120" aria-hidden="true">
+  <defs><pattern id="pm-ca1" width="20" height="20" patternUnits="userSpaceOnUse"><rect x="3" y="3" width="14" height="14" rx="4" fill="currentColor" opacity=".16"/></pattern></defs>
+  <rect width="220" height="120" fill="url(#pm-ca1)"/>
+  <g fill="currentColor"><rect x="43" y="3" width="14" height="14" rx="4"/><rect x="123" y="23" width="14" height="14" rx="4"/><rect x="23" y="43" width="14" height="14" rx="4"/><rect x="163" y="43" width="14" height="14" rx="4"/><rect x="83" y="63" width="14" height="14" rx="4"/><rect x="183" y="83" width="14" height="14" rx="4"/><rect x="63" y="103" width="14" height="14" rx="4"/></g>
+  <rect x="1" y="61" width="218" height="18" rx="6" fill="none" stroke="currentColor" stroke-width="1.5"/>
+  <g fill="var(--accent)"><rect x="143" y="63" width="14" height="14" rx="4"/><rect x="43" y="63" width="14" height="14" rx="4" opacity=".55"/></g>
+</svg>
+
+</div>
+  <div class="s-nlp">
+
+<svg viewBox="0 0 220 120" aria-hidden="true" fill="currentColor">
+  <path d="M30 52 C 60 6, 120 6, 150 52" fill="none" stroke="currentColor" stroke-width="1.5" opacity=".7"/>
+  <path d="M84 52 C 104 24, 130 24, 150 52" fill="none" stroke="currentColor" stroke-width="1.5" opacity=".4"/>
+  <path d="M150 52 C 165 34, 190 34, 202 52" fill="none" stroke="var(--accent)" stroke-width="1.5"/>
+  <rect x="4" y="54" width="52" height="22" rx="11" opacity=".18"/><rect x="62" y="54" width="44" height="22" rx="11" opacity=".18"/><rect x="112" y="54" width="76" height="22" rx="11"/><rect x="194" y="54" width="22" height="22" rx="11" fill="var(--accent)"/>
+  <rect x="4" y="84" width="34" height="22" rx="11" opacity=".18"/><rect x="44" y="84" width="70" height="22" rx="11" opacity=".18"/><rect x="120" y="84" width="40" height="22" rx="11" opacity=".18"/><rect x="166" y="84" width="50" height="22" rx="11" opacity=".18"/>
+</svg>
+
+</div>
+  <div class="s-ts">
+
+<svg viewBox="0 0 220 120" aria-hidden="true">
+  <defs><linearGradient id="tsg-ca3" x1="0" x2="0" y1="0" y2="1"><stop offset="0" stop-color="currentColor" stop-opacity=".28"/><stop offset="1" stop-color="currentColor" stop-opacity="0"/></linearGradient></defs>
+  <g stroke="currentColor" stroke-opacity=".14"><path d="M0 30h220M0 60h220M0 90h220"/></g>
+  <path d="M0 86 L18 74 L34 80 L52 58 L68 66 L86 44 L102 52 L120 36 L136 48 L140 46 L140 120 L0 120Z" fill="url(#tsg-ca3)"/>
+  <path d="M140 40 L160 26 L180 34 L200 16 L220 22 L220 62 L200 58 L180 72 L160 64 L140 54Z" fill="currentColor" opacity=".12"/>
+  <path d="M0 86 L18 74 L34 80 L52 58 L68 66 L86 44 L102 52 L120 36 L136 48 L140 46" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linejoin="round"/>
+  <path d="M140 46 L160 44 L180 52 L200 36 L220 42" fill="none" stroke="var(--accent)" stroke-width="2.2" stroke-dasharray="5 5" stroke-linejoin="round"/>
+  <circle cx="140" cy="46" r="4.5" fill="var(--accent)"/><path d="M140 6v114" stroke="currentColor" stroke-opacity=".35" stroke-dasharray="2 4"/>
+</svg>
+
+</div>
+  <div class="s-agents">
+
+<svg viewBox="0 0 220 120" aria-hidden="true">
+  <g stroke="currentColor" stroke-width="1.5" fill="none" opacity=".45"><path d="M110 60 L40 24M110 60 L40 96M110 60 L180 24M110 60 L180 96M40 24 L40 96M180 24 L180 96"/></g>
+  <g fill="currentColor" opacity=".18"><circle cx="40" cy="24" r="16"/><circle cx="40" cy="96" r="16"/><circle cx="180" cy="24" r="16"/><circle cx="180" cy="96" r="16"/></g>
+  <g fill="currentColor"><circle cx="40" cy="24" r="6"/><circle cx="40" cy="96" r="6"/><circle cx="180" cy="96" r="6"/></g>
+  <circle cx="110" cy="60" r="22" fill="none" stroke="currentColor" stroke-width="2"/><circle cx="110" cy="60" r="10" fill="currentColor"/>
+  <circle cx="180" cy="24" r="6" fill="var(--accent)"/>
+</svg>
+
+</div>
+</div>
+
+
+  </div>
+  <div class="prog-body" >
+    <h3 class="h2">Машинное обучение</h3>
+    
+    <div class="prog-meta">
+      <span class="badge outline">очно</span>
+      <span class="badge outline">8 февраля 2027</span>
+      <span class="badge outline where"><svg class="ico sm" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-cap"/></svg>на&nbsp;платформе</span>
+    </div>
+    <span class="go" aria-hidden="true"><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-arrow"/></svg></span>
+  </div>
+</a>
+
+<a class="prog-card c-backend" href="/edufamcs-demo/backend/">
+  <div class="prog-art" data-theme="dark">
+    <span class="badge dot status-finished">завершён</span>
+    
+
+<svg class="art-svg" viewBox="0 0 400 240" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+  <defs><pattern id="be-dots" width="20" height="20" patternUnits="userSpaceOnUse"><circle cx="10" cy="10" r="1.3" fill="currentColor" opacity=".25"/></pattern></defs>
+  <rect width="400" height="240" fill="url(#be-dots)"/>
+  <g fill="none" stroke="currentColor" stroke-width="2" opacity=".55">
+    <path d="M96 120H150"/><path d="M250 104C282 104 282 62 312 62"/><path d="M250 136C282 136 282 178 312 178"/><path d="M200 158V198"/><path d="M342 90V150" stroke-dasharray="3 5"/>
+  </g>
+  <rect x="24" y="90" width="72" height="60" rx="14" fill="currentColor" opacity=".16"/>
+  <path d="M44 112l14 8-14 8M66 130h16" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+  <rect x="150" y="80" width="100" height="80" rx="20" fill="currentColor"/>
+  <g fill="var(--night)" opacity=".5"><rect x="168" y="100" width="64" height="8" rx="4"/><rect x="168" y="116" width="44" height="8" rx="4"/></g>
+  <circle cx="226" cy="140" r="7" fill="var(--accent)"/>
+  <g fill="currentColor"><ellipse cx="342" cy="52" rx="30" ry="10" opacity=".35"/><path d="M312 52v22c0 6 13 10 30 10s30-4 30-10V52c0 6-13 10-30 10s-30-4-30-10z" opacity=".6"/></g>
+  <rect x="312" y="164" width="60" height="30" rx="10" fill="currentColor" opacity=".6"/><rect x="322" y="174" width="26" height="10" rx="5" fill="var(--night)" opacity=".5"/>
+  <circle cx="200" cy="208" r="12" fill="currentColor" opacity=".35"/>
+  <circle cx="122" cy="120" r="5" fill="var(--accent)"/>
+</svg>
+
+
+  </div>
+  <div class="prog-body" >
+    <h3 class="h2">Бэкенд</h3>
+    
+    <div class="prog-meta">
+      <span class="badge outline">онлайн</span>
+      <span class="badge outline">весна 2026</span>
+      <span class="badge outline where"><svg class="ico sm" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-send"/></svg>Telegram</span>
+    </div>
+    <span class="go" aria-hidden="true"><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-arrow"/></svg></span>
+  </div>
+</a>
+
+<a class="prog-card c-figma" href="/edufamcs-demo/figma/">
+  <div class="prog-art" data-theme="dark">
+    <span class="badge dot status-finished">больше не проводим</span>
+    
+
+<svg class="art-svg" viewBox="0 0 400 240" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+  <g fill="none" stroke="currentColor" stroke-width="1.5" stroke-dasharray="4 6" opacity=".35"><path d="M0 60h400M0 180h400M80 0v240M320 0v240"/></g>
+  <rect x="80" y="60" width="240" height="120" rx="4" fill="currentColor" opacity=".1" stroke="currentColor" stroke-width="2"/>
+  <g fill="var(--night-2)" stroke="currentColor" stroke-width="2"><rect x="74" y="54" width="12" height="12"/><rect x="314" y="54" width="12" height="12"/><rect x="74" y="174" width="12" height="12"/><rect x="314" y="174" width="12" height="12"/></g>
+  <path d="M112 156C150 84 196 84 214 120S280 160 296 92" fill="none" stroke="currentColor" stroke-width="4" stroke-linecap="round"/>
+  <path d="M214 120L176 82M214 120L252 158" stroke="currentColor" stroke-width="1.5" opacity=".6"/>
+  <circle cx="176" cy="82" r="6" fill="currentColor"/><circle cx="252" cy="158" r="6" fill="currentColor"/><circle cx="214" cy="120" r="8" fill="var(--accent)"/>
+  <path d="M332 186l0 34 9-9 7 15 7-3-7-15 13-1z" fill="currentColor" stroke="var(--night)" stroke-width="2" stroke-linejoin="round"/>
+  <rect x="96" y="76" width="54" height="10" rx="5" fill="currentColor" opacity=".5"/>
+</svg>
+
+
+  </div>
+  <div class="prog-body" >
+    <h3 class="h2">Дизайн в Figma</h3>
+    
+    <div class="prog-meta">
+      <span class="badge outline">онлайн</span>
+      <span class="badge outline">август 2025</span>
+      
+    </div>
+    <span class="go" aria-hidden="true"><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-arrow"/></svg></span>
+  </div>
+</a>
+
+<a class="prog-card c-math" href="/edufamcs-demo/math/">
+  <div class="prog-art" data-theme="dark">
+    <span class="badge dot status-finished">завершён</span>
+    
+
+<svg class="art-svg" viewBox="0 0 400 240" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+  <defs><pattern id="mt-grid" width="20" height="20" patternUnits="userSpaceOnUse"><path d="M20 0H0V20" fill="none" stroke="currentColor" stroke-opacity=".12"/></pattern>
+    <marker id="mt-arr" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0 0L10 5L0 10z" fill="currentColor"/></marker></defs>
+  <rect width="400" height="240" fill="url(#mt-grid)"/>
+  <path d="M40 200H230M60 220V30" stroke="currentColor" stroke-opacity=".6" stroke-width="2"/>
+  <path d="M60 200L180 90" stroke="currentColor" stroke-width="4" marker-end="url(#mt-arr)"/>
+  <path d="M60 200L200 170" stroke="currentColor" stroke-width="4" opacity=".6" marker-end="url(#mt-arr)"/>
+  <path d="M180 90L320 60" stroke="var(--accent)" stroke-width="3" stroke-dasharray="5 6"/>
+  <ellipse cx="148" cy="120" rx="70" ry="34" transform="rotate(-24 148 120)" fill="none" stroke="currentColor" stroke-opacity=".4" stroke-width="2"/>
+  <g fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><path d="M262 112h-8v76h8M352 112h8v76h-8"/></g>
+  <g fill="currentColor"><circle cx="280" cy="130" r="6"/><circle cx="306" cy="130" r="6" opacity=".5"/><circle cx="332" cy="130" r="6" opacity=".5"/><circle cx="280" cy="150" r="6" opacity=".5"/><circle cx="306" cy="150" r="6"/><circle cx="332" cy="150" r="6" opacity=".5"/><circle cx="280" cy="170" r="6" opacity=".5"/><circle cx="306" cy="170" r="6" opacity=".5"/><circle cx="332" cy="170" r="6"/></g>
+  <circle cx="320" cy="60" r="7" fill="var(--accent)"/>
+</svg>
+
+
+  </div>
+  <div class="prog-body" >
+    <h3 class="h2">Математика на Stepik</h3>
+    
+    <div class="prog-meta">
+      <span class="badge outline">онлайн</span>
+      <span class="badge outline">2022</span>
+      
+    </div>
+    <span class="go" aria-hidden="true"><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-arrow"/></svg></span>
+  </div>
+</a>
+
+<a class="prog-card c-frontend" href="/edufamcs-demo/frontend/">
+  <div class="prog-art" data-theme="dark">
+    <span class="badge dot status-finished">завершён</span>
+    
+
+<svg class="art-svg" viewBox="0 0 400 240" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+  <rect x="60" y="34" width="280" height="176" rx="16" fill="currentColor" opacity=".12" stroke="currentColor" stroke-opacity=".55" stroke-width="2"/>
+  <path d="M60 64h280" stroke="currentColor" stroke-opacity=".55" stroke-width="2"/>
+  <g fill="currentColor"><circle cx="80" cy="49" r="5" opacity=".7"/><circle cx="96" cy="49" r="5" opacity=".5"/><circle cx="112" cy="49" r="5" opacity=".3"/></g>
+  <rect x="136" y="42" width="140" height="14" rx="7" fill="currentColor" opacity=".25"/>
+  <rect x="84" y="84" width="112" height="70" rx="10" fill="currentColor" opacity=".3"/>
+  <rect x="212" y="84" width="104" height="10" rx="5" fill="currentColor" opacity=".7"/><rect x="212" y="102" width="76" height="10" rx="5" fill="currentColor" opacity=".4"/>
+  <rect x="212" y="128" width="64" height="26" rx="13" fill="var(--accent)"/>
+  <path d="M110 186l-14 -10 14 -10M140 166l-10 22M160 166l14 10 -14 10" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>
+
+
+  </div>
+  <div class="prog-body" >
+    <h3 class="h2">Фронтенд</h3>
+    
+    <div class="prog-meta">
+      
+      <span class="badge outline">2021–2022</span>
+      
+    </div>
+    <span class="go" aria-hidden="true"><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-arrow"/></svg></span>
+  </div>
+</a>
+</div>
+  </div>
+</section>
+
+
+<div class="container">
+<section class="section tight run-course" id="run" aria-labelledby="run-t">
+  <div class="band" data-theme="dark">
+    <svg class="sym fern" viewBox="0 0 40.5 65.02" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#fern"/></svg>
+    <div class="run-main">
+      <h2 id="run-t" class="display-l">Проведи свой курс</h2>
+      <div class="run-opts">
+        <div class="run-opt">
+          <span class="run-ico"><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-cap"/></svg></span>
+          <h3 class="h3">На платформе</h3>
+          <span class="run-steps" aria-hidden="true"><svg class="ico sm" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-book"/></svg><svg class="ico sm" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-check"/></svg><svg class="ico sm" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-award"/></svg></span>
+        </div>
+        <div class="run-opt">
+          <span class="run-ico"><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-link"/></svg></span>
+          <h3 class="h3">Страница со ссылками</h3>
+          <span class="run-steps" aria-hidden="true"><svg class="ico sm" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-send"/></svg><svg class="ico sm" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-github"/></svg><svg class="ico sm" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-book"/></svg></span>
+        </div>
+      </div>
+      <div class="hero-cta"><a class="btn btn-primary btn-lg" href="/edufamcs-demo/propose/?kind=course">Предложить курс, лекцию или&nbsp;хакатон<svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-arrow"/></svg></a></div>
+    </div>
+    <svg class="sym raccoon" viewBox="0 0 2391 2245" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#raccoon"/></svg>
+  </div>
+</section>
+</div>
+
+
+</main>
+
+<footer class="ftr" data-theme="dark">
+  <svg class="sym fern" viewBox="0 0 40.5 65.02" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#fern"/></svg>
+  <div class="container">
+    <div class="ftr-row">
+      <a href="/edufamcs-demo/" aria-label="EDU FAMCS — главная"><img src="/edufamcs-demo/static/brand/logo/logo-edu-dark.svg" alt="EDU FAMCS" width="196" height="40"></a>
+      <ul class="ftr-links">
+        <li><a href="/edufamcs-demo/#courses">Курсы</a></li>
+        <li><a href="/edufamcs-demo/ml/">Машинное обучение</a></li>
+        <li><a href="/edufamcs-demo/handbook/">Хендбук</a></li>
+        <li><a href="/edufamcs-demo/news/">Новости</a></li>
+        <li><a href="/edufamcs-demo/people/">Авторы</a></li>
+        <li><a href="/edufamcs-demo/about/">О&nbsp;нас</a></li>
+        <li><a href="/edufamcs-demo/propose/">Предложить или исправить</a></li>
+        <li><a href="/edufamcs-demo/privacy/">Конфиденциальность</a></li>
+      </ul>
+    </div>
+    <div class="ftr-big" aria-hidden="true">EDU<span class="d">·</span>FAMCS</div>
+    <p class="ftr-copy">© 2026 EDU FAMCS · Минск</p>
+  </div>
+</footer>
+
+<div class="toasts-region" aria-live="polite" id="toasts">
+
+</div>
+
+</body>
+</html>

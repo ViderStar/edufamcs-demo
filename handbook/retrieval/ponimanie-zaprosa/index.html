@@ -1,0 +1,264 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Понимание запроса · EDU FAMCS</title>
+<meta name="description" content="Понимание запроса — Поиск. Хендбук ML-курса ФПМИ.">
+<meta name="theme-color" content="#060A16">
+<meta name="robots" content="noindex, nofollow">
+<meta name="htmx-config" content='{"allowEval":false,"includeIndicatorStyles":false,"historyCacheSize":0,"selfRequestsOnly":true}'>
+<meta name="katex-js" content="/edufamcs-demo/static/vendor/katex/katex.min.js">
+<meta name="katex-css" content="/edufamcs-demo/static/vendor/katex/katex.min.css">
+<link rel="icon" href="/edufamcs-demo/static/brand/logo/favicon-16.svg" type="image/svg+xml" sizes="16x16">
+<link rel="icon" href="/edufamcs-demo/static/brand/logo/favicon.svg" type="image/svg+xml" sizes="any">
+<link rel="preload" href="/edufamcs-demo/static/brand/fonts/manrope-cyrillic-400.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/edufamcs-demo/static/brand/fonts/unbounded-cyrillic-800.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="/edufamcs-demo/static/brand/fonts.css">
+<link rel="stylesheet" href="/edufamcs-demo/static/brand/tokens.css">
+<link rel="stylesheet" href="/edufamcs-demo/static/brand/components.css">
+<link rel="stylesheet" href="/edufamcs-demo/static/css/site.css">
+<link rel="stylesheet" href="/edufamcs-demo/static/css/hub.css">
+<link rel="stylesheet" href="/edufamcs-demo/static/css/about.css">
+<link rel="stylesheet" href="/edufamcs-demo/static/handbook/handbook.css">
+<script src="/edufamcs-demo/static/js/theme.js"></script>
+<script src="/edufamcs-demo/static/vendor/htmx/htmx.min.js" defer></script>
+<script src="/edufamcs-demo/static/vendor/alpine/alpine-csp.min.js" defer></script>
+<script src="/edufamcs-demo/static/js/site.js" defer></script>
+<script src="/edufamcs-demo/static/handbook/handbook.js" defer></script>
+</head>
+<body class="" hx-headers='{"X-CSRFToken": "Br65Z2KvK31NcRxpcdj1tMvnhoB7GwrH0bF9J0xSFUpWrqI8Jq29qh1sP6HCeG9r"}'>
+<a class="skip" href="#main">К содержанию</a>
+<div class="demo-bar" role="note">Демо-версия для отзывов: вход, запись на курсы и формы здесь не работают.</div>
+
+<header class="hdr">
+  <div class="container">
+    <a class="brand" href="/edufamcs-demo/" aria-label="EDU FAMCS — главная">
+      <span class="full"><img class="only-light" src="/edufamcs-demo/static/brand/logo/logo-edu-light.svg" alt="EDU FAMCS" width="196" height="40"><img class="only-dark" src="/edufamcs-demo/static/brand/logo/logo-edu-dark.svg" alt="EDU FAMCS" width="196" height="40"></span>
+      <span class="short"><img class="only-light" src="/edufamcs-demo/static/brand/logo/logo-edu-light.svg" alt="EDU FAMCS" height="30"><img class="only-dark" src="/edufamcs-demo/static/brand/logo/logo-edu-dark.svg" alt="EDU FAMCS" height="30"></span>
+    </a>
+    <nav class="nav" id="main-nav" aria-label="Основная навигация">
+      <a href="/edufamcs-demo/#courses">Курсы</a>
+      <a href="/edufamcs-demo/ml/" >Машинное обучение</a>
+      
+      <a href="/edufamcs-demo/handbook/" aria-current="page">Хендбук</a>
+      <a href="/edufamcs-demo/news/" >Новости</a>
+      <a href="/edufamcs-demo/people/" >Авторы</a>
+      <a href="/edufamcs-demo/about/" >О&nbsp;нас</a>
+    </nav>
+    <div class="hdr-actions">
+      
+      <a class="btn btn-outline btn-login" href="/edufamcs-demo/accounts/login/?next=/handbook/retrieval/ponimanie-zaprosa/">Войти</a>
+      
+      <button class="icon-btn menu-btn" type="button" aria-label="Меню" aria-expanded="false" aria-controls="main-nav"><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-menu"/></svg></button>
+    </div>
+  </div>
+</header>
+
+<main id="main">
+
+
+
+<div class="container hb-page s-recsys">
+  <div class="hb">
+    <aside class="hb-nav" aria-label="Статьи раздела">
+      
+<form class="hb-search" action="/edufamcs-demo/handbook/search/" method="get" role="search">
+  <svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-search"/></svg>
+  <input class="input" type="search" name="q" value="" placeholder="Поиск по хендбуку" aria-label="Поиск по хендбуку" autocomplete="off" maxlength="120"
+    hx-get="/edufamcs-demo/handbook/search/" hx-trigger="input changed delay:250ms, search" hx-target="#hb-nav-results" hx-sync="this:replace">
+</form>
+
+      <div id="hb-nav-results" class="hb-nav-results" aria-live="polite"></div>
+      <a class="grp" href="/edufamcs-demo/handbook/retrieval/">Классический поиск</a>
+      
+      <a class="" href="/edufamcs-demo/handbook/retrieval/bm25-invertirovannyj-indeks/">BM25 и инвертированный индекс</a>
+      
+      <a class="" href="/edufamcs-demo/handbook/retrieval/ocenka-kachestva-poiska/">Оценка качества поиска</a>
+      
+      <a class="" href="/edufamcs-demo/handbook/retrieval/learning-to-rank/">Обучение ранжированию</a>
+      
+      <a class="cur" href="/edufamcs-demo/handbook/retrieval/ponimanie-zaprosa/" aria-current="page">Понимание запроса</a>
+      
+    </aside>
+
+    <article class="hb-main">
+      <nav class="crumbs" aria-label="Навигация"><a href="/edufamcs-demo/handbook/">Хендбук</a><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-chev"/></svg><a href="/edufamcs-demo/handbook/retrieval/">Поиск</a></nav>
+      <h1 class="h1">Понимание запроса</h1>
+      <div class="hb-meta">
+        
+        
+        <span><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-clock"/></svg>15&nbsp;мин</span>
+        <span class="hb-authors"><span class="avatar sm" title="Артем Лебедевич">АЛ</span>Артем Лебедевич</span>
+        <span><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-edit"/></svg>9 ноября 2026</span>
+        
+        
+      </div>
+
+      
+      <details class="hb-mtoc">
+        <summary><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-list"/></svg>Содержание<svg class="ico sm" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-chev-down"/></svg></summary>
+        <a class="l2" href="#типы-запросов">Типы запросов</a><a class="l2" href="#нормализация">Нормализация</a><a class="l2" href="#исправление-опечаток">Исправление опечаток</a><a class="l3" href="#модель-шумного-канала">Модель шумного канала</a><a class="l3" href="#неверная-раскладка-и-транслитерация">Неверная раскладка и транслитерация</a><a class="l2" href="#сегментация-и-разбор-запроса">Сегментация и разбор запроса</a><a class="l2" href="#расширение-запроса">Расширение запроса</a><a class="l2" href="#подсказки-и-автодополнение">Подсказки и автодополнение</a><a class="l2" href="#переписывание-запроса-языковыми-моделями">Переписывание запроса языковыми моделями</a><a class="l3" href="#борьба-с-пустой-выдачей">Борьба с пустой выдачей</a><a class="l2" href="#код">Код</a><a class="l2" href="#ловушки">Ловушки</a><a class="l2" href="#что-почитать">Что почитать</a>
+      </details>
+      
+
+      <div class="prose"><p>Запрос — это 2–3 слова, написанные на бегу: с опечаткой, в неправильной раскладке, в сокращённой форме, без указания контекста. Ранжирование, даже идеальное, не поможет, если оно получает на вход не то, что человек имел в виду. Поэтому перед индексом стоит слой <strong>понимания запроса</strong> (query understanding): он нормализует, исправляет, классифицирует и расширяет запрос. По опыту промышленных систем именно этот слой часто даёт больше прироста, чем замена модели ранжирования, особенно в e-commerce, где доля «грязных» запросов велика. Общая схема: запрос → нормализация → исправление → разбор → расширение/переписывание → поиск → ранжирование.</p>
+<h2 id="типы-запросов">Типы запросов</h2>
+<p>Классификация Андрея Бродера (2002) делит запросы по намерению:</p>
+<ul>
+<li><strong>Навигационные</strong> — найти конкретный сайт или страницу («вк», «личный кабинет сбербанк»). Нужен один правильный ответ на первой позиции; метрика — MRR.</li>
+<li><strong>Информационные</strong> — получить сведения («как работает ALS», «чем лечить кашель»). Релевантных документов много.</li>
+<li><strong>Транзакционные</strong> — совершить действие: купить, скачать, заказать («купить айфон 15 минск»).</li>
+</ul>
+<p>В e-commerce доминирует транзакционный тип, внутри него выделяют запросы по бренду, по категории («кроссовки»), по конкретной модели и по атрибутам. Тип запроса задаёт стратегию: для навигационного важна точность на первой позиции, для широкого категорийного — разнообразие и фасеты, для запроса по модели — точное совпадение артикула. Классификатор типа — обычный текстовый классификатор (логистическая регрессия на n-граммах или дообученный BERT) плюс признаки из логов: частота запроса, распределение кликов по категориям, энтропия кликов по документам (низкая энтропия — навигационный запрос).</p>
+<h2 id="нормализация">Нормализация</h2>
+<p>Базовые шаги: нижний регистр, <code>ё → е</code>, нормализация Unicode (NFKC), удаление лишних пробелов и знаков, разбиение слепленных токенов («iphone15» → «iphone 15»), единообразие единиц («1,5л», «1.5 л», «1500 мл»). Для русского — лемматизация или стемминг, как в <a href="/edufamcs-demo/handbook/retrieval/bm25-invertirovannyj-indeks/" rel="noopener noreferrer nofollow">BM25</a>. Ключевое правило: тот же пайплайн применяется и при индексации документов.</p>
+<h2 id="исправление-опечаток">Исправление опечаток</h2>
+<h3 id="модель-шумного-канала">Модель шумного канала</h3>
+<p>Классическая формулировка (Brill, Moore, 2000; ранее Kernighan et al., 1990). Пользователь хотел написать слово <span class="tex">w</span>, но по каналу с шумом получилось <span class="tex">x</span>. Исправление — это байесовская задача:</p>
+<div class="tex tex-block">\hat w = \arg\max_{w \in V} P(w \mid x) = \arg\max_{w \in V} \underbrace{P(x \mid w)}_{\text{модель ошибок}} \; \underbrace{P(w)}_{\text{языковая модель}}.</div>
+<p><span class="tex">P(w)</span> оценивают по частотам слов (лучше — по логам запросов, они отражают реальный спрос). <span class="tex">P(x\mid w)</span> моделирует типичные ошибки: пропуск, вставка, замена, перестановка соседних букв. Brill и Moore обобщили модель до замен подстрок (например «ph→f»), обучаемых на парах (ошибка, исправление). Кандидатов <span class="tex">w</span> ищут среди слов на расстоянии редактирования <span class="tex">\le 2</span>.</p>
+<p><strong>Расстояние Левенштейна</strong> — минимальное число вставок, удалений и замен, превращающих одну строку в другую. Динамическое программирование за <span class="tex">O(|a||b|)</span>:</p>
+<div class="tex tex-block">D[i][j] = \min\bigl(D[i-1][j] + 1,\; D[i][j-1] + 1,\; D[i-1][j-1] + [a_i \ne b_j]\bigr).</div>
+<p>Вариант Дамерау–Левенштейна добавляет перестановку соседних символов («првиет» → «привет») за одну операцию.</p>
+<p>Перебирать весь словарь на каждый запрос слишком дорого. Три индустриальных приёма:</p>
+<ol>
+<li><strong>Автомат Левенштейна</strong> — конечный автомат, принимающий все строки на расстоянии <span class="tex">\le k</span>, пересекается с префиксным деревом словаря (так работает fuzzy-запрос в Lucene).</li>
+<li><strong>SymSpell</strong> — предподсчитанный индекс всех вариантов с удалением до <span class="tex">k</span> символов у слов словаря; кандидаты ищутся по хеш-таблице, на порядки быстрее перебора.</li>
+<li><strong>Индекс по символьным n-граммам</strong> (триграммы): кандидаты — слова с большим пересечением n-грамм, затем уточнение расстоянием.</li>
+</ol>
+<p>Современное исправление использует <strong>контекст</strong>: «банк кредит минск» и «рыбалка на сома» требуют разных исправлений одного и того же слова. Для этого кандидатов переоценивают языковой моделью по всему запросу, либо дообучают seq2seq/трансформер на парах (запрос с ошибкой → исправление), добытых из логов сессий (пользователь переформулировал запрос и кликнул). Из логов же выводят правило, <strong>когда не править</strong>: слово может быть валидным брендом или артикулом, которого нет в словаре. Автоисправление «Xiaomi» в «Ксения» хуже пропущенной опечатки.</p>
+<h3 id="неверная-раскладка-и-транслитерация">Неверная раскладка и транслитерация</h3>
+<p>Частый случай в русскоязычном поиске: запрос набран в латинской раскладке («ghbdtn» вместо «привет»). Исправление — простое отображение клавиш: для каждой позиции QWERTY сопоставляется буква ЙЦУКЕН. Детектор нужен, чтобы не переводить корректный латинский запрос («iphone»): оба варианта (как есть и переведённый) оценивают языковой моделью символов или частотами в логах и берут более вероятный. В запросе бывает и смесь («ноутbook») — тогда переводят по токенам.</p>
+<p><strong>Транслитерация</strong> — запись русских слов латиницей и наоборот («кроссовки» ↔ «krossovki», «найк» ↔ «nike»). Её обучают как задачу seq2seq на парах из логов либо строят таблицу соответствий брендов. Без неё поиск по бренду теряет заметную долю запросов.</p>
+<h2 id="сегментация-и-разбор-запроса">Сегментация и разбор запроса</h2>
+<p>В e-commerce запрос «красные кроссовки nike 42» — это на самом деле фильтры: цвет = красный, тип = кроссовки, бренд = Nike, размер = 42. Если разобрать его на атрибуты, поиск можно сделать точным (структурный фильтр по полю вместо мягкого совпадения слов) и избежать ложных находок: «42» в описании чехла для телефона не размер.</p>
+<p>Задача формулируется как <strong>разметка последовательности</strong> (NER / slot filling): для каждого токена метка из BIO-схемы (<code>B-COLOR</code>, <code>B-TYPE</code>, <code>B-BRAND</code>, <code>B-SIZE</code>, <code>O</code>...). Модели: CRF на словарных и словоформенных признаках, затем BiLSTM-CRF, сейчас — дообученный BERT-подобный энкодер. Источник разметки: словари значений атрибутов из каталога (цвета, бренды) + слабая разметка по кликам (запрос → категория → атрибуты кликнутых товаров) + ручная проверка выборки.</p>
+<p>Рядом решается <strong>классификация запроса в категорию каталога</strong>: «чехол» → «Аксессуары для телефонов», «кроссовки» → «Обувь / Спортивная». Категория используется для фильтрации, для бустинга документов из этой ветки каталога и как признак ранжирования. Это многоклассовая (часто иерархическая и мультилейбл) классификация; метки берут из кликов: категории товаров, на которые кликали после запроса, с порогом на долю. Для редких запросов категории предсказываются моделью по тексту, для частых — берутся прямо из статистики.</p>
+<h2 id="расширение-запроса">Расширение запроса</h2>
+<p>Словарный разрыв лексического поиска («ноутбук» vs «лэптоп») закрывают расширением.</p>
+<p><strong>Синонимы.</strong> Словарь синонимов (ручной, из логов, по эмбеддингам слов) добавляется либо при индексации, либо при поиске. Практика: расширять при поиске, веса расширенных термов делать ниже, чем у исходных (иначе «синоним» вытеснит точное совпадение). В Lucene это фильтры <code>synonym</code>/<code>synonym_graph</code>; граф-вариант корректен для многословных синонимов. Двусторонность синонимов опасна: «мобильный телефон → смартфон» верно, обратное не всегда.</p>
+<p><strong>Псевдорелевантная обратная связь (PRF).</strong> Идея Роккио (1971): релевантная обратная связь переносит запрос к центроиду релевантных документов и от центроида нерелевантных:</p>
+<div class="tex tex-block">\vec q' = \alpha \vec q + \frac{\beta}{|D_r|}\sum_{d \in D_r}\vec d - \frac{\gamma}{|D_{nr}|}\sum_{d \in D_{nr}}\vec d.</div>
+<p>В «псевдо»-варианте явной обратной связи нет — считается, что топ-<span class="tex">k</span> первой выдачи релевантны. <strong>RM3</strong> (Lavrenko, Croft, 2001; Abdul-Jaleel et al., 2004) строит модель релевантности: из топ-<span class="tex">k</span> документов берутся термы с наибольшим значением <span class="tex">P(w\mid R)</span>, и запрос расширяется ими с весами, смешанными с исходной моделью запроса: <span class="tex">P(w \mid q') = \lambda P(w\mid q) + (1-\lambda) P(w \mid R)</span>. PRF повышает recall (находит документы, где нет слов запроса, но есть связанные термы), но рискует «дрейфом запроса»: если в топ попал нерелевантный документ, расширение уводит в сторону. На классических коллекциях TREC (Robust04, TREC DL) BM25+RM3 обычно поднимает recall и MAP относительно чистого BM25, но эффект неустойчив: на коротких точных запросах и в части доменов расширение вредит, поэтому его включают только после проверки на своей разметке.</p>
+<p><strong>Расширение документов.</strong> Вместо запросов дополняют документы. <strong>doc2query</strong> (Nogueira et al., 2019) обучает seq2seq-модель генерировать по документу запросы, на которые он мог бы отвечать, и дописывает их к тексту перед индексацией; <strong>docTTTTTquery</strong> (Nogueira, Lin, 2019) — то же на T5, с заметно лучшим качеством: на MS MARCO MRR@10 растёт с 0,187 у чистого BM25 примерно до 0,28, что сопоставимо с ранними нейросетевыми ранжировщиками, при той же стоимости запроса, потому что вся нейросетевая работа вынесена в индексацию. Цена: индекс больше, пересчёт при смене модели дорог, возможны галлюцинации. Идея «веса термов, выученные нейросетью» развита в SPLADE — <a href="/edufamcs-demo/handbook/retrieval/nejrosetevoe-ranzhirovanie/" rel="noopener noreferrer nofollow">нейросетевое ранжирование</a>.</p>
+<h2 id="подсказки-и-автодополнение">Подсказки и автодополнение</h2>
+<p>Autocomplete начинает работать до того, как запрос закончен: на каждый введённый символ нужно за единицы миллисекунд вернуть 5–10 вариантов.</p>
+<ul>
+<li><strong>Структура данных:</strong> префиксное дерево (trie) по популярным запросам; в каждой вершине хранится список лучших продолжений в поддереве (заранее вычисленный top-<span class="tex">k</span> по весу), что делает ответ <span class="tex">O(|prefix|)</span>. Альтернатива — FST (конечный преобразователь) в Lucene (<code>suggester</code>) или индекс <code>edge n-gram</code>.</li>
+<li><strong>Ранжирование — MPC</strong> (Most Popular Completion; так её назвали Bar-Yossef и Kraus, 2011): варианты сортируют по частоте запроса за недавнее окно. Простая и сильная база. Улучшения: учёт свежести и сезонности (экспоненциальное затухание), тренды, фильтры (нет в наличии, нулевая выдача, нецензурные запросы).</li>
+<li><strong>Персонализация:</strong> добавляют признаки пользователя — прошлые запросы, категории, город, контекст сессии («после запроса „iphone“ подсказывать „iphone чехол“»). Ранжирование подсказок — тоже задача LTR (<a href="/edufamcs-demo/handbook/retrieval/learning-to-rank/" rel="noopener noreferrer nofollow">обучение ранжированию</a>).</li>
+<li><strong>Опечатки в префиксе:</strong> используют approximate prefix matching, например trie с допуском ошибок в первых символах. Для неполного слова сначала ищут по префиксу, затем по расстоянию редактирования.</li>
+<li><strong>Метрики:</strong> MRR подсказок (на какой позиции оказалась подсказка, которую выбрал пользователь), доля сэкономленных нажатий клавиш, и, главное, принятие подсказок и влияние на конверсию.</li>
+</ul>
+<h2 id="переписывание-запроса-языковыми-моделями">Переписывание запроса языковыми моделями</h2>
+<p>С 2022 года LLM используют как слой переписывания.</p>
+<p><strong>HyDE</strong> (Gao et al., 2022): вместо эмбеддинга запроса модель пишет гипотетический документ-ответ, и ищут документы, близкие к его эмбеддингу. Идея: документы похожи на документы, а не на вопросы, поэтому пара «гипотетический ответ — реальный документ» ближе в эмбеддинг-пространстве. Фактические ошибки в гипотетическом документе не критичны: эмбеддинг «сглаживает» детали. <strong>Query2doc</strong> (Wang et al., 2023): LLM по запросу пишет короткий псевдо-документ, который конкатенируется с запросом (для BM25 — с повторением исходного запроса, чтобы не потерять его вес); дало прирост на MS MARCO и в BM25, и в плотном поиске. В e-commerce 2024–2025 годов LLM применяют для переписывания разговорных и длинных запросов в поисковые («чем кормить кота сфинкса» → «корм для кошек бесшерстных пород»), для распознавания намерения, генерации синонимов и атрибутов; офлайн-часть (обработка топ-запросов и кэширование результата) отделяют от онлайн-части, чтобы уложиться в задержку.</p>
+<p>Риски: задержка и цена (кэш по нормализованному запросу, обрабатывать только хвост), <strong>дрейф намерения</strong> (модель «улучшила» запрос и потеряла важное слово), галлюцинации (выдуманный бренд). Защита: сохранять исходный запрос в запросе с высоким весом, проверять переписанные варианты по логам (есть ли такие запросы, даёт ли выдача результаты) и мерить в A/B.</p>
+<h3 id="борьба-с-пустой-выдачей">Борьба с пустой выдачей</h3>
+<p>Пустая выдача — худший исход. Стратегия <strong>ослабления условий</strong> (query relaxation): если по полному запросу найдено мало или ничего, последовательно убирают наименее важные термы. Порядок удаления определяет оценка важности: слово по IDF (редкое — важнее), роль слова (бренд и тип товара важнее цвета), частота слова в каталоге. Так «красные кроссовки nike 42 мужские» ослабляется до «кроссовки nike 42», затем до «кроссовки nike». Дополнительно: переход с AND на OR с минимальным процентом совпавших термов (<code>minimum_should_match</code>), исправление опечаток, поиск по эмбеддингам как запасной вариант и честный интерфейс: «ничего не нашлось по точному запросу, показываем похожее».</p>
+<h2 id="код">Код</h2>
+<p>Исправление раскладки и расширение синонимами перед BM25.</p>
+<div class="code"><div class="code-head"><span class="lang">python</span></div><pre><code><span class="tok-k">import</span> re
+<span class="tok-k">from</span> collections <span class="tok-k">import</span> defaultdict
+
+EN <span class="tok-p">=</span> <span class="tok-s">"</span><span class="tok-s">qwertyuiop[]asdfghjkl;</span><span class="tok-s">'</span><span class="tok-s">zxcvbnm,./`</span><span class="tok-s">"</span>
+RU <span class="tok-p">=</span> <span class="tok-s">"</span><span class="tok-s">йцукенгшщзхъфывапролджэячсмитьбю.ё</span><span class="tok-s">"</span>
+<span class="tok-c"># заглавные — только для букв: иначе "." -&gt; "Ю" и "," -&gt; "Б" перезапишут строчные "ю" и "б"</span>
+EN2RU <span class="tok-p">=</span> <span class="tok-p">{</span><span class="tok-p">*</span><span class="tok-p">*</span><span class="tok-f">dict</span><span class="tok-p">(</span><span class="tok-f">zip</span><span class="tok-p">(</span>EN<span class="tok-p">,</span> RU<span class="tok-p">)</span><span class="tok-p">)</span><span class="tok-p">,</span> <span class="tok-p">*</span><span class="tok-p">*</span><span class="tok-p">{</span>e<span class="tok-p">.</span>upper<span class="tok-p">(</span><span class="tok-p">)</span><span class="tok-p">:</span> r<span class="tok-p">.</span>upper<span class="tok-p">(</span><span class="tok-p">)</span> <span class="tok-k">for</span> e<span class="tok-p">,</span> r <span class="tok-k">in</span> <span class="tok-f">zip</span><span class="tok-p">(</span>EN<span class="tok-p">,</span> RU<span class="tok-p">)</span> <span class="tok-k">if</span> e<span class="tok-p">.</span>isalpha<span class="tok-p">(</span><span class="tok-p">)</span><span class="tok-p">}</span><span class="tok-p">}</span>
+
+<span class="tok-k">def</span> <span class="tok-f">fix_layout</span><span class="tok-p">(</span>q<span class="tok-p">:</span> <span class="tok-f">str</span><span class="tok-p">,</span> ru_vocab<span class="tok-p">:</span> <span class="tok-f">set</span><span class="tok-p">[</span><span class="tok-f">str</span><span class="tok-p">]</span><span class="tok-p">,</span> en_vocab<span class="tok-p">:</span> <span class="tok-f">set</span><span class="tok-p">[</span><span class="tok-f">str</span><span class="tok-p">]</span><span class="tok-p">)</span> <span class="tok-p">-</span><span class="tok-p">&gt;</span> <span class="tok-f">str</span><span class="tok-p">:</span>
+    <span class="tok-s">"""Переводит токены из латиницы в кириллицу, если слово не похоже на латинское из словаря."""</span>
+    out <span class="tok-p">=</span> <span class="tok-p">[</span><span class="tok-p">]</span>
+    <span class="tok-k">for</span> tok <span class="tok-k">in</span> q<span class="tok-p">.</span>split<span class="tok-p">(</span><span class="tok-p">)</span><span class="tok-p">:</span>
+        <span class="tok-k">if</span> re<span class="tok-p">.</span>fullmatch<span class="tok-p">(</span><span class="tok-s">r</span><span class="tok-s">"</span><span class="tok-s">[a-zA-Z</span><span class="tok-s">\</span><span class="tok-s">[</span><span class="tok-s">\</span><span class="tok-s">];</span><span class="tok-s">'</span><span class="tok-s">,./`]+</span><span class="tok-s">"</span><span class="tok-p">,</span> tok<span class="tok-p">)</span><span class="tok-p">:</span>
+            cand <span class="tok-p">=</span> <span class="tok-s">"</span><span class="tok-s">"</span><span class="tok-p">.</span>join<span class="tok-p">(</span>EN2RU<span class="tok-p">.</span>get<span class="tok-p">(</span>c<span class="tok-p">,</span> c<span class="tok-p">)</span> <span class="tok-k">for</span> c <span class="tok-k">in</span> tok<span class="tok-p">)</span>
+            <span class="tok-k">if</span> tok<span class="tok-p">.</span>lower<span class="tok-p">(</span><span class="tok-p">)</span> <span class="tok-k">not</span> <span class="tok-k">in</span> en_vocab <span class="tok-k">and</span> cand<span class="tok-p">.</span>lower<span class="tok-p">(</span><span class="tok-p">)</span> <span class="tok-k">in</span> ru_vocab<span class="tok-p">:</span>
+                out<span class="tok-p">.</span>append<span class="tok-p">(</span>cand<span class="tok-p">)</span>
+                <span class="tok-k">continue</span>
+        out<span class="tok-p">.</span>append<span class="tok-p">(</span>tok<span class="tok-p">)</span>
+    <span class="tok-k">return</span> <span class="tok-s">"</span> <span class="tok-s">"</span><span class="tok-p">.</span>join<span class="tok-p">(</span>out<span class="tok-p">)</span>
+
+SYNONYMS <span class="tok-p">=</span> <span class="tok-p">{</span><span class="tok-s">"</span><span class="tok-s">ноутбук</span><span class="tok-s">"</span><span class="tok-p">:</span> <span class="tok-p">[</span><span class="tok-s">"</span><span class="tok-s">лэптоп</span><span class="tok-s">"</span><span class="tok-p">,</span> <span class="tok-s">"</span><span class="tok-s">ноут</span><span class="tok-s">"</span><span class="tok-p">]</span><span class="tok-p">,</span> <span class="tok-s">"</span><span class="tok-s">телефон</span><span class="tok-s">"</span><span class="tok-p">:</span> <span class="tok-p">[</span><span class="tok-s">"</span><span class="tok-s">смартфон</span><span class="tok-s">"</span><span class="tok-p">]</span><span class="tok-p">}</span>
+
+<span class="tok-k">def</span> <span class="tok-f">expand_query</span><span class="tok-p">(</span>tokens<span class="tok-p">:</span> <span class="tok-f">list</span><span class="tok-p">[</span><span class="tok-f">str</span><span class="tok-p">]</span><span class="tok-p">,</span> w_syn<span class="tok-p">:</span> <span class="tok-f">float</span> <span class="tok-p">=</span> <span class="tok-n">0.5</span><span class="tok-p">)</span> <span class="tok-p">-</span><span class="tok-p">&gt;</span> <span class="tok-f">dict</span><span class="tok-p">[</span><span class="tok-f">str</span><span class="tok-p">,</span> <span class="tok-f">float</span><span class="tok-p">]</span><span class="tok-p">:</span>
+    <span class="tok-s">"""Взвешенный запрос: исходные термы с весом 1, синонимы с меньшим."""</span>
+    weights <span class="tok-p">=</span> defaultdict<span class="tok-p">(</span><span class="tok-f">float</span><span class="tok-p">)</span>
+    <span class="tok-k">for</span> t <span class="tok-k">in</span> tokens<span class="tok-p">:</span>
+        weights<span class="tok-p">[</span>t<span class="tok-p">]</span> <span class="tok-p">=</span> <span class="tok-f">max</span><span class="tok-p">(</span>weights<span class="tok-p">[</span>t<span class="tok-p">]</span><span class="tok-p">,</span> <span class="tok-n">1.0</span><span class="tok-p">)</span>
+        <span class="tok-k">for</span> s <span class="tok-k">in</span> SYNONYMS<span class="tok-p">.</span>get<span class="tok-p">(</span>t<span class="tok-p">,</span> <span class="tok-p">[</span><span class="tok-p">]</span><span class="tok-p">)</span><span class="tok-p">:</span>
+            weights<span class="tok-p">[</span>s<span class="tok-p">]</span> <span class="tok-p">=</span> <span class="tok-f">max</span><span class="tok-p">(</span>weights<span class="tok-p">[</span>s<span class="tok-p">]</span><span class="tok-p">,</span> w_syn<span class="tok-p">)</span>
+    <span class="tok-k">return</span> <span class="tok-f">dict</span><span class="tok-p">(</span>weights<span class="tok-p">)</span>
+
+ru_vocab <span class="tok-p">=</span> <span class="tok-p">{</span><span class="tok-s">"</span><span class="tok-s">привет</span><span class="tok-s">"</span><span class="tok-p">,</span> <span class="tok-s">"</span><span class="tok-s">ноутбук</span><span class="tok-s">"</span><span class="tok-p">,</span> <span class="tok-s">"</span><span class="tok-s">телефон</span><span class="tok-s">"</span><span class="tok-p">}</span>
+en_vocab <span class="tok-p">=</span> <span class="tok-p">{</span><span class="tok-s">"</span><span class="tok-s">iphone</span><span class="tok-s">"</span><span class="tok-p">,</span> <span class="tok-s">"</span><span class="tok-s">nike</span><span class="tok-s">"</span><span class="tok-p">}</span>
+q <span class="tok-p">=</span> fix_layout<span class="tok-p">(</span><span class="tok-s">"</span><span class="tok-s">ghbdtn ноутбук iphone</span><span class="tok-s">"</span><span class="tok-p">,</span> ru_vocab<span class="tok-p">,</span> en_vocab<span class="tok-p">)</span>
+<span class="tok-f">print</span><span class="tok-p">(</span>q<span class="tok-p">)</span>                                  <span class="tok-c"># привет ноутбук iphone</span>
+<span class="tok-f">print</span><span class="tok-p">(</span>expand_query<span class="tok-p">(</span>q<span class="tok-p">.</span>split<span class="tok-p">(</span><span class="tok-p">)</span><span class="tok-p">)</span><span class="tok-p">)</span>
+</code></pre></div>
+<p>Затем веса передаются в BM25 (в Elasticsearch — <code>boost</code> на <code>match</code> по каждому терму или <code>combined_fields</code>); оценка вклада слоя — на выборке запросов с разметкой, см. <a href="/edufamcs-demo/handbook/retrieval/ocenka-kachestva-poiska/" rel="noopener noreferrer nofollow">оценку качества</a>.</p>
+<h2 id="ловушки">Ловушки</h2>
+<ul>
+<li><strong>Исправление портит правильные запросы.</strong> Любое автоисправление должно измеряться отдельно: доля запросов, где правка сделала хуже, должна быть мизерной. Показывайте «Искать вместо этого» при неуверенности вместо молчаливой замены.</li>
+<li><strong>Расширение снижает точность.</strong> Синонимы, добавленные без веса, делают выдачу шумнее; проверяйте на навигационных запросах.</li>
+<li><strong>Язык и домен.</strong> Общий словарь синонимов вредит в узком домене («мышь» в каталоге электроники и в зоомагазине). Источник правды — логи.</li>
+<li><strong>Рассинхрон слоёв.</strong> Нормализация запроса и индекса должны совпадать; обновили лемматизатор — переиндексируйте.</li>
+<li><strong>Задержка.</strong> Каждый слой добавляет миллисекунды; всё, что можно, считается офлайн по топ-запросам и кэшируется.</li>
+<li><strong>На собеседовании:</strong> вывод шумного канала, сложность и ускорение расстояния Левенштейна, различие Rocchio и RM3, чем плох PRF.</li>
+</ul>
+<h2 id="что-почитать">Что почитать</h2>
+<ul>
+<li>Manning C., Raghavan P., Schütze H. Introduction to Information Retrieval, главы 3 (допуски в словаре, исправление опечаток) и 9 (обратная связь и расширение запроса): https://nlp.stanford.edu/IR-book/</li>
+<li>Brill E., Moore R. An Improved Error Model for Noisy-Channel Spelling Correction, ACL 2000.</li>
+<li>Broder A. A Taxonomy of Web Search, SIGIR Forum, 2002.</li>
+<li>Nogueira R. et al. Document Expansion by Query Prediction, 2019: https://arxiv.org/abs/1904.08375</li>
+<li>Gao L. et al. Precise Zero-Shot Dense Retrieval without Relevance Labels (HyDE), 2022: https://arxiv.org/abs/2212.10496</li>
+<li>Wang L., Yang N., Wei F. Query2doc: Query Expansion with Large Language Models, 2023: https://arxiv.org/abs/2303.07678</li>
+</ul>
+</div>
+      
+
+      
+      <nav class="pager" aria-label="Соседние статьи">
+        <a href="/edufamcs-demo/handbook/retrieval/learning-to-rank/"><span><svg class="ico sm" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-arrow-left"/></svg>Назад</span>Обучение ранжированию</a>
+        <a href="/edufamcs-demo/handbook/retrieval/plotnyj-i-gibridnyj-poisk/"><span>Дальше<svg class="ico sm" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-arrow"/></svg></span>Плотный и гибридный поиск</a>
+      </nav>
+      
+    </article>
+
+    <aside class="hb-toc" aria-label="На этой странице">
+      <a class="l2" href="#типы-запросов">Типы запросов</a><a class="l2" href="#нормализация">Нормализация</a><a class="l2" href="#исправление-опечаток">Исправление опечаток</a><a class="l3" href="#модель-шумного-канала">Модель шумного канала</a><a class="l3" href="#неверная-раскладка-и-транслитерация">Неверная раскладка и транслитерация</a><a class="l2" href="#сегментация-и-разбор-запроса">Сегментация и разбор запроса</a><a class="l2" href="#расширение-запроса">Расширение запроса</a><a class="l2" href="#подсказки-и-автодополнение">Подсказки и автодополнение</a><a class="l2" href="#переписывание-запроса-языковыми-моделями">Переписывание запроса языковыми моделями</a><a class="l3" href="#борьба-с-пустой-выдачей">Борьба с пустой выдачей</a><a class="l2" href="#код">Код</a><a class="l2" href="#ловушки">Ловушки</a><a class="l2" href="#что-почитать">Что почитать</a>
+    </aside>
+  </div>
+</div>
+
+
+</main>
+
+<footer class="ftr" data-theme="dark">
+  <svg class="sym fern" viewBox="0 0 40.5 65.02" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#fern"/></svg>
+  <div class="container">
+    <div class="ftr-row">
+      <a href="/edufamcs-demo/" aria-label="EDU FAMCS — главная"><img src="/edufamcs-demo/static/brand/logo/logo-edu-dark.svg" alt="EDU FAMCS" width="196" height="40"></a>
+      <ul class="ftr-links">
+        <li><a href="/edufamcs-demo/#courses">Курсы</a></li>
+        <li><a href="/edufamcs-demo/ml/">Машинное обучение</a></li>
+        <li><a href="/edufamcs-demo/handbook/">Хендбук</a></li>
+        <li><a href="/edufamcs-demo/news/">Новости</a></li>
+        <li><a href="/edufamcs-demo/people/">Авторы</a></li>
+        <li><a href="/edufamcs-demo/about/">О&nbsp;нас</a></li>
+        <li><a href="/edufamcs-demo/propose/">Предложить или исправить</a></li>
+        <li><a href="/edufamcs-demo/privacy/">Конфиденциальность</a></li>
+      </ul>
+    </div>
+    <div class="ftr-big" aria-hidden="true">EDU<span class="d">·</span>FAMCS</div>
+    <p class="ftr-copy">© 2026 EDU FAMCS · Минск</p>
+  </div>
+</footer>
+
+<div class="toasts-region" aria-live="polite" id="toasts">
+
+</div>
+
+</body>
+</html>

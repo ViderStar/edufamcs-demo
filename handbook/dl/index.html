@@ -1,0 +1,188 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Введение в глубокое обучение — хендбук · EDU FAMCS</title>
+<meta name="description" content="Нейрон, обратное распространение, свёртки, рекуррентные сети и трансформеры.">
+<meta name="theme-color" content="#060A16">
+<meta name="robots" content="noindex, nofollow">
+<meta name="htmx-config" content='{"allowEval":false,"includeIndicatorStyles":false,"historyCacheSize":0,"selfRequestsOnly":true}'>
+<meta name="katex-js" content="/edufamcs-demo/static/vendor/katex/katex.min.js">
+<meta name="katex-css" content="/edufamcs-demo/static/vendor/katex/katex.min.css">
+<link rel="icon" href="/edufamcs-demo/static/brand/logo/favicon-16.svg" type="image/svg+xml" sizes="16x16">
+<link rel="icon" href="/edufamcs-demo/static/brand/logo/favicon.svg" type="image/svg+xml" sizes="any">
+<link rel="preload" href="/edufamcs-demo/static/brand/fonts/manrope-cyrillic-400.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/edufamcs-demo/static/brand/fonts/unbounded-cyrillic-800.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="/edufamcs-demo/static/brand/fonts.css">
+<link rel="stylesheet" href="/edufamcs-demo/static/brand/tokens.css">
+<link rel="stylesheet" href="/edufamcs-demo/static/brand/components.css">
+<link rel="stylesheet" href="/edufamcs-demo/static/css/site.css">
+<link rel="stylesheet" href="/edufamcs-demo/static/css/hub.css">
+<link rel="stylesheet" href="/edufamcs-demo/static/css/about.css">
+<link rel="stylesheet" href="/edufamcs-demo/static/handbook/handbook.css">
+<script src="/edufamcs-demo/static/js/theme.js"></script>
+<script src="/edufamcs-demo/static/vendor/htmx/htmx.min.js" defer></script>
+<script src="/edufamcs-demo/static/vendor/alpine/alpine-csp.min.js" defer></script>
+<script src="/edufamcs-demo/static/js/site.js" defer></script>
+
+</head>
+<body class="" hx-headers='{"X-CSRFToken": "B7m6oC3aHHkA57Fivbs1aPrRXUtqvffB0RVa8AQxCyIJkGQ12ob97kXWvCzV3pXl"}'>
+<a class="skip" href="#main">К содержанию</a>
+<div class="demo-bar" role="note">Демо-версия для отзывов: вход, запись на курсы и формы здесь не работают.</div>
+
+<header class="hdr">
+  <div class="container">
+    <a class="brand" href="/edufamcs-demo/" aria-label="EDU FAMCS — главная">
+      <span class="full"><img class="only-light" src="/edufamcs-demo/static/brand/logo/logo-edu-light.svg" alt="EDU FAMCS" width="196" height="40"><img class="only-dark" src="/edufamcs-demo/static/brand/logo/logo-edu-dark.svg" alt="EDU FAMCS" width="196" height="40"></span>
+      <span class="short"><img class="only-light" src="/edufamcs-demo/static/brand/logo/logo-edu-light.svg" alt="EDU FAMCS" height="30"><img class="only-dark" src="/edufamcs-demo/static/brand/logo/logo-edu-dark.svg" alt="EDU FAMCS" height="30"></span>
+    </a>
+    <nav class="nav" id="main-nav" aria-label="Основная навигация">
+      <a href="/edufamcs-demo/#courses">Курсы</a>
+      <a href="/edufamcs-demo/ml/" >Машинное обучение</a>
+      
+      <a href="/edufamcs-demo/handbook/" aria-current="page">Хендбук</a>
+      <a href="/edufamcs-demo/news/" >Новости</a>
+      <a href="/edufamcs-demo/people/" >Авторы</a>
+      <a href="/edufamcs-demo/about/" >О&nbsp;нас</a>
+    </nav>
+    <div class="hdr-actions">
+      
+      <a class="btn btn-outline btn-login" href="/edufamcs-demo/accounts/login/?next=/handbook/dl/">Войти</a>
+      
+      <button class="icon-btn menu-btn" type="button" aria-label="Меню" aria-expanded="false" aria-controls="main-nav"><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-menu"/></svg></button>
+    </div>
+  </div>
+</header>
+
+<main id="main">
+
+
+
+<div class="container page hb-tone">
+  <header class="hb-sec-head">
+    <div>
+      <nav class="crumbs" aria-label="Навигация"><a href="/edufamcs-demo/handbook/">Хендбук</a><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-chev"/></svg><span>Введение в глубокое обучение</span></nav>
+      <h1 class="display-l">Введение в глубокое обучение</h1>
+      <p class="lead">Нейрон, обратное распространение, свёртки, рекуррентные сети и трансформеры.</p>
+    </div>
+    <div class="hb-sec-art" aria-hidden="true">
+
+<svg viewBox="0 0 220 120" aria-hidden="true">
+  <g fill="none" stroke="currentColor" stroke-width="1.5"><path d="M20 14 h80 a10 10 0 0 1 10 10 v90 a10 10 0 0 0 -10 -10 h-80 z"/><path d="M200 14 h-80 a10 10 0 0 0 -10 10 v90 a10 10 0 0 1 10 -10 h80 z"/></g>
+  <g fill="currentColor"><rect x="32" y="32" width="56" height="7" rx="3.5"/><rect x="32" y="48" width="44" height="7" rx="3.5" opacity=".3"/><rect x="32" y="64" width="50" height="7" rx="3.5" opacity=".3"/><rect x="132" y="32" width="56" height="7" rx="3.5" opacity=".3"/><rect x="132" y="48" width="38" height="7" rx="3.5" opacity=".3"/></g>
+  <rect x="132" y="64" width="48" height="7" rx="3.5" fill="var(--accent)"/>
+</svg>
+
+</div>
+  </header>
+
+  
+  
+  <section class="hb-group">
+    <h2 class="h3 hb-group-t">Основы нейросетей</h2>
+    <ol class="hb-list">
+      
+      <li><a class="hb-item" href="/edufamcs-demo/handbook/dl/nejron-i-mnogoslojnyj-perceptron/">
+        <span class="n">01</span>
+        <span class="t">Нейрон и многослойный перцептрон</span>
+        <span class="m">
+          
+          
+          <svg class="ico sm" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-arrow"/></svg>
+        </span>
+      </a></li>
+      
+      <li><a class="hb-item" href="/edufamcs-demo/handbook/dl/obratnoe-rasprostranenie-oshibki/">
+        <span class="n">02</span>
+        <span class="t">Обратное распространение ошибки</span>
+        <span class="m">
+          
+          
+          <svg class="ico sm" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-arrow"/></svg>
+        </span>
+      </a></li>
+      
+      <li><a class="hb-item" href="/edufamcs-demo/handbook/dl/optimizatory-i-regulyarizaciya/">
+        <span class="n">03</span>
+        <span class="t">Оптимизаторы, регуляризация и практика обучения</span>
+        <span class="m">
+          
+          
+          <svg class="ico sm" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-arrow"/></svg>
+        </span>
+      </a></li>
+      
+    </ol>
+  </section>
+  
+  <section class="hb-group">
+    <h2 class="h3 hb-group-t">Архитектуры</h2>
+    <ol class="hb-list">
+      
+      <li><a class="hb-item" href="/edufamcs-demo/handbook/dl/svertochnye-seti/">
+        <span class="n">01</span>
+        <span class="t">Свёрточные сети</span>
+        <span class="m">
+          
+          
+          <svg class="ico sm" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-arrow"/></svg>
+        </span>
+      </a></li>
+      
+      <li><a class="hb-item" href="/edufamcs-demo/handbook/dl/posledovatelnosti-i-rnn/">
+        <span class="n">02</span>
+        <span class="t">Последовательности: эмбеддинги и рекуррентные сети</span>
+        <span class="m">
+          
+          
+          <svg class="ico sm" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-arrow"/></svg>
+        </span>
+      </a></li>
+      
+      <li><a class="hb-item" href="/edufamcs-demo/handbook/dl/vnimanie-i-transformery/">
+        <span class="n">03</span>
+        <span class="t">Внимание и трансформеры</span>
+        <span class="m">
+          
+          
+          <svg class="ico sm" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-arrow"/></svg>
+        </span>
+      </a></li>
+      
+    </ol>
+  </section>
+  
+  
+</div>
+
+
+</main>
+
+<footer class="ftr" data-theme="dark">
+  <svg class="sym fern" viewBox="0 0 40.5 65.02" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#fern"/></svg>
+  <div class="container">
+    <div class="ftr-row">
+      <a href="/edufamcs-demo/" aria-label="EDU FAMCS — главная"><img src="/edufamcs-demo/static/brand/logo/logo-edu-dark.svg" alt="EDU FAMCS" width="196" height="40"></a>
+      <ul class="ftr-links">
+        <li><a href="/edufamcs-demo/#courses">Курсы</a></li>
+        <li><a href="/edufamcs-demo/ml/">Машинное обучение</a></li>
+        <li><a href="/edufamcs-demo/handbook/">Хендбук</a></li>
+        <li><a href="/edufamcs-demo/news/">Новости</a></li>
+        <li><a href="/edufamcs-demo/people/">Авторы</a></li>
+        <li><a href="/edufamcs-demo/about/">О&nbsp;нас</a></li>
+        <li><a href="/edufamcs-demo/propose/">Предложить или исправить</a></li>
+        <li><a href="/edufamcs-demo/privacy/">Конфиденциальность</a></li>
+      </ul>
+    </div>
+    <div class="ftr-big" aria-hidden="true">EDU<span class="d">·</span>FAMCS</div>
+    <p class="ftr-copy">© 2026 EDU FAMCS · Минск</p>
+  </div>
+</footer>
+
+<div class="toasts-region" aria-live="polite" id="toasts">
+
+</div>
+
+</body>
+</html>

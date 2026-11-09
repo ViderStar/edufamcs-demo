@@ -1,0 +1,237 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Собственные векторы и сингулярное разложение · EDU FAMCS</title>
+<meta name="description" content="Собственные векторы и сингулярное разложение — Математическая база. Хендбук ML-курса ФПМИ.">
+<meta name="theme-color" content="#060A16">
+<meta name="robots" content="noindex, nofollow">
+<meta name="htmx-config" content='{"allowEval":false,"includeIndicatorStyles":false,"historyCacheSize":0,"selfRequestsOnly":true}'>
+<meta name="katex-js" content="/edufamcs-demo/static/vendor/katex/katex.min.js">
+<meta name="katex-css" content="/edufamcs-demo/static/vendor/katex/katex.min.css">
+<link rel="icon" href="/edufamcs-demo/static/brand/logo/favicon-16.svg" type="image/svg+xml" sizes="16x16">
+<link rel="icon" href="/edufamcs-demo/static/brand/logo/favicon.svg" type="image/svg+xml" sizes="any">
+<link rel="preload" href="/edufamcs-demo/static/brand/fonts/manrope-cyrillic-400.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/edufamcs-demo/static/brand/fonts/unbounded-cyrillic-800.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="/edufamcs-demo/static/brand/fonts.css">
+<link rel="stylesheet" href="/edufamcs-demo/static/brand/tokens.css">
+<link rel="stylesheet" href="/edufamcs-demo/static/brand/components.css">
+<link rel="stylesheet" href="/edufamcs-demo/static/css/site.css">
+<link rel="stylesheet" href="/edufamcs-demo/static/css/hub.css">
+<link rel="stylesheet" href="/edufamcs-demo/static/css/about.css">
+<link rel="stylesheet" href="/edufamcs-demo/static/handbook/handbook.css">
+<script src="/edufamcs-demo/static/js/theme.js"></script>
+<script src="/edufamcs-demo/static/vendor/htmx/htmx.min.js" defer></script>
+<script src="/edufamcs-demo/static/vendor/alpine/alpine-csp.min.js" defer></script>
+<script src="/edufamcs-demo/static/js/site.js" defer></script>
+<script src="/edufamcs-demo/static/handbook/handbook.js" defer></script>
+</head>
+<body class="" hx-headers='{"X-CSRFToken": "ajki1RI46Khzasz8UAZQTWHvZfzioWIcz3TmLPvr1BFIp1KRrNIYQrdAxXFNW6qW"}'>
+<a class="skip" href="#main">К содержанию</a>
+<div class="demo-bar" role="note">Демо-версия для отзывов: вход, запись на курсы и формы здесь не работают.</div>
+
+<header class="hdr">
+  <div class="container">
+    <a class="brand" href="/edufamcs-demo/" aria-label="EDU FAMCS — главная">
+      <span class="full"><img class="only-light" src="/edufamcs-demo/static/brand/logo/logo-edu-light.svg" alt="EDU FAMCS" width="196" height="40"><img class="only-dark" src="/edufamcs-demo/static/brand/logo/logo-edu-dark.svg" alt="EDU FAMCS" width="196" height="40"></span>
+      <span class="short"><img class="only-light" src="/edufamcs-demo/static/brand/logo/logo-edu-light.svg" alt="EDU FAMCS" height="30"><img class="only-dark" src="/edufamcs-demo/static/brand/logo/logo-edu-dark.svg" alt="EDU FAMCS" height="30"></span>
+    </a>
+    <nav class="nav" id="main-nav" aria-label="Основная навигация">
+      <a href="/edufamcs-demo/#courses">Курсы</a>
+      <a href="/edufamcs-demo/ml/" >Машинное обучение</a>
+      
+      <a href="/edufamcs-demo/handbook/" aria-current="page">Хендбук</a>
+      <a href="/edufamcs-demo/news/" >Новости</a>
+      <a href="/edufamcs-demo/people/" >Авторы</a>
+      <a href="/edufamcs-demo/about/" >О&nbsp;нас</a>
+    </nav>
+    <div class="hdr-actions">
+      
+      <a class="btn btn-outline btn-login" href="/edufamcs-demo/accounts/login/?next=/handbook/math/sobstvennye-vektory-i-svd/">Войти</a>
+      
+      <button class="icon-btn menu-btn" type="button" aria-label="Меню" aria-expanded="false" aria-controls="main-nav"><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-menu"/></svg></button>
+    </div>
+  </div>
+</header>
+
+<main id="main">
+
+
+
+<div class="container hb-page hb-tone">
+  <div class="hb">
+    <aside class="hb-nav" aria-label="Статьи раздела">
+      
+<form class="hb-search" action="/edufamcs-demo/handbook/search/" method="get" role="search">
+  <svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-search"/></svg>
+  <input class="input" type="search" name="q" value="" placeholder="Поиск по хендбуку" aria-label="Поиск по хендбуку" autocomplete="off" maxlength="120"
+    hx-get="/edufamcs-demo/handbook/search/" hx-trigger="input changed delay:250ms, search" hx-target="#hb-nav-results" hx-sync="this:replace">
+</form>
+
+      <div id="hb-nav-results" class="hb-nav-results" aria-live="polite"></div>
+      <a class="grp" href="/edufamcs-demo/handbook/math/">Линейная алгебра и анализ</a>
+      
+      <a class="" href="/edufamcs-demo/handbook/math/vektory-i-matricy/">Векторы, матрицы и нормы</a>
+      
+      <a class="cur" href="/edufamcs-demo/handbook/math/sobstvennye-vektory-i-svd/" aria-current="page">Собственные векторы и сингулярное разложение</a>
+      
+      <a class="" href="/edufamcs-demo/handbook/math/gradienty-i-optimizaciya/">Производные, градиенты и оптимизация</a>
+      
+    </aside>
+
+    <article class="hb-main">
+      <nav class="crumbs" aria-label="Навигация"><a href="/edufamcs-demo/handbook/">Хендбук</a><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-chev"/></svg><a href="/edufamcs-demo/handbook/math/">Математическая база</a></nav>
+      <h1 class="h1">Собственные векторы и сингулярное разложение</h1>
+      <div class="hb-meta">
+        
+        
+        <span><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-clock"/></svg>10&nbsp;мин</span>
+        <span class="hb-authors"><span class="avatar sm" title="Артем Лебедевич">АЛ</span>Артем Лебедевич</span>
+        <span><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-edit"/></svg>9 ноября 2026</span>
+        
+        
+      </div>
+
+      
+      <details class="hb-mtoc">
+        <summary><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-list"/></svg>Содержание<svg class="ico sm" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-chev-down"/></svg></summary>
+        <a class="l2" href="#собственные-значения-и-векторы">Собственные значения и векторы</a><a class="l2" href="#симметричные-матрицы-и-спектральная-теорема">Симметричные матрицы и спектральная теорема</a><a class="l2" href="#сингулярное-разложение-svd">Сингулярное разложение (SVD)</a><a class="l3" href="#теорема-эккартаянга">Теорема Эккарта–Янга</a><a class="l2" href="#псевдообратная-матрица-мнк-и-обусловленность">Псевдообратная матрица, МНК и обусловленность</a><a class="l2" href="#где-это-встречается">Где это встречается</a><a class="l2" href="#ловушки">Ловушки</a><a class="l2" href="#что-почитать">Что почитать</a>
+      </details>
+      
+
+      <div class="prose"><p>Оператор <span class="tex">A</span> в общем случае поворачивает и растягивает пространство одновременно, и по матрице чисел этого не видно. Собственные и сингулярные разложения находят координаты, в которых действие <span class="tex">A</span> сводится к растяжению вдоль осей. Это один инструмент для PCA, латентных факторов в рекомендациях, PageRank, анализа обусловленности и сжатия моделей.</p>
+<h2 id="собственные-значения-и-векторы">Собственные значения и векторы</h2>
+<p>Ненулевой вектор <span class="tex">v</span> — <strong>собственный вектор</strong> квадратной матрицы <span class="tex">A</span> с <strong>собственным значением</strong> <span class="tex">\lambda</span>, если</p>
+<div class="tex tex-block">Av=\lambda v.</div>
+<p>Геометрически: направление <span class="tex">v</span> оператор не меняет, только растягивает в <span class="tex">\lambda</span> раз (при <span class="tex">\lambda&lt;0</span> — ещё и разворачивает). Из <span class="tex">(A-\lambda I)v=0</span> при <span class="tex">v\ne0</span> следует <span class="tex">\det(A-\lambda I)=0</span> — <strong>характеристический многочлен</strong> степени <span class="tex">n</span>. Его корни — собственные значения: ровно <span class="tex">n</span> штук с учётом кратности, вообще говоря комплексных. Полезные тождества: <span class="tex">\mathrm{tr}\,A=\sum\lambda_i</span>, <span class="tex">\det A=\prod\lambda_i</span>. Матрица вырождена тогда и только тогда, когда один из <span class="tex">\lambda_i=0</span>.</p>
+<p>Если у <span class="tex">A</span> есть <span class="tex">n</span> независимых собственных векторов, то <span class="tex">A=V\Lambda V^{-1}</span>, где столбцы <span class="tex">V</span> — собственные векторы, <span class="tex">\Lambda=\mathrm{diag}(\lambda_i)</span>. В базисе из собственных векторов оператор диагонален, поэтому степени считаются тривиально: <span class="tex">A^k=V\Lambda^kV^{-1}</span>. На этом держится анализ динамики: <span class="tex">x_{t+1}=Ax_t</span> затухает, если все <span class="tex">|\lambda_i|&lt;1</span>, и при типичном <span class="tex">x_0</span> неограниченно растёт вдоль доминирующего собственного вектора, если какое-то <span class="tex">|\lambda_i|&gt;1</span>. Если доминирующее <span class="tex">\lambda=1</span>, а остальные по модулю меньше, итерация сходится к соответствующему собственному вектору со скоростью <span class="tex">|\lambda_2|^t</span> — так работает степенной метод в PageRank. Ошибка градиентного спуска на квадратичной функции подчиняется той же рекурсии (<a href="/edufamcs-demo/handbook/math/gradienty-i-optimizaciya/" rel="noopener noreferrer nofollow">следующая глава</a>).</p>
+<h2 id="симметричные-матрицы-и-спектральная-теорема">Симметричные матрицы и спектральная теорема</h2>
+<p>В ML почти все интересные матрицы симметричны: ковариационная <span class="tex">\Sigma</span>, матрица Грама <span class="tex">X^\top X</span>, гессиан, лапласиан графа. Для них действует <strong>спектральная теорема</strong>: если <span class="tex">A=A^\top</span>, то все <span class="tex">\lambda_i</span> вещественны, собственные векторы разных <span class="tex">\lambda</span> ортогональны, и существует ортонормированный базис из собственных векторов:</p>
+<div class="tex tex-block">A=Q\Lambda Q^\top,\qquad Q^\top Q=I.</div>
+<p>Здесь <span class="tex">Q^{-1}=Q^\top</span>, то есть <span class="tex">Q</span> — поворот (возможно, с отражением). Оператор: повернуть, растянуть вдоль осей на <span class="tex">\lambda_i</span>, повернуть обратно.</p>
+<p><strong>Квадратичная форма</strong> <span class="tex">x^\top Ax=\sum_i\lambda_i (q_i^\top x)^2</span>. Симметричная матрица <strong>положительно полуопределена</strong> (<span class="tex">A\succeq0</span>), если <span class="tex">x^\top Ax\ge0</span> для всех <span class="tex">x</span>, что эквивалентно <span class="tex">\lambda_i\ge0</span>; положительно определена (<span class="tex">A\succ0</span>), если все <span class="tex">\lambda_i&gt;0</span>. Две главные матрицы:</p>
+<ul>
+<li>Ковариационная матрица <span class="tex">\Sigma=\frac1{n}X_c^\top X_c\succeq0</span>, поскольку <span class="tex">v^\top\Sigma v=\mathrm{Var}(v^\top x)\ge0</span> — дисперсия не отрицательна. Собственные векторы <span class="tex">\Sigma</span> — главные направления, <span class="tex">\lambda_i</span> — дисперсии вдоль них.</li>
+<li>Гессиан функции потерь <span class="tex">H</span> в точке минимума положительно полуопределён; <span class="tex">\nabla L=0</span> вместе с <span class="tex">H\succ0</span> — достаточное условие строгого локального минимума. Выпуклость функции эквивалентна <span class="tex">H\succeq0</span> всюду.</li>
+</ul>
+<p>Максимум <span class="tex">x^\top Ax</span> при <span class="tex">\|x\|=1</span> равен <span class="tex">\lambda_{\max}</span> и достигается на соответствующем собственном векторе (<strong>отношение Рэлея</strong>). Это и есть вывод PCA: направление максимальной дисперсии — старший собственный вектор ковариационной матрицы (<a href="/edufamcs-demo/handbook/classic/snizhenie-razmernosti/" rel="noopener noreferrer nofollow">снижение размерности</a>).</p>
+<h2 id="сингулярное-разложение-svd">Сингулярное разложение (SVD)</h2>
+<p>Собственные векторы есть только у квадратных матриц, а данные <span class="tex">X\in\mathbb{R}^{n\times d}</span> прямоугольные. Для <strong>любой</strong> матрицы <span class="tex">A\in\mathbb{R}^{m\times n}</span> существует SVD:</p>
+<div class="tex tex-block">A=U\Sigma V^\top,</div>
+<p>где <span class="tex">U\in\mathbb{R}^{m\times m}</span> и <span class="tex">V\in\mathbb{R}^{n\times n}</span> ортогональны, а прямоугольная <span class="tex">\Sigma\in\mathbb{R}^{m\times n}</span> ненулевая только на диагонали, где стоят <strong>сингулярные числа</strong> <span class="tex">\sigma_1\ge\sigma_2\ge\dots\ge0</span>. Оператор: повернуть в <span class="tex">V</span>-координатах, растянуть оси в <span class="tex">\sigma_i</span> раз (и перейти из <span class="tex">\mathbb{R}^n</span> в <span class="tex">\mathbb{R}^m</span>), повернуть в <span class="tex">U</span>-координатах. Единичная сфера превращается в эллипсоид с полуосями <span class="tex">\sigma_iu_i</span>.</p>
+<p>Связь с собственными разложениями следует из подстановки:</p>
+<div class="tex tex-block">A^\top A=V\Sigma^\top\Sigma V^\top,\qquad AA^\top=U\Sigma\Sigma^\top U^\top.</div>
+<p>Столбцы <span class="tex">V</span> — собственные векторы <span class="tex">A^\top A</span>, столбцы <span class="tex">U</span> — собственные векторы <span class="tex">AA^\top</span>, <span class="tex">\sigma_i^2</span> — их общие ненулевые собственные значения. Число ненулевых <span class="tex">\sigma_i</span> равно <span class="tex">\mathrm{rank}\,A</span>. Спектральная норма <span class="tex">\|A\|_2=\sigma_1</span>, норма Фробениуса <span class="tex">\|A\|_F^2=\sum_{ij}a_{ij}^2=\sum\sigma_i^2</span>.</p>
+<p>Часто используют «экономичную» форму: <span class="tex">A=\sum_{i=1}^r\sigma_iu_iv_i^\top</span> — сумма матриц ранга один, упорядоченная по вкладу.</p>
+<h3 id="теорема-эккартаянга">Теорема Эккарта–Янга</h3>
+<p>Лучшее приближение матрицы матрицей ранга не выше <span class="tex">k</span> получается усечением этой суммы: <span class="tex">A_k=\sum_{i=1}^k\sigma_iu_iv_i^\top</span>. Точнее (Eckart &amp; Young, 1936; Mirsky, 1960): <span class="tex">A_k</span> минимизирует ошибку и в норме Фробениуса, и в спектральной норме,</p>
+<div class="tex tex-block">\min_{\mathrm{rank}\,B\le k}\|A-B\|_F^2=\sum_{i&gt;k}\sigma_i^2,\qquad\min_{\mathrm{rank}\,B\le k}\|A-B\|_2=\sigma_{k+1}.</div>
+<p>Это математическое обоснование всего «низкорангового» ML. Если сингулярные числа затухают быстро, матрица почти лежит в <span class="tex">k</span>-мерном подпространстве, и хранить достаточно <span class="tex">k(m+n+1)</span> чисел вместо <span class="tex">mn</span>. На той же идее построена LoRA (Hu et al., 2021) для дообучения языковых моделей: приращение весов ищут сразу в виде произведения двух узких матриц, то есть низкоранговым.</p>
+<h2 id="псевдообратная-матрица-мнк-и-обусловленность">Псевдообратная матрица, МНК и обусловленность</h2>
+<p>Для <span class="tex">A=U\Sigma V^\top</span> <strong>псевдообратная матрица</strong> Мура–Пенроуза <span class="tex">A^+=V\Sigma^+U^\top</span>, где <span class="tex">\Sigma^+</span> получается обращением ненулевых <span class="tex">\sigma_i</span>. Решение МНК <span class="tex">\min_w\|Xw-y\|^2</span> с минимальной нормой при любом ранге <span class="tex">X</span> есть <span class="tex">\hat w=X^+y</span>. При полном ранге это <span class="tex">(X^\top X)^{-1}X^\top y</span> из <a href="/edufamcs-demo/handbook/math/vektory-i-matricy/" rel="noopener noreferrer nofollow">предыдущей главы</a>, но через SVD вычисляется без возведения <span class="tex">X</span> в квадрат. Именно этим пользуется <code>np.linalg.lstsq</code>.</p>
+<p>Устойчивость решения измеряет <strong>число обусловленности</strong> <span class="tex">\kappa(X)=\sigma_{\max}/\sigma_{\min}</span>. Относительное возмущение <span class="tex">y</span> может усилиться в <span class="tex">\hat w</span> до <span class="tex">\kappa</span> раз (а при возмущении самой <span class="tex">X</span> и большой невязке — до порядка <span class="tex">\kappa^2</span>); в <span class="tex">X^\top X</span> собственные значения равны <span class="tex">\sigma_i^2</span>, так что <span class="tex">\kappa(X^\top X)=\kappa(X)^2</span>. Если <span class="tex">\sigma_{\min}\to0</span> (почти коллинеарные признаки), веса неограниченно растут и скачут от выборки к выборке.</p>
+<p><strong>Гребневая регрессия</strong> решает <span class="tex">\min\|Xw-y\|^2+\lambda\|w\|^2</span> с решением <span class="tex">\hat w=(X^\top X+\lambda I)^{-1}X^\top y</span>. В SVD-координатах каждая компонента умножается на <span class="tex">\frac{\sigma_i}{\sigma_i^2+\lambda}</span> вместо <span class="tex">\frac1{\sigma_i}</span>: направления с малым <span class="tex">\sigma_i</span> подавляются, с большим — почти не меняются. Заодно <span class="tex">\kappa(X^\top X+\lambda I)=\frac{\sigma_{\max}^2+\lambda}{\sigma_{\min}^2+\lambda}</span> ограничено. Так <span class="tex">L_2</span>-регуляризация — одновременно статистический (меньше дисперсии) и вычислительный (хорошая обусловленность) приём.</p>
+<h2 id="где-это-встречается">Где это встречается</h2>
+<ul>
+<li><strong>PCA</strong> — SVD центрированной матрицы <span class="tex">X_c=U\Sigma V^\top</span>: главные компоненты — столбцы <span class="tex">V</span>, дисперсии — <span class="tex">\sigma_i^2/n</span>, проекции объектов — <span class="tex">U\Sigma</span>. Подробно: <a href="/edufamcs-demo/handbook/classic/snizhenie-razmernosti/" rel="noopener noreferrer nofollow">снижение размерности</a>.</li>
+<li><strong>LSA</strong> (Deerwester et al., 1990) — усечённое SVD матрицы «слово×документ», скрытые «темы» ловят синонимию.</li>
+<li><strong>Рекомендации.</strong> Матрица оценок аппроксимируется <span class="tex">R\approx PQ^\top</span>. Конкурс Netflix Prize (2006–2009) закрепил SVD-подобные модели как стандарт; из-за пропусков в <span class="tex">R</span> обычное SVD не годится, и факторы подбирают по наблюдаемым ячейкам: <a href="/edufamcs-demo/handbook/recsys/matrichnye-razlozheniya-als/" rel="noopener noreferrer nofollow">матричные разложения и ALS</a>.</li>
+<li><strong>PageRank</strong> (Brin &amp; Page, 1998) — стационарный вектор марковской цепи случайного блуждания по ссылкам, то есть собственный вектор для <span class="tex">\lambda=1</span> матрицы переходов; находится степенным методом <span class="tex">x_{t+1}=Px_t</span>.</li>
+<li><strong>Сжатие</strong> изображений, эмбеддингов, весов нейросетей — усечение до ранга <span class="tex">k</span>.</li>
+</ul>
+<div class="code"><div class="code-head"><span class="lang">python</span></div><pre><code><span class="tok-k">import</span> numpy <span class="tok-k">as</span> np
+
+rng <span class="tok-p">=</span> np<span class="tok-p">.</span>random<span class="tok-p">.</span>default_rng<span class="tok-p">(</span><span class="tok-n">0</span><span class="tok-p">)</span>
+<span class="tok-c"># синтетическая «картинка» ранга ~8 + шум</span>
+m<span class="tok-p">,</span> n<span class="tok-p">,</span> r <span class="tok-p">=</span> <span class="tok-n">200</span><span class="tok-p">,</span> <span class="tok-n">300</span><span class="tok-p">,</span> <span class="tok-n">8</span>
+A <span class="tok-p">=</span> rng<span class="tok-p">.</span>normal<span class="tok-p">(</span>size<span class="tok-p">=</span><span class="tok-p">(</span>m<span class="tok-p">,</span> r<span class="tok-p">)</span><span class="tok-p">)</span> <span class="tok-p">@</span> rng<span class="tok-p">.</span>normal<span class="tok-p">(</span>size<span class="tok-p">=</span><span class="tok-p">(</span>r<span class="tok-p">,</span> n<span class="tok-p">)</span><span class="tok-p">)</span> <span class="tok-p">+</span> <span class="tok-n">0.5</span> <span class="tok-p">*</span> rng<span class="tok-p">.</span>normal<span class="tok-p">(</span>size<span class="tok-p">=</span><span class="tok-p">(</span>m<span class="tok-p">,</span> n<span class="tok-p">)</span><span class="tok-p">)</span>
+
+<span class="tok-c"># симметричный случай: eigh (а не eig!) возвращает вещественный спектр по возрастанию</span>
+S <span class="tok-p">=</span> A<span class="tok-p">.</span>T <span class="tok-p">@</span> A
+lam<span class="tok-p">,</span> Q <span class="tok-p">=</span> np<span class="tok-p">.</span>linalg<span class="tok-p">.</span>eigh<span class="tok-p">(</span>S<span class="tok-p">)</span>
+<span class="tok-k">assert</span> np<span class="tok-p">.</span>allclose<span class="tok-p">(</span>Q <span class="tok-p">@</span> np<span class="tok-p">.</span>diag<span class="tok-p">(</span>lam<span class="tok-p">)</span> <span class="tok-p">@</span> Q<span class="tok-p">.</span>T<span class="tok-p">,</span> S<span class="tok-p">)</span>
+
+U<span class="tok-p">,</span> s<span class="tok-p">,</span> Vt <span class="tok-p">=</span> np<span class="tok-p">.</span>linalg<span class="tok-p">.</span>svd<span class="tok-p">(</span>A<span class="tok-p">,</span> full_matrices<span class="tok-p">=</span><span class="tok-k">False</span><span class="tok-p">)</span>
+<span class="tok-f">print</span><span class="tok-p">(</span>np<span class="tok-p">.</span>allclose<span class="tok-p">(</span>s<span class="tok-p">*</span><span class="tok-p">*</span><span class="tok-n">2</span><span class="tok-p">,</span> np<span class="tok-p">.</span>sort<span class="tok-p">(</span>lam<span class="tok-p">)</span><span class="tok-p">[</span><span class="tok-p">:</span><span class="tok-p">:</span><span class="tok-p">-</span><span class="tok-n">1</span><span class="tok-p">]</span><span class="tok-p">[</span><span class="tok-p">:</span><span class="tok-f">len</span><span class="tok-p">(</span>s<span class="tok-p">)</span><span class="tok-p">]</span><span class="tok-p">)</span><span class="tok-p">)</span>     <span class="tok-c"># sigma^2 = собственные A^T A</span>
+
+<span class="tok-c"># ошибка усечения: по Эккарту–Янгу ||A - A_k||_F^2 = sum_{i&gt;k} sigma_i^2</span>
+<span class="tok-k">for</span> k <span class="tok-k">in</span> <span class="tok-p">(</span><span class="tok-n">2</span><span class="tok-p">,</span> <span class="tok-n">5</span><span class="tok-p">,</span> <span class="tok-n">8</span><span class="tok-p">,</span> <span class="tok-n">20</span><span class="tok-p">,</span> <span class="tok-n">50</span><span class="tok-p">)</span><span class="tok-p">:</span>
+    Ak <span class="tok-p">=</span> <span class="tok-p">(</span>U<span class="tok-p">[</span><span class="tok-p">:</span><span class="tok-p">,</span> <span class="tok-p">:</span>k<span class="tok-p">]</span> <span class="tok-p">*</span> s<span class="tok-p">[</span><span class="tok-p">:</span>k<span class="tok-p">]</span><span class="tok-p">)</span> <span class="tok-p">@</span> Vt<span class="tok-p">[</span><span class="tok-p">:</span>k<span class="tok-p">]</span>
+    err <span class="tok-p">=</span> np<span class="tok-p">.</span>linalg<span class="tok-p">.</span>norm<span class="tok-p">(</span>A <span class="tok-p">-</span> Ak<span class="tok-p">)</span> <span class="tok-p">*</span><span class="tok-p">*</span> <span class="tok-n">2</span>
+    <span class="tok-k">assert</span> np<span class="tok-p">.</span>isclose<span class="tok-p">(</span>err<span class="tok-p">,</span> <span class="tok-p">(</span>s<span class="tok-p">[</span>k<span class="tok-p">:</span><span class="tok-p">]</span> <span class="tok-p">*</span><span class="tok-p">*</span> <span class="tok-n">2</span><span class="tok-p">)</span><span class="tok-p">.</span>sum<span class="tok-p">(</span><span class="tok-p">)</span><span class="tok-p">)</span>
+    <span class="tok-f">print</span><span class="tok-p">(</span>k<span class="tok-p">,</span> <span class="tok-s">f</span><span class="tok-s">"</span><span class="tok-s">rel.err=</span><span class="tok-s">{</span>np<span class="tok-p">.</span>sqrt<span class="tok-p">(</span>err<span class="tok-p">)</span> <span class="tok-p">/</span> np<span class="tok-p">.</span>linalg<span class="tok-p">.</span>norm<span class="tok-p">(</span>A<span class="tok-p">)</span><span class="tok-s">:</span><span class="tok-s">.3f</span><span class="tok-s">}</span><span class="tok-s">"</span><span class="tok-p">,</span>
+          <span class="tok-s">f</span><span class="tok-s">"</span><span class="tok-s">хранить </span><span class="tok-s">{</span>k <span class="tok-p">*</span> <span class="tok-p">(</span>m <span class="tok-p">+</span> n <span class="tok-p">+</span> <span class="tok-n">1</span><span class="tok-p">)</span><span class="tok-s">}</span><span class="tok-s"> вместо </span><span class="tok-s">{</span>m <span class="tok-p">*</span> n<span class="tok-s">}</span><span class="tok-s">"</span><span class="tok-p">)</span>
+
+<span class="tok-c"># обусловленность: cond(A A^T) = cond(A)^2</span>
+<span class="tok-f">print</span><span class="tok-p">(</span>np<span class="tok-p">.</span>linalg<span class="tok-p">.</span>cond<span class="tok-p">(</span>A<span class="tok-p">)</span><span class="tok-p">,</span> np<span class="tok-p">.</span>linalg<span class="tok-p">.</span>cond<span class="tok-p">(</span>A <span class="tok-p">@</span> A<span class="tok-p">.</span>T<span class="tok-p">)</span><span class="tok-p">)</span>          <span class="tok-c"># ~184 и ~3.4e4</span>
+</code></pre></div>
+<p>Относительная ошибка резко падает до <span class="tex">k=8</span> (истинный ранг сигнала: <span class="tex">0{,}83\to0{,}17</span>), а дальше убывает медленно (<span class="tex">0{,}15</span> при <span class="tex">k=20</span>, <span class="tex">0{,}12</span> при <span class="tex">k=50</span>) — следующие компоненты уже описывают шум: «колено» на графике <span class="tex">\sigma_i</span> или <span class="tex">\sum_{i\le k}\sigma_i^2/\sum\sigma_i^2</span> — стандартный способ выбрать <span class="tex">k</span>.</p>
+<h2 id="ловушки">Ловушки</h2>
+<ul>
+<li><strong><code>np.linalg.eig</code> вместо <code>eigh</code></strong> для симметричной матрицы: возвращает комплексные числа из-за шума и не гарантирует ортогональность. Для симметричных всегда <code>eigh</code>.</li>
+<li><strong>Знак собственных векторов произволен.</strong> <span class="tex">v</span> и <span class="tex">-v</span> равноправны; сравнивать компоненты PCA между запусками нужно с учётом знака.</li>
+<li><strong>Полное SVD на больших матрицах.</strong> Сложность <span class="tex">O(\min(mn^2,m^2n))</span>. Для топ-<span class="tex">k</span> используют <code>scipy.sparse.linalg.svds</code>, рандомизированное SVD (Halko, Martinsson, Tropp, 2011) или инкрементальные методы.</li>
+<li><strong>Центрирование.</strong> PCA через SVD требует вычесть среднее по столбцам; без центрирования первая компонента просто указывает на среднее.</li>
+<li><strong>Пропуски в данных.</strong> SVD не умеет работать с «неизвестно»; заполнение нулями смещает предсказание оценок к «ничего не нравится». Для top-N по неявному фидбэку то же заполнение нулями (PureSVD, Cremonesi et al., 2010) — неожиданно сильный бейзлайн: там ноль честно значит «не взаимодействовал».</li>
+<li><strong>Решать через <span class="tex">X^\top X</span> при <span class="tex">\kappa&gt;10^4</span>.</strong> Двойная точность теряет примерно <span class="tex">\log_{10}\kappa^2</span> значащих цифр.</li>
+</ul>
+<h2 id="что-почитать">Что почитать</h2>
+<ul>
+<li>C. Eckart, G. Young. <em>The approximation of one matrix by another of lower rank</em>. Psychometrika, 1936; L. Mirsky. <em>Symmetric gauge functions and unitarily invariant norms</em>. Quarterly Journal of Mathematics, 1960.</li>
+<li>S. Deerwester et al. <em>Indexing by Latent Semantic Analysis</em>. JASIS, 1990.</li>
+<li>S. Brin, L. Page. <em>The anatomy of a large-scale hypertextual Web search engine</em>. Computer Networks, 1998.</li>
+<li>N. Halko, P. Martinsson, J. Tropp. <em>Finding structure with randomness: probabilistic algorithms for constructing approximate matrix decompositions</em>. SIAM Review, 2011 — <a href="https://arxiv.org/abs/0909.4061" rel="noopener noreferrer nofollow">arxiv.org/abs/0909.4061</a>.</li>
+<li>G. Strang. <em>Introduction to Linear Algebra</em>, главы 6–7; лекции MIT 18.06 о SVD — <a href="https://ocw.mit.edu/courses/18-06-linear-algebra-spring-2010/" rel="noopener noreferrer nofollow">ocw.mit.edu</a>.</li>
+<li>Y. Koren, R. Bell, C. Volinsky. <em>Matrix Factorization Techniques for Recommender Systems</em>. IEEE Computer, 2009.</li>
+<li>P. Cremonesi, Y. Koren, R. Turrin. <em>Performance of recommender algorithms on top-N recommendation tasks</em>. RecSys, 2010 — PureSVD.</li>
+<li>E. Hu et al. <em>LoRA: Low-Rank Adaptation of Large Language Models</em>, 2021 — <a href="https://arxiv.org/abs/2106.09685" rel="noopener noreferrer nofollow">arxiv.org/abs/2106.09685</a>.</li>
+<li>Хендбук Яндекса «Математика для анализа данных», «Спектральные методы и матричные разложения» — <a href="https://contest.yandex.ru/tracks/math/linear-algebra/spectral-methods-and-matrix-decompositions" rel="noopener noreferrer nofollow">contest.yandex.ru/tracks/math</a>; учебник ШАД по ML, теормин «Матричная факторизация» — <a href="https://contest.yandex.ru/tracks/ml/mathematical-foundations/matrix-factorization" rel="noopener noreferrer nofollow">contest.yandex.ru/tracks/ml</a>.</li>
+</ul>
+</div>
+      
+
+      
+      <nav class="pager" aria-label="Соседние статьи">
+        <a href="/edufamcs-demo/handbook/math/vektory-i-matricy/"><span><svg class="ico sm" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-arrow-left"/></svg>Назад</span>Векторы, матрицы и нормы</a>
+        <a href="/edufamcs-demo/handbook/math/gradienty-i-optimizaciya/"><span>Дальше<svg class="ico sm" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-arrow"/></svg></span>Производные, градиенты и оптимизация</a>
+      </nav>
+      
+    </article>
+
+    <aside class="hb-toc" aria-label="На этой странице">
+      <a class="l2" href="#собственные-значения-и-векторы">Собственные значения и векторы</a><a class="l2" href="#симметричные-матрицы-и-спектральная-теорема">Симметричные матрицы и спектральная теорема</a><a class="l2" href="#сингулярное-разложение-svd">Сингулярное разложение (SVD)</a><a class="l3" href="#теорема-эккартаянга">Теорема Эккарта–Янга</a><a class="l2" href="#псевдообратная-матрица-мнк-и-обусловленность">Псевдообратная матрица, МНК и обусловленность</a><a class="l2" href="#где-это-встречается">Где это встречается</a><a class="l2" href="#ловушки">Ловушки</a><a class="l2" href="#что-почитать">Что почитать</a>
+    </aside>
+  </div>
+</div>
+
+
+</main>
+
+<footer class="ftr" data-theme="dark">
+  <svg class="sym fern" viewBox="0 0 40.5 65.02" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#fern"/></svg>
+  <div class="container">
+    <div class="ftr-row">
+      <a href="/edufamcs-demo/" aria-label="EDU FAMCS — главная"><img src="/edufamcs-demo/static/brand/logo/logo-edu-dark.svg" alt="EDU FAMCS" width="196" height="40"></a>
+      <ul class="ftr-links">
+        <li><a href="/edufamcs-demo/#courses">Курсы</a></li>
+        <li><a href="/edufamcs-demo/ml/">Машинное обучение</a></li>
+        <li><a href="/edufamcs-demo/handbook/">Хендбук</a></li>
+        <li><a href="/edufamcs-demo/news/">Новости</a></li>
+        <li><a href="/edufamcs-demo/people/">Авторы</a></li>
+        <li><a href="/edufamcs-demo/about/">О&nbsp;нас</a></li>
+        <li><a href="/edufamcs-demo/propose/">Предложить или исправить</a></li>
+        <li><a href="/edufamcs-demo/privacy/">Конфиденциальность</a></li>
+      </ul>
+    </div>
+    <div class="ftr-big" aria-hidden="true">EDU<span class="d">·</span>FAMCS</div>
+    <p class="ftr-copy">© 2026 EDU FAMCS · Минск</p>
+  </div>
+</footer>
+
+<div class="toasts-region" aria-live="polite" id="toasts">
+
+</div>
+
+</body>
+</html>

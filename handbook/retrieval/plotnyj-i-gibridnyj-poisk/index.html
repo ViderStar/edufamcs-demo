@@ -1,0 +1,230 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Плотный и гибридный поиск · EDU FAMCS</title>
+<meta name="description" content="Плотный и гибридный поиск — Поиск. Хендбук ML-курса ФПМИ.">
+<meta name="theme-color" content="#060A16">
+<meta name="robots" content="noindex, nofollow">
+<meta name="htmx-config" content='{"allowEval":false,"includeIndicatorStyles":false,"historyCacheSize":0,"selfRequestsOnly":true}'>
+<meta name="katex-js" content="/edufamcs-demo/static/vendor/katex/katex.min.js">
+<meta name="katex-css" content="/edufamcs-demo/static/vendor/katex/katex.min.css">
+<link rel="icon" href="/edufamcs-demo/static/brand/logo/favicon-16.svg" type="image/svg+xml" sizes="16x16">
+<link rel="icon" href="/edufamcs-demo/static/brand/logo/favicon.svg" type="image/svg+xml" sizes="any">
+<link rel="preload" href="/edufamcs-demo/static/brand/fonts/manrope-cyrillic-400.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/edufamcs-demo/static/brand/fonts/unbounded-cyrillic-800.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="/edufamcs-demo/static/brand/fonts.css">
+<link rel="stylesheet" href="/edufamcs-demo/static/brand/tokens.css">
+<link rel="stylesheet" href="/edufamcs-demo/static/brand/components.css">
+<link rel="stylesheet" href="/edufamcs-demo/static/css/site.css">
+<link rel="stylesheet" href="/edufamcs-demo/static/css/hub.css">
+<link rel="stylesheet" href="/edufamcs-demo/static/css/about.css">
+<link rel="stylesheet" href="/edufamcs-demo/static/handbook/handbook.css">
+<script src="/edufamcs-demo/static/js/theme.js"></script>
+<script src="/edufamcs-demo/static/vendor/htmx/htmx.min.js" defer></script>
+<script src="/edufamcs-demo/static/vendor/alpine/alpine-csp.min.js" defer></script>
+<script src="/edufamcs-demo/static/js/site.js" defer></script>
+<script src="/edufamcs-demo/static/handbook/handbook.js" defer></script>
+</head>
+<body class="" hx-headers='{"X-CSRFToken": "L8r7rjVVkYTkRPRABcIa0NZRVw3ujXwNaS0bbhIifPht6o2j8priXivWte9ZR7ex"}'>
+<a class="skip" href="#main">К содержанию</a>
+<div class="demo-bar" role="note">Демо-версия для отзывов: вход, запись на курсы и формы здесь не работают.</div>
+
+<header class="hdr">
+  <div class="container">
+    <a class="brand" href="/edufamcs-demo/" aria-label="EDU FAMCS — главная">
+      <span class="full"><img class="only-light" src="/edufamcs-demo/static/brand/logo/logo-edu-light.svg" alt="EDU FAMCS" width="196" height="40"><img class="only-dark" src="/edufamcs-demo/static/brand/logo/logo-edu-dark.svg" alt="EDU FAMCS" width="196" height="40"></span>
+      <span class="short"><img class="only-light" src="/edufamcs-demo/static/brand/logo/logo-edu-light.svg" alt="EDU FAMCS" height="30"><img class="only-dark" src="/edufamcs-demo/static/brand/logo/logo-edu-dark.svg" alt="EDU FAMCS" height="30"></span>
+    </a>
+    <nav class="nav" id="main-nav" aria-label="Основная навигация">
+      <a href="/edufamcs-demo/#courses">Курсы</a>
+      <a href="/edufamcs-demo/ml/" >Машинное обучение</a>
+      
+      <a href="/edufamcs-demo/handbook/" aria-current="page">Хендбук</a>
+      <a href="/edufamcs-demo/news/" >Новости</a>
+      <a href="/edufamcs-demo/people/" >Авторы</a>
+      <a href="/edufamcs-demo/about/" >О&nbsp;нас</a>
+    </nav>
+    <div class="hdr-actions">
+      
+      <a class="btn btn-outline btn-login" href="/edufamcs-demo/accounts/login/?next=/handbook/retrieval/plotnyj-i-gibridnyj-poisk/">Войти</a>
+      
+      <button class="icon-btn menu-btn" type="button" aria-label="Меню" aria-expanded="false" aria-controls="main-nav"><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-menu"/></svg></button>
+    </div>
+  </div>
+</header>
+
+<main id="main">
+
+
+
+<div class="container hb-page s-recsys">
+  <div class="hb">
+    <aside class="hb-nav" aria-label="Статьи раздела">
+      
+<form class="hb-search" action="/edufamcs-demo/handbook/search/" method="get" role="search">
+  <svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-search"/></svg>
+  <input class="input" type="search" name="q" value="" placeholder="Поиск по хендбуку" aria-label="Поиск по хендбуку" autocomplete="off" maxlength="120"
+    hx-get="/edufamcs-demo/handbook/search/" hx-trigger="input changed delay:250ms, search" hx-target="#hb-nav-results" hx-sync="this:replace">
+</form>
+
+      <div id="hb-nav-results" class="hb-nav-results" aria-live="polite"></div>
+      <a class="grp" href="/edufamcs-demo/handbook/retrieval/">Нейросетевой поиск</a>
+      
+      <a class="cur" href="/edufamcs-demo/handbook/retrieval/plotnyj-i-gibridnyj-poisk/" aria-current="page">Плотный и гибридный поиск</a>
+      
+      <a class="" href="/edufamcs-demo/handbook/retrieval/nejrosetevoe-ranzhirovanie/">Нейросетевое ранжирование: cross-encoder, ColBERT, SPLADE</a>
+      
+      <a class="" href="/edufamcs-demo/handbook/retrieval/vektornye-indeksy/">Векторные индексы: HNSW, IVF, PQ</a>
+      
+    </aside>
+
+    <article class="hb-main">
+      <nav class="crumbs" aria-label="Навигация"><a href="/edufamcs-demo/handbook/">Хендбук</a><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-chev"/></svg><a href="/edufamcs-demo/handbook/retrieval/">Поиск</a></nav>
+      <h1 class="h1">Плотный и гибридный поиск</h1>
+      <div class="hb-meta">
+        
+        
+        <span><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-clock"/></svg>13&nbsp;мин</span>
+        <span class="hb-authors"><span class="avatar sm" title="Артем Лебедевич">АЛ</span>Артем Лебедевич</span>
+        <span><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-edit"/></svg>9 ноября 2026</span>
+        
+        
+      </div>
+
+      
+      <details class="hb-mtoc">
+        <summary><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-list"/></svg>Содержание<svg class="ico sm" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-chev-down"/></svg></summary>
+        <a class="l2" href="#bi-encoder">Bi-encoder</a><a class="l2" href="#история-плотного-поиска">История плотного поиска</a><a class="l2" href="#cross-encoder-точнее-но-дороже">Cross-encoder: точнее, но дороже</a><a class="l2" href="#почему-одного-плотного-поиска-мало">Почему одного плотного поиска мало</a><a class="l2" href="#гибридный-поиск">Гибридный поиск</a><a class="l2" href="#как-оценивать">Как оценивать</a><a class="l2" href="#связь-с-llm">Связь с LLM</a><a class="l2" href="#что-почитать">Что почитать</a>
+      </details>
+      
+
+      <div class="prose"><p>Лексический поиск сравнивает слова. Плотный (dense) поиск сравнивает <strong>смысл</strong>: запрос и документ кодируются нейросетью в векторы, а релевантность — это близость векторов. Запрос «чем заменить ноутбук для учёбы» найдёт документ про «лёгкие лэптопы для студентов», хотя общих слов почти нет.</p>
+<h2 id="bi-encoder">Bi-encoder</h2>
+<p>Схема та же, что у двухбашенной модели в рекомендациях. Энкодер <span class="tex">E</span> (обычно трансформер вроде BERT) переводит текст в вектор, скор — косинусная близость:</p>
+<div class="tex tex-block">s(q, d) = \cos\big(E_q(q), E_d(d)\big) = \frac{E_q(q)^\top E_d(d)}{\|E_q(q)\|\,\|E_d(d)\|} .</div>
+<p>Часто <span class="tex">E_q = E_d</span>, но запрос и документ помечают разными префиксами, потому что короткий запрос и длинный абзац выглядят по-разному. Векторы документов считаются заранее и кладутся в ANN-индекс (HNSW, IVF-PQ; см. <a href="/edufamcs-demo/handbook/retrieval/vektornye-indeksy/" rel="noopener noreferrer nofollow">векторные индексы</a>); во время запроса считается один вектор и находятся ближайшие соседи.</p>
+<p>Обучают bi-encoder контрастивно — на парах (запрос, релевантный документ) с потерей InfoNCE и in-batch негативами:</p>
+<div class="tex tex-block">\mathcal{L} = -\log \frac{\exp\big(s(q, d^+)/\tau\big)}{\sum_{d \in \mathcal{B}} \exp\big(s(q, d)/\tau\big)} ,</div>
+<p>где <span class="tex">\mathcal{B}</span> — все документы батча. Качество сильно зависит от <strong>трудных негативов</strong>: документов, которые BM25 или предыдущая версия модели ставит высоко, но которые нерелевантны. Обучать с нуля почти никогда не нужно — есть сильные готовые многоязычные модели, которые дообучают на своих данных, если они есть.</p>
+<p>Две детали этой потери важны на практике. <strong>Температура</strong> <span class="tex">\tau</span> (обычно 0,01–0,05 для косинуса) задаёт резкость softmax: чем она меньше, тем сильнее градиент сосредоточен на самых трудных негативах батча. <strong>Размер батча</strong> — это число негативов, поэтому контрастивные эмбеддеры предобучают батчами в десятки тысяч пар (у E5 — 32 тыс.) или держат очередь негативов из прошлых батчей (MoCo). Если пары взяты из логов, популярные документы чаще попадают в батч и модель штрафует их как негативы слишком сильно; поправка та же, что в двухбашенных рекомендателях: из логита вычитают <span class="tex">\log Q(d)</span>, логарифм вероятности документа попасть в батч (см. <a href="/edufamcs-demo/handbook/recsys/two-tower-ann/" rel="noopener noreferrer nofollow">two-tower и ANN</a>).</p>
+<div class="code"><div class="code-head"><span class="lang">python</span></div><pre><code><span class="tok-k">from</span> sentence_transformers <span class="tok-k">import</span> SentenceTransformer
+
+model <span class="tok-p">=</span> SentenceTransformer<span class="tok-p">(</span><span class="tok-s">"</span><span class="tok-s">intfloat/multilingual-e5-base</span><span class="tok-s">"</span><span class="tok-p">)</span>
+doc_vecs <span class="tok-p">=</span> model<span class="tok-p">.</span>encode<span class="tok-p">(</span><span class="tok-p">[</span><span class="tok-s">"</span><span class="tok-s">passage: </span><span class="tok-s">"</span> <span class="tok-p">+</span> t <span class="tok-k">for</span> t <span class="tok-k">in</span> docs<span class="tok-p">]</span><span class="tok-p">,</span> normalize_embeddings<span class="tok-p">=</span><span class="tok-k">True</span><span class="tok-p">)</span>
+q_vec <span class="tok-p">=</span> model<span class="tok-p">.</span>encode<span class="tok-p">(</span><span class="tok-s">"</span><span class="tok-s">query: как работает ALS</span><span class="tok-s">"</span><span class="tok-p">,</span> normalize_embeddings<span class="tok-p">=</span><span class="tok-k">True</span><span class="tok-p">)</span>
+top <span class="tok-p">=</span> <span class="tok-p">(</span>doc_vecs <span class="tok-p">@</span> q_vec<span class="tok-p">)</span><span class="tok-p">.</span>argsort<span class="tok-p">(</span><span class="tok-p">)</span><span class="tok-p">[</span><span class="tok-p">:</span><span class="tok-p">:</span><span class="tok-p">-</span><span class="tok-n">1</span><span class="tok-p">]</span><span class="tok-p">[</span><span class="tok-p">:</span><span class="tok-n">10</span><span class="tok-p">]</span>     <span class="tok-c"># косинус = скалярное произведение нормированных</span>
+</code></pre></div>
+<h2 id="история-плотного-поиска">История плотного поиска</h2>
+<p>Идея «поиск по смыслу» старше трансформеров (LSA, DSSM), но практическим инструментом она стала только в 2020 году. Каждый шаг ниже закрывал конкретный провал предыдущего.</p>
+<p><strong>DPR (Karpukhin et al., 2020).</strong> Dense Passage Retriever — два BERT-энкодера (запрос и абзац), InfoNCE с in-batch негативами плюс один трудный негатив от BM25 на запрос. На open-domain QA (Natural Questions, TriviaQA и др.) обошёл Lucene-BM25 на 9–19 пунктов top-20 accuracy. Главный вывод: хватает сравнительно небольшой разметки, но негативы решают всё.</p>
+<p><strong>ANCE (Xiong et al., 2020).</strong> Негативы из BM25 — это «лёгкие» ошибки, не те, которые делает сама плотная модель. ANCE периодически переиндексирует корпус текущей версией энкодера и берёт негативы из топа этого индекса (Approximate Nearest neighbor Negative Contrastive Estimation). Распределение негативов при обучении становится похожим на распределение при поиске. Цена: асинхронное переобновление индекса во время обучения. Позже эту идею упростили — отбор негативов старой моделью, дистилляция из cross-encoder'а (RocketQA, TAS-B).</p>
+<p><strong>Contriever (Izacard et al., 2021).</strong> DPR требует разметки и плохо переносится на другие домены (BEIR). Contriever учится <strong>без разметки</strong>: две независимые случайные вырезки (кропы) из одного документа считаются парой (авторы сравнили это и с Inverse Cloze Task), негативы — остальные документы батча и очередь предыдущих (MoCo). Без единой размеченной пары он обгоняет BM25 на 11 из 15 наборов BEIR по Recall@100, а как предобучение перед дообучением поднимает качество и дальше; многоязычная версия mContriever умеет кросс-язычный поиск между разными алфавитами, где совпадение слов невозможно в принципе.</p>
+<p><strong>E5 (Wang et al., 2022).</strong> Слабый, но огромный сигнал: ~270 млн пар «текст — текст» из веба (CCPairs: вопрос — ответ, заголовок — текст). Предобучение на нём контрастивно, затем дообучение на небольшой размеченной смеси (MS MARCO, NQ, NLI). Отсюда префиксы <code>query:</code> / <code>passage:</code>, которые вы видите в примере выше. По заявлению авторов, E5 стала первой моделью, которая обогнала BM25 на BEIR в zero-shot без каких-либо размеченных данных (только на слабом сигнале CCPairs). Семейство продолжили GTE, BGE, Nomic, Jina.</p>
+<p><strong>Matryoshka-эмбеддинги (Kusupati et al., 2022).</strong> Вектор длины <span class="tex">d = 1024</span> дорог в хранении и поиске. Matryoshka Representation Learning обучает модель так, чтобы <strong>префиксы</strong> вектора длины <span class="tex">d_1 &lt; d_2 &lt; \dots &lt; d</span> тоже были хорошими эмбеддингами: потеря суммируется по нескольким усечениям,</p>
+<div class="tex tex-block">\mathcal{L}_\text{MRL} = \sum_{m \in \{64, 128, 256, \dots, d\}} c_m \, \mathcal{L}\big(z_{1:m}\big) .</div>
+<p>На практике вектор можно обрезать до 256 или 128 координат (с повторной L2-нормировкой), потеряв несколько процентов качества и выиграв в 4–8 раз по памяти. Так устроены <code>text-embedding-3</code> у OpenAI, многие модели BGE и Jina; идёт в паре с квантизацией (см. <a href="/edufamcs-demo/handbook/retrieval/vektornye-indeksy/" rel="noopener noreferrer nofollow">векторные индексы</a>).</p>
+<p><strong>BGE-M3 (Chen et al., 2024).</strong> Один энкодер даёт три представления: плотный вектор, разреженные веса термов (как у SPLADE) и мультивекторные (ColBERT-подобные) представления. Поддерживает 100+ языков и тексты до 8192 токенов; обучен с самодистилляцией, где сумма трёх скоров учит каждый из них. Удобная точка старта для русскоязычного поиска и для гибрида «в одной модели».</p>
+<p><strong>LLM-эмбеддеры (2024–2025).</strong> Дальше энкодер стали брать не размером с BERT, а на основе декодерной LLM: последний токен или усреднение скрытых состояний, дообучение с LoRA, синтетические запросы от самой LLM. Ключевые работы 2025 года: Qwen3-Embedding (0.6B / 4B / 8B, Apache 2.0, лидер многоязычного MTEB на момент выхода), Gemini Embedding (Google, на основе Gemini) и jina-embeddings-v4 (3.8B, текст и изображения, одно- и мультивекторный режимы, LoRA-адаптеры под задачи; arXiv 2506.18902). Они сильнее на длинных, многоязычных и code-запросах, но дороже: кодировать корпус моделью на 8B на порядок дороже, чем моделью на 100M, а размерность 2–4 тысячи удорожает индекс. Прагматичный выбор для курса и стартапа — модель 0.1–0.6B класса E5/BGE, а большой эмбеддер — когда измерение на ваших данных показывает прирост, окупающий цену. Ориентир при выборе — лидерборды MTEB и, для русского языка, ruMTEB (Snegirev et al., 2024), но лидерборд не равен вашему домену: прогоните 2–3 кандидата на своих 100–300 размеченных запросах.</p>
+<p>Общая линия: от «обучить на разметке» (DPR) к «трудным негативам» (ANCE), затем «без разметки» (Contriever), «массовое слабое предобучение» (E5), «многозадачность и длинный контекст» (BGE-M3), «LLM как основа» (2025). Параллельно — движение в сторону экономии (Matryoshka, квантизация). Предел всей парадигмы одного вектора обсуждается отдельно в главе про <a href="/edufamcs-demo/handbook/retrieval/agentnyj-poisk/" rel="noopener noreferrer nofollow">агентный и рассуждающий поиск</a>: число различимых топ-<span class="tex">k</span> подмножеств ограничено размерностью.</p>
+<h2 id="cross-encoder-точнее-но-дороже">Cross-encoder: точнее, но дороже</h2>
+<p>Bi-encoder сжимает весь документ в один вектор, не зная запроса, и неизбежно теряет детали. <strong>Cross-encoder</strong> подаёт запрос и документ в трансформер вместе — <code>[CLS] запрос [SEP] документ</code> — и предсказывает релевантность по совместному представлению. Внимание видит каждое слово запроса рядом с каждым словом документа, поэтому точность заметно выше.</p>
+<p>Цена — скорость: заранее ничего не посчитать, на каждую пару нужен полный прогон модели. Поэтому cross-encoder используют только как <strong>переранжировщик</strong> топ-50–200 документов, найденных быстрыми методами. Это та же двухстадийная схема, что и в рекомендациях: дешёвый отбор кандидатов, дорогое точное ранжирование.</p>
+<h2 id="почему-одного-плотного-поиска-мало">Почему одного плотного поиска мало</h2>
+<p>Плотный поиск хорошо понимает перефразирование, но:</p>
+<ul>
+<li>плохо работает с <strong>точными совпадениями</strong>: артикулы, номера моделей, редкие имена, коды ошибок — то, на чём BM25 безупречен;</li>
+<li>хуже обобщается на <strong>новый домен</strong>: модель, обученная на вебе, может проиграть BM25 на юридических текстах или медицинских записях (это хорошо видно на бенчмарке BEIR);</li>
+<li>непрозрачен: сложно объяснить, почему документ попал в выдачу.</li>
+</ul>
+<p>Лексический и плотный поиск ошибаются по-разному, поэтому их сочетание почти всегда лучше каждого по отдельности.</p>
+<h2 id="гибридный-поиск">Гибридный поиск</h2>
+<p>Запрос отправляют в оба индекса, получают два списка кандидатов и объединяют их. Объединять можно двумя способами.</p>
+<p><strong>Взвешенная сумма скоров.</strong> Скоры BM25 не ограничены сверху и зависят от запроса, а косинус лежит в <span class="tex">[-1, 1]</span>, поэтому сначала их нормируют, например min-max внутри выдачи:</p>
+<div class="tex tex-block">\tilde s(d) = \frac{s(d) - \min_{d'} s(d')}{\max_{d'} s(d') - \min_{d'} s(d')}, \qquad
+s_\text{hyb}(d) = \alpha\, \tilde s_\text{dense}(d) + (1 - \alpha)\, \tilde s_\text{bm25}(d) .</div>
+<p>Вес <span class="tex">\alpha</span> подбирают на размеченных запросах. Способ чувствителен к выбросам в скорах, а документ, найденный только одним методом, получает ноль от другого.</p>
+<p><strong>Reciprocal Rank Fusion (RRF; Cormack, Clarke, Buettcher, 2009).</strong> Смотрим не на скоры, а только на позиции:</p>
+<div class="tex tex-block">\mathrm{RRF}(d) = \sum_{r \in \text{выдачи}} \frac{1}{k + \mathrm{rank}_r(d)}, \qquad k = 60 .</div>
+<p>Документ, высоко стоящий хотя бы в одной выдаче, получает заметный вклад; стоящий высоко в обеих — побеждает. Константа <span class="tex">k</span> сглаживает разрыв между первой и второй позициями: при <span class="tex">k=60</span> документы на местах 1 и 2 различаются на <span class="tex">1/61 - 1/62 \approx 0.0003</span> — одна случайная перестановка наверху не решает исхода. RRF не требует нормировки и подбора весов, устойчив и поэтому стал стандартом по умолчанию (он встроен в Elasticsearch, OpenSearch и большинство векторных баз).</p>
+<div class="code"><div class="code-head"><span class="lang">python</span></div><pre><code><span class="tok-k">from</span> collections <span class="tok-k">import</span> defaultdict
+
+<span class="tok-k">def</span> <span class="tok-f">rrf</span><span class="tok-p">(</span>rankings<span class="tok-p">,</span> k<span class="tok-p">=</span><span class="tok-n">60</span><span class="tok-p">,</span> top_n<span class="tok-p">=</span><span class="tok-n">10</span><span class="tok-p">)</span><span class="tok-p">:</span>
+    <span class="tok-s">"""rankings — списки id документов, каждый отсортирован по убыванию релевантности."""</span>
+    score <span class="tok-p">=</span> defaultdict<span class="tok-p">(</span><span class="tok-f">float</span><span class="tok-p">)</span>
+    <span class="tok-k">for</span> ranking <span class="tok-k">in</span> rankings<span class="tok-p">:</span>
+        <span class="tok-k">for</span> rank<span class="tok-p">,</span> doc_id <span class="tok-k">in</span> <span class="tok-f">enumerate</span><span class="tok-p">(</span>ranking<span class="tok-p">,</span> start<span class="tok-p">=</span><span class="tok-n">1</span><span class="tok-p">)</span><span class="tok-p">:</span>
+            score<span class="tok-p">[</span>doc_id<span class="tok-p">]</span> <span class="tok-p">+</span><span class="tok-p">=</span> <span class="tok-n">1.0</span> <span class="tok-p">/</span> <span class="tok-p">(</span>k <span class="tok-p">+</span> rank<span class="tok-p">)</span>
+    <span class="tok-k">return</span> <span class="tok-f">sorted</span><span class="tok-p">(</span>score<span class="tok-p">,</span> key<span class="tok-p">=</span>score<span class="tok-p">.</span>get<span class="tok-p">,</span> reverse<span class="tok-p">=</span><span class="tok-k">True</span><span class="tok-p">)</span><span class="tok-p">[</span><span class="tok-p">:</span>top_n<span class="tok-p">]</span>
+
+final <span class="tok-p">=</span> rrf<span class="tok-p">(</span><span class="tok-p">[</span>bm25_top100<span class="tok-p">,</span> dense_top100<span class="tok-p">]</span><span class="tok-p">)</span>
+</code></pre></div>
+<p>Отдельный вариант гибрида — <strong>обученные разреженные</strong> представления (SPLADE, разреженный режим BGE-M3): нейросеть предсказывает веса термов, включая синонимы, которых не было в тексте. Такой вектор хранится в обычном инвертированном индексе и сочетает точность совпадений с пониманием смысла.</p>
+<h2 id="как-оценивать">Как оценивать</h2>
+<p>Нужен набор запросов с разметкой релевантных документов: из логов (клики, покупки после поиска) или ручной.</p>
+<ul>
+<li><strong>Recall@100</strong> — для стадии отбора кандидатов: нашли ли нужное вообще.</li>
+<li><strong>NDCG@10</strong> и <strong>MRR@10</strong> — для итоговой выдачи: насколько высоко стоит нужное.</li>
+<li>Отдельно смотрите на разные типы запросов: точные (артикулы), короткие навигационные, длинные «смысловые». Гибрид должен не проседать ни на одном.</li>
+</ul>
+<p>Типичный рецепт, с которого стоит начать: BM25 + bi-encoder → RRF → cross-encoder на топ-50. Каждую стадию оценивайте отдельно, а итог — на A/B-тесте по поисковым метрикам продукта: доля запросов с кликом, конверсия, доля пустых выдач.</p>
+<h2 id="связь-с-llm">Связь с LLM</h2>
+<p>Найденные гибридным поиском фрагменты подаются языковой модели как контекст — это RAG, подробно разобранный в <a href="/edufamcs-demo/handbook/retrieval/rag/" rel="noopener noreferrer nofollow">отдельной главе</a>. Качество ответа там упирается в качество поиска: если нужного фрагмента нет в топе, модель его не процитирует.</p>
+<h2 id="что-почитать">Что почитать</h2>
+<ul>
+<li>Karpukhin et al., <a href="https://arxiv.org/abs/2004.04906" rel="noopener noreferrer nofollow">Dense Passage Retrieval for Open-Domain QA</a>, 2020.</li>
+<li>Xiong et al., <a href="https://arxiv.org/abs/2007.00808" rel="noopener noreferrer nofollow">Approximate Nearest Neighbor Negative Contrastive Learning (ANCE)</a>, 2020.</li>
+<li>Izacard et al., <a href="https://arxiv.org/abs/2112.09118" rel="noopener noreferrer nofollow">Unsupervised Dense Information Retrieval with Contrastive Learning (Contriever)</a>, 2021.</li>
+<li>Wang et al., <a href="https://arxiv.org/abs/2212.03533" rel="noopener noreferrer nofollow">Text Embeddings by Weakly-Supervised Contrastive Pre-training (E5)</a>, 2022; Kusupati et al., <a href="https://arxiv.org/abs/2205.13147" rel="noopener noreferrer nofollow">Matryoshka Representation Learning</a>, 2022.</li>
+<li>Chen et al., <a href="https://arxiv.org/abs/2402.03216" rel="noopener noreferrer nofollow">BGE M3-Embedding</a>, 2024; Günther et al., <a href="https://arxiv.org/abs/2506.18902" rel="noopener noreferrer nofollow">jina-embeddings-v4</a>, 2025.</li>
+<li>Thakur et al., <a href="https://arxiv.org/abs/2104.08663" rel="noopener noreferrer nofollow">BEIR: A Heterogeneous Benchmark for Zero-shot Evaluation of IR Models</a>, 2021; Muennighoff et al., <a href="https://arxiv.org/abs/2210.07316" rel="noopener noreferrer nofollow">MTEB: Massive Text Embedding Benchmark</a>, 2022; Snegirev et al., <a href="https://arxiv.org/abs/2408.12503" rel="noopener noreferrer nofollow">ruMTEB</a>, 2024.</li>
+<li>Cormack, Clarke, Büttcher, <em>Reciprocal Rank Fusion outperforms Condorcet and individual Rank Learning Methods</em>, SIGIR 2009.</li>
+</ul>
+</div>
+      
+
+      
+      <nav class="pager" aria-label="Соседние статьи">
+        <a href="/edufamcs-demo/handbook/retrieval/ponimanie-zaprosa/"><span><svg class="ico sm" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-arrow-left"/></svg>Назад</span>Понимание запроса</a>
+        <a href="/edufamcs-demo/handbook/retrieval/nejrosetevoe-ranzhirovanie/"><span>Дальше<svg class="ico sm" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-arrow"/></svg></span>Нейросетевое ранжирование: cross-encoder, ColBERT, SPLADE</a>
+      </nav>
+      
+    </article>
+
+    <aside class="hb-toc" aria-label="На этой странице">
+      <a class="l2" href="#bi-encoder">Bi-encoder</a><a class="l2" href="#история-плотного-поиска">История плотного поиска</a><a class="l2" href="#cross-encoder-точнее-но-дороже">Cross-encoder: точнее, но дороже</a><a class="l2" href="#почему-одного-плотного-поиска-мало">Почему одного плотного поиска мало</a><a class="l2" href="#гибридный-поиск">Гибридный поиск</a><a class="l2" href="#как-оценивать">Как оценивать</a><a class="l2" href="#связь-с-llm">Связь с LLM</a><a class="l2" href="#что-почитать">Что почитать</a>
+    </aside>
+  </div>
+</div>
+
+
+</main>
+
+<footer class="ftr" data-theme="dark">
+  <svg class="sym fern" viewBox="0 0 40.5 65.02" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#fern"/></svg>
+  <div class="container">
+    <div class="ftr-row">
+      <a href="/edufamcs-demo/" aria-label="EDU FAMCS — главная"><img src="/edufamcs-demo/static/brand/logo/logo-edu-dark.svg" alt="EDU FAMCS" width="196" height="40"></a>
+      <ul class="ftr-links">
+        <li><a href="/edufamcs-demo/#courses">Курсы</a></li>
+        <li><a href="/edufamcs-demo/ml/">Машинное обучение</a></li>
+        <li><a href="/edufamcs-demo/handbook/">Хендбук</a></li>
+        <li><a href="/edufamcs-demo/news/">Новости</a></li>
+        <li><a href="/edufamcs-demo/people/">Авторы</a></li>
+        <li><a href="/edufamcs-demo/about/">О&nbsp;нас</a></li>
+        <li><a href="/edufamcs-demo/propose/">Предложить или исправить</a></li>
+        <li><a href="/edufamcs-demo/privacy/">Конфиденциальность</a></li>
+      </ul>
+    </div>
+    <div class="ftr-big" aria-hidden="true">EDU<span class="d">·</span>FAMCS</div>
+    <p class="ftr-copy">© 2026 EDU FAMCS · Минск</p>
+  </div>
+</footer>
+
+<div class="toasts-region" aria-live="polite" id="toasts">
+
+</div>
+
+</body>
+</html>

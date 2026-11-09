@@ -1,0 +1,1713 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Типовые ошибки — хендбук · EDU FAMCS</title>
+<meta name="description" content="Разборы по итогам проверки 929 работ второго сезона.">
+<meta name="theme-color" content="#060A16">
+<meta name="robots" content="noindex, nofollow">
+<meta name="htmx-config" content='{"allowEval":false,"includeIndicatorStyles":false,"historyCacheSize":0,"selfRequestsOnly":true}'>
+<meta name="katex-js" content="/edufamcs-demo/static/vendor/katex/katex.min.js">
+<meta name="katex-css" content="/edufamcs-demo/static/vendor/katex/katex.min.css">
+<link rel="icon" href="/edufamcs-demo/static/brand/logo/favicon-16.svg" type="image/svg+xml" sizes="16x16">
+<link rel="icon" href="/edufamcs-demo/static/brand/logo/favicon.svg" type="image/svg+xml" sizes="any">
+<link rel="preload" href="/edufamcs-demo/static/brand/fonts/manrope-cyrillic-400.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/edufamcs-demo/static/brand/fonts/unbounded-cyrillic-800.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="/edufamcs-demo/static/brand/fonts.css">
+<link rel="stylesheet" href="/edufamcs-demo/static/brand/tokens.css">
+<link rel="stylesheet" href="/edufamcs-demo/static/brand/components.css">
+<link rel="stylesheet" href="/edufamcs-demo/static/css/site.css">
+<link rel="stylesheet" href="/edufamcs-demo/static/css/hub.css">
+<link rel="stylesheet" href="/edufamcs-demo/static/css/about.css">
+<link rel="stylesheet" href="/edufamcs-demo/static/handbook/handbook.css">
+<script src="/edufamcs-demo/static/js/theme.js"></script>
+<script src="/edufamcs-demo/static/vendor/htmx/htmx.min.js" defer></script>
+<script src="/edufamcs-demo/static/vendor/alpine/alpine-csp.min.js" defer></script>
+<script src="/edufamcs-demo/static/js/site.js" defer></script>
+
+</head>
+<body class="" hx-headers='{"X-CSRFToken": "44ozqYd880cCwjF74meW5KmRj9F9USputOXDaW0v3RALLSQQBzX42fSWRRLEs27e"}'>
+<a class="skip" href="#main">К содержанию</a>
+<div class="demo-bar" role="note">Демо-версия для отзывов: вход, запись на курсы и формы здесь не работают.</div>
+
+<header class="hdr">
+  <div class="container">
+    <a class="brand" href="/edufamcs-demo/" aria-label="EDU FAMCS — главная">
+      <span class="full"><img class="only-light" src="/edufamcs-demo/static/brand/logo/logo-edu-light.svg" alt="EDU FAMCS" width="196" height="40"><img class="only-dark" src="/edufamcs-demo/static/brand/logo/logo-edu-dark.svg" alt="EDU FAMCS" width="196" height="40"></span>
+      <span class="short"><img class="only-light" src="/edufamcs-demo/static/brand/logo/logo-edu-light.svg" alt="EDU FAMCS" height="30"><img class="only-dark" src="/edufamcs-demo/static/brand/logo/logo-edu-dark.svg" alt="EDU FAMCS" height="30"></span>
+    </a>
+    <nav class="nav" id="main-nav" aria-label="Основная навигация">
+      <a href="/edufamcs-demo/#courses">Курсы</a>
+      <a href="/edufamcs-demo/ml/" >Машинное обучение</a>
+      
+      <a href="/edufamcs-demo/handbook/" aria-current="page">Хендбук</a>
+      <a href="/edufamcs-demo/news/" >Новости</a>
+      <a href="/edufamcs-demo/people/" >Авторы</a>
+      <a href="/edufamcs-demo/about/" >О&nbsp;нас</a>
+    </nav>
+    <div class="hdr-actions">
+      
+      <a class="btn btn-outline btn-login" href="/edufamcs-demo/accounts/login/?next=/handbook/mistakes/">Войти</a>
+      
+      <button class="icon-btn menu-btn" type="button" aria-label="Меню" aria-expanded="false" aria-controls="main-nav"><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-menu"/></svg></button>
+    </div>
+  </div>
+</header>
+
+<main id="main">
+
+
+
+<div class="container page hb-tone">
+  <header class="hb-sec-head">
+    <div>
+      <nav class="crumbs" aria-label="Навигация"><a href="/edufamcs-demo/handbook/">Хендбук</a><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-chev"/></svg><span>Типовые ошибки</span></nav>
+      <h1 class="display-l">Типовые ошибки</h1>
+      <p class="lead">Разборы по итогам проверки 929 работ второго сезона.</p>
+    </div>
+    <div class="hb-sec-art" aria-hidden="true">
+
+<svg viewBox="0 0 220 120" aria-hidden="true">
+  <g fill="none" stroke="currentColor" stroke-width="1.5">
+    <rect x="1" y="4" width="150" height="30" rx="8" opacity=".5"/>
+    <rect x="1" y="44" width="150" height="30" rx="8"/>
+    <rect x="1" y="84" width="150" height="30" rx="8" opacity=".5"/>
+  </g>
+  <g fill="currentColor">
+    <rect x="12" y="15" width="40" height="8" rx="4" opacity=".25"/><rect x="58" y="15" width="64" height="8" rx="4" opacity=".25"/>
+    <rect x="12" y="55" width="28" height="8" rx="4"/><rect x="46" y="55" width="54" height="8" rx="4" opacity=".55"/>
+    <rect x="12" y="95" width="56" height="8" rx="4" opacity=".25"/><rect x="74" y="95" width="30" height="8" rx="4" opacity=".25"/>
+  </g>
+  <path d="M106 52 q10 -8 20 0 t20 0" fill="none" stroke="var(--accent)" stroke-width="2.4" stroke-linecap="round"/>
+  <path d="M106 66 q10 -8 20 0 t20 0" fill="none" stroke="var(--accent)" stroke-width="2.4" stroke-linecap="round" opacity=".55"/>
+  <circle cx="190" cy="59" r="24" fill="currentColor"/>
+  <path d="M190 46 v16" stroke="var(--on-stream)" stroke-width="4.5" stroke-linecap="round"/><circle cx="190" cy="71" r="2.8" fill="var(--on-stream)"/>
+</svg>
+
+</div>
+  </header>
+
+  
+  
+  <section class="hb-group">
+    <h2 class="h3 hb-group-t">Общие ошибки</h2>
+    <ol class="hb-list">
+      
+      <li><a class="hb-item" href="/edufamcs-demo/handbook/mistakes/common-show-without-call/">
+        <span class="n">01</span>
+        <span class="t">plt.show написан без скобок</span>
+        <span class="m">
+          
+          
+          <svg class="ico sm" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-arrow"/></svg>
+        </span>
+      </a></li>
+      
+      <li><a class="hb-item" href="/edufamcs-demo/handbook/mistakes/common-absolute-path/">
+        <span class="n">02</span>
+        <span class="t">Абсолютный путь к данным</span>
+        <span class="m">
+          
+          
+          <svg class="ico sm" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-arrow"/></svg>
+        </span>
+      </a></li>
+      
+      <li><a class="hb-item" href="/edufamcs-demo/handbook/mistakes/common-nothing-done/">
+        <span class="n">03</span>
+        <span class="t">В ноутбуке нет заполненного кода</span>
+        <span class="m">
+          
+          <span class="badge err dot">критично</span>
+          <svg class="ico sm" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-arrow"/></svg>
+        </span>
+      </a></li>
+      
+      <li><a class="hb-item" href="/edufamcs-demo/handbook/mistakes/common-secret-in-repo/">
+        <span class="n">04</span>
+        <span class="t">В репозитории лежит ключ доступа</span>
+        <span class="m">
+          
+          <span class="badge err dot">критично</span>
+          <svg class="ico sm" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-arrow"/></svg>
+        </span>
+      </a></li>
+      
+      <li><a class="hb-item" href="/edufamcs-demo/handbook/mistakes/common-no-own-conclusions/">
+        <span class="n">05</span>
+        <span class="t">Весь текст в работе — из шаблона</span>
+        <span class="m">
+          
+          
+          <svg class="ico sm" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-arrow"/></svg>
+        </span>
+      </a></li>
+      
+      <li><a class="hb-item" href="/edufamcs-demo/handbook/mistakes/common-conclusions-in-code-comments/">
+        <span class="n">06</span>
+        <span class="t">Выводы написаны комментариями в ячейке кода</span>
+        <span class="m">
+          
+          
+          <svg class="ico sm" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-arrow"/></svg>
+        </span>
+      </a></li>
+      
+      <li><a class="hb-item" href="/edufamcs-demo/handbook/mistakes/common-text-contradicts-output/">
+        <span class="n">07</span>
+        <span class="t">Выводы расходятся с результатами в ноутбуке</span>
+        <span class="m">
+          
+          
+          <svg class="ico sm" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-arrow"/></svg>
+        </span>
+      </a></li>
+      
+      <li><a class="hb-item" href="/edufamcs-demo/handbook/mistakes/common-no-effect-call/">
+        <span class="n">08</span>
+        <span class="t">Вызов не меняет данные и результат не сохраняется</span>
+        <span class="m">
+          
+          
+          <svg class="ico sm" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-arrow"/></svg>
+        </span>
+      </a></li>
+      
+      <li><a class="hb-item" href="/edufamcs-demo/handbook/mistakes/common-no-seed/">
+        <span class="n">09</span>
+        <span class="t">Не зафиксирован seed</span>
+        <span class="m">
+          
+          
+          <svg class="ico sm" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-arrow"/></svg>
+        </span>
+      </a></li>
+      
+      <li><a class="hb-item" href="/edufamcs-demo/handbook/mistakes/common-no-conclusions/">
+        <span class="n">10</span>
+        <span class="t">Нет текстовых выводов</span>
+        <span class="m">
+          
+          
+          <svg class="ico sm" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-arrow"/></svg>
+        </span>
+      </a></li>
+      
+      <li><a class="hb-item" href="/edufamcs-demo/handbook/mistakes/common-execution-out-of-order/">
+        <span class="n">11</span>
+        <span class="t">Ноутбук не выполняется сверху вниз</span>
+        <span class="m">
+          
+          
+          <svg class="ico sm" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-arrow"/></svg>
+        </span>
+      </a></li>
+      
+      <li><a class="hb-item" href="/edufamcs-demo/handbook/mistakes/common-undefined-name/">
+        <span class="n">12</span>
+        <span class="t">Ноутбук не запустится с нуля: имя нигде не определено</span>
+        <span class="m">
+          
+          <span class="badge err dot">критично</span>
+          <svg class="ico sm" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-arrow"/></svg>
+        </span>
+      </a></li>
+      
+      <li><a class="hb-item" href="/edufamcs-demo/handbook/mistakes/common-notebook-unreadable/">
+        <span class="n">13</span>
+        <span class="t">Ноутбук не открывается</span>
+        <span class="m">
+          
+          <span class="badge err dot">критично</span>
+          <svg class="ico sm" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-arrow"/></svg>
+        </span>
+      </a></li>
+      
+      <li><a class="hb-item" href="/edufamcs-demo/handbook/mistakes/common-error-output/">
+        <span class="n">14</span>
+        <span class="t">Ноутбук падает с ошибкой</span>
+        <span class="m">
+          
+          <span class="badge err dot">критично</span>
+          <svg class="ico sm" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-arrow"/></svg>
+        </span>
+      </a></li>
+      
+      <li><a class="hb-item" href="/edufamcs-demo/handbook/mistakes/common-not-executed/">
+        <span class="n">15</span>
+        <span class="t">Ноутбук сохранён без запуска</span>
+        <span class="m">
+          
+          <span class="badge err dot">критично</span>
+          <svg class="ico sm" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-arrow"/></svg>
+        </span>
+      </a></li>
+      
+      <li><a class="hb-item" href="/edufamcs-demo/handbook/mistakes/common-blank-template-cells/">
+        <span class="n">16</span>
+        <span class="t">Остались незаполненные ячейки задания</span>
+        <span class="m">
+          
+          
+          <svg class="ico sm" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-arrow"/></svg>
+        </span>
+      </a></li>
+      
+      <li><a class="hb-item" href="/edufamcs-demo/handbook/mistakes/common-prompt-injection-attempt/">
+        <span class="n">17</span>
+        <span class="t">Попытка обмануть автоматическую проверку</span>
+        <span class="m">
+          
+          <span class="badge err dot">критично</span>
+          <svg class="ico sm" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-arrow"/></svg>
+        </span>
+      </a></li>
+      
+      <li><a class="hb-item" href="/edufamcs-demo/handbook/mistakes/common-warnings-suppressed/">
+        <span class="n">18</span>
+        <span class="t">Предупреждения отключены глобально</span>
+        <span class="m">
+          
+          
+          <svg class="ico sm" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-arrow"/></svg>
+        </span>
+      </a></li>
+      
+      <li><a class="hb-item" href="/edufamcs-demo/handbook/mistakes/common-fit-before-split/">
+        <span class="n">19</span>
+        <span class="t">Преобразование обучено до разделения выборки</span>
+        <span class="m">
+          
+          
+          <svg class="ico sm" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-arrow"/></svg>
+        </span>
+      </a></li>
+      
+      <li><a class="hb-item" href="/edufamcs-demo/handbook/mistakes/common-fit-on-test/">
+        <span class="n">20</span>
+        <span class="t">Преобразование обучено на тестовой выборке</span>
+        <span class="m">
+          
+          <span class="badge err dot">критично</span>
+          <svg class="ico sm" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-arrow"/></svg>
+        </span>
+      </a></li>
+      
+      <li><a class="hb-item" href="/edufamcs-demo/handbook/mistakes/common-split-without-seed/">
+        <span class="n">21</span>
+        <span class="t">Разбиение выборки не зафиксировано</span>
+        <span class="m">
+          
+          
+          <svg class="ico sm" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-arrow"/></svg>
+        </span>
+      </a></li>
+      
+      <li><a class="hb-item" href="/edufamcs-demo/handbook/mistakes/common-partially-executed/">
+        <span class="n">22</span>
+        <span class="t">Часть ячеек не выполнена</span>
+        <span class="m">
+          
+          
+          <svg class="ico sm" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-arrow"/></svg>
+        </span>
+      </a></li>
+      
+    </ol>
+  </section>
+  
+  <section class="hb-group">
+    <h2 class="h3 hb-group-t">ДЗ 1 · Окружение, NumPy и Pandas</h2>
+    <ol class="hb-list">
+      
+      <li><a class="hb-item" href="/edufamcs-demo/handbook/mistakes/hw01-versions/">
+        <span class="n">01</span>
+        <span class="t">Не выведены версии окружения</span>
+        <span class="m">
+          
+          
+          <svg class="ico sm" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-arrow"/></svg>
+        </span>
+      </a></li>
+      
+      <li><a class="hb-item" href="/edufamcs-demo/handbook/mistakes/hw01-seed/">
+        <span class="n">02</span>
+        <span class="t">Не зафиксирован seed в бонусной части</span>
+        <span class="m">
+          
+          
+          <svg class="ico sm" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-arrow"/></svg>
+        </span>
+      </a></li>
+      
+      <li><a class="hb-item" href="/edufamcs-demo/handbook/mistakes/hw01-iris-bonus/">
+        <span class="n">03</span>
+        <span class="t">Не сделана бонусная часть с Iris</span>
+        <span class="m">
+          
+          
+          <svg class="ico sm" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-arrow"/></svg>
+        </span>
+      </a></li>
+      
+      <li><a class="hb-item" href="/edufamcs-demo/handbook/mistakes/hw01-dataframe/">
+        <span class="n">04</span>
+        <span class="t">Нет DataFrame с базовым обзором</span>
+        <span class="m">
+          
+          
+          <svg class="ico sm" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-arrow"/></svg>
+        </span>
+      </a></li>
+      
+      <li><a class="hb-item" href="/edufamcs-demo/handbook/mistakes/hw01-vectorization/">
+        <span class="n">05</span>
+        <span class="t">Нет векторизованного умножения</span>
+        <span class="m">
+          
+          
+          <svg class="ico sm" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-arrow"/></svg>
+        </span>
+      </a></li>
+      
+      <li><a class="hb-item" href="/edufamcs-demo/handbook/mistakes/hw01-plots/">
+        <span class="n">06</span>
+        <span class="t">Нет гистограммы или тепловой карты корреляций</span>
+        <span class="m">
+          
+          
+          <svg class="ico sm" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-arrow"/></svg>
+        </span>
+      </a></li>
+      
+      <li><a class="hb-item" href="/edufamcs-demo/handbook/mistakes/hw01-pandas-ops/">
+        <span class="n">07</span>
+        <span class="t">Нет осмысленных операций pandas</span>
+        <span class="m">
+          
+          
+          <svg class="ico sm" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-arrow"/></svg>
+        </span>
+      </a></li>
+      
+      <li><a class="hb-item" href="/edufamcs-demo/handbook/mistakes/hw01-numpy-matrix/">
+        <span class="n">08</span>
+        <span class="t">Нет случайной матрицы и статистик по осям</span>
+        <span class="m">
+          
+          
+          <svg class="ico sm" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-arrow"/></svg>
+        </span>
+      </a></li>
+      
+    </ol>
+  </section>
+  
+  <section class="hb-group">
+    <h2 class="h3 hb-group-t">ДЗ 2 · Разведочный анализ данных</h2>
+    <ol class="hb-list">
+      
+      <li><a class="hb-item" href="/edufamcs-demo/handbook/mistakes/hw02-justified-imputation/">
+        <span class="n">01</span>
+        <span class="t">Выбор заполнения пропусков не обоснован</span>
+        <span class="m">
+          
+          
+          <svg class="ico sm" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-arrow"/></svg>
+        </span>
+      </a></li>
+      
+      <li><a class="hb-item" href="/edufamcs-demo/handbook/mistakes/hw02-three-libs/">
+        <span class="n">02</span>
+        <span class="t">Использованы не все три библиотеки визуализации</span>
+        <span class="m">
+          
+          
+          <svg class="ico sm" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-arrow"/></svg>
+        </span>
+      </a></li>
+      
+      <li><a class="hb-item" href="/edufamcs-demo/handbook/mistakes/hw02-conclusions/">
+        <span class="n">03</span>
+        <span class="t">Мало итоговых выводов</span>
+        <span class="m">
+          
+          
+          <svg class="ico sm" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-arrow"/></svg>
+        </span>
+      </a></li>
+      
+      <li><a class="hb-item" href="/edufamcs-demo/handbook/mistakes/hw02-quantiles/">
+        <span class="n">04</span>
+        <span class="t">Не посчитаны перцентили</span>
+        <span class="m">
+          
+          
+          <svg class="ico sm" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-arrow"/></svg>
+        </span>
+      </a></li>
+      
+      <li><a class="hb-item" href="/edufamcs-demo/handbook/mistakes/hw02-feature-engineering/">
+        <span class="n">05</span>
+        <span class="t">Не созданы новые признаки</span>
+        <span class="m">
+          
+          
+          <svg class="ico sm" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-arrow"/></svg>
+        </span>
+      </a></li>
+      
+      <li><a class="hb-item" href="/edufamcs-demo/handbook/mistakes/hw02-plot-kinds/">
+        <span class="n">06</span>
+        <span class="t">Не хватает обязательных типов графиков</span>
+        <span class="m">
+          
+          
+          <svg class="ico sm" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-arrow"/></svg>
+        </span>
+      </a></li>
+      
+      <li><a class="hb-item" href="/edufamcs-demo/handbook/mistakes/hw02-describe-object/">
+        <span class="n">07</span>
+        <span class="t">Нет describe для строковых колонок</span>
+        <span class="m">
+          
+          
+          <svg class="ico sm" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-arrow"/></svg>
+        </span>
+      </a></li>
+      
+      <li><a class="hb-item" href="/edufamcs-demo/handbook/mistakes/hw02-ai-block/">
+        <span class="n">08</span>
+        <span class="t">Нет блока про использование AI</span>
+        <span class="m">
+          
+          
+          <svg class="ico sm" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-arrow"/></svg>
+        </span>
+      </a></li>
+      
+      <li><a class="hb-item" href="/edufamcs-demo/handbook/mistakes/hw02-overview/">
+        <span class="n">09</span>
+        <span class="t">Нет быстрого обзора данных</span>
+        <span class="m">
+          
+          
+          <svg class="ico sm" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-arrow"/></svg>
+        </span>
+      </a></li>
+      
+      <li><a class="hb-item" href="/edufamcs-demo/handbook/mistakes/hw02-hypotheses/">
+        <span class="n">10</span>
+        <span class="t">Нет гипотез и наблюдений</span>
+        <span class="m">
+          
+          
+          <svg class="ico sm" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-arrow"/></svg>
+        </span>
+      </a></li>
+      
+      <li><a class="hb-item" href="/edufamcs-demo/handbook/mistakes/hw02-skew-kurt/">
+        <span class="n">11</span>
+        <span class="t">Нет дисперсии, асимметрии и эксцесса</span>
+        <span class="m">
+          
+          
+          <svg class="ico sm" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-arrow"/></svg>
+        </span>
+      </a></li>
+      
+      <li><a class="hb-item" href="/edufamcs-demo/handbook/mistakes/hw02-encoding/">
+        <span class="n">12</span>
+        <span class="t">Нет кодирования категориальных признаков</span>
+        <span class="m">
+          
+          
+          <svg class="ico sm" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-arrow"/></svg>
+        </span>
+      </a></li>
+      
+      <li><a class="hb-item" href="/edufamcs-demo/handbook/mistakes/hw02-quality/">
+        <span class="n">13</span>
+        <span class="t">Нет проверки пропусков и дубликатов</span>
+        <span class="m">
+          
+          
+          <svg class="ico sm" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-arrow"/></svg>
+        </span>
+      </a></li>
+      
+      <li><a class="hb-item" href="/edufamcs-demo/handbook/mistakes/hw02-dataset-link/">
+        <span class="n">14</span>
+        <span class="t">Нет ссылки на датасет</span>
+        <span class="m">
+          
+          
+          <svg class="ico sm" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-arrow"/></svg>
+        </span>
+      </a></li>
+      
+      <li><a class="hb-item" href="/edufamcs-demo/handbook/mistakes/hw02-missing-strategies/">
+        <span class="n">15</span>
+        <span class="t">Показана только одна стратегия работы с пропусками</span>
+        <span class="m">
+          
+          
+          <svg class="ico sm" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-arrow"/></svg>
+        </span>
+      </a></li>
+      
+      <li><a class="hb-item" href="/edufamcs-demo/handbook/mistakes/hw02-mode-fill/">
+        <span class="n">16</span>
+        <span class="t">Пропуски в категориях не заполнены модой</span>
+        <span class="m">
+          
+          
+          <svg class="ico sm" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-arrow"/></svg>
+        </span>
+      </a></li>
+      
+    </ol>
+  </section>
+  
+  <section class="hb-group">
+    <h2 class="h3 hb-group-t">ДЗ 3 · Метод k ближайших соседей</h2>
+    <ol class="hb-list">
+      
+      <li><a class="hb-item" href="/edufamcs-demo/handbook/mistakes/hw03-dataset-classification/">
+        <span class="n">01</span>
+        <span class="t">Не видно загрузки датасета для классификации</span>
+        <span class="m">
+          
+          
+          <svg class="ico sm" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-arrow"/></svg>
+        </span>
+      </a></li>
+      
+      <li><a class="hb-item" href="/edufamcs-demo/handbook/mistakes/hw03-metrics-compare/">
+        <span class="n">02</span>
+        <span class="t">Не сравнивались метрики расстояния</span>
+        <span class="m">
+          
+          
+          <svg class="ico sm" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-arrow"/></svg>
+        </span>
+      </a></li>
+      
+      <li><a class="hb-item" href="/edufamcs-demo/handbook/mistakes/hw03-scaling-conclusion/">
+        <span class="n">03</span>
+        <span class="t">Нет вывода о влиянии масштабирования</span>
+        <span class="m">
+          
+          
+          <svg class="ico sm" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-arrow"/></svg>
+        </span>
+      </a></li>
+      
+      <li><a class="hb-item" href="/edufamcs-demo/handbook/mistakes/hw03-when-knn-good/">
+        <span class="n">04</span>
+        <span class="t">Нет вывода, когда KNN хорош, а когда уступает</span>
+        <span class="m">
+          
+          
+          <svg class="ico sm" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-arrow"/></svg>
+        </span>
+      </a></li>
+      
+      <li><a class="hb-item" href="/edufamcs-demo/handbook/mistakes/hw03-scaling/">
+        <span class="n">05</span>
+        <span class="t">Нет масштабирования признаков</span>
+        <span class="m">
+          
+          
+          <svg class="ico sm" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-arrow"/></svg>
+        </span>
+      </a></li>
+      
+      <li><a class="hb-item" href="/edufamcs-demo/handbook/mistakes/hw03-quality-metrics/">
+        <span class="n">06</span>
+        <span class="t">Нет метрик качества классификации</span>
+        <span class="m">
+          
+          
+          <svg class="ico sm" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-arrow"/></svg>
+        </span>
+      </a></li>
+      
+      <li><a class="hb-item" href="/edufamcs-demo/handbook/mistakes/hw03-k-search/">
+        <span class="n">07</span>
+        <span class="t">Нет подбора числа соседей</span>
+        <span class="m">
+          
+          
+          <svg class="ico sm" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-arrow"/></svg>
+        </span>
+      </a></li>
+      
+      <li><a class="hb-item" href="/edufamcs-demo/handbook/mistakes/hw03-split/">
+        <span class="n">08</span>
+        <span class="t">Нет разделения на train и test</span>
+        <span class="m">
+          
+          
+          <svg class="ico sm" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-arrow"/></svg>
+        </span>
+      </a></li>
+      
+      <li><a class="hb-item" href="/edufamcs-demo/handbook/mistakes/hw03-baselines/">
+        <span class="n">09</span>
+        <span class="t">Нет сравнения с базовыми моделями</span>
+        <span class="m">
+          
+          
+          <svg class="ico sm" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-arrow"/></svg>
+        </span>
+      </a></li>
+      
+    </ol>
+  </section>
+  
+  <section class="hb-group">
+    <h2 class="h3 hb-group-t">ДЗ 4 · Линейная регрессия</h2>
+    <ol class="hb-list">
+      
+      <li><a class="hb-item" href="/edufamcs-demo/handbook/mistakes/hw04-metric-choice-justified/">
+        <span class="n">01</span>
+        <span class="t">Выбор метрик не обоснован</span>
+        <span class="m">
+          
+          
+          <svg class="ico sm" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-arrow"/></svg>
+        </span>
+      </a></li>
+      
+      <li><a class="hb-item" href="/edufamcs-demo/handbook/mistakes/hw04-model/">
+        <span class="n">02</span>
+        <span class="t">Не обучена линейная модель</span>
+        <span class="m">
+          
+          
+          <svg class="ico sm" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-arrow"/></svg>
+        </span>
+      </a></li>
+      
+      <li><a class="hb-item" href="/edufamcs-demo/handbook/mistakes/hw04-metrics/">
+        <span class="n">03</span>
+        <span class="t">Не хватает метрик регрессии</span>
+        <span class="m">
+          
+          
+          <svg class="ico sm" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-arrow"/></svg>
+        </span>
+      </a></li>
+      
+      <li><a class="hb-item" href="/edufamcs-demo/handbook/mistakes/hw04-baseline/">
+        <span class="n">04</span>
+        <span class="t">Нет базового решения для сравнения</span>
+        <span class="m">
+          
+          
+          <svg class="ico sm" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-arrow"/></svg>
+        </span>
+      </a></li>
+      
+      <li><a class="hb-item" href="/edufamcs-demo/handbook/mistakes/hw04-eda/">
+        <span class="n">05</span>
+        <span class="t">Нет предварительного анализа данных</span>
+        <span class="m">
+          
+          
+          <svg class="ico sm" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-arrow"/></svg>
+        </span>
+      </a></li>
+      
+      <li><a class="hb-item" href="/edufamcs-demo/handbook/mistakes/hw04-feature-engineering/">
+        <span class="n">06</span>
+        <span class="t">Нет работы с признаками</span>
+        <span class="m">
+          
+          
+          <svg class="ico sm" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-arrow"/></svg>
+        </span>
+      </a></li>
+      
+      <li><a class="hb-item" href="/edufamcs-demo/handbook/mistakes/hw04-split/">
+        <span class="n">07</span>
+        <span class="t">Нет разделения выборки</span>
+        <span class="m">
+          
+          
+          <svg class="ico sm" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-arrow"/></svg>
+        </span>
+      </a></li>
+      
+      <li><a class="hb-item" href="/edufamcs-demo/handbook/mistakes/hw04-regularization/">
+        <span class="n">08</span>
+        <span class="t">Нет регуляризации</span>
+        <span class="m">
+          
+          
+          <svg class="ico sm" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-arrow"/></svg>
+        </span>
+      </a></li>
+      
+      <li><a class="hb-item" href="/edufamcs-demo/handbook/mistakes/hw04-scaling/">
+        <span class="n">09</span>
+        <span class="t">Признаки не масштабированы</span>
+        <span class="m">
+          
+          
+          <svg class="ico sm" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-arrow"/></svg>
+        </span>
+      </a></li>
+      
+      <li><a class="hb-item" href="/edufamcs-demo/handbook/mistakes/hw04-reads-as-research/">
+        <span class="n">10</span>
+        <span class="t">Работа не читается как исследование</span>
+        <span class="m">
+          
+          
+          <svg class="ico sm" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-arrow"/></svg>
+        </span>
+      </a></li>
+      
+    </ol>
+  </section>
+  
+  <section class="hb-group">
+    <h2 class="h3 hb-group-t">ДЗ 5 · Логистическая регрессия с нуля</h2>
+    <ol class="hb-list">
+      
+      <li><a class="hb-item" href="/edufamcs-demo/handbook/mistakes/hw05-model-class/">
+        <span class="n">01</span>
+        <span class="t">Модель не собрана в класс</span>
+        <span class="m">
+          
+          
+          <svg class="ico sm" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-arrow"/></svg>
+        </span>
+      </a></li>
+      
+      <li><a class="hb-item" href="/edufamcs-demo/handbook/mistakes/hw05-log-loss/">
+        <span class="n">02</span>
+        <span class="t">Не реализован log-loss</span>
+        <span class="m">
+          
+          
+          <svg class="ico sm" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-arrow"/></svg>
+        </span>
+      </a></li>
+      
+      <li><a class="hb-item" href="/edufamcs-demo/handbook/mistakes/hw05-gradient-step/">
+        <span class="n">03</span>
+        <span class="t">Не реализован шаг градиентного спуска</span>
+        <span class="m">
+          
+          
+          <svg class="ico sm" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-arrow"/></svg>
+        </span>
+      </a></li>
+      
+      <li><a class="hb-item" href="/edufamcs-demo/handbook/mistakes/hw05-sigmoid/">
+        <span class="n">04</span>
+        <span class="t">Не реализована сигмоида</span>
+        <span class="m">
+          
+          
+          <svg class="ico sm" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-arrow"/></svg>
+        </span>
+      </a></li>
+      
+      <li><a class="hb-item" href="/edufamcs-demo/handbook/mistakes/hw05-split-scale/">
+        <span class="n">05</span>
+        <span class="t">Не сделан шаг 1: разделение и стандартизация</span>
+        <span class="m">
+          
+          
+          <svg class="ico sm" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-arrow"/></svg>
+        </span>
+      </a></li>
+      
+      <li><a class="hb-item" href="/edufamcs-demo/handbook/mistakes/hw05-roc/">
+        <span class="n">06</span>
+        <span class="t">Нет confusion matrix или ROC-кривой</span>
+        <span class="m">
+          
+          
+          <svg class="ico sm" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-arrow"/></svg>
+        </span>
+      </a></li>
+      
+      <li><a class="hb-item" href="/edufamcs-demo/handbook/mistakes/hw05-metrics/">
+        <span class="n">07</span>
+        <span class="t">Нет метрик качества своей модели</span>
+        <span class="m">
+          
+          
+          <svg class="ico sm" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-arrow"/></svg>
+        </span>
+      </a></li>
+      
+      <li><a class="hb-item" href="/edufamcs-demo/handbook/mistakes/hw05-final-questions/">
+        <span class="n">08</span>
+        <span class="t">Нет ответов на финальные вопросы</span>
+        <span class="m">
+          
+          
+          <svg class="ico sm" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-arrow"/></svg>
+        </span>
+      </a></li>
+      
+      <li><a class="hb-item" href="/edufamcs-demo/handbook/mistakes/hw05-compare-sklearn/">
+        <span class="n">09</span>
+        <span class="t">Нет сравнения со scikit-learn</span>
+        <span class="m">
+          
+          
+          <svg class="ico sm" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-arrow"/></svg>
+        </span>
+      </a></li>
+      
+      <li><a class="hb-item" href="/edufamcs-demo/handbook/mistakes/hw05-threshold/">
+        <span class="n">10</span>
+        <span class="t">Нет эксперимента с порогом классификации</span>
+        <span class="m">
+          
+          
+          <svg class="ico sm" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-arrow"/></svg>
+        </span>
+      </a></li>
+      
+      <li><a class="hb-item" href="/edufamcs-demo/handbook/mistakes/hw05-numerically-stable/">
+        <span class="n">11</span>
+        <span class="t">Реализация численно неустойчива</span>
+        <span class="m">
+          
+          
+          <svg class="ico sm" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-arrow"/></svg>
+        </span>
+      </a></li>
+      
+    </ol>
+  </section>
+  
+  <section class="hb-group">
+    <h2 class="h3 hb-group-t">ДЗ 6 · Наивный Байес с нуля</h2>
+    <ol class="hb-list">
+      
+      <li><a class="hb-item" href="/edufamcs-demo/handbook/mistakes/hw06-log-space/">
+        <span class="n">01</span>
+        <span class="t">Вычисления не в логарифмах</span>
+        <span class="m">
+          
+          
+          <svg class="ico sm" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-arrow"/></svg>
+        </span>
+      </a></li>
+      
+      <li><a class="hb-item" href="/edufamcs-demo/handbook/mistakes/hw06-model-class/">
+        <span class="n">02</span>
+        <span class="t">Классификатор не собран в класс</span>
+        <span class="m">
+          
+          
+          <svg class="ico sm" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-arrow"/></svg>
+        </span>
+      </a></li>
+      
+      <li><a class="hb-item" href="/edufamcs-demo/handbook/mistakes/hw06-params/">
+        <span class="n">03</span>
+        <span class="t">Не оценены параметры распределений по классам</span>
+        <span class="m">
+          
+          
+          <svg class="ico sm" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-arrow"/></svg>
+        </span>
+      </a></li>
+      
+      <li><a class="hb-item" href="/edufamcs-demo/handbook/mistakes/hw06-independence/">
+        <span class="n">04</span>
+        <span class="t">Не проверено допущение о независимости признаков</span>
+        <span class="m">
+          
+          
+          <svg class="ico sm" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-arrow"/></svg>
+        </span>
+      </a></li>
+      
+      <li><a class="hb-item" href="/edufamcs-demo/handbook/mistakes/hw06-loglik/">
+        <span class="n">05</span>
+        <span class="t">Не реализован log-likelihood</span>
+        <span class="m">
+          
+          
+          <svg class="ico sm" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-arrow"/></svg>
+        </span>
+      </a></li>
+      
+      <li><a class="hb-item" href="/edufamcs-demo/handbook/mistakes/hw06-priors/">
+        <span class="n">06</span>
+        <span class="t">Не реализована оценка априорных вероятностей</span>
+        <span class="m">
+          
+          
+          <svg class="ico sm" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-arrow"/></svg>
+        </span>
+      </a></li>
+      
+      <li><a class="hb-item" href="/edufamcs-demo/handbook/mistakes/hw06-metrics/">
+        <span class="n">07</span>
+        <span class="t">Нет метрик и матрицы ошибок</span>
+        <span class="m">
+          
+          
+          <svg class="ico sm" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-arrow"/></svg>
+        </span>
+      </a></li>
+      
+      <li><a class="hb-item" href="/edufamcs-demo/handbook/mistakes/hw06-final-questions/">
+        <span class="n">08</span>
+        <span class="t">Нет ответов на финальные вопросы</span>
+        <span class="m">
+          
+          
+          <svg class="ico sm" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-arrow"/></svg>
+        </span>
+      </a></li>
+      
+      <li><a class="hb-item" href="/edufamcs-demo/handbook/mistakes/hw06-split/">
+        <span class="n">09</span>
+        <span class="t">Нет разделения данных</span>
+        <span class="m">
+          
+          
+          <svg class="ico sm" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-arrow"/></svg>
+        </span>
+      </a></li>
+      
+      <li><a class="hb-item" href="/edufamcs-demo/handbook/mistakes/hw06-compare-sklearn/">
+        <span class="n">10</span>
+        <span class="t">Нет сравнения с GaussianNB из sklearn</span>
+        <span class="m">
+          
+          
+          <svg class="ico sm" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-arrow"/></svg>
+        </span>
+      </a></li>
+      
+    </ol>
+  </section>
+  
+  <section class="hb-group">
+    <h2 class="h3 hb-group-t">ДЗ 7 · Деревья решений</h2>
+    <ol class="hb-list">
+      
+      <li><a class="hb-item" href="/edufamcs-demo/handbook/mistakes/hw07-base-tree/">
+        <span class="n">01</span>
+        <span class="t">Не обучено дерево решений</span>
+        <span class="m">
+          
+          
+          <svg class="ico sm" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-arrow"/></svg>
+        </span>
+      </a></li>
+      
+      <li><a class="hb-item" href="/edufamcs-demo/handbook/mistakes/hw07-instability/">
+        <span class="n">02</span>
+        <span class="t">Не показана неустойчивость дерева</span>
+        <span class="m">
+          
+          
+          <svg class="ico sm" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-arrow"/></svg>
+        </span>
+      </a></li>
+      
+      <li><a class="hb-item" href="/edufamcs-demo/handbook/mistakes/hw07-postpruning/">
+        <span class="n">03</span>
+        <span class="t">Нет post-pruning через ccp_alpha</span>
+        <span class="m">
+          
+          
+          <svg class="ico sm" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-arrow"/></svg>
+        </span>
+      </a></li>
+      
+      <li><a class="hb-item" href="/edufamcs-demo/handbook/mistakes/hw07-prepruning/">
+        <span class="n">04</span>
+        <span class="t">Нет pre-pruning</span>
+        <span class="m">
+          
+          
+          <svg class="ico sm" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-arrow"/></svg>
+        </span>
+      </a></li>
+      
+      <li><a class="hb-item" href="/edufamcs-demo/handbook/mistakes/hw07-interpretation/">
+        <span class="n">05</span>
+        <span class="t">Нет интерпретации структуры дерева</span>
+        <span class="m">
+          
+          
+          <svg class="ico sm" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-arrow"/></svg>
+        </span>
+      </a></li>
+      
+      <li><a class="hb-item" href="/edufamcs-demo/handbook/mistakes/hw07-grid/">
+        <span class="n">06</span>
+        <span class="t">Нет поиска по сетке гиперпараметров</span>
+        <span class="m">
+          
+          
+          <svg class="ico sm" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-arrow"/></svg>
+        </span>
+      </a></li>
+      
+      <li><a class="hb-item" href="/edufamcs-demo/handbook/mistakes/hw07-missing/">
+        <span class="n">07</span>
+        <span class="t">Нет работы с пропусками</span>
+        <span class="m">
+          
+          
+          <svg class="ico sm" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-arrow"/></svg>
+        </span>
+      </a></li>
+      
+      <li><a class="hb-item" href="/edufamcs-demo/handbook/mistakes/hw07-visualize/">
+        <span class="n">08</span>
+        <span class="t">Структура дерева не визуализирована</span>
+        <span class="m">
+          
+          
+          <svg class="ico sm" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-arrow"/></svg>
+        </span>
+      </a></li>
+      
+    </ol>
+  </section>
+  
+  <section class="hb-group">
+    <h2 class="h3 hb-group-t">ДЗ 8 · Метод опорных векторов</h2>
+    <ol class="hb-list">
+      
+      <li><a class="hb-item" href="/edufamcs-demo/handbook/mistakes/hw08-pipeline/">
+        <span class="n">01</span>
+        <span class="t">Масштабирование не через Pipeline</span>
+        <span class="m">
+          
+          
+          <svg class="ico sm" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-arrow"/></svg>
+        </span>
+      </a></li>
+      
+      <li><a class="hb-item" href="/edufamcs-demo/handbook/mistakes/hw08-grid/">
+        <span class="n">02</span>
+        <span class="t">Не подобраны C и gamma</span>
+        <span class="m">
+          
+          
+          <svg class="ico sm" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-arrow"/></svg>
+        </span>
+      </a></li>
+      
+      <li><a class="hb-item" href="/edufamcs-demo/handbook/mistakes/hw08-no-scaling-demo/">
+        <span class="n">03</span>
+        <span class="t">Не показан SVM без масштабирования</span>
+        <span class="m">
+          
+          
+          <svg class="ico sm" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-arrow"/></svg>
+        </span>
+      </a></li>
+      
+      <li><a class="hb-item" href="/edufamcs-demo/handbook/mistakes/hw08-boundary/">
+        <span class="n">04</span>
+        <span class="t">Не построена граница решений</span>
+        <span class="m">
+          
+          
+          <svg class="ico sm" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-arrow"/></svg>
+        </span>
+      </a></li>
+      
+      <li><a class="hb-item" href="/edufamcs-demo/handbook/mistakes/hw08-confusion/">
+        <span class="n">05</span>
+        <span class="t">Нет confusion matrix</span>
+        <span class="m">
+          
+          
+          <svg class="ico sm" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-arrow"/></svg>
+        </span>
+      </a></li>
+      
+      <li><a class="hb-item" href="/edufamcs-demo/handbook/mistakes/hw08-error-analysis/">
+        <span class="n">06</span>
+        <span class="t">Нет анализа ошибок</span>
+        <span class="m">
+          
+          
+          <svg class="ico sm" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-arrow"/></svg>
+        </span>
+      </a></li>
+      
+      <li><a class="hb-item" href="/edufamcs-demo/handbook/mistakes/hw08-final-questions/">
+        <span class="n">07</span>
+        <span class="t">Нет ответов на финальные вопросы</span>
+        <span class="m">
+          
+          
+          <svg class="ico sm" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-arrow"/></svg>
+        </span>
+      </a></li>
+      
+      <li><a class="hb-item" href="/edufamcs-demo/handbook/mistakes/hw08-split/">
+        <span class="n">08</span>
+        <span class="t">Нет разделения данных</span>
+        <span class="m">
+          
+          
+          <svg class="ico sm" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-arrow"/></svg>
+        </span>
+      </a></li>
+      
+      <li><a class="hb-item" href="/edufamcs-demo/handbook/mistakes/hw08-linear-vs-rbf/">
+        <span class="n">09</span>
+        <span class="t">Нет сравнения линейного ядра и RBF</span>
+        <span class="m">
+          
+          
+          <svg class="ico sm" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-arrow"/></svg>
+        </span>
+      </a></li>
+      
+    </ol>
+  </section>
+  
+  <section class="hb-group">
+    <h2 class="h3 hb-group-t">ДЗ 9 · Случайный лес</h2>
+    <ol class="hb-list">
+      
+      <li><a class="hb-item" href="/edufamcs-demo/handbook/mistakes/hw09-depth-matched/">
+        <span class="n">01</span>
+        <span class="t">Глубина не задана явно</span>
+        <span class="m">
+          
+          
+          <svg class="ico sm" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-arrow"/></svg>
+        </span>
+      </a></li>
+      
+      <li><a class="hb-item" href="/edufamcs-demo/handbook/mistakes/hw09-forest/">
+        <span class="n">02</span>
+        <span class="t">Не обучен случайный лес</span>
+        <span class="m">
+          
+          
+          <svg class="ico sm" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-arrow"/></svg>
+        </span>
+      </a></li>
+      
+      <li><a class="hb-item" href="/edufamcs-demo/handbook/mistakes/hw09-importances/">
+        <span class="n">03</span>
+        <span class="t">Не показана важность признаков</span>
+        <span class="m">
+          
+          
+          <svg class="ico sm" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-arrow"/></svg>
+        </span>
+      </a></li>
+      
+      <li><a class="hb-item" href="/edufamcs-demo/handbook/mistakes/hw09-preprocessing/">
+        <span class="n">04</span>
+        <span class="t">Не показана подготовка данных</span>
+        <span class="m">
+          
+          
+          <svg class="ico sm" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-arrow"/></svg>
+        </span>
+      </a></li>
+      
+      <li><a class="hb-item" href="/edufamcs-demo/handbook/mistakes/hw09-speed/">
+        <span class="n">05</span>
+        <span class="t">Не сравнивалась скорость обучения</span>
+        <span class="m">
+          
+          
+          <svg class="ico sm" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-arrow"/></svg>
+        </span>
+      </a></li>
+      
+      <li><a class="hb-item" href="/edufamcs-demo/handbook/mistakes/hw09-metrics/">
+        <span class="n">06</span>
+        <span class="t">Не хватает метрик регрессии</span>
+        <span class="m">
+          
+          
+          <svg class="ico sm" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-arrow"/></svg>
+        </span>
+      </a></li>
+      
+      <li><a class="hb-item" href="/edufamcs-demo/handbook/mistakes/hw09-comparison-conclusion/">
+        <span class="n">07</span>
+        <span class="t">Нет вывода о сравнении моделей</span>
+        <span class="m">
+          
+          
+          <svg class="ico sm" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-arrow"/></svg>
+        </span>
+      </a></li>
+      
+      <li><a class="hb-item" href="/edufamcs-demo/handbook/mistakes/hw09-cv/">
+        <span class="n">08</span>
+        <span class="t">Нет кросс-валидации</span>
+        <span class="m">
+          
+          
+          <svg class="ico sm" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-arrow"/></svg>
+        </span>
+      </a></li>
+      
+      <li><a class="hb-item" href="/edufamcs-demo/handbook/mistakes/hw09-single-tree/">
+        <span class="n">09</span>
+        <span class="t">Нет одиночного дерева для сравнения</span>
+        <span class="m">
+          
+          
+          <svg class="ico sm" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-arrow"/></svg>
+        </span>
+      </a></li>
+      
+      <li><a class="hb-item" href="/edufamcs-demo/handbook/mistakes/hw09-split-questions/">
+        <span class="n">10</span>
+        <span class="t">Нет ответов про разбиение выборки</span>
+        <span class="m">
+          
+          
+          <svg class="ico sm" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-arrow"/></svg>
+        </span>
+      </a></li>
+      
+    </ol>
+  </section>
+  
+  <section class="hb-group">
+    <h2 class="h3 hb-group-t">ДЗ 10 · Градиентный бустинг</h2>
+    <ol class="hb-list">
+      
+      <li><a class="hb-item" href="/edufamcs-demo/handbook/mistakes/hw10-colsample/">
+        <span class="n">01</span>
+        <span class="t">Не добавлен параметр colsample_bytree</span>
+        <span class="m">
+          
+          
+          <svg class="ico sm" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-arrow"/></svg>
+        </span>
+      </a></li>
+      
+      <li><a class="hb-item" href="/edufamcs-demo/handbook/mistakes/hw10-subsample/">
+        <span class="n">02</span>
+        <span class="t">Не добавлен параметр subsample</span>
+        <span class="m">
+          
+          
+          <svg class="ico sm" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-arrow"/></svg>
+        </span>
+      </a></li>
+      
+      <li><a class="hb-item" href="/edufamcs-demo/handbook/mistakes/hw10-categorical/">
+        <span class="n">03</span>
+        <span class="t">Нет поддержки категориальных признаков</span>
+        <span class="m">
+          
+          
+          <svg class="ico sm" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-arrow"/></svg>
+        </span>
+      </a></li>
+      
+      <li><a class="hb-item" href="/edufamcs-demo/handbook/mistakes/hw10-importances/">
+        <span class="n">04</span>
+        <span class="t">Нет свойства feature_importances_</span>
+        <span class="m">
+          
+          
+          <svg class="ico sm" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-arrow"/></svg>
+        </span>
+      </a></li>
+      
+      <li><a class="hb-item" href="/edufamcs-demo/handbook/mistakes/hw10-own-boosting/">
+        <span class="n">05</span>
+        <span class="t">Нет собственной реализации бустинга</span>
+        <span class="m">
+          
+          
+          <svg class="ico sm" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-arrow"/></svg>
+        </span>
+      </a></li>
+      
+      <li><a class="hb-item" href="/edufamcs-demo/handbook/mistakes/hw10-quality-gap/">
+        <span class="n">06</span>
+        <span class="t">Своя реализация заметно хуже библиотечной</span>
+        <span class="m">
+          
+          
+          <svg class="ico sm" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-arrow"/></svg>
+        </span>
+      </a></li>
+      
+      <li><a class="hb-item" href="/edufamcs-demo/handbook/mistakes/hw10-comparison/">
+        <span class="n">07</span>
+        <span class="t">Своя реализация не сравнена с библиотечной</span>
+        <span class="m">
+          
+          
+          <svg class="ico sm" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-arrow"/></svg>
+        </span>
+      </a></li>
+      
+      <li><a class="hb-item" href="/edufamcs-demo/handbook/mistakes/hw10-libraries/">
+        <span class="n">08</span>
+        <span class="t">Сравнены не все три библиотеки</span>
+        <span class="m">
+          
+          
+          <svg class="ico sm" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-arrow"/></svg>
+        </span>
+      </a></li>
+      
+    </ol>
+  </section>
+  
+  <section class="hb-group">
+    <h2 class="h3 hb-group-t">ДЗ 11 · Подбор гиперпараметров и интерпретируемость</h2>
+    <ol class="hb-list">
+      
+      <li><a class="hb-item" href="/edufamcs-demo/handbook/mistakes/hw11-reads-importances/">
+        <span class="n">01</span>
+        <span class="t">Важности показаны, но не прочитаны</span>
+        <span class="m">
+          
+          
+          <svg class="ico sm" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-arrow"/></svg>
+        </span>
+      </a></li>
+      
+      <li><a class="hb-item" href="/edufamcs-demo/handbook/mistakes/hw11-cv-correct/">
+        <span class="n">02</span>
+        <span class="t">Гиперпараметры подобраны по тесту</span>
+        <span class="m">
+          
+          <span class="badge err dot">критично</span>
+          <svg class="ico sm" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-arrow"/></svg>
+        </span>
+      </a></li>
+      
+      <li><a class="hb-item" href="/edufamcs-demo/handbook/mistakes/hw11-optuna/">
+        <span class="n">03</span>
+        <span class="t">Не сделан бонус с Optuna</span>
+        <span class="m">
+          
+          
+          <svg class="ico sm" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-arrow"/></svg>
+        </span>
+      </a></li>
+      
+      <li><a class="hb-item" href="/edufamcs-demo/handbook/mistakes/hw11-grid-search/">
+        <span class="n">04</span>
+        <span class="t">Нет Grid Search</span>
+        <span class="m">
+          
+          
+          <svg class="ico sm" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-arrow"/></svg>
+        </span>
+      </a></li>
+      
+      <li><a class="hb-item" href="/edufamcs-demo/handbook/mistakes/hw11-pdp/">
+        <span class="n">05</span>
+        <span class="t">Нет PDP и ICE-кривых</span>
+        <span class="m">
+          
+          
+          <svg class="ico sm" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-arrow"/></svg>
+        </span>
+      </a></li>
+      
+      <li><a class="hb-item" href="/edufamcs-demo/handbook/mistakes/hw11-permutation/">
+        <span class="n">06</span>
+        <span class="t">Нет Permutation Importance</span>
+        <span class="m">
+          
+          
+          <svg class="ico sm" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-arrow"/></svg>
+        </span>
+      </a></li>
+      
+      <li><a class="hb-item" href="/edufamcs-demo/handbook/mistakes/hw11-random-search/">
+        <span class="n">07</span>
+        <span class="t">Нет Random Search</span>
+        <span class="m">
+          
+          
+          <svg class="ico sm" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-arrow"/></svg>
+        </span>
+      </a></li>
+      
+      <li><a class="hb-item" href="/edufamcs-demo/handbook/mistakes/hw11-shap/">
+        <span class="n">08</span>
+        <span class="t">Нет SHAP</span>
+        <span class="m">
+          
+          
+          <svg class="ico sm" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-arrow"/></svg>
+        </span>
+      </a></li>
+      
+      <li><a class="hb-item" href="/edufamcs-demo/handbook/mistakes/hw11-baselines/">
+        <span class="n">09</span>
+        <span class="t">Нет базовых моделей без тюнинга</span>
+        <span class="m">
+          
+          
+          <svg class="ico sm" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-arrow"/></svg>
+        </span>
+      </a></li>
+      
+      <li><a class="hb-item" href="/edufamcs-demo/handbook/mistakes/hw11-leak-diagnostics/">
+        <span class="n">10</span>
+        <span class="t">Нет диагностики подозрительных признаков</span>
+        <span class="m">
+          
+          
+          <svg class="ico sm" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-arrow"/></svg>
+        </span>
+      </a></li>
+      
+      <li><a class="hb-item" href="/edufamcs-demo/handbook/mistakes/hw11-summary/">
+        <span class="n">11</span>
+        <span class="t">Нет сводной таблицы и итогов</span>
+        <span class="m">
+          
+          
+          <svg class="ico sm" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-arrow"/></svg>
+        </span>
+      </a></li>
+      
+    </ol>
+  </section>
+  
+  <section class="hb-group">
+    <h2 class="h3 hb-group-t">ДЗ 12 · Кластеризация: DBSCAN</h2>
+    <ol class="hb-list">
+      
+      <li><a class="hb-item" href="/edufamcs-demo/handbook/mistakes/hw12-dbscan/">
+        <span class="n">01</span>
+        <span class="t">DBSCAN не применён</span>
+        <span class="m">
+          
+          
+          <svg class="ico sm" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-arrow"/></svg>
+        </span>
+      </a></li>
+      
+      <li><a class="hb-item" href="/edufamcs-demo/handbook/mistakes/hw12-noise/">
+        <span class="n">02</span>
+        <span class="t">Не разобрана работа с шумом</span>
+        <span class="m">
+          
+          
+          <svg class="ico sm" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-arrow"/></svg>
+        </span>
+      </a></li>
+      
+      <li><a class="hb-item" href="/edufamcs-demo/handbook/mistakes/hw12-params/">
+        <span class="n">03</span>
+        <span class="t">Не разобрано влияние eps и min_samples</span>
+        <span class="m">
+          
+          
+          <svg class="ico sm" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-arrow"/></svg>
+        </span>
+      </a></li>
+      
+      <li><a class="hb-item" href="/edufamcs-demo/handbook/mistakes/hw12-scaling/">
+        <span class="n">04</span>
+        <span class="t">Нет масштабирования перед кластеризацией</span>
+        <span class="m">
+          
+          
+          <svg class="ico sm" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-arrow"/></svg>
+        </span>
+      </a></li>
+      
+      <li><a class="hb-item" href="/edufamcs-demo/handbook/mistakes/hw12-reflection-answers/">
+        <span class="n">05</span>
+        <span class="t">Нет ответов на вопросы для размышления</span>
+        <span class="m">
+          
+          
+          <svg class="ico sm" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-arrow"/></svg>
+        </span>
+      </a></li>
+      
+      <li><a class="hb-item" href="/edufamcs-demo/handbook/mistakes/hw12-k-distance/">
+        <span class="n">06</span>
+        <span class="t">Нет подбора eps через k-distance plot</span>
+        <span class="m">
+          
+          
+          <svg class="ico sm" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-arrow"/></svg>
+        </span>
+      </a></li>
+      
+      <li><a class="hb-item" href="/edufamcs-demo/handbook/mistakes/hw12-silhouette/">
+        <span class="n">07</span>
+        <span class="t">Нет силуэта</span>
+        <span class="m">
+          
+          
+          <svg class="ico sm" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-arrow"/></svg>
+        </span>
+      </a></li>
+      
+      <li><a class="hb-item" href="/edufamcs-demo/handbook/mistakes/hw12-kmeans-compare/">
+        <span class="n">08</span>
+        <span class="t">Нет сравнения с K-Means</span>
+        <span class="m">
+          
+          
+          <svg class="ico sm" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-arrow"/></svg>
+        </span>
+      </a></li>
+      
+    </ol>
+  </section>
+  
+  <section class="hb-group">
+    <h2 class="h3 hb-group-t">ДЗ 13 · Снижение размерности: PCA, t-SNE, UMAP</h2>
+    <ol class="hb-list">
+      
+      <li><a class="hb-item" href="/edufamcs-demo/handbook/mistakes/hw13-downstream/">
+        <span class="n">01</span>
+        <span class="t">PCA не использован как препроцессинг</span>
+        <span class="m">
+          
+          
+          <svg class="ico sm" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-arrow"/></svg>
+        </span>
+      </a></li>
+      
+      <li><a class="hb-item" href="/edufamcs-demo/handbook/mistakes/hw13-pca/">
+        <span class="n">02</span>
+        <span class="t">PCA не применён</span>
+        <span class="m">
+          
+          
+          <svg class="ico sm" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-arrow"/></svg>
+        </span>
+      </a></li>
+      
+      <li><a class="hb-item" href="/edufamcs-demo/handbook/mistakes/hw13-umap/">
+        <span class="n">03</span>
+        <span class="t">Не применён UMAP</span>
+        <span class="m">
+          
+          
+          <svg class="ico sm" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-arrow"/></svg>
+        </span>
+      </a></li>
+      
+      <li><a class="hb-item" href="/edufamcs-demo/handbook/mistakes/hw13-tsne/">
+        <span class="n">04</span>
+        <span class="t">Не применён t-SNE</span>
+        <span class="m">
+          
+          
+          <svg class="ico sm" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-arrow"/></svg>
+        </span>
+      </a></li>
+      
+      <li><a class="hb-item" href="/edufamcs-demo/handbook/mistakes/hw13-conclusions/">
+        <span class="n">05</span>
+        <span class="t">Нет выводов о структуре данных в проекциях</span>
+        <span class="m">
+          
+          
+          <svg class="ico sm" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-arrow"/></svg>
+        </span>
+      </a></li>
+      
+      <li><a class="hb-item" href="/edufamcs-demo/handbook/mistakes/hw13-loadings/">
+        <span class="n">06</span>
+        <span class="t">Нет интерпретации компонент</span>
+        <span class="m">
+          
+          
+          <svg class="ico sm" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-arrow"/></svg>
+        </span>
+      </a></li>
+      
+      <li><a class="hb-item" href="/edufamcs-demo/handbook/mistakes/hw13-cumulative/">
+        <span class="n">07</span>
+        <span class="t">Нет накопленной доли дисперсии</span>
+        <span class="m">
+          
+          
+          <svg class="ico sm" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-arrow"/></svg>
+        </span>
+      </a></li>
+      
+      <li><a class="hb-item" href="/edufamcs-demo/handbook/mistakes/hw13-explained-variance/">
+        <span class="n">08</span>
+        <span class="t">Нет объяснённой дисперсии</span>
+        <span class="m">
+          
+          
+          <svg class="ico sm" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-arrow"/></svg>
+        </span>
+      </a></li>
+      
+      <li><a class="hb-item" href="/edufamcs-demo/handbook/mistakes/hw13-scaling/">
+        <span class="n">09</span>
+        <span class="t">Нет стандартизации перед PCA</span>
+        <span class="m">
+          
+          
+          <svg class="ico sm" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-arrow"/></svg>
+        </span>
+      </a></li>
+      
+    </ol>
+  </section>
+  
+  
+</div>
+
+
+</main>
+
+<footer class="ftr" data-theme="dark">
+  <svg class="sym fern" viewBox="0 0 40.5 65.02" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#fern"/></svg>
+  <div class="container">
+    <div class="ftr-row">
+      <a href="/edufamcs-demo/" aria-label="EDU FAMCS — главная"><img src="/edufamcs-demo/static/brand/logo/logo-edu-dark.svg" alt="EDU FAMCS" width="196" height="40"></a>
+      <ul class="ftr-links">
+        <li><a href="/edufamcs-demo/#courses">Курсы</a></li>
+        <li><a href="/edufamcs-demo/ml/">Машинное обучение</a></li>
+        <li><a href="/edufamcs-demo/handbook/">Хендбук</a></li>
+        <li><a href="/edufamcs-demo/news/">Новости</a></li>
+        <li><a href="/edufamcs-demo/people/">Авторы</a></li>
+        <li><a href="/edufamcs-demo/about/">О&nbsp;нас</a></li>
+        <li><a href="/edufamcs-demo/propose/">Предложить или исправить</a></li>
+        <li><a href="/edufamcs-demo/privacy/">Конфиденциальность</a></li>
+      </ul>
+    </div>
+    <div class="ftr-big" aria-hidden="true">EDU<span class="d">·</span>FAMCS</div>
+    <p class="ftr-copy">© 2026 EDU FAMCS · Минск</p>
+  </div>
+</footer>
+
+<div class="toasts-region" aria-live="polite" id="toasts">
+
+</div>
+
+</body>
+</html>

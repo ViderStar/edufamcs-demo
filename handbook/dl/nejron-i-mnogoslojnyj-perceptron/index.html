@@ -1,0 +1,270 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Нейрон и многослойный перцептрон · EDU FAMCS</title>
+<meta name="description" content="Нейрон и многослойный перцептрон — Введение в глубокое обучение. Хендбук ML-курса ФПМИ.">
+<meta name="theme-color" content="#060A16">
+<meta name="robots" content="noindex, nofollow">
+<meta name="htmx-config" content='{"allowEval":false,"includeIndicatorStyles":false,"historyCacheSize":0,"selfRequestsOnly":true}'>
+<meta name="katex-js" content="/edufamcs-demo/static/vendor/katex/katex.min.js">
+<meta name="katex-css" content="/edufamcs-demo/static/vendor/katex/katex.min.css">
+<link rel="icon" href="/edufamcs-demo/static/brand/logo/favicon-16.svg" type="image/svg+xml" sizes="16x16">
+<link rel="icon" href="/edufamcs-demo/static/brand/logo/favicon.svg" type="image/svg+xml" sizes="any">
+<link rel="preload" href="/edufamcs-demo/static/brand/fonts/manrope-cyrillic-400.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/edufamcs-demo/static/brand/fonts/unbounded-cyrillic-800.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="/edufamcs-demo/static/brand/fonts.css">
+<link rel="stylesheet" href="/edufamcs-demo/static/brand/tokens.css">
+<link rel="stylesheet" href="/edufamcs-demo/static/brand/components.css">
+<link rel="stylesheet" href="/edufamcs-demo/static/css/site.css">
+<link rel="stylesheet" href="/edufamcs-demo/static/css/hub.css">
+<link rel="stylesheet" href="/edufamcs-demo/static/css/about.css">
+<link rel="stylesheet" href="/edufamcs-demo/static/handbook/handbook.css">
+<script src="/edufamcs-demo/static/js/theme.js"></script>
+<script src="/edufamcs-demo/static/vendor/htmx/htmx.min.js" defer></script>
+<script src="/edufamcs-demo/static/vendor/alpine/alpine-csp.min.js" defer></script>
+<script src="/edufamcs-demo/static/js/site.js" defer></script>
+<script src="/edufamcs-demo/static/handbook/handbook.js" defer></script>
+</head>
+<body class="" hx-headers='{"X-CSRFToken": "0eZ4ZNQlkmbb6IBrtO4OvEEhr67j06DqpYy8JLDIfdzklhMa01NWs9amZOdOygla"}'>
+<a class="skip" href="#main">К содержанию</a>
+<div class="demo-bar" role="note">Демо-версия для отзывов: вход, запись на курсы и формы здесь не работают.</div>
+
+<header class="hdr">
+  <div class="container">
+    <a class="brand" href="/edufamcs-demo/" aria-label="EDU FAMCS — главная">
+      <span class="full"><img class="only-light" src="/edufamcs-demo/static/brand/logo/logo-edu-light.svg" alt="EDU FAMCS" width="196" height="40"><img class="only-dark" src="/edufamcs-demo/static/brand/logo/logo-edu-dark.svg" alt="EDU FAMCS" width="196" height="40"></span>
+      <span class="short"><img class="only-light" src="/edufamcs-demo/static/brand/logo/logo-edu-light.svg" alt="EDU FAMCS" height="30"><img class="only-dark" src="/edufamcs-demo/static/brand/logo/logo-edu-dark.svg" alt="EDU FAMCS" height="30"></span>
+    </a>
+    <nav class="nav" id="main-nav" aria-label="Основная навигация">
+      <a href="/edufamcs-demo/#courses">Курсы</a>
+      <a href="/edufamcs-demo/ml/" >Машинное обучение</a>
+      
+      <a href="/edufamcs-demo/handbook/" aria-current="page">Хендбук</a>
+      <a href="/edufamcs-demo/news/" >Новости</a>
+      <a href="/edufamcs-demo/people/" >Авторы</a>
+      <a href="/edufamcs-demo/about/" >О&nbsp;нас</a>
+    </nav>
+    <div class="hdr-actions">
+      
+      <a class="btn btn-outline btn-login" href="/edufamcs-demo/accounts/login/?next=/handbook/dl/nejron-i-mnogoslojnyj-perceptron/">Войти</a>
+      
+      <button class="icon-btn menu-btn" type="button" aria-label="Меню" aria-expanded="false" aria-controls="main-nav"><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-menu"/></svg></button>
+    </div>
+  </div>
+</header>
+
+<main id="main">
+
+
+
+<div class="container hb-page hb-tone">
+  <div class="hb">
+    <aside class="hb-nav" aria-label="Статьи раздела">
+      
+<form class="hb-search" action="/edufamcs-demo/handbook/search/" method="get" role="search">
+  <svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-search"/></svg>
+  <input class="input" type="search" name="q" value="" placeholder="Поиск по хендбуку" aria-label="Поиск по хендбуку" autocomplete="off" maxlength="120"
+    hx-get="/edufamcs-demo/handbook/search/" hx-trigger="input changed delay:250ms, search" hx-target="#hb-nav-results" hx-sync="this:replace">
+</form>
+
+      <div id="hb-nav-results" class="hb-nav-results" aria-live="polite"></div>
+      <a class="grp" href="/edufamcs-demo/handbook/dl/">Основы нейросетей</a>
+      
+      <a class="cur" href="/edufamcs-demo/handbook/dl/nejron-i-mnogoslojnyj-perceptron/" aria-current="page">Нейрон и многослойный перцептрон</a>
+      
+      <a class="" href="/edufamcs-demo/handbook/dl/obratnoe-rasprostranenie-oshibki/">Обратное распространение ошибки</a>
+      
+      <a class="" href="/edufamcs-demo/handbook/dl/optimizatory-i-regulyarizaciya/">Оптимизаторы, регуляризация и практика обучения</a>
+      
+    </aside>
+
+    <article class="hb-main">
+      <nav class="crumbs" aria-label="Навигация"><a href="/edufamcs-demo/handbook/">Хендбук</a><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-chev"/></svg><a href="/edufamcs-demo/handbook/dl/">Введение в глубокое обучение</a></nav>
+      <h1 class="h1">Нейрон и многослойный перцептрон</h1>
+      <div class="hb-meta">
+        
+        
+        <span><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-clock"/></svg>11&nbsp;мин</span>
+        <span class="hb-authors"><span class="avatar sm" title="Артем Лебедевич">АЛ</span>Артем Лебедевич</span>
+        <span><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-edit"/></svg>9 ноября 2026</span>
+        
+        
+      </div>
+
+      
+      <details class="hb-mtoc">
+        <summary><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-list"/></svg>Содержание<svg class="ico sm" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-chev-down"/></svg></summary>
+        <a class="l2" href="#нейрон-от-биологии-к-формуле">Нейрон: от биологии к формуле</a><a class="l2" href="#линейный-слой">Линейный слой</a><a class="l2" href="#зачем-нужны-нелинейности">Зачем нужны нелинейности</a><a class="l2" href="#функции-активации">Функции активации</a><a class="l2" href="#mlp-как-композиция">MLP как композиция</a><a class="l2" href="#универсальная-аппроксимация-и-глубина">Универсальная аппроксимация и глубина</a><a class="l2" href="#выходные-головы-и-потери">Выходные головы и потери</a><a class="l2" href="#почему-нейросети-хорошо-работают">Почему нейросети хорошо работают</a><a class="l2" href="#код-mlp-на-pytorch-и-один-шаг-обучения">Код: MLP на PyTorch и один шаг обучения</a><a class="l2" href="#практика-и-подводные-камни">Практика и подводные камни</a><a class="l2" href="#что-почитать">Что почитать</a>
+      </details>
+      
+
+      <div class="prose"><p>Нейронная сеть — это параметрическая функция, собранная из простых блоков «линейное преобразование + нелинейность», у которой все параметры подбираются градиентным спуском. Ничего более загадочного в основе нет. Всё, что отличает глубокое обучение от классического ML, — это способность сети <strong>сама строить признаки</strong> вместо того, чтобы мы руками проектировали их для линейной модели или бустинга.</p>
+<h2 id="нейрон-от-биологии-к-формуле">Нейрон: от биологии к формуле</h2>
+<p>В 1943 году Маккалок и Питтс предложили модель нейрона как логического порогового элемента: вход — набор бинарных сигналов, выход — 1, если взвешенная сумма превысила порог. Это не обучаемая модель, веса заданы вручную, но из таких элементов можно собрать любую булеву функцию.</p>
+<p>В 1958 году Розенблатт добавил <strong>обучение</strong>. Перцептрон считает</p>
+<div class="tex tex-block">\hat y = \mathbb{1}[\,w^\top x + b &gt; 0\,],</div>
+<p>а веса обновляются только на ошибках: если <span class="tex">\hat y \ne y</span>, то <span class="tex">w \leftarrow w + \eta\,(y-\hat y)\,x</span>. Для линейно разделимых данных правило сходится за конечное число шагов. Это ровно тот же класс разделяющих поверхностей, что у линейного SVM и логистической регрессии: гиперплоскость.</p>
+<p>Предел подхода показали Минский и Паперт в 1969 году: одним нейроном нельзя представить <strong>XOR</strong>. Точки <span class="tex">(0,0),(1,1)</span> принадлежат одному классу, <span class="tex">(0,1),(1,0)</span> — другому, и никакая прямая их не разделяет. Решение известно давно — добавить скрытый слой: <span class="tex">\text{XOR}(a,b) = \text{OR}(a,b)\wedge\neg\text{AND}(a,b)</span>, и каждая из частей линейно разделима. Но обучать многослойные сети тогда не умели, и интерес к области угас почти на два десятилетия, пока не вернулось обратное распространение ошибки (следующая статья).</p>
+<h2 id="линейный-слой">Линейный слой</h2>
+<p>Основной блок современных сетей — линейный слой</p>
+<div class="tex tex-block">\text{Linear}(x) = Wx + b,\qquad W\in\mathbb{R}^{d_{out}\times d_{in}},\; b\in\mathbb{R}^{d_{out}}.</div>
+<p>Запись <code>Linear(d_in, d_out)</code> означает именно такие размерности. Параметров в слое <span class="tex">d_{out}\,d_{in} + d_{out}</span>. На батче <span class="tex">X\in\mathbb{R}^{B\times d_{in}}</span> слой считается одним матричным умножением <span class="tex">XW^\top + b</span>, поэтому он так хорошо ложится на GPU.</p>
+<h2 id="зачем-нужны-нелинейности">Зачем нужны нелинейности</h2>
+<p>Уберём из сети активации и оставим только слои:</p>
+<div class="tex tex-block">W_3(W_2(W_1 x)) = (W_3W_2W_1)\,x = W_{new}\,x.</div>
+<p>По ассоциативности произведение матриц снова матрица. Сеть из 100 линейных слоёв эквивалентна одному слою, то есть обычной линейной регрессии (добавление смещений ничего не меняет: композиция аффинных отображений аффинна). Нелинейность между слоями — единственное, что даёт сети выразительность: она «искривляет» пространство признаков, и в новом пространстве классы становятся разделимыми.</p>
+<h2 id="функции-активации">Функции активации</h2>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>Активация</th>
+<th>Формула</th>
+<th>Производная</th>
+<th>Заметки</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>сигмоида</td>
+<td><span class="tex">\sigma(z)=\frac{1}{1+e^{-z}}</span></td>
+<td><span class="tex">\sigma(z)(1-\sigma(z))\le 0{,}25</span></td>
+<td>выход в <span class="tex">(0,1)</span>; насыщается, градиент затухает</td>
+</tr>
+<tr>
+<td>tanh</td>
+<td><span class="tex">\frac{e^z-e^{-z}}{e^z+e^{-z}}</span></td>
+<td><span class="tex">1-\tanh^2 z\le 1</span></td>
+<td>центрирована в нуле; всё ещё насыщается</td>
+</tr>
+<tr>
+<td>ReLU</td>
+<td><span class="tex">\max(0,z)</span></td>
+<td><span class="tex">\mathbb 1[z&gt;0]</span></td>
+<td>дёшево, не насыщается при <span class="tex">z&gt;0</span>; «мёртвые» нейроны при <span class="tex">z&lt;0</span></td>
+</tr>
+<tr>
+<td>GELU</td>
+<td><span class="tex">z\,\Phi(z)</span></td>
+<td><span class="tex">\Phi(z)+z\varphi(z)</span></td>
+<td>гладкая «ReLU»; BERT, GPT-2, ViT</td>
+</tr>
+</tbody>
+</table></div>
+<p>Сигмоида и tanh были стандартом до 2010-х, но у них есть проблема: при <span class="tex">|z|\gg 1</span> производная почти нулевая, и градиент через несколько слоёв затухает. У ReLU для положительных входов производная равна единице. Наир и Хинтон (2010) применили её в ограниченных машинах Больцмана, Глоро, Борд и Бенджио (2011) показали, что глубокие сети с ReLU обучаются без послойного предобучения, а в AlexNet (2012) ReLU ускорила обучение в несколько раз по сравнению с tanh. Недостаток ReLU — если смещение сдвинуло нейрон в область <span class="tex">z&lt;0</span> для всех объектов, градиент в нём всегда ноль и нейрон «умирает». Лечат Leaky ReLU (<span class="tex">\max(\alpha z, z)</span>, <span class="tex">\alpha\approx0{,}01</span>) или гладкими вариантами. GELU (Hendrycks и Gimpel, 2016) взвешивает вход вероятностью <span class="tex">\Phi(z)</span> того, что стандартная нормальная величина не превзойдёт его; на практике считают приближение <span class="tex">0{,}5z\,(1+\tanh(\sqrt{2/\pi}(z+0{,}044715z^3)))</span> или встроенный <code>nn.GELU</code>. Она гладкая и немонотонная при отрицательных <span class="tex">z</span> (минимум около <span class="tex">z\approx-0{,}75</span>). GELU используют BERT, GPT-2 и ViT; в современных больших языковых моделях её чаще заменяет вентильный вариант SwiGLU (Shazeer, 2020).</p>
+<h2 id="mlp-как-композиция">MLP как композиция</h2>
+<p><strong>Многослойный перцептрон</strong> (MLP, полносвязная сеть) — это</p>
+<div class="tex tex-block">h_0 = x,\qquad h_i = \sigma\big(\text{Linear}_i(h_{i-1})\big),\; i=1,\dots,N-1,\qquad f(x)=\text{Linear}_N(h_{N-1}).</div>
+<p>Конфигурация делится на две части. <strong>Параметры задачи</strong> задаются данными: <span class="tex">d_{in}</span> — число признаков, <span class="tex">d_{out}</span> — то, что мы предсказываем. <strong>Гиперпараметры</strong> выбираем сами: глубина (число скрытых слоёв) и ширина <span class="tex">d_{hidden}</span>.</p>
+<p>Подсчёт параметров. Сеть <span class="tex">d_{in}=100 \to 256 \to 256 \to 10</span> имеет</p>
+<div class="tex tex-block">(100\cdot256+256)+(256\cdot256+256)+(256\cdot10+10)=25\,856+65\,792+2\,570=94\,218.</div>
+<p>Умение быстро прикинуть число параметров полезно и на собеседовании, и для оценки памяти: веса в <code>float32</code> занимают 4 байта на параметр, а Adam хранит ещё два буфера такого же размера (см. статью про оптимизаторы).</p>
+<h2 id="универсальная-аппроксимация-и-глубина">Универсальная аппроксимация и глубина</h2>
+<p>Цыбенко (1989) доказал: сеть с одним скрытым слоем <span class="tex">\hat f(x)=w_2^\top\sigma(W_1x+b_1)+b_2</span> с сигмоидной активацией при достаточной ширине равномерно приближает любую непрерывную функцию на единичном кубе (а значит, на любом компакте) с любой точностью <span class="tex">\varepsilon</span>. Хорник (1991) обобщил результат на широкий класс активаций. Это теорема существования, и у неё три оговорки:</p>
+<ul>
+<li>она не говорит, <strong>сколько</strong> нейронов нужно, — оно может расти экспоненциально с размерностью;</li>
+<li>она не гарантирует, что градиентный спуск такие веса найдёт;</li>
+<li>она не говорит про обобщение: приблизить обучающую выборку и предсказывать на новых данных — разные вещи.</li>
+</ul>
+<p>Глубина нужна потому, что многие функции компактно выражаются композицией и экспоненциально дороги в одном слое. Есть классы функций, для которых глубокая сеть требует полиномиального числа нейронов, а мелкая — экспоненциального (Telgarsky, 2016; Eldan и Shamir, 2016). Кроме того, композиция естественно задаёт иерархию признаков: в изображениях это границы, затем текстуры, затем части объектов.</p>
+<h2 id="выходные-головы-и-потери">Выходные головы и потери</h2>
+<p>Последний слой и функция потерь определяются задачей.</p>
+<p><strong>Регрессия.</strong> <span class="tex">d_{out}=1</span> (или <span class="tex">K</span> для нескольких целей), выход без активации, потеря — MSE: <span class="tex">L=\frac1B\sum_i(\hat y_i-y_i)^2</span>. Это максимизация правдоподобия при гауссовом шуме. При выбросах берут Huber или MAE.</p>
+<p><strong>Многоклассовая классификация.</strong> <span class="tex">d_{out}=C</span>, сеть выдаёт <strong>логиты</strong> <span class="tex">z\in\mathbb R^C</span>, а softmax превращает их в распределение:</p>
+<div class="tex tex-block">\text{softmax}(z)_i=\frac{e^{z_i}}{\sum_{j=1}^C e^{z_j}}.</div>
+<p>Потеря — кросс-энтропия <span class="tex">L=-\log p_y = -z_y+\log\sum_j e^{z_j}</span>. Градиент по логитам удивительно прост: <span class="tex">\partial L/\partial z = p - \text{onehot}(y)</span>. В PyTorch <code>nn.CrossEntropyLoss</code> принимает <strong>логиты</strong> и сама делает log-softmax в численно устойчивой форме (через <code>logsumexp</code>). Поэтому softmax перед ней добавлять нельзя — частая ошибка.</p>
+<p><strong>Бинарная классификация</strong> — <span class="tex">d_{out}=1</span>, потеря <code>BCEWithLogitsLoss</code> (сигмоида внутри).</p>
+<p>Отсюда ключевое наблюдение: <strong>логистическая регрессия — это сеть из одного нейрона</strong> с сигмоидой и кросс-энтропией, а softmax-регрессия — один линейный слой с softmax. Градиент <span class="tex">\nabla_w L = \frac1n X^\top(\hat y - y)</span>, который мы выводили в статье про <a href="/edufamcs-demo/handbook/classic/logisticheskaya-regressiya-i-metriki/" rel="noopener noreferrer nofollow">логистическую регрессию и метрики</a>, — частный случай общего правила для головы сети. Всё остальное в MLP — это скрытые слои, превращающие <span class="tex">x</span> в такое представление <span class="tex">h_{N-1}</span>, на котором эта простая линейная модель работает хорошо.</p>
+<h2 id="почему-нейросети-хорошо-работают">Почему нейросети хорошо работают</h2>
+<p>Классический ML на табличных данных зависит от feature engineering: бустингу и линейной модели нужны осмысленные признаки. Нейросеть учит <strong>представление</strong> (representation) вместе с классификатором: скрытые слои — это выученные признаки, настроенные именно на вашу функцию потерь. Поэтому на «сырых» данных — пиксели, текст, звук, последовательности событий — сети давно вне конкуренции, а на небольших табличных данных бустинг по-прежнему часто выигрывает. Эмбеддинги пользователей и товаров в <a href="/edufamcs-demo/handbook/recsys/two-tower-ann/" rel="noopener noreferrer nofollow">двухбашенной модели</a> — тот же принцип: представления учатся из сигнала взаимодействий.</p>
+<p>Добавим к этому дифференцируемость: любые блоки, составленные из дифференцируемых операций, можно стыковать и обучать совместно, а градиент сразу по всем параметрам такой конструкции даёт backprop.</p>
+<h2 id="код-mlp-на-pytorch-и-один-шаг-обучения">Код: MLP на PyTorch и один шаг обучения</h2>
+<div class="code"><div class="code-head"><span class="lang">python</span></div><pre><code><span class="tok-k">import</span> torch
+<span class="tok-k">from</span> torch <span class="tok-k">import</span> nn
+
+d_in<span class="tok-p">,</span> d_hidden<span class="tok-p">,</span> n_classes <span class="tok-p">=</span> <span class="tok-n">100</span><span class="tok-p">,</span> <span class="tok-n">256</span><span class="tok-p">,</span> <span class="tok-n">10</span>
+model <span class="tok-p">=</span> nn<span class="tok-p">.</span>Sequential<span class="tok-p">(</span>
+    nn<span class="tok-p">.</span>Linear<span class="tok-p">(</span>d_in<span class="tok-p">,</span> d_hidden<span class="tok-p">)</span><span class="tok-p">,</span> nn<span class="tok-p">.</span>ReLU<span class="tok-p">(</span><span class="tok-p">)</span><span class="tok-p">,</span>
+    nn<span class="tok-p">.</span>Linear<span class="tok-p">(</span>d_hidden<span class="tok-p">,</span> d_hidden<span class="tok-p">)</span><span class="tok-p">,</span> nn<span class="tok-p">.</span>ReLU<span class="tok-p">(</span><span class="tok-p">)</span><span class="tok-p">,</span>
+    nn<span class="tok-p">.</span>Linear<span class="tok-p">(</span>d_hidden<span class="tok-p">,</span> n_classes<span class="tok-p">)</span><span class="tok-p">,</span>          <span class="tok-c"># логиты, без softmax</span>
+<span class="tok-p">)</span>
+<span class="tok-f">print</span><span class="tok-p">(</span><span class="tok-f">sum</span><span class="tok-p">(</span>p<span class="tok-p">.</span>numel<span class="tok-p">(</span><span class="tok-p">)</span> <span class="tok-k">for</span> p <span class="tok-k">in</span> model<span class="tok-p">.</span>parameters<span class="tok-p">(</span><span class="tok-p">)</span><span class="tok-p">)</span><span class="tok-p">)</span>   <span class="tok-c"># 94218</span>
+
+loss_fn <span class="tok-p">=</span> nn<span class="tok-p">.</span>CrossEntropyLoss<span class="tok-p">(</span><span class="tok-p">)</span>
+opt <span class="tok-p">=</span> torch<span class="tok-p">.</span>optim<span class="tok-p">.</span>SGD<span class="tok-p">(</span>model<span class="tok-p">.</span>parameters<span class="tok-p">(</span><span class="tok-p">)</span><span class="tok-p">,</span> lr<span class="tok-p">=</span><span class="tok-n">1e-2</span><span class="tok-p">)</span>
+
+x <span class="tok-p">=</span> torch<span class="tok-p">.</span>randn<span class="tok-p">(</span><span class="tok-n">32</span><span class="tok-p">,</span> d_in<span class="tok-p">)</span>                    <span class="tok-c"># батч признаков</span>
+y <span class="tok-p">=</span> torch<span class="tok-p">.</span>randint<span class="tok-p">(</span><span class="tok-n">0</span><span class="tok-p">,</span> n_classes<span class="tok-p">,</span> <span class="tok-p">(</span><span class="tok-n">32</span><span class="tok-p">,</span><span class="tok-p">)</span><span class="tok-p">)</span>       <span class="tok-c"># метки классов (int64)</span>
+
+opt<span class="tok-p">.</span>zero_grad<span class="tok-p">(</span><span class="tok-p">)</span>                              <span class="tok-c"># обнулить накопленные градиенты</span>
+loss <span class="tok-p">=</span> loss_fn<span class="tok-p">(</span>model<span class="tok-p">(</span>x<span class="tok-p">)</span><span class="tok-p">,</span> y<span class="tok-p">)</span>                  <span class="tok-c"># прямой проход</span>
+loss<span class="tok-p">.</span>backward<span class="tok-p">(</span><span class="tok-p">)</span>                              <span class="tok-c"># обратный проход</span>
+opt<span class="tok-p">.</span>step<span class="tok-p">(</span><span class="tok-p">)</span>                                   <span class="tok-c"># w &lt;- w - lr * grad</span>
+</code></pre></div>
+<p>Четыре строки в конце — весь цикл обучения любой сети; меняются только модель, потеря и оптимизатор.</p>
+<h2 id="практика-и-подводные-камни">Практика и подводные камни</h2>
+<ul>
+<li><strong>Масштабируйте признаки.</strong> Сеть чувствительна к масштабу входов: стандартизуйте числовые признаки, иначе градиентный спуск плохо обусловлен, а схемы инициализации (следующая статья) рассчитаны на входы с единичной дисперсией.</li>
+<li><strong>Категориальные признаки</strong> подавайте через <code>nn.Embedding</code>, а не one-hot с тысячами столбцов.</li>
+<li><strong>Ширина против глубины.</strong> Начинайте с 2–3 скрытых слоёв и расширяйте, пока на валидации растёт качество; потом добавляйте регуляризацию.</li>
+<li><strong>Инициализация.</strong> Нулевая (и вообще одинаковая) инициализация весов не нарушает симметрию: все нейроны слоя получают одинаковый градиент и так и остаются копиями друг друга. Веса инициализируют случайно — подробности в <a href="/edufamcs-demo/handbook/dl/obratnoe-rasprostranenie-oshibki/" rel="noopener noreferrer nofollow">статье про backprop</a>.</li>
+<li><strong>Типичный вопрос на интервью:</strong> «что будет, если убрать нелинейности?» и «почему нельзя ставить softmax перед <code>CrossEntropyLoss</code>?»</li>
+</ul>
+<h2 id="что-почитать">Что почитать</h2>
+<ul>
+<li>Cybenko, <em>Approximation by superpositions of a sigmoidal function</em>, 1989: <a href="https://doi.org/10.1007/BF02551274" rel="noopener noreferrer nofollow">doi.org/10.1007/BF02551274</a>.</li>
+<li>Hornik, <em>Approximation capabilities of multilayer feedforward networks</em>, 1991: <a href="https://doi.org/10.1016/0893-6080(91)90009-T" rel="noopener noreferrer nofollow">doi.org/10.1016/0893-6080(91)90009-T</a>.</li>
+<li>Nair, Hinton, <em>Rectified Linear Units Improve Restricted Boltzmann Machines</em>, ICML 2010: <a href="https://icml.cc/Conferences/2010/papers/432.pdf" rel="noopener noreferrer nofollow">icml.cc/Conferences/2010/papers/432.pdf</a>.</li>
+<li>Glorot, Bordes, Bengio, <em>Deep Sparse Rectifier Neural Networks</em>, AISTATS 2011: <a href="https://proceedings.mlr.press/v15/glorot11a.html" rel="noopener noreferrer nofollow">proceedings.mlr.press/v15/glorot11a.html</a>.</li>
+<li>Hendrycks, Gimpel, <em>Gaussian Error Linear Units (GELUs)</em>, 2016: <a href="https://arxiv.org/abs/1606.08415" rel="noopener noreferrer nofollow">arxiv.org/abs/1606.08415</a>; Shazeer, <em>GLU Variants Improve Transformer</em>, 2020: <a href="https://arxiv.org/abs/2002.05202" rel="noopener noreferrer nofollow">arxiv.org/abs/2002.05202</a>.</li>
+<li>Яндекс Образование, «Первое знакомство с полносвязными нейросетями»: <a href="https://contest.yandex.ru/tracks/ml/deep-learning-introduction/fully-connected-neural-networks" rel="noopener noreferrer nofollow">contest.yandex.ru/tracks/ml/deep-learning-introduction/fully-connected-neural-networks</a>.</li>
+<li>Zhang et al., <em>Dive into Deep Learning</em>, глава про MLP: <a href="https://d2l.ai/chapter_multilayer-perceptrons/index.html" rel="noopener noreferrer nofollow">d2l.ai</a>.</li>
+</ul>
+</div>
+      
+
+      
+      <nav class="pager" aria-label="Соседние статьи">
+        <i></i>
+        <a href="/edufamcs-demo/handbook/dl/obratnoe-rasprostranenie-oshibki/"><span>Дальше<svg class="ico sm" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-arrow"/></svg></span>Обратное распространение ошибки</a>
+      </nav>
+      
+    </article>
+
+    <aside class="hb-toc" aria-label="На этой странице">
+      <a class="l2" href="#нейрон-от-биологии-к-формуле">Нейрон: от биологии к формуле</a><a class="l2" href="#линейный-слой">Линейный слой</a><a class="l2" href="#зачем-нужны-нелинейности">Зачем нужны нелинейности</a><a class="l2" href="#функции-активации">Функции активации</a><a class="l2" href="#mlp-как-композиция">MLP как композиция</a><a class="l2" href="#универсальная-аппроксимация-и-глубина">Универсальная аппроксимация и глубина</a><a class="l2" href="#выходные-головы-и-потери">Выходные головы и потери</a><a class="l2" href="#почему-нейросети-хорошо-работают">Почему нейросети хорошо работают</a><a class="l2" href="#код-mlp-на-pytorch-и-один-шаг-обучения">Код: MLP на PyTorch и один шаг обучения</a><a class="l2" href="#практика-и-подводные-камни">Практика и подводные камни</a><a class="l2" href="#что-почитать">Что почитать</a>
+    </aside>
+  </div>
+</div>
+
+
+</main>
+
+<footer class="ftr" data-theme="dark">
+  <svg class="sym fern" viewBox="0 0 40.5 65.02" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#fern"/></svg>
+  <div class="container">
+    <div class="ftr-row">
+      <a href="/edufamcs-demo/" aria-label="EDU FAMCS — главная"><img src="/edufamcs-demo/static/brand/logo/logo-edu-dark.svg" alt="EDU FAMCS" width="196" height="40"></a>
+      <ul class="ftr-links">
+        <li><a href="/edufamcs-demo/#courses">Курсы</a></li>
+        <li><a href="/edufamcs-demo/ml/">Машинное обучение</a></li>
+        <li><a href="/edufamcs-demo/handbook/">Хендбук</a></li>
+        <li><a href="/edufamcs-demo/news/">Новости</a></li>
+        <li><a href="/edufamcs-demo/people/">Авторы</a></li>
+        <li><a href="/edufamcs-demo/about/">О&nbsp;нас</a></li>
+        <li><a href="/edufamcs-demo/propose/">Предложить или исправить</a></li>
+        <li><a href="/edufamcs-demo/privacy/">Конфиденциальность</a></li>
+      </ul>
+    </div>
+    <div class="ftr-big" aria-hidden="true">EDU<span class="d">·</span>FAMCS</div>
+    <p class="ftr-copy">© 2026 EDU FAMCS · Минск</p>
+  </div>
+</footer>
+
+<div class="toasts-region" aria-live="polite" id="toasts">
+
+</div>
+
+</body>
+</html>

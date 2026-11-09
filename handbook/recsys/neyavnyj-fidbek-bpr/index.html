@@ -1,0 +1,277 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Неявный фидбэк: BPR, WARP и негативы · EDU FAMCS</title>
+<meta name="description" content="Неявный фидбэк: BPR, WARP и негативы — Рекомендательные системы. Хендбук ML-курса ФПМИ.">
+<meta name="theme-color" content="#060A16">
+<meta name="robots" content="noindex, nofollow">
+<meta name="htmx-config" content='{"allowEval":false,"includeIndicatorStyles":false,"historyCacheSize":0,"selfRequestsOnly":true}'>
+<meta name="katex-js" content="/edufamcs-demo/static/vendor/katex/katex.min.js">
+<meta name="katex-css" content="/edufamcs-demo/static/vendor/katex/katex.min.css">
+<link rel="icon" href="/edufamcs-demo/static/brand/logo/favicon-16.svg" type="image/svg+xml" sizes="16x16">
+<link rel="icon" href="/edufamcs-demo/static/brand/logo/favicon.svg" type="image/svg+xml" sizes="any">
+<link rel="preload" href="/edufamcs-demo/static/brand/fonts/manrope-cyrillic-400.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/edufamcs-demo/static/brand/fonts/unbounded-cyrillic-800.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="/edufamcs-demo/static/brand/fonts.css">
+<link rel="stylesheet" href="/edufamcs-demo/static/brand/tokens.css">
+<link rel="stylesheet" href="/edufamcs-demo/static/brand/components.css">
+<link rel="stylesheet" href="/edufamcs-demo/static/css/site.css">
+<link rel="stylesheet" href="/edufamcs-demo/static/css/hub.css">
+<link rel="stylesheet" href="/edufamcs-demo/static/css/about.css">
+<link rel="stylesheet" href="/edufamcs-demo/static/handbook/handbook.css">
+<script src="/edufamcs-demo/static/js/theme.js"></script>
+<script src="/edufamcs-demo/static/vendor/htmx/htmx.min.js" defer></script>
+<script src="/edufamcs-demo/static/vendor/alpine/alpine-csp.min.js" defer></script>
+<script src="/edufamcs-demo/static/js/site.js" defer></script>
+<script src="/edufamcs-demo/static/handbook/handbook.js" defer></script>
+</head>
+<body class="" hx-headers='{"X-CSRFToken": "PIHUFV97yMUzXnt5Ud7YCXOHuRPN6uSBesgYpTWutDiIcWEOrqQ6zskM2zViEEAl"}'>
+<a class="skip" href="#main">К содержанию</a>
+<div class="demo-bar" role="note">Демо-версия для отзывов: вход, запись на курсы и формы здесь не работают.</div>
+
+<header class="hdr">
+  <div class="container">
+    <a class="brand" href="/edufamcs-demo/" aria-label="EDU FAMCS — главная">
+      <span class="full"><img class="only-light" src="/edufamcs-demo/static/brand/logo/logo-edu-light.svg" alt="EDU FAMCS" width="196" height="40"><img class="only-dark" src="/edufamcs-demo/static/brand/logo/logo-edu-dark.svg" alt="EDU FAMCS" width="196" height="40"></span>
+      <span class="short"><img class="only-light" src="/edufamcs-demo/static/brand/logo/logo-edu-light.svg" alt="EDU FAMCS" height="30"><img class="only-dark" src="/edufamcs-demo/static/brand/logo/logo-edu-dark.svg" alt="EDU FAMCS" height="30"></span>
+    </a>
+    <nav class="nav" id="main-nav" aria-label="Основная навигация">
+      <a href="/edufamcs-demo/#courses">Курсы</a>
+      <a href="/edufamcs-demo/ml/" >Машинное обучение</a>
+      
+      <a href="/edufamcs-demo/handbook/" aria-current="page">Хендбук</a>
+      <a href="/edufamcs-demo/news/" >Новости</a>
+      <a href="/edufamcs-demo/people/" >Авторы</a>
+      <a href="/edufamcs-demo/about/" >О&nbsp;нас</a>
+    </nav>
+    <div class="hdr-actions">
+      
+      <a class="btn btn-outline btn-login" href="/edufamcs-demo/accounts/login/?next=/handbook/recsys/neyavnyj-fidbek-bpr/">Войти</a>
+      
+      <button class="icon-btn menu-btn" type="button" aria-label="Меню" aria-expanded="false" aria-controls="main-nav"><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-menu"/></svg></button>
+    </div>
+  </div>
+</header>
+
+<main id="main">
+
+
+
+<div class="container hb-page s-recsys">
+  <div class="hb">
+    <aside class="hb-nav" aria-label="Статьи раздела">
+      
+<form class="hb-search" action="/edufamcs-demo/handbook/search/" method="get" role="search">
+  <svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-search"/></svg>
+  <input class="input" type="search" name="q" value="" placeholder="Поиск по хендбуку" aria-label="Поиск по хендбуку" autocomplete="off" maxlength="120"
+    hx-get="/edufamcs-demo/handbook/search/" hx-trigger="input changed delay:250ms, search" hx-target="#hb-nav-results" hx-sync="this:replace">
+</form>
+
+      <div id="hb-nav-results" class="hb-nav-results" aria-live="polite"></div>
+      <a class="grp" href="/edufamcs-demo/handbook/recsys/">Классика: 1992–2012</a>
+      
+      <a class="" href="/edufamcs-demo/handbook/recsys/nepersonalnye-i-kontentnye/">Неперсонализированные и контентные рекомендации</a>
+      
+      <a class="" href="/edufamcs-demo/handbook/recsys/kollaborativnaya-filtraciya-po-sosedyam/">Коллаборативная фильтрация по соседям</a>
+      
+      <a class="" href="/edufamcs-demo/handbook/recsys/matrichnye-razlozheniya-als/">Матричные разложения и ALS</a>
+      
+      <a class="cur" href="/edufamcs-demo/handbook/recsys/neyavnyj-fidbek-bpr/" aria-current="page">Неявный фидбэк: BPR, WARP и негативы</a>
+      
+    </aside>
+
+    <article class="hb-main">
+      <nav class="crumbs" aria-label="Навигация"><a href="/edufamcs-demo/handbook/">Хендбук</a><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-chev"/></svg><a href="/edufamcs-demo/handbook/recsys/">Рекомендательные системы</a></nav>
+      <h1 class="h1">Неявный фидбэк: BPR, WARP и негативы</h1>
+      <div class="hb-meta">
+        
+        
+        <span><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-clock"/></svg>13&nbsp;мин</span>
+        <span class="hb-authors"><span class="avatar sm" title="Артем Лебедевич">АЛ</span>Артем Лебедевич</span>
+        <span><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-edit"/></svg>9 ноября 2026</span>
+        
+        
+      </div>
+
+      
+      <details class="hb-mtoc">
+        <summary><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-list"/></svg>Содержание<svg class="ico sm" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-chev-down"/></svg></summary>
+        <a class="l2" href="#неявные-данные-как-задача-ранжирования">Неявные данные как задача ранжирования</a><a class="l2" href="#bpr-rendle-et-al-2009">BPR (Rendle et al., 2009)</a><a class="l2" href="#warp-weston-bengio-usunier-2011">WARP (Weston, Bengio, Usunier, 2011)</a><a class="l2" href="#негативы-откуда-их-брать">Негативы: откуда их брать</a><a class="l2" href="#возвращение-ials-и-спор-с-ncf">Возвращение iALS и спор с NCF</a><a class="l2" href="#эмбеддинги-из-сессий">Эмбеддинги из сессий</a><a class="l2" href="#код-bpr-и-warp-против-als">Код: BPR и WARP против ALS</a><a class="l2" href="#что-ломается-на-практике">Что ломается на практике</a><a class="l2" href="#что-почитать">Что почитать</a>
+      </details>
+      
+
+      <div class="prose"><p><a href="/edufamcs-demo/handbook/recsys/matrichnye-razlozheniya-als/" rel="noopener noreferrer nofollow">Неявный ALS</a> решает регрессию: приблизить <span class="tex">p_{ui}\in\{0,1\}</span> квадратичной ошибкой, где нули учитываются с малым весом. Но мы оцениваем рекомендатель по <strong>порядку</strong> в топе (NDCG, Recall@<span class="tex">k</span>, см. <a href="/edufamcs-demo/handbook/recsys/oflajn-metriki/" rel="noopener noreferrer nofollow">метрики</a>), а регрессия на нулях и единицах этот порядок оптимизирует лишь косвенно. Следующий шаг истории — прямо оптимизировать ранжирование.</p>
+<h2 id="неявные-данные-как-задача-ранжирования">Неявные данные как задача ранжирования</h2>
+<p>Что на самом деле известно: пользователь <span class="tex">u</span> взаимодействовал с <span class="tex">i</span> и не взаимодействовал с <span class="tex">j</span>. Это не «любит <span class="tex">i</span>, не любит <span class="tex">j</span>», а слабое утверждение <strong>«<span class="tex">i</span> предпочтительнее <span class="tex">j</span>»</strong> (пользователь мог не видеть <span class="tex">j</span>). Значит, обучающие данные — это не пары <span class="tex">(u,i)</span> с метками, а <strong>тройки</strong> <span class="tex">(u,i^+,j^-)</span>, и нужно, чтобы <span class="tex">\hat x_{ui^+}&gt;\hat x_{uj^-}</span>, где <span class="tex">\hat x_{ui}=x_u^\top y_i</span> (или <span class="tex">+\,b_i</span>).</p>
+<h2 id="bpr-rendle-et-al-2009">BPR (Rendle et al., 2009)</h2>
+<p>Bayesian Personalized Ranking выводит функцию потерь как максимум апостериорной вероятности. Если модель утверждает, что <span class="tex">P(i\succ_u j\mid\Theta)=\sigma(\hat x_{uij})</span>, где <span class="tex">\hat x_{uij}=\hat x_{ui}-\hat x_{uj}</span> и <span class="tex">\sigma</span> — сигмоида, а на параметры наложен нормальный априор, получаем</p>
+<div class="tex tex-block">L_{\mathrm{BPR}} = -\sum_{(u,i,j)\in D_S}\ln\sigma\bigl(\hat x_{ui}-\hat x_{uj}\bigr) + \lambda\|\Theta\|^2,</div>
+<p>где <span class="tex">D_S=\{(u,i,j): i\in I_u,\; j\notin I_u\}</span>. Связь с <a href="/edufamcs-demo/handbook/recsys/oflajn-metriki/" rel="noopener noreferrer nofollow">AUC</a>: AUC пользователя — доля пар <span class="tex">(i^+,j^-)</span>, для которых <span class="tex">\hat x_{ui}&gt;\hat x_{uj}</span>, то есть <span class="tex">1</span> минус доля ошибок <span class="tex">[\hat x_{uij}\le 0]</span>. Индикатор ошибки ступенчатый, и градиента у него нет. Логистическая потеря <span class="tex">-\log_2\sigma(\hat x_{uij}) = \log_2(1+e^{-\hat x_{uij}})</span> — его гладкая выпуклая верхняя оценка: при <span class="tex">\hat x_{uij}\le 0</span> она не меньше <span class="tex">1</span>, при <span class="tex">\hat x_{uij}&gt;0</span> положительна. Минимизируя её, BPR поднимает нижнюю оценку AUC, то есть оптимизирует сглаженный AUC.</p>
+<p>Всех троек <span class="tex">\sum_u |I_u|\,(|I|-|I_u|)</span> слишком много, поэтому <strong>SGD с сэмплированием</strong>: выбираем пользователя, положительный объект из его истории, случайный негатив; градиентный шаг по <span class="tex">x_u,y_i,y_j</span>:</p>
+<div class="tex tex-block">\Theta \leftarrow \Theta + \eta\Bigl(\sigma(-\hat x_{uij})\,\frac{\partial \hat x_{uij}}{\partial\Theta} - \lambda\Theta\Bigr), \qquad
+\sigma(-\hat x_{uij}) = 1-\sigma(\hat x_{uij})</div>
+<p>Множитель <span class="tex">\sigma(-\hat x_{uij})</span> большой там, где пара упорядочена неверно, и ≈0 там, где модель уже права — обучение концентрируется на ошибках. Авторы предлагают обход тренировочных данных с повторным сэмплированием (bootstrap), а не по пользователям подряд: иначе градиенты коррелированы.</p>
+<p><strong>Слабость BPR:</strong> все ошибки весят одинаково, а в топ-10 важны только верхние позиции. Если среди миллиона негативов случайный проиграл — это мелочь; если не-релевантное стоит на позиции 3 — это плохо. Нужно взвешивание по рангу.</p>
+<h2 id="warp-weston-bengio-usunier-2011">WARP (Weston, Bengio, Usunier, 2011)</h2>
+<p>WSABIE (<em>Web Scale Annotation by Image Embedding</em>) ввела потерю WARP — Weighted Approximate-Rank Pairwise. Идея: штрафовать нарушение пары тем сильнее, чем ниже в списке оказался положительный объект, но так, чтобы каждая следующая позиция стоила всё меньше. Для положительного <span class="tex">i</span> с рангом <span class="tex">\mathrm{rank}_u(i)</span> (число объектов, которых модель ставит выше при заданном запасе <span class="tex">m</span>) потеря —</p>
+<div class="tex tex-block">L_{\mathrm{WARP}} = \Phi\bigl(\mathrm{rank}_u(i)\bigr)\cdot\bigl|\,m - \hat x_{ui} + \hat x_{uj}\bigr|_+, \qquad
+\Phi(r)=\sum_{k=1}^{r}\frac{1}{k}</div>
+<p>Когда над положительным объектом стоит один нарушитель, вес равен <span class="tex">1</span>; когда сто — около <span class="tex">5{,}2</span>. Объект далеко внизу получает больший градиент, но прирост <span class="tex">\Phi</span> от позиции <span class="tex">k</span> равен <span class="tex">1/k</span>: подъём с ранга 1 на 0 уменьшает вес на <span class="tex">1</span>, а подъём со 100 на 50 — всего на <span class="tex">\approx 0{,}69</span>. Поэтому потеря сосредоточена на верхушке и приближает precision@k. Для сравнения: <span class="tex">\Phi(r)=r</span> даёт все пары с одинаковым весом, то есть AUC, как в BPR, а <span class="tex">\Phi(r)=[r&gt;0]</span> — только precision@1.</p>
+<p><strong>Как оценивать ранг, не считая все объекты.</strong> Сэмплируем негативы <span class="tex">j</span> по одному, пока не найдём нарушителя (<span class="tex">m-\hat x_{ui}+\hat x_{uj}&gt;0</span>). Пусть на это ушло <span class="tex">N</span> попыток. Тогда доля нарушителей среди <span class="tex">|I|-1</span> объектов примерно <span class="tex">1/N</span>, а ранг <span class="tex">\mathrm{rank}_u(i)\approx\lfloor(|I|-1)/N\rfloor</span>. Если положительный объект и так в топе — нарушителя искать долго (<span class="tex">N</span> большое), вес маленький; если он далеко — нарушитель находится с первой попытки, вес велик. Побочный эффект: по мере обучения поиск нарушителя замедляется (нужно всё больше попыток), так что WARP дороже BPR на поздних эпохах. Поэтому число попыток ограничивают: в LightFM за это отвечает <code>max_sampled</code> (по умолчанию 10).</p>
+<p><strong>LightFM (Kula, 2015)</strong> реализует BPR и WARP (а также <code>logistic</code> и <code>warp-kos</code>) для гибридной модели: эмбеддинг объекта — сумма эмбеддингов его признаков (ID, категории, теги), аналогично для пользователя. Для новых объектов с признаками это даёт вектор без обучения на ID. Подробнее о гибридах — в статье про <a href="/edufamcs-demo/handbook/recsys/nepersonalnye-i-kontentnye/" rel="noopener noreferrer nofollow">неперсонализированные и контентные методы</a>.</p>
+<h2 id="негативы-откуда-их-брать">Негативы: откуда их брать</h2>
+<p>Любая ранжирующая потеря — это вопрос выбора негативов. Варианты:</p>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>Стратегия</th>
+<th>Что делает</th>
+<th>Проблема</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Равномерная</td>
+<td>случайный объект каталога</td>
+<td>почти всегда лёгкий негатив; градиент быстро затухает</td>
+</tr>
+<tr>
+<td>По популярности</td>
+<td><span class="tex">P(j)\propto \mathrm{pop}(j)^\alpha</span>, <span class="tex">\alpha\in[0{,}5;\,1]</span> (в word2vec — <span class="tex">0{,}75</span>)</td>
+<td>популярные объекты чаще бывают негативами; если <span class="tex">\alpha</span> велико, модель занижает хиты</td>
+</tr>
+<tr>
+<td>Трудные (hard negatives)</td>
+<td>объекты с высоким текущим скором или из выдачи, которую пользователь пропустил</td>
+<td>ложные негативы: объект мог бы понравиться; нестабильность обучения</td>
+</tr>
+<tr>
+<td>Внутри батча</td>
+<td>позитивы других пользователей в батче</td>
+<td>смещение к популярному; нужна поправка <span class="tex">\log Q</span></td>
+</tr>
+</tbody>
+</table></div>
+<p>Для больших каталогов вместо пар используют <strong>sampled softmax</strong>: вместо сравнения с одним негативом, сравниваем положительный объект с <span class="tex">K</span> сэмплированными:</p>
+<div class="tex tex-block">L=-\log\frac{\exp(s_{ui}-\log Q_i)}{\exp(s_{ui}-\log Q_i)+\sum_{j\in S}\exp(s_{uj}-\log Q_j)}</div>
+<p>где <span class="tex">Q_j</span> — вероятность, с которой объект <span class="tex">j</span> сэмплируется (поправка logQ компенсирует смещение к популярному). Подробнее — в статье про <a href="/edufamcs-demo/handbook/recsys/two-tower-ann/" rel="noopener noreferrer nofollow">двухбашенные модели</a>. Для трудных негативов в проде часто берут объекты, которые модель-кандидат вернула, но пользователь не выбрал, и смешивают их с лёгкими.</p>
+<h2 id="возвращение-ials-и-спор-с-ncf">Возвращение iALS и спор с NCF</h2>
+<p>Neural Collaborative Filtering (He et al., 2017) заменила скалярное произведение на MLP от конкатенации эмбеддингов, и статья задала моду на «нейросетевую» коллаборативную фильтрацию. Rendle et al. (2020, <em>Neural Collaborative Filtering vs. Matrix Factorization Revisited</em>) показали три вещи:</p>
+<ol>
+<li>Правильно настроенное скалярное произведение (MF) бьёт MLP из NCF на тех же данных и сплитах;</li>
+<li>MLP <strong>плохо</strong> выучивает скалярное произведение — нужны огромные размерности, чтобы его приблизить;</li>
+<li>MLP медленнее на инференсе: скалярное произведение допускает приближённый поиск соседей (ANN), а MLP — нет.</li>
+</ol>
+<p>Rendle, Krichene, Zhang, Koren (2022, <em>Revisiting the Performance of iALS on Item Recommendation Benchmarks</em>) пошли дальше. Они взяли четыре бенчмарка, где iALS раньше выглядел слабо: MovieLens 1M и Pinterest из статьи NCF, MovieLens 20M и Million Song Dataset из статьи Mult-VAE. После ручной настройки (<span class="tex">\lambda</span>, <span class="tex">\alpha</span>, размерность, частотная регуляризация) iALS превзошёл опубликованные результаты всех методов как минимум на половине метрик. На ML-20M он наравне с вариационным автоэнкодером Mult-VAE, на MSD его обгоняет только линейная <a href="/edufamcs-demo/handbook/recsys/slim-i-ease/" rel="noopener noreferrer nofollow">EASE</a>. Выводы для практики: (1) бейзлайн надо тюнить (см. <a href="/edufamcs-demo/handbook/recsys/oflajn-metriki/" rel="noopener noreferrer nofollow">метрики и воспроизводимость</a>); (2) ALS с регуляризацией, зависящей от частоты, — не устаревший, а базовый инструмент; (3) выигрыш нейросетей приходит из признаков, последовательностей и контекста, а не из замены скалярного произведения на MLP.</p>
+<h2 id="эмбеддинги-из-сессий">Эмбеддинги из сессий</h2>
+<p>Есть путь вообще без явной оптимизации по пользователям: брать последовательности действий как «предложения» и обучать word2vec (Skip-gram with Negative Sampling, SGNS) — объекты, встречающиеся рядом, получают близкие векторы. Теоретически SGNS эквивалентен неявному разложению сдвинутой матрицы PMI (Levy &amp; Goldberg, 2014), то есть всё та же низкоранговая модель.</p>
+<ul>
+<li><strong>prod2vec (Grbovic et al., 2015):</strong> последовательности покупок из чеков в почте Yahoo; эмбеддинги товаров, затем «похожие товары» и рекламные кластеры.</li>
+<li><strong>item2vec (Barkan &amp; Koenigstein, 2016):</strong> то же для неупорядоченных корзин: порядок игнорируется, окно — вся корзина.</li>
+<li><strong>Эмбеддинги объявлений Airbnb (Grbovic &amp; Cheng, 2018):</strong> SGNS на сессиях кликов, но с двумя доработками под продукт: положительный контекст расширен забронированным объявлением (оно в окне всех кликов сессии) и негативы берутся из того же рынка (города), чтобы эмбеддинг учитывал внутри-городские различия. Для новых объявлений вектор оценивают усреднением ближайших по метаданным.</li>
+</ul>
+<p>Word2vec подробнее разобран в статье <a href="/edufamcs-demo/handbook/dl/posledovatelnosti-i-rnn/" rel="noopener noreferrer nofollow">последовательности и RNN</a>. SGNS-подход дёшев, хорош для «похожих объектов» и холодного старта по сессии, но порядок учитывает лишь через окно и не знает признаков пользователя. Эти пробелы закрывают <a href="/edufamcs-demo/handbook/recsys/two-tower-ann/" rel="noopener noreferrer nofollow">двухбашенные</a> и <a href="/edufamcs-demo/handbook/recsys/posledovatelnye-modeli/" rel="noopener noreferrer nofollow">последовательные модели</a>.</p>
+<h2 id="код-bpr-и-warp-против-als">Код: BPR и WARP против ALS</h2>
+<div class="code"><div class="code-head"><span class="lang">python</span></div><pre><code><span class="tok-k">import</span> numpy <span class="tok-k">as</span> np<span class="tok-p">,</span> scipy.sparse <span class="tok-k">as</span> sp
+<span class="tok-k">from</span> implicit.als <span class="tok-k">import</span> AlternatingLeastSquares
+<span class="tok-k">from</span> implicit.bpr <span class="tok-k">import</span> BayesianPersonalizedRanking
+<span class="tok-k">from</span> lightfm <span class="tok-k">import</span> LightFM
+
+<span class="tok-c"># train, test: csr (users x items); split по времени, как в статье про метрики</span>
+<span class="tok-k">def</span> <span class="tok-f">ndcg_all</span><span class="tok-p">(</span>U<span class="tok-p">,</span> V<span class="tok-p">,</span> train<span class="tok-p">,</span> test<span class="tok-p">,</span> k<span class="tok-p">=</span><span class="tok-n">10</span><span class="tok-p">,</span> ib<span class="tok-p">=</span><span class="tok-k">None</span><span class="tok-p">)</span><span class="tok-p">:</span>
+    scores <span class="tok-p">=</span> U <span class="tok-p">@</span> V<span class="tok-p">.</span>T
+    <span class="tok-k">if</span> ib <span class="tok-k">is</span> <span class="tok-k">not</span> <span class="tok-k">None</span><span class="tok-p">:</span> scores <span class="tok-p">+</span><span class="tok-p">=</span> ib<span class="tok-p">[</span><span class="tok-k">None</span><span class="tok-p">,</span> <span class="tok-p">:</span><span class="tok-p">]</span>
+    train_coo <span class="tok-p">=</span> train<span class="tok-p">.</span>tocoo<span class="tok-p">(</span><span class="tok-p">)</span><span class="tok-p">;</span> scores<span class="tok-p">[</span>train_coo<span class="tok-p">.</span>row<span class="tok-p">,</span> train_coo<span class="tok-p">.</span>col<span class="tok-p">]</span> <span class="tok-p">=</span> <span class="tok-p">-</span>np<span class="tok-p">.</span>inf   <span class="tok-c"># маскируем историю</span>
+    top <span class="tok-p">=</span> np<span class="tok-p">.</span>argpartition<span class="tok-p">(</span><span class="tok-p">-</span>scores<span class="tok-p">,</span> k<span class="tok-p">,</span> axis<span class="tok-p">=</span><span class="tok-n">1</span><span class="tok-p">)</span><span class="tok-p">[</span><span class="tok-p">:</span><span class="tok-p">,</span> <span class="tok-p">:</span>k<span class="tok-p">]</span>
+    order <span class="tok-p">=</span> np<span class="tok-p">.</span>argsort<span class="tok-p">(</span><span class="tok-p">-</span>np<span class="tok-p">.</span>take_along_axis<span class="tok-p">(</span>scores<span class="tok-p">,</span> top<span class="tok-p">,</span> <span class="tok-n">1</span><span class="tok-p">)</span><span class="tok-p">,</span> axis<span class="tok-p">=</span><span class="tok-n">1</span><span class="tok-p">)</span>
+    top <span class="tok-p">=</span> np<span class="tok-p">.</span>take_along_axis<span class="tok-p">(</span>top<span class="tok-p">,</span> order<span class="tok-p">,</span> <span class="tok-n">1</span><span class="tok-p">)</span>
+    disc <span class="tok-p">=</span> <span class="tok-n">1</span> <span class="tok-p">/</span> np<span class="tok-p">.</span>log2<span class="tok-p">(</span>np<span class="tok-p">.</span>arange<span class="tok-p">(</span><span class="tok-n">2</span><span class="tok-p">,</span> k <span class="tok-p">+</span> <span class="tok-n">2</span><span class="tok-p">)</span><span class="tok-p">)</span>
+    res <span class="tok-p">=</span> <span class="tok-p">[</span><span class="tok-p">]</span>
+    <span class="tok-k">for</span> u <span class="tok-k">in</span> np<span class="tok-p">.</span>unique<span class="tok-p">(</span>test<span class="tok-p">.</span>nonzero<span class="tok-p">(</span><span class="tok-p">)</span><span class="tok-p">[</span><span class="tok-n">0</span><span class="tok-p">]</span><span class="tok-p">)</span><span class="tok-p">:</span>
+        rel <span class="tok-p">=</span> <span class="tok-f">set</span><span class="tok-p">(</span>test<span class="tok-p">[</span>u<span class="tok-p">]</span><span class="tok-p">.</span>indices<span class="tok-p">)</span>
+        gain <span class="tok-p">=</span> np<span class="tok-p">.</span>array<span class="tok-p">(</span><span class="tok-p">[</span>i <span class="tok-k">in</span> rel <span class="tok-k">for</span> i <span class="tok-k">in</span> top<span class="tok-p">[</span>u<span class="tok-p">]</span><span class="tok-p">]</span><span class="tok-p">,</span> <span class="tok-f">float</span><span class="tok-p">)</span>
+        res<span class="tok-p">.</span>append<span class="tok-p">(</span><span class="tok-p">(</span>gain <span class="tok-p">*</span> disc<span class="tok-p">)</span><span class="tok-p">.</span>sum<span class="tok-p">(</span><span class="tok-p">)</span> <span class="tok-p">/</span> disc<span class="tok-p">[</span><span class="tok-p">:</span><span class="tok-f">min</span><span class="tok-p">(</span><span class="tok-f">len</span><span class="tok-p">(</span>rel<span class="tok-p">)</span><span class="tok-p">,</span> k<span class="tok-p">)</span><span class="tok-p">]</span><span class="tok-p">.</span>sum<span class="tok-p">(</span><span class="tok-p">)</span><span class="tok-p">)</span>
+    <span class="tok-k">return</span> <span class="tok-f">float</span><span class="tok-p">(</span>np<span class="tok-p">.</span>mean<span class="tok-p">(</span>res<span class="tok-p">)</span><span class="tok-p">)</span>
+
+<span class="tok-c"># fit() в implicit возвращает None, поэтому модель и обучение — отдельными строками</span>
+als <span class="tok-p">=</span> AlternatingLeastSquares<span class="tok-p">(</span>factors<span class="tok-p">=</span><span class="tok-n">64</span><span class="tok-p">,</span> regularization<span class="tok-p">=</span><span class="tok-n">0.05</span><span class="tok-p">,</span> alpha<span class="tok-p">=</span><span class="tok-n">10.0</span><span class="tok-p">,</span> iterations<span class="tok-p">=</span><span class="tok-n">15</span><span class="tok-p">,</span> use_gpu<span class="tok-p">=</span><span class="tok-k">False</span><span class="tok-p">)</span>
+als<span class="tok-p">.</span>fit<span class="tok-p">(</span>train<span class="tok-p">)</span>
+bpr <span class="tok-p">=</span> BayesianPersonalizedRanking<span class="tok-p">(</span>factors<span class="tok-p">=</span><span class="tok-n">64</span><span class="tok-p">,</span> learning_rate<span class="tok-p">=</span><span class="tok-n">0.05</span><span class="tok-p">,</span> regularization<span class="tok-p">=</span><span class="tok-n">0.01</span><span class="tok-p">,</span> iterations<span class="tok-p">=</span><span class="tok-n">100</span><span class="tok-p">,</span> use_gpu<span class="tok-p">=</span><span class="tok-k">False</span><span class="tok-p">)</span>
+bpr<span class="tok-p">.</span>fit<span class="tok-p">(</span>train<span class="tok-p">)</span>
+warp <span class="tok-p">=</span> LightFM<span class="tok-p">(</span>no_components<span class="tok-p">=</span><span class="tok-n">64</span><span class="tok-p">,</span> loss<span class="tok-p">=</span><span class="tok-s">"</span><span class="tok-s">warp</span><span class="tok-s">"</span><span class="tok-p">,</span> learning_rate<span class="tok-p">=</span><span class="tok-n">0.05</span><span class="tok-p">)</span><span class="tok-p">.</span>fit<span class="tok-p">(</span>train<span class="tok-p">,</span> epochs<span class="tok-p">=</span><span class="tok-n">30</span><span class="tok-p">,</span> num_threads<span class="tok-p">=</span><span class="tok-n">4</span><span class="tok-p">)</span>  <span class="tok-c"># LightFM возвращает self</span>
+
+<span class="tok-f">print</span><span class="tok-p">(</span><span class="tok-s">"</span><span class="tok-s">ALS </span><span class="tok-s">"</span><span class="tok-p">,</span> ndcg_all<span class="tok-p">(</span>als<span class="tok-p">.</span>user_factors<span class="tok-p">,</span> als<span class="tok-p">.</span>item_factors<span class="tok-p">,</span> train<span class="tok-p">,</span> test<span class="tok-p">)</span><span class="tok-p">)</span>
+<span class="tok-f">print</span><span class="tok-p">(</span><span class="tok-s">"</span><span class="tok-s">BPR </span><span class="tok-s">"</span><span class="tok-p">,</span> ndcg_all<span class="tok-p">(</span>bpr<span class="tok-p">.</span>user_factors<span class="tok-p">,</span> bpr<span class="tok-p">.</span>item_factors<span class="tok-p">,</span> train<span class="tok-p">,</span> test<span class="tok-p">)</span><span class="tok-p">)</span>   <span class="tok-c"># в factors implicit уже зашит bias объекта</span>
+ub<span class="tok-p">,</span> U <span class="tok-p">=</span> warp<span class="tok-p">.</span>get_user_representations<span class="tok-p">(</span><span class="tok-p">)</span><span class="tok-p">;</span> ib<span class="tok-p">,</span> V <span class="tok-p">=</span> warp<span class="tok-p">.</span>get_item_representations<span class="tok-p">(</span><span class="tok-p">)</span>
+<span class="tok-f">print</span><span class="tok-p">(</span><span class="tok-s">"</span><span class="tok-s">WARP</span><span class="tok-s">"</span><span class="tok-p">,</span> ndcg_all<span class="tok-p">(</span>U<span class="tok-p">,</span> V<span class="tok-p">,</span> train<span class="tok-p">,</span> test<span class="tok-p">,</span> ib<span class="tok-p">=</span>ib<span class="tok-p">)</span><span class="tok-p">)</span>
+</code></pre></div>
+<p>Для небольших каталогов (до сотен тысяч объектов) полная матрица оценок помещается на GPU или в память батчами; на больших считайте блоками по пользователям. Сравнивайте с «популярным за неделю» и с <a href="/edufamcs-demo/handbook/recsys/kollaborativnaya-filtraciya-po-sosedyam/" rel="noopener noreferrer nofollow">item-kNN</a> — если сложная потеря не бьёт их, значит, проблема в настройке или данных.</p>
+<h2 id="что-ломается-на-практике">Что ломается на практике</h2>
+<ul>
+<li><strong>Ложные негативы.</strong> Случайный негатив может оказаться тем, что пользователь купил бы. Чем крупнее каталог и ближе негативы, тем сильнее эффект.</li>
+<li><strong>Популярностный сдвиг.</strong> Сэмплирование негативов пропорционально популярности занижает хиты, равномерное — завышает. <span class="tex">\alpha</span> подбирайте по метрике и по покрытию.</li>
+<li><strong>Скорость.</strong> BPR/WARP — SGD по триплетам: требуют много эпох, учат медленнее ALS на CPU; на GPU сэмплирование легко батчуется.</li>
+<li><strong>Регуляризация по частоте.</strong> В SGD-моделях (BPR, WARP) штраф <span class="tex">\lambda\Theta</span> применяется при каждом обновлении, поэтому частые объекты регуляризуются сильнее сами собой. В ALS штраф одинаков для всех, и частотное масштабирование надо включать явно; у Rendle et al. (2022) оно заметно помогает, особенно при больших размерностях.</li>
+<li><strong>Реализации различаются.</strong> В <code>implicit</code> смещение объекта зашито в факторы (дополнительный столбец), а в LightFM хранится отдельно — при ручном скоринге его легко потерять.</li>
+<li>Типичные вопросы на собеседованиях: «почему BPR связан с AUC?», «чем WARP отличается от BPR?», «зачем logQ-поправка?».</li>
+</ul>
+<h2 id="что-почитать">Что почитать</h2>
+<ul>
+<li>Rendle S. et al. <em>BPR: Bayesian Personalized Ranking from Implicit Feedback</em>, UAI 2009 — https://arxiv.org/abs/1205.2618</li>
+<li>Weston J., Bengio S., Usunier N. <em>WSABIE: Scaling Up To Large Vocabulary Image Annotation</em>, IJCAI 2011 — https://www.ijcai.org/Proceedings/11/Papers/460.pdf</li>
+<li>Kula M. <em>Metadata Embeddings for User and Item Cold-start Recommendations</em> (LightFM), 2015 — https://arxiv.org/abs/1507.08439</li>
+<li>Rendle S., Krichene W., Zhang L., Anderson J. <em>Neural Collaborative Filtering vs. Matrix Factorization Revisited</em>, RecSys 2020 — https://arxiv.org/abs/2005.09683</li>
+<li>Rendle S., Krichene W., Zhang L., Koren Y. <em>Revisiting the Performance of iALS on Item Recommendation Benchmarks</em>, RecSys 2022 — https://arxiv.org/abs/2110.14037</li>
+<li>Grbovic M., Cheng H. <em>Real-time Personalization using Embeddings for Search Ranking at Airbnb</em>, KDD 2018 — https://doi.org/10.1145/3219819.3219885</li>
+<li>Barkan O., Koenigstein N. <em>Item2Vec: Neural Item Embedding for Collaborative Filtering</em>, 2016 — https://arxiv.org/abs/1603.04259</li>
+<li>Лекции: Волохов, нейросетевая МФ и DSSM — https://youtu.be/IznR42dGH-c; практика DSSM на данных KION — https://youtu.be/BssyfbDCxvU; DeepRecSys, семинар 2 — https://youtu.be/q55mPzvw-AM</li>
+</ul>
+</div>
+      
+
+      
+      <nav class="pager" aria-label="Соседние статьи">
+        <a href="/edufamcs-demo/handbook/recsys/matrichnye-razlozheniya-als/"><span><svg class="ico sm" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-arrow-left"/></svg>Назад</span>Матричные разложения и ALS</a>
+        <a href="/edufamcs-demo/handbook/recsys/slim-i-ease/"><span>Дальше<svg class="ico sm" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-arrow"/></svg></span>Линейные item-item модели: SLIM и EASE</a>
+      </nav>
+      
+    </article>
+
+    <aside class="hb-toc" aria-label="На этой странице">
+      <a class="l2" href="#неявные-данные-как-задача-ранжирования">Неявные данные как задача ранжирования</a><a class="l2" href="#bpr-rendle-et-al-2009">BPR (Rendle et al., 2009)</a><a class="l2" href="#warp-weston-bengio-usunier-2011">WARP (Weston, Bengio, Usunier, 2011)</a><a class="l2" href="#негативы-откуда-их-брать">Негативы: откуда их брать</a><a class="l2" href="#возвращение-ials-и-спор-с-ncf">Возвращение iALS и спор с NCF</a><a class="l2" href="#эмбеддинги-из-сессий">Эмбеддинги из сессий</a><a class="l2" href="#код-bpr-и-warp-против-als">Код: BPR и WARP против ALS</a><a class="l2" href="#что-ломается-на-практике">Что ломается на практике</a><a class="l2" href="#что-почитать">Что почитать</a>
+    </aside>
+  </div>
+</div>
+
+
+</main>
+
+<footer class="ftr" data-theme="dark">
+  <svg class="sym fern" viewBox="0 0 40.5 65.02" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#fern"/></svg>
+  <div class="container">
+    <div class="ftr-row">
+      <a href="/edufamcs-demo/" aria-label="EDU FAMCS — главная"><img src="/edufamcs-demo/static/brand/logo/logo-edu-dark.svg" alt="EDU FAMCS" width="196" height="40"></a>
+      <ul class="ftr-links">
+        <li><a href="/edufamcs-demo/#courses">Курсы</a></li>
+        <li><a href="/edufamcs-demo/ml/">Машинное обучение</a></li>
+        <li><a href="/edufamcs-demo/handbook/">Хендбук</a></li>
+        <li><a href="/edufamcs-demo/news/">Новости</a></li>
+        <li><a href="/edufamcs-demo/people/">Авторы</a></li>
+        <li><a href="/edufamcs-demo/about/">О&nbsp;нас</a></li>
+        <li><a href="/edufamcs-demo/propose/">Предложить или исправить</a></li>
+        <li><a href="/edufamcs-demo/privacy/">Конфиденциальность</a></li>
+      </ul>
+    </div>
+    <div class="ftr-big" aria-hidden="true">EDU<span class="d">·</span>FAMCS</div>
+    <p class="ftr-copy">© 2026 EDU FAMCS · Минск</p>
+  </div>
+</footer>
+
+<div class="toasts-region" aria-live="polite" id="toasts">
+
+</div>
+
+</body>
+</html>

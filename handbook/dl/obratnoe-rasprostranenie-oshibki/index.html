@@ -1,0 +1,324 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Обратное распространение ошибки · EDU FAMCS</title>
+<meta name="description" content="Обратное распространение ошибки — Введение в глубокое обучение. Хендбук ML-курса ФПМИ.">
+<meta name="theme-color" content="#060A16">
+<meta name="robots" content="noindex, nofollow">
+<meta name="htmx-config" content='{"allowEval":false,"includeIndicatorStyles":false,"historyCacheSize":0,"selfRequestsOnly":true}'>
+<meta name="katex-js" content="/edufamcs-demo/static/vendor/katex/katex.min.js">
+<meta name="katex-css" content="/edufamcs-demo/static/vendor/katex/katex.min.css">
+<link rel="icon" href="/edufamcs-demo/static/brand/logo/favicon-16.svg" type="image/svg+xml" sizes="16x16">
+<link rel="icon" href="/edufamcs-demo/static/brand/logo/favicon.svg" type="image/svg+xml" sizes="any">
+<link rel="preload" href="/edufamcs-demo/static/brand/fonts/manrope-cyrillic-400.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/edufamcs-demo/static/brand/fonts/unbounded-cyrillic-800.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="/edufamcs-demo/static/brand/fonts.css">
+<link rel="stylesheet" href="/edufamcs-demo/static/brand/tokens.css">
+<link rel="stylesheet" href="/edufamcs-demo/static/brand/components.css">
+<link rel="stylesheet" href="/edufamcs-demo/static/css/site.css">
+<link rel="stylesheet" href="/edufamcs-demo/static/css/hub.css">
+<link rel="stylesheet" href="/edufamcs-demo/static/css/about.css">
+<link rel="stylesheet" href="/edufamcs-demo/static/handbook/handbook.css">
+<script src="/edufamcs-demo/static/js/theme.js"></script>
+<script src="/edufamcs-demo/static/vendor/htmx/htmx.min.js" defer></script>
+<script src="/edufamcs-demo/static/vendor/alpine/alpine-csp.min.js" defer></script>
+<script src="/edufamcs-demo/static/js/site.js" defer></script>
+<script src="/edufamcs-demo/static/handbook/handbook.js" defer></script>
+</head>
+<body class="" hx-headers='{"X-CSRFToken": "MZxf7nRyDLL9zBESQd3wc7cgndrVA5i9bJ6jRlEVyC9iOaPBnqME9CIlVVxq8f0T"}'>
+<a class="skip" href="#main">К содержанию</a>
+<div class="demo-bar" role="note">Демо-версия для отзывов: вход, запись на курсы и формы здесь не работают.</div>
+
+<header class="hdr">
+  <div class="container">
+    <a class="brand" href="/edufamcs-demo/" aria-label="EDU FAMCS — главная">
+      <span class="full"><img class="only-light" src="/edufamcs-demo/static/brand/logo/logo-edu-light.svg" alt="EDU FAMCS" width="196" height="40"><img class="only-dark" src="/edufamcs-demo/static/brand/logo/logo-edu-dark.svg" alt="EDU FAMCS" width="196" height="40"></span>
+      <span class="short"><img class="only-light" src="/edufamcs-demo/static/brand/logo/logo-edu-light.svg" alt="EDU FAMCS" height="30"><img class="only-dark" src="/edufamcs-demo/static/brand/logo/logo-edu-dark.svg" alt="EDU FAMCS" height="30"></span>
+    </a>
+    <nav class="nav" id="main-nav" aria-label="Основная навигация">
+      <a href="/edufamcs-demo/#courses">Курсы</a>
+      <a href="/edufamcs-demo/ml/" >Машинное обучение</a>
+      
+      <a href="/edufamcs-demo/handbook/" aria-current="page">Хендбук</a>
+      <a href="/edufamcs-demo/news/" >Новости</a>
+      <a href="/edufamcs-demo/people/" >Авторы</a>
+      <a href="/edufamcs-demo/about/" >О&nbsp;нас</a>
+    </nav>
+    <div class="hdr-actions">
+      
+      <a class="btn btn-outline btn-login" href="/edufamcs-demo/accounts/login/?next=/handbook/dl/obratnoe-rasprostranenie-oshibki/">Войти</a>
+      
+      <button class="icon-btn menu-btn" type="button" aria-label="Меню" aria-expanded="false" aria-controls="main-nav"><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-menu"/></svg></button>
+    </div>
+  </div>
+</header>
+
+<main id="main">
+
+
+
+<div class="container hb-page hb-tone">
+  <div class="hb">
+    <aside class="hb-nav" aria-label="Статьи раздела">
+      
+<form class="hb-search" action="/edufamcs-demo/handbook/search/" method="get" role="search">
+  <svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-search"/></svg>
+  <input class="input" type="search" name="q" value="" placeholder="Поиск по хендбуку" aria-label="Поиск по хендбуку" autocomplete="off" maxlength="120"
+    hx-get="/edufamcs-demo/handbook/search/" hx-trigger="input changed delay:250ms, search" hx-target="#hb-nav-results" hx-sync="this:replace">
+</form>
+
+      <div id="hb-nav-results" class="hb-nav-results" aria-live="polite"></div>
+      <a class="grp" href="/edufamcs-demo/handbook/dl/">Основы нейросетей</a>
+      
+      <a class="" href="/edufamcs-demo/handbook/dl/nejron-i-mnogoslojnyj-perceptron/">Нейрон и многослойный перцептрон</a>
+      
+      <a class="cur" href="/edufamcs-demo/handbook/dl/obratnoe-rasprostranenie-oshibki/" aria-current="page">Обратное распространение ошибки</a>
+      
+      <a class="" href="/edufamcs-demo/handbook/dl/optimizatory-i-regulyarizaciya/">Оптимизаторы, регуляризация и практика обучения</a>
+      
+    </aside>
+
+    <article class="hb-main">
+      <nav class="crumbs" aria-label="Навигация"><a href="/edufamcs-demo/handbook/">Хендбук</a><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-chev"/></svg><a href="/edufamcs-demo/handbook/dl/">Введение в глубокое обучение</a></nav>
+      <h1 class="h1">Обратное распространение ошибки</h1>
+      <div class="hb-meta">
+        
+        
+        <span><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-clock"/></svg>12&nbsp;мин</span>
+        <span class="hb-authors"><span class="avatar sm" title="Артем Лебедевич">АЛ</span>Артем Лебедевич</span>
+        <span><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-edit"/></svg>9 ноября 2026</span>
+        
+        
+      </div>
+
+      
+      <details class="hb-mtoc">
+        <summary><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-list"/></svg>Содержание<svg class="ico sm" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-chev-down"/></svg></summary>
+        <a class="l2" href="#граф-вычислений">Граф вычислений</a><a class="l2" href="#алгоритм">Алгоритм</a><a class="l2" href="#backprop-для-слоёв">Backprop для слоёв</a><a class="l2" href="#автоматическое-дифференцирование">Автоматическое дифференцирование</a><a class="l2" href="#затухающие-и-взрывающиеся-градиенты">Затухающие и взрывающиеся градиенты</a><a class="l2" href="#проверка-градиента">Проверка градиента</a><a class="l2" href="#код-мини-autograd-на-полсотни-строк">Код: мини-autograd на полсотни строк</a><a class="l2" href="#практика">Практика</a><a class="l2" href="#что-почитать">Что почитать</a>
+      </details>
+      
+
+      <div class="prose"><p>Для логистической регрессии градиент потерь выводится руками: <span class="tex">\nabla_w L = \frac1n X^\top(\hat y - y)</span>, и его можно сразу вписать в код. Для сети из 100 слоёв единой формулы никто выводить не будет, да и незачем. <strong>Обратное распространение ошибки</strong> (backpropagation) вычисляет градиент автоматически: разбивает функцию на элементарные операции и применяет правило цепочки по графу вычислений. Стоит это столько же, сколько один прямой проход, умноженный на небольшую константу.</p>
+<h2 id="граф-вычислений">Граф вычислений</h2>
+<p>Возьмём <span class="tex">L=(w\cdot x-y)^2</span> при <span class="tex">w=2</span>, <span class="tex">x=3</span>, <span class="tex">y=10</span> — это пример из лекции второго сезона. Разложим на элементарные операции:</p>
+<div class="tex tex-block">a = w\cdot x,\qquad b = a - y,\qquad L = b^2.</div>
+<p>Каждая операция — узел графа, у узла есть значение (value) и градиент (grad) <span class="tex">\partial L/\partial(\text{узел})</span>.</p>
+<p><strong>Прямой проход</strong> (от входов к <span class="tex">L</span>): <span class="tex">a=6</span>, <span class="tex">b=-4</span>, <span class="tex">L=16</span>.</p>
+<p><strong>Обратный проход</strong> (от <span class="tex">L</span> к входам). В <span class="tex">L</span> градиент равен 1 (<span class="tex">\partial L/\partial L=1</span>). Дальше по правилу цепочки градиент узла = (градиент потомка) <span class="tex">\times</span> (локальная производная):</p>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>узел</th>
+<th>значение</th>
+<th>градиент</th>
+<th>откуда</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><span class="tex">L=b^2</span></td>
+<td>16</td>
+<td>1</td>
+<td>старт</td>
+</tr>
+<tr>
+<td><span class="tex">b=a-y</span></td>
+<td>−4</td>
+<td><span class="tex">1\cdot 2b=-8</span></td>
+<td><span class="tex">\partial L/\partial b = 2b</span></td>
+</tr>
+<tr>
+<td><span class="tex">a=w x</span></td>
+<td>6</td>
+<td><span class="tex">-8\cdot 1=-8</span></td>
+<td><span class="tex">\partial b/\partial a=1</span></td>
+</tr>
+<tr>
+<td><span class="tex">y</span></td>
+<td>10</td>
+<td><span class="tex">-8\cdot(-1)=8</span></td>
+<td><span class="tex">\partial b/\partial y=-1</span></td>
+</tr>
+<tr>
+<td><span class="tex">w</span></td>
+<td>2</td>
+<td><span class="tex">-8\cdot x=-24</span></td>
+<td><span class="tex">\partial a/\partial w = x = 3</span></td>
+</tr>
+<tr>
+<td><span class="tex">x</span></td>
+<td>3</td>
+<td><span class="tex">-8\cdot w=-16</span></td>
+<td><span class="tex">\partial a/\partial x = w = 2</span></td>
+</tr>
+</tbody>
+</table></div>
+<p>Проверка здравым смыслом: увеличим <span class="tex">w</span> на <span class="tex">0{,}01</span> → <span class="tex">a=6{,}03</span>, <span class="tex">b=-3{,}97</span>, <span class="tex">L\approx15{,}76</span>, то есть <span class="tex">L</span> упало на <span class="tex">\approx0{,}24 = 24\cdot0{,}01</span>. Градиент <span class="tex">-24</span> говорит, что <span class="tex">w</span> надо увеличивать, и шаг градиентного спуска <span class="tex">w\leftarrow w-\eta\cdot(-24)</span> так и делает.</p>
+<p>Важно: локальные производные узлов считаются <strong>по значениям, сохранённым при прямом проходе</strong> (<span class="tex">x</span>, <span class="tex">w</span>, <span class="tex">b</span>). Поэтому обучение требует памяти под все промежуточные активации — отсюда и ограничение на размер батча, и приём gradient checkpointing (не хранить часть активаций, а пересчитывать).</p>
+<h2 id="алгоритм">Алгоритм</h2>
+<p>Псевдокод из лекции в общем виде:</p>
+<div class="code"><div class="code-head"><span class="lang">code</span></div><pre><code>graph.topsort()                   # узлы в порядке прямого вычисления
+graph.zero_grad()                 # обнулить grad во всех узлах
+L.grad = 1
+for node in reversed(graph.nodes):
+    if node.is_operation:
+        for inp in node.inputs:
+            inp.grad += d(node.output)/d(inp) * node.output.grad
+</code></pre></div>
+<p>Две детали, на которых спотыкаются.</p>
+<p><strong>Операция <code>+=</code>, а не <code>=</code>.</strong> Если переменная участвует в графе несколько раз (например, один и тот же вес используется в двух местах или в <span class="tex">L=(wx-y)^2+\lambda w^2</span> параметр <span class="tex">w</span> входит дважды), вклады надо <strong>суммировать</strong>: <span class="tex">\partial L/\partial w = \sum</span> по всем путям от <span class="tex">w</span> до <span class="tex">L</span>. Это многомерное правило цепочки.</p>
+<p><strong><code>zero_grad()</code> перед каждым шагом.</strong> Раз фреймворки накапливают градиенты, то без обнуления градиент нового батча прибавится к старому. Забытый <code>optimizer.zero_grad()</code> — один из самых частых багов. Побочный эффект умеют использовать намеренно: <strong>накопление градиентов</strong> — вызывать <code>backward()</code> на нескольких микробатчах и один раз <code>step()</code>, чтобы имитировать большой батч при нехватке памяти.</p>
+<h2 id="backprop-для-слоёв">Backprop для слоёв</h2>
+<p>Для линейного слоя <span class="tex">z = Wh + b</span> (на одном объекте) пусть <span class="tex">\delta = \partial L/\partial z</span> — градиент, пришедший сверху. Тогда</p>
+<div class="tex tex-block">\frac{\partial L}{\partial W}=\delta\,h^\top,\qquad \frac{\partial L}{\partial b}=\delta,\qquad \frac{\partial L}{\partial h}=W^\top\delta.</div>
+<p>На батче <span class="tex">\partial L/\partial W=\sum_i \delta_i h_i^\top = \Delta^\top H</span>, где строки матриц <span class="tex">\Delta\in\mathbb R^{B\times d_{out}}</span> и <span class="tex">H\in\mathbb R^{B\times d_{in}}</span> — это <span class="tex">\delta_i^\top</span> и <span class="tex">h_i^\top</span>; снова одно матричное умножение. Для MLP с активацией <span class="tex">h_l=\sigma(z_l)</span> ошибка распространяется назад по рекурсии</p>
+<div class="tex tex-block">\delta_l = \big(W_{l+1}^\top\,\delta_{l+1}\big)\odot\sigma'(z_l),</div>
+<p>где <span class="tex">\odot</span> — покомпонентное произведение, а стартом служит <span class="tex">\delta_N=\partial L/\partial z_N</span> (для softmax+кросс-энтропии это <span class="tex">p-\text{onehot}(y)</span>). Отсюда видно, почему активации важны для обучения: на каждом слое градиент умножается на <span class="tex">W^\top</span> и на <span class="tex">\sigma'</span>.</p>
+<h2 id="автоматическое-дифференцирование">Автоматическое дифференцирование</h2>
+<p>Backprop — частный случай <strong>reverse-mode автоматического дифференцирования</strong>. Его предложил Линнайнмаа в 1970 году (в магистерской работе, о накоплении ошибок округления), применить его к нейросетям предлагал Вербос (1974, 1982), а в 1986-м Румельхарт, Хинтон и Уильямс показали на экспериментах, что метод обучает скрытые слои и находит полезные представления. Эта работа и возродила интерес к нейросетям.</p>
+<p>Reverse-mode выгоден, когда выходов мало, а входов много: за один обратный проход мы получаем градиент скалярного <span class="tex">L</span> по всем миллионам параметров. Прямой режим (forward-mode) был бы в миллионы раз дороже. Численное дифференцирование (конечные разности) требует по прогону на параметр и теряет точность, символьное — раздувает формулы.</p>
+<p>В PyTorch этим занимается <strong>autograd</strong>: при операциях над тензорами с <code>requires_grad=True</code> он строит граф динамически (define-by-run), <code>loss.backward()</code> проходит его в обратном порядке и складывает градиенты в <code>.grad</code> у листьев. <code>with torch.no_grad():</code> отключает построение графа — его нужно использовать на инференсе, чтобы не тратить память.</p>
+<h2 id="затухающие-и-взрывающиеся-градиенты">Затухающие и взрывающиеся градиенты</h2>
+<p>Градиент для начальных слоёв — произведение множителей <span class="tex">W_l^\top</span> и <span class="tex">\sigma'(z_l)</span> вдоль всей глубины. Если типичный множитель меньше 1, градиент затухает экспоненциально, если больше 1 — взрывается. Для сигмоиды <span class="tex">\sigma'\le0{,}25</span>, так что 10 слоёв дают множитель порядка <span class="tex">10^{-6}</span> и первые слои практически не учатся. Это показали Хохрайтер (1991) и Бенджио и соавторы (1994) для рекуррентных сетей, но то же верно для глубоких feed-forward сетей.</p>
+<p>Набор приёмов, снявший проблему, и составляет практический «рецепт глубокого обучения»:</p>
+<ol>
+<li><strong>Ненасыщающие активации</strong> (ReLU, GELU) — производная не затухает на положительной части.</li>
+<li><strong>Правильная инициализация.</strong> Цель — сохранить дисперсию сигнала при проходе через слой. Для <span class="tex">\text{Linear}(d_{in},d_{out})</span> с симметричной активацией, почти линейной около нуля (tanh), Глоро и Бенджио (2010, <strong>Xavier</strong>) берут <span class="tex">\mathrm{Var}(w)=\frac{2}{d_{in}+d_{out}}</span> — компромисс между сохранением дисперсии на прямом проходе (<span class="tex">1/d_{in}</span>) и на обратном (<span class="tex">1/d_{out}</span>). Для ReLU, обнуляющей половину входов, Хе и соавторы (2015, <strong>He/Kaiming</strong>) берут <span class="tex">\mathrm{Var}(w)=\frac{2}{d_{in}}</span>. В PyTorch это <code>nn.init.xavier_uniform_</code> и <code>nn.init.kaiming_normal_</code>. Одинаковая (в частности, нулевая) инициализация недопустима: нейроны в слое остаются симметричными.</li>
+<li><strong>Нормализации.</strong> BatchNorm (Иоффе, Сегеди, 2015) нормирует активации по батчу: <span class="tex">\hat h = (h-\mu_B)/\sqrt{\sigma_B^2+\varepsilon}</span> с обучаемыми <span class="tex">\gamma,\beta</span> — это стабилизирует масштаб на каждом слое, позволяет брать большой learning rate. На инференсе используются накопленные скользящие средние, поэтому требуется <code>model.eval()</code>. LayerNorm (Ба и соавторы, 2016) нормирует по признакам одного объекта и не зависит от батча — потому стандарт для трансформеров и последовательностей.</li>
+<li><strong>Остаточные связи</strong> (He et al., 2015, ResNet): блок считает <span class="tex">h_{l+1}=h_l+F(h_l)</span>. Производная <span class="tex">\partial h_{l+1}/\partial h_l = I + \partial F/\partial h_l</span> содержит единичную матрицу, так что градиент идёт по «магистрали» мимо блока без затухания. Именно это позволило обучать сети из сотен слоёв.</li>
+<li><strong>Взрывающиеся градиенты</strong> лечат клиппингом нормы градиента (подробнее в статье про оптимизаторы).</li>
+</ol>
+<h2 id="проверка-градиента">Проверка градиента</h2>
+<p>Если вы пишете свой слой или функцию потерь, проверяйте её <strong>конечными разностями</strong>:</p>
+<div class="tex tex-block">\frac{\partial L}{\partial \theta_i}\approx\frac{L(\theta+\varepsilon e_i)-L(\theta-\varepsilon e_i)}{2\varepsilon},\qquad \varepsilon\sim10^{-5}.</div>
+<p>Сравнивайте в <code>float64</code> через относительную ошибку <span class="tex">\frac{\|g_{an}-g_{num}\|}{\|g_{an}\|+\|g_{num}\|}</span>; значения порядка <span class="tex">10^{-7}</span> и меньше считаются нормой. В PyTorch для этого есть <code>torch.autograd.gradcheck</code>. Если вход попал ближе <span class="tex">\varepsilon</span> к точке излома (ReLU в нуле, <code>max</code>, <code>abs</code>), конечная разность «перешагивает» излом и расходится с аналитическим градиентом — это не баг.</p>
+<h2 id="код-мини-autograd-на-полсотни-строк">Код: мини-autograd на полсотни строк</h2>
+<p>В духе micrograd Карпати: скалярный движок, у каждого узла хранится значение, градиент и замыкание, которое пушит градиент к родителям.</p>
+<div class="code"><div class="code-head"><span class="lang">python</span></div><pre><code><span class="tok-k">import</span> math
+
+<span class="tok-k">class</span> <span class="tok-f">Value</span><span class="tok-p">:</span>
+    <span class="tok-k">def</span> <span class="tok-f">__init__</span><span class="tok-p">(</span><span class="tok-f">self</span><span class="tok-p">,</span> data<span class="tok-p">,</span> parents<span class="tok-p">=</span><span class="tok-p">(</span><span class="tok-p">)</span><span class="tok-p">)</span><span class="tok-p">:</span>
+        <span class="tok-f">self</span><span class="tok-p">.</span>data<span class="tok-p">,</span> <span class="tok-f">self</span><span class="tok-p">.</span>grad <span class="tok-p">=</span> data<span class="tok-p">,</span> <span class="tok-n">0.0</span>
+        <span class="tok-f">self</span><span class="tok-p">.</span>_parents<span class="tok-p">,</span> <span class="tok-f">self</span><span class="tok-p">.</span>_backward <span class="tok-p">=</span> parents<span class="tok-p">,</span> <span class="tok-k">lambda</span><span class="tok-p">:</span> <span class="tok-k">None</span>
+
+    <span class="tok-k">def</span> <span class="tok-f">__add__</span><span class="tok-p">(</span><span class="tok-f">self</span><span class="tok-p">,</span> o<span class="tok-p">)</span><span class="tok-p">:</span>
+        o <span class="tok-p">=</span> o <span class="tok-k">if</span> <span class="tok-f">isinstance</span><span class="tok-p">(</span>o<span class="tok-p">,</span> Value<span class="tok-p">)</span> <span class="tok-k">else</span> Value<span class="tok-p">(</span>o<span class="tok-p">)</span>
+        out <span class="tok-p">=</span> Value<span class="tok-p">(</span><span class="tok-f">self</span><span class="tok-p">.</span>data <span class="tok-p">+</span> o<span class="tok-p">.</span>data<span class="tok-p">,</span> <span class="tok-p">(</span><span class="tok-f">self</span><span class="tok-p">,</span> o<span class="tok-p">)</span><span class="tok-p">)</span>
+        <span class="tok-k">def</span> <span class="tok-f">bw</span><span class="tok-p">(</span><span class="tok-p">)</span><span class="tok-p">:</span>
+            <span class="tok-f">self</span><span class="tok-p">.</span>grad <span class="tok-p">+</span><span class="tok-p">=</span> out<span class="tok-p">.</span>grad<span class="tok-p">;</span> o<span class="tok-p">.</span>grad <span class="tok-p">+</span><span class="tok-p">=</span> out<span class="tok-p">.</span>grad
+        out<span class="tok-p">.</span>_backward <span class="tok-p">=</span> bw
+        <span class="tok-k">return</span> out
+
+    <span class="tok-k">def</span> <span class="tok-f">__mul__</span><span class="tok-p">(</span><span class="tok-f">self</span><span class="tok-p">,</span> o<span class="tok-p">)</span><span class="tok-p">:</span>
+        o <span class="tok-p">=</span> o <span class="tok-k">if</span> <span class="tok-f">isinstance</span><span class="tok-p">(</span>o<span class="tok-p">,</span> Value<span class="tok-p">)</span> <span class="tok-k">else</span> Value<span class="tok-p">(</span>o<span class="tok-p">)</span>
+        out <span class="tok-p">=</span> Value<span class="tok-p">(</span><span class="tok-f">self</span><span class="tok-p">.</span>data <span class="tok-p">*</span> o<span class="tok-p">.</span>data<span class="tok-p">,</span> <span class="tok-p">(</span><span class="tok-f">self</span><span class="tok-p">,</span> o<span class="tok-p">)</span><span class="tok-p">)</span>
+        <span class="tok-k">def</span> <span class="tok-f">bw</span><span class="tok-p">(</span><span class="tok-p">)</span><span class="tok-p">:</span>
+            <span class="tok-f">self</span><span class="tok-p">.</span>grad <span class="tok-p">+</span><span class="tok-p">=</span> o<span class="tok-p">.</span>data <span class="tok-p">*</span> out<span class="tok-p">.</span>grad<span class="tok-p">;</span> o<span class="tok-p">.</span>grad <span class="tok-p">+</span><span class="tok-p">=</span> <span class="tok-f">self</span><span class="tok-p">.</span>data <span class="tok-p">*</span> out<span class="tok-p">.</span>grad
+        out<span class="tok-p">.</span>_backward <span class="tok-p">=</span> bw
+        <span class="tok-k">return</span> out
+
+    <span class="tok-k">def</span> <span class="tok-f">__pow__</span><span class="tok-p">(</span><span class="tok-f">self</span><span class="tok-p">,</span> k<span class="tok-p">)</span><span class="tok-p">:</span>
+        out <span class="tok-p">=</span> Value<span class="tok-p">(</span><span class="tok-f">self</span><span class="tok-p">.</span>data <span class="tok-p">*</span><span class="tok-p">*</span> k<span class="tok-p">,</span> <span class="tok-p">(</span><span class="tok-f">self</span><span class="tok-p">,</span><span class="tok-p">)</span><span class="tok-p">)</span>
+        <span class="tok-k">def</span> <span class="tok-f">bw</span><span class="tok-p">(</span><span class="tok-p">)</span><span class="tok-p">:</span> <span class="tok-f">self</span><span class="tok-p">.</span>grad <span class="tok-p">+</span><span class="tok-p">=</span> k <span class="tok-p">*</span> <span class="tok-f">self</span><span class="tok-p">.</span>data <span class="tok-p">*</span><span class="tok-p">*</span> <span class="tok-p">(</span>k <span class="tok-p">-</span> <span class="tok-n">1</span><span class="tok-p">)</span> <span class="tok-p">*</span> out<span class="tok-p">.</span>grad
+        out<span class="tok-p">.</span>_backward <span class="tok-p">=</span> bw
+        <span class="tok-k">return</span> out
+
+    <span class="tok-k">def</span> <span class="tok-f">__neg__</span><span class="tok-p">(</span><span class="tok-f">self</span><span class="tok-p">)</span><span class="tok-p">:</span> <span class="tok-k">return</span> <span class="tok-f">self</span> <span class="tok-p">*</span> <span class="tok-p">-</span><span class="tok-n">1</span>
+    <span class="tok-k">def</span> <span class="tok-f">__sub__</span><span class="tok-p">(</span><span class="tok-f">self</span><span class="tok-p">,</span> o<span class="tok-p">)</span><span class="tok-p">:</span> <span class="tok-k">return</span> <span class="tok-f">self</span> <span class="tok-p">+</span> <span class="tok-p">(</span><span class="tok-p">-</span>o<span class="tok-p">)</span>
+
+    <span class="tok-k">def</span> <span class="tok-f">tanh</span><span class="tok-p">(</span><span class="tok-f">self</span><span class="tok-p">)</span><span class="tok-p">:</span>
+        t <span class="tok-p">=</span> math<span class="tok-p">.</span>tanh<span class="tok-p">(</span><span class="tok-f">self</span><span class="tok-p">.</span>data<span class="tok-p">)</span><span class="tok-p">;</span> out <span class="tok-p">=</span> Value<span class="tok-p">(</span>t<span class="tok-p">,</span> <span class="tok-p">(</span><span class="tok-f">self</span><span class="tok-p">,</span><span class="tok-p">)</span><span class="tok-p">)</span>
+        <span class="tok-k">def</span> <span class="tok-f">bw</span><span class="tok-p">(</span><span class="tok-p">)</span><span class="tok-p">:</span> <span class="tok-f">self</span><span class="tok-p">.</span>grad <span class="tok-p">+</span><span class="tok-p">=</span> <span class="tok-p">(</span><span class="tok-n">1</span> <span class="tok-p">-</span> t <span class="tok-p">*</span> t<span class="tok-p">)</span> <span class="tok-p">*</span> out<span class="tok-p">.</span>grad
+        out<span class="tok-p">.</span>_backward <span class="tok-p">=</span> bw
+        <span class="tok-k">return</span> out
+
+    <span class="tok-k">def</span> <span class="tok-f">backward</span><span class="tok-p">(</span><span class="tok-f">self</span><span class="tok-p">)</span><span class="tok-p">:</span>
+        order<span class="tok-p">,</span> seen <span class="tok-p">=</span> <span class="tok-p">[</span><span class="tok-p">]</span><span class="tok-p">,</span> <span class="tok-f">set</span><span class="tok-p">(</span><span class="tok-p">)</span>
+        <span class="tok-k">def</span> <span class="tok-f">topo</span><span class="tok-p">(</span>v<span class="tok-p">)</span><span class="tok-p">:</span>                      <span class="tok-c"># топологическая сортировка</span>
+            <span class="tok-k">if</span> v <span class="tok-k">not</span> <span class="tok-k">in</span> seen<span class="tok-p">:</span>
+                seen<span class="tok-p">.</span>add<span class="tok-p">(</span>v<span class="tok-p">)</span>
+                <span class="tok-k">for</span> p <span class="tok-k">in</span> v<span class="tok-p">.</span>_parents<span class="tok-p">:</span> topo<span class="tok-p">(</span>p<span class="tok-p">)</span>
+                order<span class="tok-p">.</span>append<span class="tok-p">(</span>v<span class="tok-p">)</span>
+        topo<span class="tok-p">(</span><span class="tok-f">self</span><span class="tok-p">)</span>
+        <span class="tok-f">self</span><span class="tok-p">.</span>grad <span class="tok-p">=</span> <span class="tok-n">1.0</span>
+        <span class="tok-k">for</span> v <span class="tok-k">in</span> <span class="tok-f">reversed</span><span class="tok-p">(</span>order<span class="tok-p">)</span><span class="tok-p">:</span> v<span class="tok-p">.</span>_backward<span class="tok-p">(</span><span class="tok-p">)</span>
+
+w<span class="tok-p">,</span> x<span class="tok-p">,</span> y <span class="tok-p">=</span> Value<span class="tok-p">(</span><span class="tok-n">2.0</span><span class="tok-p">)</span><span class="tok-p">,</span> Value<span class="tok-p">(</span><span class="tok-n">3.0</span><span class="tok-p">)</span><span class="tok-p">,</span> Value<span class="tok-p">(</span><span class="tok-n">10.0</span><span class="tok-p">)</span>
+L <span class="tok-p">=</span> <span class="tok-p">(</span>w <span class="tok-p">*</span> x <span class="tok-p">-</span> y<span class="tok-p">)</span> <span class="tok-p">*</span><span class="tok-p">*</span> <span class="tok-n">2</span>
+L<span class="tok-p">.</span>backward<span class="tok-p">(</span><span class="tok-p">)</span>
+<span class="tok-f">print</span><span class="tok-p">(</span>L<span class="tok-p">.</span>data<span class="tok-p">,</span> w<span class="tok-p">.</span>grad<span class="tok-p">,</span> x<span class="tok-p">.</span>grad<span class="tok-p">,</span> y<span class="tok-p">.</span>grad<span class="tok-p">)</span>     <span class="tok-c"># 16.0 -24.0 -16.0 8.0</span>
+</code></pre></div>
+<p>Результат совпадает с таблицей выше. Сверка с PyTorch:</p>
+<div class="code"><div class="code-head"><span class="lang">python</span></div><pre><code><span class="tok-k">import</span> torch
+w<span class="tok-p">,</span> x<span class="tok-p">,</span> y <span class="tok-p">=</span> <span class="tok-p">(</span>torch<span class="tok-p">.</span>tensor<span class="tok-p">(</span>v<span class="tok-p">,</span> requires_grad<span class="tok-p">=</span><span class="tok-k">True</span><span class="tok-p">)</span> <span class="tok-k">for</span> v <span class="tok-k">in</span> <span class="tok-p">(</span><span class="tok-n">2.0</span><span class="tok-p">,</span> <span class="tok-n">3.0</span><span class="tok-p">,</span> <span class="tok-n">10.0</span><span class="tok-p">)</span><span class="tok-p">)</span>
+<span class="tok-p">(</span><span class="tok-p">(</span>w <span class="tok-p">*</span> x <span class="tok-p">-</span> y<span class="tok-p">)</span> <span class="tok-p">*</span><span class="tok-p">*</span> <span class="tok-n">2</span><span class="tok-p">)</span><span class="tok-p">.</span>backward<span class="tok-p">(</span><span class="tok-p">)</span>
+<span class="tok-f">print</span><span class="tok-p">(</span>w<span class="tok-p">.</span>grad<span class="tok-p">.</span>item<span class="tok-p">(</span><span class="tok-p">)</span><span class="tok-p">,</span> x<span class="tok-p">.</span>grad<span class="tok-p">.</span>item<span class="tok-p">(</span><span class="tok-p">)</span><span class="tok-p">,</span> y<span class="tok-p">.</span>grad<span class="tok-p">.</span>item<span class="tok-p">(</span><span class="tok-p">)</span><span class="tok-p">)</span>   <span class="tok-c"># -24.0 -16.0 8.0</span>
+</code></pre></div>
+<p>Обратите внимание на <code>+=</code> в каждом <code>bw</code> и на обход в обратном топологическом порядке: узел получает окончательный градиент только после того, как обработаны все его потребители.</p>
+<h2 id="практика">Практика</h2>
+<ul>
+<li><strong>Не-дифференцируемые операции</strong> (<code>argmax</code>, индексация по предсказанию, округление) рвут граф: градиент до них не дойдёт. Нужны релаксации (softmax вместо argmax, straight-through estimator).</li>
+<li><strong><code>.detach()</code> и <code>no_grad</code></strong> отрезают часть графа намеренно — например, целевую сеть в RL или замороженный энкодер.</li>
+<li><strong>In-place операции</strong> над тензорами, которые нужны для обратного прохода, дают ошибку autograd.</li>
+<li><strong>NaN в потере</strong> — почти всегда взрыв градиентов, <code>log(0)</code> или деление на ноль; ищите первый слой, где появился <code>inf</code>/<code>nan</code> (<code>torch.autograd.set_detect_anomaly(True)</code> помогает).</li>
+<li>На интервью просят вывести градиент для логистической регрессии, линейного слоя или softmax-кросс-энтропии — проделайте их на бумаге один раз.</li>
+</ul>
+<h2 id="что-почитать">Что почитать</h2>
+<ul>
+<li>Rumelhart, Hinton, Williams, <em>Learning representations by back-propagating errors</em>, Nature, 1986: <a href="https://doi.org/10.1038/323533a0" rel="noopener noreferrer nofollow">doi.org/10.1038/323533a0</a>.</li>
+<li>Baydin et al., <em>Automatic Differentiation in Machine Learning: a Survey</em>, JMLR, 2018: <a href="https://arxiv.org/abs/1502.05767" rel="noopener noreferrer nofollow">arxiv.org/abs/1502.05767</a> — обзор режимов автодифференцирования и истории метода.</li>
+<li>Glorot, Bengio, <em>Understanding the difficulty of training deep feedforward neural networks</em>, AISTATS 2010: <a href="https://proceedings.mlr.press/v9/glorot10a.html" rel="noopener noreferrer nofollow">proceedings.mlr.press/v9/glorot10a.html</a>.</li>
+<li>He et al., <em>Delving Deep into Rectifiers</em> (инициализация He), 2015: <a href="https://arxiv.org/abs/1502.01852" rel="noopener noreferrer nofollow">arxiv.org/abs/1502.01852</a>; <em>Deep Residual Learning for Image Recognition</em>, 2015: <a href="https://arxiv.org/abs/1512.03385" rel="noopener noreferrer nofollow">arxiv.org/abs/1512.03385</a>.</li>
+<li>Ioffe, Szegedy, <em>Batch Normalization</em>, 2015: <a href="https://arxiv.org/abs/1502.03167" rel="noopener noreferrer nofollow">arxiv.org/abs/1502.03167</a>; Ba, Kiros, Hinton, <em>Layer Normalization</em>, 2016: <a href="https://arxiv.org/abs/1607.06450" rel="noopener noreferrer nofollow">arxiv.org/abs/1607.06450</a>.</li>
+<li>Карпати, micrograd и лекция «The spelled-out intro to neural networks and backpropagation»: <a href="https://github.com/karpathy/micrograd" rel="noopener noreferrer nofollow">github.com/karpathy/micrograd</a>.</li>
+<li>Яндекс Образование, «Метод обратного распространения ошибки»: <a href="https://contest.yandex.ru/tracks/ml/deep-learning-introduction/backpropagation" rel="noopener noreferrer nofollow">contest.yandex.ru/tracks/ml/deep-learning-introduction/backpropagation</a>.</li>
+</ul>
+</div>
+      
+
+      
+      <nav class="pager" aria-label="Соседние статьи">
+        <a href="/edufamcs-demo/handbook/dl/nejron-i-mnogoslojnyj-perceptron/"><span><svg class="ico sm" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-arrow-left"/></svg>Назад</span>Нейрон и многослойный перцептрон</a>
+        <a href="/edufamcs-demo/handbook/dl/optimizatory-i-regulyarizaciya/"><span>Дальше<svg class="ico sm" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-arrow"/></svg></span>Оптимизаторы, регуляризация и практика обучения</a>
+      </nav>
+      
+    </article>
+
+    <aside class="hb-toc" aria-label="На этой странице">
+      <a class="l2" href="#граф-вычислений">Граф вычислений</a><a class="l2" href="#алгоритм">Алгоритм</a><a class="l2" href="#backprop-для-слоёв">Backprop для слоёв</a><a class="l2" href="#автоматическое-дифференцирование">Автоматическое дифференцирование</a><a class="l2" href="#затухающие-и-взрывающиеся-градиенты">Затухающие и взрывающиеся градиенты</a><a class="l2" href="#проверка-градиента">Проверка градиента</a><a class="l2" href="#код-мини-autograd-на-полсотни-строк">Код: мини-autograd на полсотни строк</a><a class="l2" href="#практика">Практика</a><a class="l2" href="#что-почитать">Что почитать</a>
+    </aside>
+  </div>
+</div>
+
+
+</main>
+
+<footer class="ftr" data-theme="dark">
+  <svg class="sym fern" viewBox="0 0 40.5 65.02" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#fern"/></svg>
+  <div class="container">
+    <div class="ftr-row">
+      <a href="/edufamcs-demo/" aria-label="EDU FAMCS — главная"><img src="/edufamcs-demo/static/brand/logo/logo-edu-dark.svg" alt="EDU FAMCS" width="196" height="40"></a>
+      <ul class="ftr-links">
+        <li><a href="/edufamcs-demo/#courses">Курсы</a></li>
+        <li><a href="/edufamcs-demo/ml/">Машинное обучение</a></li>
+        <li><a href="/edufamcs-demo/handbook/">Хендбук</a></li>
+        <li><a href="/edufamcs-demo/news/">Новости</a></li>
+        <li><a href="/edufamcs-demo/people/">Авторы</a></li>
+        <li><a href="/edufamcs-demo/about/">О&nbsp;нас</a></li>
+        <li><a href="/edufamcs-demo/propose/">Предложить или исправить</a></li>
+        <li><a href="/edufamcs-demo/privacy/">Конфиденциальность</a></li>
+      </ul>
+    </div>
+    <div class="ftr-big" aria-hidden="true">EDU<span class="d">·</span>FAMCS</div>
+    <p class="ftr-copy">© 2026 EDU FAMCS · Минск</p>
+  </div>
+</footer>
+
+<div class="toasts-region" aria-live="polite" id="toasts">
+
+</div>
+
+</body>
+</html>
