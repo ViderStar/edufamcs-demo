@@ -83,10 +83,14 @@
   function renderMath(scope) {
     var nodes = (scope || document).querySelectorAll('.tex:not([data-rendered])');
     if (!nodes.length) return;
+    // keep the TeX source before anything renders: several handlers (htmx settle, oob swap, page scripts) may call this
+    // for the same node before KaTeX has loaded, and rendering twice would feed KaTeX its own output
+    nodes.forEach(function (el) { if (!el.hasAttribute('data-tex')) el.setAttribute('data-tex', el.textContent); });
     loadKatex().then(function () {
       nodes.forEach(function (el) {
+        if (el.hasAttribute('data-rendered')) return;
         try {
-          window.katex.render(el.textContent, el, {
+          window.katex.render(el.getAttribute('data-tex'), el, {
             displayMode: el.classList.contains('tex-block'),
             throwOnError: false, strict: 'ignore', output: 'htmlAndMathml'
           });

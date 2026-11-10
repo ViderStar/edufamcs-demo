@@ -274,3 +274,15 @@ a.ev:hover{background:var(--surface-2)}
   .stage-f{position:sticky;bottom:0;z-index:5;margin-inline:calc(-1*var(--gutter));padding:12px var(--gutter) calc(12px + env(safe-area-inset-bottom));
     background:color-mix(in srgb,var(--bg) 88%,transparent);-webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px)}
 }
+
+/* participation certificate of a self-paced course */
+.cert-bar{display:grid;grid-template-columns:auto minmax(0,1fr) auto;align-items:center;gap:16px 20px;margin-bottom:clamp(20px,3vw,32px);
+  padding:16px 20px;border-radius:var(--r-lg);background:var(--surface);border:1px solid var(--line)}
+.cert-bar .cert-ico{display:grid;place-items:center;width:44px;height:44px;border-radius:50%;background:var(--accent-soft,var(--surface-2));color:var(--accent-ink)}
+.cert-bar b{color:var(--heading)}
+.cert-meters{display:flex;flex-wrap:wrap;gap:8px 20px;margin-top:6px;font-size:14px;color:var(--muted)}
+.cert-meters>span{display:inline-flex;align-items:center;gap:8px}
+.cert-meters .progress{display:inline-block;width:90px}
+.cert-meters .bad{color:var(--err)}
+.cert-bar.is-done .cert-ico{background:var(--ok-soft);color:var(--ok)}
+@media (max-width:560px){.cert-bar{grid-template-columns:auto minmax(0,1fr)}.cert-bar .btn{grid-column:1/-1;justify-self:start}}
