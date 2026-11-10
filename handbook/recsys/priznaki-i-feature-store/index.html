@@ -4,9 +4,16 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Признаки для рекомендаций и feature store · EDU FAMCS</title>
-<meta name="description" content="Признаки для рекомендаций и feature store — Рекомендательные системы. Хендбук ML-курса ФПМИ.">
+<meta name="description" content="Модель ранжирования в промышленной системе на 90 % состоит из признаков: архитектуры сходятся к похожим, а данные, которые модель видит, различаются. Главная опасность не в выборе признаков, а в том,…">
 <meta name="theme-color" content="#060A16">
 <meta name="robots" content="noindex, nofollow">
+<link rel="canonical" href="https://edufamcs.by/handbook/recsys/priznaki-i-feature-store/">
+<meta property="og:site_name" content="EDU FAMCS">
+<meta property="og:locale" content="ru_RU">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://edufamcs.by/handbook/recsys/priznaki-i-feature-store/">
+<link rel="sitemap" type="application/xml" href="/edufamcs-demo/sitemap.xml">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"Признаки для рекомендаций и feature store","description":"Модель ранжирования в промышленной системе на 90 % состоит из признаков: архитектуры сходятся к похожим, а данные, которые модель видит, различаются. Главная опасность не в выборе признаков, а в том, как они посчитаны: признак, в который просочилось будущее, делает офлайн-метрику красивой, а прод —","url":"https://edufamcs.by/handbook/recsys/priznaki-i-feature-store/","inLanguage":"ru","dateModified":"2026-11-10T11:19:57.130625+00:00","publisher":{"@type":"EducationalOrganization","@id":"https://edufamcs.by/#org","name":"EDU FAMCS","url":"https://edufamcs.by/","logo":"https://edufamcs.by/static/brand/logo/favicon.svg","description":"Независимый образовательный проект выпускников ФПМИ БГУ: бесплатные курсы по машинному обучению и IT.","areaServed":"BY"},"articleSection":"Рекомендательные системы","author":[{"@type":"Person","name":"Артем Лебедевич"}]}</script>
 <meta name="htmx-config" content='{"allowEval":false,"includeIndicatorStyles":false,"historyCacheSize":0,"selfRequestsOnly":true}'>
 <meta name="katex-js" content="/edufamcs-demo/static/vendor/katex/katex.min.js">
 <meta name="katex-css" content="/edufamcs-demo/static/vendor/katex/katex.min.css">
@@ -27,7 +34,7 @@
 <script src="/edufamcs-demo/static/js/site.js" defer></script>
 <script src="/edufamcs-demo/static/handbook/handbook.js" defer></script>
 </head>
-<body class="" hx-headers='{"X-CSRFToken": "hkyI84Otrj0aE9kxv29RJUgQlVhaml5EWCDxhiSlCHXqcrF6Vdd7VSvRCYrqjjzk"}'>
+<body class="" hx-headers='{"X-CSRFToken": "unOQ0ah6HF3ADjNYRaGITO7rOpA5s1363350xDJ270R0SjbaUbVB5gwBH1RdKoDB"}'>
 <a class="skip" href="#main">К содержанию</a>
 <div class="demo-bar" role="note">Демо-версия для отзывов: вход, запись на курсы и формы здесь не работают.</div>
 
@@ -306,7 +313,7 @@ res <span class="tok-p">=</span> <span class="tok-p">{</span><span class="tok-p"
       </ul>
     </div>
     <div class="ftr-big" aria-hidden="true">EDU<span class="d">·</span>FAMCS</div>
-    <p class="ftr-copy">© 2026 EDU FAMCS · Минск</p>
+    <p class="ftr-copy">© 2026 EDU FAMCS · независимый проект выпускников ФПМИ БГУ · Минск</p>
   </div>
 </footer>
 

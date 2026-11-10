@@ -4,9 +4,16 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Бустинг на лагах и признаки для рядов · EDU FAMCS</title>
-<meta name="description" content="Бустинг на лагах и признаки для рядов — Временные ряды. Хендбук ML-курса ФПМИ.">
+<meta name="description" content="Градиентный бустинг решает прогнозирование, если превратить ряд в таблицу: для каждого момента собрать признаки из прошлого и предсказывать. Такой подход победил в M5 и остаётся главным рабочим инстр…">
 <meta name="theme-color" content="#060A16">
 <meta name="robots" content="noindex, nofollow">
+<link rel="canonical" href="https://edufamcs.by/handbook/ts/busting-na-lagah/">
+<meta property="og:site_name" content="EDU FAMCS">
+<meta property="og:locale" content="ru_RU">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://edufamcs.by/handbook/ts/busting-na-lagah/">
+<link rel="sitemap" type="application/xml" href="/edufamcs-demo/sitemap.xml">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"Бустинг на лагах и признаки для рядов","description":"Градиентный бустинг решает прогнозирование, если превратить ряд в таблицу: для каждого момента собрать признаки из прошлого и предсказывать. Такой подход победил в M5 и остаётся главным рабочим инструментом для тысяч связанных рядов с ковариатами. Вся сложность переезжает в признаки и валидацию:","url":"https://edufamcs.by/handbook/ts/busting-na-lagah/","inLanguage":"ru","dateModified":"2026-11-10T11:19:57.118204+00:00","publisher":{"@type":"EducationalOrganization","@id":"https://edufamcs.by/#org","name":"EDU FAMCS","url":"https://edufamcs.by/","logo":"https://edufamcs.by/static/brand/logo/favicon.svg","description":"Независимый образовательный проект выпускников ФПМИ БГУ: бесплатные курсы по машинному обучению и IT.","areaServed":"BY"},"articleSection":"Временные ряды","author":[{"@type":"Person","name":"Артем Лебедевич"}]}</script>
 <meta name="htmx-config" content='{"allowEval":false,"includeIndicatorStyles":false,"historyCacheSize":0,"selfRequestsOnly":true}'>
 <meta name="katex-js" content="/edufamcs-demo/static/vendor/katex/katex.min.js">
 <meta name="katex-css" content="/edufamcs-demo/static/vendor/katex/katex.min.css">
@@ -27,7 +34,7 @@
 <script src="/edufamcs-demo/static/js/site.js" defer></script>
 <script src="/edufamcs-demo/static/handbook/handbook.js" defer></script>
 </head>
-<body class="" hx-headers='{"X-CSRFToken": "LALL0gYX49qnvTxvcgR14wsY6A5YEtgwqSQA9u2PfxnD3bS4CrVhguHZnDfeBrKc"}'>
+<body class="" hx-headers='{"X-CSRFToken": "ryjrL9ZubGWYx6vfgjpubeir3hwBlFhJ0eABiCrqB1KoM6TrjkEnnGHBWTNJD2Re"}'>
 <a class="skip" href="#main">К содержанию</a>
 <div class="demo-bar" role="note">Демо-версия для отзывов: вход, запись на курсы и формы здесь не работают.</div>
 
@@ -243,7 +250,7 @@ leak   MAE gbdt 10.00 snaive 15.59
       </ul>
     </div>
     <div class="ftr-big" aria-hidden="true">EDU<span class="d">·</span>FAMCS</div>
-    <p class="ftr-copy">© 2026 EDU FAMCS · Минск</p>
+    <p class="ftr-copy">© 2026 EDU FAMCS · независимый проект выпускников ФПМИ БГУ · Минск</p>
   </div>
 </footer>
 

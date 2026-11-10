@@ -4,9 +4,16 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>BM25 и инвертированный индекс · EDU FAMCS</title>
-<meta name="description" content="BM25 и инвертированный индекс — Поиск. Хендбук ML-курса ФПМИ.">
+<meta name="description" content="Поиск отличается от рекомендаций тем, что у пользователя есть явный запрос, и задача — упорядочить документы по релевантности этому запросу. Классический лексический поиск сравнивает слова запроса и …">
 <meta name="theme-color" content="#060A16">
 <meta name="robots" content="noindex, nofollow">
+<link rel="canonical" href="https://edufamcs.by/handbook/retrieval/bm25-invertirovannyj-indeks/">
+<meta property="og:site_name" content="EDU FAMCS">
+<meta property="og:locale" content="ru_RU">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://edufamcs.by/handbook/retrieval/bm25-invertirovannyj-indeks/">
+<link rel="sitemap" type="application/xml" href="/edufamcs-demo/sitemap.xml">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"BM25 и инвертированный индекс","description":"Поиск отличается от рекомендаций тем, что у пользователя есть явный запрос, и задача — упорядочить документы по релевантности этому запросу. Классический лексический поиск сравнивает слова запроса и документа. Он до сих пор остаётся сильным бейзлайном и обязательной частью гибридных систем: точно","url":"https://edufamcs.by/handbook/retrieval/bm25-invertirovannyj-indeks/","inLanguage":"ru","dateModified":"2026-11-10T10:59:12.399178+00:00","publisher":{"@type":"EducationalOrganization","@id":"https://edufamcs.by/#org","name":"EDU FAMCS","url":"https://edufamcs.by/","logo":"https://edufamcs.by/static/brand/logo/favicon.svg","description":"Независимый образовательный проект выпускников ФПМИ БГУ: бесплатные курсы по машинному обучению и IT.","areaServed":"BY"},"articleSection":"Поиск","author":[{"@type":"Person","name":"Артем Лебедевич"}]}</script>
 <meta name="htmx-config" content='{"allowEval":false,"includeIndicatorStyles":false,"historyCacheSize":0,"selfRequestsOnly":true}'>
 <meta name="katex-js" content="/edufamcs-demo/static/vendor/katex/katex.min.js">
 <meta name="katex-css" content="/edufamcs-demo/static/vendor/katex/katex.min.css">
@@ -27,7 +34,7 @@
 <script src="/edufamcs-demo/static/js/site.js" defer></script>
 <script src="/edufamcs-demo/static/handbook/handbook.js" defer></script>
 </head>
-<body class="" hx-headers='{"X-CSRFToken": "T32d2znCdMLg3weY4BCusXeKtmURxXkxyl72bNruoaIwBOzxuMGKEVtLKp47uVOd"}'>
+<body class="" hx-headers='{"X-CSRFToken": "JmrKW2ulYi4R4VNm1S9PKJJqF87R5rlQi2IUtvWhoDShjVby4ToIWb8AyKoZnOVl"}'>
 <a class="skip" href="#main">К содержанию</a>
 <div class="demo-bar" role="note">Демо-версия для отзывов: вход, запись на курсы и формы здесь не работают.</div>
 
@@ -285,7 +292,7 @@ als      → [(d42, tf=5)]
       </ul>
     </div>
     <div class="ftr-big" aria-hidden="true">EDU<span class="d">·</span>FAMCS</div>
-    <p class="ftr-copy">© 2026 EDU FAMCS · Минск</p>
+    <p class="ftr-copy">© 2026 EDU FAMCS · независимый проект выпускников ФПМИ БГУ · Минск</p>
   </div>
 </footer>
 

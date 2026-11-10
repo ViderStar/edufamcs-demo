@@ -4,9 +4,16 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Нет pre-pruning · EDU FAMCS</title>
-<meta name="description" content="Нет pre-pruning — Типовые ошибки. Хендбук ML-курса ФПМИ.">
+<meta name="description" content="Что не так. Дерево обучено без ограничений глубины и размера листьев. Почему это важно. Дерево без ограничений растёт до идеальной классификации обучающей выборки: в пределе по листу на объект. Это с…">
 <meta name="theme-color" content="#060A16">
 <meta name="robots" content="noindex, nofollow">
+<link rel="canonical" href="https://edufamcs.by/handbook/mistakes/hw07-prepruning/">
+<meta property="og:site_name" content="EDU FAMCS">
+<meta property="og:locale" content="ru_RU">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://edufamcs.by/handbook/mistakes/hw07-prepruning/">
+<link rel="sitemap" type="application/xml" href="/edufamcs-demo/sitemap.xml">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"Нет pre-pruning","description":"Что не так. Дерево обучено без ограничений глубины и размера листьев. Почему это важно. Дерево без ограничений растёт до идеальной классификации обучающей выборки: в пределе по листу на объект. Это стопроцентное переобучение. Pre-pruning — ограничения, заданные заранее. Как надо. maxdepth,","url":"https://edufamcs.by/handbook/mistakes/hw07-prepruning/","inLanguage":"ru","dateModified":"2026-11-08T21:12:18.617203+00:00","publisher":{"@type":"EducationalOrganization","@id":"https://edufamcs.by/#org","name":"EDU FAMCS","url":"https://edufamcs.by/","logo":"https://edufamcs.by/static/brand/logo/favicon.svg","description":"Независимый образовательный проект выпускников ФПМИ БГУ: бесплатные курсы по машинному обучению и IT.","areaServed":"BY"},"articleSection":"Типовые ошибки"}</script>
 <meta name="htmx-config" content='{"allowEval":false,"includeIndicatorStyles":false,"historyCacheSize":0,"selfRequestsOnly":true}'>
 <meta name="katex-js" content="/edufamcs-demo/static/vendor/katex/katex.min.js">
 <meta name="katex-css" content="/edufamcs-demo/static/vendor/katex/katex.min.css">
@@ -27,7 +34,7 @@
 <script src="/edufamcs-demo/static/js/site.js" defer></script>
 <script src="/edufamcs-demo/static/handbook/handbook.js" defer></script>
 </head>
-<body class="" hx-headers='{"X-CSRFToken": "opoeYKyMr3rMPaZ4I8X0nYWN59Bll7z33Ht37YCECro2nskD8j1gzWbOmcLBi53J"}'>
+<body class="" hx-headers='{"X-CSRFToken": "kKx6UcFAa8W49HFZWuAODicgG0aSDnczTqOgrF7wAtKuoH3bZvPHPKBqzCr0VKM4"}'>
 <a class="skip" href="#main">К содержанию</a>
 <div class="demo-bar" role="note">Демо-версия для отзывов: вход, запись на курсы и формы здесь не работают.</div>
 
@@ -154,7 +161,7 @@
       </ul>
     </div>
     <div class="ftr-big" aria-hidden="true">EDU<span class="d">·</span>FAMCS</div>
-    <p class="ftr-copy">© 2026 EDU FAMCS · Минск</p>
+    <p class="ftr-copy">© 2026 EDU FAMCS · независимый проект выпускников ФПМИ БГУ · Минск</p>
   </div>
 </footer>
 

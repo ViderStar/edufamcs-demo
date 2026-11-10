@@ -4,9 +4,16 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Docker: образы, контейнеры, Dockerfile для Python · EDU FAMCS</title>
-<meta name="description" content="Docker: образы, контейнеры, Dockerfile для Python — Инженерия: от ноутбука до сервиса. Хендбук ML-курса ФПМИ.">
+<meta name="description" content="«У меня на ноутбуке работает» — главная причина, по которой модель не доезжает до продакшена: другая версия Python, нет системной библиотеки, лежит не тот файл. Docker упаковывает приложение вместе с…">
 <meta name="theme-color" content="#060A16">
 <meta name="robots" content="noindex, nofollow">
+<link rel="canonical" href="https://edufamcs.by/handbook/engineering/docker/">
+<meta property="og:site_name" content="EDU FAMCS">
+<meta property="og:locale" content="ru_RU">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://edufamcs.by/handbook/engineering/docker/">
+<link rel="sitemap" type="application/xml" href="/edufamcs-demo/sitemap.xml">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"Docker: образы, контейнеры, Dockerfile для Python","description":"«У меня на ноутбуке работает» — главная причина, по которой модель не доезжает до продакшена: другая версия Python, нет системной библиотеки, лежит не тот файл. Docker упаковывает приложение вместе с окружением в образ, который запускается одинаково на ноутбуке, в CI и на сервере. Мы упакуем сервис","url":"https://edufamcs.by/handbook/engineering/docker/","inLanguage":"ru","dateModified":"2026-11-10T11:19:57.153527+00:00","publisher":{"@type":"EducationalOrganization","@id":"https://edufamcs.by/#org","name":"EDU FAMCS","url":"https://edufamcs.by/","logo":"https://edufamcs.by/static/brand/logo/favicon.svg","description":"Независимый образовательный проект выпускников ФПМИ БГУ: бесплатные курсы по машинному обучению и IT.","areaServed":"BY"},"articleSection":"Инженерия: от ноутбука до сервиса","author":[{"@type":"Person","name":"Артем Лебедевич"}]}</script>
 <meta name="htmx-config" content='{"allowEval":false,"includeIndicatorStyles":false,"historyCacheSize":0,"selfRequestsOnly":true}'>
 <meta name="katex-js" content="/edufamcs-demo/static/vendor/katex/katex.min.js">
 <meta name="katex-css" content="/edufamcs-demo/static/vendor/katex/katex.min.css">
@@ -27,7 +34,7 @@
 <script src="/edufamcs-demo/static/js/site.js" defer></script>
 <script src="/edufamcs-demo/static/handbook/handbook.js" defer></script>
 </head>
-<body class="" hx-headers='{"X-CSRFToken": "U1Zr8ZHPIwIczXsSEWIr2Pisgg1ykh7Gzj4ghdLHTUFs7fNr47MHeNxtxjbOhfBm"}'>
+<body class="" hx-headers='{"X-CSRFToken": "AI6Z1qfNFwy5H1RzW786N5obIhbYYceN9on9yTHJ5RmvW1fLZ8nZZxNlBTs6gzOi"}'>
 <a class="skip" href="#main">К содержанию</a>
 <div class="demo-bar" role="note">Демо-версия для отзывов: вход, запись на курсы и формы здесь не работают.</div>
 
@@ -272,7 +279,7 @@ data
       </ul>
     </div>
     <div class="ftr-big" aria-hidden="true">EDU<span class="d">·</span>FAMCS</div>
-    <p class="ftr-copy">© 2026 EDU FAMCS · Минск</p>
+    <p class="ftr-copy">© 2026 EDU FAMCS · независимый проект выпускников ФПМИ БГУ · Минск</p>
   </div>
 </footer>
 

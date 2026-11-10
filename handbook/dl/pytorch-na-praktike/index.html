@@ -4,9 +4,16 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>PyTorch на практике: обучение и дообучение · EDU FAMCS</title>
-<meta name="description" content="PyTorch на практике: обучение и дообучение — Введение в глубокое обучение. Хендбук ML-курса ФПМИ.">
+<meta name="description" content="Знать формулы backprop и Adam недостаточно: большинство потерянных дней в DL — это баги в обвязке вокруг модели (данные, режимы, формы, типы, чекпойнты). Здесь собран инженерный минимум на PyTorch 2.…">
 <meta name="theme-color" content="#060A16">
 <meta name="robots" content="noindex, nofollow">
+<link rel="canonical" href="https://edufamcs.by/handbook/dl/pytorch-na-praktike/">
+<meta property="og:site_name" content="EDU FAMCS">
+<meta property="og:locale" content="ru_RU">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://edufamcs.by/handbook/dl/pytorch-na-praktike/">
+<link rel="sitemap" type="application/xml" href="/edufamcs-demo/sitemap.xml">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"PyTorch на практике: обучение и дообучение","description":"Знать формулы backprop и Adam недостаточно: большинство потерянных дней в DL — это баги в обвязке вокруг модели (данные, режимы, формы, типы, чекпойнты). Здесь собран инженерный минимум на PyTorch 2.x: как устроен пайплайн данных, канонический цикл, смешанная точность, чекпойнты, воспроизводимость","url":"https://edufamcs.by/handbook/dl/pytorch-na-praktike/","inLanguage":"ru","dateModified":"2026-11-10T11:19:57.103251+00:00","publisher":{"@type":"EducationalOrganization","@id":"https://edufamcs.by/#org","name":"EDU FAMCS","url":"https://edufamcs.by/","logo":"https://edufamcs.by/static/brand/logo/favicon.svg","description":"Независимый образовательный проект выпускников ФПМИ БГУ: бесплатные курсы по машинному обучению и IT.","areaServed":"BY"},"articleSection":"Введение в глубокое обучение","author":[{"@type":"Person","name":"Артем Лебедевич"}]}</script>
 <meta name="htmx-config" content='{"allowEval":false,"includeIndicatorStyles":false,"historyCacheSize":0,"selfRequestsOnly":true}'>
 <meta name="katex-js" content="/edufamcs-demo/static/vendor/katex/katex.min.js">
 <meta name="katex-css" content="/edufamcs-demo/static/vendor/katex/katex.min.css">
@@ -27,7 +34,7 @@
 <script src="/edufamcs-demo/static/js/site.js" defer></script>
 <script src="/edufamcs-demo/static/handbook/handbook.js" defer></script>
 </head>
-<body class="" hx-headers='{"X-CSRFToken": "kiteOKbPrOMDvDR0SEWmmf33TTMd9tkAZAy3XYfHCcJT3VcziP0Cydi4aWWt6rOg"}'>
+<body class="" hx-headers='{"X-CSRFToken": "iDrgCU820VaushdCwRlFAPWC0IMx7actRjIq9nAYqgYUHhBOzSAyMhlMTk3FpxMY"}'>
 <a class="skip" href="#main">К содержанию</a>
 <div class="demo-bar" role="note">Демо-версия для отзывов: вход, запись на курсы и формы здесь не работают.</div>
 
@@ -318,7 +325,7 @@ test loss/acc: 0.149 / 0.972
       </ul>
     </div>
     <div class="ftr-big" aria-hidden="true">EDU<span class="d">·</span>FAMCS</div>
-    <p class="ftr-copy">© 2026 EDU FAMCS · Минск</p>
+    <p class="ftr-copy">© 2026 EDU FAMCS · независимый проект выпускников ФПМИ БГУ · Минск</p>
   </div>
 </footer>
 

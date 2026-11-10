@@ -4,9 +4,16 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Генерация: декодирование и сэмплирование · EDU FAMCS</title>
-<meta name="description" content="Генерация: декодирование и сэмплирование — NLP и большие языковые модели. Хендбук ML-курса ФПМИ.">
+<meta name="description" content="Языковая модель выдаёт не текст, а распределение вероятностей следующего токена. Как из него получить строку — отдельное инженерное решение, и оно сильно влияет на результат: одна и та же модель при …">
 <meta name="theme-color" content="#060A16">
 <meta name="robots" content="noindex, nofollow">
+<link rel="canonical" href="https://edufamcs.by/handbook/nlp/generaciya-teksta/">
+<meta property="og:site_name" content="EDU FAMCS">
+<meta property="og:locale" content="ru_RU">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://edufamcs.by/handbook/nlp/generaciya-teksta/">
+<link rel="sitemap" type="application/xml" href="/edufamcs-demo/sitemap.xml">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"Генерация: декодирование и сэмплирование","description":"Языковая модель выдаёт не текст, а распределение вероятностей следующего токена. Как из него получить строку — отдельное инженерное решение, и оно сильно влияет на результат: одна и та же модель при разных настройках декодирования то повторяет себя по кругу, то несёт чепуху, то выдаёт валидный","url":"https://edufamcs.by/handbook/nlp/generaciya-teksta/","inLanguage":"ru","dateModified":"2026-11-10T11:19:57.111508+00:00","publisher":{"@type":"EducationalOrganization","@id":"https://edufamcs.by/#org","name":"EDU FAMCS","url":"https://edufamcs.by/","logo":"https://edufamcs.by/static/brand/logo/favicon.svg","description":"Независимый образовательный проект выпускников ФПМИ БГУ: бесплатные курсы по машинному обучению и IT.","areaServed":"BY"},"articleSection":"NLP и большие языковые модели","author":[{"@type":"Person","name":"Артем Лебедевич"}]}</script>
 <meta name="htmx-config" content='{"allowEval":false,"includeIndicatorStyles":false,"historyCacheSize":0,"selfRequestsOnly":true}'>
 <meta name="katex-js" content="/edufamcs-demo/static/vendor/katex/katex.min.js">
 <meta name="katex-css" content="/edufamcs-demo/static/vendor/katex/katex.min.css">
@@ -27,7 +34,7 @@
 <script src="/edufamcs-demo/static/js/site.js" defer></script>
 <script src="/edufamcs-demo/static/handbook/handbook.js" defer></script>
 </head>
-<body class="" hx-headers='{"X-CSRFToken": "4xDwFnGLnJ1HijFZkWdF8FOsLW0dTaXJJPIlOBKDy7YXQB0yK7hVkD3t2ZatQ8rp"}'>
+<body class="" hx-headers='{"X-CSRFToken": "DPekHhp3vn0zOEhIVw0Pl7Z2GTNBTGsecvvueKRZVIOZ3EFUYxfIxzoczv4Jb32J"}'>
 <a class="skip" href="#main">К содержанию</a>
 <div class="demo-bar" role="note">Демо-версия для отзывов: вход, запись на курсы и формы здесь не работают.</div>
 
@@ -262,7 +269,7 @@ token <span class="tok-p">=</span> rng<span class="tok-p">.</span>choice<span cl
       </ul>
     </div>
     <div class="ftr-big" aria-hidden="true">EDU<span class="d">·</span>FAMCS</div>
-    <p class="ftr-copy">© 2026 EDU FAMCS · Минск</p>
+    <p class="ftr-copy">© 2026 EDU FAMCS · независимый проект выпускников ФПМИ БГУ · Минск</p>
   </div>
 </footer>
 

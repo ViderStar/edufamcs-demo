@@ -4,9 +4,16 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>System design: как спроектировать рекомендательную систему на собеседовании · EDU FAMCS</title>
-<meta name="description" content="System design: как спроектировать рекомендательную систему на собеседовании — Рекомендательные системы. Хендбук ML-курса ФПМИ.">
+<meta name="description" content="Вопрос «спроектируйте рекомендательную систему» проверяет не знание архитектуры, а порядок мысли: от цели продукта к метрикам, данным, воронке и эксплуатации. Эта глава — пошаговый разбор на одном ке…">
 <meta name="theme-color" content="#060A16">
 <meta name="robots" content="noindex, nofollow">
+<link rel="canonical" href="https://edufamcs.by/handbook/recsys/system-design-rekomendacij/">
+<meta property="og:site_name" content="EDU FAMCS">
+<meta property="og:locale" content="ru_RU">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://edufamcs.by/handbook/recsys/system-design-rekomendacij/">
+<link rel="sitemap" type="application/xml" href="/edufamcs-demo/sitemap.xml">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"System design: как спроектировать рекомендательную систему на собеседовании","description":"Вопрос «спроектируйте рекомендательную систему» проверяет не знание архитектуры, а порядок мысли: от цели продукта к метрикам, данным, воронке и эксплуатации. Эта глава — пошаговый разбор на одном кейсе: домашняя лента маркетплейса, 10 млн объектов, 5 млн DAU (все числа иллюстративные). Алгоритмы","url":"https://edufamcs.by/handbook/recsys/system-design-rekomendacij/","inLanguage":"ru","dateModified":"2026-11-10T11:19:57.131921+00:00","publisher":{"@type":"EducationalOrganization","@id":"https://edufamcs.by/#org","name":"EDU FAMCS","url":"https://edufamcs.by/","logo":"https://edufamcs.by/static/brand/logo/favicon.svg","description":"Независимый образовательный проект выпускников ФПМИ БГУ: бесплатные курсы по машинному обучению и IT.","areaServed":"BY"},"articleSection":"Рекомендательные системы","author":[{"@type":"Person","name":"Артем Лебедевич"}]}</script>
 <meta name="htmx-config" content='{"allowEval":false,"includeIndicatorStyles":false,"historyCacheSize":0,"selfRequestsOnly":true}'>
 <meta name="katex-js" content="/edufamcs-demo/static/vendor/katex/katex.min.js">
 <meta name="katex-css" content="/edufamcs-demo/static/vendor/katex/katex.min.css">
@@ -27,7 +34,7 @@
 <script src="/edufamcs-demo/static/js/site.js" defer></script>
 <script src="/edufamcs-demo/static/handbook/handbook.js" defer></script>
 </head>
-<body class="" hx-headers='{"X-CSRFToken": "dDarv8nmsQkS2QJBDygYbZz4krRoayeaSVfgEmreDeh8A84a3JkenXO5Bu1E7wIQ"}'>
+<body class="" hx-headers='{"X-CSRFToken": "0EHgd6IIQNL3DqmKwRSgajhOFmySqLmxzkYqKzaEg8ztSqKWzS79mLGYyYP0I8W2"}'>
 <a class="skip" href="#main">К содержанию</a>
 <div class="demo-bar" role="note">Демо-версия для отзывов: вход, запись на курсы и формы здесь не работают.</div>
 
@@ -264,7 +271,7 @@ budget <span class="tok-p">=</span> <span class="tok-f">dict</span><span class="
       </ul>
     </div>
     <div class="ftr-big" aria-hidden="true">EDU<span class="d">·</span>FAMCS</div>
-    <p class="ftr-copy">© 2026 EDU FAMCS · Минск</p>
+    <p class="ftr-copy">© 2026 EDU FAMCS · независимый проект выпускников ФПМИ БГУ · Минск</p>
   </div>
 </footer>
 

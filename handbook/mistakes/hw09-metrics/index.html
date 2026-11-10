@@ -4,9 +4,16 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Не хватает метрик регрессии · EDU FAMCS</title>
-<meta name="description" content="Не хватает метрик регрессии — Типовые ошибки. Хендбук ML-курса ФПМИ.">
+<meta name="description" content="Что не так. Нет R² и/или RMSE/MAE. Почему это важно. Задание требовало сравнить лес с линейной регрессией из прошлой домашки, а для этого нужны одни и те же метрики на одной и той же тестовой выборке…">
 <meta name="theme-color" content="#060A16">
 <meta name="robots" content="noindex, nofollow">
+<link rel="canonical" href="https://edufamcs.by/handbook/mistakes/hw09-metrics/">
+<meta property="og:site_name" content="EDU FAMCS">
+<meta property="og:locale" content="ru_RU">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://edufamcs.by/handbook/mistakes/hw09-metrics/">
+<link rel="sitemap" type="application/xml" href="/edufamcs-demo/sitemap.xml">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"Не хватает метрик регрессии","description":"Что не так. Нет R² и/или RMSE/MAE. Почему это важно. Задание требовало сравнить лес с линейной регрессией из прошлой домашки, а для этого нужны одни и те же метрики на одной и той же тестовой выборке. Почитать: Задание HW09 Метрики классификации и","url":"https://edufamcs.by/handbook/mistakes/hw09-metrics/","inLanguage":"ru","dateModified":"2026-11-08T21:12:18.625317+00:00","publisher":{"@type":"EducationalOrganization","@id":"https://edufamcs.by/#org","name":"EDU FAMCS","url":"https://edufamcs.by/","logo":"https://edufamcs.by/static/brand/logo/favicon.svg","description":"Независимый образовательный проект выпускников ФПМИ БГУ: бесплатные курсы по машинному обучению и IT.","areaServed":"BY"},"articleSection":"Типовые ошибки"}</script>
 <meta name="htmx-config" content='{"allowEval":false,"includeIndicatorStyles":false,"historyCacheSize":0,"selfRequestsOnly":true}'>
 <meta name="katex-js" content="/edufamcs-demo/static/vendor/katex/katex.min.js">
 <meta name="katex-css" content="/edufamcs-demo/static/vendor/katex/katex.min.css">
@@ -27,7 +34,7 @@
 <script src="/edufamcs-demo/static/js/site.js" defer></script>
 <script src="/edufamcs-demo/static/handbook/handbook.js" defer></script>
 </head>
-<body class="" hx-headers='{"X-CSRFToken": "1dLCLA2DJH40DsrZ7yHxOOWq7NlZ9l0WGvQrUO6vU51gbKMyxJLN0MbroQvf6juC"}'>
+<body class="" hx-headers='{"X-CSRFToken": "SrH90poa7xOY3V16OCYmQrCRAm7UldLer7YjxSQ6xSCoiVpiRDdf2T11tYo2DAlJ"}'>
 <a class="skip" href="#main">К содержанию</a>
 <div class="demo-bar" role="note">Демо-версия для отзывов: вход, запись на курсы и формы здесь не работают.</div>
 
@@ -156,7 +163,7 @@
       </ul>
     </div>
     <div class="ftr-big" aria-hidden="true">EDU<span class="d">·</span>FAMCS</div>
-    <p class="ftr-copy">© 2026 EDU FAMCS · Минск</p>
+    <p class="ftr-copy">© 2026 EDU FAMCS · независимый проект выпускников ФПМИ БГУ · Минск</p>
   </div>
 </footer>
 

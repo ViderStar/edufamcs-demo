@@ -4,9 +4,16 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Графовые модели: от случайных блужданий до LightGCN · EDU FAMCS</title>
-<meta name="description" content="Графовые модели: от случайных блужданий до LightGCN — Рекомендательные системы. Хендбук ML-курса ФПМИ.">
+<meta name="description" content="Матрица взаимодействий — это ещё и двудольный граф: пользователи слева, объекты справа, ребро — взаимодействие. Матричное разложение смотрит на этот граф «в упор»: учитывает только прямые рёбра. Но р…">
 <meta name="theme-color" content="#060A16">
 <meta name="robots" content="noindex, nofollow">
+<link rel="canonical" href="https://edufamcs.by/handbook/recsys/grafovye-modeli/">
+<meta property="og:site_name" content="EDU FAMCS">
+<meta property="og:locale" content="ru_RU">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://edufamcs.by/handbook/recsys/grafovye-modeli/">
+<link rel="sitemap" type="application/xml" href="/edufamcs-demo/sitemap.xml">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"Графовые модели: от случайных блужданий до LightGCN","description":"Матрица взаимодействий — это ещё и двудольный граф: пользователи слева, объекты справа, ребро — взаимодействие. Матричное разложение смотрит на этот граф «в упор»: учитывает только прямые рёбра. Но рекомендовать можно и по цепочкам: пользователь → объект → другой пользователь → объект, который","url":"https://edufamcs.by/handbook/recsys/grafovye-modeli/","inLanguage":"ru","dateModified":"2026-11-10T10:59:12.383726+00:00","publisher":{"@type":"EducationalOrganization","@id":"https://edufamcs.by/#org","name":"EDU FAMCS","url":"https://edufamcs.by/","logo":"https://edufamcs.by/static/brand/logo/favicon.svg","description":"Независимый образовательный проект выпускников ФПМИ БГУ: бесплатные курсы по машинному обучению и IT.","areaServed":"BY"},"articleSection":"Рекомендательные системы","author":[{"@type":"Person","name":"Артем Лебедевич"}]}</script>
 <meta name="htmx-config" content='{"allowEval":false,"includeIndicatorStyles":false,"historyCacheSize":0,"selfRequestsOnly":true}'>
 <meta name="katex-js" content="/edufamcs-demo/static/vendor/katex/katex.min.js">
 <meta name="katex-css" content="/edufamcs-demo/static/vendor/katex/katex.min.css">
@@ -27,7 +34,7 @@
 <script src="/edufamcs-demo/static/js/site.js" defer></script>
 <script src="/edufamcs-demo/static/handbook/handbook.js" defer></script>
 </head>
-<body class="" hx-headers='{"X-CSRFToken": "EYSjBNtE6oaCsZIRIdVEQz6l0NGOQrFnjgX8K1xwhM7S0h3q8oZU2xlmhQQ4Np93"}'>
+<body class="" hx-headers='{"X-CSRFToken": "XTD4Jo4gZbSeq5giNEzy6CCMAJ0M4H5MwzUegRwcpwGEF5EuQFOri41WtlhUm4Fh"}'>
 <a class="skip" href="#main">К содержанию</a>
 <div class="demo-bar" role="note">Демо-версия для отзывов: вход, запись на курсы и формы здесь не работают.</div>
 
@@ -288,7 +295,7 @@ e_i^{(k+1)} = \sum_{u \in N_i}\frac{1}{\sqrt{|N_i|\,|N_u|}}\, e_u^{(k)}.</div>
       </ul>
     </div>
     <div class="ftr-big" aria-hidden="true">EDU<span class="d">·</span>FAMCS</div>
-    <p class="ftr-copy">© 2026 EDU FAMCS · Минск</p>
+    <p class="ftr-copy">© 2026 EDU FAMCS · независимый проект выпускников ФПМИ БГУ · Минск</p>
   </div>
 </footer>
 

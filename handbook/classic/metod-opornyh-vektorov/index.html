@@ -4,9 +4,16 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Метод опорных векторов · EDU FAMCS</title>
-<meta name="description" content="Метод опорных векторов — Классическое машинное обучение. Хендбук ML-курса ФПМИ.">
+<meta name="description" content="Метод опорных векторов (SVM, support vector machine) строит линейный разделитель не по принципу «минимизировать ошибку на обучении», а по принципу максимального зазора: из бесконечного множества гипе…">
 <meta name="theme-color" content="#060A16">
 <meta name="robots" content="noindex, nofollow">
+<link rel="canonical" href="https://edufamcs.by/handbook/classic/metod-opornyh-vektorov/">
+<meta property="og:site_name" content="EDU FAMCS">
+<meta property="og:locale" content="ru_RU">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://edufamcs.by/handbook/classic/metod-opornyh-vektorov/">
+<link rel="sitemap" type="application/xml" href="/edufamcs-demo/sitemap.xml">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"Метод опорных векторов","description":"Метод опорных векторов (SVM, support vector machine) строит линейный разделитель не по принципу «минимизировать ошибку на обучении», а по принципу максимального зазора: из бесконечного множества гиперплоскостей, разделяющих классы, выбрать ту, что максимально удалена от обоих классов. В сочетании с","url":"https://edufamcs.by/handbook/classic/metod-opornyh-vektorov/","inLanguage":"ru","dateModified":"2026-11-10T10:59:12.338968+00:00","publisher":{"@type":"EducationalOrganization","@id":"https://edufamcs.by/#org","name":"EDU FAMCS","url":"https://edufamcs.by/","logo":"https://edufamcs.by/static/brand/logo/favicon.svg","description":"Независимый образовательный проект выпускников ФПМИ БГУ: бесплатные курсы по машинному обучению и IT.","areaServed":"BY"},"articleSection":"Классическое машинное обучение","author":[{"@type":"Person","name":"Артем Лебедевич"}]}</script>
 <meta name="htmx-config" content='{"allowEval":false,"includeIndicatorStyles":false,"historyCacheSize":0,"selfRequestsOnly":true}'>
 <meta name="katex-js" content="/edufamcs-demo/static/vendor/katex/katex.min.js">
 <meta name="katex-css" content="/edufamcs-demo/static/vendor/katex/katex.min.css">
@@ -27,7 +34,7 @@
 <script src="/edufamcs-demo/static/js/site.js" defer></script>
 <script src="/edufamcs-demo/static/handbook/handbook.js" defer></script>
 </head>
-<body class="" hx-headers='{"X-CSRFToken": "k2dTYiRNYjFoUIZQmvK5nGi7V8c9dUvjZkiI7wVF9HCEs0kpMGOlzEx8cbmpaSZZ"}'>
+<body class="" hx-headers='{"X-CSRFToken": "OLUKSz9skdQgdW9BruYf6K85pKgWcs3UnrbUp2BoKyEGsWxNuvd8icxfimx4uPDp"}'>
 <a class="skip" href="#main">К содержанию</a>
 <div class="demo-bar" role="note">Демо-версия для отзывов: вход, запись на курсы и формы здесь не работают.</div>
 
@@ -328,7 +335,7 @@ gs <span class="tok-p">=</span> GridSearchCV<span class="tok-p">(</span>pipe<spa
       </ul>
     </div>
     <div class="ftr-big" aria-hidden="true">EDU<span class="d">·</span>FAMCS</div>
-    <p class="ftr-copy">© 2026 EDU FAMCS · Минск</p>
+    <p class="ftr-copy">© 2026 EDU FAMCS · независимый проект выпускников ФПМИ БГУ · Минск</p>
   </div>
 </footer>
 

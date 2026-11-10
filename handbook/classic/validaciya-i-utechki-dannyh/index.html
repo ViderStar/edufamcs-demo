@@ -4,9 +4,16 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Валидация и утечки данных · EDU FAMCS</title>
-<meta name="description" content="Валидация и утечки данных — Классическое машинное обучение. Хендбук ML-курса ФПМИ.">
+<meta name="description" content="Валидация оценивает не «насколько модель запомнила данные» и даже не «насколько она работает на случайных новых строках», а как она будет работать там, где её применят. Почти все громкие провалы «на …">
 <meta name="theme-color" content="#060A16">
 <meta name="robots" content="noindex, nofollow">
+<link rel="canonical" href="https://edufamcs.by/handbook/classic/validaciya-i-utechki-dannyh/">
+<meta property="og:site_name" content="EDU FAMCS">
+<meta property="og:locale" content="ru_RU">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://edufamcs.by/handbook/classic/validaciya-i-utechki-dannyh/">
+<link rel="sitemap" type="application/xml" href="/edufamcs-demo/sitemap.xml">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"Валидация и утечки данных","description":"Валидация оценивает не «насколько модель запомнила данные» и даже не «насколько она работает на случайных новых строках», а как она будет работать там, где её применят. Почти все громкие провалы «на тесте 0,95, в проде 0,6» — это либо утечка информации в оценку, либо валидация, не похожая на","url":"https://edufamcs.by/handbook/classic/validaciya-i-utechki-dannyh/","inLanguage":"ru","dateModified":"2026-11-10T11:19:57.093712+00:00","publisher":{"@type":"EducationalOrganization","@id":"https://edufamcs.by/#org","name":"EDU FAMCS","url":"https://edufamcs.by/","logo":"https://edufamcs.by/static/brand/logo/favicon.svg","description":"Независимый образовательный проект выпускников ФПМИ БГУ: бесплатные курсы по машинному обучению и IT.","areaServed":"BY"},"articleSection":"Классическое машинное обучение","author":[{"@type":"Person","name":"Артем Лебедевич"}]}</script>
 <meta name="htmx-config" content='{"allowEval":false,"includeIndicatorStyles":false,"historyCacheSize":0,"selfRequestsOnly":true}'>
 <meta name="katex-js" content="/edufamcs-demo/static/vendor/katex/katex.min.js">
 <meta name="katex-css" content="/edufamcs-demo/static/vendor/katex/katex.min.css">
@@ -27,7 +34,7 @@
 <script src="/edufamcs-demo/static/js/site.js" defer></script>
 <script src="/edufamcs-demo/static/handbook/handbook.js" defer></script>
 </head>
-<body class="" hx-headers='{"X-CSRFToken": "bRxWxHJXr8xLBrTeUEL95nw29doYerLeQ9CLGVNPCwu19JeNkPPphlL3qgyebpfU"}'>
+<body class="" hx-headers='{"X-CSRFToken": "YJwqTvq056grx4G0pSDY6OgWYR8HL3UuxpNAqYSWvr4RM44csTSRigF6RtpP3quZ"}'>
 <a class="skip" href="#main">К содержанию</a>
 <div class="demo-bar" role="note">Демо-версия для отзывов: вход, запись на курсы и формы здесь не работают.</div>
 
@@ -280,7 +287,7 @@ p <span class="tok-p">=</span> cross_val_predict<span class="tok-p">(</span>Hist
       </ul>
     </div>
     <div class="ftr-big" aria-hidden="true">EDU<span class="d">·</span>FAMCS</div>
-    <p class="ftr-copy">© 2026 EDU FAMCS · Минск</p>
+    <p class="ftr-copy">© 2026 EDU FAMCS · независимый проект выпускников ФПМИ БГУ · Минск</p>
   </div>
 </footer>
 

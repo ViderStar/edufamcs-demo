@@ -4,9 +4,16 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Нормализация и инициализация · EDU FAMCS</title>
-<meta name="description" content="Нормализация и инициализация — Введение в глубокое обучение. Хендбук ML-курса ФПМИ.">
+<meta name="description" content="Глубокая сеть — это произведение десятков случайных матриц и нелинейностей. Если на каждом слое масштаб сигнала хоть немного отличается от единицы, после 20 слоёв он либо обнуляется, либо улетает в б…">
 <meta name="theme-color" content="#060A16">
 <meta name="robots" content="noindex, nofollow">
+<link rel="canonical" href="https://edufamcs.by/handbook/dl/normalizaciya-i-inicializaciya/">
+<meta property="og:site_name" content="EDU FAMCS">
+<meta property="og:locale" content="ru_RU">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://edufamcs.by/handbook/dl/normalizaciya-i-inicializaciya/">
+<link rel="sitemap" type="application/xml" href="/edufamcs-demo/sitemap.xml">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"Нормализация и инициализация","description":"Глубокая сеть — это произведение десятков случайных матриц и нелинейностей. Если на каждом слое масштаб сигнала хоть немного отличается от единицы, после 20 слоёв он либо обнуляется, либо улетает в бесконечность — и вместе с ним градиенты. Инициализация выбирает масштаб весов так, чтобы сигнал","url":"https://edufamcs.by/handbook/dl/normalizaciya-i-inicializaciya/","inLanguage":"ru","dateModified":"2026-11-10T11:19:57.102315+00:00","publisher":{"@type":"EducationalOrganization","@id":"https://edufamcs.by/#org","name":"EDU FAMCS","url":"https://edufamcs.by/","logo":"https://edufamcs.by/static/brand/logo/favicon.svg","description":"Независимый образовательный проект выпускников ФПМИ БГУ: бесплатные курсы по машинному обучению и IT.","areaServed":"BY"},"articleSection":"Введение в глубокое обучение","author":[{"@type":"Person","name":"Артем Лебедевич"}]}</script>
 <meta name="htmx-config" content='{"allowEval":false,"includeIndicatorStyles":false,"historyCacheSize":0,"selfRequestsOnly":true}'>
 <meta name="katex-js" content="/edufamcs-demo/static/vendor/katex/katex.min.js">
 <meta name="katex-css" content="/edufamcs-demo/static/vendor/katex/katex.min.css">
@@ -27,7 +34,7 @@
 <script src="/edufamcs-demo/static/js/site.js" defer></script>
 <script src="/edufamcs-demo/static/handbook/handbook.js" defer></script>
 </head>
-<body class="" hx-headers='{"X-CSRFToken": "LXWAlhk3jpo2rk3mhez5yQAGJ3vnTx6Qqf1puvoVuNliZCoVHpDlKOPH06FDQvAw"}'>
+<body class="" hx-headers='{"X-CSRFToken": "Ia8VJn41pj10oU8fE4lbc5zdtNQ1Aog9hQp5gQwXPEPqDUwrH5A4oxYnmp79SLQE"}'>
 <a class="skip" href="#main">К содержанию</a>
 <div class="demo-bar" role="note">Демо-версия для отзывов: вход, запись на курсы и формы здесь не работают.</div>
 
@@ -354,7 +361,7 @@ small  BatchNorm1d L1: 0.582 L5: 0.585 L10: 0.587 L20: 0.592
       </ul>
     </div>
     <div class="ftr-big" aria-hidden="true">EDU<span class="d">·</span>FAMCS</div>
-    <p class="ftr-copy">© 2026 EDU FAMCS · Минск</p>
+    <p class="ftr-copy">© 2026 EDU FAMCS · независимый проект выпускников ФПМИ БГУ · Минск</p>
   </div>
 </footer>
 

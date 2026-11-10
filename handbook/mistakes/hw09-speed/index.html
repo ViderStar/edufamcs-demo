@@ -4,9 +4,16 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Не сравнивалась скорость обучения · EDU FAMCS</title>
-<meta name="description" content="Не сравнивалась скорость обучения — Типовые ошибки. Хендбук ML-курса ФПМИ.">
+<meta name="description" content="Что не так. Не измерено время обучения дерева и леса. Почему это важно. Пункт задания. Лес из 100 деревьев учится примерно в 100 раз дольше одного — но деревья независимы, и это единственный ансамбль…">
 <meta name="theme-color" content="#060A16">
 <meta name="robots" content="noindex, nofollow">
+<link rel="canonical" href="https://edufamcs.by/handbook/mistakes/hw09-speed/">
+<meta property="og:site_name" content="EDU FAMCS">
+<meta property="og:locale" content="ru_RU">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://edufamcs.by/handbook/mistakes/hw09-speed/">
+<link rel="sitemap" type="application/xml" href="/edufamcs-demo/sitemap.xml">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"Не сравнивалась скорость обучения","description":"Что не так. Не измерено время обучения дерева и леса. Почему это важно. Пункт задания. Лес из 100 деревьев учится примерно в 100 раз дольше одного — но деревья независимы, и это единственный ансамбль, который честно распараллеливается. Отсюда и вопрос задания «можно ли добиться близкой скорости»:","url":"https://edufamcs.by/handbook/mistakes/hw09-speed/","inLanguage":"ru","dateModified":"2026-11-08T21:12:18.624947+00:00","publisher":{"@type":"EducationalOrganization","@id":"https://edufamcs.by/#org","name":"EDU FAMCS","url":"https://edufamcs.by/","logo":"https://edufamcs.by/static/brand/logo/favicon.svg","description":"Независимый образовательный проект выпускников ФПМИ БГУ: бесплатные курсы по машинному обучению и IT.","areaServed":"BY"},"articleSection":"Типовые ошибки"}</script>
 <meta name="htmx-config" content='{"allowEval":false,"includeIndicatorStyles":false,"historyCacheSize":0,"selfRequestsOnly":true}'>
 <meta name="katex-js" content="/edufamcs-demo/static/vendor/katex/katex.min.js">
 <meta name="katex-css" content="/edufamcs-demo/static/vendor/katex/katex.min.css">
@@ -27,7 +34,7 @@
 <script src="/edufamcs-demo/static/js/site.js" defer></script>
 <script src="/edufamcs-demo/static/handbook/handbook.js" defer></script>
 </head>
-<body class="" hx-headers='{"X-CSRFToken": "mP5h6QFFGokROnGKYlNIiYKjd4WB8vx017a6f4JxRMh7mF1jowRYuWZku76R5t1G"}'>
+<body class="" hx-headers='{"X-CSRFToken": "UcNBftacgms81vVmYFm3b34QlF3CMyI9tS4LMWC8GHgygvjy1GBWnvt0ehkK4ViE"}'>
 <a class="skip" href="#main">К содержанию</a>
 <div class="demo-bar" role="note">Демо-версия для отзывов: вход, запись на курсы и формы здесь не работают.</div>
 
@@ -164,7 +171,7 @@ t <span class="tok-p">=</span> time<span class="tok-p">.</span>perf_counter<span
       </ul>
     </div>
     <div class="ftr-big" aria-hidden="true">EDU<span class="d">·</span>FAMCS</div>
-    <p class="ftr-copy">© 2026 EDU FAMCS · Минск</p>
+    <p class="ftr-copy">© 2026 EDU FAMCS · независимый проект выпускников ФПМИ БГУ · Минск</p>
   </div>
 </footer>
 

@@ -4,9 +4,16 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Доверительные интервалы и проверка гипотез · EDU FAMCS</title>
-<meta name="description" content="Доверительные интервалы и проверка гипотез — Математическая база. Хендбук ML-курса ФПМИ.">
+<meta name="description" content="Точечная оценка без указания точности почти бесполезна: «конверсия выросла на 0,3 п.п.» — это сигнал или шум? Доверительные интервалы и проверка гипотез дают формальный ответ. Тот же аппарат решает, …">
 <meta name="theme-color" content="#060A16">
 <meta name="robots" content="noindex, nofollow">
+<link rel="canonical" href="https://edufamcs.by/handbook/math/intervaly-i-proverka-gipotez/">
+<meta property="og:site_name" content="EDU FAMCS">
+<meta property="og:locale" content="ru_RU">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://edufamcs.by/handbook/math/intervaly-i-proverka-gipotez/">
+<link rel="sitemap" type="application/xml" href="/edufamcs-demo/sitemap.xml">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"Доверительные интервалы и проверка гипотез","description":"Точечная оценка без указания точности почти бесполезна: «конверсия выросла на 0,3 п.п.» — это сигнал или шум? Доверительные интервалы и проверка гипотез дают формальный ответ. Тот же аппарат решает, выкатывать ли новую модель рекомендаций по итогам A/B-теста, и является частью ежедневной работы","url":"https://edufamcs.by/handbook/math/intervaly-i-proverka-gipotez/","inLanguage":"ru","dateModified":"2026-11-10T10:59:12.328281+00:00","publisher":{"@type":"EducationalOrganization","@id":"https://edufamcs.by/#org","name":"EDU FAMCS","url":"https://edufamcs.by/","logo":"https://edufamcs.by/static/brand/logo/favicon.svg","description":"Независимый образовательный проект выпускников ФПМИ БГУ: бесплатные курсы по машинному обучению и IT.","areaServed":"BY"},"articleSection":"Математическая база","author":[{"@type":"Person","name":"Артем Лебедевич"}]}</script>
 <meta name="htmx-config" content='{"allowEval":false,"includeIndicatorStyles":false,"historyCacheSize":0,"selfRequestsOnly":true}'>
 <meta name="katex-js" content="/edufamcs-demo/static/vendor/katex/katex.min.js">
 <meta name="katex-css" content="/edufamcs-demo/static/vendor/katex/katex.min.css">
@@ -27,7 +34,7 @@
 <script src="/edufamcs-demo/static/js/site.js" defer></script>
 <script src="/edufamcs-demo/static/handbook/handbook.js" defer></script>
 </head>
-<body class="" hx-headers='{"X-CSRFToken": "rYCQ1BVn8b2q8GcMTCNd7vG7kwOaUObI6gHFaPZfjzZGGYxljNRtjtV8BzYqRMFo"}'>
+<body class="" hx-headers='{"X-CSRFToken": "PRqgBDmvHpih7it0I1BDGpDYnsXWrvLFoxHq86Or7K6HmiRcL2QwSR28g4e4JSla"}'>
 <a class="skip" href="#main">К содержанию</a>
 <div class="demo-bar" role="note">Демо-версия для отзывов: вход, запись на курсы и формы здесь не работают.</div>
 
@@ -334,7 +341,7 @@ p <span class="tok-p">=</span> np<span class="tok-p">.</span>array<span class="t
       </ul>
     </div>
     <div class="ftr-big" aria-hidden="true">EDU<span class="d">·</span>FAMCS</div>
-    <p class="ftr-copy">© 2026 EDU FAMCS · Минск</p>
+    <p class="ftr-copy">© 2026 EDU FAMCS · независимый проект выпускников ФПМИ БГУ · Минск</p>
   </div>
 </footer>
 

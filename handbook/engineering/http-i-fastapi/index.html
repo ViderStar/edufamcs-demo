@@ -4,9 +4,16 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>HTTP и API: сервис с моделью на FastAPI · EDU FAMCS</title>
-<meta name="description" content="HTTP и API: сервис с моделью на FastAPI — Инженерия: от ноутбука до сервиса. Хендбук ML-курса ФПМИ.">
+<meta name="description" content="Модель в файле никому не нужна: её используют другие программы, а договариваются они по HTTP. Задача ML-инженера на этом этапе — обернуть predict в сервис с чётким контрактом, проверкой входа и прове…">
 <meta name="theme-color" content="#060A16">
 <meta name="robots" content="noindex, nofollow">
+<link rel="canonical" href="https://edufamcs.by/handbook/engineering/http-i-fastapi/">
+<meta property="og:site_name" content="EDU FAMCS">
+<meta property="og:locale" content="ru_RU">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://edufamcs.by/handbook/engineering/http-i-fastapi/">
+<link rel="sitemap" type="application/xml" href="/edufamcs-demo/sitemap.xml">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"HTTP и API: сервис с моделью на FastAPI","description":"Модель в файле никому не нужна: её используют другие программы, а договариваются они по HTTP. Задача ML-инженера на этом этапе — обернуть predict в сервис с чётким контрактом, проверкой входа и проверкой «жив ли я». В статье мы строим такой сервис на FastAPI поверх пакета из предыдущей","url":"https://edufamcs.by/handbook/engineering/http-i-fastapi/","inLanguage":"ru","dateModified":"2026-11-10T11:19:57.151780+00:00","publisher":{"@type":"EducationalOrganization","@id":"https://edufamcs.by/#org","name":"EDU FAMCS","url":"https://edufamcs.by/","logo":"https://edufamcs.by/static/brand/logo/favicon.svg","description":"Независимый образовательный проект выпускников ФПМИ БГУ: бесплатные курсы по машинному обучению и IT.","areaServed":"BY"},"articleSection":"Инженерия: от ноутбука до сервиса","author":[{"@type":"Person","name":"Артем Лебедевич"}]}</script>
 <meta name="htmx-config" content='{"allowEval":false,"includeIndicatorStyles":false,"historyCacheSize":0,"selfRequestsOnly":true}'>
 <meta name="katex-js" content="/edufamcs-demo/static/vendor/katex/katex.min.js">
 <meta name="katex-css" content="/edufamcs-demo/static/vendor/katex/katex.min.css">
@@ -27,7 +34,7 @@
 <script src="/edufamcs-demo/static/js/site.js" defer></script>
 <script src="/edufamcs-demo/static/handbook/handbook.js" defer></script>
 </head>
-<body class="" hx-headers='{"X-CSRFToken": "Fxvz0eU4ts7Or67SeOizyfexzklZq5sBkPAo9sYWEQ44ZosrEZmPKdtyQnvfn3Wh"}'>
+<body class="" hx-headers='{"X-CSRFToken": "fEX8W685LOWqTbwiwFxJzFUaXkgoRza0OkeitzA1b9KQ8bUuzGMCL7jkQWxw9WKv"}'>
 <a class="skip" href="#main">К содержанию</a>
 <div class="demo-bar" role="note">Демо-версия для отзывов: вход, запись на курсы и формы здесь не работают.</div>
 
@@ -351,7 +358,7 @@ r<span class="tok-p">.</span>raise_for_status<span class="tok-p">(</span><span c
       </ul>
     </div>
     <div class="ftr-big" aria-hidden="true">EDU<span class="d">·</span>FAMCS</div>
-    <p class="ftr-copy">© 2026 EDU FAMCS · Минск</p>
+    <p class="ftr-copy">© 2026 EDU FAMCS · независимый проект выпускников ФПМИ БГУ · Минск</p>
   </div>
 </footer>
 
