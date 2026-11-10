@@ -1,0 +1,325 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Codex CLI: AGENTS.md, песочница, согласования · EDU FAMCS</title>
+<meta name="description" content="Codex CLI: AGENTS.md, песочница, согласования — ИИ-ассистенты для кода. Хендбук ML-курса ФПМИ.">
+<meta name="theme-color" content="#060A16">
+<meta name="robots" content="noindex, nofollow">
+<meta name="htmx-config" content='{"allowEval":false,"includeIndicatorStyles":false,"historyCacheSize":0,"selfRequestsOnly":true}'>
+<meta name="katex-js" content="/edufamcs-demo/static/vendor/katex/katex.min.js">
+<meta name="katex-css" content="/edufamcs-demo/static/vendor/katex/katex.min.css">
+<link rel="icon" href="/edufamcs-demo/static/brand/logo/favicon-16.svg" type="image/svg+xml" sizes="16x16">
+<link rel="icon" href="/edufamcs-demo/static/brand/logo/favicon.svg" type="image/svg+xml" sizes="any">
+<link rel="preload" href="/edufamcs-demo/static/brand/fonts/manrope-cyrillic-400.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/edufamcs-demo/static/brand/fonts/unbounded-cyrillic-800.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="/edufamcs-demo/static/brand/fonts.css">
+<link rel="stylesheet" href="/edufamcs-demo/static/brand/tokens.css">
+<link rel="stylesheet" href="/edufamcs-demo/static/brand/components.css">
+<link rel="stylesheet" href="/edufamcs-demo/static/css/site.css">
+<link rel="stylesheet" href="/edufamcs-demo/static/css/hub.css">
+<link rel="stylesheet" href="/edufamcs-demo/static/css/about.css">
+<link rel="stylesheet" href="/edufamcs-demo/static/handbook/handbook.css">
+<script src="/edufamcs-demo/static/js/theme.js"></script>
+<script src="/edufamcs-demo/static/vendor/htmx/htmx.min.js" defer></script>
+<script src="/edufamcs-demo/static/vendor/alpine/alpine-csp.min.js" defer></script>
+<script src="/edufamcs-demo/static/js/site.js" defer></script>
+<script src="/edufamcs-demo/static/handbook/handbook.js" defer></script>
+</head>
+<body class="" hx-headers='{"X-CSRFToken": "aT3hkvj91jBBj8K8ZqA4Wfk5HJCZKehqM6SeAxS026PaurZAYTO1E8c39SJXuYg7"}'>
+<a class="skip" href="#main">К содержанию</a>
+<div class="demo-bar" role="note">Демо-версия для отзывов: вход, запись на курсы и формы здесь не работают.</div>
+
+<header class="hdr">
+  <div class="container">
+    <a class="brand" href="/edufamcs-demo/" aria-label="EDU FAMCS — главная">
+      <span class="full"><img class="only-light" src="/edufamcs-demo/static/brand/logo/logo-edu-light.svg" alt="EDU FAMCS" width="196" height="40"><img class="only-dark" src="/edufamcs-demo/static/brand/logo/logo-edu-dark.svg" alt="EDU FAMCS" width="196" height="40"></span>
+      <span class="short"><img class="only-light" src="/edufamcs-demo/static/brand/logo/logo-edu-light.svg" alt="EDU FAMCS" height="30"><img class="only-dark" src="/edufamcs-demo/static/brand/logo/logo-edu-dark.svg" alt="EDU FAMCS" height="30"></span>
+    </a>
+    <nav class="nav" id="main-nav" aria-label="Основная навигация">
+      <a href="/edufamcs-demo/#courses">Курсы</a>
+      <a href="/edufamcs-demo/ml/" >Машинное обучение</a>
+      
+      <a href="/edufamcs-demo/handbook/" aria-current="page">Хендбук</a>
+      <a href="/edufamcs-demo/news/" >Новости</a>
+      <a href="/edufamcs-demo/people/" >Авторы</a>
+      <a href="/edufamcs-demo/about/" >О&nbsp;нас</a>
+    </nav>
+    <div class="hdr-actions">
+      
+      <a class="btn btn-outline btn-login" href="/edufamcs-demo/accounts/login/?next=/handbook/ai-tools/codex/">Войти</a>
+      
+      <button class="icon-btn menu-btn" type="button" aria-label="Меню" aria-expanded="false" aria-controls="main-nav"><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-menu"/></svg></button>
+    </div>
+  </div>
+</header>
+
+<main id="main">
+
+
+
+<div class="container hb-page s-agents">
+  <div class="hb-readbar" aria-hidden="true"><i></i></div>
+  <div class="hb">
+    <aside class="hb-nav" aria-label="Статьи раздела">
+      
+<form class="hb-search" action="/edufamcs-demo/handbook/search/" method="get" role="search">
+  <svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-search"/></svg>
+  <input class="input" type="search" name="q" value="" placeholder="Поиск по хендбуку" aria-label="Поиск по хендбуку" autocomplete="off" maxlength="120"
+    hx-get="/edufamcs-demo/handbook/search/" hx-trigger="input changed delay:250ms, search" hx-target="#hb-nav-results" hx-sync="this:replace">
+</form>
+
+      <div id="hb-nav-results" class="hb-nav-results" aria-live="polite"></div>
+      <a class="grp" href="/edufamcs-demo/handbook/ai-tools/">Основы</a>
+      
+      <a class="" href="/edufamcs-demo/handbook/ai-tools/kak-ustroen-kodovyj-agent/">Как устроен кодовый агент: модель, инструменты, контекст</a>
+      
+      <a class="" href="/edufamcs-demo/handbook/ai-tools/claude-code/">Claude Code: установка, режимы, CLAUDE.md</a>
+      
+      <a class="cur" href="/edufamcs-demo/handbook/ai-tools/codex/" aria-current="page">Codex CLI: AGENTS.md, песочница, согласования</a>
+      
+      <a class="" href="/edufamcs-demo/handbook/ai-tools/postanovka-zadach-agentu/">Как ставить задачу агенту</a>
+      
+    </aside>
+
+    <article class="hb-main">
+      <nav class="crumbs" aria-label="Навигация"><a href="/edufamcs-demo/handbook/">Хендбук</a><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-chev"/></svg><a href="/edufamcs-demo/handbook/ai-tools/">ИИ-ассистенты для кода</a></nav>
+      <h1 class="h1">Codex CLI: AGENTS.md, песочница, согласования</h1>
+      <div class="hb-meta">
+        
+        
+        <span><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-clock"/></svg>11&nbsp;мин</span>
+        <span class="hb-authors"><span class="avatar sm" title="Артем Лебедевич">АЛ</span>Артем Лебедевич</span>
+        <span><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-edit"/></svg>10 ноября 2026</span>
+        
+        
+      </div>
+
+      
+      <details class="hb-mtoc">
+        <summary><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-list"/></svg>Содержание<svg class="ico sm" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-chev-down"/></svg></summary>
+        <a class="l2" href="#установка-и-вход">Установка и вход</a><a class="l2" href="#agentsmd">AGENTS.md</a><a class="l2" href="#песочница-и-согласования">Песочница и согласования</a><a class="l2" href="#конфигурация">Конфигурация</a><a class="l2" href="#неинтерактивный-режим-codex-exec">Неинтерактивный режим: codex exec</a><a class="l2" href="#облачные-задачи-и-ревью">Облачные задачи и ревью</a><a class="l2" href="#claude-code-и-codex-cli-по-понятиям">Claude Code и Codex CLI по понятиям</a><a class="l2" href="#один-репозиторий-для-двух-агентов">Один репозиторий для двух агентов</a><a class="l2" href="#ловушки">Ловушки</a><a class="l2" href="#проверь-себя">Проверь себя</a><a class="l2" href="#что-почитать">Что почитать</a>
+      </details>
+      
+
+      <div class="prose"><p>Codex — кодовый агент OpenAI. Он доступен как CLI в терминале, расширение для IDE, десктопное, мобильное и веб-приложения, а также облачные задачи (Codex Cloud). Принцип тот же, что у любого агента (<a href="/edufamcs-demo/handbook/ai-tools/kak-ustroen-kodovyj-agent/" rel="noopener noreferrer nofollow">цикл «модель — инструменты — результат»</a>), различаются конвенции: где лежат инструкции, как устроены песочница и согласования, как настраивается поведение. Документация Codex недавно переехала на новый домен и продолжает меняться, так что сверяйте детали с ней (ссылки внизу).</p>
+<h2 id="установка-и-вход">Установка и вход</h2>
+<p>Из README репозитория <code>openai/codex</code>:</p>
+<div class="code"><div class="code-head"><span class="lang">bash</span></div><pre><code>curl -fsSL https://chatgpt.com/codex/install.sh <span class="tok-p">|</span> sh
+</code></pre></div>
+<div class="code"><div class="code-head"><span class="lang">bash</span></div><pre><code>npm install -g @openai/codex
+</code></pre></div>
+<div class="code"><div class="code-head"><span class="lang">bash</span></div><pre><code>brew install --cask codex
+</code></pre></div>
+<div class="code"><div class="code-head"><span class="lang">powershell</span></div><pre><code>powershell -ExecutionPolicy ByPass -c <span class="tok-s">"</span><span class="tok-s">irm https://chatgpt.com/codex/install.ps1 | iex</span><span class="tok-s">"</span>
+</code></pre></div>
+<p>Первая строка — для macOS и Linux (она же обновляет Codex), последняя — для Windows. Запуск — команда <code>codex</code> в каталоге проекта; при первом запуске выберите <strong>Sign in with ChatGPT</strong> (рекомендуется для платных тарифов ChatGPT) либо вход по API-ключу, который требует дополнительной настройки по документации. Перед задачей и после неё полезно делать git-коммит: документация прямо советует чекпоинты, чтобы откатить изменения.</p>
+<p>Полезные встроенные команды: <code>/init</code> (создать <code>AGENTS.md</code>), <code>/status</code> (текущая конфигурация сессии), <code>/permissions</code> (что агенту разрешено), <code>/model</code> (модель и уровень рассуждения), <code>/review</code> (ревью изменений). Из терминала доступны также <code>codex resume</code>, <code>codex cloud</code>, <code>codex mcp</code>, флаги <code>--image</code> и <code>--search</code>.</p>
+<h2 id="agentsmd">AGENTS.md</h2>
+<p><code>AGENTS.md</code> — открытая конвенция: markdown-файл с инструкциями для агентов, «README для машин». Его читают Codex, Cursor, Gemini CLI, GitHub Copilot coding agent и многие другие; формат не требует полей, можно использовать любые заголовки. Типичное содержимое: обзор проекта, команды сборки и тестов, стиль кода, правила коммитов и PR, чего не трогать.</p>
+<p>Как Codex собирает инструкции:</p>
+<ol>
+<li><strong>Глобальный уровень:</strong> каталог <code>~/.codex</code> (или заданный <code>CODEX_HOME</code>); берётся <code>AGENTS.override.md</code>, а если его нет — <code>AGENTS.md</code>, и только первый непустой файл.</li>
+<li><strong>Проект:</strong> от корня (обычно корня git) вниз до текущего каталога; в каждом каталоге проверяется <code>AGENTS.override.md</code>, затем <code>AGENTS.md</code>, затем запасные имена; берётся не больше одного файла на каталог.</li>
+<li><strong>Слияние:</strong> файлы склеиваются от корня вниз; более близкие к рабочему каталогу идут позже и перекрывают общие.</li>
+</ol>
+<p>Цепочка собирается один раз за запуск (в TUI — за сессию). Суммарный размер ограничен <code>project_doc_max_bytes</code> (по умолчанию 32 KiB): длинные правила режьте на вложенные каталоги. Запасные имена файлов задаются в <code>config.toml</code> ключом <code>project_doc_fallback_filenames</code>. Проверить, что подхватилось, можно так: <code>codex --ask-for-approval never "Summarize the current instructions."</code>.</p>
+<p>Пример для ML-репозитория:</p>
+<div class="code"><div class="code-head"><span class="lang">markdown</span></div><pre><code># AGENTS.md
+
+## Команды
+<span class="tok-k">-</span> Установка: <span class="tok-s">`uv sync`</span>; тесты: <span class="tok-s">`uv run pytest -q`</span>; линтер: <span class="tok-s">`uv run ruff check .`</span>
+
+## Данные и эксперименты
+<span class="tok-k">-</span> <span class="tok-s">`data/raw/`</span> только для чтения; разбиение по времени в <span class="tok-s">`src/split.py`</span>
+<span class="tok-k">-</span> Любая метрика в отчёте — с командой, которой она получена
+
+## Правила
+<span class="tok-k">-</span> Не менять тесты, чтобы они проходили; падающий тест — сообщить причину
+</code></pre></div>
+<h2 id="песочница-и-согласования">Песочница и согласования</h2>
+<p>Две независимые настройки. <strong>Песочница</strong> (<code>sandbox_mode</code>) — технический предел действий агента:</p>
+<ul>
+<li><code>read-only</code> — смотреть файлы можно, править и выполнять команды без согласия нельзя;</li>
+<li><code>workspace-write</code> — править файлы внутри рабочей области и выполнять обычные локальные команды;</li>
+<li><code>danger-full-access</code> — без ограничений.</li>
+</ul>
+<p><strong>Согласования</strong> (<code>approval_policy</code>) — когда агент должен спросить вас: <code>on-request</code> (спрашивает, когда нужно выйти за границу песочницы), <code>never</code> (не спрашивает, но остаётся внутри выбранной песочницы). Прежнее значение <code>untrusted</code> выведено из обращения, его из конфигурации нужно убрать. В CLI это флаги <code>--sandbox</code> и <code>--ask-for-approval</code> (<code>-a</code>).</p>
+<p>Документированные пресеты:</p>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>Назначение</th>
+<th>Флаги</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>По умолчанию для локальной работы</td>
+<td><code>--sandbox workspace-write --ask-for-approval on-request</code></td>
+</tr>
+<tr>
+<td>Только читать, безопасно</td>
+<td><code>--sandbox read-only --ask-for-approval on-request</code></td>
+</tr>
+<tr>
+<td>CI, только чтение</td>
+<td><code>--sandbox read-only --ask-for-approval never</code></td>
+</tr>
+<tr>
+<td>Без защиты</td>
+<td><code>--dangerously-bypass-approvals-and-sandbox</code> (алиас <code>--yolo</code>), не рекомендуется</td>
+</tr>
+</tbody>
+</table></div>
+<p>Локально сеть в песочнице выключена, пока вы не включите <code>network_access</code> в секции <code>[sandbox_workspace_write]</code>; веб-поиск по умолчанию идёт по кэшу OpenAI (<code>web_search = "cached"</code>), <code>--search</code> включает живой поиск, <code>web_search = "disabled"</code> — выключает. Есть и режим, когда часть запросов на согласование проверяет отдельный агент-рецензент (<code>approvals_reviewer = "auto_review"</code>) — см. документацию.</p>
+<h2 id="конфигурация">Конфигурация</h2>
+<p>Настройки лежат в <code>~/.codex/config.toml</code>; для отдельного проекта — <code>.codex/config.toml</code> в репозитории (загружается только для доверенных проектов). Приоритет от высшего к низшему: флаги CLI и <code>--config</code>, проектные файлы, профиль (<code>--profile имя</code>, файл <code>~/.codex/имя.config.toml</code>), пользовательский файл, облачные значения, системный файл, значения по умолчанию.</p>
+<div class="code"><div class="code-head"><span class="lang">toml</span></div><pre><code>model <span class="tok-p">=</span> <span class="tok-s">"</span><span class="tok-s">&lt;модель из документации&gt;</span><span class="tok-s">"</span>
+approval_policy <span class="tok-p">=</span> <span class="tok-s">"</span><span class="tok-s">on-request</span><span class="tok-s">"</span>
+sandbox_mode <span class="tok-p">=</span> <span class="tok-s">"</span><span class="tok-s">workspace-write</span><span class="tok-s">"</span>
+</code></pre></div>
+<p>Выбор модели — ключ <code>model</code> или команда <code>/model</code> (там же уровень «усилия» рассуждения). Общий совет: для рутины хватает более лёгкой и быстрой модели, для сложного рефакторинга и отладки берут более сильную; актуальные модели и цены — в документации. Разовая подстановка значения: <code>codex -c log_dir=./.codex-log</code>.</p>
+<h2 id="неинтерактивный-режим-codex-exec">Неинтерактивный режим: <code>codex exec</code></h2>
+<p><code>codex exec</code> запускает агента без TUI: прогресс идёт в <code>stderr</code>, в <code>stdout</code> попадает только итоговое сообщение.</p>
+<div class="code"><div class="code-head"><span class="lang">bash</span></div><pre><code>codex <span class="tok-f">exec</span> <span class="tok-s">"summarize the repository structure and list the top 5 risky areas"</span>
+codex <span class="tok-f">exec</span> <span class="tok-s">"review the change for race conditions"</span>
+codex <span class="tok-f">exec</span> resume --last <span class="tok-s">"fix the race conditions you found"</span>
+</code></pre></div>
+<p>По умолчанию песочница read-only; для правок нужен <code>--sandbox workspace-write</code>. Полезные флаги: <code>--json</code> (поток событий JSON Lines), <code>-o &lt;файл&gt;</code> (сохранить последнее сообщение), <code>--output-schema &lt;файл&gt;</code> (ответ по JSON Schema), <code>--ephemeral</code> (не сохранять сессию). В CI ключ передают переменной <code>CODEX_API_KEY</code> на один запуск, а для GitHub Actions документация рекомендует <code>openai/codex-action</code>, чтобы ключ не был виден другим шагам. Устаревший <code>--full-auto</code> больше не поддерживается.</p>
+<h2 id="облачные-задачи-и-ревью">Облачные задачи и ревью</h2>
+<p>В <strong>Codex Cloud</strong> вы создаёте окружение (репозитории GitHub, установка зависимостей, секреты, сетевой доступ), ставите задачу, а агент выполняет её в отдельной рабочей области; результат и тесты вы просматриваете, просите доработки и затем коммитите или открываете PR. Облако удобно для задач, которые не нужно держать на своей машине; при выборе сетевого доступа ограничивайте домены. <strong>Ревью:</strong> команда <code>/review</code> в CLI запускает отдельного рецензента на выбранном диффе (против базовой ветки или незакоммиченные изменения) и не меняет рабочее дерево; в GitHub доступны ревью PR, в том числе автоматические, при подключении коннектора.</p>
+<p>Расширения: навыки (skills), плагины, MCP-серверы и субагенты — по смыслу то же, что в других агентах, см. <a href="/edufamcs-demo/handbook/ai-tools/skills/" rel="noopener noreferrer nofollow">навыки</a> и <a href="/edufamcs-demo/handbook/ai-tools/mcp/" rel="noopener noreferrer nofollow">MCP</a>.</p>
+<h2 id="claude-code-и-codex-cli-по-понятиям">Claude Code и Codex CLI по понятиям</h2>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>Понятие</th>
+<th>Claude Code</th>
+<th>Codex CLI</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Файл инструкций</td>
+<td><code>CLAUDE.md</code> (проект, пользователь, локальный); <code>AGENTS.md</code> читается, если нет <code>CLAUDE.md</code></td>
+<td><code>AGENTS.md</code> и <code>AGENTS.override.md</code>, иерархия от корня к текущему каталогу</td>
+</tr>
+<tr>
+<td>Разрешения</td>
+<td>режимы (<code>default</code>, <code>acceptEdits</code>, <code>plan</code>, <code>auto</code>, <code>dontAsk</code>, <code>bypassPermissions</code>) и правила <code>allow</code>/<code>deny</code> в <code>settings.json</code></td>
+<td><code>sandbox_mode</code> и <code>approval_policy</code> отдельно, пресеты флагов</td>
+</tr>
+<tr>
+<td>Конфигурация</td>
+<td><code>.claude/settings.json</code>, <code>.claude/settings.local.json</code>, <code>~/.claude/settings.json</code></td>
+<td><code>~/.codex/config.toml</code>, <code>.codex/config.toml</code>, профили</td>
+</tr>
+<tr>
+<td>Расширяемость</td>
+<td>навыки, хуки, MCP, субагенты, плагины</td>
+<td>навыки, хуки, плагины, MCP, субагенты</td>
+</tr>
+<tr>
+<td>Неинтерактивно</td>
+<td><code>claude -p "..."</code>, <code>--output-format json</code></td>
+<td><code>codex exec "..."</code>, <code>--json</code>, <code>--output-schema</code></td>
+</tr>
+<tr>
+<td>Ревью</td>
+<td><code>/review</code>, <code>/code-review</code></td>
+<td><code>/review</code>, ревью PR в GitHub</td>
+</tr>
+</tbody>
+</table></div>
+<p>Таблица сопоставляет понятия, а не оценивает инструменты: выбирайте по задаче, подписке и привычкам команды.</p>
+<h2 id="один-репозиторий-для-двух-агентов">Один репозиторий для двух агентов</h2>
+<p>Держите общие инструкции в одном <code>AGENTS.md</code>: команды, соглашения, зоны «не трогать». Если в репозитории нет <code>CLAUDE.md</code>, Claude Code прочтёт <code>AGENTS.md</code> сам. Если <code>CLAUDE.md</code> нужен (например, для правил только Claude), документация Claude Code предлагает импорт в первой строке:</p>
+<div class="code"><div class="code-head"><span class="lang">markdown</span></div><pre><code>@AGENTS.md
+
+## Claude Code
+
+Use plan mode for changes under <span class="tok-s">`src/billing/`</span>.
+</code></pre></div>
+<p>Вариант без своих правил — символическая ссылка <code>ln -s AGENTS.md CLAUDE.md</code> (на Windows предпочтителен импорт). Не дублируйте текст в двух файлах: они разойдутся.</p>
+<h2 id="ловушки">Ловушки</h2>
+<ul>
+<li><code>--yolo</code> и <code>danger-full-access</code> на машине с ключами и личными данными.</li>
+<li>Копировать устаревшие флаги и значения из старых заметок: <code>untrusted</code>, <code>--full-auto</code> больше не работают.</li>
+<li>Включённая сеть в песочнице «на всякий случай»: открывает путь для утечки данных.</li>
+<li>Раздутый <code>AGENTS.md</code>: за пределом <code>project_doc_max_bytes</code> хвост обрезается.</li>
+<li>Ключ API в переменной уровня всего CI-задания, где выполняется чужой код.</li>
+<li>Принять результат облачной задачи без запуска тестов локально.</li>
+</ul>
+<h2 id="проверь-себя">Проверь себя</h2>
+<details class="callout md details"><summary>Чем песочница отличается от политики согласований?</summary>
+<p>Песочница технически ограничивает, что может сделать агент (чтение, запись в рабочей области, полный доступ); политика определяет, когда он должен спросить вас.</p>
+</details>
+<details class="callout md details"><summary>Как Codex собирает AGENTS.md из нескольких каталогов?</summary>
+<p>Глобальный файл из <code>~/.codex</code>, затем файлы от корня проекта до текущего каталога по одному на каталог; склеиваются от общего к частному, ближние позже и приоритетнее; лимит <code>project_doc_max_bytes</code>.</p>
+</details>
+<details class="callout md details"><summary>Как запустить Codex в CI только на чтение?</summary>
+<p><code>codex exec</code> с <code>--sandbox read-only</code> и <code>--ask-for-approval never</code>; ключ — через <code>CODEX_API_KEY</code> на один запуск.</p>
+</details>
+<details class="callout md details"><summary>Как сделать один репозиторий удобным и для Claude Code, и для Codex?</summary>
+<p>Общие правила в <code>AGENTS.md</code>; Claude Code читает его сам при отсутствии <code>CLAUDE.md</code> либо через <code>@AGENTS.md</code> в <code>CLAUDE.md</code>.</p>
+</details>
+<h2 id="что-почитать">Что почитать</h2>
+<ul>
+<li><a href="https://learn.chatgpt.com/docs/codex/cli" rel="noopener noreferrer nofollow">Codex CLI</a> — установка, вход, команды.</li>
+<li><a href="https://learn.chatgpt.com/docs/agent-configuration/agents-md" rel="noopener noreferrer nofollow">AGENTS.md в Codex</a> — иерархия, лимиты, проверка.</li>
+<li><a href="https://learn.chatgpt.com/docs/sandboxing" rel="noopener noreferrer nofollow">Sandboxing</a> и <a href="https://learn.chatgpt.com/docs/agent-approvals-security" rel="noopener noreferrer nofollow">Approvals and security</a>.</li>
+<li><a href="https://learn.chatgpt.com/docs/non-interactive-mode" rel="noopener noreferrer nofollow">Non-interactive mode</a>, <a href="https://learn.chatgpt.com/docs/cloud" rel="noopener noreferrer nofollow">Cloud</a>, <a href="https://learn.chatgpt.com/docs/code-review" rel="noopener noreferrer nofollow">Code review</a>.</li>
+<li><a href="https://github.com/openai/codex" rel="noopener noreferrer nofollow">Репозиторий openai/codex</a> и <a href="https://agents.md" rel="noopener noreferrer nofollow">agents.md</a>.</li>
+<li><a href="https://code.claude.com/docs/en/memory" rel="noopener noreferrer nofollow">How Claude remembers your project</a> — раздел про AGENTS.md в Claude Code.</li>
+</ul>
+</div>
+      
+
+      
+
+      
+      <nav class="pager" aria-label="Соседние статьи">
+        <a href="/edufamcs-demo/handbook/ai-tools/claude-code/"><span><svg class="ico sm" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-arrow-left"/></svg>Назад</span>Claude Code: установка, режимы, CLAUDE.md</a>
+        <a href="/edufamcs-demo/handbook/ai-tools/postanovka-zadach-agentu/"><span>Дальше<svg class="ico sm" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-arrow"/></svg></span>Как ставить задачу агенту</a>
+      </nav>
+      
+    </article>
+
+    <aside class="hb-toc" aria-label="На этой странице">
+      <a class="l2" href="#установка-и-вход">Установка и вход</a><a class="l2" href="#agentsmd">AGENTS.md</a><a class="l2" href="#песочница-и-согласования">Песочница и согласования</a><a class="l2" href="#конфигурация">Конфигурация</a><a class="l2" href="#неинтерактивный-режим-codex-exec">Неинтерактивный режим: codex exec</a><a class="l2" href="#облачные-задачи-и-ревью">Облачные задачи и ревью</a><a class="l2" href="#claude-code-и-codex-cli-по-понятиям">Claude Code и Codex CLI по понятиям</a><a class="l2" href="#один-репозиторий-для-двух-агентов">Один репозиторий для двух агентов</a><a class="l2" href="#ловушки">Ловушки</a><a class="l2" href="#проверь-себя">Проверь себя</a><a class="l2" href="#что-почитать">Что почитать</a>
+    </aside>
+  </div>
+</div>
+
+
+</main>
+
+<footer class="ftr" data-theme="dark">
+  <svg class="sym fern" viewBox="0 0 40.5 65.02" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#fern"/></svg>
+  <div class="container">
+    <div class="ftr-row">
+      <a href="/edufamcs-demo/" aria-label="EDU FAMCS — главная"><img src="/edufamcs-demo/static/brand/logo/logo-edu-dark.svg" alt="EDU FAMCS" width="196" height="40"></a>
+      <ul class="ftr-links">
+        <li><a href="/edufamcs-demo/#courses">Курсы</a></li>
+        <li><a href="/edufamcs-demo/ml/">Машинное обучение</a></li>
+        <li><a href="/edufamcs-demo/handbook/">Хендбук</a></li>
+        <li><a href="/edufamcs-demo/news/">Новости</a></li>
+        <li><a href="/edufamcs-demo/people/">Авторы</a></li>
+        <li><a href="/edufamcs-demo/about/">О&nbsp;нас</a></li>
+        <li><a href="/edufamcs-demo/propose/">Предложить или исправить</a></li>
+        <li><a href="/edufamcs-demo/privacy/">Конфиденциальность</a></li>
+      </ul>
+    </div>
+    <div class="ftr-big" aria-hidden="true">EDU<span class="d">·</span>FAMCS</div>
+    <p class="ftr-copy">© 2026 EDU FAMCS · Минск</p>
+  </div>
+</footer>
+
+<div class="toasts-region" aria-live="polite" id="toasts">
+
+</div>
+
+</body>
+</html>

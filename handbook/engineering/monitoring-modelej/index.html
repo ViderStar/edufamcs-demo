@@ -1,0 +1,273 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Мониторинг ML-модели: дрейф, качество, деградация · EDU FAMCS</title>
+<meta name="description" content="Мониторинг ML-модели: дрейф, качество, деградация — Инженерия: от ноутбука до сервиса. Хендбук ML-курса ФПМИ.">
+<meta name="theme-color" content="#060A16">
+<meta name="robots" content="noindex, nofollow">
+<meta name="htmx-config" content='{"allowEval":false,"includeIndicatorStyles":false,"historyCacheSize":0,"selfRequestsOnly":true}'>
+<meta name="katex-js" content="/edufamcs-demo/static/vendor/katex/katex.min.js">
+<meta name="katex-css" content="/edufamcs-demo/static/vendor/katex/katex.min.css">
+<link rel="icon" href="/edufamcs-demo/static/brand/logo/favicon-16.svg" type="image/svg+xml" sizes="16x16">
+<link rel="icon" href="/edufamcs-demo/static/brand/logo/favicon.svg" type="image/svg+xml" sizes="any">
+<link rel="preload" href="/edufamcs-demo/static/brand/fonts/manrope-cyrillic-400.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/edufamcs-demo/static/brand/fonts/unbounded-cyrillic-800.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="/edufamcs-demo/static/brand/fonts.css">
+<link rel="stylesheet" href="/edufamcs-demo/static/brand/tokens.css">
+<link rel="stylesheet" href="/edufamcs-demo/static/brand/components.css">
+<link rel="stylesheet" href="/edufamcs-demo/static/css/site.css">
+<link rel="stylesheet" href="/edufamcs-demo/static/css/hub.css">
+<link rel="stylesheet" href="/edufamcs-demo/static/css/about.css">
+<link rel="stylesheet" href="/edufamcs-demo/static/handbook/handbook.css">
+<script src="/edufamcs-demo/static/js/theme.js"></script>
+<script src="/edufamcs-demo/static/vendor/htmx/htmx.min.js" defer></script>
+<script src="/edufamcs-demo/static/vendor/alpine/alpine-csp.min.js" defer></script>
+<script src="/edufamcs-demo/static/js/site.js" defer></script>
+<script src="/edufamcs-demo/static/handbook/handbook.js" defer></script>
+</head>
+<body class="" hx-headers='{"X-CSRFToken": "FInWV1sDinR8brgX8b5s7kafbrRCrG9PhVcTb31uja5HmKvp7EjpPd2dDAYAbq8w"}'>
+<a class="skip" href="#main">К содержанию</a>
+<div class="demo-bar" role="note">Демо-версия для отзывов: вход, запись на курсы и формы здесь не работают.</div>
+
+<header class="hdr">
+  <div class="container">
+    <a class="brand" href="/edufamcs-demo/" aria-label="EDU FAMCS — главная">
+      <span class="full"><img class="only-light" src="/edufamcs-demo/static/brand/logo/logo-edu-light.svg" alt="EDU FAMCS" width="196" height="40"><img class="only-dark" src="/edufamcs-demo/static/brand/logo/logo-edu-dark.svg" alt="EDU FAMCS" width="196" height="40"></span>
+      <span class="short"><img class="only-light" src="/edufamcs-demo/static/brand/logo/logo-edu-light.svg" alt="EDU FAMCS" height="30"><img class="only-dark" src="/edufamcs-demo/static/brand/logo/logo-edu-dark.svg" alt="EDU FAMCS" height="30"></span>
+    </a>
+    <nav class="nav" id="main-nav" aria-label="Основная навигация">
+      <a href="/edufamcs-demo/#courses">Курсы</a>
+      <a href="/edufamcs-demo/ml/" >Машинное обучение</a>
+      
+      <a href="/edufamcs-demo/handbook/" aria-current="page">Хендбук</a>
+      <a href="/edufamcs-demo/news/" >Новости</a>
+      <a href="/edufamcs-demo/people/" >Авторы</a>
+      <a href="/edufamcs-demo/about/" >О&nbsp;нас</a>
+    </nav>
+    <div class="hdr-actions">
+      
+      <a class="btn btn-outline btn-login" href="/edufamcs-demo/accounts/login/?next=/handbook/engineering/monitoring-modelej/">Войти</a>
+      
+      <button class="icon-btn menu-btn" type="button" aria-label="Меню" aria-expanded="false" aria-controls="main-nav"><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-menu"/></svg></button>
+    </div>
+  </div>
+</header>
+
+<main id="main">
+
+
+
+<div class="container hb-page hb-tone">
+  <div class="hb-readbar" aria-hidden="true"><i></i></div>
+  <div class="hb">
+    <aside class="hb-nav" aria-label="Статьи раздела">
+      
+<form class="hb-search" action="/edufamcs-demo/handbook/search/" method="get" role="search">
+  <svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-search"/></svg>
+  <input class="input" type="search" name="q" value="" placeholder="Поиск по хендбуку" aria-label="Поиск по хендбуку" autocomplete="off" maxlength="120"
+    hx-get="/edufamcs-demo/handbook/search/" hx-trigger="input changed delay:250ms, search" hx-target="#hb-nav-results" hx-sync="this:replace">
+</form>
+
+      <div id="hb-nav-results" class="hb-nav-results" aria-live="polite"></div>
+      <a class="grp" href="/edufamcs-demo/handbook/engineering/">Наблюдаемость</a>
+      
+      <a class="" href="/edufamcs-demo/handbook/engineering/logi-i-metriki/">Логи и метрики: Prometheus</a>
+      
+      <a class="" href="/edufamcs-demo/handbook/engineering/grafana/">Grafana: дашборды и алерты</a>
+      
+      <a class="cur" href="/edufamcs-demo/handbook/engineering/monitoring-modelej/" aria-current="page">Мониторинг ML-модели: дрейф, качество, деградация</a>
+      
+    </aside>
+
+    <article class="hb-main">
+      <nav class="crumbs" aria-label="Навигация"><a href="/edufamcs-demo/handbook/">Хендбук</a><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-chev"/></svg><a href="/edufamcs-demo/handbook/engineering/">Инженерия: от ноутбука до сервиса</a></nav>
+      <h1 class="h1">Мониторинг ML-модели: дрейф, качество, деградация</h1>
+      <div class="hb-meta">
+        
+        
+        <span><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-clock"/></svg>10&nbsp;мин</span>
+        <span class="hb-authors"><span class="avatar sm" title="Артем Лебедевич">АЛ</span>Артем Лебедевич</span>
+        <span><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-edit"/></svg>10 ноября 2026</span>
+        
+        
+      </div>
+
+      
+      <details class="hb-mtoc">
+        <summary><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-list"/></svg>Содержание<svg class="ico sm" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-chev-down"/></svg></summary>
+        <a class="l2" href="#почему-модель-деградирует">Почему модель деградирует</a><a class="l2" href="#что-логировать-с-каждым-предсказанием">Что логировать с каждым предсказанием</a><a class="l2" href="#мониторинг-входов">Мониторинг входов</a><a class="l3" href="#psi">PSI</a><a class="l3" href="#код-psi-и-тест-колмогорова-смирнова">Код: PSI и тест Колмогорова — Смирнова</a><a class="l2" href="#мониторинг-выходов">Мониторинг выходов</a><a class="l2" href="#качество-метки-приходят-поздно">Качество: метки приходят поздно</a><a class="l2" href="#катить-и-откатывать">Катить и откатывать</a><a class="l2" href="#ловушки">Ловушки</a><a class="l2" href="#проверь-себя">Проверь себя</a><a class="l2" href="#что-почитать">Что почитать</a>
+      </details>
+      
+
+      <div class="prose"><p>Обычный сервис ломается громко: 500-е, таймауты, упавший контейнер. Модель ломается тихо: сервис отвечает 200 за 30 мс, а качество предсказаний неделями падает. Метрики из статей про <a href="/edufamcs-demo/handbook/engineering/logi-i-metriki/" rel="noopener noreferrer nofollow">Prometheus</a> и <a href="/edufamcs-demo/handbook/engineering/grafana/" rel="noopener noreferrer nofollow">Grafana</a> этого не покажут: для модели нужен отдельный слой мониторинга данных и качества. Без него «модель в проде» означает «модель, о проблемах которой вы узнаете от бизнеса».</p>
+<h2 id="почему-модель-деградирует">Почему модель деградирует</h2>
+<ul>
+<li><strong>Дрейф данных</strong> (data drift): изменилось распределение входов <span class="tex">P(x)</span> — новая рекламная кампания привела другую аудиторию, сменился поставщик данных, наступил сезон.</li>
+<li><strong>Дрейф концепции</strong> (concept drift): изменилась связь входа с ответом <span class="tex">P(y\mid x)</span> — поведение мошенников адаптировалось, вкусы пользователей сменились. Входы выглядят прежними, а правильные ответы другие.</li>
+<li><strong>Изменения в источниках</strong>: переименовали колонку, поменяли единицы (рубли на копейки), поле стало приходить пустым, категория получила новые значения. Это самая частая причина на практике.</li>
+<li><strong>Петли обратной связи</strong> (feedback loops): модель влияет на данные, на которых потом обучается. Рекомендательная система показывает только то, что предсказала, и дальше учится на кликах по показанному (<a href="/edufamcs-demo/handbook/recsys/prodakshen-i-ab-testy/" rel="noopener noreferrer nofollow">подробнее</a>).</li>
+</ul>
+<h2 id="что-логировать-с-каждым-предсказанием">Что логировать с каждым предсказанием</h2>
+<p>То, что не записано в момент предсказания, потом не восстановить. Для каждого запроса сохраняйте в таблицу (см. <code>predictions</code> из <a href="/edufamcs-demo/handbook/engineering/grafana/" rel="noopener noreferrer nofollow">Grafana</a>) или в журнал:</p>
+<ul>
+<li>идентификатор запроса и время;</li>
+<li><strong>версию модели</strong> (и версию препроцессинга);</li>
+<li><strong>признаки</strong> на входе: целиком для небольших объёмов или выборку/агрегаты, плюс хэш вектора для сопоставления; без персональных данных и секретов;</li>
+<li><strong>выход</strong>: score и принятое решение;</li>
+<li>позже — <strong>метку</strong> (<code>label</code>), когда она станет известна, по идентификатору запроса.</li>
+</ul>
+<p>Так вы сможете и рассчитать качество, и воспроизвести ошибочный ответ, и переобучить модель на реальных данных.</p>
+<h2 id="мониторинг-входов">Мониторинг входов</h2>
+<p>Не требует меток, поэтому доступен сразу. Для каждого признака смотрите:</p>
+<ul>
+<li><strong>долю пропусков</strong> (внезапный рост — сломался источник);</li>
+<li><strong>диапазоны и квантили</strong> (минимум, максимум, медиана; значение в секундах вместо миллисекунд видно сразу);</li>
+<li><strong>новые категории</strong>: доля значений, которых не было в обучении;</li>
+<li><strong>распределение</strong>: насколько сегодняшнее похоже на обучающее.</li>
+</ul>
+<h3 id="psi">PSI</h3>
+<p><strong>Population Stability Index</strong> сравнивает распределение признака в обучении (ожидаемое) и в проде (фактическое). Разбейте значения на <span class="tex">K</span> корзин по квантилям обучающей выборки; пусть <span class="tex">e_k</span> и <span class="tex">a_k</span> — доли обучающих и боевых значений в корзине <span class="tex">k</span>:</p>
+<div class="tex tex-block">\mathrm{PSI}=\sum_{k=1}^{K}(a_k-e_k)\,\ln\frac{a_k}{e_k}.</div>
+<p>Это симметризованная дивергенция Кульбака — Лейблера: <span class="tex">\mathrm{PSI}=\mathrm{KL}(a\,\|\,e)+\mathrm{KL}(e\,\|\,a)</span>. Каждое слагаемое неотрицательно. Условные пороги из практики скоринга: меньше 0,1 — сдвиг незначителен, 0,1–0,25 — умеренный, больше 0,25 — значительный. Это эмпирические ориентиры, а не теорема; для малых выборок и нестандартных признаков пороги подбирайте по истории.</p>
+<p><strong>Ручной пример</strong> на 4 корзинах: ожидаемые доли <span class="tex">e=(0{,}25;\,0{,}25;\,0{,}25;\,0{,}25)</span>, фактические <span class="tex">a=(0{,}15;\,0{,}20;\,0{,}30;\,0{,}35)</span>. Вклады корзин: <span class="tex">(0{,}15-0{,}25)\ln\frac{0{,}15}{0{,}25}=0{,}0511</span>; <span class="tex">0{,}0112</span>; <span class="tex">0{,}0091</span>; <span class="tex">0{,}0336</span>. Сумма <span class="tex">\approx 0{,}105</span>: умеренный сдвиг, на границе «стоит посмотреть».</p>
+<h3 id="код-psi-и-тест-колмогорова-смирнова">Код: PSI и тест Колмогорова — Смирнова</h3>
+<div class="code"><div class="code-head"><span class="lang">python</span></div><pre><code><span class="tok-k">import</span> numpy <span class="tok-k">as</span> np
+<span class="tok-k">from</span> scipy.stats <span class="tok-k">import</span> ks_2samp
+
+
+<span class="tok-k">def</span> <span class="tok-f">psi</span><span class="tok-p">(</span>expected<span class="tok-p">,</span> actual<span class="tok-p">,</span> bins<span class="tok-p">=</span><span class="tok-n">10</span><span class="tok-p">,</span> eps<span class="tok-p">=</span><span class="tok-n">1e-4</span><span class="tok-p">)</span><span class="tok-p">:</span>
+    <span class="tok-s">"""PSI между обучающей (expected) и боевой (actual) выборками одного признака."""</span>
+    edges <span class="tok-p">=</span> np<span class="tok-p">.</span>quantile<span class="tok-p">(</span>expected<span class="tok-p">,</span> np<span class="tok-p">.</span>linspace<span class="tok-p">(</span><span class="tok-n">0</span><span class="tok-p">,</span> <span class="tok-n">1</span><span class="tok-p">,</span> bins <span class="tok-p">+</span> <span class="tok-n">1</span><span class="tok-p">)</span><span class="tok-p">)</span>
+    edges<span class="tok-p">[</span><span class="tok-n">0</span><span class="tok-p">]</span><span class="tok-p">,</span> edges<span class="tok-p">[</span><span class="tok-p">-</span><span class="tok-n">1</span><span class="tok-p">]</span> <span class="tok-p">=</span> <span class="tok-p">-</span>np<span class="tok-p">.</span>inf<span class="tok-p">,</span> np<span class="tok-p">.</span>inf          <span class="tok-c"># хвосты ловят всё, что вне обучения</span>
+    e <span class="tok-p">=</span> np<span class="tok-p">.</span>histogram<span class="tok-p">(</span>expected<span class="tok-p">,</span> edges<span class="tok-p">)</span><span class="tok-p">[</span><span class="tok-n">0</span><span class="tok-p">]</span> <span class="tok-p">/</span> <span class="tok-f">len</span><span class="tok-p">(</span>expected<span class="tok-p">)</span>
+    a <span class="tok-p">=</span> np<span class="tok-p">.</span>histogram<span class="tok-p">(</span>actual<span class="tok-p">,</span> edges<span class="tok-p">)</span><span class="tok-p">[</span><span class="tok-n">0</span><span class="tok-p">]</span> <span class="tok-p">/</span> <span class="tok-f">len</span><span class="tok-p">(</span>actual<span class="tok-p">)</span>
+    e<span class="tok-p">,</span> a <span class="tok-p">=</span> np<span class="tok-p">.</span>clip<span class="tok-p">(</span>e<span class="tok-p">,</span> eps<span class="tok-p">,</span> <span class="tok-k">None</span><span class="tok-p">)</span><span class="tok-p">,</span> np<span class="tok-p">.</span>clip<span class="tok-p">(</span>a<span class="tok-p">,</span> eps<span class="tok-p">,</span> <span class="tok-k">None</span><span class="tok-p">)</span>
+    <span class="tok-k">return</span> <span class="tok-f">float</span><span class="tok-p">(</span>np<span class="tok-p">.</span>sum<span class="tok-p">(</span><span class="tok-p">(</span>a <span class="tok-p">-</span> e<span class="tok-p">)</span> <span class="tok-p">*</span> np<span class="tok-p">.</span>log<span class="tok-p">(</span>a <span class="tok-p">/</span> e<span class="tok-p">)</span><span class="tok-p">)</span><span class="tok-p">)</span>
+
+
+rng <span class="tok-p">=</span> np<span class="tok-p">.</span>random<span class="tok-p">.</span>default_rng<span class="tok-p">(</span><span class="tok-n">42</span><span class="tok-p">)</span>
+train <span class="tok-p">=</span> rng<span class="tok-p">.</span>normal<span class="tok-p">(</span><span class="tok-n">0.0</span><span class="tok-p">,</span> <span class="tok-n">1.0</span><span class="tok-p">,</span> <span class="tok-n">50_000</span><span class="tok-p">)</span>
+prod_same <span class="tok-p">=</span> rng<span class="tok-p">.</span>normal<span class="tok-p">(</span><span class="tok-n">0.0</span><span class="tok-p">,</span> <span class="tok-n">1.0</span><span class="tok-p">,</span> <span class="tok-n">5_000</span><span class="tok-p">)</span>
+prod_shift <span class="tok-p">=</span> rng<span class="tok-p">.</span>normal<span class="tok-p">(</span><span class="tok-n">0.5</span><span class="tok-p">,</span> <span class="tok-n">1.0</span><span class="tok-p">,</span> <span class="tok-n">5_000</span><span class="tok-p">)</span>
+
+<span class="tok-f">print</span><span class="tok-p">(</span><span class="tok-s">f</span><span class="tok-s">"</span><span class="tok-s">PSI без сдвига:  </span><span class="tok-s">{</span>psi<span class="tok-p">(</span>train<span class="tok-p">,</span> prod_same<span class="tok-p">)</span><span class="tok-s">:</span><span class="tok-s">.4f</span><span class="tok-s">}</span><span class="tok-s">"</span><span class="tok-p">)</span>
+<span class="tok-f">print</span><span class="tok-p">(</span><span class="tok-s">f</span><span class="tok-s">"</span><span class="tok-s">PSI сдвиг +0.5σ: </span><span class="tok-s">{</span>psi<span class="tok-p">(</span>train<span class="tok-p">,</span> prod_shift<span class="tok-p">)</span><span class="tok-s">:</span><span class="tok-s">.4f</span><span class="tok-s">}</span><span class="tok-s">"</span><span class="tok-p">)</span>
+<span class="tok-f">print</span><span class="tok-p">(</span><span class="tok-s">f</span><span class="tok-s">"</span><span class="tok-s">KS без сдвига:   p=</span><span class="tok-s">{</span>ks_2samp<span class="tok-p">(</span>train<span class="tok-p">,</span> prod_same<span class="tok-p">)</span><span class="tok-p">.</span>pvalue<span class="tok-s">:</span><span class="tok-s">.3f</span><span class="tok-s">}</span><span class="tok-s">"</span><span class="tok-p">)</span>
+<span class="tok-f">print</span><span class="tok-p">(</span><span class="tok-s">f</span><span class="tok-s">"</span><span class="tok-s">KS сдвиг +0.5σ:  p=</span><span class="tok-s">{</span>ks_2samp<span class="tok-p">(</span>train<span class="tok-p">,</span> prod_shift<span class="tok-p">)</span><span class="tok-p">.</span>pvalue<span class="tok-s">:</span><span class="tok-s">.2e</span><span class="tok-s">}</span><span class="tok-s">"</span><span class="tok-p">)</span>
+</code></pre></div>
+<p>Вывод (запуск с <code>numpy</code> и <code>scipy</code>):</p>
+<div class="code"><div class="code-head"><span class="lang">text</span></div><pre><code>PSI без сдвига:  0.0016
+PSI сдвиг +0.5σ: 0.2382
+KS без сдвига:   p=0.260
+KS сдвиг +0.5σ:  p=1.17e-161
+</code></pre></div>
+<p>Сдвиг среднего на полсигмы даёт PSI 0,24: почти «значительный». Корзины по квантилям обучающей выборки нужны, чтобы каждая содержала ненулевую долю; <code>eps</code> защищает от <code>log(0)</code>; крайние границы <span class="tex">\pm\infty</span> собирают значения вне обучающего диапазона.</p>
+<p><strong>Критерий Колмогорова — Смирнова</strong> сравнивает две эмпирические функции распределения по максимальному расстоянию между ними и возвращает p-value (<a href="/edufamcs-demo/handbook/math/intervaly-i-proverka-gipotez/" rel="noopener noreferrer nofollow">проверка гипотез</a>). Есть подвох: на больших выборках он «замечает» ничтожные сдвиги (p-value становится крошечным при практически неважной разнице), поэтому для решений удобнее мера размера эффекта — PSI или сам статистик KS — вместе с порогом, а p-value смотрят как второстепенный сигнал.</p>
+<h2 id="мониторинг-выходов">Мониторинг выходов</h2>
+<p>Тоже без меток: <strong>распределение score</strong> (сравнивайте с обучающим тем же PSI), <strong>доля положительных предсказаний</strong> при фиксированном пороге, доля предсказаний, близких к 0 или 1, среднее предсказание. Резкий сдвиг выходов при стабильных входах указывает на сломанный препроцессинг или модель; стабильные выходы при дрейфе входов — на то, что модель к нему устойчива, и тревога может быть ложной. Не любой дрейф вредит: он важен тогда, когда задевает признаки, на которые модель опирается.</p>
+<h2 id="качество-метки-приходят-поздно">Качество: метки приходят поздно</h2>
+<p>Настоящее качество (AUC, precision, NDCG) считается, когда пришли метки: клик — через секунды, возврат кредита — через месяцы. Что делать:</p>
+<ul>
+<li><strong>Считать по когорте с задержкой</strong>: качество за прошлую неделю по тем предсказаниям, для которых метка уже есть.</li>
+<li><strong>Прокси-метрики</strong>: ранние сигналы, коррелирующие с целью (добавление в корзину вместо покупки, ранняя просрочка вместо дефолта).</li>
+<li><strong>Выборочная разметка</strong>: ручная проверка небольшой случайной выборки предсказаний.</li>
+<li><strong>Разрыв офлайн и онлайн</strong>: офлайн-метрика на исторической выборке почти всегда оптимистичнее онлайн (утечки, другой период, петли обратной связи, отличие офлайн- и онлайн-признаков, train-serving skew). Сравнивайте их регулярно и ищите причину расхождения, а не подгоняйте порог.</li>
+<li><strong>По сегментам</strong>: средняя метрика скрывает деградацию в важной группе (новые пользователи, регион, устройство, категория товара). Считайте качество и распределения отдельно по сегментам.</li>
+</ul>
+<h2 id="катить-и-откатывать">Катить и откатывать</h2>
+<p>Новая версия модели выкатывается постепенно:</p>
+<ul>
+<li><strong>Shadow</strong>: новая модель получает копию трафика и пишет предсказания в таблицу, но пользователю отвечает старая. Безопасно сравнить распределения и качество на реальных данных.</li>
+<li><strong>Canary</strong>: небольшая доля трафика (1–5 %) идёт на новую модель, метрики сравниваются со старой; если норма, долю увеличивают.</li>
+<li><strong>Откат</strong>: прежняя версия остаётся развёрнутой, переключение — одной строкой конфигурации; в <code>predictions</code> каждая строка помечена <code>model_version</code>, так что видно, чья именно ошибка. Решение «хуже ли новая модель» по бизнес-метрике принимают через A/B-тест (<a href="/edufamcs-demo/handbook/recsys/prodakshen-i-ab-testy/" rel="noopener noreferrer nofollow">A/B-тесты в рекомендациях</a>), а не по одному графику.</li>
+</ul>
+<p><strong>Когда переобучать</strong>: по расписанию (простая и устойчивая политика), по сигналу (PSI ключевых признаков выше порога или падение метрики в когорте), по событию (смена источника, новый тип данных). Автоматический переобуч без проверки и отката опасен: деградировавшие данные превратят модель в ещё худшую. Воспроизводимость обучения — в статье <a href="/edufamcs-demo/handbook/python/vosproizvodimost-i-trekking/" rel="noopener noreferrer nofollow">Воспроизводимость и трекинг</a>.</p>
+<div class="callout md tip"><p class="callout-title">Начните с малого</p>
+<p>Три вещи, которые делают 80 % работы: логирование версии модели и признаков, ежедневный расчёт PSI для 5–10 важнейших признаков и score, алерт на долю пропусков. Фреймворки для мониторинга данных (Evidently и аналоги) удобны, но сначала нужны сами записи.</p>
+</div>
+<h2 id="ловушки">Ловушки</h2>
+<ul>
+<li>Мониторить только латентность и 5xx: сервис «здоров», модель мертва.</li>
+<li>Не записывать признаки и версию модели в момент предсказания: потом нечего сравнивать.</li>
+<li>Считать PSI с корзинами, построенными на боевых данных; корзины должны браться из обучающей выборки.</li>
+<li>Реагировать на любой дрейф: алерт-усталость, см. <a href="/edufamcs-demo/handbook/engineering/grafana/" rel="noopener noreferrer nofollow">Grafana</a>.</li>
+<li>Забыть, что метки приходят с задержкой, и сравнивать неполные когорты.</li>
+<li>Только средняя метрика без сегментов; сравнение офлайн- и онлайн-качества без выяснения разрыва.</li>
+<li>На собеседовании: чем data drift отличается от concept drift; формула PSI и пороги; как мониторить без меток; как выкатывать модель безопасно; когда переобучать; что такое train-serving skew.</li>
+</ul>
+<h2 id="проверь-себя">Проверь себя</h2>
+<details class="callout md details"><summary>Чем data drift отличается от concept drift и что из них можно обнаружить без меток?</summary>
+<p>Data drift — изменение <span class="tex">P(x)</span>, concept drift — изменение <span class="tex">P(y\mid x)</span>. Первый видно по входам без меток; второй проявляется только через качество, то есть при наличии меток или прокси.</p>
+</details>
+<details class="callout md details"><summary>Посчитайте PSI для $e=(0{,}5;\,0{,}5)$ и $a=(0{,}3;\,0{,}7)$.</summary>
+<p><span class="tex">(0{,}3-0{,}5)\ln0{,}6+(0{,}7-0{,}5)\ln1{,}4=0{,}1022+0{,}0673\approx0{,}170</span>: умеренный сдвиг.</p>
+</details>
+<details class="callout md details"><summary>Что логировать с каждым предсказанием и зачем?</summary>
+<p>Версию модели, время, признаки (или их агрегаты/хэш), score, идентификатор запроса и позже метку: это позволяет считать качество, находить причину ошибки и переобучать на реальных данных.</p>
+</details>
+<details class="callout md details"><summary>Чем shadow-выкатка отличается от canary?</summary>
+<p>При shadow пользователь видит ответ старой модели, новая работает параллельно на копии трафика; при canary часть пользователей реально получает ответы новой модели.</p>
+</details>
+<details class="callout md details"><summary>Почему онлайн-качество обычно ниже офлайн?</summary>
+<p>Из-за утечки и оптимистичной валидации, различий в периоде данных, расхождения офлайн- и онлайн-признаков (train-serving skew), петель обратной связи и дрейфа.</p>
+</details>
+<h2 id="что-почитать">Что почитать</h2>
+<ul>
+<li>Evidently, документация по дрейфу данных: https://docs.evidentlyai.com/</li>
+<li>Google, Rules of Machine Learning: https://developers.google.com/machine-learning/guides/rules-of-ml</li>
+<li>Sculley D. et al. <em>Hidden Technical Debt in Machine Learning Systems</em>, NeurIPS 2015: https://papers.nips.cc/paper/2015/hash/86df7dcfd896fcaf2674f757a2463eba-Abstract.html</li>
+<li>Rabanser S. et al. <em>Failing Loudly: An Empirical Study of Methods for Detecting Dataset Shift</em>, 2018: https://arxiv.org/abs/1810.11953</li>
+<li>scipy.stats.ks_2samp: https://docs.scipy.org/doc/scipy/reference/generated/scipy.stats.ks_2samp.html</li>
+<li>Huyen C. <em>Designing Machine Learning Systems</em>, O'Reilly, 2022 (глава про мониторинг и дрейф).</li>
+</ul>
+</div>
+      
+
+      
+
+      
+      <nav class="pager" aria-label="Соседние статьи">
+        <a href="/edufamcs-demo/handbook/engineering/grafana/"><span><svg class="ico sm" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-arrow-left"/></svg>Назад</span>Grafana: дашборды и алерты</a>
+        
+      </nav>
+      
+    </article>
+
+    <aside class="hb-toc" aria-label="На этой странице">
+      <a class="l2" href="#почему-модель-деградирует">Почему модель деградирует</a><a class="l2" href="#что-логировать-с-каждым-предсказанием">Что логировать с каждым предсказанием</a><a class="l2" href="#мониторинг-входов">Мониторинг входов</a><a class="l3" href="#psi">PSI</a><a class="l3" href="#код-psi-и-тест-колмогорова-смирнова">Код: PSI и тест Колмогорова — Смирнова</a><a class="l2" href="#мониторинг-выходов">Мониторинг выходов</a><a class="l2" href="#качество-метки-приходят-поздно">Качество: метки приходят поздно</a><a class="l2" href="#катить-и-откатывать">Катить и откатывать</a><a class="l2" href="#ловушки">Ловушки</a><a class="l2" href="#проверь-себя">Проверь себя</a><a class="l2" href="#что-почитать">Что почитать</a>
+    </aside>
+  </div>
+</div>
+
+
+</main>
+
+<footer class="ftr" data-theme="dark">
+  <svg class="sym fern" viewBox="0 0 40.5 65.02" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#fern"/></svg>
+  <div class="container">
+    <div class="ftr-row">
+      <a href="/edufamcs-demo/" aria-label="EDU FAMCS — главная"><img src="/edufamcs-demo/static/brand/logo/logo-edu-dark.svg" alt="EDU FAMCS" width="196" height="40"></a>
+      <ul class="ftr-links">
+        <li><a href="/edufamcs-demo/#courses">Курсы</a></li>
+        <li><a href="/edufamcs-demo/ml/">Машинное обучение</a></li>
+        <li><a href="/edufamcs-demo/handbook/">Хендбук</a></li>
+        <li><a href="/edufamcs-demo/news/">Новости</a></li>
+        <li><a href="/edufamcs-demo/people/">Авторы</a></li>
+        <li><a href="/edufamcs-demo/about/">О&nbsp;нас</a></li>
+        <li><a href="/edufamcs-demo/propose/">Предложить или исправить</a></li>
+        <li><a href="/edufamcs-demo/privacy/">Конфиденциальность</a></li>
+      </ul>
+    </div>
+    <div class="ftr-big" aria-hidden="true">EDU<span class="d">·</span>FAMCS</div>
+    <p class="ftr-copy">© 2026 EDU FAMCS · Минск</p>
+  </div>
+</footer>
+
+<div class="toasts-region" aria-live="polite" id="toasts">
+
+</div>
+
+</body>
+</html>

@@ -1,0 +1,248 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Практика: иерархии, прерывистый спрос, аномалии и продакшен · EDU FAMCS</title>
+<meta name="description" content="Практика: иерархии, прерывистый спрос, аномалии и продакшен — Временные ряды. Хендбук ML-курса ФПМИ.">
+<meta name="theme-color" content="#060A16">
+<meta name="robots" content="noindex, nofollow">
+<meta name="htmx-config" content='{"allowEval":false,"includeIndicatorStyles":false,"historyCacheSize":0,"selfRequestsOnly":true}'>
+<meta name="katex-js" content="/edufamcs-demo/static/vendor/katex/katex.min.js">
+<meta name="katex-css" content="/edufamcs-demo/static/vendor/katex/katex.min.css">
+<link rel="icon" href="/edufamcs-demo/static/brand/logo/favicon-16.svg" type="image/svg+xml" sizes="16x16">
+<link rel="icon" href="/edufamcs-demo/static/brand/logo/favicon.svg" type="image/svg+xml" sizes="any">
+<link rel="preload" href="/edufamcs-demo/static/brand/fonts/manrope-cyrillic-400.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/edufamcs-demo/static/brand/fonts/unbounded-cyrillic-800.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="/edufamcs-demo/static/brand/fonts.css">
+<link rel="stylesheet" href="/edufamcs-demo/static/brand/tokens.css">
+<link rel="stylesheet" href="/edufamcs-demo/static/brand/components.css">
+<link rel="stylesheet" href="/edufamcs-demo/static/css/site.css">
+<link rel="stylesheet" href="/edufamcs-demo/static/css/hub.css">
+<link rel="stylesheet" href="/edufamcs-demo/static/css/about.css">
+<link rel="stylesheet" href="/edufamcs-demo/static/handbook/handbook.css">
+<script src="/edufamcs-demo/static/js/theme.js"></script>
+<script src="/edufamcs-demo/static/vendor/htmx/htmx.min.js" defer></script>
+<script src="/edufamcs-demo/static/vendor/alpine/alpine-csp.min.js" defer></script>
+<script src="/edufamcs-demo/static/js/site.js" defer></script>
+<script src="/edufamcs-demo/static/handbook/handbook.js" defer></script>
+</head>
+<body class="" hx-headers='{"X-CSRFToken": "T8fiLHlhQzxJxonvoW544YZaIGNY8Lgyvl4f1JU8RmLiIHCXnpj1MRR8aPUWSvff"}'>
+<a class="skip" href="#main">К содержанию</a>
+<div class="demo-bar" role="note">Демо-версия для отзывов: вход, запись на курсы и формы здесь не работают.</div>
+
+<header class="hdr">
+  <div class="container">
+    <a class="brand" href="/edufamcs-demo/" aria-label="EDU FAMCS — главная">
+      <span class="full"><img class="only-light" src="/edufamcs-demo/static/brand/logo/logo-edu-light.svg" alt="EDU FAMCS" width="196" height="40"><img class="only-dark" src="/edufamcs-demo/static/brand/logo/logo-edu-dark.svg" alt="EDU FAMCS" width="196" height="40"></span>
+      <span class="short"><img class="only-light" src="/edufamcs-demo/static/brand/logo/logo-edu-light.svg" alt="EDU FAMCS" height="30"><img class="only-dark" src="/edufamcs-demo/static/brand/logo/logo-edu-dark.svg" alt="EDU FAMCS" height="30"></span>
+    </a>
+    <nav class="nav" id="main-nav" aria-label="Основная навигация">
+      <a href="/edufamcs-demo/#courses">Курсы</a>
+      <a href="/edufamcs-demo/ml/" >Машинное обучение</a>
+      
+      <a href="/edufamcs-demo/handbook/" aria-current="page">Хендбук</a>
+      <a href="/edufamcs-demo/news/" >Новости</a>
+      <a href="/edufamcs-demo/people/" >Авторы</a>
+      <a href="/edufamcs-demo/about/" >О&nbsp;нас</a>
+    </nav>
+    <div class="hdr-actions">
+      
+      <a class="btn btn-outline btn-login" href="/edufamcs-demo/accounts/login/?next=/handbook/ts/praktika-prognozirovaniya/">Войти</a>
+      
+      <button class="icon-btn menu-btn" type="button" aria-label="Меню" aria-expanded="false" aria-controls="main-nav"><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-menu"/></svg></button>
+    </div>
+  </div>
+</header>
+
+<main id="main">
+
+
+
+<div class="container hb-page s-ts">
+  <div class="hb-readbar" aria-hidden="true"><i></i></div>
+  <div class="hb">
+    <aside class="hb-nav" aria-label="Статьи раздела">
+      
+<form class="hb-search" action="/edufamcs-demo/handbook/search/" method="get" role="search">
+  <svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-search"/></svg>
+  <input class="input" type="search" name="q" value="" placeholder="Поиск по хендбуку" aria-label="Поиск по хендбуку" autocomplete="off" maxlength="120"
+    hx-get="/edufamcs-demo/handbook/search/" hx-trigger="input changed delay:250ms, search" hx-target="#hb-nav-results" hx-sync="this:replace">
+</form>
+
+      <div id="hb-nav-results" class="hb-nav-results" aria-live="polite"></div>
+      <a class="grp" href="/edufamcs-demo/handbook/ts/">ML-подходы</a>
+      
+      <a class="" href="/edufamcs-demo/handbook/ts/busting-na-lagah/">Бустинг на лагах и признаки для рядов</a>
+      
+      <a class="" href="/edufamcs-demo/handbook/ts/nejroseti-dlya-ryadov/">Нейросети и фундаментальные модели для рядов</a>
+      
+      <a class="cur" href="/edufamcs-demo/handbook/ts/praktika-prognozirovaniya/" aria-current="page">Практика: иерархии, прерывистый спрос, аномалии и продакшен</a>
+      
+    </aside>
+
+    <article class="hb-main">
+      <nav class="crumbs" aria-label="Навигация"><a href="/edufamcs-demo/handbook/">Хендбук</a><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-chev"/></svg><a href="/edufamcs-demo/handbook/ts/">Временные ряды</a></nav>
+      <h1 class="h1">Практика: иерархии, прерывистый спрос, аномалии и продакшен</h1>
+      <div class="hb-meta">
+        
+        
+        <span><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-clock"/></svg>10&nbsp;мин</span>
+        <span class="hb-authors"><span class="avatar sm" title="Артем Лебедевич">АЛ</span>Артем Лебедевич</span>
+        <span><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-edit"/></svg>10 ноября 2026</span>
+        
+        
+      </div>
+
+      
+      <details class="hb-mtoc">
+        <summary><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-list"/></svg>Содержание<svg class="ico sm" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-chev-down"/></svg></summary>
+        <a class="l2" href="#иерархии-и-согласование">Иерархии и согласование</a><a class="l2" href="#прерывистый-спрос">Прерывистый спрос</a><a class="l2" href="#холодный-старт-акции-цензурирование">Холодный старт, акции, цензурирование</a><a class="l2" href="#аномалии-в-рядах">Аномалии в рядах</a><a class="l2" href="#продакшен">Продакшен</a><a class="l2" href="#интервью-кейс-спрогнозируйте-спрос-на-товар">Интервью-кейс: «спрогнозируйте спрос на товар»</a><a class="l2" href="#код">Код</a><a class="l2" href="#ловушки">Ловушки</a><a class="l2" href="#проверь-себя">Проверь себя</a><a class="l2" href="#что-почитать">Что почитать</a>
+      </details>
+      
+
+      <div class="prose"><p>Реальные задачи прогнозирования редко сводятся к «одна модель на один гладкий ряд»: ряды вложены друг в друга, спрос содержит нули, в истории есть сбои и акции, а прогноз нужен не как число, а как основание для решения о закупке. Статья собирает типичные приёмы и заканчивается разбором интервью-кейса «спрогнозируйте спрос на товар».</p>
+<h2 id="иерархии-и-согласование">Иерархии и согласование</h2>
+<p>Продажи агрегируются: товар → категория → магазин → сеть. Если прогнозировать каждый уровень отдельной моделью, суммы расходятся: прогноз сети не равен сумме прогнозов магазинов, а планировщикам нужны согласованные числа. Формально <span class="tex">y=S\,b</span>, где <span class="tex">b</span> — нижний уровень, <span class="tex">S</span> — матрица суммирования (0/1). Прогнозы <span class="tex">\hat y</span> согласуются проекцией <span class="tex">\tilde y=S P\hat y</span>.</p>
+<ul>
+<li><strong>Bottom-up:</strong> <span class="tex">P</span> берёт только нижний уровень; сумма точна, но нижние ряды шумные.</li>
+<li><strong>Top-down:</strong> прогнозируем верх и делим по долям; гладко, но теряет локальную динамику.</li>
+<li><strong>MinT</strong> (Wickramasuriya, Athanasopoulos, Hyndman, 2019): <span class="tex">P=(S^\top W^{-1}S)^{-1}S^\top W^{-1}</span>, где <span class="tex">W</span> — ковариация ошибок базовых прогнозов; решение несмещено при несмещённых базовых прогнозах и минимизирует суммарную дисперсию ошибок согласованных прогнозов. С <span class="tex">W=I</span> получается простая проекция МНК. На практике <span class="tex">W</span> оценивают с усадкой (диагональная или shrinkage).</li>
+</ul>
+<p>Пример: <span class="tex">y=(\text{всего},A,B)</span>, базовые прогнозы <span class="tex">(100,40,50)</span> не складываются. Bottom-up даёт <span class="tex">(90,40,50)</span>; МНК-проекция — <span class="tex">(96{,}7;\,43{,}3;\,53{,}3)</span>: рассогласование 10 раздаётся поровну между уровнями (результат расчёта).</p>
+<h2 id="прерывистый-спрос">Прерывистый спрос</h2>
+<p>Если в день продаётся 0–5 штук редкого товара, большинство значений нули. MAPE на таких данных неопределён, а «прогнозировать ноль» минимизирует MAE, так что медианные метрики бессмысленны. Нужно прогнозировать <strong>среднюю интенсивность</strong> (для запасов) и/или квантили.</p>
+<p><strong>Метод Кростона.</strong> Раздельно сглаживается размер ненулевого спроса <span class="tex">z</span> и интервал между ненулевыми продажами <span class="tex">p</span> (в периодах), обновление — <em>только когда спрос ненулевой</em>:
+<span class="tex tex-block">z\leftarrow\alpha q+(1-\alpha)z,\qquad p\leftarrow\alpha\,\tau+(1-\alpha)p,\qquad \hat y=\frac{z}{p},</span>
+где <span class="tex">q</span> — новый размер продажи, <span class="tex">\tau</span> — число периодов с прошлой ненулевой продажи. В нулевые периоды ничего не меняется. Пример: спрос 0,0,3,0,0,0,5,0,2,0,0,4, <span class="tex">\alpha=0{,}1</span>, инициализация по первой продаже (<span class="tex">z=3</span>, <span class="tex">p=3</span>). После продаж 5, 2, 4 получаем <span class="tex">z=3{,}172</span>, <span class="tex">p=2{,}991</span>, прогноз <span class="tex">1{,}06</span> ед. в период (среднее по ряду 1,17; расчёт). Известно, что оценка Кростона смещена вверх; поправка Синтетоса–Бойлана (SBA) умножает её на <span class="tex">1-\alpha/2</span>.</p>
+<p>Для бустинга: потери <strong>Poisson</strong>, <strong>Tweedie</strong> (степень <span class="tex">1&lt;\rho&lt;2</span> — смесь пуассоновского числа продаж и положительных размеров) моделируют среднее и хорошо работают с нулями (см. <a href="/edufamcs-demo/handbook/ts/busting-na-lagah/" rel="noopener noreferrer nofollow">бустинг на лагах</a>). Метрики: MASE по ряду со стабильным знаменателем, WAPE, а для решений — квантили и pinball-потеря.</p>
+<h2 id="холодный-старт-акции-цензурирование">Холодный старт, акции, цензурирование</h2>
+<ul>
+<li><strong>Новые ряды:</strong> глобальная модель со статикой (категория, цена, бренд), аналогии с похожими товарами, наивный прогноз «средний по категории» до накопления истории.</li>
+<li><strong>Акции и праздники</strong> — ковариаты, известные в будущем: скидка, тип акции, дни до праздника. Следите, чтобы акции в истории не были единственным источником сезонности.</li>
+<li><strong>Цензурирование:</strong> при дефиците продажи <span class="tex">\le</span> остатков — продали всё, что было, а не спрос. Данные о дефиците нужно маркировать, иначе модель недооценивает спрос; варианты — исключить периоды из обучения, добавить признак наличия, использовать модели цензурированного спроса.</li>
+</ul>
+<h2 id="аномалии-в-рядах">Аномалии в рядах</h2>
+<p>Остаточный подход: разложить ряд на тренд, сезонность и остаток (<strong>STL</strong>: тренд и сезонность оцениваются локальной регрессией, <code>robust=True</code> понижает вес выбросов) и пометить точки с большим остатком. Порог должен быть <strong>робастным</strong>: среднее и std чувствительны к самим выбросам, поэтому используют медиану и MAD: <span class="tex">z_t=(r_t-\text{med}(r))/(1{,}4826\,\text{MAD}(r))</span>, флаг при <span class="tex">|z_t|&gt;3{,}5</span>. Подробнее о детекции — в <a href="/edufamcs-demo/handbook/classic/poisk-anomalij/" rel="noopener noreferrer nofollow">статье про поиск аномалий</a>.</p>
+<p>Что делать с аномалиями в обучении: исправить (заменить прогнозом/интерполяцией), пометить признаком (если событие повторяется: акция, сбой), исключить из лосса — но не молча удалять, не выяснив причину. Разовый сбой датчика и новый уровень спроса — разные случаи: в первом выброс убирают, во втором модель должна адаптироваться.</p>
+<p><strong>Смена режима.</strong> Точки смены ряда (change points) и дрейф понятий выявляют по росту ошибки прогноза и тестам на сдвиг распределения; реакция — переобучение на свежем окне, увеличение веса недавних данных, откат к простой модели.</p>
+<h2 id="продакшен">Продакшен</h2>
+<ul>
+<li><strong>Периодичность переобучения</strong> определяется скоростью дрейфа и стоимостью: для недельных данных — недельно или по триггеру деградации; ставьте эксперимент «переобучать каждые <span class="tex">k</span> фолдов» в бэктесте.</li>
+<li><strong>Бэктест как мониторинг:</strong> каждую неделю считайте ошибку прогноза недельной давности и сравнивайте с бэктестом; рост ошибки — сигнал дрейфа (см. <a href="/edufamcs-demo/handbook/engineering/monitoring-modelej/" rel="noopener noreferrer nofollow">мониторинг моделей</a>).</li>
+<li><strong>Forecast Value Added (FVA):</strong> разность ошибки наивного прогноза и вашей модели (и ручных правок аналитиков): если шаг цепочки не снижает ошибку относительно предыдущего, он не добавляет ценности.</li>
+<li><strong>Неопределённость для решений.</strong> Страховой запас берётся из квантиля спроса за срок поставки: <span class="tex">\text{SS}=q_\tau-\mu</span>. Иллюстративный пример: спрос за срок поставки <span class="tex">\sim\mathcal N(100,20^2)</span>; <span class="tex">q_{0{,}9}=100+1{,}28\cdot20=125{,}6</span>, запас 25,6 ед.; <span class="tex">q_{0{,}95}=132{,}9</span>, запас 32,9. Выбор <span class="tex">\tau</span> — это баланс стоимости дефицита и избытка (критическое отношение <span class="tex">c_u/(c_u+c_o)</span>).</li>
+</ul>
+<h2 id="интервью-кейс-спрогнозируйте-спрос-на-товар">Интервью-кейс: «спрогнозируйте спрос на товар»</h2>
+<ol>
+<li><strong>Уточнить решение:</strong> для чего прогноз (закупка, цена, склад), горизонт, периодичность, гранулярность (SKU×магазин×день), допустимая ошибка и цена недо- и перезапаса.</li>
+<li><strong>Данные:</strong> история продаж, остатки (цензурирование), цены, акции, календарь, каталог; проверка пропусков, возвратов, аномалий.</li>
+<li><strong>Бейзлайн:</strong> сезонный наивный и скользящие средние; метрика — WAPE/MASE и квантильная для запаса.</li>
+<li><strong>Модель:</strong> глобальный бустинг на лагах со сдвинутыми окнами и ковариатами; Poisson/Tweedie для редких товаров; иерархическое согласование.</li>
+<li><strong>Валидация:</strong> rolling-origin на несколько сезонов, включая пик; ошибка по сегментам (быстрые/медленные, новые).</li>
+<li><strong>Продакшен:</strong> расписание переобучения, мониторинг, FVA, откат к бейзлайну.</li>
+<li><strong>Риски:</strong> дрейф, акции конкурентов, дефицит, новые товары.</li>
+</ol>
+<h2 id="код">Код</h2>
+<p>STL-разложение и робастные флаги на синтетическом ряде (364 точки, период 7, тренд, шум <span class="tex">\sigma=3</span>) с 10 внесёнными аномалиями (<span class="tex">\pm25</span>–45).</p>
+<div class="code"><div class="code-head"><span class="lang">python</span></div><pre><code><span class="tok-k">import</span> numpy <span class="tok-k">as</span> np
+<span class="tok-k">from</span> statsmodels.tsa.seasonal <span class="tok-k">import</span> STL
+
+rng <span class="tok-p">=</span> np<span class="tok-p">.</span>random<span class="tok-p">.</span>default_rng<span class="tok-p">(</span><span class="tok-n">3</span><span class="tok-p">)</span><span class="tok-p">;</span> n <span class="tok-p">=</span> <span class="tok-n">364</span><span class="tok-p">;</span> t <span class="tok-p">=</span> np<span class="tok-p">.</span>arange<span class="tok-p">(</span>n<span class="tok-p">)</span>
+y <span class="tok-p">=</span> <span class="tok-n">100</span> <span class="tok-p">+</span> <span class="tok-n">0.1</span><span class="tok-p">*</span>t <span class="tok-p">+</span> <span class="tok-n">15</span><span class="tok-p">*</span>np<span class="tok-p">.</span>sin<span class="tok-p">(</span><span class="tok-n">2</span><span class="tok-p">*</span>np<span class="tok-p">.</span>pi<span class="tok-p">*</span>t<span class="tok-p">/</span><span class="tok-n">7</span><span class="tok-p">)</span> <span class="tok-p">+</span> rng<span class="tok-p">.</span>normal<span class="tok-p">(</span><span class="tok-n">0</span><span class="tok-p">,</span> <span class="tok-n">3</span><span class="tok-p">,</span> n<span class="tok-p">)</span>
+idx <span class="tok-p">=</span> rng<span class="tok-p">.</span>choice<span class="tok-p">(</span>n<span class="tok-p">,</span> <span class="tok-n">10</span><span class="tok-p">,</span> replace<span class="tok-p">=</span><span class="tok-k">False</span><span class="tok-p">)</span><span class="tok-p">;</span> sign <span class="tok-p">=</span> rng<span class="tok-p">.</span>choice<span class="tok-p">(</span><span class="tok-p">[</span><span class="tok-p">-</span><span class="tok-n">1</span><span class="tok-p">,</span> <span class="tok-n">1</span><span class="tok-p">]</span><span class="tok-p">,</span> <span class="tok-n">10</span><span class="tok-p">)</span>
+y<span class="tok-p">[</span>idx<span class="tok-p">]</span> <span class="tok-p">+</span><span class="tok-p">=</span> sign <span class="tok-p">*</span> rng<span class="tok-p">.</span>uniform<span class="tok-p">(</span><span class="tok-n">25</span><span class="tok-p">,</span> <span class="tok-n">45</span><span class="tok-p">,</span> <span class="tok-n">10</span><span class="tok-p">)</span>
+
+res <span class="tok-p">=</span> STL<span class="tok-p">(</span>y<span class="tok-p">,</span> period<span class="tok-p">=</span><span class="tok-n">7</span><span class="tok-p">,</span> seasonal<span class="tok-p">=</span><span class="tok-n">21</span><span class="tok-p">,</span> trend<span class="tok-p">=</span><span class="tok-n">61</span><span class="tok-p">,</span> robust<span class="tok-p">=</span><span class="tok-k">True</span><span class="tok-p">)</span><span class="tok-p">.</span>fit<span class="tok-p">(</span><span class="tok-p">)</span><span class="tok-p">.</span>resid
+med <span class="tok-p">=</span> np<span class="tok-p">.</span>median<span class="tok-p">(</span>res<span class="tok-p">)</span><span class="tok-p">;</span> sigma <span class="tok-p">=</span> <span class="tok-n">1.4826</span> <span class="tok-p">*</span> np<span class="tok-p">.</span>median<span class="tok-p">(</span>np<span class="tok-p">.</span>abs<span class="tok-p">(</span>res <span class="tok-p">-</span> med<span class="tok-p">)</span><span class="tok-p">)</span>
+flag <span class="tok-p">=</span> np<span class="tok-p">.</span>where<span class="tok-p">(</span>np<span class="tok-p">.</span>abs<span class="tok-p">(</span><span class="tok-p">(</span>res <span class="tok-p">-</span> med<span class="tok-p">)</span><span class="tok-p">/</span>sigma<span class="tok-p">)</span> <span class="tok-p">&gt;</span> <span class="tok-n">3.5</span><span class="tok-p">)</span><span class="tok-p">[</span><span class="tok-n">0</span><span class="tok-p">]</span>
+tp <span class="tok-p">=</span> <span class="tok-f">len</span><span class="tok-p">(</span><span class="tok-f">set</span><span class="tok-p">(</span>flag<span class="tok-p">)</span> <span class="tok-p">&amp;</span> <span class="tok-f">set</span><span class="tok-p">(</span>idx<span class="tok-p">)</span><span class="tok-p">)</span>
+<span class="tok-f">print</span><span class="tok-p">(</span><span class="tok-s">"</span><span class="tok-s">внесено</span><span class="tok-s">"</span><span class="tok-p">,</span> <span class="tok-f">len</span><span class="tok-p">(</span>idx<span class="tok-p">)</span><span class="tok-p">,</span> <span class="tok-s">"</span><span class="tok-s">помечено</span><span class="tok-s">"</span><span class="tok-p">,</span> <span class="tok-f">len</span><span class="tok-p">(</span>flag<span class="tok-p">)</span><span class="tok-p">,</span> <span class="tok-s">"</span><span class="tok-s">найдено</span><span class="tok-s">"</span><span class="tok-p">,</span> tp<span class="tok-p">,</span>
+      <span class="tok-s">"</span><span class="tok-s">ложных</span><span class="tok-s">"</span><span class="tok-p">,</span> <span class="tok-f">len</span><span class="tok-p">(</span>flag<span class="tok-p">)</span><span class="tok-p">-</span>tp<span class="tok-p">,</span> <span class="tok-s">"</span><span class="tok-s">sigma_MAD </span><span class="tok-s">%.2f</span><span class="tok-s"> std </span><span class="tok-s">%.2f</span><span class="tok-s">"</span> <span class="tok-p">%</span> <span class="tok-p">(</span>sigma<span class="tok-p">,</span> res<span class="tok-p">.</span>std<span class="tok-p">(</span><span class="tok-p">)</span><span class="tok-p">)</span><span class="tok-p">)</span>
+</code></pre></div>
+<p>Вывод запуска:</p>
+<div class="code"><div class="code-head"><span class="lang">code</span></div><pre><code>внесено 10 помечено 11 найдено 10 ложных 1 sigma_MAD 2.66 std 6.62
+</code></pre></div>
+<p>Найдены все 10 аномалий при одном ложном срабатывании. Робастная оценка шума (2,66) близка к истинным 3, а обычное std остатка (6,62) раздуто самими выбросами. В моём запуске правило «3 std» по остаткам STL без робастности на этом лёгком примере тоже нашло 10 из 10 — преимущество робастности проявляется при более мелких аномалиях и их доле побольше. Урок про настройку: с параметрами STL по умолчанию (<code>trend</code> около 15 для периода 7) тренд подстраивался под шум, MAD падал до 1,42, и порог 3,5 помечал 42 точки, 32 из них ложные; задавайте <code>trend</code> и <code>seasonal</code> явно.</p>
+<h2 id="ловушки">Ловушки</h2>
+<ul>
+<li>Согласование без проверки на отрицательные значения: проекция может дать отрицательный спрос.</li>
+<li>Прогнозирование «спроса» по продажам при дефиците.</li>
+<li>Удаление «аномалий», которые на самом деле акции.</li>
+<li>Метрика MAPE для прерывистого спроса.</li>
+<li>На собеседовании: зачем согласовывать иерархию и чем MinT лучше bottom-up; как работает Кростон и почему он смещён; почему MAPE бесполезна при нулях; как посчитать страховой запас по квантилю; как организовать переобучение и мониторинг.</li>
+</ul>
+<h2 id="проверь-себя">Проверь себя</h2>
+<details class="callout md details"><summary>Почему прогнозы иерархии нужно согласовывать?</summary>
+<p>Раздельные прогнозы уровней не складываются, а решения (закупки, планы) принимаются на разных уровнях и должны быть совместимы. Согласование проецирует базовые прогнозы на пространство, где сумма нижних равна верхнему.</p>
+</details>
+<details class="callout md details"><summary>Как работает метод Кростона?</summary>
+<p>Раздельно сглаживается размер ненулевых продаж <span class="tex">z</span> и интервал между ними <span class="tex">p</span> (только в периоды с продажей); прогноз <span class="tex">z/p</span> — средняя интенсивность спроса за период.</p>
+</details>
+<details class="callout md details"><summary>Почему MAPE не подходит для прерывистого спроса?</summary>
+<p>При нулевом факте она не определена, а при малых значениях — взрывается; большинство периодов — нули, поэтому метрика бесполезна. Используют MASE, WAPE и квантильные метрики.</p>
+</details>
+<details class="callout md details"><summary>Почему для порога аномалий берут медиану и MAD, а не среднее и std?</summary>
+<p>Выбросы сильно искажают среднее и std, и порог становится слишком мягким. Медиана и MAD устойчивы: в примере σ по MAD равно 2,66, а std 6,62.</p>
+</details>
+<details class="callout md details"><summary>Как из прогноза получить страховой запас?</summary>
+<p>Берётся квантиль <span class="tex">\tau</span> распределения спроса за срок поставки; запас равен квантилю минус среднее, уровень <span class="tex">\tau</span> выбирают из соотношения стоимости дефицита и избытка.</p>
+</details>
+<h2 id="что-почитать">Что почитать</h2>
+<ul>
+<li>Wickramasuriya S., Athanasopoulos G., Hyndman R. <em>Optimal Forecast Reconciliation for Hierarchical and Grouped Time Series Through Trace Minimization</em>, JASA, 2019.</li>
+<li>Croston J. <em>Forecasting and stock control for intermittent demands</em>, Operational Research Quarterly, 1972.</li>
+<li>Syntetos A., Boylan J. <em>The accuracy of intermittent demand estimates</em>, International Journal of Forecasting, 2005.</li>
+<li>Cleveland R. et al. <em>STL: A Seasonal-Trend Decomposition Procedure Based on Loess</em>, Journal of Official Statistics, 1990.</li>
+<li>Makridakis S., Spiliotis E., Assimakopoulos V. <em>M5 accuracy competition: Results, findings, and conclusions</em>, International Journal of Forecasting, 2022.</li>
+<li>Hyndman R., Athanasopoulos G. <em>Forecasting: Principles and Practice</em>, 3rd ed., главы про иерархии и сезонное разложение: https://otexts.com/fpp3/</li>
+</ul>
+</div>
+      
+
+      
+
+      
+      <nav class="pager" aria-label="Соседние статьи">
+        <a href="/edufamcs-demo/handbook/ts/nejroseti-dlya-ryadov/"><span><svg class="ico sm" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-arrow-left"/></svg>Назад</span>Нейросети и фундаментальные модели для рядов</a>
+        
+      </nav>
+      
+    </article>
+
+    <aside class="hb-toc" aria-label="На этой странице">
+      <a class="l2" href="#иерархии-и-согласование">Иерархии и согласование</a><a class="l2" href="#прерывистый-спрос">Прерывистый спрос</a><a class="l2" href="#холодный-старт-акции-цензурирование">Холодный старт, акции, цензурирование</a><a class="l2" href="#аномалии-в-рядах">Аномалии в рядах</a><a class="l2" href="#продакшен">Продакшен</a><a class="l2" href="#интервью-кейс-спрогнозируйте-спрос-на-товар">Интервью-кейс: «спрогнозируйте спрос на товар»</a><a class="l2" href="#код">Код</a><a class="l2" href="#ловушки">Ловушки</a><a class="l2" href="#проверь-себя">Проверь себя</a><a class="l2" href="#что-почитать">Что почитать</a>
+    </aside>
+  </div>
+</div>
+
+
+</main>
+
+<footer class="ftr" data-theme="dark">
+  <svg class="sym fern" viewBox="0 0 40.5 65.02" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#fern"/></svg>
+  <div class="container">
+    <div class="ftr-row">
+      <a href="/edufamcs-demo/" aria-label="EDU FAMCS — главная"><img src="/edufamcs-demo/static/brand/logo/logo-edu-dark.svg" alt="EDU FAMCS" width="196" height="40"></a>
+      <ul class="ftr-links">
+        <li><a href="/edufamcs-demo/#courses">Курсы</a></li>
+        <li><a href="/edufamcs-demo/ml/">Машинное обучение</a></li>
+        <li><a href="/edufamcs-demo/handbook/">Хендбук</a></li>
+        <li><a href="/edufamcs-demo/news/">Новости</a></li>
+        <li><a href="/edufamcs-demo/people/">Авторы</a></li>
+        <li><a href="/edufamcs-demo/about/">О&nbsp;нас</a></li>
+        <li><a href="/edufamcs-demo/propose/">Предложить или исправить</a></li>
+        <li><a href="/edufamcs-demo/privacy/">Конфиденциальность</a></li>
+      </ul>
+    </div>
+    <div class="ftr-big" aria-hidden="true">EDU<span class="d">·</span>FAMCS</div>
+    <p class="ftr-copy">© 2026 EDU FAMCS · Минск</p>
+  </div>
+</footer>
+
+<div class="toasts-region" aria-live="polite" id="toasts">
+
+</div>
+
+</body>
+</html>

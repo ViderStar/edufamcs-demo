@@ -27,7 +27,7 @@
 <script src="/edufamcs-demo/static/js/site.js" defer></script>
 <script src="/edufamcs-demo/static/handbook/handbook.js" defer></script>
 </head>
-<body class="" hx-headers='{"X-CSRFToken": "8HVnAAW6eY3Kk7ZcHa3xcfBeqQgZbxqJUNWKuneNpbjYZGVsUzWCtHJzWdSegibI"}'>
+<body class="" hx-headers='{"X-CSRFToken": "tf3OPUsnOhfai1K1rmK83vwhQOh8VgVN5sSL5W1eP4tJtkZtqPY5LoofiXo6F0Uu"}'>
 <a class="skip" href="#main">К содержанию</a>
 <div class="demo-bar" role="note">Демо-версия для отзывов: вход, запись на курсы и формы здесь не работают.</div>
 
@@ -60,6 +60,7 @@
 
 
 <div class="container hb-page s-recsys">
+  <div class="hb-readbar" aria-hidden="true"><i></i></div>
   <div class="hb">
     <aside class="hb-nav" aria-label="Статьи раздела">
       
@@ -86,9 +87,9 @@
       <div class="hb-meta">
         
         
-        <span><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-clock"/></svg>16&nbsp;мин</span>
+        <span><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-clock"/></svg>18&nbsp;мин</span>
         <span class="hb-authors"><span class="avatar sm" title="Артем Лебедевич">АЛ</span>Артем Лебедевич</span>
-        <span><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-edit"/></svg>9 ноября 2026</span>
+        <span><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-edit"/></svg>10 ноября 2026</span>
         
         
       </div>
@@ -96,7 +97,7 @@
       
       <details class="hb-mtoc">
         <summary><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-list"/></svg>Содержание<svg class="ico sm" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-chev-down"/></svg></summary>
-        <a class="l2" href="#задача-и-компромисс">Задача и компромисс</a><a class="l2" href="#почему-не-деревья">Почему не деревья</a><a class="l2" href="#ivf-инвертированный-файл">IVF: инвертированный файл</a><a class="l2" href="#product-quantization">Product quantization</a><a class="l2" href="#графовые-индексы">Графовые индексы</a><a class="l2" href="#библиотеки-и-системы">Библиотеки и системы</a><a class="l2" href="#фильтрация-обновления-удаления">Фильтрация, обновления, удаления</a><a class="l2" href="#код-ivf-pq-против-hnsw">Код: IVF-PQ против HNSW</a><a class="l2" href="#бенчмарки">Бенчмарки</a><a class="l2" href="#типичные-грабли">Типичные грабли</a><a class="l2" href="#связь-с-рекомендациями">Связь с рекомендациями</a><a class="l2" href="#что-почитать">Что почитать</a>
+        <a class="l2" href="#задача-и-компромисс">Задача и компромисс</a><a class="l2" href="#почему-не-деревья">Почему не деревья</a><a class="l2" href="#ivf-инвертированный-файл">IVF: инвертированный файл</a><a class="l2" href="#product-quantization">Product quantization</a><a class="l2" href="#графовые-индексы">Графовые индексы</a><a class="l2" href="#библиотеки-и-системы">Библиотеки и системы</a><a class="l2" href="#фильтрация-обновления-удаления">Фильтрация, обновления, удаления</a><a class="l2" href="#код-ivf-pq-против-hnsw">Код: IVF-PQ против HNSW</a><a class="l2" href="#бенчмарки">Бенчмарки</a><a class="l2" href="#типичные-грабли">Типичные грабли</a><a class="l2" href="#связь-с-рекомендациями">Связь с рекомендациями</a><a class="l2" href="#проверь-себя">Проверь себя</a><a class="l2" href="#что-почитать">Что почитать</a>
       </details>
       
 
@@ -164,7 +165,7 @@
 <ul>
 <li><strong>FAISS</strong> (Johnson, Douze, Jégou, 2017; обзор <em>The Faiss library</em>, 2024) — библиотека Meta, эталонная реализация flat, IVF, PQ, HNSW, GPU-версий; индексы собираются фабрикой строк, например <code>"IVF4096,PQ64"</code> или <code>"OPQ64,IVF4096,PQ64"</code>.</li>
 <li><strong>hnswlib</strong> — минималистичная реализация HNSW.</li>
-<li><strong>Lucene / OpenSearch / Elasticsearch</strong> — k-NN поверх HNSW (Lucene) или FAISS/nmslib; важно, что вектор живёт рядом с инвертированным индексом и фильтрами, то есть гибридный поиск делается в одной системе.</li>
+<li><strong>Lucene / OpenSearch / Elasticsearch</strong> — k-NN поверх HNSW (Lucene) или FAISS (nmslib в OpenSearch устарел); есть встроенная квантизация (int8/int4, BBQ в Elasticsearch); важно, что вектор живёт рядом с инвертированным индексом и фильтрами, то есть гибридный поиск делается в одной системе.</li>
 <li><strong>Векторные БД</strong> (Qdrant, Milvus, Weaviate, pgvector и др.) — оболочка над теми же алгоритмами: хранение, метаданные, фильтры, репликация, обновления. Выбор системы — это в первую очередь вопрос эксплуатации, а не алгоритма.</li>
 </ul>
 <h2 id="фильтрация-обновления-удаления">Фильтрация, обновления, удаления</h2>
@@ -226,9 +227,26 @@ hnsw<span class="tok-p">.</span>add<span class="tok-p">(</span>xb<span class="to
 <li>PQ обучают на выборке, не похожей на данные (старый срез каталога) — центры «не там».</li>
 <li>Размерность и число подвекторов: <span class="tex">d</span> должно делиться на <span class="tex">m</span>; для OPQ — на <span class="tex">m</span> после вращения.</li>
 <li>Память HNSW: 100 млн векторов по 768 float32 — 300 ГБ только на векторы, граф сверху. Считайте до выбора железа.</li>
+<li><strong>На собеседовании</strong> спрашивают: почему деревья не работают при <span class="tex">d \gtrsim 20</span>; как устроены IVF и что даёт <code>nprobe</code>; как PQ сжимает вектор и что такое ADC; как HNSW строит слои и что регулирует <code>efSearch</code>; как совместить ANN с фильтрами; почему recall считают относительно точного поиска.</li>
 </ul>
 <h2 id="связь-с-рекомендациями">Связь с рекомендациями</h2>
 <p>В двухбашенных рекомендателях эмбеддинги айтемов индексируются ровно так же; запросом выступает вектор пользователя. Особенности — частая смена пользовательских векторов, строгие фильтры доступности и жёсткие требования к задержке; см. главу про <a href="/edufamcs-demo/handbook/recsys/two-tower-ann/" rel="noopener noreferrer nofollow">two-tower и ANN</a>. Инженерную сторону такого поиска в рекомендациях можно посмотреть в докладе Александра Бутенко <a href="https://www.youtube.com/watch?v=VGLW6_rTzOM" rel="noopener noreferrer nofollow">«Ускорение рекомендаций в проде»</a> (ODS AI Ru).</p>
+<h2 id="проверь-себя">Проверь себя</h2>
+<details class="callout md details"><summary>Почему при $d \sim 10^2$–$10^3$ KD-деревья вырождаются в полный перебор?</summary>
+<p>Из-за проклятия размерности расстояния до ближайшего и до среднего соседа почти совпадают, и шар запроса пересекает почти все ячейки. Отсекать ветки не удаётся.</p>
+</details>
+<details class="callout md details"><summary>Что происходит с recall и временем при росте `nprobe` в IVF?</summary>
+<p>Просматривается больше списков, поэтому recall растёт, но и работа растёт примерно как <span class="tex">N\cdot\text{nprobe}/\text{nlist}</span>. Для запроса у границы ячеек ближайший сосед может лежать в соседней ячейке, и поэтому <code>nprobe</code> обычно больше единицы.</p>
+</details>
+<details class="callout md details"><summary>Почему при $d = 768$, $m = 96$ PQ даёт сжатие в 32 раза и как считается расстояние до сжатого вектора?</summary>
+<p>Вектор хранится как <span class="tex">m = 96</span> байт вместо <span class="tex">4d = 3072</span> байт. Расстояние (ADC) считается как сумма <span class="tex">m</span> значений из таблиц <span class="tex">T_j</span>, заранее построенных для запроса, без умножений на размерность.</p>
+</details>
+<details class="callout md details"><summary>Почему у HNSW recall растёт с `efSearch`, но не бесконечно быстро, и что с памятью?</summary>
+<p><code>efSearch</code> задаёт размер списка кандидатов при обходе: больше кандидатов — больше шансов найти истинных соседей, но QPS падает. Память — полные векторы плюс граф, около <span class="tex">4d + 8M</span> байт на вектор, и всё это держится в RAM.</p>
+</details>
+<details class="callout md details"><summary>Почему post-filter плох при селективном фильтре?</summary>
+<p>Ищется топ-<span class="tex">k'</span> без учёта фильтра, а затем отбрасываются недопустимые документы; если проходит 1% документов, результат окажется пуст или короче <span class="tex">k</span>. Помогают pre-filter или выбор стратегии по оценке селективности.</p>
+</details>
 <h2 id="что-почитать">Что почитать</h2>
 <ul>
 <li>Malkov, Yashunin, <a href="https://arxiv.org/abs/1603.09320" rel="noopener noreferrer nofollow">Efficient and robust ANN search using Hierarchical Navigable Small World graphs</a>, 2016 (TPAMI 2018).</li>
@@ -243,6 +261,8 @@ hnsw<span class="tok-p">.</span>add<span class="tok-p">(</span>xb<span class="to
       
 
       
+
+      
       <nav class="pager" aria-label="Соседние статьи">
         <a href="/edufamcs-demo/handbook/retrieval/nejrosetevoe-ranzhirovanie/"><span><svg class="ico sm" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-arrow-left"/></svg>Назад</span>Нейросетевое ранжирование: cross-encoder, ColBERT, SPLADE</a>
         <a href="/edufamcs-demo/handbook/retrieval/rag/"><span>Дальше<svg class="ico sm" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-arrow"/></svg></span>RAG: поиск для языковых моделей</a>
@@ -251,7 +271,7 @@ hnsw<span class="tok-p">.</span>add<span class="tok-p">(</span>xb<span class="to
     </article>
 
     <aside class="hb-toc" aria-label="На этой странице">
-      <a class="l2" href="#задача-и-компромисс">Задача и компромисс</a><a class="l2" href="#почему-не-деревья">Почему не деревья</a><a class="l2" href="#ivf-инвертированный-файл">IVF: инвертированный файл</a><a class="l2" href="#product-quantization">Product quantization</a><a class="l2" href="#графовые-индексы">Графовые индексы</a><a class="l2" href="#библиотеки-и-системы">Библиотеки и системы</a><a class="l2" href="#фильтрация-обновления-удаления">Фильтрация, обновления, удаления</a><a class="l2" href="#код-ivf-pq-против-hnsw">Код: IVF-PQ против HNSW</a><a class="l2" href="#бенчмарки">Бенчмарки</a><a class="l2" href="#типичные-грабли">Типичные грабли</a><a class="l2" href="#связь-с-рекомендациями">Связь с рекомендациями</a><a class="l2" href="#что-почитать">Что почитать</a>
+      <a class="l2" href="#задача-и-компромисс">Задача и компромисс</a><a class="l2" href="#почему-не-деревья">Почему не деревья</a><a class="l2" href="#ivf-инвертированный-файл">IVF: инвертированный файл</a><a class="l2" href="#product-quantization">Product quantization</a><a class="l2" href="#графовые-индексы">Графовые индексы</a><a class="l2" href="#библиотеки-и-системы">Библиотеки и системы</a><a class="l2" href="#фильтрация-обновления-удаления">Фильтрация, обновления, удаления</a><a class="l2" href="#код-ivf-pq-против-hnsw">Код: IVF-PQ против HNSW</a><a class="l2" href="#бенчмарки">Бенчмарки</a><a class="l2" href="#типичные-грабли">Типичные грабли</a><a class="l2" href="#связь-с-рекомендациями">Связь с рекомендациями</a><a class="l2" href="#проверь-себя">Проверь себя</a><a class="l2" href="#что-почитать">Что почитать</a>
     </aside>
   </div>
 </div>

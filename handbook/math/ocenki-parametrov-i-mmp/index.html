@@ -27,7 +27,7 @@
 <script src="/edufamcs-demo/static/js/site.js" defer></script>
 <script src="/edufamcs-demo/static/handbook/handbook.js" defer></script>
 </head>
-<body class="" hx-headers='{"X-CSRFToken": "RbDgnGb1ba2S49UfzmyZ5MWO5ii4froJDhEDhttImni6JIQvMLr4me49BFUjkc9I"}'>
+<body class="" hx-headers='{"X-CSRFToken": "wGBeEr7LW388zesZFJORFk1xR1Co6iCR8TqbUtGCXQmHKxHrEc2OndTvjaJmQ2By"}'>
 <a class="skip" href="#main">К содержанию</a>
 <div class="demo-bar" role="note">Демо-версия для отзывов: вход, запись на курсы и формы здесь не работают.</div>
 
@@ -60,6 +60,7 @@
 
 
 <div class="container hb-page hb-tone">
+  <div class="hb-readbar" aria-hidden="true"><i></i></div>
   <div class="hb">
     <aside class="hb-nav" aria-label="Статьи раздела">
       
@@ -78,6 +79,12 @@
       
       <a class="" href="/edufamcs-demo/handbook/math/intervaly-i-proverka-gipotez/">Доверительные интервалы и проверка гипотез</a>
       
+      <a class="" href="/edufamcs-demo/handbook/math/bajesovskaya-statistika/">Байесовская статистика</a>
+      
+      <a class="" href="/edufamcs-demo/handbook/math/teoriya-informacii/">Теория информации для ML</a>
+      
+      <a class="" href="/edufamcs-demo/handbook/math/statistika-ab-testov/">Статистика A/B-тестов</a>
+      
     </aside>
 
     <article class="hb-main">
@@ -86,9 +93,9 @@
       <div class="hb-meta">
         
         
-        <span><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-clock"/></svg>10&nbsp;мин</span>
+        <span><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-clock"/></svg>14&nbsp;мин</span>
         <span class="hb-authors"><span class="avatar sm" title="Артем Лебедевич">АЛ</span>Артем Лебедевич</span>
-        <span><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-edit"/></svg>9 ноября 2026</span>
+        <span><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-edit"/></svg>10 ноября 2026</span>
         
         
       </div>
@@ -96,7 +103,7 @@
       
       <details class="hb-mtoc">
         <summary><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-list"/></svg>Содержание<svg class="ico sm" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-chev-down"/></svg></summary>
-        <a class="l2" href="#выборка-и-эмпирическая-функция-распределения">Выборка и эмпирическая функция распределения</a><a class="l2" href="#точечные-оценки-и-их-свойства">Точечные оценки и их свойства</a><a class="l3" href="#выборочное-среднее-и-дисперсия">Выборочное среднее и дисперсия</a><a class="l2" href="#метод-моментов">Метод моментов</a><a class="l2" href="#метод-максимального-правдоподобия">Метод максимального правдоподобия</a><a class="l2" href="#главная-связь-с-ml-потери-как-правдоподобие">Главная связь с ML: потери как правдоподобие</a><a class="l3" href="#map-и-регуляризация">MAP и регуляризация</a><a class="l2" href="#смещение-и-разброс">Смещение и разброс</a><a class="l2" href="#бутстрап">Бутстрап</a><a class="l2" href="#код">Код</a><a class="l2" href="#ловушки">Ловушки</a><a class="l2" href="#что-почитать">Что почитать</a>
+        <a class="l2" href="#выборка-и-эмпирическая-функция-распределения">Выборка и эмпирическая функция распределения</a><a class="l2" href="#точечные-оценки-и-их-свойства">Точечные оценки и их свойства</a><a class="l3" href="#выборочное-среднее-и-дисперсия">Выборочное среднее и дисперсия</a><a class="l2" href="#метод-моментов">Метод моментов</a><a class="l2" href="#метод-максимального-правдоподобия">Метод максимального правдоподобия</a><a class="l2" href="#главная-связь-с-ml-потери-как-правдоподобие">Главная связь с ML: потери как правдоподобие</a><a class="l3" href="#map-и-регуляризация">MAP и регуляризация</a><a class="l3" href="#сопряжённый-пример-betabinomial">Сопряжённый пример: Beta–Binomial</a><a class="l3" href="#информация-фишера-и-асимптотический-интервал">Информация Фишера и асимптотический интервал</a><a class="l2" href="#смещение-и-разброс">Смещение и разброс</a><a class="l2" href="#бутстрап">Бутстрап</a><a class="l2" href="#код">Код</a><a class="l2" href="#ловушки">Ловушки</a><a class="l2" href="#проверь-себя">Проверь себя</a><a class="l2" href="#что-почитать">Что почитать</a>
       </details>
       
 
@@ -145,10 +152,51 @@
 <div class="tex tex-block">\hat w_{MAP}=\arg\max_w\big[\ln p(\mathcal{D}\mid w)+\ln p(w)\big].</div>
 <p>Правдоподобие — это уже знакомая потеря, а <span class="tex">\ln p(w)</span> — регуляризатор:</p>
 <ul>
-<li><span class="tex">w_j\sim\mathcal{N}(0,\tau^2)</span>: <span class="tex">-\ln p(w)=\frac1{2\tau^2}\|w\|_2^2+\text{const}</span> — <strong><span class="tex">L_2</span>-регуляризация (Ridge)</strong>, <span class="tex">\lambda=\sigma^2/\tau^2</span> для MSE;</li>
+<li><span class="tex">w_j\sim\mathcal{N}(0,\tau^2)</span>: <span class="tex">-\ln p(w)=\frac1{2\tau^2}\|w\|_2^2+\text{const}</span> — <strong><span class="tex">L_2</span>-регуляризация (Ridge)</strong>, <span class="tex">\lambda=\sigma^2/\tau^2</span> для цели <span class="tex">\|Xw-y\|^2+\lambda\|w\|^2</span> (сумма квадратов, <span class="tex">-\ln p(\mathcal{D}\mid w)=\frac1{2\sigma^2}\|Xw-y\|^2+\text{const}</span>, обе части умножены на <span class="tex">2\sigma^2</span>); если потеря — среднее, MSE с множителем <span class="tex">\frac1n</span>, то <span class="tex">\lambda=\sigma^2/(n\tau^2)</span>;</li>
 <li><span class="tex">w_j\sim\mathrm{Laplace}(0,b)</span>: <span class="tex">-\ln p(w)=\frac1b\|w\|_1+\text{const}</span> — <strong><span class="tex">L_1</span>-регуляризация (Lasso)</strong>: пик Лапласа в нуле «притягивает» веса к нулю.</li>
 </ul>
 <p>Сила регуляризации — степень доверия к априори: меньше данных — больше вес априорного. При <span class="tex">n\to\infty</span> правдоподобие доминирует, MAP стремится к ММП.</p>
+<h3 id="сопряжённый-пример-betabinomial">Сопряжённый пример: Beta–Binomial</h3>
+<p>Для доли успехов (CTR, конверсия) априорное <span class="tex">p\sim\mathrm{Beta}(\alpha,\beta)</span> с плотностью <span class="tex">\propto p^{\alpha-1}(1-p)^{\beta-1}</span> <strong>сопряжено</strong> правдоподобию Бернулли: при <span class="tex">k</span> успехах из <span class="tex">n</span> апостериорное <span class="tex">\propto p^{k+\alpha-1}(1-p)^{n-k+\beta-1}</span>, то есть</p>
+<div class="tex tex-block">p\mid\mathcal{D}\sim\mathrm{Beta}(\alpha+k,\ \beta+n-k).</div>
+<p>Параметры <span class="tex">\alpha,\beta</span> — «псевдонаблюдения»: априори <span class="tex">\alpha</span> успехов и <span class="tex">\beta</span> неудач. Апостериорное среднее <span class="tex">\frac{\alpha+k}{\alpha+\beta+n}</span> — взвешенная смесь априорного среднего и ММП <span class="tex">k/n</span> с весами <span class="tex">\alpha+\beta</span> и <span class="tex">n</span>; мода (MAP) равна <span class="tex">\frac{\alpha+k-1}{\alpha+\beta+n-2}</span>. Пусть <span class="tex">k=7</span>, <span class="tex">n=10</span>:</p>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>Априорное</th>
+<th>Апостериорное</th>
+<th>Среднее</th>
+<th>MAP</th>
+<th>ММП</th>
+<th>95% достоверный интервал</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Beta(1, 1)</td>
+<td>Beta(8, 4)</td>
+<td>0,667</td>
+<td>0,700</td>
+<td>0,700</td>
+<td>(0,390; 0,891)</td>
+</tr>
+<tr>
+<td>Beta(2, 2)</td>
+<td>Beta(9, 5)</td>
+<td>0,643</td>
+<td>0,667</td>
+<td>0,700</td>
+<td>(0,386; 0,861)</td>
+</tr>
+</tbody>
+</table></div>
+<p>Равномерное априори не сдвигает моду, поэтому MAP совпал с ММП, а среднее ушло к <span class="tex">\frac12</span>; сильнее априори — сильнее сжатие. При <span class="tex">k=0</span> среднее <span class="tex">\frac1{n+2}</span> — сглаживание Лапласа, лечащее <span class="tex">\hat p=0</span>. Тот же апостериорный Beta лежит в основе Thompson sampling (<a href="/edufamcs-demo/handbook/recsys/holodnyj-start-i-bandity/" rel="noopener noreferrer nofollow">холодный старт и бандиты</a>): берут выборку из Beta каждой «руки» и играют ту, у которой она больше. Подробнее — в <a href="/edufamcs-demo/handbook/math/bajesovskaya-statistika/" rel="noopener noreferrer nofollow">байесовской статистике</a>.</p>
+<h3 id="информация-фишера-и-асимптотический-интервал">Информация Фишера и асимптотический интервал</h3>
+<p>Для Бернулли <span class="tex">\ln p(x;p)=x\ln p+(1-x)\ln(1-p)</span>, <span class="tex">-\partial_p^2\ln p(x;p)=\frac x{p^2}+\frac{1-x}{(1-p)^2}</span>, и взяв матожидание при <span class="tex">\mathbb{E}x=p</span>,</p>
+<div class="tex tex-block">I(p)=\frac1p+\frac1{1-p}=\frac1{p(1-p)}.</div>
+<p>Информация минимальна при <span class="tex">p=\frac12</span> и растёт к краям: доля около 0 или 1 определяется точнее. Асимптотическая нормальность ММП даёт <span class="tex">\hat p\approx\mathcal{N}\big(p,\frac1{nI(p)}\big)=\mathcal{N}\big(p,\frac{p(1-p)}n\big)</span>, то есть граница Рао–Крамера достигается точно, а интервал Вальда с подстановкой <span class="tex">\hat p</span> в <span class="tex">I</span>:</p>
+<div class="tex tex-block">\hat p\pm z_{1-\alpha/2}\sqrt{\frac{\hat p(1-\hat p)}n}.</div>
+<p>Для <span class="tex">k=7</span>, <span class="tex">n=10</span>: <span class="tex">I(\hat p)=4{,}76</span>, <span class="tex">\mathrm{SE}=0{,}145</span>, интервал <span class="tex">(0{,}416;\ 0{,}984)</span> — широкий и упирается в границу <span class="tex">1</span>; интервал Уилсона даёт <span class="tex">(0{,}397;\ 0{,}892)</span> и ближе к достоверному выше. При <span class="tex">n=1000</span>, <span class="tex">k=700</span> разница исчезает: Вальд <span class="tex">(0{,}672;\ 0{,}728)</span>, Уилсон <span class="tex">(0{,}671;\ 0{,}728)</span>. Подробнее об интервалах — <a href="/edufamcs-demo/handbook/math/intervaly-i-proverka-gipotez/" rel="noopener noreferrer nofollow">следующая глава</a>.</p>
 <h2 id="смещение-и-разброс">Смещение и разброс</h2>
 <p>Оценка <span class="tex">\hat\theta</span> зависит от конкретной выборки. На разных выборках она принимает разные значения; их разброс — дисперсия, а систематический сдвиг от истины — смещение. Для предсказания <span class="tex">\hat f(x)</span> полная ошибка раскладывается на <span class="tex">\mathrm{bias}^2+\mathrm{Var}+\sigma^2_{noise}</span> (неустранимый шум). Простая модель имеет большое смещение и малую дисперсию (недообучение), сложная — наоборот (переобучение). Оценка <span class="tex">\hat\sigma^2</span> с делителем <span class="tex">n</span> — типичный пример: смещённая, но с меньшей дисперсией, чем <span class="tex">s^2</span>.</p>
 <h2 id="бутстрап">Бутстрап</h2>
@@ -197,7 +245,26 @@ meds <span class="tok-p">=</span> np<span class="tok-p">.</span>array<span class
 <li><strong>Неверная модель шума.</strong> MSE на дискретных или сильно асимметричных целях (число заказов, время) — повод взять Пуассона/log-normal NLL или преобразовать цель.</li>
 <li><strong>Бутстрап зависимых данных.</strong> Пользователи с множеством событий не независимы: ресэмплируйте по пользователям, а не по строкам.</li>
 <li><strong>Малые <span class="tex">n</span> у редких событий.</strong> Оценка <span class="tex">\hat p=k/n</span> при <span class="tex">k=0</span> даёт <span class="tex">p=0</span>; применяют сглаживание Лапласа, байесовские оценки с априорным Beta.</li>
+<li><strong>На собеседовании: выведите MSE из ММП и покажите, откуда берётся <span class="tex">\lambda</span> в Ridge.</strong> Гауссов шум даёт NLL <span class="tex">\propto\frac1{2\sigma^2}\|Xw-y\|^2</span>, гауссово априори <span class="tex">\mathcal{N}(0,\tau^2)</span> — <span class="tex">\frac1{2\tau^2}\|w\|^2</span>; <span class="tex">\lambda=\sigma^2/\tau^2</span> для суммы квадратов и <span class="tex">\sigma^2/(n\tau^2)</span> для среднего.</li>
+<li><strong>На собеседовании: почему <span class="tex">s^2</span> делят на <span class="tex">n-1</span> и всегда ли несмещённая оценка лучше?</strong> Среднее подогнано под выборку, одна степень свободы потрачена; несмещённая не обязательно лучше по MSE — делитель <span class="tex">n+1</span> даже минимизирует MSE для нормальной выборки.</li>
+<li><strong>На собеседовании: оцените CTR по 0 кликам из 20 показов.</strong> ММП даёт 0 и бесполезна; Beta(1,1) в апостериорном даёт среднее <span class="tex">1/22</span>, или более информативное априори из CTR похожих объектов.</li>
 </ul>
+<h2 id="проверь-себя">Проверь себя</h2>
+<details class="callout md details"><summary>Чем отличаются ММП и MAP и когда они совпадают?</summary>
+<p>MAP максимизирует <span class="tex">\ln p(\mathcal{D}\mid w)+\ln p(w)</span>, то есть добавляет регуляризатор из априорного распределения. Совпадают при равномерном априори или при <span class="tex">n\to\infty</span>, когда правдоподобие доминирует.</p>
+</details>
+<details class="callout md details"><summary>Почему оценка дисперсии ММП смещена, но состоятельна?</summary>
+<p><span class="tex">\mathbb{E}\hat\sigma^2=\frac{n-1}n\sigma^2</span>, смещение <span class="tex">-\sigma^2/n\to0</span>, и оценка сходится к <span class="tex">\sigma^2</span> по вероятности.</p>
+</details>
+<details class="callout md details"><summary>Что означает информация Фишера и как она связана с точностью оценки?</summary>
+<p><span class="tex">I(\theta)</span> — ожидаемая кривизна лог-правдоподобия (минус вторая производная). По Рао–Краму дисперсия несмещённой оценки не меньше <span class="tex">1/(nI)</span>, а ММП асимптотически достигает этой границы.</p>
+</details>
+<details class="callout md details"><summary>Почему для редкого события лучше интервал Уилсона, чем Вальда?</summary>
+<p>Вальд строится на <span class="tex">\hat p(1-\hat p)</span>, и при <span class="tex">\hat p</span> около 0 или 1 или малом <span class="tex">n</span> он вырождается (нулевая ширина при <span class="tex">k=0</span>, выход за <span class="tex">[0,1]</span>); Уилсон инвертирует тест и не имеет этих дефектов.</p>
+</details>
+<details class="callout md details"><summary>Как в бутстрапе нужно ресэмплировать данные, где у пользователей по много событий?</summary>
+<p>Пользователями, а не строками: события одного пользователя зависимы, и ресэмплирование строк занижает разброс.</p>
+</details>
 <h2 id="что-почитать">Что почитать</h2>
 <ul>
 <li>R. Fisher. <em>On the mathematical foundations of theoretical statistics</em>. Phil. Trans. R. Soc. A, 1922.</li>
@@ -211,6 +278,8 @@ meds <span class="tok-p">=</span> np<span class="tok-p">.</span>array<span class
       
 
       
+
+      
       <nav class="pager" aria-label="Соседние статьи">
         <a href="/edufamcs-demo/handbook/math/teoriya-veroyatnostej/"><span><svg class="ico sm" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-arrow-left"/></svg>Назад</span>Теория вероятностей</a>
         <a href="/edufamcs-demo/handbook/math/intervaly-i-proverka-gipotez/"><span>Дальше<svg class="ico sm" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-arrow"/></svg></span>Доверительные интервалы и проверка гипотез</a>
@@ -219,7 +288,7 @@ meds <span class="tok-p">=</span> np<span class="tok-p">.</span>array<span class
     </article>
 
     <aside class="hb-toc" aria-label="На этой странице">
-      <a class="l2" href="#выборка-и-эмпирическая-функция-распределения">Выборка и эмпирическая функция распределения</a><a class="l2" href="#точечные-оценки-и-их-свойства">Точечные оценки и их свойства</a><a class="l3" href="#выборочное-среднее-и-дисперсия">Выборочное среднее и дисперсия</a><a class="l2" href="#метод-моментов">Метод моментов</a><a class="l2" href="#метод-максимального-правдоподобия">Метод максимального правдоподобия</a><a class="l2" href="#главная-связь-с-ml-потери-как-правдоподобие">Главная связь с ML: потери как правдоподобие</a><a class="l3" href="#map-и-регуляризация">MAP и регуляризация</a><a class="l2" href="#смещение-и-разброс">Смещение и разброс</a><a class="l2" href="#бутстрап">Бутстрап</a><a class="l2" href="#код">Код</a><a class="l2" href="#ловушки">Ловушки</a><a class="l2" href="#что-почитать">Что почитать</a>
+      <a class="l2" href="#выборка-и-эмпирическая-функция-распределения">Выборка и эмпирическая функция распределения</a><a class="l2" href="#точечные-оценки-и-их-свойства">Точечные оценки и их свойства</a><a class="l3" href="#выборочное-среднее-и-дисперсия">Выборочное среднее и дисперсия</a><a class="l2" href="#метод-моментов">Метод моментов</a><a class="l2" href="#метод-максимального-правдоподобия">Метод максимального правдоподобия</a><a class="l2" href="#главная-связь-с-ml-потери-как-правдоподобие">Главная связь с ML: потери как правдоподобие</a><a class="l3" href="#map-и-регуляризация">MAP и регуляризация</a><a class="l3" href="#сопряжённый-пример-betabinomial">Сопряжённый пример: Beta–Binomial</a><a class="l3" href="#информация-фишера-и-асимптотический-интервал">Информация Фишера и асимптотический интервал</a><a class="l2" href="#смещение-и-разброс">Смещение и разброс</a><a class="l2" href="#бутстрап">Бутстрап</a><a class="l2" href="#код">Код</a><a class="l2" href="#ловушки">Ловушки</a><a class="l2" href="#проверь-себя">Проверь себя</a><a class="l2" href="#что-почитать">Что почитать</a>
     </aside>
   </div>
 </div>

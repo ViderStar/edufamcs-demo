@@ -27,7 +27,7 @@
 <script src="/edufamcs-demo/static/js/site.js" defer></script>
 <script src="/edufamcs-demo/static/handbook/handbook.js" defer></script>
 </head>
-<body class="" hx-headers='{"X-CSRFToken": "d09LgHAMt3e2Jd586zv8c7Qt3gXpjQJHZ6a8auStEgugoM1ojYodtzYOzDzEoBuG"}'>
+<body class="" hx-headers='{"X-CSRFToken": "bOpBpf4kIzadu9VlKbRVy9ZyLjmAhut4N1eyFhDbJmoMFsaNJE5Sg2Rwdsty1esL"}'>
 <a class="skip" href="#main">К содержанию</a>
 <div class="demo-bar" role="note">Демо-версия для отзывов: вход, запись на курсы и формы здесь не работают.</div>
 
@@ -60,6 +60,7 @@
 
 
 <div class="container hb-page hb-tone">
+  <div class="hb-readbar" aria-hidden="true"><i></i></div>
   <div class="hb">
     <aside class="hb-nav" aria-label="Статьи раздела">
       
@@ -86,9 +87,9 @@
       <div class="hb-meta">
         
         
-        <span><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-clock"/></svg>12&nbsp;мин</span>
+        <span><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-clock"/></svg>15&nbsp;мин</span>
         <span class="hb-authors"><span class="avatar sm" title="Артем Лебедевич">АЛ</span>Артем Лебедевич</span>
-        <span><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-edit"/></svg>9 ноября 2026</span>
+        <span><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-edit"/></svg>10 ноября 2026</span>
         
         
       </div>
@@ -96,7 +97,7 @@
       
       <details class="hb-mtoc">
         <summary><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-list"/></svg>Содержание<svg class="ico sm" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-chev-down"/></svg></summary>
-        <a class="l2" href="#внимание-как-мягкий-поиск">Внимание как мягкий поиск</a><a class="l2" href="#позиции">Позиции</a><a class="l2" href="#блок-трансформера">Блок трансформера</a><a class="l2" href="#стоимость">Стоимость</a><a class="l2" href="#семейства-моделей">Семейства моделей</a><a class="l2" href="#мосты-к-рекомендациям-и-поиску">Мосты к рекомендациям и поиску</a><a class="l2" href="#код-self-attention-и-готовый-слой">Код: self-attention и готовый слой</a><a class="l2" href="#практика-и-подводные-камни">Практика и подводные камни</a><a class="l2" href="#что-почитать">Что почитать</a>
+        <a class="l2" href="#внимание-как-мягкий-поиск">Внимание как мягкий поиск</a><a class="l2" href="#позиции">Позиции</a><a class="l2" href="#блок-трансформера">Блок трансформера</a><a class="l2" href="#стоимость">Стоимость</a><a class="l2" href="#семейства-моделей">Семейства моделей</a><a class="l2" href="#мосты-к-рекомендациям-и-поиску">Мосты к рекомендациям и поиску</a><a class="l2" href="#код-self-attention-и-готовый-слой">Код: self-attention и готовый слой</a><a class="l2" href="#практика-и-подводные-камни">Практика и подводные камни</a><a class="l2" href="#проверь-себя">Проверь себя</a><a class="l2" href="#что-почитать">Что почитать</a>
       </details>
       
 
@@ -106,6 +107,11 @@
 <p>Пусть <span class="tex">Q\in\mathbb R^{n\times d_k}</span> (запросы), <span class="tex">K\in\mathbb R^{m\times d_k}</span> (ключи), <span class="tex">V\in\mathbb R^{m\times d_v}</span> (значения). <strong>Scaled dot-product attention</strong>:</p>
 <div class="tex tex-block">\text{Attention}(Q,K,V)=\text{softmax}\!\Big(\frac{QK^\top}{\sqrt{d_k}}\Big)V.</div>
 <p>Разберём по частям. <span class="tex">QK^\top</span> — матрица сходств «запрос × ключ», <span class="tex">n\times m</span>. Softmax по строкам превращает сходства в веса, сумма которых равна 1. Умножение на <span class="tex">V</span> — взвешенное усреднение значений. Деление на <span class="tex">\sqrt{d_k}</span> нужно потому, что скалярное произведение двух случайных векторов размерности <span class="tex">d_k</span> с независимыми компонентами (среднее 0, дисперсия 1) имеет дисперсию <span class="tex">d_k</span>: без масштаба логиты растут, softmax насыщается в почти one-hot и градиент пропадает (те же вопросы, что с сигмоидой в статье про <a href="/edufamcs-demo/handbook/dl/nejron-i-mnogoslojnyj-perceptron/" rel="noopener noreferrer nofollow">нейрон и MLP</a>).</p>
+<p><strong>Числовой пример.</strong> Три токена, <span class="tex">d_k=2</span>, <span class="tex">Q=K=\begin{pmatrix}1&amp;0\\0&amp;1\\1&amp;1\end{pmatrix}</span>, <span class="tex">V=\begin{pmatrix}1&amp;0\\0&amp;2\\3&amp;1\end{pmatrix}</span>. Сходства <span class="tex">QK^\top/\sqrt2</span> (округление до 3 знаков):</p>
+<div class="tex tex-block">S=\begin{pmatrix}0{,}707&amp;0&amp;0{,}707\\0&amp;0{,}707&amp;0{,}707\\0{,}707&amp;0{,}707&amp;1{,}414\end{pmatrix},\quad \text{softmax}_{\text{строки}}(S)=\begin{pmatrix}0{,}401&amp;0{,}198&amp;0{,}401\\0{,}198&amp;0{,}401&amp;0{,}401\\0{,}248&amp;0{,}248&amp;0{,}503\end{pmatrix}.</div>
+<p>Выход — взвешенные суммы строк <span class="tex">V</span>: для первого токена <span class="tex">0{,}401\cdot(1,0)+0{,}198\cdot(0,2)+0{,}401\cdot(3,1)=(1{,}604;\,0{,}797)</span>; полностью</p>
+<div class="tex tex-block">\text{Attention}=\begin{pmatrix}1{,}604&amp;0{,}797\\1{,}401&amp;1{,}203\\1{,}759&amp;1{,}000\end{pmatrix}.</div>
+<p>Третий токен сильнее всего похож на себя (скор <span class="tex">1{,}414</span>) и берёт половину веса у своего значения. С causal mask верхний треугольник <span class="tex">S</span> заменяется на <span class="tex">-\infty</span>: веса второй строки станут <span class="tex">(0{,}33;\,0{,}67;\,0)</span>, а первая строка — <span class="tex">(1,0,0)</span>.</p>
 <p><strong>Self-attention</strong>: запросы, ключи и значения получаются из одной и той же последовательности <span class="tex">X\in\mathbb R^{T\times d}</span> линейными проекциями <span class="tex">Q=XW_Q</span>, <span class="tex">K=XW_K</span>, <span class="tex">V=XW_V</span>. Каждый токен «спрашивает» всех остальных и собирает информацию из тех, кто ему нужен: местоимение — из существительного, к которому оно относится. Итоговое представление токена учитывает весь контекст — это и есть контекстуализация, которой не хватало word2vec.</p>
 <p><strong>Multi-head</strong>: вместо одного внимания считают <span class="tex">h</span> параллельных «голов» с меньшей размерностью <span class="tex">d_k=d/h</span> и разными проекциями, затем конкатенируют и пропускают через <span class="tex">W_O</span>. Каждая голова может специализироваться на своём типе связей (синтаксис, соседние слова, редкие сущности), а суммарная стоимость остаётся прежней.</p>
 <h2 id="позиции">Позиции</h2>
@@ -121,7 +127,10 @@
 <p>где <span class="tex">\text{FFN}(x)=W_2\,\sigma(W_1x)</span>, внутренняя размерность обычно <span class="tex">4d</span>; активация в оригинале ReLU, в BERT и GPT — GELU, в современных LLM — вентильная SwiGLU. Здесь нормализация стоит <strong>перед</strong> подслоем (<strong>pre-norm</strong>) — такая версия обучается стабильнее и менее требовательна к warmup (Xiong и соавторы, 2020); в оригинале была post-norm, <span class="tex">h'=\text{LN}(h+\text{MHA}(h))</span>. Остаточные связи и LayerNorm решают те же проблемы затухания градиентов, что разобраны в статье <a href="/edufamcs-demo/handbook/dl/obratnoe-rasprostranenie-oshibki/" rel="noopener noreferrer nofollow">про backprop</a>; именно они позволяют складывать десятки и сотни блоков. Внимание перемешивает информацию <strong>между</strong> позициями, FFN обрабатывает каждую позицию <strong>независимо</strong> и хранит большую часть параметров модели.</p>
 <p><strong>Энкодер и декодер.</strong> В энкодере каждый токен видит всех (двунаправленное внимание). В декодере используется <strong>causal mask</strong>: токен <span class="tex">t</span> видит только позиции <span class="tex">\le t</span> — в матрицу сходств перед softmax на запрещённые места ставят <span class="tex">-\infty</span>. Это нужно, чтобы при обучении на всей последовательности сразу сеть не подглядывала в будущее, а при генерации поведение совпадало с обучением. В оригинальной схеме перевода есть ещё <strong>cross-attention</strong>: запросы идут из декодера, ключи и значения — из энкодера (по роли то же, что внимание Баданау, только скалярное, а не аддитивное; см. <a href="/edufamcs-demo/handbook/dl/posledovatelnosti-i-rnn/" rel="noopener noreferrer nofollow">статью про RNN</a>).</p>
 <h2 id="стоимость">Стоимость</h2>
-<p>Матрица <span class="tex">QK^\top</span> имеет размер <span class="tex">T\times T</span>, поэтому время и память внимания — <span class="tex">O(T^2d)</span>, где <span class="tex">T</span> — длина последовательности. Для коротких текстов это не проблема, для тысяч токенов — узкое место. Ответы разные: разреженное и локальное внимание, линейные аппроксимации, а самый практичный — <strong>FlashAttention</strong> (Дао и соавторы, 2022): точное внимание без изменения математики, но с блочным вычислением в быстрой памяти GPU и без материализации матрицы <span class="tex">T\times T</span> в основной; даёт ускорение в разы и линейную по <span class="tex">T</span> память. Во время генерации декодер сохраняет ключи и значения прошлых токенов (<strong>KV-cache</strong>), чтобы не пересчитывать их заново.</p>
+<p>Матрица <span class="tex">QK^\top</span> имеет размер <span class="tex">T\times T</span>, поэтому время внимания — <span class="tex">O(T^2d)</span>, а память под матрицу весов — <span class="tex">O(T^2)</span> на голову, где <span class="tex">T</span> — длина последовательности. Для коротких текстов это не проблема, для тысяч токенов — узкое место. Ответы разные: разреженное и локальное внимание, линейные аппроксимации, а самый практичный — <strong>FlashAttention</strong> (Дао и соавторы, 2022): точное внимание без изменения математики, но с блочным вычислением в быстрой памяти GPU и без материализации матрицы <span class="tex">T\times T</span> в основной; даёт ускорение в разы и линейную по <span class="tex">T</span> память. Во время генерации декодер сохраняет ключи и значения прошлых токенов (<strong>KV-cache</strong>), чтобы не пересчитывать их заново.</p>
+<p><strong>KV-cache подробнее.</strong> При генерации токена <span class="tex">t</span> нужны запрос только нового токена и ключи и значения <strong>всех</strong> предыдущих. Они не зависят от будущего (causal mask), поэтому их считают один раз и дописывают в кэш: шаг стоит <span class="tex">O(Td)</span> вместо <span class="tex">O(T^2d)</span> при пересчёте. Кэшируются именно <span class="tex">K</span> и <span class="tex">V</span> каждого слоя, запросы — нет. Память на одну последовательность:</p>
+<div class="tex tex-block">\text{KV}\approx 2\cdot L\cdot h_{kv}\cdot d_{head}\cdot T\cdot b,</div>
+<p>где <span class="tex">L</span> — число слоёв, <span class="tex">h_{kv}</span> — число KV-голов, <span class="tex">b</span> — байт на число, множитель 2 — за <span class="tex">K</span> и <span class="tex">V</span>. Для <span class="tex">L=32</span>, <span class="tex">h_{kv}=8</span>, <span class="tex">d_{head}=128</span>, fp16 (<span class="tex">b=2</span>) получается 128 КиБ на токен, то есть ровно 1 ГиБ при <span class="tex">T=8192</span>, и растёт линейно с длиной и числом одновременных запросов. Поэтому в современных моделях применяют grouped-query attention (несколько запросов делят одну KV-голову, <span class="tex">h_{kv}&lt;h</span>) и квантование кэша.</p>
 <h2 id="семейства-моделей">Семейства моделей</h2>
 <ul>
 <li><strong>BERT</strong> (Девлин и соавторы, 2018): энкодер, обучается как <strong>masked LM</strong> — выбираются 15 % токенов (80 % из них заменяются на <code>[MASK]</code>, 10 % на случайный токен, 10 % остаются), и их нужно восстановить по двустороннему контексту. Затем дообучается под задачу (классификация, поиск ответа, ранжирование). Хорош, когда нужен «понимающий» вектор текста.</li>
@@ -129,7 +138,7 @@
 <li><strong>ViT</strong> (Досовицкий и соавторы, 2020): картинка режется на патчи <span class="tex">16\times16</span>, каждый патч — линейный слой в токен, дальше обычный энкодер. При предобучении на очень больших наборах (JFT-300M) превосходит свёрточные сети, а на одном ImageNet без сильной регуляризации уступает им (см. <a href="/edufamcs-demo/handbook/dl/svertochnye-seti/" rel="noopener noreferrer nofollow">статью про CNN</a>).</li>
 </ul>
 <p><strong>Законы масштабирования</strong> (Каплан и соавторы, 2020): потери предсказуемо падают как степенная функция от числа параметров, объёма данных и вычислений. Хоффман и соавторы (2022, Chinchilla) уточнили, что при фиксированном бюджете вычислений модель и данные надо увеличивать вместе (порядка 20 токенов на параметр), а не гнаться за размером при том же объёме данных. Отсюда индустриальная логика последних лет: масштабировать и предобучать на неразмеченных данных, а затем дообучать.</p>
-<p><strong>Дообучение и LoRA.</strong> Полный fine-tuning большой модели требует хранить градиенты и состояния оптимизатора для всех весов. <strong>LoRA</strong> (Ху и соавторы, 2021) замораживает исходные веса <span class="tex">W</span> и обучает только низкоранговую добавку <span class="tex">\Delta W=BA</span>, <span class="tex">A\in\mathbb R^{r\times d}</span>, <span class="tex">B\in\mathbb R^{d\times r}</span>, <span class="tex">r\sim8</span>–<span class="tex">64</span>. <span class="tex">B</span> инициализируют нулём, поэтому в начале дообучения модель совпадает с исходной. Обучаемых параметров на порядки меньше, а после обучения добавку можно влить в <span class="tex">W</span> без потери скорости инференса.</p>
+<p><strong>Дообучение и LoRA.</strong> Полный fine-tuning большой модели требует хранить градиенты и состояния оптимизатора для всех весов. <strong>LoRA</strong> (Ху и соавторы, 2021) замораживает исходные веса <span class="tex">W</span> и обучает только низкоранговую добавку: для <span class="tex">W\in\mathbb R^{d\times k}</span> берут <span class="tex">\Delta W=\frac{\alpha}{r}BA</span>, <span class="tex">A\in\mathbb R^{r\times k}</span>, <span class="tex">B\in\mathbb R^{d\times r}</span>, <span class="tex">r\sim8</span>–<span class="tex">64</span>, а множитель <span class="tex">\alpha/r</span> задаёт масштаб добавки независимо от выбора <span class="tex">r</span>. <span class="tex">B</span> инициализируют нулём, поэтому в начале дообучения модель совпадает с исходной. Обучаемых параметров на порядки меньше, а после обучения добавку можно влить в <span class="tex">W</span> без потери скорости инференса.</p>
 <h2 id="мосты-к-рекомендациям-и-поиску">Мосты к рекомендациям и поиску</h2>
 <ul>
 <li><strong>Последовательные рекомендации.</strong> SASRec (Канг и Маколей, 2018) — декодер с causal mask по истории пользователя, предсказывающий следующий товар; BERT4Rec (Сунь и соавторы, 2019) — маскированный вариант. Об их плюсах и о том, где они ломаются, — в статье <a href="/edufamcs-demo/handbook/recsys/posledovatelnye-modeli/" rel="noopener noreferrer nofollow">про последовательные модели</a>.</li>
@@ -164,7 +173,7 @@
 <div class="code"><div class="code-head"><span class="lang">python</span></div><pre><code>layer <span class="tok-p">=</span> nn<span class="tok-p">.</span>TransformerEncoderLayer<span class="tok-p">(</span>d_model<span class="tok-p">=</span><span class="tok-n">256</span><span class="tok-p">,</span> nhead<span class="tok-p">=</span><span class="tok-n">8</span><span class="tok-p">,</span> dim_feedforward<span class="tok-p">=</span><span class="tok-n">1024</span><span class="tok-p">,</span>
                                    dropout<span class="tok-p">=</span><span class="tok-n">0.1</span><span class="tok-p">,</span> activation<span class="tok-p">=</span><span class="tok-s">"</span><span class="tok-s">gelu</span><span class="tok-s">"</span><span class="tok-p">,</span>
                                    batch_first<span class="tok-p">=</span><span class="tok-k">True</span><span class="tok-p">,</span> norm_first<span class="tok-p">=</span><span class="tok-k">True</span><span class="tok-p">)</span>    <span class="tok-c"># pre-norm</span>
-encoder <span class="tok-p">=</span> nn<span class="tok-p">.</span>TransformerEncoder<span class="tok-p">(</span>layer<span class="tok-p">,</span> num_layers<span class="tok-p">=</span><span class="tok-n">4</span><span class="tok-p">)</span>
+encoder <span class="tok-p">=</span> nn<span class="tok-p">.</span>TransformerEncoder<span class="tok-p">(</span>layer<span class="tok-p">,</span> num_layers<span class="tok-p">=</span><span class="tok-n">4</span><span class="tok-p">,</span> norm<span class="tok-p">=</span>nn<span class="tok-p">.</span>LayerNorm<span class="tok-p">(</span><span class="tok-n">256</span><span class="tok-p">)</span><span class="tok-p">)</span>  <span class="tok-c"># pre-norm требует финальной LN</span>
 
 x <span class="tok-p">=</span> torch<span class="tok-p">.</span>randn<span class="tok-p">(</span><span class="tok-n">32</span><span class="tok-p">,</span> <span class="tok-n">50</span><span class="tok-p">,</span> <span class="tok-n">256</span><span class="tok-p">)</span>
 pad <span class="tok-p">=</span> torch<span class="tok-p">.</span>zeros<span class="tok-p">(</span><span class="tok-n">32</span><span class="tok-p">,</span> <span class="tok-n">50</span><span class="tok-p">,</span> dtype<span class="tok-p">=</span>torch<span class="tok-p">.</span>bool<span class="tok-p">)</span><span class="tok-p">;</span> pad<span class="tok-p">[</span><span class="tok-p">:</span><span class="tok-p">,</span> <span class="tok-n">40</span><span class="tok-p">:</span><span class="tok-p">]</span> <span class="tok-p">=</span> <span class="tok-k">True</span>          <span class="tok-c"># True = паддинг</span>
@@ -179,8 +188,24 @@ h <span class="tok-p">=</span> encoder<span class="tok-p">(</span>x<span class="
 <li><strong>Обучение.</strong> Трансформеру нужны warmup и AdamW с клиппингом градиента (см. статью про <a href="/edufamcs-demo/handbook/dl/optimizatory-i-regulyarizaciya/" rel="noopener noreferrer nofollow">оптимизаторы</a>); при отсутствии warmup потери часто расходятся в самом начале.</li>
 <li><strong>Данные.</strong> Трансформеры хуже свёрток и RNN на малых данных: у них слабее индуктивные смещения. Возьмите предобученную модель, а не учите с нуля.</li>
 <li><strong>Затраты.</strong> Память под KV-cache растёт линейно с длиной и размером батча и часто определяет, сколько запросов вы обслужите одновременно.</li>
-<li><strong>Что спрашивают на интервью</strong>: формулу attention и зачем <span class="tex">\sqrt{d_k}</span>; чем self-attention отличается от cross-attention; что такое causal mask; сложность по длине; зачем остаточные связи и LayerNorm; чем BERT отличается от GPT.</li>
+<li><strong>Что спрашивают на интервью</strong>: что кэшируется при генерации и сколько это занимает памяти; чем pre-norm отличается от post-norm; как работает LoRA и почему <span class="tex">B</span> инициализируют нулём; формулу attention и зачем <span class="tex">\sqrt{d_k}</span>; чем self-attention отличается от cross-attention; что такое causal mask; сложность по длине; зачем остаточные связи и LayerNorm; чем BERT отличается от GPT.</li>
 </ul>
+<h2 id="проверь-себя">Проверь себя</h2>
+<details class="callout md details"><summary>Зачем делить логиты внимания на $\sqrt{d_k}$?</summary>
+<p>Скалярное произведение двух векторов с независимыми компонентами (среднее 0, дисперсия 1) имеет дисперсию <span class="tex">d_k</span>. Без масштаба логиты растут, softmax насыщается в почти one-hot, и градиент пропадает.</p>
+</details>
+<details class="callout md details"><summary>Что изменится на выходе внимания, если перемешать токены входа и не добавлять позиционную информацию?</summary>
+<p>Строки выхода переставятся так же, как строки входа: внимание эквивариантно к перестановкам и порядка не видит. Поэтому порядок добавляют явно (синусоиды, обучаемые эмбеддинги, RoPE).</p>
+</details>
+<details class="callout md details"><summary>Зачем causal mask и почему её значения — $-\infty$, а не 0?</summary>
+<p>Она запрещает токену <span class="tex">t</span> смотреть на позиции <span class="tex">&gt;t</span>, чтобы при обучении на всей последовательности не подглядывать в будущее. <span class="tex">-\infty</span> перед softmax даёт вес ровно 0; нулевой логит дал бы положительный вес.</p>
+</details>
+<details class="callout md details"><summary>Что такое KV-cache и почему он ускоряет генерацию, но съедает память?</summary>
+<p>Ключи и значения прошлых токенов не меняются, поэтому их хранят, а не пересчитывают: шаг стоит <span class="tex">O(Td)</span>, а не <span class="tex">O(T^2d)</span>. Платой служит память <span class="tex">2\cdot L\cdot h_{kv}\cdot d_{head}\cdot T\cdot b</span> на последовательность.</p>
+</details>
+<details class="callout md details"><summary>Чем BERT отличается от GPT по архитектуре и задаче обучения?</summary>
+<p>BERT — энкодер с двунаправленным вниманием, обучается восстанавливать замаскированные токены. GPT — декодер с causal mask, обучается предсказывать следующий токен и поэтому умеет генерировать.</p>
+</details>
 <h2 id="что-почитать">Что почитать</h2>
 <ul>
 <li>Vaswani et al., <em>Attention Is All You Need</em>, 2017: <a href="https://arxiv.org/abs/1706.03762" rel="noopener noreferrer nofollow">arxiv.org/abs/1706.03762</a>; код с комментариями — <a href="https://nlp.seas.harvard.edu/annotated-transformer/" rel="noopener noreferrer nofollow">The Annotated Transformer</a>.</li>
@@ -194,15 +219,17 @@ h <span class="tok-p">=</span> encoder<span class="tok-p">(</span>x<span class="
       
 
       
+
+      
       <nav class="pager" aria-label="Соседние статьи">
         <a href="/edufamcs-demo/handbook/dl/posledovatelnosti-i-rnn/"><span><svg class="ico sm" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-arrow-left"/></svg>Назад</span>Последовательности: эмбеддинги и рекуррентные сети</a>
-        
+        <a href="/edufamcs-demo/handbook/dl/normalizaciya-i-inicializaciya/"><span>Дальше<svg class="ico sm" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-arrow"/></svg></span>Нормализация и инициализация</a>
       </nav>
       
     </article>
 
     <aside class="hb-toc" aria-label="На этой странице">
-      <a class="l2" href="#внимание-как-мягкий-поиск">Внимание как мягкий поиск</a><a class="l2" href="#позиции">Позиции</a><a class="l2" href="#блок-трансформера">Блок трансформера</a><a class="l2" href="#стоимость">Стоимость</a><a class="l2" href="#семейства-моделей">Семейства моделей</a><a class="l2" href="#мосты-к-рекомендациям-и-поиску">Мосты к рекомендациям и поиску</a><a class="l2" href="#код-self-attention-и-готовый-слой">Код: self-attention и готовый слой</a><a class="l2" href="#практика-и-подводные-камни">Практика и подводные камни</a><a class="l2" href="#что-почитать">Что почитать</a>
+      <a class="l2" href="#внимание-как-мягкий-поиск">Внимание как мягкий поиск</a><a class="l2" href="#позиции">Позиции</a><a class="l2" href="#блок-трансформера">Блок трансформера</a><a class="l2" href="#стоимость">Стоимость</a><a class="l2" href="#семейства-моделей">Семейства моделей</a><a class="l2" href="#мосты-к-рекомендациям-и-поиску">Мосты к рекомендациям и поиску</a><a class="l2" href="#код-self-attention-и-готовый-слой">Код: self-attention и готовый слой</a><a class="l2" href="#практика-и-подводные-камни">Практика и подводные камни</a><a class="l2" href="#проверь-себя">Проверь себя</a><a class="l2" href="#что-почитать">Что почитать</a>
     </aside>
   </div>
 </div>

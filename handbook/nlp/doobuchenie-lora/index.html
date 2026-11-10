@@ -1,0 +1,327 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Дообучение LLM: от полного fine-tuning до LoRA · EDU FAMCS</title>
+<meta name="description" content="Дообучение LLM: от полного fine-tuning до LoRA — NLP и большие языковые модели. Хендбук ML-курса ФПМИ.">
+<meta name="theme-color" content="#060A16">
+<meta name="robots" content="noindex, nofollow">
+<meta name="htmx-config" content='{"allowEval":false,"includeIndicatorStyles":false,"historyCacheSize":0,"selfRequestsOnly":true}'>
+<meta name="katex-js" content="/edufamcs-demo/static/vendor/katex/katex.min.js">
+<meta name="katex-css" content="/edufamcs-demo/static/vendor/katex/katex.min.css">
+<link rel="icon" href="/edufamcs-demo/static/brand/logo/favicon-16.svg" type="image/svg+xml" sizes="16x16">
+<link rel="icon" href="/edufamcs-demo/static/brand/logo/favicon.svg" type="image/svg+xml" sizes="any">
+<link rel="preload" href="/edufamcs-demo/static/brand/fonts/manrope-cyrillic-400.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/edufamcs-demo/static/brand/fonts/unbounded-cyrillic-800.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="/edufamcs-demo/static/brand/fonts.css">
+<link rel="stylesheet" href="/edufamcs-demo/static/brand/tokens.css">
+<link rel="stylesheet" href="/edufamcs-demo/static/brand/components.css">
+<link rel="stylesheet" href="/edufamcs-demo/static/css/site.css">
+<link rel="stylesheet" href="/edufamcs-demo/static/css/hub.css">
+<link rel="stylesheet" href="/edufamcs-demo/static/css/about.css">
+<link rel="stylesheet" href="/edufamcs-demo/static/handbook/handbook.css">
+<script src="/edufamcs-demo/static/js/theme.js"></script>
+<script src="/edufamcs-demo/static/vendor/htmx/htmx.min.js" defer></script>
+<script src="/edufamcs-demo/static/vendor/alpine/alpine-csp.min.js" defer></script>
+<script src="/edufamcs-demo/static/js/site.js" defer></script>
+<script src="/edufamcs-demo/static/handbook/handbook.js" defer></script>
+</head>
+<body class="" hx-headers='{"X-CSRFToken": "3SVJhYrFZdpCOrMwO5SLrIXpFJscq3dtF5KGx00w00DbZK1YNy6I9BPn7SzaaNca"}'>
+<a class="skip" href="#main">К содержанию</a>
+<div class="demo-bar" role="note">Демо-версия для отзывов: вход, запись на курсы и формы здесь не работают.</div>
+
+<header class="hdr">
+  <div class="container">
+    <a class="brand" href="/edufamcs-demo/" aria-label="EDU FAMCS — главная">
+      <span class="full"><img class="only-light" src="/edufamcs-demo/static/brand/logo/logo-edu-light.svg" alt="EDU FAMCS" width="196" height="40"><img class="only-dark" src="/edufamcs-demo/static/brand/logo/logo-edu-dark.svg" alt="EDU FAMCS" width="196" height="40"></span>
+      <span class="short"><img class="only-light" src="/edufamcs-demo/static/brand/logo/logo-edu-light.svg" alt="EDU FAMCS" height="30"><img class="only-dark" src="/edufamcs-demo/static/brand/logo/logo-edu-dark.svg" alt="EDU FAMCS" height="30"></span>
+    </a>
+    <nav class="nav" id="main-nav" aria-label="Основная навигация">
+      <a href="/edufamcs-demo/#courses">Курсы</a>
+      <a href="/edufamcs-demo/ml/" >Машинное обучение</a>
+      
+      <a href="/edufamcs-demo/handbook/" aria-current="page">Хендбук</a>
+      <a href="/edufamcs-demo/news/" >Новости</a>
+      <a href="/edufamcs-demo/people/" >Авторы</a>
+      <a href="/edufamcs-demo/about/" >О&nbsp;нас</a>
+    </nav>
+    <div class="hdr-actions">
+      
+      <a class="btn btn-outline btn-login" href="/edufamcs-demo/accounts/login/?next=/handbook/nlp/doobuchenie-lora/">Войти</a>
+      
+      <button class="icon-btn menu-btn" type="button" aria-label="Меню" aria-expanded="false" aria-controls="main-nav"><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-menu"/></svg></button>
+    </div>
+  </div>
+</header>
+
+<main id="main">
+
+
+
+<div class="container hb-page s-nlp">
+  <div class="hb-readbar" aria-hidden="true"><i></i></div>
+  <div class="hb">
+    <aside class="hb-nav" aria-label="Статьи раздела">
+      
+<form class="hb-search" action="/edufamcs-demo/handbook/search/" method="get" role="search">
+  <svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-search"/></svg>
+  <input class="input" type="search" name="q" value="" placeholder="Поиск по хендбуку" aria-label="Поиск по хендбуку" autocomplete="off" maxlength="120"
+    hx-get="/edufamcs-demo/handbook/search/" hx-trigger="input changed delay:250ms, search" hx-target="#hb-nav-results" hx-sync="this:replace">
+</form>
+
+      <div id="hb-nav-results" class="hb-nav-results" aria-live="polite"></div>
+      <a class="grp" href="/edufamcs-demo/handbook/nlp/">Практика</a>
+      
+      <a class="cur" href="/edufamcs-demo/handbook/nlp/doobuchenie-lora/" aria-current="page">Дообучение LLM: от полного fine-tuning до LoRA</a>
+      
+      <a class="" href="/edufamcs-demo/handbook/nlp/ocenka-i-inferens-llm/">Оценка и инференс LLM</a>
+      
+    </aside>
+
+    <article class="hb-main">
+      <nav class="crumbs" aria-label="Навигация"><a href="/edufamcs-demo/handbook/">Хендбук</a><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-chev"/></svg><a href="/edufamcs-demo/handbook/nlp/">NLP и большие языковые модели</a></nav>
+      <h1 class="h1">Дообучение LLM: от полного fine-tuning до LoRA</h1>
+      <div class="hb-meta">
+        
+        
+        <span><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-clock"/></svg>13&nbsp;мин</span>
+        <span class="hb-authors"><span class="avatar sm" title="Артем Лебедевич">АЛ</span>Артем Лебедевич</span>
+        <span><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-edit"/></svg>10 ноября 2026</span>
+        
+        
+      </div>
+
+      
+      <details class="hb-mtoc">
+        <summary><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-list"/></svg>Содержание<svg class="ico sm" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-chev-down"/></svg></summary>
+        <a class="l2" href="#prompt-rag-или-fine-tuning">Prompt, RAG или fine-tuning</a><a class="l2" href="#инструктивное-дообучение-sft">Инструктивное дообучение (SFT)</a><a class="l2" href="#lora-вывод">LoRA: вывод</a><a class="l2" href="#qlora-и-другие-peft-методы">QLoRA и другие PEFT-методы</a><a class="l2" href="#дообучение-на-предпочтениях">Дообучение на предпочтениях</a><a class="l2" href="#гиперпараметры-которые-важны">Гиперпараметры, которые важны</a><a class="l2" href="#оценка-и-переобучение-на-малых-наборах">Оценка и переобучение на малых наборах</a><a class="l2" href="#код">Код</a><a class="l2" href="#ловушки">Ловушки</a><a class="l2" href="#проверь-себя">Проверь себя</a><a class="l2" href="#что-почитать">Что почитать</a>
+      </details>
+      
+
+      <div class="prose"><p>Предобученная модель знает язык и много фактов, но не знает ваш формат ответа, терминологию и правила. Адаптировать её можно промптом, поиском по вашим данным или изменением весов. Дообучение — самый дорогой и необратимый из трёх способов, поэтому решение о нём принимают осознанно. Когда оно нужно, полное обновление всех параметров почти всегда избыточно: хватает низкоранговой добавки LoRA, которую мы выведем и реализуем с нуля.</p>
+<h2 id="prompt-rag-или-fine-tuning">Prompt, RAG или fine-tuning</h2>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>Проблема</th>
+<th>Что пробовать</th>
+<th>Почему</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Модель не знает ваших фактов или они часто меняются</td>
+<td><a href="/edufamcs-demo/handbook/retrieval/rag/" rel="noopener noreferrer nofollow">RAG</a></td>
+<td>знания обновляются заменой документов, ответ можно привязать к источнику</td>
+</tr>
+<tr>
+<td>Нужен определённый формат, тон, роль</td>
+<td>промпт с примерами, затем дообучение</td>
+<td>формат — навык, а не знание: примеры в промпте дёшевы, дообучение даёт устойчивость</td>
+</tr>
+<tr>
+<td>Нужна устойчивая специфическая манера на тысячах запросов в секунду</td>
+<td>дообучение небольшой модели</td>
+<td>короче промпт, ниже стоимость токена</td>
+</tr>
+<tr>
+<td>Узкая задача (классификация, извлечение сущностей) с разметкой</td>
+<td>дообучение малой модели или энкодера</td>
+<td>дешевле и быстрее большой модели с промптом</td>
+</tr>
+<tr>
+<td>Нужна проверка/цитирование</td>
+<td>RAG + проверка вывода</td>
+<td>дообучение не даёт ссылок на источник</td>
+</tr>
+</tbody>
+</table></div>
+<p>Правило: сначала промпт и оценка (см. <a href="/edufamcs-demo/handbook/nlp/ocenka-i-inferens-llm/" rel="noopener noreferrer nofollow">оценку</a>), потом RAG, и только потом веса. Дообучение плохо <strong>добавляет новые факты</strong> — модель учит форму и манеру, а факты запоминает ненадёжно и забывает прежние. Нет оценочного набора — дообучать рано: вы не узнаете, стало ли лучше.</p>
+<h2 id="инструктивное-дообучение-sft">Инструктивное дообучение (SFT)</h2>
+<p>Данные — пары «запрос → хороший ответ», часто в виде диалога <code>system/user/assistant</code>. Диалог превращается в одну последовательность токенов через <strong>chat template</strong> (см. <a href="/edufamcs-demo/handbook/nlp/tokenizaciya-i-embeddingi/" rel="noopener noreferrer nofollow">токенизацию</a>), и модель обучается обычным предсказанием следующего токена, как при предобучении. Важная деталь: потери считаются <strong>только на токенах ответа ассистента</strong>. Метки токенов промпта и шаблона заменяют на <code>-100</code> (значение <code>ignore_index</code> в PyTorch), иначе модель учится воспроизводить вопросы пользователя, а сигнал размывается. В итоге:</p>
+<div class="tex tex-block">\mathcal L=-\frac{1}{|\mathcal A|}\sum_{t\in\mathcal A}\log p_\theta(x_t\mid x_{&lt;t}),</div>
+<p>где <span class="tex">\mathcal A</span> — множество позиций ответа. Данных нужно меньше, чем кажется: для формата и стиля хватает сотен–тысяч тщательных примеров; качество и разнообразие важнее объёма. Шаблон при обучении и при инференсе должен совпадать до символа.</p>
+<p><strong>Катастрофическое забывание.</strong> Обновление всех весов на узких данных сдвигает модель в область, где она хорошо решает вашу задачу и теряет прежние навыки (общие рассуждения, другие языки, безопасность). Меры: малый learning rate, мало эпох, подмешивание общих данных, параметрически эффективные методы.</p>
+<h2 id="lora-вывод">LoRA: вывод</h2>
+<p>Идея (Ху и соавторы, 2021): изменение весов при дообучении имеет низкий «внутренний ранг». Заморозим <span class="tex">W_0\in\mathbb R^{d_{out}\times d_{in}}</span> и будем обучать добавку <span class="tex">\Delta W=BA</span>, где <span class="tex">B\in\mathbb R^{d_{out}\times r}</span>, <span class="tex">A\in\mathbb R^{r\times d_{in}}</span>, <span class="tex">r\ll\min(d_{in},d_{out})</span>:</p>
+<div class="tex tex-block">h=W_0x+\frac{\alpha}{r}BAx.</div>
+<p><strong>Число параметров.</strong> Полный слой — <span class="tex">d_{out}d_{in}</span>, LoRA — <span class="tex">r(d_{in}+d_{out})</span>. Для <span class="tex">d_{in}=d_{out}=4096</span>, <span class="tex">r=8</span>: <span class="tex">16\,777\,216</span> против <span class="tex">65\,536</span>, то есть <span class="tex">0{,}39\,\%</span>. Если применить <span class="tex">r=8</span> к четырём квадратным проекциям внимания в каждом из 32 слоёв, получится <span class="tex">32\cdot4\cdot65\,536=8\,388\,608</span> параметров (иллюстративная конфигурация). Состояния оптимизатора и градиенты нужны только для них, а не для миллиардов весов базы — отсюда экономия памяти.</p>
+<p><strong>Зачем <span class="tex">B=0</span>.</strong> <span class="tex">A</span> инициализируют случайно, а <span class="tex">B</span> нулями, поэтому <span class="tex">BA=0</span> и в начале обучения модель в точности совпадает с базовой: дообучение стартует с известной хорошей точки. Нулевой должна быть только одна матрица: если нули в обеих, градиенты по обеим будут нулевыми и обучение не сдвинется; если случайны обе, добавка в начале шумит. Градиент по <span class="tex">B</span> при <span class="tex">B=0</span> ненулевой (<span class="tex">\propto \delta\,(Ax)^\top</span>), поэтому <span class="tex">B</span> начинает расти, затем растёт и градиент по <span class="tex">A</span>.</p>
+<p><strong>Зачем <span class="tex">\alpha/r</span>.</strong> Множитель делает масштаб добавки независимым от ранга: можно менять <span class="tex">r</span>, почти не пересматривая learning rate; <span class="tex">\alpha</span> — отдельная ручка силы добавки (часто берут <span class="tex">\alpha=r</span> или <span class="tex">2r</span>).</p>
+<p><strong>Слияние.</strong> После обучения <span class="tex">W=W_0+\frac\alpha r BA</span> — обычная матрица того же размера: у слитой модели нет накладных расходов на инференс. Либо адаптеры хранят отдельно (по мегабайты на задачу) и подгружают нужный к общей базе.</p>
+<p><strong>Какие модули.</strong> В оригинале — проекции <span class="tex">W_q,W_v</span>; на практике берут все линейные слои внимания и MLP (<code>q,k,v,o</code> плюс <code>gate,up,down</code>): так качество выше при том же ранге, хотя параметров больше. Эмбеддинги и нормы обычно заморожены.</p>
+<h2 id="qlora-и-другие-peft-методы">QLoRA и другие PEFT-методы</h2>
+<p><strong>QLoRA</strong> (Деттмерс и соавторы, NeurIPS 2023): базовую модель квантуют в 4 бита (тип NormalFloat NF4, двойное квантование констант), замораживают, а градиенты текут через неё в LoRA-адаптеры, которые хранятся в более высокой точности. Страничные оптимизаторы сглаживают пики памяти. По заявлению авторов, это позволило дообучать модель на 65 млрд параметров на одной видеокарте с 48 ГБ без потери качества относительно 16-битного дообучения.</p>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>Метод</th>
+<th>Что обучается</th>
+<th>Замечание</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Adapters (Хаулсби и соавторы, 2019)</td>
+<td>маленькие bottleneck-блоки внутри слоёв</td>
+<td>добавляют слои, небольшая задержка при инференсе</td>
+</tr>
+<tr>
+<td>Prefix-tuning (Ли и Лян, 2021)</td>
+<td>обучаемые векторы-префиксы в ключах/значениях каждого слоя</td>
+<td>базовая модель заморожена, префиксы занимают контекст</td>
+</tr>
+<tr>
+<td>Prompt tuning (Лестер и соавторы, 2021)</td>
+<td>обучаемые «мягкие» токены на входе</td>
+<td>растёт качество с размером модели</td>
+</tr>
+<tr>
+<td>LoRA</td>
+<td>низкоранговая добавка к весам</td>
+<td>сливается в веса, стандарт de facto</td>
+</tr>
+<tr>
+<td>DoRA (Лю и соавторы, ICML 2024)</td>
+<td>разделяет вес на магнитуду и направление, LoRA обновляет направление</td>
+<td>авторы сообщают улучшение над LoRA без добавочной стоимости инференса</td>
+</tr>
+</tbody>
+</table></div>
+<div class="callout md note"><p class="callout-title">LoRA и качество</p>
+<p>Биддерман и соавторы (2024, «LoRA Learns Less and Forgets Less») на задачах программирования и математики показали, что полное дообучение обычно сильнее LoRA, но LoRA лучше сохраняет возможности базовой модели вне целевой области. Выбор — компромисс, а не «LoRA всегда хуже/лучше».</p>
+</div>
+<h2 id="дообучение-на-предпочтениях">Дообучение на предпочтениях</h2>
+<p>После SFT модель часто доучивают на <strong>предпочтениях</strong>: для запроса <span class="tex">x</span> есть ответ <span class="tex">y_w</span> лучше ответа <span class="tex">y_l</span>. <strong>RLHF</strong> (Оуян и соавторы, 2022): обучить reward-модель <span class="tex">r(x,y)</span> на парах по модели Брэдли–Терри, <span class="tex">-\log\sigma\big(r(x,y_w)-r(x,y_l)\big)</span>, затем оптимизировать политику алгоритмом PPO, максимизируя награду со штрафом <span class="tex">\beta\,\mathrm{KL}</span> за отход от SFT-модели. Сложно: четыре модели в памяти и нестабильный RL. <strong>DPO</strong> (Рафаилов и соавторы, 2023) убирает reward-модель и RL: из решения задачи с KL-штрафом выражается награда через отношение политик, и остаётся классификационная функция потерь</p>
+<div class="tex tex-block">\mathcal L_{\text{DPO}}=-\mathbb E\Big[\log\sigma\Big(\beta\log\frac{\pi_\theta(y_w\mid x)}{\pi_{\text{ref}}(y_w\mid x)}-\beta\log\frac{\pi_\theta(y_l\mid x)}{\pi_{\text{ref}}(y_l\mid x)}\Big)\Big],</div>
+<p>где <span class="tex">\pi_{\text{ref}}</span> — замороженная SFT-модель. Словами: повысить вероятность выбранного ответа и понизить отвергнутого относительно референса; <span class="tex">\beta</span> задаёт, насколько далеко можно отойти. Нужна только пара моделей (обучаемая и замороженная) и данные пар. Качество данных предпочтений решает больше, чем выбор алгоритма.</p>
+<h2 id="гиперпараметры-которые-важны">Гиперпараметры, которые важны</h2>
+<ul>
+<li><strong>learning rate:</strong> для LoRA обычно выше, чем для полного дообучения (порядка <span class="tex">10^{-4}</span> против <span class="tex">10^{-5}</span> — ориентировочно; подбирать);</li>
+<li><strong>ранг <span class="tex">r</span> и <span class="tex">\alpha</span>:</strong> начинайте с 8–16; повышать ранг имеет смысл, если качество на обучении не растёт;</li>
+<li><strong>модули-цели:</strong> все линейные слои надёжнее, чем только внимание;</li>
+<li><strong>число эпох:</strong> 1–3; больше — быстро переобучает малый набор;</li>
+<li><strong>размер батча и warmup</strong>, <code>weight decay</code> и <code>dropout</code> адаптера — вторичны.</li>
+</ul>
+<h2 id="оценка-и-переобучение-на-малых-наборах">Оценка и переобучение на малых наборах</h2>
+<p>На малом наборе (сотни примеров) потери обучения падают до нуля, а качество на новых запросах — нет. Держите отложенную выборку, которую вы не смотрели, оценивайте <strong>генерацию</strong> целевой метрикой, а не только потери валидации, и проверяйте регрессию на общих задачах (забывание). Лучшая контрольная точка — по метрике, а не по последней эпохе. Подробнее о построении наборов — <a href="/edufamcs-demo/handbook/nlp/ocenka-i-inferens-llm/" rel="noopener noreferrer nofollow">оценка LLM</a>.</p>
+<h2 id="код">Код</h2>
+<p>LoRA-слой с нуля (проверка: на старте выход равен выходу базы, обучаются только <span class="tex">A</span> и <span class="tex">B</span>):</p>
+<div class="code"><div class="code-head"><span class="lang">python</span></div><pre><code><span class="tok-k">import</span> math<span class="tok-p">,</span> torch<span class="tok-p">,</span> torch.nn <span class="tok-k">as</span> nn
+
+<span class="tok-k">class</span> <span class="tok-f">LoRALinear</span><span class="tok-p">(</span>nn<span class="tok-p">.</span>Module<span class="tok-p">)</span><span class="tok-p">:</span>
+    <span class="tok-k">def</span> <span class="tok-f">__init__</span><span class="tok-p">(</span><span class="tok-f">self</span><span class="tok-p">,</span> base<span class="tok-p">:</span> nn<span class="tok-p">.</span>Linear<span class="tok-p">,</span> r<span class="tok-p">=</span><span class="tok-n">8</span><span class="tok-p">,</span> alpha<span class="tok-p">=</span><span class="tok-n">16</span><span class="tok-p">)</span><span class="tok-p">:</span>
+        <span class="tok-f">super</span><span class="tok-p">(</span><span class="tok-p">)</span><span class="tok-p">.</span><span class="tok-f">__init__</span><span class="tok-p">(</span><span class="tok-p">)</span>
+        <span class="tok-f">self</span><span class="tok-p">.</span>base <span class="tok-p">=</span> base
+        <span class="tok-k">for</span> p <span class="tok-k">in</span> <span class="tok-f">self</span><span class="tok-p">.</span>base<span class="tok-p">.</span>parameters<span class="tok-p">(</span><span class="tok-p">)</span><span class="tok-p">:</span> p<span class="tok-p">.</span>requires_grad_<span class="tok-p">(</span><span class="tok-k">False</span><span class="tok-p">)</span>
+        <span class="tok-f">self</span><span class="tok-p">.</span>A <span class="tok-p">=</span> nn<span class="tok-p">.</span>Parameter<span class="tok-p">(</span>torch<span class="tok-p">.</span>randn<span class="tok-p">(</span>r<span class="tok-p">,</span> base<span class="tok-p">.</span>in_features<span class="tok-p">)</span> <span class="tok-p">/</span> math<span class="tok-p">.</span>sqrt<span class="tok-p">(</span>base<span class="tok-p">.</span>in_features<span class="tok-p">)</span><span class="tok-p">)</span>
+        <span class="tok-f">self</span><span class="tok-p">.</span>B <span class="tok-p">=</span> nn<span class="tok-p">.</span>Parameter<span class="tok-p">(</span>torch<span class="tok-p">.</span>zeros<span class="tok-p">(</span>base<span class="tok-p">.</span>out_features<span class="tok-p">,</span> r<span class="tok-p">)</span><span class="tok-p">)</span>     <span class="tok-c"># нули: стартуем с базы</span>
+        <span class="tok-f">self</span><span class="tok-p">.</span>scale <span class="tok-p">=</span> alpha <span class="tok-p">/</span> r
+    <span class="tok-k">def</span> <span class="tok-f">forward</span><span class="tok-p">(</span><span class="tok-f">self</span><span class="tok-p">,</span> x<span class="tok-p">)</span><span class="tok-p">:</span>
+        <span class="tok-k">return</span> <span class="tok-f">self</span><span class="tok-p">.</span>base<span class="tok-p">(</span>x<span class="tok-p">)</span> <span class="tok-p">+</span> <span class="tok-f">self</span><span class="tok-p">.</span>scale <span class="tok-p">*</span> <span class="tok-p">(</span>x <span class="tok-p">@</span> <span class="tok-f">self</span><span class="tok-p">.</span>A<span class="tok-p">.</span>T<span class="tok-p">)</span> <span class="tok-p">@</span> <span class="tok-f">self</span><span class="tok-p">.</span>B<span class="tok-p">.</span>T
+    <span class="tok-f">@torch</span><span class="tok-p">.</span>no_grad<span class="tok-p">(</span><span class="tok-p">)</span>
+    <span class="tok-k">def</span> <span class="tok-f">merge</span><span class="tok-p">(</span><span class="tok-f">self</span><span class="tok-p">)</span><span class="tok-p">:</span>
+        <span class="tok-f">self</span><span class="tok-p">.</span>base<span class="tok-p">.</span>weight <span class="tok-p">+</span><span class="tok-p">=</span> <span class="tok-f">self</span><span class="tok-p">.</span>scale <span class="tok-p">*</span> <span class="tok-f">self</span><span class="tok-p">.</span>B <span class="tok-p">@</span> <span class="tok-f">self</span><span class="tok-p">.</span>A
+        <span class="tok-k">return</span> <span class="tok-f">self</span><span class="tok-p">.</span>base
+
+torch<span class="tok-p">.</span>manual_seed<span class="tok-p">(</span><span class="tok-n">0</span><span class="tok-p">)</span>
+base <span class="tok-p">=</span> nn<span class="tok-p">.</span>Linear<span class="tok-p">(</span><span class="tok-n">64</span><span class="tok-p">,</span> <span class="tok-n">64</span><span class="tok-p">)</span><span class="tok-p">;</span> lora <span class="tok-p">=</span> LoRALinear<span class="tok-p">(</span>base<span class="tok-p">,</span> r<span class="tok-p">=</span><span class="tok-n">4</span><span class="tok-p">,</span> alpha<span class="tok-p">=</span><span class="tok-n">8</span><span class="tok-p">)</span>
+x <span class="tok-p">=</span> torch<span class="tok-p">.</span>randn<span class="tok-p">(</span><span class="tok-n">32</span><span class="tok-p">,</span> <span class="tok-n">64</span><span class="tok-p">)</span>
+<span class="tok-f">print</span><span class="tok-p">(</span>torch<span class="tok-p">.</span>allclose<span class="tok-p">(</span>lora<span class="tok-p">(</span>x<span class="tok-p">)</span><span class="tok-p">,</span> base<span class="tok-p">(</span>x<span class="tok-p">)</span><span class="tok-p">)</span><span class="tok-p">)</span>                     <span class="tok-c"># True</span>
+<span class="tok-f">print</span><span class="tok-p">(</span><span class="tok-f">sum</span><span class="tok-p">(</span>p<span class="tok-p">.</span>numel<span class="tok-p">(</span><span class="tok-p">)</span> <span class="tok-k">for</span> p <span class="tok-k">in</span> lora<span class="tok-p">.</span>parameters<span class="tok-p">(</span><span class="tok-p">)</span> <span class="tok-k">if</span> p<span class="tok-p">.</span>requires_grad<span class="tok-p">)</span><span class="tok-p">)</span>   <span class="tok-c"># 512 (= 4*(64+64))</span>
+<span class="tok-c"># 4160 заморожено (64*64 + 64 смещение)</span>
+y <span class="tok-p">=</span> base<span class="tok-p">(</span>x<span class="tok-p">)</span> <span class="tok-p">+</span> x <span class="tok-p">@</span> <span class="tok-p">(</span>torch<span class="tok-p">.</span>randn<span class="tok-p">(</span><span class="tok-n">64</span><span class="tok-p">,</span> <span class="tok-n">4</span><span class="tok-p">)</span> <span class="tok-p">@</span> torch<span class="tok-p">.</span>randn<span class="tok-p">(</span><span class="tok-n">4</span><span class="tok-p">,</span> <span class="tok-n">64</span><span class="tok-p">)</span> <span class="tok-p">*</span> <span class="tok-n">0.3</span><span class="tok-p">)</span><span class="tok-p">.</span>T  <span class="tok-c"># сдвиг ранга 4</span>
+opt <span class="tok-p">=</span> torch<span class="tok-p">.</span>optim<span class="tok-p">.</span>Adam<span class="tok-p">(</span><span class="tok-p">[</span>p <span class="tok-k">for</span> p <span class="tok-k">in</span> lora<span class="tok-p">.</span>parameters<span class="tok-p">(</span><span class="tok-p">)</span> <span class="tok-k">if</span> p<span class="tok-p">.</span>requires_grad<span class="tok-p">]</span><span class="tok-p">,</span> lr<span class="tok-p">=</span><span class="tok-n">1e-2</span><span class="tok-p">)</span>
+<span class="tok-k">for</span> i <span class="tok-k">in</span> <span class="tok-f">range</span><span class="tok-p">(</span><span class="tok-n">301</span><span class="tok-p">)</span><span class="tok-p">:</span>
+    loss <span class="tok-p">=</span> <span class="tok-p">(</span><span class="tok-p">(</span>lora<span class="tok-p">(</span>x<span class="tok-p">)</span> <span class="tok-p">-</span> y<span class="tok-p">)</span> <span class="tok-p">*</span><span class="tok-p">*</span> <span class="tok-n">2</span><span class="tok-p">)</span><span class="tok-p">.</span>mean<span class="tok-p">(</span><span class="tok-p">)</span><span class="tok-p">;</span> opt<span class="tok-p">.</span>zero_grad<span class="tok-p">(</span><span class="tok-p">)</span><span class="tok-p">;</span> loss<span class="tok-p">.</span>backward<span class="tok-p">(</span><span class="tok-p">)</span><span class="tok-p">;</span> opt<span class="tok-p">.</span>step<span class="tok-p">(</span><span class="tok-p">)</span>
+<span class="tok-c"># loss: 28.435 (шаг 0) -&gt; 0.047 (100) -&gt; 8e-5 (200)</span>
+out <span class="tok-p">=</span> lora<span class="tok-p">(</span>x<span class="tok-p">)</span><span class="tok-p">.</span>detach<span class="tok-p">(</span><span class="tok-p">)</span><span class="tok-p">;</span> <span class="tok-f">print</span><span class="tok-p">(</span>torch<span class="tok-p">.</span>allclose<span class="tok-p">(</span>lora<span class="tok-p">.</span>merge<span class="tok-p">(</span><span class="tok-p">)</span><span class="tok-p">(</span>x<span class="tok-p">)</span><span class="tok-p">,</span> out<span class="tok-p">,</span> atol<span class="tok-p">=</span><span class="tok-n">1e-5</span><span class="tok-p">)</span><span class="tok-p">)</span>   <span class="tok-c"># True</span>
+</code></pre></div>
+<p>Запустите на реальной модели через библиотеку <code>peft</code> (<code>LoraConfig(r=16, lora_alpha=32, target_modules="all-linear")</code>), а обучение — через <code>trl</code> (<code>SFTTrainer</code>, у которого есть режим «потери только на ответах ассистента»). Сверяйтесь с документацией установленной версии: API этих библиотек меняется.</p>
+<h2 id="ловушки">Ловушки</h2>
+<div class="callout md warn"><p class="callout-title">Дообучение «для знаний»</p>
+<p>Если вы дообучаете, чтобы модель «знала» документы компании, вы получите уверенные выдумки в стиле документов. Для знаний — RAG; дообучение — для формата и манеры.</p>
+</div>
+<ul>
+<li>Шаблон диалога при обучении не совпадает с шаблоном при инференсе.</li>
+<li>Потери считаются по всей последовательности, включая промпт.</li>
+<li>Оценка только по потерям на валидации; нет проверки общих навыков.</li>
+<li>Данные из тех же источников, что оценочный набор: утечка, завышенные метрики.</li>
+<li><strong>На собеседовании:</strong> выведите число параметров LoRA и объясните, почему <span class="tex">B</span> нулевая; чем QLoRA отличается от LoRA.</li>
+<li><strong>На собеседовании:</strong> когда дообучение, а когда RAG; чем DPO проще RLHF и что в нём заменяет reward-модель.</li>
+</ul>
+<h2 id="проверь-себя">Проверь себя</h2>
+<details class="callout md details"><summary>Сколько параметров добавляет LoRA ранга $r$ к матрице $d_{out}\times d_{in}$?</summary>
+<p><span class="tex">r(d_{in}+d_{out})</span>: матрицы <span class="tex">A\in\mathbb R^{r\times d_{in}}</span> и <span class="tex">B\in\mathbb R^{d_{out}\times r}</span>. Для <span class="tex">4096\times4096</span> и <span class="tex">r=8</span> — 65 536, то есть 0,39 % от слоя.</p>
+</details>
+<details class="callout md details"><summary>Почему $B$ инициализируют нулями, а $A$ — случайно?</summary>
+<p>Тогда <span class="tex">BA=0</span> и модель в начале совпадает с базовой, при этом градиент по <span class="tex">B</span> ненулевой и обучение стартует. При двух нулевых матрицах градиенты нулевые.</p>
+</details>
+<details class="callout md details"><summary>Что такое $\alpha/r$ и зачем оно?</summary>
+<p>Масштаб добавки <span class="tex">\frac\alpha r BA</span>: делает её силу слабо зависящей от ранга, чтобы при смене <span class="tex">r</span> не подбирать learning rate заново.</p>
+</details>
+<details class="callout md details"><summary>На каких токенах считаются потери в SFT и как это реализуют?</summary>
+<p>Только на токенах ответа ассистента; метки остальных позиций заменяют на <span class="tex">-100</span> (<code>ignore_index</code>).</p>
+</details>
+<details class="callout md details"><summary>В чём идея DPO по сравнению с RLHF?</summary>
+<p>Награда выражается через логарифм отношения политик, поэтому reward-модель и RL не нужны: учим классификатор «выбранный ответ вероятнее отвергнутого» относительно замороженного референса.</p>
+</details>
+<h2 id="что-почитать">Что почитать</h2>
+<ul>
+<li>Hu et al., <em>LoRA: Low-Rank Adaptation of Large Language Models</em>, ICLR 2022: <a href="https://arxiv.org/abs/2106.09685" rel="noopener noreferrer nofollow">arxiv.org/abs/2106.09685</a>.</li>
+<li>Dettmers et al., <em>QLoRA: Efficient Finetuning of Quantized LLMs</em>, NeurIPS 2023: <a href="https://arxiv.org/abs/2305.14314" rel="noopener noreferrer nofollow">arxiv.org/abs/2305.14314</a>.</li>
+<li>Rafailov et al., <em>Direct Preference Optimization: Your Language Model is Secretly a Reward Model</em>, NeurIPS 2023: <a href="https://arxiv.org/abs/2305.18290" rel="noopener noreferrer nofollow">arxiv.org/abs/2305.18290</a>; Ouyang et al., <em>Training language models to follow instructions with human feedback</em>, 2022: <a href="https://arxiv.org/abs/2203.02155" rel="noopener noreferrer nofollow">arxiv.org/abs/2203.02155</a>.</li>
+<li>Liu et al., <em>DoRA: Weight-Decomposed Low-Rank Adaptation</em>, ICML 2024: <a href="https://arxiv.org/abs/2402.09353" rel="noopener noreferrer nofollow">arxiv.org/abs/2402.09353</a>; Biderman et al., <em>LoRA Learns Less and Forgets Less</em>, TMLR 2024: <a href="https://arxiv.org/abs/2405.09673" rel="noopener noreferrer nofollow">arxiv.org/abs/2405.09673</a>.</li>
+<li>Houlsby et al., <em>Parameter-Efficient Transfer Learning for NLP</em>, ICML 2019: <a href="https://arxiv.org/abs/1902.00751" rel="noopener noreferrer nofollow">arxiv.org/abs/1902.00751</a>; Li, Liang, <em>Prefix-Tuning</em>, ACL 2021: <a href="https://arxiv.org/abs/2101.00190" rel="noopener noreferrer nofollow">arxiv.org/abs/2101.00190</a>; Lester et al., <em>The Power of Scale for Parameter-Efficient Prompt Tuning</em>, EMNLP 2021: <a href="https://arxiv.org/abs/2104.08691" rel="noopener noreferrer nofollow">arxiv.org/abs/2104.08691</a>.</li>
+<li>Документация Hugging Face: <a href="https://huggingface.co/docs/peft" rel="noopener noreferrer nofollow">PEFT</a> и <a href="https://huggingface.co/docs/trl" rel="noopener noreferrer nofollow">TRL</a>.</li>
+</ul>
+</div>
+      
+
+      
+
+      
+      <nav class="pager" aria-label="Соседние статьи">
+        <a href="/edufamcs-demo/handbook/nlp/generaciya-teksta/"><span><svg class="ico sm" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-arrow-left"/></svg>Назад</span>Генерация: декодирование и сэмплирование</a>
+        <a href="/edufamcs-demo/handbook/nlp/ocenka-i-inferens-llm/"><span>Дальше<svg class="ico sm" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-arrow"/></svg></span>Оценка и инференс LLM</a>
+      </nav>
+      
+    </article>
+
+    <aside class="hb-toc" aria-label="На этой странице">
+      <a class="l2" href="#prompt-rag-или-fine-tuning">Prompt, RAG или fine-tuning</a><a class="l2" href="#инструктивное-дообучение-sft">Инструктивное дообучение (SFT)</a><a class="l2" href="#lora-вывод">LoRA: вывод</a><a class="l2" href="#qlora-и-другие-peft-методы">QLoRA и другие PEFT-методы</a><a class="l2" href="#дообучение-на-предпочтениях">Дообучение на предпочтениях</a><a class="l2" href="#гиперпараметры-которые-важны">Гиперпараметры, которые важны</a><a class="l2" href="#оценка-и-переобучение-на-малых-наборах">Оценка и переобучение на малых наборах</a><a class="l2" href="#код">Код</a><a class="l2" href="#ловушки">Ловушки</a><a class="l2" href="#проверь-себя">Проверь себя</a><a class="l2" href="#что-почитать">Что почитать</a>
+    </aside>
+  </div>
+</div>
+
+
+</main>
+
+<footer class="ftr" data-theme="dark">
+  <svg class="sym fern" viewBox="0 0 40.5 65.02" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#fern"/></svg>
+  <div class="container">
+    <div class="ftr-row">
+      <a href="/edufamcs-demo/" aria-label="EDU FAMCS — главная"><img src="/edufamcs-demo/static/brand/logo/logo-edu-dark.svg" alt="EDU FAMCS" width="196" height="40"></a>
+      <ul class="ftr-links">
+        <li><a href="/edufamcs-demo/#courses">Курсы</a></li>
+        <li><a href="/edufamcs-demo/ml/">Машинное обучение</a></li>
+        <li><a href="/edufamcs-demo/handbook/">Хендбук</a></li>
+        <li><a href="/edufamcs-demo/news/">Новости</a></li>
+        <li><a href="/edufamcs-demo/people/">Авторы</a></li>
+        <li><a href="/edufamcs-demo/about/">О&nbsp;нас</a></li>
+        <li><a href="/edufamcs-demo/propose/">Предложить или исправить</a></li>
+        <li><a href="/edufamcs-demo/privacy/">Конфиденциальность</a></li>
+      </ul>
+    </div>
+    <div class="ftr-big" aria-hidden="true">EDU<span class="d">·</span>FAMCS</div>
+    <p class="ftr-copy">© 2026 EDU FAMCS · Минск</p>
+  </div>
+</footer>
+
+<div class="toasts-region" aria-live="polite" id="toasts">
+
+</div>
+
+</body>
+</html>

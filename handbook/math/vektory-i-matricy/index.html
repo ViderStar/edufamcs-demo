@@ -27,7 +27,7 @@
 <script src="/edufamcs-demo/static/js/site.js" defer></script>
 <script src="/edufamcs-demo/static/handbook/handbook.js" defer></script>
 </head>
-<body class="" hx-headers='{"X-CSRFToken": "FkQ77qRWMHdCu64b5d9dpgv9hHVwWYw9rqRu1d9DXUtQ9F0riC2iGIDuN4xL1Jh8"}'>
+<body class="" hx-headers='{"X-CSRFToken": "qdxvNbh71LbI9yONHgg65jxrUX0IO66s2qms3dQY2yphkR3fGJu3Ncppm67GyQ59"}'>
 <a class="skip" href="#main">К содержанию</a>
 <div class="demo-bar" role="note">Демо-версия для отзывов: вход, запись на курсы и формы здесь не работают.</div>
 
@@ -60,6 +60,7 @@
 
 
 <div class="container hb-page hb-tone">
+  <div class="hb-readbar" aria-hidden="true"><i></i></div>
   <div class="hb">
     <aside class="hb-nav" aria-label="Статьи раздела">
       
@@ -78,6 +79,8 @@
       
       <a class="" href="/edufamcs-demo/handbook/math/gradienty-i-optimizaciya/">Производные, градиенты и оптимизация</a>
       
+      <a class="" href="/edufamcs-demo/handbook/math/matrichnoe-differencirovanie/">Матричное дифференцирование</a>
+      
     </aside>
 
     <article class="hb-main">
@@ -86,9 +89,9 @@
       <div class="hb-meta">
         
         
-        <span><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-clock"/></svg>11&nbsp;мин</span>
+        <span><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-clock"/></svg>14&nbsp;мин</span>
         <span class="hb-authors"><span class="avatar sm" title="Артем Лебедевич">АЛ</span>Артем Лебедевич</span>
-        <span><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-edit"/></svg>9 ноября 2026</span>
+        <span><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-edit"/></svg>10 ноября 2026</span>
         
         
       </div>
@@ -96,7 +99,7 @@
       
       <details class="hb-mtoc">
         <summary><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-list"/></svg>Содержание<svg class="ico sm" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-chev-down"/></svg></summary>
-        <a class="l2" href="#векторное-пространство">Векторное пространство</a><a class="l2" href="#скалярное-произведение-длина-угол">Скалярное произведение, длина, угол</a><a class="l2" href="#нормы-и-метрики">Нормы и метрики</a><a class="l2" href="#матрица-как-оператор">Матрица как оператор</a><a class="l2" href="#системы-и-метод-наименьших-квадратов">Системы Ax=b и метод наименьших квадратов</a><a class="l2" href="#разреженные-матрицы">Разреженные матрицы</a><a class="l2" href="#ловушки">Ловушки</a><a class="l2" href="#что-почитать">Что почитать</a>
+        <a class="l2" href="#векторное-пространство">Векторное пространство</a><a class="l2" href="#скалярное-произведение-длина-угол">Скалярное произведение, длина, угол</a><a class="l2" href="#нормы-и-метрики">Нормы и метрики</a><a class="l2" href="#матрица-как-оператор">Матрица как оператор</a><a class="l2" href="#системы-и-метод-наименьших-квадратов">Системы Ax=b и метод наименьших квадратов</a><a class="l2" href="#разреженные-матрицы">Разреженные матрицы</a><a class="l2" href="#ловушки">Ловушки</a><a class="l2" href="#проверь-себя">Проверь себя</a><a class="l2" href="#что-почитать">Что почитать</a>
       </details>
       
 
@@ -112,6 +115,7 @@
 <p><strong>Проекция</strong> вектора <span class="tex">b</span> на прямую, заданную <span class="tex">a</span>:</p>
 <div class="tex tex-block">\mathrm{proj}_a b = \frac{\langle a, b\rangle}{\langle a, a\rangle}\, a.</div>
 <p>Остаток <span class="tex">b - \mathrm{proj}_a b</span> ортогонален <span class="tex">a</span>. Это частный случай общего факта: ближайшая к <span class="tex">b</span> точка подпространства — ортогональная проекция, а разность ортогональна всему подпространству. Ниже он превратится в линейную регрессию.</p>
+<p><strong>Пример руками.</strong> Возьмите <span class="tex">A=\begin{pmatrix}1&amp;2\\2&amp;4\end{pmatrix}</span>: второй столбец вдвое длиннее первого, значит <span class="tex">\mathrm{rank}\,A=1</span>, <span class="tex">\det A=0</span>, образ <span class="tex">\mathrm{im}\,A</span> — прямая <span class="tex">\mathrm{span}\{(1,2)^\top\}</span>, а ядро находится из <span class="tex">x_1+2x_2=0</span>: <span class="tex">\ker A=\mathrm{span}\{(2,-1)^\top\}</span>, <span class="tex">\dim\ker A=2-1=1</span>. Система <span class="tex">Ax=b</span> с <span class="tex">b=(3,1)^\top</span> неразрешима, так как <span class="tex">b\notin\mathrm{im}\,A</span>. Ближайшая к <span class="tex">b</span> точка образа — проекция на <span class="tex">a=(1,2)^\top</span>: <span class="tex">\langle a,b\rangle=5</span>, <span class="tex">\langle a,a\rangle=5</span>, поэтому <span class="tex">\mathrm{proj}_a b=(1,2)^\top</span>, а остаток <span class="tex">b-\mathrm{proj}_a b=(2,-1)^\top</span> ортогонален <span class="tex">a</span>: <span class="tex">2\cdot1+(-1)\cdot2=0</span>. Расстояние от <span class="tex">b</span> до прямой — <span class="tex">\|(2,-1)\|=\sqrt5</span>. Это и есть МНК в миниатюре: «ответ» <span class="tex">Ax=(1,2)^\top</span> — всё, чего можно достичь.</p>
 <h2 id="нормы-и-метрики">Нормы и метрики</h2>
 <p><strong>Норма</strong> <span class="tex">\|\cdot\|</span> — функция с тремя свойствами: <span class="tex">\|x\|=0 \iff x=0</span>; <span class="tex">\|\alpha x\| = |\alpha|\|x\|</span>; неравенство треугольника <span class="tex">\|x+y\| \le \|x\|+\|y\|</span>. Основное семейство:</p>
 <div class="tex tex-block">\|x\|_p = \Big(\sum_i |x_i|^p\Big)^{1/p},\quad \|x\|_\infty = \max_i |x_i|.</div>
@@ -162,6 +166,7 @@ a<span class="tok-p">,</span> b <span class="tok-p">=</span> X<span class="tok-p
 cos <span class="tok-p">=</span> a <span class="tok-p">@</span> b <span class="tok-p">/</span> <span class="tok-p">(</span>np<span class="tok-p">.</span>linalg<span class="tok-p">.</span>norm<span class="tok-p">(</span>a<span class="tok-p">)</span> <span class="tok-p">*</span> np<span class="tok-p">.</span>linalg<span class="tok-p">.</span>norm<span class="tok-p">(</span>b<span class="tok-p">)</span><span class="tok-p">)</span>
 <span class="tok-f">print</span><span class="tok-p">(</span>cos<span class="tok-p">,</span> np<span class="tok-p">.</span>linalg<span class="tok-p">.</span>norm<span class="tok-p">(</span>a<span class="tok-p">,</span> <span class="tok-n">1</span><span class="tok-p">)</span><span class="tok-p">,</span> np<span class="tok-p">.</span>linalg<span class="tok-p">.</span>norm<span class="tok-p">(</span>a<span class="tok-p">,</span> np<span class="tok-p">.</span>inf<span class="tok-p">)</span><span class="tok-p">)</span>
 </code></pre></div>
+<p><strong>Что на самом деле делают <code>lstsq</code> и <code>LinearRegression</code>.</strong> Ни та ни другая не обращает <span class="tex">X^\top X</span>. <code>LinearRegression</code> для плотных данных вызывает <code>scipy.linalg.lstsq</code>; <code>np.linalg.lstsq</code> и <code>scipy.linalg.lstsq</code> (драйвер по умолчанию <code>gelsd</code>) решают задачу через SVD (<a href="/edufamcs-demo/handbook/math/sobstvennye-vektory-i-svd/" rel="noopener noreferrer nofollow">следующая глава</a>), отбрасывая сингулярные числа ниже порога <code>rcond</code>, поэтому работают и при вырожденной <span class="tex">X</span>. Альтернатива — QR-разложение <span class="tex">X=QR</span> с ортогональной <span class="tex">Q</span>: задача сводится к треугольной системе <span class="tex">Rw=Q^\top y</span>, а обусловленность остаётся <span class="tex">\kappa(X)</span>. Нормальные уравнения решают через разложение Холецкого <span class="tex">X^\top X=LL^\top</span>: оно вдвое дешевле QR и потому остаётся в <code>Ridge(solver="cholesky")</code>, где добавка <span class="tex">\lambda I</span> лечит обусловленность, но на голой <span class="tex">X^\top X</span> оно теряет точность, ведь <span class="tex">\kappa(X^\top X)=\kappa(X)^2</span> и требуется положительная определённость. Эксперимент (матрица Вандермонда <span class="tex">50\times10</span> на <span class="tex">[0,1]</span>, <span class="tex">\kappa(X)\approx3{,}6\cdot10^6</span>, <span class="tex">\kappa(X^\top X)\approx1{,}3\cdot10^{13}</span>, точные веса — единицы): относительная ошибка весов у <code>lstsq</code> <span class="tex">8\cdot10^{-11}</span>, у QR <span class="tex">1\cdot10^{-10}</span>, у нормальных уравнений через <code>solve</code> <span class="tex">4{,}6\cdot10^{-4}</span>, через Холецкого <span class="tex">1{,}3\cdot10^{-4}</span> — на шесть порядков хуже.</p>
 <h2 id="разреженные-матрицы">Разреженные матрицы</h2>
 <p>Матрица пользователь–товар в рекомендациях имеет <span class="tex">10^6\times10^6</span> ячеек, из которых заполнено доли процента; плотный массив занял бы терабайты. <strong>CSR</strong> (compressed sparse row) хранит три массива: значения ненулей, их номера столбцов и смещения начал строк. Границы строки находятся за <span class="tex">O(1)</span>, сама строка читается за число её ненулей, произведение матрицы на вектор — за <span class="tex">O(\mathrm{nnz})</span>. CSC устроен симметрично по столбцам; COO (тройки «строка, столбец, значение») удобен для сборки. Те же структуры — у bag-of-words и one-hot-признаков. Применение к рекомендациям разобрано в <a href="/edufamcs-demo/handbook/recsys/zadacha-i-dannye/" rel="noopener noreferrer nofollow">задаче рекомендаций</a>.</p>
 <div class="code"><div class="code-head"><span class="lang">python</span></div><pre><code><span class="tok-k">import</span> numpy <span class="tok-k">as</span> np
@@ -181,7 +186,26 @@ v <span class="tok-p">=</span> np<span class="tok-p">.</span>ones<span class="to
 <li><strong>Densify по ошибке.</strong> <code>.toarray()</code> или <code>X - X.mean(0)</code> на разреженной матрице превращает её в плотную; центрирование разреженных данных делают неявно.</li>
 <li><strong>Косинус против евклида.</strong> Для ненормированных эмбеддингов результаты kNN различаются; нормируйте один раз и используйте скалярное произведение.</li>
 <li><strong>Путаница форм.</strong> Вектор формы <code>(n,)</code> и <code>(n,1)</code> в numpy ведут себя по-разному при <code>@</code> и broadcasting; на собеседованиях любят спрашивать форму результата <code>X.T @ X</code>, <code>X @ w</code>, <code>a[:,None] - b[None,:]</code>.</li>
+<li><strong>На собеседовании: почему не <code>inv(X.T @ X) @ X.T @ y</code>?</strong> Три причины: явная обратная дороже и менее точна, чем <code>solve</code>; <span class="tex">\kappa(X^\top X)=\kappa(X)^2</span>; при мультиколлинеарности <span class="tex">X^\top X</span> вырождена и обратной нет вовсе. Нужен <code>lstsq</code>/QR/SVD.</li>
+<li><strong>На собеседовании: что будет, если в <span class="tex">X</span> добавить копию столбца?</strong> Ранг не изменится, <span class="tex">X^\top X</span> станет вырожденной, решение МНК перестанет быть единственным (ядро размерности 1); <code>lstsq</code> вернёт решение минимальной нормы, Ridge — единственное и симметричное.</li>
+<li><strong>На собеседовании: чему равна <span class="tex">\dim\ker A</span> для <span class="tex">A\in\mathbb{R}^{5\times8}</span> ранга 3?</strong> <span class="tex">8-3=5</span> (теорема о ранге и дефекте: <span class="tex">\mathrm{rank}+\dim\ker=n</span>, число столбцов).</li>
 </ul>
+<h2 id="проверь-себя">Проверь себя</h2>
+<details class="callout md details"><summary>Почему невязка МНК ортогональна столбцам $X$?</summary>
+<p>Ближайшая к <span class="tex">y</span> точка подпространства <span class="tex">\mathrm{im}\,X</span> — ортогональная проекция: если бы остаток имел компоненту вдоль подпространства, сдвиг в эту сторону уменьшил бы расстояние. Условие <span class="tex">X^\top(y-X\hat w)=0</span> и есть нормальные уравнения.</p>
+</details>
+<details class="callout md details"><summary>Почему $L_1$-регуляризация даёт разреженные веса, а $L_2$ — нет?</summary>
+<p>Шар <span class="tex">\|w\|_1\le r</span> — ромб с вершинами на осях, и линии уровня потерь чаще всего касаются его именно в вершине, где часть координат равна нулю. Шар <span class="tex">\|w\|_2\le r</span> гладкий, касание происходит в точке общего положения, веса сжимаются, но не обнуляются.</p>
+</details>
+<details class="callout md details"><summary>Является ли $1-\cos\theta$ метрикой?</summary>
+<p>Нет: неравенство треугольника нарушается. Метрикой будет угол <span class="tex">\theta=\arccos(\cos\theta)</span> или евклидово расстояние между нормированными векторами.</p>
+</details>
+<details class="callout md details"><summary>Как связаны ранг, образ и ядро и чему равна $\dim\ker A$?</summary>
+<p><span class="tex">\dim\mathrm{im}\,A=\mathrm{rank}\,A</span> и <span class="tex">\dim\ker A=n-\mathrm{rank}\,A</span>, где <span class="tex">n</span> — число столбцов. <span class="tex">A</span> обратима тогда и только тогда, когда ядро нулевое и ранг полный.</p>
+</details>
+<details class="callout md details"><summary>В каком случае система $Ax=b$ разрешима и когда решение единственно?</summary>
+<p>Разрешима при <span class="tex">b\in\mathrm{im}\,A</span>; единственно, если <span class="tex">\ker A=\{0\}</span>, то есть столбцы независимы. Иначе решений бесконечно много и они образуют сдвиг ядра.</p>
+</details>
 <h2 id="что-почитать">Что почитать</h2>
 <ul>
 <li>G. Strang. <em>Introduction to Linear Algebra</em> (5th ed., Wellesley–Cambridge Press, 2016) и открытый курс MIT 18.06 — <a href="https://ocw.mit.edu/courses/18-06-linear-algebra-spring-2010/" rel="noopener noreferrer nofollow">ocw.mit.edu/courses/18-06-linear-algebra-spring-2010</a>.</li>
@@ -195,6 +219,8 @@ v <span class="tok-p">=</span> np<span class="tok-p">.</span>ones<span class="to
       
 
       
+
+      
       <nav class="pager" aria-label="Соседние статьи">
         <i></i>
         <a href="/edufamcs-demo/handbook/math/sobstvennye-vektory-i-svd/"><span>Дальше<svg class="ico sm" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-arrow"/></svg></span>Собственные векторы и сингулярное разложение</a>
@@ -203,7 +229,7 @@ v <span class="tok-p">=</span> np<span class="tok-p">.</span>ones<span class="to
     </article>
 
     <aside class="hb-toc" aria-label="На этой странице">
-      <a class="l2" href="#векторное-пространство">Векторное пространство</a><a class="l2" href="#скалярное-произведение-длина-угол">Скалярное произведение, длина, угол</a><a class="l2" href="#нормы-и-метрики">Нормы и метрики</a><a class="l2" href="#матрица-как-оператор">Матрица как оператор</a><a class="l2" href="#системы-и-метод-наименьших-квадратов">Системы Ax=b и метод наименьших квадратов</a><a class="l2" href="#разреженные-матрицы">Разреженные матрицы</a><a class="l2" href="#ловушки">Ловушки</a><a class="l2" href="#что-почитать">Что почитать</a>
+      <a class="l2" href="#векторное-пространство">Векторное пространство</a><a class="l2" href="#скалярное-произведение-длина-угол">Скалярное произведение, длина, угол</a><a class="l2" href="#нормы-и-метрики">Нормы и метрики</a><a class="l2" href="#матрица-как-оператор">Матрица как оператор</a><a class="l2" href="#системы-и-метод-наименьших-квадратов">Системы Ax=b и метод наименьших квадратов</a><a class="l2" href="#разреженные-матрицы">Разреженные матрицы</a><a class="l2" href="#ловушки">Ловушки</a><a class="l2" href="#проверь-себя">Проверь себя</a><a class="l2" href="#что-почитать">Что почитать</a>
     </aside>
   </div>
 </div>

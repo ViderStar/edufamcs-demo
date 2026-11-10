@@ -27,7 +27,7 @@
 <script src="/edufamcs-demo/static/js/site.js" defer></script>
 <script src="/edufamcs-demo/static/handbook/handbook.js" defer></script>
 </head>
-<body class="" hx-headers='{"X-CSRFToken": "zgGZ9IVXKFIFxP8DwGuKmaEU3Rn6aiSMlmHm3vdEVSYTco4TJ5nPDCMfzeZlf3DL"}'>
+<body class="" hx-headers='{"X-CSRFToken": "i5g9sMwuZ52h1PePJ8lTrrIvMLG28CXiUi56IO5l0SgQc8thIBzQ9kAteUN0SmWZ"}'>
 <a class="skip" href="#main">К содержанию</a>
 <div class="demo-bar" role="note">Демо-версия для отзывов: вход, запись на курсы и формы здесь не работают.</div>
 
@@ -60,6 +60,7 @@
 
 
 <div class="container hb-page hb-tone">
+  <div class="hb-readbar" aria-hidden="true"><i></i></div>
   <div class="hb">
     <aside class="hb-nav" aria-label="Статьи раздела">
       
@@ -78,6 +79,12 @@
       
       <a class="cur" href="/edufamcs-demo/handbook/math/intervaly-i-proverka-gipotez/" aria-current="page">Доверительные интервалы и проверка гипотез</a>
       
+      <a class="" href="/edufamcs-demo/handbook/math/bajesovskaya-statistika/">Байесовская статистика</a>
+      
+      <a class="" href="/edufamcs-demo/handbook/math/teoriya-informacii/">Теория информации для ML</a>
+      
+      <a class="" href="/edufamcs-demo/handbook/math/statistika-ab-testov/">Статистика A/B-тестов</a>
+      
     </aside>
 
     <article class="hb-main">
@@ -86,9 +93,9 @@
       <div class="hb-meta">
         
         
-        <span><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-clock"/></svg>11&nbsp;мин</span>
+        <span><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-clock"/></svg>15&nbsp;мин</span>
         <span class="hb-authors"><span class="avatar sm" title="Артем Лебедевич">АЛ</span>Артем Лебедевич</span>
-        <span><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-edit"/></svg>9 ноября 2026</span>
+        <span><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-edit"/></svg>10 ноября 2026</span>
         
         
       </div>
@@ -96,7 +103,7 @@
       
       <details class="hb-mtoc">
         <summary><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-list"/></svg>Содержание<svg class="ico sm" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-chev-down"/></svg></summary>
-        <a class="l2" href="#доверительный-интервал">Доверительный интервал</a><a class="l3" href="#интервал-для-среднего">Интервал для среднего</a><a class="l2" href="#проверка-гипотез">Проверка гипотез</a><a class="l3" href="#как-p-value-читают-неверно">Как p-value читают неверно</a><a class="l3" href="#мощность-и-размер-выборки">Мощность и размер выборки</a><a class="l2" href="#стандартные-критерии">Стандартные критерии</a><a class="l2" href="#множественные-сравнения">Множественные сравнения</a><a class="l2" href="#бутстрап-интервалы-и-ab-тесты">Бутстрап-интервалы и A/B-тесты</a><a class="l2" href="#код">Код</a><a class="l2" href="#ловушки">Ловушки</a><a class="l2" href="#что-почитать">Что почитать</a>
+        <a class="l2" href="#доверительный-интервал">Доверительный интервал</a><a class="l3" href="#интервал-для-среднего">Интервал для среднего</a><a class="l2" href="#проверка-гипотез">Проверка гипотез</a><a class="l3" href="#как-p-value-читают-неверно">Как p-value читают неверно</a><a class="l3" href="#мощность-и-размер-выборки">Мощность и размер выборки</a><a class="l2" href="#стандартные-критерии">Стандартные критерии</a><a class="l3" href="#две-доли-z-тест-ctr-конверсия">Две доли: z-тест (CTR, конверсия)</a><a class="l2" href="#множественные-сравнения">Множественные сравнения</a><a class="l2" href="#бутстрап-интервалы-и-ab-тесты">Бутстрап-интервалы и A/B-тесты</a><a class="l2" href="#код">Код</a><a class="l2" href="#ловушки">Ловушки</a><a class="l2" href="#проверь-себя">Проверь себя</a><a class="l2" href="#что-почитать">Что почитать</a>
       </details>
       
 
@@ -201,16 +208,21 @@
 </tbody>
 </table></div>
 <p><strong>t-тест Уэлча</strong> для двух выборок: <span class="tex">t=\dfrac{\bar x_1-\bar x_2}{\sqrt{s_1^2/n_1+s_2^2/n_2}}</span> с приближённым числом степеней свободы по Уэлчу–Саттертвейту. Классический тест Стьюдента требует <span class="tex">\sigma_1=\sigma_2</span>; Уэлч этого не требует и почти ничего не теряет при равенстве, поэтому по умолчанию берут его. Проверка равенства дисперсий перед t-тестом как обязательный «шаг 1» — устаревшая практика: двухэтапная процедура сама искажает уровень значимости.</p>
+<h3 id="две-доли-z-тест-ctr-конверсия">Две доли: z-тест (CTR, конверсия)</h3>
+<p>Главный случай A/B: <span class="tex">x_1</span> из <span class="tex">n_1</span> в контроле и <span class="tex">x_2</span> из <span class="tex">n_2</span> в тесте, <span class="tex">\hat p_j=x_j/n_j</span>, <span class="tex">H_0:p_1=p_2</span>. При <span class="tex">H_0</span> у обеих групп одна доля, её оценивают пулом <span class="tex">\hat p=\frac{x_1+x_2}{n_1+n_2}</span>, и по ЦПТ</p>
+<div class="tex tex-block">z=\frac{\hat p_2-\hat p_1}{\sqrt{\hat p(1-\hat p)\big(\frac1{n_1}+\frac1{n_2}\big)}}\approx\mathcal{N}(0,1),\qquad p\text{-value}=2\big(1-\Phi(|z|)\big).</div>
+<p>Пример: контроль <span class="tex">480/10\,000</span> (<span class="tex">4{,}8\%</span>), тест <span class="tex">540/10\,000</span> (<span class="tex">5{,}4\%</span>). Пул <span class="tex">\hat p=0{,}051</span>, <span class="tex">\mathrm{SE}=0{,}00311</span>, <span class="tex">z=1{,}93</span>, <span class="tex">p=0{,}054</span> — на уровне <span class="tex">0{,}05</span> эффект не подтверждён, хотя относительный рост <span class="tex">+12{,}5\%</span> выглядит внушительно. Для интервала разности стандартную ошибку берут <strong>без</strong> пула (при <span class="tex">H_1</span> доли разные): <span class="tex">\sqrt{\hat p_1(1-\hat p_1)/n_1+\hat p_2(1-\hat p_2)/n_2}=0{,}00311</span>, интервал <span class="tex">+0{,}60</span> п.п. <span class="tex">\pm\,0{,}61</span>, то есть <span class="tex">(-0{,}01;\ +1{,}21)</span> п.п.: он едва задевает ноль, и честный вывод — «данных мало». Чтобы уверенно ловить такой эффект (<span class="tex">\delta=0{,}6</span> п.п.) при мощности <span class="tex">0{,}8</span>, нужно около <span class="tex">21\,100</span> пользователей на группу — по формуле выше с <span class="tex">\sigma^2=p_1(1-p_1)+p_2(1-p_2)</span> вместо <span class="tex">2\sigma^2</span>. Квадрат <span class="tex">z</span> совпадает со статистикой <span class="tex">\chi^2</span> на таблице <span class="tex">2\times2</span> без поправки на непрерывность; в коде — <code>statsmodels.stats.proportion.proportions_ztest</code>. Подробнее — в <a href="/edufamcs-demo/handbook/math/statistika-ab-testov/" rel="noopener noreferrer nofollow">статистике A/B-тестов</a>.</p>
 <h2 id="множественные-сравнения">Множественные сравнения</h2>
 <p>Если проверить 20 независимых гипотез при <span class="tex">\alpha=0{,}05</span> и все <span class="tex">H_0</span> верны, вероятность хотя бы одной ложной тревоги — <span class="tex">1-0{,}95^{20}\approx64\%</span>. Это важно при тестировании множества метрик, сегментов, вариантов. Две защиты:</p>
 <ul>
 <li><strong>Бонферрони</strong>: отвергать при <span class="tex">p_i&lt;\alpha/m</span>. Контролирует вероятность хотя бы одной ошибки (FWER); консервативна при больших <span class="tex">m</span>.</li>
-<li><strong>Бенджамини–Хохберг</strong> (1995): отсортировать <span class="tex">p_{(1)}\le\dots\le p_{(m)}</span>, найти наибольшее <span class="tex">k</span> с <span class="tex">p_{(k)}\le\frac km\alpha</span> и отвергнуть первые <span class="tex">k</span> гипотез. Контролирует долю ложных открытий (FDR) — разумный выбор при сотнях гипотез и допустимой доле ложных срабатываний. Реализация: <code>statsmodels.stats.multitest.multipletests(p, method='fdr_bh')</code>.</li>
+<li><strong>Бенджамини–Хохберг</strong> (1995): отсортировать <span class="tex">p_{(1)}\le\dots\le p_{(m)}</span>, найти наибольшее <span class="tex">k</span> с <span class="tex">p_{(k)}\le\frac km\alpha</span> и отвергнуть первые <span class="tex">k</span> гипотез. Контролирует долю ложных открытий (FDR) — разумный выбор при сотнях гипотез и допустимой доле ложных срабатываний. Реализация: <code>statsmodels.stats.multitest.multipletests(p, method='fdr_bh')</code>. Гарантия <span class="tex">\mathrm{FDR}\le\alpha\,m_0/m</span> (<span class="tex">m_0</span> — число верных <span class="tex">H_0</span>) доказана для <strong>независимых</strong> статистик и при условии положительной регрессионной зависимости (PRDS): метрики движутся вместе, как положительно коррелированные нормальные величины. Для произвольной зависимости используют поправку Бенджамини–Йекутили: порог <span class="tex">\frac km\alpha/c(m)</span>, <span class="tex">c(m)=\sum_{i=1}^m\frac1i</span> (при <span class="tex">m=20</span> — <span class="tex">3{,}6</span>, <code>method='fdr_by'</code>), заметно строже. Метрики с отрицательной связью (выручка на сессию против числа сессий) условие нарушают.</li>
 </ul>
 <p>Другой способ нарваться на ту же проблему — «подглядывание»: проверять p-value каждый день и остановить тест, когда оно упало ниже <span class="tex">0{,}05</span>. Уровень ошибки I рода при этом растёт в разы; нужна заранее фиксированная длительность либо последовательные критерии.</p>
 <h2 id="бутстрап-интервалы-и-ab-тесты">Бутстрап-интервалы и A/B-тесты</h2>
 <p>Когда распределение статистики неизвестно (медиана, отношение метрик, AUC), используйте процентильный бутстрап из <a href="/edufamcs-demo/handbook/math/ocenki-parametrov-i-mmp/" rel="noopener noreferrer nofollow">предыдущей главы</a>: 2,5% и 97,5% квантили распределения <span class="tex">T^*</span>. Для разности метрик в A/B ресэмплируют пользователей в каждой группе, пересчитывают метрику и берут интервал разности: если он не содержит нуля, эффект значим примерно на уровне 5%.</p>
 <p>В A/B-тестах <a href="/edufamcs-demo/handbook/recsys/prodakshen-i-ab-testy/" rel="noopener noreferrer nofollow">рекомендательной системы</a> работает та же схема: <span class="tex">H_0</span> — «модели одинаковы по целевой метрике», рандомизация по пользователям, MDE и длительность определяются до старта, решение — по интервалу эффекта и guardrail-метрикам. Специфика: метрики на уровне пользователя с выбросами (чек), зависимость событий одного пользователя (считайте на уровне пользователя, не события), CUPED (Deng et al., 2013) — снижение дисперсии за счёт ковариаты из периода до эксперимента.</p>
+<p><strong>Проверки самого эксперимента.</strong> Прежде чем читать результат, сверяют <strong>SRM</strong> (sample ratio mismatch): фактическое деление трафика против плана через <span class="tex">\chi^2</span> на количествах. При плане <span class="tex">50/50</span> на <span class="tex">100\,000</span> пользователей наблюдение <span class="tex">50\,900/49\,100</span> даёт <span class="tex">\chi^2=32{,}4</span>, <span class="tex">p=1{,}3\cdot10^{-8}</span>: это ошибка назначения или логирования, а не случайность, и метрики такого теста недостоверны (на практике тревогу поднимают при <span class="tex">p&lt;0{,}001</span>). <strong>A/A-тест</strong> — та же сплит-система без различий между группами: p-value должны быть равномерны на <span class="tex">[0,1]</span>, а доля значимых — около <span class="tex">\alpha</span>. В симуляции на <span class="tex">2000</span> A/A-тестов по <span class="tex">10\,000</span> пользователей при <span class="tex">p=5\%</span> значимыми были <span class="tex">4{,}65\%</span>, а гистограмма p-value по пяти корзинам — <span class="tex">397/404/408/419/372</span>.</p>
 <h2 id="код">Код</h2>
 <div class="code"><div class="code-head"><span class="lang">python</span></div><pre><code><span class="tok-k">import</span> numpy <span class="tok-k">as</span> np
 <span class="tok-k">from</span> scipy <span class="tok-k">import</span> stats
@@ -253,7 +265,26 @@ p <span class="tok-p">=</span> np<span class="tok-p">.</span>array<span class="t
 <li><strong>Критерий Колмогорова с оценёнными параметрами.</strong> Подставили <span class="tex">\hat\lambda</span> по той же выборке — p-value завышено; используйте Лиллиефорса или параметрический бутстрап.</li>
 <li><strong>Односторонний тест, выбранный постфактум.</strong> Направление гипотезы фиксируется до наблюдения данных.</li>
 <li><strong>Значимо, но бесполезно.</strong> Сочетайте p-value с MDE, размером эффекта и бизнес-порогом.</li>
+<li><strong>На собеседовании: как читать p-value <span class="tex">=0{,}03</span>?</strong> Если <span class="tex">H_0</span> верна, статистика не менее экстремальная случается в 3% повторений; это не вероятность <span class="tex">H_0</span> и не вероятность эффекта.</li>
+<li><strong>На собеседовании: тест идёт неделю, на 3-й день <span class="tex">p&lt;0{,}05</span>. Останавливаем?</strong> Нет: подглядывание раздувает ошибку I рода; нужна фиксированная длительность или последовательные критерии. Спросят и про SRM как первую проверку.</li>
+<li><strong>На собеседовании: 20 метрик, одна значима при <span class="tex">p=0{,}04</span>.</strong> Бонферрони и BH не оставят её значимой (<span class="tex">0{,}04&gt;0{,}05/20</span>); при независимых <span class="tex">H_0</span> вероятность хотя бы одной ложной тревоги <span class="tex">\approx64\%</span>.</li>
 </ul>
+<h2 id="проверь-себя">Проверь себя</h2>
+<details class="callout md details"><summary>Что означает 95%-й доверительный интервал?</summary>
+<p>Метод построения накрывает истинный параметр в 95% повторений эксперимента; конкретный интервал параметр либо накрывает, либо нет, вероятность 95% о нём не говорят.</p>
+</details>
+<details class="callout md details"><summary>Чем мощность связана с размером выборки и эффектом?</summary>
+<p>Для двух средних <span class="tex">n\approx15{,}7\,\sigma^2/\delta^2</span> на группу при <span class="tex">\alpha=0{,}05</span> и мощности <span class="tex">0{,}8</span>: вдвое меньший эффект требует вчетверо больше данных. Мощность растёт с <span class="tex">\delta</span>, <span class="tex">n</span>, <span class="tex">\alpha</span> и падает с <span class="tex">\sigma</span>.</p>
+</details>
+<details class="callout md details"><summary>Зачем в z-тесте двух долей брать пулированную долю для теста и непулированную для интервала?</summary>
+<p>Тест строится при <span class="tex">H_0</span>, где доли равны, и общая доля оценивается точнее по объединённой выборке. Интервал описывает разность при истинных, возможно разных долях, поэтому дисперсии берут раздельно.</p>
+</details>
+<details class="callout md details"><summary>Чем FWER отличается от FDR и когда выбирают BH, а не Бонферрони?</summary>
+<p>FWER — вероятность хотя бы одной ложной тревоги (Бонферрони), FDR — ожидаемая доля ложных среди отвергнутых (BH). BH мощнее при сотнях гипотез, если допустима небольшая доля ошибок, и требует независимости или PRDS.</p>
+</details>
+<details class="callout md details"><summary>Тест Манна–Уитни показал значимость, а t-тест нет. Что проверяется?</summary>
+<p>Манна–Уитни проверяет <span class="tex">P(X&gt;Y)=\frac12</span>, то есть сдвиг распределений, а не равенство средних. На тяжёлых хвостах и выбросах результаты могут расходиться: тесты отвечают на разные вопросы.</p>
+</details>
 <h2 id="что-почитать">Что почитать</h2>
 <ul>
 <li>Student (W. Gosset). <em>The probable error of a mean</em>. Biometrika, 1908.</li>
@@ -268,15 +299,17 @@ p <span class="tok-p">=</span> np<span class="tok-p">.</span>array<span class="t
       
 
       
+
+      
       <nav class="pager" aria-label="Соседние статьи">
         <a href="/edufamcs-demo/handbook/math/ocenki-parametrov-i-mmp/"><span><svg class="ico sm" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-arrow-left"/></svg>Назад</span>Оценки параметров и метод максимального правдоподобия</a>
-        
+        <a href="/edufamcs-demo/handbook/math/matrichnoe-differencirovanie/"><span>Дальше<svg class="ico sm" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-arrow"/></svg></span>Матричное дифференцирование</a>
       </nav>
       
     </article>
 
     <aside class="hb-toc" aria-label="На этой странице">
-      <a class="l2" href="#доверительный-интервал">Доверительный интервал</a><a class="l3" href="#интервал-для-среднего">Интервал для среднего</a><a class="l2" href="#проверка-гипотез">Проверка гипотез</a><a class="l3" href="#как-p-value-читают-неверно">Как p-value читают неверно</a><a class="l3" href="#мощность-и-размер-выборки">Мощность и размер выборки</a><a class="l2" href="#стандартные-критерии">Стандартные критерии</a><a class="l2" href="#множественные-сравнения">Множественные сравнения</a><a class="l2" href="#бутстрап-интервалы-и-ab-тесты">Бутстрап-интервалы и A/B-тесты</a><a class="l2" href="#код">Код</a><a class="l2" href="#ловушки">Ловушки</a><a class="l2" href="#что-почитать">Что почитать</a>
+      <a class="l2" href="#доверительный-интервал">Доверительный интервал</a><a class="l3" href="#интервал-для-среднего">Интервал для среднего</a><a class="l2" href="#проверка-гипотез">Проверка гипотез</a><a class="l3" href="#как-p-value-читают-неверно">Как p-value читают неверно</a><a class="l3" href="#мощность-и-размер-выборки">Мощность и размер выборки</a><a class="l2" href="#стандартные-критерии">Стандартные критерии</a><a class="l3" href="#две-доли-z-тест-ctr-конверсия">Две доли: z-тест (CTR, конверсия)</a><a class="l2" href="#множественные-сравнения">Множественные сравнения</a><a class="l2" href="#бутстрап-интервалы-и-ab-тесты">Бутстрап-интервалы и A/B-тесты</a><a class="l2" href="#код">Код</a><a class="l2" href="#ловушки">Ловушки</a><a class="l2" href="#проверь-себя">Проверь себя</a><a class="l2" href="#что-почитать">Что почитать</a>
     </aside>
   </div>
 </div>

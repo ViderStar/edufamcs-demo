@@ -1,0 +1,318 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Jupyter: как работать в ноутбуках и не утонуть · EDU FAMCS</title>
+<meta name="description" content="Jupyter: как работать в ноутбуках и не утонуть — Python и исследования. Хендбук ML-курса ФПМИ.">
+<meta name="theme-color" content="#060A16">
+<meta name="robots" content="noindex, nofollow">
+<meta name="htmx-config" content='{"allowEval":false,"includeIndicatorStyles":false,"historyCacheSize":0,"selfRequestsOnly":true}'>
+<meta name="katex-js" content="/edufamcs-demo/static/vendor/katex/katex.min.js">
+<meta name="katex-css" content="/edufamcs-demo/static/vendor/katex/katex.min.css">
+<link rel="icon" href="/edufamcs-demo/static/brand/logo/favicon-16.svg" type="image/svg+xml" sizes="16x16">
+<link rel="icon" href="/edufamcs-demo/static/brand/logo/favicon.svg" type="image/svg+xml" sizes="any">
+<link rel="preload" href="/edufamcs-demo/static/brand/fonts/manrope-cyrillic-400.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/edufamcs-demo/static/brand/fonts/unbounded-cyrillic-800.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="/edufamcs-demo/static/brand/fonts.css">
+<link rel="stylesheet" href="/edufamcs-demo/static/brand/tokens.css">
+<link rel="stylesheet" href="/edufamcs-demo/static/brand/components.css">
+<link rel="stylesheet" href="/edufamcs-demo/static/css/site.css">
+<link rel="stylesheet" href="/edufamcs-demo/static/css/hub.css">
+<link rel="stylesheet" href="/edufamcs-demo/static/css/about.css">
+<link rel="stylesheet" href="/edufamcs-demo/static/handbook/handbook.css">
+<script src="/edufamcs-demo/static/js/theme.js"></script>
+<script src="/edufamcs-demo/static/vendor/htmx/htmx.min.js" defer></script>
+<script src="/edufamcs-demo/static/vendor/alpine/alpine-csp.min.js" defer></script>
+<script src="/edufamcs-demo/static/js/site.js" defer></script>
+<script src="/edufamcs-demo/static/handbook/handbook.js" defer></script>
+</head>
+<body class="" hx-headers='{"X-CSRFToken": "BzY6UoJH9x1dVyh646rRIKdtyq8VQRzXdMN3aqiyakfM6Rwy3zFOqD5r0zfTAByE"}'>
+<a class="skip" href="#main">К содержанию</a>
+<div class="demo-bar" role="note">Демо-версия для отзывов: вход, запись на курсы и формы здесь не работают.</div>
+
+<header class="hdr">
+  <div class="container">
+    <a class="brand" href="/edufamcs-demo/" aria-label="EDU FAMCS — главная">
+      <span class="full"><img class="only-light" src="/edufamcs-demo/static/brand/logo/logo-edu-light.svg" alt="EDU FAMCS" width="196" height="40"><img class="only-dark" src="/edufamcs-demo/static/brand/logo/logo-edu-dark.svg" alt="EDU FAMCS" width="196" height="40"></span>
+      <span class="short"><img class="only-light" src="/edufamcs-demo/static/brand/logo/logo-edu-light.svg" alt="EDU FAMCS" height="30"><img class="only-dark" src="/edufamcs-demo/static/brand/logo/logo-edu-dark.svg" alt="EDU FAMCS" height="30"></span>
+    </a>
+    <nav class="nav" id="main-nav" aria-label="Основная навигация">
+      <a href="/edufamcs-demo/#courses">Курсы</a>
+      <a href="/edufamcs-demo/ml/" >Машинное обучение</a>
+      
+      <a href="/edufamcs-demo/handbook/" aria-current="page">Хендбук</a>
+      <a href="/edufamcs-demo/news/" >Новости</a>
+      <a href="/edufamcs-demo/people/" >Авторы</a>
+      <a href="/edufamcs-demo/about/" >О&nbsp;нас</a>
+    </nav>
+    <div class="hdr-actions">
+      
+      <a class="btn btn-outline btn-login" href="/edufamcs-demo/accounts/login/?next=/handbook/python/jupyter-noutbuki/">Войти</a>
+      
+      <button class="icon-btn menu-btn" type="button" aria-label="Меню" aria-expanded="false" aria-controls="main-nav"><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-menu"/></svg></button>
+    </div>
+  </div>
+</header>
+
+<main id="main">
+
+
+
+<div class="container hb-page hb-tone">
+  <div class="hb-readbar" aria-hidden="true"><i></i></div>
+  <div class="hb">
+    <aside class="hb-nav" aria-label="Статьи раздела">
+      
+<form class="hb-search" action="/edufamcs-demo/handbook/search/" method="get" role="search">
+  <svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-search"/></svg>
+  <input class="input" type="search" name="q" value="" placeholder="Поиск по хендбуку" aria-label="Поиск по хендбуку" autocomplete="off" maxlength="120"
+    hx-get="/edufamcs-demo/handbook/search/" hx-trigger="input changed delay:250ms, search" hx-target="#hb-nav-results" hx-sync="this:replace">
+</form>
+
+      <div id="hb-nav-results" class="hb-nav-results" aria-live="polite"></div>
+      <a class="grp" href="/edufamcs-demo/handbook/python/">Инструменты</a>
+      
+      <a class="" href="/edufamcs-demo/handbook/python/okruzhenie-uv/">Окружение: uv, виртуальные окружения и структура проекта</a>
+      
+      <a class="" href="/edufamcs-demo/handbook/python/python-dlya-ml/">Python для ML: что нужно на самом деле</a>
+      
+      <a class="" href="/edufamcs-demo/handbook/python/numpy-vektorizaciya/">NumPy: массивы, broadcasting, векторизация</a>
+      
+      <a class="" href="/edufamcs-demo/handbook/python/pandas-i-polars/">Таблицы: pandas и polars</a>
+      
+      <a class="cur" href="/edufamcs-demo/handbook/python/jupyter-noutbuki/" aria-current="page">Jupyter: как работать в ноутбуках и не утонуть</a>
+      
+      <a class="" href="/edufamcs-demo/handbook/python/vizualizaciya/">Графики, которые читаются: matplotlib и seaborn</a>
+      
+    </aside>
+
+    <article class="hb-main">
+      <nav class="crumbs" aria-label="Навигация"><a href="/edufamcs-demo/handbook/">Хендбук</a><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-chev"/></svg><a href="/edufamcs-demo/handbook/python/">Python и исследования</a></nav>
+      <h1 class="h1">Jupyter: как работать в ноутбуках и не утонуть</h1>
+      <div class="hb-meta">
+        
+        
+        <span><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-clock"/></svg>11&nbsp;мин</span>
+        <span class="hb-authors"><span class="avatar sm" title="Артем Лебедевич">АЛ</span>Артем Лебедевич</span>
+        <span><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-edit"/></svg>10 ноября 2026</span>
+        
+        
+      </div>
+
+      
+      <details class="hb-mtoc">
+        <summary><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-list"/></svg>Содержание<svg class="ico sm" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-chev-down"/></svg></summary>
+        <a class="l2" href="#ядро-и-скрытое-состояние">Ядро и скрытое состояние</a><a class="l2" href="#структура-ноутбука">Структура ноутбука</a><a class="l2" href="#магические-команды">Магические команды</a><a class="l2" href="#запуск-без-интерфейса">Запуск без интерфейса</a><a class="l2" href="#ноутбуки-в-git">Ноутбуки в git</a><a class="l2" href="#colab-kaggle-vs-code">Colab, Kaggle, VS Code</a><a class="l2" href="#когда-ноутбук-должен-стать-модулем">Когда ноутбук должен стать модулем</a><a class="l2" href="#ловушки">Ловушки</a><a class="l2" href="#проверь-себя">Проверь себя</a><a class="l2" href="#что-почитать">Что почитать</a>
+      </details>
+      
+
+      <div class="prose"><p>Ноутбук — лучший инструмент для разведки: код, графики и пояснения в одном документе, результат видно сразу. Он же — главный источник невоспроизводимых результатов: ячейки выполнялись в произвольном порядке, переменная давно удалена из кода, но жива в памяти. Эта глава — как устроены ноутбук и его ядро, чтобы использовать его без самообмана, и когда пора переносить код в модуль.</p>
+<h2 id="ядро-и-скрытое-состояние">Ядро и скрытое состояние</h2>
+<p>Ноутбук — это файл <code>.ipynb</code> (JSON со списком ячеек и их выводом) плюс отдельный процесс — <strong>ядро</strong> (kernel), в котором выполняется код. Все ячейки делят одно пространство имён; ядро помнит всё, что выполнялось, <strong>независимо от того, что сейчас написано в ячейках</strong>. Отсюда главные проблемы:</p>
+<ul>
+<li><strong>Выполнение не по порядку.</strong> Счётчики <code>In [3]</code>, <code>In [1]</code>, <code>In [7]</code> показывают реальный порядок. Результат зависит от истории кликов, а не от текста документа.</li>
+<li><strong>Скрытое состояние.</strong> Вы удалили ячейку с <code>df = df[df.price &gt; 0]</code>, но <code>df</code> в памяти остался отфильтрованным; «нужные» результаты получены состоянием, которого в файле нет.</li>
+<li><strong>Мутация на месте.</strong> Повторный запуск ячейки <code>df["x"] += 1</code> каждый раз меняет данные.</li>
+</ul>
+<div class="code"><div class="code-head"><span class="lang">python</span></div><pre><code><span class="tok-c"># ячейка 1</span>
+x <span class="tok-p">=</span> <span class="tok-n">10</span>
+<span class="tok-c"># ячейка 2</span>
+x <span class="tok-p">=</span> x <span class="tok-p">*</span> <span class="tok-n">2</span>
+<span class="tok-f">print</span><span class="tok-p">(</span>x<span class="tok-p">)</span>     <span class="tok-c"># 20 при первом запуске, 40 — при втором, 80 — при третьем</span>
+</code></pre></div>
+<div class="callout md tip"><p class="callout-title">Правило «Restart &amp; Run All»</p>
+<p>Перед тем как показать результат, закоммитить или написать вывод в статью: <code>Kernel → Restart Kernel and Run All Cells</code>. Работает без ошибок и выдаёт те же числа — ноутбук воспроизводим. Нет — вы нашли скрытое состояние. Делайте это каждые 30–60 минут работы, а не в конце дня.</p>
+</div>
+<p>Ядро подключается к конкретному окружению. Чтобы ноутбук видел зависимости проекта, поставьте <code>ipykernel</code> в <code>.venv</code> (<code>uv add --dev ipykernel</code>) и выберите это ядро; проверка в первой ячейке — <code>import sys; print(sys.executable)</code>. Про окружения — в главе <a href="/edufamcs-demo/handbook/python/okruzhenie-uv/" rel="noopener noreferrer nofollow">uv</a>.</p>
+<h2 id="структура-ноутбука">Структура ноутбука</h2>
+<p>Одно хорошее правило: ноутбук читается сверху вниз как отчёт.</p>
+<ol>
+<li><strong>Заголовок и вопрос</strong> (markdown): что проверяем, на каких данных, какая метрика.</li>
+<li><strong>Конфиг-ячейка</strong>: все пути, сиды, гиперпараметры в одном месте.</li>
+<li><strong>Загрузка данных</strong>: одна ячейка, с проверками размеров.</li>
+<li><strong>Функции</strong> — но не здесь, а в <code>src/</code> (см. ниже).</li>
+<li><strong>Эксперимент, результаты, выводы</strong> (markdown с числами).</li>
+</ol>
+<div class="code"><div class="code-head"><span class="lang">python</span></div><pre><code><span class="tok-c"># %% конфиг</span>
+<span class="tok-k">from</span> pathlib <span class="tok-k">import</span> Path
+<span class="tok-k">import</span> numpy <span class="tok-k">as</span> np
+
+SEED <span class="tok-p">=</span> <span class="tok-n">42</span>
+DATA <span class="tok-p">=</span> Path<span class="tok-p">(</span><span class="tok-s">"</span><span class="tok-s">../data/processed/train.parquet</span><span class="tok-s">"</span><span class="tok-p">)</span>
+rng <span class="tok-p">=</span> np<span class="tok-p">.</span>random<span class="tok-p">.</span>default_rng<span class="tok-p">(</span>SEED<span class="tok-p">)</span>
+
+<span class="tok-c"># %% автоперезагрузка модулей из src/</span>
+<span class="tok-p">%</span>load_ext autoreload
+<span class="tok-p">%</span>autoreload <span class="tok-n">2</span>
+<span class="tok-k">from</span> churn.features <span class="tok-k">import</span> build_features      <span class="tok-c"># правите churn/features.py — ноутбук подхватывает</span>
+</code></pre></div>
+<p><code>%autoreload 2</code> перед выполнением каждой ячейки перезагружает изменённые модули, поэтому логика живёт в <code>.py</code>-файлах (тесты, ревью, импорт из других ноутбуков), а ноутбук только вызывает её и показывает результат. Ограничение: методы старых объектов обновляются, но их состояние от старого <code>__init__</code> не пересоздаётся; замена <code>@property</code> на метод (и наоборот) и C-расширения не перезагружаются — тогда пересоздайте объект или перезапустите ядро.</p>
+<h2 id="магические-команды">Магические команды</h2>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>Команда</th>
+<th>Назначение</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>%timeit expr</code> / <code>%%timeit</code></td>
+<td>время строки / ячейки (много запусков)</td>
+</tr>
+<tr>
+<td><code>%time expr</code></td>
+<td>один замер</td>
+</tr>
+<tr>
+<td><code>%load_ext autoreload</code>, <code>%autoreload 2</code></td>
+<td>перезагрузка импортируемых модулей</td>
+</tr>
+<tr>
+<td><code>%who</code>, <code>%whos</code></td>
+<td>какие переменные есть в ядре</td>
+</tr>
+<tr>
+<td><code>%matplotlib inline</code></td>
+<td>графики в выводе (в современных ядрах по умолчанию)</td>
+</tr>
+<tr>
+<td><code>%debug</code></td>
+<td>зайти в отладчик после исключения</td>
+</tr>
+<tr>
+<td><code>!ls data</code>, <code>!uv pip list</code></td>
+<td>команда оболочки</td>
+</tr>
+<tr>
+<td><code>%env VAR</code></td>
+<td>переменные окружения</td>
+</tr>
+<tr>
+<td><code>%%bash</code>, <code>%%writefile f.py</code></td>
+<td>ячейка целиком как shell / запись в файл</td>
+</tr>
+</tbody>
+</table></div>
+<p><code>%pip install</code> в ноутбуке меняет окружение без записи в <code>pyproject.toml</code> — для экспериментов в Colab нормально, для проекта нет: ставьте через <code>uv add</code> и перезапускайте ядро.</p>
+<h2 id="запуск-без-интерфейса">Запуск без интерфейса</h2>
+<p>Ноутбук, который можно запустить из командной строки, годится для сервера, CI и серий экспериментов.</p>
+<div class="code"><div class="code-head"><span class="lang">bash</span></div><pre><code><span class="tok-c"># выполнить и сохранить результат в новый файл
+</span>uv run jupyter nbconvert --to notebook --execute notebooks/exp.ipynb --output exp_run.ipynb
+
+<span class="tok-c"># параметризованный запуск (papermill; первая ячейка с тегом "parameters")
+</span>uv run papermill notebooks/exp.ipynb out/exp_lr01.ipynb -p lr <span class="tok-n">0</span>.1 -p seed <span class="tok-n">7</span>
+
+<span class="tok-c"># сделать из результата HTML-отчёт
+</span>uv run jupyter nbconvert --to html out/exp_lr01.ipynb
+</code></pre></div>
+<p>В ячейке-конфиге с тегом <code>parameters</code> стоят значения по умолчанию (<code>lr = 0.01</code>, <code>seed = 42</code>); papermill вставляет после неё ячейку, где значения перезаписаны командной строкой, и исполняет ноутбук. Прогон, в котором сохраняется выполненная копия <code>out/...ipynb</code>, — готовый журнал эксперимента: код, параметры и числа в одном файле. Проверка: ноутбук из двух ячеек (<code>alpha = 0.1</code> и <code>print(alpha * 2)</code>) при <code>-p alpha 0.6</code> напечатал <code>1.2</code>. <code>papermill</code> и <code>nbconvert</code> нужны в зависимостях (<code>uv add --dev papermill nbconvert</code>), ядро — тоже. Для длинных прогонов на удалённой машине запускайте в <code>tmux</code> или через <code>nohup</code>, чтобы разрыв SSH их не убил.</p>
+<h2 id="ноутбуки-в-git">Ноутбуки в git</h2>
+<p>Диффы <code>.ipynb</code> нечитаемы: в JSON попадают выводы, base64-картинки, счётчики выполнения, идентификаторы ячеек; один пересчёт даёт тысячи изменённых строк, а конфликты слияния фактически не разрешаются. Три способа, от простого к основательному:</p>
+<div class="code"><div class="code-head"><span class="lang">bash</span></div><pre><code><span class="tok-c"># 1. очистить выводы вручную перед коммитом
+</span>uv run jupyter nbconvert --clear-output --inplace notebooks/exp.ipynb
+
+<span class="tok-c"># 2. nbstripout: git-фильтр, который чистит выводы автоматически при коммите
+</span>uv add --dev nbstripout jupytext
+uv run nbstripout --install          <span class="tok-c"># настраивает фильтр в текущем репозитории
+</span>
+<span class="tok-c"># 3. jupytext: хранить ноутбук как .py (формат percent) и синхронизировать
+</span>uv run jupytext --set-formats ipynb,py:percent notebooks/exp.ipynb
+uv run jupytext --sync notebooks/exp.ipynb
+</code></pre></div>
+<p>С jupytext в git кладут <code>.py</code> (нормальный диф, нормальное ревью), а <code>.ipynb</code> — в <code>.gitignore</code> или как локальный артефакт. Если выводы нужны как результат (отчёт для коллег) — публикуйте HTML или выполненную копию отдельно, а не в основной ветке. Подробнее — в главе <a href="/edufamcs-demo/handbook/python/git-dlya-ml-proekta/" rel="noopener noreferrer nofollow">Git для ML-проекта</a>.</p>
+<h2 id="colab-kaggle-vs-code">Colab, Kaggle, VS Code</h2>
+<ul>
+<li><strong>Google Colab</strong>: бесплатный доступ к GPU, но ресурсы не гарантированы (тип GPU, длина сессии и простои меняются, сессия может оборваться). Диск виртуальной машины <strong>стирается</strong> вместе с сессией: чекпоинты и данные храните на Google Drive (<code>drive.mount</code>) или в облачном хранилище, сохраняйте чекпоинт каждые N шагов. Окружение не ваше: версии библиотек предустановлены, фиксируйте их в первой ячейке.</li>
+<li><strong>Kaggle Notebooks</strong>: GPU/TPU в рамках квот в неделю; доступ в интернет отключён для соревновательных ноутбуков; выходные файлы лежат в <code>/kaggle/working</code>, данные — только для чтения в <code>/kaggle/input</code>.</li>
+<li><strong>VS Code</strong> (расширения Python и Jupyter): те же <code>.ipynb</code>, но с отладчиком, автодополнением, git-диффом и выбором ядра из <code>.venv</code>; файлы <code>.py</code> с разделителями <code># %%</code> запускаются как ячейки без <code>.ipynb</code> вообще. Это удобный компромисс между скриптом и ноутбуком.</li>
+<li><strong>JupyterLab</strong> локально: <code>uv run --with jupyterlab jupyter lab</code> (или добавьте <code>jupyterlab</code> в группу зависимостей <code>notebooks</code>).</li>
+</ul>
+<p>Лимиты и квоты облачных сервисов меняются, актуальные значения смотрите в их документации перед планированием обучения.</p>
+<h2 id="когда-ноутбук-должен-стать-модулем">Когда ноутбук должен стать модулем</h2>
+<p>Признаки: ячейка длиннее экрана; код копируется между ноутбуками; нужен запуск по расписанию или в проде; нужны тесты; ноутбук нельзя перезапустить, не дождавшись часа. Порядок: функции — в <code>src/pkg/*.py</code>, ноутбук импортирует их и остаётся «тонким» слоем: параметры, вызов, графики, выводы. Обучение и инференс — скрипты с аргументами командной строки; ноутбук читает их результаты. Как оформить итог исследования — см. <a href="/edufamcs-demo/handbook/python/kak-oformit-rezultat/" rel="noopener noreferrer nofollow">Как оформить результат</a>.</p>
+<h2 id="ловушки">Ловушки</h2>
+<ul>
+<li>Результаты, полученные «после нескольких правок без перезапуска»; графики без подписей осей, потерянные после очистки выводов.</li>
+<li>Данные и секреты в ноутбуке (путь <code>/Users/me/...</code>, токены в выводах, которые попадут в git вместе с <code>.ipynb</code>).</li>
+<li>Утечки через состояние: <code>scaler.fit</code> выполнен на всём датасете в ячейке выше, а ячейка разбиения запущена позже.</li>
+<li>Огромные выводы (<code>print(df)</code> на миллион строк) раздувают файл и вкладку браузера.</li>
+<li>Ядро занимает GPU-память после остановки обучения: <code>Restart</code> освобождает её, <code>del model</code> часто — нет.</li>
+<li>На собеседованиях: что такое ядро и почему ноутбуки невоспроизводимы; как вы запускаете эксперименты на сервере; как хранить ноутбуки в git; когда код надо выносить из ноутбука; как параметризовать ноутбук.</li>
+</ul>
+<h2 id="проверь-себя">Проверь себя</h2>
+<details class="callout md details"><summary>Что такое ядро и что произойдёт с переменными при его перезапуске?</summary>
+<p>Ядро — процесс, исполняющий код ячеек. При перезапуске вся память (переменные, загруженные модули, модели на GPU) сбрасывается, файлы на диске остаются.</p>
+</details>
+<details class="callout md details"><summary>Ноутбук выдаёт разные результаты при повторных прогонах. С чего начать?</summary>
+<p><code>Restart &amp; Run All</code>: если результат меняется — проверить сиды (передавать <code>rng</code> и фиксировать во всех библиотеках), недетерминизм GPU и мутацию данных в ячейках, запускаемых повторно.</p>
+</details>
+<details class="callout md details"><summary>Как запустить один и тот же ноутбук с пятью значениями learning rate на сервере?</summary>
+<p>Пометить ячейку конфига тегом <code>parameters</code> и запустить <code>papermill exp.ipynb out/lr_X.ipynb -p lr X</code> в цикле (в <code>tmux</code>/<code>nohup</code>); выходные ноутбуки — журнал прогонов.</p>
+</details>
+<details class="callout md details"><summary>Зачем `%autoreload 2` и в чём его предел?</summary>
+<p>Подхватывает изменения в импортируемых <code>.py</code>-модулях без перезапуска ядра, позволяя держать логику вне ноутбука. Методы старых объектов подменяются, но состояние от старого <code>__init__</code> не пересоздаётся; смена <code>@property</code> на метод и C-расширения не поддерживаются — тогда пересоздать объект или перезапустить ядро.</p>
+</details>
+<details class="callout md details"><summary>Как хранить ноутбуки в git, чтобы диффы были читаемыми?</summary>
+<p>Либо чистить выводы (<code>nbstripout</code>/<code>nbconvert --clear-output</code>), либо хранить парный <code>.py</code> в формате percent через <code>jupytext</code> и коммитить его.</p>
+</details>
+<h2 id="что-почитать">Что почитать</h2>
+<ul>
+<li><a href="https://docs.jupyter.org/" rel="noopener noreferrer nofollow">Project Jupyter: Documentation</a> и <a href="https://jupyterlab.readthedocs.io/" rel="noopener noreferrer nofollow">JupyterLab docs</a>.</li>
+<li><a href="https://ipython.readthedocs.io/en/stable/interactive/magics.html" rel="noopener noreferrer nofollow">IPython: Built-in magic commands</a>, <a href="https://ipython.readthedocs.io/en/stable/config/extensions/autoreload.html" rel="noopener noreferrer nofollow">autoreload</a>.</li>
+<li><a href="https://nbconvert.readthedocs.io/en/latest/execute_api.html" rel="noopener noreferrer nofollow">nbconvert: Executing notebooks</a>.</li>
+<li><a href="https://papermill.readthedocs.io/" rel="noopener noreferrer nofollow">papermill</a>.</li>
+<li><a href="https://jupytext.readthedocs.io/" rel="noopener noreferrer nofollow">jupytext</a> и <a href="https://github.com/kynan/nbstripout" rel="noopener noreferrer nofollow">nbstripout</a>.</li>
+<li><a href="https://code.visualstudio.com/docs/datascience/jupyter-notebooks" rel="noopener noreferrer nofollow">VS Code: Jupyter Notebooks</a>.</li>
+<li><a href="https://research.google.com/colaboratory/faq.html" rel="noopener noreferrer nofollow">Google Colab: FAQ</a>.</li>
+</ul>
+</div>
+      
+
+      
+
+      
+      <nav class="pager" aria-label="Соседние статьи">
+        <a href="/edufamcs-demo/handbook/python/pandas-i-polars/"><span><svg class="ico sm" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-arrow-left"/></svg>Назад</span>Таблицы: pandas и polars</a>
+        <a href="/edufamcs-demo/handbook/python/vizualizaciya/"><span>Дальше<svg class="ico sm" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-arrow"/></svg></span>Графики, которые читаются: matplotlib и seaborn</a>
+      </nav>
+      
+    </article>
+
+    <aside class="hb-toc" aria-label="На этой странице">
+      <a class="l2" href="#ядро-и-скрытое-состояние">Ядро и скрытое состояние</a><a class="l2" href="#структура-ноутбука">Структура ноутбука</a><a class="l2" href="#магические-команды">Магические команды</a><a class="l2" href="#запуск-без-интерфейса">Запуск без интерфейса</a><a class="l2" href="#ноутбуки-в-git">Ноутбуки в git</a><a class="l2" href="#colab-kaggle-vs-code">Colab, Kaggle, VS Code</a><a class="l2" href="#когда-ноутбук-должен-стать-модулем">Когда ноутбук должен стать модулем</a><a class="l2" href="#ловушки">Ловушки</a><a class="l2" href="#проверь-себя">Проверь себя</a><a class="l2" href="#что-почитать">Что почитать</a>
+    </aside>
+  </div>
+</div>
+
+
+</main>
+
+<footer class="ftr" data-theme="dark">
+  <svg class="sym fern" viewBox="0 0 40.5 65.02" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#fern"/></svg>
+  <div class="container">
+    <div class="ftr-row">
+      <a href="/edufamcs-demo/" aria-label="EDU FAMCS — главная"><img src="/edufamcs-demo/static/brand/logo/logo-edu-dark.svg" alt="EDU FAMCS" width="196" height="40"></a>
+      <ul class="ftr-links">
+        <li><a href="/edufamcs-demo/#courses">Курсы</a></li>
+        <li><a href="/edufamcs-demo/ml/">Машинное обучение</a></li>
+        <li><a href="/edufamcs-demo/handbook/">Хендбук</a></li>
+        <li><a href="/edufamcs-demo/news/">Новости</a></li>
+        <li><a href="/edufamcs-demo/people/">Авторы</a></li>
+        <li><a href="/edufamcs-demo/about/">О&nbsp;нас</a></li>
+        <li><a href="/edufamcs-demo/propose/">Предложить или исправить</a></li>
+        <li><a href="/edufamcs-demo/privacy/">Конфиденциальность</a></li>
+      </ul>
+    </div>
+    <div class="ftr-big" aria-hidden="true">EDU<span class="d">·</span>FAMCS</div>
+    <p class="ftr-copy">© 2026 EDU FAMCS · Минск</p>
+  </div>
+</footer>
+
+<div class="toasts-region" aria-live="polite" id="toasts">
+
+</div>
+
+</body>
+</html>

@@ -1,0 +1,282 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Docker Compose: сервис, база и секреты · EDU FAMCS</title>
+<meta name="description" content="Docker Compose: сервис, база и секреты — Инженерия: от ноутбука до сервиса. Хендбук ML-курса ФПМИ.">
+<meta name="theme-color" content="#060A16">
+<meta name="robots" content="noindex, nofollow">
+<meta name="htmx-config" content='{"allowEval":false,"includeIndicatorStyles":false,"historyCacheSize":0,"selfRequestsOnly":true}'>
+<meta name="katex-js" content="/edufamcs-demo/static/vendor/katex/katex.min.js">
+<meta name="katex-css" content="/edufamcs-demo/static/vendor/katex/katex.min.css">
+<link rel="icon" href="/edufamcs-demo/static/brand/logo/favicon-16.svg" type="image/svg+xml" sizes="16x16">
+<link rel="icon" href="/edufamcs-demo/static/brand/logo/favicon.svg" type="image/svg+xml" sizes="any">
+<link rel="preload" href="/edufamcs-demo/static/brand/fonts/manrope-cyrillic-400.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/edufamcs-demo/static/brand/fonts/unbounded-cyrillic-800.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="/edufamcs-demo/static/brand/fonts.css">
+<link rel="stylesheet" href="/edufamcs-demo/static/brand/tokens.css">
+<link rel="stylesheet" href="/edufamcs-demo/static/brand/components.css">
+<link rel="stylesheet" href="/edufamcs-demo/static/css/site.css">
+<link rel="stylesheet" href="/edufamcs-demo/static/css/hub.css">
+<link rel="stylesheet" href="/edufamcs-demo/static/css/about.css">
+<link rel="stylesheet" href="/edufamcs-demo/static/handbook/handbook.css">
+<script src="/edufamcs-demo/static/js/theme.js"></script>
+<script src="/edufamcs-demo/static/vendor/htmx/htmx.min.js" defer></script>
+<script src="/edufamcs-demo/static/vendor/alpine/alpine-csp.min.js" defer></script>
+<script src="/edufamcs-demo/static/js/site.js" defer></script>
+<script src="/edufamcs-demo/static/handbook/handbook.js" defer></script>
+</head>
+<body class="" hx-headers='{"X-CSRFToken": "rdfWoNMwDnfUdffDfLObsL1WYz26O3MB3q4TEPlnEattoyu5ee28aETUqI94yNLi"}'>
+<a class="skip" href="#main">К содержанию</a>
+<div class="demo-bar" role="note">Демо-версия для отзывов: вход, запись на курсы и формы здесь не работают.</div>
+
+<header class="hdr">
+  <div class="container">
+    <a class="brand" href="/edufamcs-demo/" aria-label="EDU FAMCS — главная">
+      <span class="full"><img class="only-light" src="/edufamcs-demo/static/brand/logo/logo-edu-light.svg" alt="EDU FAMCS" width="196" height="40"><img class="only-dark" src="/edufamcs-demo/static/brand/logo/logo-edu-dark.svg" alt="EDU FAMCS" width="196" height="40"></span>
+      <span class="short"><img class="only-light" src="/edufamcs-demo/static/brand/logo/logo-edu-light.svg" alt="EDU FAMCS" height="30"><img class="only-dark" src="/edufamcs-demo/static/brand/logo/logo-edu-dark.svg" alt="EDU FAMCS" height="30"></span>
+    </a>
+    <nav class="nav" id="main-nav" aria-label="Основная навигация">
+      <a href="/edufamcs-demo/#courses">Курсы</a>
+      <a href="/edufamcs-demo/ml/" >Машинное обучение</a>
+      
+      <a href="/edufamcs-demo/handbook/" aria-current="page">Хендбук</a>
+      <a href="/edufamcs-demo/news/" >Новости</a>
+      <a href="/edufamcs-demo/people/" >Авторы</a>
+      <a href="/edufamcs-demo/about/" >О&nbsp;нас</a>
+    </nav>
+    <div class="hdr-actions">
+      
+      <a class="btn btn-outline btn-login" href="/edufamcs-demo/accounts/login/?next=/handbook/engineering/docker-compose/">Войти</a>
+      
+      <button class="icon-btn menu-btn" type="button" aria-label="Меню" aria-expanded="false" aria-controls="main-nav"><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-menu"/></svg></button>
+    </div>
+  </div>
+</header>
+
+<main id="main">
+
+
+
+<div class="container hb-page hb-tone">
+  <div class="hb-readbar" aria-hidden="true"><i></i></div>
+  <div class="hb">
+    <aside class="hb-nav" aria-label="Статьи раздела">
+      
+<form class="hb-search" action="/edufamcs-demo/handbook/search/" method="get" role="search">
+  <svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-search"/></svg>
+  <input class="input" type="search" name="q" value="" placeholder="Поиск по хендбуку" aria-label="Поиск по хендбуку" autocomplete="off" maxlength="120"
+    hx-get="/edufamcs-demo/handbook/search/" hx-trigger="input changed delay:250ms, search" hx-target="#hb-nav-results" hx-sync="this:replace">
+</form>
+
+      <div id="hb-nav-results" class="hb-nav-results" aria-live="polite"></div>
+      <a class="grp" href="/edufamcs-demo/handbook/engineering/">Запуск</a>
+      
+      <a class="" href="/edufamcs-demo/handbook/engineering/docker/">Docker: образы, контейнеры, Dockerfile для Python</a>
+      
+      <a class="cur" href="/edufamcs-demo/handbook/engineering/docker-compose/" aria-current="page">Docker Compose: сервис, база и секреты</a>
+      
+      <a class="" href="/edufamcs-demo/handbook/engineering/gde-zapuskat-proekt/">Где запускать свой проект: ноутбук дома, VPS, облака</a>
+      
+      <a class="" href="/edufamcs-demo/handbook/engineering/ci-github-actions/">CI: тесты и линтер на каждый коммит</a>
+      
+    </aside>
+
+    <article class="hb-main">
+      <nav class="crumbs" aria-label="Навигация"><a href="/edufamcs-demo/handbook/">Хендбук</a><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-chev"/></svg><a href="/edufamcs-demo/handbook/engineering/">Инженерия: от ноутбука до сервиса</a></nav>
+      <h1 class="h1">Docker Compose: сервис, база и секреты</h1>
+      <div class="hb-meta">
+        
+        
+        <span><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-clock"/></svg>10&nbsp;мин</span>
+        <span class="hb-authors"><span class="avatar sm" title="Артем Лебедевич">АЛ</span>Артем Лебедевич</span>
+        <span><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-edit"/></svg>10 ноября 2026</span>
+        
+        
+      </div>
+
+      
+      <details class="hb-mtoc">
+        <summary><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-list"/></svg>Содержание<svg class="ico sm" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-chev-down"/></svg></summary>
+        <a class="l2" href="#composeyaml-для-сервиса-и-базы">compose.yaml для сервиса и базы</a><a class="l2" href="#переменные-окружения-и-секреты">Переменные окружения и секреты</a><a class="l2" href="#жизненный-цикл">Жизненный цикл</a><a class="l2" href="#перезапуск-и-обновление">Перезапуск и обновление</a><a class="l2" href="#резервные-копии-базы">Резервные копии базы</a><a class="l2" href="#порты-127001-против-0000">Порты: 127.0.0.1 против 0.0.0.0</a><a class="l2" href="#ловушки">Ловушки</a><a class="l2" href="#проверь-себя">Проверь себя</a><a class="l2" href="#что-почитать">Что почитать</a>
+      </details>
+      
+
+      <div class="prose"><p>Реальный сервис — это несколько контейнеров: приложение, база данных, иногда мониторинг. Запускать каждый длинной командой <code>docker run</code> с десятком флагов неудобно и ненадёжно, а Docker Compose описывает всю связку одним файлом <code>compose.yaml</code> и поднимает её одной командой. Здесь мы соберём стек из сервиса с моделью (<a href="/edufamcs-demo/handbook/engineering/docker/" rel="noopener noreferrer nofollow">образ из предыдущей статьи</a>) и Postgres, разберёмся с данными, секретами и тем, чего нельзя делать на сервере.</p>
+<h2 id="composeyaml-для-сервиса-и-базы">compose.yaml для сервиса и базы</h2>
+<p>Файл Compose v2+ (команда <code>docker compose</code>, без дефиса) не содержит ключа <code>version:</code>: он устарел и игнорируется.</p>
+<div class="code"><div class="code-head"><span class="lang">yaml</span></div><pre><code>services<span class="tok-p">:</span>
+  db<span class="tok-p">:</span>
+    image<span class="tok-p">:</span> postgres:17
+    environment<span class="tok-p">:</span>
+      POSTGRES_USER<span class="tok-p">:</span> churn
+      POSTGRES_DB<span class="tok-p">:</span> churn
+      POSTGRES_PASSWORD<span class="tok-p">:</span> ${POSTGRES_PASSWORD:?задайте POSTGRES_PASSWORD в .env}
+    volumes<span class="tok-p">:</span>
+      <span class="tok-p">-</span> pgdata:/var/lib/postgresql/data
+      <span class="tok-p">-</span> ./sql/schema.sql:/docker-entrypoint-initdb.d/01-schema.sql:ro
+    healthcheck<span class="tok-p">:</span>
+      test<span class="tok-p">:</span> <span class="tok-p">[</span><span class="tok-s">"</span><span class="tok-s">CMD-SHELL</span><span class="tok-s">"</span><span class="tok-p">,</span> <span class="tok-s">"</span><span class="tok-s">pg_isready</span> <span class="tok-s">-h</span> <span class="tok-s">127.0.0.1</span> <span class="tok-s">-U</span> <span class="tok-s">churn</span> <span class="tok-s">-d</span> <span class="tok-s">churn</span><span class="tok-s">"</span><span class="tok-p">]</span>
+      interval<span class="tok-p">:</span> 5s
+      timeout<span class="tok-p">:</span> 3s
+      retries<span class="tok-p">:</span> 10
+    ports<span class="tok-p">:</span>
+      <span class="tok-p">-</span> <span class="tok-s">"</span><span class="tok-s">127.0.0.1:5432:5432</span><span class="tok-s">"</span>   <span class="tok-c"># только с этой машины</span>
+    restart<span class="tok-p">:</span> unless-stopped
+
+  app<span class="tok-p">:</span>
+    build<span class="tok-p">:</span> .
+    environment<span class="tok-p">:</span>
+      CHURN_DATABASE_URL<span class="tok-p">:</span> postgresql://churn:${POSTGRES_PASSWORD}@db:5432/churn
+      CHURN_API_TOKEN<span class="tok-p">:</span> ${CHURN_API_TOKEN:?задайте CHURN_API_TOKEN в .env}
+    ports<span class="tok-p">:</span>
+      <span class="tok-p">-</span> <span class="tok-s">"</span><span class="tok-s">127.0.0.1:8765:8000</span><span class="tok-s">"</span>
+    depends_on<span class="tok-p">:</span>
+      db<span class="tok-p">:</span>
+        condition<span class="tok-p">:</span> service_healthy
+    restart<span class="tok-p">:</span> unless-stopped
+
+  prometheus<span class="tok-p">:</span>
+    image<span class="tok-p">:</span> prom/prometheus:v3.16.0
+    profiles<span class="tok-p">:</span> <span class="tok-p">[</span><span class="tok-s">"</span><span class="tok-s">monitoring</span><span class="tok-s">"</span><span class="tok-p">]</span>
+    volumes<span class="tok-p">:</span>
+      <span class="tok-p">-</span> ./prometheus/prometheus.yml:/etc/prometheus/prometheus.yml:ro
+    ports<span class="tok-p">:</span>
+      <span class="tok-p">-</span> <span class="tok-s">"</span><span class="tok-s">127.0.0.1:9090:9090</span><span class="tok-s">"</span>
+
+volumes<span class="tok-p">:</span>
+  pgdata<span class="tok-p">:</span>
+</code></pre></div>
+<p>Разбор по пунктам:</p>
+<ul>
+<li><strong>Сеть и имена.</strong> Compose создаёт для проекта общую сеть, и каждый сервис доступен по своему имени как по хосту. Поэтому приложение подключается к <code>db:5432</code>, а не к <code>localhost</code>: <code>localhost</code> внутри контейнера — он сам. Для связи сервисов <code>ports</code> не нужен: он публикует порт на хост, а контейнеры в одной сети и так видят друг друга.</li>
+<li><strong>Тома.</strong> <code>pgdata</code> — именованный том: данные базы переживают пересоздание контейнера. Файл <code>schema.sql</code> в <code>/docker-entrypoint-initdb.d/</code> выполняется только при первой инициализации пустого тома; схему изменили позже — нужна миграция, а не перезапуск. У образов Postgres 18 и новее путь данных изменился (том монтируют на <code>/var/lib/postgresql</code>): сверяйтесь с описанием образа на Docker Hub.</li>
+<li><strong><code>depends_on</code> и healthcheck.</strong> Голый <code>depends_on</code> ждёт только <em>старта</em> контейнера, а не готовности базы. Условие <code>service_healthy</code> ждёт, пока <code>pg_isready</code> не ответит успехом. Но надёжный сервис всё равно умеет переподключаться: база может перезапуститься позже.</li>
+<li><strong>Подстановки.</strong> <code>${VAR:?сообщение}</code> останавливает запуск с понятной ошибкой, если переменной нет. Пароль с символами <code>@</code>, <code>/</code>, <code>:</code> в URL нужно процентно закодировать, иначе строка подключения сломается.</li>
+<li><strong>Проверка здоровья по TCP.</strong> При первой инициализации образ Postgres поднимает временный сервер, слушающий только Unix-сокет; <code>pg_isready</code> без <code>-h</code> проверяет сокет и рапортует «healthy» до окончания init-скриптов, а с <code>-h 127.0.0.1</code> проверка идёт по TCP и срабатывает только на настоящем сервере.</li>
+<li><strong>Профили.</strong> Сервисы с <code>profiles</code> по умолчанию не стартуют; <code>docker compose --profile monitoring up -d</code> добавит Prometheus (по тому же шаблону и Grafana, см. <a href="/edufamcs-demo/handbook/engineering/grafana/" rel="noopener noreferrer nofollow">Grafana</a>).</li>
+</ul>
+<h2 id="переменные-окружения-и-секреты">Переменные окружения и секреты</h2>
+<p>Compose сам читает файл <code>.env</code> из папки проекта для <strong>подстановки</strong> <code>${...}</code> в <code>compose.yaml</code>. Файл с паролями:</p>
+<ul>
+<li>лежит в <code>.gitignore</code> с правами <code>chmod 600</code>; в репозитории только <code>.env.example</code> с именами переменных без значений;</li>
+<li>явный файл передаётся флагом: <code>docker compose --env-file ~/.config/churn/prod.env up -d</code>;</li>
+<li><strong>не загружается в shell командой <code>source .env</code></strong>: значения с пробелами или <code>$</code> ломают разбор, а упавший разбор печатает строку с паролем в терминал и историю. Compose читает файл сам.</li>
+</ul>
+<p>Отдельный ключ <code>env_file:</code> внутри сервиса передаёт переменные прямо в окружение контейнера. Подстановка и <code>env_file</code> — разные механизмы, не путайте их.</p>
+<div class="callout md note"><p class="callout-title">Секреты глубже</p>
+<p>Переменные окружения видны в <code>docker inspect</code> и в <code>/proc</code> процесса. Образ Postgres умеет читать пароль из файла (<code>POSTGRES_PASSWORD_FILE</code>), а Compose монтирует такой файл через верхнеуровневый блок <code>secrets:</code>. Для одного сервера <code>.env</code> с правами 600 — приемлемый минимум; для общих стендов берут менеджер секретов (Vault, 1Password, облачный).</p>
+</div>
+<h2 id="жизненный-цикл">Жизненный цикл</h2>
+<div class="code"><div class="code-head"><span class="lang">bash</span></div><pre><code>docker compose --env-file ~/.config/churn/prod.env up -d --build   <span class="tok-c"># собрать и поднять в фоне
+</span>docker compose ps                                                  <span class="tok-c"># статус и health
+</span>docker compose logs -f app                                         <span class="tok-c"># логи сервиса, -f: следить
+</span>docker compose <span class="tok-f">exec</span> db psql -U churn -d churn                      <span class="tok-c"># psql внутри контейнера
+</span>docker compose stop                                                <span class="tok-c"># остановить, ничего не удаляя
+</span>docker compose down                                                <span class="tok-c"># удалить контейнеры и сеть, тома остаются
+</span>docker compose down -v                                             <span class="tok-c"># + удалить именованные тома: БД пропадёт
+</span></code></pre></div>
+<p><code>down -v</code> уничтожает том <code>pgdata</code>, то есть <strong>всю базу</strong>, без подтверждения. Привыкайте писать <code>down</code> без <code>-v</code>; флаг уместен на локальном стенде, когда вы сознательно хотите чистую базу.</p>
+<div class="callout md warn"><p class="callout-title">Ловушка</p>
+<p><code>docker compose down -v</code> и <code>docker volume prune</code> стирают данные без возможности восстановления. Перед ними нужна свежая копия через <code>pg_dump</code> (ниже), особенно на сервере.</p>
+</div>
+<h2 id="перезапуск-и-обновление">Перезапуск и обновление</h2>
+<p><code>restart: unless-stopped</code> поднимает контейнер после падения процесса и перезагрузки машины, если вы не останавливали его вручную. Остальные политики: <code>always</code> — то же, но и остановленный вручную контейнер поднимется при рестарте Docker; <code>on-failure</code> — только при ненулевом коде выхода; <code>no</code> — не перезапускать. Для сервисов на одном сервере обычно берут <code>unless-stopped</code>.</p>
+<p>Обновление: <code>docker compose up -d --build app</code> пересоздаёт контейнер <code>app</code>, и на секунды сервис недоступен. Для учебного и внутреннего сервиса это нормально. Настоящий zero-downtime требует минимум двух реплик за обратным прокси (или оркестратора вроде Kubernetes) и совместимых версий схемы базы: миграции делают так, чтобы старый и новый код работали на одной схеме одновременно.</p>
+<h2 id="резервные-копии-базы">Резервные копии базы</h2>
+<p>Том — не бэкап: он умирает вместе с диском и после ошибочного <code>down -v</code>. Логическую копию делает <code>pg_dump</code> внутри контейнера:</p>
+<div class="code"><div class="code-head"><span class="lang">bash</span></div><pre><code>docker compose <span class="tok-f">exec</span> -T db pg_dump -U churn -Fc churn &gt; backup-<span class="tok-k">$(</span>date +%F<span class="tok-k">)</span>.dump
+<span class="tok-c"># восстановление в пустую (или пересоздаваемую) базу
+</span>docker compose <span class="tok-f">exec</span> -T db pg_restore -U churn -d churn --clean --if-exists &lt; backup-2026-11-10.dump
+</code></pre></div>
+<p><code>-Fc</code> — сжатый формат, <code>-T</code> отключает псевдотерминал, чтобы перенаправление не испортило бинарные данные. Копию храните вне сервера (объектное хранилище), делайте по расписанию (cron, systemd timer) и <strong>хотя бы раз проверьте восстановление</strong>: бэкап, который не восстанавливали, остаётся гипотезой.</p>
+<h2 id="порты-127001-против-0000">Порты: 127.0.0.1 против 0.0.0.0</h2>
+<p>Запись <code>"8765:8000"</code> публикует порт на <strong>всех</strong> интерфейсах (<code>0.0.0.0</code>): сервис виден из интернета, если у сервера публичный адрес. <code>"127.0.0.1:8765:8000"</code> открывает его только для самой машины; снаружи сервис выставляют через обратный прокси (nginx, Caddy) с HTTPS. Особенно важно это для базы: Postgres со слабым паролем на <code>0.0.0.0:5432</code> находят сканеры за считаные часы.</p>
+<p>Docker сам прописывает правила в <code>iptables</code>, и опубликованный порт обходит настройки <code>ufw</code>: «закрыли файрволом» не значит «закрыто». Надёжная защита — публиковать на <code>127.0.0.1</code> или вообще не публиковать (базе порт нужен только внутри сети Compose, поэтому <code>ports</code> у <code>db</code> на сервере обычно убирают). Про выбор места запуска — <a href="/edufamcs-demo/handbook/engineering/gde-zapuskat-proekt/" rel="noopener noreferrer nofollow">где запускать проект</a>.</p>
+<h2 id="ловушки">Ловушки</h2>
+<ul>
+<li><code>down -v</code> вместо <code>down</code>; единственная копия базы лежит в томе.</li>
+<li>Пароль из <code>.env</code> попал в git; <code>.env</code> скопирован в образ из-за пустого <code>.dockerignore</code>.</li>
+<li>Порт базы опубликован на <code>0.0.0.0</code> на публичном сервере.</li>
+<li>Приложение подключается к <code>localhost</code> вместо имени сервиса.</li>
+<li><code>depends_on</code> без <code>healthcheck</code>: приложение стартует раньше базы и падает.</li>
+<li><code>schema.sql</code> в <code>initdb.d</code> «не применился»: том уже не пуст, скрипты выполняются только при первой инициализации.</li>
+<li>Ошибки в отступах YAML и подстановках ловит <code>docker compose config</code>: он печатает итоговую конфигурацию.</li>
+<li>На собеседовании спрашивают: как контейнеры находят друг друга; чем том отличается от bind mount; что делает <code>depends_on</code>; как бэкапить базу в контейнере; как обновить сервис без простоя; что такое профиль.</li>
+</ul>
+<h2 id="проверь-себя">Проверь себя</h2>
+<details class="callout md details"><summary>Как приложение в Compose находит базу, и почему не `localhost`?</summary>
+<p>По имени сервиса (<code>db</code>): Compose создаёт общую сеть с DNS по именам сервисов. <code>localhost</code> внутри контейнера — сам контейнер.</p>
+</details>
+<details class="callout md details"><summary>Что делает `docker compose down -v` и чем опасен?</summary>
+<p>Удаляет контейнеры, сети и именованные тома, то есть данные базы. Без <code>-v</code> тома сохраняются.</p>
+</details>
+<details class="callout md details"><summary>Почему `depends_on` недостаточно, чтобы база была готова?</summary>
+<p>Он ждёт запуска контейнера, а не готовности процесса внутри. Нужны <code>healthcheck</code> и <code>condition: service_healthy</code>, а в приложении логика повторных подключений.</p>
+</details>
+<details class="callout md details"><summary>В чём разница между `127.0.0.1:5432:5432` и `5432:5432`?</summary>
+<p>Первое открывает порт только на самой машине, второе на всех интерфейсах, включая публичный. На сервере почти всегда нужен первый вариант или отсутствие <code>ports</code>.</p>
+</details>
+<details class="callout md details"><summary>Как безопасно сделать резервную копию и восстановить базу?</summary>
+<p><code>pg_dump -Fc</code> внутри контейнера в файл, копия вне сервера, <code>pg_restore</code> в чистую базу. Том не заменяет бэкап; восстановление нужно проверять.</p>
+</details>
+<h2 id="что-почитать">Что почитать</h2>
+<ul>
+<li><a href="https://docs.docker.com/compose/" rel="noopener noreferrer nofollow">Docker Compose: обзор</a></li>
+<li><a href="https://docs.docker.com/reference/compose-file/" rel="noopener noreferrer nofollow">Compose file reference</a></li>
+<li><a href="https://docs.docker.com/compose/how-tos/startup-order/" rel="noopener noreferrer nofollow">Compose: порядок запуска и depends_on</a></li>
+<li><a href="https://docs.docker.com/compose/how-tos/profiles/" rel="noopener noreferrer nofollow">Compose: профили</a></li>
+<li><a href="https://docs.docker.com/compose/how-tos/environment-variables/" rel="noopener noreferrer nofollow">Compose: переменные окружения</a></li>
+<li><a href="https://hub.docker.com/_/postgres" rel="noopener noreferrer nofollow">Образ postgres на Docker Hub</a></li>
+<li><a href="https://www.postgresql.org/docs/current/app-pgdump.html" rel="noopener noreferrer nofollow">PostgreSQL: pg_dump</a></li>
+</ul>
+</div>
+      
+
+      
+
+      
+      <nav class="pager" aria-label="Соседние статьи">
+        <a href="/edufamcs-demo/handbook/engineering/docker/"><span><svg class="ico sm" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-arrow-left"/></svg>Назад</span>Docker: образы, контейнеры, Dockerfile для Python</a>
+        <a href="/edufamcs-demo/handbook/engineering/gde-zapuskat-proekt/"><span>Дальше<svg class="ico sm" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-arrow"/></svg></span>Где запускать свой проект: ноутбук дома, VPS, облака</a>
+      </nav>
+      
+    </article>
+
+    <aside class="hb-toc" aria-label="На этой странице">
+      <a class="l2" href="#composeyaml-для-сервиса-и-базы">compose.yaml для сервиса и базы</a><a class="l2" href="#переменные-окружения-и-секреты">Переменные окружения и секреты</a><a class="l2" href="#жизненный-цикл">Жизненный цикл</a><a class="l2" href="#перезапуск-и-обновление">Перезапуск и обновление</a><a class="l2" href="#резервные-копии-базы">Резервные копии базы</a><a class="l2" href="#порты-127001-против-0000">Порты: 127.0.0.1 против 0.0.0.0</a><a class="l2" href="#ловушки">Ловушки</a><a class="l2" href="#проверь-себя">Проверь себя</a><a class="l2" href="#что-почитать">Что почитать</a>
+    </aside>
+  </div>
+</div>
+
+
+</main>
+
+<footer class="ftr" data-theme="dark">
+  <svg class="sym fern" viewBox="0 0 40.5 65.02" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#fern"/></svg>
+  <div class="container">
+    <div class="ftr-row">
+      <a href="/edufamcs-demo/" aria-label="EDU FAMCS — главная"><img src="/edufamcs-demo/static/brand/logo/logo-edu-dark.svg" alt="EDU FAMCS" width="196" height="40"></a>
+      <ul class="ftr-links">
+        <li><a href="/edufamcs-demo/#courses">Курсы</a></li>
+        <li><a href="/edufamcs-demo/ml/">Машинное обучение</a></li>
+        <li><a href="/edufamcs-demo/handbook/">Хендбук</a></li>
+        <li><a href="/edufamcs-demo/news/">Новости</a></li>
+        <li><a href="/edufamcs-demo/people/">Авторы</a></li>
+        <li><a href="/edufamcs-demo/about/">О&nbsp;нас</a></li>
+        <li><a href="/edufamcs-demo/propose/">Предложить или исправить</a></li>
+        <li><a href="/edufamcs-demo/privacy/">Конфиденциальность</a></li>
+      </ul>
+    </div>
+    <div class="ftr-big" aria-hidden="true">EDU<span class="d">·</span>FAMCS</div>
+    <p class="ftr-copy">© 2026 EDU FAMCS · Минск</p>
+  </div>
+</footer>
+
+<div class="toasts-region" aria-live="polite" id="toasts">
+
+</div>
+
+</body>
+</html>

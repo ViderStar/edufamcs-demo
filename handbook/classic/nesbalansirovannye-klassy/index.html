@@ -1,0 +1,293 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Несбалансированные классы · EDU FAMCS</title>
+<meta name="description" content="Несбалансированные классы — Классическое машинное обучение. Хендбук ML-курса ФПМИ.">
+<meta name="theme-color" content="#060A16">
+<meta name="robots" content="noindex, nofollow">
+<meta name="htmx-config" content='{"allowEval":false,"includeIndicatorStyles":false,"historyCacheSize":0,"selfRequestsOnly":true}'>
+<meta name="katex-js" content="/edufamcs-demo/static/vendor/katex/katex.min.js">
+<meta name="katex-css" content="/edufamcs-demo/static/vendor/katex/katex.min.css">
+<link rel="icon" href="/edufamcs-demo/static/brand/logo/favicon-16.svg" type="image/svg+xml" sizes="16x16">
+<link rel="icon" href="/edufamcs-demo/static/brand/logo/favicon.svg" type="image/svg+xml" sizes="any">
+<link rel="preload" href="/edufamcs-demo/static/brand/fonts/manrope-cyrillic-400.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/edufamcs-demo/static/brand/fonts/unbounded-cyrillic-800.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="/edufamcs-demo/static/brand/fonts.css">
+<link rel="stylesheet" href="/edufamcs-demo/static/brand/tokens.css">
+<link rel="stylesheet" href="/edufamcs-demo/static/brand/components.css">
+<link rel="stylesheet" href="/edufamcs-demo/static/css/site.css">
+<link rel="stylesheet" href="/edufamcs-demo/static/css/hub.css">
+<link rel="stylesheet" href="/edufamcs-demo/static/css/about.css">
+<link rel="stylesheet" href="/edufamcs-demo/static/handbook/handbook.css">
+<script src="/edufamcs-demo/static/js/theme.js"></script>
+<script src="/edufamcs-demo/static/vendor/htmx/htmx.min.js" defer></script>
+<script src="/edufamcs-demo/static/vendor/alpine/alpine-csp.min.js" defer></script>
+<script src="/edufamcs-demo/static/js/site.js" defer></script>
+<script src="/edufamcs-demo/static/handbook/handbook.js" defer></script>
+</head>
+<body class="" hx-headers='{"X-CSRFToken": "3EDCIM629CQL9weCaUfMpkmDqy13ixKUFRszYOFTap4kkPt49ntJ7deBSH812hJB"}'>
+<a class="skip" href="#main">К содержанию</a>
+<div class="demo-bar" role="note">Демо-версия для отзывов: вход, запись на курсы и формы здесь не работают.</div>
+
+<header class="hdr">
+  <div class="container">
+    <a class="brand" href="/edufamcs-demo/" aria-label="EDU FAMCS — главная">
+      <span class="full"><img class="only-light" src="/edufamcs-demo/static/brand/logo/logo-edu-light.svg" alt="EDU FAMCS" width="196" height="40"><img class="only-dark" src="/edufamcs-demo/static/brand/logo/logo-edu-dark.svg" alt="EDU FAMCS" width="196" height="40"></span>
+      <span class="short"><img class="only-light" src="/edufamcs-demo/static/brand/logo/logo-edu-light.svg" alt="EDU FAMCS" height="30"><img class="only-dark" src="/edufamcs-demo/static/brand/logo/logo-edu-dark.svg" alt="EDU FAMCS" height="30"></span>
+    </a>
+    <nav class="nav" id="main-nav" aria-label="Основная навигация">
+      <a href="/edufamcs-demo/#courses">Курсы</a>
+      <a href="/edufamcs-demo/ml/" >Машинное обучение</a>
+      
+      <a href="/edufamcs-demo/handbook/" aria-current="page">Хендбук</a>
+      <a href="/edufamcs-demo/news/" >Новости</a>
+      <a href="/edufamcs-demo/people/" >Авторы</a>
+      <a href="/edufamcs-demo/about/" >О&nbsp;нас</a>
+    </nav>
+    <div class="hdr-actions">
+      
+      <a class="btn btn-outline btn-login" href="/edufamcs-demo/accounts/login/?next=/handbook/classic/nesbalansirovannye-klassy/">Войти</a>
+      
+      <button class="icon-btn menu-btn" type="button" aria-label="Меню" aria-expanded="false" aria-controls="main-nav"><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-menu"/></svg></button>
+    </div>
+  </div>
+</header>
+
+<main id="main">
+
+
+
+<div class="container hb-page hb-tone">
+  <div class="hb-readbar" aria-hidden="true"><i></i></div>
+  <div class="hb">
+    <aside class="hb-nav" aria-label="Статьи раздела">
+      
+<form class="hb-search" action="/edufamcs-demo/handbook/search/" method="get" role="search">
+  <svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-search"/></svg>
+  <input class="input" type="search" name="q" value="" placeholder="Поиск по хендбуку" aria-label="Поиск по хендбуку" autocomplete="off" maxlength="120"
+    hx-get="/edufamcs-demo/handbook/search/" hx-trigger="input changed delay:250ms, search" hx-target="#hb-nav-results" hx-sync="this:replace">
+</form>
+
+      <div id="hb-nav-results" class="hb-nav-results" aria-live="polite"></div>
+      <a class="grp" href="/edufamcs-demo/handbook/classic/">Данные, метрики и валидация</a>
+      
+      <a class="" href="/edufamcs-demo/handbook/classic/priznaki-i-kodirovanie-kategorij/">Признаки и кодирование категорий</a>
+      
+      <a class="cur" href="/edufamcs-demo/handbook/classic/nesbalansirovannye-klassy/" aria-current="page">Несбалансированные классы</a>
+      
+      <a class="" href="/edufamcs-demo/handbook/classic/metriki-klassifikacii-i-kalibrovka/">Метрики классификации и калибровка</a>
+      
+      <a class="" href="/edufamcs-demo/handbook/classic/validaciya-i-utechki-dannyh/">Валидация и утечки данных</a>
+      
+      <a class="" href="/edufamcs-demo/handbook/classic/poisk-anomalij/">Поиск аномалий</a>
+      
+    </aside>
+
+    <article class="hb-main">
+      <nav class="crumbs" aria-label="Навигация"><a href="/edufamcs-demo/handbook/">Хендбук</a><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-chev"/></svg><a href="/edufamcs-demo/handbook/classic/">Классическое машинное обучение</a></nav>
+      <h1 class="h1">Несбалансированные классы</h1>
+      <div class="hb-meta">
+        
+        
+        <span><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-clock"/></svg>10&nbsp;мин</span>
+        <span class="hb-authors"><span class="avatar sm" title="Артем Лебедевич">АЛ</span>Артем Лебедевич</span>
+        <span><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-edit"/></svg>10 ноября 2026</span>
+        
+        
+      </div>
+
+      
+      <details class="hb-mtoc">
+        <summary><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-list"/></svg>Содержание<svg class="ico sm" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-chev-down"/></svg></summary>
+        <a class="l2" href="#почему-accuracy-не-годится-и-что-считать">Почему accuracy не годится и что считать</a><a class="l2" href="#что-реально-помогает">Что реально помогает</a><a class="l3" href="#under--и-over-sampling-smote">Under- и over-sampling, SMOTE</a><a class="l3" href="#поправка-вероятностей-вывод">Поправка вероятностей: вывод</a><a class="l3" href="#стратификация">Стратификация</a><a class="l2" href="#числа-1-положительных">Числа: 1% положительных</a><a class="l2" href="#код">Код</a><a class="l2" href="#ловушки">Ловушки</a><a class="l2" href="#проверь-себя">Проверь себя</a><a class="l2" href="#что-почитать">Что почитать</a>
+      </details>
+      
+
+      <div class="prose"><p>Мошенничество, отток, клики по рекламе, дефекты на производстве: интересующее событие встречается в долях процента. Стандартный рефлекс — «баланс классов сломан, надо сэмплировать». На практике дисбаланс почти никогда не проблема сам по себе: проблемы создают неподходящая метрика, порог 0,5 и ожидание, что вероятности останутся честными после «исправления».</p>
+<h2 id="почему-accuracy-не-годится-и-что-считать">Почему accuracy не годится и что считать</h2>
+<p>При доле положительных 1% модель «всегда 0» имеет accuracy 0,99. Нужны метрики, чувствительные к редкому классу (определения — в <a href="/edufamcs-demo/handbook/classic/logisticheskaya-regressiya-i-metriki/" rel="noopener noreferrer nofollow">главе про логистическую регрессию</a> и <a href="/edufamcs-demo/handbook/classic/metriki-klassifikacii-i-kalibrovka/" rel="noopener noreferrer nofollow">главе про метрики</a>).</p>
+<ul>
+<li><strong>PR-AUC (average precision)</strong> отвечает на вопрос, который важен бизнесу: среди тех, кого модель отметила, сколько настоящих? У случайной модели PR-AUC равна доле положительных (≈0,01), поэтому шкала «честная».</li>
+<li><strong>ROC-AUC</strong> обманчив при сильном дисбалансе: FPR нормируется на огромное число отрицательных. Арифметика (иллюстрация): 100 000 объектов, 1% положительных, то есть 1000 и 99 000. Порог с TPR 40% и FPR 1% выглядит на ROC-кривой отличной точкой, но даёт 400 попаданий и 990 ложных тревог, то есть precision <span class="tex">400/1390\approx0{,}29</span>. Saito и Rehmsmeier (2015) показали на модельных задачах, что PR-график информативнее ROC при дисбалансе.</li>
+<li><strong>Recall@precision</strong> и <strong>precision@k</strong>: «какую долю положительных мы найдём, если требуем precision ≥ 0,3» или «сколько настоящих среди 100 самых подозрительных». Это ровно то, как модель используют (очередь на ручную проверку ограничена).</li>
+<li><strong>Стоимостная метрика</strong>: ожидаемые потери <span class="tex">c_{FN}\cdot FN + c_{FP}\cdot FP</span>. Для калиброванных вероятностей оптимальный порог <span class="tex">\tau = \frac{c_{FP}}{c_{FP}+c_{FN}}</span> (Elkan, 2001).</li>
+</ul>
+<div class="callout md tip"><p class="callout-title">Начинайте с порога</p>
+<p>Модель, обученная на исходных данных, уже хорошо ранжирует и даёт честные вероятности. Единственная вещь, которая обычно «ломается» при дисбалансе, — порог 0,5: вероятности редкого события почти всегда ниже 0,5. Подбор порога на валидации по бизнес-метрике часто даёт больше, чем любой ресэмплинг.</p>
+</div>
+<h2 id="что-реально-помогает">Что реально помогает</h2>
+<ol>
+<li><strong>Подбор порога</strong> по цене ошибок или по F-мере на отдельной валидации.</li>
+<li><strong>Веса классов</strong> (<code>class_weight</code>, <code>scale_pos_weight</code>): умножают вклад положительных объектов в функцию потерь. Дешёвый способ усилить сигнал редкого класса без изменения данных, но сдвигает вероятности.</li>
+<li><strong>Больше данных редкого класса</strong>: активная разметка, сбор целевых примеров. Единственное, что реально добавляет информацию.</li>
+<li><strong>Ресэмплинг</strong>: меняет только частоту примеров, информации не добавляет.</li>
+</ol>
+<h3 id="under--и-over-sampling-smote">Under- и over-sampling, SMOTE</h3>
+<p><strong>Undersampling</strong> выбрасывает часть отрицательных объектов: быстрее обучение, но теряется информация. <strong>Oversampling</strong> дублирует положительные — модель их «запоминает». <strong>SMOTE</strong> (Chawla et al., 2002) создаёт синтетические положительные: берёт положительный объект <span class="tex">x_i</span>, одного из его <span class="tex">k</span> ближайших положительных соседей <span class="tex">x_j</span> и ставит новую точку <span class="tex">x_{\text{new}}=x_i+u\,(x_j-x_i)</span>, <span class="tex">u\sim U[0,1]</span>. Идея — заполнить область класса, а не повторять точки.</p>
+<p>Почему это часто не работает для сильных моделей. Синтетические точки лежат на отрезках между настоящими, не несут новой информации и размывают границу в шумных и многомерных данных (расстояния в высокой размерности плохо различают соседей). Градиентный бустинг и так умеет работать с редким классом, если порог выбран верно. Elor и Averbuch-Elor (2022, препринт) на наборах данных с тремя сильными классификаторами не обнаружили выигрыша от балансировки, при этом слабым классификаторам она помогала. Van den Goorbergh et al. (2022) для логистической регрессии показали: все виды ресэмплинга не улучшают AUROC и делают вероятности завышенными, а эффект на чувствительность воспроизводится простым сдвигом порога.</p>
+<h3 id="поправка-вероятностей-вывод">Поправка вероятностей: вывод</h3>
+<p>Пусть при обучении доля положительных <span class="tex">\pi_{\text{tr}}</span> (после ресэмплинга или эффективная при весах), а в жизни <span class="tex">\pi</span>. Условное распределение признаков <span class="tex">p(x\mid y)</span> не менялось, меняется только априор. Это верно для undersampling, дублирования и весов; SMOTE меняет и <span class="tex">p(x\mid y{=}1)</span> (синтетические точки), поэтому для него поправка приближённая. По Байесу:</p>
+<div class="tex tex-block">\frac{p(y{=}1\mid x)}{p(y{=}0\mid x)}=\frac{p(x\mid 1)}{p(x\mid 0)}\cdot\frac{\pi}{1-\pi}.</div>
+<p>Одно и то же отношение правдоподобий <span class="tex">\frac{p(x\mid1)}{p(x\mid0)}</span> входит в шансы модели и в шансы реальности, отличаются только множители-априоры. Значит</p>
+<div class="tex tex-block">\operatorname{odds}_{\text{true}}(x)=\operatorname{odds}_{\text{model}}(x)\cdot\frac{\pi/(1-\pi)}{\pi_{\text{tr}}/(1-\pi_{\text{tr}})},\qquad p=\frac{\text{odds}}{1+\text{odds}}.</div>
+<p>Для <code>class_weight="balanced"</code> эффективный <span class="tex">\pi_{\text{tr}}=0{,}5</span> (веса уравнивают суммарный вес классов), поэтому поправка — домножение шансов на <span class="tex">\frac{\pi}{1-\pi}</span>. Для весов <span class="tex">w</span> на положительных: делим шансы на <span class="tex">w</span>. Поправка монотонна, поэтому PR-AUC и ROC-AUC не меняются, а Brier, log-loss и ECE возвращаются к норме (Dal Pozzolo et al., 2015, для undersampling).</p>
+<h3 id="стратификация">Стратификация</h3>
+<p>При 1% положительных случайное разбиение может дать фолд с рекордно малым числом положительных, и метрика будет прыгать. <code>StratifiedKFold</code> и <code>train_test_split(stratify=y)</code> сохраняют долю в каждой части. Ресэмплинг делают <strong>только внутри обучающей части фолда</strong> (<code>imblearn.pipeline.Pipeline</code>), иначе синтетические точки попадут в оценку (см. <a href="/edufamcs-demo/handbook/classic/validaciya-i-utechki-dannyh/" rel="noopener noreferrer nofollow">валидацию и утечки</a>).</p>
+<h2 id="числа-1-положительных">Числа: 1% положительных</h2>
+<p>Синтетика <code>make_classification</code>, 200 тыс. строк, доля положительных 0,99%, 20 признаков (6 информативных), шум меток 1%. Разбиение 50/25/25 (train/val/test) со стратификацией, около 500 положительных в тесте. Модель — <code>HistGradientBoostingClassifier</code>; результат — среднее ± стандартное отклонение по 5 независимым наборам данных (поэтому разброс велик: положительных в тесте немного).</p>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>Вариант</th>
+<th>PR-AUC</th>
+<th>ROC-AUC</th>
+<th>Brier</th>
+<th>ECE</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>baseline</td>
+<td>0,193 ± 0,044</td>
+<td>0,714 ± 0,008</td>
+<td>0,0089</td>
+<td>0,0017</td>
+</tr>
+<tr>
+<td><code>class_weight="balanced"</code></td>
+<td>0,192 ± 0,049</td>
+<td>0,717 ± 0,012</td>
+<td>0,1221</td>
+<td>0,314</td>
+</tr>
+<tr>
+<td>+ поправка приора</td>
+<td>0,192 ± 0,049</td>
+<td>0,717 ± 0,012</td>
+<td>0,0095</td>
+<td>0,0043</td>
+</tr>
+<tr>
+<td>SMOTE до 50/50</td>
+<td>0,175 ± 0,053</td>
+<td>0,699 ± 0,015</td>
+<td>0,0753</td>
+<td>0,185</td>
+</tr>
+<tr>
+<td>+ поправка приора</td>
+<td>0,175 ± 0,053</td>
+<td>0,699 ± 0,015</td>
+<td>0,0092</td>
+<td>0,0056</td>
+</tr>
+</tbody>
+</table></div>
+<p>F1 на тесте: baseline при пороге 0,5 — 0,237, с порогом, подобранным на валидации, — 0,260; <code>class_weight</code> при 0,5 — 0,095, с подбором порога — 0,270; SMOTE при 0,5 — 0,081, с подбором — 0,243. Выводы: ранжирование (PR-AUC) не улучшилось ни от весов, ни от SMOTE (у SMOTE слегка хуже); вероятности без поправки сильно искажены (ECE 0,19–0,31 против 0,002); весь «выигрыш» на F1 при пороге 0,5 — это сдвиг порога, который baseline получает и сам. Результат — для одной синтетики и одной модели; на слабых моделях картина может быть иной (Elor и Averbuch-Elor отмечают выигрыш для слабых классификаторов).</p>
+<h2 id="код">Код</h2>
+<div class="code"><div class="code-head"><span class="lang">python</span></div><pre><code><span class="tok-k">from</span> imblearn.over_sampling <span class="tok-k">import</span> SMOTE
+<span class="tok-k">from</span> imblearn.pipeline <span class="tok-k">import</span> Pipeline
+<span class="tok-k">from</span> sklearn.ensemble <span class="tok-k">import</span> HistGradientBoostingClassifier
+<span class="tok-k">from</span> sklearn.metrics <span class="tok-k">import</span> average_precision_score<span class="tok-p">,</span> precision_recall_curve
+
+<span class="tok-c"># ресэмплинг только на обучающей части; на predict SMOTE не применяется</span>
+pipe <span class="tok-p">=</span> Pipeline<span class="tok-p">(</span><span class="tok-p">[</span><span class="tok-p">(</span><span class="tok-s">"</span><span class="tok-s">smote</span><span class="tok-s">"</span><span class="tok-p">,</span> SMOTE<span class="tok-p">(</span>random_state<span class="tok-p">=</span><span class="tok-n">0</span><span class="tok-p">)</span><span class="tok-p">)</span><span class="tok-p">,</span>
+                 <span class="tok-p">(</span><span class="tok-s">"</span><span class="tok-s">model</span><span class="tok-s">"</span><span class="tok-p">,</span> HistGradientBoostingClassifier<span class="tok-p">(</span><span class="tok-p">)</span><span class="tok-p">)</span><span class="tok-p">]</span><span class="tok-p">)</span><span class="tok-p">.</span>fit<span class="tok-p">(</span>X_tr<span class="tok-p">,</span> y_tr<span class="tok-p">)</span>
+
+<span class="tok-k">def</span> <span class="tok-f">fix_prior</span><span class="tok-p">(</span>p<span class="tok-p">,</span> pi_train<span class="tok-p">,</span> pi_true<span class="tok-p">)</span><span class="tok-p">:</span>
+    odds <span class="tok-p">=</span> p <span class="tok-p">/</span> <span class="tok-p">(</span><span class="tok-n">1</span> <span class="tok-p">-</span> p<span class="tok-p">)</span> <span class="tok-p">*</span> <span class="tok-p">(</span>pi_true <span class="tok-p">/</span> <span class="tok-p">(</span><span class="tok-n">1</span> <span class="tok-p">-</span> pi_true<span class="tok-p">)</span><span class="tok-p">)</span> <span class="tok-p">/</span> <span class="tok-p">(</span>pi_train <span class="tok-p">/</span> <span class="tok-p">(</span><span class="tok-n">1</span> <span class="tok-p">-</span> pi_train<span class="tok-p">)</span><span class="tok-p">)</span>
+    <span class="tok-k">return</span> odds <span class="tok-p">/</span> <span class="tok-p">(</span><span class="tok-n">1</span> <span class="tok-p">+</span> odds<span class="tok-p">)</span>
+
+p_val <span class="tok-p">=</span> fix_prior<span class="tok-p">(</span>pipe<span class="tok-p">.</span>predict_proba<span class="tok-p">(</span>X_val<span class="tok-p">)</span><span class="tok-p">[</span><span class="tok-p">:</span><span class="tok-p">,</span> <span class="tok-n">1</span><span class="tok-p">]</span><span class="tok-p">,</span> <span class="tok-n">0.5</span><span class="tok-p">,</span> y_tr<span class="tok-p">.</span>mean<span class="tok-p">(</span><span class="tok-p">)</span><span class="tok-p">)</span>
+prec<span class="tok-p">,</span> rec<span class="tok-p">,</span> thr <span class="tok-p">=</span> precision_recall_curve<span class="tok-p">(</span>y_val<span class="tok-p">,</span> p_val<span class="tok-p">)</span>
+f1 <span class="tok-p">=</span> <span class="tok-n">2</span> <span class="tok-p">*</span> prec <span class="tok-p">*</span> rec <span class="tok-p">/</span> <span class="tok-p">(</span>prec <span class="tok-p">+</span> rec <span class="tok-p">+</span> <span class="tok-n">1e-12</span><span class="tok-p">)</span>
+t <span class="tok-p">=</span> thr<span class="tok-p">[</span>f1<span class="tok-p">[</span><span class="tok-p">:</span><span class="tok-p">-</span><span class="tok-n">1</span><span class="tok-p">]</span><span class="tok-p">.</span>argmax<span class="tok-p">(</span><span class="tok-p">)</span><span class="tok-p">]</span>      <span class="tok-c"># порог по F1 на валидации; тест не трогаем</span>
+<span class="tok-f">print</span><span class="tok-p">(</span>average_precision_score<span class="tok-p">(</span>y_val<span class="tok-p">,</span> p_val<span class="tok-p">)</span><span class="tok-p">,</span> t<span class="tok-p">)</span>
+</code></pre></div>
+<h2 id="ловушки">Ловушки</h2>
+<ul>
+<li>Оценивать по accuracy и ROC-AUC и считать задачу решённой.</li>
+<li>Ресэмплинг до разбиения: дубликаты и синтетика попадают в тест.</li>
+<li>Ресэмплировать валидацию и тест: метрики должны считаться на данных с реальным приором.</li>
+<li>Использовать вероятности после <code>class_weight</code>/SMOTE как честные (ожидаемые потери, ранжирование по <span class="tex">p\cdot</span>цена).</li>
+<li>Подбирать порог на тесте.</li>
+<li>На собеседовании: почему при дисбалансе PR-кривая информативнее ROC; вывод поправки вероятностей при смене априора; что делает SMOTE и почему он может навредить; чем <code>class_weight</code> отличается от сдвига порога; когда нужен ресэмплинг, а когда нет (дорогое обучение: undersampling отрицательных ускоряет и допустим, если сделать поправку).</li>
+</ul>
+<h2 id="проверь-себя">Проверь себя</h2>
+<details class="callout md details"><summary>Почему ROC-AUC может быть высоким, а модель бесполезной при 1% положительных?</summary>
+<p>FPR нормирован на огромное число отрицательных, поэтому малый FPR уже означает много ложных срабатываний по сравнению с числом настоящих. Precision и PR-AUC это показывают, ROC-AUC нет.</p>
+</details>
+<details class="callout md details"><summary>Как исправить вероятности после обучения на выборке с долей положительных 0,5 при истинной доле $\pi$?</summary>
+<p>Умножить шансы на <span class="tex">\frac{\pi/(1-\pi)}{0{,}5/0{,}5}=\frac{\pi}{1-\pi}</span> и вернуться к вероятности. Порядок объектов не меняется.</p>
+</details>
+<details class="callout md details"><summary>Изменяет ли `class_weight="balanced"` PR-AUC модели в среднем сильно?</summary>
+<p>Обычно нет: меняется масштаб вероятностей и порог, а упорядочивание близко к исходному. В эксперименте PR-AUC 0,192 против 0,193.</p>
+</details>
+<details class="callout md details"><summary>Что делает SMOTE и почему он не добавляет информации?</summary>
+<p>Создаёт точки на отрезках между положительным объектом и его положительным соседом. Они выводятся из уже имеющихся объектов, поэтому новой информации о классе нет.</p>
+</details>
+<details class="callout md details"><summary>Почему SMOTE нельзя применять до разбиения на train/test?</summary>
+<p>Синтетические точки строятся из соседей, в том числе из будущего теста, и оценка получается завышенной.</p>
+</details>
+<h2 id="что-почитать">Что почитать</h2>
+<ul>
+<li>Chawla N. et al. <em>SMOTE: Synthetic Minority Over-sampling Technique</em>, JAIR, 2002: https://arxiv.org/abs/1106.1813</li>
+<li>Elor Y., Averbuch-Elor H. <em>To SMOTE, or not to SMOTE?</em>, arXiv, 2022: https://arxiv.org/abs/2201.08528</li>
+<li>van den Goorbergh R. et al. <em>The harm of class imbalance corrections for risk prediction models: illustration and simulation using logistic regression</em>, JAMIA, 2022: https://arxiv.org/abs/2202.09101</li>
+<li>Saito T., Rehmsmeier M. <em>The Precision-Recall Plot Is More Informative than the ROC Plot When Evaluating Binary Classifiers on Imbalanced Datasets</em>, PLoS ONE, 2015.</li>
+<li>Davis J., Goadrich M. <em>The Relationship Between Precision-Recall and ROC Curves</em>, ICML 2006.</li>
+<li>Elkan C. <em>The Foundations of Cost-Sensitive Learning</em>, IJCAI 2001.</li>
+<li>Dal Pozzolo A. et al. <em>Calibrating Probability with Undersampling for Unbalanced Classification</em>, IEEE SSCI 2015.</li>
+<li>Документация imbalanced-learn: https://imbalanced-learn.org/stable/</li>
+</ul>
+</div>
+      
+
+      
+
+      
+      <nav class="pager" aria-label="Соседние статьи">
+        <a href="/edufamcs-demo/handbook/classic/priznaki-i-kodirovanie-kategorij/"><span><svg class="ico sm" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-arrow-left"/></svg>Назад</span>Признаки и кодирование категорий</a>
+        <a href="/edufamcs-demo/handbook/classic/metriki-klassifikacii-i-kalibrovka/"><span>Дальше<svg class="ico sm" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-arrow"/></svg></span>Метрики классификации и калибровка</a>
+      </nav>
+      
+    </article>
+
+    <aside class="hb-toc" aria-label="На этой странице">
+      <a class="l2" href="#почему-accuracy-не-годится-и-что-считать">Почему accuracy не годится и что считать</a><a class="l2" href="#что-реально-помогает">Что реально помогает</a><a class="l3" href="#under--и-over-sampling-smote">Under- и over-sampling, SMOTE</a><a class="l3" href="#поправка-вероятностей-вывод">Поправка вероятностей: вывод</a><a class="l3" href="#стратификация">Стратификация</a><a class="l2" href="#числа-1-положительных">Числа: 1% положительных</a><a class="l2" href="#код">Код</a><a class="l2" href="#ловушки">Ловушки</a><a class="l2" href="#проверь-себя">Проверь себя</a><a class="l2" href="#что-почитать">Что почитать</a>
+    </aside>
+  </div>
+</div>
+
+
+</main>
+
+<footer class="ftr" data-theme="dark">
+  <svg class="sym fern" viewBox="0 0 40.5 65.02" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#fern"/></svg>
+  <div class="container">
+    <div class="ftr-row">
+      <a href="/edufamcs-demo/" aria-label="EDU FAMCS — главная"><img src="/edufamcs-demo/static/brand/logo/logo-edu-dark.svg" alt="EDU FAMCS" width="196" height="40"></a>
+      <ul class="ftr-links">
+        <li><a href="/edufamcs-demo/#courses">Курсы</a></li>
+        <li><a href="/edufamcs-demo/ml/">Машинное обучение</a></li>
+        <li><a href="/edufamcs-demo/handbook/">Хендбук</a></li>
+        <li><a href="/edufamcs-demo/news/">Новости</a></li>
+        <li><a href="/edufamcs-demo/people/">Авторы</a></li>
+        <li><a href="/edufamcs-demo/about/">О&nbsp;нас</a></li>
+        <li><a href="/edufamcs-demo/propose/">Предложить или исправить</a></li>
+        <li><a href="/edufamcs-demo/privacy/">Конфиденциальность</a></li>
+      </ul>
+    </div>
+    <div class="ftr-big" aria-hidden="true">EDU<span class="d">·</span>FAMCS</div>
+    <p class="ftr-copy">© 2026 EDU FAMCS · Минск</p>
+  </div>
+</footer>
+
+<div class="toasts-region" aria-live="polite" id="toasts">
+
+</div>
+
+</body>
+</html>

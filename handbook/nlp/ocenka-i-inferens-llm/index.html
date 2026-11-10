@@ -1,0 +1,255 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Оценка и инференс LLM · EDU FAMCS</title>
+<meta name="description" content="Оценка и инференс LLM — NLP и большие языковые модели. Хендбук ML-курса ФПМИ.">
+<meta name="theme-color" content="#060A16">
+<meta name="robots" content="noindex, nofollow">
+<meta name="htmx-config" content='{"allowEval":false,"includeIndicatorStyles":false,"historyCacheSize":0,"selfRequestsOnly":true}'>
+<meta name="katex-js" content="/edufamcs-demo/static/vendor/katex/katex.min.js">
+<meta name="katex-css" content="/edufamcs-demo/static/vendor/katex/katex.min.css">
+<link rel="icon" href="/edufamcs-demo/static/brand/logo/favicon-16.svg" type="image/svg+xml" sizes="16x16">
+<link rel="icon" href="/edufamcs-demo/static/brand/logo/favicon.svg" type="image/svg+xml" sizes="any">
+<link rel="preload" href="/edufamcs-demo/static/brand/fonts/manrope-cyrillic-400.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/edufamcs-demo/static/brand/fonts/unbounded-cyrillic-800.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="/edufamcs-demo/static/brand/fonts.css">
+<link rel="stylesheet" href="/edufamcs-demo/static/brand/tokens.css">
+<link rel="stylesheet" href="/edufamcs-demo/static/brand/components.css">
+<link rel="stylesheet" href="/edufamcs-demo/static/css/site.css">
+<link rel="stylesheet" href="/edufamcs-demo/static/css/hub.css">
+<link rel="stylesheet" href="/edufamcs-demo/static/css/about.css">
+<link rel="stylesheet" href="/edufamcs-demo/static/handbook/handbook.css">
+<script src="/edufamcs-demo/static/js/theme.js"></script>
+<script src="/edufamcs-demo/static/vendor/htmx/htmx.min.js" defer></script>
+<script src="/edufamcs-demo/static/vendor/alpine/alpine-csp.min.js" defer></script>
+<script src="/edufamcs-demo/static/js/site.js" defer></script>
+<script src="/edufamcs-demo/static/handbook/handbook.js" defer></script>
+</head>
+<body class="" hx-headers='{"X-CSRFToken": "IpOJw3aoU5Qx1nNfADgM7KOCJvSZVch1kCDGM5JfVS46cG2Hz6uJPDGAbEZXFWgI"}'>
+<a class="skip" href="#main">К содержанию</a>
+<div class="demo-bar" role="note">Демо-версия для отзывов: вход, запись на курсы и формы здесь не работают.</div>
+
+<header class="hdr">
+  <div class="container">
+    <a class="brand" href="/edufamcs-demo/" aria-label="EDU FAMCS — главная">
+      <span class="full"><img class="only-light" src="/edufamcs-demo/static/brand/logo/logo-edu-light.svg" alt="EDU FAMCS" width="196" height="40"><img class="only-dark" src="/edufamcs-demo/static/brand/logo/logo-edu-dark.svg" alt="EDU FAMCS" width="196" height="40"></span>
+      <span class="short"><img class="only-light" src="/edufamcs-demo/static/brand/logo/logo-edu-light.svg" alt="EDU FAMCS" height="30"><img class="only-dark" src="/edufamcs-demo/static/brand/logo/logo-edu-dark.svg" alt="EDU FAMCS" height="30"></span>
+    </a>
+    <nav class="nav" id="main-nav" aria-label="Основная навигация">
+      <a href="/edufamcs-demo/#courses">Курсы</a>
+      <a href="/edufamcs-demo/ml/" >Машинное обучение</a>
+      
+      <a href="/edufamcs-demo/handbook/" aria-current="page">Хендбук</a>
+      <a href="/edufamcs-demo/news/" >Новости</a>
+      <a href="/edufamcs-demo/people/" >Авторы</a>
+      <a href="/edufamcs-demo/about/" >О&nbsp;нас</a>
+    </nav>
+    <div class="hdr-actions">
+      
+      <a class="btn btn-outline btn-login" href="/edufamcs-demo/accounts/login/?next=/handbook/nlp/ocenka-i-inferens-llm/">Войти</a>
+      
+      <button class="icon-btn menu-btn" type="button" aria-label="Меню" aria-expanded="false" aria-controls="main-nav"><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-menu"/></svg></button>
+    </div>
+  </div>
+</header>
+
+<main id="main">
+
+
+
+<div class="container hb-page s-nlp">
+  <div class="hb-readbar" aria-hidden="true"><i></i></div>
+  <div class="hb">
+    <aside class="hb-nav" aria-label="Статьи раздела">
+      
+<form class="hb-search" action="/edufamcs-demo/handbook/search/" method="get" role="search">
+  <svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-search"/></svg>
+  <input class="input" type="search" name="q" value="" placeholder="Поиск по хендбуку" aria-label="Поиск по хендбуку" autocomplete="off" maxlength="120"
+    hx-get="/edufamcs-demo/handbook/search/" hx-trigger="input changed delay:250ms, search" hx-target="#hb-nav-results" hx-sync="this:replace">
+</form>
+
+      <div id="hb-nav-results" class="hb-nav-results" aria-live="polite"></div>
+      <a class="grp" href="/edufamcs-demo/handbook/nlp/">Практика</a>
+      
+      <a class="" href="/edufamcs-demo/handbook/nlp/doobuchenie-lora/">Дообучение LLM: от полного fine-tuning до LoRA</a>
+      
+      <a class="cur" href="/edufamcs-demo/handbook/nlp/ocenka-i-inferens-llm/" aria-current="page">Оценка и инференс LLM</a>
+      
+    </aside>
+
+    <article class="hb-main">
+      <nav class="crumbs" aria-label="Навигация"><a href="/edufamcs-demo/handbook/">Хендбук</a><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-chev"/></svg><a href="/edufamcs-demo/handbook/nlp/">NLP и большие языковые модели</a></nav>
+      <h1 class="h1">Оценка и инференс LLM</h1>
+      <div class="hb-meta">
+        
+        
+        <span><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-clock"/></svg>14&nbsp;мин</span>
+        <span class="hb-authors"><span class="avatar sm" title="Артем Лебедевич">АЛ</span>Артем Лебедевич</span>
+        <span><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-edit"/></svg>10 ноября 2026</span>
+        
+        
+      </div>
+
+      
+      <details class="hb-mtoc">
+        <summary><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-list"/></svg>Содержание<svg class="ico sm" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-chev-down"/></svg></summary>
+        <a class="l2" href="#часть-1-оценка">Часть 1. Оценка</a><a class="l3" href="#почему-это-трудно">Почему это трудно</a><a class="l3" href="#виды-оценки">Виды оценки</a><a class="l3" href="#оценка-вашего-приложения">Оценка вашего приложения</a><a class="l3" href="#статистическая-аккуратность">Статистическая аккуратность</a><a class="l2" href="#часть-2-инференс">Часть 2. Инференс</a><a class="l3" href="#анатомия-задержки">Анатомия задержки</a><a class="l3" href="#батчинг-и-пропускная-способность">Батчинг и пропускная способность</a><a class="l3" href="#память-kv-кэша">Память KV-кэша</a><a class="l3" href="#квантизация-дистилляция">Квантизация, дистилляция</a><a class="l3" href="#стеки-обслуживания">Стеки обслуживания</a><a class="l3" href="#стоимость-в-токенах">Стоимость в токенах</a><a class="l2" href="#код">Код</a><a class="l2" href="#ловушки">Ловушки</a><a class="l2" href="#проверь-себя">Проверь себя</a><a class="l2" href="#что-почитать">Что почитать</a>
+      </details>
+      
+
+      <div class="prose"><p>Две вещи отличают игрушечную LLM-демо от продукта: вы умеете измерять, что она отвечает хорошо, и вы умеете обслуживать её быстро и за разумные деньги. Оценка трудна, потому что ответ — свободный текст, а «правильно» часто определено нечётко. Инференс труден, потому что генерация последовательна и упирается в память, а не в вычисления. Статья делится на две части; генерация и KV-кэш описаны в <a href="/edufamcs-demo/handbook/nlp/generaciya-teksta/" rel="noopener noreferrer nofollow">предыдущей статье</a>.</p>
+<h2 id="часть-1-оценка">Часть 1. Оценка</h2>
+<h3 id="почему-это-трудно">Почему это трудно</h3>
+<ul>
+<li><strong>Открытые ответы.</strong> Много верных формулировок; точное совпадение со строкой не подходит.</li>
+<li><strong>Загрязнение (contamination).</strong> Публичные бенчмарки могут оказаться в обучающих данных: модель «знает» ответы, и метрика завышена.</li>
+<li><strong>Чувствительность к промпту.</strong> Порядок вариантов, формулировка инструкции, формат few-shot могут менять результат на заметную величину; сравнение двух моделей на разных промптах бессмысленно.</li>
+<li><strong>Шум.</strong> Выборка конечна, а сэмплирование случайно: разница в долю процента на сотнях примеров — не результат.</li>
+</ul>
+<h3 id="виды-оценки">Виды оценки</h3>
+<p><strong>Бенчмарки с точным ответом</strong> (вопросы с выбором, математика с числовым ответом, код с юнит-тестами): метрика однозначна, воспроизводится, но измеряет только то, что имеет проверяемый ответ, и подвержена загрязнению. Для кода популярна метрика pass@k — доля задач, где хотя бы одна из <span class="tex">k</span> попыток проходит тесты.</p>
+<p><strong>Метрики по эталону.</strong> BLEU (Папинени и соавторы, 2002) — модифицированная точность <span class="tex">n</span>-грамм кандидата относительно эталона со штрафом за краткость; ROUGE (Лин, 2004) — в первую очередь полнота пересечения <span class="tex">n</span>-грамм и подпоследовательностей. Они считают совпадения слов, а не смысла: перефразирование верного ответа получает низкую оценку, а плавный, но неверный текст с нужными словами — высокую. Для перевода и суммаризации они всё ещё дают грубый сигнал для регрессий, для чат-ответов — плохой.</p>
+<p><strong>LLM-as-a-judge</strong> (Чжэн и соавторы, 2023): сильная модель оценивает ответы по критериям. Два режима: оценка по <strong>рубрике</strong> (шкала 1–5 с описанием каждого уровня; заставляйте судью сначала написать обоснование, потом выставить балл) и <strong>попарное сравнение</strong> (какой ответ лучше), которое устойчивее абсолютных баллов. Известные смещения: предпочтение первой позиции, предпочтение длинных ответов, предпочтение ответов собственной модели, слабость в проверке сложных рассуждений. Меры: менять порядок ответов местами и усреднять, фиксировать критерии, использовать для проверки эталон, где он есть.</p>
+<p><strong>Судью надо проверять.</strong> Разметьте 100–200 примеров людьми и сравните с судьёй. Простое согласие <span class="tex">p_o</span> вводит в заблуждение при несбалансированных классах, поэтому используют каппу Коэна <span class="tex">\kappa=\frac{p_o-p_e}{1-p_e}</span>, где <span class="tex">p_e</span> — согласие, ожидаемое при независимых оценках. В симуляции из 100 примеров с долей согласия <span class="tex">p_o=0{,}84</span> и 60 % положительных меток людей получилось <span class="tex">\kappa\approx0{,}67</span> — заметно ниже, чем «84 %» (данные синтетические, иллюстрация). Если судья не согласуется с людьми, его оценки — шум.</p>
+<p><strong>Люди и арена.</strong> Экспертная разметка дорога и медленна, но остаётся эталоном. В арене-стиле (Chatbot Arena, Чианг и соавторы, 2024) пользователи сравнивают вслепую пары ответов, а результаты агрегируются в рейтинг по модели Брэдли–Терри или Эло. Эло: ожидаемый результат <span class="tex">E_A=\frac{1}{1+10^{(R_B-R_A)/400}}</span>, обновление <span class="tex">R_A\leftarrow R_A+K(S_A-E_A)</span>; при равных рейтингах <span class="tex">1000</span> и <span class="tex">K=32</span> победа даёт <span class="tex">+16</span>, а победа над соперником с рейтингом <span class="tex">1100</span> (<span class="tex">E_A=0{,}36</span>) — около <span class="tex">+20{,}5</span>. Арена отражает вкусы тех, кто голосует, а не вашу задачу.</p>
+<h3 id="оценка-вашего-приложения">Оценка вашего приложения</h3>
+<p>Публичные бенчмарки отвечают на вопрос «какая модель вообще сильнее», а не «справится ли она с моими запросами». Порядок работы:</p>
+<ol>
+<li>Соберите <strong>золотой набор</strong>: 50–200 реальных запросов (из логов, анонимизированных), с эталонными ответами или чек-листами. Начните с этого <strong>до</strong> улучшений.</li>
+<li>Разделите по типам запросов и отдельно пометьте трудные и опасные случаи.</li>
+<li>Выберите метрики: точное совпадение, проверка структуры, суждение судьи, доля случаев, где ответ содержит неподтверждённые факты.</li>
+<li>Включите набор в <strong>регрессионные тесты</strong>: любое изменение промпта, модели или ретривера прогоняется на нём до выката. Каждая найденная в продакшене ошибка добавляется в набор.</li>
+</ol>
+<p>Для RAG добавляют оценку поиска отдельно от генерации (<a href="/edufamcs-demo/handbook/retrieval/rag/" rel="noopener noreferrer nofollow">RAG</a>). Для агентов измеряют успех задачи целиком (<a href="/edufamcs-demo/handbook/ai-tools/kak-ustroen-kodovyj-agent/" rel="noopener noreferrer nofollow">как устроен кодовый агент</a>).</p>
+<h3 id="статистическая-аккуратность">Статистическая аккуратность</h3>
+<p>Точность на <span class="tex">n</span> примерах — случайная величина: стандартная ошибка <span class="tex">\sqrt{p(1-p)/n}</span> — при <span class="tex">p=0{,}75</span> и <span class="tex">n=200</span> около <span class="tex">3{,}1</span> п.п. Разницу двух моделей на одном и том же наборе считайте <strong>парно</strong>: учитывайте, какие примеры решены каждой (общая сложность убирает часть шума). Доверительный интервал разности — бутстрэпом по примерам: многократно (10 000 раз) выбирайте <span class="tex">n</span> примеров с возвращением, пересчитывайте разность точностей, берите 2,5 % и 97,5 % квантили. Общие понятия интервалов — <a href="/edufamcs-demo/handbook/math/intervaly-i-proverka-gipotez/" rel="noopener noreferrer nofollow">интервалы и проверка гипотез</a>.</p>
+<p><strong>Числовой пример</strong> (синтетический: 200 примеров, выходы двух «моделей» сгенерированы с общей сложностью). Модель A решила 78,5 %, B — 72 %, разница <span class="tex">6{,}5</span> п.п.; примеров, где верна только A, — 25, только B — 12. Парный бутстрэп даёт 95 % интервал <span class="tex">[0{,}5;\,12{,}5]</span> п.п.: разница едва отличима от нуля. Бутстрэп, который рассматривает выборки независимо (без учёта пары), даёт заметно более широкий <span class="tex">[-2{,}0;\,15{,}0]</span> — парность нужна.</p>
+<h2 id="часть-2-инференс">Часть 2. Инференс</h2>
+<h3 id="анатомия-задержки">Анатомия задержки</h3>
+<ul>
+<li><strong>Time to first token (TTFT):</strong> ожидание в очереди плюс <strong>prefill</strong> — параллельная обработка всего промпта. Растёт с длиной промпта, ограничена вычислениями.</li>
+<li><strong>Время на токен (TPOT)</strong> или токенов в секунду на запрос: фаза <strong>decode</strong>, токен за токеном. На каждом шаге нужно прочитать из памяти все веса и KV-кэш, а арифметики на токен мало: фаза ограничена пропускной способностью памяти, а не вычислениями.</li>
+</ul>
+<p>Оценка сверху для одного запроса: скорость <span class="tex">\lesssim\frac{\text{пропускная способность памяти}}{\text{байт весов}}</span>. Например (иллюстративно), для 7 млрд параметров в fp16 это 14 ГБ на токен; при 1 ТБ/с получается не более <span class="tex">\approx70</span> токенов/с на запрос.</p>
+<h3 id="батчинг-и-пропускная-способность">Батчинг и пропускная способность</h3>
+<p>Веса читаются один раз на шаг независимо от числа запросов в батче, поэтому объединение запросов почти бесплатно повышает суммарную пропускную способность (токенов/с по всем запросам), пока шаг остаётся ограничен памятью. <strong>Непрерывный батчинг</strong> (Orca, Ю и соавторы, 2022) добавляет и убирает запросы на каждом шаге, не дожидаясь самого длинного. Платой за рост пропускной способности служит задержка отдельного запроса и память под KV-кэш.</p>
+<h3 id="память-kv-кэша">Память KV-кэша</h3>
+<p>На токен хранится <span class="tex">2\cdot L\cdot h_{kv}\cdot d_{head}\cdot b</span> байт (множитель 2 — ключи и значения). Для <span class="tex">L=32</span>, <span class="tex">h_{kv}=8</span> (grouped-query attention), <span class="tex">d_{head}=128</span>, fp16 (<span class="tex">b=2</span>) это <span class="tex">128</span> КиБ на токен: <span class="tex">1</span> ГиБ при <span class="tex">T=8192</span> и <span class="tex">16</span> ГиБ для 16 одновременных запросов такой длины. Для <span class="tex">L=80</span>, <span class="tex">h_{kv}=8</span>, <span class="tex">d_{head}=128</span> — 320 КиБ на токен и <span class="tex">10</span> ГиБ на один запрос в 32 768 токенов. Без GQA (<span class="tex">h_{kv}=32</span>) первая конфигурация потребовала бы 512 КиБ на токен. Подробности формулы — в <a href="/edufamcs-demo/handbook/dl/vnimanie-i-transformery/" rel="noopener noreferrer nofollow">статье про трансформеры</a>. Выводы: KV-кэш определяет число одновременных запросов, а длинный контекст дорог не только по вычислениям. <strong>Prefix/prompt caching:</strong> если у запросов общий префикс (системный промпт, документы), его KV можно сохранить и не пересчитывать: экономятся prefill и время до первого токена. Требование — совпадение префикса токен в токен, поэтому статическое кладут в начало промпта, а переменное — в конец.</p>
+<h3 id="квантизация-дистилляция">Квантизация, дистилляция</h3>
+<p><strong>Квантизация</strong> хранит веса в меньшем числе бит (int8, 4 бита): модель занимает в 2–4 раза меньше памяти, а раз декод упирается в чтение весов, ещё и быстрее. Это почти всегда компромисс с небольшим падением качества, который надо измерить на <strong>вашем</strong> золотом наборе. Методы: <strong>GPTQ</strong> (Франтар и соавторы, 2023) — послойная квантизация после обучения с коррекцией ошибки; <strong>AWQ</strong> (Лин и соавторы, 2024) — сохраняет точность для важных, по активациям, каналов весов; <strong>GGUF</strong> — формат файла <code>llama.cpp</code> с квантизованными весами для запуска на CPU и потребительских GPU. Квантизовать можно и KV-кэш. <strong>Дистилляция</strong> (Хинтон и соавторы, 2015) обучает малую модель-«ученика» повторять выходы большой: меняет качество на скорость и размер, но требует обучения.</p>
+<h3 id="стеки-обслуживания">Стеки обслуживания</h3>
+<ul>
+<li><strong>vLLM</strong> — сервер инференса с PagedAttention (Квон и соавторы, SOSP 2023): KV-кэш хранится блоками, как страницы памяти, что уменьшает фрагментацию; непрерывный батчинг; open source.</li>
+<li><strong>llama.cpp</strong> — C/C++-движок для запуска квантизованных моделей (GGUF) на CPU и разных GPU, в том числе локально.</li>
+<li><strong>Text Generation Inference (TGI)</strong> — сервер Hugging Face; по состоянию на конец 2025 года проект в режиме поддержки (принимаются исправления), для новых развёртываний рекомендуют другие стеки (например vLLM или SGLang). Проверяйте актуальный статус.</li>
+</ul>
+<h3 id="стоимость-в-токенах">Стоимость в токенах</h3>
+<p>Вычисляйте стоимость запроса как <span class="tex">n_{in}\cdot c_{in}+n_{out}\cdot c_{out}</span> с вашими тарифами (у входных и выходных токенов они разные, у кэшированных — часто отдельный). Выходные токены дороже по времени: они последовательны. Рычаги: короче промпт (см. <a href="/edufamcs-demo/handbook/nlp/tokenizaciya-i-embeddingi/" rel="noopener noreferrer nofollow">токенизацию</a>), кэширование префикса, ограничение <code>max_tokens</code>, малая модель для лёгких запросов, а большая — для трудных, квантизация, батчинг при собственном хостинге. Для самостоятельного хостинга сравнивайте с API по <strong>стоимости миллиона токенов при вашей реальной загрузке</strong>: простаивающая GPU дорога.</p>
+<h2 id="код">Код</h2>
+<div class="code"><div class="code-head"><span class="lang">python</span></div><pre><code><span class="tok-k">import</span> numpy <span class="tok-k">as</span> np
+<span class="tok-k">def</span> <span class="tok-f">kv_bytes</span><span class="tok-p">(</span>L<span class="tok-p">,</span> h_kv<span class="tok-p">,</span> d_head<span class="tok-p">,</span> T<span class="tok-p">,</span> b<span class="tok-p">=</span><span class="tok-n">2</span><span class="tok-p">,</span> batch<span class="tok-p">=</span><span class="tok-n">1</span><span class="tok-p">)</span><span class="tok-p">:</span>
+    <span class="tok-k">return</span> <span class="tok-n">2</span> <span class="tok-p">*</span> L <span class="tok-p">*</span> h_kv <span class="tok-p">*</span> d_head <span class="tok-p">*</span> T <span class="tok-p">*</span> b <span class="tok-p">*</span> batch
+<span class="tok-f">print</span><span class="tok-p">(</span>kv_bytes<span class="tok-p">(</span><span class="tok-n">32</span><span class="tok-p">,</span> <span class="tok-n">8</span><span class="tok-p">,</span> <span class="tok-n">128</span><span class="tok-p">,</span> <span class="tok-n">1</span><span class="tok-p">)</span> <span class="tok-p">/</span> <span class="tok-n">1024</span><span class="tok-p">)</span>             <span class="tok-c"># 128.0 КиБ на токен</span>
+<span class="tok-f">print</span><span class="tok-p">(</span>kv_bytes<span class="tok-p">(</span><span class="tok-n">32</span><span class="tok-p">,</span> <span class="tok-n">8</span><span class="tok-p">,</span> <span class="tok-n">128</span><span class="tok-p">,</span> <span class="tok-n">8192</span><span class="tok-p">)</span> <span class="tok-p">/</span> <span class="tok-n">2</span><span class="tok-p">*</span><span class="tok-p">*</span><span class="tok-n">30</span><span class="tok-p">)</span>         <span class="tok-c"># 1.0 ГиБ</span>
+<span class="tok-f">print</span><span class="tok-p">(</span>kv_bytes<span class="tok-p">(</span><span class="tok-n">32</span><span class="tok-p">,</span> <span class="tok-n">8</span><span class="tok-p">,</span> <span class="tok-n">128</span><span class="tok-p">,</span> <span class="tok-n">8192</span><span class="tok-p">,</span> batch<span class="tok-p">=</span><span class="tok-n">16</span><span class="tok-p">)</span> <span class="tok-p">/</span> <span class="tok-n">2</span><span class="tok-p">*</span><span class="tok-p">*</span><span class="tok-n">30</span><span class="tok-p">)</span>   <span class="tok-c"># 16.0 ГиБ</span>
+
+rng <span class="tok-p">=</span> np<span class="tok-p">.</span>random<span class="tok-p">.</span>default_rng<span class="tok-p">(</span><span class="tok-n">42</span><span class="tok-p">)</span><span class="tok-p">;</span> n <span class="tok-p">=</span> <span class="tok-n">200</span>          <span class="tok-c"># синтетические данные</span>
+hard <span class="tok-p">=</span> rng<span class="tok-p">.</span>random<span class="tok-p">(</span>n<span class="tok-p">)</span>
+a <span class="tok-p">=</span> <span class="tok-p">(</span>rng<span class="tok-p">.</span>random<span class="tok-p">(</span>n<span class="tok-p">)</span> <span class="tok-p">&lt;</span> np<span class="tok-p">.</span>where<span class="tok-p">(</span>hard <span class="tok-p">&lt;</span> <span class="tok-n">0.7</span><span class="tok-p">,</span> <span class="tok-n">0.95</span><span class="tok-p">,</span> <span class="tok-n">0.35</span><span class="tok-p">)</span><span class="tok-p">)</span><span class="tok-p">.</span>astype<span class="tok-p">(</span><span class="tok-f">int</span><span class="tok-p">)</span>   <span class="tok-c"># 1 = верно</span>
+b <span class="tok-p">=</span> <span class="tok-p">(</span>rng<span class="tok-p">.</span>random<span class="tok-p">(</span>n<span class="tok-p">)</span> <span class="tok-p">&lt;</span> np<span class="tok-p">.</span>where<span class="tok-p">(</span>hard <span class="tok-p">&lt;</span> <span class="tok-n">0.7</span><span class="tok-p">,</span> <span class="tok-n">0.92</span><span class="tok-p">,</span> <span class="tok-n">0.25</span><span class="tok-p">)</span><span class="tok-p">)</span><span class="tok-p">.</span>astype<span class="tok-p">(</span><span class="tok-f">int</span><span class="tok-p">)</span>
+<span class="tok-f">print</span><span class="tok-p">(</span>a<span class="tok-p">.</span>mean<span class="tok-p">(</span><span class="tok-p">)</span><span class="tok-p">,</span> b<span class="tok-p">.</span>mean<span class="tok-p">(</span><span class="tok-p">)</span><span class="tok-p">)</span>                         <span class="tok-c"># 0.785 0.72</span>
+d <span class="tok-p">=</span> <span class="tok-p">[</span><span class="tok-p">]</span>
+<span class="tok-k">for</span> _ <span class="tok-k">in</span> <span class="tok-f">range</span><span class="tok-p">(</span><span class="tok-n">10_000</span><span class="tok-p">)</span><span class="tok-p">:</span>
+    i <span class="tok-p">=</span> rng<span class="tok-p">.</span>integers<span class="tok-p">(</span><span class="tok-n">0</span><span class="tok-p">,</span> n<span class="tok-p">,</span> n<span class="tok-p">)</span>                     <span class="tok-c"># одни и те же примеры для A и B</span>
+    d<span class="tok-p">.</span>append<span class="tok-p">(</span>a<span class="tok-p">[</span>i<span class="tok-p">]</span><span class="tok-p">.</span>mean<span class="tok-p">(</span><span class="tok-p">)</span> <span class="tok-p">-</span> b<span class="tok-p">[</span>i<span class="tok-p">]</span><span class="tok-p">.</span>mean<span class="tok-p">(</span><span class="tok-p">)</span><span class="tok-p">)</span>
+<span class="tok-f">print</span><span class="tok-p">(</span>np<span class="tok-p">.</span>percentile<span class="tok-p">(</span>d<span class="tok-p">,</span> <span class="tok-p">[</span><span class="tok-n">2.5</span><span class="tok-p">,</span> <span class="tok-n">97.5</span><span class="tok-p">]</span><span class="tok-p">)</span><span class="tok-p">.</span>round<span class="tok-p">(</span><span class="tok-n">3</span><span class="tok-p">)</span><span class="tok-p">)</span>     <span class="tok-c"># [0.005 0.125]</span>
+</code></pre></div>
+<p>Чтобы бутстрэпить именно по примерам, а не по моделям, индексы <code>i</code> берутся один раз и применяются к обеим моделям — это и делает сравнение парным.</p>
+<h2 id="ловушки">Ловушки</h2>
+<div class="callout md warn"><p class="callout-title">Одно число вместо интервала</p>
+<p>«Модель A лучше на 2 п.п.» на 100 примерах — шум. Всегда показывайте доверительный интервал и размер набора.</p>
+</div>
+<ul>
+<li>Судья той же модели, что оценивается; порядок ответов не меняется местами.</li>
+<li>Золотой набор, смешанный с обучающими примерами дообучения или с примерами из промпта.</li>
+<li>Квантизация и смена движка без повторного прогона оценки.</li>
+<li>Сравнение скорости без указания длин входа и выхода и размера батча.</li>
+<li><strong>На собеседовании:</strong> как проверить, что LLM-судье можно верить; почему BLEU плох для чат-ответов.</li>
+<li><strong>На собеседовании:</strong> посчитайте память KV-кэша для данной конфигурации; почему decode упирается в память, а prefill в вычисления; зачем непрерывный батчинг.</li>
+</ul>
+<h2 id="проверь-себя">Проверь себя</h2>
+<details class="callout md details"><summary>Почему для оценки судьи используют каппу Коэна, а не долю совпадений?</summary>
+<p>Доля совпадений зависит от баланса классов: если 90 % ответов хорошие, судья «всегда хорошо» согласуется в 90 %. Каппа вычитает случайное согласие.</p>
+</details>
+<details class="callout md details"><summary>Как посчитать доверительный интервал разницы точности двух моделей на одном наборе?</summary>
+<p>Парный бутстрэп: выбрать <span class="tex">n</span> примеров с возвращением, посчитать разницу точностей на этой выборке для обеих моделей, повторить многократно и взять 2,5 % и 97,5 % квантили.</p>
+</details>
+<details class="callout md details"><summary>Сколько памяти KV-кэша на токен при $L=32$, $h_{kv}=8$, $d_{head}=128$, fp16?</summary>
+<p><span class="tex">2\cdot32\cdot8\cdot128\cdot2=131\,072</span> байт = 128 КиБ.</p>
+</details>
+<details class="callout md details"><summary>Почему decode обычно ограничен памятью, а не вычислениями?</summary>
+<p>На каждом шаге читаются все веса и KV-кэш, а вычислений на один токен относительно мало; прирост даёт батчинг — веса читаются один раз на много запросов.</p>
+</details>
+<details class="callout md details"><summary>Что нужно, чтобы кэширование префикса сработало?</summary>
+<p>Совпадение префикса токен в токен: статическую часть (системный промпт, документы) кладут в начало, переменную — в конец.</p>
+</details>
+<h2 id="что-почитать">Что почитать</h2>
+<ul>
+<li>Zheng et al., <em>Judging LLM-as-a-Judge with MT-Bench and Chatbot Arena</em>, NeurIPS 2023: <a href="https://arxiv.org/abs/2306.05685" rel="noopener noreferrer nofollow">arxiv.org/abs/2306.05685</a>; Chiang et al., <em>Chatbot Arena: An Open Platform for Evaluating LLMs by Human Preference</em>, ICML 2024: <a href="https://arxiv.org/abs/2403.04132" rel="noopener noreferrer nofollow">arxiv.org/abs/2403.04132</a>.</li>
+<li>Papineni et al., <em>BLEU</em>, ACL 2002: <a href="https://aclanthology.org/P02-1040/" rel="noopener noreferrer nofollow">aclanthology.org/P02-1040</a>; Lin, <em>ROUGE: A Package for Automatic Evaluation of Summaries</em>, 2004: <a href="https://aclanthology.org/W04-1013/" rel="noopener noreferrer nofollow">aclanthology.org/W04-1013</a>.</li>
+<li>Kwon et al., <em>Efficient Memory Management for Large Language Model Serving with PagedAttention</em>, SOSP 2023: <a href="https://arxiv.org/abs/2309.06180" rel="noopener noreferrer nofollow">arxiv.org/abs/2309.06180</a>; Yu et al., <em>Orca</em>, OSDI 2022: <a href="https://www.usenix.org/conference/osdi22/presentation/yu" rel="noopener noreferrer nofollow">usenix.org</a>.</li>
+<li>Frantar et al., <em>GPTQ</em>, ICLR 2023: <a href="https://arxiv.org/abs/2210.17323" rel="noopener noreferrer nofollow">arxiv.org/abs/2210.17323</a>; Lin et al., <em>AWQ: Activation-aware Weight Quantization for LLM Compression and Acceleration</em>, MLSys 2024: <a href="https://arxiv.org/abs/2306.00978" rel="noopener noreferrer nofollow">arxiv.org/abs/2306.00978</a>.</li>
+<li>Hinton, Vinyals, Dean, <em>Distilling the Knowledge in a Neural Network</em>, 2015: <a href="https://arxiv.org/abs/1503.02531" rel="noopener noreferrer nofollow">arxiv.org/abs/1503.02531</a>.</li>
+<li>Документация: <a href="https://docs.vllm.ai" rel="noopener noreferrer nofollow">vLLM</a>, <a href="https://github.com/ggml-org/llama.cpp" rel="noopener noreferrer nofollow">llama.cpp</a>, <a href="https://huggingface.co/docs/text-generation-inference" rel="noopener noreferrer nofollow">Text Generation Inference</a>.</li>
+</ul>
+</div>
+      
+
+      
+
+      
+      <nav class="pager" aria-label="Соседние статьи">
+        <a href="/edufamcs-demo/handbook/nlp/doobuchenie-lora/"><span><svg class="ico sm" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-arrow-left"/></svg>Назад</span>Дообучение LLM: от полного fine-tuning до LoRA</a>
+        
+      </nav>
+      
+    </article>
+
+    <aside class="hb-toc" aria-label="На этой странице">
+      <a class="l2" href="#часть-1-оценка">Часть 1. Оценка</a><a class="l3" href="#почему-это-трудно">Почему это трудно</a><a class="l3" href="#виды-оценки">Виды оценки</a><a class="l3" href="#оценка-вашего-приложения">Оценка вашего приложения</a><a class="l3" href="#статистическая-аккуратность">Статистическая аккуратность</a><a class="l2" href="#часть-2-инференс">Часть 2. Инференс</a><a class="l3" href="#анатомия-задержки">Анатомия задержки</a><a class="l3" href="#батчинг-и-пропускная-способность">Батчинг и пропускная способность</a><a class="l3" href="#память-kv-кэша">Память KV-кэша</a><a class="l3" href="#квантизация-дистилляция">Квантизация, дистилляция</a><a class="l3" href="#стеки-обслуживания">Стеки обслуживания</a><a class="l3" href="#стоимость-в-токенах">Стоимость в токенах</a><a class="l2" href="#код">Код</a><a class="l2" href="#ловушки">Ловушки</a><a class="l2" href="#проверь-себя">Проверь себя</a><a class="l2" href="#что-почитать">Что почитать</a>
+    </aside>
+  </div>
+</div>
+
+
+</main>
+
+<footer class="ftr" data-theme="dark">
+  <svg class="sym fern" viewBox="0 0 40.5 65.02" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#fern"/></svg>
+  <div class="container">
+    <div class="ftr-row">
+      <a href="/edufamcs-demo/" aria-label="EDU FAMCS — главная"><img src="/edufamcs-demo/static/brand/logo/logo-edu-dark.svg" alt="EDU FAMCS" width="196" height="40"></a>
+      <ul class="ftr-links">
+        <li><a href="/edufamcs-demo/#courses">Курсы</a></li>
+        <li><a href="/edufamcs-demo/ml/">Машинное обучение</a></li>
+        <li><a href="/edufamcs-demo/handbook/">Хендбук</a></li>
+        <li><a href="/edufamcs-demo/news/">Новости</a></li>
+        <li><a href="/edufamcs-demo/people/">Авторы</a></li>
+        <li><a href="/edufamcs-demo/about/">О&nbsp;нас</a></li>
+        <li><a href="/edufamcs-demo/propose/">Предложить или исправить</a></li>
+        <li><a href="/edufamcs-demo/privacy/">Конфиденциальность</a></li>
+      </ul>
+    </div>
+    <div class="ftr-big" aria-hidden="true">EDU<span class="d">·</span>FAMCS</div>
+    <p class="ftr-copy">© 2026 EDU FAMCS · Минск</p>
+  </div>
+</footer>
+
+<div class="toasts-region" aria-live="polite" id="toasts">
+
+</div>
+
+</body>
+</html>

@@ -27,7 +27,7 @@
 <script src="/edufamcs-demo/static/js/site.js" defer></script>
 <script src="/edufamcs-demo/static/handbook/handbook.js" defer></script>
 </head>
-<body class="" hx-headers='{"X-CSRFToken": "v2mmvVcMovpOGDv9mUEjevjdDbb9A1qMh8nJpIutzIF2lcrpzjxovXry9yNoFMbL"}'>
+<body class="" hx-headers='{"X-CSRFToken": "n6l2FPAN0kub6rwa3N3CPZ9ooFjIezkTZjaZVR9E17IKhKLC2ghzxS1mQOqGYjjA"}'>
 <a class="skip" href="#main">К содержанию</a>
 <div class="demo-bar" role="note">Демо-версия для отзывов: вход, запись на курсы и формы здесь не работают.</div>
 
@@ -60,6 +60,7 @@
 
 
 <div class="container hb-page hb-tone">
+  <div class="hb-readbar" aria-hidden="true"><i></i></div>
   <div class="hb">
     <aside class="hb-nav" aria-label="Статьи раздела">
       
@@ -78,6 +79,8 @@
       
       <a class="cur" href="/edufamcs-demo/handbook/math/gradienty-i-optimizaciya/" aria-current="page">Производные, градиенты и оптимизация</a>
       
+      <a class="" href="/edufamcs-demo/handbook/math/matrichnoe-differencirovanie/">Матричное дифференцирование</a>
+      
     </aside>
 
     <article class="hb-main">
@@ -86,9 +89,9 @@
       <div class="hb-meta">
         
         
-        <span><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-clock"/></svg>12&nbsp;мин</span>
+        <span><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-clock"/></svg>14&nbsp;мин</span>
         <span class="hb-authors"><span class="avatar sm" title="Артем Лебедевич">АЛ</span>Артем Лебедевич</span>
-        <span><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-edit"/></svg>9 ноября 2026</span>
+        <span><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-edit"/></svg>10 ноября 2026</span>
         
         
       </div>
@@ -96,7 +99,7 @@
       
       <details class="hb-mtoc">
         <summary><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-list"/></svg>Содержание<svg class="ico sm" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-chev-down"/></svg></summary>
-        <a class="l2" href="#производная-градиент-якобиан-гессиан">Производная, градиент, якобиан, гессиан</a><a class="l2" href="#правило-цепочки">Правило цепочки</a><a class="l2" href="#шпаргалка-матричного-дифференцирования">Шпаргалка матричного дифференцирования</a><a class="l2" href="#выпуклость">Выпуклость</a><a class="l2" href="#градиентный-спуск">Градиентный спуск</a><a class="l2" href="#условная-оптимизация">Условная оптимизация</a><a class="l2" href="#проверка-градиента-и-код">Проверка градиента и код</a><a class="l2" href="#ловушки">Ловушки</a><a class="l2" href="#что-почитать">Что почитать</a>
+        <a class="l2" href="#производная-градиент-якобиан-гессиан">Производная, градиент, якобиан, гессиан</a><a class="l2" href="#правило-цепочки">Правило цепочки</a><a class="l2" href="#шпаргалка-матричного-дифференцирования">Шпаргалка матричного дифференцирования</a><a class="l2" href="#выпуклость">Выпуклость</a><a class="l2" href="#градиентный-спуск">Градиентный спуск</a><a class="l2" href="#условная-оптимизация">Условная оптимизация</a><a class="l2" href="#проверка-градиента-и-код">Проверка градиента и код</a><a class="l2" href="#ловушки">Ловушки</a><a class="l2" href="#проверь-себя">Проверь себя</a><a class="l2" href="#что-почитать">Что почитать</a>
       </details>
       
 
@@ -159,7 +162,7 @@
 <p>Итерация</p>
 <div class="tex tex-block">w_{t+1}=w_t-\eta\,\nabla L(w_t),</div>
 <p>предложена Коши в 1847 году для решения систем уравнений. Шаг <span class="tex">\eta</span> (learning rate) — ключевой гиперпараметр. Разберём квадратичную модель <span class="tex">L(w)=\tfrac12w^\top Aw-b^\top w</span>, <span class="tex">A\succ0</span> — к ней сводится окрестность любого минимума. Ошибка <span class="tex">e_t=w_t-w^*</span> удовлетворяет <span class="tex">e_{t+1}=(I-\eta A)e_t</span>, то есть в собственном базисе компонента <span class="tex">i</span> умножается на <span class="tex">1-\eta\lambda_i</span> каждый шаг. Сходимость требует <span class="tex">|1-\eta\lambda_i|&lt;1</span> для всех <span class="tex">i</span>, то есть <span class="tex">\eta&lt;2/\lambda_{\max}</span>. Оптимальный шаг <span class="tex">\eta=2/(\lambda_{\max}+\lambda_{\min})</span> даёт скорость <span class="tex">\frac{\kappa-1}{\kappa+1}</span> на итерацию, где <span class="tex">\kappa=\lambda_{\max}/\lambda_{\min}</span> — число обусловленности. При <span class="tex">\kappa=1000</span> даже с оптимальным шагом нужно около 1150 итераций на каждый порядок точности (в общем случае — порядка <span class="tex">\kappa</span>): эллиптические «овраги» заставляют траекторию зигзагом бегать поперёк. Поэтому нормализация признаков обычно ускоряет сходимость — она уменьшает <span class="tex">\kappa</span> матрицы <span class="tex">X^\top X</span>.</p>
-<p><strong>Стохастический градиентный спуск.</strong> Для <span class="tex">L(w)=\frac1n\sum_i\ell_i(w)</span> точный градиент стоит <span class="tex">O(n)</span>. Робинс и Монро (1951) показали, что можно брать несмещённую оценку по случайному объекту или <strong>мини-батчу</strong> из <span class="tex">B</span> объектов: <span class="tex">g_t=\frac1B\sum_{i\in\mathcal{B}}\nabla\ell_i(w_t)</span>, <span class="tex">\mathbb{E}\,g_t=\nabla L</span>. Стандартное отклонение оценки убывает как <span class="tex">1/\sqrt B</span>. Условия сходимости на убывающий шаг: <span class="tex">\sum\eta_t=\infty</span>, <span class="tex">\sum\eta_t^2&lt;\infty</span>. На практике шумной оценки достаточно и часто выгодно: шум помогает выбираться из седел.</p>
+<p><strong>Стохастический градиентный спуск.</strong> Для <span class="tex">L(w)=\frac1n\sum_i\ell_i(w)</span> точный градиент стоит <span class="tex">O(n)</span>. Роббинс и Монро (1951) показали, что можно брать несмещённую оценку по случайному объекту или <strong>мини-батчу</strong> из <span class="tex">B</span> объектов: <span class="tex">g_t=\frac1B\sum_{i\in\mathcal{B}}\nabla\ell_i(w_t)</span>, <span class="tex">\mathbb{E}\,g_t=\nabla L</span>. Стандартное отклонение оценки убывает как <span class="tex">1/\sqrt B</span>. Условия сходимости на убывающий шаг: <span class="tex">\sum\eta_t=\infty</span>, <span class="tex">\sum\eta_t^2&lt;\infty</span>. На практике шумной оценки достаточно и часто выгодно: шум помогает выбираться из седел.</p>
 <p><strong>Импульс.</strong> Метод тяжёлого шарика (Polyak, 1964): <span class="tex">v_{t+1}=\mu v_t+\nabla L(w_t)</span>, <span class="tex">w_{t+1}=w_t-\eta v_{t+1}</span>. Накопленная скорость гасит зигзаги и ускоряет движение вдоль дна оврага. На квадратичной функции при подобранных <span class="tex">\eta,\mu</span> множитель за шаг становится <span class="tex">\frac{\sqrt\kappa-1}{\sqrt\kappa+1}</span>: число итераций растёт как <span class="tex">\sqrt\kappa</span>, а не <span class="tex">\kappa</span> (при <span class="tex">\kappa=1000</span> — около 36 на порядок точности вместо 1150). Для произвольных сильно выпуклых функций у тяжёлого шарика такой гарантии нет. Нестеров (1983) считает градиент в «упреждающей» точке <span class="tex">w_t-\eta\mu v_t</span> и получает оптимальную оценку <span class="tex">O(1/t^2)</span> для гладких выпуклых функций, а для сильно выпуклых — число итераций порядка <span class="tex">\sqrt\kappa</span> на порядок точности. Адаптивные методы (AdaGrad 2011, RMSProp 2012, Adam 2014) нормируют шаг по каждой координате на историю градиентов; их разбирают в главе <a href="/edufamcs-demo/handbook/dl/optimizatory-i-regulyarizaciya/" rel="noopener noreferrer nofollow">об оптимизаторах</a>.</p>
 <p><strong>Метод Ньютона</strong> использует вторую производную: <span class="tex">w_{t+1}=w_t-H^{-1}\nabla L(w_t)</span> — минимум квадратичной аппроксимации Тейлора. На квадратичной функции сходится за один шаг независимо от <span class="tex">\kappa</span>, вблизи минимума — квадратично. Цена: хранение и обращение гессиана <span class="tex">O(d^2)</span> памяти и <span class="tex">O(d^3)</span> времени, а вдали от минимума <span class="tex">H</span> может быть не положительно определён. Поэтому в классическом ML Ньютон работает на малых <span class="tex">d</span> (IRLS для логистической регрессии), а на больших — квазиньютоновские L-BFGS, которые строят приближение <span class="tex">H^{-1}</span> по последним градиентам.</p>
 <h2 id="условная-оптимизация">Условная оптимизация</h2>
@@ -206,7 +209,26 @@ lam <span class="tok-p">=</span> np<span class="tok-p">.</span>linalg<span class
 <li><strong>Численно неустойчивые формулы.</strong> <span class="tex">\ln\sigma(z)=-\ln(1+e^{-z})</span> и <span class="tex">\ln\sum e^z</span> считают через <code>np.logaddexp(0, -z)</code> и <code>scipy.special.logsumexp</code>, а не в лоб: <span class="tex">e^{-z}</span> переполняется уже при <span class="tex">z\approx-710</span>.</li>
 <li><strong>Сходимость по loss — не по весам.</strong> При плохой обусловленности <span class="tex">L</span> уже на плато, а <span class="tex">w</span> ещё далеко от <span class="tex">w^*</span>.</li>
 <li><strong>Невыпуклость.</strong> Результат зависит от инициализации и порядка батчей; фиксируйте seed и сравнивайте несколько запусков.</li>
+<li><strong>На собеседовании: выведите градиент log-loss логистической регрессии.</strong> <span class="tex">\nabla_w\ell=(\hat p-y)\,x</span>; для всей выборки <span class="tex">\frac1nX^\top(\hat p-y)</span>. Следом спросят про гессиан <span class="tex">X^\top\mathrm{diag}(\hat p_i(1-\hat p_i))X\succeq0</span> и вывод о выпуклости.</li>
+<li><strong>На собеседовании: почему стандартизация признаков ускоряет градиентный спуск?</strong> Она уменьшает <span class="tex">\kappa(X^\top X)</span>, а скорость сходимости на квадратичной функции — <span class="tex">\frac{\kappa-1}{\kappa+1}</span> за шаг; кроме того, один <span class="tex">\eta</span> становится пригодным для всех координат.</li>
+<li><strong>На собеседовании: чем Ньютон лучше градиентного спуска и почему им не обучают нейросети?</strong> Он учитывает кривизну и на квадратичной функции сходится за шаг, но требует <span class="tex">O(d^2)</span> памяти и <span class="tex">O(d^3)</span> времени на гессиан и невыпуклость делает <span class="tex">H</span> неопределённым.</li>
 </ul>
+<h2 id="проверь-себя">Проверь себя</h2>
+<details class="callout md details"><summary>Откуда условие $\eta&lt;2/\lambda_{\max}$ для градиентного спуска на квадратичной функции?</summary>
+<p>Компонента ошибки вдоль собственного вектора умножается на <span class="tex">1-\eta\lambda_i</span> за шаг; сходимость требует <span class="tex">|1-\eta\lambda_i|&lt;1</span> для всех <span class="tex">i</span>, и самое жёсткое ограничение даёт <span class="tex">\lambda_{\max}</span>.</p>
+</details>
+<details class="callout md details"><summary>Почему мини-батч — несмещённая оценка градиента и как шум зависит от размера батча?</summary>
+<p>Если объекты в батче выбраны равномерно и независимо от <span class="tex">w_t</span>, то <span class="tex">\mathbb{E}\,g_t=\nabla L(w_t)</span>. Стандартное отклонение оценки убывает как <span class="tex">1/\sqrt B</span>, поэтому учетверение батча вдвое снижает шум.</p>
+</details>
+<details class="callout md details"><summary>Почему $L_2$-регуляризация делает задачу сильно выпуклой, а $L_1$ нет?</summary>
+<p>Штраф <span class="tex">\lambda\|w\|^2</span> добавляет <span class="tex">2\lambda I</span> к гессиану, и <span class="tex">H\succeq2\lambda I\succ0</span> даже при вырожденной <span class="tex">X^\top X</span>. У <span class="tex">L_1</span> вторая производная равна нулю почти всюду, кривизны он не добавляет.</p>
+</details>
+<details class="callout md details"><summary>Как правило цепочки превращается в backprop и зачем помнить про устойчивость логарифмов?</summary>
+<p>Градиент по параметрам слоя — произведение якобианов вдоль пути от потерь, а backprop считает его справа налево, переиспользуя промежуточные результаты. Формулы вроде <span class="tex">\ln\sum e^{z_j}</span> вычисляют через вычитание максимума, иначе экспонента переполняется.</p>
+</details>
+<details class="callout md details"><summary>Почему у выпуклой функции любой локальный минимум глобален?</summary>
+<p>Если бы нашлась точка со значением ниже, то по неравенству выпуклости на отрезке к ней значения были бы не выше линейной интерполяции и строго ниже значения в локальном минимуме сколь угодно близко к нему — противоречие.</p>
+</details>
 <h2 id="что-почитать">Что почитать</h2>
 <ul>
 <li>S. Boyd, L. Vandenberghe. <em>Convex Optimization</em>. Cambridge UP, 2004 — свободно на <a href="https://web.stanford.edu/~boyd/cvxbook/" rel="noopener noreferrer nofollow">web.stanford.edu/~boyd/cvxbook</a>.</li>
@@ -222,6 +244,8 @@ lam <span class="tok-p">=</span> np<span class="tok-p">.</span>linalg<span class
       
 
       
+
+      
       <nav class="pager" aria-label="Соседние статьи">
         <a href="/edufamcs-demo/handbook/math/sobstvennye-vektory-i-svd/"><span><svg class="ico sm" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-arrow-left"/></svg>Назад</span>Собственные векторы и сингулярное разложение</a>
         <a href="/edufamcs-demo/handbook/math/teoriya-veroyatnostej/"><span>Дальше<svg class="ico sm" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-arrow"/></svg></span>Теория вероятностей</a>
@@ -230,7 +254,7 @@ lam <span class="tok-p">=</span> np<span class="tok-p">.</span>linalg<span class
     </article>
 
     <aside class="hb-toc" aria-label="На этой странице">
-      <a class="l2" href="#производная-градиент-якобиан-гессиан">Производная, градиент, якобиан, гессиан</a><a class="l2" href="#правило-цепочки">Правило цепочки</a><a class="l2" href="#шпаргалка-матричного-дифференцирования">Шпаргалка матричного дифференцирования</a><a class="l2" href="#выпуклость">Выпуклость</a><a class="l2" href="#градиентный-спуск">Градиентный спуск</a><a class="l2" href="#условная-оптимизация">Условная оптимизация</a><a class="l2" href="#проверка-градиента-и-код">Проверка градиента и код</a><a class="l2" href="#ловушки">Ловушки</a><a class="l2" href="#что-почитать">Что почитать</a>
+      <a class="l2" href="#производная-градиент-якобиан-гессиан">Производная, градиент, якобиан, гессиан</a><a class="l2" href="#правило-цепочки">Правило цепочки</a><a class="l2" href="#шпаргалка-матричного-дифференцирования">Шпаргалка матричного дифференцирования</a><a class="l2" href="#выпуклость">Выпуклость</a><a class="l2" href="#градиентный-спуск">Градиентный спуск</a><a class="l2" href="#условная-оптимизация">Условная оптимизация</a><a class="l2" href="#проверка-градиента-и-код">Проверка градиента и код</a><a class="l2" href="#ловушки">Ловушки</a><a class="l2" href="#проверь-себя">Проверь себя</a><a class="l2" href="#что-почитать">Что почитать</a>
     </aside>
   </div>
 </div>

@@ -1,0 +1,317 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Матричное дифференцирование · EDU FAMCS</title>
+<meta name="description" content="Матричное дифференцирование — Математическая база. Хендбук ML-курса ФПМИ.">
+<meta name="theme-color" content="#060A16">
+<meta name="robots" content="noindex, nofollow">
+<meta name="htmx-config" content='{"allowEval":false,"includeIndicatorStyles":false,"historyCacheSize":0,"selfRequestsOnly":true}'>
+<meta name="katex-js" content="/edufamcs-demo/static/vendor/katex/katex.min.js">
+<meta name="katex-css" content="/edufamcs-demo/static/vendor/katex/katex.min.css">
+<link rel="icon" href="/edufamcs-demo/static/brand/logo/favicon-16.svg" type="image/svg+xml" sizes="16x16">
+<link rel="icon" href="/edufamcs-demo/static/brand/logo/favicon.svg" type="image/svg+xml" sizes="any">
+<link rel="preload" href="/edufamcs-demo/static/brand/fonts/manrope-cyrillic-400.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/edufamcs-demo/static/brand/fonts/unbounded-cyrillic-800.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="/edufamcs-demo/static/brand/fonts.css">
+<link rel="stylesheet" href="/edufamcs-demo/static/brand/tokens.css">
+<link rel="stylesheet" href="/edufamcs-demo/static/brand/components.css">
+<link rel="stylesheet" href="/edufamcs-demo/static/css/site.css">
+<link rel="stylesheet" href="/edufamcs-demo/static/css/hub.css">
+<link rel="stylesheet" href="/edufamcs-demo/static/css/about.css">
+<link rel="stylesheet" href="/edufamcs-demo/static/handbook/handbook.css">
+<script src="/edufamcs-demo/static/js/theme.js"></script>
+<script src="/edufamcs-demo/static/vendor/htmx/htmx.min.js" defer></script>
+<script src="/edufamcs-demo/static/vendor/alpine/alpine-csp.min.js" defer></script>
+<script src="/edufamcs-demo/static/js/site.js" defer></script>
+<script src="/edufamcs-demo/static/handbook/handbook.js" defer></script>
+</head>
+<body class="" hx-headers='{"X-CSRFToken": "hBR2JIODCp4to6qQ84zpeQfeABscRf9LTOGZZKnuDci2zpFi7xNmWJ7c2KzaBZ8s"}'>
+<a class="skip" href="#main">К содержанию</a>
+<div class="demo-bar" role="note">Демо-версия для отзывов: вход, запись на курсы и формы здесь не работают.</div>
+
+<header class="hdr">
+  <div class="container">
+    <a class="brand" href="/edufamcs-demo/" aria-label="EDU FAMCS — главная">
+      <span class="full"><img class="only-light" src="/edufamcs-demo/static/brand/logo/logo-edu-light.svg" alt="EDU FAMCS" width="196" height="40"><img class="only-dark" src="/edufamcs-demo/static/brand/logo/logo-edu-dark.svg" alt="EDU FAMCS" width="196" height="40"></span>
+      <span class="short"><img class="only-light" src="/edufamcs-demo/static/brand/logo/logo-edu-light.svg" alt="EDU FAMCS" height="30"><img class="only-dark" src="/edufamcs-demo/static/brand/logo/logo-edu-dark.svg" alt="EDU FAMCS" height="30"></span>
+    </a>
+    <nav class="nav" id="main-nav" aria-label="Основная навигация">
+      <a href="/edufamcs-demo/#courses">Курсы</a>
+      <a href="/edufamcs-demo/ml/" >Машинное обучение</a>
+      
+      <a href="/edufamcs-demo/handbook/" aria-current="page">Хендбук</a>
+      <a href="/edufamcs-demo/news/" >Новости</a>
+      <a href="/edufamcs-demo/people/" >Авторы</a>
+      <a href="/edufamcs-demo/about/" >О&nbsp;нас</a>
+    </nav>
+    <div class="hdr-actions">
+      
+      <a class="btn btn-outline btn-login" href="/edufamcs-demo/accounts/login/?next=/handbook/math/matrichnoe-differencirovanie/">Войти</a>
+      
+      <button class="icon-btn menu-btn" type="button" aria-label="Меню" aria-expanded="false" aria-controls="main-nav"><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-menu"/></svg></button>
+    </div>
+  </div>
+</header>
+
+<main id="main">
+
+
+
+<div class="container hb-page hb-tone">
+  <div class="hb-readbar" aria-hidden="true"><i></i></div>
+  <div class="hb">
+    <aside class="hb-nav" aria-label="Статьи раздела">
+      
+<form class="hb-search" action="/edufamcs-demo/handbook/search/" method="get" role="search">
+  <svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-search"/></svg>
+  <input class="input" type="search" name="q" value="" placeholder="Поиск по хендбуку" aria-label="Поиск по хендбуку" autocomplete="off" maxlength="120"
+    hx-get="/edufamcs-demo/handbook/search/" hx-trigger="input changed delay:250ms, search" hx-target="#hb-nav-results" hx-sync="this:replace">
+</form>
+
+      <div id="hb-nav-results" class="hb-nav-results" aria-live="polite"></div>
+      <a class="grp" href="/edufamcs-demo/handbook/math/">Линейная алгебра и анализ</a>
+      
+      <a class="" href="/edufamcs-demo/handbook/math/vektory-i-matricy/">Векторы, матрицы и нормы</a>
+      
+      <a class="" href="/edufamcs-demo/handbook/math/sobstvennye-vektory-i-svd/">Собственные векторы и сингулярное разложение</a>
+      
+      <a class="" href="/edufamcs-demo/handbook/math/gradienty-i-optimizaciya/">Производные, градиенты и оптимизация</a>
+      
+      <a class="cur" href="/edufamcs-demo/handbook/math/matrichnoe-differencirovanie/" aria-current="page">Матричное дифференцирование</a>
+      
+    </aside>
+
+    <article class="hb-main">
+      <nav class="crumbs" aria-label="Навигация"><a href="/edufamcs-demo/handbook/">Хендбук</a><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-chev"/></svg><a href="/edufamcs-demo/handbook/math/">Математическая база</a></nav>
+      <h1 class="h1">Матричное дифференцирование</h1>
+      <div class="hb-meta">
+        
+        
+        <span><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-clock"/></svg>11&nbsp;мин</span>
+        <span class="hb-authors"><span class="avatar sm" title="Артем Лебедевич">АЛ</span>Артем Лебедевич</span>
+        <span><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-edit"/></svg>10 ноября 2026</span>
+        
+        
+      </div>
+
+      
+      <details class="hb-mtoc">
+        <summary><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-list"/></svg>Содержание<svg class="ico sm" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-chev-down"/></svg></summary>
+        <a class="l2" href="#идея-дифференциал-и-скалярное-произведение">Идея: дифференциал и скалярное произведение</a><a class="l2" href="#соглашения-о-раскладке">Соглашения о раскладке</a><a class="l2" href="#вывод-1-мнк-и-ridge">Вывод 1: МНК и Ridge</a><a class="l2" href="#вывод-2-квадратичная-форма">Вывод 2: квадратичная форма</a><a class="l2" href="#вывод-3-логистическая-регрессия">Вывод 3: логистическая регрессия</a><a class="l2" href="#вывод-4-softmax-и-кросс-энтропия">Вывод 4: softmax и кросс-энтропия</a><a class="l2" href="#вывод-5-линейный-слой-и-обратное-распространение">Вывод 5: линейный слой и обратное распространение</a><a class="l2" href="#вывод-6-логарифм-определителя">Вывод 6: логарифм определителя</a><a class="l2" href="#таблица-тождеств">Таблица тождеств</a><a class="l2" href="#код">Код</a><a class="l2" href="#ловушки">Ловушки</a><a class="l2" href="#проверь-себя">Проверь себя</a><a class="l2" href="#что-почитать">Что почитать</a>
+      </details>
+      
+
+      <div class="prose"><p>Градиент потери по матрице весов можно вывести покомпонентно, через суммы и индексы, но это долго и легко ошибиться. <strong>Метод дифференциалов</strong> сводит вывод к нескольким правилам и одному приёму «привести к виду <span class="tex">\mathrm{tr}(M^\top dX)</span> и прочитать ответ». Им выводятся градиенты в линейной и логистической регрессии, в softmax и в слоях нейросети; на собеседованиях его просят применить у доски. Краткая шпаргалка уже есть в <a href="/edufamcs-demo/handbook/math/gradienty-i-optimizaciya/" rel="noopener noreferrer nofollow">главе о градиентах</a>, здесь — метод целиком.</p>
+<h2 id="идея-дифференциал-и-скалярное-произведение">Идея: дифференциал и скалярное произведение</h2>
+<p>Для скалярной функции <span class="tex">f(X)</span> матричного аргумента первый дифференциал — линейная по <span class="tex">dX</span> главная часть приращения. Градиент <span class="tex">\nabla f</span> определяется как матрица того же размера, что и <span class="tex">X</span>, для которой</p>
+<div class="tex tex-block">df=\langle\nabla f,\,dX\rangle=\mathrm{tr}\big((\nabla f)^\top dX\big)=\sum_{ij}(\nabla f)_{ij}\,dX_{ij}.</div>
+<p>Поэтому алгоритм такой: взять дифференциал, преобразовать до <span class="tex">\mathrm{tr}(M^\top dX)</span> (или <span class="tex">m^\top dx</span> для вектора), и тогда <span class="tex">\nabla f=M</span>. Выражение в такой форме единственно, так что ответ нельзя получить «неправильным способом».</p>
+<p><strong>Правила</strong> (все <span class="tex">A,B</span> — константы, <span class="tex">dX</span> того же размера, что <span class="tex">X</span>):</p>
+<ul>
+<li><span class="tex">d(AXB)=A\,(dX)\,B</span>, <span class="tex">\;d(X^\top)=(dX)^\top</span>, <span class="tex">\;d(X+Y)=dX+dY</span>;</li>
+<li><span class="tex">d(XY)=(dX)\,Y+X\,(dY)</span> — правило произведения, порядок множителей сохраняется;</li>
+<li><span class="tex">d\,\mathrm{tr}(X)=\mathrm{tr}(dX)</span>, <span class="tex">\;\mathrm{tr}(A)=\mathrm{tr}(A^\top)</span>, <span class="tex">\;\mathrm{tr}(ABC)=\mathrm{tr}(BCA)</span> (циклическая перестановка; можно только циклически, не менять порядок произвольно);</li>
+<li>поэлементная функция: <span class="tex">d\,\varphi(X)=\varphi'(X)\odot dX</span>, и <span class="tex">\mathrm{tr}\big(A^\top(B\odot C)\big)=\mathrm{tr}\big((A\odot B)^\top C\big)</span>, то есть <span class="tex">\odot</span> можно «перебросить» на другой множитель;</li>
+<li>обратная матрица: из <span class="tex">XX^{-1}=I</span> получаем <span class="tex">dX\,X^{-1}+X\,d(X^{-1})=0</span>, откуда <span class="tex">d(X^{-1})=-X^{-1}(dX)X^{-1}</span>;</li>
+<li>определитель: <span class="tex">d\det X=\det X\cdot\mathrm{tr}(X^{-1}dX)</span>, поэтому <span class="tex">d\ln\det X=\mathrm{tr}(X^{-1}dX)</span> и <span class="tex">\nabla\ln\det X=X^{-\top}</span>.</li>
+</ul>
+<div class="callout md tip"><p class="callout-title">Проверка размерностей</p>
+<p>Градиент по <span class="tex">X</span> имеет форму <span class="tex">X</span>. Если после вывода форма не сошлась, значит, потерян транспонирование или перепутан порядок множителей. Это самая дешёвая проверка: делайте её на каждом шаге. Правило для якобиана: <span class="tex">J</span> имеет форму «выход <span class="tex">\times</span> вход», градиент скаляра — это <span class="tex">J^\top</span>.</p>
+</div>
+<h2 id="соглашения-о-раскладке">Соглашения о раскладке</h2>
+<p>Производная скаляра по вектору <span class="tex">x\in\mathbb{R}^n</span> в разных учебниках записывается строкой (numerator layout) или столбцом (denominator layout). Здесь и в большинстве ML-текстов: <strong>градиент — столбец</strong> (для матрицы — матрица той же формы), а якобиан <span class="tex">J\in\mathbb{R}^{m\times n}</span> для <span class="tex">y=f(x)</span> имеет строки-градиенты компонент. Производная матрицы по матрице — четырёхмерный тензор, и записывать её «матрицей» не нужно: через дифференциал она не требуется, нужен только скалярный <span class="tex">L</span> в конце цепочки. Если всё-таки нужна явная матрица, помогает <span class="tex">\mathrm{vec}(AXB)=(B^\top\otimes A)\,\mathrm{vec}(X)</span>.</p>
+<h2 id="вывод-1-мнк-и-ridge">Вывод 1: МНК и Ridge</h2>
+<p><span class="tex">L(w)=\|Xw-y\|_2^2+\lambda\|w\|_2^2</span>, <span class="tex">X\in\mathbb{R}^{n\times d}</span>. Обозначим <span class="tex">r=Xw-y</span>, тогда <span class="tex">dr=X\,dw</span> и</p>
+<div class="tex tex-block">dL=2r^\top dr+2\lambda w^\top dw=\big(2X^\top r+2\lambda w\big)^\top dw
+\;\Rightarrow\;\nabla L=2X^\top(Xw-y)+2\lambda w.</div>
+<p>Форма: <span class="tex">X^\top</span> — <span class="tex">d\times n</span>, <span class="tex">r</span> — <span class="tex">n</span>, итог — <span class="tex">d</span>, как у <span class="tex">w</span>. Приравнивая к нулю, получаем <span class="tex">(X^\top X+\lambda I)w=X^\top y</span>. Второй дифференциал <span class="tex">d(\nabla L)=2(X^\top X+\lambda I)\,dw</span> даёт гессиан <span class="tex">2(X^\top X+\lambda I)\succ0</span> при <span class="tex">\lambda&gt;0</span>: задача строго выпукла, минимум единственный (сравните с <a href="/edufamcs-demo/handbook/math/gradienty-i-optimizaciya/" rel="noopener noreferrer nofollow">выпуклостью</a>).</p>
+<h2 id="вывод-2-квадратичная-форма">Вывод 2: квадратичная форма</h2>
+<p><span class="tex">f=w^\top Aw</span>, <span class="tex">A</span> произвольная. <span class="tex">df=dw^\top Aw+w^\top A\,dw</span>. Первое слагаемое — скаляр, значит, равно своему транспонированию: <span class="tex">w^\top A^\top dw</span>. Итого <span class="tex">df=\big((A+A^\top)w\big)^\top dw</span>, <span class="tex">\nabla f=(A+A^\top)w</span>; при симметричной <span class="tex">A</span> — <span class="tex">2Aw</span>.</p>
+<h2 id="вывод-3-логистическая-регрессия">Вывод 3: логистическая регрессия</h2>
+<p><span class="tex">z=Xw</span>, <span class="tex">p=\sigma(z)</span>, лог-потеря в устойчивой форме <span class="tex">L=\sum_i\big[\ln(1+e^{z_i})-y_iz_i\big]</span> (это <span class="tex">-\sum[y\ln p+(1-y)\ln(1-p)]</span>, проверьте: <span class="tex">-\ln(1-p)=\ln(1+e^z)</span> и <span class="tex">-\ln p=\ln(1+e^{z})-z</span>). Так как <span class="tex">\frac{d}{dz}\ln(1+e^z)=\sigma(z)</span>,</p>
+<div class="tex tex-block">dL=\sum_i(p_i-y_i)\,dz_i=(p-y)^\top X\,dw\;\Rightarrow\;\nabla L=X^\top(p-y).</div>
+<p>Для гессиана дифференцируем градиент: <span class="tex">dp=\sigma'(z)\odot dz=p\odot(1-p)\odot dz=S\,X\,dw</span>, где <span class="tex">S=\mathrm{diag}\big(p_i(1-p_i)\big)</span>. Тогда <span class="tex">d(\nabla L)=X^\top dp=X^\top SX\,dw</span>:</p>
+<div class="tex tex-block">H=X^\top SX\succeq0,</div>
+<p>поскольку <span class="tex">v^\top Hv=\sum_ip_i(1-p_i)(x_i^\top v)^2\ge0</span>. Лог-потеря выпукла, а ньютоновский шаг <span class="tex">w\leftarrow w-H^{-1}\nabla L</span> — это метод IRLS (итеративно перевзвешенных наименьших квадратов): каждый шаг решает взвешенную МНК-задачу с весами <span class="tex">S</span>.</p>
+<h2 id="вывод-4-softmax-и-кросс-энтропия">Вывод 4: softmax и кросс-энтропия</h2>
+<p><span class="tex">p=\mathrm{softmax}(z)</span>, <span class="tex">p_i=e^{z_i}/s</span>, <span class="tex">s=\sum_je^{z_j}</span>. Дифференцируем логарифм: <span class="tex">d\ln p_i=dz_i-d\ln s=dz_i-\sum_jp_j\,dz_j</span>, поэтому <span class="tex">dp_i=p_i\big(dz_i-p^\top dz\big)</span>. В матричном виде <span class="tex">dp=\big(\mathrm{diag}(p)-pp^\top\big)dz</span>, то есть якобиан</p>
+<div class="tex tex-block">J=\mathrm{diag}(p)-pp^\top.</div>
+<p>Он симметричен, а <span class="tex">J\mathbf 1=0</span>: сдвиг всех логитов на константу ничего не меняет, и <span class="tex">J</span> вырождена. Для кросс-энтропии с истинным классом <span class="tex">y</span> (one-hot <span class="tex">e_y</span>) <span class="tex">L=-\ln p_y=-z_y+\ln s</span>, откуда <span class="tex">dL=-e_y^\top dz+p^\top dz=(p-e_y)^\top dz</span>:</p>
+<div class="tex tex-block">\nabla_zL=p-e_y.</div>
+<p>Тот же вид, что и у логистической регрессии: «предсказание минус ответ». Это не случайность — оба случая принадлежат экспоненциальному семейству с каноническим связующим отображением; но для вывода достаточно строк выше.</p>
+<h2 id="вывод-5-линейный-слой-и-обратное-распространение">Вывод 5: линейный слой и обратное распространение</h2>
+<p><span class="tex">Y=XW+\mathbf 1b^\top</span>, <span class="tex">X\in\mathbb{R}^{N\times d_{in}}</span>, <span class="tex">W\in\mathbb{R}^{d_{in}\times d_{out}}</span>. Пусть дальше по сети вычислен скалярный <span class="tex">L</span>, и известен <span class="tex">G=\partial L/\partial Y\in\mathbb{R}^{N\times d_{out}}</span>, то есть <span class="tex">dL=\mathrm{tr}(G^\top dY)</span>. Подставим <span class="tex">dY=dX\,W+X\,dW+\mathbf 1\,db^\top</span>:</p>
+<div class="tex tex-block">dL=\mathrm{tr}(G^\top X\,dW)+\mathrm{tr}(G^\top dX\,W)+\mathrm{tr}(G^\top\mathbf 1\,db^\top).</div>
+<p>Первое слагаемое уже в виде <span class="tex">\mathrm{tr}(M^\top dW)</span> с <span class="tex">M=X^\top G</span>. Во втором переставим циклически: <span class="tex">\mathrm{tr}(WG^\top dX)=\mathrm{tr}\big((GW^\top)^\top dX\big)</span>. В третьем <span class="tex">\mathrm{tr}(G^\top\mathbf 1\,db^\top)=(G^\top\mathbf 1)^\top db</span>. Итог:</p>
+<div class="tex tex-block">\frac{\partial L}{\partial W}=X^\top G,\qquad\frac{\partial L}{\partial X}=GW^\top,\qquad\frac{\partial L}{\partial b}=G^\top\mathbf 1.</div>
+<p>Проверка форм: <span class="tex">d_{in}\times N</span> на <span class="tex">N\times d_{out}</span> — как <span class="tex">W</span>; <span class="tex">N\times d_{out}</span> на <span class="tex">d_{out}\times d_{in}</span> — как <span class="tex">X</span>. Именно эти три формулы выполняет <code>backward()</code> у слоя <code>Linear</code>: <span class="tex">\partial L/\partial X</span> передаётся предыдущему слою как его <span class="tex">G</span>, и так до входа. Это <a href="/edufamcs-demo/handbook/dl/obratnoe-rasprostranenie-oshibki/" rel="noopener noreferrer nofollow">обратное распространение</a> в матричной записи: вся цепочка — перемножения «градиент <span class="tex">\times</span> транспонированная матрица», без явных якобианов.</p>
+<h2 id="вывод-6-логарифм-определителя">Вывод 6: логарифм определителя</h2>
+<p>Гауссовская отрицательная лог-правдоподобность по ковариации (с точностью до константы и множителя <span class="tex">n/2</span>): <span class="tex">f(\Sigma)=\ln\det\Sigma+\mathrm{tr}(\Sigma^{-1}S)</span>, <span class="tex">S=\frac1n\sum_i(x_i-\mu)(x_i-\mu)^\top</span> — выборочная ковариация с нормировкой <span class="tex">1/n</span>. <span class="tex">d\ln\det\Sigma=\mathrm{tr}(\Sigma^{-1}d\Sigma)</span>, <span class="tex">d\,\mathrm{tr}(\Sigma^{-1}S)=-\mathrm{tr}(\Sigma^{-1}d\Sigma\,\Sigma^{-1}S)=-\mathrm{tr}(\Sigma^{-1}S\Sigma^{-1}d\Sigma)</span>. Значит, <span class="tex">\nabla f=\Sigma^{-1}-\Sigma^{-1}S\Sigma^{-1}</span> (всё симметрично), и нуль достигается при <span class="tex">\Sigma=S</span>: оценка ММП ковариации — выборочная ковариация.</p>
+<h2 id="таблица-тождеств">Таблица тождеств</h2>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th><span class="tex">f</span></th>
+<th><span class="tex">df</span></th>
+<th><span class="tex">\nabla f</span></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><span class="tex">\mathrm{tr}(AX)</span></td>
+<td><span class="tex">\mathrm{tr}(A\,dX)</span></td>
+<td><span class="tex">A^\top</span></td>
+</tr>
+<tr>
+<td><span class="tex">\mathrm{tr}(X^\top AX)</span></td>
+<td><span class="tex">\mathrm{tr}\big(X^\top(A+A^\top)dX\big)</span></td>
+<td><span class="tex">(A+A^\top)X</span></td>
+</tr>
+<tr>
+<td><span class="tex">\lVert X\rVert_F^2</span></td>
+<td><span class="tex">2\,\mathrm{tr}(X^\top dX)</span></td>
+<td><span class="tex">2X</span></td>
+</tr>
+<tr>
+<td><span class="tex">\lVert XW-Y\rVert_F^2</span></td>
+<td><span class="tex">2\,\mathrm{tr}\big((XW-Y)^\top X\,dW\big)</span></td>
+<td><span class="tex">2X^\top(XW-Y)</span> по <span class="tex">W</span></td>
+</tr>
+<tr>
+<td><span class="tex">\ln\det X</span></td>
+<td><span class="tex">\mathrm{tr}(X^{-1}dX)</span></td>
+<td><span class="tex">X^{-\top}</span></td>
+</tr>
+<tr>
+<td><span class="tex">\mathrm{tr}(AX^{-1})</span></td>
+<td><span class="tex">-\mathrm{tr}(X^{-1}AX^{-1}dX)</span></td>
+<td><span class="tex">-X^{-\top}A^\top X^{-\top}</span></td>
+</tr>
+<tr>
+<td><span class="tex">a^\top Xb</span></td>
+<td><span class="tex">a^\top dX\,b</span></td>
+<td><span class="tex">ab^\top</span></td>
+</tr>
+<tr>
+<td><span class="tex">\mathrm{LSE}(z)</span></td>
+<td><span class="tex">p^\top dz</span></td>
+<td><span class="tex">\mathrm{softmax}(z)</span></td>
+</tr>
+</tbody>
+</table></div>
+<h2 id="код">Код</h2>
+<p>Любой выведенный градиент проверяйте конечными разностями. Ниже — два из выводов; относительная ошибка порядка <span class="tex">10^{-10}</span> означает, что вывод верен (в нашем запуске все три — порядка <span class="tex">10^{-10}</span>).</p>
+<div class="code"><div class="code-head"><span class="lang">python</span></div><pre><code><span class="tok-k">import</span> numpy <span class="tok-k">as</span> np
+
+<span class="tok-k">def</span> <span class="tok-f">num_grad</span><span class="tok-p">(</span>f<span class="tok-p">,</span> x<span class="tok-p">,</span> eps<span class="tok-p">=</span><span class="tok-n">1e-6</span><span class="tok-p">)</span><span class="tok-p">:</span>
+    g <span class="tok-p">=</span> np<span class="tok-p">.</span>zeros_like<span class="tok-p">(</span>x<span class="tok-p">)</span>
+    <span class="tok-k">for</span> i <span class="tok-k">in</span> np<span class="tok-p">.</span>ndindex<span class="tok-p">(</span>x<span class="tok-p">.</span>shape<span class="tok-p">)</span><span class="tok-p">:</span>
+        e <span class="tok-p">=</span> np<span class="tok-p">.</span>zeros_like<span class="tok-p">(</span>x<span class="tok-p">)</span><span class="tok-p">;</span> e<span class="tok-p">[</span>i<span class="tok-p">]</span> <span class="tok-p">=</span> eps
+        g<span class="tok-p">[</span>i<span class="tok-p">]</span> <span class="tok-p">=</span> <span class="tok-p">(</span>f<span class="tok-p">(</span>x <span class="tok-p">+</span> e<span class="tok-p">)</span> <span class="tok-p">-</span> f<span class="tok-p">(</span>x <span class="tok-p">-</span> e<span class="tok-p">)</span><span class="tok-p">)</span> <span class="tok-p">/</span> <span class="tok-p">(</span><span class="tok-n">2</span> <span class="tok-p">*</span> eps<span class="tok-p">)</span>   <span class="tok-c"># центральная разность</span>
+    <span class="tok-k">return</span> g
+
+rel <span class="tok-p">=</span> <span class="tok-k">lambda</span> a<span class="tok-p">,</span> b<span class="tok-p">:</span> np<span class="tok-p">.</span>linalg<span class="tok-p">.</span>norm<span class="tok-p">(</span>a <span class="tok-p">-</span> b<span class="tok-p">)</span> <span class="tok-p">/</span> <span class="tok-p">(</span>np<span class="tok-p">.</span>linalg<span class="tok-p">.</span>norm<span class="tok-p">(</span>a<span class="tok-p">)</span> <span class="tok-p">+</span> np<span class="tok-p">.</span>linalg<span class="tok-p">.</span>norm<span class="tok-p">(</span>b<span class="tok-p">)</span><span class="tok-p">)</span>
+rng <span class="tok-p">=</span> np<span class="tok-p">.</span>random<span class="tok-p">.</span>default_rng<span class="tok-p">(</span><span class="tok-n">0</span><span class="tok-p">)</span>
+X<span class="tok-p">,</span> w <span class="tok-p">=</span> rng<span class="tok-p">.</span>normal<span class="tok-p">(</span>size<span class="tok-p">=</span><span class="tok-p">(</span><span class="tok-n">50</span><span class="tok-p">,</span> <span class="tok-n">4</span><span class="tok-p">)</span><span class="tok-p">)</span><span class="tok-p">,</span> rng<span class="tok-p">.</span>normal<span class="tok-p">(</span>size<span class="tok-p">=</span><span class="tok-n">4</span><span class="tok-p">)</span>
+yr<span class="tok-p">,</span> yb<span class="tok-p">,</span> lam <span class="tok-p">=</span> rng<span class="tok-p">.</span>normal<span class="tok-p">(</span>size<span class="tok-p">=</span><span class="tok-n">50</span><span class="tok-p">)</span><span class="tok-p">,</span> <span class="tok-p">(</span>rng<span class="tok-p">.</span>random<span class="tok-p">(</span><span class="tok-n">50</span><span class="tok-p">)</span> <span class="tok-p">&lt;</span> <span class="tok-n">.5</span><span class="tok-p">)</span> <span class="tok-p">*</span> <span class="tok-n">1.0</span><span class="tok-p">,</span> <span class="tok-n">0.7</span>
+
+ridge <span class="tok-p">=</span> <span class="tok-k">lambda</span> w<span class="tok-p">:</span> np<span class="tok-p">.</span>sum<span class="tok-p">(</span><span class="tok-p">(</span>X <span class="tok-p">@</span> w <span class="tok-p">-</span> yr<span class="tok-p">)</span> <span class="tok-p">*</span><span class="tok-p">*</span> <span class="tok-n">2</span><span class="tok-p">)</span> <span class="tok-p">+</span> lam <span class="tok-p">*</span> w <span class="tok-p">@</span> w
+<span class="tok-f">print</span><span class="tok-p">(</span>rel<span class="tok-p">(</span><span class="tok-n">2</span> <span class="tok-p">*</span> X<span class="tok-p">.</span>T <span class="tok-p">@</span> <span class="tok-p">(</span>X <span class="tok-p">@</span> w <span class="tok-p">-</span> yr<span class="tok-p">)</span> <span class="tok-p">+</span> <span class="tok-n">2</span> <span class="tok-p">*</span> lam <span class="tok-p">*</span> w<span class="tok-p">,</span> num_grad<span class="tok-p">(</span>ridge<span class="tok-p">,</span> w<span class="tok-p">)</span><span class="tok-p">)</span><span class="tok-p">)</span>
+
+sigmoid <span class="tok-p">=</span> <span class="tok-k">lambda</span> z<span class="tok-p">:</span> <span class="tok-n">1</span> <span class="tok-p">/</span> <span class="tok-p">(</span><span class="tok-n">1</span> <span class="tok-p">+</span> np<span class="tok-p">.</span>exp<span class="tok-p">(</span><span class="tok-p">-</span>z<span class="tok-p">)</span><span class="tok-p">)</span>
+<span class="tok-k">def</span> <span class="tok-f">logloss</span><span class="tok-p">(</span>w<span class="tok-p">)</span><span class="tok-p">:</span>
+    z <span class="tok-p">=</span> X <span class="tok-p">@</span> w
+    <span class="tok-k">return</span> np<span class="tok-p">.</span>sum<span class="tok-p">(</span>np<span class="tok-p">.</span>logaddexp<span class="tok-p">(</span><span class="tok-n">0</span><span class="tok-p">,</span> z<span class="tok-p">)</span> <span class="tok-p">-</span> yb <span class="tok-p">*</span> z<span class="tok-p">)</span>      <span class="tok-c"># устойчивая форма</span>
+p <span class="tok-p">=</span> sigmoid<span class="tok-p">(</span>X <span class="tok-p">@</span> w<span class="tok-p">)</span>
+<span class="tok-f">print</span><span class="tok-p">(</span>rel<span class="tok-p">(</span>X<span class="tok-p">.</span>T <span class="tok-p">@</span> <span class="tok-p">(</span>p <span class="tok-p">-</span> yb<span class="tok-p">)</span><span class="tok-p">,</span> num_grad<span class="tok-p">(</span>logloss<span class="tok-p">,</span> w<span class="tok-p">)</span><span class="tok-p">)</span><span class="tok-p">)</span>
+H <span class="tok-p">=</span> X<span class="tok-p">.</span>T <span class="tok-p">@</span> <span class="tok-p">(</span><span class="tok-p">(</span>p <span class="tok-p">*</span> <span class="tok-p">(</span><span class="tok-n">1</span> <span class="tok-p">-</span> p<span class="tok-p">)</span><span class="tok-p">)</span><span class="tok-p">[</span><span class="tok-p">:</span><span class="tok-p">,</span> <span class="tok-k">None</span><span class="tok-p">]</span> <span class="tok-p">*</span> X<span class="tok-p">)</span>              <span class="tok-c"># гессиан X^T S X</span>
+grad <span class="tok-p">=</span> <span class="tok-k">lambda</span> v<span class="tok-p">:</span> X<span class="tok-p">.</span>T <span class="tok-p">@</span> <span class="tok-p">(</span>sigmoid<span class="tok-p">(</span>X <span class="tok-p">@</span> v<span class="tok-p">)</span> <span class="tok-p">-</span> yb<span class="tok-p">)</span>
+H_num <span class="tok-p">=</span> np<span class="tok-p">.</span>stack<span class="tok-p">(</span><span class="tok-p">[</span>num_grad<span class="tok-p">(</span><span class="tok-k">lambda</span> v<span class="tok-p">,</span> i<span class="tok-p">=</span>i<span class="tok-p">:</span> grad<span class="tok-p">(</span>v<span class="tok-p">)</span><span class="tok-p">[</span>i<span class="tok-p">]</span><span class="tok-p">,</span> w<span class="tok-p">)</span> <span class="tok-k">for</span> i <span class="tok-k">in</span> <span class="tok-f">range</span><span class="tok-p">(</span><span class="tok-n">4</span><span class="tok-p">)</span><span class="tok-p">]</span><span class="tok-p">)</span>
+<span class="tok-f">print</span><span class="tok-p">(</span>rel<span class="tok-p">(</span>H<span class="tok-p">,</span> H_num<span class="tok-p">)</span><span class="tok-p">)</span>
+</code></pre></div>
+<p>Я также проверил этим способом формулы для <span class="tex">w^\top Aw</span>, якобиана softmax, <span class="tex">p-e_y</span>, трёх градиентов линейного слоя (под произвольной потерей <span class="tex">\sum\tanh(Y)\odot C</span>), <span class="tex">\nabla\ln\det</span> с <span class="tex">\mathrm{tr}(\Sigma^{-1}S)</span> и <span class="tex">d(X^{-1})</span>: везде ошибка <span class="tex">\lesssim 2\cdot10^{-9}</span>.</p>
+<h2 id="ловушки">Ловушки</h2>
+<div class="callout md warn"><p class="callout-title">Типичные ошибки</p>
+<p>Транспонирование потеряно или поставлено не туда (лечится проверкой форм); <span class="tex">\mathrm{tr}(ABC)</span> переставлен не циклически; <span class="tex">d(XY)</span> записан как <span class="tex">dX\,dY</span> или <span class="tex">Y\,dX</span>; градиент по симметричной матрице <span class="tex">\Sigma</span> трактуется как независимый по всем элементам — формула верна в симметричной точке, но для ограниченной оптимизации нужна симметризация <span class="tex">\tfrac12(\nabla+\nabla^\top)</span>.</p>
+</div>
+<ul>
+<li>Нельзя сразу «дифференцировать матрицу по матрице» и применять цепное правило как для скаляров — сначала доведите до скалярного <span class="tex">L</span> и работайте с <span class="tex">dL</span>.</li>
+<li>Не подменяйте проверку градиента аналитическим «похоже на правду»: слабые места (знак, множитель 2) ловит только конечная разность. Шаг <span class="tex">\varepsilon\sim10^{-6}</span> в float64, центральная разность; в float32 проверка не работает.</li>
+<li>На собеседовании: выведите <span class="tex">\nabla_w\|Xw-y\|^2</span> и гессиан логистической регрессии; покажите, что градиент softmax-кросс-энтропии равен <span class="tex">p-y</span>; выведите <span class="tex">\partial L/\partial W=X^\top G</span> и объясните, откуда транспонирование; чему равен <span class="tex">\nabla\ln\det X</span> и почему <span class="tex">X</span> должна быть обратимой.</li>
+</ul>
+<h2 id="проверь-себя">Проверь себя</h2>
+<details class="callout md details"><summary>Чему равен градиент $\|Xw-y\|^2$ и из каких двух шагов он получается?</summary>
+<p><span class="tex">2X^\top(Xw-y)</span>. Шаг 1: <span class="tex">dL=2r^\top dr</span> при <span class="tex">r=Xw-y</span>, <span class="tex">dr=X\,dw</span>. Шаг 2: <span class="tex">2r^\top X\,dw=(2X^\top r)^\top dw</span>, и коэффициент при <span class="tex">dw</span> — градиент.</p>
+</details>
+<details class="callout md details"><summary>Почему гессиан лог-потери $X^\top SX$ неотрицателен и что отсюда следует?</summary>
+<p>Диагональ <span class="tex">S</span> состоит из <span class="tex">p_i(1-p_i)\ge0</span>, поэтому <span class="tex">v^\top X^\top SXv=\sum_ip_i(1-p_i)(x_i^\top v)^2\ge0</span>. Лог-потеря выпукла, локальный минимум глобален; при полном ранге <span class="tex">X</span> и <span class="tex">p\in(0,1)</span> — строго выпукла.</p>
+</details>
+<details class="callout md details"><summary>Почему якобиан softmax вырожден?</summary>
+<p><span class="tex">J=\mathrm{diag}(p)-pp^\top</span>, и <span class="tex">J\mathbf 1=p-p(p^\top\mathbf 1)=0</span>. Сдвиг всех логитов на константу не меняет <span class="tex">p</span>, значит, в этом направлении производная равна нулю.</p>
+</details>
+<details class="callout md details"><summary>Откуда в $\partial L/\partial W=X^\top G$ берётся транспонирование?</summary>
+<p>Из <span class="tex">dL=\mathrm{tr}(G^\top X\,dW)</span> нужно получить вид <span class="tex">\mathrm{tr}(M^\top dW)</span>. Тогда <span class="tex">M^\top=G^\top X</span>, то есть <span class="tex">M=X^\top G</span>. Форма <span class="tex">d_{in}\times d_{out}</span> совпадает с формой <span class="tex">W</span>.</p>
+</details>
+<details class="callout md details"><summary>Чему равна производная $\ln\det X$ и как её вывести за одну строку?</summary>
+<p><span class="tex">\nabla\ln\det X=X^{-\top}</span>. Из <span class="tex">d\det X=\det X\cdot\mathrm{tr}(X^{-1}dX)</span> делим на <span class="tex">\det X</span> и читаем коэффициент: <span class="tex">\mathrm{tr}\big((X^{-\top})^\top dX\big)</span>.</p>
+</details>
+<h2 id="что-почитать">Что почитать</h2>
+<ul>
+<li>Petersen K., Pedersen M. <em>The Matrix Cookbook</em>, 2012 — справочник тождеств: https://www2.imm.dtu.dk/pubdb/edoc/imm3274.pdf</li>
+<li>Magnus J., Neudecker H. <em>Matrix Differential Calculus with Applications in Statistics and Econometrics</em>, 3rd ed., Wiley, 2019 — метод дифференциалов в полном виде.</li>
+<li>Parr T., Howard J. <em>The Matrix Calculus You Need For Deep Learning</em>, 2018: https://arxiv.org/abs/1802.01528</li>
+<li>Boyd S., Vandenberghe L. <em>Convex Optimization</em>, Cambridge University Press, 2004, §A.4 (градиент, гессиан): https://web.stanford.edu/~boyd/cvxbook/</li>
+<li>Murphy K. <em>Probabilistic Machine Learning: An Introduction</em>, MIT Press, 2022 — главы о линейной алгебре и оптимизации: https://probml.github.io/pml-book/book1.html</li>
+<li>Документация PyTorch, <em>Autograd mechanics</em> и <code>torch.autograd.gradcheck</code>: https://docs.pytorch.org/docs/stable/notes/autograd.html</li>
+</ul>
+</div>
+      
+
+      
+
+      
+      <nav class="pager" aria-label="Соседние статьи">
+        <a href="/edufamcs-demo/handbook/math/intervaly-i-proverka-gipotez/"><span><svg class="ico sm" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-arrow-left"/></svg>Назад</span>Доверительные интервалы и проверка гипотез</a>
+        <a href="/edufamcs-demo/handbook/math/bajesovskaya-statistika/"><span>Дальше<svg class="ico sm" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-arrow"/></svg></span>Байесовская статистика</a>
+      </nav>
+      
+    </article>
+
+    <aside class="hb-toc" aria-label="На этой странице">
+      <a class="l2" href="#идея-дифференциал-и-скалярное-произведение">Идея: дифференциал и скалярное произведение</a><a class="l2" href="#соглашения-о-раскладке">Соглашения о раскладке</a><a class="l2" href="#вывод-1-мнк-и-ridge">Вывод 1: МНК и Ridge</a><a class="l2" href="#вывод-2-квадратичная-форма">Вывод 2: квадратичная форма</a><a class="l2" href="#вывод-3-логистическая-регрессия">Вывод 3: логистическая регрессия</a><a class="l2" href="#вывод-4-softmax-и-кросс-энтропия">Вывод 4: softmax и кросс-энтропия</a><a class="l2" href="#вывод-5-линейный-слой-и-обратное-распространение">Вывод 5: линейный слой и обратное распространение</a><a class="l2" href="#вывод-6-логарифм-определителя">Вывод 6: логарифм определителя</a><a class="l2" href="#таблица-тождеств">Таблица тождеств</a><a class="l2" href="#код">Код</a><a class="l2" href="#ловушки">Ловушки</a><a class="l2" href="#проверь-себя">Проверь себя</a><a class="l2" href="#что-почитать">Что почитать</a>
+    </aside>
+  </div>
+</div>
+
+
+</main>
+
+<footer class="ftr" data-theme="dark">
+  <svg class="sym fern" viewBox="0 0 40.5 65.02" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#fern"/></svg>
+  <div class="container">
+    <div class="ftr-row">
+      <a href="/edufamcs-demo/" aria-label="EDU FAMCS — главная"><img src="/edufamcs-demo/static/brand/logo/logo-edu-dark.svg" alt="EDU FAMCS" width="196" height="40"></a>
+      <ul class="ftr-links">
+        <li><a href="/edufamcs-demo/#courses">Курсы</a></li>
+        <li><a href="/edufamcs-demo/ml/">Машинное обучение</a></li>
+        <li><a href="/edufamcs-demo/handbook/">Хендбук</a></li>
+        <li><a href="/edufamcs-demo/news/">Новости</a></li>
+        <li><a href="/edufamcs-demo/people/">Авторы</a></li>
+        <li><a href="/edufamcs-demo/about/">О&nbsp;нас</a></li>
+        <li><a href="/edufamcs-demo/propose/">Предложить или исправить</a></li>
+        <li><a href="/edufamcs-demo/privacy/">Конфиденциальность</a></li>
+      </ul>
+    </div>
+    <div class="ftr-big" aria-hidden="true">EDU<span class="d">·</span>FAMCS</div>
+    <p class="ftr-copy">© 2026 EDU FAMCS · Минск</p>
+  </div>
+</footer>
+
+<div class="toasts-region" aria-live="polite" id="toasts">
+
+</div>
+
+</body>
+</html>

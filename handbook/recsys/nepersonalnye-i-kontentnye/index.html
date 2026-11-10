@@ -27,7 +27,7 @@
 <script src="/edufamcs-demo/static/js/site.js" defer></script>
 <script src="/edufamcs-demo/static/handbook/handbook.js" defer></script>
 </head>
-<body class="" hx-headers='{"X-CSRFToken": "UuHUTE8mQuoQbor8eKYjcvOuuLFNPh0qGAIhNrq31HE4QXnor9RotXWP08h2U2Lp"}'>
+<body class="" hx-headers='{"X-CSRFToken": "ZCqDjhAr6xRtgoBrGaVcDOXSFbH3DjqGBPfAzj9i7k52rHQTFD99lHPQ7kO1n3pn"}'>
 <a class="skip" href="#main">К содержанию</a>
 <div class="demo-bar" role="note">Демо-версия для отзывов: вход, запись на курсы и формы здесь не работают.</div>
 
@@ -60,6 +60,7 @@
 
 
 <div class="container hb-page s-recsys">
+  <div class="hb-readbar" aria-hidden="true"><i></i></div>
   <div class="hb">
     <aside class="hb-nav" aria-label="Статьи раздела">
       
@@ -88,9 +89,9 @@
       <div class="hb-meta">
         
         
-        <span><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-clock"/></svg>11&nbsp;мин</span>
+        <span><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-clock"/></svg>13&nbsp;мин</span>
         <span class="hb-authors"><span class="avatar sm" title="Артем Лебедевич">АЛ</span>Артем Лебедевич</span>
-        <span><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-edit"/></svg>9 ноября 2026</span>
+        <span><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-edit"/></svg>10 ноября 2026</span>
         
         
       </div>
@@ -98,7 +99,7 @@
       
       <details class="hb-mtoc">
         <summary><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-list"/></svg>Содержание<svg class="ico sm" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-chev-down"/></svg></summary>
-        <a class="l2" href="#топ-популярного-и-его-окна">Топ популярного и его окна</a><a class="l3" href="#тренды-с-затуханием">Тренды с затуханием</a><a class="l3" href="#популярность-по-сегментам">Популярность по сегментам</a><a class="l3" href="#повторы-и-личный-топ">Повторы и личный топ</a><a class="l2" href="#средний-рейтинг-и-малые-выборки">Средний рейтинг и малые выборки</a><a class="l2" href="#с-этим-покупают-ассоциативные-правила">«С этим покупают»: ассоциативные правила</a><a class="l2" href="#контентные-рекомендации">Контентные рекомендации</a><a class="l3" href="#профиль-объекта">Профиль объекта</a><a class="l3" href="#профиль-пользователя">Профиль пользователя</a><a class="l3" href="#современный-вариант-эмбеддинги">Современный вариант: эмбеддинги</a><a class="l3" href="#плюсы-и-минусы">Плюсы и минусы</a><a class="l3" href="#гибриды">Гибриды</a><a class="l2" href="#что-ломается-на-практике">Что ломается на практике</a><a class="l2" href="#что-почитать">Что почитать</a>
+        <a class="l2" href="#топ-популярного-и-его-окна">Топ популярного и его окна</a><a class="l3" href="#тренды-с-затуханием">Тренды с затуханием</a><a class="l3" href="#популярность-по-сегментам">Популярность по сегментам</a><a class="l3" href="#повторы-и-личный-топ">Повторы и личный топ</a><a class="l2" href="#средний-рейтинг-и-малые-выборки">Средний рейтинг и малые выборки</a><a class="l2" href="#с-этим-покупают-ассоциативные-правила">«С этим покупают»: ассоциативные правила</a><a class="l2" href="#контентные-рекомендации">Контентные рекомендации</a><a class="l3" href="#профиль-объекта">Профиль объекта</a><a class="l3" href="#профиль-пользователя">Профиль пользователя</a><a class="l3" href="#современный-вариант-эмбеддинги">Современный вариант: эмбеддинги</a><a class="l3" href="#плюсы-и-минусы">Плюсы и минусы</a><a class="l3" href="#гибриды">Гибриды</a><a class="l2" href="#что-ломается-на-практике">Что ломается на практике</a><a class="l2" href="#проверь-себя">Проверь себя</a><a class="l2" href="#что-почитать">Что почитать</a>
       </details>
       
 
@@ -148,7 +149,7 @@
 <h3 id="профиль-объекта">Профиль объекта</h3>
 <p>Объект превращается в вектор:</p>
 <ul>
-<li><strong>Текст</strong> (название, описание) — TF-IDF: частота терма в документе, умноженная на <span class="tex">\log(N/\mathrm{df})</span>, чтобы редкие слова весили больше (то же, что в <a href="/edufamcs-demo/handbook/search/bm25-invertirovannyj-indeks/" rel="noopener noreferrer nofollow">BM25</a>).</li>
+<li><strong>Текст</strong> (название, описание) — TF-IDF: частота терма в документе, умноженная на <span class="tex">\log(N/\mathrm{df})</span>, чтобы редкие слова весили больше (то же, что в <a href="/edufamcs-demo/handbook/retrieval/bm25-invertirovannyj-indeks/" rel="noopener noreferrer nofollow">BM25</a>).</li>
 <li><strong>Категории и атрибуты</strong> — one-hot или мультихот (бренд, жанр, автор), нормированные и взвешенные.</li>
 <li><strong>Числовые признаки</strong> — цена, год, длительность: после масштабирования или биннинга.</li>
 </ul>
@@ -191,7 +192,7 @@ V <span class="tok-p">=</span> normalize<span class="tok-p">(</span>tfidf<span c
 </tr>
 <tr>
 <td>Не нужны данные других пользователей</td>
-<td>Не ловит неочевидные связи («подгузники и пиво» — по контенту не видно)</td>
+<td>Не ловит неочевидные связи (хрестоматийная, скорее легендарная история «подгузники и пиво» — по контенту такого не видно)</td>
 </tr>
 <tr>
 <td>Независим от популярности</td>
@@ -207,8 +208,26 @@ V <span class="tok-p">=</span> normalize<span class="tok-p">(</span>tfidf<span c
 <li><strong>Нормализация TF-IDF по каталогу</strong> устаревает: IDF пересчитывают периодически, а при обновлении словаря перестраивают все векторы.</li>
 <li><strong>Пользователь с двумя интересами</strong> (детские книги и детективы): средний вектор их смешивает и указывает в никуда. Исправление — несколько векторов-интересов (кластеризация объектов пользователя) или поиск по каждому объекту истории отдельно.</li>
 <li><strong>Дубли и вариации товара</strong> (цвет, размер) забивают выдачу; нужна дедупликация по карточке.</li>
-<li>На собеседованиях часто спрашивают: «почему среднее по рейтингу — плохой ранжировщик?», «чем lift отличается от confidence?», «как рекомендовать новый товар?».</li>
+<li>На собеседовании: почему среднее по рейтингу — плохой ранжировщик и что с этим делает нижняя граница Вильсона?</li>
+<li>На собеседовании: чем lift отличается от confidence и почему confidence предвзят к популярным объектам?</li>
+<li>На собеседовании: как рекомендовать совсем новый товар и новому пользователю без истории?</li>
 </ul>
+<h2 id="проверь-себя">Проверь себя</h2>
+<details class="callout md details"><summary>Почему среднее по рейтингу — плохой ранжировщик?</summary>
+<p>У объекта с одной оценкой 5 среднее выше, чем у объекта с 900 пятёрками из 1000, хотя доверять ему нельзя. Нижняя граница доверительного интервала Вильсона учитывает размер выборки и ставит «1 из 1» ниже «900 из 1000».</p>
+</details>
+<details class="callout md details"><summary>Чем lift лучше confidence для рекомендаций «с этим покупают»?</summary>
+<p>Confidence <span class="tex">P(B\mid A)</span> высок для любых популярных <span class="tex">B</span> (молоко покупают с чем угодно). Lift делит на <span class="tex">P(B)</span>, то есть убирает эффект популярности: значение около 1 означает независимость, больше 1 — настоящую связь.</p>
+</details>
+<details class="callout md details"><summary>Что произойдёт с бейзлайном «популярное», если считать его без окна?</summary>
+<p>Список застынет: старые хиты будут вечно держаться в топе, а новое не успеет его пробить. Окно или экспоненциальное затухание с периодом полураспада <span class="tex">T_{1/2}</span> делает список трендовым; <span class="tex">T_{1/2}</span> выбирают по временной валидации.</p>
+</details>
+<details class="callout md details"><summary>Почему средний вектор интересов пользователя может не работать?</summary>
+<p>Если у пользователя два разных интереса (детские книги и детективы), среднее их векторов указывает «между» ними и не похоже ни на то ни на другое. Решение — несколько векторов-интересов или поиск по каждому объекту истории отдельно.</p>
+</details>
+<details class="callout md details"><summary>Как комбинируют контентные и коллаборативные источники?</summary>
+<p>Взвешенной смесью оценок, переключением по числу взаимодействий объекта, контентными признаками внутри коллаборативной модели или контентными эмбеддингами как инициализацией векторов новых объектов. В двухстадийной схеме разные источники кандидатов сливаются и ранжируются одной моделью.</p>
+</details>
 <h2 id="что-почитать">Что почитать</h2>
 <ul>
 <li>Agrawal R., Imieliński T., Swami A. <em>Mining association rules between sets of items in large databases</em>, SIGMOD 1993 — https://doi.org/10.1145/170035.170072</li>
@@ -223,6 +242,8 @@ V <span class="tok-p">=</span> normalize<span class="tok-p">(</span>tfidf<span c
       
 
       
+
+      
       <nav class="pager" aria-label="Соседние статьи">
         <a href="/edufamcs-demo/handbook/recsys/oflajn-metriki/"><span><svg class="ico sm" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-arrow-left"/></svg>Назад</span>Офлайн-метрики: Precision@k, Recall@k, MAP, NDCG</a>
         <a href="/edufamcs-demo/handbook/recsys/kollaborativnaya-filtraciya-po-sosedyam/"><span>Дальше<svg class="ico sm" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-arrow"/></svg></span>Коллаборативная фильтрация по соседям</a>
@@ -231,7 +252,7 @@ V <span class="tok-p">=</span> normalize<span class="tok-p">(</span>tfidf<span c
     </article>
 
     <aside class="hb-toc" aria-label="На этой странице">
-      <a class="l2" href="#топ-популярного-и-его-окна">Топ популярного и его окна</a><a class="l3" href="#тренды-с-затуханием">Тренды с затуханием</a><a class="l3" href="#популярность-по-сегментам">Популярность по сегментам</a><a class="l3" href="#повторы-и-личный-топ">Повторы и личный топ</a><a class="l2" href="#средний-рейтинг-и-малые-выборки">Средний рейтинг и малые выборки</a><a class="l2" href="#с-этим-покупают-ассоциативные-правила">«С этим покупают»: ассоциативные правила</a><a class="l2" href="#контентные-рекомендации">Контентные рекомендации</a><a class="l3" href="#профиль-объекта">Профиль объекта</a><a class="l3" href="#профиль-пользователя">Профиль пользователя</a><a class="l3" href="#современный-вариант-эмбеддинги">Современный вариант: эмбеддинги</a><a class="l3" href="#плюсы-и-минусы">Плюсы и минусы</a><a class="l3" href="#гибриды">Гибриды</a><a class="l2" href="#что-ломается-на-практике">Что ломается на практике</a><a class="l2" href="#что-почитать">Что почитать</a>
+      <a class="l2" href="#топ-популярного-и-его-окна">Топ популярного и его окна</a><a class="l3" href="#тренды-с-затуханием">Тренды с затуханием</a><a class="l3" href="#популярность-по-сегментам">Популярность по сегментам</a><a class="l3" href="#повторы-и-личный-топ">Повторы и личный топ</a><a class="l2" href="#средний-рейтинг-и-малые-выборки">Средний рейтинг и малые выборки</a><a class="l2" href="#с-этим-покупают-ассоциативные-правила">«С этим покупают»: ассоциативные правила</a><a class="l2" href="#контентные-рекомендации">Контентные рекомендации</a><a class="l3" href="#профиль-объекта">Профиль объекта</a><a class="l3" href="#профиль-пользователя">Профиль пользователя</a><a class="l3" href="#современный-вариант-эмбеддинги">Современный вариант: эмбеддинги</a><a class="l3" href="#плюсы-и-минусы">Плюсы и минусы</a><a class="l3" href="#гибриды">Гибриды</a><a class="l2" href="#что-ломается-на-практике">Что ломается на практике</a><a class="l2" href="#проверь-себя">Проверь себя</a><a class="l2" href="#что-почитать">Что почитать</a>
     </aside>
   </div>
 </div>

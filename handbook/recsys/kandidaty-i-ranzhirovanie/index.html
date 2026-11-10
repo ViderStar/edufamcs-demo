@@ -27,7 +27,7 @@
 <script src="/edufamcs-demo/static/js/site.js" defer></script>
 <script src="/edufamcs-demo/static/handbook/handbook.js" defer></script>
 </head>
-<body class="" hx-headers='{"X-CSRFToken": "MlDUzELKGz67izPkopVefwoNkS2yLwHByrEhtr3rRMmlX8LABOOjwYw8QfENQhsA"}'>
+<body class="" hx-headers='{"X-CSRFToken": "sg0EBbbDNTyvAK6KywdAuZyIgPLxgWVY4tPBRdKuOGM4L3lcxZrxcSqGIYSv0GUF"}'>
 <a class="skip" href="#main">К содержанию</a>
 <div class="demo-bar" role="note">Демо-версия для отзывов: вход, запись на курсы и формы здесь не работают.</div>
 
@@ -60,6 +60,7 @@
 
 
 <div class="container hb-page s-recsys">
+  <div class="hb-readbar" aria-hidden="true"><i></i></div>
   <div class="hb">
     <aside class="hb-nav" aria-label="Статьи раздела">
       
@@ -78,6 +79,14 @@
       
       <a class="" href="/edufamcs-demo/handbook/recsys/prodakshen-i-ab-testy/">Рекомендации в продакшене: A/B-тесты и эксплуатация</a>
       
+      <a class="" href="/edufamcs-demo/handbook/recsys/multitask-ranzhirovanie/">Многозадачное ранжирование: MMoE, PLE, ESMM</a>
+      
+      <a class="" href="/edufamcs-demo/handbook/recsys/priznaki-i-feature-store/">Признаки для рекомендаций и feature store</a>
+      
+      <a class="" href="/edufamcs-demo/handbook/recsys/protokol-oflajn-ocenki/">Протокол офлайн-оценки и утечки</a>
+      
+      <a class="" href="/edufamcs-demo/handbook/recsys/system-design-rekomendacij/">System design: как спроектировать рекомендательную систему на собеседовании</a>
+      
     </aside>
 
     <article class="hb-main">
@@ -86,9 +95,9 @@
       <div class="hb-meta">
         
         
-        <span><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-clock"/></svg>12&nbsp;мин</span>
+        <span><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-clock"/></svg>16&nbsp;мин</span>
         <span class="hb-authors"><span class="avatar sm" title="Артем Лебедевич">АЛ</span>Артем Лебедевич</span>
-        <span><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-edit"/></svg>9 ноября 2026</span>
+        <span><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-edit"/></svg>10 ноября 2026</span>
         
         
       </div>
@@ -96,7 +105,7 @@
       
       <details class="hb-mtoc">
         <summary><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-list"/></svg>Содержание<svg class="ico sm" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-chev-down"/></svg></summary>
-        <a class="l2" href="#источники-кандидатов">Источники кандидатов</a><a class="l2" href="#ранжирующая-модель">Ранжирующая модель</a><a class="l2" href="#pre-ranking-промежуточный-этап-каскада">Pre-ranking: промежуточный этап каскада</a><a class="l2" href="#learning-to-rank">Learning to rank</a><a class="l2" href="#как-собрать-обучающую-выборку-без-утечек">Как собрать обучающую выборку без утечек</a><a class="l2" href="#переранжирование">Переранжирование</a><a class="l3" href="#mmr">MMR</a><a class="l3" href="#dpp">DPP</a><a class="l3" href="#калибровка">Калибровка</a><a class="l3" href="#смешивание-целей">Смешивание целей</a><a class="l3" href="#правила-и-ограничения">Правила и ограничения</a><a class="l2" href="#что-почитать">Что почитать</a>
+        <a class="l2" href="#источники-кандидатов">Источники кандидатов</a><a class="l2" href="#ранжирующая-модель">Ранжирующая модель</a><a class="l2" href="#pre-ranking-промежуточный-этап-каскада">Pre-ranking: промежуточный этап каскада</a><a class="l2" href="#learning-to-rank">Learning to rank</a><a class="l2" href="#как-собрать-обучающую-выборку-без-утечек">Как собрать обучающую выборку без утечек</a><a class="l3" href="#откуда-берутся-примеры-и-негативы">Откуда берутся примеры и негативы</a><a class="l2" href="#ловушки">Ловушки</a><a class="l2" href="#переранжирование">Переранжирование</a><a class="l3" href="#mmr">MMR</a><a class="l3" href="#dpp">DPP</a><a class="l3" href="#калибровка">Калибровка</a><a class="l3" href="#смешивание-целей">Смешивание целей</a><a class="l3" href="#правила-и-ограничения">Правила и ограничения</a><a class="l2" href="#проверь-себя">Проверь себя</a><a class="l2" href="#что-почитать">Что почитать</a>
       </details>
       
 
@@ -159,11 +168,23 @@ ranker<span class="tok-p">.</span>fit<span class="tok-p">(</span>
 <li>Для теста повторяем то же со сдвигом: кандидаты и признаки по данным до <span class="tex">T_2</span>, метки — из <span class="tex">[T_2, T_3)</span>.</li>
 </ol>
 <p>Если обучить модель кандидатов на всех данных, включая окно меток, её скор станет «подсказкой» ответа: ранжировщик научится ему доверять, а в проде, где будущего нет, качество провалится. Та же проблема с признаками популярности, посчитанными по всему логу.</p>
+<h3 id="откуда-берутся-примеры-и-негативы">Откуда берутся примеры и негативы</h3>
+<p>Метки ранжировщика — это исходы <strong>показов</strong> (impressions): клик или покупка — положительный пример, показ без отклика — отрицательный. Такие негативы честные в одном смысле: объект прошёл отбор действующей системы и пользователь мог его увидеть. Но «не кликнул» не равно «не понравилось» — объект мог стоять ниже экрана; клик сильно зависит от позиции (position bias), поэтому позицию логируют и либо подают как признак (на инференсе фиксируют), либо взвешивают примеры; про логирование — в <a href="/edufamcs-demo/handbook/recsys/prodakshen-i-ab-testy/" rel="noopener noreferrer nofollow">главе об эксплуатации</a>, про ранжирующие потери — в <a href="/edufamcs-demo/handbook/retrieval/learning-to-rank/" rel="noopener noreferrer nofollow">обучении ранжированию</a>.</p>
+<p><strong>Никогда не показанные</strong> кандидаты (вышли из retrieval, но не дошли до выдачи) — метки неизвестны. Их берут как негативы лишь осознанно: они дополняют выборку объектами, которые действующая политика отсекла, и снижают смещение отбора. Но обучать ранжировщик <strong>только на случайных негативах</strong> (случайный объект каталога вместо кандидата) нельзя: такие негативы слишком лёгкие, модель учится отличать «хоть что-то подходящее» от мусора, а в проде ей надо упорядочить сотню объектов, каждый из которых уже похож на релевантный. Итог — слабое упорядочивание внутри пула и <strong>неоткалиброванные</strong> вероятности: доля позитивов в обучении задана долей сэмплирования, а не реальным CTR. Если негативы прореживали с долей <span class="tex">w</span>, вероятность поправляют: <span class="tex">p_{\text{true}} = \dfrac{w\,p}{w\,p + 1 - p}</span>. Практичная смесь: показы с исходами как основа плюс небольшая доля «непоказанных» кандидатов с понижающим весом.</p>
 <p>Ещё два практических момента:</p>
 <ul>
 <li>Пользователей, у которых среди кандидатов нет ни одного положительного, из обучения ранжировщика обычно исключают — для listwise-потерь они не несут сигнала. Но в <strong>оценке</strong> их оставляют, иначе метрика завысится.</li>
 <li>Сравнивайте итог с потолком: какая доля тестовых объектов вообще попала в кандидаты (Recall@N первой стадии). Если потолок 30 %, улучшать ранжирование дальше бессмысленно — сначала нужны кандидаты.</li>
 </ul>
+<h2 id="ловушки">Ловушки</h2>
+<ul>
+<li><strong>Обучение ранжировщика на кандидатах другого распределения.</strong> Если на обучении кандидатов выдаёт одна версия retrieval, а в проде другая, признаки «ранг и скор в источнике» меняют смысл.</li>
+<li><strong>Метка из окна, пересекающегося с обучением кандидатов</strong> (см. выше): скор первой стадии становится подсказкой.</li>
+<li><strong>Смещение по позиции игнорируется</strong>: ранжировщик учится повторять прежний порядок.</li>
+<li><strong>Оценка только на пользователях с позитивами в пуле</strong> завышает метрику.</li>
+<li><strong>Pre-ranking, обученный только на показанных объектах</strong>, плохо работает на всём пуле.</li>
+</ul>
+<p>На собеседовании: зачем несколько источников кандидатов и как оценить потолок первой стадии; как собрать обучающую выборку для ранжировщика без утечки; чем pointwise, pairwise и listwise отличаются по цели; как калибруется вероятность после прореживания негативов.</p>
 <h2 id="переранжирование">Переранжирование</h2>
 <p>Даже идеально упорядоченный по вероятности клика список может быть плохим: десять почти одинаковых чёрных футболок. Последний шаг применяет к ранжированному списку диверсификацию, калибровку, бизнес-правила и объединение нескольких целей.</p>
 <h3 id="mmr">MMR</h3>
@@ -193,6 +214,22 @@ ranker<span class="tok-p">.</span>fit<span class="tok-p">(</span>
 <p>Мультипликативная форма удобна: низкая вероятность одной цели не компенсируется высокой другой. Веса <span class="tex">w_k</span> — не обучаемые параметры, а <strong>рычаги продукта</strong>: их подбирают A/B-тестами и автоматической оптимизацией по онлайн-метрикам, следя за тем, как меняются долгосрочные метрики. Нормировка вероятностей (калибровка) — обязательное условие: без неё веса несравнимы.</p>
 <h3 id="правила-и-ограничения">Правила и ограничения</h3>
 <p>Затем фильтры наличия и возрастных ограничений, лимиты («не более двух объектов одного продавца подряд»), слоты под рекламу и новинки, «замораживание» позиций. Правила лучше держать <strong>после</strong> модели и логировать: иначе обучающие данные искажаются невидимыми для модели вмешательствами.</p>
+<h2 id="проверь-себя">Проверь себя</h2>
+<details class="callout md details"><summary>Почему данные для ранжировщика режут по времени дважды ($T_1 &lt; T_2$)?</summary>
+<p>Модели кандидатов и признаки считаются по данным до <span class="tex">T_1</span>, метки берутся из <span class="tex">[T_1,T_2)</span>. Если модель кандидатов видела окно меток, её скор «подсказывает» ответ, и в проде, где будущего нет, качество падает.</p>
+</details>
+<details class="callout md details"><summary>Что неверно в обучении ранжировщика только на случайных негативах?</summary>
+<p>Они слишком легко отделимы от позитивов, а в проде надо упорядочивать уже похожие объекты. В результате слабое упорядочивание внутри пула и вероятности, калиброванные под долю сэмплирования, а не под реальный CTR.</p>
+</details>
+<details class="callout md details"><summary>Чем LambdaRank отличается от RankNet?</summary>
+<p>Градиент RankNet по паре умножается на <span class="tex">|\Delta \mathrm{NDCG}_{ij}|</span> — изменение метрики при обмене объектов, поэтому пары в верхушке списка весят больше, чем в хвосте.</p>
+</details>
+<details class="callout md details"><summary>Как MMR разделяет релевантность и разнообразие и что будет при $\lambda=1$?</summary>
+<p>На каждом шаге берётся объект, максимизирующий <span class="tex">\lambda s - (1-\lambda)\max_j\mathrm{sim}(i,j)</span> по выбранным. При <span class="tex">\lambda=1</span> штрафа нет и порядок остаётся исходным.</p>
+</details>
+<details class="callout md details"><summary>Почему качество ранжирования нельзя улучшать, если Recall@N первой стадии низкий?</summary>
+<p>Ранжировщик переставляет только то, что ему дали: если в пул попало 30 % релевантного, это потолок, и сначала нужно улучшать кандидатов.</p>
+</details>
 <h2 id="что-почитать">Что почитать</h2>
 <ul>
 <li>Covington et al. <a href="https://research.google/pubs/deep-neural-networks-for-youtube-recommendations/" rel="noopener noreferrer nofollow"><em>Deep Neural Networks for YouTube Recommendations</em></a>, RecSys 2016 — классический пример двух стадий.</li>
@@ -205,6 +242,8 @@ ranker<span class="tok-p">.</span>fit<span class="tok-p">(</span>
       
 
       
+
+      
       <nav class="pager" aria-label="Соседние статьи">
         <a href="/edufamcs-demo/handbook/recsys/grafovye-modeli/"><span><svg class="ico sm" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-arrow-left"/></svg>Назад</span>Графовые модели: от случайных блужданий до LightGCN</a>
         <a href="/edufamcs-demo/handbook/recsys/holodnyj-start-i-bandity/"><span>Дальше<svg class="ico sm" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-arrow"/></svg></span>Холодный старт, исследование и бандиты</a>
@@ -213,7 +252,7 @@ ranker<span class="tok-p">.</span>fit<span class="tok-p">(</span>
     </article>
 
     <aside class="hb-toc" aria-label="На этой странице">
-      <a class="l2" href="#источники-кандидатов">Источники кандидатов</a><a class="l2" href="#ранжирующая-модель">Ранжирующая модель</a><a class="l2" href="#pre-ranking-промежуточный-этап-каскада">Pre-ranking: промежуточный этап каскада</a><a class="l2" href="#learning-to-rank">Learning to rank</a><a class="l2" href="#как-собрать-обучающую-выборку-без-утечек">Как собрать обучающую выборку без утечек</a><a class="l2" href="#переранжирование">Переранжирование</a><a class="l3" href="#mmr">MMR</a><a class="l3" href="#dpp">DPP</a><a class="l3" href="#калибровка">Калибровка</a><a class="l3" href="#смешивание-целей">Смешивание целей</a><a class="l3" href="#правила-и-ограничения">Правила и ограничения</a><a class="l2" href="#что-почитать">Что почитать</a>
+      <a class="l2" href="#источники-кандидатов">Источники кандидатов</a><a class="l2" href="#ранжирующая-модель">Ранжирующая модель</a><a class="l2" href="#pre-ranking-промежуточный-этап-каскада">Pre-ranking: промежуточный этап каскада</a><a class="l2" href="#learning-to-rank">Learning to rank</a><a class="l2" href="#как-собрать-обучающую-выборку-без-утечек">Как собрать обучающую выборку без утечек</a><a class="l3" href="#откуда-берутся-примеры-и-негативы">Откуда берутся примеры и негативы</a><a class="l2" href="#ловушки">Ловушки</a><a class="l2" href="#переранжирование">Переранжирование</a><a class="l3" href="#mmr">MMR</a><a class="l3" href="#dpp">DPP</a><a class="l3" href="#калибровка">Калибровка</a><a class="l3" href="#смешивание-целей">Смешивание целей</a><a class="l3" href="#правила-и-ограничения">Правила и ограничения</a><a class="l2" href="#проверь-себя">Проверь себя</a><a class="l2" href="#что-почитать">Что почитать</a>
     </aside>
   </div>
 </div>

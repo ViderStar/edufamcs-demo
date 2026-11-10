@@ -1,0 +1,276 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>System design: как спроектировать рекомендательную систему на собеседовании · EDU FAMCS</title>
+<meta name="description" content="System design: как спроектировать рекомендательную систему на собеседовании — Рекомендательные системы. Хендбук ML-курса ФПМИ.">
+<meta name="theme-color" content="#060A16">
+<meta name="robots" content="noindex, nofollow">
+<meta name="htmx-config" content='{"allowEval":false,"includeIndicatorStyles":false,"historyCacheSize":0,"selfRequestsOnly":true}'>
+<meta name="katex-js" content="/edufamcs-demo/static/vendor/katex/katex.min.js">
+<meta name="katex-css" content="/edufamcs-demo/static/vendor/katex/katex.min.css">
+<link rel="icon" href="/edufamcs-demo/static/brand/logo/favicon-16.svg" type="image/svg+xml" sizes="16x16">
+<link rel="icon" href="/edufamcs-demo/static/brand/logo/favicon.svg" type="image/svg+xml" sizes="any">
+<link rel="preload" href="/edufamcs-demo/static/brand/fonts/manrope-cyrillic-400.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/edufamcs-demo/static/brand/fonts/unbounded-cyrillic-800.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="/edufamcs-demo/static/brand/fonts.css">
+<link rel="stylesheet" href="/edufamcs-demo/static/brand/tokens.css">
+<link rel="stylesheet" href="/edufamcs-demo/static/brand/components.css">
+<link rel="stylesheet" href="/edufamcs-demo/static/css/site.css">
+<link rel="stylesheet" href="/edufamcs-demo/static/css/hub.css">
+<link rel="stylesheet" href="/edufamcs-demo/static/css/about.css">
+<link rel="stylesheet" href="/edufamcs-demo/static/handbook/handbook.css">
+<script src="/edufamcs-demo/static/js/theme.js"></script>
+<script src="/edufamcs-demo/static/vendor/htmx/htmx.min.js" defer></script>
+<script src="/edufamcs-demo/static/vendor/alpine/alpine-csp.min.js" defer></script>
+<script src="/edufamcs-demo/static/js/site.js" defer></script>
+<script src="/edufamcs-demo/static/handbook/handbook.js" defer></script>
+</head>
+<body class="" hx-headers='{"X-CSRFToken": "ZF4Hl4s5chouWZzDkhnN9U3KXJQoxljgBSTEB61Wd4C37iO5jKBKRNVIpSXmh5iX"}'>
+<a class="skip" href="#main">К содержанию</a>
+<div class="demo-bar" role="note">Демо-версия для отзывов: вход, запись на курсы и формы здесь не работают.</div>
+
+<header class="hdr">
+  <div class="container">
+    <a class="brand" href="/edufamcs-demo/" aria-label="EDU FAMCS — главная">
+      <span class="full"><img class="only-light" src="/edufamcs-demo/static/brand/logo/logo-edu-light.svg" alt="EDU FAMCS" width="196" height="40"><img class="only-dark" src="/edufamcs-demo/static/brand/logo/logo-edu-dark.svg" alt="EDU FAMCS" width="196" height="40"></span>
+      <span class="short"><img class="only-light" src="/edufamcs-demo/static/brand/logo/logo-edu-light.svg" alt="EDU FAMCS" height="30"><img class="only-dark" src="/edufamcs-demo/static/brand/logo/logo-edu-dark.svg" alt="EDU FAMCS" height="30"></span>
+    </a>
+    <nav class="nav" id="main-nav" aria-label="Основная навигация">
+      <a href="/edufamcs-demo/#courses">Курсы</a>
+      <a href="/edufamcs-demo/ml/" >Машинное обучение</a>
+      
+      <a href="/edufamcs-demo/handbook/" aria-current="page">Хендбук</a>
+      <a href="/edufamcs-demo/news/" >Новости</a>
+      <a href="/edufamcs-demo/people/" >Авторы</a>
+      <a href="/edufamcs-demo/about/" >О&nbsp;нас</a>
+    </nav>
+    <div class="hdr-actions">
+      
+      <a class="btn btn-outline btn-login" href="/edufamcs-demo/accounts/login/?next=/handbook/recsys/system-design-rekomendacij/">Войти</a>
+      
+      <button class="icon-btn menu-btn" type="button" aria-label="Меню" aria-expanded="false" aria-controls="main-nav"><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-menu"/></svg></button>
+    </div>
+  </div>
+</header>
+
+<main id="main">
+
+
+
+<div class="container hb-page s-recsys">
+  <div class="hb-readbar" aria-hidden="true"><i></i></div>
+  <div class="hb">
+    <aside class="hb-nav" aria-label="Статьи раздела">
+      
+<form class="hb-search" action="/edufamcs-demo/handbook/search/" method="get" role="search">
+  <svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-search"/></svg>
+  <input class="input" type="search" name="q" value="" placeholder="Поиск по хендбуку" aria-label="Поиск по хендбуку" autocomplete="off" maxlength="120"
+    hx-get="/edufamcs-demo/handbook/search/" hx-trigger="input changed delay:250ms, search" hx-target="#hb-nav-results" hx-sync="this:replace">
+</form>
+
+      <div id="hb-nav-results" class="hb-nav-results" aria-live="polite"></div>
+      <a class="grp" href="/edufamcs-demo/handbook/recsys/">Рекомендательная система целиком</a>
+      
+      <a class="" href="/edufamcs-demo/handbook/recsys/kandidaty-i-ranzhirovanie/">Двухстадийная схема: кандидаты → ранжирование</a>
+      
+      <a class="" href="/edufamcs-demo/handbook/recsys/holodnyj-start-i-bandity/">Холодный старт, исследование и бандиты</a>
+      
+      <a class="" href="/edufamcs-demo/handbook/recsys/prodakshen-i-ab-testy/">Рекомендации в продакшене: A/B-тесты и эксплуатация</a>
+      
+      <a class="" href="/edufamcs-demo/handbook/recsys/multitask-ranzhirovanie/">Многозадачное ранжирование: MMoE, PLE, ESMM</a>
+      
+      <a class="" href="/edufamcs-demo/handbook/recsys/priznaki-i-feature-store/">Признаки для рекомендаций и feature store</a>
+      
+      <a class="" href="/edufamcs-demo/handbook/recsys/protokol-oflajn-ocenki/">Протокол офлайн-оценки и утечки</a>
+      
+      <a class="cur" href="/edufamcs-demo/handbook/recsys/system-design-rekomendacij/" aria-current="page">System design: как спроектировать рекомендательную систему на собеседовании</a>
+      
+    </aside>
+
+    <article class="hb-main">
+      <nav class="crumbs" aria-label="Навигация"><a href="/edufamcs-demo/handbook/">Хендбук</a><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-chev"/></svg><a href="/edufamcs-demo/handbook/recsys/">Рекомендательные системы</a></nav>
+      <h1 class="h1">System design: как спроектировать рекомендательную систему на собеседовании</h1>
+      <div class="hb-meta">
+        
+        
+        <span><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-clock"/></svg>12&nbsp;мин</span>
+        <span class="hb-authors"><span class="avatar sm" title="Артем Лебедевич">АЛ</span>Артем Лебедевич</span>
+        <span><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-edit"/></svg>10 ноября 2026</span>
+        
+        
+      </div>
+
+      
+      <details class="hb-mtoc">
+        <summary><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-list"/></svg>Содержание<svg class="ico sm" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-chev-down"/></svg></summary>
+        <a class="l2" href="#1-цель-и-ограничения">1. Цель и ограничения</a><a class="l2" href="#2-метрики-бизнес-онлайн-офлайн">2. Метрики: бизнес → онлайн → офлайн</a><a class="l2" href="#3-данные-и-логирование">3. Данные и логирование</a><a class="l2" href="#4-архитектура-воронки">4. Архитектура воронки</a><a class="l3" href="#бюджеты-арифметика">Бюджеты: арифметика</a><a class="l2" href="#5-генераторы-кандидатов-и-их-обслуживание">5. Генераторы кандидатов и их обслуживание</a><a class="l2" href="#6-ранжировщик">6. Ранжировщик</a><a class="l2" href="#7-холодный-старт-и-исследование">7. Холодный старт и исследование</a><a class="l2" href="#8-свежесть-что-и-когда-пересчитывается">8. Свежесть: что и когда пересчитывается</a><a class="l2" href="#9-оценка-и-выкатка">9. Оценка и выкатка</a><a class="l2" href="#10-отказы-фолбэки-и-петли-обратной-связи">10. Отказы, фолбэки и петли обратной связи</a><a class="l2" href="#что-ищут-на-собеседовании">Что ищут на собеседовании</a><a class="l2" href="#типичные-вопросы">Типичные вопросы</a><a class="l2" href="#ловушки">Ловушки</a><a class="l2" href="#проверь-себя">Проверь себя</a><a class="l2" href="#что-почитать">Что почитать</a>
+      </details>
+      
+
+      <div class="prose"><p>Вопрос «спроектируйте рекомендательную систему» проверяет не знание архитектуры, а порядок мысли: от цели продукта к метрикам, данным, воронке и эксплуатации. Эта глава — пошаговый разбор на одном кейсе: домашняя лента маркетплейса, 10 млн объектов, 5 млн DAU (все числа иллюстративные). Алгоритмы здесь только называются; каждый раскрыт в своей главе.</p>
+<h2 id="1-цель-и-ограничения">1. Цель и ограничения</h2>
+<p>Сначала вопросы интервьюеру: что считается успехом (выручка, конверсия в заказ, удержание)? Где показываем (главная, лента бесконечная или карусели)? Есть ли залогированные показы и клики, что уже работает в проде? Каков бюджет задержки и нагрузка? Каталог: как быстро появляются новые объекты, есть ли остатки и региональные ограничения? Фиксируем: лента из ~30 карточек, p99 ответа 200 мс, ответ должен учитывать остатки и недавние действия пользователя.</p>
+<h2 id="2-метрики-бизнес-онлайн-офлайн">2. Метрики: бизнес → онлайн → офлайн</h2>
+<ul>
+<li><strong>Бизнес:</strong> выручка на пользователя, число заказов, удержание, доля повторных покупателей.</li>
+<li><strong>Онлайн (A/B):</strong> CTR, добавления в корзину, конверсия в заказ на пользователя, выручка на сессию (<a href="/edufamcs-demo/handbook/recsys/prodakshen-i-ab-testy/" rel="noopener noreferrer nofollow">онлайн-метрики</a>). Метрику считают на пользователя, а не на показ — иначе завышена значимость.</li>
+<li><strong>Ограничения (guardrails):</strong> доля возвратов и жалоб, время ответа, покрытие каталога, доля нового продавца, доля пустых или фолбэк-выдач.</li>
+<li><strong>Офлайн:</strong> Recall кандидат-генератора, NDCG/GAUC ранжировщика, калибровка (<a href="/edufamcs-demo/handbook/recsys/oflajn-metriki/" rel="noopener noreferrer nofollow">метрики</a>).</li>
+</ul>
+<p>Связка: офлайн-метрика — прокси, которую проверяют по истории A/B (<a href="/edufamcs-demo/handbook/recsys/protokol-oflajn-ocenki/" rel="noopener noreferrer nofollow">протокол оценки</a>).</p>
+<h2 id="3-данные-и-логирование">3. Данные и логирование</h2>
+<p>Основа — <strong>лог показов</strong>, а не лог кликов: для каждого показа пользователь, объект, позиция, блок, версия модели и источник кандидата, <strong>вероятность показа</strong>, значения признаков на момент показа (<a href="/edufamcs-demo/handbook/recsys/priznaki-i-feature-store/" rel="noopener noreferrer nofollow">признаки и feature store</a>), время. Клики, корзина, заказ приходят отдельными событиями и <strong>с задержкой</strong> (заказ — часы или дни): окно созревания меток, иначе свежие примеры занижают конверсию. Без залогированных позиций и показов нельзя ни обучить ранжировщик без смещения, ни посчитать CTR.</p>
+<h2 id="4-архитектура-воронки">4. Архитектура воронки</h2>
+<p>Каталог 10 млн нельзя прогнать через тяжёлую модель на каждый запрос. Каскад (<a href="/edufamcs-demo/handbook/recsys/kandidaty-i-ranzhirovanie/" rel="noopener noreferrer nofollow">двухстадийная схема</a>):</p>
+<ol>
+<li><strong>Генерация кандидатов</strong> — несколько источников: two-tower/ANN по эмбеддингу пользователя, item-to-item по недавним действиям, популярное по сегменту и региону, свежие объекты, повторные покупки. Тысячи кандидатов.</li>
+<li><strong>Пре-ранжирование</strong> — лёгкая модель режет до сотен.</li>
+<li><strong>Ранжирование</strong> — тяжёлая модель с богатыми признаками, несколько целей (<a href="/edufamcs-demo/handbook/recsys/multitask-ranzhirovanie/" rel="noopener noreferrer nofollow">многозадачное ранжирование</a>).</li>
+<li><strong>Переранжирование и правила</strong> — диверсификация, ограничения по продавцам, наличие, слоты под новинки и рекламу.</li>
+</ol>
+<h3 id="бюджеты-арифметика">Бюджеты: арифметика</h3>
+<p>Скрипт ниже считает нагрузку по допущениям из заголовка и бюджет задержки. Запуск: <code>python3 capacity.py</code>.</p>
+<div class="code"><div class="code-head"><span class="lang">python</span></div><pre><code><span class="tok-c"># Иллюстративная оценка мощности для домашней ленты маркетплейса (все входные числа — допущения)</span>
+DAU<span class="tok-p">,</span> REQ_PER_DAU<span class="tok-p">,</span> PEAK <span class="tok-p">=</span> <span class="tok-n">5_000_000</span><span class="tok-p">,</span> <span class="tok-n">4</span><span class="tok-p">,</span> <span class="tok-n">4</span>          <span class="tok-c"># 4 запроса ленты на пользователя в день; пик в 4 раза выше среднего</span>
+ITEMS<span class="tok-p">,</span> DIM <span class="tok-p">=</span> <span class="tok-n">10_000_000</span><span class="tok-p">,</span> <span class="tok-n">64</span>
+SRC<span class="tok-p">,</span> PER_SRC <span class="tok-p">=</span> <span class="tok-n">4</span><span class="tok-p">,</span> <span class="tok-n">300</span>                              <span class="tok-c"># 4 источника кандидатов по 300</span>
+DEDUP <span class="tok-p">=</span> <span class="tok-n">0.7</span>                                        <span class="tok-c"># после слияния остаётся 70 %</span>
+PRE_OUT<span class="tok-p">,</span> RANK_IN<span class="tok-p">,</span> PAGE<span class="tok-p">,</span> IMPR_BYTES <span class="tok-p">=</span> <span class="tok-n">200</span><span class="tok-p">,</span> <span class="tok-n">200</span><span class="tok-p">,</span> <span class="tok-n">30</span><span class="tok-p">,</span> <span class="tok-n">150</span>
+MACS_PER_ITEM <span class="tok-p">=</span> <span class="tok-n">2_000_000</span>                          <span class="tok-c"># ранжировщик ~2 млн умножений-сложений на объект</span>
+CORE_GFLOPS <span class="tok-p">=</span> <span class="tok-n">20</span>                                   <span class="tok-c"># эффективные GFLOP/s на ядро CPU (допущение, ~15–25 % от пика AVX2/AVX-512)</span>
+
+req_day <span class="tok-p">=</span> DAU <span class="tok-p">*</span> REQ_PER_DAU
+qps_avg <span class="tok-p">=</span> req_day <span class="tok-p">/</span> <span class="tok-n">86400</span><span class="tok-p">;</span> qps_peak <span class="tok-p">=</span> qps_avg <span class="tok-p">*</span> PEAK
+cands <span class="tok-p">=</span> SRC <span class="tok-p">*</span> PER_SRC<span class="tok-p">;</span> merged <span class="tok-p">=</span> <span class="tok-f">int</span><span class="tok-p">(</span>cands <span class="tok-p">*</span> DEDUP<span class="tok-p">)</span>
+rank_flop_req <span class="tok-p">=</span> RANK_IN <span class="tok-p">*</span> MACS_PER_ITEM <span class="tok-p">*</span> <span class="tok-n">2</span>
+rank_tflops <span class="tok-p">=</span> rank_flop_req <span class="tok-p">*</span> qps_peak <span class="tok-p">/</span> <span class="tok-n">1e12</span>
+cores <span class="tok-p">=</span> rank_flop_req <span class="tok-p">*</span> qps_peak <span class="tok-p">/</span> <span class="tok-p">(</span>CORE_GFLOPS <span class="tok-p">*</span> <span class="tok-n">1e9</span><span class="tok-p">)</span>
+reads <span class="tok-p">=</span> qps_peak <span class="tok-p">*</span> <span class="tok-p">(</span><span class="tok-n">1</span> <span class="tok-p">+</span> RANK_IN<span class="tok-p">)</span>                   <span class="tok-c"># ключей из онлайн-хранилища в секунду (1 пользователь + объекты, без кэша)</span>
+emb_gb <span class="tok-p">=</span> ITEMS <span class="tok-p">*</span> DIM <span class="tok-p">*</span> <span class="tok-n">4</span> <span class="tok-p">/</span> <span class="tok-n">1e9</span>
+impr_day <span class="tok-p">=</span> req_day <span class="tok-p">*</span> PAGE<span class="tok-p">;</span> log_gb <span class="tok-p">=</span> impr_day <span class="tok-p">*</span> IMPR_BYTES <span class="tok-p">/</span> <span class="tok-n">1e9</span>
+<span class="tok-f">print</span><span class="tok-p">(</span><span class="tok-s">f</span><span class="tok-s">"</span><span class="tok-s">запросов/сутки </span><span class="tok-s">{</span>req_day<span class="tok-p">/</span><span class="tok-n">1e6</span><span class="tok-s">:</span><span class="tok-s">.0f</span><span class="tok-s">}</span><span class="tok-s"> млн; QPS средний </span><span class="tok-s">{</span>qps_avg<span class="tok-s">:</span><span class="tok-s">.0f</span><span class="tok-s">}</span><span class="tok-s">, пиковый </span><span class="tok-s">{</span>qps_peak<span class="tok-s">:</span><span class="tok-s">.0f</span><span class="tok-s">}</span><span class="tok-s">"</span><span class="tok-p">)</span>
+<span class="tok-f">print</span><span class="tok-p">(</span><span class="tok-s">f</span><span class="tok-s">"</span><span class="tok-s">кандидатов </span><span class="tok-s">{</span>cands<span class="tok-s">}</span><span class="tok-s"> -&gt; после дедупа </span><span class="tok-s">{</span>merged<span class="tok-s">}</span><span class="tok-s"> -&gt; пре-ранкер -&gt; </span><span class="tok-s">{</span>PRE_OUT<span class="tok-s">}</span><span class="tok-s"> -&gt; ранжировщик </span><span class="tok-s">{</span>RANK_IN<span class="tok-s">}</span><span class="tok-s"> -&gt; страница </span><span class="tok-s">{</span>PAGE<span class="tok-s">}</span><span class="tok-s">"</span><span class="tok-p">)</span>
+<span class="tok-f">print</span><span class="tok-p">(</span><span class="tok-s">f</span><span class="tok-s">"</span><span class="tok-s">ранжировщик: </span><span class="tok-s">{</span>rank_flop_req<span class="tok-p">/</span><span class="tok-n">1e9</span><span class="tok-s">:</span><span class="tok-s">.2f</span><span class="tok-s">}</span><span class="tok-s"> GFLOP/запрос; </span><span class="tok-s">{</span>rank_tflops<span class="tok-s">:</span><span class="tok-s">.2f</span><span class="tok-s">}</span><span class="tok-s"> TFLOP/s на пике; ~</span><span class="tok-s">{</span>cores<span class="tok-s">:</span><span class="tok-s">.0f</span><span class="tok-s">}</span><span class="tok-s"> ядер (с запасом x2: </span><span class="tok-s">{</span><span class="tok-n">2</span><span class="tok-p">*</span>cores<span class="tok-s">:</span><span class="tok-s">.0f</span><span class="tok-s">}</span><span class="tok-s">)</span><span class="tok-s">"</span><span class="tok-p">)</span>
+<span class="tok-f">print</span><span class="tok-p">(</span><span class="tok-s">f</span><span class="tok-s">"</span><span class="tok-s">чтений из онлайн-хранилища на пике: </span><span class="tok-s">{</span>reads<span class="tok-p">/</span><span class="tok-n">1e3</span><span class="tok-s">:</span><span class="tok-s">.0f</span><span class="tok-s">}</span><span class="tok-s"> тыс. ключей/с</span><span class="tok-s">"</span><span class="tok-p">)</span>
+<span class="tok-f">print</span><span class="tok-p">(</span><span class="tok-s">f</span><span class="tok-s">"</span><span class="tok-s">эмбеддинги объектов float32: </span><span class="tok-s">{</span>emb_gb<span class="tok-s">:</span><span class="tok-s">.2f</span><span class="tok-s">}</span><span class="tok-s"> ГБ; fp16: </span><span class="tok-s">{</span>emb_gb<span class="tok-p">/</span><span class="tok-n">2</span><span class="tok-s">:</span><span class="tok-s">.2f</span><span class="tok-s">}</span><span class="tok-s"> ГБ</span><span class="tok-s">"</span><span class="tok-p">)</span>
+<span class="tok-f">print</span><span class="tok-p">(</span><span class="tok-s">f</span><span class="tok-s">"</span><span class="tok-s">показов/сутки </span><span class="tok-s">{</span>impr_day<span class="tok-p">/</span><span class="tok-n">1e6</span><span class="tok-s">:</span><span class="tok-s">.0f</span><span class="tok-s">}</span><span class="tok-s"> млн; лог показов ~</span><span class="tok-s">{</span>log_gb<span class="tok-s">:</span><span class="tok-s">.0f</span><span class="tok-s">}</span><span class="tok-s"> ГБ/сутки</span><span class="tok-s">"</span><span class="tok-p">)</span>
+budget <span class="tok-p">=</span> <span class="tok-f">dict</span><span class="tok-p">(</span>gateway<span class="tok-p">=</span><span class="tok-n">10</span><span class="tok-p">,</span> user_features<span class="tok-p">=</span><span class="tok-n">10</span><span class="tok-p">,</span> retrieval_parallel<span class="tok-p">=</span><span class="tok-n">30</span><span class="tok-p">,</span> merge_dedup<span class="tok-p">=</span><span class="tok-n">5</span><span class="tok-p">,</span> prerank<span class="tok-p">=</span><span class="tok-n">15</span><span class="tok-p">,</span> item_features<span class="tok-p">=</span><span class="tok-n">15</span><span class="tok-p">,</span> ranker<span class="tok-p">=</span><span class="tok-n">40</span><span class="tok-p">,</span> rerank<span class="tok-p">=</span><span class="tok-n">10</span><span class="tok-p">,</span> response<span class="tok-p">=</span><span class="tok-n">10</span><span class="tok-p">)</span>
+<span class="tok-f">print</span><span class="tok-p">(</span><span class="tok-s">"</span><span class="tok-s">бюджет p99, мс:</span><span class="tok-s">"</span><span class="tok-p">,</span> budget<span class="tok-p">,</span> <span class="tok-s">"</span><span class="tok-s">сумма</span><span class="tok-s">"</span><span class="tok-p">,</span> <span class="tok-f">sum</span><span class="tok-p">(</span>budget<span class="tok-p">.</span>values<span class="tok-p">(</span><span class="tok-p">)</span><span class="tok-p">)</span><span class="tok-p">,</span> <span class="tok-s">"</span><span class="tok-s">из 200</span><span class="tok-s">"</span><span class="tok-p">)</span>
+</code></pre></div>
+<p>Вывод: 20 млн запросов в сутки дают средний QPS 231 и пиковый 926, то есть порядка 1000. Каскад: 4 источника по 300 дают 1200 кандидатов, после слияния и дедупликации 840, пре-ранкер оставляет 200, ранжировщик выдаёт страницу из 30. Ранжировщик с 2 млн умножений-сложений на объект стоит <span class="tex">200\cdot 2\cdot10^6\cdot 2=0{,}8</span> GFLOP на запрос; на пике <span class="tex">0{,}74</span> TFLOP/s, это порядка 37 ядер при 20 GFLOP/s на ядро — берём ×2 запаса, 74. Онлайн-хранилище на пике читают ~186 тыс. ключей/с (поэтому признаки объектов кэшируют в памяти сервиса). Эмбеддинги 10 млн объектов по 64 float32 — 2,56 ГБ, в fp16 — 1,28 ГБ. Лог показов: 600 млн показов в сутки, около 90 ГБ. Бюджет p99 в 200 мс: сумма этапов в скрипте 145 мс (источники и признаки пользователя реально идут параллельно, так что запас больше). Ключевая мысль: <strong>стоимость ранжировщика линейна по числу кандидатов</strong>, поэтому пре-ранкер и размер пула — главные рычаги.</p>
+<h2 id="5-генераторы-кандидатов-и-их-обслуживание">5. Генераторы кандидатов и их обслуживание</h2>
+<p>Эмбеддинги объектов строятся офлайн, индексируются в ANN (<a href="/edufamcs-demo/handbook/retrieval/vektornye-indeksy/" rel="noopener noreferrer nofollow">векторные индексы</a>: HNSW, IVF-PQ), эмбеддинг пользователя считается в момент запроса из недавней истории (лёгкая башня) или берётся из кэша (<a href="/edufamcs-demo/handbook/recsys/two-tower-ann/" rel="noopener noreferrer nofollow">two-tower</a>). Индекс обновляют пачками (сутки) плюс малый «горячий» индекс для новых объектов; фильтры по остаткам и региону — либо в индексе, либо постфильтром с запасом по размеру выдачи. Источники измеряют по вкладу: Recall кандидатов и доля финальных показов от источника.</p>
+<h2 id="6-ранжировщик">6. Ранжировщик</h2>
+<p><strong>Признаки:</strong> пользователь, объект, пользователь × объект, контекст, счётчики по окнам, последовательность действий; по правилам <a href="/edufamcs-demo/handbook/recsys/priznaki-i-feature-store/" rel="noopener noreferrer nofollow">главы про признаки</a> — point-in-time, логирование признаков при показе. <strong>Модель:</strong> GBDT как сильный старт, затем нейросеть типа DCN/DIN (<a href="/edufamcs-demo/handbook/recsys/ctr-modeli/" rel="noopener noreferrer nofollow">CTR-модели</a>). <strong>Цели:</strong> клик, добавление в корзину, заказ; конверсия — через ESMM-постановку, головы в MMoE или PLE (<a href="/edufamcs-demo/handbook/recsys/multitask-ranzhirovanie/" rel="noopener noreferrer nofollow">глава 18</a>); итоговый скор — взвешенное произведение вероятностей. <strong>Обучающая выборка:</strong> показы с исходами, позиция — признак; негативы только из реальных показов с небольшой долей непоказанных кандидатов. <strong>Калибровка</strong> каждой головы — иначе веса в скоринге бессмысленны.</p>
+<h2 id="7-холодный-старт-и-исследование">7. Холодный старт и исследование</h2>
+<p>Новый пользователь: популярное по региону и устройству, затем быстрая адаптация по первым кликам. Новый объект: контентные эмбеддинги, источник «свежее», квота показов с учётом неопределённости (бандит, Thompson sampling — <a href="/edufamcs-demo/handbook/recsys/holodnyj-start-i-bandity/" rel="noopener noreferrer nofollow">холодный старт</a>). Исследование нужно ещё и для того, чтобы лог содержал случайность для будущих несмещённых оценок.</p>
+<h2 id="8-свежесть-что-и-когда-пересчитывается">8. Свежесть: что и когда пересчитывается</h2>
+<ul>
+<li><strong>Batch (сутки):</strong> эмбеддинги, профили, переобучение генераторов и пересборка индекса.</li>
+<li><strong>Near-real-time (секунды–минуты):</strong> счётчики показов и кликов объектов, последние действия пользователя, остатки.</li>
+<li><strong>Request-time:</strong> позиция, время, эмбеддинг запроса, пересечения пользователя с кандидатом.</li>
+</ul>
+<p>Чем свежее, тем дороже и тем рискованнее skew; свежесть выбирают по тому, как быстро устаревает метрика.</p>
+<h2 id="9-оценка-и-выкатка">9. Оценка и выкатка</h2>
+<p>Офлайн — по протоколу (<a href="/edufamcs-demo/handbook/recsys/protokol-oflajn-ocenki/" rel="noopener noreferrer nofollow">глава 20</a>): глобальный временной сплит, полный каталог, настроенные бейзлайны, интервалы. Затем A/B-тест на нагрузке части пользователей с guardrails; при необходимости интерливинг для быстрого отбора. Выкатка поэтапная: 1 %, 10 %, 50 %, удержание холдаута для долгосрочного эффекта. Мониторинг: дрейф признаков и скоров, покрытие, доля фолбэков, свежесть, задержки.</p>
+<h2 id="10-отказы-фолбэки-и-петли-обратной-связи">10. Отказы, фолбэки и петли обратной связи</h2>
+<ul>
+<li><strong>Тайм-аут или падение источника:</strong> остальные источники работают, итог собирается из того, что успело; пустую выдачу не отдаём.</li>
+<li><strong>Недоступно онлайн-хранилище:</strong> дефолты признаков (отмеченные флагом) или облегчённая модель без пользовательских признаков.</li>
+<li><strong>Падение ранжировщика:</strong> кэшированная выдача или популярное по сегменту.</li>
+<li><strong>Петля обратной связи:</strong> система обучается на том, что сама показала, и сужает выдачу (Chaney et al., RecSys 2018); лечится исследованием, ограничениями на долю популярного, дебайасингом позиции. <strong>Пузырь фильтров:</strong> следите за разнообразием и покрытием как за guardrail.</li>
+</ul>
+<h2 id="что-ищут-на-собеседовании">Что ищут на собеседовании</h2>
+<p>Структуру (цель → метрики → данные → воронка → оценка → эксплуатация), числа (QPS, задержка, память), осознание компромиссов (точность против задержки, свежесть против стоимости) и готовность начать с простого бейзлайна — popular + item-to-item — и усложнять по данным.</p>
+<h2 id="типичные-вопросы">Типичные вопросы</h2>
+<ul>
+<li><strong>Как обучить без залогированных позиций?</strong> Нельзя без смещения: позицию надо логировать; иначе — рандомизация небольшой доли трафика.</li>
+<li><strong>Что делать, если ранжировщик не помещается в бюджет?</strong> Сократить пул пре-ранкером, дистиллировать, квантизовать, кэшировать признаки.</li>
+<li><strong>Как добавить рекламу или новинки?</strong> Слоты в переранжировании с отдельной логикой и учётом в метриках.</li>
+<li><strong>Как понять, что новая модель лучше?</strong> Офлайн по протоколу, затем A/B с guardrails.</li>
+<li><strong>Почему конверсия по кликам смещена?</strong> Конверсия наблюдается только после клика (ESMM).</li>
+</ul>
+<h2 id="ловушки">Ловушки</h2>
+<ul>
+<li>Сразу прыгать к модели («возьмём трансформер») без метрик и бейзлайнов.</li>
+<li>Игнорировать задержку и стоимость: ранжировщик на 20 000 кандидатов не обслужить.</li>
+<li>Не говорить про логирование и задержку меток.</li>
+<li>Оценка по случайному сплиту.</li>
+<li>Нет фолбэка и мониторинга.</li>
+</ul>
+<p>На собеседовании: назовите две метрики-ограничения и объясните, зачем; почему в воронке несколько источников кандидатов; какая часть признаков должна считаться в момент запроса.</p>
+<h2 id="проверь-себя">Проверь себя</h2>
+<details class="callout md details"><summary>Почему в воронке нужен пре-ранкер?</summary>
+<p>Стоимость тяжёлого ранжировщика линейна по числу кандидатов; лёгкая модель сокращает пул до сотен и укладывает запрос в бюджет задержки.</p>
+</details>
+<details class="callout md details"><summary>Что обязательно логировать при показе?</summary>
+<p>Пользователя, объект, позицию, блок, версию модели, источник кандидата, вероятность показа, признаки на момент показа и время.</p>
+</details>
+<details class="callout md details"><summary>Как оценить пиковый QPS?</summary>
+<p>Запросы в сутки поделить на 86 400 и умножить на пик-фактор (здесь 4): <span class="tex">231\cdot4\approx926</span>.</p>
+</details>
+<details class="callout md details"><summary>Что делать при падении онлайн-хранилища признаков?</summary>
+<p>Подставить дефолты с флагом пропуска или переключиться на облегчённую модель; пустую выдачу не отдавать.</p>
+</details>
+<details class="callout md details"><summary>Как работает петля обратной связи и чем её сдерживают?</summary>
+<p>Модель учится на показанном и сужает показы; исследование, ограничения на популярность и дебайасинг позиции её ослабляют.</p>
+</details>
+<h2 id="что-почитать">Что почитать</h2>
+<ul>
+<li>Covington P., Adams J., Sargin E. <em>Deep Neural Networks for YouTube Recommendations</em>, RecSys 2016.</li>
+<li>Chaney A., Stewart B., Engelhardt B. <em>How Algorithmic Confounding in Recommendation Systems Increases Homogeneity and Decreases Utility</em>, RecSys 2018.</li>
+<li>Ma X. et al. <em>Entire Space Multi-Task Model</em>, SIGIR 2018 — https://arxiv.org/abs/1804.07931</li>
+<li>Sculley D. et al. <em>Hidden Technical Debt in Machine Learning Systems</em>, NIPS 2015.</li>
+<li>Zinkevich M. <em>Rules of Machine Learning: Best Practices for ML Engineering</em>, Google.</li>
+</ul>
+</div>
+      
+
+      
+
+      
+      <nav class="pager" aria-label="Соседние статьи">
+        <a href="/edufamcs-demo/handbook/recsys/protokol-oflajn-ocenki/"><span><svg class="ico sm" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-arrow-left"/></svg>Назад</span>Протокол офлайн-оценки и утечки</a>
+        
+      </nav>
+      
+    </article>
+
+    <aside class="hb-toc" aria-label="На этой странице">
+      <a class="l2" href="#1-цель-и-ограничения">1. Цель и ограничения</a><a class="l2" href="#2-метрики-бизнес-онлайн-офлайн">2. Метрики: бизнес → онлайн → офлайн</a><a class="l2" href="#3-данные-и-логирование">3. Данные и логирование</a><a class="l2" href="#4-архитектура-воронки">4. Архитектура воронки</a><a class="l3" href="#бюджеты-арифметика">Бюджеты: арифметика</a><a class="l2" href="#5-генераторы-кандидатов-и-их-обслуживание">5. Генераторы кандидатов и их обслуживание</a><a class="l2" href="#6-ранжировщик">6. Ранжировщик</a><a class="l2" href="#7-холодный-старт-и-исследование">7. Холодный старт и исследование</a><a class="l2" href="#8-свежесть-что-и-когда-пересчитывается">8. Свежесть: что и когда пересчитывается</a><a class="l2" href="#9-оценка-и-выкатка">9. Оценка и выкатка</a><a class="l2" href="#10-отказы-фолбэки-и-петли-обратной-связи">10. Отказы, фолбэки и петли обратной связи</a><a class="l2" href="#что-ищут-на-собеседовании">Что ищут на собеседовании</a><a class="l2" href="#типичные-вопросы">Типичные вопросы</a><a class="l2" href="#ловушки">Ловушки</a><a class="l2" href="#проверь-себя">Проверь себя</a><a class="l2" href="#что-почитать">Что почитать</a>
+    </aside>
+  </div>
+</div>
+
+
+</main>
+
+<footer class="ftr" data-theme="dark">
+  <svg class="sym fern" viewBox="0 0 40.5 65.02" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#fern"/></svg>
+  <div class="container">
+    <div class="ftr-row">
+      <a href="/edufamcs-demo/" aria-label="EDU FAMCS — главная"><img src="/edufamcs-demo/static/brand/logo/logo-edu-dark.svg" alt="EDU FAMCS" width="196" height="40"></a>
+      <ul class="ftr-links">
+        <li><a href="/edufamcs-demo/#courses">Курсы</a></li>
+        <li><a href="/edufamcs-demo/ml/">Машинное обучение</a></li>
+        <li><a href="/edufamcs-demo/handbook/">Хендбук</a></li>
+        <li><a href="/edufamcs-demo/news/">Новости</a></li>
+        <li><a href="/edufamcs-demo/people/">Авторы</a></li>
+        <li><a href="/edufamcs-demo/about/">О&nbsp;нас</a></li>
+        <li><a href="/edufamcs-demo/propose/">Предложить или исправить</a></li>
+        <li><a href="/edufamcs-demo/privacy/">Конфиденциальность</a></li>
+      </ul>
+    </div>
+    <div class="ftr-big" aria-hidden="true">EDU<span class="d">·</span>FAMCS</div>
+    <p class="ftr-copy">© 2026 EDU FAMCS · Минск</p>
+  </div>
+</footer>
+
+<div class="toasts-region" aria-live="polite" id="toasts">
+
+</div>
+
+</body>
+</html>

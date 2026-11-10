@@ -27,7 +27,7 @@
 <script src="/edufamcs-demo/static/js/site.js" defer></script>
 <script src="/edufamcs-demo/static/handbook/handbook.js" defer></script>
 </head>
-<body class="" hx-headers='{"X-CSRFToken": "kGFbtcoa6sBVwCMO2NqnFWiVE3h7bSy06MGynZGRhFR9bbI4fcjsWoqgaqTmgDjZ"}'>
+<body class="" hx-headers='{"X-CSRFToken": "GFSK65gmJFFaATNOQFg9ggFZIBRfV94oiSHHm7PdKsTJLc2gP8u6Y9xXaKYdFT35"}'>
 <a class="skip" href="#main">К содержанию</a>
 <div class="demo-bar" role="note">Демо-версия для отзывов: вход, запись на курсы и формы здесь не работают.</div>
 
@@ -60,6 +60,7 @@
 
 
 <div class="container hb-page s-recsys">
+  <div class="hb-readbar" aria-hidden="true"><i></i></div>
   <div class="hb">
     <aside class="hb-nav" aria-label="Статьи раздела">
       
@@ -86,9 +87,9 @@
       <div class="hb-meta">
         
         
-        <span><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-clock"/></svg>17&nbsp;мин</span>
+        <span><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-clock"/></svg>20&nbsp;мин</span>
         <span class="hb-authors"><span class="avatar sm" title="Артем Лебедевич">АЛ</span>Артем Лебедевич</span>
-        <span><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-edit"/></svg>9 ноября 2026</span>
+        <span><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-edit"/></svg>10 ноября 2026</span>
         
         
       </div>
@@ -96,7 +97,7 @@
       
       <details class="hb-mtoc">
         <summary><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-list"/></svg>Содержание<svg class="ico sm" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-chev-down"/></svg></summary>
-        <a class="l2" href="#llm-как-ранжировщик">LLM как ранжировщик</a><a class="l2" href="#задачи-требующие-рассуждения-bright">Задачи, требующие рассуждения: BRIGHT</a><a class="l2" href="#рассуждающие-переранжировщики-и-ретриверы">Рассуждающие переранжировщики и ретриверы</a><a class="l2" href="#предел-одного-вектора">Предел одного вектора</a><a class="l2" href="#агентный-поиск">Агентный поиск</a><a class="l2" href="#стоимость-и-задержка">Стоимость и задержка</a><a class="l2" href="#что-не-меняется">Что не меняется</a><a class="l2" href="#код-цикл-агента">Код: цикл агента</a><a class="l2" href="#что-запомнить">Что запомнить</a><a class="l2" href="#что-почитать">Что почитать</a>
+        <a class="l2" href="#llm-как-ранжировщик">LLM как ранжировщик</a><a class="l2" href="#задачи-требующие-рассуждения-bright">Задачи, требующие рассуждения: BRIGHT</a><a class="l2" href="#рассуждающие-переранжировщики-и-ретриверы">Рассуждающие переранжировщики и ретриверы</a><a class="l2" href="#предел-одного-вектора">Предел одного вектора</a><a class="l2" href="#агентный-поиск">Агентный поиск</a><a class="l2" href="#стоимость-и-задержка">Стоимость и задержка</a><a class="l2" href="#что-не-меняется">Что не меняется</a><a class="l2" href="#код-цикл-агента">Код: цикл агента</a><a class="l2" href="#что-запомнить">Что запомнить</a><a class="l2" href="#ловушки">Ловушки</a><a class="l2" href="#проверь-себя">Проверь себя</a><a class="l2" href="#что-почитать">Что почитать</a>
       </details>
       
 
@@ -242,6 +243,31 @@ SYSTEM <span class="tok-p">=</span> <span class="tok-p">(</span>
 <li>Предел одного вектора (LIMIT) — аргумент в пользу гибрида и переранжирования, но тест синтетический.</li>
 <li>Агентный поиск = цикл «подумать → запрос → прочитать → ответить» (ReAct, IRCoT, Search-R1); база — по-прежнему BM25 + dense + реранкер.</li>
 </ul>
+<h2 id="ловушки">Ловушки</h2>
+<ul>
+<li><strong>Нет лимитов.</strong> Агент без лимита шагов, токенов и таймаута зацикливается и сжигает бюджет: цена растёт квадратично по числу шагов. Нужны детектор повторных запросов, кэш и сжатие наблюдений.</li>
+<li><strong>Выводы из синтетического теста.</strong> LIMIT и BRIGHT показывают качественные вещи (одного вектора мало, MTEB не измеряет рассуждение), но не заменяют проверки на ваших запросах.</li>
+<li><strong>Рассуждение не всегда помогает.</strong> Rank1 и Don't "Overthink" дают противоположные выводы; сравнивайте при одинаковом обучении и учитывайте сотни токенов на документ.</li>
+<li><strong>Агент не лечит плохой поиск.</strong> Если нужный документ не находится ни одним инструментом, цикл только тратит токены; измеряйте recall@k инструментов отдельно.</li>
+<li><strong>Недоверенный текст.</strong> Страницы, которые читает агент, могут содержать инструкции (prompt injection); результат инструмента — данные, а не команды.</li>
+<li><strong>На собеседовании</strong> спрашивают: как работает listwise-переранжирование скользящим окном и чем его ускоряет FIRST; почему сильный на MTEB эмбеддер слаб на BRIGHT; в чём ограничение одного вектора на документ и как его обходят; как обучают Search-R1 и зачем маскируют найденные токены; чем ReAct отличается от IRCoT.</li>
+</ul>
+<h2 id="проверь-себя">Проверь себя</h2>
+<details class="callout md details"><summary>Почему RankGPT использует скользящее окно и как оно работает?</summary>
+<p>Контекст LLM ограничен, поэтому 100 кандидатов не подать сразу. Окно из 20 фрагментов идёт по списку с конца с шагом 10, и лучшие документы постепенно «поднимаются» вверх, как в пузырьковой сортировке по окнам.</p>
+</details>
+<details class="callout md details"><summary>Что показал BRIGHT и почему это важно для выбора эмбеддера?</summary>
+<p>Эмбеддер, лидировавший на MTEB (59,0 по поиску), получил на BRIGHT всего 18,3 nDCG@10. Бенчмарки на сопоставление почти не измеряют способность находить документы, связь которых с запросом надо вывести рассуждением.</p>
+</details>
+<details class="callout md details"><summary>Почему число различных топ-$k$ подмножеств ограничено размерностью эмбеддинга и как это обходят?</summary>
+<p>Каждому подмножеству нужен «свой» запрос-направление, и по упаковке шаров число реализуемых подмножеств растёт не быстрее, чем <span class="tex">(1+1/\gamma)^d</span>. Обходят мультивекторными моделями (ColBERT), разреженными моделями с размерностью порядка словаря, переранжированием и гибридом.</p>
+</details>
+<details class="callout md details"><summary>Зачем в Search-R1 маскируют найденные токены в потере?</summary>
+<p>Градиент должен идти только по тому, что сгенерировала модель (рассуждение и запросы), а не по тексту, скопированному из выдачи. Иначе обучение нестабильно, а награда за итоговый ответ приписывалась бы чужим токенам.</p>
+</details>
+<details class="callout md details"><summary>Почему цена агента растёт квадратично по числу шагов и что с этим делать?</summary>
+<p>На шаге <span class="tex">t</span> модель заново читает всю историю длины около <span class="tex">tL</span>, и сумма по <span class="tex">T</span> шагам даёт порядка <span class="tex">LT^2/2</span> входных токенов. Сжимают наблюдения, кэшируют префикс истории и ограничивают число шагов.</p>
+</details>
 <h2 id="что-почитать">Что почитать</h2>
 <ul>
 <li>Sun et al., <a href="https://arxiv.org/abs/2304.09542" rel="noopener noreferrer nofollow">Is ChatGPT Good at Search? Investigating LLMs as Re-Ranking Agents (RankGPT)</a>, 2023; Reddy et al., <a href="https://arxiv.org/abs/2406.15657" rel="noopener noreferrer nofollow">FIRST</a>, 2024.</li>
@@ -256,15 +282,17 @@ SYSTEM <span class="tok-p">=</span> <span class="tok-p">(</span>
       
 
       
+
+      
       <nav class="pager" aria-label="Соседние статьи">
         <a href="/edufamcs-demo/handbook/retrieval/generativnyj-poisk/"><span><svg class="ico sm" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-arrow-left"/></svg>Назад</span>Генеративный поиск: модель как индекс</a>
-        
+        <a href="/edufamcs-demo/handbook/retrieval/obuchenie-embedderov/"><span>Дальше<svg class="ico sm" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-arrow"/></svg></span>Как обучают эмбеддеры для поиска</a>
       </nav>
       
     </article>
 
     <aside class="hb-toc" aria-label="На этой странице">
-      <a class="l2" href="#llm-как-ранжировщик">LLM как ранжировщик</a><a class="l2" href="#задачи-требующие-рассуждения-bright">Задачи, требующие рассуждения: BRIGHT</a><a class="l2" href="#рассуждающие-переранжировщики-и-ретриверы">Рассуждающие переранжировщики и ретриверы</a><a class="l2" href="#предел-одного-вектора">Предел одного вектора</a><a class="l2" href="#агентный-поиск">Агентный поиск</a><a class="l2" href="#стоимость-и-задержка">Стоимость и задержка</a><a class="l2" href="#что-не-меняется">Что не меняется</a><a class="l2" href="#код-цикл-агента">Код: цикл агента</a><a class="l2" href="#что-запомнить">Что запомнить</a><a class="l2" href="#что-почитать">Что почитать</a>
+      <a class="l2" href="#llm-как-ранжировщик">LLM как ранжировщик</a><a class="l2" href="#задачи-требующие-рассуждения-bright">Задачи, требующие рассуждения: BRIGHT</a><a class="l2" href="#рассуждающие-переранжировщики-и-ретриверы">Рассуждающие переранжировщики и ретриверы</a><a class="l2" href="#предел-одного-вектора">Предел одного вектора</a><a class="l2" href="#агентный-поиск">Агентный поиск</a><a class="l2" href="#стоимость-и-задержка">Стоимость и задержка</a><a class="l2" href="#что-не-меняется">Что не меняется</a><a class="l2" href="#код-цикл-агента">Код: цикл агента</a><a class="l2" href="#что-запомнить">Что запомнить</a><a class="l2" href="#ловушки">Ловушки</a><a class="l2" href="#проверь-себя">Проверь себя</a><a class="l2" href="#что-почитать">Что почитать</a>
     </aside>
   </div>
 </div>

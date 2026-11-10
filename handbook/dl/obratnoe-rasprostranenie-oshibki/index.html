@@ -27,7 +27,7 @@
 <script src="/edufamcs-demo/static/js/site.js" defer></script>
 <script src="/edufamcs-demo/static/handbook/handbook.js" defer></script>
 </head>
-<body class="" hx-headers='{"X-CSRFToken": "YolzRSJlR6adRmrwiHPojUygmyyiYMqnKumWLF122jqrwVnMv6ItAmGBSVax3xbm"}'>
+<body class="" hx-headers='{"X-CSRFToken": "UADbHV8buGlsIYyJ4uAYiRmteFD1OYOLwNs8XXH2vtz1ThNb3XOV0KerGOKZyINs"}'>
 <a class="skip" href="#main">К содержанию</a>
 <div class="demo-bar" role="note">Демо-версия для отзывов: вход, запись на курсы и формы здесь не работают.</div>
 
@@ -60,6 +60,7 @@
 
 
 <div class="container hb-page hb-tone">
+  <div class="hb-readbar" aria-hidden="true"><i></i></div>
   <div class="hb">
     <aside class="hb-nav" aria-label="Статьи раздела">
       
@@ -86,9 +87,9 @@
       <div class="hb-meta">
         
         
-        <span><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-clock"/></svg>12&nbsp;мин</span>
+        <span><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-clock"/></svg>13&nbsp;мин</span>
         <span class="hb-authors"><span class="avatar sm" title="Артем Лебедевич">АЛ</span>Артем Лебедевич</span>
-        <span><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-edit"/></svg>9 ноября 2026</span>
+        <span><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-edit"/></svg>10 ноября 2026</span>
         
         
       </div>
@@ -96,7 +97,7 @@
       
       <details class="hb-mtoc">
         <summary><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-list"/></svg>Содержание<svg class="ico sm" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-chev-down"/></svg></summary>
-        <a class="l2" href="#граф-вычислений">Граф вычислений</a><a class="l2" href="#алгоритм">Алгоритм</a><a class="l2" href="#backprop-для-слоёв">Backprop для слоёв</a><a class="l2" href="#автоматическое-дифференцирование">Автоматическое дифференцирование</a><a class="l2" href="#затухающие-и-взрывающиеся-градиенты">Затухающие и взрывающиеся градиенты</a><a class="l2" href="#проверка-градиента">Проверка градиента</a><a class="l2" href="#код-мини-autograd-на-полсотни-строк">Код: мини-autograd на полсотни строк</a><a class="l2" href="#практика">Практика</a><a class="l2" href="#что-почитать">Что почитать</a>
+        <a class="l2" href="#граф-вычислений">Граф вычислений</a><a class="l2" href="#алгоритм">Алгоритм</a><a class="l2" href="#backprop-для-слоёв">Backprop для слоёв</a><a class="l2" href="#автоматическое-дифференцирование">Автоматическое дифференцирование</a><a class="l2" href="#затухающие-и-взрывающиеся-градиенты">Затухающие и взрывающиеся градиенты</a><a class="l2" href="#проверка-градиента">Проверка градиента</a><a class="l2" href="#код-мини-autograd-на-полсотни-строк">Код: мини-autograd на полсотни строк</a><a class="l2" href="#практика">Практика</a><a class="l2" href="#проверь-себя">Проверь себя</a><a class="l2" href="#что-почитать">Что почитать</a>
       </details>
       
 
@@ -181,7 +182,7 @@ for node in reversed(graph.nodes):
 <p>Reverse-mode выгоден, когда выходов мало, а входов много: за один обратный проход мы получаем градиент скалярного <span class="tex">L</span> по всем миллионам параметров. Прямой режим (forward-mode) был бы в миллионы раз дороже. Численное дифференцирование (конечные разности) требует по прогону на параметр и теряет точность, символьное — раздувает формулы.</p>
 <p>В PyTorch этим занимается <strong>autograd</strong>: при операциях над тензорами с <code>requires_grad=True</code> он строит граф динамически (define-by-run), <code>loss.backward()</code> проходит его в обратном порядке и складывает градиенты в <code>.grad</code> у листьев. <code>with torch.no_grad():</code> отключает построение графа — его нужно использовать на инференсе, чтобы не тратить память.</p>
 <h2 id="затухающие-и-взрывающиеся-градиенты">Затухающие и взрывающиеся градиенты</h2>
-<p>Градиент для начальных слоёв — произведение множителей <span class="tex">W_l^\top</span> и <span class="tex">\sigma'(z_l)</span> вдоль всей глубины. Если типичный множитель меньше 1, градиент затухает экспоненциально, если больше 1 — взрывается. Для сигмоиды <span class="tex">\sigma'\le0{,}25</span>, так что 10 слоёв дают множитель порядка <span class="tex">10^{-6}</span> и первые слои практически не учатся. Это показали Хохрайтер (1991) и Бенджио и соавторы (1994) для рекуррентных сетей, но то же верно для глубоких feed-forward сетей.</p>
+<p>Градиент для начальных слоёв — произведение множителей <span class="tex">W_l^\top</span> и <span class="tex">\sigma'(z_l)</span> вдоль всей глубины. Если типичный множитель меньше 1, градиент затухает экспоненциально, если больше 1 — взрывается. Для сигмоиды <span class="tex">\sigma'\le0{,}25</span>, так что при <span class="tex">\|W\|\approx 1</span> 10 слоёв дают множитель порядка <span class="tex">10^{-6}</span> и первые слои практически не учатся. Это показали Хохрайтер (1991) и Бенджио и соавторы (1994) для рекуррентных сетей, но то же верно для глубоких feed-forward сетей.</p>
 <p>Набор приёмов, снявший проблему, и составляет практический «рецепт глубокого обучения»:</p>
 <ol>
 <li><strong>Ненасыщающие активации</strong> (ReLU, GELU) — производная не затухает на положительной части.</li>
@@ -263,8 +264,24 @@ w<span class="tok-p">,</span> x<span class="tok-p">,</span> y <span class="tok-p
 <li><strong><code>.detach()</code> и <code>no_grad</code></strong> отрезают часть графа намеренно — например, целевую сеть в RL или замороженный энкодер.</li>
 <li><strong>In-place операции</strong> над тензорами, которые нужны для обратного прохода, дают ошибку autograd.</li>
 <li><strong>NaN в потере</strong> — почти всегда взрыв градиентов, <code>log(0)</code> или деление на ноль; ищите первый слой, где появился <code>inf</code>/<code>nan</code> (<code>torch.autograd.set_detect_anomaly(True)</code> помогает).</li>
-<li>На интервью просят вывести градиент для логистической регрессии, линейного слоя или softmax-кросс-энтропии — проделайте их на бумаге один раз.</li>
+<li>На интервью просят вывести градиент для логистической регрессии, линейного слоя или softmax-кросс-энтропии — проделайте их на бумаге один раз. Ещё спрашивают: почему reverse-mode, а не forward-mode; зачем хранить активации и что даёт gradient checkpointing; почему <code>+=</code> в градиентах; как проверить свой слой (конечные разности, <code>gradcheck</code>).</li>
 </ul>
+<h2 id="проверь-себя">Проверь себя</h2>
+<details class="callout md details"><summary>Почему для обучения нейросети используют reverse-mode, а не forward-mode дифференцирование?</summary>
+<p>Выход один (скаляр <span class="tex">L</span>), а входов-параметров миллионы. Reverse-mode даёт градиент по всем параметрам за один обратный проход, forward-mode потребовал бы отдельного прохода на каждый параметр.</p>
+</details>
+<details class="callout md details"><summary>Почему в backprop градиенты накапливают через `+=`, а не присваивают?</summary>
+<p>Если переменная влияет на <span class="tex">L</span> по нескольким путям, полная производная — сумма вкладов по всем путям (многомерное правило цепочки). Присваивание потеряло бы все пути, кроме последнего.</p>
+</details>
+<details class="callout md details"><summary>Почему в сети с сигмоидами первые слои почти не учатся?</summary>
+<p>Градиент до них — произведение множителей <span class="tex">W^\top</span> и <span class="tex">\sigma'\le0{,}25</span>; при <span class="tex">\|W\|\approx1</span> он падает как <span class="tex">0{,}25^{L}</span>, то есть экспоненциально по глубине.</p>
+</details>
+<details class="callout md details"><summary>Почему остаточная связь $h+F(h)$ помогает градиенту?</summary>
+<p>Якобиан <span class="tex">\partial h_{l+1}/\partial h_l=I+\partial F/\partial h_l</span> содержит единичную матрицу, поэтому часть градиента идёт мимо блока без умножения на малые множители.</p>
+</details>
+<details class="callout md details"><summary>Зачем нужен `zero_grad()` и как это использовать намеренно?</summary>
+<p>Градиенты в autograd накапливаются, и без обнуления градиент нового батча прибавится к старому. Накопление применяют сознательно: несколько <code>backward()</code> на микробатчах и один <code>step()</code> имитируют большой батч.</p>
+</details>
 <h2 id="что-почитать">Что почитать</h2>
 <ul>
 <li>Rumelhart, Hinton, Williams, <em>Learning representations by back-propagating errors</em>, Nature, 1986: <a href="https://doi.org/10.1038/323533a0" rel="noopener noreferrer nofollow">doi.org/10.1038/323533a0</a>.</li>
@@ -279,6 +296,8 @@ w<span class="tok-p">,</span> x<span class="tok-p">,</span> y <span class="tok-p
       
 
       
+
+      
       <nav class="pager" aria-label="Соседние статьи">
         <a href="/edufamcs-demo/handbook/dl/nejron-i-mnogoslojnyj-perceptron/"><span><svg class="ico sm" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-arrow-left"/></svg>Назад</span>Нейрон и многослойный перцептрон</a>
         <a href="/edufamcs-demo/handbook/dl/optimizatory-i-regulyarizaciya/"><span>Дальше<svg class="ico sm" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-arrow"/></svg></span>Оптимизаторы, регуляризация и практика обучения</a>
@@ -287,7 +306,7 @@ w<span class="tok-p">,</span> x<span class="tok-p">,</span> y <span class="tok-p
     </article>
 
     <aside class="hb-toc" aria-label="На этой странице">
-      <a class="l2" href="#граф-вычислений">Граф вычислений</a><a class="l2" href="#алгоритм">Алгоритм</a><a class="l2" href="#backprop-для-слоёв">Backprop для слоёв</a><a class="l2" href="#автоматическое-дифференцирование">Автоматическое дифференцирование</a><a class="l2" href="#затухающие-и-взрывающиеся-градиенты">Затухающие и взрывающиеся градиенты</a><a class="l2" href="#проверка-градиента">Проверка градиента</a><a class="l2" href="#код-мини-autograd-на-полсотни-строк">Код: мини-autograd на полсотни строк</a><a class="l2" href="#практика">Практика</a><a class="l2" href="#что-почитать">Что почитать</a>
+      <a class="l2" href="#граф-вычислений">Граф вычислений</a><a class="l2" href="#алгоритм">Алгоритм</a><a class="l2" href="#backprop-для-слоёв">Backprop для слоёв</a><a class="l2" href="#автоматическое-дифференцирование">Автоматическое дифференцирование</a><a class="l2" href="#затухающие-и-взрывающиеся-градиенты">Затухающие и взрывающиеся градиенты</a><a class="l2" href="#проверка-градиента">Проверка градиента</a><a class="l2" href="#код-мини-autograd-на-полсотни-строк">Код: мини-autograd на полсотни строк</a><a class="l2" href="#практика">Практика</a><a class="l2" href="#проверь-себя">Проверь себя</a><a class="l2" href="#что-почитать">Что почитать</a>
     </aside>
   </div>
 </div>

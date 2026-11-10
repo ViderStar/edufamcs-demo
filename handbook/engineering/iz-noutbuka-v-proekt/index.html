@@ -1,0 +1,377 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Из ноутбука в проект: модули, конфиги, тесты · EDU FAMCS</title>
+<meta name="description" content="Из ноутбука в проект: модули, конфиги, тесты — Инженерия: от ноутбука до сервиса. Хендбук ML-курса ФПМИ.">
+<meta name="theme-color" content="#060A16">
+<meta name="robots" content="noindex, nofollow">
+<meta name="htmx-config" content='{"allowEval":false,"includeIndicatorStyles":false,"historyCacheSize":0,"selfRequestsOnly":true}'>
+<meta name="katex-js" content="/edufamcs-demo/static/vendor/katex/katex.min.js">
+<meta name="katex-css" content="/edufamcs-demo/static/vendor/katex/katex.min.css">
+<link rel="icon" href="/edufamcs-demo/static/brand/logo/favicon-16.svg" type="image/svg+xml" sizes="16x16">
+<link rel="icon" href="/edufamcs-demo/static/brand/logo/favicon.svg" type="image/svg+xml" sizes="any">
+<link rel="preload" href="/edufamcs-demo/static/brand/fonts/manrope-cyrillic-400.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/edufamcs-demo/static/brand/fonts/unbounded-cyrillic-800.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="/edufamcs-demo/static/brand/fonts.css">
+<link rel="stylesheet" href="/edufamcs-demo/static/brand/tokens.css">
+<link rel="stylesheet" href="/edufamcs-demo/static/brand/components.css">
+<link rel="stylesheet" href="/edufamcs-demo/static/css/site.css">
+<link rel="stylesheet" href="/edufamcs-demo/static/css/hub.css">
+<link rel="stylesheet" href="/edufamcs-demo/static/css/about.css">
+<link rel="stylesheet" href="/edufamcs-demo/static/handbook/handbook.css">
+<script src="/edufamcs-demo/static/js/theme.js"></script>
+<script src="/edufamcs-demo/static/vendor/htmx/htmx.min.js" defer></script>
+<script src="/edufamcs-demo/static/vendor/alpine/alpine-csp.min.js" defer></script>
+<script src="/edufamcs-demo/static/js/site.js" defer></script>
+<script src="/edufamcs-demo/static/handbook/handbook.js" defer></script>
+</head>
+<body class="" hx-headers='{"X-CSRFToken": "7m6ZdGeqsEHfHxWKsAlhtBoPiXynyNerJzVWtINhtrVOSQbcr3zebugNK6Flixd8"}'>
+<a class="skip" href="#main">К содержанию</a>
+<div class="demo-bar" role="note">Демо-версия для отзывов: вход, запись на курсы и формы здесь не работают.</div>
+
+<header class="hdr">
+  <div class="container">
+    <a class="brand" href="/edufamcs-demo/" aria-label="EDU FAMCS — главная">
+      <span class="full"><img class="only-light" src="/edufamcs-demo/static/brand/logo/logo-edu-light.svg" alt="EDU FAMCS" width="196" height="40"><img class="only-dark" src="/edufamcs-demo/static/brand/logo/logo-edu-dark.svg" alt="EDU FAMCS" width="196" height="40"></span>
+      <span class="short"><img class="only-light" src="/edufamcs-demo/static/brand/logo/logo-edu-light.svg" alt="EDU FAMCS" height="30"><img class="only-dark" src="/edufamcs-demo/static/brand/logo/logo-edu-dark.svg" alt="EDU FAMCS" height="30"></span>
+    </a>
+    <nav class="nav" id="main-nav" aria-label="Основная навигация">
+      <a href="/edufamcs-demo/#courses">Курсы</a>
+      <a href="/edufamcs-demo/ml/" >Машинное обучение</a>
+      
+      <a href="/edufamcs-demo/handbook/" aria-current="page">Хендбук</a>
+      <a href="/edufamcs-demo/news/" >Новости</a>
+      <a href="/edufamcs-demo/people/" >Авторы</a>
+      <a href="/edufamcs-demo/about/" >О&nbsp;нас</a>
+    </nav>
+    <div class="hdr-actions">
+      
+      <a class="btn btn-outline btn-login" href="/edufamcs-demo/accounts/login/?next=/handbook/engineering/iz-noutbuka-v-proekt/">Войти</a>
+      
+      <button class="icon-btn menu-btn" type="button" aria-label="Меню" aria-expanded="false" aria-controls="main-nav"><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-menu"/></svg></button>
+    </div>
+  </div>
+</header>
+
+<main id="main">
+
+
+
+<div class="container hb-page hb-tone">
+  <div class="hb-readbar" aria-hidden="true"><i></i></div>
+  <div class="hb">
+    <aside class="hb-nav" aria-label="Статьи раздела">
+      
+<form class="hb-search" action="/edufamcs-demo/handbook/search/" method="get" role="search">
+  <svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-search"/></svg>
+  <input class="input" type="search" name="q" value="" placeholder="Поиск по хендбуку" aria-label="Поиск по хендбуку" autocomplete="off" maxlength="120"
+    hx-get="/edufamcs-demo/handbook/search/" hx-trigger="input changed delay:250ms, search" hx-target="#hb-nav-results" hx-sync="this:replace">
+</form>
+
+      <div id="hb-nav-results" class="hb-nav-results" aria-live="polite"></div>
+      <a class="grp" href="/edufamcs-demo/handbook/engineering/">Сервис</a>
+      
+      <a class="cur" href="/edufamcs-demo/handbook/engineering/iz-noutbuka-v-proekt/" aria-current="page">Из ноутбука в проект: модули, конфиги, тесты</a>
+      
+      <a class="" href="/edufamcs-demo/handbook/engineering/http-i-fastapi/">HTTP и API: сервис с моделью на FastAPI</a>
+      
+      <a class="" href="/edufamcs-demo/handbook/engineering/sql-i-postgres/">SQL и Postgres: минимум для ML-инженера</a>
+      
+    </aside>
+
+    <article class="hb-main">
+      <nav class="crumbs" aria-label="Навигация"><a href="/edufamcs-demo/handbook/">Хендбук</a><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-chev"/></svg><a href="/edufamcs-demo/handbook/engineering/">Инженерия: от ноутбука до сервиса</a></nav>
+      <h1 class="h1">Из ноутбука в проект: модули, конфиги, тесты</h1>
+      <div class="hb-meta">
+        
+        
+        <span><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-clock"/></svg>11&nbsp;мин</span>
+        <span class="hb-authors"><span class="avatar sm" title="Артем Лебедевич">АЛ</span>Артем Лебедевич</span>
+        <span><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-edit"/></svg>10 ноября 2026</span>
+        
+        
+      </div>
+
+      
+      <details class="hb-mtoc">
+        <summary><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-list"/></svg>Содержание<svg class="ico sm" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-chev-down"/></svg></summary>
+        <a class="l2" href="#почему-ноутбук-не-поставка">Почему ноутбук не поставка</a><a class="l2" href="#целевая-структура">Целевая структура</a><a class="l2" href="#выносим-функции">Выносим функции</a><a class="l2" href="#конфигурация-12-factor">Конфигурация: 12-factor</a><a class="l2" href="#логирование-вместо-print">Логирование вместо print</a><a class="l2" href="#тесты">Тесты</a><a class="l2" href="#линтер-и-makefile">Линтер и Makefile</a><a class="l2" href="#ловушки">Ловушки</a><a class="l2" href="#проверь-себя">Проверь себя</a><a class="l2" href="#что-почитать">Что почитать</a>
+      </details>
+      
+
+      <div class="prose"><p>Ноутбук хорош для разведки, но не является результатом работы: его нельзя импортировать, запустить по расписанию, покрыть тестом или внятно показать в диффе. Инженер отдаёт проект, который собирается одной командой, читает настройки из окружения и умеет проверять сам себя. Дальше мы разберём, как за час превратить ноутбук в такой проект. Это же будет основой сервиса, который мы доведём до контейнера в следующих статьях.</p>
+<p>Сквозной пример всей секции: сервис, который по трём признакам клиента (<code>n_orders</code>, <code>days_since_last</code>, <code>avg_check</code>) возвращает вероятность оттока. Внутри бустинг из scikit-learn (см. <a href="/edufamcs-demo/handbook/classic/gradientnyj-busting/" rel="noopener noreferrer nofollow">градиентный бустинг</a>), снаружи FastAPI, а запросы пишутся в Postgres.</p>
+<h2 id="почему-ноутбук-не-поставка">Почему ноутбук не поставка</h2>
+<ul>
+<li><strong>Скрытое состояние.</strong> Ячейки выполнялись в произвольном порядке, переменная из удалённой ячейки ещё жива. Результат не воспроизвести «Restart &amp; Run All».</li>
+<li><strong>Нельзя тестировать и переиспользовать.</strong> Код предобработки живёт в ячейке, а в сервисе нужен тот же код. Копипаста даёт <strong>train/serve skew</strong>: модель обучена на одних признаках, а в проде получает другие.</li>
+<li><strong>Плохие диффы.</strong> JSON с картинками и выводами не ревьюится; конфликты слияния мучительны.</li>
+<li><strong>Секреты и пути.</strong> Пароль к базе «временно» вставлен в ячейку и уехал в git.</li>
+</ul>
+<p>Ноутбук остаётся для EDA и прототипа (см. <a href="/edufamcs-demo/handbook/python/jupyter-noutbuki/" rel="noopener noreferrer nofollow">Jupyter-ноутбуки</a>), но всё, что нужно дважды, переезжает в модуль.</p>
+<h2 id="целевая-структура">Целевая структура</h2>
+<div class="code"><div class="code-head"><span class="lang">text</span></div><pre><code>churn/
+├── pyproject.toml        # зависимости и настройки инструментов
+├── uv.lock               # точные версии, коммитится
+├── Makefile              # train / test / lint / serve
+├── src/churn/
+│   ├── settings.py       # конфигурация из окружения
+│   ├── features.py       # чистые функции предобработки
+│   ├── model.py          # сборка пайплайна, save/load
+│   ├── predict.py        # инференс
+│   ├── train.py          # точка входа обучения
+│   └── api.py            # HTTP-слой (следующая статья)
+├── tests/
+├── configs/              # не секретные параметры (YAML и т. п.)
+└── artifacts/            # model.joblib, в .gitignore
+</code></pre></div>
+<p>Раскладка <code>src/</code> защищает от ловушки «импортируется, потому что лежит рядом»: пакет доступен только после установки (<code>uv sync</code>), как и у пользователя. Окружение — через <a href="/edufamcs-demo/handbook/python/okruzhenie-uv/" rel="noopener noreferrer nofollow">uv</a>; минимальный <code>pyproject.toml</code>:</p>
+<div class="code"><div class="code-head"><span class="lang">toml</span></div><pre><code><span class="tok-k">[</span><span class="tok-k">project</span><span class="tok-k">]</span>
+name <span class="tok-p">=</span> <span class="tok-s">"</span><span class="tok-s">churn</span><span class="tok-s">"</span>
+version <span class="tok-p">=</span> <span class="tok-s">"</span><span class="tok-s">0.1.0</span><span class="tok-s">"</span>
+requires-python <span class="tok-p">=</span> <span class="tok-s">"</span><span class="tok-s">&gt;=3.12</span><span class="tok-s">"</span>
+dependencies <span class="tok-p">=</span> <span class="tok-p">[</span>
+  <span class="tok-s">"</span><span class="tok-s">fastapi&gt;=0.115</span><span class="tok-s">"</span><span class="tok-p">,</span> <span class="tok-s">"</span><span class="tok-s">uvicorn&gt;=0.32</span><span class="tok-s">"</span><span class="tok-p">,</span> <span class="tok-s">"</span><span class="tok-s">scikit-learn&gt;=1.5</span><span class="tok-s">"</span><span class="tok-p">,</span> <span class="tok-s">"</span><span class="tok-s">pandas&gt;=2.2</span><span class="tok-s">"</span><span class="tok-p">,</span>
+  <span class="tok-s">"</span><span class="tok-s">joblib&gt;=1.4</span><span class="tok-s">"</span><span class="tok-p">,</span> <span class="tok-s">"</span><span class="tok-s">pydantic-settings&gt;=2.6</span><span class="tok-s">"</span><span class="tok-p">,</span> <span class="tok-s">"</span><span class="tok-s">psycopg[binary]&gt;=3.2</span><span class="tok-s">"</span><span class="tok-p">,</span>
+<span class="tok-p">]</span>
+
+<span class="tok-k">[</span><span class="tok-k">dependency-groups</span><span class="tok-k">]</span>
+dev <span class="tok-p">=</span> <span class="tok-p">[</span><span class="tok-s">"</span><span class="tok-s">pytest&gt;=8</span><span class="tok-s">"</span><span class="tok-p">,</span> <span class="tok-s">"</span><span class="tok-s">httpx&gt;=0.27</span><span class="tok-s">"</span><span class="tok-p">,</span> <span class="tok-s">"</span><span class="tok-s">ruff&gt;=0.8</span><span class="tok-s">"</span><span class="tok-p">]</span>
+
+<span class="tok-k">[</span><span class="tok-k">build-system</span><span class="tok-k">]</span>
+requires <span class="tok-p">=</span> <span class="tok-p">[</span><span class="tok-s">"</span><span class="tok-s">hatchling</span><span class="tok-s">"</span><span class="tok-p">]</span>
+build-backend <span class="tok-p">=</span> <span class="tok-s">"</span><span class="tok-s">hatchling.build</span><span class="tok-s">"</span>
+
+<span class="tok-k">[</span><span class="tok-k">tool</span><span class="tok-k">.</span><span class="tok-k">hatch</span><span class="tok-k">.</span><span class="tok-k">build</span><span class="tok-k">.</span><span class="tok-k">targets</span><span class="tok-k">.</span><span class="tok-k">wheel</span><span class="tok-k">]</span>
+packages <span class="tok-p">=</span> <span class="tok-p">[</span><span class="tok-s">"</span><span class="tok-s">src/churn</span><span class="tok-s">"</span><span class="tok-p">]</span>
+
+<span class="tok-k">[</span><span class="tok-k">tool</span><span class="tok-k">.</span><span class="tok-k">ruff</span><span class="tok-k">]</span>
+line-length <span class="tok-p">=</span> <span class="tok-n">100</span>
+
+<span class="tok-k">[</span><span class="tok-k">tool</span><span class="tok-k">.</span><span class="tok-k">ruff</span><span class="tok-k">.</span><span class="tok-k">lint</span><span class="tok-k">]</span>
+select <span class="tok-p">=</span> <span class="tok-p">[</span><span class="tok-s">"</span><span class="tok-s">E</span><span class="tok-s">"</span><span class="tok-p">,</span> <span class="tok-s">"</span><span class="tok-s">F</span><span class="tok-s">"</span><span class="tok-p">,</span> <span class="tok-s">"</span><span class="tok-s">I</span><span class="tok-s">"</span><span class="tok-p">,</span> <span class="tok-s">"</span><span class="tok-s">B</span><span class="tok-s">"</span><span class="tok-p">]</span>   <span class="tok-c"># ошибки, pyflakes, сортировка импортов, bugbear</span>
+</code></pre></div>
+<h2 id="выносим-функции">Выносим функции</h2>
+<p>Правило: функция принимает данные и возвращает данные, не читает файлы и не обращается к глобальным переменным. Такую функцию можно вызвать из теста, из <code>train.py</code> и из API.</p>
+<div class="code"><div class="code-head"><span class="lang">python</span></div><pre><code><span class="tok-c"># src/churn/features.py</span>
+<span class="tok-k">import</span> pandas <span class="tok-k">as</span> pd
+
+FEATURES <span class="tok-p">=</span> <span class="tok-p">[</span><span class="tok-s">"</span><span class="tok-s">n_orders</span><span class="tok-s">"</span><span class="tok-p">,</span> <span class="tok-s">"</span><span class="tok-s">days_since_last</span><span class="tok-s">"</span><span class="tok-p">,</span> <span class="tok-s">"</span><span class="tok-s">avg_check</span><span class="tok-s">"</span><span class="tok-p">]</span>
+
+
+<span class="tok-k">def</span> <span class="tok-f">build_features</span><span class="tok-p">(</span>df<span class="tok-p">:</span> pd<span class="tok-p">.</span>DataFrame<span class="tok-p">)</span> <span class="tok-p">-</span><span class="tok-p">&gt;</span> pd<span class="tok-p">.</span>DataFrame<span class="tok-p">:</span>
+    out <span class="tok-p">=</span> pd<span class="tok-p">.</span>DataFrame<span class="tok-p">(</span>index<span class="tok-p">=</span>df<span class="tok-p">.</span>index<span class="tok-p">)</span>
+    out<span class="tok-p">[</span><span class="tok-s">"</span><span class="tok-s">n_orders</span><span class="tok-s">"</span><span class="tok-p">]</span> <span class="tok-p">=</span> df<span class="tok-p">[</span><span class="tok-s">"</span><span class="tok-s">n_orders</span><span class="tok-s">"</span><span class="tok-p">]</span><span class="tok-p">.</span>fillna<span class="tok-p">(</span><span class="tok-n">0</span><span class="tok-p">)</span><span class="tok-p">.</span>clip<span class="tok-p">(</span>lower<span class="tok-p">=</span><span class="tok-n">0</span><span class="tok-p">)</span>
+    days <span class="tok-p">=</span> df<span class="tok-p">[</span><span class="tok-s">"</span><span class="tok-s">days_since_last</span><span class="tok-s">"</span><span class="tok-p">]</span>
+    out<span class="tok-p">[</span><span class="tok-s">"</span><span class="tok-s">days_since_last</span><span class="tok-s">"</span><span class="tok-p">]</span> <span class="tok-p">=</span> days<span class="tok-p">.</span>fillna<span class="tok-p">(</span>days<span class="tok-p">.</span>max<span class="tok-p">(</span><span class="tok-p">)</span><span class="tok-p">)</span><span class="tok-p">.</span>clip<span class="tok-p">(</span>upper<span class="tok-p">=</span><span class="tok-n">365</span><span class="tok-p">)</span>
+    out<span class="tok-p">[</span><span class="tok-s">"</span><span class="tok-s">avg_check</span><span class="tok-s">"</span><span class="tok-p">]</span> <span class="tok-p">=</span> df<span class="tok-p">[</span><span class="tok-s">"</span><span class="tok-s">avg_check</span><span class="tok-s">"</span><span class="tok-p">]</span><span class="tok-p">.</span>fillna<span class="tok-p">(</span><span class="tok-n">0.0</span><span class="tok-p">)</span><span class="tok-p">.</span>clip<span class="tok-p">(</span>lower<span class="tok-p">=</span><span class="tok-n">0</span><span class="tok-p">)</span>
+    <span class="tok-k">return</span> out<span class="tok-p">[</span>FEATURES<span class="tok-p">]</span>
+</code></pre></div>
+<p><strong>Предобработку сериализуют вместе с моделью.</strong> Положите <code>build_features</code> внутрь <code>sklearn.pipeline.Pipeline</code> (через <code>FunctionTransformer</code>) и сохраняйте один объект: нельзя загрузить модель и забыть про масштабирование.</p>
+<div class="code"><div class="code-head"><span class="lang">python</span></div><pre><code><span class="tok-c"># src/churn/model.py</span>
+<span class="tok-k">import</span> logging
+<span class="tok-k">from</span> pathlib <span class="tok-k">import</span> Path
+
+<span class="tok-k">import</span> joblib
+<span class="tok-k">from</span> sklearn.ensemble <span class="tok-k">import</span> GradientBoostingClassifier
+<span class="tok-k">from</span> sklearn.pipeline <span class="tok-k">import</span> Pipeline
+<span class="tok-k">from</span> sklearn.preprocessing <span class="tok-k">import</span> FunctionTransformer
+
+<span class="tok-k">from</span> churn.features <span class="tok-k">import</span> build_features
+
+log <span class="tok-p">=</span> logging<span class="tok-p">.</span>getLogger<span class="tok-p">(</span>__name__<span class="tok-p">)</span>
+
+
+<span class="tok-k">def</span> <span class="tok-f">make_pipeline</span><span class="tok-p">(</span>seed<span class="tok-p">:</span> <span class="tok-f">int</span> <span class="tok-p">=</span> <span class="tok-n">0</span><span class="tok-p">)</span> <span class="tok-p">-</span><span class="tok-p">&gt;</span> Pipeline<span class="tok-p">:</span>
+    <span class="tok-k">return</span> Pipeline<span class="tok-p">(</span><span class="tok-p">[</span>
+        <span class="tok-p">(</span><span class="tok-s">"</span><span class="tok-s">features</span><span class="tok-s">"</span><span class="tok-p">,</span> FunctionTransformer<span class="tok-p">(</span>build_features<span class="tok-p">)</span><span class="tok-p">)</span><span class="tok-p">,</span>
+        <span class="tok-p">(</span><span class="tok-s">"</span><span class="tok-s">clf</span><span class="tok-s">"</span><span class="tok-p">,</span> GradientBoostingClassifier<span class="tok-p">(</span>random_state<span class="tok-p">=</span>seed<span class="tok-p">)</span><span class="tok-p">)</span><span class="tok-p">,</span>
+    <span class="tok-p">]</span><span class="tok-p">)</span>
+
+
+<span class="tok-k">def</span> <span class="tok-f">save</span><span class="tok-p">(</span>model<span class="tok-p">:</span> Pipeline<span class="tok-p">,</span> path<span class="tok-p">:</span> Path<span class="tok-p">)</span> <span class="tok-p">-</span><span class="tok-p">&gt;</span> <span class="tok-k">None</span><span class="tok-p">:</span>
+    path<span class="tok-p">.</span>parent<span class="tok-p">.</span>mkdir<span class="tok-p">(</span>parents<span class="tok-p">=</span><span class="tok-k">True</span><span class="tok-p">,</span> exist_ok<span class="tok-p">=</span><span class="tok-k">True</span><span class="tok-p">)</span>
+    joblib<span class="tok-p">.</span>dump<span class="tok-p">(</span>model<span class="tok-p">,</span> path<span class="tok-p">)</span>
+    log<span class="tok-p">.</span>info<span class="tok-p">(</span><span class="tok-s">"</span><span class="tok-s">model saved to </span><span class="tok-s">%s</span><span class="tok-s">"</span><span class="tok-p">,</span> path<span class="tok-p">)</span>
+
+
+<span class="tok-k">def</span> <span class="tok-f">load</span><span class="tok-p">(</span>path<span class="tok-p">:</span> Path<span class="tok-p">)</span> <span class="tok-p">-</span><span class="tok-p">&gt;</span> Pipeline<span class="tok-p">:</span>
+    <span class="tok-k">return</span> joblib<span class="tok-p">.</span>load<span class="tok-p">(</span>path<span class="tok-p">)</span>
+</code></pre></div>
+<div class="callout md warn"><p class="callout-title">Pickle и версии</p>
+<p><code>joblib</code>/<code>pickle</code> привязаны к версиям библиотек и к пути импорта функции (<code>churn.features.build_features</code>). Файл, сохранённый на scikit-learn 1.5, может не открыться на 1.9. Фиксируйте <code>uv.lock</code> и обучайте в том же образе, где будете запускать. Не загружайте pickle из недоверенного источника: он исполняет код при загрузке.</p>
+</div>
+<h2 id="конфигурация-12-factor">Конфигурация: 12-factor</h2>
+<p>Принцип <a href="https://12factor.net/config" rel="noopener noreferrer nofollow">12-factor</a>: конфигурация, меняющаяся между окружениями (пути, адрес базы, токены), хранится в <strong>переменных окружения</strong>, а не в коде. Секреты никогда не попадают в git: ни в код, ни в YAML репозитория, ни в «дефолт на всякий случай». <code>pydantic-settings</code> читает окружение (и локальный <code>.env</code>, который лежит в <code>.gitignore</code>) и проверяет типы:</p>
+<div class="code"><div class="code-head"><span class="lang">python</span></div><pre><code><span class="tok-c"># src/churn/settings.py</span>
+<span class="tok-k">from</span> pathlib <span class="tok-k">import</span> Path
+
+<span class="tok-k">from</span> pydantic_settings <span class="tok-k">import</span> BaseSettings<span class="tok-p">,</span> SettingsConfigDict
+
+
+<span class="tok-k">class</span> <span class="tok-f">Settings</span><span class="tok-p">(</span>BaseSettings<span class="tok-p">)</span><span class="tok-p">:</span>
+    model_config <span class="tok-p">=</span> SettingsConfigDict<span class="tok-p">(</span>env_prefix<span class="tok-p">=</span><span class="tok-s">"</span><span class="tok-s">CHURN_</span><span class="tok-s">"</span><span class="tok-p">,</span> env_file<span class="tok-p">=</span><span class="tok-s">"</span><span class="tok-s">.env</span><span class="tok-s">"</span><span class="tok-p">,</span> extra<span class="tok-p">=</span><span class="tok-s">"</span><span class="tok-s">ignore</span><span class="tok-s">"</span><span class="tok-p">)</span>
+
+    model_path<span class="tok-p">:</span> Path <span class="tok-p">=</span> Path<span class="tok-p">(</span><span class="tok-s">"</span><span class="tok-s">artifacts/model.joblib</span><span class="tok-s">"</span><span class="tok-p">)</span>
+    database_url<span class="tok-p">:</span> <span class="tok-f">str</span> <span class="tok-p">|</span> <span class="tok-k">None</span> <span class="tok-p">=</span> <span class="tok-k">None</span>   <span class="tok-c"># только из окружения</span>
+    log_level<span class="tok-p">:</span> <span class="tok-f">str</span> <span class="tok-p">=</span> <span class="tok-s">"</span><span class="tok-s">INFO</span><span class="tok-s">"</span>
+    api_token<span class="tok-p">:</span> <span class="tok-f">str</span> <span class="tok-p">|</span> <span class="tok-k">None</span> <span class="tok-p">=</span> <span class="tok-k">None</span>
+
+
+<span class="tok-k">def</span> <span class="tok-f">get_settings</span><span class="tok-p">(</span><span class="tok-p">)</span> <span class="tok-p">-</span><span class="tok-p">&gt;</span> Settings<span class="tok-p">:</span>
+    <span class="tok-k">return</span> Settings<span class="tok-p">(</span><span class="tok-p">)</span>
+</code></pre></div>
+<p><code>CHURN_LOG_LEVEL=DEBUG make serve</code> меняет поведение без правки кода. Параметры эксперимента (глубина дерева, число деревьев) — в <code>configs/*.yaml</code> под версионным контролем: они не секрет и входят в воспроизводимость.</p>
+<h2 id="логирование-вместо-print">Логирование вместо print</h2>
+<p><code>print</code> нельзя отфильтровать по уровню, у него нет времени и источника. Модуль <code>logging</code> даёт всё это: <code>log = logging.getLogger(__name__)</code>, конфигурация один раз в точке входа.</p>
+<div class="code"><div class="code-head"><span class="lang">python</span></div><pre><code><span class="tok-c"># src/churn/train.py (фрагмент); synthetic() генерирует таблицу признаков и метку churned</span>
+<span class="tok-k">def</span> <span class="tok-f">main</span><span class="tok-p">(</span><span class="tok-p">)</span> <span class="tok-p">-</span><span class="tok-p">&gt;</span> <span class="tok-k">None</span><span class="tok-p">:</span>
+    s <span class="tok-p">=</span> get_settings<span class="tok-p">(</span><span class="tok-p">)</span>
+    logging<span class="tok-p">.</span>basicConfig<span class="tok-p">(</span>level<span class="tok-p">=</span>s<span class="tok-p">.</span>log_level<span class="tok-p">,</span> <span class="tok-f">format</span><span class="tok-p">=</span><span class="tok-s">"</span><span class="tok-s">%(asctime)s</span> <span class="tok-s">%(levelname)s</span> <span class="tok-s">%(name)s</span> <span class="tok-s">%(message)s</span><span class="tok-s">"</span><span class="tok-p">)</span>
+    df <span class="tok-p">=</span> synthetic<span class="tok-p">(</span><span class="tok-p">)</span>
+    tr<span class="tok-p">,</span> va <span class="tok-p">=</span> train_test_split<span class="tok-p">(</span>df<span class="tok-p">,</span> test_size<span class="tok-p">=</span><span class="tok-n">0.2</span><span class="tok-p">,</span> random_state<span class="tok-p">=</span><span class="tok-n">0</span><span class="tok-p">)</span>
+    model <span class="tok-p">=</span> make_pipeline<span class="tok-p">(</span><span class="tok-p">)</span><span class="tok-p">.</span>fit<span class="tok-p">(</span>tr<span class="tok-p">[</span>FEATURES<span class="tok-p">]</span><span class="tok-p">,</span> tr<span class="tok-p">[</span><span class="tok-s">"</span><span class="tok-s">churned</span><span class="tok-s">"</span><span class="tok-p">]</span><span class="tok-p">)</span>
+    auc <span class="tok-p">=</span> roc_auc_score<span class="tok-p">(</span>va<span class="tok-p">[</span><span class="tok-s">"</span><span class="tok-s">churned</span><span class="tok-s">"</span><span class="tok-p">]</span><span class="tok-p">,</span> model<span class="tok-p">.</span>predict_proba<span class="tok-p">(</span>va<span class="tok-p">[</span>FEATURES<span class="tok-p">]</span><span class="tok-p">)</span><span class="tok-p">[</span><span class="tok-p">:</span><span class="tok-p">,</span> <span class="tok-n">1</span><span class="tok-p">]</span><span class="tok-p">)</span>
+    log<span class="tok-p">.</span>info<span class="tok-p">(</span><span class="tok-s">"</span><span class="tok-s">val auc=</span><span class="tok-s">%.3f</span><span class="tok-s">"</span><span class="tok-p">,</span> auc<span class="tok-p">)</span>
+    save<span class="tok-p">(</span>model<span class="tok-p">,</span> s<span class="tok-p">.</span>model_path<span class="tok-p">)</span>
+</code></pre></div>
+<h2 id="тесты">Тесты</h2>
+<p>Минимум, который ловит большую часть поломок: предобработка не оставляет пропусков и держит контракт по колонкам; модель загружается и возвращает ответ нужной формы.</p>
+<div class="code"><div class="code-head"><span class="lang">python</span></div><pre><code><span class="tok-c"># tests/test_features.py</span>
+<span class="tok-k">import</span> numpy <span class="tok-k">as</span> np
+<span class="tok-k">import</span> pandas <span class="tok-k">as</span> pd
+
+<span class="tok-k">from</span> churn.features <span class="tok-k">import</span> FEATURES<span class="tok-p">,</span> build_features
+
+
+<span class="tok-k">def</span> <span class="tok-f">test_build_features_fills_and_clips</span><span class="tok-p">(</span><span class="tok-p">)</span><span class="tok-p">:</span>
+    df <span class="tok-p">=</span> pd<span class="tok-p">.</span>DataFrame<span class="tok-p">(</span><span class="tok-p">{</span>
+        <span class="tok-s">"</span><span class="tok-s">n_orders</span><span class="tok-s">"</span><span class="tok-p">:</span> <span class="tok-p">[</span>np<span class="tok-p">.</span>nan<span class="tok-p">,</span> <span class="tok-p">-</span><span class="tok-n">3</span><span class="tok-p">,</span> <span class="tok-n">4</span><span class="tok-p">]</span><span class="tok-p">,</span>
+        <span class="tok-s">"</span><span class="tok-s">days_since_last</span><span class="tok-s">"</span><span class="tok-p">:</span> <span class="tok-p">[</span><span class="tok-n">10.0</span><span class="tok-p">,</span> np<span class="tok-p">.</span>nan<span class="tok-p">,</span> <span class="tok-n">900.0</span><span class="tok-p">]</span><span class="tok-p">,</span>
+        <span class="tok-s">"</span><span class="tok-s">avg_check</span><span class="tok-s">"</span><span class="tok-p">:</span> <span class="tok-p">[</span>np<span class="tok-p">.</span>nan<span class="tok-p">,</span> <span class="tok-n">5.0</span><span class="tok-p">,</span> <span class="tok-n">7.0</span><span class="tok-p">]</span><span class="tok-p">,</span>
+    <span class="tok-p">}</span><span class="tok-p">)</span>
+    out <span class="tok-p">=</span> build_features<span class="tok-p">(</span>df<span class="tok-p">)</span>
+    <span class="tok-k">assert</span> <span class="tok-f">list</span><span class="tok-p">(</span>out<span class="tok-p">.</span>columns<span class="tok-p">)</span> <span class="tok-p">==</span> FEATURES
+    <span class="tok-k">assert</span> <span class="tok-k">not</span> out<span class="tok-p">.</span>isna<span class="tok-p">(</span><span class="tok-p">)</span><span class="tok-p">.</span>any<span class="tok-p">(</span><span class="tok-p">)</span><span class="tok-p">.</span>any<span class="tok-p">(</span><span class="tok-p">)</span>
+    <span class="tok-k">assert</span> out<span class="tok-p">[</span><span class="tok-s">"</span><span class="tok-s">days_since_last</span><span class="tok-s">"</span><span class="tok-p">]</span><span class="tok-p">.</span>max<span class="tok-p">(</span><span class="tok-p">)</span> <span class="tok-p">&lt;</span><span class="tok-p">=</span> <span class="tok-n">365</span>
+</code></pre></div>
+<div class="code"><div class="code-head"><span class="lang">python</span></div><pre><code><span class="tok-c"># tests/test_model.py</span>
+<span class="tok-k">import</span> pandas <span class="tok-k">as</span> pd
+
+<span class="tok-k">from</span> churn.features <span class="tok-k">import</span> FEATURES
+<span class="tok-k">from</span> churn.model <span class="tok-k">import</span> load<span class="tok-p">,</span> make_pipeline<span class="tok-p">,</span> save
+<span class="tok-k">from</span> churn.predict <span class="tok-k">import</span> predict_proba
+<span class="tok-k">from</span> churn.train <span class="tok-k">import</span> synthetic
+
+
+<span class="tok-k">def</span> <span class="tok-f">test_model_loads_and_predicts_shape</span><span class="tok-p">(</span>tmp_path<span class="tok-p">)</span><span class="tok-p">:</span>
+    df <span class="tok-p">=</span> synthetic<span class="tok-p">(</span><span class="tok-n">500</span><span class="tok-p">)</span>
+    save<span class="tok-p">(</span>make_pipeline<span class="tok-p">(</span><span class="tok-p">)</span><span class="tok-p">.</span>fit<span class="tok-p">(</span>df<span class="tok-p">[</span>FEATURES<span class="tok-p">]</span><span class="tok-p">,</span> df<span class="tok-p">[</span><span class="tok-s">"</span><span class="tok-s">churned</span><span class="tok-s">"</span><span class="tok-p">]</span><span class="tok-p">)</span><span class="tok-p">,</span> tmp_path <span class="tok-p">/</span> <span class="tok-s">"</span><span class="tok-s">m.joblib</span><span class="tok-s">"</span><span class="tok-p">)</span>
+    model <span class="tok-p">=</span> load<span class="tok-p">(</span>tmp_path <span class="tok-p">/</span> <span class="tok-s">"</span><span class="tok-s">m.joblib</span><span class="tok-s">"</span><span class="tok-p">)</span>
+    rows <span class="tok-p">=</span> pd<span class="tok-p">.</span>DataFrame<span class="tok-p">(</span><span class="tok-p">{</span><span class="tok-s">"</span><span class="tok-s">n_orders</span><span class="tok-s">"</span><span class="tok-p">:</span> <span class="tok-p">[</span><span class="tok-n">1</span><span class="tok-p">,</span> <span class="tok-n">2</span><span class="tok-p">,</span> <span class="tok-n">3</span><span class="tok-p">]</span><span class="tok-p">,</span> <span class="tok-s">"</span><span class="tok-s">days_since_last</span><span class="tok-s">"</span><span class="tok-p">:</span> <span class="tok-p">[</span><span class="tok-n">5.0</span><span class="tok-p">,</span> <span class="tok-n">50.0</span><span class="tok-p">,</span> <span class="tok-n">500.0</span><span class="tok-p">]</span><span class="tok-p">,</span>
+                         <span class="tok-s">"</span><span class="tok-s">avg_check</span><span class="tok-s">"</span><span class="tok-p">:</span> <span class="tok-p">[</span><span class="tok-n">10</span><span class="tok-p">,</span> <span class="tok-n">20</span><span class="tok-p">,</span> <span class="tok-n">30</span><span class="tok-p">]</span><span class="tok-p">}</span><span class="tok-p">)</span>
+    p <span class="tok-p">=</span> predict_proba<span class="tok-p">(</span>model<span class="tok-p">,</span> rows<span class="tok-p">)</span>
+    <span class="tok-k">assert</span> p<span class="tok-p">.</span>shape <span class="tok-p">==</span> <span class="tok-p">(</span><span class="tok-n">3</span><span class="tok-p">,</span><span class="tok-p">)</span>
+    <span class="tok-k">assert</span> <span class="tok-p">(</span><span class="tok-p">(</span>p <span class="tok-p">&gt;</span><span class="tok-p">=</span> <span class="tok-n">0</span><span class="tok-p">)</span> <span class="tok-p">&amp;</span> <span class="tok-p">(</span>p <span class="tok-p">&lt;</span><span class="tok-p">=</span> <span class="tok-n">1</span><span class="tok-p">)</span><span class="tok-p">)</span><span class="tok-p">.</span>all<span class="tok-p">(</span><span class="tok-p">)</span>
+</code></pre></div>
+<p>Тест на форму не проверяет качество, он проверяет, что артефакт не сломан. Качество проверяется метрикой на отложенной выборке и в мониторинге (см. <a href="/edufamcs-demo/handbook/engineering/monitoring-modelej/" rel="noopener noreferrer nofollow">мониторинг моделей</a>).</p>
+<h2 id="линтер-и-makefile">Линтер и Makefile</h2>
+<p><code>ruff check</code> ловит неиспользуемые импорты и типичные баги, <code>ruff format</code> форматирует. Команды складываем в <code>Makefile</code> (или <code>justfile</code>), чтобы новичок не угадывал, как запускать проект:</p>
+<div class="code"><div class="code-head"><span class="lang">makefile</span></div><pre><code><span class="tok-f">.PHONY</span><span class="tok-p">:</span> train test lint serve
+<span class="tok-f">train</span><span class="tok-p">:</span>
+	uv run python -m churn.train
+<span class="tok-f">test</span><span class="tok-p">:</span>
+	uv run pytest -q
+<span class="tok-f">lint</span><span class="tok-p">:</span>
+	uv run ruff check . <span class="tok-p">&amp;&amp;</span> uv run ruff format --check .
+<span class="tok-f">serve</span><span class="tok-p">:</span>
+	uv run uvicorn churn.api:app --port <span class="tok-n">8765</span> --reload
+</code></pre></div>
+<p>В Makefile отступы — табы. Эти же команды потом запустит CI (см. <a href="/edufamcs-demo/handbook/engineering/ci-github-actions/" rel="noopener noreferrer nofollow">CI на GitHub Actions</a>); игнорируемые файлы и коммиты — в статье про <a href="/edufamcs-demo/handbook/python/git-dlya-ml-proekta/" rel="noopener noreferrer nofollow">git для ML-проекта</a>.</p>
+<p>Сниппеты в статьях отформатированы для чтения: перед первым коммитом выполните <code>uv run ruff format . &amp;&amp; uv run ruff check --fix .</code>, иначе <code>make lint</code> и CI упадут.</p>
+<h2 id="ловушки">Ловушки</h2>
+<ul>
+<li>Логика осталась в ноутбуке, а в сервисе её переписали заново: train/serve skew. Один код предобработки, один сериализованный объект.</li>
+<li>Пути вида <code>/Users/ivan/data.csv</code> и <code>../data</code>: путь или вынесен в настройки, или считается от файла.</li>
+<li>Пароль «временно» в коде или в <code>config.yaml</code> в репозитории. Утёкший в историю секрет считается скомпрометированным; удаление коммита не помогает, ключ перевыпускают.</li>
+<li>Нет <code>random_state</code> и зафиксированных версий: результат не повторить через неделю.</li>
+<li>Тест, который обучает модель на всём датасете: тесты работают на крошечных синтетических данных и идут секунды.</li>
+<li>На собеседовании спрашивают: чем <code>requirements.txt</code> отличается от lock-файла; почему <code>print</code> плох в сервисе; что такое train/serve skew и как его предотвратить; как хранить секреты; что тестировать в ML-коде, если «правильного ответа» нет.</li>
+</ul>
+<h2 id="проверь-себя">Проверь себя</h2>
+<details class="callout md details"><summary>Чем плох «просто положить ноутбук в репозиторий» и что вы вынесете из него в первую очередь?</summary>
+<p>Скрытое состояние, плохие диффы, невозможность импортировать и тестировать. Первыми выносят то, что нужно и при обучении, и в сервисе: предобработку признаков и загрузку/сохранение модели, затем точку входа обучения.</p>
+</details>
+<details class="callout md details"><summary>Что такое train/serve skew и как сериализация пайплайна с предобработкой помогает?</summary>
+<p>Расхождение между признаками при обучении и при обслуживании (разный код, разные заполнения пропусков, разный масштаб). Если предобработка лежит внутри сохранённого <code>Pipeline</code>, сервис не может применить модель без неё.</p>
+</details>
+<details class="callout md details"><summary>Где хранить пароль к базе и адрес модели для разных окружений?</summary>
+<p>Пароль — только в переменных окружения (локально в <code>.env</code> вне git, на сервере в менеджере секретов). Адрес модели и прочие несекретные параметры тоже читаются из окружения через <code>pydantic-settings</code>, значения по умолчанию безопасны для разработки.</p>
+</details>
+<details class="callout md details"><summary>Какие два теста обязательны для модельного артефакта?</summary>
+<p>Тест предобработки (колонки, отсутствие пропусков, границы) и тест «модель загружается и на входе из N строк даёт N вероятностей в [0, 1]». Оба быстрые и работают на синтетике.</p>
+</details>
+<details class="callout md details"><summary>Почему структура `src/&lt;pkg&gt;/` лучше плоской папки со скриптами?</summary>
+<p>Пакет импортируется только после установки, поэтому тесты и сервис работают с тем же кодом, что и у пользователя; нет случайных импортов из текущей директории, а <code>pyproject.toml</code> явно описывает зависимости.</p>
+</details>
+<h2 id="что-почитать">Что почитать</h2>
+<ul>
+<li><a href="https://12factor.net/config" rel="noopener noreferrer nofollow">The Twelve-Factor App: Config</a></li>
+<li><a href="https://docs.astral.sh/uv/guides/projects/" rel="noopener noreferrer nofollow">uv: работа с проектами</a></li>
+<li><a href="https://docs.pydantic.dev/latest/concepts/pydantic_settings/" rel="noopener noreferrer nofollow">pydantic-settings</a></li>
+<li><a href="https://docs.pytest.org/en/stable/" rel="noopener noreferrer nofollow">pytest: документация</a></li>
+<li><a href="https://docs.astral.sh/ruff/" rel="noopener noreferrer nofollow">Ruff: документация</a></li>
+<li><a href="https://scikit-learn.org/stable/model_persistence.html" rel="noopener noreferrer nofollow">scikit-learn: сохранение моделей и риски</a></li>
+<li><a href="https://packaging.python.org/en/latest/guides/writing-pyproject-toml/" rel="noopener noreferrer nofollow">Python Packaging User Guide: pyproject.toml</a></li>
+</ul>
+</div>
+      
+
+      
+
+      
+      <nav class="pager" aria-label="Соседние статьи">
+        <i></i>
+        <a href="/edufamcs-demo/handbook/engineering/http-i-fastapi/"><span>Дальше<svg class="ico sm" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-arrow"/></svg></span>HTTP и API: сервис с моделью на FastAPI</a>
+      </nav>
+      
+    </article>
+
+    <aside class="hb-toc" aria-label="На этой странице">
+      <a class="l2" href="#почему-ноутбук-не-поставка">Почему ноутбук не поставка</a><a class="l2" href="#целевая-структура">Целевая структура</a><a class="l2" href="#выносим-функции">Выносим функции</a><a class="l2" href="#конфигурация-12-factor">Конфигурация: 12-factor</a><a class="l2" href="#логирование-вместо-print">Логирование вместо print</a><a class="l2" href="#тесты">Тесты</a><a class="l2" href="#линтер-и-makefile">Линтер и Makefile</a><a class="l2" href="#ловушки">Ловушки</a><a class="l2" href="#проверь-себя">Проверь себя</a><a class="l2" href="#что-почитать">Что почитать</a>
+    </aside>
+  </div>
+</div>
+
+
+</main>
+
+<footer class="ftr" data-theme="dark">
+  <svg class="sym fern" viewBox="0 0 40.5 65.02" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#fern"/></svg>
+  <div class="container">
+    <div class="ftr-row">
+      <a href="/edufamcs-demo/" aria-label="EDU FAMCS — главная"><img src="/edufamcs-demo/static/brand/logo/logo-edu-dark.svg" alt="EDU FAMCS" width="196" height="40"></a>
+      <ul class="ftr-links">
+        <li><a href="/edufamcs-demo/#courses">Курсы</a></li>
+        <li><a href="/edufamcs-demo/ml/">Машинное обучение</a></li>
+        <li><a href="/edufamcs-demo/handbook/">Хендбук</a></li>
+        <li><a href="/edufamcs-demo/news/">Новости</a></li>
+        <li><a href="/edufamcs-demo/people/">Авторы</a></li>
+        <li><a href="/edufamcs-demo/about/">О&nbsp;нас</a></li>
+        <li><a href="/edufamcs-demo/propose/">Предложить или исправить</a></li>
+        <li><a href="/edufamcs-demo/privacy/">Конфиденциальность</a></li>
+      </ul>
+    </div>
+    <div class="ftr-big" aria-hidden="true">EDU<span class="d">·</span>FAMCS</div>
+    <p class="ftr-copy">© 2026 EDU FAMCS · Минск</p>
+  </div>
+</footer>
+
+<div class="toasts-region" aria-live="polite" id="toasts">
+
+</div>
+
+</body>
+</html>

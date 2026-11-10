@@ -1,0 +1,318 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Признаки для рекомендаций и feature store · EDU FAMCS</title>
+<meta name="description" content="Признаки для рекомендаций и feature store — Рекомендательные системы. Хендбук ML-курса ФПМИ.">
+<meta name="theme-color" content="#060A16">
+<meta name="robots" content="noindex, nofollow">
+<meta name="htmx-config" content='{"allowEval":false,"includeIndicatorStyles":false,"historyCacheSize":0,"selfRequestsOnly":true}'>
+<meta name="katex-js" content="/edufamcs-demo/static/vendor/katex/katex.min.js">
+<meta name="katex-css" content="/edufamcs-demo/static/vendor/katex/katex.min.css">
+<link rel="icon" href="/edufamcs-demo/static/brand/logo/favicon-16.svg" type="image/svg+xml" sizes="16x16">
+<link rel="icon" href="/edufamcs-demo/static/brand/logo/favicon.svg" type="image/svg+xml" sizes="any">
+<link rel="preload" href="/edufamcs-demo/static/brand/fonts/manrope-cyrillic-400.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/edufamcs-demo/static/brand/fonts/unbounded-cyrillic-800.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="/edufamcs-demo/static/brand/fonts.css">
+<link rel="stylesheet" href="/edufamcs-demo/static/brand/tokens.css">
+<link rel="stylesheet" href="/edufamcs-demo/static/brand/components.css">
+<link rel="stylesheet" href="/edufamcs-demo/static/css/site.css">
+<link rel="stylesheet" href="/edufamcs-demo/static/css/hub.css">
+<link rel="stylesheet" href="/edufamcs-demo/static/css/about.css">
+<link rel="stylesheet" href="/edufamcs-demo/static/handbook/handbook.css">
+<script src="/edufamcs-demo/static/js/theme.js"></script>
+<script src="/edufamcs-demo/static/vendor/htmx/htmx.min.js" defer></script>
+<script src="/edufamcs-demo/static/vendor/alpine/alpine-csp.min.js" defer></script>
+<script src="/edufamcs-demo/static/js/site.js" defer></script>
+<script src="/edufamcs-demo/static/handbook/handbook.js" defer></script>
+</head>
+<body class="" hx-headers='{"X-CSRFToken": "sQQwvJuIMos0sqV0WdehPyaYMZYJbD0P43FtLL3zNbGzDJasVGsexr2We85HVnZw"}'>
+<a class="skip" href="#main">К содержанию</a>
+<div class="demo-bar" role="note">Демо-версия для отзывов: вход, запись на курсы и формы здесь не работают.</div>
+
+<header class="hdr">
+  <div class="container">
+    <a class="brand" href="/edufamcs-demo/" aria-label="EDU FAMCS — главная">
+      <span class="full"><img class="only-light" src="/edufamcs-demo/static/brand/logo/logo-edu-light.svg" alt="EDU FAMCS" width="196" height="40"><img class="only-dark" src="/edufamcs-demo/static/brand/logo/logo-edu-dark.svg" alt="EDU FAMCS" width="196" height="40"></span>
+      <span class="short"><img class="only-light" src="/edufamcs-demo/static/brand/logo/logo-edu-light.svg" alt="EDU FAMCS" height="30"><img class="only-dark" src="/edufamcs-demo/static/brand/logo/logo-edu-dark.svg" alt="EDU FAMCS" height="30"></span>
+    </a>
+    <nav class="nav" id="main-nav" aria-label="Основная навигация">
+      <a href="/edufamcs-demo/#courses">Курсы</a>
+      <a href="/edufamcs-demo/ml/" >Машинное обучение</a>
+      
+      <a href="/edufamcs-demo/handbook/" aria-current="page">Хендбук</a>
+      <a href="/edufamcs-demo/news/" >Новости</a>
+      <a href="/edufamcs-demo/people/" >Авторы</a>
+      <a href="/edufamcs-demo/about/" >О&nbsp;нас</a>
+    </nav>
+    <div class="hdr-actions">
+      
+      <a class="btn btn-outline btn-login" href="/edufamcs-demo/accounts/login/?next=/handbook/recsys/priznaki-i-feature-store/">Войти</a>
+      
+      <button class="icon-btn menu-btn" type="button" aria-label="Меню" aria-expanded="false" aria-controls="main-nav"><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-menu"/></svg></button>
+    </div>
+  </div>
+</header>
+
+<main id="main">
+
+
+
+<div class="container hb-page s-recsys">
+  <div class="hb-readbar" aria-hidden="true"><i></i></div>
+  <div class="hb">
+    <aside class="hb-nav" aria-label="Статьи раздела">
+      
+<form class="hb-search" action="/edufamcs-demo/handbook/search/" method="get" role="search">
+  <svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-search"/></svg>
+  <input class="input" type="search" name="q" value="" placeholder="Поиск по хендбуку" aria-label="Поиск по хендбуку" autocomplete="off" maxlength="120"
+    hx-get="/edufamcs-demo/handbook/search/" hx-trigger="input changed delay:250ms, search" hx-target="#hb-nav-results" hx-sync="this:replace">
+</form>
+
+      <div id="hb-nav-results" class="hb-nav-results" aria-live="polite"></div>
+      <a class="grp" href="/edufamcs-demo/handbook/recsys/">Рекомендательная система целиком</a>
+      
+      <a class="" href="/edufamcs-demo/handbook/recsys/kandidaty-i-ranzhirovanie/">Двухстадийная схема: кандидаты → ранжирование</a>
+      
+      <a class="" href="/edufamcs-demo/handbook/recsys/holodnyj-start-i-bandity/">Холодный старт, исследование и бандиты</a>
+      
+      <a class="" href="/edufamcs-demo/handbook/recsys/prodakshen-i-ab-testy/">Рекомендации в продакшене: A/B-тесты и эксплуатация</a>
+      
+      <a class="" href="/edufamcs-demo/handbook/recsys/multitask-ranzhirovanie/">Многозадачное ранжирование: MMoE, PLE, ESMM</a>
+      
+      <a class="cur" href="/edufamcs-demo/handbook/recsys/priznaki-i-feature-store/" aria-current="page">Признаки для рекомендаций и feature store</a>
+      
+      <a class="" href="/edufamcs-demo/handbook/recsys/protokol-oflajn-ocenki/">Протокол офлайн-оценки и утечки</a>
+      
+      <a class="" href="/edufamcs-demo/handbook/recsys/system-design-rekomendacij/">System design: как спроектировать рекомендательную систему на собеседовании</a>
+      
+    </aside>
+
+    <article class="hb-main">
+      <nav class="crumbs" aria-label="Навигация"><a href="/edufamcs-demo/handbook/">Хендбук</a><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-chev"/></svg><a href="/edufamcs-demo/handbook/recsys/">Рекомендательные системы</a></nav>
+      <h1 class="h1">Признаки для рекомендаций и feature store</h1>
+      <div class="hb-meta">
+        
+        
+        <span><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-clock"/></svg>14&nbsp;мин</span>
+        <span class="hb-authors"><span class="avatar sm" title="Артем Лебедевич">АЛ</span>Артем Лебедевич</span>
+        <span><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-edit"/></svg>10 ноября 2026</span>
+        
+        
+      </div>
+
+      
+      <details class="hb-mtoc">
+        <summary><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-list"/></svg>Содержание<svg class="ico sm" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-chev-down"/></svg></summary>
+        <a class="l2" href="#семейства-признаков">Семейства признаков</a><a class="l2" href="#счётчики-по-окнам-и-сглаживание">Счётчики по окнам и сглаживание</a><a class="l2" href="#утечка-через-время-и-point-in-time-корректность">Утечка через время и point-in-time корректность</a><a class="l2" href="#trainserve-skew">Train/serve skew</a><a class="l2" href="#feature-store">Feature store</a><a class="l2" href="#важность-признаков-и-абляции">Важность признаков и абляции</a><a class="l2" href="#пример-утечка-против-корректного-join">Пример: утечка против корректного join</a><a class="l2" href="#код">Код</a><a class="l2" href="#ловушки">Ловушки</a><a class="l2" href="#проверь-себя">Проверь себя</a><a class="l2" href="#что-почитать">Что почитать</a>
+      </details>
+      
+
+      <div class="prose"><p>Модель ранжирования в промышленной системе на 90 % состоит из признаков: архитектуры сходятся к похожим, а данные, которые модель видит, различаются. Главная опасность не в выборе признаков, а в том, <strong>как</strong> они посчитаны: признак, в который просочилось будущее, делает офлайн-метрику красивой, а прод — бесполезным. Эта глава — про семейства признаков, правильные временные окна, point-in-time join и feature store, который делает обучение и обслуживание согласованными.</p>
+<h2 id="семейства-признаков">Семейства признаков</h2>
+<p>Для ранжировщика (<a href="/edufamcs-demo/handbook/recsys/kandidaty-i-ranzhirovanie/" rel="noopener noreferrer nofollow">двухстадийная схема</a>) признаки делят по тому, чьи они:</p>
+<ul>
+<li><strong>Пользователь:</strong> возраст аккаунта, страна, язык, устройство, доли категорий в истории, активность за окна, средний чек.</li>
+<li><strong>Объект:</strong> категория, цена, возраст объекта, число показов и CTR за окна, рейтинг, свойства продавца, контентные эмбеддинги.</li>
+<li><strong>Пользователь × объект:</strong> пересечение категории объекта с историей пользователя, сколько раз пользователь видел или кликал именно этот объект, этот бренд, этого продавца; скалярное произведение эмбеддингов пользователя и объекта; оценка кандидат-генератора и его номер.</li>
+<li><strong>Контекст:</strong> время суток, день недели, страница, блок, <strong>позиция</strong> показа (при обучении — признак, при обслуживании — фиксированное значение), поисковый запрос.</li>
+<li><strong>Последовательности:</strong> последние <span class="tex">N</span> идентификаторов действий; их подают в DIN или трансформер (<a href="/edufamcs-demo/handbook/recsys/ctr-modeli/" rel="noopener noreferrer nofollow">CTR-модели</a>, <a href="/edufamcs-demo/handbook/recsys/posledovatelnye-modeli/" rel="noopener noreferrer nofollow">последовательные модели</a>).</li>
+</ul>
+<p>Эмбеддинги из других моделей (ALS, two-tower — <a href="/edufamcs-demo/handbook/recsys/two-tower-ann/" rel="noopener noreferrer nofollow">two-tower</a>) подают как признаки: сами векторы, скалярное произведение или косинус. Предупреждение: если эмбеддинги обучены на тех же событиях, что и метки ранжировщика, они «помнят» метку (разрез по времени дважды описан в <a href="/edufamcs-demo/handbook/recsys/kandidaty-i-ranzhirovanie/" rel="noopener noreferrer nofollow">двухстадийной схеме</a>).</p>
+<h2 id="счётчики-по-окнам-и-сглаживание">Счётчики по окнам и сглаживание</h2>
+<p>Самый полезный и самый опасный класс признаков — счётчики: показы <span class="tex">n</span> и клики <span class="tex">c</span> объекта за окна 1, 7, 30 суток. Сырой CTR <span class="tex">c/n</span> у объекта с 3 показами и 1 кликом равен 0,33 и ничего не значит. Байесовская оценка (см. <a href="/edufamcs-demo/handbook/math/bajesovskaya-statistika/" rel="noopener noreferrer nofollow">байесовскую статистику</a>): априорное <span class="tex">\mathrm{Beta}(\alpha p_0,\ \alpha(1-p_0))</span> с глобальным CTR <span class="tex">p_0</span> даёт апостериорное среднее</p>
+<div class="tex tex-block">\widehat{\mathrm{CTR}} = \frac{c + \alpha p_0}{n + \alpha},</div>
+<p>то есть <span class="tex">\alpha</span> «псевдопоказов» с глобальным CTR стягивают малую выборку к среднему; при <span class="tex">n\gg\alpha</span> оценка почти равна <span class="tex">c/n</span>. Альтернатива — нижняя граница интервала Вильсона для долей:</p>
+<div class="tex tex-block">\frac{\hat p + \frac{z^2}{2n} - z\sqrt{\frac{\hat p(1-\hat p)}{n} + \frac{z^2}{4n^2}}}{1 + \frac{z^2}{n}},</div>
+<p>она консервативно ранжирует малые выборки. Хорошо подавать в модель и <span class="tex">n</span> отдельным признаком: GBDT сам решит, насколько доверять CTR. Окна разной длины ловят разные эффекты: 1 день — всплески, 30 дней — устойчивое качество.</p>
+<h2 id="утечка-через-время-и-point-in-time-корректность">Утечка через время и point-in-time корректность</h2>
+<p>Признак для строки обучения должен быть таким, каким он был <strong>на момент показа <span class="tex">t</span></strong>: только события строго до <span class="tex">t</span>. Нарушение — утечка из будущего. Типичные механизмы:</p>
+<ol>
+<li><strong>Ключ по дате.</strong> Таблица «CTR объекта по дням» присоединяется по дате показа: в сутки показа входят все клики этих суток, включая метку самой строки.</li>
+<li><strong>Агрегат по всему периоду</strong> («CTR объекта за всё время», средний рейтинг) — тоже содержит будущее.</li>
+<li><strong>Пересчёт признака офлайн «как сейчас»</strong>: например, текущая категория продавца, а не та, что была в момент показа.</li>
+</ol>
+<p>Правильный способ — <strong>point-in-time join</strong>: для каждого показа берётся последний снимок признака с временем расчёта <span class="tex">\le t</span> (в pandas — <code>merge_asof</code>, в polars — <code>join_asof</code>, в Spark и SQL — оконные функции или самосоединение с условием по времени). Ещё надёжнее — <strong>логировать признаки при показе</strong>: то, что реально ушло в модель, записывается рядом с показом, и обучение читает этот лог. Тогда исчезает вопрос «как пересчитать прошлое», а заодно сохраняются случайные эффекты прода (таймауты, дефолтные значения). Цена — объём хранения и невозможность добавить новый признак задним числом: для новых признаков всё равно нужен backfill с point-in-time join.</p>
+<h2 id="trainserve-skew">Train/serve skew</h2>
+<p>Скос (skew) — расхождение признаков при обучении и обслуживании: разный код, разные окна, разные дефолты для пропусков, разная свежесть (офлайн — на конец дня, онлайн — на момент запроса). Обнаруживают так: (1) сравнивают распределения каждого признака в логе обслуживания и в обучающей выборке (PSI, KS, доля пропусков); (2) пересчитывают признаки офлайн для залогированных показов и сравнивают с залогированными значениями — расхождение указывает на разный код; (3) смотрят на разрыв «офлайн-метрика против онлайн». Мониторинг признаков в проде — часть <a href="/edufamcs-demo/handbook/recsys/prodakshen-i-ab-testy/" rel="noopener noreferrer nofollow">эксплуатации</a>.</p>
+<h2 id="feature-store">Feature store</h2>
+<p>Feature store решает две задачи: одно определение признака для обучения и обслуживания и согласованное хранение. Состав:</p>
+<ul>
+<li><strong>Офлайн-хранилище</strong> (хранилище данных, parquet, таблицы с историей): большие выгрузки для обучения, point-in-time join, backfill.</li>
+<li><strong>Онлайн-хранилище</strong> (key-value с задержкой в миллисекундах): последнее значение признака по ключу, <code>user_id</code> или <code>item_id</code>.</li>
+<li><strong>Реестр и определения:</strong> признак описывается один раз (источник, ключ, окно, преобразование), и из этого описания собираются и офлайн-таблица, и онлайн-запись. Готовые решения — Feast, Tecton, Hopsworks; во многих компаниях это собственная надстройка над хранилищем и KV.</li>
+</ul>
+<p>Классы свежести: <strong>batch</strong> (раз в сутки: долгосрочные профили, эмбеддинги), <strong>streaming</strong> (секунды–минуты: счётчики за последний час, последние действия) и <strong>request-time</strong> (считается в момент запроса: позиция, время суток, пересечение с историей, скалярное произведение эмбеддингов). Чем свежее, тем дороже и тем выше риск skew. <strong>Backfill</strong> — пересчёт признака на историю для обучения; он обязан использовать те же правила окон и point-in-time, иначе офлайн-историю нельзя сравнивать с прод-значениями.</p>
+<h2 id="важность-признаков-и-абляции">Важность признаков и абляции</h2>
+<p>Важность по сплитам или gain в GBDT склонна к признакам с высокой кардинальностью; надёжнее <strong>абляция по группам</strong>: удалить группу (все счётчики, все пользовательские, все эмбеддинги) и измерить падение GAUC на валидации по времени. Группа, удаление которой почти ничего не меняет, — кандидат на удаление и экономию на feature store; группа с подозрительно огромным вкладом — первое место для поиска утечки. Подозрительно высокий вклад свежих счётчиков — типичный признак наивного join.</p>
+<h2 id="пример-утечка-против-корректного-join">Пример: утечка против корректного join</h2>
+<p>Синтетический лог: 4000 объектов, 30 суток, 600 000 показов, CTR объекта дрейфует по стационарному AR(1) во времени. Признаки: сглаженный CTR и число показов за 7 суток и за 1 сутки (с <span class="tex">\alpha=20</span>), позиция. Два варианта сборки из <strong>одной</strong> таблицы снимков: корректный — <code>merge_asof</code> по времени показа (последний снимок до показа); наивный — присоединение по дате (снимок «на конец суток показа», в окно попадают те же сутки и метка). Модель — <code>HistGradientBoostingClassifier</code>; обучение на сутках 0–19, «офлайн» — случайные 20 % этих суток, «позже» — сутки 24–29 с признаками, как их посчитал бы прод (корректными). AUC:</p>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>Сборка признаков</th>
+<th>Офлайн (случайная валидация)</th>
+<th>Позже, признаки как в проде</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>наивный join по дате</td>
+<td>0,9365</td>
+<td>0,5638</td>
+</tr>
+<tr>
+<td>point-in-time (<code>merge_asof</code>)</td>
+<td>0,6605</td>
+<td>0,6692</td>
+</tr>
+</tbody>
+</table></div>
+<p>Утечка поднимает офлайн-AUC с 0,66 до 0,94, а на реальной картине прода модель падает до 0,56 — хуже честной (0,67), потому что научилась читать метку из признака, которого в проде нет. Если же в «позже» подставить признаки с утечкой, AUC остаётся 0,9373 — так и выглядит лживая офлайн-метрика. Числа синтетические и иллюстративные: сила утечки зависит от числа показов в окне, но механизм общий.</p>
+<h2 id="код">Код</h2>
+<p>Весь эксперимент (CPU, несколько секунд): <code>uv run --with pandas --with numpy --with scikit-learn python pit.py</code>.</p>
+<div class="code"><div class="code-head"><span class="lang">python</span></div><pre><code><span class="tok-k">import</span> numpy <span class="tok-k">as</span> np<span class="tok-p">,</span> pandas <span class="tok-k">as</span> pd
+<span class="tok-k">from</span> sklearn.ensemble <span class="tok-k">import</span> HistGradientBoostingClassifier
+<span class="tok-k">from</span> sklearn.metrics <span class="tok-k">import</span> roc_auc_score
+
+rng <span class="tok-p">=</span> np<span class="tok-p">.</span>random<span class="tok-p">.</span>default_rng<span class="tok-p">(</span><span class="tok-n">0</span><span class="tok-p">)</span>
+N_ITEMS<span class="tok-p">,</span> N_USERS<span class="tok-p">,</span> DAYS<span class="tok-p">,</span> PER_DAY <span class="tok-p">=</span> <span class="tok-n">4000</span><span class="tok-p">,</span> <span class="tok-n">5000</span><span class="tok-p">,</span> <span class="tok-n">30</span><span class="tok-p">,</span> <span class="tok-n">20000</span>
+<span class="tok-c"># истинный логит CTR товара дрейфует по дням (стационарный AR(1))</span>
+item_base <span class="tok-p">=</span> rng<span class="tok-p">.</span>normal<span class="tok-p">(</span><span class="tok-p">-</span><span class="tok-n">2.5</span><span class="tok-p">,</span> <span class="tok-n">0.5</span><span class="tok-p">,</span> N_ITEMS<span class="tok-p">)</span>
+drift <span class="tok-p">=</span> np<span class="tok-p">.</span>zeros<span class="tok-p">(</span><span class="tok-p">(</span>DAYS<span class="tok-p">,</span> N_ITEMS<span class="tok-p">)</span><span class="tok-p">)</span><span class="tok-p">;</span> drift<span class="tok-p">[</span><span class="tok-n">0</span><span class="tok-p">]</span> <span class="tok-p">=</span> rng<span class="tok-p">.</span>normal<span class="tok-p">(</span><span class="tok-n">0</span><span class="tok-p">,</span> <span class="tok-n">0.69</span><span class="tok-p">,</span> N_ITEMS<span class="tok-p">)</span>
+<span class="tok-k">for</span> t <span class="tok-k">in</span> <span class="tok-f">range</span><span class="tok-p">(</span><span class="tok-n">1</span><span class="tok-p">,</span> DAYS<span class="tok-p">)</span><span class="tok-p">:</span> drift<span class="tok-p">[</span>t<span class="tok-p">]</span> <span class="tok-p">=</span> <span class="tok-n">0.9</span> <span class="tok-p">*</span> drift<span class="tok-p">[</span>t <span class="tok-p">-</span> <span class="tok-n">1</span><span class="tok-p">]</span> <span class="tok-p">+</span> rng<span class="tok-p">.</span>normal<span class="tok-p">(</span><span class="tok-n">0</span><span class="tok-p">,</span> <span class="tok-n">0.3</span><span class="tok-p">,</span> N_ITEMS<span class="tok-p">)</span>   <span class="tok-c"># стационарный AR(1)</span>
+user_b <span class="tok-p">=</span> rng<span class="tok-p">.</span>normal<span class="tok-p">(</span><span class="tok-n">0</span><span class="tok-p">,</span> <span class="tok-n">0.4</span><span class="tok-p">,</span> N_USERS<span class="tok-p">)</span>
+
+n <span class="tok-p">=</span> DAYS <span class="tok-p">*</span> PER_DAY
+ts <span class="tok-p">=</span> np<span class="tok-p">.</span>sort<span class="tok-p">(</span>rng<span class="tok-p">.</span>uniform<span class="tok-p">(</span><span class="tok-n">0</span><span class="tok-p">,</span> DAYS<span class="tok-p">,</span> n<span class="tok-p">)</span><span class="tok-p">)</span>                 <span class="tok-c"># время показа в сутках (float)</span>
+day <span class="tok-p">=</span> ts<span class="tok-p">.</span>astype<span class="tok-p">(</span><span class="tok-f">int</span><span class="tok-p">)</span>
+item <span class="tok-p">=</span> rng<span class="tok-p">.</span>integers<span class="tok-p">(</span><span class="tok-n">0</span><span class="tok-p">,</span> N_ITEMS<span class="tok-p">,</span> n<span class="tok-p">)</span><span class="tok-p">;</span> user <span class="tok-p">=</span> rng<span class="tok-p">.</span>integers<span class="tok-p">(</span><span class="tok-n">0</span><span class="tok-p">,</span> N_USERS<span class="tok-p">,</span> n<span class="tok-p">)</span>
+pos <span class="tok-p">=</span> rng<span class="tok-p">.</span>integers<span class="tok-p">(</span><span class="tok-n">1</span><span class="tok-p">,</span> <span class="tok-n">11</span><span class="tok-p">,</span> n<span class="tok-p">)</span>
+logit <span class="tok-p">=</span> item_base<span class="tok-p">[</span>item<span class="tok-p">]</span> <span class="tok-p">+</span> drift<span class="tok-p">[</span>day<span class="tok-p">,</span> item<span class="tok-p">]</span> <span class="tok-p">+</span> user_b<span class="tok-p">[</span>user<span class="tok-p">]</span> <span class="tok-p">-</span> <span class="tok-n">0.15</span> <span class="tok-p">*</span> pos
+y <span class="tok-p">=</span> <span class="tok-p">(</span>rng<span class="tok-p">.</span>random<span class="tok-p">(</span>n<span class="tok-p">)</span> <span class="tok-p">&lt;</span> <span class="tok-n">1</span> <span class="tok-p">/</span> <span class="tok-p">(</span><span class="tok-n">1</span> <span class="tok-p">+</span> np<span class="tok-p">.</span>exp<span class="tok-p">(</span><span class="tok-p">-</span>logit<span class="tok-p">)</span><span class="tok-p">)</span><span class="tok-p">)</span><span class="tok-p">.</span>astype<span class="tok-p">(</span><span class="tok-f">int</span><span class="tok-p">)</span>
+df <span class="tok-p">=</span> pd<span class="tok-p">.</span>DataFrame<span class="tok-p">(</span><span class="tok-f">dict</span><span class="tok-p">(</span>ts<span class="tok-p">=</span>ts<span class="tok-p">,</span> day<span class="tok-p">=</span>day<span class="tok-p">,</span> item<span class="tok-p">=</span>item<span class="tok-p">,</span> user<span class="tok-p">=</span>user<span class="tok-p">,</span> pos<span class="tok-p">=</span>pos<span class="tok-p">,</span> y<span class="tok-p">=</span>y<span class="tok-p">)</span><span class="tok-p">)</span>
+
+<span class="tok-c"># --- таблица снимков: на границе суток k — счётчики за дни k-7..k-1 (только прошлое) ---</span>
+daily <span class="tok-p">=</span> df<span class="tok-p">.</span>groupby<span class="tok-p">(</span><span class="tok-p">[</span><span class="tok-s">"</span><span class="tok-s">item</span><span class="tok-s">"</span><span class="tok-p">,</span> <span class="tok-s">"</span><span class="tok-s">day</span><span class="tok-s">"</span><span class="tok-p">]</span><span class="tok-p">)</span><span class="tok-p">.</span>agg<span class="tok-p">(</span>imp<span class="tok-p">=</span><span class="tok-p">(</span><span class="tok-s">"</span><span class="tok-s">y</span><span class="tok-s">"</span><span class="tok-p">,</span> <span class="tok-s">"</span><span class="tok-s">size</span><span class="tok-s">"</span><span class="tok-p">)</span><span class="tok-p">,</span> clk<span class="tok-p">=</span><span class="tok-p">(</span><span class="tok-s">"</span><span class="tok-s">y</span><span class="tok-s">"</span><span class="tok-p">,</span> <span class="tok-s">"</span><span class="tok-s">sum</span><span class="tok-s">"</span><span class="tok-p">)</span><span class="tok-p">)</span><span class="tok-p">.</span>reset_index<span class="tok-p">(</span><span class="tok-p">)</span>
+grid <span class="tok-p">=</span> pd<span class="tok-p">.</span>MultiIndex<span class="tok-p">.</span>from_product<span class="tok-p">(</span><span class="tok-p">[</span><span class="tok-f">range</span><span class="tok-p">(</span>N_ITEMS<span class="tok-p">)</span><span class="tok-p">,</span> <span class="tok-f">range</span><span class="tok-p">(</span>DAYS <span class="tok-p">+</span> <span class="tok-n">1</span><span class="tok-p">)</span><span class="tok-p">]</span><span class="tok-p">,</span> names<span class="tok-p">=</span><span class="tok-p">[</span><span class="tok-s">"</span><span class="tok-s">item</span><span class="tok-s">"</span><span class="tok-p">,</span> <span class="tok-s">"</span><span class="tok-s">day</span><span class="tok-s">"</span><span class="tok-p">]</span><span class="tok-p">)</span>
+daily <span class="tok-p">=</span> daily<span class="tok-p">.</span>set_index<span class="tok-p">(</span><span class="tok-p">[</span><span class="tok-s">"</span><span class="tok-s">item</span><span class="tok-s">"</span><span class="tok-p">,</span> <span class="tok-s">"</span><span class="tok-s">day</span><span class="tok-s">"</span><span class="tok-p">]</span><span class="tok-p">)</span><span class="tok-p">.</span>reindex<span class="tok-p">(</span>grid<span class="tok-p">,</span> fill_value<span class="tok-p">=</span><span class="tok-n">0</span><span class="tok-p">)</span><span class="tok-p">.</span>reset_index<span class="tok-p">(</span><span class="tok-p">)</span>
+g <span class="tok-p">=</span> daily<span class="tok-p">.</span>groupby<span class="tok-p">(</span><span class="tok-s">"</span><span class="tok-s">item</span><span class="tok-s">"</span><span class="tok-p">)</span><span class="tok-p">[</span><span class="tok-p">[</span><span class="tok-s">"</span><span class="tok-s">imp</span><span class="tok-s">"</span><span class="tok-p">,</span> <span class="tok-s">"</span><span class="tok-s">clk</span><span class="tok-s">"</span><span class="tok-p">]</span><span class="tok-p">]</span>
+<span class="tok-c"># окно строки k покрывает дни k-W..k-1 (сдвиг на 1): только прошлое относительно границы суток k</span>
+<span class="tok-k">def</span> <span class="tok-f">win</span><span class="tok-p">(</span>W<span class="tok-p">)</span><span class="tok-p">:</span> <span class="tok-k">return</span> g<span class="tok-p">.</span>transform<span class="tok-p">(</span><span class="tok-k">lambda</span> s<span class="tok-p">:</span> s<span class="tok-p">.</span>rolling<span class="tok-p">(</span>W<span class="tok-p">,</span> min_periods<span class="tok-p">=</span><span class="tok-n">1</span><span class="tok-p">)</span><span class="tok-p">.</span>sum<span class="tok-p">(</span><span class="tok-p">)</span><span class="tok-p">.</span>shift<span class="tok-p">(</span><span class="tok-n">1</span><span class="tok-p">)</span><span class="tok-p">)</span><span class="tok-p">.</span>fillna<span class="tok-p">(</span><span class="tok-n">0</span><span class="tok-p">)</span>
+snap <span class="tok-p">=</span> pd<span class="tok-p">.</span>concat<span class="tok-p">(</span><span class="tok-p">[</span>daily<span class="tok-p">[</span><span class="tok-p">[</span><span class="tok-s">"</span><span class="tok-s">item</span><span class="tok-s">"</span><span class="tok-p">,</span> <span class="tok-s">"</span><span class="tok-s">day</span><span class="tok-s">"</span><span class="tok-p">]</span><span class="tok-p">]</span><span class="tok-p">,</span> win<span class="tok-p">(</span><span class="tok-n">7</span><span class="tok-p">)</span><span class="tok-p">.</span>add_suffix<span class="tok-p">(</span><span class="tok-s">"</span><span class="tok-s">7</span><span class="tok-s">"</span><span class="tok-p">)</span><span class="tok-p">,</span> win<span class="tok-p">(</span><span class="tok-n">1</span><span class="tok-p">)</span><span class="tok-p">.</span>add_suffix<span class="tok-p">(</span><span class="tok-s">"</span><span class="tok-s">1</span><span class="tok-s">"</span><span class="tok-p">)</span><span class="tok-p">]</span><span class="tok-p">,</span> axis<span class="tok-p">=</span><span class="tok-n">1</span><span class="tok-p">)</span>
+snap<span class="tok-p">[</span><span class="tok-s">"</span><span class="tok-s">snap_ts</span><span class="tok-s">"</span><span class="tok-p">]</span> <span class="tok-p">=</span> snap<span class="tok-p">[</span><span class="tok-s">"</span><span class="tok-s">day</span><span class="tok-s">"</span><span class="tok-p">]</span><span class="tok-p">.</span>astype<span class="tok-p">(</span><span class="tok-f">float</span><span class="tok-p">)</span>           <span class="tok-c"># граница суток = момент расчёта снимка</span>
+
+PRIOR<span class="tok-p">,</span> A <span class="tok-p">=</span> df<span class="tok-p">.</span>y<span class="tok-p">.</span>mean<span class="tok-p">(</span><span class="tok-p">)</span><span class="tok-p">,</span> <span class="tok-n">20.0</span>                          <span class="tok-c"># байесовское сглаживание Beta(A*prior, A*(1-prior))</span>
+<span class="tok-k">def</span> <span class="tok-f">add_ctr</span><span class="tok-p">(</span>d<span class="tok-p">)</span><span class="tok-p">:</span>
+    d<span class="tok-p">[</span><span class="tok-s">"</span><span class="tok-s">ctr7</span><span class="tok-s">"</span><span class="tok-p">]</span> <span class="tok-p">=</span> <span class="tok-p">(</span>d<span class="tok-p">.</span>clk7 <span class="tok-p">+</span> A <span class="tok-p">*</span> PRIOR<span class="tok-p">)</span> <span class="tok-p">/</span> <span class="tok-p">(</span>d<span class="tok-p">.</span>imp7 <span class="tok-p">+</span> A<span class="tok-p">)</span>
+    d<span class="tok-p">[</span><span class="tok-s">"</span><span class="tok-s">ctr1</span><span class="tok-s">"</span><span class="tok-p">]</span> <span class="tok-p">=</span> <span class="tok-p">(</span>d<span class="tok-p">.</span>clk1 <span class="tok-p">+</span> A <span class="tok-p">*</span> PRIOR<span class="tok-p">)</span> <span class="tok-p">/</span> <span class="tok-p">(</span>d<span class="tok-p">.</span>imp1 <span class="tok-p">+</span> A<span class="tok-p">)</span><span class="tok-p">;</span> <span class="tok-k">return</span> d
+
+<span class="tok-c"># корректный join: последний снимок с snap_ts &lt;= ts показа (merge_asof)</span>
+ok <span class="tok-p">=</span> pd<span class="tok-p">.</span>merge_asof<span class="tok-p">(</span>df<span class="tok-p">.</span>sort_values<span class="tok-p">(</span><span class="tok-s">"</span><span class="tok-s">ts</span><span class="tok-s">"</span><span class="tok-p">)</span><span class="tok-p">,</span> snap<span class="tok-p">.</span>drop<span class="tok-p">(</span>columns<span class="tok-p">=</span><span class="tok-s">"</span><span class="tok-s">day</span><span class="tok-s">"</span><span class="tok-p">)</span><span class="tok-p">.</span>sort_values<span class="tok-p">(</span><span class="tok-s">"</span><span class="tok-s">snap_ts</span><span class="tok-s">"</span><span class="tok-p">)</span><span class="tok-p">,</span> left_on<span class="tok-p">=</span><span class="tok-s">"</span><span class="tok-s">ts</span><span class="tok-s">"</span><span class="tok-p">,</span> right_on<span class="tok-p">=</span><span class="tok-s">"</span><span class="tok-s">snap_ts</span><span class="tok-s">"</span><span class="tok-p">,</span>
+                   by<span class="tok-p">=</span><span class="tok-s">"</span><span class="tok-s">item</span><span class="tok-s">"</span><span class="tok-p">,</span> direction<span class="tok-p">=</span><span class="tok-s">"</span><span class="tok-s">backward</span><span class="tok-s">"</span><span class="tok-p">,</span> allow_exact_matches<span class="tok-p">=</span><span class="tok-k">True</span><span class="tok-p">)</span>
+ok <span class="tok-p">=</span> add_ctr<span class="tok-p">(</span>ok<span class="tok-p">)</span>
+<span class="tok-c"># наивный join по дате: снимок «на конец суток показа» — в окно попадает сам показ и вся остальная суточная выручка</span>
+leak <span class="tok-p">=</span> df<span class="tok-p">.</span>assign<span class="tok-p">(</span>day_next<span class="tok-p">=</span>df<span class="tok-p">.</span>day <span class="tok-p">+</span> <span class="tok-n">1</span><span class="tok-p">)</span><span class="tok-p">.</span>merge<span class="tok-p">(</span>snap<span class="tok-p">,</span> left_on<span class="tok-p">=</span><span class="tok-p">[</span><span class="tok-s">"</span><span class="tok-s">item</span><span class="tok-s">"</span><span class="tok-p">,</span> <span class="tok-s">"</span><span class="tok-s">day_next</span><span class="tok-s">"</span><span class="tok-p">]</span><span class="tok-p">,</span> right_on<span class="tok-p">=</span><span class="tok-p">[</span><span class="tok-s">"</span><span class="tok-s">item</span><span class="tok-s">"</span><span class="tok-p">,</span> <span class="tok-s">"</span><span class="tok-s">day</span><span class="tok-s">"</span><span class="tok-p">]</span><span class="tok-p">,</span>
+                                            suffixes<span class="tok-p">=</span><span class="tok-p">(</span><span class="tok-s">"</span><span class="tok-s">"</span><span class="tok-p">,</span> <span class="tok-s">"</span><span class="tok-s">_s</span><span class="tok-s">"</span><span class="tok-p">)</span><span class="tok-p">)</span>
+leak<span class="tok-p">[</span><span class="tok-s">"</span><span class="tok-s">clk7</span><span class="tok-s">"</span><span class="tok-p">]</span> <span class="tok-p">+</span><span class="tok-p">=</span> <span class="tok-n">0</span>  <span class="tok-c"># окно снимка day+1 = дни day-6..day — включает ТЕКУЩИЕ сутки и метку</span>
+leak <span class="tok-p">=</span> add_ctr<span class="tok-p">(</span>leak<span class="tok-p">)</span><span class="tok-p">.</span>sort_values<span class="tok-p">(</span><span class="tok-s">"</span><span class="tok-s">ts</span><span class="tok-s">"</span><span class="tok-p">)</span>
+
+FEATS <span class="tok-p">=</span> <span class="tok-p">[</span><span class="tok-s">"</span><span class="tok-s">ctr7</span><span class="tok-s">"</span><span class="tok-p">,</span> <span class="tok-s">"</span><span class="tok-s">imp7</span><span class="tok-s">"</span><span class="tok-p">,</span> <span class="tok-s">"</span><span class="tok-s">ctr1</span><span class="tok-s">"</span><span class="tok-p">,</span> <span class="tok-s">"</span><span class="tok-s">imp1</span><span class="tok-s">"</span><span class="tok-p">,</span> <span class="tok-s">"</span><span class="tok-s">pos</span><span class="tok-s">"</span><span class="tok-p">]</span>
+<span class="tok-k">def</span> <span class="tok-f">fit_eval</span><span class="tok-p">(</span>train<span class="tok-p">,</span> valid_random<span class="tok-p">,</span> later_correct<span class="tok-p">)</span><span class="tok-p">:</span>
+    m <span class="tok-p">=</span> HistGradientBoostingClassifier<span class="tok-p">(</span>max_iter<span class="tok-p">=</span><span class="tok-n">150</span><span class="tok-p">,</span> learning_rate<span class="tok-p">=</span><span class="tok-n">0.1</span><span class="tok-p">,</span> random_state<span class="tok-p">=</span><span class="tok-n">0</span><span class="tok-p">)</span><span class="tok-p">.</span>fit<span class="tok-p">(</span>train<span class="tok-p">[</span>FEATS<span class="tok-p">]</span><span class="tok-p">,</span> train<span class="tok-p">.</span>y<span class="tok-p">)</span>
+    f <span class="tok-p">=</span> <span class="tok-k">lambda</span> d<span class="tok-p">:</span> roc_auc_score<span class="tok-p">(</span>d<span class="tok-p">.</span>y<span class="tok-p">,</span> m<span class="tok-p">.</span>predict_proba<span class="tok-p">(</span>d<span class="tok-p">[</span>FEATS<span class="tok-p">]</span><span class="tok-p">)</span><span class="tok-p">[</span><span class="tok-p">:</span><span class="tok-p">,</span> <span class="tok-n">1</span><span class="tok-p">]</span><span class="tok-p">)</span>
+    <span class="tok-k">return</span> f<span class="tok-p">(</span>valid_random<span class="tok-p">)</span><span class="tok-p">,</span> f<span class="tok-p">(</span>later_correct<span class="tok-p">)</span>
+
+TR_END<span class="tok-p">,</span> LATER <span class="tok-p">=</span> <span class="tok-n">20</span><span class="tok-p">,</span> <span class="tok-n">24</span>     <span class="tok-c"># обучение: дни 0..19; "случайный" вал — случайные 20% дней 0..19; позже — дни 24..29</span>
+res <span class="tok-p">=</span> <span class="tok-p">{</span><span class="tok-p">}</span>
+<span class="tok-k">for</span> name<span class="tok-p">,</span> d <span class="tok-k">in</span> <span class="tok-p">(</span><span class="tok-p">(</span><span class="tok-s">"</span><span class="tok-s">leaky</span><span class="tok-s">"</span><span class="tok-p">,</span> leak<span class="tok-p">)</span><span class="tok-p">,</span> <span class="tok-p">(</span><span class="tok-s">"</span><span class="tok-s">point-in-time</span><span class="tok-s">"</span><span class="tok-p">,</span> ok<span class="tok-p">)</span><span class="tok-p">)</span><span class="tok-p">:</span>
+    pool <span class="tok-p">=</span> d<span class="tok-p">[</span>d<span class="tok-p">.</span>day <span class="tok-p">&lt;</span> TR_END<span class="tok-p">]</span>
+    msk <span class="tok-p">=</span> np<span class="tok-p">.</span>random<span class="tok-p">.</span>default_rng<span class="tok-p">(</span><span class="tok-n">1</span><span class="tok-p">)</span><span class="tok-p">.</span>random<span class="tok-p">(</span><span class="tok-f">len</span><span class="tok-p">(</span>pool<span class="tok-p">)</span><span class="tok-p">)</span> <span class="tok-p">&lt;</span> <span class="tok-n">0.2</span>
+    later_serve <span class="tok-p">=</span> ok<span class="tok-p">[</span>ok<span class="tok-p">.</span>day <span class="tok-p">&gt;</span><span class="tok-p">=</span> LATER<span class="tok-p">]</span>                  <span class="tok-c"># на проде признаки считаются корректно</span>
+    res<span class="tok-p">[</span>name<span class="tok-p">]</span> <span class="tok-p">=</span> fit_eval<span class="tok-p">(</span>pool<span class="tok-p">[</span><span class="tok-p">~</span>msk<span class="tok-p">]</span><span class="tok-p">,</span> pool<span class="tok-p">[</span>msk<span class="tok-p">]</span><span class="tok-p">,</span> later_serve<span class="tok-p">)</span>
+    <span class="tok-k">if</span> name <span class="tok-p">==</span> <span class="tok-s">"</span><span class="tok-s">leaky</span><span class="tok-s">"</span><span class="tok-p">:</span> res<span class="tok-p">[</span><span class="tok-s">"</span><span class="tok-s">leaky: later with leaky feats</span><span class="tok-s">"</span><span class="tok-p">]</span> <span class="tok-p">=</span> fit_eval<span class="tok-p">(</span>pool<span class="tok-p">[</span><span class="tok-p">~</span>msk<span class="tok-p">]</span><span class="tok-p">,</span> pool<span class="tok-p">[</span>msk<span class="tok-p">]</span><span class="tok-p">,</span> leak<span class="tok-p">[</span>leak<span class="tok-p">.</span>day <span class="tok-p">&gt;</span><span class="tok-p">=</span> LATER<span class="tok-p">]</span><span class="tok-p">)</span><span class="tok-p">[</span><span class="tok-n">1</span><span class="tok-p">:</span><span class="tok-p">]</span>
+<span class="tok-k">for</span> k<span class="tok-p">,</span> v <span class="tok-k">in</span> res<span class="tok-p">.</span>items<span class="tok-p">(</span><span class="tok-p">)</span><span class="tok-p">:</span> <span class="tok-f">print</span><span class="tok-p">(</span>k<span class="tok-p">,</span> <span class="tok-p">[</span><span class="tok-f">round</span><span class="tok-p">(</span>x<span class="tok-p">,</span> <span class="tok-n">4</span><span class="tok-p">)</span> <span class="tok-k">for</span> x <span class="tok-k">in</span> v<span class="tok-p">]</span><span class="tok-p">)</span>
+<span class="tok-f">print</span><span class="tok-p">(</span><span class="tok-s">"</span><span class="tok-s">rows</span><span class="tok-s">"</span><span class="tok-p">,</span> <span class="tok-f">len</span><span class="tok-p">(</span>df<span class="tok-p">)</span><span class="tok-p">,</span> <span class="tok-s">"</span><span class="tok-s">clicks rate</span><span class="tok-s">"</span><span class="tok-p">,</span> <span class="tok-f">round</span><span class="tok-p">(</span>df<span class="tok-p">.</span>y<span class="tok-p">.</span>mean<span class="tok-p">(</span><span class="tok-p">)</span><span class="tok-p">,</span> <span class="tok-n">4</span><span class="tok-p">)</span><span class="tok-p">)</span>
+</code></pre></div>
+<h2 id="ловушки">Ловушки</h2>
+<ul>
+<li><strong>Агрегат «по дате» без сдвига.</strong> Окно должно кончаться до начала интервала показа; проверяйте, что у показа из первого дня счётчик нулевой.</li>
+<li><strong>Дефолты.</strong> Пропуск в обучении (0 показов) и пропуск в проде (feature store недоступен) должны кодироваться одинаково; лучше отдельным флагом.</li>
+<li><strong>Признаки из логов выдачи нынешней модели.</strong> Счётчики, зависящие от того, кому показала предыдущая модель, замыкают петлю обратной связи.</li>
+<li><strong>Несогласованное время.</strong> Часовые пояса и задержка доставки событий: событие «до <span class="tex">t</span>» может прийти в хранилище после <span class="tex">t</span>.</li>
+</ul>
+<p>На собеседовании: что такое point-in-time корректность и как её обеспечить; чем онлайн-хранилище отличается от офлайн-хранилища; как обнаружить train/serve skew; зачем сглаживать CTR и чем Вильсон отличается от байесовского среднего.</p>
+<h2 id="проверь-себя">Проверь себя</h2>
+<details class="callout md details"><summary>Как наивный join «CTR по дням» утекает метку?</summary>
+<p>Дневной CTR включает клики тех же суток, в том числе клик самой строки; модель читает метку из признака, которого в момент показа в проде нет.</p>
+</details>
+<details class="callout md details"><summary>Почему логирование признаков при показе надёжнее пересчёта?</summary>
+<p>Оно записывает ровно то, что видела модель, включая прод-дефолты и свежесть, и исключает расхождение кода; пересчитывать прошлое нужно только для новых признаков.</p>
+</details>
+<details class="callout md details"><summary>Зачем сглаживать CTR объекта и подавать в модель число показов?</summary>
+<p>Малые выборки дают шумный <span class="tex">c/n</span>; сглаживание стягивает их к глобальному CTR, а <span class="tex">n</span> как признак позволяет модели решать, насколько доверять оценке.</p>
+</details>
+<details class="callout md details"><summary>Как обнаружить train/serve skew?</summary>
+<p>Сравнить распределения признаков и долю пропусков в обучении и в логе обслуживания; пересчитать признаки офлайн для залогированных показов и сверить; следить за разрывом офлайн и онлайн.</p>
+</details>
+<details class="callout md details"><summary>Какие классы свежести бывают в feature store?</summary>
+<p>Batch (раз в сутки), streaming (секунды–минуты), request-time (в момент запроса); свежее — дороже и выше риск skew.</p>
+</details>
+<h2 id="что-почитать">Что почитать</h2>
+<ul>
+<li>Sculley D. et al. <em>Hidden Technical Debt in Machine Learning Systems</em>, NIPS 2015.</li>
+<li>McMahan H. B. et al. <em>Ad Click Prediction: a View from the Trenches</em>, KDD 2013.</li>
+<li>Документация Feast (point-in-time joins, <code>get_historical_features</code>) — https://docs.feast.dev</li>
+<li>Документация pandas <code>merge_asof</code> — https://pandas.pydata.org/docs/reference/api/pandas.merge_asof.html</li>
+<li>Ji Y., Sun A., Zhang J., Li C. <em>A Critical Study on Data Leakage in Recommender System Offline Evaluation</em>, TOIS 2023 — https://arxiv.org/abs/2010.11060</li>
+</ul>
+</div>
+      
+
+      
+
+      
+      <nav class="pager" aria-label="Соседние статьи">
+        <a href="/edufamcs-demo/handbook/recsys/multitask-ranzhirovanie/"><span><svg class="ico sm" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-arrow-left"/></svg>Назад</span>Многозадачное ранжирование: MMoE, PLE, ESMM</a>
+        <a href="/edufamcs-demo/handbook/recsys/protokol-oflajn-ocenki/"><span>Дальше<svg class="ico sm" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-arrow"/></svg></span>Протокол офлайн-оценки и утечки</a>
+      </nav>
+      
+    </article>
+
+    <aside class="hb-toc" aria-label="На этой странице">
+      <a class="l2" href="#семейства-признаков">Семейства признаков</a><a class="l2" href="#счётчики-по-окнам-и-сглаживание">Счётчики по окнам и сглаживание</a><a class="l2" href="#утечка-через-время-и-point-in-time-корректность">Утечка через время и point-in-time корректность</a><a class="l2" href="#trainserve-skew">Train/serve skew</a><a class="l2" href="#feature-store">Feature store</a><a class="l2" href="#важность-признаков-и-абляции">Важность признаков и абляции</a><a class="l2" href="#пример-утечка-против-корректного-join">Пример: утечка против корректного join</a><a class="l2" href="#код">Код</a><a class="l2" href="#ловушки">Ловушки</a><a class="l2" href="#проверь-себя">Проверь себя</a><a class="l2" href="#что-почитать">Что почитать</a>
+    </aside>
+  </div>
+</div>
+
+
+</main>
+
+<footer class="ftr" data-theme="dark">
+  <svg class="sym fern" viewBox="0 0 40.5 65.02" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#fern"/></svg>
+  <div class="container">
+    <div class="ftr-row">
+      <a href="/edufamcs-demo/" aria-label="EDU FAMCS — главная"><img src="/edufamcs-demo/static/brand/logo/logo-edu-dark.svg" alt="EDU FAMCS" width="196" height="40"></a>
+      <ul class="ftr-links">
+        <li><a href="/edufamcs-demo/#courses">Курсы</a></li>
+        <li><a href="/edufamcs-demo/ml/">Машинное обучение</a></li>
+        <li><a href="/edufamcs-demo/handbook/">Хендбук</a></li>
+        <li><a href="/edufamcs-demo/news/">Новости</a></li>
+        <li><a href="/edufamcs-demo/people/">Авторы</a></li>
+        <li><a href="/edufamcs-demo/about/">О&nbsp;нас</a></li>
+        <li><a href="/edufamcs-demo/propose/">Предложить или исправить</a></li>
+        <li><a href="/edufamcs-demo/privacy/">Конфиденциальность</a></li>
+      </ul>
+    </div>
+    <div class="ftr-big" aria-hidden="true">EDU<span class="d">·</span>FAMCS</div>
+    <p class="ftr-copy">© 2026 EDU FAMCS · Минск</p>
+  </div>
+</footer>
+
+<div class="toasts-region" aria-live="polite" id="toasts">
+
+</div>
+
+</body>
+</html>

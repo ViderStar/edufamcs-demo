@@ -1,0 +1,363 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>HTTP и API: сервис с моделью на FastAPI · EDU FAMCS</title>
+<meta name="description" content="HTTP и API: сервис с моделью на FastAPI — Инженерия: от ноутбука до сервиса. Хендбук ML-курса ФПМИ.">
+<meta name="theme-color" content="#060A16">
+<meta name="robots" content="noindex, nofollow">
+<meta name="htmx-config" content='{"allowEval":false,"includeIndicatorStyles":false,"historyCacheSize":0,"selfRequestsOnly":true}'>
+<meta name="katex-js" content="/edufamcs-demo/static/vendor/katex/katex.min.js">
+<meta name="katex-css" content="/edufamcs-demo/static/vendor/katex/katex.min.css">
+<link rel="icon" href="/edufamcs-demo/static/brand/logo/favicon-16.svg" type="image/svg+xml" sizes="16x16">
+<link rel="icon" href="/edufamcs-demo/static/brand/logo/favicon.svg" type="image/svg+xml" sizes="any">
+<link rel="preload" href="/edufamcs-demo/static/brand/fonts/manrope-cyrillic-400.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/edufamcs-demo/static/brand/fonts/unbounded-cyrillic-800.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="/edufamcs-demo/static/brand/fonts.css">
+<link rel="stylesheet" href="/edufamcs-demo/static/brand/tokens.css">
+<link rel="stylesheet" href="/edufamcs-demo/static/brand/components.css">
+<link rel="stylesheet" href="/edufamcs-demo/static/css/site.css">
+<link rel="stylesheet" href="/edufamcs-demo/static/css/hub.css">
+<link rel="stylesheet" href="/edufamcs-demo/static/css/about.css">
+<link rel="stylesheet" href="/edufamcs-demo/static/handbook/handbook.css">
+<script src="/edufamcs-demo/static/js/theme.js"></script>
+<script src="/edufamcs-demo/static/vendor/htmx/htmx.min.js" defer></script>
+<script src="/edufamcs-demo/static/vendor/alpine/alpine-csp.min.js" defer></script>
+<script src="/edufamcs-demo/static/js/site.js" defer></script>
+<script src="/edufamcs-demo/static/handbook/handbook.js" defer></script>
+</head>
+<body class="" hx-headers='{"X-CSRFToken": "zvPfVvZ8SBgRHgbNLw7lPfcuoppGSXCObIEcbxyZTouqSzqfKZlix84sQywECHBv"}'>
+<a class="skip" href="#main">К содержанию</a>
+<div class="demo-bar" role="note">Демо-версия для отзывов: вход, запись на курсы и формы здесь не работают.</div>
+
+<header class="hdr">
+  <div class="container">
+    <a class="brand" href="/edufamcs-demo/" aria-label="EDU FAMCS — главная">
+      <span class="full"><img class="only-light" src="/edufamcs-demo/static/brand/logo/logo-edu-light.svg" alt="EDU FAMCS" width="196" height="40"><img class="only-dark" src="/edufamcs-demo/static/brand/logo/logo-edu-dark.svg" alt="EDU FAMCS" width="196" height="40"></span>
+      <span class="short"><img class="only-light" src="/edufamcs-demo/static/brand/logo/logo-edu-light.svg" alt="EDU FAMCS" height="30"><img class="only-dark" src="/edufamcs-demo/static/brand/logo/logo-edu-dark.svg" alt="EDU FAMCS" height="30"></span>
+    </a>
+    <nav class="nav" id="main-nav" aria-label="Основная навигация">
+      <a href="/edufamcs-demo/#courses">Курсы</a>
+      <a href="/edufamcs-demo/ml/" >Машинное обучение</a>
+      
+      <a href="/edufamcs-demo/handbook/" aria-current="page">Хендбук</a>
+      <a href="/edufamcs-demo/news/" >Новости</a>
+      <a href="/edufamcs-demo/people/" >Авторы</a>
+      <a href="/edufamcs-demo/about/" >О&nbsp;нас</a>
+    </nav>
+    <div class="hdr-actions">
+      
+      <a class="btn btn-outline btn-login" href="/edufamcs-demo/accounts/login/?next=/handbook/engineering/http-i-fastapi/">Войти</a>
+      
+      <button class="icon-btn menu-btn" type="button" aria-label="Меню" aria-expanded="false" aria-controls="main-nav"><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-menu"/></svg></button>
+    </div>
+  </div>
+</header>
+
+<main id="main">
+
+
+
+<div class="container hb-page hb-tone">
+  <div class="hb-readbar" aria-hidden="true"><i></i></div>
+  <div class="hb">
+    <aside class="hb-nav" aria-label="Статьи раздела">
+      
+<form class="hb-search" action="/edufamcs-demo/handbook/search/" method="get" role="search">
+  <svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-search"/></svg>
+  <input class="input" type="search" name="q" value="" placeholder="Поиск по хендбуку" aria-label="Поиск по хендбуку" autocomplete="off" maxlength="120"
+    hx-get="/edufamcs-demo/handbook/search/" hx-trigger="input changed delay:250ms, search" hx-target="#hb-nav-results" hx-sync="this:replace">
+</form>
+
+      <div id="hb-nav-results" class="hb-nav-results" aria-live="polite"></div>
+      <a class="grp" href="/edufamcs-demo/handbook/engineering/">Сервис</a>
+      
+      <a class="" href="/edufamcs-demo/handbook/engineering/iz-noutbuka-v-proekt/">Из ноутбука в проект: модули, конфиги, тесты</a>
+      
+      <a class="cur" href="/edufamcs-demo/handbook/engineering/http-i-fastapi/" aria-current="page">HTTP и API: сервис с моделью на FastAPI</a>
+      
+      <a class="" href="/edufamcs-demo/handbook/engineering/sql-i-postgres/">SQL и Postgres: минимум для ML-инженера</a>
+      
+    </aside>
+
+    <article class="hb-main">
+      <nav class="crumbs" aria-label="Навигация"><a href="/edufamcs-demo/handbook/">Хендбук</a><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-chev"/></svg><a href="/edufamcs-demo/handbook/engineering/">Инженерия: от ноутбука до сервиса</a></nav>
+      <h1 class="h1">HTTP и API: сервис с моделью на FastAPI</h1>
+      <div class="hb-meta">
+        
+        
+        <span><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-clock"/></svg>11&nbsp;мин</span>
+        <span class="hb-authors"><span class="avatar sm" title="Артем Лебедевич">АЛ</span>Артем Лебедевич</span>
+        <span><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-edit"/></svg>10 ноября 2026</span>
+        
+        
+      </div>
+
+      
+      <details class="hb-mtoc">
+        <summary><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-list"/></svg>Содержание<svg class="ico sm" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-chev-down"/></svg></summary>
+        <a class="l2" href="#http-за-десять-строк">HTTP за десять строк</a><a class="l2" href="#приложение-контракт-на-pydantic">Приложение: контракт на pydantic</a><a class="l3" href="#модель-загружается-один-раз-lifespan">Модель загружается один раз: lifespan</a><a class="l3" href="#эндпоинты">Эндпоинты</a><a class="l2" href="#ошибки-валидации">Ошибки валидации</a><a class="l2" href="#sync-против-async-что-блокирует-event-loop">sync против async: что блокирует event loop</a><a class="l2" href="#тест-через-testclient">Тест через TestClient</a><a class="l2" href="#задержка-p50-p95-p99">Задержка: p50, p95, p99</a><a class="l2" href="#аутентификация-токеном">Аутентификация токеном</a><a class="l2" href="#ловушки">Ловушки</a><a class="l2" href="#проверь-себя">Проверь себя</a><a class="l2" href="#что-почитать">Что почитать</a>
+      </details>
+      
+
+      <div class="prose"><p>Модель в файле никому не нужна: её используют другие программы, а договариваются они по HTTP. Задача ML-инженера на этом этапе — обернуть <code>predict</code> в сервис с чётким контрактом, проверкой входа и проверкой «жив ли я». В статье мы строим такой сервис на FastAPI поверх пакета из <a href="/edufamcs-demo/handbook/engineering/iz-noutbuka-v-proekt/" rel="noopener noreferrer nofollow">предыдущей статьи</a>.</p>
+<h2 id="http-за-десять-строк">HTTP за десять строк</h2>
+<p>Клиент отправляет <strong>запрос</strong>: метод, путь, заголовки, необязательное тело. Сервер возвращает <strong>ответ</strong>: код статуса, заголовки, тело.</p>
+<div class="code"><div class="code-head"><span class="lang">text</span></div><pre><code>POST /predict HTTP/1.1
+Host: localhost:8765
+Content-Type: application/json
+Authorization: Bearer &lt;token&gt;
+
+{"n_orders": 3, "days_since_last": 40, "avg_check": 25}
+</code></pre></div>
+<div class="code"><div class="code-head"><span class="lang">text</span></div><pre><code>HTTP/1.1 200 OK
+Content-Type: application/json
+
+{"churn_probability": 0.34, "model_version": "v1"}
+</code></pre></div>
+<ul>
+<li><strong>Метод</strong> — смысл действия: <code>GET</code> читает без побочных эффектов, <code>POST</code> создаёт или запускает вычисление, <code>PUT</code>/<code>PATCH</code> меняют, <code>DELETE</code> удаляет.</li>
+<li><strong>Статусы</strong>: <code>200</code> успех; <code>201</code> создано; <code>400</code>/<code>422</code> плохой вход; <code>401</code> нет или неверный токен; <code>403</code> нельзя; <code>404</code> нет такого; <code>429</code> слишком много запросов; <code>500</code> ошибка сервера; <code>503</code> сервис не готов.</li>
+<li><strong>Заголовки</strong> — метаданные: <code>Content-Type</code>, <code>Authorization</code>, <code>Accept</code>. Тело в JSON.</li>
+</ul>
+<p>REST-соглашения: путь — это существительное (<code>/users/42/orders</code>), глагол задаёт метод, статус говорит о результате, а не «всегда 200 и ошибка в теле». Предсказание формально вычисление, а не создание ресурса, поэтому <code>POST /predict</code> — общепринятый выбор: признаков много, в адресную строку их класть неудобно.</p>
+<h2 id="приложение-контракт-на-pydantic">Приложение: контракт на pydantic</h2>
+<p>FastAPI строит валидацию и документацию из аннотаций типов. Модели pydantic v2 описывают вход и выход:</p>
+<div class="code"><div class="code-head"><span class="lang">python</span></div><pre><code><span class="tok-c"># src/churn/api.py</span>
+<span class="tok-k">import</span> logging
+<span class="tok-k">from</span> contextlib <span class="tok-k">import</span> asynccontextmanager
+
+<span class="tok-k">import</span> pandas <span class="tok-k">as</span> pd
+<span class="tok-k">from</span> fastapi <span class="tok-k">import</span> FastAPI<span class="tok-p">,</span> HTTPException<span class="tok-p">,</span> Request
+<span class="tok-k">from</span> pydantic <span class="tok-k">import</span> BaseModel<span class="tok-p">,</span> Field
+
+<span class="tok-k">from</span> churn <span class="tok-k">import</span> model <span class="tok-k">as</span> model_lib
+<span class="tok-k">from</span> churn <span class="tok-k">import</span> predict <span class="tok-k">as</span> predict_lib
+<span class="tok-k">from</span> churn.settings <span class="tok-k">import</span> get_settings
+
+log <span class="tok-p">=</span> logging<span class="tok-p">.</span>getLogger<span class="tok-p">(</span><span class="tok-s">"</span><span class="tok-s">churn.api</span><span class="tok-s">"</span><span class="tok-p">)</span>
+
+
+<span class="tok-k">class</span> <span class="tok-f">PredictRequest</span><span class="tok-p">(</span>BaseModel<span class="tok-p">)</span><span class="tok-p">:</span>
+    n_orders<span class="tok-p">:</span> <span class="tok-f">int</span> <span class="tok-p">=</span> Field<span class="tok-p">(</span>ge<span class="tok-p">=</span><span class="tok-n">0</span><span class="tok-p">,</span> examples<span class="tok-p">=</span><span class="tok-p">[</span><span class="tok-n">7</span><span class="tok-p">]</span><span class="tok-p">)</span>
+    days_since_last<span class="tok-p">:</span> <span class="tok-f">float</span> <span class="tok-p">=</span> Field<span class="tok-p">(</span>ge<span class="tok-p">=</span><span class="tok-n">0</span><span class="tok-p">,</span> examples<span class="tok-p">=</span><span class="tok-p">[</span><span class="tok-n">12.5</span><span class="tok-p">]</span><span class="tok-p">)</span>
+    avg_check<span class="tok-p">:</span> <span class="tok-f">float</span> <span class="tok-p">=</span> Field<span class="tok-p">(</span>ge<span class="tok-p">=</span><span class="tok-n">0</span><span class="tok-p">,</span> examples<span class="tok-p">=</span><span class="tok-p">[</span><span class="tok-n">35.0</span><span class="tok-p">]</span><span class="tok-p">)</span>
+
+
+<span class="tok-k">class</span> <span class="tok-f">PredictResponse</span><span class="tok-p">(</span>BaseModel<span class="tok-p">)</span><span class="tok-p">:</span>
+    churn_probability<span class="tok-p">:</span> <span class="tok-f">float</span>
+    model_version<span class="tok-p">:</span> <span class="tok-f">str</span>
+</code></pre></div>
+<h3 id="модель-загружается-один-раз-lifespan">Модель загружается один раз: lifespan</h3>
+<p>Загрузка занимает секунды и сотни мегабайт. Делать её на каждый запрос нельзя; на старте процесса, до приёма трафика, можно. Для этого служит <code>lifespan</code>: код до <code>yield</code> выполняется при старте, после — при остановке. Модель кладём в <code>app.state</code>.</p>
+<div class="code"><div class="code-head"><span class="lang">python</span></div><pre><code><span class="tok-f">@asynccontextmanager</span>
+<span class="tok-k">async</span> <span class="tok-k">def</span> <span class="tok-f">lifespan</span><span class="tok-p">(</span>app<span class="tok-p">:</span> FastAPI<span class="tok-p">)</span><span class="tok-p">:</span>
+    settings <span class="tok-p">=</span> get_settings<span class="tok-p">(</span><span class="tok-p">)</span>
+    logging<span class="tok-p">.</span>basicConfig<span class="tok-p">(</span>level<span class="tok-p">=</span>settings<span class="tok-p">.</span>log_level<span class="tok-p">)</span>
+    app<span class="tok-p">.</span>state<span class="tok-p">.</span>settings <span class="tok-p">=</span> settings
+    app<span class="tok-p">.</span>state<span class="tok-p">.</span>model <span class="tok-p">=</span> model_lib<span class="tok-p">.</span>load<span class="tok-p">(</span>settings<span class="tok-p">.</span>model_path<span class="tok-p">)</span>
+    log<span class="tok-p">.</span>info<span class="tok-p">(</span><span class="tok-s">"</span><span class="tok-s">model loaded from </span><span class="tok-s">%s</span><span class="tok-s">"</span><span class="tok-p">,</span> settings<span class="tok-p">.</span>model_path<span class="tok-p">)</span>
+    <span class="tok-k">yield</span>
+    log<span class="tok-p">.</span>info<span class="tok-p">(</span><span class="tok-s">"</span><span class="tok-s">shutdown</span><span class="tok-s">"</span><span class="tok-p">)</span>
+
+
+app <span class="tok-p">=</span> FastAPI<span class="tok-p">(</span>title<span class="tok-p">=</span><span class="tok-s">"</span><span class="tok-s">churn-service</span><span class="tok-s">"</span><span class="tok-p">,</span> lifespan<span class="tok-p">=</span>lifespan<span class="tok-p">)</span>
+</code></pre></div>
+<p>Прежний <code>@app.on_event("startup")</code> объявлен устаревшим; в новом коде используйте <code>lifespan</code>.</p>
+<h3 id="эндпоинты">Эндпоинты</h3>
+<div class="code"><div class="code-head"><span class="lang">python</span></div><pre><code><span class="tok-f">@app</span><span class="tok-p">.</span>get<span class="tok-p">(</span><span class="tok-s">"</span><span class="tok-s">/healthz</span><span class="tok-s">"</span><span class="tok-p">)</span>
+<span class="tok-k">def</span> <span class="tok-f">healthz</span><span class="tok-p">(</span><span class="tok-p">)</span> <span class="tok-p">-</span><span class="tok-p">&gt;</span> <span class="tok-f">dict</span><span class="tok-p">:</span>
+    <span class="tok-k">return</span> <span class="tok-p">{</span><span class="tok-s">"</span><span class="tok-s">status</span><span class="tok-s">"</span><span class="tok-p">:</span> <span class="tok-s">"</span><span class="tok-s">ok</span><span class="tok-s">"</span><span class="tok-p">}</span>          <span class="tok-c"># процесс жив</span>
+
+
+<span class="tok-f">@app</span><span class="tok-p">.</span>get<span class="tok-p">(</span><span class="tok-s">"</span><span class="tok-s">/readyz</span><span class="tok-s">"</span><span class="tok-p">)</span>
+<span class="tok-k">def</span> <span class="tok-f">readyz</span><span class="tok-p">(</span>request<span class="tok-p">:</span> Request<span class="tok-p">)</span> <span class="tok-p">-</span><span class="tok-p">&gt;</span> <span class="tok-f">dict</span><span class="tok-p">:</span>
+    <span class="tok-k">if</span> <span class="tok-f">getattr</span><span class="tok-p">(</span>request<span class="tok-p">.</span>app<span class="tok-p">.</span>state<span class="tok-p">,</span> <span class="tok-s">"</span><span class="tok-s">model</span><span class="tok-s">"</span><span class="tok-p">,</span> <span class="tok-k">None</span><span class="tok-p">)</span> <span class="tok-k">is</span> <span class="tok-k">None</span><span class="tok-p">:</span>
+        <span class="tok-k">raise</span> HTTPException<span class="tok-p">(</span>status_code<span class="tok-p">=</span><span class="tok-n">503</span><span class="tok-p">,</span> detail<span class="tok-p">=</span><span class="tok-s">"</span><span class="tok-s">model not loaded</span><span class="tok-s">"</span><span class="tok-p">)</span>
+    <span class="tok-k">return</span> <span class="tok-p">{</span><span class="tok-s">"</span><span class="tok-s">status</span><span class="tok-s">"</span><span class="tok-p">:</span> <span class="tok-s">"</span><span class="tok-s">ready</span><span class="tok-s">"</span><span class="tok-p">}</span>       <span class="tok-c"># можно слать трафик</span>
+
+
+<span class="tok-f">@app</span><span class="tok-p">.</span>post<span class="tok-p">(</span><span class="tok-s">"</span><span class="tok-s">/predict</span><span class="tok-s">"</span><span class="tok-p">,</span> response_model<span class="tok-p">=</span>PredictResponse<span class="tok-p">)</span>
+<span class="tok-k">def</span> <span class="tok-f">predict</span><span class="tok-p">(</span>req<span class="tok-p">:</span> PredictRequest<span class="tok-p">,</span> request<span class="tok-p">:</span> Request<span class="tok-p">)</span> <span class="tok-p">-</span><span class="tok-p">&gt;</span> PredictResponse<span class="tok-p">:</span>
+    row <span class="tok-p">=</span> pd<span class="tok-p">.</span>DataFrame<span class="tok-p">(</span><span class="tok-p">[</span>req<span class="tok-p">.</span>model_dump<span class="tok-p">(</span><span class="tok-p">)</span><span class="tok-p">]</span><span class="tok-p">)</span>
+    p <span class="tok-p">=</span> <span class="tok-f">float</span><span class="tok-p">(</span>predict_lib<span class="tok-p">.</span>predict_proba<span class="tok-p">(</span>request<span class="tok-p">.</span>app<span class="tok-p">.</span>state<span class="tok-p">.</span>model<span class="tok-p">,</span> row<span class="tok-p">)</span><span class="tok-p">[</span><span class="tok-n">0</span><span class="tok-p">]</span><span class="tok-p">)</span>
+    <span class="tok-k">return</span> PredictResponse<span class="tok-p">(</span>churn_probability<span class="tok-p">=</span>p<span class="tok-p">,</span> model_version<span class="tok-p">=</span><span class="tok-s">"</span><span class="tok-s">v1</span><span class="tok-s">"</span><span class="tok-p">)</span>
+</code></pre></div>
+<p>Различие двух проб важно для оркестратора: <strong>liveness</strong> (<code>/healthz</code>) отвечает «перезапусти меня, если не отвечаю» и не должна зависеть от базы; <strong>readiness</strong> (<code>/readyz</code>) отвечает «я готов принимать трафик» и может проверять модель или соединение с БД. Если <code>/healthz</code> ходит в БД, то временный сбой базы приведёт к каскадному перезапуску всех копий сервиса.</p>
+<p>Запуск и вызовы (порт 8765, потому что 8000 часто занят):</p>
+<div class="code"><div class="code-head"><span class="lang">bash</span></div><pre><code>uv run uvicorn churn.api:app --port <span class="tok-n">8765</span>
+curl -s localhost:8765/healthz
+curl -s -X POST localhost:8765/predict <span class="tok-s">\
+</span>  -H <span class="tok-s">'Content-Type: application/json'</span> <span class="tok-s">\
+</span>  -d <span class="tok-s">'{"n_orders":3,"days_since_last":40,"avg_check":25}'</span>
+</code></pre></div>
+<p>Интерактивная документация сгенерирована автоматически: <code>/docs</code> (Swagger UI) и <code>/openapi.json</code>. Из Python:</p>
+<div class="code"><div class="code-head"><span class="lang">python</span></div><pre><code><span class="tok-k">import</span> httpx
+
+r <span class="tok-p">=</span> httpx<span class="tok-p">.</span>post<span class="tok-p">(</span><span class="tok-s">"</span><span class="tok-s">http://localhost:8765/predict</span><span class="tok-s">"</span><span class="tok-p">,</span> timeout<span class="tok-p">=</span><span class="tok-n">5</span><span class="tok-p">,</span>
+               json<span class="tok-p">=</span><span class="tok-p">{</span><span class="tok-s">"</span><span class="tok-s">n_orders</span><span class="tok-s">"</span><span class="tok-p">:</span> <span class="tok-n">3</span><span class="tok-p">,</span> <span class="tok-s">"</span><span class="tok-s">days_since_last</span><span class="tok-s">"</span><span class="tok-p">:</span> <span class="tok-n">40</span><span class="tok-p">,</span> <span class="tok-s">"</span><span class="tok-s">avg_check</span><span class="tok-s">"</span><span class="tok-p">:</span> <span class="tok-n">25</span><span class="tok-p">}</span><span class="tok-p">)</span>
+r<span class="tok-p">.</span>raise_for_status<span class="tok-p">(</span><span class="tok-p">)</span>
+<span class="tok-f">print</span><span class="tok-p">(</span>r<span class="tok-p">.</span>json<span class="tok-p">(</span><span class="tok-p">)</span><span class="tok-p">)</span>
+</code></pre></div>
+<p>Всегда задавайте <code>timeout</code>: у <code>httpx</code> он по умолчанию 5 секунд на фазу, но в клиентском коде полагаться на умолчания о таймаутах опасно.</p>
+<h2 id="ошибки-валидации">Ошибки валидации</h2>
+<p>Если вход нарушает схему, FastAPI сам вернёт <code>422 Unprocessable Entity</code> со списком проблем, а ваш код не вызовется:</p>
+<div class="code"><div class="code-head"><span class="lang">json</span></div><pre><code><span class="tok-p">{</span>"detail"<span class="tok-p">:</span> <span class="tok-p">[</span>
+  <span class="tok-p">{</span>"type"<span class="tok-p">:</span> <span class="tok-s">"greater_than_equal"</span><span class="tok-p">,</span> "loc"<span class="tok-p">:</span> <span class="tok-p">[</span><span class="tok-s">"body"</span><span class="tok-p">,</span> <span class="tok-s">"n_orders"</span><span class="tok-p">],</span>
+   "msg"<span class="tok-p">:</span> <span class="tok-s">"Input should be greater than or equal to 0"</span><span class="tok-p">,</span> "input"<span class="tok-p">:</span> <span class="tok-n">-1</span><span class="tok-p">,</span> "ctx"<span class="tok-p">:</span> <span class="tok-p">{</span>"ge"<span class="tok-p">:</span> <span class="tok-n">0</span><span class="tok-p">}},</span>
+  <span class="tok-p">{</span>"type"<span class="tok-p">:</span> <span class="tok-s">"missing"</span><span class="tok-p">,</span> "loc"<span class="tok-p">:</span> <span class="tok-p">[</span><span class="tok-s">"body"</span><span class="tok-p">,</span> <span class="tok-s">"avg_check"</span><span class="tok-p">],</span> "msg"<span class="tok-p">:</span> <span class="tok-s">"Field required"</span><span class="tok-p">}</span>
+<span class="tok-p">]}</span>
+</code></pre></div>
+<p>Контракт на входе — самая дешёвая защита модели: отрицательное число заказов или строка вместо числа не доедут до <code>predict</code>.</p>
+<h2 id="sync-против-async-что-блокирует-event-loop">sync против async: что блокирует event loop</h2>
+<p><code>async def</code> выполняется прямо в event loop, одном потоке, который обслуживает все соединения. Если внутри <code>async def</code> вы вызываете тяжёлый <code>model.predict</code> (CPU-bound, без <code>await</code>), весь процесс замирает: ни <code>/healthz</code>, ни другие запросы не обработаются, пока не закончится вычисление. Обычная <code>def</code>-функция FastAPI запускает в пуле потоков, и loop свободен. Поэтому правило для ML:</p>
+<ul>
+<li>инференс на CPU (sklearn, LightGBM, onnxruntime): <code>def</code>, а не <code>async def</code>;</li>
+<li><code>async def</code> — только если внутри есть <code>await</code> на сетевой/дисковый ввод-вывод (асинхронный драйвер БД, <code>httpx.AsyncClient</code>);</li>
+<li>пул потоков ограничен (по умолчанию порядка 40 потоков), а GIL мешает ускорению чистого Python-кода; нативные библиотеки (numpy, sklearn, torch) GIL на время расчёта отпускают.</li>
+</ul>
+<p>Масштабирование по ядрам: один процесс uvicorn использует одно ядро для питоновской части. <code>uvicorn churn.api:app --workers 4</code> запускает 4 процесса; <strong>модель будет загружена в каждом</strong> (4× памяти). Альтернатива в контейнерах — один процесс на контейнер и несколько реплик (см. <a href="/edufamcs-demo/handbook/engineering/docker/" rel="noopener noreferrer nofollow">Docker</a>).</p>
+<div class="callout md warn"><p class="callout-title">Ловушка</p>
+<p><code>async def predict(...)</code> с вызовом <code>model.predict</code> внутри выглядит современно и ломает сервис под нагрузкой: p99 растёт, а <code>/healthz</code> перестаёт отвечать, и оркестратор убивает «зависший» контейнер.</p>
+</div>
+<h2 id="тест-через-testclient">Тест через TestClient</h2>
+<p><code>TestClient</code> вызывает приложение без сети. Важно использовать его как контекстный менеджер: тогда выполняется <code>lifespan</code>.</p>
+<div class="code"><div class="code-head"><span class="lang">python</span></div><pre><code><span class="tok-c"># tests/test_api.py</span>
+<span class="tok-k">import</span> os
+
+<span class="tok-k">import</span> pytest
+<span class="tok-k">from</span> fastapi.testclient <span class="tok-k">import</span> TestClient
+
+<span class="tok-k">from</span> churn.features <span class="tok-k">import</span> FEATURES
+<span class="tok-k">from</span> churn.model <span class="tok-k">import</span> make_pipeline<span class="tok-p">,</span> save
+<span class="tok-k">from</span> churn.train <span class="tok-k">import</span> synthetic
+
+
+<span class="tok-f">@pytest</span><span class="tok-p">.</span>fixture<span class="tok-p">(</span>scope<span class="tok-p">=</span><span class="tok-s">"</span><span class="tok-s">module</span><span class="tok-s">"</span><span class="tok-p">)</span>
+<span class="tok-k">def</span> <span class="tok-f">client</span><span class="tok-p">(</span>tmp_path_factory<span class="tok-p">)</span><span class="tok-p">:</span>
+    path <span class="tok-p">=</span> tmp_path_factory<span class="tok-p">.</span>mktemp<span class="tok-p">(</span><span class="tok-s">"</span><span class="tok-s">m</span><span class="tok-s">"</span><span class="tok-p">)</span> <span class="tok-p">/</span> <span class="tok-s">"</span><span class="tok-s">model.joblib</span><span class="tok-s">"</span>
+    df <span class="tok-p">=</span> synthetic<span class="tok-p">(</span><span class="tok-n">500</span><span class="tok-p">)</span>
+    save<span class="tok-p">(</span>make_pipeline<span class="tok-p">(</span><span class="tok-p">)</span><span class="tok-p">.</span>fit<span class="tok-p">(</span>df<span class="tok-p">[</span>FEATURES<span class="tok-p">]</span><span class="tok-p">,</span> df<span class="tok-p">[</span><span class="tok-s">"</span><span class="tok-s">churned</span><span class="tok-s">"</span><span class="tok-p">]</span><span class="tok-p">)</span><span class="tok-p">,</span> path<span class="tok-p">)</span>
+    os<span class="tok-p">.</span>environ<span class="tok-p">[</span><span class="tok-s">"</span><span class="tok-s">CHURN_MODEL_PATH</span><span class="tok-s">"</span><span class="tok-p">]</span> <span class="tok-p">=</span> <span class="tok-f">str</span><span class="tok-p">(</span>path<span class="tok-p">)</span>
+    <span class="tok-k">from</span> churn.api <span class="tok-k">import</span> app
+
+    <span class="tok-k">with</span> TestClient<span class="tok-p">(</span>app<span class="tok-p">)</span> <span class="tok-k">as</span> c<span class="tok-p">:</span>
+        <span class="tok-k">yield</span> c
+
+
+<span class="tok-k">def</span> <span class="tok-f">test_predict_ok</span><span class="tok-p">(</span>client<span class="tok-p">)</span><span class="tok-p">:</span>
+    r <span class="tok-p">=</span> client<span class="tok-p">.</span>post<span class="tok-p">(</span><span class="tok-s">"</span><span class="tok-s">/predict</span><span class="tok-s">"</span><span class="tok-p">,</span> json<span class="tok-p">=</span><span class="tok-p">{</span><span class="tok-s">"</span><span class="tok-s">n_orders</span><span class="tok-s">"</span><span class="tok-p">:</span> <span class="tok-n">3</span><span class="tok-p">,</span> <span class="tok-s">"</span><span class="tok-s">days_since_last</span><span class="tok-s">"</span><span class="tok-p">:</span> <span class="tok-n">40</span><span class="tok-p">,</span> <span class="tok-s">"</span><span class="tok-s">avg_check</span><span class="tok-s">"</span><span class="tok-p">:</span> <span class="tok-n">25</span><span class="tok-p">}</span><span class="tok-p">)</span>
+    <span class="tok-k">assert</span> r<span class="tok-p">.</span>status_code <span class="tok-p">==</span> <span class="tok-n">200</span>
+    <span class="tok-k">assert</span> <span class="tok-n">0</span> <span class="tok-p">&lt;</span><span class="tok-p">=</span> r<span class="tok-p">.</span>json<span class="tok-p">(</span><span class="tok-p">)</span><span class="tok-p">[</span><span class="tok-s">"</span><span class="tok-s">churn_probability</span><span class="tok-s">"</span><span class="tok-p">]</span> <span class="tok-p">&lt;</span><span class="tok-p">=</span> <span class="tok-n">1</span>
+
+
+<span class="tok-k">def</span> <span class="tok-f">test_predict_validation</span><span class="tok-p">(</span>client<span class="tok-p">)</span><span class="tok-p">:</span>
+    r <span class="tok-p">=</span> client<span class="tok-p">.</span>post<span class="tok-p">(</span><span class="tok-s">"</span><span class="tok-s">/predict</span><span class="tok-s">"</span><span class="tok-p">,</span> json<span class="tok-p">=</span><span class="tok-p">{</span><span class="tok-s">"</span><span class="tok-s">n_orders</span><span class="tok-s">"</span><span class="tok-p">:</span> <span class="tok-p">-</span><span class="tok-n">1</span><span class="tok-p">,</span> <span class="tok-s">"</span><span class="tok-s">days_since_last</span><span class="tok-s">"</span><span class="tok-p">:</span> <span class="tok-s">"</span><span class="tok-s">abc</span><span class="tok-s">"</span><span class="tok-p">}</span><span class="tok-p">)</span>
+    <span class="tok-k">assert</span> r<span class="tok-p">.</span>status_code <span class="tok-p">==</span> <span class="tok-n">422</span>
+</code></pre></div>
+<p>Для <code>TestClient</code> нужен установленный <code>httpx</code> (в свежих версиях Starlette предпочитают пакет <code>httpx2</code>, а <code>httpx</code> работает с предупреждением: смотрите сообщение при запуске).</p>
+<h2 id="задержка-p50-p95-p99">Задержка: p50, p95, p99</h2>
+<p>Среднее время ответа скрывает хвост. Смотрят <strong>перцентили</strong>: p50 (медиана), p95, p99 — «столько мы отвечаем за 95 % / 99 % запросов». SLA формулируют по хвосту: «p95 &lt; 200 мс». На ноутбуке у примера выше (бустинг на одной строке, локальный <code>httpx</code> в цикле на 200 запросов) получилось p50 ≈ 5 мс, p95 ≈ 6 мс, p99 ≈ 12 мс; на ваших данных цифры другие, важно измерять.</p>
+<p>Рычаги: меньше работы на запрос (лёгкая предобработка, предрасчитанные признаки), <strong>батчинг</strong> (принимать список объектов и предсказывать одним вызовом: векторизованный <code>predict</code> на 100 строк обычно ненамного дороже, чем на одной), больше процессов/реплик, меньше модель. Метрики и трассы — в статье про <a href="/edufamcs-demo/handbook/engineering/logi-i-metriki/" rel="noopener noreferrer nofollow">логи и метрики</a>.</p>
+<h2 id="аутентификация-токеном">Аутентификация токеном</h2>
+<p>Закрытый сервис требует токен в заголовке <code>Authorization: Bearer &lt;token&gt;</code>. В FastAPI это зависимость, которую вешают на эндпоинт; токен берут из окружения, сравнивают в константное время:</p>
+<div class="code"><div class="code-head"><span class="lang">python</span></div><pre><code><span class="tok-k">import</span> secrets
+<span class="tok-k">from</span> fastapi <span class="tok-k">import</span> Depends<span class="tok-p">,</span> Header<span class="tok-p">,</span> HTTPException<span class="tok-p">,</span> Request
+
+
+<span class="tok-k">def</span> <span class="tok-f">check_token</span><span class="tok-p">(</span>request<span class="tok-p">:</span> Request<span class="tok-p">,</span> authorization<span class="tok-p">:</span> <span class="tok-f">str</span> <span class="tok-p">|</span> <span class="tok-k">None</span> <span class="tok-p">=</span> Header<span class="tok-p">(</span>default<span class="tok-p">=</span><span class="tok-k">None</span><span class="tok-p">)</span><span class="tok-p">)</span> <span class="tok-p">-</span><span class="tok-p">&gt;</span> <span class="tok-k">None</span><span class="tok-p">:</span>
+    expected <span class="tok-p">=</span> request<span class="tok-p">.</span>app<span class="tok-p">.</span>state<span class="tok-p">.</span>settings<span class="tok-p">.</span>api_token
+    <span class="tok-k">if</span> expected <span class="tok-k">is</span> <span class="tok-k">None</span><span class="tok-p">:</span>          <span class="tok-c"># токен не задан: локальная разработка</span>
+        <span class="tok-k">return</span>
+    given <span class="tok-p">=</span> <span class="tok-p">(</span>authorization <span class="tok-k">or</span> <span class="tok-s">"</span><span class="tok-s">"</span><span class="tok-p">)</span><span class="tok-p">.</span>removeprefix<span class="tok-p">(</span><span class="tok-s">"</span><span class="tok-s">Bearer </span><span class="tok-s">"</span><span class="tok-p">)</span>
+    <span class="tok-k">if</span> <span class="tok-k">not</span> secrets<span class="tok-p">.</span>compare_digest<span class="tok-p">(</span>given<span class="tok-p">,</span> expected<span class="tok-p">)</span><span class="tok-p">:</span>
+        <span class="tok-k">raise</span> HTTPException<span class="tok-p">(</span>status_code<span class="tok-p">=</span><span class="tok-n">401</span><span class="tok-p">,</span> detail<span class="tok-p">=</span><span class="tok-s">"</span><span class="tok-s">invalid token</span><span class="tok-s">"</span><span class="tok-p">)</span>
+
+<span class="tok-c"># @app.post("/predict", response_model=PredictResponse, dependencies=[Depends(check_token)])</span>
+</code></pre></div>
+<p>Токен по HTTP без TLS читается любым по пути: HTTPS терминируют на прокси (nginx, Caddy, облачный балансировщик). Токен хранится в секретах, а не в коде.</p>
+<h2 id="ловушки">Ловушки</h2>
+<ul>
+<li>Загрузка модели внутри обработчика или на уровне импорта (ломает тесты и <code>--reload</code>): только <code>lifespan</code>.</li>
+<li><code>async def</code> + тяжёлый CPU-код в теле; блокирующий <code>requests</code> внутри <code>async def</code>.</li>
+<li><code>/healthz</code> зависит от внешних систем; в итоге сбой Postgres перезапускает весь парк сервисов.</li>
+<li><code>--workers N</code> без расчёта памяти: N копий модели.</li>
+<li>Ответ <code>200</code> с <code>{"error": ...}</code> в теле вместо кода статуса.</li>
+<li>На собеседовании спрашивают: чем <code>PUT</code> отличается от <code>POST</code>; что такое идемпотентность; чем liveness от readiness; почему <code>async</code> не ускоряет инференс; чем p99 важнее среднего; как бы вы масштабировали сервис при росте RPS в 10 раз.</li>
+</ul>
+<h2 id="проверь-себя">Проверь себя</h2>
+<details class="callout md details"><summary>Зачем `lifespan`, и что случится, если грузить модель в теле `predict`?</summary>
+<p><code>lifespan</code> выполняется один раз при старте процесса: модель загружается до первого запроса. В теле обработчика загрузка повторялась бы на каждый запрос, добавляя секунды к задержке и забивая память.</p>
+</details>
+<details class="callout md details"><summary>Почему CPU-инференс лучше писать как `def`, а не `async def`?</summary>
+<p><code>async def</code> выполняется в event loop; тяжёлый синхронный код его блокирует, и сервис не обслуживает другие запросы (включая <code>/healthz</code>). <code>def</code> FastAPI запускает в пуле потоков.</p>
+</details>
+<details class="callout md details"><summary>Какой статус вернёт FastAPI на `{"n_orders": -1}` и откуда он берётся?</summary>
+<p><code>422</code>. Pydantic-модель запроса нарушена (<code>ge=0</code>, плюс отсутствуют обязательные поля), FastAPI формирует ответ с подробным списком ошибок до вызова вашей функции.</p>
+</details>
+<details class="callout md details"><summary>Чем `/healthz` отличается от `/readyz`?</summary>
+<p>Первый показывает, что процесс жив (нужен для перезапуска); второй — что сервис готов принимать трафик (модель загружена, зависимости доступны). Первый не должен зависеть от внешних систем.</p>
+</details>
+<details class="callout md details"><summary>Сервис отвечает в среднем за 20 мс, но жалобы на «тормоза». Что смотреть?</summary>
+<p>Хвост: p95/p99, не среднее. Причины хвоста: холодные кэши, GC, блокировка loop, очередь при нехватке воркеров, медленные запросы в БД. Проверьте распределение, а не одно число.</p>
+</details>
+<h2 id="что-почитать">Что почитать</h2>
+<ul>
+<li><a href="https://fastapi.tiangolo.com/" rel="noopener noreferrer nofollow">FastAPI: документация</a></li>
+<li><a href="https://fastapi.tiangolo.com/advanced/events/" rel="noopener noreferrer nofollow">FastAPI: lifespan events</a></li>
+<li><a href="https://fastapi.tiangolo.com/async/" rel="noopener noreferrer nofollow">FastAPI: concurrency и async/await</a></li>
+<li><a href="https://fastapi.tiangolo.com/tutorial/testing/" rel="noopener noreferrer nofollow">FastAPI: тестирование</a></li>
+<li><a href="https://developer.mozilla.org/ru/docs/Web/HTTP" rel="noopener noreferrer nofollow">MDN: HTTP</a></li>
+<li><a href="https://www.uvicorn.org/deployment/" rel="noopener noreferrer nofollow">Uvicorn: deployment</a></li>
+<li><a href="https://www.python-httpx.org/" rel="noopener noreferrer nofollow">HTTPX</a></li>
+</ul>
+</div>
+      
+
+      
+
+      
+      <nav class="pager" aria-label="Соседние статьи">
+        <a href="/edufamcs-demo/handbook/engineering/iz-noutbuka-v-proekt/"><span><svg class="ico sm" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-arrow-left"/></svg>Назад</span>Из ноутбука в проект: модули, конфиги, тесты</a>
+        <a href="/edufamcs-demo/handbook/engineering/sql-i-postgres/"><span>Дальше<svg class="ico sm" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-arrow"/></svg></span>SQL и Postgres: минимум для ML-инженера</a>
+      </nav>
+      
+    </article>
+
+    <aside class="hb-toc" aria-label="На этой странице">
+      <a class="l2" href="#http-за-десять-строк">HTTP за десять строк</a><a class="l2" href="#приложение-контракт-на-pydantic">Приложение: контракт на pydantic</a><a class="l3" href="#модель-загружается-один-раз-lifespan">Модель загружается один раз: lifespan</a><a class="l3" href="#эндпоинты">Эндпоинты</a><a class="l2" href="#ошибки-валидации">Ошибки валидации</a><a class="l2" href="#sync-против-async-что-блокирует-event-loop">sync против async: что блокирует event loop</a><a class="l2" href="#тест-через-testclient">Тест через TestClient</a><a class="l2" href="#задержка-p50-p95-p99">Задержка: p50, p95, p99</a><a class="l2" href="#аутентификация-токеном">Аутентификация токеном</a><a class="l2" href="#ловушки">Ловушки</a><a class="l2" href="#проверь-себя">Проверь себя</a><a class="l2" href="#что-почитать">Что почитать</a>
+    </aside>
+  </div>
+</div>
+
+
+</main>
+
+<footer class="ftr" data-theme="dark">
+  <svg class="sym fern" viewBox="0 0 40.5 65.02" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#fern"/></svg>
+  <div class="container">
+    <div class="ftr-row">
+      <a href="/edufamcs-demo/" aria-label="EDU FAMCS — главная"><img src="/edufamcs-demo/static/brand/logo/logo-edu-dark.svg" alt="EDU FAMCS" width="196" height="40"></a>
+      <ul class="ftr-links">
+        <li><a href="/edufamcs-demo/#courses">Курсы</a></li>
+        <li><a href="/edufamcs-demo/ml/">Машинное обучение</a></li>
+        <li><a href="/edufamcs-demo/handbook/">Хендбук</a></li>
+        <li><a href="/edufamcs-demo/news/">Новости</a></li>
+        <li><a href="/edufamcs-demo/people/">Авторы</a></li>
+        <li><a href="/edufamcs-demo/about/">О&nbsp;нас</a></li>
+        <li><a href="/edufamcs-demo/propose/">Предложить или исправить</a></li>
+        <li><a href="/edufamcs-demo/privacy/">Конфиденциальность</a></li>
+      </ul>
+    </div>
+    <div class="ftr-big" aria-hidden="true">EDU<span class="d">·</span>FAMCS</div>
+    <p class="ftr-copy">© 2026 EDU FAMCS · Минск</p>
+  </div>
+</footer>
+
+<div class="toasts-region" aria-live="polite" id="toasts">
+
+</div>
+
+</body>
+</html>

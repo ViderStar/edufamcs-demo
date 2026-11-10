@@ -1,0 +1,272 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Поиск аномалий · EDU FAMCS</title>
+<meta name="description" content="Поиск аномалий — Классическое машинное обучение. Хендбук ML-курса ФПМИ.">
+<meta name="theme-color" content="#060A16">
+<meta name="robots" content="noindex, nofollow">
+<meta name="htmx-config" content='{"allowEval":false,"includeIndicatorStyles":false,"historyCacheSize":0,"selfRequestsOnly":true}'>
+<meta name="katex-js" content="/edufamcs-demo/static/vendor/katex/katex.min.js">
+<meta name="katex-css" content="/edufamcs-demo/static/vendor/katex/katex.min.css">
+<link rel="icon" href="/edufamcs-demo/static/brand/logo/favicon-16.svg" type="image/svg+xml" sizes="16x16">
+<link rel="icon" href="/edufamcs-demo/static/brand/logo/favicon.svg" type="image/svg+xml" sizes="any">
+<link rel="preload" href="/edufamcs-demo/static/brand/fonts/manrope-cyrillic-400.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/edufamcs-demo/static/brand/fonts/unbounded-cyrillic-800.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="/edufamcs-demo/static/brand/fonts.css">
+<link rel="stylesheet" href="/edufamcs-demo/static/brand/tokens.css">
+<link rel="stylesheet" href="/edufamcs-demo/static/brand/components.css">
+<link rel="stylesheet" href="/edufamcs-demo/static/css/site.css">
+<link rel="stylesheet" href="/edufamcs-demo/static/css/hub.css">
+<link rel="stylesheet" href="/edufamcs-demo/static/css/about.css">
+<link rel="stylesheet" href="/edufamcs-demo/static/handbook/handbook.css">
+<script src="/edufamcs-demo/static/js/theme.js"></script>
+<script src="/edufamcs-demo/static/vendor/htmx/htmx.min.js" defer></script>
+<script src="/edufamcs-demo/static/vendor/alpine/alpine-csp.min.js" defer></script>
+<script src="/edufamcs-demo/static/js/site.js" defer></script>
+<script src="/edufamcs-demo/static/handbook/handbook.js" defer></script>
+</head>
+<body class="" hx-headers='{"X-CSRFToken": "5u5drcC4LVskkZUHNNbQxeTTvYDwulq4HHUaHebVMIGTvi99MgpNf7LRX7Kue5pL"}'>
+<a class="skip" href="#main">К содержанию</a>
+<div class="demo-bar" role="note">Демо-версия для отзывов: вход, запись на курсы и формы здесь не работают.</div>
+
+<header class="hdr">
+  <div class="container">
+    <a class="brand" href="/edufamcs-demo/" aria-label="EDU FAMCS — главная">
+      <span class="full"><img class="only-light" src="/edufamcs-demo/static/brand/logo/logo-edu-light.svg" alt="EDU FAMCS" width="196" height="40"><img class="only-dark" src="/edufamcs-demo/static/brand/logo/logo-edu-dark.svg" alt="EDU FAMCS" width="196" height="40"></span>
+      <span class="short"><img class="only-light" src="/edufamcs-demo/static/brand/logo/logo-edu-light.svg" alt="EDU FAMCS" height="30"><img class="only-dark" src="/edufamcs-demo/static/brand/logo/logo-edu-dark.svg" alt="EDU FAMCS" height="30"></span>
+    </a>
+    <nav class="nav" id="main-nav" aria-label="Основная навигация">
+      <a href="/edufamcs-demo/#courses">Курсы</a>
+      <a href="/edufamcs-demo/ml/" >Машинное обучение</a>
+      
+      <a href="/edufamcs-demo/handbook/" aria-current="page">Хендбук</a>
+      <a href="/edufamcs-demo/news/" >Новости</a>
+      <a href="/edufamcs-demo/people/" >Авторы</a>
+      <a href="/edufamcs-demo/about/" >О&nbsp;нас</a>
+    </nav>
+    <div class="hdr-actions">
+      
+      <a class="btn btn-outline btn-login" href="/edufamcs-demo/accounts/login/?next=/handbook/classic/poisk-anomalij/">Войти</a>
+      
+      <button class="icon-btn menu-btn" type="button" aria-label="Меню" aria-expanded="false" aria-controls="main-nav"><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-menu"/></svg></button>
+    </div>
+  </div>
+</header>
+
+<main id="main">
+
+
+
+<div class="container hb-page hb-tone">
+  <div class="hb-readbar" aria-hidden="true"><i></i></div>
+  <div class="hb">
+    <aside class="hb-nav" aria-label="Статьи раздела">
+      
+<form class="hb-search" action="/edufamcs-demo/handbook/search/" method="get" role="search">
+  <svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-search"/></svg>
+  <input class="input" type="search" name="q" value="" placeholder="Поиск по хендбуку" aria-label="Поиск по хендбуку" autocomplete="off" maxlength="120"
+    hx-get="/edufamcs-demo/handbook/search/" hx-trigger="input changed delay:250ms, search" hx-target="#hb-nav-results" hx-sync="this:replace">
+</form>
+
+      <div id="hb-nav-results" class="hb-nav-results" aria-live="polite"></div>
+      <a class="grp" href="/edufamcs-demo/handbook/classic/">Данные, метрики и валидация</a>
+      
+      <a class="" href="/edufamcs-demo/handbook/classic/priznaki-i-kodirovanie-kategorij/">Признаки и кодирование категорий</a>
+      
+      <a class="" href="/edufamcs-demo/handbook/classic/nesbalansirovannye-klassy/">Несбалансированные классы</a>
+      
+      <a class="" href="/edufamcs-demo/handbook/classic/metriki-klassifikacii-i-kalibrovka/">Метрики классификации и калибровка</a>
+      
+      <a class="" href="/edufamcs-demo/handbook/classic/validaciya-i-utechki-dannyh/">Валидация и утечки данных</a>
+      
+      <a class="cur" href="/edufamcs-demo/handbook/classic/poisk-anomalij/" aria-current="page">Поиск аномалий</a>
+      
+    </aside>
+
+    <article class="hb-main">
+      <nav class="crumbs" aria-label="Навигация"><a href="/edufamcs-demo/handbook/">Хендбук</a><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-chev"/></svg><a href="/edufamcs-demo/handbook/classic/">Классическое машинное обучение</a></nav>
+      <h1 class="h1">Поиск аномалий</h1>
+      <div class="hb-meta">
+        
+        
+        <span><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-clock"/></svg>10&nbsp;мин</span>
+        <span class="hb-authors"><span class="avatar sm" title="Артем Лебедевич">АЛ</span>Артем Лебедевич</span>
+        <span><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-edit"/></svg>10 ноября 2026</span>
+        
+        
+      </div>
+
+      
+      <details class="hb-mtoc">
+        <summary><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-list"/></svg>Содержание<svg class="ico sm" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-chev-down"/></svg></summary>
+        <a class="l2" href="#постановки">Постановки</a><a class="l2" href="#робастная-статистика">Робастная статистика</a><a class="l2" href="#isolation-forest">Isolation Forest</a><a class="l2" href="#lof">LOF</a><a class="l2" href="#one-class-svm-и-автокодировщик">One-Class SVM и автокодировщик</a><a class="l2" href="#оценка-при-нехватке-меток">Оценка при нехватке меток</a><a class="l2" href="#числа-if-против-lof">Числа: IF против LOF</a><a class="l2" href="#код">Код</a><a class="l2" href="#ловушки">Ловушки</a><a class="l2" href="#проверь-себя">Проверь себя</a><a class="l2" href="#что-почитать">Что почитать</a>
+      </details>
+      
+
+      <div class="prose"><p>Аномалия — объект, который плохо согласуется с остальными: мошенническая транзакция, сломавшийся датчик, атака на сервис. Размеченных примеров мало или нет совсем, поэтому обычный классификатор не подходит, а оценивать качество приходится почти вслепую. Эта глава разбирает постановки, простые робастные правила и три классических метода: Isolation Forest, LOF и One-Class SVM.</p>
+<h2 id="постановки">Постановки</h2>
+<ul>
+<li><strong>Outlier detection</strong> (неконтролируемая): в обучающей выборке есть аномалии, и мы ищем их внутри неё. Метод должен быть устойчивым к «загрязнению».</li>
+<li><strong>Novelty detection</strong> (полуконтролируемая): обучение на заведомо нормальных данных, аномалии ищем среди новых объектов. Здесь <code>predict</code> применяется к новым данным.</li>
+<li><strong>Контролируемая</strong>: есть метки аномалий, но их доли промиль. Это уже <a href="/edufamcs-demo/handbook/classic/nesbalansirovannye-klassy/" rel="noopener noreferrer nofollow">несбалансированная классификация</a>; аномальность — частный случай редкого класса.</li>
+</ul>
+<p>Аномалии бывают <strong>точечными</strong> (одно значение необычно), <strong>контекстными</strong> (нормально ночью, аномально днём) и <strong>коллективными</strong> (каждая точка нормальна, их последовательность — нет). Реальное определение «нормального» задаёт бизнес, не алгоритм.</p>
+<h2 id="робастная-статистика">Робастная статистика</h2>
+<p>Среднее и стандартное отклонение сами искажаются выбросами: один выброс раздувает <span class="tex">\sigma</span> и сам же прячется. Поэтому для одномерного случая берут устойчивые оценки.</p>
+<p><strong>Медиана и MAD</strong>: <span class="tex">\text{MAD}=\operatorname{med}_i|x_i-\operatorname{med}(x)|</span>. Модифицированный z-score
+<span class="tex tex-block">M_i=\frac{0{,}6745\,(x_i-\operatorname{med}(x))}{\text{MAD}},</span>
+где <span class="tex">0{,}6745\approx1/1{,}4826</span> — константа, при которой <span class="tex">1{,}4826\cdot\text{MAD}</span> оценивает <span class="tex">\sigma</span> для нормального закона; флаг при <span class="tex">|M_i|&gt;3{,}5</span> (рекомендация Iglewicz и Hoaglin, 1993). <strong>IQR (правило Тьюки)</strong>: аномалия вне <span class="tex">[Q_1-1{,}5\,\text{IQR},\ Q_3+1{,}5\,\text{IQR}]</span> (см. <a href="/edufamcs-demo/handbook/classic/razvedochnyj-analiz-dannyh/" rel="noopener noreferrer nofollow">разведочный анализ</a>).</p>
+<p>Пример: <span class="tex">x=(10,11,9,10,12,10,11,9,10,55)</span>. Обычный z-score для 55 равен всего 2,99 (при пороге 3 едва замечен), потому что 55 раздувает и среднее, и <span class="tex">\sigma</span>. Медиана 10, MAD 1, модифицированный z-score равен 30,4, а границы IQR: <span class="tex">[8{,}5;12{,}5]</span> с <span class="tex">Q_1=10</span>, <span class="tex">Q_3=11</span>. Эти правила одномерны: многомерные аномалии, где каждая координата нормальна, они не видят.</p>
+<h2 id="isolation-forest">Isolation Forest</h2>
+<p>Идея (Liu, Ting, Zhou, ICDM 2008): аномалии <strong>легче изолировать</strong>. Строим случайное дерево: выбираем случайный признак и случайный порог между минимумом и максимумом признака в узле, делим, повторяем до листа с одним объектом (или до лимита глубины). Редкая точка вдали от основной массы отделяется за несколько разбиений, типичная точка в плотной области требует много. Длина пути <span class="tex">h(x)</span> усредняется по лесу деревьев, обученных на подвыборках размера <span class="tex">n</span> (по умолчанию 256).</p>
+<p>Чтобы сравнивать пути на выборках разного размера, их нормируют средней длиной пути неудачного поиска в бинарном дереве поиска из <span class="tex">n</span> элементов:
+<span class="tex tex-block">c(n)=2H(n-1)-\frac{2(n-1)}{n},\qquad H(i)\approx\ln i+0{,}5772\ldots</span>
+(<span class="tex">H</span> — гармоническое число, <span class="tex">0{,}5772</span> — константа Эйлера–Маскерони). Оценка аномальности:
+<span class="tex tex-block">s(x,n)=2^{-\,E[h(x)]/c(n)}.</span>
+Если <span class="tex">E[h(x)]\to0</span>, то <span class="tex">s\to1</span> (аномалия); если <span class="tex">E[h(x)]=c(n)</span>, то <span class="tex">s=0{,}5</span>; если <span class="tex">E[h(x)]\to n-1</span>, то <span class="tex">s\to0</span>. Значения <span class="tex">s\gg0{,}5</span> подозрительны, около 0,5 для всех объектов — нет выраженных аномалий. Для <span class="tex">n=256</span>: <span class="tex">c(256)=10{,}24</span>. Свойства: линейная по <span class="tex">n</span> сложность, не использует расстояния, работает в средних размерностях. Слабое место — аномалии, которые лежат внутри оси-выровненных «коробок» нормальных данных, и локальные аномалии рядом с плотным кластером.</p>
+<h2 id="lof">LOF</h2>
+<p><strong>Local Outlier Factor</strong> (Breunig et al., SIGMOD 2000) сравнивает плотность вокруг точки с плотностью вокруг её соседей. Пусть <span class="tex">k\text{-dist}(o)</span> — расстояние до <span class="tex">k</span>-го ближайшего соседа <span class="tex">o</span>, <span class="tex">N_k(p)</span> — множество <span class="tex">k</span> соседей <span class="tex">p</span>. <strong>Достижимое расстояние</strong>
+<span class="tex tex-block">\text{reach-dist}_k(p,o)=\max\{k\text{-dist}(o),\ d(p,o)\},</span>
+а <strong>локальная плотность достижимости</strong> <span class="tex">\text{lrd}_k(p)=\left(\frac{1}{|N_k(p)|}\sum_{o\in N_k(p)}\text{reach-dist}_k(p,o)\right)^{-1}</span>. Максимум в reach-dist сглаживает расстояния до слишком близких соседей. Тогда
+<span class="tex tex-block">\text{LOF}_k(p)=\frac{1}{|N_k(p)|}\sum_{o\in N_k(p)}\frac{\text{lrd}_k(o)}{\text{lrd}_k(p)}.</span>
+Если плотность точки примерно равна плотности соседей, <span class="tex">\text{LOF}\approx1</span>; у выброса плотность ниже, чем у соседей, и <span class="tex">\text{LOF}\gg1</span>. Сила метода — <strong>локальность</strong>: он ловит точку, которая для разреженного кластера нормальна, а у плотного — аномальна. Минусы: стоимость <span class="tex">O(n^2)</span> без индексов, зависимость от <span class="tex">k</span> и от масштаба признаков.</p>
+<h2 id="one-class-svm-и-автокодировщик">One-Class SVM и автокодировщик</h2>
+<p><strong>One-Class SVM</strong> (Schölkopf et al., 2001) отделяет данные от начала координат в пространстве признаков ядра максимальным зазором; параметр <span class="tex">\nu</span> — верхняя граница доли выбросов и нижняя граница доли опорных векторов. Работает на небольших выборках, но чувствителен к ширине ядра и плохо масштабируется по <span class="tex">n</span>. <strong>Автокодировщик</strong> учится сжимать и восстанавливать нормальные объекты; ошибка реконструкции <span class="tex">\|x-\hat x\|^2</span> служит оценкой аномальности: на объектах, не похожих на обучающие, реконструкция хуже. Риск — слишком мощная сеть восстанавливает и аномалии.</p>
+<h2 id="оценка-при-нехватке-меток">Оценка при нехватке меток</h2>
+<p>Разметьте небольшую выборку (случайную и из верхушки рейтинга) и считайте <strong>precision@k</strong> (из <span class="tex">k</span> самых аномальных, сколько действительно) и <strong>PR-AUC</strong> на размеченной части; ROC-AUC при доле аномалий в доли процента обманчив. Помните: «аномалия» — не то же самое, что «интересный объект для бизнеса»; полезнее всего метрика, привязанная к разбору очереди аналитиком. Для временных рядов (контекстные и коллективные аномалии, сезонность) нужны методы с учётом времени: остатки сезонной декомпозиции или прогноза плюс те же робастные пороги; общие методы выше применяют к скользящим окнам признаков.</p>
+<h2 id="числа-if-против-lof">Числа: IF против LOF</h2>
+<p>Синтетика: плотный кластер (<span class="tex">\sigma=0{,}3</span>) и разреженный (<span class="tex">\sigma=1{,}5</span>) по 900 точек, 30 глобальных выбросов (равномерно по большой области) и 30 локальных (кольцо радиуса около 2,3 вокруг плотного кластера: далеко для его плотности, но в области, где разреженный кластер «нормален»). Доля аномалий 3,2%. Признаки стандартизованы, среднее по 10 генерациям:</p>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>Метод</th>
+<th>PR-AUC</th>
+<th>ROC-AUC</th>
+<th>precision@60</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Isolation Forest (300 деревьев)</td>
+<td>0,841 ± 0,029</td>
+<td>0,985</td>
+<td>0,743</td>
+</tr>
+<tr>
+<td>LOF (<span class="tex">k=35</span>)</td>
+<td>0,935 ± 0,010</td>
+<td>0,980</td>
+<td>0,905</td>
+</tr>
+<tr>
+<td>One-Class SVM (<span class="tex">\nu=0{,}03</span>, RBF)</td>
+<td>0,611 ± 0,028</td>
+<td>0,920</td>
+<td>0,583</td>
+</tr>
+</tbody>
+</table></div>
+<p>LOF выигрывает на локальных аномалиях. Добавим 20 шумовых признаков (стандартная нормаль) и стандартизуем: PR-AUC падает у всех до 0,06–0,09 (ROC-AUC около 0,62): в высокой размерности расстояния и разбиения размываются шумом. Это иллюстрация проклятия размерности (см. <a href="/edufamcs-demo/handbook/classic/snizhenie-razmernosti/" rel="noopener noreferrer nofollow">снижение размерности</a>): перед поиском аномалий отбирайте признаки.</p>
+<h2 id="код">Код</h2>
+<div class="code"><div class="code-head"><span class="lang">python</span></div><pre><code><span class="tok-k">from</span> sklearn.ensemble <span class="tok-k">import</span> IsolationForest
+<span class="tok-k">from</span> sklearn.neighbors <span class="tok-k">import</span> LocalOutlierFactor
+<span class="tok-k">from</span> sklearn.preprocessing <span class="tok-k">import</span> StandardScaler
+<span class="tok-k">from</span> sklearn.metrics <span class="tok-k">import</span> average_precision_score
+
+Xs <span class="tok-p">=</span> StandardScaler<span class="tok-p">(</span><span class="tok-p">)</span><span class="tok-p">.</span>fit_transform<span class="tok-p">(</span>X<span class="tok-p">)</span>
+
+iso <span class="tok-p">=</span> IsolationForest<span class="tok-p">(</span>n_estimators<span class="tok-p">=</span><span class="tok-n">300</span><span class="tok-p">,</span> random_state<span class="tok-p">=</span><span class="tok-n">0</span><span class="tok-p">)</span><span class="tok-p">.</span>fit<span class="tok-p">(</span>Xs<span class="tok-p">)</span>
+s_if <span class="tok-p">=</span> <span class="tok-p">-</span>iso<span class="tok-p">.</span>score_samples<span class="tok-p">(</span>Xs<span class="tok-p">)</span>            <span class="tok-c"># больше = аномальнее</span>
+<span class="tok-c"># outlier detection (оценка на тех же данных)</span>
+s_lof <span class="tok-p">=</span> <span class="tok-p">-</span>LocalOutlierFactor<span class="tok-p">(</span>n_neighbors<span class="tok-p">=</span><span class="tok-n">35</span><span class="tok-p">)</span><span class="tok-p">.</span>fit<span class="tok-p">(</span>Xs<span class="tok-p">)</span><span class="tok-p">.</span>negative_outlier_factor_
+<span class="tok-c"># novelty detection: LocalOutlierFactor(novelty=True).fit(X_norm).score_samples(X_new)</span>
+
+<span class="tok-f">print</span><span class="tok-p">(</span>average_precision_score<span class="tok-p">(</span>y<span class="tok-p">,</span> s_if<span class="tok-p">)</span><span class="tok-p">,</span> average_precision_score<span class="tok-p">(</span>y<span class="tok-p">,</span> s_lof<span class="tok-p">)</span><span class="tok-p">)</span>
+</code></pre></div>
+<p>Важно: <code>IsolationForest.score_samples</code> возвращает <span class="tex">-s(x,n)</span> (чем меньше, тем аномальнее), поэтому знак меняют. У <code>LocalOutlierFactor</code> метод <code>predict</code>/<code>score_samples</code> доступен только при <code>novelty=True</code>; в режиме выбросов используют <code>fit_predict</code> и <code>negative_outlier_factor_</code>.</p>
+<h2 id="ловушки">Ловушки</h2>
+<ul>
+<li><strong>Параметр <code>contamination</code></strong> лишь определяет порог: <code>contamination=0.03</code> пометит ровно 3% объектов аномалиями (проверено на данных: 0,01 → 1,0%, 0,03 → 3,0%, 0,1 → 10,0%), даже если аномалий нет совсем. Рейтинг (<code>score_samples</code>) от него не зависит; порог выбирайте по бюджету разбора.</li>
+<li><strong>Масштаб признаков</strong> критичен для LOF, One-Class SVM и других методов на расстояниях; Isolation Forest выбирает порог равномерно между минимумом и максимумом признака и к линейному масштабу инвариантен.</li>
+<li><strong>Высокая размерность</strong> прячет аномалии (см. таблицу выше).</li>
+<li>Обучение на данных с аномалиями без чистки для novelty-режима.</li>
+<li>Проверка «на глаз» на нескольких примерах вместо precision@k.</li>
+<li>На собеседовании: запишите формулу оценки Isolation Forest и объясните <span class="tex">c(n)</span>; чем LOF отличается от Isolation Forest и когда нужна локальность; outlier против novelty detection; почему z-score плох при выбросах и что такое MAD; как оценивать детектор без разметки.</li>
+</ul>
+<h2 id="проверь-себя">Проверь себя</h2>
+<details class="callout md details"><summary>Почему аномалию Isolation Forest изолирует за малое число разбиений?</summary>
+<p>Она лежит далеко от плотных областей, поэтому случайный порог отделяет её от остальных быстро; типичную точку в плотной области отделить сложнее, путь длиннее.</p>
+</details>
+<details class="callout md details"><summary>Чему равна оценка $s(x,n)$, если $E[h(x)]=c(n)$?</summary>
+<p><span class="tex">2^{-1}=0{,}5</span>: путь в среднем такой же, как у случайной точки, выраженных аномалий нет.</p>
+</details>
+<details class="callout md details"><summary>Что показывает $\text{LOF}\approx1$ и $\text{LOF}\gg1$?</summary>
+<p>Около 1 — плотность точки как у соседей; много больше 1 — точка в области заметно менее плотной, чем окрестность её соседей: локальный выброс.</p>
+</details>
+<details class="callout md details"><summary>Чем outlier detection отличается от novelty detection?</summary>
+<p>В первом аномалии есть в обучающих данных и ищутся среди них; во втором модель обучена на нормальных данных, а аномалии проверяют на новых.</p>
+</details>
+<details class="callout md details"><summary>Почему при поиске аномалий ROC-AUC может ввести в заблуждение?</summary>
+<p>Доля аномалий мала, поэтому даже малый FPR даёт много ложных срабатываний относительно числа аномалий; PR-AUC и precision@k это учитывают.</p>
+</details>
+<h2 id="что-почитать">Что почитать</h2>
+<ul>
+<li>Liu F. T., Ting K. M., Zhou Z.-H. <em>Isolation Forest</em>, ICDM 2008.</li>
+<li>Breunig M. et al. <em>LOF: Identifying Density-Based Local Outliers</em>, ACM SIGMOD 2000.</li>
+<li>Schölkopf B. et al. <em>Estimating the Support of a High-Dimensional Distribution</em>, Neural Computation, 2001.</li>
+<li>Chandola V., Banerjee A., Kumar V. <em>Anomaly Detection: A Survey</em>, ACM Computing Surveys, 2009.</li>
+<li>Han S. et al. <em>ADBench: Anomaly Detection Benchmark</em>, NeurIPS 2022 Datasets and Benchmarks: https://arxiv.org/abs/2206.09426</li>
+<li>Iglewicz B., Hoaglin D. <em>How to Detect and Handle Outliers</em>, ASQC Quality Press, 1993.</li>
+<li>Документация scikit-learn: Novelty and Outlier Detection: https://scikit-learn.org/stable/modules/outlier_detection.html</li>
+</ul>
+</div>
+      
+
+      
+
+      
+      <nav class="pager" aria-label="Соседние статьи">
+        <a href="/edufamcs-demo/handbook/classic/validaciya-i-utechki-dannyh/"><span><svg class="ico sm" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-arrow-left"/></svg>Назад</span>Валидация и утечки данных</a>
+        
+      </nav>
+      
+    </article>
+
+    <aside class="hb-toc" aria-label="На этой странице">
+      <a class="l2" href="#постановки">Постановки</a><a class="l2" href="#робастная-статистика">Робастная статистика</a><a class="l2" href="#isolation-forest">Isolation Forest</a><a class="l2" href="#lof">LOF</a><a class="l2" href="#one-class-svm-и-автокодировщик">One-Class SVM и автокодировщик</a><a class="l2" href="#оценка-при-нехватке-меток">Оценка при нехватке меток</a><a class="l2" href="#числа-if-против-lof">Числа: IF против LOF</a><a class="l2" href="#код">Код</a><a class="l2" href="#ловушки">Ловушки</a><a class="l2" href="#проверь-себя">Проверь себя</a><a class="l2" href="#что-почитать">Что почитать</a>
+    </aside>
+  </div>
+</div>
+
+
+</main>
+
+<footer class="ftr" data-theme="dark">
+  <svg class="sym fern" viewBox="0 0 40.5 65.02" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#fern"/></svg>
+  <div class="container">
+    <div class="ftr-row">
+      <a href="/edufamcs-demo/" aria-label="EDU FAMCS — главная"><img src="/edufamcs-demo/static/brand/logo/logo-edu-dark.svg" alt="EDU FAMCS" width="196" height="40"></a>
+      <ul class="ftr-links">
+        <li><a href="/edufamcs-demo/#courses">Курсы</a></li>
+        <li><a href="/edufamcs-demo/ml/">Машинное обучение</a></li>
+        <li><a href="/edufamcs-demo/handbook/">Хендбук</a></li>
+        <li><a href="/edufamcs-demo/news/">Новости</a></li>
+        <li><a href="/edufamcs-demo/people/">Авторы</a></li>
+        <li><a href="/edufamcs-demo/about/">О&nbsp;нас</a></li>
+        <li><a href="/edufamcs-demo/propose/">Предложить или исправить</a></li>
+        <li><a href="/edufamcs-demo/privacy/">Конфиденциальность</a></li>
+      </ul>
+    </div>
+    <div class="ftr-big" aria-hidden="true">EDU<span class="d">·</span>FAMCS</div>
+    <p class="ftr-copy">© 2026 EDU FAMCS · Минск</p>
+  </div>
+</footer>
+
+<div class="toasts-region" aria-live="polite" id="toasts">
+
+</div>
+
+</body>
+</html>

@@ -1,0 +1,286 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Воспроизводимость: сиды, данные, MLflow · EDU FAMCS</title>
+<meta name="description" content="Воспроизводимость: сиды, данные, MLflow — Python и исследования. Хендбук ML-курса ФПМИ.">
+<meta name="theme-color" content="#060A16">
+<meta name="robots" content="noindex, nofollow">
+<meta name="htmx-config" content='{"allowEval":false,"includeIndicatorStyles":false,"historyCacheSize":0,"selfRequestsOnly":true}'>
+<meta name="katex-js" content="/edufamcs-demo/static/vendor/katex/katex.min.js">
+<meta name="katex-css" content="/edufamcs-demo/static/vendor/katex/katex.min.css">
+<link rel="icon" href="/edufamcs-demo/static/brand/logo/favicon-16.svg" type="image/svg+xml" sizes="16x16">
+<link rel="icon" href="/edufamcs-demo/static/brand/logo/favicon.svg" type="image/svg+xml" sizes="any">
+<link rel="preload" href="/edufamcs-demo/static/brand/fonts/manrope-cyrillic-400.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/edufamcs-demo/static/brand/fonts/unbounded-cyrillic-800.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="/edufamcs-demo/static/brand/fonts.css">
+<link rel="stylesheet" href="/edufamcs-demo/static/brand/tokens.css">
+<link rel="stylesheet" href="/edufamcs-demo/static/brand/components.css">
+<link rel="stylesheet" href="/edufamcs-demo/static/css/site.css">
+<link rel="stylesheet" href="/edufamcs-demo/static/css/hub.css">
+<link rel="stylesheet" href="/edufamcs-demo/static/css/about.css">
+<link rel="stylesheet" href="/edufamcs-demo/static/handbook/handbook.css">
+<script src="/edufamcs-demo/static/js/theme.js"></script>
+<script src="/edufamcs-demo/static/vendor/htmx/htmx.min.js" defer></script>
+<script src="/edufamcs-demo/static/vendor/alpine/alpine-csp.min.js" defer></script>
+<script src="/edufamcs-demo/static/js/site.js" defer></script>
+<script src="/edufamcs-demo/static/handbook/handbook.js" defer></script>
+</head>
+<body class="" hx-headers='{"X-CSRFToken": "aw8KxFIdzRlQ7WQ5BWbDvQwCup2U2uwiMJXHNHh4AEzpif5xAppAdJoAWy9SMevZ"}'>
+<a class="skip" href="#main">К содержанию</a>
+<div class="demo-bar" role="note">Демо-версия для отзывов: вход, запись на курсы и формы здесь не работают.</div>
+
+<header class="hdr">
+  <div class="container">
+    <a class="brand" href="/edufamcs-demo/" aria-label="EDU FAMCS — главная">
+      <span class="full"><img class="only-light" src="/edufamcs-demo/static/brand/logo/logo-edu-light.svg" alt="EDU FAMCS" width="196" height="40"><img class="only-dark" src="/edufamcs-demo/static/brand/logo/logo-edu-dark.svg" alt="EDU FAMCS" width="196" height="40"></span>
+      <span class="short"><img class="only-light" src="/edufamcs-demo/static/brand/logo/logo-edu-light.svg" alt="EDU FAMCS" height="30"><img class="only-dark" src="/edufamcs-demo/static/brand/logo/logo-edu-dark.svg" alt="EDU FAMCS" height="30"></span>
+    </a>
+    <nav class="nav" id="main-nav" aria-label="Основная навигация">
+      <a href="/edufamcs-demo/#courses">Курсы</a>
+      <a href="/edufamcs-demo/ml/" >Машинное обучение</a>
+      
+      <a href="/edufamcs-demo/handbook/" aria-current="page">Хендбук</a>
+      <a href="/edufamcs-demo/news/" >Новости</a>
+      <a href="/edufamcs-demo/people/" >Авторы</a>
+      <a href="/edufamcs-demo/about/" >О&nbsp;нас</a>
+    </nav>
+    <div class="hdr-actions">
+      
+      <a class="btn btn-outline btn-login" href="/edufamcs-demo/accounts/login/?next=/handbook/python/vosproizvodimost-i-trekking/">Войти</a>
+      
+      <button class="icon-btn menu-btn" type="button" aria-label="Меню" aria-expanded="false" aria-controls="main-nav"><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-menu"/></svg></button>
+    </div>
+  </div>
+</header>
+
+<main id="main">
+
+
+
+<div class="container hb-page hb-tone">
+  <div class="hb-readbar" aria-hidden="true"><i></i></div>
+  <div class="hb">
+    <aside class="hb-nav" aria-label="Статьи раздела">
+      
+<form class="hb-search" action="/edufamcs-demo/handbook/search/" method="get" role="search">
+  <svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-search"/></svg>
+  <input class="input" type="search" name="q" value="" placeholder="Поиск по хендбуку" aria-label="Поиск по хендбуку" autocomplete="off" maxlength="120"
+    hx-get="/edufamcs-demo/handbook/search/" hx-trigger="input changed delay:250ms, search" hx-target="#hb-nav-results" hx-sync="this:replace">
+</form>
+
+      <div id="hb-nav-results" class="hb-nav-results" aria-live="polite"></div>
+      <a class="grp" href="/edufamcs-demo/handbook/python/">Как вести исследование</a>
+      
+      <a class="" href="/edufamcs-demo/handbook/python/kak-vesti-issledovanie/">Как вести исследование: гипотеза, бейзлайн, эксперимент</a>
+      
+      <a class="cur" href="/edufamcs-demo/handbook/python/vosproizvodimost-i-trekking/" aria-current="page">Воспроизводимость: сиды, данные, MLflow</a>
+      
+      <a class="" href="/edufamcs-demo/handbook/python/git-dlya-ml-proekta/">Git и GitHub для ML-проекта</a>
+      
+      <a class="" href="/edufamcs-demo/handbook/python/kak-oformit-rezultat/">Как оформить результат и защитить проект</a>
+      
+    </aside>
+
+    <article class="hb-main">
+      <nav class="crumbs" aria-label="Навигация"><a href="/edufamcs-demo/handbook/">Хендбук</a><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-chev"/></svg><a href="/edufamcs-demo/handbook/python/">Python и исследования</a></nav>
+      <h1 class="h1">Воспроизводимость: сиды, данные, MLflow</h1>
+      <div class="hb-meta">
+        
+        
+        <span><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-clock"/></svg>9&nbsp;мин</span>
+        <span class="hb-authors"><span class="avatar sm" title="Артем Лебедевич">АЛ</span>Артем Лебедевич</span>
+        <span><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-edit"/></svg>10 ноября 2026</span>
+        
+        
+      </div>
+
+      
+      <details class="hb-mtoc">
+        <summary><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-list"/></svg>Содержание<svg class="ico sm" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-chev-down"/></svg></summary>
+        <a class="l2" href="#откуда-берётся-недетерминизм">Откуда берётся недетерминизм</a><a class="l2" href="#сиды">Сиды</a><a class="l2" href="#конфиг-как-один-объект">Конфиг как один объект</a><a class="l2" href="#данные">Данные</a><a class="l2" href="#трекинг-экспериментов-mlflow">Трекинг экспериментов: MLflow</a><a class="l2" href="#модель-вместе-с-предобработкой">Модель вместе с предобработкой</a><a class="l2" href="#ловушки">Ловушки</a><a class="l2" href="#проверь-себя">Проверь себя</a><a class="l2" href="#что-почитать">Что почитать</a>
+      </details>
+      
+
+      <div class="prose"><p>Воспроизводимость — это возможность получить ваше число заново: через неделю, на другом ноутбуке, у ревьюера. Без неё нельзя ни отладить регресс («вчера было 0,83, сегодня 0,81 — что изменилось?»), ни защитить результат. Хорошая новость: она достигается небольшим набором привычек — фиксация случайности, конфиг как один объект, неизменные данные и трекинг запусков.</p>
+<h2 id="откуда-берётся-недетерминизм">Откуда берётся недетерминизм</h2>
+<p>Результат запуска зависит не только от кода:</p>
+<ul>
+<li><strong>Сиды</strong> — у каждой библиотеки свой генератор: <code>random</code>, <code>numpy</code>, <code>torch</code> (отдельно CPU и CUDA), а ещё сплиттеры и бустинги со своим <code>random_state</code>/<code>seed</code>.</li>
+<li><strong>Порядок данных</strong> — перемешивание в <code>DataLoader</code>, порядок строк после <code>groupby</code>/join, порядок файлов в <code>glob</code> (зависит от файловой системы).</li>
+<li><strong>Параллелизм и GPU</strong> — суммирование чисел с плавающей запятой неассоциативно: <code>atomicAdd</code> на GPU или многопоточная редукция даёт разный порядок и разные последние знаки. cuDNN в режиме <code>benchmark</code> выбирает алгоритм по скорости, и выбор может отличаться.</li>
+<li><strong>Версии библиотек</strong> — обновление <code>scikit-learn</code>, <code>lightgbm</code> или <code>torch</code> меняет умолчания и реализации.</li>
+<li><strong>Железо</strong> — другая видеокарта или CPU с другой SIMD-реализацией дают немного другие числа.</li>
+</ul>
+<p>Полной битовой воспроизводимости между разными машинами обычно не бывает, и добиваться её не нужно. Цель практичнее: <strong>результат воспроизводится в пределах шума</strong> (то есть в пределах доверительного интервала по сидам, см. <a href="/edufamcs-demo/handbook/python/kak-vesti-issledovanie/" rel="noopener noreferrer nofollow">«Как вести исследование»</a>), а на той же машине с тем же окружением — точно.</p>
+<h2 id="сиды">Сиды</h2>
+<div class="code"><div class="code-head"><span class="lang">python</span></div><pre><code><span class="tok-k">import</span> os<span class="tok-p">,</span> random
+<span class="tok-k">import</span> numpy <span class="tok-k">as</span> np
+
+<span class="tok-k">def</span> <span class="tok-f">seed_everything</span><span class="tok-p">(</span>seed<span class="tok-p">:</span> <span class="tok-f">int</span><span class="tok-p">)</span> <span class="tok-p">-</span><span class="tok-p">&gt;</span> <span class="tok-k">None</span><span class="tok-p">:</span>
+    random<span class="tok-p">.</span>seed<span class="tok-p">(</span>seed<span class="tok-p">)</span>
+    os<span class="tok-p">.</span>environ<span class="tok-p">[</span><span class="tok-s">"</span><span class="tok-s">PYTHONHASHSEED</span><span class="tok-s">"</span><span class="tok-p">]</span> <span class="tok-p">=</span> <span class="tok-f">str</span><span class="tok-p">(</span>seed<span class="tok-p">)</span>  <span class="tok-c"># действует на процессы, запущенные после</span>
+    np<span class="tok-p">.</span>random<span class="tok-p">.</span>seed<span class="tok-p">(</span>seed<span class="tok-p">)</span>
+    <span class="tok-k">try</span><span class="tok-p">:</span>
+        <span class="tok-k">import</span> torch
+        torch<span class="tok-p">.</span>manual_seed<span class="tok-p">(</span>seed<span class="tok-p">)</span>
+        torch<span class="tok-p">.</span>cuda<span class="tok-p">.</span>manual_seed_all<span class="tok-p">(</span>seed<span class="tok-p">)</span>
+        torch<span class="tok-p">.</span>backends<span class="tok-p">.</span>cudnn<span class="tok-p">.</span>benchmark <span class="tok-p">=</span> <span class="tok-k">False</span>
+        torch<span class="tok-p">.</span>use_deterministic_algorithms<span class="tok-p">(</span><span class="tok-k">True</span><span class="tok-p">,</span> warn_only<span class="tok-p">=</span><span class="tok-k">True</span><span class="tok-p">)</span>
+    <span class="tok-k">except</span> ImportError<span class="tok-p">:</span>
+        <span class="tok-k">pass</span>
+</code></pre></div>
+<p>Для нового кода лучше локальные генераторы вместо глобального состояния: <code>rng = np.random.default_rng(seed)</code> и передача <code>rng</code> в функции. Для PyTorch ещё нужны <code>generator=torch.Generator().manual_seed(seed)</code> и <code>worker_init_fn</code> в <code>DataLoader</code> при <code>num_workers&gt;0</code>; для <code>use_deterministic_algorithms</code> на GPU — переменная окружения <code>CUBLAS_WORKSPACE_CONFIG=:4096:8</code>. Детерминизм замедляет обучение; в экспериментах включайте его для финальных прогонов и отладки, а для screening не обязательно. Подробности — в <a href="https://docs.pytorch.org/docs/stable/notes/randomness.html" rel="noopener noreferrer nofollow">заметке PyTorch про случайность</a>.</p>
+<div class="callout md note"><p class="callout-title">Сид — не параметр, который подбирают</p>
+<p>Если «хороший» сид выбран по тестовой метрике, вы подогнали результат. Фиксируйте сид один раз и дополнительно считайте метрику по нескольким (например, 0–4), как в статье про <a href="/edufamcs-demo/handbook/python/vizualizaciya/" rel="noopener noreferrer nofollow">визуализацию</a> метрик по сидам.</p>
+</div>
+<h2 id="конфиг-как-один-объект">Конфиг как один объект</h2>
+<p>В ячейках ноутбука «магические числа» (<code>lr=0.05</code>, <code>n=500</code>, путь к файлу) разбросаны по коду. Соберите их в один неизменяемый объект и передавайте его всюду:</p>
+<div class="code"><div class="code-head"><span class="lang">python</span></div><pre><code><span class="tok-k">from</span> dataclasses <span class="tok-k">import</span> dataclass<span class="tok-p">,</span> asdict
+
+<span class="tok-f">@dataclass</span><span class="tok-p">(</span>frozen<span class="tok-p">=</span><span class="tok-k">True</span><span class="tok-p">)</span>
+<span class="tok-k">class</span> <span class="tok-f">Config</span><span class="tok-p">:</span>
+    seed<span class="tok-p">:</span> <span class="tok-f">int</span> <span class="tok-p">=</span> <span class="tok-n">42</span>
+    data_path<span class="tok-p">:</span> <span class="tok-f">str</span> <span class="tok-p">=</span> <span class="tok-s">"</span><span class="tok-s">data/interim/train.parquet</span><span class="tok-s">"</span>
+    val_days<span class="tok-p">:</span> <span class="tok-f">int</span> <span class="tok-p">=</span> <span class="tok-n">14</span>
+    lr<span class="tok-p">:</span> <span class="tok-f">float</span> <span class="tok-p">=</span> <span class="tok-n">0.05</span>
+    n_estimators<span class="tok-p">:</span> <span class="tok-f">int</span> <span class="tok-p">=</span> <span class="tok-n">500</span>
+
+cfg <span class="tok-p">=</span> Config<span class="tok-p">(</span><span class="tok-p">)</span>
+<span class="tok-f">print</span><span class="tok-p">(</span>asdict<span class="tok-p">(</span>cfg<span class="tok-p">)</span><span class="tok-p">)</span>
+</code></pre></div>
+<p>Для запуска из командной строки конфиг читается из YAML (<code>yaml.safe_load</code> → <code>Config(**d)</code>), переопределения — аргументами. Все, что может повлиять на число, лежит в конфиге; все, что в конфиге, логируется в трекер. Среду ноутбуков и скриптов см. в <a href="/edufamcs-demo/handbook/python/jupyter-noutbuki/" rel="noopener noreferrer nofollow">«Jupyter»</a> и <a href="/edufamcs-demo/handbook/python/okruzhenie-uv/" rel="noopener noreferrer nofollow">«Окружении»</a>: версии фиксируются файлами <code>pyproject.toml</code> и <code>uv.lock</code>, воспроизведение — <code>uv sync --frozen</code>.</p>
+<h2 id="данные">Данные</h2>
+<ul>
+<li><strong>Сырые данные неизменны.</strong> Кладёте в <code>data/raw/</code> и больше не трогаете; все преобразования — кодом, вход → выход в <code>data/interim/</code> и <code>data/processed/</code>. Тогда результат пересобирается из сырья.</li>
+<li><strong>Хеш.</strong> Идентифицируйте набор данных контрольной суммой и пишите её в трекер: если файл изменился, хеш другой.</li>
+<li><strong>Снапшоты в parquet</strong> — компактный формат с типами; имя включает версию или дату (<code>train_2026-11-01.parquet</code>).</li>
+</ul>
+<div class="code"><div class="code-head"><span class="lang">python</span></div><pre><code><span class="tok-k">import</span> hashlib
+
+<span class="tok-k">def</span> <span class="tok-f">sha256</span><span class="tok-p">(</span>path<span class="tok-p">:</span> <span class="tok-f">str</span><span class="tok-p">,</span> chunk<span class="tok-p">:</span> <span class="tok-f">int</span> <span class="tok-p">=</span> <span class="tok-n">1</span> <span class="tok-p">&lt;&lt;</span> <span class="tok-n">20</span><span class="tok-p">)</span> <span class="tok-p">-</span><span class="tok-p">&gt;</span> <span class="tok-f">str</span><span class="tok-p">:</span>
+    h <span class="tok-p">=</span> hashlib<span class="tok-p">.</span>sha256<span class="tok-p">(</span><span class="tok-p">)</span>
+    <span class="tok-k">with</span> <span class="tok-f">open</span><span class="tok-p">(</span>path<span class="tok-p">,</span> <span class="tok-s">"</span><span class="tok-s">rb</span><span class="tok-s">"</span><span class="tok-p">)</span> <span class="tok-k">as</span> f<span class="tok-p">:</span>
+        <span class="tok-k">while</span> block <span class="tok-p">:=</span> f<span class="tok-p">.</span>read<span class="tok-p">(</span>chunk<span class="tok-p">)</span><span class="tok-p">:</span>
+            h<span class="tok-p">.</span>update<span class="tok-p">(</span>block<span class="tok-p">)</span>
+    <span class="tok-k">return</span> h<span class="tok-p">.</span>hexdigest<span class="tok-p">(</span><span class="tok-p">)</span>
+</code></pre></div>
+<p>Когда данных много или они меняются, подходит <strong>DVC</strong>: <code>dvc add data/raw.parquet</code> кладёт файл в кэш и создаёт маленький <code>.dvc</code>-файл с хешем, который вы коммитите в git; <code>dvc push</code> отправляет сами данные в удалённое хранилище (S3, диск, Google Drive), а <code>dvc pull</code> на другой машине возвращает версию, соответствующую коммиту. Для учебного проекта часто хватает README с командой загрузки и проверкой хеша.</p>
+<h2 id="трекинг-экспериментов-mlflow">Трекинг экспериментов: MLflow</h2>
+<p><strong>MLflow Tracking</strong> хранит для каждого <strong>запуска</strong> (run): параметры, метрики (по шагам тоже), теги и файлы-артефакты (график, модель, конфиг). Запуски группируются в <strong>эксперименты</strong>, их можно сравнивать в веб-интерфейсе. Минимальный рабочий вариант с локальной SQLite-базой:</p>
+<div class="code"><div class="code-head"><span class="lang">python</span></div><pre><code><span class="tok-k">import</span> subprocess
+<span class="tok-k">import</span> mlflow
+<span class="tok-k">from</span> dataclasses <span class="tok-k">import</span> asdict
+
+commit <span class="tok-p">=</span> subprocess<span class="tok-p">.</span>check_output<span class="tok-p">(</span><span class="tok-p">[</span><span class="tok-s">"</span><span class="tok-s">git</span><span class="tok-s">"</span><span class="tok-p">,</span> <span class="tok-s">"</span><span class="tok-s">rev-parse</span><span class="tok-s">"</span><span class="tok-p">,</span> <span class="tok-s">"</span><span class="tok-s">--short</span><span class="tok-s">"</span><span class="tok-p">,</span> <span class="tok-s">"</span><span class="tok-s">HEAD</span><span class="tok-s">"</span><span class="tok-p">]</span><span class="tok-p">,</span> text<span class="tok-p">=</span><span class="tok-k">True</span><span class="tok-p">)</span><span class="tok-p">.</span>strip<span class="tok-p">(</span><span class="tok-p">)</span>
+
+mlflow<span class="tok-p">.</span>set_tracking_uri<span class="tok-p">(</span><span class="tok-s">"</span><span class="tok-s">sqlite:///mlflow.db</span><span class="tok-s">"</span><span class="tok-p">)</span>
+mlflow<span class="tok-p">.</span>set_experiment<span class="tok-p">(</span><span class="tok-s">"</span><span class="tok-s">ndcg-baselines</span><span class="tok-s">"</span><span class="tok-p">)</span>
+
+<span class="tok-k">with</span> mlflow<span class="tok-p">.</span>start_run<span class="tok-p">(</span>run_name<span class="tok-p">=</span><span class="tok-s">"</span><span class="tok-s">lgbm_v2</span><span class="tok-s">"</span><span class="tok-p">)</span><span class="tok-p">:</span>
+    mlflow<span class="tok-p">.</span>log_params<span class="tok-p">(</span>asdict<span class="tok-p">(</span>cfg<span class="tok-p">)</span><span class="tok-p">)</span>
+    mlflow<span class="tok-p">.</span>set_tags<span class="tok-p">(</span><span class="tok-p">{</span><span class="tok-s">"</span><span class="tok-s">git_commit</span><span class="tok-s">"</span><span class="tok-p">:</span> commit<span class="tok-p">,</span> <span class="tok-s">"</span><span class="tok-s">data_sha256</span><span class="tok-s">"</span><span class="tok-p">:</span> sha256<span class="tok-p">(</span>cfg<span class="tok-p">.</span>data_path<span class="tok-p">)</span><span class="tok-p">[</span><span class="tok-p">:</span><span class="tok-n">12</span><span class="tok-p">]</span><span class="tok-p">}</span><span class="tok-p">)</span>
+    <span class="tok-k">for</span> epoch<span class="tok-p">,</span> v <span class="tok-k">in</span> <span class="tok-f">enumerate</span><span class="tok-p">(</span>val_scores<span class="tok-p">)</span><span class="tok-p">:</span>
+        mlflow<span class="tok-p">.</span>log_metric<span class="tok-p">(</span><span class="tok-s">"</span><span class="tok-s">val_ndcg</span><span class="tok-s">"</span><span class="tok-p">,</span> v<span class="tok-p">,</span> step<span class="tok-p">=</span>epoch<span class="tok-p">)</span>
+    mlflow<span class="tok-p">.</span>log_metric<span class="tok-p">(</span><span class="tok-s">"</span><span class="tok-s">test_ndcg</span><span class="tok-s">"</span><span class="tok-p">,</span> test_score<span class="tok-p">)</span>
+    mlflow<span class="tok-p">.</span>log_dict<span class="tok-p">(</span>asdict<span class="tok-p">(</span>cfg<span class="tok-p">)</span><span class="tok-p">,</span> <span class="tok-s">"</span><span class="tok-s">config.json</span><span class="tok-s">"</span><span class="tok-p">)</span>
+    mlflow<span class="tok-p">.</span>log_artifact<span class="tok-p">(</span><span class="tok-s">"</span><span class="tok-s">reports/figures/curve.png</span><span class="tok-s">"</span><span class="tok-p">)</span>
+</code></pre></div>
+<p>Просмотр и сравнение: <code>uv run mlflow ui --backend-store-uri sqlite:///mlflow.db</code> и браузер на <code>http://127.0.0.1:5000</code>; выделяете несколько запусков и жмёте Compare. Из кода: <code>mlflow.search_runs(experiment_names=["ndcg-baselines"], order_by=["metrics.test_ndcg DESC"])</code> вернёт <code>DataFrame</code>. Модель с предобработкой логируйте как один объект: <code>mlflow.sklearn.log_model(pipeline, name="model")</code> (в MLflow 3.x аргумент называется <code>name</code>), затем <code>mlflow.sklearn.load_model(uri)</code>.</p>
+<p>Альтернатива — <strong>Weights &amp; Biases</strong>: <code>wandb.init(project=..., config=asdict(cfg))</code> и <code>wandb.log({...})</code>, облачный интерфейс с красивыми графиками; идея та же. Выбор не принципиален, принципиально — логировать всегда.</p>
+<h2 id="модель-вместе-с-предобработкой">Модель вместе с предобработкой</h2>
+<p>Сохранённая модель, у которой нет кода масштабирования, кодирования категорий и порядка признаков, бесполезна. Упаковывайте всё в один объект: <code>sklearn.pipeline.Pipeline</code> (<code>ColumnTransformer</code> + модель) сохраняется и загружается целиком; для PyTorch — рядом с весами сохраняйте конфиг, словари, статистики нормализации и версию кода. Проверка: загрузить сохранённое в чистом процессе и получить те же предсказания на 100 контрольных объектах.</p>
+<div class="callout md tip"><p class="callout-title">Чек-лист: чужой человек воспроизводит число из README одной командой</p>
+<ol>
+<li><code>git clone</code> и зафиксированное окружение: <code>uv sync --frozen</code>.</li>
+<li>Одна команда получения данных (<code>make data</code> или <code>dvc pull</code>), проверка хеша.</li>
+<li>Одна команда запуска (<code>make train</code> / <code>uv run python -m project.train --config configs/final.yaml</code>) печатает итоговую метрику.</li>
+<li>В README записано ожидаемое число с интервалом и время работы.</li>
+<li>Сиды и конфиг зафиксированы; запуск залогирован (коммит, данные, параметры).</li>
+</ol>
+</div>
+<h2 id="ловушки">Ловушки</h2>
+<ul>
+<li>Сид задан только в <code>numpy</code>, а <code>torch</code> и сплит остались случайными. <code>random_state</code> забыт в <code>train_test_split</code> или <code>KFold(shuffle=True)</code>.</li>
+<li>Конфиг лежит в голове: в ячейке 17 поменяли <code>lr</code> и не записали. Решение — всё через конфиг и трекер.</li>
+<li>Данные «обновились» на диске (перегенерировали parquet): прошлые числа несравнимы. Защита — хеш и иммутабельность.</li>
+<li><code>pip install</code> без фиксации версий; результат «ломается» после обновления бустинга.</li>
+<li>Хранение моделей и данных в git без LFS (см. <a href="/edufamcs-demo/handbook/python/git-dlya-ml-proekta/" rel="noopener noreferrer nofollow">Git</a>).</li>
+<li>На интервью: «откуда недетерминизм на GPU?», «как воспроизвести эксперимент через полгода?», «зачем хешировать данные?», «что вы логируете для каждого запуска?», «чем MLflow отличается от Git?» (git версионирует код, трекер — запуски и их результаты).</li>
+</ul>
+<h2 id="проверь-себя">Проверь себя</h2>
+<details class="callout md details"><summary>Назовите четыре источника недетерминизма в обучении нейросети.</summary>
+<p>Сиды генераторов (python, numpy, torch CPU/GPU), порядок данных и воркеры <code>DataLoader</code>, недетерминированные операции на GPU (<code>atomicAdd</code>, cuDNN autotune), версии библиотек и железо.</p>
+</details>
+<details class="callout md details"><summary>Почему не стоит подбирать сид по лучшему результату на тесте?</summary>
+<p>Это подгонка под тест: разница между сидами — шум, и выбор максимума по нему делает оценку оптимистичной. Нужно фиксировать сид заранее и сообщать среднее с интервалом по нескольким сидам.</p>
+</details>
+<details class="callout md details"><summary>Что должно быть записано в каждом запуске, чтобы его можно было повторить?</summary>
+<p>Конфиг и параметры, коммит кода, версию/хеш данных, версии библиотек (lock-файл), сид, итоговые метрики; плюс артефакты (модель, графики).</p>
+</details>
+<details class="callout md details"><summary>Зачем хранить предобработку вместе с моделью?</summary>
+<p>При инференсе признаки должны быть получены ровно так же, как при обучении (масштаб, кодирование, порядок). Если модель отдельно, а предобработка пересоздана вручную, получится train/serve skew, и качество упадёт без ошибок в логах.</p>
+</details>
+<details class="callout md details"><summary>Чем DVC отличается от Git LFS и от трекера экспериментов?</summary>
+<p>DVC связывает версии данных (и пайплайнов) с коммитами, а сами файлы хранит во внешнем хранилище; LFS — расширение git для больших файлов на сервере git-хостинга; MLflow — журнал запусков с метриками и артефактами. Они дополняют друг друга.</p>
+</details>
+<h2 id="что-почитать">Что почитать</h2>
+<ul>
+<li><a href="https://mlflow.org/docs/latest/ml/tracking/" rel="noopener noreferrer nofollow">MLflow Tracking — документация</a> и <a href="https://mlflow.org/docs/latest/ml/tracking/quickstart/" rel="noopener noreferrer nofollow">Quickstart</a>.</li>
+<li><a href="https://docs.pytorch.org/docs/stable/notes/randomness.html" rel="noopener noreferrer nofollow">PyTorch: Reproducibility</a>.</li>
+<li><a href="https://dvc.org/doc/start" rel="noopener noreferrer nofollow">DVC: Get Started</a>.</li>
+<li><a href="https://docs.wandb.ai/" rel="noopener noreferrer nofollow">Weights &amp; Biases: документация</a>.</li>
+<li><a href="https://docs.astral.sh/uv/guides/projects/" rel="noopener noreferrer nofollow">uv: работа с проектами</a>.</li>
+<li><a href="https://cookiecutter-data-science.drivendata.org/" rel="noopener noreferrer nofollow">Cookiecutter Data Science</a> — структура проекта: raw/interim/processed, отчёты, модели.</li>
+<li>Pineau et al., <em>Improving Reproducibility in Machine Learning Research (A Report from the NeurIPS 2019 Reproducibility Program)</em>, JMLR, 2021.</li>
+</ul>
+</div>
+      
+
+      
+
+      
+      <nav class="pager" aria-label="Соседние статьи">
+        <a href="/edufamcs-demo/handbook/python/kak-vesti-issledovanie/"><span><svg class="ico sm" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-arrow-left"/></svg>Назад</span>Как вести исследование: гипотеза, бейзлайн, эксперимент</a>
+        <a href="/edufamcs-demo/handbook/python/git-dlya-ml-proekta/"><span>Дальше<svg class="ico sm" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-arrow"/></svg></span>Git и GitHub для ML-проекта</a>
+      </nav>
+      
+    </article>
+
+    <aside class="hb-toc" aria-label="На этой странице">
+      <a class="l2" href="#откуда-берётся-недетерминизм">Откуда берётся недетерминизм</a><a class="l2" href="#сиды">Сиды</a><a class="l2" href="#конфиг-как-один-объект">Конфиг как один объект</a><a class="l2" href="#данные">Данные</a><a class="l2" href="#трекинг-экспериментов-mlflow">Трекинг экспериментов: MLflow</a><a class="l2" href="#модель-вместе-с-предобработкой">Модель вместе с предобработкой</a><a class="l2" href="#ловушки">Ловушки</a><a class="l2" href="#проверь-себя">Проверь себя</a><a class="l2" href="#что-почитать">Что почитать</a>
+    </aside>
+  </div>
+</div>
+
+
+</main>
+
+<footer class="ftr" data-theme="dark">
+  <svg class="sym fern" viewBox="0 0 40.5 65.02" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#fern"/></svg>
+  <div class="container">
+    <div class="ftr-row">
+      <a href="/edufamcs-demo/" aria-label="EDU FAMCS — главная"><img src="/edufamcs-demo/static/brand/logo/logo-edu-dark.svg" alt="EDU FAMCS" width="196" height="40"></a>
+      <ul class="ftr-links">
+        <li><a href="/edufamcs-demo/#courses">Курсы</a></li>
+        <li><a href="/edufamcs-demo/ml/">Машинное обучение</a></li>
+        <li><a href="/edufamcs-demo/handbook/">Хендбук</a></li>
+        <li><a href="/edufamcs-demo/news/">Новости</a></li>
+        <li><a href="/edufamcs-demo/people/">Авторы</a></li>
+        <li><a href="/edufamcs-demo/about/">О&nbsp;нас</a></li>
+        <li><a href="/edufamcs-demo/propose/">Предложить или исправить</a></li>
+        <li><a href="/edufamcs-demo/privacy/">Конфиденциальность</a></li>
+      </ul>
+    </div>
+    <div class="ftr-big" aria-hidden="true">EDU<span class="d">·</span>FAMCS</div>
+    <p class="ftr-copy">© 2026 EDU FAMCS · Минск</p>
+  </div>
+</footer>
+
+<div class="toasts-region" aria-live="polite" id="toasts">
+
+</div>
+
+</body>
+</html>

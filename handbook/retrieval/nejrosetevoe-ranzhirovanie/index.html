@@ -27,7 +27,7 @@
 <script src="/edufamcs-demo/static/js/site.js" defer></script>
 <script src="/edufamcs-demo/static/handbook/handbook.js" defer></script>
 </head>
-<body class="" hx-headers='{"X-CSRFToken": "c0paBYMABMoIvhPZJ3DGXR0xqIhsI2LUY6qxvL4hMZEWaQLfWswLej8SW5THNNwT"}'>
+<body class="" hx-headers='{"X-CSRFToken": "FexLGCCmL4YGTsgJTC1TwB00hKYowYLihrmIWEbdMRcf4LvbS5fQeuSYJT5mgIKZ"}'>
 <a class="skip" href="#main">К содержанию</a>
 <div class="demo-bar" role="note">Демо-версия для отзывов: вход, запись на курсы и формы здесь не работают.</div>
 
@@ -60,6 +60,7 @@
 
 
 <div class="container hb-page s-recsys">
+  <div class="hb-readbar" aria-hidden="true"><i></i></div>
   <div class="hb">
     <aside class="hb-nav" aria-label="Статьи раздела">
       
@@ -86,9 +87,9 @@
       <div class="hb-meta">
         
         
-        <span><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-clock"/></svg>16&nbsp;мин</span>
+        <span><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-clock"/></svg>18&nbsp;мин</span>
         <span class="hb-authors"><span class="avatar sm" title="Артем Лебедевич">АЛ</span>Артем Лебедевич</span>
-        <span><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-edit"/></svg>9 ноября 2026</span>
+        <span><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-edit"/></svg>10 ноября 2026</span>
         
         
       </div>
@@ -96,7 +97,7 @@
       
       <details class="hb-mtoc">
         <summary><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-list"/></svg>Содержание<svg class="ico sm" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-chev-down"/></svg></summary>
-        <a class="l2" href="#до-bert-нейро-ir-20132018">До BERT: нейро-IR 2013–2018</a><a class="l2" href="#2019-monobert-и-cross-encoder">2019: monoBERT и cross-encoder</a><a class="l3" href="#трудные-негативы-и-дистилляция">Трудные негативы и дистилляция</a><a class="l2" href="#позднее-взаимодействие-colbert">Позднее взаимодействие: ColBERT</a><a class="l2" href="#обученный-разреженный-поиск">Обученный разреженный поиск</a><a class="l2" href="#сравнение-подходов">Сравнение подходов</a><a class="l2" href="#llm-ранжировщики">LLM-ранжировщики</a><a class="l2" href="#код-переранжирование-топ-100-bm25">Код: переранжирование топ-100 BM25</a><a class="l2" href="#ловушки">Ловушки</a><a class="l2" href="#что-почитать">Что почитать</a>
+        <a class="l2" href="#до-bert-нейро-ir-20132018">До BERT: нейро-IR 2013–2018</a><a class="l2" href="#2019-monobert-и-cross-encoder">2019: monoBERT и cross-encoder</a><a class="l3" href="#трудные-негативы-и-дистилляция">Трудные негативы и дистилляция</a><a class="l2" href="#позднее-взаимодействие-colbert">Позднее взаимодействие: ColBERT</a><a class="l2" href="#обученный-разреженный-поиск">Обученный разреженный поиск</a><a class="l2" href="#сравнение-подходов">Сравнение подходов</a><a class="l2" href="#llm-ранжировщики">LLM-ранжировщики</a><a class="l2" href="#код-переранжирование-топ-100-bm25">Код: переранжирование топ-100 BM25</a><a class="l2" href="#ловушки">Ловушки</a><a class="l2" href="#проверь-себя">Проверь себя</a><a class="l2" href="#что-почитать">Что почитать</a>
       </details>
       
 
@@ -132,6 +133,32 @@
 <li>Качество на MS MARCO близко к BERT-cross-encoder'у (MRR@10 ≈ 0,35–0,36), а по оценке авторов модель работает на два порядка быстрее и требует на четыре порядка меньше FLOPs на запрос: десятки миллисекунд против секунд на переранжирование 1000 кандидатов.</li>
 <li>Бонус: интерпретируемость — видно, какое слово документа «ответило» на каждое слово запроса — и лучшая точность по редким терминам, чем у одновекторных.</li>
 </ul>
+<p><strong>Пример MaxSim.</strong> Два токена запроса <span class="tex">q_1 = (1, 0)</span>, <span class="tex">q_2 = (0{,}6, 0{,}8)</span> и три токена документа <span class="tex">d_1 = (0{,}8, 0{,}6)</span>, <span class="tex">d_2 = (0, 1)</span>, <span class="tex">d_3 = (-0{,}6, 0{,}8)</span> (все векторы единичной длины). Матрица скалярных произведений (строки — токены запроса):</p>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th></th>
+<th><span class="tex">d_1</span></th>
+<th><span class="tex">d_2</span></th>
+<th><span class="tex">d_3</span></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><span class="tex">q_1</span></td>
+<td>0,80</td>
+<td>0,00</td>
+<td>−0,60</td>
+</tr>
+<tr>
+<td><span class="tex">q_2</span></td>
+<td>0,96</td>
+<td>0,80</td>
+<td>0,28</td>
+</tr>
+</tbody>
+</table></div>
+<p>Максимумы по строкам: <span class="tex">0{,}80</span> (для <span class="tex">q_1</span> лучший токен — <span class="tex">d_1</span>) и <span class="tex">0{,}96</span> (для <span class="tex">q_2</span> тоже <span class="tex">d_1</span>). Скор <span class="tex">s(q, d) = 0{,}80 + 0{,}96 = 1{,}76</span>. Токен <span class="tex">d_3</span> на результат не повлиял: MaxSim берёт только лучшее совпадение, и один токен документа (<span class="tex">d_1</span>) может «ответить» сразу на несколько токенов запроса. По матрице видно, какое слово документа совпало с каким словом запроса.</p>
 <p>Цена — <strong>память</strong>: вместо одного вектора на документ — по вектору на каждый токен, то есть десятки–сотни векторов. Для MS MARCO (8,8 млн абзацев) индекс ColBERT 2020 года занимал 154 ГиБ.</p>
 <p><strong>ColBERTv2</strong> (Santhanam et al., 2022) решает проблему памяти двумя ходами: (1) <strong>остаточное сжатие</strong> — векторы кластеризуются в центроиды (k-means), каждый токен хранится как идентификатор ближайшего центроида плюс остаток <span class="tex">e - c</span>, квантованный до 1–2 бит на координату; индекс сжимается в 6–10 раз (16 или 25 ГиБ на MS MARCO — меньше, чем одновекторный индекс в float32); (2) <strong>дистилляция из cross-encoder</strong> с трудными негативами — качество выше (MRR@10 ≈ 0,397 на MS MARCO) и устойчивее к смене домена. <strong>PLAID</strong> (Santhanam et al., 2022) ускоряет поиск: сначала кандидаты отбираются по центроидам (вместо полных векторов), нерелевантные центроиды отсекаются, и точный MaxSim считается лишь для небольшого набора. По данным авторов, это до 7 раз быстрее исходного ColBERTv2 на GPU и до 45 раз на CPU при том же качестве.</p>
 <p><strong>ColPali</strong> (Faysse et al., 2024) переносит идею на страницы документов как изображения. Вместо OCR и разбиения на текст страница PDF (таблицы, схемы, вёрстка) подаётся vision-language модели (PaliGemma); патчи изображения получают векторы, которые сравниваются с токенами запроса через тот же MaxSim. Бенчмарк ViDoRe показал, что такой подход обходит OCR-конвейеры на визуально насыщенных документах. Минус тот же: около тысячи векторов на страницу (по одному на патч).</p>
@@ -239,6 +266,22 @@ reranked <span class="tok-p">=</span> <span class="tok-p">[</span>top<span class
 <li><strong>Ложные негативы</strong> при обучении: дообучение на неразмеченных позитивах как на негативах ухудшает модель.</li>
 <li><strong>На собеседовании</strong> спрашивают: почему cross-encoder нельзя использовать для первичного поиска; как устроен MaxSim и сколько он стоит по памяти; почему в SPLADE используется <span class="tex">\log(1+\mathrm{ReLU})</span> и FLOPS-регуляризация; когда лучше ColBERT, а когда SPLADE.</li>
 </ul>
+<h2 id="проверь-себя">Проверь себя</h2>
+<details class="callout md details"><summary>Почему cross-encoder нельзя использовать для первичного поиска?</summary>
+<p>Он считает скор только для пары «запрос — документ» и ничего не предвычисляет, а каждая пара требует полного прогона BERT по сотням токенов. Для миллионов документов это секунды и больше на запрос, поэтому cross-encoder стоит вторым этапом на топ-100–1000.</p>
+</details>
+<details class="callout md details"><summary>Что выигрывает и что платит ColBERT по сравнению с bi-encoder?</summary>
+<p>Он хранит по вектору на токен документа и считает MaxSim, поэтому видит детали и редкие термы, а токены документа предвычисляются офлайн. Цена — память: десятки–сотни векторов вместо одного, 154 ГиБ на MS MARCO в версии 2020 года; ColBERTv2 сжимает индекс остаточной квантизацией в 6–10 раз.</p>
+</details>
+<details class="callout md details"><summary>Зачем в SPLADE нужны $\log(1+\mathrm{ReLU})$ и регуляризация FLOPS?</summary>
+<p>ReLU обнуляет большинство термов (разреженность), а логарифм подавляет доминирование отдельных термов, как насыщение <span class="tex">k_1</span> в BM25. FLOPS-штраф выравнивает активность термов по батчу и бьёт по тем, что активируются у всех документов, то есть сокращает длину posting lists и стоимость запроса.</p>
+</details>
+<details class="callout md details"><summary>Почему Margin-MSE дистиллирует разность скоров, а не сами скоры?</summary>
+<p>Шкалы скоров учителя (cross-encoder) и студента различаются, а разности скоров положительного и отрицательного документов сопоставимы. Поэтому студент воспроизводит порядок и расстояние между примерами, а не абсолютные значения.</p>
+</details>
+<details class="callout md details"><summary>Почему «трудные» негативы из топ-10 BM25 опасны на MS MARCO?</summary>
+<p>Разметка разрежена, и многие неразмеченные документы на самом деле релевантны. Обучение на них как на негативах ухудшает модель, поэтому негативы берут из рангов 10–200 и фильтруют cross-encoder'ом.</p>
+</details>
 <h2 id="что-почитать">Что почитать</h2>
 <ul>
 <li>Nogueira R., Cho K. Passage Re-ranking with BERT, 2019: https://arxiv.org/abs/1901.04085</li>
@@ -252,6 +295,8 @@ reranked <span class="tok-p">=</span> <span class="tok-p">[</span>top<span class
       
 
       
+
+      
       <nav class="pager" aria-label="Соседние статьи">
         <a href="/edufamcs-demo/handbook/retrieval/plotnyj-i-gibridnyj-poisk/"><span><svg class="ico sm" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-arrow-left"/></svg>Назад</span>Плотный и гибридный поиск</a>
         <a href="/edufamcs-demo/handbook/retrieval/vektornye-indeksy/"><span>Дальше<svg class="ico sm" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-arrow"/></svg></span>Векторные индексы: HNSW, IVF, PQ</a>
@@ -260,7 +305,7 @@ reranked <span class="tok-p">=</span> <span class="tok-p">[</span>top<span class
     </article>
 
     <aside class="hb-toc" aria-label="На этой странице">
-      <a class="l2" href="#до-bert-нейро-ir-20132018">До BERT: нейро-IR 2013–2018</a><a class="l2" href="#2019-monobert-и-cross-encoder">2019: monoBERT и cross-encoder</a><a class="l3" href="#трудные-негативы-и-дистилляция">Трудные негативы и дистилляция</a><a class="l2" href="#позднее-взаимодействие-colbert">Позднее взаимодействие: ColBERT</a><a class="l2" href="#обученный-разреженный-поиск">Обученный разреженный поиск</a><a class="l2" href="#сравнение-подходов">Сравнение подходов</a><a class="l2" href="#llm-ранжировщики">LLM-ранжировщики</a><a class="l2" href="#код-переранжирование-топ-100-bm25">Код: переранжирование топ-100 BM25</a><a class="l2" href="#ловушки">Ловушки</a><a class="l2" href="#что-почитать">Что почитать</a>
+      <a class="l2" href="#до-bert-нейро-ir-20132018">До BERT: нейро-IR 2013–2018</a><a class="l2" href="#2019-monobert-и-cross-encoder">2019: monoBERT и cross-encoder</a><a class="l3" href="#трудные-негативы-и-дистилляция">Трудные негативы и дистилляция</a><a class="l2" href="#позднее-взаимодействие-colbert">Позднее взаимодействие: ColBERT</a><a class="l2" href="#обученный-разреженный-поиск">Обученный разреженный поиск</a><a class="l2" href="#сравнение-подходов">Сравнение подходов</a><a class="l2" href="#llm-ранжировщики">LLM-ранжировщики</a><a class="l2" href="#код-переранжирование-топ-100-bm25">Код: переранжирование топ-100 BM25</a><a class="l2" href="#ловушки">Ловушки</a><a class="l2" href="#проверь-себя">Проверь себя</a><a class="l2" href="#что-почитать">Что почитать</a>
     </aside>
   </div>
 </div>

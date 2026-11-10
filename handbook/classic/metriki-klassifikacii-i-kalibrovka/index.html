@@ -1,0 +1,312 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Метрики классификации и калибровка · EDU FAMCS</title>
+<meta name="description" content="Метрики классификации и калибровка — Классическое машинное обучение. Хендбук ML-курса ФПМИ.">
+<meta name="theme-color" content="#060A16">
+<meta name="robots" content="noindex, nofollow">
+<meta name="htmx-config" content='{"allowEval":false,"includeIndicatorStyles":false,"historyCacheSize":0,"selfRequestsOnly":true}'>
+<meta name="katex-js" content="/edufamcs-demo/static/vendor/katex/katex.min.js">
+<meta name="katex-css" content="/edufamcs-demo/static/vendor/katex/katex.min.css">
+<link rel="icon" href="/edufamcs-demo/static/brand/logo/favicon-16.svg" type="image/svg+xml" sizes="16x16">
+<link rel="icon" href="/edufamcs-demo/static/brand/logo/favicon.svg" type="image/svg+xml" sizes="any">
+<link rel="preload" href="/edufamcs-demo/static/brand/fonts/manrope-cyrillic-400.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/edufamcs-demo/static/brand/fonts/unbounded-cyrillic-800.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="/edufamcs-demo/static/brand/fonts.css">
+<link rel="stylesheet" href="/edufamcs-demo/static/brand/tokens.css">
+<link rel="stylesheet" href="/edufamcs-demo/static/brand/components.css">
+<link rel="stylesheet" href="/edufamcs-demo/static/css/site.css">
+<link rel="stylesheet" href="/edufamcs-demo/static/css/hub.css">
+<link rel="stylesheet" href="/edufamcs-demo/static/css/about.css">
+<link rel="stylesheet" href="/edufamcs-demo/static/handbook/handbook.css">
+<script src="/edufamcs-demo/static/js/theme.js"></script>
+<script src="/edufamcs-demo/static/vendor/htmx/htmx.min.js" defer></script>
+<script src="/edufamcs-demo/static/vendor/alpine/alpine-csp.min.js" defer></script>
+<script src="/edufamcs-demo/static/js/site.js" defer></script>
+<script src="/edufamcs-demo/static/handbook/handbook.js" defer></script>
+</head>
+<body class="" hx-headers='{"X-CSRFToken": "JFVSM39yattxpWoE0D3fsTqamlKZPhcxlSKP25IpbgH6AfD6Z6hcaMi8OuRXz1be"}'>
+<a class="skip" href="#main">К содержанию</a>
+<div class="demo-bar" role="note">Демо-версия для отзывов: вход, запись на курсы и формы здесь не работают.</div>
+
+<header class="hdr">
+  <div class="container">
+    <a class="brand" href="/edufamcs-demo/" aria-label="EDU FAMCS — главная">
+      <span class="full"><img class="only-light" src="/edufamcs-demo/static/brand/logo/logo-edu-light.svg" alt="EDU FAMCS" width="196" height="40"><img class="only-dark" src="/edufamcs-demo/static/brand/logo/logo-edu-dark.svg" alt="EDU FAMCS" width="196" height="40"></span>
+      <span class="short"><img class="only-light" src="/edufamcs-demo/static/brand/logo/logo-edu-light.svg" alt="EDU FAMCS" height="30"><img class="only-dark" src="/edufamcs-demo/static/brand/logo/logo-edu-dark.svg" alt="EDU FAMCS" height="30"></span>
+    </a>
+    <nav class="nav" id="main-nav" aria-label="Основная навигация">
+      <a href="/edufamcs-demo/#courses">Курсы</a>
+      <a href="/edufamcs-demo/ml/" >Машинное обучение</a>
+      
+      <a href="/edufamcs-demo/handbook/" aria-current="page">Хендбук</a>
+      <a href="/edufamcs-demo/news/" >Новости</a>
+      <a href="/edufamcs-demo/people/" >Авторы</a>
+      <a href="/edufamcs-demo/about/" >О&nbsp;нас</a>
+    </nav>
+    <div class="hdr-actions">
+      
+      <a class="btn btn-outline btn-login" href="/edufamcs-demo/accounts/login/?next=/handbook/classic/metriki-klassifikacii-i-kalibrovka/">Войти</a>
+      
+      <button class="icon-btn menu-btn" type="button" aria-label="Меню" aria-expanded="false" aria-controls="main-nav"><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-menu"/></svg></button>
+    </div>
+  </div>
+</header>
+
+<main id="main">
+
+
+
+<div class="container hb-page hb-tone">
+  <div class="hb-readbar" aria-hidden="true"><i></i></div>
+  <div class="hb">
+    <aside class="hb-nav" aria-label="Статьи раздела">
+      
+<form class="hb-search" action="/edufamcs-demo/handbook/search/" method="get" role="search">
+  <svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-search"/></svg>
+  <input class="input" type="search" name="q" value="" placeholder="Поиск по хендбуку" aria-label="Поиск по хендбуку" autocomplete="off" maxlength="120"
+    hx-get="/edufamcs-demo/handbook/search/" hx-trigger="input changed delay:250ms, search" hx-target="#hb-nav-results" hx-sync="this:replace">
+</form>
+
+      <div id="hb-nav-results" class="hb-nav-results" aria-live="polite"></div>
+      <a class="grp" href="/edufamcs-demo/handbook/classic/">Данные, метрики и валидация</a>
+      
+      <a class="" href="/edufamcs-demo/handbook/classic/priznaki-i-kodirovanie-kategorij/">Признаки и кодирование категорий</a>
+      
+      <a class="" href="/edufamcs-demo/handbook/classic/nesbalansirovannye-klassy/">Несбалансированные классы</a>
+      
+      <a class="cur" href="/edufamcs-demo/handbook/classic/metriki-klassifikacii-i-kalibrovka/" aria-current="page">Метрики классификации и калибровка</a>
+      
+      <a class="" href="/edufamcs-demo/handbook/classic/validaciya-i-utechki-dannyh/">Валидация и утечки данных</a>
+      
+      <a class="" href="/edufamcs-demo/handbook/classic/poisk-anomalij/">Поиск аномалий</a>
+      
+    </aside>
+
+    <article class="hb-main">
+      <nav class="crumbs" aria-label="Навигация"><a href="/edufamcs-demo/handbook/">Хендбук</a><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-chev"/></svg><a href="/edufamcs-demo/handbook/classic/">Классическое машинное обучение</a></nav>
+      <h1 class="h1">Метрики классификации и калибровка</h1>
+      <div class="hb-meta">
+        
+        
+        <span><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-clock"/></svg>10&nbsp;мин</span>
+        <span class="hb-authors"><span class="avatar sm" title="Артем Лебедевич">АЛ</span>Артем Лебедевич</span>
+        <span><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-edit"/></svg>10 ноября 2026</span>
+        
+        
+      </div>
+
+      
+      <details class="hb-mtoc">
+        <summary><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-list"/></svg>Содержание<svg class="ico sm" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-chev-down"/></svg></summary>
+        <a class="l2" href="#всё-из-матрицы-ошибок">Всё из матрицы ошибок</a><a class="l2" href="#метрики-без-порога">Метрики без порога</a><a class="l2" href="#строгие-оценочные-правила-log-loss-и-brier">Строгие оценочные правила: log-loss и Brier</a><a class="l2" href="#многоклассовые-случаи">Многоклассовые случаи</a><a class="l2" href="#калибровка">Калибровка</a><a class="l2" href="#числа-восемь-точек-руками">Числа: восемь точек руками</a><a class="l2" href="#код">Код</a><a class="l2" href="#ловушки">Ловушки</a><a class="l2" href="#проверь-себя">Проверь себя</a><a class="l2" href="#что-почитать">Что почитать</a>
+      </details>
+      
+
+      <div class="prose"><p>Метрика определяет, что значит «модель стала лучше», поэтому её выбирают раньше модели. Для классификации нужно различать три вопроса: хорошо ли модель <strong>ранжирует</strong> (AUC), хорошо ли выбран <strong>порог</strong> (precision, recall, F, MCC) и можно ли верить самим <strong>вероятностям</strong> (log-loss, Brier, калибровка). Определения accuracy, precision, recall, F1, ROC и PR даны в <a href="/edufamcs-demo/handbook/classic/logisticheskaya-regressiya-i-metriki/" rel="noopener noreferrer nofollow">главе про логистическую регрессию</a>; здесь — то, чего там нет: вывод свойств, строгие оценочные правила, калибровка и пример, который можно пересчитать руками.</p>
+<h2 id="всё-из-матрицы-ошибок">Всё из матрицы ошибок</h2>
+<p>При фиксированном пороге всё считается из четырёх чисел TP, FP, FN, TN:</p>
+<div class="tex tex-block">\text{spec}=\frac{TN}{TN+FP},\quad F_\beta=\frac{(1+\beta^2)PR}{\beta^2P+R},\quad
+\text{MCC}=\frac{TP\cdot TN-FP\cdot FN}{\sqrt{(TP+FP)(TP+FN)(TN+FP)(TN+FN)}}.</div>
+<p><strong>Specificity</strong> — доля верно отвергнутых отрицательных (это <span class="tex">1-\text{FPR}</span>). <span class="tex">F_\beta</span> — взвешенное гармоническое среднее: <span class="tex">\beta=2</span> ценит recall вдвое выше precision. <strong>MCC</strong> — коэффициент корреляции Пирсона между предсказанной и истинной бинарными метками, лежит в <span class="tex">[-1,1]</span>, использует все четыре ячейки и не «хвалит» модель, которая угадывает мажоритарный класс; F1 игнорирует TN и зависит от того, какой класс назван положительным.</p>
+<h2 id="метрики-без-порога">Метрики без порога</h2>
+<p><strong>ROC-AUC как вероятность правильного порядка.</strong> Пусть <span class="tex">S^+</span>, <span class="tex">S^-</span> — оценки случайного положительного и отрицательного объектов (непрерывные). <span class="tex">\text{TPR}(t)=P(S^+&gt;t)</span>, <span class="tex">\text{FPR}(t)=P(S^-&gt;t)</span>. При росте <span class="tex">t</span> точка <span class="tex">(\text{FPR},\text{TPR})</span> идёт от <span class="tex">(1,1)</span> к <span class="tex">(0,0)</span>, и <span class="tex">d\,\text{FPR}=-f_-(t)\,dt</span>. Тогда</p>
+<div class="tex tex-block">\text{AUC}=\int \text{TPR}\,d\text{FPR}=\int P(S^+&gt;t)\,f_-(t)\,dt=P(S^+&gt;S^-).</div>
+<p>Вторая строка — условная вероятность по плотности <span class="tex">S^-</span>. При совпадающих оценках добавляется половина вероятности ничьей; в выборке это доля пар «положительный, отрицательный» с верным порядком (статистика Манна–Уитни). Отсюда: AUC зависит только от упорядочивания и не меняется при любом монотонном преобразовании оценок — <strong>в том числе калибровка его не улучшает</strong>.</p>
+<p><strong>Gini</strong> <span class="tex">=2\,\text{AUC}-1</span> — тот же показатель в шкале <span class="tex">[-1,1]</span> (случайная модель = 0), его любят в кредитном скоринге. <strong>PR-AUC</strong> (average precision) чувствительна к доле положительных и в дисбалансе информативнее ROC, см. <a href="/edufamcs-demo/handbook/classic/nesbalansirovannye-klassy/" rel="noopener noreferrer nofollow">главу о несбалансированных классах</a>.</p>
+<h2 id="строгие-оценочные-правила-log-loss-и-brier">Строгие оценочные правила: log-loss и Brier</h2>
+<p>Если мы хотим, чтобы <span class="tex">\hat p</span> было вероятностью, нужна функция потерь, минимум которой по <span class="tex">\hat p</span> достигается при <span class="tex">\hat p=p</span>. Это <strong>строго собственное правило</strong> (proper scoring rule). Для <span class="tex">L(\hat p,y)=-y\log\hat p-(1-y)\log(1-\hat p)</span> (log-loss) и <span class="tex">(\hat p-y)^2</span> (Brier) ожидание при истинной <span class="tex">P(y{=}1)=p</span> минимизируется ровно в <span class="tex">\hat p=p</span>: для Brier <span class="tex">\mathbb E(\hat p-y)^2=(\hat p-p)^2+p(1-p)</span>. Accuracy и F1 таким свойством не обладают.</p>
+<p>Log-loss сильнее штрафует уверенные ошибки (у <span class="tex">\hat p\to0</span> при <span class="tex">y=1</span> штраф бесконечен), Brier ограничен. <strong>Разложение Брайера</strong> (Murphy, 1973), в словах: Brier = <em>reliability</em> (насколько предсказания в группах расходятся с частотами; «калибровка») − <em>resolution</em> (насколько группы различаются между собой по частоте; «сила модели») + <em>uncertainty</em> (дисперсия самой метки <span class="tex">\bar y(1-\bar y)</span>, от модели не зависит). Калибровка снижает первое слагаемое и не трогает второе.</p>
+<h2 id="многоклассовые-случаи">Многоклассовые случаи</h2>
+<p><strong>Micro</strong> суммирует TP/FP/FN по классам (доминируют крупные классы), <strong>macro</strong> усредняет метрику по классам поровну, <strong>weighted</strong> — с весами по числу объектов (см. <a href="/edufamcs-demo/handbook/classic/logisticheskaya-regressiya-i-metriki/" rel="noopener noreferrer nofollow">главу о логистической регрессии</a>). Для AUC в <code>roc_auc_score</code>: <code>multi_class="ovr"</code> — класс против остальных, чувствителен к дисбалансу классов; <code>"ovo"</code> — усреднение по парам классов, устойчивее к дисбалансу. Нужны вероятности всех классов, суммирующиеся в 1.</p>
+<h2 id="калибровка">Калибровка</h2>
+<p>Модель <strong>откалибрована</strong>, если среди объектов с <span class="tex">\hat p\approx0{,}7</span> положительных около 70%. Основной инструмент диагностики — <strong>reliability diagram</strong>: бины по <span class="tex">\hat p</span>, по оси <span class="tex">x</span> — средний <span class="tex">\hat p</span> в бине, по <span class="tex">y</span> — доля положительных. Скаляр — <strong>ECE</strong> (expected calibration error): <span class="tex">\text{ECE}=\sum_{k}\frac{n_k}{n}\,|\bar y_k-\bar p_k|</span>. Он зависит от числа и способа бинирования (равноширокие или равночастотные бины) и неустойчив при малой выборке; сравнивайте только ECE с одинаковыми настройками.</p>
+<p>Методы калибровки обучаются на <strong>отдельной</strong> выборке (не на обучающей модели):</p>
+<ul>
+<li><strong>Platt scaling</strong> (sigmoid): <span class="tex">\hat p'=\sigma(a\,s+b)</span>, два параметра. Хорош при малых данных и «S-образных» искажениях (SVM, бустинг по экспоненте).</li>
+<li><strong>Изотоническая регрессия</strong>: монотонная кусочно-постоянная функция, никаких предположений о форме, но на малой калибровочной выборке переобучается; даёт ступеньки, а значит, ничьи в ранжировании.</li>
+<li><strong>Temperature scaling</strong> (Guo et al., 2017): один параметр, <span class="tex">\hat p'=\sigma(z/T)</span>, где <span class="tex">z</span> — логит; <span class="tex">T&gt;1</span> смягчает переуверенность. Не меняет порядок, а в многоклассовом случае делит все логиты на <span class="tex">T</span> и сохраняет argmax. Стандарт для нейросетей.</li>
+</ul>
+<div class="callout md note"><p class="callout-title">Когда калибровка важна</p>
+<p>Если вероятность идёт в формулу: ожидаемая выручка <span class="tex">p\cdot\text{цена}</span>, порог по стоимости ошибок <span class="tex">\tau=\frac{c_{FP}}{c_{FP}+c_{FN}}</span>, слияние рангов нескольких моделей, ставка в рекламном аукционе при предсказании CTR. Если нужно только отсортировать список, калибровка бесполезна: AUC не изменится.</p>
+</div>
+<h2 id="числа-восемь-точек-руками">Числа: восемь точек руками</h2>
+<p>Метки <span class="tex">y=(1,1,1,0,1,0,0,0)</span>, оценки модели <span class="tex">\hat p=(0{,}97;\,0{,}95;\,0{,}90;\,0{,}92;\,0{,}20;\,0{,}10;\,0{,}05;\,0{,}03)</span>.</p>
+<ul>
+<li>Порог 0,5: TP=3 (0,97; 0,95; 0,90), FP=1 (0,92), FN=1 (0,20), TN=3. Precision=recall=specificity=0,75, MCC <span class="tex">=\frac{3\cdot3-1\cdot1}{\sqrt{4\cdot4\cdot4\cdot4}}=\frac{8}{16}=0{,}5</span>.</li>
+<li>AUC: положительных 4, отрицательных 4, пар 16. Неверно упорядочены 2 пары: отрицательный 0,92 оценён выше положительных 0,90 и 0,20. AUC <span class="tex">=14/16=0{,}875</span>, Gini <span class="tex">=0{,}75</span>.</li>
+<li>Brier: квадраты ошибок <span class="tex">0{,}0009;\ 0{,}0025;\ 0{,}01;\ 0{,}8464;\ 0{,}64;\ 0{,}01;\ 0{,}0025;\ 0{,}0009</span>, сумма 1,5132, Brier <span class="tex">=0{,}189</span>. Log-loss <span class="tex">=0{,}564</span>: основной вклад дают две уверенные ошибки (2,53 для 0,92 при <span class="tex">y=0</span> и 1,61 для 0,20 при <span class="tex">y=1</span>).</li>
+<li>Калибровка, два бина: в <span class="tex">[0;0{,}5)</span> четыре точки, средний <span class="tex">\hat p=0{,}095</span>, доля положительных 0,25; в <span class="tex">[0{,}5;1]</span> средний <span class="tex">\hat p=0{,}935</span>, доля 0,75. ECE <span class="tex">=\frac12\cdot0{,}155+\frac12\cdot0{,}185=0{,}17</span>. Модель переуверена.</li>
+<li>Temperature scaling: подбор <span class="tex">T</span> по log-loss на этих же восьми точках (только для иллюстрации — калибровать на тех же точках нельзя) даёт <span class="tex">T\approx1{,}82</span>; log-loss падает с 0,564 до 0,485, Brier — с 0,189 до 0,161, AUC остаётся 0,875.</li>
+</ul>
+<p>Теперь на реальной разметке: синтетика, 30 000 строк, <code>RandomForest</code> и <code>GaussianNB</code> обучены на 50%, калибратор — на 6000 объектов, тест — 9000.</p>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>Модель и калибровка</th>
+<th>AUC</th>
+<th>log-loss</th>
+<th>Brier</th>
+<th>ECE</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>RF, без калибровки</td>
+<td>0,9498</td>
+<td>0,3186</td>
+<td>0,0903</td>
+<td>0,0895</td>
+</tr>
+<tr>
+<td>RF, sigmoid</td>
+<td>0,9498</td>
+<td>0,2765</td>
+<td>0,0800</td>
+<td>0,0063</td>
+</tr>
+<tr>
+<td>RF, isotonic</td>
+<td>0,9491</td>
+<td>0,2800</td>
+<td>0,0805</td>
+<td>0,0075</td>
+</tr>
+<tr>
+<td>RF, temperature (<span class="tex">T=0{,}60</span>)</td>
+<td>0,9498</td>
+<td>0,2851</td>
+<td>0,0812</td>
+<td>0,0191</td>
+</tr>
+<tr>
+<td>NB, без калибровки</td>
+<td>0,7931</td>
+<td>0,5919</td>
+<td>0,1907</td>
+<td>0,0747</td>
+</tr>
+<tr>
+<td>NB, sigmoid</td>
+<td>0,7931</td>
+<td>0,5506</td>
+<td>0,1846</td>
+<td>0,0298</td>
+</tr>
+<tr>
+<td>NB, isotonic</td>
+<td>0,7924</td>
+<td>0,5468</td>
+<td>0,1835</td>
+<td>0,0125</td>
+</tr>
+<tr>
+<td>NB, temperature (<span class="tex">T=1{,}75</span>)</td>
+<td>0,7931</td>
+<td>0,5496</td>
+<td>0,1844</td>
+<td>0,0270</td>
+</tr>
+</tbody>
+</table></div>
+<p>AUC не меняется (isotonic слегка снижает из-за ничьих), метрики вероятностей улучшаются. Лес <em>недо</em>уверен (<span class="tex">T&lt;1</span> его обостряет), наивный Байес — переуверен (<span class="tex">T&gt;1</span>).</p>
+<h2 id="код">Код</h2>
+<div class="code"><div class="code-head"><span class="lang">python</span></div><pre><code><span class="tok-k">from</span> sklearn.calibration <span class="tok-k">import</span> CalibratedClassifierCV<span class="tok-p">,</span> calibration_curve
+<span class="tok-k">from</span> sklearn.frozen <span class="tok-k">import</span> FrozenEstimator
+<span class="tok-k">from</span> sklearn.metrics <span class="tok-k">import</span> brier_score_loss<span class="tok-p">,</span> log_loss
+
+base <span class="tok-p">=</span> model<span class="tok-p">.</span>fit<span class="tok-p">(</span>X_train<span class="tok-p">,</span> y_train<span class="tok-p">)</span>
+cal <span class="tok-p">=</span> CalibratedClassifierCV<span class="tok-p">(</span>FrozenEstimator<span class="tok-p">(</span>base<span class="tok-p">)</span><span class="tok-p">,</span> method<span class="tok-p">=</span><span class="tok-s">"</span><span class="tok-s">isotonic</span><span class="tok-s">"</span><span class="tok-p">)</span>  <span class="tok-c"># или "sigmoid"</span>
+cal<span class="tok-p">.</span>fit<span class="tok-p">(</span>X_cal<span class="tok-p">,</span> y_cal<span class="tok-p">)</span>            <span class="tok-c"># отдельная выборка, не train и не test</span>
+p <span class="tok-p">=</span> cal<span class="tok-p">.</span>predict_proba<span class="tok-p">(</span>X_test<span class="tok-p">)</span><span class="tok-p">[</span><span class="tok-p">:</span><span class="tok-p">,</span> <span class="tok-n">1</span><span class="tok-p">]</span>
+
+frac_pos<span class="tok-p">,</span> mean_pred <span class="tok-p">=</span> calibration_curve<span class="tok-p">(</span>y_test<span class="tok-p">,</span> p<span class="tok-p">,</span> n_bins<span class="tok-p">=</span><span class="tok-n">10</span><span class="tok-p">,</span> strategy<span class="tok-p">=</span><span class="tok-s">"</span><span class="tok-s">quantile</span><span class="tok-s">"</span><span class="tok-p">)</span>
+<span class="tok-f">print</span><span class="tok-p">(</span>brier_score_loss<span class="tok-p">(</span>y_test<span class="tok-p">,</span> p<span class="tok-p">)</span><span class="tok-p">,</span> log_loss<span class="tok-p">(</span>y_test<span class="tok-p">,</span> p<span class="tok-p">)</span><span class="tok-p">)</span>
+</code></pre></div>
+<p><code>FrozenEstimator</code> (scikit-learn 1.6+) заменил прежний <code>cv="prefit"</code>: он говорит калибратору не переобучать базовую модель. Без него <code>CalibratedClassifierCV(model, cv=5)</code> само обучает модель по фолдам и усредняет калиброванные копии.</p>
+<h2 id="ловушки">Ловушки</h2>
+<ul>
+<li>Калибровка на тех же данных, на которых обучена модель, или на тесте.</li>
+<li>Сравнивать ECE между моделями с разным бинированием; на малой выборке ECE почти шум.</li>
+<li>Калибровать на одном распределении и применять на другом (другая доля положительных): калибровка «плывёт», см. <a href="/edufamcs-demo/handbook/engineering/monitoring-modelej/" rel="noopener noreferrer nofollow">мониторинг моделей</a>.</li>
+<li>Ждать роста AUC от калибровки.</li>
+<li>Выбирать модель по accuracy/F1 при пороге по умолчанию.</li>
+<li>На собеседовании: доказать, что AUC равен <span class="tex">P(S^+&gt;S^-)</span>; почему AUC инвариантен к монотонным преобразованиям; чем Brier отличается от log-loss; как устроен reliability diagram; когда Platt лучше изотонической регрессии; что такое MCC и чем он лучше F1.</li>
+</ul>
+<h2 id="проверь-себя">Проверь себя</h2>
+<details class="callout md details"><summary>Что такое AUC в терминах пар объектов?</summary>
+<p>Доля пар (положительный, отрицательный), в которых оценка положительного выше; ничья считается за 1/2. Это вероятность верного упорядочивания случайной пары.</p>
+</details>
+<details class="callout md details"><summary>Изменит ли калибровка ROC-AUC?</summary>
+<p>Нет, если калибровка строго монотонна (Platt, temperature). Изотоническая регрессия может создать ничьи и слегка изменить AUC.</p>
+</details>
+<details class="callout md details"><summary>Почему accuracy нельзя использовать как функцию потерь для оценки вероятностей?</summary>
+<p>Она не строго собственное правило: не различает <span class="tex">\hat p=0{,}51</span> и <span class="tex">0{,}99</span> и не стимулирует честную вероятность. Log-loss и Brier стимулируют.</p>
+</details>
+<details class="callout md details"><summary>Когда изотоническая калибровка хуже Platt?</summary>
+<p>При малой калибровочной выборке: ступенчатая функция подгоняется под шум, а у sigmoid всего два параметра.</p>
+</details>
+<details class="callout md details"><summary>Чем micro-усреднение отличается от macro?</summary>
+<p>Micro суммирует TP/FP/FN по всем классам и отражает крупные классы; macro усредняет метрики классов с равными весами и показывает качество на редких.</p>
+</details>
+<h2 id="что-почитать">Что почитать</h2>
+<ul>
+<li>Guo C. et al. <em>On Calibration of Modern Neural Networks</em>, ICML 2017: https://arxiv.org/abs/1706.04599</li>
+<li>Niculescu-Mizil A., Caruana R. <em>Predicting Good Probabilities With Supervised Learning</em>, ICML 2005.</li>
+<li>Platt J. <em>Probabilistic Outputs for Support Vector Machines and Comparisons to Regularized Likelihood Methods</em>, 1999.</li>
+<li>Gneiting T., Raftery A. <em>Strictly Proper Scoring Rules, Prediction, and Estimation</em>, JASA, 2007.</li>
+<li>Murphy A. <em>A New Vector Partition of the Probability Score</em>, Journal of Applied Meteorology, 1973.</li>
+<li>Fawcett T. <em>An introduction to ROC analysis</em>, Pattern Recognition Letters, 2006.</li>
+<li>Документация scikit-learn: Probability calibration: https://scikit-learn.org/stable/modules/calibration.html</li>
+</ul>
+</div>
+      
+
+      
+
+      
+      <nav class="pager" aria-label="Соседние статьи">
+        <a href="/edufamcs-demo/handbook/classic/nesbalansirovannye-klassy/"><span><svg class="ico sm" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-arrow-left"/></svg>Назад</span>Несбалансированные классы</a>
+        <a href="/edufamcs-demo/handbook/classic/validaciya-i-utechki-dannyh/"><span>Дальше<svg class="ico sm" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-arrow"/></svg></span>Валидация и утечки данных</a>
+      </nav>
+      
+    </article>
+
+    <aside class="hb-toc" aria-label="На этой странице">
+      <a class="l2" href="#всё-из-матрицы-ошибок">Всё из матрицы ошибок</a><a class="l2" href="#метрики-без-порога">Метрики без порога</a><a class="l2" href="#строгие-оценочные-правила-log-loss-и-brier">Строгие оценочные правила: log-loss и Brier</a><a class="l2" href="#многоклассовые-случаи">Многоклассовые случаи</a><a class="l2" href="#калибровка">Калибровка</a><a class="l2" href="#числа-восемь-точек-руками">Числа: восемь точек руками</a><a class="l2" href="#код">Код</a><a class="l2" href="#ловушки">Ловушки</a><a class="l2" href="#проверь-себя">Проверь себя</a><a class="l2" href="#что-почитать">Что почитать</a>
+    </aside>
+  </div>
+</div>
+
+
+</main>
+
+<footer class="ftr" data-theme="dark">
+  <svg class="sym fern" viewBox="0 0 40.5 65.02" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#fern"/></svg>
+  <div class="container">
+    <div class="ftr-row">
+      <a href="/edufamcs-demo/" aria-label="EDU FAMCS — главная"><img src="/edufamcs-demo/static/brand/logo/logo-edu-dark.svg" alt="EDU FAMCS" width="196" height="40"></a>
+      <ul class="ftr-links">
+        <li><a href="/edufamcs-demo/#courses">Курсы</a></li>
+        <li><a href="/edufamcs-demo/ml/">Машинное обучение</a></li>
+        <li><a href="/edufamcs-demo/handbook/">Хендбук</a></li>
+        <li><a href="/edufamcs-demo/news/">Новости</a></li>
+        <li><a href="/edufamcs-demo/people/">Авторы</a></li>
+        <li><a href="/edufamcs-demo/about/">О&nbsp;нас</a></li>
+        <li><a href="/edufamcs-demo/propose/">Предложить или исправить</a></li>
+        <li><a href="/edufamcs-demo/privacy/">Конфиденциальность</a></li>
+      </ul>
+    </div>
+    <div class="ftr-big" aria-hidden="true">EDU<span class="d">·</span>FAMCS</div>
+    <p class="ftr-copy">© 2026 EDU FAMCS · Минск</p>
+  </div>
+</footer>
+
+<div class="toasts-region" aria-live="polite" id="toasts">
+
+</div>
+
+</body>
+</html>

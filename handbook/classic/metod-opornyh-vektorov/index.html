@@ -27,7 +27,7 @@
 <script src="/edufamcs-demo/static/js/site.js" defer></script>
 <script src="/edufamcs-demo/static/handbook/handbook.js" defer></script>
 </head>
-<body class="" hx-headers='{"X-CSRFToken": "6fmQMy0s8pzNNV66hihKvkxTSJka6dgISlndGli9jCP1su2muHaPMMFeo6WpbY1H"}'>
+<body class="" hx-headers='{"X-CSRFToken": "GVwDufrgMMsvm4z5uEQskPOIT3vCp9R4i8lAKh07NzG4xnOxt74p2IGGlcCA9TQL"}'>
 <a class="skip" href="#main">К содержанию</a>
 <div class="demo-bar" role="note">Демо-версия для отзывов: вход, запись на курсы и формы здесь не работают.</div>
 
@@ -60,6 +60,7 @@
 
 
 <div class="container hb-page hb-tone">
+  <div class="hb-readbar" aria-hidden="true"><i></i></div>
   <div class="hb">
     <aside class="hb-nav" aria-label="Статьи раздела">
       
@@ -88,9 +89,9 @@
       <div class="hb-meta">
         
         
-        <span><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-clock"/></svg>9&nbsp;мин</span>
+        <span><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-clock"/></svg>11&nbsp;мин</span>
         <span class="hb-authors"><span class="avatar sm" title="Артем Лебедевич">АЛ</span>Артем Лебедевич</span>
-        <span><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-edit"/></svg>9 ноября 2026</span>
+        <span><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-edit"/></svg>10 ноября 2026</span>
         
         
       </div>
@@ -98,7 +99,7 @@
       
       <details class="hb-mtoc">
         <summary><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-list"/></svg>Содержание<svg class="ico sm" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-chev-down"/></svg></summary>
-        <a class="l2" href="#идея-максимального-зазора">Идея максимального зазора</a><a class="l2" href="#жёсткий-зазор">Жёсткий зазор</a><a class="l2" href="#мягкий-зазор">Мягкий зазор</a><a class="l2" href="#двойственная-задача-и-опорные-векторы">Двойственная задача и опорные векторы</a><a class="l2" href="#ядровой-трюк">Ядровой трюк</a><a class="l2" href="#svr">SVR</a><a class="l2" href="#сложность-масштаб-и-вероятности">Сложность, масштаб и вероятности</a><a class="l2" href="#история">История</a><a class="l2" href="#код">Код</a><a class="l2" href="#практика-и-типичные-ошибки">Практика и типичные ошибки</a><a class="l2" href="#что-почитать">Что почитать</a>
+        <a class="l2" href="#идея-максимального-зазора">Идея максимального зазора</a><a class="l2" href="#жёсткий-зазор">Жёсткий зазор</a><a class="l2" href="#мягкий-зазор">Мягкий зазор</a><a class="l2" href="#двойственная-задача-и-опорные-векторы">Двойственная задача и опорные векторы</a><a class="l2" href="#ядровой-трюк">Ядровой трюк</a><a class="l2" href="#svr">SVR</a><a class="l2" href="#сложность-масштаб-и-вероятности">Сложность, масштаб и вероятности</a><a class="l2" href="#история">История</a><a class="l2" href="#код">Код</a><a class="l2" href="#практика-и-типичные-ошибки">Практика и типичные ошибки</a><a class="l2" href="#проверь-себя">Проверь себя</a><a class="l2" href="#что-почитать">Что почитать</a>
       </details>
       
 
@@ -114,6 +115,40 @@
 <p>Реальные данные шумны и не всегда разделимы. Вводим штрафные переменные <span class="tex">\xi_i\ge0</span> — насколько объект нарушает зазор:</p>
 <div class="tex tex-block">\min_{w,b,\xi}\ \tfrac12\|w\|^2+C\sum_{i=1}^n\xi_i\quad\text{при}\quad y_i(w^\top x_i+b)\ge1-\xi_i,\ \xi_i\ge0.</div>
 <p><span class="tex">C</span> — цена ошибки. Большой <span class="tex">C</span> — узкий зазор и мало нарушений (риск переобучения), малый <span class="tex">C</span> — широкий зазор и больше нарушений (риск недообучения).</p>
+<p><strong>Связь <span class="tex">C</span> и <span class="tex">\lambda</span>.</strong> Разделим цель на <span class="tex">Cn</span>:</p>
+<div class="tex tex-block">\frac1n\sum_i\max\big(0,\,1-y_ia(x_i)\big)+\frac{1}{2Cn}\|w\|^2 .</div>
+<p>Это «средняя потеря + <span class="tex">\frac\lambda2\|w\|^2</span>» с <span class="tex">\lambda=\dfrac1{Cn}</span>: <span class="tex">C</span> — обратная сила регуляризации, и та же запись, что у логистической регрессии в sklearn. Из-за суммы, а не среднего, при росте <span class="tex">n</span> тот же <span class="tex">C</span> регуляризует слабее. Проверка на данных (1000 объектов, 5 стандартизованных признаков, значения из запуска): <code>SVC(kernel="linear", C)</code> и <code>SGDClassifier(loss="hinge", alpha=1/(C*n))</code> приходят к одному значению цели <span class="tex">\tfrac12\|w\|^2+C\sum\xi_i</span>.</p>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th><span class="tex">C</span></th>
+<th><span class="tex">\lambda=1/(Cn)</span></th>
+<th>зазор <span class="tex">2/|w|</span></th>
+<th>опорных векторов</th>
+<th>цель SVC</th>
+<th>цель SGD</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>0,01</td>
+<td>0,1</td>
+<td>2,82</td>
+<td>731</td>
+<td>7,04</td>
+<td>7,04</td>
+</tr>
+<tr>
+<td>0,1</td>
+<td>0,01</td>
+<td>2,43</td>
+<td>684</td>
+<td>67,78</td>
+<td>67,84</td>
+</tr>
+</tbody>
+</table></div>
+<p>Меньше <span class="tex">C</span> — шире зазор и больше опорных векторов (нарушителей больше). При <span class="tex">C\ge1</span> SGD на этих шумных данных сходится медленно и значения уже расходятся — это свойство решателя, а не формулы.</p>
 <p><strong>Hinge loss.</strong> Исключая <span class="tex">\xi_i=\max\big(0,\,1-y_ia(x_i)\big)</span>, где <span class="tex">a(x)=w^\top x+b</span>, получаем безусловную задачу:</p>
 <div class="tex tex-block">\min_{w,b}\ \tfrac12\|w\|^2+C\sum_{i}\max\big(0,\,1-y_i\,a(x_i)\big).</div>
 <p>То есть SVM — обычная регуляризованная линейная модель с функцией потерь hinge. Величина <span class="tex">M_i=y_ia(x_i)</span> — <strong>отступ</strong> (margin объекта): <span class="tex">M&gt;0</span> — верный класс, <span class="tex">M&lt;0</span> — ошибка. Сравнение потерь как функций отступа:</p>
@@ -225,8 +260,26 @@ gs <span class="tok-p">=</span> GridSearchCV<span class="tok-p">(</span>pipe<spa
 <li><strong>Дисбаланс классов</strong>: используйте <code>class_weight="balanced"</code> и метрики PR/AUC, а не accuracy.</li>
 <li><strong><code>predict_proba</code> как истина</strong>: это Platt scaling, он может не согласовываться с <code>predict</code>; для порога используйте <code>decision_function</code>.</li>
 <li><strong>Интерпретация</strong>: ядровую SVM трудно объяснить; у линейной веса читаются как у логистической регрессии.</li>
-<li>Вопросы собеседований: вывод ширины зазора <span class="tex">2/\|w\|</span>, зачем двойственная задача, что такое опорные векторы, что делает ядро, чем hinge отличается от log-loss, роль <span class="tex">C</span> и <span class="tex">\gamma</span>.</li>
+<li><strong>На собеседовании:</strong> выведите ширину зазора <span class="tex">2/\|w\|</span>; зачем двойственная задача и что даёт условие дополняющей нежёсткости.</li>
+<li><strong>На собеседовании:</strong> чем hinge отличается от log-loss (ноль при <span class="tex">M\ge1</span>, поэтому разрежённость), как <span class="tex">C</span> связан с силой регуляризации.</li>
+<li><strong>На собеседовании:</strong> что делает ядро, в чём условие Мерсера, как <span class="tex">\gamma</span> и <span class="tex">C</span> влияют на переобучение и почему их ищут совместно.</li>
 </ul>
+<h2 id="проверь-себя">Проверь себя</h2>
+<details class="callout md details"><summary>Почему зазор равен $2/\|w\|$?</summary>
+<p>Нормировка <span class="tex">|w^\top x+b|=1</span> на ближайших точках; расстояние до гиперплоскости <span class="tex">|w^\top x+b|/\|w\|=1/\|w\|</span> с каждой стороны, итого <span class="tex">2/\|w\|</span>. Максимизация зазора — минимизация <span class="tex">\|w\|^2</span>.</p>
+</details>
+<details class="callout md details"><summary>Кто такие опорные векторы и что будет, если удалить остальные объекты?</summary>
+<p>Объекты с <span class="tex">\alpha_i&gt;0</span>: на границе зазора или внутри него. Решение зависит только от них: удаление остальных не меняет гиперплоскость.</p>
+</details>
+<details class="callout md details"><summary>Что произойдёт при $C\to\infty$ и при $C\to0$?</summary>
+<p>Большой <span class="tex">C</span> — жёсткий зазор, любое нарушение дорого, риск переобучения. Малый <span class="tex">C</span> — широкий зазор, много нарушителей, риск недообучения.</p>
+</details>
+<details class="callout md details"><summary>Почему ядровой трюк работает?</summary>
+<p>И обучение, и предсказание зависят от данных только через скалярные произведения <span class="tex">x_i^\top x_j</span>; их заменяют ядром <span class="tex">K</span> (симметричным, положительно полуопределённым), не вычисляя <span class="tex">\varphi</span> явно.</p>
+</details>
+<details class="callout md details"><summary>Почему у SVM есть опорные векторы, а у логистической регрессии нет?</summary>
+<p>Hinge-потеря равна нулю при <span class="tex">M\ge1</span>: уверенно классифицированные объекты не вносят вклад. Log-loss положительна всегда, поэтому каждый объект тянет границу.</p>
+</details>
 <h2 id="что-почитать">Что почитать</h2>
 <ul>
 <li>B. Boser, I. Guyon, V. Vapnik, <em>A training algorithm for optimal margin classifiers</em>, COLT, 1992.</li>
@@ -240,6 +293,8 @@ gs <span class="tok-p">=</span> GridSearchCV<span class="tok-p">(</span>pipe<spa
       
 
       
+
+      
       <nav class="pager" aria-label="Соседние статьи">
         <a href="/edufamcs-demo/handbook/classic/logisticheskaya-regressiya-i-metriki/"><span><svg class="ico sm" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-arrow-left"/></svg>Назад</span>Логистическая регрессия и метрики классификации</a>
         <a href="/edufamcs-demo/handbook/classic/derevya-reshenij/"><span>Дальше<svg class="ico sm" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-arrow"/></svg></span>Деревья решений</a>
@@ -248,7 +303,7 @@ gs <span class="tok-p">=</span> GridSearchCV<span class="tok-p">(</span>pipe<spa
     </article>
 
     <aside class="hb-toc" aria-label="На этой странице">
-      <a class="l2" href="#идея-максимального-зазора">Идея максимального зазора</a><a class="l2" href="#жёсткий-зазор">Жёсткий зазор</a><a class="l2" href="#мягкий-зазор">Мягкий зазор</a><a class="l2" href="#двойственная-задача-и-опорные-векторы">Двойственная задача и опорные векторы</a><a class="l2" href="#ядровой-трюк">Ядровой трюк</a><a class="l2" href="#svr">SVR</a><a class="l2" href="#сложность-масштаб-и-вероятности">Сложность, масштаб и вероятности</a><a class="l2" href="#история">История</a><a class="l2" href="#код">Код</a><a class="l2" href="#практика-и-типичные-ошибки">Практика и типичные ошибки</a><a class="l2" href="#что-почитать">Что почитать</a>
+      <a class="l2" href="#идея-максимального-зазора">Идея максимального зазора</a><a class="l2" href="#жёсткий-зазор">Жёсткий зазор</a><a class="l2" href="#мягкий-зазор">Мягкий зазор</a><a class="l2" href="#двойственная-задача-и-опорные-векторы">Двойственная задача и опорные векторы</a><a class="l2" href="#ядровой-трюк">Ядровой трюк</a><a class="l2" href="#svr">SVR</a><a class="l2" href="#сложность-масштаб-и-вероятности">Сложность, масштаб и вероятности</a><a class="l2" href="#история">История</a><a class="l2" href="#код">Код</a><a class="l2" href="#практика-и-типичные-ошибки">Практика и типичные ошибки</a><a class="l2" href="#проверь-себя">Проверь себя</a><a class="l2" href="#что-почитать">Что почитать</a>
     </aside>
   </div>
 </div>

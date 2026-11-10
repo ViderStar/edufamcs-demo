@@ -20,6 +20,16 @@
     box.appendChild(f);
   });
 
+  /* copy a link: <button data-copy="https://…"> */
+  document.addEventListener('click', function (e) {
+    var b = e.target.closest('[data-copy]');
+    if (!b || !navigator.clipboard) return;
+    navigator.clipboard.writeText(b.getAttribute('data-copy')).then(function () {
+      b.classList.add('copied');
+      setTimeout(function () { b.classList.remove('copied'); }, 1600);
+    });
+  });
+
   document.addEventListener('keydown', function (e) {
     if (e.defaultPrevented || e.altKey || e.ctrlKey || e.metaKey || e.shiftKey) return;
     if (e.key !== 'ArrowLeft' && e.key !== 'ArrowRight') return;

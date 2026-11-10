@@ -1,0 +1,289 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Как устроен кодовый агент: модель, инструменты, контекст · EDU FAMCS</title>
+<meta name="description" content="Как устроен кодовый агент: модель, инструменты, контекст — ИИ-ассистенты для кода. Хендбук ML-курса ФПМИ.">
+<meta name="theme-color" content="#060A16">
+<meta name="robots" content="noindex, nofollow">
+<meta name="htmx-config" content='{"allowEval":false,"includeIndicatorStyles":false,"historyCacheSize":0,"selfRequestsOnly":true}'>
+<meta name="katex-js" content="/edufamcs-demo/static/vendor/katex/katex.min.js">
+<meta name="katex-css" content="/edufamcs-demo/static/vendor/katex/katex.min.css">
+<link rel="icon" href="/edufamcs-demo/static/brand/logo/favicon-16.svg" type="image/svg+xml" sizes="16x16">
+<link rel="icon" href="/edufamcs-demo/static/brand/logo/favicon.svg" type="image/svg+xml" sizes="any">
+<link rel="preload" href="/edufamcs-demo/static/brand/fonts/manrope-cyrillic-400.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/edufamcs-demo/static/brand/fonts/unbounded-cyrillic-800.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="/edufamcs-demo/static/brand/fonts.css">
+<link rel="stylesheet" href="/edufamcs-demo/static/brand/tokens.css">
+<link rel="stylesheet" href="/edufamcs-demo/static/brand/components.css">
+<link rel="stylesheet" href="/edufamcs-demo/static/css/site.css">
+<link rel="stylesheet" href="/edufamcs-demo/static/css/hub.css">
+<link rel="stylesheet" href="/edufamcs-demo/static/css/about.css">
+<link rel="stylesheet" href="/edufamcs-demo/static/handbook/handbook.css">
+<script src="/edufamcs-demo/static/js/theme.js"></script>
+<script src="/edufamcs-demo/static/vendor/htmx/htmx.min.js" defer></script>
+<script src="/edufamcs-demo/static/vendor/alpine/alpine-csp.min.js" defer></script>
+<script src="/edufamcs-demo/static/js/site.js" defer></script>
+<script src="/edufamcs-demo/static/handbook/handbook.js" defer></script>
+</head>
+<body class="" hx-headers='{"X-CSRFToken": "axLNce7NCpYH11hyIcXmcK02dxGnYEBdMKAKsgGEDccgckw0HFbjUDS0FGNlIoAU"}'>
+<a class="skip" href="#main">К содержанию</a>
+<div class="demo-bar" role="note">Демо-версия для отзывов: вход, запись на курсы и формы здесь не работают.</div>
+
+<header class="hdr">
+  <div class="container">
+    <a class="brand" href="/edufamcs-demo/" aria-label="EDU FAMCS — главная">
+      <span class="full"><img class="only-light" src="/edufamcs-demo/static/brand/logo/logo-edu-light.svg" alt="EDU FAMCS" width="196" height="40"><img class="only-dark" src="/edufamcs-demo/static/brand/logo/logo-edu-dark.svg" alt="EDU FAMCS" width="196" height="40"></span>
+      <span class="short"><img class="only-light" src="/edufamcs-demo/static/brand/logo/logo-edu-light.svg" alt="EDU FAMCS" height="30"><img class="only-dark" src="/edufamcs-demo/static/brand/logo/logo-edu-dark.svg" alt="EDU FAMCS" height="30"></span>
+    </a>
+    <nav class="nav" id="main-nav" aria-label="Основная навигация">
+      <a href="/edufamcs-demo/#courses">Курсы</a>
+      <a href="/edufamcs-demo/ml/" >Машинное обучение</a>
+      
+      <a href="/edufamcs-demo/handbook/" aria-current="page">Хендбук</a>
+      <a href="/edufamcs-demo/news/" >Новости</a>
+      <a href="/edufamcs-demo/people/" >Авторы</a>
+      <a href="/edufamcs-demo/about/" >О&nbsp;нас</a>
+    </nav>
+    <div class="hdr-actions">
+      
+      <a class="btn btn-outline btn-login" href="/edufamcs-demo/accounts/login/?next=/handbook/ai-tools/kak-ustroen-kodovyj-agent/">Войти</a>
+      
+      <button class="icon-btn menu-btn" type="button" aria-label="Меню" aria-expanded="false" aria-controls="main-nav"><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-menu"/></svg></button>
+    </div>
+  </div>
+</header>
+
+<main id="main">
+
+
+
+<div class="container hb-page s-agents">
+  <div class="hb-readbar" aria-hidden="true"><i></i></div>
+  <div class="hb">
+    <aside class="hb-nav" aria-label="Статьи раздела">
+      
+<form class="hb-search" action="/edufamcs-demo/handbook/search/" method="get" role="search">
+  <svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-search"/></svg>
+  <input class="input" type="search" name="q" value="" placeholder="Поиск по хендбуку" aria-label="Поиск по хендбуку" autocomplete="off" maxlength="120"
+    hx-get="/edufamcs-demo/handbook/search/" hx-trigger="input changed delay:250ms, search" hx-target="#hb-nav-results" hx-sync="this:replace">
+</form>
+
+      <div id="hb-nav-results" class="hb-nav-results" aria-live="polite"></div>
+      <a class="grp" href="/edufamcs-demo/handbook/ai-tools/">Основы</a>
+      
+      <a class="cur" href="/edufamcs-demo/handbook/ai-tools/kak-ustroen-kodovyj-agent/" aria-current="page">Как устроен кодовый агент: модель, инструменты, контекст</a>
+      
+      <a class="" href="/edufamcs-demo/handbook/ai-tools/claude-code/">Claude Code: установка, режимы, CLAUDE.md</a>
+      
+      <a class="" href="/edufamcs-demo/handbook/ai-tools/codex/">Codex CLI: AGENTS.md, песочница, согласования</a>
+      
+      <a class="" href="/edufamcs-demo/handbook/ai-tools/postanovka-zadach-agentu/">Как ставить задачу агенту</a>
+      
+    </aside>
+
+    <article class="hb-main">
+      <nav class="crumbs" aria-label="Навигация"><a href="/edufamcs-demo/handbook/">Хендбук</a><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-chev"/></svg><a href="/edufamcs-demo/handbook/ai-tools/">ИИ-ассистенты для кода</a></nav>
+      <h1 class="h1">Как устроен кодовый агент: модель, инструменты, контекст</h1>
+      <div class="hb-meta">
+        
+        
+        <span><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-clock"/></svg>10&nbsp;мин</span>
+        <span class="hb-authors"><span class="avatar sm" title="Артем Лебедевич">АЛ</span>Артем Лебедевич</span>
+        <span><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-edit"/></svg>10 ноября 2026</span>
+        
+        
+      </div>
+
+      
+      <details class="hb-mtoc">
+        <summary><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-list"/></svg>Содержание<svg class="ico sm" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-chev-down"/></svg></summary>
+        <a class="l2" href="#три-поколения-автодополнение-чат-агент">Три поколения: автодополнение, чат, агент</a><a class="l2" href="#цикл-агента">Цикл агента</a><a class="l2" href="#инструменты">Инструменты</a><a class="l2" href="#контекст-дефицитный-ресурс">Контекст — дефицитный ресурс</a><a class="l2" href="#безопасность-разрешения-и-песочница">Безопасность: разрешения и песочница</a><a class="l2" href="#почему-агент-уверенно-ошибается">Почему агент уверенно ошибается</a><a class="l2" href="#стоимость-токены">Стоимость: токены</a><a class="l2" href="#ловушки">Ловушки</a><a class="l2" href="#проверь-себя">Проверь себя</a><a class="l2" href="#что-почитать">Что почитать</a>
+      </details>
+      
+
+      <div class="prose"><p>Кодовый агент — это языковая модель в цикле: она читает задачу, вызывает инструменты (прочитать файл, запустить команду), получает результат и решает, что делать дальше. Вся «магия» — обвязка вокруг модели: набор инструментов, управление контекстом и правила безопасности. Зная устройство, вы предсказываете, где агент сработает, где соврёт и почему в длинной сессии он «забыл» вашу просьбу. Конкретные продукты и их команды меняются каждый месяц, а механика ниже — нет.</p>
+<h2 id="три-поколения-автодополнение-чат-агент">Три поколения: автодополнение, чат, агент</h2>
+<ul>
+<li><strong>Автодополнение</strong> (inline completion): модель видит текущий файл и курсор, предлагает продолжение строки или функции. Один запрос — один ответ, вы принимаете или отвергаете каждую вставку.</li>
+<li><strong>Чат</strong>: вы вставляете код и вопрос, получаете текст. Модель не видит ваш репозиторий и ничего не запускает; всё, что она не знает, вы должны принести сами.</li>
+<li><strong>Агент</strong>: модель сама ищет файлы, правит их, запускает тесты и читает ошибки. Один ваш запрос превращается в десятки шагов.</li>
+</ul>
+<p>Чем больше автономии, тем больше пользы на единицу вашего времени — и тем дороже незамеченная ошибка: агент может изменить двадцать файлов, прежде чем вы заглянете в дифф.</p>
+<h2 id="цикл-агента">Цикл агента</h2>
+<p>Ядро любого агента — цикл «модель → вызов инструмента → результат → следующий шаг». Упрощённо:</p>
+<div class="code"><div class="code-head"><span class="lang">python</span></div><pre><code><span class="tok-k">def</span> <span class="tok-f">run_agent</span><span class="tok-p">(</span>task<span class="tok-p">:</span> <span class="tok-f">str</span><span class="tok-p">,</span> tools<span class="tok-p">:</span> <span class="tok-f">dict</span><span class="tok-p">,</span> max_steps<span class="tok-p">:</span> <span class="tok-f">int</span> <span class="tok-p">=</span> <span class="tok-n">50</span><span class="tok-p">)</span> <span class="tok-p">-</span><span class="tok-p">&gt;</span> <span class="tok-f">str</span><span class="tok-p">:</span>
+    messages <span class="tok-p">=</span> <span class="tok-p">[</span>
+        <span class="tok-p">{</span><span class="tok-s">"</span><span class="tok-s">role</span><span class="tok-s">"</span><span class="tok-p">:</span> <span class="tok-s">"</span><span class="tok-s">system</span><span class="tok-s">"</span><span class="tok-p">,</span> <span class="tok-s">"</span><span class="tok-s">content</span><span class="tok-s">"</span><span class="tok-p">:</span> SYSTEM_PROMPT <span class="tok-p">+</span> load_instructions_files<span class="tok-p">(</span><span class="tok-p">)</span><span class="tok-p">}</span><span class="tok-p">,</span>
+        <span class="tok-p">{</span><span class="tok-s">"</span><span class="tok-s">role</span><span class="tok-s">"</span><span class="tok-p">:</span> <span class="tok-s">"</span><span class="tok-s">user</span><span class="tok-s">"</span><span class="tok-p">,</span> <span class="tok-s">"</span><span class="tok-s">content</span><span class="tok-s">"</span><span class="tok-p">:</span> task<span class="tok-p">}</span><span class="tok-p">,</span>
+    <span class="tok-p">]</span>
+    <span class="tok-k">for</span> step <span class="tok-k">in</span> <span class="tok-f">range</span><span class="tok-p">(</span>max_steps<span class="tok-p">)</span><span class="tok-p">:</span>
+        reply <span class="tok-p">=</span> llm<span class="tok-p">(</span>messages<span class="tok-p">,</span> tools<span class="tok-p">=</span>describe<span class="tok-p">(</span>tools<span class="tok-p">)</span><span class="tok-p">)</span>   <span class="tok-c"># один вызов модели</span>
+        messages<span class="tok-p">.</span>append<span class="tok-p">(</span>reply<span class="tok-p">.</span>as_message<span class="tok-p">(</span><span class="tok-p">)</span><span class="tok-p">)</span>
+
+        <span class="tok-k">if</span> <span class="tok-k">not</span> reply<span class="tok-p">.</span>tool_calls<span class="tok-p">:</span>                       <span class="tok-c"># модель решила, что закончила</span>
+            <span class="tok-k">return</span> reply<span class="tok-p">.</span>text
+
+        <span class="tok-k">for</span> call <span class="tok-k">in</span> reply<span class="tok-p">.</span>tool_calls<span class="tok-p">:</span>
+            <span class="tok-k">if</span> <span class="tok-k">not</span> permissions<span class="tok-p">.</span>allows<span class="tok-p">(</span>call<span class="tok-p">)</span><span class="tok-p">:</span>           <span class="tok-c"># слой безопасности</span>
+                result <span class="tok-p">=</span> <span class="tok-s">"</span><span class="tok-s">denied by user policy</span><span class="tok-s">"</span>
+            <span class="tok-k">else</span><span class="tok-p">:</span>
+                result <span class="tok-p">=</span> tools<span class="tok-p">[</span>call<span class="tok-p">.</span>name<span class="tok-p">]</span><span class="tok-p">(</span><span class="tok-p">*</span><span class="tok-p">*</span>call<span class="tok-p">.</span>args<span class="tok-p">)</span>  <span class="tok-c"># read_file, edit, shell...</span>
+            messages<span class="tok-p">.</span>append<span class="tok-p">(</span><span class="tok-p">{</span><span class="tok-s">"</span><span class="tok-s">role</span><span class="tok-s">"</span><span class="tok-p">:</span> <span class="tok-s">"</span><span class="tok-s">tool</span><span class="tok-s">"</span><span class="tok-p">,</span> <span class="tok-s">"</span><span class="tok-s">id</span><span class="tok-s">"</span><span class="tok-p">:</span> call<span class="tok-p">.</span>id<span class="tok-p">,</span> <span class="tok-s">"</span><span class="tok-s">content</span><span class="tok-s">"</span><span class="tok-p">:</span> truncate<span class="tok-p">(</span>result<span class="tok-p">)</span><span class="tok-p">}</span><span class="tok-p">)</span>
+
+        <span class="tok-k">if</span> tokens<span class="tok-p">(</span>messages<span class="tok-p">)</span> <span class="tok-p">&gt;</span> <span class="tok-n">0.8</span> <span class="tok-p">*</span> CONTEXT_LIMIT<span class="tok-p">:</span>     <span class="tok-c"># контекст заполняется</span>
+            messages <span class="tok-p">=</span> compact<span class="tok-p">(</span>messages<span class="tok-p">)</span>               <span class="tok-c"># свернуть историю в резюме</span>
+    <span class="tok-k">return</span> <span class="tok-s">"</span><span class="tok-s">step limit reached</span><span class="tok-s">"</span>
+</code></pre></div>
+<p>Обратите внимание на три места. Условие остановки — решение самой модели, а не проверка результата: «закончила» значит «ей так кажется». <code>permissions.allows</code> стоит в обвязке, а не в промпте: запрет, который существует только как просьба в тексте, модель может обойти. <code>compact</code> — единственное, что не даёт истории переполнить окно.</p>
+<h2 id="инструменты">Инструменты</h2>
+<p>Инструмент — функция с описанием и схемой аргументов, которую модель может «вызвать», выдав структурированный запрос. Типичный набор:</p>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>Категория</th>
+<th>Что делает</th>
+<th>Зачем</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Чтение и поиск</td>
+<td>прочитать файл, glob по именам, grep по содержимому</td>
+<td>собрать контекст, не вставляя репозиторий целиком</td>
+</tr>
+<tr>
+<td>Правка</td>
+<td>заменить фрагмент, создать файл</td>
+<td>изменить код</td>
+</tr>
+<tr>
+<td>Оболочка (shell)</td>
+<td>выполнить команду: тесты, git, <code>uv run</code>, скрипты</td>
+<td>проверить результат, получить факты</td>
+</tr>
+<tr>
+<td>Веб</td>
+<td>поиск, загрузка страницы</td>
+<td>свежая документация, сообщения об ошибках</td>
+</tr>
+<tr>
+<td>Внешние сервисы</td>
+<td>трекер задач, базы данных через подключаемые серверы</td>
+<td>данные, которых нет в репозитории</td>
+</tr>
+</tbody>
+</table></div>
+<p>Поиск по репозиторию агент строит так же, как агентный поиск из статьи <a href="/edufamcs-demo/handbook/retrieval/agentnyj-poisk/" rel="noopener noreferrer nofollow">Рассуждающий и агентный поиск</a>: не векторный индекс, а цикл «придумал запрос, посмотрел результаты, уточнил». Для кода это обычно grep и чтение файлов.</p>
+<p>Расширения — подключаемые серверы инструментов, навыки, хуки, субагенты — разобраны в статьях про <a href="/edufamcs-demo/handbook/ai-tools/skills/" rel="noopener noreferrer nofollow">навыки</a>, <a href="/edufamcs-demo/handbook/ai-tools/mcp/" rel="noopener noreferrer nofollow">MCP</a> и <a href="/edufamcs-demo/handbook/ai-tools/subagenty-huki-komandy/" rel="noopener noreferrer nofollow">субагентов и хуки</a>.</p>
+<h2 id="контекст-дефицитный-ресурс">Контекст — дефицитный ресурс</h2>
+<p>Модель видит только то, что лежит в <strong>контекстном окне</strong>: системный промпт, файлы-инструкции, вся история сообщений, содержимое прочитанных файлов и вывод команд. Окно конечно, и оно заполняется быстро: один вывод <code>pytest</code> с 500 строками трейсбека или прочитанный целиком ноутбук с выводами ячеек занимают его заметную долю.</p>
+<p>Что из этого следует:</p>
+<ul>
+<li><strong>Качество падает по мере заполнения.</strong> Важные детали тонут в длинной истории, модель хуже находит нужное, чаще противоречит себе. Это эмпирическое наблюдение разработчиков агентов, а не гарантия, но подстраиваться под него стоит.</li>
+<li><strong>Компактация.</strong> Когда окно почти полно, обвязка просит модель (или другой вызов) сжать историю в резюме и продолжает с ним. Резюме неизбежно теряет детали: договорённость из начала сессии может исчезнуть. Так происходит «забывание».</li>
+<li><strong>Новая сессия не помнит старую.</strong> Состояние между сессиями не переносится само.</li>
+<li><strong>Файлы инструкций — постоянная память.</strong> Файл вроде <code>CLAUDE.md</code> или <code>AGENTS.md</code> заново подгружается в начало каждой сессии и при необходимости после компактации. Туда идёт то, что вы иначе повторяли бы каждый раз: команда запуска тестов, соглашения, зоны «не трогать». Файл должен быть коротким: он каждый раз занимает место в окне, а противоречивые правила снижают соблюдение.</li>
+<li><strong>Субагенты</strong> ведут разведку в своём окне и возвращают только вывод — это способ не засорять основное окно.</li>
+</ul>
+<div class="callout md tip"><p class="callout-title">Практическое правило</p>
+<p>Одна задача — одна сессия. Закончили — начните новую, а важные решения запишите в файл (инструкции, заметки по задаче). Заметка в файле надёжнее «договорённости в чате».</p>
+</div>
+<h2 id="безопасность-разрешения-и-песочница">Безопасность: разрешения и песочница</h2>
+<p>Агент выполняет команды от вашего имени. Поэтому обвязка содержит два слоя: <strong>разрешения</strong> (спрашивать подтверждение на правки и команды или заранее разрешить безопасные: «тесты можно», «git push нельзя») и <strong>песочницу</strong> (ограничение файловой системы и сети на уровне ОС, чтобы даже разрешённая команда не вышла за пределы проекта). Подтверждение раз за разом утомляет, и соблазн «разрешить всё» велик; режим без ограничений уместен только в изолированном контейнере или виртуалке. Разбор угроз — в статье про <a href="/edufamcs-demo/handbook/ai-tools/bezopasnost-agentov/" rel="noopener noreferrer nofollow">безопасность агентов</a>.</p>
+<h2 id="почему-агент-уверенно-ошибается">Почему агент уверенно ошибается</h2>
+<p>Модель обучена порождать правдоподобный текст. У неё нет собственного знания, правильна ли программа, пока она не запустит её и не прочитает результат. Поэтому:</p>
+<ul>
+<li>без запуска тестов утверждение «готово, всё работает» ничем не подкреплено;</li>
+<li>в ML особенно опасно: код выполняется без ошибок, а результат ложный — утечка из теста, не та метрика, не тот сплит (подробнее в <a href="/edufamcs-demo/handbook/ai-tools/vajb-koding-i-zashchita/" rel="noopener noreferrer nofollow">статье про защиту проекта</a>);</li>
+<li>агент склонен «чинить» проваленный тест подгонкой теста или хитрым обходом, если это быстрее, чем найти причину;</li>
+<li>библиотеки меняются, и модель может уверенно использовать функцию, которой нет в вашей версии.</li>
+</ul>
+<p>Лекарство одно: дать агенту проверку, возвращающую «прошло/не прошло» (тест, линтер, скрипт сравнения), и самому читать дифф. Агент с хорошей проверкой работает намного надёжнее агента без неё.</p>
+<h2 id="стоимость-токены">Стоимость: токены</h2>
+<p>Работа оплачивается токенами: считаются и входные (вся история и прочитанное, которая отправляется заново на каждом шаге цикла), и выходные (то, что пишет модель). Отсюда: длинная сессия с большим контекстом дороже короткой, лишнее чтение файлов и огромные выводы стоят денег, а повторяющийся префикс (системный промпт, файл инструкций) обычно кэшируется и дешевле. Подписки ограничивают объём использования лимитами, API — берёт плату за токены. Актуальные модели и цены — в документации провайдера.</p>
+<div class="callout md note"><p class="callout-title">Заметка</p>
+<p>Продукты и их возможности меняются быстро; источник истины — официальная документация, ссылки внизу.</p>
+</div>
+<h2 id="ловушки">Ловушки</h2>
+<ul>
+<li>Считать «агент сказал, что тесты проходят» доказательством: просите показать вывод команды или запускайте сами.</li>
+<li>Тянуть одну сессию неделями: контекст раздулся, ранние договорённости потеряны.</li>
+<li>Класть в файл инструкций сотни строк: он съедает окно и снижает соблюдение правил.</li>
+<li>Давать полный доступ без песочницы «чтобы не спрашивал».</li>
+<li>Вставлять в чат секреты (ключи, токены): они попадают в историю и логи.</li>
+<li>Принимать правку без просмотра диффа, потому что «агент же запускал тесты»: тесты могли быть изменены.</li>
+</ul>
+<h2 id="проверь-себя">Проверь себя</h2>
+<details class="callout md details"><summary>Чем агент отличается от чата с моделью?</summary>
+<p>Агент сам вызывает инструменты (чтение, правка, shell, поиск) в цикле и видит результаты, а чат только отвечает текстом на то, что вы принесли.</p>
+</details>
+<details class="callout md details"><summary>Почему агент в длинной сессии «забывает» ранние указания?</summary>
+<p>Окно конечно; при заполнении история сжимается в резюме с потерей деталей, а качество работы с длинным контекстом падает. Постоянные правила нужно держать в файле инструкций, который перечитывается заново.</p>
+</details>
+<details class="callout md details"><summary>Кто решает, что задача выполнена, и чем это опасно?</summary>
+<p>Сама модель: цикл останавливается, когда она не запросила больше инструментов. Без запуска проверки «выполнено» означает «выглядит правдоподобно».</p>
+</details>
+<details class="callout md details"><summary>Чем разрешения отличаются от песочницы?</summary>
+<p>Разрешения решают, спрашивать ли вас перед действием; песочница ограничивает на уровне ОС, что процесс вообще может затронуть. Нужны оба слоя.</p>
+</details>
+<details class="callout md details"><summary>Из чего складывается стоимость сессии?</summary>
+<p>Из входных токенов (вся история заново на каждом шаге, прочитанные файлы, вывод команд) и выходных. Длинный контекст и объёмные выводы удорожают сессию.</p>
+</details>
+<h2 id="что-почитать">Что почитать</h2>
+<ul>
+<li><a href="https://code.claude.com/docs/en/how-claude-code-works" rel="noopener noreferrer nofollow">How Claude Code works</a> — цикл агента, инструменты, контекст, чекпоинты.</li>
+<li><a href="https://code.claude.com/docs/en/best-practices" rel="noopener noreferrer nofollow">Best practices for Claude Code</a> — проверка результата, управление контекстом, инструкции.</li>
+<li><a href="https://agents.md" rel="noopener noreferrer nofollow">AGENTS.md</a> — открытый формат файла инструкций для разных агентов.</li>
+<li><a href="https://learn.chatgpt.com/docs/codex/cli" rel="noopener noreferrer nofollow">Codex CLI</a> — документация другого кодового агента.</li>
+</ul>
+</div>
+      
+
+      
+
+      
+      <nav class="pager" aria-label="Соседние статьи">
+        <i></i>
+        <a href="/edufamcs-demo/handbook/ai-tools/claude-code/"><span>Дальше<svg class="ico sm" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-arrow"/></svg></span>Claude Code: установка, режимы, CLAUDE.md</a>
+      </nav>
+      
+    </article>
+
+    <aside class="hb-toc" aria-label="На этой странице">
+      <a class="l2" href="#три-поколения-автодополнение-чат-агент">Три поколения: автодополнение, чат, агент</a><a class="l2" href="#цикл-агента">Цикл агента</a><a class="l2" href="#инструменты">Инструменты</a><a class="l2" href="#контекст-дефицитный-ресурс">Контекст — дефицитный ресурс</a><a class="l2" href="#безопасность-разрешения-и-песочница">Безопасность: разрешения и песочница</a><a class="l2" href="#почему-агент-уверенно-ошибается">Почему агент уверенно ошибается</a><a class="l2" href="#стоимость-токены">Стоимость: токены</a><a class="l2" href="#ловушки">Ловушки</a><a class="l2" href="#проверь-себя">Проверь себя</a><a class="l2" href="#что-почитать">Что почитать</a>
+    </aside>
+  </div>
+</div>
+
+
+</main>
+
+<footer class="ftr" data-theme="dark">
+  <svg class="sym fern" viewBox="0 0 40.5 65.02" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#fern"/></svg>
+  <div class="container">
+    <div class="ftr-row">
+      <a href="/edufamcs-demo/" aria-label="EDU FAMCS — главная"><img src="/edufamcs-demo/static/brand/logo/logo-edu-dark.svg" alt="EDU FAMCS" width="196" height="40"></a>
+      <ul class="ftr-links">
+        <li><a href="/edufamcs-demo/#courses">Курсы</a></li>
+        <li><a href="/edufamcs-demo/ml/">Машинное обучение</a></li>
+        <li><a href="/edufamcs-demo/handbook/">Хендбук</a></li>
+        <li><a href="/edufamcs-demo/news/">Новости</a></li>
+        <li><a href="/edufamcs-demo/people/">Авторы</a></li>
+        <li><a href="/edufamcs-demo/about/">О&nbsp;нас</a></li>
+        <li><a href="/edufamcs-demo/propose/">Предложить или исправить</a></li>
+        <li><a href="/edufamcs-demo/privacy/">Конфиденциальность</a></li>
+      </ul>
+    </div>
+    <div class="ftr-big" aria-hidden="true">EDU<span class="d">·</span>FAMCS</div>
+    <p class="ftr-copy">© 2026 EDU FAMCS · Минск</p>
+  </div>
+</footer>
+
+<div class="toasts-region" aria-live="polite" id="toasts">
+
+</div>
+
+</body>
+</html>

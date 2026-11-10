@@ -27,7 +27,7 @@
 <script src="/edufamcs-demo/static/js/site.js" defer></script>
 <script src="/edufamcs-demo/static/handbook/handbook.js" defer></script>
 </head>
-<body class="" hx-headers='{"X-CSRFToken": "MxqZTxccGK0Naxm62iJpL8Cq0xY1WY24yDrmNkuTRXg1P6imfHCu2AKLwUAg1JN3"}'>
+<body class="" hx-headers='{"X-CSRFToken": "nS4OVqsbd29hUSydlOKNUkm6vJg8X3vlZ5TLbs12ePnQ5bNFkhYKCde4XSn6HNu2"}'>
 <a class="skip" href="#main">К содержанию</a>
 <div class="demo-bar" role="note">Демо-версия для отзывов: вход, запись на курсы и формы здесь не работают.</div>
 
@@ -60,6 +60,7 @@
 
 
 <div class="container hb-page s-recsys">
+  <div class="hb-readbar" aria-hidden="true"><i></i></div>
   <div class="hb">
     <aside class="hb-nav" aria-label="Статьи раздела">
       
@@ -90,9 +91,9 @@
       <div class="hb-meta">
         
         
-        <span><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-clock"/></svg>13&nbsp;мин</span>
+        <span><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-clock"/></svg>17&nbsp;мин</span>
         <span class="hb-authors"><span class="avatar sm" title="Артем Лебедевич">АЛ</span>Артем Лебедевич</span>
-        <span><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-edit"/></svg>9 ноября 2026</span>
+        <span><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-edit"/></svg>10 ноября 2026</span>
         
         
       </div>
@@ -100,7 +101,7 @@
       
       <details class="hb-mtoc">
         <summary><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-list"/></svg>Содержание<svg class="ico sm" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-chev-down"/></svg></summary>
-        <a class="l2" href="#марковские-цепи-и-fpmc-2010">Марковские цепи и FPMC (2010)</a><a class="l2" href="#gru4rec-2016">GRU4Rec (2016)</a><a class="l2" href="#sasrec-2018">SASRec (2018)</a><a class="l2" href="#bert4rec-2019">BERT4Rec (2019)</a><a class="l2" href="#спор-о-воспроизводимости">Спор о воспроизводимости</a><a class="l2" href="#код-sasrec-на-pytorch">Код: SASRec на PyTorch</a><a class="l2" href="#оценка-подвох-с-разбиением">Оценка: подвох с разбиением</a><a class="l2" href="#промышленные-модели">Промышленные модели</a><a class="l2" href="#что-дальше">Что дальше</a><a class="l2" href="#подводные-камни">Подводные камни</a><a class="l2" href="#что-почитать">Что почитать</a>
+        <a class="l2" href="#марковские-цепи-и-fpmc-2010">Марковские цепи и FPMC (2010)</a><a class="l2" href="#gru4rec-2016">GRU4Rec (2016)</a><a class="l2" href="#сессионные-knn-бейзлайн-который-надо-побить">Сессионные kNN: бейзлайн, который надо побить</a><a class="l2" href="#sasrec-2018">SASRec (2018)</a><a class="l2" href="#bert4rec-2019">BERT4Rec (2019)</a><a class="l2" href="#спор-о-воспроизводимости">Спор о воспроизводимости</a><a class="l2" href="#код-sasrec-на-pytorch">Код: SASRec на PyTorch</a><a class="l2" href="#оценка-подвох-с-разбиением">Оценка: подвох с разбиением</a><a class="l2" href="#промышленные-модели">Промышленные модели</a><a class="l2" href="#что-дальше">Что дальше</a><a class="l2" href="#подводные-камни">Подводные камни</a><a class="l2" href="#проверь-себя">Проверь себя</a><a class="l2" href="#что-почитать">Что почитать</a>
       </details>
       
 
@@ -119,11 +120,14 @@
 </ul>
 <p>Позже Hidasi и Karatzoglou (CIKM 2018, <em>Recurrent Neural Networks with Top-k Gains</em>) показали, что при большом числе негативов градиент BPR и TOP1 «затухает»: большинство негативов легко отделимы, и среднее по ним сглаживает сигнал. Предложены <strong>BPR-max</strong> и <strong>TOP1-max</strong> — потери, использующие softmax-веса негативов, так что вклад определяется самыми сильными из них; плюс рост числа негативов за счёт дополнительной выборки. Это дало прирост в десятки процентов по MRR на их датасетах и закрепило идею: <em>потеря важна не меньше архитектуры</em>.</p>
 <p><strong>Caser</strong> (Tang, Wang, WSDM 2018) трактует матрицу эмбеддингов последних <span class="tex">L</span> объектов как изображение и применяет горизонтальные и вертикальные свёртки. Сегодня применяется редко, но помнить стоит: показал, что CNN работает для коротких последовательностей.</p>
+<h2 id="сессионные-knn-бейзлайн-который-надо-побить">Сессионные kNN: бейзлайн, который надо побить</h2>
+<p>Ludewig и Jannach (UMUAI, 2018, <em>Evaluation of Session-based Recommendation Algorithms</em>) сравнили нейросетевые и простые методы на нескольких датасетах и показали, что соседские методы часто сопоставимы с GRU4Rec или лучше него (на части датасетов GRU4Rec выигрывает), при этом не требуют обучения нейросети. <strong>SKNN</strong> (session-kNN): текущую сессию <span class="tex">s</span> рассматривают как бинарный вектор объектов, среди прошлых сессий находят <span class="tex">k</span> ближайших по косинусу или Жаккару, а скор объекта <span class="tex">j</span> — сумма сходств соседей, содержащих <span class="tex">j</span>: <span class="tex">\hat r_j = \sum_{n \in N_k(s)} \mathrm{sim}(s,n)\,\mathbb{1}[j \in n]</span>. <strong>V-SKNN</strong> (vector multiplication) делает сходство чувствительным к порядку: объекты текущей сессии получают вес, растущий к последним кликам. Вывод для практики: любую последовательную модель сравнивайте с SKNN/V-SKNN, иначе выигрыш может оказаться выигрышем над слабым бейзлайном.</p>
 <h2 id="sasrec-2018">SASRec (2018)</h2>
 <p>Kang и McAuley (ICDM 2018) перенесли в рекомендации механизм самовнимания: каждый элемент истории смотрит на все предыдущие и сам выбирает, какие важны. RNN сжимает всё прошлое в одно состояние фиксированного размера, а внимание — нет.</p>
 <p>Вход: эмбеддинги объектов плюс позиционные эмбеддинги <span class="tex">X = [e_{i_1}+p_1, \dots, e_{i_t}+p_t]</span>. Слой causal self-attention:</p>
 <div class="tex tex-block">\mathrm{Attn}(X) = \mathrm{softmax}\!\Big(\frac{(XW_Q)(XW_K)^\top}{\sqrt d} + M\Big)\,XW_V, \qquad M_{ab} = \begin{cases}0 &amp; b \le a\\ -\infty &amp; b &gt; a\end{cases}.</div>
 <p>Маска <span class="tex">M</span> запрещает смотреть в будущее. За вниманием идут FFN, остаточные связи и LayerNorm, как в обычном трансформере. На выходе позиции <span class="tex">a</span> — вектор <span class="tex">h_a</span>, который сравнивается со всеми эмбеддингами объектов: <span class="tex">r_{a,j} = \langle h_a, e_j \rangle</span>; обучение идёт <strong>на каждой позиции одновременно</strong>: <span class="tex">h_a</span> должен предсказывать <span class="tex">i_{a+1}</span>. Одна последовательность даёт <span class="tex">t</span> обучающих примеров за один проход.</p>
+<p>Обучение на <strong>всех позициях</strong> и на <strong>только последней</strong> — разные режимы. Если учить лишь предсказание последнего объекта (как в leave-one-out тесте), пользователь даёт один пример, и сигнал расходуется впустую; на всех позициях примеров в <span class="tex">t-1</span> раз больше, но они сильно коррелированы, а ранние позиции (короткий контекст) вносят вклад столько же, сколько поздние. Именно в такой постановке работают SASRec и GRU4Rec.</p>
 <p>Оригинальная SASRec использовала бинарную кросс-энтропию (BCE) с одним случайным негативом на позицию: <span class="tex">-\log\sigma(r_{a,i_{a+1}}) - \log(1-\sigma(r_{a,j^-}))</span>.</p>
 <h2 id="bert4rec-2019">BERT4Rec (2019)</h2>
 <p>Sun et al. (CIKM 2019) предложили двунаправленный вариант: случайная доля <span class="tex">\rho</span> объектов заменяется токеном <code>[MASK]</code>, модель восстанавливает их, глядя в обе стороны (как BERT, cloze-задача). Доля <span class="tex">\rho</span> — гиперпараметр: в статье от 0,2 на плотных MovieLens до 0,4–0,6 на более разреженных датасетах. Аргумент: контекст справа тоже несёт информацию о том, что пользователь хочет сейчас, а двунаправленность даёт больше обучающих сигналов на последовательность. На момент выхода BERT4Rec значительно побеждал SASRec на четырёх датасетах, и «используйте BERT4Rec» стало почти правилом.</p>
@@ -231,9 +235,28 @@
 <li><strong>Время между событиями.</strong> Порядок без временных интервалов — грубая модель; добавляют эмбеддинги временных промежутков (TiSASRec).</li>
 <li><strong>Признаки объектов.</strong> Чистый ID-SASRec игнорирует категорию, цену, тип события; в продакшене к эмбеддингу объекта добавляют признаки.</li>
 <li><strong>Холодные объекты</strong> не имеют эмбеддинга; нужны контентные признаки.</li>
+<li><strong>Слабый бейзлайн.</strong> Сравнение SASRec с BCE на 1 негатив и без SKNN/полной CE даёт завышенный выигрыш новой модели.</li>
 </ul>
+<p>На собеседовании: чем SASRec отличается от BERT4Rec и что на самом деле давало выигрыш BERT4Rec; почему сэмплированные метрики опасны; какой простой бейзлайн вы поставите перед GRU4Rec.</p>
+<h2 id="проверь-себя">Проверь себя</h2>
+<details class="callout md details"><summary>Почему SASRec обучают на всех позициях сразу?</summary>
+<p>Причинная маска не даёт позиции <span class="tex">a</span> видеть будущее, поэтому выход в каждой позиции — независимый прогноз <span class="tex">i_{a+1}</span>; одна последовательность даёт <span class="tex">t</span> примеров за один проход.</p>
+</details>
+<details class="callout md details"><summary>Что показали Klenitskiy и Vasilev про BERT4Rec и SASRec?</summary>
+<p>Преимущество BERT4Rec давала потеря: он обучается с полной кросс-энтропией по каталогу. SASRec с полной CE сравнивается с ним или превосходит его, обучаясь в разы быстрее, — то есть выигрыш не от двунаправленности.</p>
+</details>
+<details class="callout md details"><summary>Почему сэмплированный softmax или BCE с малым числом негативов приводит к overconfidence и как это лечит gBCE?</summary>
+<p>В выборке доля положительных завышена, и модель переоценивает их вероятности. gBCE возводит вероятность положительного в степень <span class="tex">\beta</span>, зависящую от доли негативов <span class="tex">\alpha=k/(|I|-1)</span>, и тем калибрует оценку.</p>
+</details>
+<details class="callout md details"><summary>Почему у leave-one-out сплита метрики могут быть нечестными?</summary>
+<p>Тестовые события разных пользователей лежат в разное время, и модель обучается на «будущем» других пользователей; утечка искажает метрики и способна менять порядок моделей. Глобальный временной сплит даёт метрики ниже, но честные.</p>
+</details>
+<details class="callout md details"><summary>Почему паддинг в примере кода ставят справа?</summary>
+<p>Реальные события тогда никогда не смотрят на паддинг: он «в будущем» и закрыт причинной маской, отдельная маска паддинга не нужна. При левом паддинге возникают позиции со всеми закрытыми ключами и NaN в режиме <code>eval</code>.</p>
+</details>
 <h2 id="что-почитать">Что почитать</h2>
 <ul>
+<li>Ludewig, Jannach. <em>Evaluation of Session-based Recommendation Algorithms</em>, User Modeling and User-Adapted Interaction, 2018 (SKNN, V-SKNN).</li>
 <li>Rendle, Freudenthaler, Schmidt-Thieme. <em>Factorizing Personalized Markov Chains for Next-Basket Recommendation</em>, WWW 2010.</li>
 <li>Hidasi et al. <a href="https://arxiv.org/abs/1511.06939" rel="noopener noreferrer nofollow"><em>Session-based Recommendations with Recurrent Neural Networks</em></a>, ICLR 2016; Hidasi, Karatzoglou. <a href="https://arxiv.org/abs/1706.03847" rel="noopener noreferrer nofollow"><em>Recurrent Neural Networks with Top-k Gains for Session-based Recommendations</em></a>, CIKM 2018.</li>
 <li>Kang, McAuley. <a href="https://arxiv.org/abs/1808.09781" rel="noopener noreferrer nofollow"><em>Self-Attentive Sequential Recommendation</em></a>, ICDM 2018; Sun et al. <a href="https://arxiv.org/abs/1904.06690" rel="noopener noreferrer nofollow"><em>BERT4Rec</em></a>, CIKM 2019.</li>
@@ -246,6 +269,8 @@
       
 
       
+
+      
       <nav class="pager" aria-label="Соседние статьи">
         <a href="/edufamcs-demo/handbook/recsys/two-tower-ann/"><span><svg class="ico sm" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-arrow-left"/></svg>Назад</span>Нейросетевые рекомендации: two-tower, negative sampling, ANN</a>
         <a href="/edufamcs-demo/handbook/recsys/grafovye-modeli/"><span>Дальше<svg class="ico sm" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-arrow"/></svg></span>Графовые модели: от случайных блужданий до LightGCN</a>
@@ -254,7 +279,7 @@
     </article>
 
     <aside class="hb-toc" aria-label="На этой странице">
-      <a class="l2" href="#марковские-цепи-и-fpmc-2010">Марковские цепи и FPMC (2010)</a><a class="l2" href="#gru4rec-2016">GRU4Rec (2016)</a><a class="l2" href="#sasrec-2018">SASRec (2018)</a><a class="l2" href="#bert4rec-2019">BERT4Rec (2019)</a><a class="l2" href="#спор-о-воспроизводимости">Спор о воспроизводимости</a><a class="l2" href="#код-sasrec-на-pytorch">Код: SASRec на PyTorch</a><a class="l2" href="#оценка-подвох-с-разбиением">Оценка: подвох с разбиением</a><a class="l2" href="#промышленные-модели">Промышленные модели</a><a class="l2" href="#что-дальше">Что дальше</a><a class="l2" href="#подводные-камни">Подводные камни</a><a class="l2" href="#что-почитать">Что почитать</a>
+      <a class="l2" href="#марковские-цепи-и-fpmc-2010">Марковские цепи и FPMC (2010)</a><a class="l2" href="#gru4rec-2016">GRU4Rec (2016)</a><a class="l2" href="#сессионные-knn-бейзлайн-который-надо-побить">Сессионные kNN: бейзлайн, который надо побить</a><a class="l2" href="#sasrec-2018">SASRec (2018)</a><a class="l2" href="#bert4rec-2019">BERT4Rec (2019)</a><a class="l2" href="#спор-о-воспроизводимости">Спор о воспроизводимости</a><a class="l2" href="#код-sasrec-на-pytorch">Код: SASRec на PyTorch</a><a class="l2" href="#оценка-подвох-с-разбиением">Оценка: подвох с разбиением</a><a class="l2" href="#промышленные-модели">Промышленные модели</a><a class="l2" href="#что-дальше">Что дальше</a><a class="l2" href="#подводные-камни">Подводные камни</a><a class="l2" href="#проверь-себя">Проверь себя</a><a class="l2" href="#что-почитать">Что почитать</a>
     </aside>
   </div>
 </div>

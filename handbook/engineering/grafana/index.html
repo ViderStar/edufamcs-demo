@@ -1,0 +1,358 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Grafana: дашборды и алерты · EDU FAMCS</title>
+<meta name="description" content="Grafana: дашборды и алерты — Инженерия: от ноутбука до сервиса. Хендбук ML-курса ФПМИ.">
+<meta name="theme-color" content="#060A16">
+<meta name="robots" content="noindex, nofollow">
+<meta name="htmx-config" content='{"allowEval":false,"includeIndicatorStyles":false,"historyCacheSize":0,"selfRequestsOnly":true}'>
+<meta name="katex-js" content="/edufamcs-demo/static/vendor/katex/katex.min.js">
+<meta name="katex-css" content="/edufamcs-demo/static/vendor/katex/katex.min.css">
+<link rel="icon" href="/edufamcs-demo/static/brand/logo/favicon-16.svg" type="image/svg+xml" sizes="16x16">
+<link rel="icon" href="/edufamcs-demo/static/brand/logo/favicon.svg" type="image/svg+xml" sizes="any">
+<link rel="preload" href="/edufamcs-demo/static/brand/fonts/manrope-cyrillic-400.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/edufamcs-demo/static/brand/fonts/unbounded-cyrillic-800.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="/edufamcs-demo/static/brand/fonts.css">
+<link rel="stylesheet" href="/edufamcs-demo/static/brand/tokens.css">
+<link rel="stylesheet" href="/edufamcs-demo/static/brand/components.css">
+<link rel="stylesheet" href="/edufamcs-demo/static/css/site.css">
+<link rel="stylesheet" href="/edufamcs-demo/static/css/hub.css">
+<link rel="stylesheet" href="/edufamcs-demo/static/css/about.css">
+<link rel="stylesheet" href="/edufamcs-demo/static/handbook/handbook.css">
+<script src="/edufamcs-demo/static/js/theme.js"></script>
+<script src="/edufamcs-demo/static/vendor/htmx/htmx.min.js" defer></script>
+<script src="/edufamcs-demo/static/vendor/alpine/alpine-csp.min.js" defer></script>
+<script src="/edufamcs-demo/static/js/site.js" defer></script>
+<script src="/edufamcs-demo/static/handbook/handbook.js" defer></script>
+</head>
+<body class="" hx-headers='{"X-CSRFToken": "sAJGnTymipyqfy0V7WIJiV2b80CuSiF94NyDDV7djcMZqRfn6pWG0OU9A9JsC2EQ"}'>
+<a class="skip" href="#main">К содержанию</a>
+<div class="demo-bar" role="note">Демо-версия для отзывов: вход, запись на курсы и формы здесь не работают.</div>
+
+<header class="hdr">
+  <div class="container">
+    <a class="brand" href="/edufamcs-demo/" aria-label="EDU FAMCS — главная">
+      <span class="full"><img class="only-light" src="/edufamcs-demo/static/brand/logo/logo-edu-light.svg" alt="EDU FAMCS" width="196" height="40"><img class="only-dark" src="/edufamcs-demo/static/brand/logo/logo-edu-dark.svg" alt="EDU FAMCS" width="196" height="40"></span>
+      <span class="short"><img class="only-light" src="/edufamcs-demo/static/brand/logo/logo-edu-light.svg" alt="EDU FAMCS" height="30"><img class="only-dark" src="/edufamcs-demo/static/brand/logo/logo-edu-dark.svg" alt="EDU FAMCS" height="30"></span>
+    </a>
+    <nav class="nav" id="main-nav" aria-label="Основная навигация">
+      <a href="/edufamcs-demo/#courses">Курсы</a>
+      <a href="/edufamcs-demo/ml/" >Машинное обучение</a>
+      
+      <a href="/edufamcs-demo/handbook/" aria-current="page">Хендбук</a>
+      <a href="/edufamcs-demo/news/" >Новости</a>
+      <a href="/edufamcs-demo/people/" >Авторы</a>
+      <a href="/edufamcs-demo/about/" >О&nbsp;нас</a>
+    </nav>
+    <div class="hdr-actions">
+      
+      <a class="btn btn-outline btn-login" href="/edufamcs-demo/accounts/login/?next=/handbook/engineering/grafana/">Войти</a>
+      
+      <button class="icon-btn menu-btn" type="button" aria-label="Меню" aria-expanded="false" aria-controls="main-nav"><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-menu"/></svg></button>
+    </div>
+  </div>
+</header>
+
+<main id="main">
+
+
+
+<div class="container hb-page hb-tone">
+  <div class="hb-readbar" aria-hidden="true"><i></i></div>
+  <div class="hb">
+    <aside class="hb-nav" aria-label="Статьи раздела">
+      
+<form class="hb-search" action="/edufamcs-demo/handbook/search/" method="get" role="search">
+  <svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-search"/></svg>
+  <input class="input" type="search" name="q" value="" placeholder="Поиск по хендбуку" aria-label="Поиск по хендбуку" autocomplete="off" maxlength="120"
+    hx-get="/edufamcs-demo/handbook/search/" hx-trigger="input changed delay:250ms, search" hx-target="#hb-nav-results" hx-sync="this:replace">
+</form>
+
+      <div id="hb-nav-results" class="hb-nav-results" aria-live="polite"></div>
+      <a class="grp" href="/edufamcs-demo/handbook/engineering/">Наблюдаемость</a>
+      
+      <a class="" href="/edufamcs-demo/handbook/engineering/logi-i-metriki/">Логи и метрики: Prometheus</a>
+      
+      <a class="cur" href="/edufamcs-demo/handbook/engineering/grafana/" aria-current="page">Grafana: дашборды и алерты</a>
+      
+      <a class="" href="/edufamcs-demo/handbook/engineering/monitoring-modelej/">Мониторинг ML-модели: дрейф, качество, деградация</a>
+      
+    </aside>
+
+    <article class="hb-main">
+      <nav class="crumbs" aria-label="Навигация"><a href="/edufamcs-demo/handbook/">Хендбук</a><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-chev"/></svg><a href="/edufamcs-demo/handbook/engineering/">Инженерия: от ноутбука до сервиса</a></nav>
+      <h1 class="h1">Grafana: дашборды и алерты</h1>
+      <div class="hb-meta">
+        
+        
+        <span><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-clock"/></svg>9&nbsp;мин</span>
+        <span class="hb-authors"><span class="avatar sm" title="Артем Лебедевич">АЛ</span>Артем Лебедевич</span>
+        <span><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-edit"/></svg>10 ноября 2026</span>
+        
+        
+      </div>
+
+      
+      <details class="hb-mtoc">
+        <summary><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-list"/></svg>Содержание<svg class="ico sm" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-chev-down"/></svg></summary>
+        <a class="l2" href="#grafana-в-compose">Grafana в compose</a><a class="l2" href="#provisioning-настройки-из-файлов">Provisioning: настройки из файлов</a><a class="l2" href="#дашборд-сервиса">Дашборд сервиса</a><a class="l2" href="#postgres-продуктовые-и-модельные-метрики">Postgres: продуктовые и модельные метрики</a><a class="l2" href="#алерты">Алерты</a><a class="l2" href="#правила-дизайна-дашборда">Правила дизайна дашборда</a><a class="l2" href="#ловушки">Ловушки</a><a class="l2" href="#проверь-себя">Проверь себя</a><a class="l2" href="#что-почитать">Что почитать</a>
+      </details>
+      
+
+      <div class="prose"><p>Prometheus хранит числа, но смотреть на сырой вывод запросов неудобно. <strong>Grafana</strong> — веб-интерфейс, который рисует графики и таблицы поверх источников данных и умеет отправлять оповещения. Она сама ничего не хранит и не собирает: это «окно» в Prometheus, Postgres, ClickHouse и десятки других систем. ML-инженеру Grafana нужна и для здоровья сервиса (задержки, ошибки), и для продуктовых и модельных метрик (число предсказаний, CTR по версиям модели).</p>
+<h2 id="grafana-в-compose">Grafana в compose</h2>
+<p>Продолжаем <code>compose.yaml</code> из <a href="/edufamcs-demo/handbook/engineering/logi-i-metriki/" rel="noopener noreferrer nofollow">предыдущей статьи</a>. Данные Grafana (пользователи, настройки) лежат в томе; пароль администратора берётся из окружения, а не из файла в репозитории; порт привязан к <code>127.0.0.1</code>.</p>
+<div class="code"><div class="code-head"><span class="lang">yaml</span></div><pre><code>  grafana<span class="tok-p">:</span>
+    image<span class="tok-p">:</span> grafana/grafana:12.3.0
+    profiles<span class="tok-p">:</span> <span class="tok-p">[</span><span class="tok-s">"</span><span class="tok-s">monitoring</span><span class="tok-s">"</span><span class="tok-p">]</span>
+    environment<span class="tok-p">:</span>
+      GF_SECURITY_ADMIN_PASSWORD<span class="tok-p">:</span> ${GRAFANA_ADMIN_PASSWORD}
+      GF_USERS_ALLOW_SIGN_UP<span class="tok-p">:</span> <span class="tok-s">"</span><span class="tok-s">false</span><span class="tok-s">"</span>
+      PG_RO_PASSWORD<span class="tok-p">:</span> ${PG_RO_PASSWORD}
+    volumes<span class="tok-p">:</span>
+      <span class="tok-p">-</span> grafanadata:/var/lib/grafana
+      <span class="tok-p">-</span> ./grafana/provisioning:/etc/grafana/provisioning:ro
+      <span class="tok-p">-</span> ./grafana/dashboards:/var/lib/grafana/dashboards:ro
+    ports<span class="tok-p">:</span>
+      <span class="tok-p">-</span> <span class="tok-s">"</span><span class="tok-s">127.0.0.1:3000:3000</span><span class="tok-s">"</span>
+    depends_on<span class="tok-p">:</span>
+      <span class="tok-p">-</span> prometheus
+    restart<span class="tok-p">:</span> unless-stopped
+
+volumes<span class="tok-p">:</span>
+  grafanadata<span class="tok-p">:</span>
+</code></pre></div>
+<p>Grafana и Prometheus входят в профиль <code>monitoring</code> (как в <a href="/edufamcs-demo/handbook/engineering/docker-compose/" rel="noopener noreferrer nofollow">Docker Compose</a>), поэтому стек поднимается командой <code>docker compose --profile monitoring up -d</code>: без профиля у Grafana нет <code>depends_on</code>-цели и сервис не стартует.</p>
+<p>Переменные <code>GRAFANA_ADMIN_PASSWORD</code> и <code>PG_RO_PASSWORD</code> лежат в <code>.env</code> рядом с <code>compose.yaml</code> (файл в <code>.gitignore</code>). Мы зафиксировали <code>12.3.0</code>; формат provisioning ниже одинаков для 11.x, 12.x и новее, версию сверяйте с релизами Grafana.</p>
+<div class="callout md warn"><p class="callout-title">Не выставляйте Grafana в интернет без аутентификации</p>
+<p>Дашборд раскрывает устройство сервиса, а редактор запросов даёт доступ к базе. Оставьте порт на <code>127.0.0.1</code> и публикуйте через reverse proxy с HTTPS, сильным паролем и отключённой регистрацией (<code>GF_USERS_ALLOW_SIGN_UP=false</code>), либо ходите через SSH-туннель: <code>ssh -L 3000:127.0.0.1:3000 user@server</code>.</p>
+</div>
+<h2 id="provisioning-настройки-из-файлов">Provisioning: настройки из файлов</h2>
+<p>Источники данных и дашборды, созданные кликами, живут только в томе: потеряли том, потеряли работу, а «что менялось» не выяснить. <strong>Provisioning</strong> позволяет описать их файлами в репозитории: Grafana читает каталог <code>/etc/grafana/provisioning</code> при старте.</p>
+<p><code>grafana/provisioning/datasources/datasources.yaml</code>:</p>
+<div class="code"><div class="code-head"><span class="lang">yaml</span></div><pre><code>apiVersion<span class="tok-p">:</span> 1
+
+datasources<span class="tok-p">:</span>
+  <span class="tok-p">-</span> name<span class="tok-p">:</span> Prometheus
+    uid<span class="tok-p">:</span> prometheus
+    type<span class="tok-p">:</span> prometheus
+    access<span class="tok-p">:</span> proxy
+    url<span class="tok-p">:</span> http://prometheus:9090
+    isDefault<span class="tok-p">:</span> true
+    editable<span class="tok-p">:</span> false
+
+  <span class="tok-p">-</span> name<span class="tok-p">:</span> Postgres
+    uid<span class="tok-p">:</span> postgres
+    type<span class="tok-p">:</span> grafana-postgresql-datasource
+    access<span class="tok-p">:</span> proxy
+    url<span class="tok-p">:</span> db:5432
+    user<span class="tok-p">:</span> grafana_ro
+    jsonData<span class="tok-p">:</span>
+      database<span class="tok-p">:</span> churn
+      sslmode<span class="tok-p">:</span> disable
+    secureJsonData<span class="tok-p">:</span>
+      password<span class="tok-p">:</span> $PG_RO_PASSWORD
+    editable<span class="tok-p">:</span> false
+</code></pre></div>
+<p><code>$PG_RO_PASSWORD</code> Grafana подставляет из окружения контейнера, значение в репозиторий не попадает. Явный <code>uid</code> нужен, чтобы JSON дашборда мог ссылаться на источник по постоянному идентификатору.</p>
+<p><code>grafana/provisioning/dashboards/dashboards.yaml</code> — провайдер, который подхватывает JSON-файлы из каталога:</p>
+<div class="code"><div class="code-head"><span class="lang">yaml</span></div><pre><code>apiVersion<span class="tok-p">:</span> 1
+
+providers<span class="tok-p">:</span>
+  <span class="tok-p">-</span> name<span class="tok-p">:</span> repo
+    type<span class="tok-p">:</span> file
+    folder<span class="tok-p">:</span> Service
+    allowUiUpdates<span class="tok-p">:</span> false
+    options<span class="tok-p">:</span>
+      path<span class="tok-p">:</span> /var/lib/grafana/dashboards
+</code></pre></div>
+<p>Удобный рабочий цикл: собрали дашборд в интерфейсе, нажали <code>Export → Export as JSON</code>, положили файл в <code>grafana/dashboards/</code> и закоммитили. Дальше правки идут через git, как у кода.</p>
+<h2 id="дашборд-сервиса">Дашборд сервиса</h2>
+<p>Один вопрос — одна панель. Для сервиса из прошлой статьи нужны четыре панели; PromQL для каждой:</p>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>Панель</th>
+<th>Единица</th>
+<th>PromQL</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>RPS по маршрутам</td>
+<td><code>reqps</code></td>
+<td><code>sum by (route) (rate(http_requests_total{route=~"$route"}[5m]))</code></td>
+</tr>
+<tr>
+<td>Доля ошибок</td>
+<td><code>percentunit</code></td>
+<td><code>sum(rate(http_requests_total{status=~"5.."}[5m])) / sum(rate(http_requests_total[5m]))</code></td>
+</tr>
+<tr>
+<td>Задержка p50 и p95</td>
+<td><code>s</code></td>
+<td><code>histogram_quantile(0.95, sum by (le) (rate(http_request_duration_seconds_bucket{route=~"$route"}[5m])))</code></td>
+</tr>
+<tr>
+<td>Насыщение</td>
+<td><code>short</code></td>
+<td><code>http_requests_in_flight</code></td>
+</tr>
+</tbody>
+</table></div>
+<p>Фрагмент JSON с первой и последней панелями (остальные панели собираются по тому же образцу):</p>
+<div class="code"><div class="code-head"><span class="lang">json</span></div><pre><code><span class="tok-p">{</span>
+  "title"<span class="tok-p">:</span> <span class="tok-s">"Prediction service"</span><span class="tok-p">,</span>
+  "uid"<span class="tok-p">:</span> <span class="tok-s">"pred-service"</span><span class="tok-p">,</span>
+  "schemaVersion"<span class="tok-p">:</span> <span class="tok-n">39</span><span class="tok-p">,</span>
+  "time"<span class="tok-p">:</span> <span class="tok-p">{</span> "from"<span class="tok-p">:</span> <span class="tok-s">"now-6h"</span><span class="tok-p">,</span> "to"<span class="tok-p">:</span> <span class="tok-s">"now"</span> <span class="tok-p">},</span>
+  "refresh"<span class="tok-p">:</span> <span class="tok-s">"30s"</span><span class="tok-p">,</span>
+  "templating"<span class="tok-p">:</span> <span class="tok-p">{</span>
+    "list"<span class="tok-p">:</span> <span class="tok-p">[</span>
+      <span class="tok-p">{</span>
+        "name"<span class="tok-p">:</span> <span class="tok-s">"route"</span><span class="tok-p">,</span>
+        "type"<span class="tok-p">:</span> <span class="tok-s">"query"</span><span class="tok-p">,</span>
+        "datasource"<span class="tok-p">:</span> <span class="tok-p">{</span> "type"<span class="tok-p">:</span> <span class="tok-s">"prometheus"</span><span class="tok-p">,</span> "uid"<span class="tok-p">:</span> <span class="tok-s">"prometheus"</span> <span class="tok-p">},</span>
+        "query"<span class="tok-p">:</span> <span class="tok-s">"label_values(http_requests_total, route)"</span><span class="tok-p">,</span>
+        "includeAll"<span class="tok-p">:</span> <span class="tok-k">true</span><span class="tok-p">,</span>
+        "multi"<span class="tok-p">:</span> <span class="tok-k">true</span>
+      <span class="tok-p">}</span>
+    <span class="tok-p">]</span>
+  <span class="tok-p">},</span>
+  "panels"<span class="tok-p">:</span> <span class="tok-p">[</span>
+    <span class="tok-p">{</span>
+      "id"<span class="tok-p">:</span> <span class="tok-n">1</span><span class="tok-p">,</span> "type"<span class="tok-p">:</span> <span class="tok-s">"timeseries"</span><span class="tok-p">,</span> "title"<span class="tok-p">:</span> <span class="tok-s">"RPS by route"</span><span class="tok-p">,</span>
+      "gridPos"<span class="tok-p">:</span> <span class="tok-p">{</span> "x"<span class="tok-p">:</span> <span class="tok-n">0</span><span class="tok-p">,</span> "y"<span class="tok-p">:</span> <span class="tok-n">0</span><span class="tok-p">,</span> "w"<span class="tok-p">:</span> <span class="tok-n">12</span><span class="tok-p">,</span> "h"<span class="tok-p">:</span> <span class="tok-n">8</span> <span class="tok-p">},</span>
+      "datasource"<span class="tok-p">:</span> <span class="tok-p">{</span> "type"<span class="tok-p">:</span> <span class="tok-s">"prometheus"</span><span class="tok-p">,</span> "uid"<span class="tok-p">:</span> <span class="tok-s">"prometheus"</span> <span class="tok-p">},</span>
+      "fieldConfig"<span class="tok-p">:</span> <span class="tok-p">{</span> "defaults"<span class="tok-p">:</span> <span class="tok-p">{</span> "unit"<span class="tok-p">:</span> <span class="tok-s">"reqps"</span> <span class="tok-p">},</span> "overrides"<span class="tok-p">:</span> <span class="tok-p">[]</span> <span class="tok-p">},</span>
+      "targets"<span class="tok-p">:</span> <span class="tok-p">[</span>
+        <span class="tok-p">{</span> "refId"<span class="tok-p">:</span> <span class="tok-s">"A"</span><span class="tok-p">,</span>
+          "expr"<span class="tok-p">:</span> <span class="tok-s">"sum by (route) (rate(http_requests_total{route=~\"$route\"}[5m]))"</span><span class="tok-p">,</span>
+          "legendFormat"<span class="tok-p">:</span> <span class="tok-s">"{{route}}"</span> <span class="tok-p">}</span>
+      <span class="tok-p">]</span>
+    <span class="tok-p">}</span>
+  <span class="tok-p">]</span>
+<span class="tok-p">}</span>
+</code></pre></div>
+<p><strong>Переменные</strong> (<code>templating</code>) превращают один дашборд во много: <code>$route</code> берёт значения из <code>label_values(...)</code>, выпадающий список в верхней части страницы подставляет их в запросы. Тот же приём применяют для окружения, версии модели, инстанса. Для регулярного выражения <code>=~"$route"</code> включайте <code>multi</code> и <code>includeAll</code>, тогда выбор «All» работает.</p>
+<h2 id="postgres-продуктовые-и-модельные-метрики">Postgres: продуктовые и модельные метрики</h2>
+<p>Grafana читает SQL-источники напрямую. Допустим, сервис пишет каждое предсказание в таблицу <code>predictions</code> (схема — в статье <a href="/edufamcs-demo/handbook/engineering/sql-i-postgres/" rel="noopener noreferrer nofollow">SQL и Postgres</a>):</p>
+<div class="code"><div class="code-head"><span class="lang">sql</span></div><pre><code><span class="tok-k">ALTER</span> <span class="tok-k">TABLE</span> predictions <span class="tok-k">ADD</span> <span class="tok-k">COLUMN</span> churned <span class="tok-f">boolean</span><span class="tok-p">;</span>  <span class="tok-c">-- исход, проставляется позже
+</span>
+<span class="tok-k">CREATE</span> <span class="tok-k">ROLE</span> grafana_ro LOGIN PASSWORD <span class="tok-s">'задайте-вне-репозитория'</span><span class="tok-p">;</span>
+<span class="tok-k">GRANT</span> <span class="tok-k">SELECT</span> <span class="tok-k">ON</span> predictions <span class="tok-k">TO</span> grafana_ro<span class="tok-p">;</span>
+</code></pre></div>
+<p>Для Grafana заведите отдельную роль только с <code>SELECT</code>: у дашборда не должно быть прав что-то менять. Панель «Предсказаний в день и доля оттока по версиям модели» (формат Table или Time series):</p>
+<div class="code"><div class="code-head"><span class="lang">sql</span></div><pre><code><span class="tok-k">SELECT</span>
+  date_trunc<span class="tok-p">(</span><span class="tok-s">'day'</span><span class="tok-p">,</span> created_at<span class="tok-p">)</span>              <span class="tok-k">AS</span> <span class="tok-s">"time"</span><span class="tok-p">,</span>
+  model_version<span class="tok-p">,</span>
+  <span class="tok-k">count</span><span class="tok-p">(</span><span class="tok-p">*</span><span class="tok-p">)</span>                                   <span class="tok-k">AS</span> predictions<span class="tok-p">,</span>
+  <span class="tok-k">avg</span><span class="tok-p">(</span>churn_probability<span class="tok-p">)</span>                     <span class="tok-k">AS</span> mean_score<span class="tok-p">,</span>
+  <span class="tok-k">avg</span><span class="tok-p">(</span>churned<span class="tok-p">:</span><span class="tok-p">:</span><span class="tok-f">int</span><span class="tok-p">)</span>                          <span class="tok-k">AS</span> churn_rate
+<span class="tok-k">FROM</span> predictions
+<span class="tok-k">WHERE</span> $__timeFilter<span class="tok-p">(</span>created_at<span class="tok-p">)</span>
+  <span class="tok-k">AND</span> churned <span class="tok-k">IS</span> <span class="tok-k">NOT</span> <span class="tok-k">NULL</span>
+<span class="tok-k">GROUP</span> <span class="tok-k">BY</span> <span class="tok-n">1</span><span class="tok-p">,</span> <span class="tok-n">2</span>
+<span class="tok-k">ORDER</span> <span class="tok-k">BY</span> <span class="tok-n">1</span><span class="tok-p">;</span>
+</code></pre></div>
+<p><code>$__timeFilter(created_at)</code> — макрос Grafana, подставляющий выбранный диапазон времени. Фильтр <code>churned IS NOT NULL</code> исключает предсказания, исход которых ещё неизвестен, иначе доля оттока за последние часы занижена. Не гоняйте на живой базе тяжёлые запросы с автообновлением раз в несколько секунд: для больших объёмов считайте агрегаты заранее.</p>
+<h2 id="алерты">Алерты</h2>
+<p>Алерт в Grafana — это запрос, условие, окно ожидания и адресат. Алерт вида «p95 выше 500 мс» задаётся в <code>Alerting → Alert rules → New alert rule</code>:</p>
+<ol>
+<li><strong>Запрос</strong>: <code>histogram_quantile(0.95, sum by (le) (rate(http_request_duration_seconds_bucket[5m])))</code>.</li>
+<li><strong>Условие</strong>: Threshold, значение выше <code>0.5</code>.</li>
+<li><strong>Pending period</strong> (<code>for</code>): 5 минут. Алерт срабатывает, только если условие держится всё это время; кратковременные скачки игнорируются.</li>
+<li><strong>Contact point</strong>: Email или Telegram. Для Telegram нужен токен бота (создаётся у <code>@BotFather</code>) и <code>chat id</code>; токен вводится в форме в Grafana и не должен попадать в репозиторий.</li>
+</ol>
+<p><strong>Алерт-усталость</strong>: когда уведомления приходят слишком часто и без последствий, их перестают читать, и пропускают настоящую аварию. Критерии хорошего алерта: он требует действия человека <em>сейчас</em>, у него понятная причина и первое действие. Алертить стоит на симптомы (сервис недоступен, доля 5xx выше 1 % в течение 5 минут, p95 выше SLO), а не на причины («CPU 80 %»). Остальное — на дашборд.</p>
+<h2 id="правила-дизайна-дашборда">Правила дизайна дашборда</h2>
+<ul>
+<li><strong>Один вопрос — одна панель</strong>, и заголовок формулирует его («Доля ошибок», а не «Panel 7»).</li>
+<li><strong>Единицы и пороги</strong>: у каждой панели задана единица (<code>s</code>, <code>reqps</code>, <code>percentunit</code>), на графике ошибок — линия порога.</li>
+<li>Сверху — самое важное для принятия решения (ошибки, задержка), ниже — детали.</li>
+<li>Одинаковый временной диапазон и цвета для одной метрики на всех панелях.</li>
+<li>Не более 8–12 панелей: больше — делите на два дашборда.</li>
+</ul>
+<h2 id="ловушки">Ловушки</h2>
+<ul>
+<li>Пароль <code>admin/admin</code>, не изменённый после запуска; Grafana доступна из интернета.</li>
+<li>Дашборд собран кликами и не лежит в git; потерян том — потерян дашборд.</li>
+<li>Панель без единицы измерения или с неверным окном <code>rate</code>.</li>
+<li>Алерт на каждый пик CPU; нет <code>for</code>, и сообщения приходят от единичного выброса.</li>
+<li>Подключение Grafana к Postgres под ролью с правом записи.</li>
+<li>На собеседовании: чем Grafana отличается от Prometheus; что такое provisioning и зачем; на что алертить; как построить панель p95 и почему нужен <code>le</code>.</li>
+</ul>
+<h2 id="проверь-себя">Проверь себя</h2>
+<details class="callout md details"><summary>Хранит ли Grafana метрики?</summary>
+<p>Нет. Она отправляет запросы в источники данных (Prometheus, Postgres и т. д.) и рисует результат. Хранит только свою конфигурацию: пользователей, дашборды, правила алертов.</p>
+</details>
+<details class="callout md details"><summary>Зачем provisioning, если дашборд можно собрать в интерфейсе?</summary>
+<p>Конфигурация в git воспроизводима и ревьюится, а дашборд из тома пропадает вместе с томом; один и тот же стек поднимается на другой машине без ручных шагов.</p>
+</details>
+<details class="callout md details"><summary>Что делает параметр `for` в правиле алерта?</summary>
+<p>Требует, чтобы условие выполнялось непрерывно заданное время, прежде чем отправить уведомление. Так отсекаются единичные выбросы.</p>
+</details>
+<details class="callout md details"><summary>Почему для Postgres в Grafana нужна отдельная read-only роль?</summary>
+<p>Дашборд и его редактор запросов не должны иметь возможность изменить или удалить данные, а компрометация Grafana не должна вести к компрометации базы.</p>
+</details>
+<h2 id="что-почитать">Что почитать</h2>
+<ul>
+<li>Grafana, документация: https://grafana.com/docs/grafana/latest/</li>
+<li>Provisioning: https://grafana.com/docs/grafana/latest/administration/provisioning/</li>
+<li>Источник данных Prometheus: https://grafana.com/docs/grafana/latest/datasources/prometheus/</li>
+<li>Источник данных PostgreSQL: https://grafana.com/docs/grafana/latest/datasources/postgres/</li>
+<li>Grafana Alerting: https://grafana.com/docs/grafana/latest/alerting/</li>
+<li>Рекомендации по дашбордам: https://grafana.com/docs/grafana/latest/dashboards/build-dashboards/best-practices/</li>
+<li>Образ Grafana в Docker: https://grafana.com/docs/grafana/latest/setup-grafana/installation/docker/</li>
+</ul>
+</div>
+      
+
+      
+
+      
+      <nav class="pager" aria-label="Соседние статьи">
+        <a href="/edufamcs-demo/handbook/engineering/logi-i-metriki/"><span><svg class="ico sm" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-arrow-left"/></svg>Назад</span>Логи и метрики: Prometheus</a>
+        <a href="/edufamcs-demo/handbook/engineering/monitoring-modelej/"><span>Дальше<svg class="ico sm" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-arrow"/></svg></span>Мониторинг ML-модели: дрейф, качество, деградация</a>
+      </nav>
+      
+    </article>
+
+    <aside class="hb-toc" aria-label="На этой странице">
+      <a class="l2" href="#grafana-в-compose">Grafana в compose</a><a class="l2" href="#provisioning-настройки-из-файлов">Provisioning: настройки из файлов</a><a class="l2" href="#дашборд-сервиса">Дашборд сервиса</a><a class="l2" href="#postgres-продуктовые-и-модельные-метрики">Postgres: продуктовые и модельные метрики</a><a class="l2" href="#алерты">Алерты</a><a class="l2" href="#правила-дизайна-дашборда">Правила дизайна дашборда</a><a class="l2" href="#ловушки">Ловушки</a><a class="l2" href="#проверь-себя">Проверь себя</a><a class="l2" href="#что-почитать">Что почитать</a>
+    </aside>
+  </div>
+</div>
+
+
+</main>
+
+<footer class="ftr" data-theme="dark">
+  <svg class="sym fern" viewBox="0 0 40.5 65.02" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#fern"/></svg>
+  <div class="container">
+    <div class="ftr-row">
+      <a href="/edufamcs-demo/" aria-label="EDU FAMCS — главная"><img src="/edufamcs-demo/static/brand/logo/logo-edu-dark.svg" alt="EDU FAMCS" width="196" height="40"></a>
+      <ul class="ftr-links">
+        <li><a href="/edufamcs-demo/#courses">Курсы</a></li>
+        <li><a href="/edufamcs-demo/ml/">Машинное обучение</a></li>
+        <li><a href="/edufamcs-demo/handbook/">Хендбук</a></li>
+        <li><a href="/edufamcs-demo/news/">Новости</a></li>
+        <li><a href="/edufamcs-demo/people/">Авторы</a></li>
+        <li><a href="/edufamcs-demo/about/">О&nbsp;нас</a></li>
+        <li><a href="/edufamcs-demo/propose/">Предложить или исправить</a></li>
+        <li><a href="/edufamcs-demo/privacy/">Конфиденциальность</a></li>
+      </ul>
+    </div>
+    <div class="ftr-big" aria-hidden="true">EDU<span class="d">·</span>FAMCS</div>
+    <p class="ftr-copy">© 2026 EDU FAMCS · Минск</p>
+  </div>
+</footer>
+
+<div class="toasts-region" aria-live="polite" id="toasts">
+
+</div>
+
+</body>
+</html>

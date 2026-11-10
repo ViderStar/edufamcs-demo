@@ -1,0 +1,258 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Байесовская статистика · EDU FAMCS</title>
+<meta name="description" content="Байесовская статистика — Математическая база. Хендбук ML-курса ФПМИ.">
+<meta name="theme-color" content="#060A16">
+<meta name="robots" content="noindex, nofollow">
+<meta name="htmx-config" content='{"allowEval":false,"includeIndicatorStyles":false,"historyCacheSize":0,"selfRequestsOnly":true}'>
+<meta name="katex-js" content="/edufamcs-demo/static/vendor/katex/katex.min.js">
+<meta name="katex-css" content="/edufamcs-demo/static/vendor/katex/katex.min.css">
+<link rel="icon" href="/edufamcs-demo/static/brand/logo/favicon-16.svg" type="image/svg+xml" sizes="16x16">
+<link rel="icon" href="/edufamcs-demo/static/brand/logo/favicon.svg" type="image/svg+xml" sizes="any">
+<link rel="preload" href="/edufamcs-demo/static/brand/fonts/manrope-cyrillic-400.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/edufamcs-demo/static/brand/fonts/unbounded-cyrillic-800.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="/edufamcs-demo/static/brand/fonts.css">
+<link rel="stylesheet" href="/edufamcs-demo/static/brand/tokens.css">
+<link rel="stylesheet" href="/edufamcs-demo/static/brand/components.css">
+<link rel="stylesheet" href="/edufamcs-demo/static/css/site.css">
+<link rel="stylesheet" href="/edufamcs-demo/static/css/hub.css">
+<link rel="stylesheet" href="/edufamcs-demo/static/css/about.css">
+<link rel="stylesheet" href="/edufamcs-demo/static/handbook/handbook.css">
+<script src="/edufamcs-demo/static/js/theme.js"></script>
+<script src="/edufamcs-demo/static/vendor/htmx/htmx.min.js" defer></script>
+<script src="/edufamcs-demo/static/vendor/alpine/alpine-csp.min.js" defer></script>
+<script src="/edufamcs-demo/static/js/site.js" defer></script>
+<script src="/edufamcs-demo/static/handbook/handbook.js" defer></script>
+</head>
+<body class="" hx-headers='{"X-CSRFToken": "DcEVD8kkmNoCXQ4sqkspoJunZ0PDerGlfptSTaTbnACb89jUpNGm6Cmlr9WBYbF2"}'>
+<a class="skip" href="#main">К содержанию</a>
+<div class="demo-bar" role="note">Демо-версия для отзывов: вход, запись на курсы и формы здесь не работают.</div>
+
+<header class="hdr">
+  <div class="container">
+    <a class="brand" href="/edufamcs-demo/" aria-label="EDU FAMCS — главная">
+      <span class="full"><img class="only-light" src="/edufamcs-demo/static/brand/logo/logo-edu-light.svg" alt="EDU FAMCS" width="196" height="40"><img class="only-dark" src="/edufamcs-demo/static/brand/logo/logo-edu-dark.svg" alt="EDU FAMCS" width="196" height="40"></span>
+      <span class="short"><img class="only-light" src="/edufamcs-demo/static/brand/logo/logo-edu-light.svg" alt="EDU FAMCS" height="30"><img class="only-dark" src="/edufamcs-demo/static/brand/logo/logo-edu-dark.svg" alt="EDU FAMCS" height="30"></span>
+    </a>
+    <nav class="nav" id="main-nav" aria-label="Основная навигация">
+      <a href="/edufamcs-demo/#courses">Курсы</a>
+      <a href="/edufamcs-demo/ml/" >Машинное обучение</a>
+      
+      <a href="/edufamcs-demo/handbook/" aria-current="page">Хендбук</a>
+      <a href="/edufamcs-demo/news/" >Новости</a>
+      <a href="/edufamcs-demo/people/" >Авторы</a>
+      <a href="/edufamcs-demo/about/" >О&nbsp;нас</a>
+    </nav>
+    <div class="hdr-actions">
+      
+      <a class="btn btn-outline btn-login" href="/edufamcs-demo/accounts/login/?next=/handbook/math/bajesovskaya-statistika/">Войти</a>
+      
+      <button class="icon-btn menu-btn" type="button" aria-label="Меню" aria-expanded="false" aria-controls="main-nav"><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-menu"/></svg></button>
+    </div>
+  </div>
+</header>
+
+<main id="main">
+
+
+
+<div class="container hb-page hb-tone">
+  <div class="hb-readbar" aria-hidden="true"><i></i></div>
+  <div class="hb">
+    <aside class="hb-nav" aria-label="Статьи раздела">
+      
+<form class="hb-search" action="/edufamcs-demo/handbook/search/" method="get" role="search">
+  <svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-search"/></svg>
+  <input class="input" type="search" name="q" value="" placeholder="Поиск по хендбуку" aria-label="Поиск по хендбуку" autocomplete="off" maxlength="120"
+    hx-get="/edufamcs-demo/handbook/search/" hx-trigger="input changed delay:250ms, search" hx-target="#hb-nav-results" hx-sync="this:replace">
+</form>
+
+      <div id="hb-nav-results" class="hb-nav-results" aria-live="polite"></div>
+      <a class="grp" href="/edufamcs-demo/handbook/math/">Вероятность и статистика</a>
+      
+      <a class="" href="/edufamcs-demo/handbook/math/teoriya-veroyatnostej/">Теория вероятностей</a>
+      
+      <a class="" href="/edufamcs-demo/handbook/math/ocenki-parametrov-i-mmp/">Оценки параметров и метод максимального правдоподобия</a>
+      
+      <a class="" href="/edufamcs-demo/handbook/math/intervaly-i-proverka-gipotez/">Доверительные интервалы и проверка гипотез</a>
+      
+      <a class="cur" href="/edufamcs-demo/handbook/math/bajesovskaya-statistika/" aria-current="page">Байесовская статистика</a>
+      
+      <a class="" href="/edufamcs-demo/handbook/math/teoriya-informacii/">Теория информации для ML</a>
+      
+      <a class="" href="/edufamcs-demo/handbook/math/statistika-ab-testov/">Статистика A/B-тестов</a>
+      
+    </aside>
+
+    <article class="hb-main">
+      <nav class="crumbs" aria-label="Навигация"><a href="/edufamcs-demo/handbook/">Хендбук</a><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-chev"/></svg><a href="/edufamcs-demo/handbook/math/">Математическая база</a></nav>
+      <h1 class="h1">Байесовская статистика</h1>
+      <div class="hb-meta">
+        
+        
+        <span><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-clock"/></svg>12&nbsp;мин</span>
+        <span class="hb-authors"><span class="avatar sm" title="Артем Лебедевич">АЛ</span>Артем Лебедевич</span>
+        <span><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-edit"/></svg>10 ноября 2026</span>
+        
+        
+      </div>
+
+      
+      <details class="hb-mtoc">
+        <summary><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-list"/></svg>Содержание<svg class="ico sm" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-chev-down"/></svg></summary>
+        <a class="l2" href="#априори-правдоподобие-апостериори">Априори, правдоподобие, апостериори</a><a class="l2" href="#три-сопряжённые-пары">Три сопряжённые пары</a><a class="l2" href="#map-апостериорное-среднее-и-ммп">MAP, апостериорное среднее и ММП</a><a class="l2" href="#интервалы-и-предсказания">Интервалы и предсказания</a><a class="l2" href="#байесовский-ab-тест">Байесовский A/B-тест</a><a class="l2" href="#thompson-sampling">Thompson sampling</a><a class="l2" href="#эмпирический-байес-сглаживание-ctr">Эмпирический Байес: сглаживание CTR</a><a class="l2" href="#код">Код</a><a class="l2" href="#ловушки">Ловушки</a><a class="l2" href="#проверь-себя">Проверь себя</a><a class="l2" href="#что-почитать">Что почитать</a>
+      </details>
+      
+
+      <div class="prose"><p>В байесовском подходе неизвестный параметр — случайная величина: у нас есть априорное мнение о нём, данные его обновляют, и результат — целое распределение, а не одна точка. Это даёт честную неопределённость на малых выборках, естественный способ «притянуть» шумную оценку к разумному значению (сглаживание CTR редких товаров) и основу для бандитов и байесовских A/B-тестов. Здесь — механика обновления, сопряжённые пары с выводом, связь с регуляризацией и границы применимости.</p>
+<h2 id="априори-правдоподобие-апостериори">Априори, правдоподобие, апостериори</h2>
+<p>По формуле Байеса (<a href="/edufamcs-demo/handbook/math/teoriya-veroyatnostej/" rel="noopener noreferrer nofollow">теория вероятностей</a>)</p>
+<div class="tex tex-block">p(\theta\mid\mathcal{D})=\frac{p(\mathcal{D}\mid\theta)\,p(\theta)}{p(\mathcal{D})}\;\propto\;p(\mathcal{D}\mid\theta)\,p(\theta).</div>
+<p>Знаменатель <span class="tex">p(\mathcal{D})=\int p(\mathcal{D}\mid\theta)p(\theta)\,d\theta</span> — константа по <span class="tex">\theta</span>; в общем случае интеграл не берётся, и тогда используют MCMC или вариационный вывод. Но для <strong>сопряжённых пар</strong> апостериори принадлежит тому же семейству, что и априори, и обновление сводится к арифметике над параметрами.</p>
+<h2 id="три-сопряжённые-пары">Три сопряжённые пары</h2>
+<p><strong>Beta–Бином.</strong> Модель: <span class="tex">k\mid p\sim\mathrm{Bin}(n,p)</span>, <span class="tex">p\sim\mathrm{Beta}(a,b)</span> с плотностью <span class="tex">\propto p^{a-1}(1-p)^{b-1}</span>. Перемножаем:</p>
+<div class="tex tex-block">p(p\mid k)\propto p^{k}(1-p)^{n-k}\cdot p^{a-1}(1-p)^{b-1}=p^{a+k-1}(1-p)^{b+n-k-1},</div>
+<p>то есть <span class="tex">p\mid k\sim\mathrm{Beta}(a+k,\;b+n-k)</span>. Параметры <span class="tex">a,b</span> читаются как <strong>псевдонаблюдения</strong>: <span class="tex">a</span> «успехов» и <span class="tex">b</span> «неудач» до эксперимента. Апостериорное среднее</p>
+<div class="tex tex-block">\mathbb{E}[p\mid k]=\frac{a+k}{a+b+n}=w\,\frac{a}{a+b}+(1-w)\,\frac kn,\qquad w=\frac{a+b}{a+b+n},</div>
+<p>— взвешенное среднее среднего априори и ММП-оценки <span class="tex">k/n</span> (<strong>shrinkage</strong>): чем больше данных, тем меньше вес априори.</p>
+<p><strong>Нормальная–нормальная</strong> (дисперсия <span class="tex">\sigma^2</span> известна). <span class="tex">x_i\mid\mu\sim\mathcal{N}(\mu,\sigma^2)</span>, <span class="tex">\mu\sim\mathcal{N}(\mu_0,\tau_0^2)</span>. Логарифм апостериори с точностью до константы:</p>
+<div class="tex tex-block">-\frac{(\mu-\mu_0)^2}{2\tau_0^2}-\sum_i\frac{(x_i-\mu)^2}{2\sigma^2}=-\frac12\Big[\mu^2\Big(\frac1{\tau_0^2}+\frac n{\sigma^2}\Big)-2\mu\Big(\frac{\mu_0}{\tau_0^2}+\frac{n\bar x}{\sigma^2}\Big)\Big]+\text{const}.</div>
+<p>Это квадратичная форма по <span class="tex">\mu</span>, то есть нормальная плотность (выделение полного квадрата): <strong>точности складываются</strong>, <span class="tex">\;1/\tau_n^2=1/\tau_0^2+n/\sigma^2</span>, а среднее есть взвешенное по точностям,</p>
+<div class="tex tex-block">\mu_n=\tau_n^2\Big(\frac{\mu_0}{\tau_0^2}+\frac{n\bar x}{\sigma^2}\Big)=w\mu_0+(1-w)\bar x,\qquad w=\frac{\sigma^2/n}{\sigma^2/n+\tau_0^2}.</div>
+<p><strong>Гамма–Пуассон.</strong> <span class="tex">x_i\mid\lambda\sim\mathrm{Pois}(\lambda)</span>, <span class="tex">\lambda\sim\mathrm{Gamma}(\alpha,\beta)</span> (форма <span class="tex">\alpha</span>, скорость <span class="tex">\beta</span>, плотность <span class="tex">\propto\lambda^{\alpha-1}e^{-\beta\lambda}</span>). Правдоподобие <span class="tex">\propto\lambda^{\sum x_i}e^{-n\lambda}</span>, поэтому</p>
+<div class="tex tex-block">\lambda\mid x\sim\mathrm{Gamma}\Big(\alpha+\sum_ix_i,\;\beta+n\Big),\qquad\mathbb{E}[\lambda\mid x]=\frac{\alpha+\sum x_i}{\beta+n}.</div>
+<p>Псевдоинтерпретация: <span class="tex">\alpha</span> событий за <span class="tex">\beta</span> единиц экспозиции. Так моделируют счётчики: число заказов в день, кликов на баннер за сутки.</p>
+<div class="callout md note"><p class="callout-title">Проверка</p>
+<p>Формулы для нормальной и гамма-пар я сверил с численным апостериори на сетке в <span class="tex">2\cdot10^5</span> точек: среднее и стандартное отклонение совпали до четвёртого знака (Нормальная: <span class="tex">\mu_n=1{,}4673</span>, <span class="tex">\tau_n=0{,}4364</span> при <span class="tex">n=5</span>; Гамма: <span class="tex">\mathrm{Gamma}(23,6)</span>, среднее <span class="tex">3{,}8333</span>).</p>
+</div>
+<h2 id="map-апостериорное-среднее-и-ммп">MAP, апостериорное среднее и ММП</h2>
+<p>Три точечные оценки одной и той же задачи: ММП <span class="tex">\hat\theta=\arg\max p(\mathcal{D}\mid\theta)</span>, MAP <span class="tex">=\arg\max p(\theta\mid\mathcal{D})</span> и апостериорное среднее. На примере <span class="tex">a=2,b=8</span>, <span class="tex">n=20</span>, <span class="tex">k=7</span>: ММП <span class="tex">=0{,}35</span>, апостериори <span class="tex">\mathrm{Beta}(9,21)</span>, среднее <span class="tex">=0{,}30</span> (вес априори <span class="tex">w=1/3</span>), мода (MAP) <span class="tex">=(a+k-1)/(a+b+n-2)=0{,}286</span>. При <span class="tex">a=b=1</span> MAP совпадает с ММП: плоское априори ничего не добавляет. Для нормального апостериори мода и среднее совпадают.</p>
+<p>Связь с регуляризацией уже выведена в <a href="/edufamcs-demo/handbook/math/ocenki-parametrov-i-mmp/" rel="noopener noreferrer nofollow">главе об оценках</a>: априори <span class="tex">\mathcal{N}(0,\tau^2)</span> на веса даёт <span class="tex">L_2</span> (Ridge, <span class="tex">\lambda=\sigma^2/\tau^2</span>), Лапласа — <span class="tex">L_1</span> (Lasso). Важное отличие: Ridge выдаёт только MAP-точку, а байесовская линейная регрессия — целое нормальное апостериори <span class="tex">\mathcal{N}(m_n,S_n)</span> с <span class="tex">S_n^{-1}=\tau^{-2}I+\sigma^{-2}X^\top X</span> и <span class="tex">m_n=\sigma^{-2}S_nX^\top y</span> (то есть решение Ridge) и неопределённость предсказания по каждому объекту.</p>
+<h2 id="интервалы-и-предсказания">Интервалы и предсказания</h2>
+<p><strong>Достоверный интервал</strong> (credible interval) уровня 95% — отрезок, в который параметр попадает с апостериорной вероятностью 95%: <span class="tex">P(\theta\in[l,u]\mid\mathcal{D})=0{,}95</span>. Для <span class="tex">\mathrm{Beta}(9,21)</span> это <span class="tex">[0{,}153;\,0{,}472]</span>. Это прямое высказывание о параметре, которое хочется услышать от интервала; <strong>доверительный</strong> интервал (<a href="/edufamcs-demo/handbook/math/intervaly-i-proverka-gipotez/" rel="noopener noreferrer nofollow">предыдущая тема</a>) говорит иное: процедура, повторённая на новых выборках, накрывает истинное значение в 95% случаев при любом фиксированном <span class="tex">\theta</span>. Вероятностное утверждение о параметре — зависит от априори, а покрытие — от процедуры. Поэтому свойства различаются: проверка на <span class="tex">n=30</span> показала, что 95%-й достоверный интервал при плоском априори накрывает истинное <span class="tex">p</span> в 95,1% случаев <em>в среднем по априори</em>, но при фиксированном <span class="tex">p=0{,}02</span> — лишь в 88,1% (интервал Уилсона — 97,9%, наивный Вальда — 45,3%). Достоверный интервал честен ровно настолько, насколько честно априори.</p>
+<p><strong>Апостериорное предсказательное</strong> распределение интегрирует по неопределённости параметра:</p>
+<div class="tex tex-block">p(x_{\text{new}}\mid\mathcal{D})=\int p(x_{\text{new}}\mid\theta)\,p(\theta\mid\mathcal{D})\,d\theta.</div>
+<p>Для нормальной пары это <span class="tex">\mathcal{N}(\mu_n,\sigma^2+\tau_n^2)</span>: дисперсия шума плюс неопределённость среднего. Для Beta–Бинома число успехов в <span class="tex">m</span> будущих испытаниях имеет бета-биномиальное распределение — оно шире биномиального с плагин-оценкой <span class="tex">\hat p=0{,}30</span>: при <span class="tex">m=10</span> вероятность 0 успехов <span class="tex">0{,}047</span> против <span class="tex">0{,}028</span> у <span class="tex">\mathrm{Bin}(10;0{,}30)</span>, а дисперсия <span class="tex">2{,}71</span> против <span class="tex">2{,}10</span> (аналитика и симуляция совпали). Плагин-оценка скрывает неопределённость, поэтому недооценивает хвосты.</p>
+<h2 id="байесовский-ab-тест">Байесовский A/B-тест</h2>
+<p>Пусть у каждой группы <span class="tex">\mathrm{Beta}(1,1)</span> в качестве априори. Вариант A: <span class="tex">120</span> конверсий из <span class="tex">2400</span>, B: <span class="tex">150</span> из <span class="tex">2400</span>. Апостериори <span class="tex">\mathrm{Beta}(121,2281)</span> и <span class="tex">\mathrm{Beta}(151,2251)</span>. Достаточно сэмплировать: брать пары <span class="tex">(p_A,p_B)</span> и считать долю <span class="tex">P(p_B&gt;p_A)</span>. Получаем <span class="tex">0{,}970</span>; относительный прирост — медиана <span class="tex">+24{,}8\%</span>, 95%-й интервал <span class="tex">[-0{,}9\%;\,+57{,}7\%]</span>. Классический z-тест на тех же данных: <span class="tex">p\text{-value}=0{,}060</span> — оба вывода не противоречат друг другу, это разные величины.</p>
+<p>Для решения нужна ещё цена ошибки. <strong>Ожидаемые потери</strong>: если выкатить B, а на деле A лучше, теряем <span class="tex">\mathbb{E}[\max(p_A-p_B,0)]=0{,}00008</span> (0,008 п. п.); если оставить A — <span class="tex">\mathbb{E}[\max(p_B-p_A,0)]=0{,}0126</span> (1,3 п. п.). Правило «выкатить B, если ожидаемые потери меньше порога <span class="tex">\varepsilon</span>» учитывает масштаб эффекта, чего <span class="tex">P(B&gt;A)</span> не делает. Байесовские выводы формально сохраняют смысл при любом правиле остановки, но частота ложных побед у правила «остановиться, когда <span class="tex">P(B&gt;A)&gt;0{,}95</span>» всё равно растёт с числом проверок; подробности — в главе <a href="/edufamcs-demo/handbook/math/statistika-ab-testov/" rel="noopener noreferrer nofollow">о статистике A/B-тестов</a>.</p>
+<h2 id="thompson-sampling">Thompson sampling</h2>
+<p>Тот же апостериори работает как политика выбора: для каждой ручки сэмплируем <span class="tex">\tilde p_a\sim\mathrm{Beta}(\alpha_a,\beta_a)</span> и выбираем <span class="tex">\arg\max_a\tilde p_a</span>. Вероятность выбрать ручку равна апостериорной вероятности того, что она лучшая; неопределённость сама регулирует исследование. Разбор — в главе <a href="/edufamcs-demo/handbook/recsys/holodnyj-start-i-bandity/" rel="noopener noreferrer nofollow">о холодном старте и бандитах</a>.</p>
+<h2 id="эмпирический-байес-сглаживание-ctr">Эмпирический Байес: сглаживание CTR</h2>
+<p>Товар с 3 показами и 1 кликом имеет CTR <span class="tex">33\%</span> — это шум. Берём априори <span class="tex">\mathrm{Beta}(\alpha,\beta)</span> и подбираем его <strong>по данным всех товаров</strong> (empirical Bayes): параметры априори оцениваются, затем применяются к каждому товару отдельно.</p>
+<p>Вывод оценки по моментам. Истинные CTR <span class="tex">p_i\sim\mathrm{Beta}(\alpha,\beta)</span> со средним <span class="tex">m</span> и дисперсией <span class="tex">s^2</span>; <span class="tex">k_i\mid p_i\sim\mathrm{Bin}(n_i,p_i)</span>, <span class="tex">\hat c_i=k_i/n_i</span>. По формуле полной дисперсии, с учётом <span class="tex">\mathbb{E}\,p(1-p)=m(1-m)-s^2</span>:</p>
+<div class="tex tex-block">\mathrm{Var}(\hat c_i)=\frac{m(1-m)-s^2}{n_i}+s^2=\frac{m(1-m)}{n_i}+s^2\Big(1-\frac1{n_i}\Big).</div>
+<p>Усредняя по товарам и решая относительно <span class="tex">s^2</span> (с <span class="tex">\overline{1/n}=\frac1M\sum 1/n_i</span>):</p>
+<div class="tex tex-block">\hat s^2=\frac{\overline{(\hat c_i-\bar c)^2}-\bar c(1-\bar c)\,\overline{1/n}}{1-\overline{1/n}},\qquad\alpha+\beta=\frac{m(1-m)}{s^2}-1,\quad\alpha=m(\alpha+\beta).</div>
+<p>(последнее — из <span class="tex">s^2=\frac{m(1-m)}{\alpha+\beta+1}</span>). Симуляция: 5000 товаров, истинное <span class="tex">\mathrm{Beta}(2;38)</span> (среднее <span class="tex">5\%</span>), у 70% товаров меньше 50 показов. Оценка по моментам: <span class="tex">\hat\alpha=1{,}93</span>, <span class="tex">\hat\beta=36{,}5</span>; сила априори <span class="tex">\alpha+\beta\approx38</span> псевдопоказов. Сглаженный CTR <span class="tex">=(\alpha+k)/(\alpha+\beta+n)</span>: у товара <span class="tex">(n,k)=(3,1)</span> — <span class="tex">0{,}071</span> вместо <span class="tex">0{,}333</span>, у <span class="tex">(3,0)</span> — <span class="tex">0{,}047</span>, а у <span class="tex">(5000,250)</span> — прежние <span class="tex">0{,}050</span>. Среднеквадратичная ошибка относительно истинного <span class="tex">p_i</span> упала в 3,4 раза (с <span class="tex">2{,}1\cdot10^{-3}</span> до <span class="tex">6{,}2\cdot10^{-4}</span>), на товарах с <span class="tex">n&lt;20</span> — в 5 раз, на <span class="tex">n\ge200</span> почти не изменилась. Топ-50 по «сырому» CTR состоял из товаров с в среднем 17 показами и истинным CTR <span class="tex">0{,}120</span>; топ-50 по сглаженному — из товаров с 895 показами и истинным <span class="tex">0{,}157</span>.</p>
+<h2 id="код">Код</h2>
+<div class="code"><div class="code-head"><span class="lang">python</span></div><pre><code><span class="tok-k">import</span> numpy <span class="tok-k">as</span> np
+<span class="tok-k">from</span> scipy <span class="tok-k">import</span> stats
+rng <span class="tok-p">=</span> np<span class="tok-p">.</span>random<span class="tok-p">.</span>default_rng<span class="tok-p">(</span><span class="tok-n">0</span><span class="tok-p">)</span>
+
+<span class="tok-c"># Beta-Binomial: априори Beta(2, 8), 7 успехов из 20</span>
+a<span class="tok-p">,</span> b<span class="tok-p">,</span> n<span class="tok-p">,</span> k <span class="tok-p">=</span> <span class="tok-n">2</span><span class="tok-p">,</span> <span class="tok-n">8</span><span class="tok-p">,</span> <span class="tok-n">20</span><span class="tok-p">,</span> <span class="tok-n">7</span>
+post <span class="tok-p">=</span> stats<span class="tok-p">.</span>beta<span class="tok-p">(</span>a <span class="tok-p">+</span> k<span class="tok-p">,</span> b <span class="tok-p">+</span> n <span class="tok-p">-</span> k<span class="tok-p">)</span>
+<span class="tok-f">print</span><span class="tok-p">(</span>post<span class="tok-p">.</span>mean<span class="tok-p">(</span><span class="tok-p">)</span><span class="tok-p">,</span> post<span class="tok-p">.</span>interval<span class="tok-p">(</span><span class="tok-n">0.95</span><span class="tok-p">)</span><span class="tok-p">)</span>        <span class="tok-c"># 0.30, (0.153, 0.472)</span>
+
+<span class="tok-c"># Байесовский A/B</span>
+pA <span class="tok-p">=</span> rng<span class="tok-p">.</span>beta<span class="tok-p">(</span><span class="tok-n">1</span> <span class="tok-p">+</span> <span class="tok-n">120</span><span class="tok-p">,</span> <span class="tok-n">1</span> <span class="tok-p">+</span> <span class="tok-n">2400</span> <span class="tok-p">-</span> <span class="tok-n">120</span><span class="tok-p">,</span> <span class="tok-n">400_000</span><span class="tok-p">)</span>
+pB <span class="tok-p">=</span> rng<span class="tok-p">.</span>beta<span class="tok-p">(</span><span class="tok-n">1</span> <span class="tok-p">+</span> <span class="tok-n">150</span><span class="tok-p">,</span> <span class="tok-n">1</span> <span class="tok-p">+</span> <span class="tok-n">2400</span> <span class="tok-p">-</span> <span class="tok-n">150</span><span class="tok-p">,</span> <span class="tok-n">400_000</span><span class="tok-p">)</span>
+<span class="tok-f">print</span><span class="tok-p">(</span><span class="tok-p">(</span>pB <span class="tok-p">&gt;</span> pA<span class="tok-p">)</span><span class="tok-p">.</span>mean<span class="tok-p">(</span><span class="tok-p">)</span><span class="tok-p">,</span> np<span class="tok-p">.</span>maximum<span class="tok-p">(</span>pA <span class="tok-p">-</span> pB<span class="tok-p">,</span> <span class="tok-n">0</span><span class="tok-p">)</span><span class="tok-p">.</span>mean<span class="tok-p">(</span><span class="tok-p">)</span><span class="tok-p">)</span>   <span class="tok-c"># P(B&gt;A), потери</span>
+
+<span class="tok-c"># Эмпирический Байес: оценка Beta по моментам (c = k/n, n — показы)</span>
+<span class="tok-k">def</span> <span class="tok-f">fit_beta</span><span class="tok-p">(</span>c<span class="tok-p">,</span> n<span class="tok-p">)</span><span class="tok-p">:</span>
+    m<span class="tok-p">,</span> inv <span class="tok-p">=</span> c<span class="tok-p">.</span>mean<span class="tok-p">(</span><span class="tok-p">)</span><span class="tok-p">,</span> <span class="tok-p">(</span><span class="tok-n">1</span> <span class="tok-p">/</span> n<span class="tok-p">)</span><span class="tok-p">.</span>mean<span class="tok-p">(</span><span class="tok-p">)</span>
+    s2 <span class="tok-p">=</span> <span class="tok-p">(</span>np<span class="tok-p">.</span>mean<span class="tok-p">(</span><span class="tok-p">(</span>c <span class="tok-p">-</span> m<span class="tok-p">)</span> <span class="tok-p">*</span><span class="tok-p">*</span> <span class="tok-n">2</span><span class="tok-p">)</span> <span class="tok-p">-</span> m <span class="tok-p">*</span> <span class="tok-p">(</span><span class="tok-n">1</span> <span class="tok-p">-</span> m<span class="tok-p">)</span> <span class="tok-p">*</span> inv<span class="tok-p">)</span> <span class="tok-p">/</span> <span class="tok-p">(</span><span class="tok-n">1</span> <span class="tok-p">-</span> inv<span class="tok-p">)</span>
+    S <span class="tok-p">=</span> m <span class="tok-p">*</span> <span class="tok-p">(</span><span class="tok-n">1</span> <span class="tok-p">-</span> m<span class="tok-p">)</span> <span class="tok-p">/</span> s2 <span class="tok-p">-</span> <span class="tok-n">1</span>
+    <span class="tok-k">return</span> m <span class="tok-p">*</span> S<span class="tok-p">,</span> <span class="tok-p">(</span><span class="tok-n">1</span> <span class="tok-p">-</span> m<span class="tok-p">)</span> <span class="tok-p">*</span> S                    <span class="tok-c"># alpha, beta</span>
+</code></pre></div>
+<h2 id="ловушки">Ловушки</h2>
+<ul>
+<li>Априори — часть модели, и его нужно обосновывать и проверять чувствительность: при малых данных вывод может целиком определяться им. «Неинформативное» априори не бывает вполне нейтральным: <span class="tex">\mathrm{Beta}(1,1)</span> и <span class="tex">\mathrm{Beta}(0{,}5;0{,}5)</span> (Джеффриса) дают заметно разные ответы при <span class="tex">n=3</span>.</li>
+<li>Оценка по моментам нестабильна, если <span class="tex">\hat s^2\le0</span> (данные «слишком однородны»); тогда ограничьте <span class="tex">\hat s^2</span> снизу и проверьте, что <span class="tex">\alpha,\beta&gt;0</span>. Эмпирический Байес использует данные дважды — на оценку априори и на обновление; при малом числе товаров это даёт слегка оптимистичные интервалы.</li>
+<li>Достоверный и доверительный интервалы — не одно и то же; в отчёте называйте тот, что посчитали.</li>
+<li>Не читайте <span class="tex">P(B&gt;A)=0{,}97</span> как «вероятность, что эффект не нулевой»: при непрерывном апостериори <span class="tex">P(p_B=p_A)=0</span> всегда.</li>
+<li>На собеседовании: вывести апостериори Beta–Бином; объяснить shrinkage через псевдонаблюдения; чем MAP отличается от среднего апостериори; как сгладить CTR товара без истории; как работает Thompson sampling.</li>
+</ul>
+<div class="callout md tip"><p class="callout-title">Когда байесовский аппарат избыточен</p>
+<p>Если данных много (десятки тысяч наблюдений), априори перестаёт влиять, и результаты совпадают с частотными. Если нужна одна оценка и интервал — достаточно ММП и бутстрапа. Полноценный MCMC (Stan, PyMC) оправдан для иерархических моделей с малыми группами и когда важна неопределённость каждого параметра; для сопряжённых пар обходятся арифметикой.</p>
+</div>
+<h2 id="проверь-себя">Проверь себя</h2>
+<details class="callout md details"><summary>Почему апостериорное среднее в Beta–Бином лежит между средним априори и $k/n$?</summary>
+<p>Оно равно <span class="tex">w\cdot a/(a+b)+(1-w)\cdot k/n</span>, где <span class="tex">w=(a+b)/(a+b+n)\in(0,1)</span>. Вес априори убывает с ростом <span class="tex">n</span>, и оценка стремится к ММП.</p>
+</details>
+<details class="callout md details"><summary>В чём разница между 95%-м достоверным и 95%-м доверительным интервалом?</summary>
+<p>Достоверный: апостериорная вероятность попадания параметра в отрезок 95% при данном априори. Доверительный: процедура накрывает истинное значение в 95% повторений при любом фиксированном <span class="tex">\theta</span>; про конкретный интервал вероятностей не говорится.</p>
+</details>
+<details class="callout md details"><summary>Как связаны MAP и $L_2$-регуляризация?</summary>
+<p>При нормальном априори <span class="tex">w_j\sim\mathcal{N}(0,\tau^2)</span> слагаемое <span class="tex">-\ln p(w)=\frac1{2\tau^2}\|w\|^2+\text{const}</span>, и MAP минимизирует потерю плюс <span class="tex">L_2</span>-штраф с <span class="tex">\lambda=\sigma^2/\tau^2</span> (для суммы квадратов; для среднего MSE — <span class="tex">\sigma^2/(n\tau^2)</span>).</p>
+</details>
+<details class="callout md details"><summary>Почему сглаживание CTR улучшает ранжирование по «сырому» CTR?</summary>
+<p>Товары с малым <span class="tex">n</span> имеют высокую дисперсию <span class="tex">\hat c_i</span>, и в топе по сырому CTR оказываются случайные «везунчики». Сглаживание притягивает их к среднему тем сильнее, чем меньше <span class="tex">n</span>, и в топе остаются товары с подтверждённым высоким CTR.</p>
+</details>
+<details class="callout md details"><summary>Чем $P(p_B&gt;p_A)$ отличается от ожидаемых потерь как критерия выкатки?</summary>
+<p><span class="tex">P(p_B&gt;p_A)</span> говорит о вероятности направления эффекта, но не о его величине. Ожидаемые потери показывают, сколько метрики мы в среднем теряем, выбрав вариант, и допускают порог в единицах бизнеса.</p>
+</details>
+<h2 id="что-почитать">Что почитать</h2>
+<ul>
+<li>Gelman A. et al. <em>Bayesian Data Analysis</em>, 3rd ed., CRC Press, 2013 — главы 2–3 (сопряжённые пары), 5 (иерархические модели): http://www.stat.columbia.edu/~gelman/book/</li>
+<li>Murphy K. <em>Probabilistic Machine Learning: An Introduction</em>, MIT Press, 2022, гл. 3 и 4: https://probml.github.io/pml-book/book1.html</li>
+<li>Efron B., Morris C. <em>Data Analysis Using Stein's Estimator and Its Generalizations</em>, JASA, 1975 — классический пример shrinkage.</li>
+<li>Robinson D. <em>Introduction to Empirical Bayes: Examples from Baseball Statistics</em>, 2017 — сглаживание бета-биномиальной оценки на практике.</li>
+<li>Russo D., Van Roy B., Kazerouni A., Osband I., Wen Z. <em>A Tutorial on Thompson Sampling</em>, Foundations and Trends in Machine Learning, 2018: https://arxiv.org/abs/1707.02038</li>
+<li>Stucchio C. <em>Bayesian A/B Testing at VWO</em>, 2015 — ожидаемые потери как критерий остановки.</li>
+<li>Документация PyMC: https://www.pymc.io/</li>
+</ul>
+</div>
+      
+
+      
+
+      
+      <nav class="pager" aria-label="Соседние статьи">
+        <a href="/edufamcs-demo/handbook/math/matrichnoe-differencirovanie/"><span><svg class="ico sm" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-arrow-left"/></svg>Назад</span>Матричное дифференцирование</a>
+        <a href="/edufamcs-demo/handbook/math/teoriya-informacii/"><span>Дальше<svg class="ico sm" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-arrow"/></svg></span>Теория информации для ML</a>
+      </nav>
+      
+    </article>
+
+    <aside class="hb-toc" aria-label="На этой странице">
+      <a class="l2" href="#априори-правдоподобие-апостериори">Априори, правдоподобие, апостериори</a><a class="l2" href="#три-сопряжённые-пары">Три сопряжённые пары</a><a class="l2" href="#map-апостериорное-среднее-и-ммп">MAP, апостериорное среднее и ММП</a><a class="l2" href="#интервалы-и-предсказания">Интервалы и предсказания</a><a class="l2" href="#байесовский-ab-тест">Байесовский A/B-тест</a><a class="l2" href="#thompson-sampling">Thompson sampling</a><a class="l2" href="#эмпирический-байес-сглаживание-ctr">Эмпирический Байес: сглаживание CTR</a><a class="l2" href="#код">Код</a><a class="l2" href="#ловушки">Ловушки</a><a class="l2" href="#проверь-себя">Проверь себя</a><a class="l2" href="#что-почитать">Что почитать</a>
+    </aside>
+  </div>
+</div>
+
+
+</main>
+
+<footer class="ftr" data-theme="dark">
+  <svg class="sym fern" viewBox="0 0 40.5 65.02" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#fern"/></svg>
+  <div class="container">
+    <div class="ftr-row">
+      <a href="/edufamcs-demo/" aria-label="EDU FAMCS — главная"><img src="/edufamcs-demo/static/brand/logo/logo-edu-dark.svg" alt="EDU FAMCS" width="196" height="40"></a>
+      <ul class="ftr-links">
+        <li><a href="/edufamcs-demo/#courses">Курсы</a></li>
+        <li><a href="/edufamcs-demo/ml/">Машинное обучение</a></li>
+        <li><a href="/edufamcs-demo/handbook/">Хендбук</a></li>
+        <li><a href="/edufamcs-demo/news/">Новости</a></li>
+        <li><a href="/edufamcs-demo/people/">Авторы</a></li>
+        <li><a href="/edufamcs-demo/about/">О&nbsp;нас</a></li>
+        <li><a href="/edufamcs-demo/propose/">Предложить или исправить</a></li>
+        <li><a href="/edufamcs-demo/privacy/">Конфиденциальность</a></li>
+      </ul>
+    </div>
+    <div class="ftr-big" aria-hidden="true">EDU<span class="d">·</span>FAMCS</div>
+    <p class="ftr-copy">© 2026 EDU FAMCS · Минск</p>
+  </div>
+</footer>
+
+<div class="toasts-region" aria-live="polite" id="toasts">
+
+</div>
+
+</body>
+</html>

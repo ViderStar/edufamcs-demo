@@ -27,7 +27,7 @@
 <script src="/edufamcs-demo/static/js/site.js" defer></script>
 <script src="/edufamcs-demo/static/handbook/handbook.js" defer></script>
 </head>
-<body class="" hx-headers='{"X-CSRFToken": "ozfHHM3EqF9NUeP3dXfLBZ5GWkP7MrZ5aFg4BzllBSp1zNLjqm8QSrd1sHrmRcK4"}'>
+<body class="" hx-headers='{"X-CSRFToken": "ZG1oKbBjr2ChIUJka7iYQVRUdj03hww5BTQl0daasPQQTdYM9AwVyOJSFs711gvM"}'>
 <a class="skip" href="#main">К содержанию</a>
 <div class="demo-bar" role="note">Демо-версия для отзывов: вход, запись на курсы и формы здесь не работают.</div>
 
@@ -60,6 +60,7 @@
 
 
 <div class="container hb-page s-recsys">
+  <div class="hb-readbar" aria-hidden="true"><i></i></div>
   <div class="hb">
     <aside class="hb-nav" aria-label="Статьи раздела">
       
@@ -78,6 +79,14 @@
       
       <a class="cur" href="/edufamcs-demo/handbook/recsys/prodakshen-i-ab-testy/" aria-current="page">Рекомендации в продакшене: A/B-тесты и эксплуатация</a>
       
+      <a class="" href="/edufamcs-demo/handbook/recsys/multitask-ranzhirovanie/">Многозадачное ранжирование: MMoE, PLE, ESMM</a>
+      
+      <a class="" href="/edufamcs-demo/handbook/recsys/priznaki-i-feature-store/">Признаки для рекомендаций и feature store</a>
+      
+      <a class="" href="/edufamcs-demo/handbook/recsys/protokol-oflajn-ocenki/">Протокол офлайн-оценки и утечки</a>
+      
+      <a class="" href="/edufamcs-demo/handbook/recsys/system-design-rekomendacij/">System design: как спроектировать рекомендательную систему на собеседовании</a>
+      
     </aside>
 
     <article class="hb-main">
@@ -86,9 +95,9 @@
       <div class="hb-meta">
         
         
-        <span><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-clock"/></svg>14&nbsp;мин</span>
+        <span><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-clock"/></svg>17&nbsp;мин</span>
         <span class="hb-authors"><span class="avatar sm" title="Артем Лебедевич">АЛ</span>Артем Лебедевич</span>
-        <span><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-edit"/></svg>9 ноября 2026</span>
+        <span><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-edit"/></svg>10 ноября 2026</span>
         
         
       </div>
@@ -96,7 +105,7 @@
       
       <details class="hb-mtoc">
         <summary><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-list"/></svg>Содержание<svg class="ico sm" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-chev-down"/></svg></summary>
-        <a class="l2" href="#онлайн-метрики">Онлайн-метрики</a><a class="l2" href="#дизайн-ab-теста">Дизайн A/B-теста</a><a class="l2" href="#cuped-уменьшаем-дисперсию">CUPED: уменьшаем дисперсию</a><a class="l2" href="#типичные-ошибки-анализа">Типичные ошибки анализа</a><a class="l2" href="#interleaving">Interleaving</a><a class="l2" href="#разрыв-офлайн-и-онлайн">Разрыв офлайн и онлайн</a><a class="l2" href="#эксплуатация">Эксплуатация</a><a class="l2" href="#бизнес-эффект">Бизнес-эффект</a><a class="l2" href="#что-почитать">Что почитать</a>
+        <a class="l2" href="#онлайн-метрики">Онлайн-метрики</a><a class="l3" href="#дельта-метод-для-отношения">Дельта-метод для отношения</a><a class="l2" href="#дизайн-ab-теста">Дизайн A/B-теста</a><a class="l2" href="#cuped-уменьшаем-дисперсию">CUPED: уменьшаем дисперсию</a><a class="l2" href="#типичные-ошибки-анализа">Типичные ошибки анализа</a><a class="l2" href="#interleaving">Interleaving</a><a class="l2" href="#разрыв-офлайн-и-онлайн">Разрыв офлайн и онлайн</a><a class="l2" href="#эксплуатация">Эксплуатация</a><a class="l2" href="#бизнес-эффект">Бизнес-эффект</a><a class="l2" href="#проверь-себя">Проверь себя</a><a class="l2" href="#что-почитать">Что почитать</a>
       </details>
       
 
@@ -109,6 +118,17 @@
 <li><strong>Guardrail-метрики</strong> — то, что нельзя ухудшить: задержка ответа, доля пустых выдач, доля возвратов, жалобы, выручка на сессию, доля продавца-монополиста. Эксперимент «выигрывает», только если прокси выросла, а ни одна guardrail не просела значимо.</li>
 </ul>
 <p>Стоит различать <strong>метрику на показ</strong> (CTR) и <strong>на пользователя</strong> (клики на пользователя за неделю). Первая считается как отношение, и наивный t-тест по показам нарушает независимость: показы одного пользователя коррелированы. Корректно: агрегировать до единицы рандомизации (пользователя) и сравнивать средние по пользователям либо применять дельта-метод для отношений.</p>
+<h3 id="дельта-метод-для-отношения">Дельта-метод для отношения</h3>
+<p>Пусть у <span class="tex">n</span> независимых пользователей есть числитель <span class="tex">X_i</span> (клики) и знаменатель <span class="tex">Y_i</span> (показы), метрика <span class="tex">R=\bar X/\bar Y</span>. Линеаризуем <span class="tex">R</span> в окрестности средних: <span class="tex">R \approx R_0 + \frac{1}{\bar Y}\big[(\bar X - \mu_X) - R_0(\bar Y-\mu_Y)\big]</span>, где <span class="tex">R_0=\mu_X/\mu_Y</span>. Тогда</p>
+<div class="tex tex-block">\mathrm{Var}(R)\approx \frac{1}{n\,\bar Y^2}\Big(s_X^2 - 2R\,s_{XY} + R^2 s_Y^2\Big),</div>
+<p>где <span class="tex">s_X^2, s_Y^2, s_{XY}</span> — выборочные дисперсии и ковариация <strong>по пользователям</strong>. Эквивалентно: <span class="tex">z_i=(X_i-RY_i)/\bar Y</span>, <span class="tex">\mathrm{Var}(R)\approx s_z^2/n</span>. Пример на синтетике (5000 пользователей, число показов и индивидуальный CTR разные у разных пользователей; код ниже): <span class="tex">R=0{,}0498</span>, стандартная ошибка по дельта-методу <span class="tex">0{,}00105</span>, по бутстрепу <span class="tex">0{,}00103</span>, а «наивная» биномиальная по показам <span class="tex">\sqrt{R(1-R)/\sum Y_i}=0{,}00085</span> — на 19 % ниже, интервал слишком узок, потому что показы одного пользователя коррелированы.</p>
+<div class="code"><div class="code-head"><span class="lang">python</span></div><pre><code>rng <span class="tok-p">=</span> np<span class="tok-p">.</span>random<span class="tok-p">.</span>default_rng<span class="tok-p">(</span><span class="tok-n">7</span><span class="tok-p">)</span><span class="tok-p">;</span> n <span class="tok-p">=</span> <span class="tok-n">5000</span>
+y <span class="tok-p">=</span> rng<span class="tok-p">.</span>poisson<span class="tok-p">(</span>rng<span class="tok-p">.</span>gamma<span class="tok-p">(</span><span class="tok-n">2.0</span><span class="tok-p">,</span> <span class="tok-n">6.0</span><span class="tok-p">,</span> n<span class="tok-p">)</span><span class="tok-p">)</span> <span class="tok-p">+</span> <span class="tok-n">1</span>          <span class="tok-c"># показы на пользователя</span>
+x <span class="tok-p">=</span> rng<span class="tok-p">.</span>binomial<span class="tok-p">(</span>y<span class="tok-p">,</span> rng<span class="tok-p">.</span>beta<span class="tok-p">(</span><span class="tok-n">2</span><span class="tok-p">,</span> <span class="tok-n">38</span><span class="tok-p">,</span> n<span class="tok-p">)</span><span class="tok-p">)</span>               <span class="tok-c"># клики, CTR у каждого свой</span>
+R <span class="tok-p">=</span> x<span class="tok-p">.</span>sum<span class="tok-p">(</span><span class="tok-p">)</span> <span class="tok-p">/</span> y<span class="tok-p">.</span>sum<span class="tok-p">(</span><span class="tok-p">)</span>
+z <span class="tok-p">=</span> <span class="tok-p">(</span>x <span class="tok-p">-</span> R <span class="tok-p">*</span> y<span class="tok-p">)</span> <span class="tok-p">/</span> y<span class="tok-p">.</span>mean<span class="tok-p">(</span><span class="tok-p">)</span>
+<span class="tok-f">print</span><span class="tok-p">(</span>R<span class="tok-p">,</span> np<span class="tok-p">.</span>sqrt<span class="tok-p">(</span>z<span class="tok-p">.</span>var<span class="tok-p">(</span>ddof<span class="tok-p">=</span><span class="tok-n">1</span><span class="tok-p">)</span> <span class="tok-p">/</span> n<span class="tok-p">)</span><span class="tok-p">,</span> np<span class="tok-p">.</span>sqrt<span class="tok-p">(</span>R <span class="tok-p">*</span> <span class="tok-p">(</span><span class="tok-n">1</span> <span class="tok-p">-</span> R<span class="tok-p">)</span> <span class="tok-p">/</span> y<span class="tok-p">.</span>sum<span class="tok-p">(</span><span class="tok-p">)</span><span class="tok-p">)</span><span class="tok-p">)</span>
+</code></pre></div>
 <h2 id="дизайн-ab-теста">Дизайн A/B-теста</h2>
 <p><strong>Единица рандомизации.</strong> Обычно пользователь (а не сессия и не показ): иначе один человек увидит обе версии, а пользовательские эффекты «протекут» между группами. Назначение должно быть детерминированным: <code>hash(user_id + salt) mod 100</code>, где <code>salt</code> разный у разных экспериментов, чтобы группы разных тестов не коррелировали.</p>
 <p><strong>Гипотеза и размер выборки.</strong> Нулевая гипотеза: эффекта нет. Задаём уровень значимости <span class="tex">\alpha=0{,}05</span>, мощность <span class="tex">1-\beta = 0{,}8</span> и <strong>минимально значимый эффект</strong> <span class="tex">\Delta</span> (в абсолютных единицах метрики). Для разности средних с дисперсией <span class="tex">\sigma^2</span> в каждой группе (подробности — в главе <a href="/edufamcs-demo/handbook/math/intervaly-i-proverka-gipotez/" rel="noopener noreferrer nofollow">«Доверительные интервалы и проверка гипотез»</a>):</p>
@@ -155,6 +175,7 @@ y_cuped <span class="tok-p">=</span> y <span class="tok-p">-</span> theta <span 
 <li><strong>Сетевые эффекты и интерференция.</strong> В маркетплейсе группы конкурируют за один и тот же товар и бюджет продавцов; в соцсети влияние распространяется по связям. Тогда пользовательская рандомизация даёт смещённую оценку; используют рандомизацию по кластерам, регионам или переключение по времени (switchback).</li>
 <li><strong>Выброс «китов».</strong> Пара гигантских заказов ломает среднюю выручку; применяйте винзоризацию (срез на 99-м перцентиле) и бутстрап.</li>
 </ul>
+<p>На собеседовании: как посчитать дисперсию CTR, если единица рандомизации — пользователь; что такое SRM и что делать при его срабатывании; как работает CUPED и почему оценка остаётся несмещённой; почему офлайн-победитель проигрывает онлайн.</p>
 <h2 id="interleaving">Interleaving</h2>
 <p>A/B-тест рекомендаций сравнивает два ранжирования, но шума много. <strong>Interleaving</strong> (Chapelle, Joachims, Radlinski, Yue; ACM TOIS 2012, <em>Large-Scale Validation and Analysis of Interleaved Search Evaluation</em>) смешивает выдачи двух моделей в <strong>один</strong> список, показывает его каждому пользователю, а победитель определяется по кликам. В <strong>team-draft</strong> схеме два «капитана» по очереди (жребий в каждом раунде решает, кто выбирает первым) берут из своего ранжирования самый высокий объект, которого ещё нет в общем списке, и помечают его своей командой; победитель на пользователе — команда с бо́льшим числом кликов. Метод намного чувствительнее A/B: в отчётах компаний (веб-поиск, Netflix, DoorDash) называют выигрыш в 10–100 раз по числу пользователей, нужных для того же вывода, — точный множитель зависит от задачи. Причина в том, что каждый пользователь сравнивает обе модели сам с собой, и межпользовательский разброс уходит из сравнения. Ограничения: подходит только для списков, где позиции сопоставимы, и измеряет <em>предпочтение</em>, а не метрики бизнеса (выручку, удержание), поэтому после interleaving всё равно идёт финальный A/B на меньшем числе вариантов.</p>
 <p>Фундаментальный текст по всему направлению — Kohavi, Tang, Xu, <em>Trustworthy Online Controlled Experiments</em> (Cambridge University Press, 2020): правила дизайна, SRM, длительность, «закон Туймана» (чем интереснее результат, тем вероятнее ошибка в данных).</p>
@@ -184,6 +205,22 @@ y_cuped <span class="tok-p">=</span> y <span class="tok-p">-</span> theta <span 
 <p><strong>Технический долг.</strong> Sculley et al. (NIPS 2015, <em>Hidden Technical Debt in Machine Learning Systems</em>) перечисляют то, что ломает ML-системы: запутанность («изменение одной вещи меняет всё», CACE), необъявленные потребители выходов модели, петли обратной связи, склеенный из скриптов код, нестабильные входные сигналы. Совет Zinkevich (<em>Rules of Machine Learning</em>, Google): сначала простая модель и хорошая инфраструктура логирования и метрик, лишь потом сложные модели; первое правило — «не бойтесь запускать продукт без ML». Для рекомендаций это значит: популярное + item-to-item + аккуратный A/B часто дают большую часть эффекта.</p>
 <h2 id="бизнес-эффект">Бизнес-эффект</h2>
 <p>Чаще всего измеримый эффект рекомендаций — доля выручки, пришедшая с рекомендательных блоков, прирост конверсии и среднего чека, рост удержания. Типичные для индустрии заявления — единицы процентов на зрелой системе и десятки процентов на «никаких рекомендаций → любые рекомендации»; приросты от замены одной модели на более сложную чаще лежат в диапазоне <strong>десятых долей процента</strong> и заметны лишь на огромных объёмах трафика (глава про генеративные рекомендатели). Закладывайте это в приоритеты: инвестиция в логирование, свежесть данных или исправление train/serve skew нередко окупается лучше новой архитектуры.</p>
+<h2 id="проверь-себя">Проверь себя</h2>
+<details class="callout md details"><summary>Почему t-тест по показам для CTR некорректен?</summary>
+<p>Показы одного пользователя коррелированы, а единица рандомизации — пользователь; независимость нарушена и интервал получается слишком узким. Агрегируйте до пользователя или используйте дельта-метод.</p>
+</details>
+<details class="callout md details"><summary>Почему CUPED не вносит смещения в оценку эффекта?</summary>
+<p>Ковариата <span class="tex">X</span> измерена до рандомизации и не зависит от группы, поэтому <span class="tex">\mathbb{E}Y'</span> в группах отличается так же, как <span class="tex">\mathbb{E}Y</span>, а дисперсия падает в <span class="tex">(1-\rho^2)</span> раз.</p>
+</details>
+<details class="callout md details"><summary>Что будет, если проверять p-value каждый день и остановиться при $p&lt;0{,}05$?</summary>
+<p>Реальная частота ложных срабатываний растёт с числом проверок (до 20–30 % вместо 5 %). Нужны фиксированный срок и размер выборки либо последовательные тесты.</p>
+</details>
+<details class="callout md details"><summary>Почему после interleaving всё равно нужен A/B?</summary>
+<p>Interleaving измеряет предпочтение между двумя ранжированиями на кликах и чувствительнее A/B, но не измеряет бизнес-метрики (выручку, удержание).</p>
+</details>
+<details class="callout md details"><summary>Почему офлайн-победитель может проиграть онлайн?</summary>
+<p>Лог собран старой политикой и штрафует непоказывавшееся; метрика не равна цели; тяжёлая модель дольше отвечает; сама рекомендация меняет поведение. Поэтому офлайн — фильтр, а победителя определяет A/B.</p>
+</details>
 <h2 id="что-почитать">Что почитать</h2>
 <ul>
 <li>Kohavi, Tang, Xu. <em>Trustworthy Online Controlled Experiments: A Practical Guide to A/B Testing</em>. Cambridge University Press, 2020.</li>
@@ -197,6 +234,8 @@ y_cuped <span class="tok-p">=</span> y <span class="tok-p">-</span> theta <span 
       
 
       
+
+      
       <nav class="pager" aria-label="Соседние статьи">
         <a href="/edufamcs-demo/handbook/recsys/holodnyj-start-i-bandity/"><span><svg class="ico sm" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-arrow-left"/></svg>Назад</span>Холодный старт, исследование и бандиты</a>
         <a href="/edufamcs-demo/handbook/recsys/semanticheskie-id-tiger/"><span>Дальше<svg class="ico sm" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-arrow"/></svg></span>Семантические ID и генеративный retrieval: TIGER</a>
@@ -205,7 +244,7 @@ y_cuped <span class="tok-p">=</span> y <span class="tok-p">-</span> theta <span 
     </article>
 
     <aside class="hb-toc" aria-label="На этой странице">
-      <a class="l2" href="#онлайн-метрики">Онлайн-метрики</a><a class="l2" href="#дизайн-ab-теста">Дизайн A/B-теста</a><a class="l2" href="#cuped-уменьшаем-дисперсию">CUPED: уменьшаем дисперсию</a><a class="l2" href="#типичные-ошибки-анализа">Типичные ошибки анализа</a><a class="l2" href="#interleaving">Interleaving</a><a class="l2" href="#разрыв-офлайн-и-онлайн">Разрыв офлайн и онлайн</a><a class="l2" href="#эксплуатация">Эксплуатация</a><a class="l2" href="#бизнес-эффект">Бизнес-эффект</a><a class="l2" href="#что-почитать">Что почитать</a>
+      <a class="l2" href="#онлайн-метрики">Онлайн-метрики</a><a class="l3" href="#дельта-метод-для-отношения">Дельта-метод для отношения</a><a class="l2" href="#дизайн-ab-теста">Дизайн A/B-теста</a><a class="l2" href="#cuped-уменьшаем-дисперсию">CUPED: уменьшаем дисперсию</a><a class="l2" href="#типичные-ошибки-анализа">Типичные ошибки анализа</a><a class="l2" href="#interleaving">Interleaving</a><a class="l2" href="#разрыв-офлайн-и-онлайн">Разрыв офлайн и онлайн</a><a class="l2" href="#эксплуатация">Эксплуатация</a><a class="l2" href="#бизнес-эффект">Бизнес-эффект</a><a class="l2" href="#проверь-себя">Проверь себя</a><a class="l2" href="#что-почитать">Что почитать</a>
     </aside>
   </div>
 </div>

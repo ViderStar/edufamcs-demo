@@ -27,7 +27,7 @@
 <script src="/edufamcs-demo/static/js/site.js" defer></script>
 <script src="/edufamcs-demo/static/handbook/handbook.js" defer></script>
 </head>
-<body class="" hx-headers='{"X-CSRFToken": "Yc8xkPtLjh97nvmppIONWv3lDuepCLo9Ki9UeCLsuupl24iFC7HSdXbG9RQEHw98"}'>
+<body class="" hx-headers='{"X-CSRFToken": "teE5koVvBsCxIxjZerkfLUakmKlvSeUA5rt2AqumCfQ6TQyrdUyctN2iOTstCYTh"}'>
 <a class="skip" href="#main">К содержанию</a>
 <div class="demo-bar" role="note">Демо-версия для отзывов: вход, запись на курсы и формы здесь не работают.</div>
 
@@ -60,6 +60,7 @@
 
 
 <div class="container hb-page hb-tone">
+  <div class="hb-readbar" aria-hidden="true"><i></i></div>
   <div class="hb">
     <aside class="hb-nav" aria-label="Статьи раздела">
       
@@ -84,9 +85,9 @@
       <div class="hb-meta">
         
         
-        <span><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-clock"/></svg>11&nbsp;мин</span>
+        <span><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-clock"/></svg>13&nbsp;мин</span>
         <span class="hb-authors"><span class="avatar sm" title="Артем Лебедевич">АЛ</span>Артем Лебедевич</span>
-        <span><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-edit"/></svg>9 ноября 2026</span>
+        <span><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-edit"/></svg>10 ноября 2026</span>
         
         
       </div>
@@ -94,7 +95,7 @@
       
       <details class="hb-mtoc">
         <summary><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-list"/></svg>Содержание<svg class="ico sm" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-chev-down"/></svg></summary>
-        <a class="l2" href="#k-means">K-means</a><a class="l2" href="#выбор-числа-кластеров">Выбор числа кластеров</a><a class="l2" href="#иерархическая-агломеративная-кластеризация">Иерархическая агломеративная кластеризация</a><a class="l2" href="#dbscan">DBSCAN</a><a class="l2" href="#gmm-и-em">GMM и EM</a><a class="l2" href="#сравнение-на-лунах-и-кольцах">Сравнение на «лунах» и «кольцах»</a><a class="l2" href="#ловушки">Ловушки</a><a class="l2" href="#что-почитать">Что почитать</a>
+        <a class="l2" href="#k-means">K-means</a><a class="l2" href="#выбор-числа-кластеров">Выбор числа кластеров</a><a class="l2" href="#иерархическая-агломеративная-кластеризация">Иерархическая агломеративная кластеризация</a><a class="l2" href="#dbscan">DBSCAN</a><a class="l2" href="#gmm-и-em">GMM и EM</a><a class="l2" href="#сравнение-на-лунах-и-кольцах">Сравнение на «лунах» и «кольцах»</a><a class="l2" href="#ловушки">Ловушки</a><a class="l2" href="#проверь-себя">Проверь себя</a><a class="l2" href="#что-почитать">Что почитать</a>
       </details>
       
 
@@ -111,7 +112,15 @@
 <li>повторять 2–3 до стабилизации назначений.</li>
 </ol>
 <p>Каждый шаг не увеличивает <span class="tex">J</span> (шаг 2 минимизирует по <span class="tex">C</span> при фиксированных <span class="tex">\mu</span>, шаг 3 — по <span class="tex">\mu</span> при фиксированных <span class="tex">C</span>, и среднее — минимум суммы квадратов), число разбиений конечно, поэтому алгоритм сходится, но только к <strong>локальному минимуму</strong>; задача глобально NP-трудна. Стоимость итерации <span class="tex">O(nKd)</span>, это один из самых быстрых методов.</p>
-<p><strong>Инициализация.</strong> Случайные центры дают плохие локальные минимумы (два центра в одном кластере, ни одного — в другом). <strong>k-means++</strong> (Arthur &amp; Vassilvitskii, 2007): первый центр случайный, каждый следующий выбирается с вероятностью, пропорциональной <span class="tex">D(x)^2</span> — квадрату расстояния до ближайшего уже выбранного центра. Центры оказываются разнесёнными; гарантируется <span class="tex">O(\log K)</span>-приближение к оптимуму в среднем. В sklearn <code>init="k-means++"</code> по умолчанию, <code>n_init</code> перезапусков — берётся лучший по <span class="tex">J</span> (inertia).</p>
+<p><strong>Инициализация.</strong> Случайные центры дают плохие локальные минимумы (два центра в одном кластере, ни одного — в другом). <strong>k-means++</strong> (Arthur &amp; Vassilvitskii, 2007): первый центр случайный, каждый следующий выбирается с вероятностью, пропорциональной <span class="tex">D(x)^2</span> — квадрату расстояния до ближайшего уже выбранного центра. Центры оказываются разнесёнными; гарантируется <span class="tex">O(\log K)</span>-приближение к оптимуму в среднем. В sklearn <code>init="k-means++"</code> по умолчанию, <code>n_init</code> перезапусков — берётся лучший по <span class="tex">J</span> (inertia). Начиная с scikit-learn 1.4 значение по умолчанию <code>n_init="auto"</code>: это <strong>один</strong> запуск с k-means++ (для случайной инициализации — десять), поэтому для стабильности задавайте <code>n_init=10</code> явно.</p>
+<p><strong>Итерации на шести точках.</strong> Одномерные точки <span class="tex">x=1,2,3,8,9,12</span>, <span class="tex">K=2</span>, неудачный старт <span class="tex">\mu=(1,2)</span>.</p>
+<ul>
+<li>Назначение: 1 → кластер 1; 2, 3, 8, 9, 12 → кластер 2. <span class="tex">J=0+0+1+36+49+100=186</span>.</li>
+<li>Пересчёт: <span class="tex">\mu=(1;\,6{,}8)</span>, <span class="tex">J=70{,}8</span>.</li>
+<li>Назначение: <span class="tex">\{1,2,3\}</span> и <span class="tex">\{8,9,12\}</span> (<span class="tex">2</span> ближе к <span class="tex">1</span>, чем к <span class="tex">6{,}8</span>; <span class="tex">3</span> — тоже; <span class="tex">8</span> ближе к <span class="tex">6{,}8</span>). Пересчёт: <span class="tex">\mu=(2;\,9{,}67)</span>, <span class="tex">J=10{,}67</span>.</li>
+<li>Назначение не меняется — сходимость за 3 прохода; <span class="tex">J</span> упало <span class="tex">186\to70{,}8\to10{,}67</span> и ни разу не выросло.</li>
+</ul>
+<p><code>KMeans(2, init=[[1],[2]], n_init=1)</code> даёт те же центры и <code>inertia_</code> <span class="tex">=10{,}667</span>.</p>
 <p><strong>Варианты.</strong> <em>Mini-Batch K-Means</em> пересчитывает центры по случайным мини-батчам — на порядки быстрее на больших данных, качество чуть хуже. <em>Bisecting K-Means</em> стартует с одного кластера и последовательно делит надвое кластер с наибольшей ошибкой; даёт иерархию и обычно более ровные результаты. <em>K-medoids</em> берёт центром реальную точку, устойчивее к выбросам.</p>
 <p><strong>Где ломается k-means.</strong> Он неявно предполагает шарообразные кластеры примерно одинакового размера и числа точек:</p>
 <ul>
@@ -218,8 +227,24 @@ models <span class="tok-p">=</span> <span class="tok-p">{</span>
 <li>Силуэт и инерция не сравнимы между разными метриками и масштабами.</li>
 <li>Результат k-means зависит от <code>random_state</code>: проверяйте стабильность на нескольких запусках.</li>
 <li>Кластеры — гипотезы: чтобы назвать их «сегментами клиентов», опишите каждый по признакам и проверьте на отложенных данных.</li>
-<li>На интервью спрашивают: сходимость k-means и почему к локальному минимуму; идея k-means++; силуэт; отличие core/border/noise в DBSCAN; когда DBSCAN хуже k-means.</li>
+<li><strong>На собеседовании:</strong> спрашивают: сходимость k-means и почему к локальному минимуму; идея k-means++; силуэт; отличие core/border/noise в DBSCAN; когда DBSCAN хуже k-means.</li>
 </ul>
+<h2 id="проверь-себя">Проверь себя</h2>
+<details class="callout md details"><summary>Почему k-means сходится, но не обязательно к глобальному оптимуму?</summary>
+<p>Каждый шаг (назначение, пересчёт средних) не увеличивает <span class="tex">J</span>, число разбиений конечно, значит, процесс остановится. Но <span class="tex">J</span> невыпукла по разбиению, и остановка происходит в локальном минимуме, зависящем от старта.</p>
+</details>
+<details class="callout md details"><summary>Чем k-means++ лучше случайной инициализации?</summary>
+<p>Следующий центр выбирается с вероятностью, пропорциональной <span class="tex">D(x)^2</span>, поэтому центры разнесены. Это даёт <span class="tex">O(\log K)</span>-приближение в среднем и меньше плохих локальных минимумов.</p>
+</details>
+<details class="callout md details"><summary>Что показывает силуэт и когда он вводит в заблуждение?</summary>
+<p><span class="tex">s=(b-a)/\max(a,b)</span>: близко к 1 — объект в своём кластере, около 0 — на границе. Он предпочитает выпуклые кластеры, поэтому для DBSCAN и вытянутых форм занижен.</p>
+</details>
+<details class="callout md details"><summary>Как DBSCAN различает core, border и noise?</summary>
+<p>Ядровая точка имеет не менее <code>min_samples</code> точек в <span class="tex">\varepsilon</span>-окрестности; граничная лежит в окрестности ядровой, но сама не ядровая; остальные — шум.</p>
+</details>
+<details class="callout md details"><summary>В каком случае k-means — частный случай GMM?</summary>
+<p>При сферических ковариациях с одинаковой дисперсией и жёстких назначениях (дисперсия стремится к нулю), вместо мягких ответственностей.</p>
+</details>
 <h2 id="что-почитать">Что почитать</h2>
 <ul>
 <li>Arthur D., Vassilvitskii S. <em>k-means++: The Advantages of Careful Seeding</em>, SODA 2007.</li>
@@ -234,6 +259,8 @@ models <span class="tok-p">=</span> <span class="tok-p">{</span>
       
 
       
+
+      
       <nav class="pager" aria-label="Соседние статьи">
         <a href="/edufamcs-demo/handbook/classic/giperparametry-i-interpretiruemost/"><span><svg class="ico sm" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-arrow-left"/></svg>Назад</span>Подбор гиперпараметров и интерпретируемость</a>
         <a href="/edufamcs-demo/handbook/classic/snizhenie-razmernosti/"><span>Дальше<svg class="ico sm" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-arrow"/></svg></span>Снижение размерности: PCA, t-SNE, UMAP</a>
@@ -242,7 +269,7 @@ models <span class="tok-p">=</span> <span class="tok-p">{</span>
     </article>
 
     <aside class="hb-toc" aria-label="На этой странице">
-      <a class="l2" href="#k-means">K-means</a><a class="l2" href="#выбор-числа-кластеров">Выбор числа кластеров</a><a class="l2" href="#иерархическая-агломеративная-кластеризация">Иерархическая агломеративная кластеризация</a><a class="l2" href="#dbscan">DBSCAN</a><a class="l2" href="#gmm-и-em">GMM и EM</a><a class="l2" href="#сравнение-на-лунах-и-кольцах">Сравнение на «лунах» и «кольцах»</a><a class="l2" href="#ловушки">Ловушки</a><a class="l2" href="#что-почитать">Что почитать</a>
+      <a class="l2" href="#k-means">K-means</a><a class="l2" href="#выбор-числа-кластеров">Выбор числа кластеров</a><a class="l2" href="#иерархическая-агломеративная-кластеризация">Иерархическая агломеративная кластеризация</a><a class="l2" href="#dbscan">DBSCAN</a><a class="l2" href="#gmm-и-em">GMM и EM</a><a class="l2" href="#сравнение-на-лунах-и-кольцах">Сравнение на «лунах» и «кольцах»</a><a class="l2" href="#ловушки">Ловушки</a><a class="l2" href="#проверь-себя">Проверь себя</a><a class="l2" href="#что-почитать">Что почитать</a>
     </aside>
   </div>
 </div>

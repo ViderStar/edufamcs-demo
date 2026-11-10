@@ -1,0 +1,344 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Поисковые движки: Elasticsearch, OpenSearch, Qdrant, Vespa · EDU FAMCS</title>
+<meta name="description" content="Поисковые движки: Elasticsearch, OpenSearch, Qdrant, Vespa — Поиск. Хендбук ML-курса ФПМИ.">
+<meta name="theme-color" content="#060A16">
+<meta name="robots" content="noindex, nofollow">
+<meta name="htmx-config" content='{"allowEval":false,"includeIndicatorStyles":false,"historyCacheSize":0,"selfRequestsOnly":true}'>
+<meta name="katex-js" content="/edufamcs-demo/static/vendor/katex/katex.min.js">
+<meta name="katex-css" content="/edufamcs-demo/static/vendor/katex/katex.min.css">
+<link rel="icon" href="/edufamcs-demo/static/brand/logo/favicon-16.svg" type="image/svg+xml" sizes="16x16">
+<link rel="icon" href="/edufamcs-demo/static/brand/logo/favicon.svg" type="image/svg+xml" sizes="any">
+<link rel="preload" href="/edufamcs-demo/static/brand/fonts/manrope-cyrillic-400.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/edufamcs-demo/static/brand/fonts/unbounded-cyrillic-800.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="/edufamcs-demo/static/brand/fonts.css">
+<link rel="stylesheet" href="/edufamcs-demo/static/brand/tokens.css">
+<link rel="stylesheet" href="/edufamcs-demo/static/brand/components.css">
+<link rel="stylesheet" href="/edufamcs-demo/static/css/site.css">
+<link rel="stylesheet" href="/edufamcs-demo/static/css/hub.css">
+<link rel="stylesheet" href="/edufamcs-demo/static/css/about.css">
+<link rel="stylesheet" href="/edufamcs-demo/static/handbook/handbook.css">
+<script src="/edufamcs-demo/static/js/theme.js"></script>
+<script src="/edufamcs-demo/static/vendor/htmx/htmx.min.js" defer></script>
+<script src="/edufamcs-demo/static/vendor/alpine/alpine-csp.min.js" defer></script>
+<script src="/edufamcs-demo/static/js/site.js" defer></script>
+<script src="/edufamcs-demo/static/handbook/handbook.js" defer></script>
+</head>
+<body class="" hx-headers='{"X-CSRFToken": "kYJHHqDpZPs9fgyfSB726FgsfhAReFpIWbyEXscg0CGIqzNHR4lZOy8qHqHPYpop"}'>
+<a class="skip" href="#main">К содержанию</a>
+<div class="demo-bar" role="note">Демо-версия для отзывов: вход, запись на курсы и формы здесь не работают.</div>
+
+<header class="hdr">
+  <div class="container">
+    <a class="brand" href="/edufamcs-demo/" aria-label="EDU FAMCS — главная">
+      <span class="full"><img class="only-light" src="/edufamcs-demo/static/brand/logo/logo-edu-light.svg" alt="EDU FAMCS" width="196" height="40"><img class="only-dark" src="/edufamcs-demo/static/brand/logo/logo-edu-dark.svg" alt="EDU FAMCS" width="196" height="40"></span>
+      <span class="short"><img class="only-light" src="/edufamcs-demo/static/brand/logo/logo-edu-light.svg" alt="EDU FAMCS" height="30"><img class="only-dark" src="/edufamcs-demo/static/brand/logo/logo-edu-dark.svg" alt="EDU FAMCS" height="30"></span>
+    </a>
+    <nav class="nav" id="main-nav" aria-label="Основная навигация">
+      <a href="/edufamcs-demo/#courses">Курсы</a>
+      <a href="/edufamcs-demo/ml/" >Машинное обучение</a>
+      
+      <a href="/edufamcs-demo/handbook/" aria-current="page">Хендбук</a>
+      <a href="/edufamcs-demo/news/" >Новости</a>
+      <a href="/edufamcs-demo/people/" >Авторы</a>
+      <a href="/edufamcs-demo/about/" >О&nbsp;нас</a>
+    </nav>
+    <div class="hdr-actions">
+      
+      <a class="btn btn-outline btn-login" href="/edufamcs-demo/accounts/login/?next=/handbook/retrieval/poiskovye-dvizhki/">Войти</a>
+      
+      <button class="icon-btn menu-btn" type="button" aria-label="Меню" aria-expanded="false" aria-controls="main-nav"><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-menu"/></svg></button>
+    </div>
+  </div>
+</header>
+
+<main id="main">
+
+
+
+<div class="container hb-page s-recsys">
+  <div class="hb-readbar" aria-hidden="true"><i></i></div>
+  <div class="hb">
+    <aside class="hb-nav" aria-label="Статьи раздела">
+      
+<form class="hb-search" action="/edufamcs-demo/handbook/search/" method="get" role="search">
+  <svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-search"/></svg>
+  <input class="input" type="search" name="q" value="" placeholder="Поиск по хендбуку" aria-label="Поиск по хендбуку" autocomplete="off" maxlength="120"
+    hx-get="/edufamcs-demo/handbook/search/" hx-trigger="input changed delay:250ms, search" hx-target="#hb-nav-results" hx-sync="this:replace">
+</form>
+
+      <div id="hb-nav-results" class="hb-nav-results" aria-live="polite"></div>
+      <a class="grp" href="/edufamcs-demo/handbook/retrieval/">Поиск в продакшене</a>
+      
+      <a class="" href="/edufamcs-demo/handbook/retrieval/obuchenie-embedderov/">Как обучают эмбеддеры для поиска</a>
+      
+      <a class="cur" href="/edufamcs-demo/handbook/retrieval/poiskovye-dvizhki/" aria-current="page">Поисковые движки: Elasticsearch, OpenSearch, Qdrant, Vespa</a>
+      
+      <a class="" href="/edufamcs-demo/handbook/retrieval/ecommerce-poisk/">Поиск в e-commerce</a>
+      
+    </aside>
+
+    <article class="hb-main">
+      <nav class="crumbs" aria-label="Навигация"><a href="/edufamcs-demo/handbook/">Хендбук</a><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-chev"/></svg><a href="/edufamcs-demo/handbook/retrieval/">Поиск</a></nav>
+      <h1 class="h1">Поисковые движки: Elasticsearch, OpenSearch, Qdrant, Vespa</h1>
+      <div class="hb-meta">
+        
+        
+        <span><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-clock"/></svg>15&nbsp;мин</span>
+        <span class="hb-authors"><span class="avatar sm" title="Артем Лебедевич">АЛ</span>Артем Лебедевич</span>
+        <span><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-edit"/></svg>10 ноября 2026</span>
+        
+        
+      </div>
+
+      
+      <details class="hb-mtoc">
+        <summary><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-list"/></svg>Содержание<svg class="ico sm" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-chev-down"/></svg></summary>
+        <a class="l2" href="#жизненный-цикл-индекса">Жизненный цикл индекса</a><a class="l2" href="#анализ-текста">Анализ текста</a><a class="l2" href="#маппинги-и-типы-полей">Маппинги и типы полей</a><a class="l2" href="#шарды-реплики-и-глубокая-пагинация">Шарды, реплики и глубокая пагинация</a><a class="l2" href="#настройка-релевантности">Настройка релевантности</a><a class="l2" href="#векторный-поиск-внутри-движка">Векторный поиск внутри движка</a><a class="l2" href="#переранжирование">Переранжирование</a><a class="l2" href="#выбор-движка">Выбор движка</a><a class="l2" href="#эксплуатация">Эксплуатация</a><a class="l2" href="#ловушки">Ловушки</a><a class="l2" href="#проверь-себя">Проверь себя</a><a class="l2" href="#что-почитать">Что почитать</a>
+      </details>
+      
+
+      <div class="prose"><p>BM25, HNSW и обученный ранжировщик — это алгоритмы. Поисковый движок — это то, что превращает их в сервис: хранит индекс на диске, принимает обновления, делит данные по машинам, переживает отказ узла, кэширует фильтры и отдаёт перцентили задержки. Выбор движка чаще определяет, получится ли поиск в продакшене, чем выбор эмбеддера. Ниже — что есть в движке сверх алгоритма, как это настраивается и чем отличаются четыре популярных системы. Примеры запросов сверены с текущей документацией на ноябрь 2026; версии и параметры меняются — перед использованием откройте документацию своей версии.</p>
+<h2 id="жизненный-цикл-индекса">Жизненный цикл индекса</h2>
+<p>Elasticsearch и OpenSearch построены на Lucene. Документ попадает в буфер в памяти и в журнал транзакций (translog), а раз в <code>refresh_interval</code> (по умолчанию <code>1s</code> для Elasticsearch) буфер превращается в новый <strong>сегмент</strong> — неизменяемый набор файлов с <a href="/edufamcs-demo/handbook/retrieval/bm25-invertirovannyj-indeks/" rel="noopener noreferrer nofollow">инвертированным индексом</a>. Именно refresh делает документ видимым для поиска: поэтому поиск <strong>почти</strong> реального времени (near-real-time), а не мгновенный. Сегменты никогда не правятся: обновление документа — это пометка старой версии удалённой и запись новой, а удалённые версии физически исчезают при <strong>слиянии сегментов</strong> (merge) в фоне. Следствия: много мелких сегментов замедляют поиск (нужно обойти каждый), слияния грузят диск, а массовая индексация идёт быстрее при редком refresh.</p>
+<h2 id="анализ-текста">Анализ текста</h2>
+<p>Цепочка анализа (analyzer) применяется и при индексации, и при запросе: <strong>char filters</strong> (например, замена <code>ё</code> на <code>е</code>) → <strong>tokenizer</strong> (разбиение на токены) → <strong>token filters</strong> (нижний регистр, стоп-слова, стемминг, синонимы). Для русского встроенный анализатор <code>russian</code> в документации разворачивается в цепочку <code>standard</code> tokenizer → <code>lowercase</code> → стоп-слова → стеммер <code>russian</code>. Стеммер отрезает окончания и суффиксы по правилам: быстро и без словаря, но ошибается на исключениях и омонимах. <strong>Лемматизация</strong> (приведение к словарной форме по морфологическому словарю) точнее, но требует словаря или плагина, а на неизвестных словах (бренды, модели) всё равно нужна запасная ветка.</p>
+<p>Синонимы подключают фильтром <code>synonym_graph</code> и обычно применяют <strong>на стороне запроса</strong>, чтобы не переиндексировать корпус при каждом изменении словаря. Главное правило: анализатор индекса и запроса должны быть согласованы, иначе токены не совпадут — частая причина «документ есть, но не находится». Проверяйте цепочку командой <code>_analyze</code>.</p>
+<h2 id="маппинги-и-типы-полей">Маппинги и типы полей</h2>
+<p>Строка индексируется как <code>text</code> (анализируется, нужна для полнотекстового поиска) или <code>keyword</code> (хранится целиком: фильтры, сортировка, агрегации, точное совпадение). Одно поле часто нужно в обоих видах — для этого <strong>multi-fields</strong>:</p>
+<div class="code"><div class="code-head"><span class="lang">json</span></div><pre><code>PUT my<span class="tok-n">-</span>i<span class="tok-k">n</span>dex
+<span class="tok-p">{</span>
+  "mappings"<span class="tok-p">:</span> <span class="tok-p">{</span>
+    "properties"<span class="tok-p">:</span> <span class="tok-p">{</span>
+      "city"<span class="tok-p">:</span> <span class="tok-p">{</span> "type"<span class="tok-p">:</span> <span class="tok-s">"text"</span><span class="tok-p">,</span> "fields"<span class="tok-p">:</span> <span class="tok-p">{</span> "raw"<span class="tok-p">:</span> <span class="tok-p">{</span> "type"<span class="tok-p">:</span> <span class="tok-s">"keyword"</span> <span class="tok-p">}</span> <span class="tok-p">}</span> <span class="tok-p">}</span>
+    <span class="tok-p">}</span>
+  <span class="tok-p">}</span>
+<span class="tok-p">}</span>
+</code></pre></div>
+<p>Так в документации Elasticsearch: <code>match</code> по <code>city</code> ищет по тексту, а сортировка идёт по <code>city.raw</code>. Тип поля после создания не меняется — менять маппинг приходится через новый индекс (ниже про alias).</p>
+<h2 id="шарды-реплики-и-глубокая-пагинация">Шарды, реплики и глубокая пагинация</h2>
+<p>Индекс делится на <strong>шарды</strong> (primary shards), каждый — самостоятельный Lucene-индекс; у каждого есть <strong>реплики</strong> (отказоустойчивость и дополнительная пропускная способность на чтение). Запрос обрабатывается в две фазы (query then fetch): координирующий узел рассылает запрос на все шарды, каждый возвращает свой топ <code>from + size</code> (id и скоры), координатор сливает списки и только потом запрашивает сами документы у нужных шардов. Отсюда <strong>цена глубокой пагинации</strong>: чтобы выдать страницу 1000 при размере 10, каждый шард должен собрать и отдать 10 010 кандидатов. Поэтому в Elasticsearch <code>from + size</code> по умолчанию ограничен <code>index.max_result_window = 10000</code>, а для обхода глубже используют <code>search_after</code> вместе с point in time (PIT).</p>
+<p>Ещё одна тонкость: IDF в BM25 считается по статистике <strong>шарда</strong>, а не всего индекса. На малых и неравномерных индексах скоры из разных шардов несопоставимы; лечится режимом <code>dfs_query_then_fetch</code> (цена — лишний раунд).</p>
+<h2 id="настройка-релевантности">Настройка релевантности</h2>
+<ul>
+<li><strong>Параметры BM25 по полям.</strong> По умолчанию <span class="tex">k_1=1{,}2</span>, <span class="tex">b=0{,}75</span>; для коротких полей вроде названия нормировку на длину (<span class="tex">b</span>) часто ослабляют; проверяйте на размеченных запросах. Настраиваются через настройки <code>similarity</code> и атрибут <code>similarity</code> в маппинге поля.</li>
+<li><strong>Бусты полей</strong>: <code>"title^3"</code> в <code>multi_match</code> — совпадение в названии весит втрое.</li>
+<li><strong>Сигналы вне текста.</strong> Популярность, свежесть, рейтинг подмешивают через <code>function_score</code> или специальный тип поля <code>rank_feature</code> с запросом <code>rank_feature</code>. Это ручной аналог <a href="/edufamcs-demo/handbook/retrieval/learning-to-rank/" rel="noopener noreferrer nofollow">признаков LTR</a>: подбирайте веса на размеченных запросах, а не на глаз.</li>
+<li><strong>Фильтры против запросов.</strong> Условие в <code>filter</code> не считает скор и может кэшироваться, условие в <code>must</code> участвует в скоре. Всё, что не должно влиять на ранжирование (категория, наличие, диапазон цены), кладите в <code>filter</code>.</li>
+</ul>
+<p>Пример: запрос с бустом поля, фильтрами и мягким предпочтением бренда (форма взята из документации по <code>bool</code> и <code>multi_match</code>):</p>
+<div class="code"><div class="code-head"><span class="lang">json</span></div><pre><code>POST produc<span class="tok-k">ts</span>/_search
+<span class="tok-p">{</span>
+  "query"<span class="tok-p">:</span> <span class="tok-p">{</span>
+    "bool"<span class="tok-p">:</span> <span class="tok-p">{</span>
+      "must"<span class="tok-p">:</span> <span class="tok-p">{</span>
+        "multi_match"<span class="tok-p">:</span> <span class="tok-p">{</span> "query"<span class="tok-p">:</span> <span class="tok-s">"кроссовки красные"</span><span class="tok-p">,</span> "fields"<span class="tok-p">:</span> <span class="tok-p">[</span><span class="tok-s">"title^3"</span><span class="tok-p">,</span> <span class="tok-s">"description"</span><span class="tok-p">]</span> <span class="tok-p">}</span>
+      <span class="tok-p">},</span>
+      "filter"<span class="tok-p">:</span> <span class="tok-p">[</span>
+        <span class="tok-p">{</span> "term"<span class="tok-p">:</span> <span class="tok-p">{</span> "in_stock"<span class="tok-p">:</span> <span class="tok-k">true</span> <span class="tok-p">}</span> <span class="tok-p">},</span>
+        <span class="tok-p">{</span> "range"<span class="tok-p">:</span> <span class="tok-p">{</span> "price"<span class="tok-p">:</span> <span class="tok-p">{</span> "lte"<span class="tok-p">:</span> <span class="tok-n">10000</span> <span class="tok-p">}</span> <span class="tok-p">}</span> <span class="tok-p">}</span>
+      <span class="tok-p">],</span>
+      "should"<span class="tok-p">:</span> <span class="tok-p">[</span>
+        <span class="tok-p">{</span> "term"<span class="tok-p">:</span> <span class="tok-p">{</span> "brand"<span class="tok-p">:</span> <span class="tok-p">{</span> "value"<span class="tok-p">:</span> <span class="tok-s">"nike"</span><span class="tok-p">,</span> "boost"<span class="tok-p">:</span> <span class="tok-n">2.0</span> <span class="tok-p">}</span> <span class="tok-p">}</span> <span class="tok-p">}</span>
+      <span class="tok-p">]</span>
+    <span class="tok-p">}</span>
+  <span class="tok-p">},</span>
+  "size"<span class="tok-p">:</span> <span class="tok-n">10</span>
+<span class="tok-p">}</span>
+</code></pre></div>
+<p>Поля <code>title</code>, <code>description</code> (text), <code>brand</code> (keyword), <code>in_stock</code> (boolean), <code>price</code> (число) — предполагаемая схема каталога.</p>
+<h2 id="векторный-поиск-внутри-движка">Векторный поиск внутри движка</h2>
+<p>Elasticsearch хранит векторы в поле <code>dense_vector</code>; по документации кроме алгоритма HNSW (параметры <code>m</code> — число соседей, по умолчанию 16, и <code>ef_construction</code>, по умолчанию 100; смысл см. в <a href="/edufamcs-demo/handbook/retrieval/vektornye-indeksy/" rel="noopener noreferrer nofollow">статье про индексы</a>) доступна квантизация <code>int8_hnsw</code>, <code>int4_hnsw</code>, <code>bbq_hnsw</code> (экономия памяти 4×, 8× и 32× соответственно ценой точности; исходные float-векторы остаются на диске для переранжирования). В OpenSearch векторное поле называется <code>knn_vector</code>, а в настройках индекса нужен <code>"knn": true</code>; метод (<code>hnsw</code>), движок (<code>faiss</code>) и параметры <code>m</code>, <code>ef_construction</code> задаются в блоке <code>method</code>.</p>
+<p><strong>Фильтры и граф.</strong> Фильтр после поиска ближайших соседей (post-filtering) может вернуть меньше <span class="tex">k</span> результатов, а в худшем случае — ни одного: ANN нашёл 10 ближайших, а фильтр отсёк почти все. <strong>Pre-filtering</strong> — фильтр применяется во время обхода графа — гарантирует <span class="tex">k</span> подходящих документов, но селективный фильтр замедляет обход. В Elasticsearch фильтр внутри <code>knn</code> (опция, запрос или ретривер) работает как pre-filter, а фильтр рядом с <code>knn</code> в <code>bool</code> — уже после:</p>
+<div class="code"><div class="code-head"><span class="lang">json</span></div><pre><code>POST image<span class="tok-n">-</span>i<span class="tok-k">n</span>dex/_search
+<span class="tok-p">{</span>
+  "knn"<span class="tok-p">:</span> <span class="tok-p">{</span>
+    "field"<span class="tok-p">:</span> <span class="tok-s">"image-vector"</span><span class="tok-p">,</span>
+    "query_vector"<span class="tok-p">:</span> <span class="tok-p">[</span><span class="tok-n">54</span><span class="tok-p">,</span> <span class="tok-n">10</span><span class="tok-p">,</span> <span class="tok-n">-2</span><span class="tok-p">],</span>
+    "k"<span class="tok-p">:</span> <span class="tok-n">5</span><span class="tok-p">,</span>
+    "num_candidates"<span class="tok-p">:</span> <span class="tok-n">50</span><span class="tok-p">,</span>
+    "filter"<span class="tok-p">:</span> <span class="tok-p">{</span> "term"<span class="tok-p">:</span> <span class="tok-p">{</span> "file-type"<span class="tok-p">:</span> <span class="tok-s">"png"</span> <span class="tok-p">}</span> <span class="tok-p">}</span>
+  <span class="tok-p">}</span>
+<span class="tok-p">}</span>
+</code></pre></div>
+<p><strong>Гибридный запрос.</strong> Лексический запрос и kNN объединяют ретривером <code>rrf</code> (формула RRF — в <a href="/edufamcs-demo/handbook/retrieval/plotnyj-i-gibridnyj-poisk/" rel="noopener noreferrer nofollow">статье про гибридный поиск</a>). На самостоятельной установке Elasticsearch RRF-ретривер может требовать платной подписки — проверьте страницу подписок Elastic. Константа RRF у движков разная: в Elasticsearch <code>rank_constant</code> по умолчанию 60, в Qdrant <code>k</code> по умолчанию 2 (задаётся явно: <code>"query": {"rrf": {"k": 60}}</code>, с v1.16). Форма запроса из документации Elasticsearch:</p>
+<div class="code"><div class="code-head"><span class="lang">json</span></div><pre><code>POST image<span class="tok-n">-</span>i<span class="tok-k">n</span>dex/_search
+<span class="tok-p">{</span>
+  "retriever"<span class="tok-p">:</span> <span class="tok-p">{</span>
+    "rrf"<span class="tok-p">:</span> <span class="tok-p">{</span>
+      "retrievers"<span class="tok-p">:</span> <span class="tok-p">[</span>
+        <span class="tok-p">{</span> "standard"<span class="tok-p">:</span> <span class="tok-p">{</span> "query"<span class="tok-p">:</span> <span class="tok-p">{</span> "match"<span class="tok-p">:</span> <span class="tok-p">{</span> "title"<span class="tok-p">:</span> <span class="tok-s">"mountain lake"</span> <span class="tok-p">}</span> <span class="tok-p">}</span> <span class="tok-p">}</span> <span class="tok-p">},</span>
+        <span class="tok-p">{</span> "knn"<span class="tok-p">:</span> <span class="tok-p">{</span> "field"<span class="tok-p">:</span> <span class="tok-s">"image-vector"</span><span class="tok-p">,</span> "query_vector"<span class="tok-p">:</span> <span class="tok-p">[</span><span class="tok-n">54</span><span class="tok-p">,</span> <span class="tok-n">10</span><span class="tok-p">,</span> <span class="tok-n">-2</span><span class="tok-p">],</span> "k"<span class="tok-p">:</span> <span class="tok-n">50</span><span class="tok-p">,</span> "num_candidates"<span class="tok-p">:</span> <span class="tok-n">100</span> <span class="tok-p">}</span> <span class="tok-p">}</span>
+      <span class="tok-p">],</span>
+      "rank_window_size"<span class="tok-p">:</span> <span class="tok-n">50</span>
+    <span class="tok-p">}</span>
+  <span class="tok-p">},</span>
+  "size"<span class="tok-p">:</span> <span class="tok-n">10</span>
+<span class="tok-p">}</span>
+</code></pre></div>
+<p>Документация отдельно предупреждает: оценки BM25 и векторного сходства лежат в несопоставимых шкалах, поэтому слияние по рангам (или с нормировкой через <code>linear</code>-ретривер) надёжнее, чем сложение сырых скоров.</p>
+<h2 id="переранжирование">Переранжирование</h2>
+<p>Первая стадия движка даёт сотни кандидатов, дальше работает дорогая модель. В Elasticsearch есть <code>rescore</code> с <code>window_size</code>: он переоценивает только верх выдачи, в числе вариантов — <code>learning_to_rank</code> с готовой LTR-моделью; в OpenSearch для этого есть плагин LTR. Cross-encoder обычно вызывают вне движка, отдельным сервисом, на топ-50–200.</p>
+<h2 id="выбор-движка">Выбор движка</h2>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th></th>
+<th>Elasticsearch / OpenSearch</th>
+<th>Qdrant</th>
+<th>Vespa</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Основа</td>
+<td>Lucene; OpenSearch — ответвление Elasticsearch</td>
+<td>специализированная векторная БД</td>
+<td>самостоятельный движок поиска и ранжирования</td>
+</tr>
+<tr>
+<td>Полнотекстовый поиск</td>
+<td>зрелый: анализаторы, BM25, агрегации</td>
+<td>есть (BM25-запрос по текстовому индексу, разреженные векторы), анализа как у Lucene нет</td>
+<td>зрелый</td>
+</tr>
+<tr>
+<td>Векторы</td>
+<td>HNSW в Lucene; квантизация</td>
+<td>HNSW с фильтрацией по payload, квантизация</td>
+<td>HNSW, тензоры</td>
+</tr>
+<tr>
+<td>Ранжирование</td>
+<td><code>function_score</code>, <code>rescore</code>, LTR</td>
+<td>слияние <code>prefetch</code> + <code>rrf</code>/<code>dbsf</code>, формулы над скором и payload (<code>formula</code>)</td>
+<td>rank profiles: выражения над тензорами, несколько фаз ранжирования</td>
+</tr>
+<tr>
+<td>Модель данных</td>
+<td>JSON-документы, маппинги</td>
+<td>точки: вектор + payload</td>
+<td>схема с тензорами и атрибутами</td>
+</tr>
+<tr>
+<td>Фильтры</td>
+<td>кэшируемые фильтры</td>
+<td>индексы по payload</td>
+<td>атрибуты и операторы в языке запросов</td>
+</tr>
+<tr>
+<td>Горизонтальное масштабирование</td>
+<td>шарды и реплики</td>
+<td>шарды и реплики коллекции</td>
+<td>кластер контент-узлов</td>
+</tr>
+</tbody>
+</table></div>
+<p>Это таблица фактов, не рейтинг: у каждого варианта своя цена эксплуатации. Типичные критерии выбора: (1) в команде уже есть Elasticsearch/OpenSearch и корпус — тексты с фильтрами и агрегациями, а векторы — добавка; (2) векторы и фильтры по метаданным — основной сценарий, а богатый текстовый анализ не нужен; (3) ранжирование нужно строить собственными выражениями над тензорами в несколько фаз внутри движка. Для Vespa в документации минимальный пример выглядит так: поле <code>tensor&lt;float&gt;(d[3])</code> с <code>distance-metric</code>, профиль ранжирования с <code>closeness(field, d_vector)</code> и запрос <code>nearestNeighbor(d_vector, q_vector)</code> с <code>targetHits</code>.</p>
+<p>Qdrant: запрос с фильтром по payload (форма из документации, <code>POST /collections/{collection_name}/points/query</code>):</p>
+<div class="code"><div class="code-head"><span class="lang">json</span></div><pre><code><span class="tok-p">{</span>
+  "query"<span class="tok-p">:</span> <span class="tok-p">[</span><span class="tok-n">0.2</span><span class="tok-p">,</span> <span class="tok-n">0.1</span><span class="tok-p">,</span> <span class="tok-n">0.9</span><span class="tok-p">,</span> <span class="tok-n">0.79</span><span class="tok-p">],</span>
+  "filter"<span class="tok-p">:</span> <span class="tok-p">{</span> "must"<span class="tok-p">:</span> <span class="tok-p">[</span> <span class="tok-p">{</span> "key"<span class="tok-p">:</span> <span class="tok-s">"city"</span><span class="tok-p">,</span> "match"<span class="tok-p">:</span> <span class="tok-p">{</span> "value"<span class="tok-p">:</span> <span class="tok-s">"London"</span> <span class="tok-p">}</span> <span class="tok-p">}</span> <span class="tok-p">]</span> <span class="tok-p">},</span>
+  "params"<span class="tok-p">:</span> <span class="tok-p">{</span> "hnsw_ef"<span class="tok-p">:</span> <span class="tok-n">128</span><span class="tok-p">,</span> "exact"<span class="tok-p">:</span> <span class="tok-k">false</span> <span class="tok-p">},</span>
+  "limit"<span class="tok-p">:</span> <span class="tok-n">3</span>
+<span class="tok-p">}</span>
+</code></pre></div>
+<p>Документация рекомендует создавать <strong>payload-индексы</strong> для полей, по которым идёт фильтрация, — лучше до загрузки данных. Гибрид в Qdrant задаётся блоком <code>prefetch</code> (по подзапросу на каждый сигнал) и <code>"query": { "rrf": {} }</code>.</p>
+<h2 id="эксплуатация">Эксплуатация</h2>
+<p><strong>Переиндексация без простоя.</strong> Не пишите в индекс по имени, который меняется. Клиенты ходят в <strong>alias</strong> <code>products</code>, он указывает на <code>products_v1</code>; новый индекс <code>products_v2</code> строят параллельно, затем одним атомарным запросом перекидывают alias. По документации, в одном запросе действия <code>remove</code> и <code>add</code> выполняются атомарно, и alias не бывает без индекса или с двумя сразу:</p>
+<div class="code"><div class="code-head"><span class="lang">json</span></div><pre><code>POST _aliases
+<span class="tok-p">{</span>
+  "actions"<span class="tok-p">:</span> <span class="tok-p">[</span>
+    <span class="tok-p">{</span> "remove"<span class="tok-p">:</span> <span class="tok-p">{</span> "index"<span class="tok-p">:</span> <span class="tok-s">"products_v1"</span><span class="tok-p">,</span> "alias"<span class="tok-p">:</span> <span class="tok-s">"products"</span> <span class="tok-p">}</span> <span class="tok-p">},</span>
+    <span class="tok-p">{</span> "add"<span class="tok-p">:</span>    <span class="tok-p">{</span> "index"<span class="tok-p">:</span> <span class="tok-s">"products_v2"</span><span class="tok-p">,</span> "alias"<span class="tok-p">:</span> <span class="tok-s">"products"</span> <span class="tok-p">}</span> <span class="tok-p">}</span>
+  <span class="tok-p">]</span>
+<span class="tok-p">}</span>
+</code></pre></div>
+<p><strong>Мониторинг.</strong> Следите за перцентилями задержки (p50, p95, p99), а не средним: хвост определяет худший шард, и он же растёт при слиянии сегментов, холодном кэше и переполненной памяти. Отдельно — частота пустых выдач, доля timeout и заполнение кэша страниц.</p>
+<p><strong>Оценка памяти для HNSW.</strong> Руководство Elasticsearch даёт формулу: оперативная память вне кучи Java ≈ <span class="tex">N\cdot b_{\text{vec}} + N\cdot 4m</span> (это оценка документации Elasticsearch; FAISS считает граф как <span class="tex">8M</span> байт на вектор, потому что на слое 0 до <span class="tex">2M</span> соседей — см. <a href="/edufamcs-demo/handbook/retrieval/vektornye-indeksy/" rel="noopener noreferrer nofollow">векторные индексы</a>), где <span class="tex">b_{\text{vec}}</span> — байт на вектор в используемом представлении, <span class="tex">4m</span> байт на граф. Учтите, что для float-векторов квантизация включена по умолчанию: в 9.0 — <code>int8_hnsw</code>, с 9.1 — <code>bbq_hnsw</code> при <code>dims</code> ≥ 384, с 9.4 — <code>bbq_disk</code> (если позволяет лицензия); полноточный HNSW нужно явно задать <code>"index_options": {"type": "hnsw"}</code>. Для <span class="tex">N=10^7</span>, <span class="tex">d=768</span>, <span class="tex">m=16</span>: граф <span class="tex">10^7\cdot 4\cdot 16 = 0{,}64</span> ГБ. Векторы float32: <span class="tex">768\cdot4=3072</span> Б, то есть <span class="tex">30{,}72</span> ГБ; итого <span class="tex">\approx 31{,}4</span> ГБ. С квантизацией <code>int8</code> по формуле документации <span class="tex">d+16=784</span> Б на вектор — <span class="tex">7{,}84</span> ГБ, итого <span class="tex">\approx 8{,}5</span> ГБ; с <code>bbq</code> <span class="tex">\lceil d/64\rceil\cdot 8+14=110</span> Б — <span class="tex">1{,}1</span> ГБ, итого <span class="tex">\approx 1{,}7</span> ГБ. Исходные float-векторы при квантизации остаются на диске и в RAM не входят, но диска нужно больше. Это нижняя граница: добавьте реплики (память умножается на их число), кучу, кэш ОС для остальных полей и запас. Если рабочий набор не помещается в кэш ОС, запросы уходят на диск, и задержка резко растёт.</p>
+<h2 id="ловушки">Ловушки</h2>
+<ul>
+<li>Разные анализаторы при индексации и запросе — тихая потеря документов.</li>
+<li>Постфильтрация вместо префильтрации при селективных фильтрах: пустые или короткие выдачи.</li>
+<li><code>from + size</code> в тысячи: используйте <code>search_after</code> + PIT.</li>
+<li>Тип поля нельзя поменять на месте; без alias переиндексация превращается в простой.</li>
+<li>Слишком много мелких шардов: накладные расходы на фазе слияния результатов.</li>
+<li><strong>На собеседовании:</strong> как запрос проходит через шарды и почему дорога глубокая пагинация; чем <code>filter</code> отличается от <code>must</code>; как оценить память под <span class="tex">N</span> векторов с HNSW; зачем alias при переиндексации; когда выбрать векторную БД, а когда полнотекстовый движок с векторами.</li>
+</ul>
+<h2 id="проверь-себя">Проверь себя</h2>
+<details class="callout md details"><summary>Почему поиск в Elasticsearch «почти» реального времени?</summary>
+<p>Новые документы видны только после refresh, который раз в <code>refresh_interval</code> (по умолчанию 1 с) превращает буфер в новый сегмент.</p>
+</details>
+<details class="callout md details"><summary>Почему страница 1000 дороже страницы 1?</summary>
+<p>Каждый шард должен вернуть координатору топ <code>from + size</code> кандидатов, а координатор слить их все; поэтому есть лимит <code>max_result_window</code> и альтернатива <code>search_after</code>.</p>
+</details>
+<details class="callout md details"><summary>Чем pre-filtering отличается от post-filtering в kNN?</summary>
+<p>Pre-filter применяется при обходе графа и гарантирует <span class="tex">k</span> подходящих документов; post-filter отсекает уже найденные <span class="tex">k</span> соседей и может оставить меньше <span class="tex">k</span> или ни одного.</p>
+</details>
+<details class="callout md details"><summary>Как переиндексировать без простоя?</summary>
+<p>Клиенты работают через alias, новый индекс строят параллельно, затем атомарной операцией <code>_aliases</code> переключают alias со старого индекса на новый.</p>
+</details>
+<details class="callout md details"><summary>Сколько RAM нужно HNSW-индексу на $10^7$ векторов $d=768$, $m=16$ без квантизации?</summary>
+<p>Векторы <span class="tex">10^7\cdot3072\approx30{,}7</span> ГБ плюс граф <span class="tex">10^7\cdot4\cdot16=0{,}64</span> ГБ: около 31 ГБ на одну копию данных, без запаса и реплик.</p>
+</details>
+<h2 id="что-почитать">Что почитать</h2>
+<ul>
+<li>Документация Elasticsearch: Boolean query, Multi-match query, Approximate kNN search, Filter approximate kNN results, Optimize approximate kNN search (оценка памяти), Aliases.</li>
+<li>Документация OpenSearch: <code>knn_vector</code> field type.</li>
+<li>Документация Qdrant: Search (points/query), Hybrid queries.</li>
+<li>Документация Vespa: Nearest neighbor search.</li>
+<li>Malkov, Yashunin, <a href="https://arxiv.org/abs/1603.09320" rel="noopener noreferrer nofollow">Efficient and Robust Approximate Nearest Neighbor Search Using HNSW Graphs</a>, IEEE TPAMI, 2018.</li>
+<li>Cormack, Clarke, Büttcher, <em>Reciprocal Rank Fusion outperforms Condorcet and individual Rank Learning Methods</em>, SIGIR 2009.</li>
+</ul>
+</div>
+      
+
+      
+
+      
+      <nav class="pager" aria-label="Соседние статьи">
+        <a href="/edufamcs-demo/handbook/retrieval/obuchenie-embedderov/"><span><svg class="ico sm" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-arrow-left"/></svg>Назад</span>Как обучают эмбеддеры для поиска</a>
+        <a href="/edufamcs-demo/handbook/retrieval/ecommerce-poisk/"><span>Дальше<svg class="ico sm" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-arrow"/></svg></span>Поиск в e-commerce</a>
+      </nav>
+      
+    </article>
+
+    <aside class="hb-toc" aria-label="На этой странице">
+      <a class="l2" href="#жизненный-цикл-индекса">Жизненный цикл индекса</a><a class="l2" href="#анализ-текста">Анализ текста</a><a class="l2" href="#маппинги-и-типы-полей">Маппинги и типы полей</a><a class="l2" href="#шарды-реплики-и-глубокая-пагинация">Шарды, реплики и глубокая пагинация</a><a class="l2" href="#настройка-релевантности">Настройка релевантности</a><a class="l2" href="#векторный-поиск-внутри-движка">Векторный поиск внутри движка</a><a class="l2" href="#переранжирование">Переранжирование</a><a class="l2" href="#выбор-движка">Выбор движка</a><a class="l2" href="#эксплуатация">Эксплуатация</a><a class="l2" href="#ловушки">Ловушки</a><a class="l2" href="#проверь-себя">Проверь себя</a><a class="l2" href="#что-почитать">Что почитать</a>
+    </aside>
+  </div>
+</div>
+
+
+</main>
+
+<footer class="ftr" data-theme="dark">
+  <svg class="sym fern" viewBox="0 0 40.5 65.02" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#fern"/></svg>
+  <div class="container">
+    <div class="ftr-row">
+      <a href="/edufamcs-demo/" aria-label="EDU FAMCS — главная"><img src="/edufamcs-demo/static/brand/logo/logo-edu-dark.svg" alt="EDU FAMCS" width="196" height="40"></a>
+      <ul class="ftr-links">
+        <li><a href="/edufamcs-demo/#courses">Курсы</a></li>
+        <li><a href="/edufamcs-demo/ml/">Машинное обучение</a></li>
+        <li><a href="/edufamcs-demo/handbook/">Хендбук</a></li>
+        <li><a href="/edufamcs-demo/news/">Новости</a></li>
+        <li><a href="/edufamcs-demo/people/">Авторы</a></li>
+        <li><a href="/edufamcs-demo/about/">О&nbsp;нас</a></li>
+        <li><a href="/edufamcs-demo/propose/">Предложить или исправить</a></li>
+        <li><a href="/edufamcs-demo/privacy/">Конфиденциальность</a></li>
+      </ul>
+    </div>
+    <div class="ftr-big" aria-hidden="true">EDU<span class="d">·</span>FAMCS</div>
+    <p class="ftr-copy">© 2026 EDU FAMCS · Минск</p>
+  </div>
+</footer>
+
+<div class="toasts-region" aria-live="polite" id="toasts">
+
+</div>
+
+</body>
+</html>

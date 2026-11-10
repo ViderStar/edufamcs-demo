@@ -1,0 +1,344 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Инженерия и ИИ-ассистенты · EDU FAMCS</title>
+<meta name="description" content="От ноутбука до сервиса: FastAPI, Docker, Grafana — и работа с Claude Code и Codex без потери понимания.">
+<meta name="theme-color" content="#060A16">
+<meta name="robots" content="noindex, nofollow">
+<meta name="htmx-config" content='{"allowEval":false,"includeIndicatorStyles":false,"historyCacheSize":0,"selfRequestsOnly":true}'>
+<meta name="katex-js" content="/edufamcs-demo/static/vendor/katex/katex.min.js">
+<meta name="katex-css" content="/edufamcs-demo/static/vendor/katex/katex.min.css">
+<link rel="icon" href="/edufamcs-demo/static/brand/logo/favicon-16.svg" type="image/svg+xml" sizes="16x16">
+<link rel="icon" href="/edufamcs-demo/static/brand/logo/favicon.svg" type="image/svg+xml" sizes="any">
+<link rel="preload" href="/edufamcs-demo/static/brand/fonts/manrope-cyrillic-400.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/edufamcs-demo/static/brand/fonts/unbounded-cyrillic-800.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="/edufamcs-demo/static/brand/fonts.css">
+<link rel="stylesheet" href="/edufamcs-demo/static/brand/tokens.css">
+<link rel="stylesheet" href="/edufamcs-demo/static/brand/components.css">
+<link rel="stylesheet" href="/edufamcs-demo/static/css/site.css">
+<link rel="stylesheet" href="/edufamcs-demo/static/css/hub.css">
+<link rel="stylesheet" href="/edufamcs-demo/static/css/about.css">
+<link rel="stylesheet" href="/edufamcs-demo/static/courses/courses.css">
+<script src="/edufamcs-demo/static/js/theme.js"></script>
+<script src="/edufamcs-demo/static/vendor/htmx/htmx.min.js" defer></script>
+<script src="/edufamcs-demo/static/vendor/alpine/alpine-csp.min.js" defer></script>
+<script src="/edufamcs-demo/static/js/site.js" defer></script>
+
+</head>
+<body class="" hx-headers='{"X-CSRFToken": "IN1ACcDfzmAKNNaZmh5HpWW9B9fHowfQk0QxSec6A9OjY6prlKjE7PO73imF8gex"}'>
+<a class="skip" href="#main">К содержанию</a>
+<div class="demo-bar" role="note">Демо-версия для отзывов: вход, запись на курсы и формы здесь не работают.</div>
+
+<header class="hdr">
+  <div class="container">
+    <a class="brand" href="/edufamcs-demo/" aria-label="EDU FAMCS — главная">
+      <span class="full"><img class="only-light" src="/edufamcs-demo/static/brand/logo/logo-edu-light.svg" alt="EDU FAMCS" width="196" height="40"><img class="only-dark" src="/edufamcs-demo/static/brand/logo/logo-edu-dark.svg" alt="EDU FAMCS" width="196" height="40"></span>
+      <span class="short"><img class="only-light" src="/edufamcs-demo/static/brand/logo/logo-edu-light.svg" alt="EDU FAMCS" height="30"><img class="only-dark" src="/edufamcs-demo/static/brand/logo/logo-edu-dark.svg" alt="EDU FAMCS" height="30"></span>
+    </a>
+    <nav class="nav" id="main-nav" aria-label="Основная навигация">
+      <a href="/edufamcs-demo/#courses">Курсы</a>
+      <a href="/edufamcs-demo/ml/" >Машинное обучение</a>
+      
+      <a href="/edufamcs-demo/handbook/" >Хендбук</a>
+      <a href="/edufamcs-demo/news/" >Новости</a>
+      <a href="/edufamcs-demo/people/" >Авторы</a>
+      <a href="/edufamcs-demo/about/" >О&nbsp;нас</a>
+    </nav>
+    <div class="hdr-actions">
+      
+      <a class="btn btn-outline btn-login" href="/edufamcs-demo/accounts/login/?next=/courses/engineering/">Войти</a>
+      
+      <button class="icon-btn menu-btn" type="button" aria-label="Меню" aria-expanded="false" aria-controls="main-nav"><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-menu"/></svg></button>
+    </div>
+  </div>
+</header>
+
+<main id="main">
+
+
+<div class="container hero-wrap">
+  <section class="chero" data-theme="dark" aria-labelledby="course-t">
+    <svg class="sym hero-fern" viewBox="0 0 40.5 65.02" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#fern"/></svg>
+    <div>
+      <h1 id="course-t" class="display-xl">Инженерия и ИИ-ассистенты</h1>
+      <p class="lead">От ноутбука до сервиса: FastAPI, Docker, Grafana — и работа с Claude Code и Codex без потери понимания.</p>
+      
+      <div class="hero-cta">
+        
+          <a class="btn btn-primary btn-lg" href="/edufamcs-demo/accounts/login/?next=/courses/engineering/">Войти и&nbsp;записаться<svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-arrow"/></svg></a>
+        
+      </div>
+      <div class="stats">
+        <div class="stat"><b>2</b><span>модуля</span></div>
+        <div class="stat"><b>20</b><span>уроков</span></div>
+        
+      </div>
+    </div>
+    <div class="chero-art" aria-hidden="true">
+      <div class="ring r3"></div><div class="ring"></div><div class="ring r2"></div>
+      <div class="seal-glow"></div><img class="seal" src="/edufamcs-demo/static/brand/logo/raccoon-seal-blue.svg" alt="">
+    </div>
+  </section>
+</div>
+
+
+<div class="container page pt0">
+  <div class="mods">
+    
+    
+    <section class="mod s-agents" id="m-engineering" aria-labelledby="mt-24">
+      <div class="mod-h">
+        <div class="mod-art"><span class="idx">01</span><svg class="art" viewBox="0 0 220 120" aria-hidden="true"><g stroke="currentColor" stroke-width="1.5" fill="none" opacity=".45"><path d="M40 60 L100 26 L170 40 M40 60 L100 94 L170 82 M100 26 L100 94 M170 40 L200 60 L170 82"/></g><g fill="currentColor"><circle cx="100" cy="26" r="9" opacity=".25"/><circle cx="100" cy="94" r="9" opacity=".25"/><circle cx="170" cy="40" r="9"/><circle cx="170" cy="82" r="9" opacity=".25"/></g><rect x="18" y="44" width="44" height="32" rx="10" fill="currentColor"/><path d="M30 60h20M40 52v16" stroke="var(--surface)" stroke-width="2" stroke-linecap="round" opacity=".9"/><circle cx="200" cy="60" r="10" fill="var(--accent)"/></svg>
+</div>
+        <div class="mod-b">
+          <h2 class="h3" id="mt-24">Инженерия: от ноутбука до сервиса</h2>
+          <div class="row">
+            
+            <span class="badge">10&nbsp;уроков</span>
+            
+          </div>
+        </div>
+        
+      </div>
+      <ol class="lsns">
+        
+        <li>
+          <a class="lsn" href="/edufamcs-demo/courses/engineering/engineering/iz-noutbuka-v-proekt/">
+            <span class="mk">1</span>
+            
+            <span class="t">Из ноутбука в проект: модули, конфиги, тесты</span>
+            
+          </a>
+        </li>
+        
+        <li>
+          <a class="lsn" href="/edufamcs-demo/courses/engineering/engineering/http-i-fastapi/">
+            <span class="mk">2</span>
+            
+            <span class="t">HTTP и API: сервис с моделью на FastAPI</span>
+            
+          </a>
+        </li>
+        
+        <li>
+          <a class="lsn" href="/edufamcs-demo/courses/engineering/engineering/sql-i-postgres/">
+            <span class="mk">3</span>
+            
+            <span class="t">SQL и Postgres: минимум для ML-инженера</span>
+            
+          </a>
+        </li>
+        
+        <li>
+          <a class="lsn" href="/edufamcs-demo/courses/engineering/engineering/docker/">
+            <span class="mk">4</span>
+            
+            <span class="t">Docker: образы, контейнеры, Dockerfile для Python</span>
+            
+          </a>
+        </li>
+        
+        <li>
+          <a class="lsn" href="/edufamcs-demo/courses/engineering/engineering/docker-compose/">
+            <span class="mk">5</span>
+            
+            <span class="t">Docker Compose: сервис, база и секреты</span>
+            
+          </a>
+        </li>
+        
+        <li>
+          <a class="lsn" href="/edufamcs-demo/courses/engineering/engineering/gde-zapuskat-proekt/">
+            <span class="mk">6</span>
+            
+            <span class="t">Где запускать свой проект: ноутбук дома, VPS, облака</span>
+            
+          </a>
+        </li>
+        
+        <li>
+          <a class="lsn" href="/edufamcs-demo/courses/engineering/engineering/ci-github-actions/">
+            <span class="mk">7</span>
+            
+            <span class="t">CI: тесты и линтер на каждый коммит</span>
+            
+          </a>
+        </li>
+        
+        <li>
+          <a class="lsn" href="/edufamcs-demo/courses/engineering/engineering/logi-i-metriki/">
+            <span class="mk">8</span>
+            
+            <span class="t">Логи и метрики: Prometheus</span>
+            
+          </a>
+        </li>
+        
+        <li>
+          <a class="lsn" href="/edufamcs-demo/courses/engineering/engineering/grafana/">
+            <span class="mk">9</span>
+            
+            <span class="t">Grafana: дашборды и алерты</span>
+            
+          </a>
+        </li>
+        
+        <li>
+          <a class="lsn" href="/edufamcs-demo/courses/engineering/engineering/monitoring-modelej/">
+            <span class="mk">10</span>
+            
+            <span class="t">Мониторинг ML-модели: дрейф, качество, деградация</span>
+            
+          </a>
+        </li>
+        
+      </ol>
+    </section>
+    
+    
+    
+    <section class="mod s-agents" id="m-ai-tools" aria-labelledby="mt-25">
+      <div class="mod-h">
+        <div class="mod-art"><span class="idx">02</span><svg class="art" viewBox="0 0 220 120" aria-hidden="true"><g stroke="currentColor" stroke-width="1.5" fill="none" opacity=".45"><path d="M40 60 L100 26 L170 40 M40 60 L100 94 L170 82 M100 26 L100 94 M170 40 L200 60 L170 82"/></g><g fill="currentColor"><circle cx="100" cy="26" r="9" opacity=".25"/><circle cx="100" cy="94" r="9" opacity=".25"/><circle cx="170" cy="40" r="9"/><circle cx="170" cy="82" r="9" opacity=".25"/></g><rect x="18" y="44" width="44" height="32" rx="10" fill="currentColor"/><path d="M30 60h20M40 52v16" stroke="var(--surface)" stroke-width="2" stroke-linecap="round" opacity=".9"/><circle cx="200" cy="60" r="10" fill="var(--accent)"/></svg>
+</div>
+        <div class="mod-b">
+          <h2 class="h3" id="mt-25">ИИ-ассистенты для кода</h2>
+          <div class="row">
+            
+            <span class="badge">10&nbsp;уроков</span>
+            
+          </div>
+        </div>
+        
+      </div>
+      <ol class="lsns">
+        
+        <li>
+          <a class="lsn" href="/edufamcs-demo/courses/engineering/ai-tools/kak-ustroen-kodovyj-agent/">
+            <span class="mk">1</span>
+            
+            <span class="t">Как устроен кодовый агент: модель, инструменты, контекст</span>
+            
+          </a>
+        </li>
+        
+        <li>
+          <a class="lsn" href="/edufamcs-demo/courses/engineering/ai-tools/claude-code/">
+            <span class="mk">2</span>
+            
+            <span class="t">Claude Code: установка, режимы, CLAUDE.md</span>
+            
+          </a>
+        </li>
+        
+        <li>
+          <a class="lsn" href="/edufamcs-demo/courses/engineering/ai-tools/codex/">
+            <span class="mk">3</span>
+            
+            <span class="t">Codex CLI: AGENTS.md, песочница, согласования</span>
+            
+          </a>
+        </li>
+        
+        <li>
+          <a class="lsn" href="/edufamcs-demo/courses/engineering/ai-tools/postanovka-zadach-agentu/">
+            <span class="mk">4</span>
+            
+            <span class="t">Как ставить задачу агенту</span>
+            
+          </a>
+        </li>
+        
+        <li>
+          <a class="lsn" href="/edufamcs-demo/courses/engineering/ai-tools/skills/">
+            <span class="mk">5</span>
+            
+            <span class="t">Скиллы: SKILL.md и как написать свой</span>
+            
+          </a>
+        </li>
+        
+        <li>
+          <a class="lsn" href="/edufamcs-demo/courses/engineering/ai-tools/mcp/">
+            <span class="mk">6</span>
+            
+            <span class="t">MCP: подключаем инструменты и данные</span>
+            
+          </a>
+        </li>
+        
+        <li>
+          <a class="lsn" href="/edufamcs-demo/courses/engineering/ai-tools/subagenty-huki-komandy/">
+            <span class="mk">7</span>
+            
+            <span class="t">Субагенты, хуки и слэш-команды</span>
+            
+          </a>
+        </li>
+        
+        <li>
+          <a class="lsn" href="/edufamcs-demo/courses/engineering/ai-tools/agent-v-ml-proekte/">
+            <span class="mk">8</span>
+            
+            <span class="t">Агент в ML-проекте: ноутбуки, эксперименты, ревью</span>
+            
+          </a>
+        </li>
+        
+        <li>
+          <a class="lsn" href="/edufamcs-demo/courses/engineering/ai-tools/bezopasnost-agentov/">
+            <span class="mk">9</span>
+            
+            <span class="t">Безопасность: секреты, права, prompt injection</span>
+            
+          </a>
+        </li>
+        
+        <li>
+          <a class="lsn" href="/edufamcs-demo/courses/engineering/ai-tools/vajb-koding-i-zashchita/">
+            <span class="mk">10</span>
+            
+            <span class="t">Вайб-кодинг и защита проекта: как понимать код, который писали не вы</span>
+            
+          </a>
+        </li>
+        
+      </ol>
+    </section>
+    
+    
+  </div>
+</div>
+
+
+</main>
+
+<footer class="ftr" data-theme="dark">
+  <svg class="sym fern" viewBox="0 0 40.5 65.02" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#fern"/></svg>
+  <div class="container">
+    <div class="ftr-row">
+      <a href="/edufamcs-demo/" aria-label="EDU FAMCS — главная"><img src="/edufamcs-demo/static/brand/logo/logo-edu-dark.svg" alt="EDU FAMCS" width="196" height="40"></a>
+      <ul class="ftr-links">
+        <li><a href="/edufamcs-demo/#courses">Курсы</a></li>
+        <li><a href="/edufamcs-demo/ml/">Машинное обучение</a></li>
+        <li><a href="/edufamcs-demo/handbook/">Хендбук</a></li>
+        <li><a href="/edufamcs-demo/news/">Новости</a></li>
+        <li><a href="/edufamcs-demo/people/">Авторы</a></li>
+        <li><a href="/edufamcs-demo/about/">О&nbsp;нас</a></li>
+        <li><a href="/edufamcs-demo/propose/">Предложить или исправить</a></li>
+        <li><a href="/edufamcs-demo/privacy/">Конфиденциальность</a></li>
+      </ul>
+    </div>
+    <div class="ftr-big" aria-hidden="true">EDU<span class="d">·</span>FAMCS</div>
+    <p class="ftr-copy">© 2026 EDU FAMCS · Минск</p>
+  </div>
+</footer>
+
+<div class="toasts-region" aria-live="polite" id="toasts">
+
+</div>
+
+</body>
+</html>

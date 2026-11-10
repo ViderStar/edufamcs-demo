@@ -27,7 +27,7 @@
 <script src="/edufamcs-demo/static/js/site.js" defer></script>
 <script src="/edufamcs-demo/static/handbook/handbook.js" defer></script>
 </head>
-<body class="" hx-headers='{"X-CSRFToken": "8hvfZllCnLD7WO1zy4FicsLHST7Yc9GdUnwCT8DjyYTlBnXPLtyntUT2ogJdhUrc"}'>
+<body class="" hx-headers='{"X-CSRFToken": "Pe1YKSVpEiUxmTzisuS2ywxugyejC6bVrrQV0UugF586xcOKrX6ZgppsIHlhmQaC"}'>
 <a class="skip" href="#main">К содержанию</a>
 <div class="demo-bar" role="note">Демо-версия для отзывов: вход, запись на курсы и формы здесь не работают.</div>
 
@@ -60,6 +60,7 @@
 
 
 <div class="container hb-page s-recsys">
+  <div class="hb-readbar" aria-hidden="true"><i></i></div>
   <div class="hb">
     <aside class="hb-nav" aria-label="Статьи раздела">
       
@@ -88,9 +89,9 @@
       <div class="hb-meta">
         
         
-        <span><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-clock"/></svg>13&nbsp;мин</span>
+        <span><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-clock"/></svg>15&nbsp;мин</span>
         <span class="hb-authors"><span class="avatar sm" title="Артем Лебедевич">АЛ</span>Артем Лебедевич</span>
-        <span><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-edit"/></svg>9 ноября 2026</span>
+        <span><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-edit"/></svg>10 ноября 2026</span>
         
         
       </div>
@@ -98,7 +99,7 @@
       
       <details class="hb-mtoc">
         <summary><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-list"/></svg>Содержание<svg class="ico sm" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-chev-down"/></svg></summary>
-        <a class="l2" href="#неявные-данные-как-задача-ранжирования">Неявные данные как задача ранжирования</a><a class="l2" href="#bpr-rendle-et-al-2009">BPR (Rendle et al., 2009)</a><a class="l2" href="#warp-weston-bengio-usunier-2011">WARP (Weston, Bengio, Usunier, 2011)</a><a class="l2" href="#негативы-откуда-их-брать">Негативы: откуда их брать</a><a class="l2" href="#возвращение-ials-и-спор-с-ncf">Возвращение iALS и спор с NCF</a><a class="l2" href="#эмбеддинги-из-сессий">Эмбеддинги из сессий</a><a class="l2" href="#код-bpr-и-warp-против-als">Код: BPR и WARP против ALS</a><a class="l2" href="#что-ломается-на-практике">Что ломается на практике</a><a class="l2" href="#что-почитать">Что почитать</a>
+        <a class="l2" href="#неявные-данные-как-задача-ранжирования">Неявные данные как задача ранжирования</a><a class="l2" href="#bpr-rendle-et-al-2009">BPR (Rendle et al., 2009)</a><a class="l2" href="#warp-weston-bengio-usunier-2011">WARP (Weston, Bengio, Usunier, 2011)</a><a class="l2" href="#негативы-откуда-их-брать">Негативы: откуда их брать</a><a class="l2" href="#возвращение-ials-и-спор-с-ncf">Возвращение iALS и спор с NCF</a><a class="l2" href="#эмбеддинги-из-сессий">Эмбеддинги из сессий</a><a class="l2" href="#код-bpr-и-warp-против-als">Код: BPR и WARP против ALS</a><a class="l2" href="#что-ломается-на-практике">Что ломается на практике</a><a class="l2" href="#проверь-себя">Проверь себя</a><a class="l2" href="#что-почитать">Что почитать</a>
       </details>
       
 
@@ -113,6 +114,13 @@
 <div class="tex tex-block">\Theta \leftarrow \Theta + \eta\Bigl(\sigma(-\hat x_{uij})\,\frac{\partial \hat x_{uij}}{\partial\Theta} - \lambda\Theta\Bigr), \qquad
 \sigma(-\hat x_{uij}) = 1-\sigma(\hat x_{uij})</div>
 <p>Множитель <span class="tex">\sigma(-\hat x_{uij})</span> большой там, где пара упорядочена неверно, и ≈0 там, где модель уже права — обучение концентрируется на ошибках. Авторы предлагают обход тренировочных данных с повторным сэмплированием (bootstrap), а не по пользователям подряд: иначе градиенты коррелированы.</p>
+<p><strong>Один шаг на числах.</strong> Пусть <span class="tex">f=2</span>, <span class="tex">x_u=(0{,}6;\,0{,}2)</span>, положительный <span class="tex">y_i=(0{,}5;\,0{,}1)</span>, негативный <span class="tex">y_j=(0{,}7;\,0{,}4)</span>, <span class="tex">\eta=0{,}1</span>, <span class="tex">\lambda=0{,}01</span>. Скоры: <span class="tex">\hat x_{ui}=0{,}32</span>, <span class="tex">\hat x_{uj}=0{,}50</span>, значит <span class="tex">\hat x_{uij}=-0{,}18</span> — пара упорядочена неверно, и <span class="tex">\sigma(-\hat x_{uij})=\sigma(0{,}18)\approx0{,}545</span> (при верном порядке с большим запасом множитель был бы близок к нулю). Шаг:</p>
+<div class="tex tex-block">\begin{aligned}
+x_u &amp;\leftarrow x_u+\eta\bigl(0{,}545\,(y_i-y_j)-\lambda x_u\bigr)\approx(0{,}589;\,0{,}184),\\
+y_i &amp;\leftarrow y_i+\eta\bigl(0{,}545\,x_u-\lambda y_i\bigr)\approx(0{,}532;\,0{,}111),\\
+y_j &amp;\leftarrow y_j+\eta\bigl(-0{,}545\,x_u-\lambda y_j\bigr)\approx(0{,}667;\,0{,}389).
+\end{aligned}</div>
+<p>Положительный объект сдвигается к пользователю, негативный — от него, а пользователь — в сторону <span class="tex">y_i-y_j</span>. После шага <span class="tex">\hat x_{uij}\approx-0{,}130</span>: разность выросла, но пара ещё не упорядочена, и следующие шаги продолжат (множитель теперь <span class="tex">\approx0{,}533</span>).</p>
 <p><strong>Слабость BPR:</strong> все ошибки весят одинаково, а в топ-10 важны только верхние позиции. Если среди миллиона негативов случайный проиграл — это мелочь; если не-релевантное стоит на позиции 3 — это плохо. Нужно взвешивание по рангу.</p>
 <h2 id="warp-weston-bengio-usunier-2011">WARP (Weston, Bengio, Usunier, 2011)</h2>
 <p>WSABIE (<em>Web Scale Annotation by Image Embedding</em>) ввела потерю WARP — Weighted Approximate-Rank Pairwise. Идея: штрафовать нарушение пары тем сильнее, чем ниже в списке оказался положительный объект, но так, чтобы каждая следующая позиция стоила всё меньше. Для положительного <span class="tex">i</span> с рангом <span class="tex">\mathrm{rank}_u(i)</span> (число объектов, которых модель ставит выше при заданном запасе <span class="tex">m</span>) потеря —</p>
@@ -215,8 +223,26 @@ ub<span class="tok-p">,</span> U <span class="tok-p">=</span> warp<span class="t
 <li><strong>Скорость.</strong> BPR/WARP — SGD по триплетам: требуют много эпох, учат медленнее ALS на CPU; на GPU сэмплирование легко батчуется.</li>
 <li><strong>Регуляризация по частоте.</strong> В SGD-моделях (BPR, WARP) штраф <span class="tex">\lambda\Theta</span> применяется при каждом обновлении, поэтому частые объекты регуляризуются сильнее сами собой. В ALS штраф одинаков для всех, и частотное масштабирование надо включать явно; у Rendle et al. (2022) оно заметно помогает, особенно при больших размерностях.</li>
 <li><strong>Реализации различаются.</strong> В <code>implicit</code> смещение объекта зашито в факторы (дополнительный столбец), а в LightFM хранится отдельно — при ручном скоринге его легко потерять.</li>
-<li>Типичные вопросы на собеседованиях: «почему BPR связан с AUC?», «чем WARP отличается от BPR?», «зачем logQ-поправка?».</li>
+<li>На собеседовании: почему BPR оптимизирует сглаженный AUC и чем множитель <span class="tex">\sigma(-\hat x_{uij})</span> помогает обучению?</li>
+<li>На собеседовании: чем WARP отличается от BPR и как он оценивает ранг, не считая весь каталог?</li>
+<li>На собеседовании: зачем нужна logQ-поправка и в каком случае равномерные негативы хуже негативов по популярности?</li>
 </ul>
+<h2 id="проверь-себя">Проверь себя</h2>
+<details class="callout md details"><summary>Почему обучающие данные BPR — это тройки, а не пары с метками?</summary>
+<p>В неявных данных известно лишь, что <span class="tex">i</span> предпочтительнее <span class="tex">j</span> (с <span class="tex">j</span> взаимодействия не было, возможно, пользователь его не видел), но не что <span class="tex">j</span> не нравится. Поэтому цель — <span class="tex">\hat x_{ui}&gt;\hat x_{uj}</span> для троек <span class="tex">(u,i,j)</span>.</p>
+</details>
+<details class="callout md details"><summary>Что происходит с градиентом BPR, когда модель уже правильно упорядочила пару с большим запасом?</summary>
+<p>Множитель <span class="tex">\sigma(-\hat x_{uij})</span> стремится к нулю, и обновление почти не происходит. Обучение концентрируется на неверно упорядоченных парах, как в числовом примере выше.</p>
+</details>
+<details class="callout md details"><summary>Чем WARP отличается от BPR по весу нарушений?</summary>
+<p>Вес <span class="tex">\Phi(\mathrm{rank})=\sum_{k\le \mathrm{rank}}1/k</span> растёт с рангом положительного объекта, но приращение от позиции <span class="tex">k</span> равно <span class="tex">1/k</span>, поэтому потеря сосредоточена на верхушке и приближает precision@k. BPR весит все пары одинаково, то есть оптимизирует AUC.</p>
+</details>
+<details class="callout md details"><summary>Почему в sampled softmax из логита вычитают $\log Q_j$?</summary>
+<p>Негативы сэмплируются неравномерно (например, из батча), и популярные объекты попадают в знаменатель чаще. Поправка компенсирует это, иначе модель занижает хиты.</p>
+</details>
+<details class="callout md details"><summary>Почему NCF с MLP не стал заменой скалярному произведению?</summary>
+<p>Rendle et al. показали, что настроенное скалярное произведение бьёт MLP, MLP плохо выучивает скалярное произведение, а инференс MLP не допускает приближённого поиска соседей.</p>
+</details>
 <h2 id="что-почитать">Что почитать</h2>
 <ul>
 <li>Rendle S. et al. <em>BPR: Bayesian Personalized Ranking from Implicit Feedback</em>, UAI 2009 — https://arxiv.org/abs/1205.2618</li>
@@ -232,6 +258,8 @@ ub<span class="tok-p">,</span> U <span class="tok-p">=</span> warp<span class="t
       
 
       
+
+      
       <nav class="pager" aria-label="Соседние статьи">
         <a href="/edufamcs-demo/handbook/recsys/matrichnye-razlozheniya-als/"><span><svg class="ico sm" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-arrow-left"/></svg>Назад</span>Матричные разложения и ALS</a>
         <a href="/edufamcs-demo/handbook/recsys/slim-i-ease/"><span>Дальше<svg class="ico sm" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-arrow"/></svg></span>Линейные item-item модели: SLIM и EASE</a>
@@ -240,7 +268,7 @@ ub<span class="tok-p">,</span> U <span class="tok-p">=</span> warp<span class="t
     </article>
 
     <aside class="hb-toc" aria-label="На этой странице">
-      <a class="l2" href="#неявные-данные-как-задача-ранжирования">Неявные данные как задача ранжирования</a><a class="l2" href="#bpr-rendle-et-al-2009">BPR (Rendle et al., 2009)</a><a class="l2" href="#warp-weston-bengio-usunier-2011">WARP (Weston, Bengio, Usunier, 2011)</a><a class="l2" href="#негативы-откуда-их-брать">Негативы: откуда их брать</a><a class="l2" href="#возвращение-ials-и-спор-с-ncf">Возвращение iALS и спор с NCF</a><a class="l2" href="#эмбеддинги-из-сессий">Эмбеддинги из сессий</a><a class="l2" href="#код-bpr-и-warp-против-als">Код: BPR и WARP против ALS</a><a class="l2" href="#что-ломается-на-практике">Что ломается на практике</a><a class="l2" href="#что-почитать">Что почитать</a>
+      <a class="l2" href="#неявные-данные-как-задача-ранжирования">Неявные данные как задача ранжирования</a><a class="l2" href="#bpr-rendle-et-al-2009">BPR (Rendle et al., 2009)</a><a class="l2" href="#warp-weston-bengio-usunier-2011">WARP (Weston, Bengio, Usunier, 2011)</a><a class="l2" href="#негативы-откуда-их-брать">Негативы: откуда их брать</a><a class="l2" href="#возвращение-ials-и-спор-с-ncf">Возвращение iALS и спор с NCF</a><a class="l2" href="#эмбеддинги-из-сессий">Эмбеддинги из сессий</a><a class="l2" href="#код-bpr-и-warp-против-als">Код: BPR и WARP против ALS</a><a class="l2" href="#что-ломается-на-практике">Что ломается на практике</a><a class="l2" href="#проверь-себя">Проверь себя</a><a class="l2" href="#что-почитать">Что почитать</a>
     </aside>
   </div>
 </div>

@@ -27,7 +27,7 @@
 <script src="/edufamcs-demo/static/js/site.js" defer></script>
 <script src="/edufamcs-demo/static/handbook/handbook.js" defer></script>
 </head>
-<body class="" hx-headers='{"X-CSRFToken": "5RcTkvRcGoFfjxzVsj2UhojWVG8CJ1dVRXdgei9TRBVtY6vbFIVZyQrhr3KROMYU"}'>
+<body class="" hx-headers='{"X-CSRFToken": "bY2rxB85K5Vlr5hqnJv7hh7LPSjGHwBkNbRoNDHWLS9UCowSmcJ4ZaZJh1qErgA1"}'>
 <a class="skip" href="#main">К содержанию</a>
 <div class="demo-bar" role="note">Демо-версия для отзывов: вход, запись на курсы и формы здесь не работают.</div>
 
@@ -60,6 +60,7 @@
 
 
 <div class="container hb-page s-recsys">
+  <div class="hb-readbar" aria-hidden="true"><i></i></div>
   <div class="hb">
     <aside class="hb-nav" aria-label="Статьи раздела">
       
@@ -88,9 +89,9 @@
       <div class="hb-meta">
         
         
-        <span><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-clock"/></svg>12&nbsp;мин</span>
+        <span><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-clock"/></svg>15&nbsp;мин</span>
         <span class="hb-authors"><span class="avatar sm" title="Артем Лебедевич">АЛ</span>Артем Лебедевич</span>
-        <span><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-edit"/></svg>9 ноября 2026</span>
+        <span><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-edit"/></svg>10 ноября 2026</span>
         
         
       </div>
@@ -98,7 +99,7 @@
       
       <details class="hb-mtoc">
         <summary><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-list"/></svg>Содержание<svg class="ico sm" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-chev-down"/></svg></summary>
-        <a class="l2" href="#история-от-tapestry-до-amazon">История: от Tapestry до Amazon</a><a class="l2" href="#user-based-cf">User-based CF</a><a class="l2" href="#меры-сходства">Меры сходства</a><a class="l3" href="#shrinkage-борьба-с-малым-пересечением">Shrinkage: борьба с малым пересечением</a><a class="l2" href="#item-based-cf">Item-based CF</a><a class="l2" href="#slope-one">Slope One</a><a class="l2" href="#неявный-фидбэк">Неявный фидбэк</a><a class="l3" href="#сложность">Сложность</a><a class="l2" href="#почему-knn-сильный-бейзлайн">Почему kNN — сильный бейзлайн</a><a class="l2" href="#что-ломается-на-практике">Что ломается на практике</a><a class="l2" href="#что-почитать">Что почитать</a>
+        <a class="l2" href="#история-от-tapestry-до-amazon">История: от Tapestry до Amazon</a><a class="l2" href="#user-based-cf">User-based CF</a><a class="l2" href="#меры-сходства">Меры сходства</a><a class="l3" href="#shrinkage-борьба-с-малым-пересечением">Shrinkage: борьба с малым пересечением</a><a class="l2" href="#item-based-cf">Item-based CF</a><a class="l2" href="#slope-one">Slope One</a><a class="l2" href="#неявный-фидбэк">Неявный фидбэк</a><a class="l3" href="#сложность">Сложность</a><a class="l3" href="#co-visitation-направленный-сессионный-item-to-item">Co-visitation: направленный сессионный item-to-item</a><a class="l2" href="#почему-knn-сильный-бейзлайн">Почему kNN — сильный бейзлайн</a><a class="l2" href="#что-ломается-на-практике">Что ломается на практике</a><a class="l2" href="#проверь-себя">Проверь себя</a><a class="l2" href="#что-почитать">Что почитать</a>
       </details>
       
 
@@ -181,6 +182,21 @@
     <span class="tok-k">return</span> top<span class="tok-p">[</span>np<span class="tok-p">.</span>argsort<span class="tok-p">(</span><span class="tok-p">-</span>scores<span class="tok-p">[</span>top<span class="tok-p">]</span><span class="tok-p">)</span><span class="tok-p">]</span>
 </code></pre></div>
 <p>Перед использованием на проде проверьте валидацию по времени, как в <a href="/edufamcs-demo/handbook/recsys/oflajn-metriki/" rel="noopener noreferrer nofollow">статье про метрики</a>.</p>
+<h3 id="co-visitation-направленный-сессионный-item-to-item">Co-visitation: направленный сессионный item-to-item</h3>
+<p>Самый практичный вариант соседей в проде — <strong>co-visitation</strong>: счётчики не по всей истории пользователя, а по парам внутри сессии. Для каждой пары <span class="tex">(a, b)</span>, где <span class="tex">b</span> встретился <strong>после</strong> <span class="tex">a</span> не дальше чем через <span class="tex">w</span> событий (или <span class="tex">\Delta</span> минут), в матрицу <span class="tex">C_{ab}</span> добавляют вес, убывающий с расстоянием: <span class="tex">\mathrm{decay}^{\,\text{расстояние}-1}</span> или <span class="tex">e^{-\Delta t/\tau}</span>. Матрица <strong>несимметрична</strong>: <span class="tex">C_{ab}</span> отвечает на вопрос «после <span class="tex">a</span> люди смотрели <span class="tex">b</span>», а <span class="tex">C_{ba}</span> — на обратный; для «аксессуар после телефона» и «телефон после аксессуара» это разные сигналы. Окно и затухание отсекают случайную совстречаемость в длинных сессиях, а направление сохраняет часть порядка, которого нет в <span class="tex">R^\top R</span>. Скор кандидата — сумма <span class="tex">C_{ab}</span> по последним объектам пользователя, с большим весом у свежих; популярность кандидата нормируют так же, как выше.</p>
+<div class="code"><div class="code-head"><span class="lang">python</span></div><pre><code><span class="tok-k">from</span> collections <span class="tok-k">import</span> defaultdict
+
+<span class="tok-k">def</span> <span class="tok-f">covisit</span><span class="tok-p">(</span>sessions<span class="tok-p">,</span> window<span class="tok-p">=</span><span class="tok-n">3</span><span class="tok-p">,</span> decay<span class="tok-p">=</span><span class="tok-n">0.5</span><span class="tok-p">,</span> top<span class="tok-p">=</span><span class="tok-n">50</span><span class="tok-p">)</span><span class="tok-p">:</span>
+    <span class="tok-s">"""sessions: списки item_id в порядке времени. C[a][b]: после a смотрели b."""</span>
+    C <span class="tok-p">=</span> defaultdict<span class="tok-p">(</span><span class="tok-k">lambda</span><span class="tok-p">:</span> defaultdict<span class="tok-p">(</span><span class="tok-f">float</span><span class="tok-p">)</span><span class="tok-p">)</span>
+    <span class="tok-k">for</span> s <span class="tok-k">in</span> sessions<span class="tok-p">:</span>
+        <span class="tok-k">for</span> p<span class="tok-p">,</span> a <span class="tok-k">in</span> <span class="tok-f">enumerate</span><span class="tok-p">(</span>s<span class="tok-p">)</span><span class="tok-p">:</span>
+            <span class="tok-k">for</span> q <span class="tok-k">in</span> <span class="tok-f">range</span><span class="tok-p">(</span>p <span class="tok-p">+</span> <span class="tok-n">1</span><span class="tok-p">,</span> <span class="tok-f">min</span><span class="tok-p">(</span>p <span class="tok-p">+</span> <span class="tok-n">1</span> <span class="tok-p">+</span> window<span class="tok-p">,</span> <span class="tok-f">len</span><span class="tok-p">(</span>s<span class="tok-p">)</span><span class="tok-p">)</span><span class="tok-p">)</span><span class="tok-p">:</span>
+                <span class="tok-k">if</span> s<span class="tok-p">[</span>q<span class="tok-p">]</span> <span class="tok-p">!=</span> a<span class="tok-p">:</span>
+                    C<span class="tok-p">[</span>a<span class="tok-p">]</span><span class="tok-p">[</span>s<span class="tok-p">[</span>q<span class="tok-p">]</span><span class="tok-p">]</span> <span class="tok-p">+</span><span class="tok-p">=</span> decay <span class="tok-p">*</span><span class="tok-p">*</span> <span class="tok-p">(</span>q <span class="tok-p">-</span> p <span class="tok-p">-</span> <span class="tok-n">1</span><span class="tok-p">)</span>   <span class="tok-c"># ближе по времени -&gt; тяжелее</span>
+    <span class="tok-k">return</span> <span class="tok-p">{</span>a<span class="tok-p">:</span> <span class="tok-f">sorted</span><span class="tok-p">(</span>d<span class="tok-p">.</span>items<span class="tok-p">(</span><span class="tok-p">)</span><span class="tok-p">,</span> key<span class="tok-p">=</span><span class="tok-k">lambda</span> x<span class="tok-p">:</span> <span class="tok-p">-</span>x<span class="tok-p">[</span><span class="tok-n">1</span><span class="tok-p">]</span><span class="tok-p">)</span><span class="tok-p">[</span><span class="tok-p">:</span>top<span class="tok-p">]</span> <span class="tok-k">for</span> a<span class="tok-p">,</span> d <span class="tok-k">in</span> C<span class="tok-p">.</span>items<span class="tok-p">(</span><span class="tok-p">)</span><span class="tok-p">}</span>
+</code></pre></div>
+<p>На четырёх сессиях <code>[A,B,C]</code>, <code>[A,B]</code>, <code>[B,A]</code>, <code>[A,C,B]</code> получаем <span class="tex">C_{AB}=2{,}5</span> против <span class="tex">C_{BA}=1{,}0</span>. Стоимость — <span class="tex">O(w \cdot \text{число событий})</span> вместо <span class="tex">\sum_u n_u^2</span>, а таблица обновляется потоком; это и делает метод рабочей лошадкой кандидатогенерации для блоков «похожее» и «после этого смотрят».</p>
 <h2 id="почему-knn-сильный-бейзлайн">Почему kNN — сильный бейзлайн</h2>
 <p>Ferrari Dacrema, Cremonesi и Jannach (2019, <em>Are We Really Making Much Progress?</em>) взяли 18 нейросетевых методов с топ-конференций, воспроизвести смогли 7, и 6 из них часто проигрывали хорошо настроенным соседским методам (item-kNN, user-kNN) и простым <a href="/edufamcs-demo/handbook/recsys/grafovye-modeli/" rel="noopener noreferrer nofollow">графовым моделям</a> на случайных блужданиях. Причины: kNN почти не переобучается, имеет мало гиперпараметров (<span class="tex">k</span>, нормировка, shrinkage) и использует всю информацию о совстречаемости без аппроксимации низким рангом. Практический вывод: любой нейросетевой метод нужно сравнивать с item-kNN, настроенным с тем же бюджетом. Дальше в истории: ту же совстречаемость обучают как параметры в <a href="/edufamcs-demo/handbook/recsys/slim-i-ease/" rel="noopener noreferrer nofollow">SLIM и EASE</a>, а низкоранговая версия — <a href="/edufamcs-demo/handbook/recsys/matrichnye-razlozheniya-als/" rel="noopener noreferrer nofollow">матричные разложения</a>.</p>
 <h2 id="что-ломается-на-практике">Что ломается на практике</h2>
@@ -191,7 +207,26 @@
 <li><strong>Вычислительная стоимость</strong> растёт квадратично с длиной истории: следите за выбросами.</li>
 <li><strong>Свежесть таблицы:</strong> <span class="tex">S</span> считают офлайн, интервал пересчёта (час, сутки) задаёт, насколько быстро реагируют рекомендации; в ленте новостей этого мало.</li>
 <li><strong>Повторы:</strong> в e-commerce рекомендовать только что купленный холодильник бессмысленно, а в продуктовых — естественно; решайте это правилом, а не моделью.</li>
+<li>На собеседовании: чем user-based CF отличается от item-based и почему вторая масштабируется лучше?</li>
+<li>На собеседовании: зачем нужен shrinkage в сходстве и как нормировка по популярности меняет выдачу?</li>
+<li>На собеседовании: как сделать item-to-item для карточки товара без обучения модели и чем он плох на холодном старте?</li>
 </ul>
+<h2 id="проверь-себя">Проверь себя</h2>
+<details class="callout md details"><summary>Почему item-based CF масштабируется лучше user-based?</summary>
+<p>Объектов обычно меньше, чем пользователей, а сходства между ними стабильнее и считаются офлайн. Онлайн остаётся сумма по короткой истории пользователя, а не сравнение с миллионами людей.</p>
+</details>
+<details class="callout md details"><summary>Что делает shrinkage и почему он меняет порядок соседей?</summary>
+<p>Он уменьшает сходство, подтверждённое малым числом общих пользователей <span class="tex">n_{ij}</span>. В примере из статьи <span class="tex">\mathrm{sim}(1,4)</span> при <span class="tex">\lambda=2</span> падает втрое, а <span class="tex">\mathrm{sim}(1,2)</span> — вдвое, и чайник уступает коврику.</p>
+</details>
+<details class="callout md details"><summary>Чем обобщённая нормировка $C_{ij}/(C_{ii}^{\alpha}C_{jj}^{1-\alpha})$ при $\alpha=0$ отличается от $\alpha\to1$?</summary>
+<p>При <span class="tex">\alpha=0</span> получается <span class="tex">P(i\mid j)</span>: популярность кандидата не штрафуется, выдача тянется к хитам. При <span class="tex">\alpha\to1</span> получается <span class="tex">P(j\mid i)</span>: популярные кандидаты штрафуются сильно, поднимается хвост; <span class="tex">\alpha=0{,}5</span> даёт косинус.</p>
+</details>
+<details class="callout md details"><summary>Почему взвешивание столбцов матрицы перед косинусом бесполезно, а строк — работает?</summary>
+<p>Масштаб столбца сокращается при нормировке на норму столбца. Взвешивание строк (пользователей) меняет вклад каждого пользователя в <span class="tex">C_{ij}</span>, поэтому длинные истории можно ослабить.</p>
+</details>
+<details class="callout md details"><summary>Чем co-visitation отличается от $R^\top R$ и зачем в нём окно и направление?</summary>
+<p>Он считает пары только внутри сессии, с весом, убывающим с расстоянием, и только в порядке «после <span class="tex">a</span> — <span class="tex">b</span>». Окно отсекает случайные пары в длинных сессиях, направление сохраняет порядок, и стоимость становится линейной по числу событий, а не квадратичной по длине истории.</p>
+</details>
 <h2 id="что-почитать">Что почитать</h2>
 <ul>
 <li>Goldberg D. et al. <em>Using collaborative filtering to weave an information tapestry</em>, CACM 1992 — https://doi.org/10.1145/138859.138867</li>
@@ -207,6 +242,8 @@
       
 
       
+
+      
       <nav class="pager" aria-label="Соседние статьи">
         <a href="/edufamcs-demo/handbook/recsys/nepersonalnye-i-kontentnye/"><span><svg class="ico sm" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-arrow-left"/></svg>Назад</span>Неперсонализированные и контентные рекомендации</a>
         <a href="/edufamcs-demo/handbook/recsys/matrichnye-razlozheniya-als/"><span>Дальше<svg class="ico sm" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-arrow"/></svg></span>Матричные разложения и ALS</a>
@@ -215,7 +252,7 @@
     </article>
 
     <aside class="hb-toc" aria-label="На этой странице">
-      <a class="l2" href="#история-от-tapestry-до-amazon">История: от Tapestry до Amazon</a><a class="l2" href="#user-based-cf">User-based CF</a><a class="l2" href="#меры-сходства">Меры сходства</a><a class="l3" href="#shrinkage-борьба-с-малым-пересечением">Shrinkage: борьба с малым пересечением</a><a class="l2" href="#item-based-cf">Item-based CF</a><a class="l2" href="#slope-one">Slope One</a><a class="l2" href="#неявный-фидбэк">Неявный фидбэк</a><a class="l3" href="#сложность">Сложность</a><a class="l2" href="#почему-knn-сильный-бейзлайн">Почему kNN — сильный бейзлайн</a><a class="l2" href="#что-ломается-на-практике">Что ломается на практике</a><a class="l2" href="#что-почитать">Что почитать</a>
+      <a class="l2" href="#история-от-tapestry-до-amazon">История: от Tapestry до Amazon</a><a class="l2" href="#user-based-cf">User-based CF</a><a class="l2" href="#меры-сходства">Меры сходства</a><a class="l3" href="#shrinkage-борьба-с-малым-пересечением">Shrinkage: борьба с малым пересечением</a><a class="l2" href="#item-based-cf">Item-based CF</a><a class="l2" href="#slope-one">Slope One</a><a class="l2" href="#неявный-фидбэк">Неявный фидбэк</a><a class="l3" href="#сложность">Сложность</a><a class="l3" href="#co-visitation-направленный-сессионный-item-to-item">Co-visitation: направленный сессионный item-to-item</a><a class="l2" href="#почему-knn-сильный-бейзлайн">Почему kNN — сильный бейзлайн</a><a class="l2" href="#что-ломается-на-практике">Что ломается на практике</a><a class="l2" href="#проверь-себя">Проверь себя</a><a class="l2" href="#что-почитать">Что почитать</a>
     </aside>
   </div>
 </div>

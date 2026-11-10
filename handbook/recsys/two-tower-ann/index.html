@@ -27,7 +27,7 @@
 <script src="/edufamcs-demo/static/js/site.js" defer></script>
 <script src="/edufamcs-demo/static/handbook/handbook.js" defer></script>
 </head>
-<body class="" hx-headers='{"X-CSRFToken": "1CtR6bK8qyflMyf8IiAh3qDQ6Pof7ZTCNIue0Y2PBLvzr7boVHtmkSLbCc0ucKEB"}'>
+<body class="" hx-headers='{"X-CSRFToken": "a5l2gHDcWfDm7FBb4U8WB7aPzgwG54dLMiaZwJc3X2RViYQD3nmTj02N1pDEPOcs"}'>
 <a class="skip" href="#main">К содержанию</a>
 <div class="demo-bar" role="note">Демо-версия для отзывов: вход, запись на курсы и формы здесь не работают.</div>
 
@@ -60,6 +60,7 @@
 
 
 <div class="container hb-page s-recsys">
+  <div class="hb-readbar" aria-hidden="true"><i></i></div>
   <div class="hb">
     <aside class="hb-nav" aria-label="Статьи раздела">
       
@@ -90,9 +91,9 @@
       <div class="hb-meta">
         
         
-        <span><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-clock"/></svg>11&nbsp;мин</span>
+        <span><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-clock"/></svg>15&nbsp;мин</span>
         <span class="hb-authors"><span class="avatar sm" title="Артем Лебедевич">АЛ</span>Артем Лебедевич</span>
-        <span><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-edit"/></svg>9 ноября 2026</span>
+        <span><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-edit"/></svg>10 ноября 2026</span>
         
         
       </div>
@@ -100,7 +101,7 @@
       
       <details class="hb-mtoc">
         <summary><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-list"/></svg>Содержание<svg class="ico sm" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-chev-down"/></svg></summary>
-        <a class="l2" href="#откуда-это-взялось">Откуда это взялось</a><a class="l2" href="#архитектура">Архитектура</a><a class="l2" href="#обучение-и-негативы">Обучение и негативы</a><a class="l2" href="#поиск-ближайших-соседей-ann">Поиск ближайших соседей (ANN)</a><a class="l2" href="#практика-обучение-и-выдача">Практика: обучение и выдача</a><a class="l2" href="#где-это-работает">Где это работает</a><a class="l2" href="#что-почитать">Что почитать</a>
+        <a class="l2" href="#откуда-это-взялось">Откуда это взялось</a><a class="l2" href="#архитектура">Архитектура</a><a class="l2" href="#обучение-и-негативы">Обучение и негативы</a><a class="l3" href="#почему-in-batch-softmax-смещён-и-почему-помогает">Почему in-batch softmax смещён и почему помогает \log Q</a><a class="l2" href="#поиск-ближайших-соседей-ann">Поиск ближайших соседей (ANN)</a><a class="l2" href="#практика-обучение-и-выдача">Практика: обучение и выдача</a><a class="l2" href="#где-это-работает">Где это работает</a><a class="l2" href="#ловушки">Ловушки</a><a class="l2" href="#проверь-себя">Проверь себя</a><a class="l2" href="#что-почитать">Что почитать</a>
       </details>
       
 
@@ -150,6 +151,14 @@
     labels <span class="tok-p">=</span> torch<span class="tok-p">.</span>arange<span class="tok-p">(</span><span class="tok-f">len</span><span class="tok-p">(</span>u<span class="tok-p">)</span><span class="tok-p">,</span> device<span class="tok-p">=</span>u<span class="tok-p">.</span>device<span class="tok-p">)</span>
     <span class="tok-k">return</span> F<span class="tok-p">.</span>cross_entropy<span class="tok-p">(</span>logits<span class="tok-p">,</span> labels<span class="tok-p">)</span>
 </code></pre></div>
+<h3 id="почему-in-batch-softmax-смещён-и-почему-помогает">Почему in-batch softmax смещён и почему помогает <span class="tex">\log Q</span></h3>
+<p>Целевое распределение — полный softmax <span class="tex">p_\theta(i\mid u)=e^{s(u,i)}/\sum_{j\in I}e^{s(u,j)}</span>. In-batch заменяет сумму по каталогу суммой по объектам батча, а они попадают в него с вероятностью <span class="tex">Q(i)\propto\mathrm{freq}(i)</span>: положительные пары берутся из лога.</p>
+<p><strong>1. Смещение.</strong> Для <span class="tex">m</span> негативов из <span class="tex">Q</span>: <span class="tex">\mathbb{E}\sum_{j\in S}e^{s(u,j)}=m\sum_{j\in I}Q(j)\,e^{s(u,j)}</span>. Каждое слагаемое полного знаменателя взвешено на <span class="tex">Q(j)</span>, то есть популярные объекты вносят непропорционально много. Чтобы уменьшить потерю, модель занижает их скоры для всех пользователей.</p>
+<p><strong>2. Что учится на самом деле.</strong> Набор кандидатов — положительный объект из <span class="tex">p(i\mid u)</span> и остальные из <span class="tex">Q</span>. По формуле Байеса вероятность того, что кандидат <span class="tex">i</span> положительный, пропорциональна <span class="tex">p(i\mid u)/Q(i)</span>, и softmax-классификатор воспроизводит её на оптимуме:</p>
+<div class="tex tex-block">s(u,i)=\log p(i\mid u)-\log Q(i)+c(u).</div>
+<p>Если <span class="tex">Q</span> — маргинальная частота объекта, это <span class="tex">\log\frac{p(i\mid u)}{p(i)}</span>, то есть PMI: популярность оказывается поделённой.</p>
+<p><strong>3. Лечение.</strong> Вычитаем <span class="tex">\log Q</span> из логита: на оптимуме <span class="tex">s(u,i)-\log Q(i)=\log p(i\mid u)-\log Q(i)+c(u)</span>, откуда <span class="tex">s(u,i)=\log p(i\mid u)+c(u)</span>. Это importance sampling: <span class="tex">\sum_{j\in I}e^{s_j}\approx\sum_{j\in S}e^{s_j}/Q_j=\sum_{j\in S}e^{s_j-\log Q_j}</span>. Поправка нужна только в обучении: при выдаче ранжируют по <span class="tex">s(u,i)</span>.</p>
+<p>Проверка на игрушечной таблице логитов (3 пользователя, 6 объектов, батч 32, SGD): без поправки выученные <span class="tex">s</span> совпали с <span class="tex">\log p(i\mid u)-\log Q(i)</span> (максимальное отклонение <span class="tex">0{,}29</span> после центрирования по пользователю), с поправкой — с <span class="tex">\log p(i\mid u)</span> (<span class="tex">0{,}24</span>). Самый частый объект при этом получал логит ниже самого редкого на <span class="tex">\ln(Q_{\max}/Q_{\min})\approx2{,}08</span> из-за смещения.</p>
 <h2 id="поиск-ближайших-соседей-ann">Поиск ближайших соседей (ANN)</h2>
 <p>Подробное устройство индексов — в <a href="/edufamcs-demo/handbook/retrieval/vektornye-indeksy/" rel="noopener noreferrer nofollow">/handbook/retrieval/vektornye-indeksy/</a>; здесь только то, что нужно для рекомендаций.</p>
 <p>После обучения задача рекомендации сводится к поиску: найти <span class="tex">k</span> объектов с максимальным <span class="tex">\langle q, v_i \rangle</span> для вектора запроса <span class="tex">q</span>. Точный перебор стоит <span class="tex">O(|I| \cdot d)</span> на запрос — при десяти миллионах объектов и <span class="tex">d = 128</span> это больше миллиарда операций, слишком медленно для онлайна. Поэтому используют приближённый поиск (approximate nearest neighbours), жертвуя небольшой долей точности ради скорости в сотни раз.</p>
@@ -182,6 +191,34 @@ scores<span class="tok-p">,</span> ids <span class="tok-p">=</span> index<span c
 </ul>
 <h2 id="где-это-работает">Где это работает</h2>
 <p>Двухбашенная модель — стандартный способ <strong>генерации кандидатов</strong> в крупных системах: YouTube, Pinterest, маркетплейсы. Она быстро сужает каталог с миллионов до сотен объектов, учитывает признаки и свежую историю пользователя и легко обновляется. Финальный порядок затем определяет более тяжёлая <a href="/edufamcs-demo/handbook/recsys/ctr-modeli/" rel="noopener noreferrer nofollow">ранжирующая модель</a> — об этом статья про <a href="/edufamcs-demo/handbook/recsys/kandidaty-i-ranzhirovanie/" rel="noopener noreferrer nofollow">двухстадийную схему</a>.</p>
+<h2 id="ловушки">Ловушки</h2>
+<ul>
+<li>Забыть logQ при обучении с in-batch негативами — модель занижает хиты; применить её при выдаче — в топ полезут редкие объекты.</li>
+<li>Оценивать <span class="tex">Q(i)</span> один раз по статичной таблице частот: поток нестационарен, оценку обновляют онлайн.</li>
+<li>Один и тот же объект у другого пользователя в батче считается негативом, хотя он тоже мог бы подойти; чем крупнее батч и популярнее объект, тем чаще.</li>
+<li>Использовать только hard negatives: много ложных негативов и нестабильное обучение.</li>
+<li>Выкатить новую башню пользователя со старым индексом объектов: векторы несовместимы, модель и индекс выкатывают вместе.</li>
+<li>Искать по скалярному произведению ненормированных векторов: побеждают объекты с большой нормой, часто популярные.</li>
+<li>На собеседовании: выведите logQ-поправку и объясните, почему она нужна только при обучении.</li>
+<li>На собеседовании: почему две башни не взаимодействуют до скалярного произведения и что это даёт и стоит?</li>
+<li>На собеседовании: сравните IVF, PQ и HNSW; как измерить качество ANN отдельно от качества модели?</li>
+</ul>
+<h2 id="проверь-себя">Проверь себя</h2>
+<details class="callout md details"><summary>Почему башни не должны взаимодействовать до скалярного произведения?</summary>
+<p>Тогда векторы всех объектов можно посчитать заранее и положить в ANN-индекс, а на запросе считать один вектор пользователя. Цена — модель не видит тонких взаимодействий признаков пользователя и объекта, их добирает ранжировщик.</p>
+</details>
+<details class="callout md details"><summary>Почему in-batch негативы без поправки занижают популярные объекты?</summary>
+<p>Объект попадает в батч пропорционально популярности и чаще входит в знаменатель softmax, так что его скор приходится занижать. На оптимуме модель учит <span class="tex">\log p(i\mid u)-\log Q(i)</span>, а не <span class="tex">\log p(i\mid u)</span>.</p>
+</details>
+<details class="callout md details"><summary>Почему logQ вычитают при обучении, но не при выдаче?</summary>
+<p>Поправка компенсирует способ выбора негативов, а не свойство данных. С ней обученные скоры оценивают <span class="tex">\log p(i\mid u)</span>, и на выдаче ранжируют по ним напрямую; вычитание <span class="tex">\log Q</span> там вытолкнет редкие объекты.</p>
+</details>
+<details class="callout md details"><summary>Как растёт качество с размером батча и что делать, если батч не помещается в память?</summary>
+<p>Больше негативов — точнее оценка знаменателя softmax, поэтому берут батчи в тысячи и десятки тысяч пар. Если не помещается, держат очередь векторов объектов из прошлых батчей: они слегка устарели, но почти бесплатны.</p>
+</details>
+<details class="callout md details"><summary>Чем при поиске по скалярному произведению вредит ненормированность векторов?</summary>
+<p>При maximum inner product search объекты с большой нормой, часто популярные, доминируют в выдаче. Если модель обучена на косинусе, векторы объектов и запросов нормируют, и поиск по скалярному произведению совпадает с поиском по косинусу.</p>
+</details>
 <h2 id="что-почитать">Что почитать</h2>
 <ul>
 <li>Huang et al. <em>Learning Deep Structured Semantic Models for Web Search using Clickthrough Data</em>, CIKM 2013 — <a href="https://www.microsoft.com/en-us/research/publication/learning-deep-structured-semantic-models-for-web-search-using-clickthrough-data/" rel="noopener noreferrer nofollow">страница Microsoft Research</a>.</li>
@@ -195,6 +232,8 @@ scores<span class="tok-p">,</span> ids <span class="tok-p">=</span> index<span c
       
 
       
+
+      
       <nav class="pager" aria-label="Соседние статьи">
         <a href="/edufamcs-demo/handbook/recsys/ctr-modeli/"><span><svg class="ico sm" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-arrow-left"/></svg>Назад</span>Модели CTR: от логрегрессии до DCN и DIN</a>
         <a href="/edufamcs-demo/handbook/recsys/posledovatelnye-modeli/"><span>Дальше<svg class="ico sm" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-arrow"/></svg></span>Последовательные модели: GRU4Rec, SASRec, BERT4Rec</a>
@@ -203,7 +242,7 @@ scores<span class="tok-p">,</span> ids <span class="tok-p">=</span> index<span c
     </article>
 
     <aside class="hb-toc" aria-label="На этой странице">
-      <a class="l2" href="#откуда-это-взялось">Откуда это взялось</a><a class="l2" href="#архитектура">Архитектура</a><a class="l2" href="#обучение-и-негативы">Обучение и негативы</a><a class="l2" href="#поиск-ближайших-соседей-ann">Поиск ближайших соседей (ANN)</a><a class="l2" href="#практика-обучение-и-выдача">Практика: обучение и выдача</a><a class="l2" href="#где-это-работает">Где это работает</a><a class="l2" href="#что-почитать">Что почитать</a>
+      <a class="l2" href="#откуда-это-взялось">Откуда это взялось</a><a class="l2" href="#архитектура">Архитектура</a><a class="l2" href="#обучение-и-негативы">Обучение и негативы</a><a class="l3" href="#почему-in-batch-softmax-смещён-и-почему-помогает">Почему in-batch softmax смещён и почему помогает \log Q</a><a class="l2" href="#поиск-ближайших-соседей-ann">Поиск ближайших соседей (ANN)</a><a class="l2" href="#практика-обучение-и-выдача">Практика: обучение и выдача</a><a class="l2" href="#где-это-работает">Где это работает</a><a class="l2" href="#ловушки">Ловушки</a><a class="l2" href="#проверь-себя">Проверь себя</a><a class="l2" href="#что-почитать">Что почитать</a>
     </aside>
   </div>
 </div>

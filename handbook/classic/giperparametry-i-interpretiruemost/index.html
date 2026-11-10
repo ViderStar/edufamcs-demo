@@ -27,7 +27,7 @@
 <script src="/edufamcs-demo/static/js/site.js" defer></script>
 <script src="/edufamcs-demo/static/handbook/handbook.js" defer></script>
 </head>
-<body class="" hx-headers='{"X-CSRFToken": "B3pDHpdpppLHmFtOOsHAagOEDpfDU1xYn9q0Bcv6AC1V1ep41RAFrIWZ9MRSZMiX"}'>
+<body class="" hx-headers='{"X-CSRFToken": "WkYGpbpS1RX3zMKIwL2g6eXrf9gugHspyxNDFdYJ2EbCK5ZavegdO7PpHins0rr6"}'>
 <a class="skip" href="#main">К содержанию</a>
 <div class="demo-bar" role="note">Демо-версия для отзывов: вход, запись на курсы и формы здесь не работают.</div>
 
@@ -60,6 +60,7 @@
 
 
 <div class="container hb-page hb-tone">
+  <div class="hb-readbar" aria-hidden="true"><i></i></div>
   <div class="hb">
     <aside class="hb-nav" aria-label="Статьи раздела">
       
@@ -88,9 +89,9 @@
       <div class="hb-meta">
         
         
-        <span><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-clock"/></svg>12&nbsp;мин</span>
+        <span><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-clock"/></svg>15&nbsp;мин</span>
         <span class="hb-authors"><span class="avatar sm" title="Артем Лебедевич">АЛ</span>Артем Лебедевич</span>
-        <span><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-edit"/></svg>9 ноября 2026</span>
+        <span><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-edit"/></svg>10 ноября 2026</span>
         
         
       </div>
@@ -98,7 +99,7 @@
       
       <details class="hb-mtoc">
         <summary><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-list"/></svg>Содержание<svg class="ico sm" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-chev-down"/></svg></summary>
-        <a class="l2" href="#параметры-и-гиперпараметры">Параметры и гиперпараметры</a><a class="l2" href="#кросс-валидация">Кросс-валидация</a><a class="l3" href="#вложенная-кросс-валидация">Вложенная кросс-валидация</a><a class="l2" href="#стратегии-поиска">Стратегии поиска</a><a class="l2" href="#зачем-нужна-интерпретируемость">Зачем нужна интерпретируемость</a><a class="l2" href="#permutation-importance">Permutation importance</a><a class="l2" href="#pdp-и-ice">PDP и ICE</a><a class="l2" href="#shap">SHAP</a><a class="l2" href="#lime">LIME</a><a class="l2" href="#ловушки-интерпретации">Ловушки интерпретации</a><a class="l2" href="#код">Код</a><a class="l2" href="#что-почитать">Что почитать</a>
+        <a class="l2" href="#параметры-и-гиперпараметры">Параметры и гиперпараметры</a><a class="l2" href="#кросс-валидация">Кросс-валидация</a><a class="l3" href="#вложенная-кросс-валидация">Вложенная кросс-валидация</a><a class="l3" href="#правило-одной-стандартной-ошибки">Правило одной стандартной ошибки</a><a class="l2" href="#стратегии-поиска">Стратегии поиска</a><a class="l2" href="#зачем-нужна-интерпретируемость">Зачем нужна интерпретируемость</a><a class="l2" href="#permutation-importance">Permutation importance</a><a class="l2" href="#pdp-и-ice">PDP и ICE</a><a class="l2" href="#shap">SHAP</a><a class="l2" href="#lime">LIME</a><a class="l2" href="#ловушки-интерпретации">Ловушки интерпретации</a><a class="l2" href="#ловушки-при-подборе">Ловушки при подборе</a><a class="l2" href="#код">Код</a><a class="l2" href="#проверь-себя">Проверь себя</a><a class="l2" href="#что-почитать">Что почитать</a>
       </details>
       
 
@@ -114,6 +115,31 @@
 </ul>
 <h3 id="вложенная-кросс-валидация">Вложенная кросс-валидация</h3>
 <p>Если выбрать лучшую конфигурацию по CV и сообщить её же CV-оценку, получится оптимистичная оценка: максимум по шуму смещён вверх. <strong>Nested CV</strong> разделяет эти задачи: внешний цикл оценивает качество <em>процедуры</em> «подбор + обучение»; во внутреннем цикле на обучающей части внешнего фолда подбираются гиперпараметры. Стоимость — <span class="tex">K_{\text{out}}\times K_{\text{in}}\times |\text{сетка}|</span> обучений, поэтому её используют для честного сравнения моделей на малых данных, а на больших хватает простого hold-out теста.</p>
+<h3 id="правило-одной-стандартной-ошибки">Правило одной стандартной ошибки</h3>
+<p>Разница между конфигурациями меньше шума CV — повод взять <strong>более простую</strong> (Hastie et al., ESL, §7.10). Берём лучший CV-результат, считаем стандартную ошибку среднего по фолдам <span class="tex">\mathrm{SE}=s/\sqrt K</span> и выбираем самую простую конфигурацию, чей результат не хуже <span class="tex">\text{лучший}+\mathrm{SE}</span> (для ошибки). Пример: Lasso на <code>load_diabetes</code>, 10-fold, RMSE по сетке <span class="tex">\alpha</span> (значения из запуска):</p>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th><span class="tex">\alpha</span></th>
+<th>0,003</th>
+<th>0,03</th>
+<th>0,1</th>
+<th>0,3</th>
+<th>1</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>RMSE</td>
+<td>54,45</td>
+<td>54,46</td>
+<td>54,66</td>
+<td>55,96</td>
+<td>62,09</td>
+</tr>
+</tbody>
+</table></div>
+<p>Лучший — <span class="tex">\alpha=0{,}003</span> (<span class="tex">54{,}45</span>, <span class="tex">\mathrm{SE}=1{,}45</span>), порог <span class="tex">54{,}45+1{,}45=55{,}90</span>. Самый сильный <span class="tex">\alpha</span> под порогом — <span class="tex">0{,}1</span> (RMSE <span class="tex">54{,}66</span>, 7 ненулевых весов против 9); <span class="tex">\alpha=0{,}3</span> порог превышает (<span class="tex">55{,}96</span>). Качество статистически то же, модель проще и устойчивее.</p>
 <h2 id="стратегии-поиска">Стратегии поиска</h2>
 <p><strong>Grid search</strong> перебирает декартово произведение сетки значений. Число конфигураций растёт экспоненциально с числом гиперпараметров, а равномерная сетка тратит много запусков на повторение одних и тех же значений важных параметров.</p>
 <p><strong>Random search</strong> (Bergstra &amp; Bengio, 2012): значения каждого параметра сэмплируются независимо из заданного распределения (для <span class="tex">C</span>, <span class="tex">\gamma</span>, <span class="tex">\eta</span> — логравномерного). На практике для данной задачи важна лишь малая часть гиперпараметров («низкая эффективная размерность»). Тогда <span class="tex">N</span> случайных точек дают <span class="tex">N</span> разных значений каждого важного параметра, а сетка на <span class="tex">d</span> параметров — только <span class="tex">N^{1/d}</span> разных значений. Поэтому при одинаковом бюджете случайный поиск обычно находит конфигурацию не хуже.</p>
@@ -152,6 +178,16 @@
 <li><strong>Коррелированные признаки</strong> размывают и PI, и SHAP, и PDP; сгруппируйте их или анализируйте на уровне групп.</li>
 <li><strong>Объяснения зависят от модели и фона</strong>: разные модели с одинаковым качеством дают разные важности. Не стоит рассказывать «истину о данных», опираясь на одну модель.</li>
 <li>Проверяйте объяснения на здравый смысл: если ID-подобный признак наверху рейтинга — это утечка.</li>
+</ul>
+<h2 id="ловушки-при-подборе">Ловушки при подборе</h2>
+<ul>
+<li>Подбор по тесту или по тем же фолдам, по которым отчитываетесь, — оптимистичная оценка (см. nested CV).</li>
+<li>Препроцессинг вне <code>Pipeline</code> — утечка в каждый фолд.</li>
+<li>Равномерная шкала для <span class="tex">C</span>, <span class="tex">\gamma</span>, <span class="tex">\eta</span> вместо логарифмической.</li>
+<li>Объяснение по трейну: важности и SHAP считают на отложенной выборке.</li>
+<li><strong>На собеседовании:</strong> почему random search обычно лучше grid search при том же бюджете (низкая эффективная размерность).</li>
+<li><strong>На собеседовании:</strong> зачем nested CV и сколько обучений она требует: <span class="tex">K_{\text{out}}K_{\text{in}}|\text{сетка}|</span>.</li>
+<li><strong>На собеседовании:</strong> чем permutation importance лучше MDI и чем SHAP отличается от LIME; что такое свойства Шепли; почему важность не равна причинности.</li>
 </ul>
 <h2 id="код">Код</h2>
 <div class="code"><div class="code-head"><span class="lang">python</span></div><pre><code><span class="tok-k">import</span> optuna<span class="tok-p">,</span> shap
@@ -201,6 +237,22 @@ sv <span class="tok-p">=</span> explainer<span class="tok-p">(</span>X_te<span c
 shap<span class="tok-p">.</span>plots<span class="tok-p">.</span>beeswarm<span class="tok-p">(</span>sv<span class="tok-p">)</span>              <span class="tok-c"># summary plot</span>
 shap<span class="tok-p">.</span>plots<span class="tok-p">.</span>waterfall<span class="tok-p">(</span>sv<span class="tok-p">[</span><span class="tok-n">0</span><span class="tok-p">]</span><span class="tok-p">)</span>          <span class="tok-c"># один объект</span>
 </code></pre></div>
+<h2 id="проверь-себя">Проверь себя</h2>
+<details class="callout md details"><summary>Почему нельзя сообщать CV-оценку лучшей конфигурации как качество модели?</summary>
+<p>Максимум по многим шумным оценкам смещён вверх: выбранная конфигурация отчасти выиграла случайно. Честную оценку даёт nested CV или нетронутый тест.</p>
+</details>
+<details class="callout md details"><summary>Почему при низкой эффективной размерности random search эффективнее grid search?</summary>
+<p>Сетка на <span class="tex">d</span> параметров даёт только <span class="tex">N^{1/d}</span> различных значений каждого параметра при <span class="tex">N</span> запусках, случайный поиск — <span class="tex">N</span> разных значений каждого важного параметра.</p>
+</details>
+<details class="callout md details"><summary>Чем TPE отличается от гауссовского процесса?</summary>
+<p>TPE моделирует <span class="tex">p(\theta\mid y)</span>: делит запуски на хорошие и плохие по квантилю метрики, оценивает плотности <span class="tex">l</span> и <span class="tex">g</span> и берёт точки с максимальным <span class="tex">l/g</span>. Он работает с условными и категориальными пространствами.</p>
+</details>
+<details class="callout md details"><summary>Почему PDP может быть плоским при сильном влиянии признака?</summary>
+<p>Усреднение скрывает разнонаправленные эффекты: для одной группы объектов отклик растёт, для другой падает. ICE-кривые это показывают.</p>
+</details>
+<details class="callout md details"><summary>Что гарантируют значения Шепли и почему TreeSHAP быстрый?</summary>
+<p>Локальную точность (вклады дают прогноз минус среднее), нулевой вклад для неиспользуемого признака, согласованность. TreeSHAP использует структуру деревьев и считает точные значения за полиномиальное время вместо <span class="tex">2^p</span> коалиций.</p>
+</details>
 <h2 id="что-почитать">Что почитать</h2>
 <ul>
 <li>Bergstra J., Bengio Y. <em>Random Search for Hyper-Parameter Optimization</em>, JMLR, 2012: https://jmlr.org/papers/v13/bergstra12a.html</li>
@@ -215,6 +267,8 @@ shap<span class="tok-p">.</span>plots<span class="tok-p">.</span>waterfall<span 
       
 
       
+
+      
       <nav class="pager" aria-label="Соседние статьи">
         <a href="/edufamcs-demo/handbook/classic/gradientnyj-busting/"><span><svg class="ico sm" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-arrow-left"/></svg>Назад</span>Градиентный бустинг</a>
         <a href="/edufamcs-demo/handbook/classic/klasterizaciya/"><span>Дальше<svg class="ico sm" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-arrow"/></svg></span>Кластеризация: k-means, иерархическая, DBSCAN</a>
@@ -223,7 +277,7 @@ shap<span class="tok-p">.</span>plots<span class="tok-p">.</span>waterfall<span 
     </article>
 
     <aside class="hb-toc" aria-label="На этой странице">
-      <a class="l2" href="#параметры-и-гиперпараметры">Параметры и гиперпараметры</a><a class="l2" href="#кросс-валидация">Кросс-валидация</a><a class="l3" href="#вложенная-кросс-валидация">Вложенная кросс-валидация</a><a class="l2" href="#стратегии-поиска">Стратегии поиска</a><a class="l2" href="#зачем-нужна-интерпретируемость">Зачем нужна интерпретируемость</a><a class="l2" href="#permutation-importance">Permutation importance</a><a class="l2" href="#pdp-и-ice">PDP и ICE</a><a class="l2" href="#shap">SHAP</a><a class="l2" href="#lime">LIME</a><a class="l2" href="#ловушки-интерпретации">Ловушки интерпретации</a><a class="l2" href="#код">Код</a><a class="l2" href="#что-почитать">Что почитать</a>
+      <a class="l2" href="#параметры-и-гиперпараметры">Параметры и гиперпараметры</a><a class="l2" href="#кросс-валидация">Кросс-валидация</a><a class="l3" href="#вложенная-кросс-валидация">Вложенная кросс-валидация</a><a class="l3" href="#правило-одной-стандартной-ошибки">Правило одной стандартной ошибки</a><a class="l2" href="#стратегии-поиска">Стратегии поиска</a><a class="l2" href="#зачем-нужна-интерпретируемость">Зачем нужна интерпретируемость</a><a class="l2" href="#permutation-importance">Permutation importance</a><a class="l2" href="#pdp-и-ice">PDP и ICE</a><a class="l2" href="#shap">SHAP</a><a class="l2" href="#lime">LIME</a><a class="l2" href="#ловушки-интерпретации">Ловушки интерпретации</a><a class="l2" href="#ловушки-при-подборе">Ловушки при подборе</a><a class="l2" href="#код">Код</a><a class="l2" href="#проверь-себя">Проверь себя</a><a class="l2" href="#что-почитать">Что почитать</a>
     </aside>
   </div>
 </div>

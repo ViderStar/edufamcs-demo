@@ -37,3 +37,23 @@
     if (a) a.closest('details').removeAttribute('open');
   });
 })();
+
+/* Reading progress: how far the article text has scrolled past the top of the viewport. */
+(function () {
+  'use strict';
+  var bar = document.querySelector('.hb-readbar');
+  var prose = document.querySelector('.hb-main .prose');
+  if (!bar || !prose) return;
+  var ticking = false;
+  function update() {
+    ticking = false;
+    var r = prose.getBoundingClientRect();
+    var total = r.height - window.innerHeight * 0.6;
+    var done = Math.min(Math.max(-r.top + 80, 0), Math.max(total, 1));
+    bar.style.setProperty('--v', (total > 0 ? (100 * done / total) : 100).toFixed(1) + '%');
+  }
+  function onScroll() { if (!ticking) { ticking = true; window.requestAnimationFrame(update); } }
+  window.addEventListener('scroll', onScroll, { passive: true });
+  window.addEventListener('resize', onScroll, { passive: true });
+  update();
+})();

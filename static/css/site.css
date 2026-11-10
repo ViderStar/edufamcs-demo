@@ -15,6 +15,22 @@ main{flex:1}
 .skip{position:absolute;left:-999px;top:8px;z-index:100;padding:8px 14px;border-radius:var(--r-pill);background:var(--accent);color:var(--on-accent)}
 .skip:focus{left:8px}
 
+/* Markdown callouts (:::tip / :::warn / :::note) and self-check answers (:::details) — apps/core/markdown.py */
+.callout.md{display:block;border-left:3px solid var(--c);border-radius:var(--r-sm) var(--r-md) var(--r-md) var(--r-sm)}
+.callout.md>*+*{margin-top:.6em}
+.callout.md .callout-title{font-weight:700;color:var(--text);font-size:14px;letter-spacing:.01em}
+.callout.md .code{margin-top:.8em}
+.callout.md.note{--c:var(--muted);--c-soft:var(--surface-2)}
+details.callout.md{--c:var(--accent-ink);--c-soft:var(--surface-2);padding:0}
+details.callout.md>summary{list-style:none;cursor:pointer;display:flex;align-items:flex-start;gap:10px;padding:14px 16px;font-weight:600;color:var(--text);margin:0}
+details.callout.md>summary::-webkit-details-marker{display:none}
+details.callout.md>summary::before{content:"";flex:none;width:8px;height:8px;margin-top:.5em;border-right:2px solid var(--c);border-bottom:2px solid var(--c);transform:rotate(-45deg);transition:transform var(--dur-2)}
+details.callout.md[open]>summary::before{transform:rotate(45deg)}
+details.callout.md>summary:focus-visible{outline:2px solid var(--focus);outline-offset:2px;border-radius:var(--r-sm)}
+details.callout.md>:not(summary){margin:0 16px 14px 34px}
+details.callout.md>summary+*{margin-top:0}
+.prose details.callout.md+details.callout.md{margin-top:.5em}
+
 /* user menu (native <details>, closed by site.js on outside click / Esc) */
 .user-menu{position:relative}
 .user-menu>summary{list-style:none;cursor:pointer;display:inline-flex;align-items:center;gap:6px;border-radius:var(--r-pill);padding:2px}

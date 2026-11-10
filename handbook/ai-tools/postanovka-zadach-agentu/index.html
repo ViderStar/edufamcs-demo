@@ -1,0 +1,266 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Как ставить задачу агенту · EDU FAMCS</title>
+<meta name="description" content="Как ставить задачу агенту — ИИ-ассистенты для кода. Хендбук ML-курса ФПМИ.">
+<meta name="theme-color" content="#060A16">
+<meta name="robots" content="noindex, nofollow">
+<meta name="htmx-config" content='{"allowEval":false,"includeIndicatorStyles":false,"historyCacheSize":0,"selfRequestsOnly":true}'>
+<meta name="katex-js" content="/edufamcs-demo/static/vendor/katex/katex.min.js">
+<meta name="katex-css" content="/edufamcs-demo/static/vendor/katex/katex.min.css">
+<link rel="icon" href="/edufamcs-demo/static/brand/logo/favicon-16.svg" type="image/svg+xml" sizes="16x16">
+<link rel="icon" href="/edufamcs-demo/static/brand/logo/favicon.svg" type="image/svg+xml" sizes="any">
+<link rel="preload" href="/edufamcs-demo/static/brand/fonts/manrope-cyrillic-400.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/edufamcs-demo/static/brand/fonts/unbounded-cyrillic-800.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="/edufamcs-demo/static/brand/fonts.css">
+<link rel="stylesheet" href="/edufamcs-demo/static/brand/tokens.css">
+<link rel="stylesheet" href="/edufamcs-demo/static/brand/components.css">
+<link rel="stylesheet" href="/edufamcs-demo/static/css/site.css">
+<link rel="stylesheet" href="/edufamcs-demo/static/css/hub.css">
+<link rel="stylesheet" href="/edufamcs-demo/static/css/about.css">
+<link rel="stylesheet" href="/edufamcs-demo/static/handbook/handbook.css">
+<script src="/edufamcs-demo/static/js/theme.js"></script>
+<script src="/edufamcs-demo/static/vendor/htmx/htmx.min.js" defer></script>
+<script src="/edufamcs-demo/static/vendor/alpine/alpine-csp.min.js" defer></script>
+<script src="/edufamcs-demo/static/js/site.js" defer></script>
+<script src="/edufamcs-demo/static/handbook/handbook.js" defer></script>
+</head>
+<body class="" hx-headers='{"X-CSRFToken": "LEmg7T4A9RHeBD8CY7d83XB4YiAec7b4nRbdnVDraEVNMWn4XAr5LQt2qrHcWRaL"}'>
+<a class="skip" href="#main">К содержанию</a>
+<div class="demo-bar" role="note">Демо-версия для отзывов: вход, запись на курсы и формы здесь не работают.</div>
+
+<header class="hdr">
+  <div class="container">
+    <a class="brand" href="/edufamcs-demo/" aria-label="EDU FAMCS — главная">
+      <span class="full"><img class="only-light" src="/edufamcs-demo/static/brand/logo/logo-edu-light.svg" alt="EDU FAMCS" width="196" height="40"><img class="only-dark" src="/edufamcs-demo/static/brand/logo/logo-edu-dark.svg" alt="EDU FAMCS" width="196" height="40"></span>
+      <span class="short"><img class="only-light" src="/edufamcs-demo/static/brand/logo/logo-edu-light.svg" alt="EDU FAMCS" height="30"><img class="only-dark" src="/edufamcs-demo/static/brand/logo/logo-edu-dark.svg" alt="EDU FAMCS" height="30"></span>
+    </a>
+    <nav class="nav" id="main-nav" aria-label="Основная навигация">
+      <a href="/edufamcs-demo/#courses">Курсы</a>
+      <a href="/edufamcs-demo/ml/" >Машинное обучение</a>
+      
+      <a href="/edufamcs-demo/handbook/" aria-current="page">Хендбук</a>
+      <a href="/edufamcs-demo/news/" >Новости</a>
+      <a href="/edufamcs-demo/people/" >Авторы</a>
+      <a href="/edufamcs-demo/about/" >О&nbsp;нас</a>
+    </nav>
+    <div class="hdr-actions">
+      
+      <a class="btn btn-outline btn-login" href="/edufamcs-demo/accounts/login/?next=/handbook/ai-tools/postanovka-zadach-agentu/">Войти</a>
+      
+      <button class="icon-btn menu-btn" type="button" aria-label="Меню" aria-expanded="false" aria-controls="main-nav"><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-menu"/></svg></button>
+    </div>
+  </div>
+</header>
+
+<main id="main">
+
+
+
+<div class="container hb-page s-agents">
+  <div class="hb-readbar" aria-hidden="true"><i></i></div>
+  <div class="hb">
+    <aside class="hb-nav" aria-label="Статьи раздела">
+      
+<form class="hb-search" action="/edufamcs-demo/handbook/search/" method="get" role="search">
+  <svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-search"/></svg>
+  <input class="input" type="search" name="q" value="" placeholder="Поиск по хендбуку" aria-label="Поиск по хендбуку" autocomplete="off" maxlength="120"
+    hx-get="/edufamcs-demo/handbook/search/" hx-trigger="input changed delay:250ms, search" hx-target="#hb-nav-results" hx-sync="this:replace">
+</form>
+
+      <div id="hb-nav-results" class="hb-nav-results" aria-live="polite"></div>
+      <a class="grp" href="/edufamcs-demo/handbook/ai-tools/">Основы</a>
+      
+      <a class="" href="/edufamcs-demo/handbook/ai-tools/kak-ustroen-kodovyj-agent/">Как устроен кодовый агент: модель, инструменты, контекст</a>
+      
+      <a class="" href="/edufamcs-demo/handbook/ai-tools/claude-code/">Claude Code: установка, режимы, CLAUDE.md</a>
+      
+      <a class="" href="/edufamcs-demo/handbook/ai-tools/codex/">Codex CLI: AGENTS.md, песочница, согласования</a>
+      
+      <a class="cur" href="/edufamcs-demo/handbook/ai-tools/postanovka-zadach-agentu/" aria-current="page">Как ставить задачу агенту</a>
+      
+    </aside>
+
+    <article class="hb-main">
+      <nav class="crumbs" aria-label="Навигация"><a href="/edufamcs-demo/handbook/">Хендбук</a><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-chev"/></svg><a href="/edufamcs-demo/handbook/ai-tools/">ИИ-ассистенты для кода</a></nav>
+      <h1 class="h1">Как ставить задачу агенту</h1>
+      <div class="hb-meta">
+        
+        
+        <span><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-clock"/></svg>10&nbsp;мин</span>
+        <span class="hb-authors"><span class="avatar sm" title="Артем Лебедевич">АЛ</span>Артем Лебедевич</span>
+        <span><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-edit"/></svg>10 ноября 2026</span>
+        
+        
+      </div>
+
+      
+      <details class="hb-mtoc">
+        <summary><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-list"/></svg>Содержание<svg class="ico sm" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-chev-down"/></svg></summary>
+        <a class="l2" href="#анатомия-хорошей-задачи">Анатомия хорошей задачи</a><a class="l2" href="#плохо-и-хорошо-пары-для-ml-задач">Плохо и хорошо: пары для ML-задач</a><a class="l2" href="#сначала-план">Сначала план</a><a class="l2" href="#маленькие-проверяемые-шаги">Маленькие проверяемые шаги</a><a class="l2" href="#требуйте-доказательства">Требуйте доказательства</a><a class="l2" href="#когда-прервать-и-начать-заново">Когда прервать и начать заново</a><a class="l2" href="#дифф-ваша-работа">Дифф — ваша работа</a><a class="l2" href="#примеры-и-образцы">Примеры и образцы</a><a class="l2" href="#длинные-задачи-заметки-и-контрольные-точки">Длинные задачи: заметки и контрольные точки</a><a class="l2" href="#антипаттерны">Антипаттерны</a><a class="l2" href="#ловушки">Ловушки</a><a class="l2" href="#проверь-себя">Проверь себя</a><a class="l2" href="#что-почитать">Что почитать</a>
+      </details>
+      
+
+      <div class="prose"><p>Качество результата агента во многом определяется постановкой. Агент не знает того, что вы держите в голове: какая метрика считается главной, какие данные трогать нельзя, что значит «готово». Хорошая постановка похожа на тикет для толкового коллеги, который видит репозиторий, но не присутствовал на ваших обсуждениях. Инструкции под конкретные инструменты меняются, а принципы ниже работают с любым агентом.</p>
+<h2 id="анатомия-хорошей-задачи">Анатомия хорошей задачи</h2>
+<p>Пять элементов; не всегда нужны все, но пропуск должен быть осознанным.</p>
+<ol>
+<li><strong>Цель</strong> — что должно появиться или измениться и зачем. «Нужна воспроизводимая оценка бейзлайна, чтобы сравнивать с ней модели».</li>
+<li><strong>Контекст</strong> — где смотреть: файлы, существующие образцы, формат данных. Укажите пути, а не «в проекте где-то».</li>
+<li><strong>Ограничения</strong> — что нельзя: менять <code>data/raw/</code>, добавлять зависимости, трогать тесты, переписывать архитектуру.</li>
+<li><strong>Критерий готовности</strong> — наблюдаемое условие: «<code>uv run pytest</code> зелёный, <code>recall@10</code> на валидации напечатан».</li>
+<li><strong>Способ проверки</strong> — как агент убедится сам: команда, скрипт, эталонное значение. Без него «готово» означает «выглядит правдоподобно» (<a href="/edufamcs-demo/handbook/ai-tools/kak-ustroen-kodovyj-agent/" rel="noopener noreferrer nofollow">почему</a>).</li>
+</ol>
+<p>Шаблон:</p>
+<div class="code"><div class="code-head"><span class="lang">text</span></div><pre><code>Цель: &lt;что и зачем&gt;
+Контекст: смотри &lt;файлы&gt;; образец — &lt;похожий модуль&gt;
+Ограничения: не менять &lt;...&gt;; без новых зависимостей
+Готово, когда: &lt;команда&gt; проходит; &lt;число&gt; напечатано
+Проверь сам: запусти &lt;команда&gt; и покажи вывод
+</code></pre></div>
+<h2 id="плохо-и-хорошо-пары-для-ml-задач">Плохо и хорошо: пары для ML-задач</h2>
+<p><strong>EDA</strong></p>
+<div class="code"><div class="code-head"><span class="lang">text</span></div><pre><code>Плохо:  Сделай EDA датасета.
+Хорошо: В data/train.parquet (цель — churn, дата события — event_ts) посчитай: долю
+        пропусков по столбцам, баланс классов, число дублей по user_id, распределение
+        event_ts по неделям. Выведи таблицами в stdout, графики не нужны. Если встретишь
+        признак, который выглядит как следствие цели (почти идеально коррелирует), назови
+        его отдельным списком — без удаления.
+</code></pre></div>
+<p><strong>Бейзлайн</strong></p>
+<div class="code"><div class="code-head"><span class="lang">text</span></div><pre><code>Плохо:  Построй модель для предсказания оттока.
+Хорошо: Построй бейзлайн: логистическая регрессия на числовых признаках из src/features.py.
+        Разбиение — по времени, как в src/split.py (не случайное). Метрика — PR-AUC на
+        валидации. Выведи PR-AUC и PR-AUC константного предсказания (доля положительных)
+        рядом. Фиксируй seed. Код — в scripts/baseline.py.
+</code></pre></div>
+<p><strong>Рефакторинг ноутбука</strong></p>
+<div class="code"><div class="code-head"><span class="lang">text</span></div><pre><code>Плохо:  Приведи ноутбук в порядок.
+Хорошо: Вынеси из notebooks/exp3.ipynb в src/ функции подготовки признаков и расчёта
+        метрик, не меняя логику. До и после запусти ноутбук и сравни метрику на валидации:
+        должна совпасть до 4-го знака. Покажи оба числа. Сами ячейки оставь, замени на импорты.
+</code></pre></div>
+<p><strong>Падающий тест</strong></p>
+<div class="code"><div class="code-head"><span class="lang">text</span></div><pre><code>Плохо:  Тесты падают, почини.
+Хорошо: tests/test_metrics.py::test_ndcg_ties падает. Запусти его, найди причину в
+        src/metrics.py. Тест не менять: он задаёт ожидаемое поведение. Если считаешь, что
+        тест неверен, объясни почему и остановись, не правь.
+</code></pre></div>
+<p><strong>Ускорение цикла обучения</strong></p>
+<div class="code"><div class="code-head"><span class="lang">text</span></div><pre><code>Плохо:  Ускорь обучение.
+Хорошо: Цикл в train.py делает ~N шагов в секунду. Сначала замерь (профилировщик или
+        простые таймеры), покажи, где уходит время. Предложи 2–3 правки с ожидаемым
+        выигрышем; примени по одной; после каждой — тот же замер и проверка, что loss на
+        первых 200 шагах тот же с точностью до шума при фиксированном seed.
+</code></pre></div>
+<p>Общий приём: в хорошей версии есть конкретные файлы, ограничение, число для сравнения и явное «если не уверен — остановись».</p>
+<h2 id="сначала-план">Сначала план</h2>
+<p>Для всего нетривиального попросите план без правок: затронутые файлы, порядок шагов, что проверяется на каждом, риски. Читать план намного дешевле, чем разбирать готовый дифф на двадцать файлов; неверное допущение (знаменатель метрики, источник данных, схема разбиения) ловится на этом этапе. В <a href="/edufamcs-demo/handbook/ai-tools/claude-code/" rel="noopener noreferrer nofollow">Claude Code</a> для этого есть режим планирования, но подойдёт и просьба «пока ничего не меняй, только план».</p>
+<h2 id="маленькие-проверяемые-шаги">Маленькие проверяемые шаги</h2>
+<p>Разбивайте работу на шаги, каждый из которых можно проверить за минуту: «сначала функция и тест на ручном примере, затем подключение в пайплайн, затем прогон на выборке». После каждого шага — коммит. Так ошибка локализуется до одного коммита, а откат стоит одной команды. Одна огромная задача «сделай всё» порождает дифф, который вы не прочтёте.</p>
+<h2 id="требуйте-доказательства">Требуйте доказательства</h2>
+<p>Просите не «проверь», а «запусти и покажи вывод»: команда, её вывод, число. Фраза «все тесты проходят» без вывода ничего не значит. Для числовых результатов: «покажи значение метрики и команду, которой оно получено», «сравни с константным предсказанием». Полезный приём — попросить агента сначала написать проверку, убедиться, что она падает на неправильном коде, а затем писать решение.</p>
+<h2 id="когда-прервать-и-начать-заново">Когда прервать и начать заново</h2>
+<p>Если агент пошёл не туда, а вы спорите уже третье сообщение, контекст загрязнён неудачными попытками. Остановите его (в большинстве инструментов есть клавиша прерывания), откатите правки через git или чекпоинт, перепишите задачу с учётом того, чего не хватало, и начните новую сессию. Признаки: агент повторяет один и тот же провалившийся подход, «чинит» симптом, просит всё больше разрешений, противоречит собственным прежним выводам. Перезапуск с хорошей постановкой обычно быстрее, чем спасение сессии.</p>
+<div class="callout md tip"><p class="callout-title">Правило трёх сообщений</p>
+<p>Не исправилось после двух уточнений — не пишите третье, а исправьте исходную постановку и начните с чистого контекста.</p>
+</div>
+<h2 id="дифф-ваша-работа">Дифф — ваша работа</h2>
+<p>Агент отвечает за черновик, вы — за результат. Читайте дифф целиком: что изменено, чего изменено не должно было быть (тесты, конфиги, данные), нет ли «заодно» добавленных зависимостей, подавленных предупреждений, <code>try/except: pass</code>. Для ML-кода отдельно проверьте: откуда берутся данные для оценки, нет ли подгонки под тест, как задан seed. Подробнее о том, как превратить «понял на глаз» в «проверил» — в статье про <a href="/edufamcs-demo/handbook/ai-tools/vajb-koding-i-zashchita/" rel="noopener noreferrer nofollow">защиту проекта</a>.</p>
+<h2 id="примеры-и-образцы">Примеры и образцы</h2>
+<p>«Сделай так же, как в <code>src/models/gbdt.py</code>» работает лучше длинного описания стиля. Дайте образец структуры, формат ожидаемого вывода, пример входа и выхода функции. Если задача новая для кодовой базы, приложите ссылку или выдержку документации библиотеки: иначе агент опирается на память о более старой версии API.</p>
+<h2 id="длинные-задачи-заметки-и-контрольные-точки">Длинные задачи: заметки и контрольные точки</h2>
+<p>Если работа не умещается в одну сессию, ведите файл заметок в репозитории (например, <code>notes/task.md</code>): цель, принятые решения, что сделано, что осталось, команды запуска. Просите агента обновлять его по ходу и перечитывать в начале новой сессии. Это надёжнее, чем рассчитывать, что сжатая история сохранит детали. Контрольные точки — коммиты на каждом работающем состоянии и короткое сообщение о том, что именно проверено.</p>
+<h2 id="антипаттерны">Антипаттерны</h2>
+<ul>
+<li>«Сделай лучше», «оптимизируй», «приведи в порядок» без критерия: агент выберет критерий сам, и это будет не ваш.</li>
+<li>Вставка секретов (ключей, паролей, токенов, строк подключения с паролем) в промпт: они остаются в истории и логах. Давайте имена переменных окружения.</li>
+<li>Принять код, который никто не запускал, потому что «выглядит нормально».</li>
+<li>Разрешить агенту править тесты, чтобы «зелёное» стало зелёным. Запретите явно и проверяйте дифф по каталогу <code>tests/</code>.</li>
+<li>Задача из десяти пунктов в одном сообщении.</li>
+<li>Игнорировать числа, которые «слишком хороши»: метрика 0.99 на задаче с шумом — повод искать утечку, а не праздновать.</li>
+</ul>
+<div class="callout md note"><p class="callout-title">Заметка</p>
+<p>Продукты и их возможности меняются, но этот набор приёмов не зависит от конкретного инструмента; для деталей инструмента см. его официальную документацию.</p>
+</div>
+<h2 id="ловушки">Ловушки</h2>
+<ul>
+<li>Контекст «очевиден» вам, но не агенту: он не знает ваших договорённостей, пока их не прочитает в файле.</li>
+<li>Критерий готовности без команды проверки: агент закончит, когда ему покажется.</li>
+<li>Слишком подробная пошаговая диктовка: вы теряете преимущество агента и платите за него. Диктуйте ограничения и проверку, а не каждый шаг.</li>
+<li>Правки одной сессии без коммитов: откат превращается в ручную работу.</li>
+</ul>
+<h2 id="проверь-себя">Проверь себя</h2>
+<details class="callout md details"><summary>Из каких элементов состоит хорошая постановка?</summary>
+<p>Цель, контекст (файлы и образцы), ограничения, критерий готовности и способ проверки.</p>
+</details>
+<details class="callout md details"><summary>Почему для нетривиальной задачи просят сначала план?</summary>
+<p>Ошибочное допущение дешевле поймать в плане из десяти строк, чем в готовом диффе; план задаёт порядок и точки проверки.</p>
+</details>
+<details class="callout md details"><summary>Как поступить, если агент после двух уточнений всё ещё идёт не туда?</summary>
+<p>Прервать, откатить правки, переписать исходную задачу и начать новую сессию: история с неудачными попытками мешает.</p>
+</details>
+<details class="callout md details"><summary>Почему нельзя позволять агенту править тесты, чтобы они проходили?</summary>
+<p>Тест — спецификация поведения. Подгонка теста скрывает ошибку в коде и делает зелёный результат бессодержательным.</p>
+</details>
+<details class="callout md details"><summary>Как вести задачу, которая длится несколько сессий?</summary>
+<p>Файл заметок в репозитории (цель, решения, статус, команды), коммиты на каждом рабочем состоянии, перечитывание заметок в начале сессии.</p>
+</details>
+<h2 id="что-почитать">Что почитать</h2>
+<ul>
+<li><a href="https://code.claude.com/docs/en/best-practices" rel="noopener noreferrer nofollow">Best practices for Claude Code</a> — как формулировать задачи, давать проверку и управлять контекстом.</li>
+<li><a href="https://code.claude.com/docs/en/common-workflows" rel="noopener noreferrer nofollow">Common workflows</a> — рецепты для отладки, рефакторинга, тестов, PR.</li>
+<li><a href="https://agents.md" rel="noopener noreferrer nofollow">AGENTS.md</a> — что стоит вынести в постоянные инструкции, чтобы не повторять в каждой задаче.</li>
+<li><a href="https://learn.chatgpt.com/docs/codex/cli" rel="noopener noreferrer nofollow">Codex CLI</a> — как те же принципы реализованы в другом агенте.</li>
+</ul>
+</div>
+      
+
+      
+
+      
+      <nav class="pager" aria-label="Соседние статьи">
+        <a href="/edufamcs-demo/handbook/ai-tools/codex/"><span><svg class="ico sm" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-arrow-left"/></svg>Назад</span>Codex CLI: AGENTS.md, песочница, согласования</a>
+        <a href="/edufamcs-demo/handbook/ai-tools/skills/"><span>Дальше<svg class="ico sm" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-arrow"/></svg></span>Скиллы: SKILL.md и как написать свой</a>
+      </nav>
+      
+    </article>
+
+    <aside class="hb-toc" aria-label="На этой странице">
+      <a class="l2" href="#анатомия-хорошей-задачи">Анатомия хорошей задачи</a><a class="l2" href="#плохо-и-хорошо-пары-для-ml-задач">Плохо и хорошо: пары для ML-задач</a><a class="l2" href="#сначала-план">Сначала план</a><a class="l2" href="#маленькие-проверяемые-шаги">Маленькие проверяемые шаги</a><a class="l2" href="#требуйте-доказательства">Требуйте доказательства</a><a class="l2" href="#когда-прервать-и-начать-заново">Когда прервать и начать заново</a><a class="l2" href="#дифф-ваша-работа">Дифф — ваша работа</a><a class="l2" href="#примеры-и-образцы">Примеры и образцы</a><a class="l2" href="#длинные-задачи-заметки-и-контрольные-точки">Длинные задачи: заметки и контрольные точки</a><a class="l2" href="#антипаттерны">Антипаттерны</a><a class="l2" href="#ловушки">Ловушки</a><a class="l2" href="#проверь-себя">Проверь себя</a><a class="l2" href="#что-почитать">Что почитать</a>
+    </aside>
+  </div>
+</div>
+
+
+</main>
+
+<footer class="ftr" data-theme="dark">
+  <svg class="sym fern" viewBox="0 0 40.5 65.02" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#fern"/></svg>
+  <div class="container">
+    <div class="ftr-row">
+      <a href="/edufamcs-demo/" aria-label="EDU FAMCS — главная"><img src="/edufamcs-demo/static/brand/logo/logo-edu-dark.svg" alt="EDU FAMCS" width="196" height="40"></a>
+      <ul class="ftr-links">
+        <li><a href="/edufamcs-demo/#courses">Курсы</a></li>
+        <li><a href="/edufamcs-demo/ml/">Машинное обучение</a></li>
+        <li><a href="/edufamcs-demo/handbook/">Хендбук</a></li>
+        <li><a href="/edufamcs-demo/news/">Новости</a></li>
+        <li><a href="/edufamcs-demo/people/">Авторы</a></li>
+        <li><a href="/edufamcs-demo/about/">О&nbsp;нас</a></li>
+        <li><a href="/edufamcs-demo/propose/">Предложить или исправить</a></li>
+        <li><a href="/edufamcs-demo/privacy/">Конфиденциальность</a></li>
+      </ul>
+    </div>
+    <div class="ftr-big" aria-hidden="true">EDU<span class="d">·</span>FAMCS</div>
+    <p class="ftr-copy">© 2026 EDU FAMCS · Минск</p>
+  </div>
+</footer>
+
+<div class="toasts-region" aria-live="polite" id="toasts">
+
+</div>
+
+</body>
+</html>

@@ -27,7 +27,7 @@
 <script src="/edufamcs-demo/static/js/site.js" defer></script>
 <script src="/edufamcs-demo/static/handbook/handbook.js" defer></script>
 </head>
-<body class="" hx-headers='{"X-CSRFToken": "kqsPrv04sRTeimI6wfkBTvJJdnSuMTvX6wtcliiLD49sXVEmJEdGaXR4JKuJREgW"}'>
+<body class="" hx-headers='{"X-CSRFToken": "sirE7PbzdHgqaXYtIgB4m0kGSfzBWlB24vgBnRKqeuuZlgdVHJP14TcEkoGzG5AJ"}'>
 <a class="skip" href="#main">К содержанию</a>
 <div class="demo-bar" role="note">Демо-версия для отзывов: вход, запись на курсы и формы здесь не работают.</div>
 
@@ -60,6 +60,7 @@
 
 
 <div class="container hb-page hb-tone">
+  <div class="hb-readbar" aria-hidden="true"><i></i></div>
   <div class="hb">
     <aside class="hb-nav" aria-label="Статьи раздела">
       
@@ -78,6 +79,8 @@
       
       <a class="" href="/edufamcs-demo/handbook/math/gradienty-i-optimizaciya/">Производные, градиенты и оптимизация</a>
       
+      <a class="" href="/edufamcs-demo/handbook/math/matrichnoe-differencirovanie/">Матричное дифференцирование</a>
+      
     </aside>
 
     <article class="hb-main">
@@ -86,9 +89,9 @@
       <div class="hb-meta">
         
         
-        <span><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-clock"/></svg>10&nbsp;мин</span>
+        <span><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-clock"/></svg>13&nbsp;мин</span>
         <span class="hb-authors"><span class="avatar sm" title="Артем Лебедевич">АЛ</span>Артем Лебедевич</span>
-        <span><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-edit"/></svg>9 ноября 2026</span>
+        <span><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-edit"/></svg>10 ноября 2026</span>
         
         
       </div>
@@ -96,7 +99,7 @@
       
       <details class="hb-mtoc">
         <summary><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-list"/></svg>Содержание<svg class="ico sm" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-chev-down"/></svg></summary>
-        <a class="l2" href="#собственные-значения-и-векторы">Собственные значения и векторы</a><a class="l2" href="#симметричные-матрицы-и-спектральная-теорема">Симметричные матрицы и спектральная теорема</a><a class="l2" href="#сингулярное-разложение-svd">Сингулярное разложение (SVD)</a><a class="l3" href="#теорема-эккартаянга">Теорема Эккарта–Янга</a><a class="l2" href="#псевдообратная-матрица-мнк-и-обусловленность">Псевдообратная матрица, МНК и обусловленность</a><a class="l2" href="#где-это-встречается">Где это встречается</a><a class="l2" href="#ловушки">Ловушки</a><a class="l2" href="#что-почитать">Что почитать</a>
+        <a class="l2" href="#собственные-значения-и-векторы">Собственные значения и векторы</a><a class="l2" href="#симметричные-матрицы-и-спектральная-теорема">Симметричные матрицы и спектральная теорема</a><a class="l2" href="#сингулярное-разложение-svd">Сингулярное разложение (SVD)</a><a class="l3" href="#теорема-эккартаянга">Теорема Эккарта–Янга</a><a class="l2" href="#псевдообратная-матрица-мнк-и-обусловленность">Псевдообратная матрица, МНК и обусловленность</a><a class="l2" href="#где-это-встречается">Где это встречается</a><a class="l2" href="#ловушки">Ловушки</a><a class="l2" href="#проверь-себя">Проверь себя</a><a class="l2" href="#что-почитать">Что почитать</a>
       </details>
       
 
@@ -110,9 +113,12 @@
 <p>В ML почти все интересные матрицы симметричны: ковариационная <span class="tex">\Sigma</span>, матрица Грама <span class="tex">X^\top X</span>, гессиан, лапласиан графа. Для них действует <strong>спектральная теорема</strong>: если <span class="tex">A=A^\top</span>, то все <span class="tex">\lambda_i</span> вещественны, собственные векторы разных <span class="tex">\lambda</span> ортогональны, и существует ортонормированный базис из собственных векторов:</p>
 <div class="tex tex-block">A=Q\Lambda Q^\top,\qquad Q^\top Q=I.</div>
 <p>Здесь <span class="tex">Q^{-1}=Q^\top</span>, то есть <span class="tex">Q</span> — поворот (возможно, с отражением). Оператор: повернуть, растянуть вдоль осей на <span class="tex">\lambda_i</span>, повернуть обратно.</p>
+<p><strong>Пример руками.</strong> Для <span class="tex">S=\begin{pmatrix}2&amp;1\\1&amp;2\end{pmatrix}</span> характеристический многочлен <span class="tex">\det(S-\lambda I)=(2-\lambda)^2-1=0</span>, откуда <span class="tex">\lambda_1=3</span>, <span class="tex">\lambda_2=1</span> (проверка: <span class="tex">\mathrm{tr}\,S=4=3+1</span>, <span class="tex">\det S=3=3\cdot1</span>). Для <span class="tex">\lambda=3</span> система <span class="tex">(S-3I)v=0</span> сводится к <span class="tex">-v_1+v_2=0</span>, <span class="tex">v=(1,1)^\top</span>; для <span class="tex">\lambda=1</span> — к <span class="tex">v_1+v_2=0</span>, <span class="tex">v=(1,-1)^\top</span>. Они ортогональны, как и обещает теорема; нормируя, получаем</p>
+<div class="tex tex-block">Q=\frac1{\sqrt2}\begin{pmatrix}1&amp;1\\1&amp;-1\end{pmatrix},\quad\Lambda=\mathrm{diag}(3,1),\quad S=Q\Lambda Q^\top.</div>
+<p>Проверка по элементам: <span class="tex">S_{11}=\frac{3+1}{2}=2</span>, <span class="tex">S_{12}=\frac{3-1}{2}=1</span>. Квадратичная форма <span class="tex">x^\top Sx=3\,\frac{(x_1+x_2)^2}{2}+\frac{(x_1-x_2)^2}{2}</span> на единичной окружности достигает максимума <span class="tex">3</span> при <span class="tex">x=(1,1)^\top/\sqrt2</span> и минимума <span class="tex">1</span> при <span class="tex">x=(1,-1)^\top/\sqrt2</span>. Если бы <span class="tex">S</span> была ковариацией двух признаков, первая главная компонента шла бы по диагонали <span class="tex">x_1=x_2</span> и несла <span class="tex">3/4</span> дисперсии. <code>np.linalg.eigh</code> возвращает те же числа (знак векторов вправе отличаться).</p>
 <p><strong>Квадратичная форма</strong> <span class="tex">x^\top Ax=\sum_i\lambda_i (q_i^\top x)^2</span>. Симметричная матрица <strong>положительно полуопределена</strong> (<span class="tex">A\succeq0</span>), если <span class="tex">x^\top Ax\ge0</span> для всех <span class="tex">x</span>, что эквивалентно <span class="tex">\lambda_i\ge0</span>; положительно определена (<span class="tex">A\succ0</span>), если все <span class="tex">\lambda_i&gt;0</span>. Две главные матрицы:</p>
 <ul>
-<li>Ковариационная матрица <span class="tex">\Sigma=\frac1{n}X_c^\top X_c\succeq0</span>, поскольку <span class="tex">v^\top\Sigma v=\mathrm{Var}(v^\top x)\ge0</span> — дисперсия не отрицательна. Собственные векторы <span class="tex">\Sigma</span> — главные направления, <span class="tex">\lambda_i</span> — дисперсии вдоль них.</li>
+<li>Ковариационная матрица <span class="tex">\Sigma=\frac1{n-1}X_c^\top X_c\succeq0</span> (делитель <span class="tex">n</span> или <span class="tex">n-1</span> — вопрос соглашения; <code>np.cov</code> и scikit-learn берут <span class="tex">n-1</span>), поскольку <span class="tex">v^\top\Sigma v=\mathrm{Var}(v^\top x)\ge0</span> — дисперсия не отрицательна. Собственные векторы <span class="tex">\Sigma</span> — главные направления, <span class="tex">\lambda_i</span> — дисперсии вдоль них.</li>
 <li>Гессиан функции потерь <span class="tex">H</span> в точке минимума положительно полуопределён; <span class="tex">\nabla L=0</span> вместе с <span class="tex">H\succ0</span> — достаточное условие строгого локального минимума. Выпуклость функции эквивалентна <span class="tex">H\succeq0</span> всюду.</li>
 </ul>
 <p>Максимум <span class="tex">x^\top Ax</span> при <span class="tex">\|x\|=1</span> равен <span class="tex">\lambda_{\max}</span> и достигается на соответствующем собственном векторе (<strong>отношение Рэлея</strong>). Это и есть вывод PCA: направление максимальной дисперсии — старший собственный вектор ковариационной матрицы (<a href="/edufamcs-demo/handbook/classic/snizhenie-razmernosti/" rel="noopener noreferrer nofollow">снижение размерности</a>).</p>
@@ -130,11 +136,11 @@
 <p>Это математическое обоснование всего «низкорангового» ML. Если сингулярные числа затухают быстро, матрица почти лежит в <span class="tex">k</span>-мерном подпространстве, и хранить достаточно <span class="tex">k(m+n+1)</span> чисел вместо <span class="tex">mn</span>. На той же идее построена LoRA (Hu et al., 2021) для дообучения языковых моделей: приращение весов ищут сразу в виде произведения двух узких матриц, то есть низкоранговым.</p>
 <h2 id="псевдообратная-матрица-мнк-и-обусловленность">Псевдообратная матрица, МНК и обусловленность</h2>
 <p>Для <span class="tex">A=U\Sigma V^\top</span> <strong>псевдообратная матрица</strong> Мура–Пенроуза <span class="tex">A^+=V\Sigma^+U^\top</span>, где <span class="tex">\Sigma^+</span> получается обращением ненулевых <span class="tex">\sigma_i</span>. Решение МНК <span class="tex">\min_w\|Xw-y\|^2</span> с минимальной нормой при любом ранге <span class="tex">X</span> есть <span class="tex">\hat w=X^+y</span>. При полном ранге это <span class="tex">(X^\top X)^{-1}X^\top y</span> из <a href="/edufamcs-demo/handbook/math/vektory-i-matricy/" rel="noopener noreferrer nofollow">предыдущей главы</a>, но через SVD вычисляется без возведения <span class="tex">X</span> в квадрат. Именно этим пользуется <code>np.linalg.lstsq</code>.</p>
-<p>Устойчивость решения измеряет <strong>число обусловленности</strong> <span class="tex">\kappa(X)=\sigma_{\max}/\sigma_{\min}</span>. Относительное возмущение <span class="tex">y</span> может усилиться в <span class="tex">\hat w</span> до <span class="tex">\kappa</span> раз (а при возмущении самой <span class="tex">X</span> и большой невязке — до порядка <span class="tex">\kappa^2</span>); в <span class="tex">X^\top X</span> собственные значения равны <span class="tex">\sigma_i^2</span>, так что <span class="tex">\kappa(X^\top X)=\kappa(X)^2</span>. Если <span class="tex">\sigma_{\min}\to0</span> (почти коллинеарные признаки), веса неограниченно растут и скачут от выборки к выборке.</p>
+<p>Устойчивость решения измеряет <strong>число обусловленности</strong> <span class="tex">\kappa(X)=\sigma_{\max}/\sigma_{\min}</span>. Относительное возмущение <span class="tex">y</span> может усилиться в <span class="tex">\hat w</span> до <span class="tex">\kappa/\cos\theta</span> раз, где <span class="tex">\theta</span> — угол между <span class="tex">y</span> и <span class="tex">\mathrm{im}\,X</span>, <span class="tex">\cos\theta=\|X\hat w\|/\|y\|</span>: для совместной системы (<span class="tex">y\in\mathrm{im}\,X</span>, <span class="tex">\theta=0</span>) это ровно <span class="tex">\kappa</span>, а чем больше невязка, тем сильнее усиление (при возмущении самой <span class="tex">X</span> и большой невязке — до порядка <span class="tex">\kappa^2</span>); в <span class="tex">X^\top X</span> собственные значения равны <span class="tex">\sigma_i^2</span>, так что <span class="tex">\kappa(X^\top X)=\kappa(X)^2</span>. Если <span class="tex">\sigma_{\min}\to0</span> (почти коллинеарные признаки), веса неограниченно растут и скачут от выборки к выборке.</p>
 <p><strong>Гребневая регрессия</strong> решает <span class="tex">\min\|Xw-y\|^2+\lambda\|w\|^2</span> с решением <span class="tex">\hat w=(X^\top X+\lambda I)^{-1}X^\top y</span>. В SVD-координатах каждая компонента умножается на <span class="tex">\frac{\sigma_i}{\sigma_i^2+\lambda}</span> вместо <span class="tex">\frac1{\sigma_i}</span>: направления с малым <span class="tex">\sigma_i</span> подавляются, с большим — почти не меняются. Заодно <span class="tex">\kappa(X^\top X+\lambda I)=\frac{\sigma_{\max}^2+\lambda}{\sigma_{\min}^2+\lambda}</span> ограничено. Так <span class="tex">L_2</span>-регуляризация — одновременно статистический (меньше дисперсии) и вычислительный (хорошая обусловленность) приём.</p>
 <h2 id="где-это-встречается">Где это встречается</h2>
 <ul>
-<li><strong>PCA</strong> — SVD центрированной матрицы <span class="tex">X_c=U\Sigma V^\top</span>: главные компоненты — столбцы <span class="tex">V</span>, дисперсии — <span class="tex">\sigma_i^2/n</span>, проекции объектов — <span class="tex">U\Sigma</span>. Подробно: <a href="/edufamcs-demo/handbook/classic/snizhenie-razmernosti/" rel="noopener noreferrer nofollow">снижение размерности</a>.</li>
+<li><strong>PCA</strong> — SVD центрированной матрицы <span class="tex">X_c=U\Sigma V^\top</span>: главные компоненты — столбцы <span class="tex">V</span>, дисперсии — <span class="tex">\sigma_i^2/(n-1)</span> (при делителе <span class="tex">n</span> — <span class="tex">\sigma_i^2/n</span>), проекции объектов — <span class="tex">U\Sigma</span>. Подробно: <a href="/edufamcs-demo/handbook/classic/snizhenie-razmernosti/" rel="noopener noreferrer nofollow">снижение размерности</a>.</li>
 <li><strong>LSA</strong> (Deerwester et al., 1990) — усечённое SVD матрицы «слово×документ», скрытые «темы» ловят синонимию.</li>
 <li><strong>Рекомендации.</strong> Матрица оценок аппроксимируется <span class="tex">R\approx PQ^\top</span>. Конкурс Netflix Prize (2006–2009) закрепил SVD-подобные модели как стандарт; из-за пропусков в <span class="tex">R</span> обычное SVD не годится, и факторы подбирают по наблюдаемым ячейкам: <a href="/edufamcs-demo/handbook/recsys/matrichnye-razlozheniya-als/" rel="noopener noreferrer nofollow">матричные разложения и ALS</a>.</li>
 <li><strong>PageRank</strong> (Brin &amp; Page, 1998) — стационарный вектор марковской цепи случайного блуждания по ссылкам, то есть собственный вектор для <span class="tex">\lambda=1</span> матрицы переходов; находится степенным методом <span class="tex">x_{t+1}=Px_t</span>.</li>
@@ -175,7 +181,26 @@ U<span class="tok-p">,</span> s<span class="tok-p">,</span> Vt <span class="tok-
 <li><strong>Центрирование.</strong> PCA через SVD требует вычесть среднее по столбцам; без центрирования первая компонента просто указывает на среднее.</li>
 <li><strong>Пропуски в данных.</strong> SVD не умеет работать с «неизвестно»; заполнение нулями смещает предсказание оценок к «ничего не нравится». Для top-N по неявному фидбэку то же заполнение нулями (PureSVD, Cremonesi et al., 2010) — неожиданно сильный бейзлайн: там ноль честно значит «не взаимодействовал».</li>
 <li><strong>Решать через <span class="tex">X^\top X</span> при <span class="tex">\kappa&gt;10^4</span>.</strong> Двойная точность теряет примерно <span class="tex">\log_{10}\kappa^2</span> значащих цифр.</li>
+<li><strong>На собеседовании: как связаны PCA, SVD и собственные векторы?</strong> Главные компоненты — собственные векторы ковариации <span class="tex">X_c^\top X_c/(n-1)</span> и правые сингулярные векторы <span class="tex">X_c</span>; <span class="tex">\lambda_i=\sigma_i^2/(n-1)</span>. SVD применяют напрямую к <span class="tex">X_c</span>, не строя <span class="tex">X_c^\top X_c</span> (иначе <span class="tex">\kappa</span> возводится в квадрат).</li>
+<li><strong>На собеседовании: почему <span class="tex">\kappa(X^\top X)=\kappa(X)^2</span> и чем это грозит?</strong> Собственные значения <span class="tex">X^\top X</span> равны <span class="tex">\sigma_i^2</span>. При <span class="tex">\kappa(X)=10^4</span> нормальные уравнения теряют около 8 значащих цифр из 16.</li>
+<li><strong>На собеседовании: что такое LoRA с точки зрения SVD?</strong> Приращение весов <span class="tex">\Delta W=BA</span> ограничено рангом <span class="tex">r</span>; лучшее ранг-<span class="tex">r</span> приближение полного приращения даёт усечённое SVD (Эккарт–Янг), а LoRA находит ранг-<span class="tex">r</span> факторы обучением.</li>
 </ul>
+<h2 id="проверь-себя">Проверь себя</h2>
+<details class="callout md details"><summary>Почему у симметричной матрицы собственные значения вещественны, а векторы разных $\lambda$ ортогональны?</summary>
+<p>Из <span class="tex">Av=\lambda v</span> и <span class="tex">A=A^\top</span>: <span class="tex">\lambda\langle v,u\rangle=\langle Av,u\rangle=\langle v,Au\rangle=\mu\langle v,u\rangle</span> для векторов с <span class="tex">\lambda\ne\mu</span>, значит <span class="tex">\langle v,u\rangle=0</span>. Вещественность следует из того же расчёта с комплексным сопряжением.</p>
+</details>
+<details class="callout md details"><summary>Чему равны сингулярные числа матрицы $A$ через собственные значения?</summary>
+<p><span class="tex">\sigma_i=\sqrt{\lambda_i(A^\top A)}</span>, то есть корни ненулевых собственных значений <span class="tex">A^\top A</span> (они же — у <span class="tex">AA^\top</span>). Число ненулевых <span class="tex">\sigma_i</span> равно <span class="tex">\mathrm{rank}\,A</span>.</p>
+</details>
+<details class="callout md details"><summary>Что утверждает теорема Эккарта–Янга и зачем она нужна?</summary>
+<p>Лучшее приближение ранга не выше <span class="tex">k</span> в нормах Фробениуса и спектральной — усечённое SVD <span class="tex">A_k</span>, ошибка равна <span class="tex">\sum_{i&gt;k}\sigma_i^2</span> (в квадрате фробениусовой нормы) и <span class="tex">\sigma_{k+1}</span> (спектральной). На этом стоят PCA, LSA, сжатие эмбеддингов и LoRA.</p>
+</details>
+<details class="callout md details"><summary>Почему без центрирования первая главная компонента указывает на среднее?</summary>
+<p>Без вычитания среднего SVD раскладывает матрицу вторых моментов, а не ковариацию: если среднее далеко от нуля, оно даёт наибольший вклад в <span class="tex">\|X\|_F^2</span>, и старшее сингулярное направление почти совпадает с вектором среднего.</p>
+</details>
+<details class="callout md details"><summary>Как гребневая регрессия меняет решение МНК в SVD-координатах?</summary>
+<p>Множитель <span class="tex">1/\sigma_i</span> заменяется на <span class="tex">\sigma_i/(\sigma_i^2+\lambda)</span>: направления с малыми <span class="tex">\sigma_i</span> подавляются, с большими — почти не меняются; <span class="tex">\kappa</span> ограничено числом <span class="tex">(\sigma_{\max}^2+\lambda)/(\sigma_{\min}^2+\lambda)</span>.</p>
+</details>
 <h2 id="что-почитать">Что почитать</h2>
 <ul>
 <li>C. Eckart, G. Young. <em>The approximation of one matrix by another of lower rank</em>. Psychometrika, 1936; L. Mirsky. <em>Symmetric gauge functions and unitarily invariant norms</em>. Quarterly Journal of Mathematics, 1960.</li>
@@ -192,6 +217,8 @@ U<span class="tok-p">,</span> s<span class="tok-p">,</span> Vt <span class="tok-
       
 
       
+
+      
       <nav class="pager" aria-label="Соседние статьи">
         <a href="/edufamcs-demo/handbook/math/vektory-i-matricy/"><span><svg class="ico sm" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-arrow-left"/></svg>Назад</span>Векторы, матрицы и нормы</a>
         <a href="/edufamcs-demo/handbook/math/gradienty-i-optimizaciya/"><span>Дальше<svg class="ico sm" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-arrow"/></svg></span>Производные, градиенты и оптимизация</a>
@@ -200,7 +227,7 @@ U<span class="tok-p">,</span> s<span class="tok-p">,</span> Vt <span class="tok-
     </article>
 
     <aside class="hb-toc" aria-label="На этой странице">
-      <a class="l2" href="#собственные-значения-и-векторы">Собственные значения и векторы</a><a class="l2" href="#симметричные-матрицы-и-спектральная-теорема">Симметричные матрицы и спектральная теорема</a><a class="l2" href="#сингулярное-разложение-svd">Сингулярное разложение (SVD)</a><a class="l3" href="#теорема-эккартаянга">Теорема Эккарта–Янга</a><a class="l2" href="#псевдообратная-матрица-мнк-и-обусловленность">Псевдообратная матрица, МНК и обусловленность</a><a class="l2" href="#где-это-встречается">Где это встречается</a><a class="l2" href="#ловушки">Ловушки</a><a class="l2" href="#что-почитать">Что почитать</a>
+      <a class="l2" href="#собственные-значения-и-векторы">Собственные значения и векторы</a><a class="l2" href="#симметричные-матрицы-и-спектральная-теорема">Симметричные матрицы и спектральная теорема</a><a class="l2" href="#сингулярное-разложение-svd">Сингулярное разложение (SVD)</a><a class="l3" href="#теорема-эккартаянга">Теорема Эккарта–Янга</a><a class="l2" href="#псевдообратная-матрица-мнк-и-обусловленность">Псевдообратная матрица, МНК и обусловленность</a><a class="l2" href="#где-это-встречается">Где это встречается</a><a class="l2" href="#ловушки">Ловушки</a><a class="l2" href="#проверь-себя">Проверь себя</a><a class="l2" href="#что-почитать">Что почитать</a>
     </aside>
   </div>
 </div>

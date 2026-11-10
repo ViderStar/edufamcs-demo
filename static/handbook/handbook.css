@@ -130,3 +130,17 @@
   background:var(--surface);border:1px solid var(--line)}
 .hb-lock>div{flex:1;min-width:200px}
 .hb-lock p{margin:4px 0 0;color:var(--muted)}
+
+/* ── «прочитано» ── */
+.hb-read{display:flex;flex-wrap:wrap;align-items:center;gap:10px;margin-top:clamp(28px,4vw,44px);padding-top:24px;border-top:1px solid var(--line)}
+.hb-prog{display:flex;align-items:center;gap:12px;margin-top:20px;max-width:360px}
+.hb-prog .progress{flex:1}
+.hb-prog .num{font-size:13px;color:var(--muted)}
+.hb-item.read .n{color:var(--muted)}
+.hb-item .hb-done{display:inline-flex;align-items:center;gap:4px;color:var(--ok)}
+.hb-page .hb-nav a.read::after{content:"";display:inline-block;width:5px;height:9px;margin-left:8px;border:solid var(--ok);border-width:0 2px 2px 0;transform:rotate(45deg) translateY(-2px)}
+
+/* reading progress under the site header (handbook.js sets --v) */
+.hb-readbar{position:fixed;left:0;right:0;top:var(--header-h);z-index:calc(var(--z-header) - 1);height:3px;pointer-events:none}
+.hb-readbar>i{display:block;height:100%;width:var(--v,0%);background:var(--stream,var(--info));transition:width var(--dur-1) linear}
+@media (prefers-reduced-motion:reduce){.hb-readbar>i{transition:none}}

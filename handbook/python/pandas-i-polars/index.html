@@ -1,0 +1,285 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Таблицы: pandas и polars · EDU FAMCS</title>
+<meta name="description" content="Таблицы: pandas и polars — Python и исследования. Хендбук ML-курса ФПМИ.">
+<meta name="theme-color" content="#060A16">
+<meta name="robots" content="noindex, nofollow">
+<meta name="htmx-config" content='{"allowEval":false,"includeIndicatorStyles":false,"historyCacheSize":0,"selfRequestsOnly":true}'>
+<meta name="katex-js" content="/edufamcs-demo/static/vendor/katex/katex.min.js">
+<meta name="katex-css" content="/edufamcs-demo/static/vendor/katex/katex.min.css">
+<link rel="icon" href="/edufamcs-demo/static/brand/logo/favicon-16.svg" type="image/svg+xml" sizes="16x16">
+<link rel="icon" href="/edufamcs-demo/static/brand/logo/favicon.svg" type="image/svg+xml" sizes="any">
+<link rel="preload" href="/edufamcs-demo/static/brand/fonts/manrope-cyrillic-400.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/edufamcs-demo/static/brand/fonts/unbounded-cyrillic-800.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="/edufamcs-demo/static/brand/fonts.css">
+<link rel="stylesheet" href="/edufamcs-demo/static/brand/tokens.css">
+<link rel="stylesheet" href="/edufamcs-demo/static/brand/components.css">
+<link rel="stylesheet" href="/edufamcs-demo/static/css/site.css">
+<link rel="stylesheet" href="/edufamcs-demo/static/css/hub.css">
+<link rel="stylesheet" href="/edufamcs-demo/static/css/about.css">
+<link rel="stylesheet" href="/edufamcs-demo/static/handbook/handbook.css">
+<script src="/edufamcs-demo/static/js/theme.js"></script>
+<script src="/edufamcs-demo/static/vendor/htmx/htmx.min.js" defer></script>
+<script src="/edufamcs-demo/static/vendor/alpine/alpine-csp.min.js" defer></script>
+<script src="/edufamcs-demo/static/js/site.js" defer></script>
+<script src="/edufamcs-demo/static/handbook/handbook.js" defer></script>
+</head>
+<body class="" hx-headers='{"X-CSRFToken": "JapZRsjWT5ylLVbIj46Qp3ygeFSQOxkalneW7uSNUSMUWeqaixkN7WqeGOZOyhjR"}'>
+<a class="skip" href="#main">К содержанию</a>
+<div class="demo-bar" role="note">Демо-версия для отзывов: вход, запись на курсы и формы здесь не работают.</div>
+
+<header class="hdr">
+  <div class="container">
+    <a class="brand" href="/edufamcs-demo/" aria-label="EDU FAMCS — главная">
+      <span class="full"><img class="only-light" src="/edufamcs-demo/static/brand/logo/logo-edu-light.svg" alt="EDU FAMCS" width="196" height="40"><img class="only-dark" src="/edufamcs-demo/static/brand/logo/logo-edu-dark.svg" alt="EDU FAMCS" width="196" height="40"></span>
+      <span class="short"><img class="only-light" src="/edufamcs-demo/static/brand/logo/logo-edu-light.svg" alt="EDU FAMCS" height="30"><img class="only-dark" src="/edufamcs-demo/static/brand/logo/logo-edu-dark.svg" alt="EDU FAMCS" height="30"></span>
+    </a>
+    <nav class="nav" id="main-nav" aria-label="Основная навигация">
+      <a href="/edufamcs-demo/#courses">Курсы</a>
+      <a href="/edufamcs-demo/ml/" >Машинное обучение</a>
+      
+      <a href="/edufamcs-demo/handbook/" aria-current="page">Хендбук</a>
+      <a href="/edufamcs-demo/news/" >Новости</a>
+      <a href="/edufamcs-demo/people/" >Авторы</a>
+      <a href="/edufamcs-demo/about/" >О&nbsp;нас</a>
+    </nav>
+    <div class="hdr-actions">
+      
+      <a class="btn btn-outline btn-login" href="/edufamcs-demo/accounts/login/?next=/handbook/python/pandas-i-polars/">Войти</a>
+      
+      <button class="icon-btn menu-btn" type="button" aria-label="Меню" aria-expanded="false" aria-controls="main-nav"><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-menu"/></svg></button>
+    </div>
+  </div>
+</header>
+
+<main id="main">
+
+
+
+<div class="container hb-page hb-tone">
+  <div class="hb-readbar" aria-hidden="true"><i></i></div>
+  <div class="hb">
+    <aside class="hb-nav" aria-label="Статьи раздела">
+      
+<form class="hb-search" action="/edufamcs-demo/handbook/search/" method="get" role="search">
+  <svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-search"/></svg>
+  <input class="input" type="search" name="q" value="" placeholder="Поиск по хендбуку" aria-label="Поиск по хендбуку" autocomplete="off" maxlength="120"
+    hx-get="/edufamcs-demo/handbook/search/" hx-trigger="input changed delay:250ms, search" hx-target="#hb-nav-results" hx-sync="this:replace">
+</form>
+
+      <div id="hb-nav-results" class="hb-nav-results" aria-live="polite"></div>
+      <a class="grp" href="/edufamcs-demo/handbook/python/">Инструменты</a>
+      
+      <a class="" href="/edufamcs-demo/handbook/python/okruzhenie-uv/">Окружение: uv, виртуальные окружения и структура проекта</a>
+      
+      <a class="" href="/edufamcs-demo/handbook/python/python-dlya-ml/">Python для ML: что нужно на самом деле</a>
+      
+      <a class="" href="/edufamcs-demo/handbook/python/numpy-vektorizaciya/">NumPy: массивы, broadcasting, векторизация</a>
+      
+      <a class="cur" href="/edufamcs-demo/handbook/python/pandas-i-polars/" aria-current="page">Таблицы: pandas и polars</a>
+      
+      <a class="" href="/edufamcs-demo/handbook/python/jupyter-noutbuki/">Jupyter: как работать в ноутбуках и не утонуть</a>
+      
+      <a class="" href="/edufamcs-demo/handbook/python/vizualizaciya/">Графики, которые читаются: matplotlib и seaborn</a>
+      
+    </aside>
+
+    <article class="hb-main">
+      <nav class="crumbs" aria-label="Навигация"><a href="/edufamcs-demo/handbook/">Хендбук</a><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-chev"/></svg><a href="/edufamcs-demo/handbook/python/">Python и исследования</a></nav>
+      <h1 class="h1">Таблицы: pandas и polars</h1>
+      <div class="hb-meta">
+        
+        
+        <span><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-clock"/></svg>11&nbsp;мин</span>
+        <span class="hb-authors"><span class="avatar sm" title="Артем Лебедевич">АЛ</span>Артем Лебедевич</span>
+        <span><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-edit"/></svg>10 ноября 2026</span>
+        
+        
+      </div>
+
+      
+      <details class="hb-mtoc">
+        <summary><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-list"/></svg>Содержание<svg class="ico sm" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-chev-down"/></svg></summary>
+        <a class="l2" href="#series-dataframe-индекс">Series, DataFrame, индекс</a><a class="l2" href="#выборка-loc-iloc-маски">Выборка: loc, iloc, маски</a><a class="l2" href="#groupby-agg-transform">groupby, agg, transform</a><a class="l2" href="#merge-и-проверка-взрыва-строк">merge и проверка взрыва строк</a><a class="l2" href="#признаки-по-времени">Признаки по времени</a><a class="l2" href="#память-dtypes-и-parquet">Память: dtypes и parquet</a><a class="l2" href="#polars-ленивый-api-и-выражения">polars: ленивый API и выражения</a><a class="l2" href="#утечки-при-групповых-статистиках">Утечки при групповых статистиках</a><a class="l2" href="#ловушки">Ловушки</a><a class="l2" href="#проверь-себя">Проверь себя</a><a class="l2" href="#что-почитать">Что почитать</a>
+      </details>
+      
+
+      <div class="prose"><p>Большая часть ML-работы — это таблицы: логи событий, транзакции, профили, признаки. pandas — стандарт, который вы увидите в любом ноутбуке и на любом собеседовании; polars — быстрый современный конкурент с ленивыми вычислениями. Здесь — модель данных, выборка без ловушек, <code>groupby</code>/<code>merge</code>, экономия памяти и самые частые способы устроить утечку данных агрегатами.</p>
+<h2 id="series-dataframe-индекс">Series, DataFrame, индекс</h2>
+<p><code>Series</code> — одномерный массив с <strong>индексом</strong> (метками), <code>DataFrame</code> — набор столбцов-<code>Series</code> с общим индексом; у каждого столбца свой dtype. Арифметика и <code>merge</code> <strong>выравнивают данные по индексу</strong>, а не по позиции: это удобно и опасно (после фильтрации индекс остаётся «дырявым»). Если метки не нужны — <code>df.reset_index(drop=True)</code>. Версии на ноябрь 2026: pandas 3.x, в нём строковые столбцы по умолчанию имеют отдельный dtype <code>str</code> (а не <code>object</code>), а включено Copy-on-Write.</p>
+<div class="code"><div class="code-head"><span class="lang">python</span></div><pre><code><span class="tok-k">import</span> pandas <span class="tok-k">as</span> pd
+
+df <span class="tok-p">=</span> pd<span class="tok-p">.</span>DataFrame<span class="tok-p">(</span><span class="tok-p">{</span>
+    <span class="tok-s">"</span><span class="tok-s">user</span><span class="tok-s">"</span><span class="tok-p">:</span> <span class="tok-p">[</span><span class="tok-s">"</span><span class="tok-s">a</span><span class="tok-s">"</span><span class="tok-p">,</span> <span class="tok-s">"</span><span class="tok-s">a</span><span class="tok-s">"</span><span class="tok-p">,</span> <span class="tok-s">"</span><span class="tok-s">b</span><span class="tok-s">"</span><span class="tok-p">,</span> <span class="tok-s">"</span><span class="tok-s">b</span><span class="tok-s">"</span><span class="tok-p">,</span> <span class="tok-s">"</span><span class="tok-s">b</span><span class="tok-s">"</span><span class="tok-p">,</span> <span class="tok-s">"</span><span class="tok-s">c</span><span class="tok-s">"</span><span class="tok-p">]</span><span class="tok-p">,</span>
+    <span class="tok-s">"</span><span class="tok-s">item</span><span class="tok-s">"</span><span class="tok-p">:</span> <span class="tok-p">[</span><span class="tok-n">1</span><span class="tok-p">,</span> <span class="tok-n">2</span><span class="tok-p">,</span> <span class="tok-n">1</span><span class="tok-p">,</span> <span class="tok-n">3</span><span class="tok-p">,</span> <span class="tok-n">3</span><span class="tok-p">,</span> <span class="tok-n">2</span><span class="tok-p">]</span><span class="tok-p">,</span>
+    <span class="tok-s">"</span><span class="tok-s">price</span><span class="tok-s">"</span><span class="tok-p">:</span> <span class="tok-p">[</span><span class="tok-n">10.</span><span class="tok-p">,</span> <span class="tok-n">20.</span><span class="tok-p">,</span> <span class="tok-n">30.</span><span class="tok-p">,</span> <span class="tok-n">40.</span><span class="tok-p">,</span> <span class="tok-n">50.</span><span class="tok-p">,</span> <span class="tok-n">60.</span><span class="tok-p">]</span><span class="tok-p">,</span>
+    <span class="tok-s">"</span><span class="tok-s">ts</span><span class="tok-s">"</span><span class="tok-p">:</span> pd<span class="tok-p">.</span>to_datetime<span class="tok-p">(</span><span class="tok-p">[</span><span class="tok-s">"</span><span class="tok-s">2026-01-01</span><span class="tok-s">"</span><span class="tok-p">,</span> <span class="tok-s">"</span><span class="tok-s">2026-01-03</span><span class="tok-s">"</span><span class="tok-p">,</span> <span class="tok-s">"</span><span class="tok-s">2026-01-02</span><span class="tok-s">"</span><span class="tok-p">,</span>
+                          <span class="tok-s">"</span><span class="tok-s">2026-01-04</span><span class="tok-s">"</span><span class="tok-p">,</span> <span class="tok-s">"</span><span class="tok-s">2026-01-05</span><span class="tok-s">"</span><span class="tok-p">,</span> <span class="tok-s">"</span><span class="tok-s">2026-01-06</span><span class="tok-s">"</span><span class="tok-p">]</span><span class="tok-p">)</span><span class="tok-p">,</span>
+<span class="tok-p">}</span><span class="tok-p">)</span>
+</code></pre></div>
+<h2 id="выборка-loc-iloc-маски">Выборка: loc, iloc, маски</h2>
+<ul>
+<li><code>df.loc[rows, cols]</code> — по <strong>меткам</strong> и булевым маскам; срезы по меткам включают правый конец.</li>
+<li><code>df.iloc[rows, cols]</code> — по <strong>позициям</strong>; правый конец не включается.</li>
+<li><code>df[df.price &gt; 25]</code> — булева маска; условия объединяют <code>&amp;</code>, <code>|</code>, <code>~</code> с обязательными скобками: <code>(df.price &gt; 25) &amp; (df.user == "b")</code>.</li>
+</ul>
+<div class="code"><div class="code-head"><span class="lang">python</span></div><pre><code>df<span class="tok-p">.</span>loc<span class="tok-p">[</span>df<span class="tok-p">.</span>price <span class="tok-p">&gt;</span> <span class="tok-n">25</span><span class="tok-p">,</span> <span class="tok-s">"</span><span class="tok-s">price</span><span class="tok-s">"</span><span class="tok-p">]</span> <span class="tok-p">=</span> <span class="tok-n">0</span>     <span class="tok-c"># одно присваивание: строки и столбец сразу</span>
+</code></pre></div>
+<p><strong>Chained assignment.</strong> Запись <code>df[df.price &gt; 25]["price"] = 0</code> состоит из двух операций: сначала <code>df[mask]</code> создаёт промежуточный объект, потом в него пишется значение. В pandas 3 с Copy-on-Write любой результат выборки ведёт себя как копия, поэтому такая запись <strong>никогда не меняет <code>df</code></strong> (и выдаёт <code>ChainedAssignmentError</code>); в pandas 2 и раньше результат зависел от того, view получился или copy, — отсюда <code>SettingWithCopyWarning</code>. Правило одно: пишите через <code>df.loc[mask, "col"] = value</code> (или <code>df["col"] = ...</code> для целого столбца).</p>
+<div class="callout md warn"><p class="callout-title">Ловушка</p>
+<p>Если в выводе вы видели предупреждение про copy / chained assignment — это не «шум», а признак того, что присваивание не сработало. Проверьте на выходе: <code>df.price.tolist()</code>.</p>
+</div>
+<h2 id="groupby-agg-transform">groupby, agg, transform</h2>
+<p><code>groupby</code> разбивает таблицу на группы, а дальше выбор такой: <strong>агрегировать</strong> (одна строка на группу — <code>agg</code>), <strong>вернуть значение на каждую исходную строку</strong> (<code>transform</code>) или применить произвольную функцию (<code>apply</code>, медленно; крайняя мера).</p>
+<div class="code"><div class="code-head"><span class="lang">python</span></div><pre><code>res <span class="tok-p">=</span> df<span class="tok-p">.</span>groupby<span class="tok-p">(</span><span class="tok-s">"</span><span class="tok-s">user</span><span class="tok-s">"</span><span class="tok-p">)</span><span class="tok-p">.</span>agg<span class="tok-p">(</span>n<span class="tok-p">=</span><span class="tok-p">(</span><span class="tok-s">"</span><span class="tok-s">item</span><span class="tok-s">"</span><span class="tok-p">,</span> <span class="tok-s">"</span><span class="tok-s">size</span><span class="tok-s">"</span><span class="tok-p">)</span><span class="tok-p">,</span> mean_price<span class="tok-p">=</span><span class="tok-p">(</span><span class="tok-s">"</span><span class="tok-s">price</span><span class="tok-s">"</span><span class="tok-p">,</span> <span class="tok-s">"</span><span class="tok-s">mean</span><span class="tok-s">"</span><span class="tok-p">)</span><span class="tok-p">,</span>
+                             last_ts<span class="tok-p">=</span><span class="tok-p">(</span><span class="tok-s">"</span><span class="tok-s">ts</span><span class="tok-s">"</span><span class="tok-p">,</span> <span class="tok-s">"</span><span class="tok-s">max</span><span class="tok-s">"</span><span class="tok-p">)</span><span class="tok-p">)</span><span class="tok-p">.</span>reset_index<span class="tok-p">(</span><span class="tok-p">)</span>
+<span class="tok-f">print</span><span class="tok-p">(</span>res<span class="tok-p">)</span>
+<span class="tok-c">#   user  n  mean_price    last_ts</span>
+<span class="tok-c"># 0    a  2        15.0 2026-01-03</span>
+<span class="tok-c"># 1    b  3        40.0 2026-01-05</span>
+<span class="tok-c"># 2    c  1        60.0 2026-01-06</span>
+
+df<span class="tok-p">[</span><span class="tok-s">"</span><span class="tok-s">user_mean</span><span class="tok-s">"</span><span class="tok-p">]</span> <span class="tok-p">=</span> df<span class="tok-p">.</span>groupby<span class="tok-p">(</span><span class="tok-s">"</span><span class="tok-s">user</span><span class="tok-s">"</span><span class="tok-p">)</span><span class="tok-p">[</span><span class="tok-s">"</span><span class="tok-s">price</span><span class="tok-s">"</span><span class="tok-p">]</span><span class="tok-p">.</span>transform<span class="tok-p">(</span><span class="tok-s">"</span><span class="tok-s">mean</span><span class="tok-s">"</span><span class="tok-p">)</span>   <span class="tok-c"># длина = len(df)</span>
+</code></pre></div>
+<p>Именованная агрегация (<code>имя=(столбец, функция)</code>) читается лучше словаря. <code>size</code> считает строки группы, <code>count</code> — непустые значения столбца.</p>
+<h2 id="merge-и-проверка-взрыва-строк">merge и проверка взрыва строк</h2>
+<p><code>pd.merge(left, right, on=..., how=...)</code> — SQL-join. Главная опасность — <strong>дубликаты ключа в правой таблице</strong>: каждая строка слева размножается на число совпадений.</p>
+<div class="code"><div class="code-head"><span class="lang">python</span></div><pre><code>items <span class="tok-p">=</span> pd<span class="tok-p">.</span>DataFrame<span class="tok-p">(</span><span class="tok-p">{</span><span class="tok-s">"</span><span class="tok-s">item</span><span class="tok-s">"</span><span class="tok-p">:</span> <span class="tok-p">[</span><span class="tok-n">1</span><span class="tok-p">,</span> <span class="tok-n">2</span><span class="tok-p">,</span> <span class="tok-n">3</span><span class="tok-p">,</span> <span class="tok-n">3</span><span class="tok-p">]</span><span class="tok-p">,</span> <span class="tok-s">"</span><span class="tok-s">cat</span><span class="tok-s">"</span><span class="tok-p">:</span> <span class="tok-p">[</span><span class="tok-s">"</span><span class="tok-s">x</span><span class="tok-s">"</span><span class="tok-p">,</span> <span class="tok-s">"</span><span class="tok-s">y</span><span class="tok-s">"</span><span class="tok-p">,</span> <span class="tok-s">"</span><span class="tok-s">z</span><span class="tok-s">"</span><span class="tok-p">,</span> <span class="tok-s">"</span><span class="tok-s">w</span><span class="tok-s">"</span><span class="tok-p">]</span><span class="tok-p">}</span><span class="tok-p">)</span>   <span class="tok-c"># item=3 дважды</span>
+<span class="tok-f">print</span><span class="tok-p">(</span><span class="tok-f">len</span><span class="tok-p">(</span>df<span class="tok-p">)</span><span class="tok-p">,</span> <span class="tok-f">len</span><span class="tok-p">(</span>df<span class="tok-p">.</span>merge<span class="tok-p">(</span>items<span class="tok-p">,</span> on<span class="tok-p">=</span><span class="tok-s">"</span><span class="tok-s">item</span><span class="tok-s">"</span><span class="tok-p">,</span> how<span class="tok-p">=</span><span class="tok-s">"</span><span class="tok-s">left</span><span class="tok-s">"</span><span class="tok-p">)</span><span class="tok-p">)</span><span class="tok-p">)</span>   <span class="tok-c"># 6 8 — размножились 2 строки</span>
+
+df<span class="tok-p">.</span>merge<span class="tok-p">(</span>items<span class="tok-p">,</span> on<span class="tok-p">=</span><span class="tok-s">"</span><span class="tok-s">item</span><span class="tok-s">"</span><span class="tok-p">,</span> how<span class="tok-p">=</span><span class="tok-s">"</span><span class="tok-s">left</span><span class="tok-s">"</span><span class="tok-p">,</span> validate<span class="tok-p">=</span><span class="tok-s">"</span><span class="tok-s">many_to_one</span><span class="tok-s">"</span><span class="tok-p">)</span>
+<span class="tok-c"># MergeError: Merge keys are not unique in right dataset; not a many-to-one merge</span>
+</code></pre></div>
+<p><code>validate="many_to_one"</code> превращает тихий взрыв строк (и завышенные метрики после него) в ошибку. Привычка: после каждого <code>merge</code> сравнивать <code>len</code> до и после, а ключ справа — проверять на уникальность (<code>items["item"].is_unique</code>). Для <code>how="left"</code> число строк должно быть не меньше исходного и в точности равно ему, если справа ключ уникален.</p>
+<h2 id="признаки-по-времени">Признаки по времени</h2>
+<p>Сортируйте по времени внутри группы и используйте только <strong>прошлое</strong>:</p>
+<div class="code"><div class="code-head"><span class="lang">python</span></div><pre><code>df <span class="tok-p">=</span> df<span class="tok-p">.</span>sort_values<span class="tok-p">(</span><span class="tok-p">[</span><span class="tok-s">"</span><span class="tok-s">user</span><span class="tok-s">"</span><span class="tok-p">,</span> <span class="tok-s">"</span><span class="tok-s">ts</span><span class="tok-s">"</span><span class="tok-p">]</span><span class="tok-p">)</span>
+df<span class="tok-p">[</span><span class="tok-s">"</span><span class="tok-s">prev_price</span><span class="tok-s">"</span><span class="tok-p">]</span> <span class="tok-p">=</span> df<span class="tok-p">.</span>groupby<span class="tok-p">(</span><span class="tok-s">"</span><span class="tok-s">user</span><span class="tok-s">"</span><span class="tok-p">)</span><span class="tok-p">[</span><span class="tok-s">"</span><span class="tok-s">price</span><span class="tok-s">"</span><span class="tok-p">]</span><span class="tok-p">.</span>shift<span class="tok-p">(</span><span class="tok-n">1</span><span class="tok-p">)</span>                         <span class="tok-c"># NaN у первого события</span>
+df<span class="tok-p">[</span><span class="tok-s">"</span><span class="tok-s">cum_before</span><span class="tok-s">"</span><span class="tok-p">]</span> <span class="tok-p">=</span> df<span class="tok-p">.</span>groupby<span class="tok-p">(</span><span class="tok-s">"</span><span class="tok-s">user</span><span class="tok-s">"</span><span class="tok-p">)</span><span class="tok-p">[</span><span class="tok-s">"</span><span class="tok-s">price</span><span class="tok-s">"</span><span class="tok-p">]</span><span class="tok-p">.</span>cumsum<span class="tok-p">(</span><span class="tok-p">)</span> <span class="tok-p">-</span> df<span class="tok-p">[</span><span class="tok-s">"</span><span class="tok-s">price</span><span class="tok-s">"</span><span class="tok-p">]</span>           <span class="tok-c"># сумма строго до текущей</span>
+<span class="tok-c">#   user         ts  price  prev_price  cum_before</span>
+<span class="tok-c">#   a   2026-01-01   10.0         NaN         0.0</span>
+<span class="tok-c">#   a   2026-01-03   20.0        10.0        10.0</span>
+<span class="tok-c">#   b   2026-01-02   30.0         NaN         0.0</span>
+<span class="tok-c">#   b   2026-01-04   40.0        30.0        30.0</span>
+<span class="tok-c">#   b   2026-01-05   50.0        40.0        70.0</span>
+<span class="tok-c">#   c   2026-01-06   60.0         NaN         0.0</span>
+</code></pre></div>
+<p>Для скользящих окон — <code>groupby(...).rolling("7D", on="ts")</code> (окно по времени требует отсортированного <code>ts</code>); <code>shift</code> перед окном исключает текущую строку. Разбиение на train/valid по времени подробно разобрано в главе про <a href="/edufamcs-demo/handbook/python/kak-vesti-issledovanie/" rel="noopener noreferrer nofollow">исследование</a>.</p>
+<h2 id="память-dtypes-и-parquet">Память: dtypes и parquet</h2>
+<ul>
+<li>Целые и вещественные по умолчанию 64-битные; <code>float32</code> и <code>int32</code> вдвое компактнее (<code>pd.to_numeric(..., downcast=...)</code>, <code>astype</code>).</li>
+<li>Столбец с малым числом уникальных значений — <code>astype("category")</code>: хранятся коды и словарь. На столбце из 100 000 значений из трёх строк <code>memory_usage(deep=True)</code> показал 1 000 132 байт для <code>str</code> и 100 163 для <code>category</code> (pandas 3.1, строки как <code>str</code>).</li>
+<li><strong>CSV</strong> — текст без типов: парсится медленно, даты и категории теряются. <strong>Parquet</strong> — колоночный бинарный формат со схемой и сжатием: <code>df.to_parquet("x.parquet")</code>, <code>pd.read_parquet("x.parquet", columns=["user", "price"])</code> читает только нужные столбцы. Для данных, которые вы читаете более одного раза, конвертируйте в parquet сразу.</li>
+<li>Диагностика: <code>df.info(memory_usage="deep")</code>, <code>df.memory_usage(deep=True)</code>.</li>
+</ul>
+<h2 id="polars-ленивый-api-и-выражения">polars: ленивый API и выражения</h2>
+<p>Polars — движок на Rust со столбцовым форматом Arrow, многопоточный, без индекса: строки идентифицируются только позицией. Основная идея — <strong>выражения</strong> (<code>pl.col("price").mean()</code>), описывающие вычисление над столбцом, и <strong>ленивый режим</strong>: <code>scan_parquet</code> / <code>.lazy()</code> строит план, а <code>.collect()</code> выполняет его после оптимизации (проталкивание фильтров и выбора столбцов к источнику, объединение операций). Вот та же задача, что выше:</p>
+<div class="code"><div class="code-head"><span class="lang">python</span></div><pre><code><span class="tok-k">import</span> polars <span class="tok-k">as</span> pl
+
+lf <span class="tok-p">=</span> pl<span class="tok-p">.</span>from_pandas<span class="tok-p">(</span>df<span class="tok-p">[</span><span class="tok-p">[</span><span class="tok-s">"</span><span class="tok-s">user</span><span class="tok-s">"</span><span class="tok-p">,</span> <span class="tok-s">"</span><span class="tok-s">item</span><span class="tok-s">"</span><span class="tok-p">,</span> <span class="tok-s">"</span><span class="tok-s">price</span><span class="tok-s">"</span><span class="tok-p">,</span> <span class="tok-s">"</span><span class="tok-s">ts</span><span class="tok-s">"</span><span class="tok-p">]</span><span class="tok-p">]</span><span class="tok-p">)</span><span class="tok-p">.</span>lazy<span class="tok-p">(</span><span class="tok-p">)</span>      <span class="tok-c"># в реальности: pl.scan_parquet(...)</span>
+out <span class="tok-p">=</span> <span class="tok-p">(</span>lf<span class="tok-p">.</span>group_by<span class="tok-p">(</span><span class="tok-s">"</span><span class="tok-s">user</span><span class="tok-s">"</span><span class="tok-p">)</span>
+         <span class="tok-p">.</span>agg<span class="tok-p">(</span>n<span class="tok-p">=</span>pl<span class="tok-p">.</span>len<span class="tok-p">(</span><span class="tok-p">)</span><span class="tok-p">,</span> mean_price<span class="tok-p">=</span>pl<span class="tok-p">.</span>col<span class="tok-p">(</span><span class="tok-s">"</span><span class="tok-s">price</span><span class="tok-s">"</span><span class="tok-p">)</span><span class="tok-p">.</span>mean<span class="tok-p">(</span><span class="tok-p">)</span><span class="tok-p">,</span> last_ts<span class="tok-p">=</span>pl<span class="tok-p">.</span>col<span class="tok-p">(</span><span class="tok-s">"</span><span class="tok-s">ts</span><span class="tok-s">"</span><span class="tok-p">)</span><span class="tok-p">.</span>max<span class="tok-p">(</span><span class="tok-p">)</span><span class="tok-p">)</span>
+         <span class="tok-p">.</span>sort<span class="tok-p">(</span><span class="tok-s">"</span><span class="tok-s">user</span><span class="tok-s">"</span><span class="tok-p">)</span>
+         <span class="tok-p">.</span>collect<span class="tok-p">(</span><span class="tok-p">)</span><span class="tok-p">)</span>
+<span class="tok-c"># shape: (3, 4):  a 2 15.0 2026-01-03;  b 3 40.0 2026-01-05;  c 1 60.0 2026-01-06</span>
+
+feat <span class="tok-p">=</span> <span class="tok-p">(</span>pl<span class="tok-p">.</span>from_pandas<span class="tok-p">(</span>df<span class="tok-p">[</span><span class="tok-p">[</span><span class="tok-s">"</span><span class="tok-s">user</span><span class="tok-s">"</span><span class="tok-p">,</span> <span class="tok-s">"</span><span class="tok-s">price</span><span class="tok-s">"</span><span class="tok-p">,</span> <span class="tok-s">"</span><span class="tok-s">ts</span><span class="tok-s">"</span><span class="tok-p">]</span><span class="tok-p">]</span><span class="tok-p">)</span>
+          <span class="tok-p">.</span>sort<span class="tok-p">(</span><span class="tok-s">"</span><span class="tok-s">user</span><span class="tok-s">"</span><span class="tok-p">,</span> <span class="tok-s">"</span><span class="tok-s">ts</span><span class="tok-s">"</span><span class="tok-p">)</span>
+          <span class="tok-p">.</span>with_columns<span class="tok-p">(</span>prev_price<span class="tok-p">=</span>pl<span class="tok-p">.</span>col<span class="tok-p">(</span><span class="tok-s">"</span><span class="tok-s">price</span><span class="tok-s">"</span><span class="tok-p">)</span><span class="tok-p">.</span>shift<span class="tok-p">(</span><span class="tok-n">1</span><span class="tok-p">)</span><span class="tok-p">.</span>over<span class="tok-p">(</span><span class="tok-s">"</span><span class="tok-s">user</span><span class="tok-s">"</span><span class="tok-p">)</span><span class="tok-p">,</span>
+                        user_mean<span class="tok-p">=</span>pl<span class="tok-p">.</span>col<span class="tok-p">(</span><span class="tok-s">"</span><span class="tok-s">price</span><span class="tok-s">"</span><span class="tok-p">)</span><span class="tok-p">.</span>mean<span class="tok-p">(</span><span class="tok-p">)</span><span class="tok-p">.</span>over<span class="tok-p">(</span><span class="tok-s">"</span><span class="tok-s">user</span><span class="tok-s">"</span><span class="tok-p">)</span><span class="tok-p">)</span><span class="tok-p">)</span>
+</code></pre></div>
+<p>Для <code>pl.from_pandas</code> (столбцы <code>str</code> в pandas 3) и для <code>to_parquet</code>/<code>read_parquet</code> нужен <code>pyarrow</code>: <code>uv add pyarrow</code>.</p>
+<p>Результат совпадает с pandas (<code>prev_price</code> у первого события пользователя — <code>null</code>). <code>.over("user")</code> — аналог <code>groupby().transform</code>. Когда брать polars: данные не помещаются в память или читаются из parquet (ленивый режим читает только нужное), много группировок и join'ов, нужна скорость без ручной оптимизации. Когда оставить pandas: экосистема (scikit-learn, matplotlib, статистические пакеты принимают pandas напрямую; из polars делайте <code>.to_pandas()</code> или <code>.to_numpy()</code>), короткая разведка, чужой код. Соотношение скорости зависит от задачи и железа: измеряйте на своих данных, а не по чужим бенчмаркам.</p>
+<h2 id="утечки-при-групповых-статистиках">Утечки при групповых статистиках</h2>
+<p>Самая частая ошибка — признак, посчитанный по группе, в которую входит и сам объект с его меткой. Пример — target encoding города:</p>
+<div class="code"><div class="code-head"><span class="lang">python</span></div><pre><code>d <span class="tok-p">=</span> pd<span class="tok-p">.</span>DataFrame<span class="tok-p">(</span><span class="tok-p">{</span><span class="tok-s">"</span><span class="tok-s">city</span><span class="tok-s">"</span><span class="tok-p">:</span> <span class="tok-f">list</span><span class="tok-p">(</span><span class="tok-s">"</span><span class="tok-s">aaabbbc</span><span class="tok-s">"</span><span class="tok-p">)</span><span class="tok-p">,</span> <span class="tok-s">"</span><span class="tok-s">y</span><span class="tok-s">"</span><span class="tok-p">:</span> <span class="tok-p">[</span><span class="tok-n">1</span><span class="tok-p">,</span> <span class="tok-n">0</span><span class="tok-p">,</span> <span class="tok-n">1</span><span class="tok-p">,</span> <span class="tok-n">0</span><span class="tok-p">,</span> <span class="tok-n">0</span><span class="tok-p">,</span> <span class="tok-n">1</span><span class="tok-p">,</span> <span class="tok-n">1</span><span class="tok-p">]</span><span class="tok-p">}</span><span class="tok-p">)</span>
+d<span class="tok-p">[</span><span class="tok-s">"</span><span class="tok-s">te_leaky</span><span class="tok-s">"</span><span class="tok-p">]</span> <span class="tok-p">=</span> d<span class="tok-p">.</span>groupby<span class="tok-p">(</span><span class="tok-s">"</span><span class="tok-s">city</span><span class="tok-s">"</span><span class="tok-p">)</span><span class="tok-p">[</span><span class="tok-s">"</span><span class="tok-s">y</span><span class="tok-s">"</span><span class="tok-p">]</span><span class="tok-p">.</span>transform<span class="tok-p">(</span><span class="tok-s">"</span><span class="tok-s">mean</span><span class="tok-s">"</span><span class="tok-p">)</span>
+<span class="tok-c"># a: 0.67 0.67 0.67 | b: 0.33 0.33 0.33 | c: 1.00  ← у единственного объекта города c признак равен его метке</span>
+</code></pre></div>
+<p>Модель на таком признаке выучит «te = y» для редких групп, а на новых данных этого соответствия нет. Лекарство — считать статистику <strong>вне объекта</strong>: по out-of-fold разбиению (для каждой части — по остальным), со сглаживанием к глобальному среднему для редких категорий; при временных данных — только по прошлому (<code>shift</code> + <code>cumsum</code> как выше). После внешнего кросс-валидационного разбиения кодирование нужно делать внутри каждого фолда, иначе валидация загрязнена.</p>
+<h2 id="ловушки">Ловушки</h2>
+<ul>
+<li>Присваивание через цепочку <code>df[a][b] = ...</code>; изменение «среза» вместо исходного.</li>
+<li><code>merge</code> с неуникальным ключом без <code>validate</code>; <code>NaN</code> в ключе (pandas соединяет <code>NaN</code> с <code>NaN</code>, SQL — нет).</li>
+<li><code>apply(axis=1)</code> и циклы <code>iterrows</code> на миллионах строк вместо векторных операций.</li>
+<li>Статистики по группам / <code>fit</code> скейлера / <code>fillna(df.mean())</code> по всему датасету до разбиения на train/test.</li>
+<li>Выравнивание по индексу: <code>df["new"] = other_series</code> после фильтрации подставляет значения по меткам, а не по порядку.</li>
+<li>На собеседованиях: чем <code>loc</code> от <code>iloc</code>; <code>transform</code> от <code>agg</code>; что такое <code>SettingWithCopyWarning</code>; как посчитать «долю пользователей с покупкой» за <span class="tex">k</span> дней; почему CSV хуже parquet; как избежать утечки при target encoding; найти топ-3 товара по выручке в каждой категории (<code>sort_values</code> + <code>groupby().head(3)</code>).</li>
+</ul>
+<h2 id="проверь-себя">Проверь себя</h2>
+<details class="callout md details"><summary>Почему `df[df.a &gt; 0]["b"] = 1` не меняет `df` в pandas 3 и что писать вместо?</summary>
+<p>Результат <code>df[mask]</code> — отдельный объект (Copy-on-Write: выборка ведёт себя как копия), запись идёт в него. Нужно <code>df.loc[df.a &gt; 0, "b"] = 1</code>.</p>
+</details>
+<details class="callout md details"><summary>Вы сделали `left`-merge, и таблица выросла с 6 до 8 строк. Что случилось и как поймать это заранее?</summary>
+<p>В правой таблице ключ повторяется (<code>item=3</code> дважды), строки слева размножились. Заранее — <code>validate="many_to_one"</code> и проверка <code>is_unique</code> у ключа справа.</p>
+</details>
+<details class="callout md details"><summary>Чем `transform("mean")` отличается от `agg("mean")`?</summary>
+<p><code>agg</code> возвращает одну строку на группу, <code>transform</code> — столбец длины исходной таблицы (значение группы повторено для каждого её объекта), поэтому его можно присвоить обратно в <code>df</code>.</p>
+</details>
+<details class="callout md details"><summary>Почему групповое среднее таргета по всему датасету — утечка?</summary>
+<p>Метка объекта входит в статистику, которой он же и описывается; в малых группах признак почти равен метке. Решение — out-of-fold или временной сдвиг, чтобы метка объекта в его признак не попадала.</p>
+</details>
+<details class="callout md details"><summary>Как выглядит `groupby().agg` в polars и чем ленивый режим помогает?</summary>
+<p><code>lf.group_by("user").agg(mean_price=pl.col("price").mean()).collect()</code>; ленивый план оптимизируется до выполнения — читаются только нужные столбцы и строки из источника, фильтры применяются раньше.</p>
+</details>
+<h2 id="что-почитать">Что почитать</h2>
+<ul>
+<li><a href="https://pandas.pydata.org/docs/user_guide/index.html" rel="noopener noreferrer nofollow">pandas: User Guide</a>, разделы Indexing, Group by, Merge, Copy-on-Write.</li>
+<li><a href="https://pandas.pydata.org/docs/user_guide/copy_on_write.html" rel="noopener noreferrer nofollow">pandas: Copy-on-Write (CoW)</a>.</li>
+<li><a href="https://pandas.pydata.org/docs/user_guide/scale.html" rel="noopener noreferrer nofollow">pandas: Scaling to large datasets</a>.</li>
+<li><a href="https://docs.pola.rs/" rel="noopener noreferrer nofollow">Polars: User guide</a> — Expressions, Lazy API.</li>
+<li><a href="https://parquet.apache.org/docs/" rel="noopener noreferrer nofollow">Apache Parquet: Documentation</a>.</li>
+<li>Wes McKinney, <em>Python for Data Analysis</em>, 3rd ed. (O'Reilly); открытая версия: <a href="https://wesmckinney.com/book/" rel="noopener noreferrer nofollow">wesmckinney.com/book</a>.</li>
+</ul>
+</div>
+      
+
+      
+
+      
+      <nav class="pager" aria-label="Соседние статьи">
+        <a href="/edufamcs-demo/handbook/python/numpy-vektorizaciya/"><span><svg class="ico sm" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-arrow-left"/></svg>Назад</span>NumPy: массивы, broadcasting, векторизация</a>
+        <a href="/edufamcs-demo/handbook/python/jupyter-noutbuki/"><span>Дальше<svg class="ico sm" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-arrow"/></svg></span>Jupyter: как работать в ноутбуках и не утонуть</a>
+      </nav>
+      
+    </article>
+
+    <aside class="hb-toc" aria-label="На этой странице">
+      <a class="l2" href="#series-dataframe-индекс">Series, DataFrame, индекс</a><a class="l2" href="#выборка-loc-iloc-маски">Выборка: loc, iloc, маски</a><a class="l2" href="#groupby-agg-transform">groupby, agg, transform</a><a class="l2" href="#merge-и-проверка-взрыва-строк">merge и проверка взрыва строк</a><a class="l2" href="#признаки-по-времени">Признаки по времени</a><a class="l2" href="#память-dtypes-и-parquet">Память: dtypes и parquet</a><a class="l2" href="#polars-ленивый-api-и-выражения">polars: ленивый API и выражения</a><a class="l2" href="#утечки-при-групповых-статистиках">Утечки при групповых статистиках</a><a class="l2" href="#ловушки">Ловушки</a><a class="l2" href="#проверь-себя">Проверь себя</a><a class="l2" href="#что-почитать">Что почитать</a>
+    </aside>
+  </div>
+</div>
+
+
+</main>
+
+<footer class="ftr" data-theme="dark">
+  <svg class="sym fern" viewBox="0 0 40.5 65.02" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#fern"/></svg>
+  <div class="container">
+    <div class="ftr-row">
+      <a href="/edufamcs-demo/" aria-label="EDU FAMCS — главная"><img src="/edufamcs-demo/static/brand/logo/logo-edu-dark.svg" alt="EDU FAMCS" width="196" height="40"></a>
+      <ul class="ftr-links">
+        <li><a href="/edufamcs-demo/#courses">Курсы</a></li>
+        <li><a href="/edufamcs-demo/ml/">Машинное обучение</a></li>
+        <li><a href="/edufamcs-demo/handbook/">Хендбук</a></li>
+        <li><a href="/edufamcs-demo/news/">Новости</a></li>
+        <li><a href="/edufamcs-demo/people/">Авторы</a></li>
+        <li><a href="/edufamcs-demo/about/">О&nbsp;нас</a></li>
+        <li><a href="/edufamcs-demo/propose/">Предложить или исправить</a></li>
+        <li><a href="/edufamcs-demo/privacy/">Конфиденциальность</a></li>
+      </ul>
+    </div>
+    <div class="ftr-big" aria-hidden="true">EDU<span class="d">·</span>FAMCS</div>
+    <p class="ftr-copy">© 2026 EDU FAMCS · Минск</p>
+  </div>
+</footer>
+
+<div class="toasts-region" aria-live="polite" id="toasts">
+
+</div>
+
+</body>
+</html>

@@ -1,0 +1,248 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Статистика A/B-тестов · EDU FAMCS</title>
+<meta name="description" content="Статистика A/B-тестов — Математическая база. Хендбук ML-курса ФПМИ.">
+<meta name="theme-color" content="#060A16">
+<meta name="robots" content="noindex, nofollow">
+<meta name="htmx-config" content='{"allowEval":false,"includeIndicatorStyles":false,"historyCacheSize":0,"selfRequestsOnly":true}'>
+<meta name="katex-js" content="/edufamcs-demo/static/vendor/katex/katex.min.js">
+<meta name="katex-css" content="/edufamcs-demo/static/vendor/katex/katex.min.css">
+<link rel="icon" href="/edufamcs-demo/static/brand/logo/favicon-16.svg" type="image/svg+xml" sizes="16x16">
+<link rel="icon" href="/edufamcs-demo/static/brand/logo/favicon.svg" type="image/svg+xml" sizes="any">
+<link rel="preload" href="/edufamcs-demo/static/brand/fonts/manrope-cyrillic-400.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/edufamcs-demo/static/brand/fonts/unbounded-cyrillic-800.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="/edufamcs-demo/static/brand/fonts.css">
+<link rel="stylesheet" href="/edufamcs-demo/static/brand/tokens.css">
+<link rel="stylesheet" href="/edufamcs-demo/static/brand/components.css">
+<link rel="stylesheet" href="/edufamcs-demo/static/css/site.css">
+<link rel="stylesheet" href="/edufamcs-demo/static/css/hub.css">
+<link rel="stylesheet" href="/edufamcs-demo/static/css/about.css">
+<link rel="stylesheet" href="/edufamcs-demo/static/handbook/handbook.css">
+<script src="/edufamcs-demo/static/js/theme.js"></script>
+<script src="/edufamcs-demo/static/vendor/htmx/htmx.min.js" defer></script>
+<script src="/edufamcs-demo/static/vendor/alpine/alpine-csp.min.js" defer></script>
+<script src="/edufamcs-demo/static/js/site.js" defer></script>
+<script src="/edufamcs-demo/static/handbook/handbook.js" defer></script>
+</head>
+<body class="" hx-headers='{"X-CSRFToken": "WbdsVNVKfHEuJ57MNid8LvEPBmkRdv60yo2pbPuBguS3UomeMLr5towN3vrPXf5H"}'>
+<a class="skip" href="#main">К содержанию</a>
+<div class="demo-bar" role="note">Демо-версия для отзывов: вход, запись на курсы и формы здесь не работают.</div>
+
+<header class="hdr">
+  <div class="container">
+    <a class="brand" href="/edufamcs-demo/" aria-label="EDU FAMCS — главная">
+      <span class="full"><img class="only-light" src="/edufamcs-demo/static/brand/logo/logo-edu-light.svg" alt="EDU FAMCS" width="196" height="40"><img class="only-dark" src="/edufamcs-demo/static/brand/logo/logo-edu-dark.svg" alt="EDU FAMCS" width="196" height="40"></span>
+      <span class="short"><img class="only-light" src="/edufamcs-demo/static/brand/logo/logo-edu-light.svg" alt="EDU FAMCS" height="30"><img class="only-dark" src="/edufamcs-demo/static/brand/logo/logo-edu-dark.svg" alt="EDU FAMCS" height="30"></span>
+    </a>
+    <nav class="nav" id="main-nav" aria-label="Основная навигация">
+      <a href="/edufamcs-demo/#courses">Курсы</a>
+      <a href="/edufamcs-demo/ml/" >Машинное обучение</a>
+      
+      <a href="/edufamcs-demo/handbook/" aria-current="page">Хендбук</a>
+      <a href="/edufamcs-demo/news/" >Новости</a>
+      <a href="/edufamcs-demo/people/" >Авторы</a>
+      <a href="/edufamcs-demo/about/" >О&nbsp;нас</a>
+    </nav>
+    <div class="hdr-actions">
+      
+      <a class="btn btn-outline btn-login" href="/edufamcs-demo/accounts/login/?next=/handbook/math/statistika-ab-testov/">Войти</a>
+      
+      <button class="icon-btn menu-btn" type="button" aria-label="Меню" aria-expanded="false" aria-controls="main-nav"><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-menu"/></svg></button>
+    </div>
+  </div>
+</header>
+
+<main id="main">
+
+
+
+<div class="container hb-page hb-tone">
+  <div class="hb-readbar" aria-hidden="true"><i></i></div>
+  <div class="hb">
+    <aside class="hb-nav" aria-label="Статьи раздела">
+      
+<form class="hb-search" action="/edufamcs-demo/handbook/search/" method="get" role="search">
+  <svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-search"/></svg>
+  <input class="input" type="search" name="q" value="" placeholder="Поиск по хендбуку" aria-label="Поиск по хендбуку" autocomplete="off" maxlength="120"
+    hx-get="/edufamcs-demo/handbook/search/" hx-trigger="input changed delay:250ms, search" hx-target="#hb-nav-results" hx-sync="this:replace">
+</form>
+
+      <div id="hb-nav-results" class="hb-nav-results" aria-live="polite"></div>
+      <a class="grp" href="/edufamcs-demo/handbook/math/">Вероятность и статистика</a>
+      
+      <a class="" href="/edufamcs-demo/handbook/math/teoriya-veroyatnostej/">Теория вероятностей</a>
+      
+      <a class="" href="/edufamcs-demo/handbook/math/ocenki-parametrov-i-mmp/">Оценки параметров и метод максимального правдоподобия</a>
+      
+      <a class="" href="/edufamcs-demo/handbook/math/intervaly-i-proverka-gipotez/">Доверительные интервалы и проверка гипотез</a>
+      
+      <a class="" href="/edufamcs-demo/handbook/math/bajesovskaya-statistika/">Байесовская статистика</a>
+      
+      <a class="" href="/edufamcs-demo/handbook/math/teoriya-informacii/">Теория информации для ML</a>
+      
+      <a class="cur" href="/edufamcs-demo/handbook/math/statistika-ab-testov/" aria-current="page">Статистика A/B-тестов</a>
+      
+    </aside>
+
+    <article class="hb-main">
+      <nav class="crumbs" aria-label="Навигация"><a href="/edufamcs-demo/handbook/">Хендбук</a><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-chev"/></svg><a href="/edufamcs-demo/handbook/math/">Математическая база</a></nav>
+      <h1 class="h1">Статистика A/B-тестов</h1>
+      <div class="hb-meta">
+        
+        
+        <span><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-clock"/></svg>12&nbsp;мин</span>
+        <span class="hb-authors"><span class="avatar sm" title="Артем Лебедевич">АЛ</span>Артем Лебедевич</span>
+        <span><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-edit"/></svg>10 ноября 2026</span>
+        
+        
+      </div>
+
+      
+      <details class="hb-mtoc">
+        <summary><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-list"/></svg>Содержание<svg class="ico sm" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-chev-down"/></svg></summary>
+        <a class="l2" href="#постановка">Постановка</a><a class="l2" href="#критерии-для-двух-групп">Критерии для двух групп</a><a class="l2" href="#размер-выборки-и-mde">Размер выборки и MDE</a><a class="l2" href="#подглядывание">Подглядывание</a><a class="l2" href="#метрики-отношения-и-дельта-метод">Метрики-отношения и дельта-метод</a><a class="l2" href="#cuped">CUPED</a><a class="l2" href="#проверка-разбиения-srm">Проверка разбиения: SRM</a><a class="l2" href="#множественные-сравнения-aa-и-бутстрап">Множественные сравнения, A/A и бутстрап</a><a class="l2" href="#код">Код</a><a class="l2" href="#ловушки">Ловушки</a><a class="l2" href="#проверь-себя">Проверь себя</a><a class="l2" href="#что-почитать">Что почитать</a>
+      </details>
+      
+
+      <div class="prose"><p>Большинство ошибок в A/B-тестах — не в формуле t-критерия, а в нарушенных допущениях: зависимые наблюдения, подглядывание, неверная единица рандомизации, сломанное разбиение. Здесь разобрано, откуда берутся формулы размера выборки, дельта-метода и CUPED, и приведены симуляции, показывающие, насколько именно ломается уровень значимости. Базовые понятия (p-value, мощность, множественные сравнения) — в <a href="/edufamcs-demo/handbook/math/intervaly-i-proverka-gipotez/" rel="noopener noreferrer nofollow">главе об интервалах и гипотезах</a>; организационная часть тестов рекомендаций — в <a href="/edufamcs-demo/handbook/recsys/prodakshen-i-ab-testy/" rel="noopener noreferrer nofollow">главе о продакшене</a>.</p>
+<h2 id="постановка">Постановка</h2>
+<p>Нужны четыре решения до запуска: <strong>единица рандомизации</strong> (пользователь, сессия, устройство; почти всегда пользователь, чтобы опыт не «перетекал» между вариантами), <strong>основная метрика</strong> (одна, заранее), <span class="tex">H_0</span>: эффект равен нулю, и <strong>длительность</strong> (из размера выборки). Если метрика считается по событиям, а рандомизация — по пользователям, события одного пользователя зависимы; это источник главных ошибок ниже.</p>
+<h2 id="критерии-для-двух-групп">Критерии для двух групп</h2>
+<p>Для долей: <span class="tex">z=\dfrac{\hat p_B-\hat p_A}{\sqrt{\hat p(1-\hat p)(1/n_A+1/n_B)}}</span>, где <span class="tex">\hat p</span> — объединённая доля (при <span class="tex">H_0</span> она общая). Для средних без допущения равных дисперсий — <strong>критерий Уэлча</strong>:</p>
+<div class="tex tex-block">t=\frac{\bar x_B-\bar x_A}{\sqrt{s_A^2/n_A+s_B^2/n_B}},</div>
+<p>степени свободы по Уэлчу–Саттертвейту; на размерах A/B-тестов <span class="tex">t\approx z</span>. Метрики с тяжёлыми хвостами (выручка) требуют бутстрапа или винзоризации — выбросы раздувают <span class="tex">s^2</span> и съедают мощность.</p>
+<h2 id="размер-выборки-и-mde">Размер выборки и MDE</h2>
+<p>Пусть в каждой группе <span class="tex">n</span> наблюдений с дисперсией <span class="tex">\sigma^2</span>, истинный эффект <span class="tex">\delta</span>. Разность средних <span class="tex">d\sim\mathcal{N}(\delta,\,2\sigma^2/n)</span>. Критерий отвергает при <span class="tex">|d|&gt;z_{1-\alpha/2}\sigma\sqrt{2/n}</span>. Мощность (пренебрегая противоположным хвостом) равна <span class="tex">P(d&gt;\text{порог})=\Phi\big(\frac{\delta}{\sigma\sqrt{2/n}}-z_{1-\alpha/2}\big)</span>. Приравняем её <span class="tex">1-\beta</span>: <span class="tex">\frac{\delta}{\sigma\sqrt{2/n}}-z_{1-\alpha/2}=z_{1-\beta}</span>, откуда</p>
+<div class="tex tex-block">n=\frac{2\sigma^2\,(z_{1-\alpha/2}+z_{1-\beta})^2}{\delta^2}\quad\text{на группу},\qquad\mathrm{MDE}=(z_{1-\alpha/2}+z_{1-\beta})\,\sigma\sqrt{\frac2n}.</div>
+<p>Для долей дисперсия при <span class="tex">H_0</span> и <span class="tex">H_1</span> различается (<span class="tex">2\bar p\bar q</span> против <span class="tex">p_1q_1+p_2q_2</span>), и точная форма — <span class="tex">n=\big(z_{1-\alpha/2}\sqrt{2\bar p\bar q}+z_{1-\beta}\sqrt{p_1q_1+p_2q_2}\big)^2/\delta^2</span>. Конверсия <span class="tex">10\%\to11\%</span>: упрощённая формула даёт <span class="tex">14\,752</span> пользователей на группу, точная — <span class="tex">14\,751</span>; симуляция при <span class="tex">n=14\,751</span> показала мощность <span class="tex">0{,}803</span>. При <span class="tex">n=20\,000</span> и <span class="tex">p=0{,}1</span> MDE равен <span class="tex">0{,}84</span> п. п. Отношение <span class="tex">\delta/\mathrm{SE}</span> растёт как <span class="tex">\sqrt n</span>, MDE падает как <span class="tex">1/\sqrt n</span>: вдвое меньший эффект стоит вчетверо больше трафика.</p>
+<h2 id="подглядывание">Подглядывание</h2>
+<p>Критерий с <span class="tex">\alpha=0{,}05</span> верен при <strong>одной</strong> проверке в заранее выбранный момент. Если проверять ежедневно и остановиться при первом <span class="tex">p&lt;0{,}05</span>, вы фактически запускаете 14 зависимых тестов. Симуляция A/A (14 дней, <span class="tex">500</span> пользователей на группу в день, <span class="tex">p=0{,}10</span>, 20,000 повторов): только в конце — <span class="tex">4{,}9\%</span> ложных срабатываний; <strong>подглядывание каждый день — <span class="tex">22{,}0\%</span></strong>; два взгляда (дни 7 и 14) — <span class="tex">8{,}1\%</span>. Статистика <span class="tex">z_t</span> — случайное блуждание, и его максимум по времени выходит за <span class="tex">\pm1{,}96</span> чаще, чем конечное значение.</p>
+<p><strong>Последовательные методы</strong> решают это.</p>
+<ul>
+<li><em>Групповые последовательные</em> планы (Pocock, 1977; O'Brien–Fleming, 1979): число проверок и границы заданы заранее; граница Покока постоянна, а границы О'Брайена–Флеминга ужесточены в начале и почти равны обычным в конце. Lan–DeMets (1983) допускают нерегулярные проверки через «расходование» <span class="tex">\alpha</span>. Для наших 14 равноудалённых проверок симуляция дала постоянную границу <span class="tex">|z|&gt;2{,}615</span> (общий уровень <span class="tex">4{,}7\%</span> на новой симуляции).</li>
+<li><strong>mSPRT</strong> и <em>always-valid</em> выводы (Johari et al., 2017): смесь правдоподобий по априори <span class="tex">\theta\sim\mathcal{N}(0,\tau^2)</span> даёт отношение правдоподобия <span class="tex">\Lambda_n=\sqrt{\tfrac{\sigma^2}{\sigma^2+n\tau^2}}\exp\!\Big(\tfrac{n^2\tau^2\bar x_n^2}{2\sigma^2(\sigma^2+n\tau^2)}\Big)</span>; при <span class="tex">H_0</span> (нормальные наблюдения, известная <span class="tex">\sigma^2</span>) это неотрицательный мартингал со средним 1; для долей с оценённой дисперсией — приближённо, и по неравенству Вилля <span class="tex">P(\exists n:\Lambda_n\ge1/\alpha)\le\alpha</span> — ограничение действует при любом правиле остановки. Цена — мощность: при том же сценарии A/A доля ложных срабатываний у mSPRT <span class="tex">0{,}6\%</span> (консервативно), а при реальном эффекте <span class="tex">+1</span> п. п. и 14 днях мощность в этой настройке заметно ниже, чем у теста фиксированной длины (<span class="tex">0{,}17</span> против <span class="tex">0{,}49</span> при <span class="tex">\tau=0{,}01</span>; иллюстративно, зависит от <span class="tex">\tau</span>).</li>
+</ul>
+<h2 id="метрики-отношения-и-дельта-метод">Метрики-отношения и дельта-метод</h2>
+<p>CTR <span class="tex">=\sum k_u/\sum n_u</span> — отношение сумм по пользователям (клики <span class="tex">k_u</span>, показы <span class="tex">n_u</span>). Рандомизация по пользователю, значит, независимы пользователи, а не показы. Метод <span class="tex">\hat p(1-\hat p)/N</span> предполагает <span class="tex">N</span> независимых испытаний, и это неверно: у каждого пользователя свой CTR, и показы внутри пользователя коррелируют.</p>
+<p><strong>Дельта-метод.</strong> <span class="tex">R=\bar y/\bar x</span> — функция выборочных средних по <span class="tex">n</span> пользователям, <span class="tex">g(a,b)=a/b</span>, <span class="tex">\nabla g=\big(\tfrac1{\mu_x},-\tfrac{\mu_y}{\mu_x^2}\big)</span>. По ЦПТ <span class="tex">(\bar y,\bar x)</span> приближённо нормальна с ковариацией <span class="tex">\Sigma/n</span>, и разложение первого порядка даёт</p>
+<div class="tex tex-block">\mathrm{Var}(R)\approx\frac{\nabla g^\top\Sigma\,\nabla g}{n}=\frac1{n\mu_x^2}\Big(\sigma_y^2-2R\,\sigma_{xy}+R^2\sigma_x^2\Big)=\frac{\mathrm{Var}(y-Rx)}{n\mu_x^2},</div>
+<p>с <span class="tex">R=\mu_y/\mu_x</span>. На практике <span class="tex">\widehat{\mathrm{Var}}(R)=\frac{\sum_u(y_u-\hat Rx_u)^2}{(\sum_ux_u)^2}\cdot\frac n{n-1}</span> — это просто дисперсия «линеаризованной» метрики <span class="tex">y_u-\hat Rx_u</span> по пользователям.</p>
+<p>Симуляция A/A (2000 пользователей в группе, ~9 показов на пользователя, CTR <span class="tex">\approx10\%</span>, у каждого пользователя свой CTR: бета-распределение с суммой параметров 1,5 — сильная гетерогенность, 3000 повторов): <strong>наивный z-тест по событиям даёт <span class="tex">51\%</span> ложных срабатываний</strong>, дельта-метод — <span class="tex">4{,}4\%</span>. Стандартная ошибка наивного теста в 3,1 раза меньше настоящей (SE <span class="tex">0{,}0022</span> против <span class="tex">0{,}0069</span>); эмпирическое стандартное отклонение <span class="tex">R</span> по повторам <span class="tex">0{,}00677</span> совпало с дельта-оценкой <span class="tex">0{,}00691</span>. Чем неоднороднее пользователи, тем хуже наивный критерий.</p>
+<h2 id="cuped">CUPED</h2>
+<p>Метрика <span class="tex">Y</span> шумна из-за различий между пользователями, часть которых видна до теста. Возьмём ковариату <span class="tex">X</span>, измеренную <strong>до</strong> рандомизации, и <span class="tex">Y_\theta=Y-\theta(X-\bar X)</span>. Из-за рандомизации <span class="tex">\mathbb{E}X</span> одинаково в группах, поэтому поправка не меняет разность средних: оценка эффекта несмещена. Дисперсия <span class="tex">\mathrm{Var}(Y_\theta)=\sigma_Y^2+\theta^2\sigma_X^2-2\theta\,\mathrm{cov}(X,Y)</span> — парабола по <span class="tex">\theta</span>, минимум в</p>
+<div class="tex tex-block">\theta^*=\frac{\mathrm{cov}(Y,X)}{\mathrm{var}(X)},\qquad\mathrm{Var}(Y_{\theta^*})=\sigma_Y^2\big(1-\rho^2\big),</div>
+<p>где <span class="tex">\rho</span> — корреляция <span class="tex">X</span> и <span class="tex">Y</span>. Симуляция (<span class="tex">\rho=0{,}702</span>): дисперсия упала до <span class="tex">0{,}508\,\sigma_Y^2</span> против предсказанных <span class="tex">1-\rho^2=0{,}507</span>; мощность при <span class="tex">n=2000</span> и эффекте <span class="tex">0{,}5</span> выросла с <span class="tex">0{,}26</span> до <span class="tex">0{,}47</span>. Метод — линейная регрессия на <span class="tex">X</span> (Deng et al., 2013); <span class="tex">\theta</span> оценивают по объединённым данным обеих групп.</p>
+<h2 id="проверка-разбиения-srm">Проверка разбиения: SRM</h2>
+<p>Если задумано 50/50, число пользователей в группах — <span class="tex">\chi^2</span>-тест на заданные доли. Для <span class="tex">50\,000</span> и <span class="tex">50\,800</span>: <span class="tex">\chi^2=6{,}35</span>, <span class="tex">p=0{,}012</span>; для <span class="tex">50\,000</span> и <span class="tex">50\,300</span>: <span class="tex">p=0{,}34</span>. Порог для SRM берут жёстче обычного (часто <span class="tex">p&lt;0{,}001</span>): тест запускается на каждом эксперименте, а срабатывание означает баг в логировании или разбиении и обесценивает любые выводы по метрикам.</p>
+<h2 id="множественные-сравнения-aa-и-бутстрап">Множественные сравнения, A/A и бутстрап</h2>
+<p>Метрик в отчёте десятки; при 20 независимых проверках и всех верных <span class="tex">H_0</span> хотя бы одно <span class="tex">p&lt;0{,}05</span> встречается в <span class="tex">64{,}5\%</span> случаев, при поправке Бонферрони (<span class="tex">\alpha/m</span>) — <span class="tex">4{,}8\%</span>, при Бенджамини–Хохберге — <span class="tex">4{,}9\%</span> (это при глобальной нулевой; BH контролирует долю ложных открытий, а не вероятность хотя бы одного). Лучшая защита — одна основная метрика; остальные — защитные (guardrail), по ним проверяют отсутствие ухудшения.</p>
+<p><strong>A/A-тесты</strong> — основной тест самой системы экспериментов: запустите сотни разбиений без изменений, распределение <span class="tex">p</span> должно быть равномерным на <span class="tex">[0,1]</span>, а доля <span class="tex">p&lt;0{,}05</span> — около 5%. Именно так выявляют наивный критерий из раздела про дельта-метод.</p>
+<p><strong>Бутстрап по пользователям</strong> подходит для любой метрики (медиана, отношение, квантиль): ресэмплируйте пользователей, а не события, и берите квантили разности.</p>
+<h2 id="код">Код</h2>
+<div class="code"><div class="code-head"><span class="lang">python</span></div><pre><code><span class="tok-k">import</span> numpy <span class="tok-k">as</span> np
+rng <span class="tok-p">=</span> np<span class="tok-p">.</span>random<span class="tok-p">.</span>default_rng<span class="tok-p">(</span><span class="tok-n">1</span><span class="tok-p">)</span>
+
+<span class="tok-c"># Подглядывание: A/A, 14 дней по 500 пользователей на группу, p = 0.1</span>
+reps<span class="tok-p">,</span> days<span class="tok-p">,</span> per<span class="tok-p">,</span> p <span class="tok-p">=</span> <span class="tok-n">20_000</span><span class="tok-p">,</span> <span class="tok-n">14</span><span class="tok-p">,</span> <span class="tok-n">500</span><span class="tok-p">,</span> <span class="tok-n">0.10</span>
+a <span class="tok-p">=</span> rng<span class="tok-p">.</span>binomial<span class="tok-p">(</span>per<span class="tok-p">,</span> p<span class="tok-p">,</span> <span class="tok-p">(</span>reps<span class="tok-p">,</span> days<span class="tok-p">)</span><span class="tok-p">)</span><span class="tok-p">.</span>cumsum<span class="tok-p">(</span><span class="tok-n">1</span><span class="tok-p">)</span>
+b <span class="tok-p">=</span> rng<span class="tok-p">.</span>binomial<span class="tok-p">(</span>per<span class="tok-p">,</span> p<span class="tok-p">,</span> <span class="tok-p">(</span>reps<span class="tok-p">,</span> days<span class="tok-p">)</span><span class="tok-p">)</span><span class="tok-p">.</span>cumsum<span class="tok-p">(</span><span class="tok-n">1</span><span class="tok-p">)</span>
+N <span class="tok-p">=</span> per <span class="tok-p">*</span> np<span class="tok-p">.</span>arange<span class="tok-p">(</span><span class="tok-n">1</span><span class="tok-p">,</span> days <span class="tok-p">+</span> <span class="tok-n">1</span><span class="tok-p">)</span>
+pool <span class="tok-p">=</span> <span class="tok-p">(</span>a <span class="tok-p">+</span> b<span class="tok-p">)</span> <span class="tok-p">/</span> <span class="tok-p">(</span><span class="tok-n">2</span> <span class="tok-p">*</span> N<span class="tok-p">)</span>
+z <span class="tok-p">=</span> <span class="tok-p">(</span>b <span class="tok-p">-</span> a<span class="tok-p">)</span> <span class="tok-p">/</span> N <span class="tok-p">/</span> np<span class="tok-p">.</span>sqrt<span class="tok-p">(</span>pool <span class="tok-p">*</span> <span class="tok-p">(</span><span class="tok-n">1</span> <span class="tok-p">-</span> pool<span class="tok-p">)</span> <span class="tok-p">*</span> <span class="tok-n">2</span> <span class="tok-p">/</span> N<span class="tok-p">)</span>
+<span class="tok-f">print</span><span class="tok-p">(</span><span class="tok-p">(</span>np<span class="tok-p">.</span>abs<span class="tok-p">(</span>z<span class="tok-p">[</span><span class="tok-p">:</span><span class="tok-p">,</span> <span class="tok-p">-</span><span class="tok-n">1</span><span class="tok-p">]</span><span class="tok-p">)</span> <span class="tok-p">&gt;</span> <span class="tok-n">1.96</span><span class="tok-p">)</span><span class="tok-p">.</span>mean<span class="tok-p">(</span><span class="tok-p">)</span><span class="tok-p">)</span>          <span class="tok-c"># 0.049: одна проверка в конце</span>
+<span class="tok-f">print</span><span class="tok-p">(</span><span class="tok-p">(</span>np<span class="tok-p">.</span>abs<span class="tok-p">(</span>z<span class="tok-p">)</span> <span class="tok-p">&gt;</span> <span class="tok-n">1.96</span><span class="tok-p">)</span><span class="tok-p">.</span>any<span class="tok-p">(</span><span class="tok-n">1</span><span class="tok-p">)</span><span class="tok-p">.</span>mean<span class="tok-p">(</span><span class="tok-p">)</span><span class="tok-p">)</span>          <span class="tok-c"># 0.220: проверка каждый день</span>
+
+<span class="tok-c"># Дельта-метод для CTR; v — показы, k — клики по пользователям</span>
+<span class="tok-k">def</span> <span class="tok-f">delta_z</span><span class="tok-p">(</span>vA<span class="tok-p">,</span> kA<span class="tok-p">,</span> vB<span class="tok-p">,</span> kB<span class="tok-p">)</span><span class="tok-p">:</span>
+    <span class="tok-k">def</span> <span class="tok-f">stat</span><span class="tok-p">(</span>v<span class="tok-p">,</span> k<span class="tok-p">)</span><span class="tok-p">:</span>
+        R<span class="tok-p">,</span> n <span class="tok-p">=</span> k<span class="tok-p">.</span>sum<span class="tok-p">(</span><span class="tok-p">)</span> <span class="tok-p">/</span> v<span class="tok-p">.</span>sum<span class="tok-p">(</span><span class="tok-p">)</span><span class="tok-p">,</span> <span class="tok-f">len</span><span class="tok-p">(</span>v<span class="tok-p">)</span>
+        <span class="tok-k">return</span> R<span class="tok-p">,</span> <span class="tok-p">(</span><span class="tok-p">(</span>k <span class="tok-p">-</span> R <span class="tok-p">*</span> v<span class="tok-p">)</span> <span class="tok-p">*</span><span class="tok-p">*</span> <span class="tok-n">2</span><span class="tok-p">)</span><span class="tok-p">.</span>sum<span class="tok-p">(</span><span class="tok-p">)</span> <span class="tok-p">/</span> <span class="tok-p">(</span>n <span class="tok-p">-</span> <span class="tok-n">1</span><span class="tok-p">)</span> <span class="tok-p">/</span> <span class="tok-p">(</span>n <span class="tok-p">*</span> v<span class="tok-p">.</span>mean<span class="tok-p">(</span><span class="tok-p">)</span> <span class="tok-p">*</span><span class="tok-p">*</span> <span class="tok-n">2</span><span class="tok-p">)</span>
+    <span class="tok-p">(</span>RA<span class="tok-p">,</span> sA<span class="tok-p">)</span><span class="tok-p">,</span> <span class="tok-p">(</span>RB<span class="tok-p">,</span> sB<span class="tok-p">)</span> <span class="tok-p">=</span> stat<span class="tok-p">(</span>vA<span class="tok-p">,</span> kA<span class="tok-p">)</span><span class="tok-p">,</span> stat<span class="tok-p">(</span>vB<span class="tok-p">,</span> kB<span class="tok-p">)</span>
+    <span class="tok-k">return</span> <span class="tok-p">(</span>RB <span class="tok-p">-</span> RA<span class="tok-p">)</span> <span class="tok-p">/</span> np<span class="tok-p">.</span>sqrt<span class="tok-p">(</span>sA <span class="tok-p">+</span> sB<span class="tok-p">)</span>
+</code></pre></div>
+<h2 id="ловушки">Ловушки</h2>
+<ul>
+<li><strong>Эффект новизны и сезонность.</strong> Новый интерфейс привлекает внимание в первые дни, и эффект затухает; длинная смена пользовательского поведения (недельный цикл, зарплата, праздники) требует хотя бы 1–2 полных недель. Смотрите эффект по дням экспозиции: тренд к нулю — признак новизны.</li>
+<li>Офлайн-метрика из <a href="/edufamcs-demo/handbook/classic/metriki-klassifikacii-i-kalibrovka/" rel="noopener noreferrer nofollow">классификации</a> — не замена онлайн-метрике: улучшение AUC не гарантирует выигрыш в бизнес-показателе.</li>
+<li>Несколько вариантов вместо двух — это множественные сравнения; пользователи, видевшие тест в обеих ветках, — загрязнение.</li>
+<li>На собеседовании: вывести размер выборки; объяснить, почему подглядывание раздувает ошибку I рода и как с этим бороться; дельта-метод для CTR и почему event-level критерий неверен; вывести <span class="tex">\theta^*</span> в CUPED и <span class="tex">1-\rho^2</span>; что делать при SRM.</li>
+</ul>
+<h2 id="проверь-себя">Проверь себя</h2>
+<details class="callout md details"><summary>Как из условия мощности выводится $n=2\sigma^2(z_{1-\alpha/2}+z_{1-\beta})^2/\delta^2$?</summary>
+<p>Критический порог <span class="tex">z_{1-\alpha/2}\sigma\sqrt{2/n}</span>, при эффекте <span class="tex">\delta</span> мощность равна <span class="tex">\Phi\big(\delta/(\sigma\sqrt{2/n})-z_{1-\alpha/2}\big)</span>. Приравнивая к <span class="tex">1-\beta</span> и решая относительно <span class="tex">n</span>, получаем формулу.</p>
+</details>
+<details class="callout md details"><summary>Почему подглядывание раздувает долю ложных срабатываний до 22% вместо 5%?</summary>
+<p>Каждая проверка — отдельный шанс пересечь порог при верной <span class="tex">H_0</span>, а статистики соседних дней сильно зависимы. Вероятность того, что случайное блуждание хоть раз выйдет за <span class="tex">\pm1{,}96</span>, заметно больше, чем в одной точке.</p>
+</details>
+<details class="callout md details"><summary>Почему наивный z-тест для CTR по событиям антиконсервативен?</summary>
+<p>Он считает показы независимыми, а они кластеризованы по пользователям (внутри пользователя CTR общий). Эффективный размер выборки близок к числу пользователей, и настоящая дисперсия оценки в несколько раз больше наивной.</p>
+</details>
+<details class="callout md details"><summary>Почему CUPED не вносит смещения?</summary>
+<p>Ковариата измерена до рандомизации, её среднее одинаково в группах, и поправка <span class="tex">-\theta(X-\bar X)</span> в разности средних сокращается в ожидании. Дисперсия при этом умножается на <span class="tex">1-\rho^2</span>.</p>
+</details>
+<details class="callout md details"><summary>Что означает срабатывание SRM-теста и что делать?</summary>
+<p>Фактическое разбиение отличается от задуманного сильнее, чем допускает случайность. Это признак бага (логирование, фильтры, боты, рандомизация), результаты метрик считаются недействительными, пока причина не найдена.</p>
+</details>
+<h2 id="что-почитать">Что почитать</h2>
+<ul>
+<li>Kohavi R., Tang D., Xu Y. <em>Trustworthy Online Controlled Experiments</em>, Cambridge University Press, 2020.</li>
+<li>Deng A., Xu Y., Kohavi R., Walker T. <em>Improving the Sensitivity of Online Controlled Experiments by Utilizing Pre-Experiment Data</em>, WSDM 2013 (CUPED).</li>
+<li>Deng A., Knoblich U., Lu J. <em>Applying the Delta Method in Metric Analytics: A Practical Guide with Novel Ideas</em>, KDD 2018: https://arxiv.org/abs/1803.06336</li>
+<li>Johari R., Koomen P., Pekelis L., Walsh D. <em>Peeking at A/B Tests: Why it matters, and what to do about it</em>, KDD 2017.</li>
+<li>Pocock S. <em>Group sequential methods in the design and analysis of clinical trials</em>, Biometrika, 1977; O'Brien P., Fleming T. <em>A multiple testing procedure for clinical trials</em>, Biometrics, 1979.</li>
+<li>Lan K., DeMets D. <em>Discrete sequential boundaries for clinical trials</em>, Biometrika, 1983.</li>
+<li>Benjamini Y., Hochberg Y. <em>Controlling the False Discovery Rate</em>, JRSS B, 1995.</li>
+<li>Fabijan A. et al. <em>Diagnosing Sample Ratio Mismatch in Online Controlled Experiments</em>, KDD 2019.</li>
+</ul>
+</div>
+      
+
+      
+
+      
+      <nav class="pager" aria-label="Соседние статьи">
+        <a href="/edufamcs-demo/handbook/math/teoriya-informacii/"><span><svg class="ico sm" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-arrow-left"/></svg>Назад</span>Теория информации для ML</a>
+        
+      </nav>
+      
+    </article>
+
+    <aside class="hb-toc" aria-label="На этой странице">
+      <a class="l2" href="#постановка">Постановка</a><a class="l2" href="#критерии-для-двух-групп">Критерии для двух групп</a><a class="l2" href="#размер-выборки-и-mde">Размер выборки и MDE</a><a class="l2" href="#подглядывание">Подглядывание</a><a class="l2" href="#метрики-отношения-и-дельта-метод">Метрики-отношения и дельта-метод</a><a class="l2" href="#cuped">CUPED</a><a class="l2" href="#проверка-разбиения-srm">Проверка разбиения: SRM</a><a class="l2" href="#множественные-сравнения-aa-и-бутстрап">Множественные сравнения, A/A и бутстрап</a><a class="l2" href="#код">Код</a><a class="l2" href="#ловушки">Ловушки</a><a class="l2" href="#проверь-себя">Проверь себя</a><a class="l2" href="#что-почитать">Что почитать</a>
+    </aside>
+  </div>
+</div>
+
+
+</main>
+
+<footer class="ftr" data-theme="dark">
+  <svg class="sym fern" viewBox="0 0 40.5 65.02" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#fern"/></svg>
+  <div class="container">
+    <div class="ftr-row">
+      <a href="/edufamcs-demo/" aria-label="EDU FAMCS — главная"><img src="/edufamcs-demo/static/brand/logo/logo-edu-dark.svg" alt="EDU FAMCS" width="196" height="40"></a>
+      <ul class="ftr-links">
+        <li><a href="/edufamcs-demo/#courses">Курсы</a></li>
+        <li><a href="/edufamcs-demo/ml/">Машинное обучение</a></li>
+        <li><a href="/edufamcs-demo/handbook/">Хендбук</a></li>
+        <li><a href="/edufamcs-demo/news/">Новости</a></li>
+        <li><a href="/edufamcs-demo/people/">Авторы</a></li>
+        <li><a href="/edufamcs-demo/about/">О&nbsp;нас</a></li>
+        <li><a href="/edufamcs-demo/propose/">Предложить или исправить</a></li>
+        <li><a href="/edufamcs-demo/privacy/">Конфиденциальность</a></li>
+      </ul>
+    </div>
+    <div class="ftr-big" aria-hidden="true">EDU<span class="d">·</span>FAMCS</div>
+    <p class="ftr-copy">© 2026 EDU FAMCS · Минск</p>
+  </div>
+</footer>
+
+<div class="toasts-region" aria-live="polite" id="toasts">
+
+</div>
+
+</body>
+</html>

@@ -27,7 +27,7 @@
 <script src="/edufamcs-demo/static/js/site.js" defer></script>
 <script src="/edufamcs-demo/static/handbook/handbook.js" defer></script>
 </head>
-<body class="" hx-headers='{"X-CSRFToken": "QXjzG2nkifShFATnJZ37FRT3IgQw9HXxC3kWAPF1ts8vk9PDWoWcWj1oeDsLesIw"}'>
+<body class="" hx-headers='{"X-CSRFToken": "4Ib2gLNwIPAnsR7ZfuBeezzNI1nqJDO6GV0ZwNmnJCOWDamreXPbWsrLaauotnNN"}'>
 <a class="skip" href="#main">К содержанию</a>
 <div class="demo-bar" role="note">Демо-версия для отзывов: вход, запись на курсы и формы здесь не работают.</div>
 
@@ -60,6 +60,7 @@
 
 
 <div class="container hb-page s-recsys">
+  <div class="hb-readbar" aria-hidden="true"><i></i></div>
   <div class="hb">
     <aside class="hb-nav" aria-label="Статьи раздела">
       
@@ -90,9 +91,9 @@
       <div class="hb-meta">
         
         
-        <span><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-clock"/></svg>13&nbsp;мин</span>
+        <span><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-clock"/></svg>16&nbsp;мин</span>
         <span class="hb-authors"><span class="avatar sm" title="Артем Лебедевич">АЛ</span>Артем Лебедевич</span>
-        <span><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-edit"/></svg>9 ноября 2026</span>
+        <span><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-edit"/></svg>10 ноября 2026</span>
         
         
       </div>
@@ -100,7 +101,7 @@
       
       <details class="hb-mtoc">
         <summary><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-list"/></svg>Содержание<svg class="ico sm" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-chev-down"/></svg></summary>
-        <a class="l2" href="#случайные-блуждания-и">Случайные блуждания: P^3\alpha и RP^3\beta</a><a class="l2" href="#графовые-нейросети">Графовые нейросети</a><a class="l2" href="#lightgcn-2020">LightGCN (2020)</a><a class="l2" href="#что-идёт-дальше">Что идёт дальше</a><a class="l2" href="#где-графы-реально-применяют">Где графы реально применяют</a><a class="l2" href="#подводные-камни">Подводные камни</a><a class="l2" href="#что-почитать">Что почитать</a>
+        <a class="l2" href="#случайные-блуждания-и">Случайные блуждания: P^3\alpha и RP^3\beta</a><a class="l2" href="#графовые-нейросети">Графовые нейросети</a><a class="l2" href="#lightgcn-2020">LightGCN (2020)</a><a class="l2" href="#что-идёт-дальше">Что идёт дальше</a><a class="l2" href="#где-графы-реально-применяют">Где графы реально применяют</a><a class="l2" href="#подводные-камни">Подводные камни</a><a class="l2" href="#проверь-себя">Проверь себя</a><a class="l2" href="#что-почитать">Что почитать</a>
       </details>
       
 
@@ -116,6 +117,35 @@
 <div class="tex tex-block">s(i,j) = \sum_{u \in U_i \cap U_j}\ \sum_{v \in U_i \cap U_j,\ v \ne u} \frac{1}{\alpha + |I_u \cap I_v|},</div>
 <p>где <span class="tex">U_i</span> — пользователи объекта <span class="tex">i</span>, <span class="tex">I_u</span> — объекты пользователя <span class="tex">u</span>, а <span class="tex">\alpha</span> — свой сглаживающий параметр (не тот, что в <span class="tex">P^3_\alpha</span>). Swing устойчив к «шумным» парам вроде товаров, которые кликают все подряд, и до сих пор популярен как дешёвый источник item-to-item кандидатов.</p>
 <p><strong>Pixie</strong> (Eksombatchai et al., Pinterest, WWW 2018). Блуждания в масштабе Pinterest: граф из 3 млрд узлов (пины и доски) и 17 млрд рёбер, прореженный и загруженный целиком в память сервера. Рекомендации строятся <strong>в реальном времени</strong>: из пинов запроса (недавние действия пользователя) запускают множество коротких блужданий с возвратом в стартовую вершину, а число посещений пина служит скором; блуждание останавливают досрочно, как только достаточно пинов набрали нужное число посещений. Блуждания смещаются по признакам пользователя (язык, тематика) — просто изменением вероятностей переходов. По данным авторов, один сервер обслуживает около 1200 запросов в секунду с задержкой 60 мс; обучения и пересчёта эмбеддингов нет.</p>
+<p><strong>Игрушечный пример.</strong> Четыре пользователя, пять объектов <span class="tex">a</span>–<span class="tex">e</span>: <span class="tex">u_1=\{a,b\}</span>, <span class="tex">u_2=\{a,b,d,e\}</span>, <span class="tex">u_3=\{b,e\}</span>, <span class="tex">u_4=\{a,b,c,d\}</span>. Для <span class="tex">u_1</span> непросмотренные — <span class="tex">c, d, e</span>. Скоры трёхшагового блуждания (код на NumPy, степень применяется к вероятностям переходов поэлементно):</p>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th><span class="tex">\alpha</span></th>
+<th><span class="tex">c</span></th>
+<th><span class="tex">d</span></th>
+<th><span class="tex">e</span></th>
+<th>порядок</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>0,0729</td>
+<td>0,1458</td>
+<td>0,1354</td>
+<td><span class="tex">d &gt; e &gt; c</span></td>
+</tr>
+<tr>
+<td>2</td>
+<td>0,0027</td>
+<td>0,0054</td>
+<td>0,0066</td>
+<td><span class="tex">e &gt; d &gt; c</span></td>
+</tr>
+</tbody>
+</table></div>
+<p>Объект <span class="tex">d</span> достижим через двух «тяжёлых» пользователей (<span class="tex">u_2</span>, <span class="tex">u_4</span> — по 4 объекта), <span class="tex">e</span> — через <span class="tex">u_2</span> и через «лёгкого» <span class="tex">u_3</span> (2 объекта). При <span class="tex">\alpha=1</span> побеждает число путей, при <span class="tex">\alpha=2</span> каждый переход через узел степени 4 дешевеет в <span class="tex">4^{-\alpha}</span> раз, и путь через узкого <span class="tex">u_3</span> (вклад <span class="tex">0{,}0039</span> из <span class="tex">0{,}0066</span>) перевешивает. Заметьте, что при <span class="tex">\alpha\ne1</span> сумма вероятностей уже не равна 1 — перенормировки нет.</p>
 <h2 id="графовые-нейросети">Графовые нейросети</h2>
 <p><strong>Идея message passing.</strong> Каждый узел обновляет эмбеддинг агрегированием эмбеддингов соседей, затем слои повторяются: после <span class="tex">K</span> слоёв эмбеддинг узла зависит от его окрестности радиуса <span class="tex">K</span>.</p>
 <ul>
@@ -131,7 +161,7 @@ e_i^{(k+1)} = \sum_{u \in N_i}\frac{1}{\sqrt{|N_i|\,|N_u|}}\, e_u^{(k)}.</div>
 <p>В матричном виде: <span class="tex">E^{(k+1)} = \hat A E^{(k)}</span>, где <span class="tex">\hat A = D^{-1/2}\begin{pmatrix}0 &amp; R\\ R^\top &amp; 0\end{pmatrix}D^{-1/2}</span> — нормированная матрица смежности. Параметры модели — только <span class="tex">E^{(0)}</span>, начальные эмбеддинги. Итоговое представление — взвешенное среднее по слоям (учитывает и собственные признаки, как self-loop в GCN, и окрестность разных радиусов):</p>
 <div class="tex tex-block">e_u = \sum_{k=0}^{K}\alpha_k e_u^{(k)}, \quad \alpha_k = \tfrac{1}{K+1}, \qquad \hat y_{ui} = e_u^\top e_i .</div>
 <p>Обучение — BPR: <span class="tex">\mathcal{L} = -\sum_{(u,i^+,i^-)}\log\sigma(\hat y_{ui^+} - \hat y_{ui^-}) + \lambda\|E^{(0)}\|^2</span>. Типичные <span class="tex">K = 2</span>–<span class="tex">3</span>.</p>
-<p>Интерпретация: LightGCN — <strong>сглаживание эмбеддингов по графу</strong> (низкочастотный фильтр на спектре <span class="tex">\hat A</span>). Эмбеддинг пользователя становится близок к эмбеддингам его объектов и объектов пользователей с похожими вкусами. С этой точки зрения LightGCN близок к линейным моделям: два шага пропагации дают нормированную матрицу совстречаемости <span class="tex">\tilde R^\top \tilde R</span>, где <span class="tex">\tilde R = D_U^{-1/2} R D_I^{-1/2}</span>, — ту же структуру, что использует EASE, только LightGCN работает с ней через обучаемые эмбеддинги, а EASE — напрямую. Shen et al. (CIKM 2021) довели мысль до конца: в терминах обработки сигналов на графах kNN, матричное разложение, линейные автоэнкодеры и LightGCN — разные низкочастотные фильтры, а фильтр в замкнутой форме без обучения (GF-CF) на трёх датасетах не уступает нейросетевым моделям.</p>
+<p>Интерпретация: LightGCN — <strong>сглаживание эмбеддингов по графу</strong> (низкочастотный фильтр на спектре <span class="tex">\hat A</span>). Эмбеддинг пользователя становится близок к эмбеддингам его объектов и объектов пользователей с похожими вкусами. С этой точки зрения LightGCN близок к линейным моделям: два шага пропагации дают нормированную матрицу совстречаемости <span class="tex">\tilde R^\top \tilde R</span>, где <span class="tex">\tilde R = D_U^{-1/2} R D_I^{-1/2}</span>, — маргинальную совстречаемость, нормированную по степеням: <span class="tex">(\tilde R^\top\tilde R)_{ij} = \sum_u R_{ui}R_{uj}\,/\,\big(|N_u|\sqrt{|N_i||N_j|}\big)</span>. Это по сути item-kNN с косинусной нормировкой (пользователь вносит вклад <span class="tex">1/|N_u|</span>), только LightGCN работает с ней через обучаемые эмбеддинги. EASE же использует <em>обратную</em> к Gram-матрице <span class="tex">G=R^\top R</span> и потому учитывает условные зависимости между объектами (какой вклад <span class="tex">i</span> даёт при уже известных остальных), а не маргинальные. Shen et al. (CIKM 2021) довели мысль до конца: в терминах обработки сигналов на графах kNN, матричное разложение, линейные автоэнкодеры и LightGCN — разные низкочастотные фильтры, а фильтр в замкнутой форме без обучения (GF-CF) на трёх датасетах не уступает нейросетевым моделям.</p>
 <div class="code"><div class="code-head"><span class="lang">python</span></div><pre><code><span class="tok-k">import</span> numpy <span class="tok-k">as</span> np<span class="tok-p">,</span> scipy.sparse <span class="tok-k">as</span> sp<span class="tok-p">,</span> torch
 
 <span class="tok-k">def</span> <span class="tok-f">normalized_adj</span><span class="tok-p">(</span>R<span class="tok-p">:</span> sp<span class="tok-p">.</span>csr_matrix<span class="tok-p">)</span> <span class="tok-p">-</span><span class="tok-p">&gt;</span> torch<span class="tok-p">.</span>Tensor<span class="tok-p">:</span>
@@ -192,6 +222,23 @@ e_i^{(k+1)} = \sum_{u \in N_i}\frac{1}{\sqrt{|N_i|\,|N_u|}}\, e_u^{(k)}.</div>
 <li><strong>Холодные пользователи.</strong> Нового пользователя нет в таблице <span class="tex">E^{(0)}</span>, а у узла без рёбер нет и соседей. Нужен либо пересчёт, либо индуктивная модель с признаками, либо другой источник кандидатов.</li>
 <li><strong>Память.</strong> Эмбеддинги всех узлов и сам граф на миллиардах объектов приходится шардировать.</li>
 </ul>
+<p>На собеседовании: чем LightGCN отличается от NGCF и почему можно выбросить <span class="tex">W</span> и нелинейность; почему при росте <span class="tex">K</span> эмбеддинги «схлопываются» и как с этим борются; что общего у LightGCN и item-kNN/EASE и чем они отличаются; почему <span class="tex">RP^3_\beta</span> часто неожиданно силён.</p>
+<h2 id="проверь-себя">Проверь себя</h2>
+<details class="callout md details"><summary>Почему при $\alpha&gt;1$ в $P^3_\alpha$ пути через хабы весят меньше?</summary>
+<p>Для бинарной матрицы вероятность перехода <span class="tex">1/\deg</span>, после возведения в <span class="tex">\alpha</span> вклад перехода равен <span class="tex">\deg^{-\alpha}</span>; чем больше степень узла, тем сильнее штраф, и перенормировки нет.</p>
+</details>
+<details class="callout md details"><summary>Чем $RP^3_\beta$ отличается от $P^3_\alpha$ и зачем нужен?</summary>
+<p>Скор делят на популярность конечного объекта в степени <span class="tex">\beta</span>. Это снимает смещение блужданий в хабы и добавляет длинный хвост в выдачу, ценой точности при слишком большом <span class="tex">\beta</span>.</p>
+</details>
+<details class="callout md details"><summary>Что выбросили из NGCF, чтобы получить LightGCN, и почему это работает?</summary>
+<p>Матрицы преобразования и нелинейность. Входом служат только ID-эмбеддинги без богатых признаков, и преобразовывать нечего; оставшиеся пропагация и усреднение по слоям дают лучшее качество и обучение.</p>
+</details>
+<details class="callout md details"><summary>Что происходит с эмбеддингами LightGCN при большом $K$?</summary>
+<p>Пересглаживание: в <span class="tex">\hat A^K</span> выживают только компоненты с собственными значениями <span class="tex">\pm 1</span>, и все пользователи смотрят в одном направлении (объекты тоже). Поэтому <span class="tex">K</span> берут 2–3 и усредняют слои.</p>
+</details>
+<details class="callout md details"><summary>Чем $\tilde R^\top\tilde R$ из LightGCN отличается от того, что использует EASE?</summary>
+<p>Это маргинальная нормированная совстречаемость (item-kNN-подобная), тогда как EASE работает с обратной к <span class="tex">R^\top R</span> матрицей, то есть с условными зависимостями.</p>
+</details>
 <h2 id="что-почитать">Что почитать</h2>
 <ul>
 <li>Cooper et al. <em>Random Walks in Recommender Systems: Exact Computation and Simulations</em>, WWW 2014 (<span class="tex">P^3_\alpha</span>, DOI 10.1145/2567948.2579244); Christoffel et al. <em>Blockbusters and Wallflowers: Accurate, Diverse, and Scalable Recommendations with Random Walks</em>, RecSys 2015 (<span class="tex">RP^3_\beta</span>, DOI 10.1145/2792838.2800180); Paudel et al. <em>Updatable, Accurate, Diverse, and Scalable Recommendations for Interactive Applications</em>, ACM TiiS 2016.</li>
@@ -206,6 +253,8 @@ e_i^{(k+1)} = \sum_{u \in N_i}\frac{1}{\sqrt{|N_i|\,|N_u|}}\, e_u^{(k)}.</div>
       
 
       
+
+      
       <nav class="pager" aria-label="Соседние статьи">
         <a href="/edufamcs-demo/handbook/recsys/posledovatelnye-modeli/"><span><svg class="ico sm" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-arrow-left"/></svg>Назад</span>Последовательные модели: GRU4Rec, SASRec, BERT4Rec</a>
         <a href="/edufamcs-demo/handbook/recsys/kandidaty-i-ranzhirovanie/"><span>Дальше<svg class="ico sm" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-arrow"/></svg></span>Двухстадийная схема: кандидаты → ранжирование</a>
@@ -214,7 +263,7 @@ e_i^{(k+1)} = \sum_{u \in N_i}\frac{1}{\sqrt{|N_i|\,|N_u|}}\, e_u^{(k)}.</div>
     </article>
 
     <aside class="hb-toc" aria-label="На этой странице">
-      <a class="l2" href="#случайные-блуждания-и">Случайные блуждания: P^3\alpha и RP^3\beta</a><a class="l2" href="#графовые-нейросети">Графовые нейросети</a><a class="l2" href="#lightgcn-2020">LightGCN (2020)</a><a class="l2" href="#что-идёт-дальше">Что идёт дальше</a><a class="l2" href="#где-графы-реально-применяют">Где графы реально применяют</a><a class="l2" href="#подводные-камни">Подводные камни</a><a class="l2" href="#что-почитать">Что почитать</a>
+      <a class="l2" href="#случайные-блуждания-и">Случайные блуждания: P^3\alpha и RP^3\beta</a><a class="l2" href="#графовые-нейросети">Графовые нейросети</a><a class="l2" href="#lightgcn-2020">LightGCN (2020)</a><a class="l2" href="#что-идёт-дальше">Что идёт дальше</a><a class="l2" href="#где-графы-реально-применяют">Где графы реально применяют</a><a class="l2" href="#подводные-камни">Подводные камни</a><a class="l2" href="#проверь-себя">Проверь себя</a><a class="l2" href="#что-почитать">Что почитать</a>
     </aside>
   </div>
 </div>

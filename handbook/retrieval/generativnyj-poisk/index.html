@@ -27,7 +27,7 @@
 <script src="/edufamcs-demo/static/js/site.js" defer></script>
 <script src="/edufamcs-demo/static/handbook/handbook.js" defer></script>
 </head>
-<body class="" hx-headers='{"X-CSRFToken": "OWrrIWb0ssWDU1fYk2a5go8tDUAIG5X7A2sOCJtHDFcRzAbexr3axQgO9hcXLQI6"}'>
+<body class="" hx-headers='{"X-CSRFToken": "bwULiAD1QIr6WAKeIx0T08cOSzu4FfdPNJJIyCcSRvFF7TZGH0eQI14MkIB2pZcw"}'>
 <a class="skip" href="#main">К содержанию</a>
 <div class="demo-bar" role="note">Демо-версия для отзывов: вход, запись на курсы и формы здесь не работают.</div>
 
@@ -60,6 +60,7 @@
 
 
 <div class="container hb-page s-recsys">
+  <div class="hb-readbar" aria-hidden="true"><i></i></div>
   <div class="hb">
     <aside class="hb-nav" aria-label="Статьи раздела">
       
@@ -86,9 +87,9 @@
       <div class="hb-meta">
         
         
-        <span><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-clock"/></svg>16&nbsp;мин</span>
+        <span><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-clock"/></svg>19&nbsp;мин</span>
         <span class="hb-authors"><span class="avatar sm" title="Артем Лебедевич">АЛ</span>Артем Лебедевич</span>
-        <span><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-edit"/></svg>9 ноября 2026</span>
+        <span><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-edit"/></svg>10 ноября 2026</span>
         
         
       </div>
@@ -96,7 +97,7 @@
       
       <details class="hb-mtoc">
         <summary><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-list"/></svg>Содержание<svg class="ico sm" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-chev-down"/></svg></summary>
-        <a class="l2" href="#идея-поиск-как-seq2seq">Идея: поиск как seq2seq</a><a class="l2" href="#хроника">Хроника</a><a class="l2" href="#дизайн-идентификатора">Дизайн идентификатора</a><a class="l3" href="#ограниченное-декодирование">Ограниченное декодирование</a><a class="l2" href="#код-игрушечный-dsi">Код: игрушечный DSI</a><a class="l2" href="#проблемы">Проблемы</a><a class="l2" href="#что-показали-новые-обзоры-и-эксперименты-20242025">Что показали новые обзоры и эксперименты (2024–2025)</a><a class="l2" href="#что-запомнить-для-собеседования">Что запомнить для собеседования</a><a class="l2" href="#что-почитать">Что почитать</a>
+        <a class="l2" href="#идея-поиск-как-seq2seq">Идея: поиск как seq2seq</a><a class="l2" href="#хроника">Хроника</a><a class="l2" href="#дизайн-идентификатора">Дизайн идентификатора</a><a class="l3" href="#ограниченное-декодирование">Ограниченное декодирование</a><a class="l2" href="#код-игрушечный-dsi">Код: игрушечный DSI</a><a class="l2" href="#проблемы">Проблемы</a><a class="l2" href="#что-показали-новые-обзоры-и-эксперименты-20242025">Что показали новые обзоры и эксперименты (2024–2025)</a><a class="l2" href="#что-запомнить-для-собеседования">Что запомнить для собеседования</a><a class="l2" href="#проверь-себя">Проверь себя</a><a class="l2" href="#что-почитать">Что почитать</a>
       </details>
       
 
@@ -169,6 +170,7 @@
 <p>Модель не должна выдавать несуществующий docid. Допустимые идентификаторы кладём в <strong>trie</strong> (префиксное дерево); на каждом шаге генерации маскируем логиты токенов, которые не продолжают ни одного допустимого префикса.</p>
 <div class="tex tex-block">\tilde p(c_t \mid c_{&lt;t}, q) \propto p(c_t \mid c_{&lt;t}, q)\cdot \mathbb{1}\big[c_{&lt;t}c_t \in \mathrm{Prefixes}(\mathcal{D})\big].</div>
 <p>Ограничение гарантирует валидность, но не правильность: модель всё ещё может с уверенностью выбрать неверную ветку.</p>
+<p><strong>Пример: ограниченный beam search.</strong> Двухуровневый docid, четыре документа; вероятности модели на каждом уровне (после маскирования по trie, уже нормированные): первый разряд <span class="tex">p(1) = 0{,}6</span>, <span class="tex">p(2) = 0{,}4</span>; второй — под префиксом 1: <span class="tex">0{,}5</span> и <span class="tex">0{,}5</span>, под префиксом 2: <span class="tex">0{,}9</span> и <span class="tex">0{,}1</span>. Вероятности docid: <span class="tex">11 \to 0{,}30</span>, <span class="tex">12 \to 0{,}30</span>, <span class="tex">21 \to 0{,}36</span>, <span class="tex">22 \to 0{,}04</span>. Лучший документ — <span class="tex">21</span>. При ширине луча <span class="tex">b = 1</span> после первого разряда остаётся только префикс 1 (0,6 против 0,4), и лучший ответ потерян: выдача — документы 11 или 12 с вероятностью 0,30. При <span class="tex">b = 2</span> оба префикса доживают до второго шага, и топ-2 — это <span class="tex">21</span> (0,36) и <span class="tex">11</span> (0,30). Так «ошибка на раннем уровне необратима» превращается в требование: для топ-<span class="tex">k</span> документов нужна ширина луча не меньше <span class="tex">k</span> и обычно заметно больше.</p>
 <h2 id="код-игрушечный-dsi">Код: игрушечный DSI</h2>
 <p>Минимальная демонстрация трёх компонентов: иерархический docid, trie допустимых путей и beam search под ограничением. Вместо декодера трансформера — логистические регрессии по tf-idf: в каждом узле дерева своя, она предсказывает следующий разряд docid. Последний разряд — номер документа внутри листа, он делает docid уникальным (как токен против коллизий в TIGER). Логика ограниченного beam search — настоящая.</p>
 <div class="code"><div class="code-head"><span class="lang">python</span></div><pre><code><span class="tok-k">import</span> numpy <span class="tok-k">as</span> np
@@ -259,7 +261,7 @@ q <span class="tok-p">=</span> vec<span class="tok-p">.</span>transform<span cla
 <li><strong>Законы масштабирования</strong> (Cai et al., arXiv 2503.18941, SIGIR 2025, <em>Exploring Training and Inference Scaling Laws in Generative Retrieval</em>): качество растёт с размером модели, объёмом данных и вычислениями на выводе, и эти факторы дополняют друг друга; методы с n-граммными идентификаторами (как SEAL) лучше всего согласуются с законами масштабирования; декодерные LLaMA стабильно превосходят T5. Для сравнения методов предложена непрерывная метрика на основе contrastive entropy и потерь генерации, а не дискретный Recall.</li>
 <li><strong>Does Generative Retrieval Overcome the Limitations of Dense Retrieval?</strong> (Zhang et al., arXiv 2509.22116, 2025): теоретические доводы в пользу GR — глобально нормированная цель (softmax по всему корпусу, а не по батчу) вместо локально нормированной у dense, и представимость, растущая с числом параметров, вместо ограничения низким рангом. Контролируемые эксперименты на NQ и MS MARCO подтверждают часть этих доводов, но авторы подчёркивают, что GR не превосходит DR универсально.</li>
 </ul>
-<p>Итог для практики: GR — активная исследовательская область с интересными свойствами (универсальный интерфейс, end-to-end обучение), но в промышленных системах поиска по большим меняющимся корпусам доминируют dense, sparse и гибриды с переранжированием. Там, где GR прижился, это <em>рекомендации</em>: каталог ограничен, docid можно учить вместе с моделью, а слои Semantic ID переиспользуются между задачами.</p>
+<p>Итог для практики: GR — активная исследовательская область с интересными свойствами (универсальный интерфейс, end-to-end обучение), но в промышленных системах поиска по большим меняющимся корпусам доминируют dense, sparse и гибриды с переранжированием. GR прижился прежде всего в рекомендациях и в e-commerce-поиске с ограниченным каталогом: там docid можно учить вместе с моделью, а слои Semantic ID переиспользуются между задачами. Kuaishou OneSearch (arXiv 2509.03236, 2025) заменил в проде многостадийный конвейер одной генеративной моделью.</p>
 <h2 id="что-запомнить-для-собеседования">Что запомнить для собеседования</h2>
 <ul>
 <li>GR = seq2seq «запрос → docid» + ограниченный beam search по trie; в отличие от RAG, не добавляет контекст к генерации, а <em>заменяет</em> индекс.</li>
@@ -267,6 +269,22 @@ q <span class="tok-p">=</span> vec<span class="tok-p">.</span>transform<span cla
 <li>Главные слабости: обновление корпуса и масштаб. Эти же слабости объясняют, почему dense retrieval остаётся стандартом.</li>
 <li>В рекомендациях та же идея работает как TIGER с семантическими ID.</li>
 </ul>
+<h2 id="проверь-себя">Проверь себя</h2>
+<details class="callout md details"><summary>Чем generative retrieval отличается от RAG?</summary>
+<p>GR заменяет индекс: модель по запросу сама генерирует идентификатор документа, и корпус хранится в параметрах. RAG добавляет найденные обычным поиском фрагменты в контекст генерации, поиск и индекс при этом остаются.</p>
+</details>
+<details class="callout md details"><summary>Зачем нужен trie при декодировании и что он гарантирует?</summary>
+<p>На каждом шаге маскируются токены, которые не продолжают ни один существующий docid, поэтому модель не может сгенерировать несуществующий идентификатор. Это гарантирует валидность, но не правильность: модель всё ещё может уверенно выбрать неверную ветку.</p>
+</details>
+<details class="callout md details"><summary>Почему иерархические семантические docid лучше атомарных при обучении с разметкой?</summary>
+<p>Близкие документы делят префикс, и модель обобщает между ними; словарь не растёт вместе с корпусом. Атомарные docid требуют токена на документ и ничего не передают между документами; цена иерархических — необратимая ошибка на раннем уровне и перестройка кластеров.</p>
+</details>
+<details class="callout md details"><summary>Почему добавление новых документов — главная слабость GR?</summary>
+<p>Нейросеть не умеет вставлять запись: новый документ требует дообучения с риском катастрофически забыть старые или полного переобучения. У плотного индекса новый вектор просто добавляется, не трогая остальные.</p>
+</details>
+<details class="callout md details"><summary>Почему в DSI важны синтетические запросы к документам?</summary>
+<p>Размеченные запросы есть лишь для малой доли документов, а текст документа и короткий запрос выглядят по-разному. Синтетические запросы (docT5query) дают «поисковые» пары для всех документов, и, по результатам Pradeep et al., именно они оказались главным приёмом на больших корпусах.</p>
+</details>
 <h2 id="что-почитать">Что почитать</h2>
 <ul>
 <li>Tay et al., <a href="https://arxiv.org/abs/2202.06991" rel="noopener noreferrer nofollow">Transformer Memory as a Differentiable Search Index</a>, 2022.</li>
@@ -282,6 +300,8 @@ q <span class="tok-p">=</span> vec<span class="tok-p">.</span>transform<span cla
       
 
       
+
+      
       <nav class="pager" aria-label="Соседние статьи">
         <a href="/edufamcs-demo/handbook/retrieval/rag/"><span><svg class="ico sm" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-arrow-left"/></svg>Назад</span>RAG: поиск для языковых моделей</a>
         <a href="/edufamcs-demo/handbook/retrieval/agentnyj-poisk/"><span>Дальше<svg class="ico sm" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-arrow"/></svg></span>Рассуждающий и агентный поиск: 2025–2026</a>
@@ -290,7 +310,7 @@ q <span class="tok-p">=</span> vec<span class="tok-p">.</span>transform<span cla
     </article>
 
     <aside class="hb-toc" aria-label="На этой странице">
-      <a class="l2" href="#идея-поиск-как-seq2seq">Идея: поиск как seq2seq</a><a class="l2" href="#хроника">Хроника</a><a class="l2" href="#дизайн-идентификатора">Дизайн идентификатора</a><a class="l3" href="#ограниченное-декодирование">Ограниченное декодирование</a><a class="l2" href="#код-игрушечный-dsi">Код: игрушечный DSI</a><a class="l2" href="#проблемы">Проблемы</a><a class="l2" href="#что-показали-новые-обзоры-и-эксперименты-20242025">Что показали новые обзоры и эксперименты (2024–2025)</a><a class="l2" href="#что-запомнить-для-собеседования">Что запомнить для собеседования</a><a class="l2" href="#что-почитать">Что почитать</a>
+      <a class="l2" href="#идея-поиск-как-seq2seq">Идея: поиск как seq2seq</a><a class="l2" href="#хроника">Хроника</a><a class="l2" href="#дизайн-идентификатора">Дизайн идентификатора</a><a class="l3" href="#ограниченное-декодирование">Ограниченное декодирование</a><a class="l2" href="#код-игрушечный-dsi">Код: игрушечный DSI</a><a class="l2" href="#проблемы">Проблемы</a><a class="l2" href="#что-показали-новые-обзоры-и-эксперименты-20242025">Что показали новые обзоры и эксперименты (2024–2025)</a><a class="l2" href="#что-запомнить-для-собеседования">Что запомнить для собеседования</a><a class="l2" href="#проверь-себя">Проверь себя</a><a class="l2" href="#что-почитать">Что почитать</a>
     </aside>
   </div>
 </div>

@@ -27,7 +27,7 @@
 <script src="/edufamcs-demo/static/js/site.js" defer></script>
 <script src="/edufamcs-demo/static/handbook/handbook.js" defer></script>
 </head>
-<body class="" hx-headers='{"X-CSRFToken": "EuxF9dbNiUrGYVzWZ4GmBXEy05n5qkzWqAy230tut7HUDuvcctzrSpMTwsZkv5kV"}'>
+<body class="" hx-headers='{"X-CSRFToken": "BGgQ9oHQgwbehIqPfmItusbbQWq6d1ZBdT5NpqgHhjpNs1FhePWqcl39i5x4XLYi"}'>
 <a class="skip" href="#main">К содержанию</a>
 <div class="demo-bar" role="note">Демо-версия для отзывов: вход, запись на курсы и формы здесь не работают.</div>
 
@@ -60,6 +60,7 @@
 
 
 <div class="container hb-page hb-tone">
+  <div class="hb-readbar" aria-hidden="true"><i></i></div>
   <div class="hb">
     <aside class="hb-nav" aria-label="Статьи раздела">
       
@@ -86,9 +87,9 @@
       <div class="hb-meta">
         
         
-        <span><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-clock"/></svg>12&nbsp;мин</span>
+        <span><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-clock"/></svg>14&nbsp;мин</span>
         <span class="hb-authors"><span class="avatar sm" title="Артем Лебедевич">АЛ</span>Артем Лебедевич</span>
-        <span><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-edit"/></svg>9 ноября 2026</span>
+        <span><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-edit"/></svg>10 ноября 2026</span>
         
         
       </div>
@@ -96,7 +97,7 @@
       
       <details class="hb-mtoc">
         <summary><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-list"/></svg>Содержание<svg class="ico sm" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-chev-down"/></svg></summary>
-        <a class="l2" href="#мини-батч-sgd">Мини-батч SGD</a><a class="l2" href="#импульс-и-нестеров">Импульс и Нестеров</a><a class="l2" href="#адаптивные-оптимизаторы">Адаптивные оптимизаторы</a><a class="l2" href="#расписания-learning-rate">Расписания learning rate</a><a class="l2" href="#регуляризация">Регуляризация</a><a class="l2" href="#рецепт-карпати">Рецепт Карпати</a><a class="l2" href="#практика-обучения">Практика обучения</a><a class="l2" href="#типичные-баги">Типичные баги</a><a class="l2" href="#код-цикл-обучения">Код: цикл обучения</a><a class="l2" href="#что-почитать">Что почитать</a>
+        <a class="l2" href="#мини-батч-sgd">Мини-батч SGD</a><a class="l2" href="#импульс-и-нестеров">Импульс и Нестеров</a><a class="l2" href="#адаптивные-оптимизаторы">Адаптивные оптимизаторы</a><a class="l2" href="#расписания-learning-rate">Расписания learning rate</a><a class="l2" href="#регуляризация">Регуляризация</a><a class="l2" href="#рецепт-карпати">Рецепт Карпати</a><a class="l2" href="#практика-обучения">Практика обучения</a><a class="l2" href="#типичные-баги">Типичные баги</a><a class="l2" href="#код-цикл-обучения">Код: цикл обучения</a><a class="l2" href="#проверь-себя">Проверь себя</a><a class="l2" href="#что-почитать">Что почитать</a>
       </details>
       
 
@@ -117,7 +118,8 @@
 <p><strong>Adam</strong> (Кингма и Ба, 2014) соединяет импульс и RMSProp:</p>
 <div class="tex tex-block">m_t=\beta_1m_{t-1}+(1-\beta_1)g_t,\qquad v_t=\beta_2v_{t-1}+(1-\beta_2)g_t^2,</div>
 <div class="tex tex-block">\hat m_t=\frac{m_t}{1-\beta_1^t},\quad \hat v_t=\frac{v_t}{1-\beta_2^t},\qquad \theta_t=\theta_{t-1}-\eta\frac{\hat m_t}{\sqrt{\hat v_t}+\varepsilon}.</div>
-<p>Стандартные значения <span class="tex">\beta_1=0{,}9</span>, <span class="tex">\beta_2=0{,}999</span>, <span class="tex">\varepsilon=10^{-8}</span>. <strong>Коррекция смещения</strong> нужна потому, что <span class="tex">m_0=v_0=0</span>: на первых шагах скользящие средние занижены (<span class="tex">m_1=0{,}1g_1</span> вместо <span class="tex">g_1</span>), и деление на <span class="tex">1-\beta^t</span> это исправляет. Adam хранит два буфера размером с модель, поэтому оптимизатор занимает в памяти вдвое больше самих весов.</p>
+<p>Стандартные значения <span class="tex">\beta_1=0{,}9</span>, <span class="tex">\beta_2=0{,}999</span>, <span class="tex">\varepsilon=10^{-8}</span>. <strong>Коррекция смещения</strong> нужна потому, что <span class="tex">m_0=v_0=0</span>: на первых шагах скользящие средние занижены (<span class="tex">m_1=0{,}1g_1</span> вместо <span class="tex">g_1</span>), и деление на <span class="tex">1-\beta^t</span> это исправляет.</p>
+<p>Два шага на числах: один параметр <span class="tex">\theta_0=1</span>, <span class="tex">\eta=0{,}1</span>, градиенты <span class="tex">g_1=0{,}2</span>, <span class="tex">g_2=-0{,}1</span>. Шаг 1: <span class="tex">m_1=0{,}02</span>, <span class="tex">v_1=4\cdot10^{-5}</span>; <span class="tex">\hat m_1=0{,}02/0{,}1=0{,}2</span>, <span class="tex">\hat v_1=4\cdot10^{-5}/0{,}001=0{,}04</span>, поэтому сдвиг <span class="tex">0{,}1\cdot0{,}2/\sqrt{0{,}04}=0{,}1</span>, то есть <span class="tex">\theta_1=0{,}9</span>: первый шаг Adam равен <span class="tex">\eta</span> по модулю при любом масштабе градиента. Шаг 2: <span class="tex">m_2=0{,}9\cdot0{,}02+0{,}1\cdot(-0{,}1)=0{,}008</span>, <span class="tex">v_2=0{,}999\cdot4\cdot10^{-5}+0{,}001\cdot0{,}01=4{,}996\cdot10^{-5}</span>; <span class="tex">\hat m_2=0{,}008/0{,}19\approx0{,}0421</span>, <span class="tex">\hat v_2=4{,}996\cdot10^{-5}/0{,}001999\approx0{,}02499</span>, сдвиг <span class="tex">0{,}1\cdot0{,}0421/0{,}1581\approx0{,}0266</span>, <span class="tex">\theta_2\approx0{,}8734</span>. Смена знака градиента почти погасила импульс. Adam хранит два буфера размером с модель, поэтому оптимизатор занимает в памяти вдвое больше самих весов.</p>
 <p><strong>AdamW</strong> (Лощилов и Хуттер, 2017) исправляет ошибку, незаметную много лет. В SGD <span class="tex">L_2</span>-регуляризация и weight decay — одно и то же, но в Adam <span class="tex">L_2</span>-слагаемое попадает в градиент и затем делится на <span class="tex">\sqrt{\hat v_t}</span>, так что регуляризация слабее для параметров с большим градиентом. AdamW применяет затухание <strong>отдельно</strong> от адаптивного шага:</p>
 <div class="tex tex-block">\theta_t=\theta_{t-1}-\eta\Big(\frac{\hat m_t}{\sqrt{\hat v_t}+\varepsilon}+\lambda\,\theta_{t-1}\Big).</div>
 <p>Для трансформеров и современных сетей по умолчанию берут <code>AdamW</code> (<span class="tex">\lambda\sim0{,}01</span>–<span class="tex">0{,}1</span>, без затухания для смещений и параметров нормализации).</p>
@@ -169,18 +171,28 @@
 <li>Неверный тип меток: для <code>CrossEntropyLoss</code> нужен <code>int64</code> с индексами классов.</li>
 <li>Итоговое качество сообщают по той же валидации, на которой подбирали гиперпараметры и выбирали эпоху: оценка завышена. Нужна отложенная тестовая выборка, к которой обращаются один раз.</li>
 </ul>
+<p>На интервью спрашивают:</p>
+<ul>
+<li>чем Adam отличается от SGD с импульсом и зачем коррекция смещения <span class="tex">1-\beta^t</span>;</li>
+<li>чем AdamW отличается от Adam с <span class="tex">L_2</span> и почему weight decay не применяют к смещениям и нормализациям;</li>
+<li>почему дропаут масштабируют на <span class="tex">1/(1-p)</span> и что меняется на инференсе; как подобрать learning rate и зачем warmup.</li>
+</ul>
 <h2 id="код-цикл-обучения">Код: цикл обучения</h2>
 <div class="code"><div class="code-head"><span class="lang">python</span></div><pre><code><span class="tok-k">import</span> copy<span class="tok-p">,</span> torch
 <span class="tok-k">from</span> torch <span class="tok-k">import</span> nn
 
 <span class="tok-k">def</span> <span class="tok-f">fit</span><span class="tok-p">(</span>model<span class="tok-p">,</span> train_dl<span class="tok-p">,</span> val_dl<span class="tok-p">,</span> epochs<span class="tok-p">=</span><span class="tok-n">50</span><span class="tok-p">,</span> lr<span class="tok-p">=</span><span class="tok-n">1e-3</span><span class="tok-p">,</span> wd<span class="tok-p">=</span><span class="tok-n">1e-2</span><span class="tok-p">,</span> patience<span class="tok-p">=</span><span class="tok-n">5</span><span class="tok-p">,</span> device<span class="tok-p">=</span><span class="tok-s">"</span><span class="tok-s">cuda</span><span class="tok-s">"</span><span class="tok-p">)</span><span class="tok-p">:</span>
     model<span class="tok-p">.</span>to<span class="tok-p">(</span>device<span class="tok-p">)</span>
-    opt <span class="tok-p">=</span> torch<span class="tok-p">.</span>optim<span class="tok-p">.</span>AdamW<span class="tok-p">(</span>model<span class="tok-p">.</span>parameters<span class="tok-p">(</span><span class="tok-p">)</span><span class="tok-p">,</span> lr<span class="tok-p">=</span>lr<span class="tok-p">,</span> weight_decay<span class="tok-p">=</span>wd<span class="tok-p">)</span>
+    decay <span class="tok-p">=</span> <span class="tok-p">[</span>p <span class="tok-k">for</span> p <span class="tok-k">in</span> model<span class="tok-p">.</span>parameters<span class="tok-p">(</span><span class="tok-p">)</span> <span class="tok-k">if</span> p<span class="tok-p">.</span>ndim <span class="tok-p">&gt;</span> <span class="tok-n">1</span><span class="tok-p">]</span>       <span class="tok-c"># матрицы весов</span>
+    no_decay <span class="tok-p">=</span> <span class="tok-p">[</span>p <span class="tok-k">for</span> p <span class="tok-k">in</span> model<span class="tok-p">.</span>parameters<span class="tok-p">(</span><span class="tok-p">)</span> <span class="tok-k">if</span> p<span class="tok-p">.</span>ndim <span class="tok-p">&lt;</span><span class="tok-p">=</span> <span class="tok-n">1</span><span class="tok-p">]</span>   <span class="tok-c"># смещения, LayerNorm/BatchNorm</span>
+    opt <span class="tok-p">=</span> torch<span class="tok-p">.</span>optim<span class="tok-p">.</span>AdamW<span class="tok-p">(</span><span class="tok-p">[</span><span class="tok-p">{</span><span class="tok-s">"</span><span class="tok-s">params</span><span class="tok-s">"</span><span class="tok-p">:</span> decay<span class="tok-p">,</span> <span class="tok-s">"</span><span class="tok-s">weight_decay</span><span class="tok-s">"</span><span class="tok-p">:</span> wd<span class="tok-p">}</span><span class="tok-p">,</span>
+                             <span class="tok-p">{</span><span class="tok-s">"</span><span class="tok-s">params</span><span class="tok-s">"</span><span class="tok-p">:</span> no_decay<span class="tok-p">,</span> <span class="tok-s">"</span><span class="tok-s">weight_decay</span><span class="tok-s">"</span><span class="tok-p">:</span> <span class="tok-n">0.0</span><span class="tok-p">}</span><span class="tok-p">]</span><span class="tok-p">,</span> lr<span class="tok-p">=</span>lr<span class="tok-p">)</span>
     total <span class="tok-p">=</span> epochs <span class="tok-p">*</span> <span class="tok-f">len</span><span class="tok-p">(</span>train_dl<span class="tok-p">)</span>
     sched <span class="tok-p">=</span> torch<span class="tok-p">.</span>optim<span class="tok-p">.</span>lr_scheduler<span class="tok-p">.</span>OneCycleLR<span class="tok-p">(</span>opt<span class="tok-p">,</span> max_lr<span class="tok-p">=</span>lr<span class="tok-p">,</span> total_steps<span class="tok-p">=</span>total<span class="tok-p">,</span>
                                                 anneal_strategy<span class="tok-p">=</span><span class="tok-s">"</span><span class="tok-s">cos</span><span class="tok-s">"</span><span class="tok-p">,</span> pct_start<span class="tok-p">=</span><span class="tok-n">0.1</span><span class="tok-p">)</span>
     loss_fn <span class="tok-p">=</span> nn<span class="tok-p">.</span>CrossEntropyLoss<span class="tok-p">(</span>label_smoothing<span class="tok-p">=</span><span class="tok-n">0.05</span><span class="tok-p">)</span>
-    best<span class="tok-p">,</span> best_state<span class="tok-p">,</span> bad <span class="tok-p">=</span> <span class="tok-f">float</span><span class="tok-p">(</span><span class="tok-s">"</span><span class="tok-s">inf</span><span class="tok-s">"</span><span class="tok-p">)</span><span class="tok-p">,</span> <span class="tok-k">None</span><span class="tok-p">,</span> <span class="tok-n">0</span>
+    best<span class="tok-p">,</span> bad <span class="tok-p">=</span> <span class="tok-f">float</span><span class="tok-p">(</span><span class="tok-s">"</span><span class="tok-s">inf</span><span class="tok-s">"</span><span class="tok-p">)</span><span class="tok-p">,</span> <span class="tok-n">0</span>
+    best_state <span class="tok-p">=</span> copy<span class="tok-p">.</span>deepcopy<span class="tok-p">(</span>model<span class="tok-p">.</span>state_dict<span class="tok-p">(</span><span class="tok-p">)</span><span class="tok-p">)</span>   <span class="tok-c"># не None, даже если val ни разу не улучшится</span>
 
     <span class="tok-k">for</span> epoch <span class="tok-k">in</span> <span class="tok-f">range</span><span class="tok-p">(</span>epochs<span class="tok-p">)</span><span class="tok-p">:</span>
         model<span class="tok-p">.</span>train<span class="tok-p">(</span><span class="tok-p">)</span>
@@ -212,6 +224,22 @@
     <span class="tok-k">return</span> model
 </code></pre></div>
 <p>Расписание здесь шагает после каждого батча. Валидационная потеря считается без label smoothing: это честная кросс-энтропия, по ней выбирается лучшая эпоха. Поэтому сравнивать её напрямую с train-потерей (со сглаживанием) нельзя — у сглаженной потери даже идеальная модель имеет ненулевой минимум.</p>
+<h2 id="проверь-себя">Проверь себя</h2>
+<details class="callout md details"><summary>Зачем в Adam нужна коррекция смещения?</summary>
+<p>Буферы <span class="tex">m_0=v_0=0</span>, поэтому на первых шагах <span class="tex">m_t</span> и <span class="tex">v_t</span> занижены (<span class="tex">m_1=0{,}1g_1</span>). Деление на <span class="tex">1-\beta^t</span> возвращает несмещённые оценки; без него оценки <span class="tex">m</span> и <span class="tex">v</span> сдвинуты к нулю разными темпами (<span class="tex">\beta_2</span> ближе к 1, чем <span class="tex">\beta_1</span>), и размер первых шагов искажён.</p>
+</details>
+<details class="callout md details"><summary>Чем AdamW отличается от Adam с $L_2$-регуляризацией?</summary>
+<p>В Adam с <span class="tex">L_2</span> слагаемое <span class="tex">\lambda\theta</span> попадает в градиент и делится на <span class="tex">\sqrt{\hat v_t}</span>, так что параметры с большим градиентом регуляризуются слабее. AdamW применяет затухание отдельно от адаптивного шага, и оно одинаково для всех параметров.</p>
+</details>
+<details class="callout md details"><summary>Почему во время обучения dropout масштабируют на $1/(1-p)$?</summary>
+<p>Так математическое ожидание активации не меняется: оставшиеся нейроны умножаются на <span class="tex">1/(1-p)</span>, и на инференсе, где dropout выключен, масштаб совпадает с обучением.</p>
+</details>
+<details class="callout md details"><summary>Вы увеличили батч в 8 раз. Что делать со learning rate?</summary>
+<p>По правилу линейного масштабирования увеличить <span class="tex">\eta</span> примерно в 8 раз с прогревом: шагов за эпоху в 8 раз меньше, а градиент менее шумный. Правило работает до некоторого предела размера батча.</p>
+</details>
+<details class="callout md details"><summary>Потеря на обучении падает, а на валидации растёт. Что вы сделаете?</summary>
+<p>Это переобучение: включить раннюю остановку с сохранением лучших весов, добавить weight decay, dropout, аугментации или данные. Заодно проверьте утечки и то, что <code>model.eval()</code> включён на валидации.</p>
+</details>
 <h2 id="что-почитать">Что почитать</h2>
 <ul>
 <li>Kingma, Ba, <em>Adam: A Method for Stochastic Optimization</em>, 2014: <a href="https://arxiv.org/abs/1412.6980" rel="noopener noreferrer nofollow">arxiv.org/abs/1412.6980</a>.</li>
@@ -226,6 +254,8 @@
       
 
       
+
+      
       <nav class="pager" aria-label="Соседние статьи">
         <a href="/edufamcs-demo/handbook/dl/obratnoe-rasprostranenie-oshibki/"><span><svg class="ico sm" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-arrow-left"/></svg>Назад</span>Обратное распространение ошибки</a>
         <a href="/edufamcs-demo/handbook/dl/svertochnye-seti/"><span>Дальше<svg class="ico sm" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-arrow"/></svg></span>Свёрточные сети</a>
@@ -234,7 +264,7 @@
     </article>
 
     <aside class="hb-toc" aria-label="На этой странице">
-      <a class="l2" href="#мини-батч-sgd">Мини-батч SGD</a><a class="l2" href="#импульс-и-нестеров">Импульс и Нестеров</a><a class="l2" href="#адаптивные-оптимизаторы">Адаптивные оптимизаторы</a><a class="l2" href="#расписания-learning-rate">Расписания learning rate</a><a class="l2" href="#регуляризация">Регуляризация</a><a class="l2" href="#рецепт-карпати">Рецепт Карпати</a><a class="l2" href="#практика-обучения">Практика обучения</a><a class="l2" href="#типичные-баги">Типичные баги</a><a class="l2" href="#код-цикл-обучения">Код: цикл обучения</a><a class="l2" href="#что-почитать">Что почитать</a>
+      <a class="l2" href="#мини-батч-sgd">Мини-батч SGD</a><a class="l2" href="#импульс-и-нестеров">Импульс и Нестеров</a><a class="l2" href="#адаптивные-оптимизаторы">Адаптивные оптимизаторы</a><a class="l2" href="#расписания-learning-rate">Расписания learning rate</a><a class="l2" href="#регуляризация">Регуляризация</a><a class="l2" href="#рецепт-карпати">Рецепт Карпати</a><a class="l2" href="#практика-обучения">Практика обучения</a><a class="l2" href="#типичные-баги">Типичные баги</a><a class="l2" href="#код-цикл-обучения">Код: цикл обучения</a><a class="l2" href="#проверь-себя">Проверь себя</a><a class="l2" href="#что-почитать">Что почитать</a>
     </aside>
   </div>
 </div>

@@ -1,0 +1,321 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Признаки и кодирование категорий · EDU FAMCS</title>
+<meta name="description" content="Признаки и кодирование категорий — Классическое машинное обучение. Хендбук ML-курса ФПМИ.">
+<meta name="theme-color" content="#060A16">
+<meta name="robots" content="noindex, nofollow">
+<meta name="htmx-config" content='{"allowEval":false,"includeIndicatorStyles":false,"historyCacheSize":0,"selfRequestsOnly":true}'>
+<meta name="katex-js" content="/edufamcs-demo/static/vendor/katex/katex.min.js">
+<meta name="katex-css" content="/edufamcs-demo/static/vendor/katex/katex.min.css">
+<link rel="icon" href="/edufamcs-demo/static/brand/logo/favicon-16.svg" type="image/svg+xml" sizes="16x16">
+<link rel="icon" href="/edufamcs-demo/static/brand/logo/favicon.svg" type="image/svg+xml" sizes="any">
+<link rel="preload" href="/edufamcs-demo/static/brand/fonts/manrope-cyrillic-400.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/edufamcs-demo/static/brand/fonts/unbounded-cyrillic-800.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="/edufamcs-demo/static/brand/fonts.css">
+<link rel="stylesheet" href="/edufamcs-demo/static/brand/tokens.css">
+<link rel="stylesheet" href="/edufamcs-demo/static/brand/components.css">
+<link rel="stylesheet" href="/edufamcs-demo/static/css/site.css">
+<link rel="stylesheet" href="/edufamcs-demo/static/css/hub.css">
+<link rel="stylesheet" href="/edufamcs-demo/static/css/about.css">
+<link rel="stylesheet" href="/edufamcs-demo/static/handbook/handbook.css">
+<script src="/edufamcs-demo/static/js/theme.js"></script>
+<script src="/edufamcs-demo/static/vendor/htmx/htmx.min.js" defer></script>
+<script src="/edufamcs-demo/static/vendor/alpine/alpine-csp.min.js" defer></script>
+<script src="/edufamcs-demo/static/js/site.js" defer></script>
+<script src="/edufamcs-demo/static/handbook/handbook.js" defer></script>
+</head>
+<body class="" hx-headers='{"X-CSRFToken": "46BXZQPIPHCxSlBEnuC09NTaKSHpeYUBGjqUfSozQuQ63EQ6mXQXRGL8c1OnYITi"}'>
+<a class="skip" href="#main">К содержанию</a>
+<div class="demo-bar" role="note">Демо-версия для отзывов: вход, запись на курсы и формы здесь не работают.</div>
+
+<header class="hdr">
+  <div class="container">
+    <a class="brand" href="/edufamcs-demo/" aria-label="EDU FAMCS — главная">
+      <span class="full"><img class="only-light" src="/edufamcs-demo/static/brand/logo/logo-edu-light.svg" alt="EDU FAMCS" width="196" height="40"><img class="only-dark" src="/edufamcs-demo/static/brand/logo/logo-edu-dark.svg" alt="EDU FAMCS" width="196" height="40"></span>
+      <span class="short"><img class="only-light" src="/edufamcs-demo/static/brand/logo/logo-edu-light.svg" alt="EDU FAMCS" height="30"><img class="only-dark" src="/edufamcs-demo/static/brand/logo/logo-edu-dark.svg" alt="EDU FAMCS" height="30"></span>
+    </a>
+    <nav class="nav" id="main-nav" aria-label="Основная навигация">
+      <a href="/edufamcs-demo/#courses">Курсы</a>
+      <a href="/edufamcs-demo/ml/" >Машинное обучение</a>
+      
+      <a href="/edufamcs-demo/handbook/" aria-current="page">Хендбук</a>
+      <a href="/edufamcs-demo/news/" >Новости</a>
+      <a href="/edufamcs-demo/people/" >Авторы</a>
+      <a href="/edufamcs-demo/about/" >О&nbsp;нас</a>
+    </nav>
+    <div class="hdr-actions">
+      
+      <a class="btn btn-outline btn-login" href="/edufamcs-demo/accounts/login/?next=/handbook/classic/priznaki-i-kodirovanie-kategorij/">Войти</a>
+      
+      <button class="icon-btn menu-btn" type="button" aria-label="Меню" aria-expanded="false" aria-controls="main-nav"><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-menu"/></svg></button>
+    </div>
+  </div>
+</header>
+
+<main id="main">
+
+
+
+<div class="container hb-page hb-tone">
+  <div class="hb-readbar" aria-hidden="true"><i></i></div>
+  <div class="hb">
+    <aside class="hb-nav" aria-label="Статьи раздела">
+      
+<form class="hb-search" action="/edufamcs-demo/handbook/search/" method="get" role="search">
+  <svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-search"/></svg>
+  <input class="input" type="search" name="q" value="" placeholder="Поиск по хендбуку" aria-label="Поиск по хендбуку" autocomplete="off" maxlength="120"
+    hx-get="/edufamcs-demo/handbook/search/" hx-trigger="input changed delay:250ms, search" hx-target="#hb-nav-results" hx-sync="this:replace">
+</form>
+
+      <div id="hb-nav-results" class="hb-nav-results" aria-live="polite"></div>
+      <a class="grp" href="/edufamcs-demo/handbook/classic/">Данные, метрики и валидация</a>
+      
+      <a class="cur" href="/edufamcs-demo/handbook/classic/priznaki-i-kodirovanie-kategorij/" aria-current="page">Признаки и кодирование категорий</a>
+      
+      <a class="" href="/edufamcs-demo/handbook/classic/nesbalansirovannye-klassy/">Несбалансированные классы</a>
+      
+      <a class="" href="/edufamcs-demo/handbook/classic/metriki-klassifikacii-i-kalibrovka/">Метрики классификации и калибровка</a>
+      
+      <a class="" href="/edufamcs-demo/handbook/classic/validaciya-i-utechki-dannyh/">Валидация и утечки данных</a>
+      
+      <a class="" href="/edufamcs-demo/handbook/classic/poisk-anomalij/">Поиск аномалий</a>
+      
+    </aside>
+
+    <article class="hb-main">
+      <nav class="crumbs" aria-label="Навигация"><a href="/edufamcs-demo/handbook/">Хендбук</a><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-chev"/></svg><a href="/edufamcs-demo/handbook/classic/">Классическое машинное обучение</a></nav>
+      <h1 class="h1">Признаки и кодирование категорий</h1>
+      <div class="hb-meta">
+        
+        
+        <span><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-clock"/></svg>12&nbsp;мин</span>
+        <span class="hb-authors"><span class="avatar sm" title="Артем Лебедевич">АЛ</span>Артем Лебедевич</span>
+        <span><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-edit"/></svg>10 ноября 2026</span>
+        
+        
+      </div>
+
+      
+      <details class="hb-mtoc">
+        <summary><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-list"/></svg>Содержание<svg class="ico sm" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-chev-down"/></svg></summary>
+        <a class="l2" href="#числовые-признаки-что-нужно-какой-модели">Числовые признаки: что нужно какой модели</a><a class="l2" href="#категориальные-признаки">Категориальные признаки</a><a class="l3" href="#target-encoding-сглаживание">Target encoding: сглаживание</a><a class="l3" href="#почему-наивный-target-encoding-течёт">Почему наивный target encoding течёт</a><a class="l3" href="#редкие-и-невидимые-категории">Редкие и невидимые категории</a><a class="l2" href="#дата-время-взаимодействия-пропуски">Дата, время, взаимодействия, пропуски</a><a class="l2" href="#отбор-признаков">Отбор признаков</a><a class="l2" href="#числа-наивный-и-oof-target-encoding">Числа: наивный и OOF target encoding</a><a class="l2" href="#код">Код</a><a class="l2" href="#ловушки">Ловушки</a><a class="l2" href="#проверь-себя">Проверь себя</a><a class="l2" href="#что-почитать">Что почитать</a>
+      </details>
+      
+
+      <div class="prose"><p>На табличных данных качество чаще определяют признаки, а не выбор модели. Главные вопросы практика: как подать модели числа, чтобы она могла ими воспользоваться, как закодировать категорию с тысячами значений и ничего не «подсмотреть» в таргете, и какие признаки оставить. Эта глава собирает приёмы и показывает на числах, чем опасен наивный target encoding.</p>
+<h2 id="числовые-признаки-что-нужно-какой-модели">Числовые признаки: что нужно какой модели</h2>
+<p>Деревья и бустинг зависят только от порядка значений: монотонное преобразование (логарифм, масштабирование) не меняет разбиений, кроме числа корзин в гистограммном алгоритме. Линейные модели, kNN, SVM и нейросети чувствительны к масштабу и форме распределения.</p>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>Преобразование</th>
+<th>Когда помогает</th>
+<th>Кому нужно</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><span class="tex">\log(1+x)</span></td>
+<td>тяжёлый правый хвост: цены, суммы, счётчики</td>
+<td>линейные, kNN, NN; деревьям не нужно</td>
+</tr>
+<tr>
+<td>Стандартизация <span class="tex">(x-\mu)/\sigma</span></td>
+<td>регуляризация и расстояния зависят от масштаба</td>
+<td>линейные с L1/L2, SVM, kNN, NN, PCA</td>
+</tr>
+<tr>
+<td>Квантильное / robust-масштабирование</td>
+<td>выбросы, разные единицы</td>
+<td>то же, когда среднее и <span class="tex">\sigma</span> неустойчивы</td>
+</tr>
+<tr>
+<td>Биннинг</td>
+<td>нелинейная связь для линейной модели; «шумные» значения</td>
+<td>линейные (даёт кусочно-постоянную функцию); деревья делают это сами</td>
+</tr>
+</tbody>
+</table></div>
+<p>Масштабировщик обучают только на обучающей части (см. <a href="/edufamcs-demo/handbook/classic/validaciya-i-utechki-dannyh/" rel="noopener noreferrer nofollow">валидацию и утечки</a>). Логарифм — не «улучшение распределения ради красоты»: он нужен, когда эффект мультипликативный (рост суммы в два раза значит одно и то же при 10 и при 10 000).</p>
+<h2 id="категориальные-признаки">Категориальные признаки</h2>
+<p>Модель ждёт числа, поэтому у категории есть несколько способов превратиться в число.</p>
+<ul>
+<li><strong>One-hot</strong>: бинарный столбец на категорию. Безопасно, но при кардинальности <span class="tex">10^4</span>–<span class="tex">10^6</span> даёт огромную разреженную матрицу; для деревьев неэффективно (дереву нужно много сплитов, чтобы выделить подмножество).</li>
+<li><strong>Ordinal (label)</strong>: категория → целое. Допустимо, если есть настоящий порядок («малый/средний/большой»). Для номинальных признаков линейной модели навязывает ложный порядок; деревья справятся, но разбиение по номеру случайно.</li>
+<li><strong>Frequency / count encoding</strong>: категория → доля или число её появлений. Не использует таргет, а частота часто сама информативна (популярный товар). Минус: разные категории с одной частотой неразличимы.</li>
+<li><strong>Hashing</strong>: <span class="tex">h(\text{категория}) \bmod D</span> в один из <span class="tex">D</span> столбцов. Память фиксирована, новых категорий не боится, но возможны коллизии. Стандарт в онлайн-обучении с огромным словарём.</li>
+<li><strong>Target encoding</strong>: категория → среднее таргета по ней. Самый сильный и самый опасный способ.</li>
+</ul>
+<h3 id="target-encoding-сглаживание">Target encoding: сглаживание</h3>
+<p>Пусть у категории <span class="tex">c</span> есть <span class="tex">n_c</span> объектов со средним таргета <span class="tex">\bar y_c</span>, а общее среднее <span class="tex">\bar y</span>. Сырое <span class="tex">\bar y_c</span> при малых <span class="tex">n_c</span> шумно: у категории из одного объекта оно равно 0 или 1. Сглаживание — это байесовская оценка с априорным средним <span class="tex">\bar y</span>, весом которой служат <span class="tex">m</span> «виртуальных» наблюдений:</p>
+<div class="tex tex-block">\hat y_c = \frac{n_c\,\bar y_c + m\,\bar y}{n_c + m}.</div>
+<p>Это выпуклая комбинация: при <span class="tex">n_c \gg m</span> побеждает категорийное среднее, при <span class="tex">n_c \ll m</span> — глобальное, а нулевая категория (в тесте новая) естественно получает <span class="tex">\bar y</span>. Пример: категория из 3 объектов, два положительных (<span class="tex">n_c\bar y_c = 2</span>), глобальная доля <span class="tex">\bar y=0{,}2</span>, <span class="tex">m=5</span>: <span class="tex">\hat y_c=(2+5\cdot0{,}2)/(3+5)=0{,}375</span> вместо сырых 0,667.</p>
+<h3 id="почему-наивный-target-encoding-течёт">Почему наивный target encoding течёт</h3>
+<p>Если закодировать обучающие строки средним по <em>всему</em> train, в признак каждой строки входит её собственная метка. У категории с <span class="tex">n_c=1</span> признак просто равен таргету. Дерево видит почти идеальный признак, на трейне качество прекрасное, на новых данных — хуже, чем вовсе без признака. Это утечка таргета через препроцессинг.</p>
+<p>Лечение — <strong>out-of-fold схема</strong>: делим train на <span class="tex">K</span> фолдов; значения для фолда <span class="tex">k</span> считаются по остальным <span class="tex">K-1</span> фолдам. Метка объекта в его признак не попадает. Тестовые данные кодируют статистиками по всему train. Это же делает <code>sklearn.preprocessing.TargetEncoder</code>: его <code>fit_transform</code> внутри обучающей выборки выполняет кросс-фиттинг (<code>cv=5</code>), а <code>transform</code> на новых данных использует кодировки, обученные на всём train. Из этого следует тонкость: <code>fit(X, y).transform(X)</code> и <code>fit_transform(X, y)</code> на трейне дают <strong>разные</strong> результаты, и первый течёт. Параметр <code>smooth="auto"</code> выбирает <span class="tex">m</span> эмпирически-байесовским способом из дисперсий внутри категорий и общей.</p>
+<p>CatBoost решает ту же задачу иначе: <strong>ordered target statistics</strong> — категория кодируется средним таргета только по объектам, стоящим раньше в случайной перестановке (см. <a href="/edufamcs-demo/handbook/classic/gradientnyj-busting/" rel="noopener noreferrer nofollow">градиентный бустинг</a>). Метка текущего объекта не участвует ни в каком виде.</p>
+<h3 id="редкие-и-невидимые-категории">Редкие и невидимые категории</h3>
+<p>Категории, встретившиеся реже порога, объединяют в <code>other</code>; при target encoding это делает сглаживание автоматически. Новые в проде категории должны получить осмысленное значение: глобальное среднее для TE, нулевой вектор для one-hot (<code>handle_unknown="ignore"</code>), «пустую» частоту для frequency. Эту ветку полезно явно тестировать: сдвиг словаря — частая причина падений в проде.</p>
+<h2 id="дата-время-взаимодействия-пропуски">Дата, время, взаимодействия, пропуски</h2>
+<p><strong>Время.</strong> Из метки времени извлекают час, день недели, месяц, признак «выходной», время с момента события. Периодичность нельзя кодировать целым числом: 23:00 и 00:00 далеки по числу и близки по смыслу. <strong>Циклическое кодирование</strong>: пара <span class="tex">(\sin\frac{2\pi h}{24},\ \cos\frac{2\pi h}{24})</span> ставит часы на окружность, расстояние между соседними часами мало, а между 23 и 0 равно расстоянию между 0 и 1. Деревья с этим справляются и без кодирования, линейным моделям и NN оно нужно.</p>
+<p><strong>Взаимодействия.</strong> Линейная модель не видит произведений: «возраст × регион» приходится добавлять руками (<code>PolynomialFeatures</code>, перекрёстные категории). Деревья строят взаимодействия сами, но признак-отношение (цена / площадь, клики / показы) всё равно нередко помогает, потому что дерево приближает деление ступеньками.</p>
+<p><strong>Пропуски.</strong> Пропуск часто несёт сигнал: поле не заполнено именно у тех, кто уходит. Поэтому к импутации (медиана, константа) добавляют индикатор <code>is_missing</code> (<code>SimpleImputer(add_indicator=True)</code>). XGBoost, LightGBM и <code>HistGradientBoosting*</code> обрабатывают NaN нативно, выбирая направление при сплите. Импутировать нужно по статистикам train.</p>
+<h2 id="отбор-признаков">Отбор признаков</h2>
+<ul>
+<li><strong>Filter</strong>: ранжируем признаки до обучения модели (взаимная информация, корреляция, <span class="tex">\chi^2</span>, дисперсия). Дёшево, но не видит взаимодействий и избыточности.</li>
+<li><strong>Wrapper</strong>: перебор подмножеств с обучением модели (RFE, forward selection). Точнее, но дорого и легко переобучает на шуме выбора.</li>
+<li><strong>Embedded</strong>: отбор внутри обучения. L1 в линейной модели зануляет коэффициенты (см. <a href="/edufamcs-demo/handbook/classic/logisticheskaya-regressiya-i-metriki/" rel="noopener noreferrer nofollow">логистическую регрессию</a>), а важности деревьев — побочный продукт обучения.</li>
+</ul>
+<p><strong>Permutation importance</strong> (подробнее в <a href="/edufamcs-demo/handbook/classic/giperparametry-i-interpretiruemost/" rel="noopener noreferrer nofollow">интерпретируемости</a>) считают на валидации. Ловушка: если два признака почти дублируют друг друга, перемешивание одного почти не бьёт по метрике, так как модель берёт информацию из второго, — оба кажутся неважными, хотя вместе они ключевые. Лекарство: группировать коррелирующие признаки и перемешивать их вместе, либо сначала кластеризовать по корреляции. Важности «по сплитам» в деревьях к тому же завышают признаки с большим числом уникальных значений.</p>
+<div class="callout md warn"><p class="callout-title">Отбор и кодирование — часть модели</p>
+<p>Любое преобразование, которое использует таргет или статистики всей выборки (target encoding, отбор по корреляции с <span class="tex">y</span>, масштабирование), должно обучаться внутри цикла валидации. Иначе оценка качества оптимистична, см. <a href="/edufamcs-demo/handbook/classic/validaciya-i-utechki-dannyh/" rel="noopener noreferrer nofollow">валидацию и утечки</a>.</p>
+</div>
+<h2 id="числа-наивный-и-oof-target-encoding">Числа: наивный и OOF target encoding</h2>
+<p>Синтетика: 20 000 строк, категория с 3000 значениями (в среднем ≈ 7 строк на значение), у каждой свой случайный эффект на логит, плюс числовой признак. Модель — <code>HistGradientBoostingClassifier</code>, hold-out 30%. Метрики на тесте:</p>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>Кодирование</th>
+<th>AUC (test)</th>
+<th>log-loss (test)</th>
+<th>AUC (train)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>без категории</td>
+<td>0,660</td>
+<td>0,574</td>
+<td>0,678</td>
+</tr>
+<tr>
+<td>наивный TE, <span class="tex">m=0</span></td>
+<td>0,631</td>
+<td>1,010</td>
+<td>0,873</td>
+</tr>
+<tr>
+<td>наивный TE, <span class="tex">m=10</span></td>
+<td>0,642</td>
+<td>0,755</td>
+<td>0,870</td>
+</tr>
+<tr>
+<td>OOF TE, 5 фолдов, <span class="tex">m=10</span></td>
+<td>0,686</td>
+<td>0,561</td>
+<td>0,719</td>
+</tr>
+<tr>
+<td><code>sklearn.TargetEncoder</code> (cv=5)</td>
+<td>0,680</td>
+<td>0,564</td>
+<td>0,718</td>
+</tr>
+</tbody>
+</table></div>
+<p>Наивный TE <strong>хуже, чем вообще без признака</strong>: train AUC 0,87 против test 0,63 — классический след утечки. OOF-схема и sklearn-реализация почти совпадают и дают реальный выигрыш. Эксперимент на одной синтетике: абсолютные числа иллюстративны, порядок эффекта — нет.</p>
+<h2 id="код">Код</h2>
+<div class="code"><div class="code-head"><span class="lang">python</span></div><pre><code><span class="tok-k">from</span> sklearn.compose <span class="tok-k">import</span> ColumnTransformer
+<span class="tok-k">from</span> sklearn.ensemble <span class="tok-k">import</span> HistGradientBoostingClassifier
+<span class="tok-k">from</span> sklearn.model_selection <span class="tok-k">import</span> KFold<span class="tok-p">,</span> cross_val_score
+<span class="tok-k">from</span> sklearn.pipeline <span class="tok-k">import</span> Pipeline
+<span class="tok-k">from</span> sklearn.preprocessing <span class="tok-k">import</span> TargetEncoder
+
+pre <span class="tok-p">=</span> ColumnTransformer<span class="tok-p">(</span>
+    <span class="tok-p">[</span><span class="tok-p">(</span><span class="tok-s">"</span><span class="tok-s">te</span><span class="tok-s">"</span><span class="tok-p">,</span> TargetEncoder<span class="tok-p">(</span>cv<span class="tok-p">=</span>KFold<span class="tok-p">(</span><span class="tok-n">5</span><span class="tok-p">,</span> shuffle<span class="tok-p">=</span><span class="tok-k">True</span><span class="tok-p">,</span> random_state<span class="tok-p">=</span><span class="tok-n">0</span><span class="tok-p">)</span><span class="tok-p">)</span><span class="tok-p">,</span> <span class="tok-p">[</span><span class="tok-s">"</span><span class="tok-s">cat</span><span class="tok-s">"</span><span class="tok-p">]</span><span class="tok-p">)</span><span class="tok-p">,</span>
+     <span class="tok-p">(</span><span class="tok-s">"</span><span class="tok-s">num</span><span class="tok-s">"</span><span class="tok-p">,</span> <span class="tok-s">"</span><span class="tok-s">passthrough</span><span class="tok-s">"</span><span class="tok-p">,</span> <span class="tok-p">[</span><span class="tok-s">"</span><span class="tok-s">x1</span><span class="tok-s">"</span><span class="tok-p">]</span><span class="tok-p">)</span><span class="tok-p">]</span>
+<span class="tok-p">)</span>
+pipe <span class="tok-p">=</span> Pipeline<span class="tok-p">(</span><span class="tok-p">[</span><span class="tok-p">(</span><span class="tok-s">"</span><span class="tok-s">pre</span><span class="tok-s">"</span><span class="tok-p">,</span> pre<span class="tok-p">)</span><span class="tok-p">,</span> <span class="tok-p">(</span><span class="tok-s">"</span><span class="tok-s">model</span><span class="tok-s">"</span><span class="tok-p">,</span> HistGradientBoostingClassifier<span class="tok-p">(</span><span class="tok-p">)</span><span class="tok-p">)</span><span class="tok-p">]</span><span class="tok-p">)</span>
+
+<span class="tok-c"># кодировщик заново обучается внутри каждого фолда внешней CV</span>
+scores <span class="tok-p">=</span> cross_val_score<span class="tok-p">(</span>pipe<span class="tok-p">,</span> X<span class="tok-p">,</span> y<span class="tok-p">,</span> cv<span class="tok-p">=</span><span class="tok-n">5</span><span class="tok-p">,</span> scoring<span class="tok-p">=</span><span class="tok-s">"</span><span class="tok-s">roc_auc</span><span class="tok-s">"</span><span class="tok-p">)</span>
+</code></pre></div>
+<p>Правило: всё, что обучается, живёт в <code>Pipeline</code>, а оценка — снаружи через <code>cross_val_score</code>. В scikit-learn 1.9 параметры <code>shuffle</code> и <code>random_state</code> у <code>TargetEncoder</code> объявлены устаревшими; перемешивание задают через генератор <code>cv</code>.</p>
+<h2 id="ловушки">Ловушки</h2>
+<ul>
+<li>Target encoding без OOF и без сглаживания: см. таблицу выше.</li>
+<li>Масштабирование и отбор признаков на всех данных до split.</li>
+<li>One-hot с <span class="tex">10^5</span> категорий для линейной модели без разреженной матрицы и регуляризации.</li>
+<li>Порядковое кодирование номинальных признаков для линейной модели.</li>
+<li>Допущение, что важность признака = причинность: корреляция и дубли ломают интерпретацию.</li>
+<li>На собеседовании: почему наивный target encoding течёт и как это чинят; чем сглаживание <span class="tex">\frac{n\bar y_c+m\bar y}{n+m}</span> похоже на байесовскую оценку; зачем <span class="tex">\sin</span> и <span class="tex">\cos</span> вместо номера часа; что делает hashing trick и чем рискует; чем permutation importance подводит на коррелирующих признаках.</li>
+</ul>
+<h2 id="проверь-себя">Проверь себя</h2>
+<details class="callout md details"><summary>Почему наивный target encoding даёт высокий train-score и низкий test-score?</summary>
+<p>Признак каждой обучающей строки вычислен с использованием её собственной метки; у редких категорий он почти равен таргету. Модель учится на утёкшем сигнале, которого нет у новых объектов.</p>
+</details>
+<details class="callout md details"><summary>Что делает параметр $m$ в сглаживании и как он ведёт себя на новой категории?</summary>
+<p><span class="tex">m</span> — вес априорного среднего в «виртуальных наблюдениях». При <span class="tex">n_c=0</span> получается <span class="tex">\bar y</span>, при <span class="tex">n_c\gg m</span> — почти сырое среднее категории.</p>
+</details>
+<details class="callout md details"><summary>Почему для часа суток используют пару $\sin, \cos$, а не один $\sin$?</summary>
+<p>Один синус совпадает у симметричных точек окружности: <span class="tex">\sin\frac{2\pi\cdot3}{24}=\sin\frac{2\pi\cdot9}{24}</span>, то есть 3 и 9 часов неразличимы. Пара <span class="tex">(\sin,\cos)</span> задаёт точку окружности однозначно.</p>
+</details>
+<details class="callout md details"><summary>Нужен ли логарифм признака для градиентного бустинга?</summary>
+<p>Нет для качества сплитов: деревья инвариантны к монотонным преобразованиям. Логарифм нужен линейным моделям, kNN и нейросетям.</p>
+</details>
+<details class="callout md details"><summary>Как нужно считать permutation importance при двух почти дублирующих признаках?</summary>
+<p>Перемешивать их вместе как группу (или заранее объединить коррелирующие признаки), иначе важность размоется между ними и оба покажутся незначимыми.</p>
+</details>
+<h2 id="что-почитать">Что почитать</h2>
+<ul>
+<li>Micci-Barreca D. <em>A Preprocessing Scheme for High-Cardinality Categorical Attributes in Classification and Prediction Problems</em>, ACM SIGKDD Explorations, 2001 — исходное сглаженное target-кодирование.</li>
+<li>Prokhorenkova L. et al. <em>CatBoost: unbiased boosting with categorical features</em>, NeurIPS 2018: https://arxiv.org/abs/1706.09516</li>
+<li>Документация scikit-learn: <code>TargetEncoder</code>, раздел «Target Encoder's Internal Cross fitting»: https://scikit-learn.org/stable/modules/preprocessing.html#target-encoder</li>
+<li>Weinberger K. et al. <em>Feature Hashing for Large Scale Multitask Learning</em>, ICML 2009: https://arxiv.org/abs/0902.2206</li>
+<li>Fisher A., Rudin C., Dominici F. <em>All Models are Wrong, but Many are Useful</em>, JMLR 2019 — model reliance (permutation importance): https://arxiv.org/abs/1801.01489</li>
+<li>Guyon I., Elisseeff A. <em>An Introduction to Variable and Feature Selection</em>, JMLR 2003.</li>
+<li>Kuhn M., Johnson K. <em>Feature Engineering and Selection</em>, CRC Press, 2019: https://bookdown.org/max/FES/</li>
+</ul>
+</div>
+      
+
+      
+
+      
+      <nav class="pager" aria-label="Соседние статьи">
+        <a href="/edufamcs-demo/handbook/classic/snizhenie-razmernosti/"><span><svg class="ico sm" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-arrow-left"/></svg>Назад</span>Снижение размерности: PCA, t-SNE, UMAP</a>
+        <a href="/edufamcs-demo/handbook/classic/nesbalansirovannye-klassy/"><span>Дальше<svg class="ico sm" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-arrow"/></svg></span>Несбалансированные классы</a>
+      </nav>
+      
+    </article>
+
+    <aside class="hb-toc" aria-label="На этой странице">
+      <a class="l2" href="#числовые-признаки-что-нужно-какой-модели">Числовые признаки: что нужно какой модели</a><a class="l2" href="#категориальные-признаки">Категориальные признаки</a><a class="l3" href="#target-encoding-сглаживание">Target encoding: сглаживание</a><a class="l3" href="#почему-наивный-target-encoding-течёт">Почему наивный target encoding течёт</a><a class="l3" href="#редкие-и-невидимые-категории">Редкие и невидимые категории</a><a class="l2" href="#дата-время-взаимодействия-пропуски">Дата, время, взаимодействия, пропуски</a><a class="l2" href="#отбор-признаков">Отбор признаков</a><a class="l2" href="#числа-наивный-и-oof-target-encoding">Числа: наивный и OOF target encoding</a><a class="l2" href="#код">Код</a><a class="l2" href="#ловушки">Ловушки</a><a class="l2" href="#проверь-себя">Проверь себя</a><a class="l2" href="#что-почитать">Что почитать</a>
+    </aside>
+  </div>
+</div>
+
+
+</main>
+
+<footer class="ftr" data-theme="dark">
+  <svg class="sym fern" viewBox="0 0 40.5 65.02" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#fern"/></svg>
+  <div class="container">
+    <div class="ftr-row">
+      <a href="/edufamcs-demo/" aria-label="EDU FAMCS — главная"><img src="/edufamcs-demo/static/brand/logo/logo-edu-dark.svg" alt="EDU FAMCS" width="196" height="40"></a>
+      <ul class="ftr-links">
+        <li><a href="/edufamcs-demo/#courses">Курсы</a></li>
+        <li><a href="/edufamcs-demo/ml/">Машинное обучение</a></li>
+        <li><a href="/edufamcs-demo/handbook/">Хендбук</a></li>
+        <li><a href="/edufamcs-demo/news/">Новости</a></li>
+        <li><a href="/edufamcs-demo/people/">Авторы</a></li>
+        <li><a href="/edufamcs-demo/about/">О&nbsp;нас</a></li>
+        <li><a href="/edufamcs-demo/propose/">Предложить или исправить</a></li>
+        <li><a href="/edufamcs-demo/privacy/">Конфиденциальность</a></li>
+      </ul>
+    </div>
+    <div class="ftr-big" aria-hidden="true">EDU<span class="d">·</span>FAMCS</div>
+    <p class="ftr-copy">© 2026 EDU FAMCS · Минск</p>
+  </div>
+</footer>
+
+<div class="toasts-region" aria-live="polite" id="toasts">
+
+</div>
+
+</body>
+</html>

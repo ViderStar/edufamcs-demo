@@ -1,0 +1,268 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Предобучение: BERT, GPT и что между ними · EDU FAMCS</title>
+<meta name="description" content="Предобучение: BERT, GPT и что между ними — NLP и большие языковые модели. Хендбук ML-курса ФПМИ.">
+<meta name="theme-color" content="#060A16">
+<meta name="robots" content="noindex, nofollow">
+<meta name="htmx-config" content='{"allowEval":false,"includeIndicatorStyles":false,"historyCacheSize":0,"selfRequestsOnly":true}'>
+<meta name="katex-js" content="/edufamcs-demo/static/vendor/katex/katex.min.js">
+<meta name="katex-css" content="/edufamcs-demo/static/vendor/katex/katex.min.css">
+<link rel="icon" href="/edufamcs-demo/static/brand/logo/favicon-16.svg" type="image/svg+xml" sizes="16x16">
+<link rel="icon" href="/edufamcs-demo/static/brand/logo/favicon.svg" type="image/svg+xml" sizes="any">
+<link rel="preload" href="/edufamcs-demo/static/brand/fonts/manrope-cyrillic-400.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/edufamcs-demo/static/brand/fonts/unbounded-cyrillic-800.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="/edufamcs-demo/static/brand/fonts.css">
+<link rel="stylesheet" href="/edufamcs-demo/static/brand/tokens.css">
+<link rel="stylesheet" href="/edufamcs-demo/static/brand/components.css">
+<link rel="stylesheet" href="/edufamcs-demo/static/css/site.css">
+<link rel="stylesheet" href="/edufamcs-demo/static/css/hub.css">
+<link rel="stylesheet" href="/edufamcs-demo/static/css/about.css">
+<link rel="stylesheet" href="/edufamcs-demo/static/handbook/handbook.css">
+<script src="/edufamcs-demo/static/js/theme.js"></script>
+<script src="/edufamcs-demo/static/vendor/htmx/htmx.min.js" defer></script>
+<script src="/edufamcs-demo/static/vendor/alpine/alpine-csp.min.js" defer></script>
+<script src="/edufamcs-demo/static/js/site.js" defer></script>
+<script src="/edufamcs-demo/static/handbook/handbook.js" defer></script>
+</head>
+<body class="" hx-headers='{"X-CSRFToken": "wrJ7DBNw2JJCbfVNCjjeCaLMi5QTaSq98Ey4TDmn3wXbmyafBMxbk3DKKeXRUCpQ"}'>
+<a class="skip" href="#main">К содержанию</a>
+<div class="demo-bar" role="note">Демо-версия для отзывов: вход, запись на курсы и формы здесь не работают.</div>
+
+<header class="hdr">
+  <div class="container">
+    <a class="brand" href="/edufamcs-demo/" aria-label="EDU FAMCS — главная">
+      <span class="full"><img class="only-light" src="/edufamcs-demo/static/brand/logo/logo-edu-light.svg" alt="EDU FAMCS" width="196" height="40"><img class="only-dark" src="/edufamcs-demo/static/brand/logo/logo-edu-dark.svg" alt="EDU FAMCS" width="196" height="40"></span>
+      <span class="short"><img class="only-light" src="/edufamcs-demo/static/brand/logo/logo-edu-light.svg" alt="EDU FAMCS" height="30"><img class="only-dark" src="/edufamcs-demo/static/brand/logo/logo-edu-dark.svg" alt="EDU FAMCS" height="30"></span>
+    </a>
+    <nav class="nav" id="main-nav" aria-label="Основная навигация">
+      <a href="/edufamcs-demo/#courses">Курсы</a>
+      <a href="/edufamcs-demo/ml/" >Машинное обучение</a>
+      
+      <a href="/edufamcs-demo/handbook/" aria-current="page">Хендбук</a>
+      <a href="/edufamcs-demo/news/" >Новости</a>
+      <a href="/edufamcs-demo/people/" >Авторы</a>
+      <a href="/edufamcs-demo/about/" >О&nbsp;нас</a>
+    </nav>
+    <div class="hdr-actions">
+      
+      <a class="btn btn-outline btn-login" href="/edufamcs-demo/accounts/login/?next=/handbook/nlp/predobuchenie-bert-gpt/">Войти</a>
+      
+      <button class="icon-btn menu-btn" type="button" aria-label="Меню" aria-expanded="false" aria-controls="main-nav"><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-menu"/></svg></button>
+    </div>
+  </div>
+</header>
+
+<main id="main">
+
+
+
+<div class="container hb-page s-nlp">
+  <div class="hb-readbar" aria-hidden="true"><i></i></div>
+  <div class="hb">
+    <aside class="hb-nav" aria-label="Статьи раздела">
+      
+<form class="hb-search" action="/edufamcs-demo/handbook/search/" method="get" role="search">
+  <svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-search"/></svg>
+  <input class="input" type="search" name="q" value="" placeholder="Поиск по хендбуку" aria-label="Поиск по хендбуку" autocomplete="off" maxlength="120"
+    hx-get="/edufamcs-demo/handbook/search/" hx-trigger="input changed delay:250ms, search" hx-target="#hb-nav-results" hx-sync="this:replace">
+</form>
+
+      <div id="hb-nav-results" class="hb-nav-results" aria-live="polite"></div>
+      <a class="grp" href="/edufamcs-demo/handbook/nlp/">Основы</a>
+      
+      <a class="" href="/edufamcs-demo/handbook/nlp/tokenizaciya-i-embeddingi/">Токенизация и эмбеддинги слов</a>
+      
+      <a class="cur" href="/edufamcs-demo/handbook/nlp/predobuchenie-bert-gpt/" aria-current="page">Предобучение: BERT, GPT и что между ними</a>
+      
+      <a class="" href="/edufamcs-demo/handbook/nlp/generaciya-teksta/">Генерация: декодирование и сэмплирование</a>
+      
+    </aside>
+
+    <article class="hb-main">
+      <nav class="crumbs" aria-label="Навигация"><a href="/edufamcs-demo/handbook/">Хендбук</a><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-chev"/></svg><a href="/edufamcs-demo/handbook/nlp/">NLP и большие языковые модели</a></nav>
+      <h1 class="h1">Предобучение: BERT, GPT и что между ними</h1>
+      <div class="hb-meta">
+        
+        
+        <span><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-clock"/></svg>11&nbsp;мин</span>
+        <span class="hb-authors"><span class="avatar sm" title="Артем Лебедевич">АЛ</span>Артем Лебедевич</span>
+        <span><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-edit"/></svg>10 ноября 2026</span>
+        
+        
+      </div>
+
+      
+      <details class="hb-mtoc">
+        <summary><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-list"/></svg>Содержание<svg class="ico sm" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-chev-down"/></svg></summary>
+        <a class="l2" href="#причинная-языковая-модель-gpt">Причинная языковая модель (GPT)</a><a class="l2" href="#маскированная-модель-bert">Маскированная модель (BERT)</a><a class="l2" href="#восстановление-из-шума-t5-и-bart">Восстановление из шума: T5 и BART</a><a class="l2" href="#три-архитектуры-и-для-чего-они-сегодня">Три архитектуры и для чего они сегодня</a><a class="l2" href="#от-pretrain-fine-tune-к-промптам">От pretrain → fine-tune к промптам</a><a class="l2" href="#масштабирование-и-контекст">Масштабирование и контекст</a><a class="l2" href="#код">Код</a><a class="l2" href="#ловушки">Ловушки</a><a class="l2" href="#проверь-себя">Проверь себя</a><a class="l2" href="#что-почитать">Что почитать</a>
+      </details>
+      
+
+      <div class="prose"><p>Языковые модели учатся на тексте без разметки: сам текст служит и входом, и ответом. Способ, которым из текста вырезают «задачу», определяет архитектуру, а архитектура — то, для чего модель годится: BERT хорош как кодировщик, GPT — как генератор. Разберём три постановки (причинная, маскированная, восстановление из шума), как от «предобучить и дообучить» пришли к «предобучить, обучить на инструкциях, написать промпт», и что такое контекстное окно с точки зрения вычислений. Устройство самого трансформера описано в <a href="/edufamcs-demo/handbook/dl/vnimanie-i-transformery/" rel="noopener noreferrer nofollow">статье про внимание</a>, токенизация — в <a href="/edufamcs-demo/handbook/nlp/tokenizaciya-i-embeddingi/" rel="noopener noreferrer nofollow">предыдущей</a>.</p>
+<h2 id="причинная-языковая-модель-gpt">Причинная языковая модель (GPT)</h2>
+<p>Последовательность токенов <span class="tex">x_1,\dots,x_T</span> раскладывается по правилу цепочки вероятностей — это тождество, а не допущение модели:</p>
+<div class="tex tex-block">p(x_1,\dots,x_T)=\prod_{t=1}^{T}p(x_t\mid x_{&lt;t}).</div>
+<p>Модель <span class="tex">p_\theta(x_t\mid x_{&lt;t})</span> — трансформер с causal mask: позиция <span class="tex">t</span> видит только <span class="tex">\le t</span>. Потери — средняя кросс-энтропия следующего токена:</p>
+<div class="tex tex-block">\mathcal L(\theta)=-\frac1T\sum_{t=1}^{T}\log p_\theta(x_t\mid x_{&lt;t}).</div>
+<p>Главное достоинство: <strong>за один проход</strong> по последовательности из <span class="tex">T</span> токенов получается <span class="tex">T</span> обучающих сигналов (каждая позиция предсказывает следующий токен), а при генерации модель разворачивается ровно как обучалась, токен за токеном. Метрика качества — <strong>перплексия</strong> <span class="tex">\mathrm{PPL}=\exp(\mathcal L)</span>: «эффективное число равновероятных вариантов» на каждом шаге. Для равномерной модели по <span class="tex">V</span> токенам она равна <span class="tex">V</span>. Сравнивать перплексию можно только при одном токенизаторе и тексте: она усредняется по токенам, а не по словам или символам.</p>
+<p><strong>Числовой пример.</strong> Словарь <code>{the, cat, sat, mat}</code>, последовательность <code>the cat sat the</code>. Модель выдаёт распределения после <code>the</code>, <code>cat</code>, <code>sat</code>; вероятности правильных токенов — <span class="tex">0{,}60</span>, <span class="tex">0{,}80</span>, <span class="tex">0{,}50</span>. Потери по позициям: <span class="tex">0{,}511</span>, <span class="tex">0{,}223</span>, <span class="tex">0{,}693</span>; среднее <span class="tex">0{,}476</span>, перплексия <span class="tex">e^{0{,}476}=1{,}609</span> — хуже единицы, но заметно лучше равномерной модели, у которой <span class="tex">\mathrm{PPL}=4</span>. (Числа из кода ниже.)</p>
+<h2 id="маскированная-модель-bert">Маскированная модель (BERT)</h2>
+<p>Если разрешить токену видеть и левый, и правый контекст, предсказывать «следующий токен» нельзя — он уже виден. BERT (Девлин и соавторы, 2018) прячет часть токенов и просит их восстановить: выбирается 15 % позиций, и из выбранных</p>
+<ul>
+<li>в 80 % случаев токен заменяется на <code>[MASK]</code>,</li>
+<li>в 10 % — на случайный токен,</li>
+<li>в 10 % остаётся как есть.</li>
+</ul>
+<p>Потери считаются только по выбранным позициям. Зачем 10/10: на дообучении и в продакшене <code>[MASK]</code> нет, и модель, которая видела только его, не научится строить хорошие представления для обычных токенов. Случайные и оставленные токены заставляют кодировать <strong>каждую</strong> позицию, ведь заранее неизвестно, какая из них «подозрительная». Цена: сигнал только с 15 % позиций, поэтому масочные модели обучаются медленнее на токен, чем причинные (в RoBERTa маски к тому же пересэмплируются на каждой эпохе). Оригинальный BERT добавлял задачу предсказания следующего предложения, но последующие работы (RoBERTa) показали, что без неё качество не хуже.</p>
+<h2 id="восстановление-из-шума-t5-и-bart">Восстановление из шума: T5 и BART</h2>
+<p><strong>T5</strong> (Раффел и соавторы, 2019/2020) — энкодер-декодер, обученный на <em>span corruption</em>: в тексте вырезаются отрезки токенов, заменяются служебными метками, а декодер генерирует вырезанные куски. Все задачи формулируются как «текст → текст». <strong>BART</strong> (Льюис и соавторы, 2019/2020) портит текст разными способами (маскирование, перестановка предложений, удаление) и учит декодер восстановить оригинал целиком. Обе модели читают вход двунаправленно (энкодер), а выход порождают слева направо (декодер).</p>
+<h2 id="три-архитектуры-и-для-чего-они-сегодня">Три архитектуры и для чего они сегодня</h2>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th></th>
+<th>Внимание</th>
+<th>Предобучение</th>
+<th>Сильные стороны</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Encoder-only (BERT)</td>
+<td>двунаправленное</td>
+<td>маскирование</td>
+<td>эмбеддинги, классификация, разметка токенов, переранжирование</td>
+</tr>
+<tr>
+<td>Decoder-only (GPT)</td>
+<td>причинное</td>
+<td>следующий токен</td>
+<td>генерация, диалог, универсальный интерфейс «промпт → ответ»</td>
+</tr>
+<tr>
+<td>Encoder-decoder (T5, BART)</td>
+<td>энкодер двунаправленный, декодер причинный + cross-attention</td>
+<td>восстановление фрагментов</td>
+<td>перевод, суммаризация, структурированный вывод</td>
+</tr>
+</tbody>
+</table></div>
+<p>Практический итог на 2026 год: универсальные генеративные LLM — decoder-only; но энкодеры не исчезли. Для эмбеддингов в поиске, классификации и cross-encoder-переранжирования они остаются дешёвыми и точными: одна модель на сотни миллионов параметров заменяет вызов большой генеративной, а в 2024 году вышла ModernBERT (Уорнер и соавторы) — обновлённый энкодер с контекстом 8192 токена. См. <a href="/edufamcs-demo/handbook/retrieval/plotnyj-i-gibridnyj-poisk/" rel="noopener noreferrer nofollow">плотный поиск</a>. Для генерации же причинное внимание удобно тем, что позволяет кэшировать ключи и значения (см. <a href="/edufamcs-demo/handbook/nlp/generaciya-teksta/" rel="noopener noreferrer nofollow">генерацию</a>).</p>
+<h2 id="от-pretrain-fine-tune-к-промптам">От pretrain → fine-tune к промптам</h2>
+<p>Классическая схема 2018–2020: предобучить модель на сыром тексте, затем <strong>дообучить</strong> копию под каждую задачу со своей головой и размеченными данными. GPT-3 (Браун и соавторы, 2020) показал <strong>in-context learning</strong>: достаточно большая причинная модель решает новую задачу по описанию и нескольким примерам в промпте, без обновления весов. Затем добавился слой, превративший сырую модель в помощника: <strong>обучение на инструкциях</strong> (FLAN, Вэй и соавторы, 2021; InstructGPT, Оуян и соавторы, 2022 — супервизия на демонстрациях плюс предпочтения людей). Сегодняшняя цепочка: предобучение → инструктивное дообучение → оптимизация предпочтений → промпт (см. <a href="/edufamcs-demo/handbook/nlp/doobuchenie-lora/" rel="noopener noreferrer nofollow">дообучение</a>). Заметьте: предобучение определяет знания модели, а постобучение — формат и манеру ответа.</p>
+<h2 id="масштабирование-и-контекст">Масштабирование и контекст</h2>
+<p>Устойчивые факты. Потери причинных LM убывают как степенная функция от параметров <span class="tex">N</span>, данных <span class="tex">D</span> и вычислений <span class="tex">C</span> (Каплан и соавторы, 2020). Для плотного трансформера обучение стоит примерно <span class="tex">C\approx 6ND</span> FLOPs. Хоффман и соавторы (2022, Chinchilla) показали, что при фиксированном бюджете параметры и токены надо наращивать вместе (грубо — порядка 20 токенов на параметр); на практике модели часто обучают на заметно большем числе токенов, чтобы уменьшить стоимость инференса. Что эти законы <strong>не</strong> гарантируют: что конкретный навык появится на конкретном размере.</p>
+<p><strong>Контекстное окно</strong> — максимальное число токенов, которое модель обрабатывает за раз (вход плюс выход). Вычислительно: обработка промпта длины <span class="tex">T</span> стоит <span class="tex">O(T^2d)</span> на внимании и <span class="tex">O(Td^2)</span> на MLP, память KV-кэша растёт линейно по <span class="tex">T</span>; сверх длины, на которой модель обучалась, качество падает, если не применять специальные методы. Длинное окно не значит равномерно хорошее использование: на длинном контексте модели хуже находят информацию из середины (Лю и соавторы, «Lost in the Middle», 2023). Поэтому в <a href="/edufamcs-demo/handbook/retrieval/rag/" rel="noopener noreferrer nofollow">RAG</a> в окно кладут отобранное, а не всё.</p>
+<h2 id="код">Код</h2>
+<p>Причинная маска и сдвинутые метки: логиты позиции <span class="tex">t</span> сравниваются с токеном <span class="tex">t+1</span>.</p>
+<div class="code"><div class="code-head"><span class="lang">python</span></div><pre><code><span class="tok-k">import</span> torch<span class="tok-p">,</span> torch.nn.functional <span class="tok-k">as</span> F
+torch<span class="tok-p">.</span>manual_seed<span class="tok-p">(</span><span class="tok-n">0</span><span class="tok-p">)</span>
+B<span class="tok-p">,</span> T<span class="tok-p">,</span> V<span class="tok-p">,</span> d <span class="tok-p">=</span> <span class="tok-n">2</span><span class="tok-p">,</span> <span class="tok-n">6</span><span class="tok-p">,</span> <span class="tok-n">11</span><span class="tok-p">,</span> <span class="tok-n">16</span>
+ids <span class="tok-p">=</span> torch<span class="tok-p">.</span>randint<span class="tok-p">(</span><span class="tok-n">0</span><span class="tok-p">,</span> V<span class="tok-p">,</span> <span class="tok-p">(</span>B<span class="tok-p">,</span> T<span class="tok-p">)</span><span class="tok-p">)</span>
+emb <span class="tok-p">=</span> torch<span class="tok-p">.</span>nn<span class="tok-p">.</span>Embedding<span class="tok-p">(</span>V<span class="tok-p">,</span> d<span class="tok-p">)</span>
+q<span class="tok-p">,</span> k<span class="tok-p">,</span> v <span class="tok-p">=</span> <span class="tok-p">(</span>torch<span class="tok-p">.</span>nn<span class="tok-p">.</span>Linear<span class="tok-p">(</span>d<span class="tok-p">,</span> d<span class="tok-p">)</span> <span class="tok-k">for</span> _ <span class="tok-k">in</span> <span class="tok-f">range</span><span class="tok-p">(</span><span class="tok-n">3</span><span class="tok-p">)</span><span class="tok-p">)</span><span class="tok-p">;</span> head <span class="tok-p">=</span> torch<span class="tok-p">.</span>nn<span class="tok-p">.</span>Linear<span class="tok-p">(</span>d<span class="tok-p">,</span> V<span class="tok-p">)</span>
+
+<span class="tok-k">def</span> <span class="tok-f">forward</span><span class="tok-p">(</span>ids<span class="tok-p">)</span><span class="tok-p">:</span>
+    x <span class="tok-p">=</span> emb<span class="tok-p">(</span>ids<span class="tok-p">)</span>
+    att <span class="tok-p">=</span> q<span class="tok-p">(</span>x<span class="tok-p">)</span> <span class="tok-p">@</span> k<span class="tok-p">(</span>x<span class="tok-p">)</span><span class="tok-p">.</span>transpose<span class="tok-p">(</span><span class="tok-p">-</span><span class="tok-n">1</span><span class="tok-p">,</span> <span class="tok-p">-</span><span class="tok-n">2</span><span class="tok-p">)</span> <span class="tok-p">/</span> d<span class="tok-p">*</span><span class="tok-p">*</span><span class="tok-n">0.5</span>               <span class="tok-c"># (B, T, T)</span>
+    mask <span class="tok-p">=</span> torch<span class="tok-p">.</span>triu<span class="tok-p">(</span>torch<span class="tok-p">.</span>ones<span class="tok-p">(</span>T<span class="tok-p">,</span> T<span class="tok-p">,</span> dtype<span class="tok-p">=</span>torch<span class="tok-p">.</span>bool<span class="tok-p">)</span><span class="tok-p">,</span> <span class="tok-n">1</span><span class="tok-p">)</span>    <span class="tok-c"># True выше диагонали</span>
+    w <span class="tok-p">=</span> att<span class="tok-p">.</span>masked_fill<span class="tok-p">(</span>mask<span class="tok-p">,</span> <span class="tok-f">float</span><span class="tok-p">(</span><span class="tok-s">"</span><span class="tok-s">-inf</span><span class="tok-s">"</span><span class="tok-p">)</span><span class="tok-p">)</span><span class="tok-p">.</span>softmax<span class="tok-p">(</span><span class="tok-p">-</span><span class="tok-n">1</span><span class="tok-p">)</span>
+    <span class="tok-k">return</span> head<span class="tok-p">(</span>w <span class="tok-p">@</span> v<span class="tok-p">(</span>x<span class="tok-p">)</span><span class="tok-p">)</span>                                       <span class="tok-c"># (B, T, V)</span>
+
+logits <span class="tok-p">=</span> forward<span class="tok-p">(</span>ids<span class="tok-p">)</span>
+loss <span class="tok-p">=</span> F<span class="tok-p">.</span>cross_entropy<span class="tok-p">(</span>logits<span class="tok-p">[</span><span class="tok-p">:</span><span class="tok-p">,</span> <span class="tok-p">:</span><span class="tok-p">-</span><span class="tok-n">1</span><span class="tok-p">]</span><span class="tok-p">.</span>reshape<span class="tok-p">(</span><span class="tok-p">-</span><span class="tok-n">1</span><span class="tok-p">,</span> V<span class="tok-p">)</span><span class="tok-p">,</span> ids<span class="tok-p">[</span><span class="tok-p">:</span><span class="tok-p">,</span> <span class="tok-n">1</span><span class="tok-p">:</span><span class="tok-p">]</span><span class="tok-p">.</span>reshape<span class="tok-p">(</span><span class="tok-p">-</span><span class="tok-n">1</span><span class="tok-p">)</span><span class="tok-p">)</span>
+<span class="tok-f">print</span><span class="tok-p">(</span>loss<span class="tok-p">.</span>item<span class="tok-p">(</span><span class="tok-p">)</span><span class="tok-p">,</span> torch<span class="tok-p">.</span>exp<span class="tok-p">(</span>loss<span class="tok-p">)</span><span class="tok-p">.</span>item<span class="tok-p">(</span><span class="tok-p">)</span><span class="tok-p">)</span>    <span class="tok-c"># 2.486  12.01; ln(11)=2.398</span>
+
+ids2 <span class="tok-p">=</span> ids<span class="tok-p">.</span>clone<span class="tok-p">(</span><span class="tok-p">)</span><span class="tok-p">;</span> ids2<span class="tok-p">[</span><span class="tok-p">:</span><span class="tok-p">,</span> <span class="tok-p">-</span><span class="tok-n">1</span><span class="tok-p">]</span> <span class="tok-p">=</span> <span class="tok-p">(</span>ids2<span class="tok-p">[</span><span class="tok-p">:</span><span class="tok-p">,</span> <span class="tok-p">-</span><span class="tok-n">1</span><span class="tok-p">]</span> <span class="tok-p">+</span> <span class="tok-n">1</span><span class="tok-p">)</span> <span class="tok-p">%</span> V        <span class="tok-c"># меняем последний токен</span>
+<span class="tok-f">print</span><span class="tok-p">(</span>torch<span class="tok-p">.</span>allclose<span class="tok-p">(</span>forward<span class="tok-p">(</span>ids<span class="tok-p">)</span><span class="tok-p">[</span><span class="tok-p">:</span><span class="tok-p">,</span> <span class="tok-p">:</span><span class="tok-p">-</span><span class="tok-n">1</span><span class="tok-p">]</span><span class="tok-p">,</span> forward<span class="tok-p">(</span>ids2<span class="tok-p">)</span><span class="tok-p">[</span><span class="tok-p">:</span><span class="tok-p">,</span> <span class="tok-p">:</span><span class="tok-p">-</span><span class="tok-n">1</span><span class="tok-p">]</span><span class="tok-p">)</span><span class="tok-p">)</span>   <span class="tok-c"># True: прошлое не видит будущего</span>
+</code></pre></div>
+<p>Случайная модель даёт потери близкие к <span class="tex">\ln V=2{,}398</span> (у нас 2,486 — случайная инициализация чуть хуже равномерной). Вторая проверка — стандартный тест на утечку из будущего: если она выдаёт <code>False</code>, маска написана неверно.</p>
+<h2 id="ловушки">Ловушки</h2>
+<div class="callout md warn"><p class="callout-title">Перплексия не сравнима между токенизаторами</p>
+<p>Модель с более крупными токенами получает «худшую» перплексию на токен при том же качестве. Сравнивайте биты на символ/байт или потери на одном токенизаторе.</p>
+</div>
+<ul>
+<li>Сдвиг на единицу забыт или сделан дважды: потери получаются подозрительно малыми (модель копирует вход) либо не падают.</li>
+<li>Метки на паддинге не замаскированы (<code>ignore_index=-100</code>).</li>
+<li>Использовать BERT для генерации, а GPT-эмбеддинг последнего токена как «вектор предложения» без дообучения.</li>
+<li>Считать, что контекст в 128 тысяч токенов означает, что модель одинаково надёжно использует всё.</li>
+<li><strong>На собеседовании:</strong> зачем в BERT правило 80/10/10; почему GPT-обучение эффективно по сигналам на токен; чем перплексия связана с кросс-энтропией.</li>
+<li><strong>На собеседовании:</strong> когда вы выберете энкодер, а когда декодер для задачи классификации обращений.</li>
+</ul>
+<h2 id="проверь-себя">Проверь себя</h2>
+<details class="callout md details"><summary>Запишите факторизацию вероятности последовательности в причинной LM и функцию потерь.</summary>
+<p><span class="tex">p(x_{1:T})=\prod_t p(x_t\mid x_{&lt;t})</span>; потери — <span class="tex">-\frac1T\sum_t\log p_\theta(x_t\mid x_{&lt;t})</span>, то есть средняя кросс-энтропия по предсказанию следующего токена.</p>
+</details>
+<details class="callout md details"><summary>Чему равна перплексия, если модель на каждом шаге присваивает правильному токену вероятность 0,25?</summary>
+<p><span class="tex">\exp(-\ln 0{,}25)=4</span>: так же, как у равномерной модели на четырёх токенах.</p>
+</details>
+<details class="callout md details"><summary>Почему в BERT 10 % выбранных токенов заменяют случайными и 10 % оставляют?</summary>
+<p>Чтобы модель не привязывалась к <code>[MASK]</code>, которого нет на дообучении, и строила хорошие представления для всех позиций.</p>
+</details>
+<details class="callout md details"><summary>Чем span corruption в T5 отличается от маскирования в BERT?</summary>
+<p>BERT предсказывает отдельные токены на месте масок внутри энкодера, T5 заменяет отрезки одной меткой, а декодер генерирует вырезанные куски последовательности.</p>
+</details>
+<details class="callout md details"><summary>Что в контекстном окне растёт квадратично, а что линейно?</summary>
+<p>Вычисление внимания над промптом — <span class="tex">O(T^2)</span> по длине; память KV-кэша и стоимость одного шага генерации — линейно по <span class="tex">T</span>.</p>
+</details>
+<h2 id="что-почитать">Что почитать</h2>
+<ul>
+<li>Devlin et al., <em>BERT: Pre-training of Deep Bidirectional Transformers for Language Understanding</em>, NAACL 2019: <a href="https://arxiv.org/abs/1810.04805" rel="noopener noreferrer nofollow">arxiv.org/abs/1810.04805</a>; Liu et al., <em>RoBERTa</em>, 2019: <a href="https://arxiv.org/abs/1907.11692" rel="noopener noreferrer nofollow">arxiv.org/abs/1907.11692</a>.</li>
+<li>Radford et al., <em>Improving Language Understanding by Generative Pre-Training</em> (GPT), 2018; Brown et al., <em>Language Models are Few-Shot Learners</em>, NeurIPS 2020: <a href="https://arxiv.org/abs/2005.14165" rel="noopener noreferrer nofollow">arxiv.org/abs/2005.14165</a>.</li>
+<li>Raffel et al., <em>Exploring the Limits of Transfer Learning with a Unified Text-to-Text Transformer</em> (T5), JMLR 2020: <a href="https://arxiv.org/abs/1910.10683" rel="noopener noreferrer nofollow">arxiv.org/abs/1910.10683</a>; Lewis et al., <em>BART</em>, ACL 2020: <a href="https://arxiv.org/abs/1910.13461" rel="noopener noreferrer nofollow">arxiv.org/abs/1910.13461</a>.</li>
+<li>Kaplan et al., <em>Scaling Laws for Neural Language Models</em>, 2020: <a href="https://arxiv.org/abs/2001.08361" rel="noopener noreferrer nofollow">arxiv.org/abs/2001.08361</a>; Hoffmann et al., <em>Training Compute-Optimal Large Language Models</em>, 2022: <a href="https://arxiv.org/abs/2203.15556" rel="noopener noreferrer nofollow">arxiv.org/abs/2203.15556</a>.</li>
+<li>Wei et al., <em>Finetuned Language Models Are Zero-Shot Learners</em> (FLAN), ICLR 2022: <a href="https://arxiv.org/abs/2109.01652" rel="noopener noreferrer nofollow">arxiv.org/abs/2109.01652</a>; Ouyang et al., <em>Training language models to follow instructions with human feedback</em>, NeurIPS 2022: <a href="https://arxiv.org/abs/2203.02155" rel="noopener noreferrer nofollow">arxiv.org/abs/2203.02155</a>.</li>
+<li>Warner et al., <em>ModernBERT</em>, 2024: <a href="https://arxiv.org/abs/2412.13663" rel="noopener noreferrer nofollow">arxiv.org/abs/2412.13663</a>; Liu et al., <em>Lost in the Middle</em>, TACL 2024: <a href="https://arxiv.org/abs/2307.03172" rel="noopener noreferrer nofollow">arxiv.org/abs/2307.03172</a>.</li>
+</ul>
+</div>
+      
+
+      
+
+      
+      <nav class="pager" aria-label="Соседние статьи">
+        <a href="/edufamcs-demo/handbook/nlp/tokenizaciya-i-embeddingi/"><span><svg class="ico sm" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-arrow-left"/></svg>Назад</span>Токенизация и эмбеддинги слов</a>
+        <a href="/edufamcs-demo/handbook/nlp/generaciya-teksta/"><span>Дальше<svg class="ico sm" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-arrow"/></svg></span>Генерация: декодирование и сэмплирование</a>
+      </nav>
+      
+    </article>
+
+    <aside class="hb-toc" aria-label="На этой странице">
+      <a class="l2" href="#причинная-языковая-модель-gpt">Причинная языковая модель (GPT)</a><a class="l2" href="#маскированная-модель-bert">Маскированная модель (BERT)</a><a class="l2" href="#восстановление-из-шума-t5-и-bart">Восстановление из шума: T5 и BART</a><a class="l2" href="#три-архитектуры-и-для-чего-они-сегодня">Три архитектуры и для чего они сегодня</a><a class="l2" href="#от-pretrain-fine-tune-к-промптам">От pretrain → fine-tune к промптам</a><a class="l2" href="#масштабирование-и-контекст">Масштабирование и контекст</a><a class="l2" href="#код">Код</a><a class="l2" href="#ловушки">Ловушки</a><a class="l2" href="#проверь-себя">Проверь себя</a><a class="l2" href="#что-почитать">Что почитать</a>
+    </aside>
+  </div>
+</div>
+
+
+</main>
+
+<footer class="ftr" data-theme="dark">
+  <svg class="sym fern" viewBox="0 0 40.5 65.02" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#fern"/></svg>
+  <div class="container">
+    <div class="ftr-row">
+      <a href="/edufamcs-demo/" aria-label="EDU FAMCS — главная"><img src="/edufamcs-demo/static/brand/logo/logo-edu-dark.svg" alt="EDU FAMCS" width="196" height="40"></a>
+      <ul class="ftr-links">
+        <li><a href="/edufamcs-demo/#courses">Курсы</a></li>
+        <li><a href="/edufamcs-demo/ml/">Машинное обучение</a></li>
+        <li><a href="/edufamcs-demo/handbook/">Хендбук</a></li>
+        <li><a href="/edufamcs-demo/news/">Новости</a></li>
+        <li><a href="/edufamcs-demo/people/">Авторы</a></li>
+        <li><a href="/edufamcs-demo/about/">О&nbsp;нас</a></li>
+        <li><a href="/edufamcs-demo/propose/">Предложить или исправить</a></li>
+        <li><a href="/edufamcs-demo/privacy/">Конфиденциальность</a></li>
+      </ul>
+    </div>
+    <div class="ftr-big" aria-hidden="true">EDU<span class="d">·</span>FAMCS</div>
+    <p class="ftr-copy">© 2026 EDU FAMCS · Минск</p>
+  </div>
+</footer>
+
+<div class="toasts-region" aria-live="polite" id="toasts">
+
+</div>
+
+</body>
+</html>

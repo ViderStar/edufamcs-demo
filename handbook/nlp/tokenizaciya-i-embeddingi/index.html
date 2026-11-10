@@ -1,0 +1,309 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Токенизация и эмбеддинги слов · EDU FAMCS</title>
+<meta name="description" content="Токенизация и эмбеддинги слов — NLP и большие языковые модели. Хендбук ML-курса ФПМИ.">
+<meta name="theme-color" content="#060A16">
+<meta name="robots" content="noindex, nofollow">
+<meta name="htmx-config" content='{"allowEval":false,"includeIndicatorStyles":false,"historyCacheSize":0,"selfRequestsOnly":true}'>
+<meta name="katex-js" content="/edufamcs-demo/static/vendor/katex/katex.min.js">
+<meta name="katex-css" content="/edufamcs-demo/static/vendor/katex/katex.min.css">
+<link rel="icon" href="/edufamcs-demo/static/brand/logo/favicon-16.svg" type="image/svg+xml" sizes="16x16">
+<link rel="icon" href="/edufamcs-demo/static/brand/logo/favicon.svg" type="image/svg+xml" sizes="any">
+<link rel="preload" href="/edufamcs-demo/static/brand/fonts/manrope-cyrillic-400.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/edufamcs-demo/static/brand/fonts/unbounded-cyrillic-800.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="/edufamcs-demo/static/brand/fonts.css">
+<link rel="stylesheet" href="/edufamcs-demo/static/brand/tokens.css">
+<link rel="stylesheet" href="/edufamcs-demo/static/brand/components.css">
+<link rel="stylesheet" href="/edufamcs-demo/static/css/site.css">
+<link rel="stylesheet" href="/edufamcs-demo/static/css/hub.css">
+<link rel="stylesheet" href="/edufamcs-demo/static/css/about.css">
+<link rel="stylesheet" href="/edufamcs-demo/static/handbook/handbook.css">
+<script src="/edufamcs-demo/static/js/theme.js"></script>
+<script src="/edufamcs-demo/static/vendor/htmx/htmx.min.js" defer></script>
+<script src="/edufamcs-demo/static/vendor/alpine/alpine-csp.min.js" defer></script>
+<script src="/edufamcs-demo/static/js/site.js" defer></script>
+<script src="/edufamcs-demo/static/handbook/handbook.js" defer></script>
+</head>
+<body class="" hx-headers='{"X-CSRFToken": "qQqeOU7MG7T5lB4NRiuViq7MdOeSgsP423fb4WGDHU7EwUjfQLIS0jZKFXlQ0cOL"}'>
+<a class="skip" href="#main">К содержанию</a>
+<div class="demo-bar" role="note">Демо-версия для отзывов: вход, запись на курсы и формы здесь не работают.</div>
+
+<header class="hdr">
+  <div class="container">
+    <a class="brand" href="/edufamcs-demo/" aria-label="EDU FAMCS — главная">
+      <span class="full"><img class="only-light" src="/edufamcs-demo/static/brand/logo/logo-edu-light.svg" alt="EDU FAMCS" width="196" height="40"><img class="only-dark" src="/edufamcs-demo/static/brand/logo/logo-edu-dark.svg" alt="EDU FAMCS" width="196" height="40"></span>
+      <span class="short"><img class="only-light" src="/edufamcs-demo/static/brand/logo/logo-edu-light.svg" alt="EDU FAMCS" height="30"><img class="only-dark" src="/edufamcs-demo/static/brand/logo/logo-edu-dark.svg" alt="EDU FAMCS" height="30"></span>
+    </a>
+    <nav class="nav" id="main-nav" aria-label="Основная навигация">
+      <a href="/edufamcs-demo/#courses">Курсы</a>
+      <a href="/edufamcs-demo/ml/" >Машинное обучение</a>
+      
+      <a href="/edufamcs-demo/handbook/" aria-current="page">Хендбук</a>
+      <a href="/edufamcs-demo/news/" >Новости</a>
+      <a href="/edufamcs-demo/people/" >Авторы</a>
+      <a href="/edufamcs-demo/about/" >О&nbsp;нас</a>
+    </nav>
+    <div class="hdr-actions">
+      
+      <a class="btn btn-outline btn-login" href="/edufamcs-demo/accounts/login/?next=/handbook/nlp/tokenizaciya-i-embeddingi/">Войти</a>
+      
+      <button class="icon-btn menu-btn" type="button" aria-label="Меню" aria-expanded="false" aria-controls="main-nav"><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-menu"/></svg></button>
+    </div>
+  </div>
+</header>
+
+<main id="main">
+
+
+
+<div class="container hb-page s-nlp">
+  <div class="hb-readbar" aria-hidden="true"><i></i></div>
+  <div class="hb">
+    <aside class="hb-nav" aria-label="Статьи раздела">
+      
+<form class="hb-search" action="/edufamcs-demo/handbook/search/" method="get" role="search">
+  <svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-search"/></svg>
+  <input class="input" type="search" name="q" value="" placeholder="Поиск по хендбуку" aria-label="Поиск по хендбуку" autocomplete="off" maxlength="120"
+    hx-get="/edufamcs-demo/handbook/search/" hx-trigger="input changed delay:250ms, search" hx-target="#hb-nav-results" hx-sync="this:replace">
+</form>
+
+      <div id="hb-nav-results" class="hb-nav-results" aria-live="polite"></div>
+      <a class="grp" href="/edufamcs-demo/handbook/nlp/">Основы</a>
+      
+      <a class="cur" href="/edufamcs-demo/handbook/nlp/tokenizaciya-i-embeddingi/" aria-current="page">Токенизация и эмбеддинги слов</a>
+      
+      <a class="" href="/edufamcs-demo/handbook/nlp/predobuchenie-bert-gpt/">Предобучение: BERT, GPT и что между ними</a>
+      
+      <a class="" href="/edufamcs-demo/handbook/nlp/generaciya-teksta/">Генерация: декодирование и сэмплирование</a>
+      
+    </aside>
+
+    <article class="hb-main">
+      <nav class="crumbs" aria-label="Навигация"><a href="/edufamcs-demo/handbook/">Хендбук</a><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-chev"/></svg><a href="/edufamcs-demo/handbook/nlp/">NLP и большие языковые модели</a></nav>
+      <h1 class="h1">Токенизация и эмбеддинги слов</h1>
+      <div class="hb-meta">
+        
+        
+        <span><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-clock"/></svg>14&nbsp;мин</span>
+        <span class="hb-authors"><span class="avatar sm" title="Артем Лебедевич">АЛ</span>Артем Лебедевич</span>
+        <span><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-edit"/></svg>10 ноября 2026</span>
+        
+        
+      </div>
+
+      
+      <details class="hb-mtoc">
+        <summary><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-list"/></svg>Содержание<svg class="ico sm" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-chev-down"/></svg></summary>
+        <a class="l2" href="#от-текста-к-вектору">От текста к вектору</a><a class="l2" href="#как-строится-словарь-подслов">Как строится словарь подслов</a><a class="l2" href="#пример-bpe-вручную">Пример: BPE вручную</a><a class="l2" href="#практические-следствия">Практические следствия</a><a class="l2" href="#дистрибутивная-гипотеза-и-word2vec">Дистрибутивная гипотеза и word2vec</a><a class="l2" href="#glove-и-fasttext">GloVe и fastText</a><a class="l2" href="#статические-и-контекстные-эмбеддинги">Статические и контекстные эмбеддинги</a><a class="l2" href="#код">Код</a><a class="l2" href="#ловушки">Ловушки</a><a class="l2" href="#проверь-себя">Проверь себя</a><a class="l2" href="#что-почитать">Что почитать</a>
+      </details>
+      
+
+      <div class="prose"><p>Нейросеть работает с числами, а текст — это строка. Путь от строки к модели состоит из трёх шагов: текст режется на <strong>токены</strong>, токены заменяются номерами из словаря, номера — векторами из обучаемой таблицы. От выбора токенизатора зависят длина промпта, его стоимость, качество на русском языке и поведение модели на числах и опечатках. Эмбеддинги же — первая идея, из которой выросли современные языковые модели. Короткий обзор есть в статьях про <a href="/edufamcs-demo/handbook/dl/posledovatelnosti-i-rnn/" rel="noopener noreferrer nofollow">RNN</a> и <a href="/edufamcs-demo/handbook/dl/vnimanie-i-transformery/" rel="noopener noreferrer nofollow">трансформеры</a>; здесь разберём устройство подробнее.</p>
+<h2 id="от-текста-к-вектору">От текста к вектору</h2>
+<p>Конвейер: <code>"Привет, мир"</code> → токены <code>["Привет", ",", " мир"]</code> → номера <code>[15496, 11, 8402]</code> (номера иллюстративные) → строки матрицы <span class="tex">E\in\mathbb R^{|V|\times d}</span>. Токенизатор — отдельная детерминированная программа, обученная на корпусе до обучения модели. Модель видит только номера: сменить токенизатор у готовой модели нельзя без переобучения эмбеддингов и выходного слоя.</p>
+<p>Три уровня гранулярности:</p>
+<ul>
+<li><strong>Слова.</strong> Короткие последовательности, но словарь огромный, а любое незнакомое слово превращается в <code>&lt;unk&gt;</code>. Для языка с богатой морфологией, как русский («бежать, бегу, бежал, пробегая…»), форм слишком много.</li>
+<li><strong>Символы (или байты).</strong> Словаря почти нет, ничто не «неизвестно», но последовательности в 4–5 раз длиннее, а внимание стоит <span class="tex">O(T^2)</span>.</li>
+<li><strong>Подслова.</strong> Компромисс: частые слова — один токен, редкие — несколько кусков. Именно так устроены все современные LLM.</li>
+</ul>
+<h2 id="как-строится-словарь-подслов">Как строится словарь подслов</h2>
+<p><strong>BPE</strong> (Byte Pair Encoding; для NLP — Сеннрих и соавторы, 2016). Начинаем с символов. Повторяем: находим самую частую соседнюю пару токенов, сливаем её в новый токен, дописываем правило слияния в упорядоченный список. Останавливаемся, когда словарь достиг заданного размера. <strong>Сегментация</strong> нового слова: разбить на символы и применять правила <strong>в порядке их появления</strong>. В GPT-2 алгоритм запускают над байтами UTF-8 (базовый алфавит из 256 символов), поэтому <code>&lt;unk&gt;</code> не бывает.</p>
+<p><strong>WordPiece</strong> (BERT) похож, но пару выбирают не по частоте, а по score <span class="tex">\frac{\text{count}(ab)}{\text{count}(a)\,\text{count}(b)}</span>: сливается та пара, которая встречается вместе чаще, чем ожидалось бы при независимости. Продолжения слова помечаются префиксом <code>##</code>; сегментация жадная — самый длинный подходящий префикс слова.</p>
+<p><strong>Unigram</strong> (Кудо, 2018) идёт в обратную сторону. Берём большой начальный словарь, считаем вероятности кусков <span class="tex">p(x)</span> и выбираем сегментацию <span class="tex">\mathbf x=(x_1,\dots,x_m)</span> слова с максимальной <span class="tex">\prod_i p(x_i)</span> (алгоритм Витерби). Потом EM-шагами пересчитываем <span class="tex">p(x)</span> и отбрасываем куски, удаление которых меньше всего ухудшает правдоподобие корпуса, пока словарь не сократится до нужного размера. Побочный плюс: сегментацию можно <strong>сэмплировать</strong> — это регуляризация (subword regularization).</p>
+<p><strong>SentencePiece</strong> (Кудо и Ричардсон, 2018) — не алгоритм, а библиотека: работает с сырым текстом без предварительного разбиения по пробелам (пробел кодируется символом <code>▁</code>), реализует BPE и Unigram. Поэтому её удобно использовать для языков без пробелов и для обратимой детокенизации.</p>
+<h2 id="пример-bpe-вручную">Пример: BPE вручную</h2>
+<p>Корпус <code>low</code>×5, <code>lower</code>×2, <code>newest</code>×6, <code>widest</code>×3 с маркером конца слова <code>&lt;/w&gt;</code>. Код ниже (его вывод) даёт слияния:</p>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>шаг</th>
+<th>пара</th>
+<th>частота</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td><code>t</code> + <code>&lt;/w&gt;</code></td>
+<td>9</td>
+</tr>
+<tr>
+<td>2</td>
+<td><code>s</code> + <code>t&lt;/w&gt;</code></td>
+<td>9</td>
+</tr>
+<tr>
+<td>3</td>
+<td><code>e</code> + <code>st&lt;/w&gt;</code></td>
+<td>9</td>
+</tr>
+<tr>
+<td>4</td>
+<td><code>o</code> + <code>w</code></td>
+<td>7</td>
+</tr>
+<tr>
+<td>5</td>
+<td><code>l</code> + <code>ow</code></td>
+<td>7</td>
+</tr>
+<tr>
+<td>6</td>
+<td><code>w</code> + <code>est&lt;/w&gt;</code></td>
+<td>6</td>
+</tr>
+<tr>
+<td>7</td>
+<td><code>n</code> + <code>e</code></td>
+<td>6</td>
+</tr>
+<tr>
+<td>8</td>
+<td><code>ne</code> + <code>west&lt;/w&gt;</code></td>
+<td>6</td>
+</tr>
+</tbody>
+</table></div>
+<p>При равных частотах (шаги 1–3, 4–5) порядок зависит от правила разрешения ничьих — оно часть реализации. Сегментация слов, которых не было в корпусе: <code>lowest</code> → <code>low</code>, <code>est&lt;/w&gt;</code>; <code>newer</code> → <code>ne</code>, <code>w</code>, <code>e</code>, <code>r</code>, <code>&lt;/w&gt;</code> (на шаге 8 слитого <code>west&lt;/w&gt;</code> в слове нет); <code>wide</code> → <code>w</code>, <code>i</code>, <code>d</code>, <code>e</code>, <code>&lt;/w&gt;</code> (ни одно правило не применилось). Общий принцип: <strong>чем ближе слово к обучающему корпусу, тем короче его запись</strong>.</p>
+<h2 id="практические-следствия">Практические следствия</h2>
+<ul>
+<li><strong>Токен ≠ слово.</strong> Для английского в среднем порядка 1,3 токена на слово, но точное число зависит от токенизатора, а для русского оно заметно выше, если корпус токенизатора был в основном английским: слова режутся на слоги и окончания. Одинаковый по смыслу промпт на русском может стоить в токенах заметно дороже; считайте токены тем самым токенизатором, который у вашей модели.</li>
+<li><strong>Промпт стоит токенов:</strong> вы платите временем и деньгами за каждый токен входа и выхода, а ещё контекстное окно ограничено числом токенов, а не слов. Подробнее — в статье про <a href="/edufamcs-demo/handbook/nlp/ocenka-i-inferens-llm/" rel="noopener noreferrer nofollow">инференс</a>.</li>
+<li><strong>Числа и редкие строки</strong> режутся по статистике корпуса, а не по разрядам (у многих токенизаторов длинное число распадается на куски по 1–3 цифры, и границы не совпадают с разрядами): арифметика и посимвольные задачи («сколько букв r в слове») модели решают хуже именно из-за границ токенов.</li>
+<li><strong>Пробел — часть токена:</strong> <code>" мир"</code> и <code>"мир"</code> — разные токены; лишний пробел или регистр в конце промпта меняет распределение следующего токена.</li>
+<li><strong>Специальные токены</strong> (<code>&lt;s&gt;</code>, <code>&lt;|endoftext|&gt;</code>, маркеры ролей) в обычном тексте не встречаются и задают структуру. <strong>Chat template</strong> — шаблон, превращающий список сообщений <code>system/user/assistant</code> в одну строку со специальными токенами в формате, на котором модель дообучалась; у разных моделей он разный, и неверный шаблон заметно портит ответы (в <code>transformers</code> — <code>tokenizer.apply_chat_template</code>).</li>
+</ul>
+<h2 id="дистрибутивная-гипотеза-и-word2vec">Дистрибутивная гипотеза и word2vec</h2>
+<p>Дистрибутивная гипотеза (Харрис, 1954; Фёрс: «слово характеризуется окружением»): слова с похожим контекстом близки по смыслу. Отсюда идея: вектор слова обучить так, чтобы по нему предсказывался контекст.</p>
+<p><strong>Skip-gram</strong> (Миколов и соавторы, 2013): для слова <span class="tex">w</span> и слова-соседа <span class="tex">c</span> в окне <span class="tex">\pm m</span> модель предсказывает <span class="tex">c</span> по <span class="tex">w</span>. Полный softmax по <span class="tex">|V|</span> слов слишком дорог, поэтому используют <strong>negative sampling</strong>: положительную пару <span class="tex">(w,c)</span> отличают от <span class="tex">k</span> случайных пар <span class="tex">(w,c_i)</span>, <span class="tex">c_i\sim P_n</span> (в оригинале <span class="tex">P_n\propto\text{count}^{3/4}</span>). У слова два вектора: <span class="tex">w</span> (из таблицы слов) и <span class="tex">c</span> (из таблицы контекстов). Функция потерь для одной пары:</p>
+<div class="tex tex-block">\ell=-\log\sigma(w^\top c)-\sum_{i=1}^{k}\log\sigma(-w^\top c_i).</div>
+<p><strong>Градиент.</strong> Так как <span class="tex">\frac{d}{dx}\log\sigma(x)=\sigma(-x)</span> и <span class="tex">\sigma(-x)=1-\sigma(x)</span>:</p>
+<div class="tex tex-block">\frac{\partial\ell}{\partial w}=-\big(1-\sigma(w^\top c)\big)\,c+\sum_{i=1}^k\sigma(w^\top c_i)\,c_i,\qquad \frac{\partial\ell}{\partial c}=-\big(1-\sigma(w^\top c)\big)\,w,\qquad \frac{\partial\ell}{\partial c_i}=\sigma(w^\top c_i)\,w.</div>
+<p>Смысл: вектор слова притягивается к контексту, который он плохо предсказывал, и отталкивается от случайных. Шаг стоит <span class="tex">O(kd)</span>, а не <span class="tex">O(|V|d)</span>.</p>
+<p><strong>Связь с PMI</strong> (Леви и Голдберг, 2014). Для фиксированной пары <span class="tex">(w,c)</span> по всему корпусу <span class="tex">D</span> ожидаемая потеря равна <span class="tex">-\#(w,c)\log\sigma(x)-k\,\#(w)\tfrac{\#(c)}{|D|}\log\sigma(-x)</span>, где <span class="tex">x=w^\top c</span> (считаем <span class="tex">P_n(c)=\#(c)/|D|</span>). Приравняем производную по <span class="tex">x</span> к нулю:</p>
+<div class="tex tex-block">\#(w,c)\,\sigma(-x)=k\,\frac{\#(w)\#(c)}{|D|}\,\sigma(x)\;\Rightarrow\; e^{x}=\frac{\#(w,c)\,|D|}{k\,\#(w)\#(c)}\;\Rightarrow\; w^\top c=\operatorname{PMI}(w,c)-\log k,</div>
+<p>где <span class="tex">\operatorname{PMI}(w,c)=\log\frac{p(w,c)}{p(w)p(c)}</span>. То есть skip-gram с отрицательными примерами неявно факторизует матрицу сдвинутых PMI низкоранговым произведением <span class="tex">WC^\top</span>. Для сравнения: LSA/SVD факторизует матрицу счётчиков (см. <a href="/edufamcs-demo/handbook/math/sobstvennye-vektory-i-svd/" rel="noopener noreferrer nofollow">SVD</a>). Идеальный минимум достижим, только если <span class="tex">d</span> достаточно велик; при малом <span class="tex">d</span> сеть находит приближение — и в этом сжатии рождается обобщение.</p>
+<p><strong>Числовой пример</strong> (счётчики совместной встречаемости, иллюстративные, <span class="tex">\begin{pmatrix}10&amp;2\\3&amp;15\end{pmatrix}</span>, <span class="tex">N=30</span>). Вычисленная PMI: <span class="tex">\begin{pmatrix}0{,}654&amp;-1{,}224\\-0{,}956&amp;0{,}386\end{pmatrix}</span>; при <span class="tex">k=5</span> целевое значение <span class="tex">w^\top c</span> равно PMI<span class="tex">-\log5</span>, то есть <span class="tex">\begin{pmatrix}-0{,}956&amp;-2{,}833\\-2{,}565&amp;-1{,}224\end{pmatrix}</span>. Чем больше <span class="tex">k</span>, тем сильнее сдвиг: модель получает положительный отклик только от пар, встречающихся заметно чаще случайного.</p>
+<h2 id="glove-и-fasttext">GloVe и fastText</h2>
+<p><strong>GloVe</strong> (Пеннингтон и соавторы, 2014) факторизует лог-счётчики явно: минимизирует <span class="tex">\sum_{ij}f(X_{ij})\big(w_i^\top\tilde w_j+b_i+\tilde b_j-\log X_{ij}\big)^2</span> с весом <span class="tex">f</span>, который сглаживает вклад редких и частых пар. Результат близок к word2vec; разница больше в способе обучения (по всей матрице счётчиков, а не по потоку пар).</p>
+<p><strong>fastText</strong> (Бояновски и соавторы, 2017) представляет слово суммой векторов его символьных <span class="tex">n</span>-грамм (обычно от 3 до 6 символов с маркерами границ <code>&lt;</code> и <code>&gt;</code>) и самого слова. Для русского это важно: слово <code>бегущий</code> и никогда не виденная форма <code>бегущая</code> делят <span class="tex">n</span>-граммы, поэтому вектор строится и для слов вне словаря.</p>
+<h2 id="статические-и-контекстные-эмбеддинги">Статические и контекстные эмбеддинги</h2>
+<p>У word2vec, GloVe и fastText один вектор на слово: «ключ» (дверной) и «ключ» (родник) смешаны. <strong>Контекстные</strong> эмбеддинги (ELMo, BERT и все последующие модели) дают вектор токена, зависящий от всего предложения: это выход трансформера, а не строка таблицы. В современных моделях таблица <span class="tex">E</span> остаётся лишь входным слоем, а смысл накапливается в слоях. Для поиска предложения кодируют в один вектор и сравнивают по косинусу — см. <a href="/edufamcs-demo/handbook/dl/kontrastivnoe-obuchenie/" rel="noopener noreferrer nofollow">контрастивное обучение</a> и <a href="/edufamcs-demo/handbook/retrieval/plotnyj-i-gibridnyj-poisk/" rel="noopener noreferrer nofollow">плотный поиск</a>.</p>
+<div class="callout md note"><p class="callout-title">Про аналогии</p>
+<p>Знаменитое «король − мужчина + женщина ≈ королева» работает на хорошо подобранных примерах и держится на том, что при поиске ближайшего слова исходные слова исключают из выдачи. В игрушечных векторах ниже без исключения самым близким к результату оказывается слово «королева» (косинус 0,995), но «король» тоже даёт 0,585. Не воспринимайте аналогии как строгий закон алгебры смыслов.</p>
+</div>
+<h2 id="код">Код</h2>
+<div class="code"><div class="code-head"><span class="lang">python</span></div><pre><code><span class="tok-k">import</span> numpy <span class="tok-k">as</span> np
+<span class="tok-k">from</span> tokenizers <span class="tok-k">import</span> Tokenizer<span class="tok-p">,</span> models<span class="tok-p">,</span> trainers<span class="tok-p">,</span> pre_tokenizers
+
+tok <span class="tok-p">=</span> Tokenizer<span class="tok-p">(</span>models<span class="tok-p">.</span>BPE<span class="tok-p">(</span>unk_token<span class="tok-p">=</span><span class="tok-s">"</span><span class="tok-s">[UNK]</span><span class="tok-s">"</span><span class="tok-p">)</span><span class="tok-p">)</span>
+tok<span class="tok-p">.</span>pre_tokenizer <span class="tok-p">=</span> pre_tokenizers<span class="tok-p">.</span>Whitespace<span class="tok-p">(</span><span class="tok-p">)</span>
+trainer <span class="tok-p">=</span> trainers<span class="tok-p">.</span>BpeTrainer<span class="tok-p">(</span>vocab_size<span class="tok-p">=</span><span class="tok-n">60</span><span class="tok-p">,</span> special_tokens<span class="tok-p">=</span><span class="tok-p">[</span><span class="tok-s">"</span><span class="tok-s">[UNK]</span><span class="tok-s">"</span><span class="tok-p">]</span><span class="tok-p">)</span>
+txt <span class="tok-p">=</span> <span class="tok-p">[</span><span class="tok-s">"</span><span class="tok-s">низкий низкий низкий нижний новейший новейший широкий</span><span class="tok-s">"</span><span class="tok-p">,</span>
+       <span class="tok-s">"</span><span class="tok-s">the lower the newest the widest the low</span><span class="tok-s">"</span><span class="tok-p">]</span> <span class="tok-p">*</span> <span class="tok-n">20</span>
+tok<span class="tok-p">.</span>train_from_iterator<span class="tok-p">(</span>txt<span class="tok-p">,</span> trainer<span class="tok-p">)</span>
+<span class="tok-k">for</span> s <span class="tok-k">in</span> <span class="tok-p">[</span><span class="tok-s">"</span><span class="tok-s">низкий новейший</span><span class="tok-s">"</span><span class="tok-p">,</span> <span class="tok-s">"</span><span class="tok-s">нижайший</span><span class="tok-s">"</span><span class="tok-p">,</span> <span class="tok-s">"</span><span class="tok-s">the lowest</span><span class="tok-s">"</span><span class="tok-p">]</span><span class="tok-p">:</span>
+    e <span class="tok-p">=</span> tok<span class="tok-p">.</span>encode<span class="tok-p">(</span>s<span class="tok-p">)</span><span class="tok-p">;</span> <span class="tok-f">print</span><span class="tok-p">(</span>s<span class="tok-p">,</span> e<span class="tok-p">.</span>tokens<span class="tok-p">,</span> e<span class="tok-p">.</span>ids<span class="tok-p">)</span>
+<span class="tok-c"># низкий новейший ['низкий', 'новейший'] [29, 39]</span>
+<span class="tok-c"># нижайший ['ни', 'ж', '[UNK]', 'йш', 'ий'] [27, 14, 0, 33, 23]</span>
+<span class="tok-c"># the lowest ['the', 'low', 'est'] [25, 36, 35]</span>
+
+E <span class="tok-p">=</span> <span class="tok-p">{</span><span class="tok-s">"</span><span class="tok-s">король</span><span class="tok-s">"</span><span class="tok-p">:</span> <span class="tok-p">[</span><span class="tok-n">.9</span><span class="tok-p">,</span> <span class="tok-n">.8</span><span class="tok-p">,</span> <span class="tok-n">.1</span><span class="tok-p">]</span><span class="tok-p">,</span> <span class="tok-s">"</span><span class="tok-s">королева</span><span class="tok-s">"</span><span class="tok-p">:</span> <span class="tok-p">[</span><span class="tok-n">.9</span><span class="tok-p">,</span> <span class="tok-n">.1</span><span class="tok-p">,</span> <span class="tok-n">.8</span><span class="tok-p">]</span><span class="tok-p">,</span>
+     <span class="tok-s">"</span><span class="tok-s">мужчина</span><span class="tok-s">"</span><span class="tok-p">:</span> <span class="tok-p">[</span><span class="tok-n">.1</span><span class="tok-p">,</span> <span class="tok-n">.9</span><span class="tok-p">,</span> <span class="tok-n">.1</span><span class="tok-p">]</span><span class="tok-p">,</span> <span class="tok-s">"</span><span class="tok-s">женщина</span><span class="tok-s">"</span><span class="tok-p">:</span> <span class="tok-p">[</span><span class="tok-n">.1</span><span class="tok-p">,</span> <span class="tok-n">.1</span><span class="tok-p">,</span> <span class="tok-n">.9</span><span class="tok-p">]</span><span class="tok-p">}</span>   <span class="tok-c"># игрушечные векторы</span>
+E <span class="tok-p">=</span> <span class="tok-p">{</span>k<span class="tok-p">:</span> np<span class="tok-p">.</span>array<span class="tok-p">(</span>v<span class="tok-p">)</span> <span class="tok-k">for</span> k<span class="tok-p">,</span> v <span class="tok-k">in</span> E<span class="tok-p">.</span>items<span class="tok-p">(</span><span class="tok-p">)</span><span class="tok-p">}</span>
+cos <span class="tok-p">=</span> <span class="tok-k">lambda</span> a<span class="tok-p">,</span> b<span class="tok-p">:</span> a <span class="tok-p">@</span> b <span class="tok-p">/</span> np<span class="tok-p">.</span>linalg<span class="tok-p">.</span>norm<span class="tok-p">(</span>a<span class="tok-p">)</span> <span class="tok-p">/</span> np<span class="tok-p">.</span>linalg<span class="tok-p">.</span>norm<span class="tok-p">(</span>b<span class="tok-p">)</span>
+<span class="tok-f">print</span><span class="tok-p">(</span><span class="tok-f">round</span><span class="tok-p">(</span>cos<span class="tok-p">(</span>E<span class="tok-p">[</span><span class="tok-s">"</span><span class="tok-s">король</span><span class="tok-s">"</span><span class="tok-p">]</span><span class="tok-p">,</span> E<span class="tok-p">[</span><span class="tok-s">"</span><span class="tok-s">королева</span><span class="tok-s">"</span><span class="tok-p">]</span><span class="tok-p">)</span><span class="tok-p">,</span> <span class="tok-n">3</span><span class="tok-p">)</span><span class="tok-p">)</span>          <span class="tok-c"># 0.664</span>
+<span class="tok-f">print</span><span class="tok-p">(</span><span class="tok-f">round</span><span class="tok-p">(</span>cos<span class="tok-p">(</span>E<span class="tok-p">[</span><span class="tok-s">"</span><span class="tok-s">мужчина</span><span class="tok-s">"</span><span class="tok-p">]</span><span class="tok-p">,</span> E<span class="tok-p">[</span><span class="tok-s">"</span><span class="tok-s">женщина</span><span class="tok-s">"</span><span class="tok-p">]</span><span class="tok-p">)</span><span class="tok-p">,</span> <span class="tok-n">3</span><span class="tok-p">)</span><span class="tok-p">)</span>          <span class="tok-c"># 0.229</span>
+</code></pre></div>
+<p>Буква «а» в корпусе не встречалась, поэтому слово «нижайший» дало <code>[UNK]</code>: у BPE на символах есть неизвестные символы, а у байтового BPE (как в GPT-2) их нет. Проверьте градиент skip-gram численно (конечными разностями): расхождение с формулой выше должно быть на уровне ошибки округления.</p>
+<h2 id="ловушки">Ловушки</h2>
+<div class="callout md warn"><p class="callout-title">Токенизатор и модель — одна пара</p>
+<p>Эмбеддинги модели привязаны к словарю. Подмена токенизатора, другая версия <code>chat template</code>, лишний <code>&lt;s&gt;</code> в начале дают тихую деградацию качества без ошибок.</p>
+</div>
+<ul>
+<li>Считать стоимость и лимит по числу слов или символов, а не токенов.</li>
+<li>Сравнивать длину промптов на разных языках «на глаз».</li>
+<li>Забыть, что при дообучении новые специальные токены требуют расширения таблицы <span class="tex">E</span> и их обучения.</li>
+<li>Нормировать эмбеддинги из разных моделей вместе: пространства несовместимы, косинус между ними бессмыслен.</li>
+<li><strong>На собеседовании:</strong> как строится BPE и чем WordPiece отличается от него; почему у skip-gram два набора векторов; зачем <span class="tex">k</span> отрицательных примеров и что с ними связано PMI.</li>
+<li><strong>На собеседовании:</strong> почему языковые модели путают буквы и цифры в словах; как обрабатывается слово, которого не было в обучении.</li>
+</ul>
+<h2 id="проверь-себя">Проверь себя</h2>
+<details class="callout md details"><summary>Чем BPE отличается от WordPiece при выборе пары для слияния?</summary>
+<p>BPE берёт самую частую пару; WordPiece — пару с максимальным <span class="tex">\frac{\text{count}(ab)}{\text{count}(a)\text{count}(b)}</span>, то есть ту, что встречается вместе чаще, чем при независимости.</p>
+</details>
+<details class="callout md details"><summary>Почему у байтового BPE нет неизвестных токенов?</summary>
+<p>Базовый алфавит — все 256 байт, а любая строка Unicode кодируется в байты UTF-8. Редкий символ просто распадается на несколько байтовых токенов.</p>
+</details>
+<details class="callout md details"><summary>Выведите градиент skip-gram с negative sampling по вектору $w$.</summary>
+<p><span class="tex">\ell=-\log\sigma(w^\top c)-\sum_i\log\sigma(-w^\top c_i)</span>, откуда <span class="tex">\partial\ell/\partial w=-(1-\sigma(w^\top c))c+\sum_i\sigma(w^\top c_i)c_i</span>.</p>
+</details>
+<details class="callout md details"><summary>К чему стремится $w^\top c$ при оптимуме SGNS?</summary>
+<p>К <span class="tex">\operatorname{PMI}(w,c)-\log k</span> (Леви и Голдберг, 2014): производная ожидаемой потери по <span class="tex">x=w^\top c</span> обнуляется при <span class="tex">e^x=\frac{\#(w,c)|D|}{k\#(w)\#(c)}</span>.</p>
+</details>
+<details class="callout md details"><summary>Почему fastText лучше word2vec на морфологически богатых языках?</summary>
+<p>Вектор слова — сумма векторов символьных <span class="tex">n</span>-грамм, поэтому родственные формы делят параметры, а для слова вне словаря вектор всё равно строится.</p>
+</details>
+<h2 id="что-почитать">Что почитать</h2>
+<ul>
+<li>Sennrich, Haddow, Birch, <em>Neural Machine Translation of Rare Words with Subword Units</em>, ACL 2016: <a href="https://arxiv.org/abs/1508.07909" rel="noopener noreferrer nofollow">arxiv.org/abs/1508.07909</a>.</li>
+<li>Kudo, <em>Subword Regularization: Improving Neural Network Translation Models with Multiple Subword Candidates</em>, ACL 2018: <a href="https://arxiv.org/abs/1804.10959" rel="noopener noreferrer nofollow">arxiv.org/abs/1804.10959</a>; Kudo, Richardson, <em>SentencePiece</em>, EMNLP 2018 (demo): <a href="https://arxiv.org/abs/1808.06226" rel="noopener noreferrer nofollow">arxiv.org/abs/1808.06226</a>.</li>
+<li>Mikolov et al., <em>Distributed Representations of Words and Phrases and their Compositionality</em>, NeurIPS 2013: <a href="https://arxiv.org/abs/1310.4546" rel="noopener noreferrer nofollow">arxiv.org/abs/1310.4546</a>.</li>
+<li>Levy, Goldberg, <em>Neural Word Embedding as Implicit Matrix Factorization</em>, NeurIPS 2014: <a href="https://proceedings.neurips.cc/paper/2014/hash/b78666971ceae55a8e87efb7cbfd9ad4-Abstract.html" rel="noopener noreferrer nofollow">proceedings.neurips.cc</a>.</li>
+<li>Pennington, Socher, Manning, <em>GloVe: Global Vectors for Word Representation</em>, EMNLP 2014: <a href="https://aclanthology.org/D14-1162/" rel="noopener noreferrer nofollow">aclanthology.org/D14-1162</a>.</li>
+<li>Bojanowski et al., <em>Enriching Word Vectors with Subword Information</em>, TACL 2017: <a href="https://arxiv.org/abs/1607.04606" rel="noopener noreferrer nofollow">arxiv.org/abs/1607.04606</a>.</li>
+<li>Документация Hugging Face: <a href="https://huggingface.co/docs/tokenizers" rel="noopener noreferrer nofollow">Tokenizers</a> и раздел про chat templates в <a href="https://huggingface.co/docs/transformers" rel="noopener noreferrer nofollow">Transformers</a>.</li>
+</ul>
+</div>
+      
+
+      
+
+      
+      <nav class="pager" aria-label="Соседние статьи">
+        <i></i>
+        <a href="/edufamcs-demo/handbook/nlp/predobuchenie-bert-gpt/"><span>Дальше<svg class="ico sm" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-arrow"/></svg></span>Предобучение: BERT, GPT и что между ними</a>
+      </nav>
+      
+    </article>
+
+    <aside class="hb-toc" aria-label="На этой странице">
+      <a class="l2" href="#от-текста-к-вектору">От текста к вектору</a><a class="l2" href="#как-строится-словарь-подслов">Как строится словарь подслов</a><a class="l2" href="#пример-bpe-вручную">Пример: BPE вручную</a><a class="l2" href="#практические-следствия">Практические следствия</a><a class="l2" href="#дистрибутивная-гипотеза-и-word2vec">Дистрибутивная гипотеза и word2vec</a><a class="l2" href="#glove-и-fasttext">GloVe и fastText</a><a class="l2" href="#статические-и-контекстные-эмбеддинги">Статические и контекстные эмбеддинги</a><a class="l2" href="#код">Код</a><a class="l2" href="#ловушки">Ловушки</a><a class="l2" href="#проверь-себя">Проверь себя</a><a class="l2" href="#что-почитать">Что почитать</a>
+    </aside>
+  </div>
+</div>
+
+
+</main>
+
+<footer class="ftr" data-theme="dark">
+  <svg class="sym fern" viewBox="0 0 40.5 65.02" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#fern"/></svg>
+  <div class="container">
+    <div class="ftr-row">
+      <a href="/edufamcs-demo/" aria-label="EDU FAMCS — главная"><img src="/edufamcs-demo/static/brand/logo/logo-edu-dark.svg" alt="EDU FAMCS" width="196" height="40"></a>
+      <ul class="ftr-links">
+        <li><a href="/edufamcs-demo/#courses">Курсы</a></li>
+        <li><a href="/edufamcs-demo/ml/">Машинное обучение</a></li>
+        <li><a href="/edufamcs-demo/handbook/">Хендбук</a></li>
+        <li><a href="/edufamcs-demo/news/">Новости</a></li>
+        <li><a href="/edufamcs-demo/people/">Авторы</a></li>
+        <li><a href="/edufamcs-demo/about/">О&nbsp;нас</a></li>
+        <li><a href="/edufamcs-demo/propose/">Предложить или исправить</a></li>
+        <li><a href="/edufamcs-demo/privacy/">Конфиденциальность</a></li>
+      </ul>
+    </div>
+    <div class="ftr-big" aria-hidden="true">EDU<span class="d">·</span>FAMCS</div>
+    <p class="ftr-copy">© 2026 EDU FAMCS · Минск</p>
+  </div>
+</footer>
+
+<div class="toasts-region" aria-live="polite" id="toasts">
+
+</div>
+
+</body>
+</html>

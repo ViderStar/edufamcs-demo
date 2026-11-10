@@ -27,7 +27,7 @@
 <script src="/edufamcs-demo/static/js/site.js" defer></script>
 <script src="/edufamcs-demo/static/handbook/handbook.js" defer></script>
 </head>
-<body class="" hx-headers='{"X-CSRFToken": "N6I2rJadB7euqJpPd0Ut9lx3cU8Xbee2zcJplwsUMkuI5il5qpNyqNFoIhKcgZZ1"}'>
+<body class="" hx-headers='{"X-CSRFToken": "YCzEuz7xa7ggbGwXWBCUmzBBjVkMztxQAPoBKBGobUuPmZLpV4QR4stzL4rKjdwx"}'>
 <a class="skip" href="#main">К содержанию</a>
 <div class="demo-bar" role="note">Демо-версия для отзывов: вход, запись на курсы и формы здесь не работают.</div>
 
@@ -60,6 +60,7 @@
 
 
 <div class="container hb-page s-recsys">
+  <div class="hb-readbar" aria-hidden="true"><i></i></div>
   <div class="hb">
     <aside class="hb-nav" aria-label="Статьи раздела">
       
@@ -88,9 +89,9 @@
       <div class="hb-meta">
         
         
-        <span><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-clock"/></svg>15&nbsp;мин</span>
+        <span><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-clock"/></svg>19&nbsp;мин</span>
         <span class="hb-authors"><span class="avatar sm" title="Артем Лебедевич">АЛ</span>Артем Лебедевич</span>
-        <span><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-edit"/></svg>9 ноября 2026</span>
+        <span><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-edit"/></svg>10 ноября 2026</span>
         
         
       </div>
@@ -98,7 +99,7 @@
       
       <details class="hb-mtoc">
         <summary><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-list"/></svg>Содержание<svg class="ico sm" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-chev-down"/></svg></summary>
-        <a class="l2" href="#парадигма-кранфилда">Парадигма Кранфилда</a><a class="l2" href="#как-размечают">Как размечают</a><a class="l2" href="#метрики-поискового-уклона">Метрики поискового уклона</a><a class="l2" href="#бенчмарки">Бенчмарки</a><a class="l2" href="#клики-как-сигнал">Клики как сигнал</a><a class="l2" href="#онлайн-оценка">Онлайн-оценка</a><a class="l2" href="#llm-как-асессор">LLM как асессор</a><a class="l2" href="#код">Код</a><a class="l2" href="#ловушки">Ловушки</a><a class="l2" href="#что-почитать">Что почитать</a>
+        <a class="l2" href="#парадигма-кранфилда">Парадигма Кранфилда</a><a class="l2" href="#как-размечают">Как размечают</a><a class="l2" href="#метрики-поискового-уклона">Метрики поискового уклона</a><a class="l2" href="#бенчмарки">Бенчмарки</a><a class="l2" href="#клики-как-сигнал">Клики как сигнал</a><a class="l2" href="#онлайн-оценка">Онлайн-оценка</a><a class="l2" href="#llm-как-асессор">LLM как асессор</a><a class="l2" href="#код">Код</a><a class="l2" href="#ловушки">Ловушки</a><a class="l2" href="#проверь-себя">Проверь себя</a><a class="l2" href="#что-почитать">Что почитать</a>
       </details>
       
 
@@ -150,6 +151,12 @@
 <p><strong>ERR</strong> (expected reciprocal rank; Chapelle et al., 2009) строится на модели поведения: пользователь просматривает выдачу сверху вниз, на позиции <span class="tex">j</span> удовлетворяется с вероятностью <span class="tex">R_j = \frac{2^{\mathrm{rel}_j}-1}{2^{g_{\max}}}</span> (где <span class="tex">g_{\max}</span> — высшая оценка шкалы) и останавливается; иначе идёт дальше. Метрика — ожидаемая обратная позиция остановки:</p>
 <div class="tex tex-block">\mathrm{ERR} = \sum_{j=1}^{k} \frac{1}{j} R_j \prod_{i&lt;j}(1 - R_i).</div>
 <p>В отличие от NDCG, документ на позиции 5 получает меньше, если выше уже есть хороший: пользователь, скорее всего, остановился раньше. Вклад документа зависит от того, что стоит над ним (содержательную избыточность, то есть дубли, метрика при этом не видит). ERR была основной метрикой Yahoo! Learning to Rank Challenge.</p>
+<p><strong>Пример на числах.</strong> Выдача по одному запросу, оценки по позициям: <span class="tex">3, 0, 2, 1, 0</span>. В корпусе есть ещё один релевантный документ с оценкой 2, который система не нашла, так что всего релевантных <span class="tex">R_q = 4</span>.</p>
+<ul>
+<li><strong>AP</strong> (релевантно — оценка <span class="tex">\ge 1</span>, то есть позиции 1, 3, 4): <span class="tex">P@1 = 1</span>, <span class="tex">P@3 = 2/3</span>, <span class="tex">P@4 = 3/4</span>, <span class="tex">\mathrm{AP} = (1 + 0{,}667 + 0{,}75)/4 \approx 0{,}604</span>. Ненайденный документ вносит в сумму ноль, но остаётся в знаменателе.</li>
+<li><strong>DCG@5</strong> с gain <span class="tex">2^{\mathrm{rel}} - 1</span>: слагаемые <span class="tex">7/1,\ 0,\ 3/2,\ 1/\log_2 5,\ 0</span> дают <span class="tex">7 + 1{,}5 + 0{,}431 = 8{,}931</span>. Идеальная выдача (с учётом ненайденного документа) — оценки <span class="tex">3, 2, 2, 1, 0</span>: <span class="tex">7 + 3/1{,}585 + 1{,}5 + 0{,}431 = 10{,}823</span>. Тогда <span class="tex">\mathrm{NDCG}@5 = 8{,}931 / 10{,}823 \approx 0{,}825</span>.</li>
+<li><strong>ERR</strong> (<span class="tex">g_{\max} = 3</span>, <span class="tex">R_j = (2^{\mathrm{rel}_j} - 1)/8</span>): <span class="tex">R = 0{,}875;\ 0;\ 0{,}375;\ 0{,}125;\ 0</span>. Вклад позиции 1 равен <span class="tex">0{,}875</span>; пользователь дошёл до позиции 3 с вероятностью <span class="tex">0{,}125</span>, вклад <span class="tex">0{,}125 \cdot 0{,}375 / 3 = 0{,}0156</span>; позиции 4 — <span class="tex">0{,}0024</span>. Итого <span class="tex">\mathrm{ERR} \approx 0{,}893</span>: почти всё определено тем, что на первом месте стоит документ с оценкой 3.</li>
+</ul>
 <p>Всегда фиксируйте <span class="tex">k</span>: NDCG@10 и NDCG@100 измеряют разное (качество первой страницы против качества кандидатов для следующей стадии). Для первичного поиска, за которым идёт переранжирование, важнее <strong>Recall@100/1000</strong>: то, что потеряно на первой стадии, уже не вернуть.</p>
 <h2 id="бенчмарки">Бенчмарки</h2>
 <ul>
@@ -223,7 +230,24 @@ report <span class="tok-p">=</span> compare<span class="tok-p">(</span>qrels<spa
 <li><strong>Значимость.</strong> На 50 запросах разница в 0,01 NDCG — шум. Используйте парный t-тест или bootstrap по запросам, а не по документам.</li>
 <li><strong>Утечка бенчмарка.</strong> Модель, обученная на тестовых частях BEIR/MTEB, показывает завышенный результат; сверяйте со своей выборкой.</li>
 <li><strong>Метрика не равна пользе.</strong> Высокий NDCG при 8% пустых выдач — плохой поиск. Смотрите вместе с продуктовыми метриками.</li>
+<li><strong>На собеседовании</strong> спрашивают: чем NDCG отличается от MAP и когда нужна какая; почему gain экспоненциальный и что даёт нормировка на IDCG; как работает ERR и чем он отличается от NDCG; почему клик не равен релевантности; как сравнить две системы без разметки (interleaving); как считать значимость различия метрик.</li>
 </ul>
+<h2 id="проверь-себя">Проверь себя</h2>
+<details class="callout md details"><summary>Почему NDCG нормируют на IDCG?</summary>
+<p>У разных запросов разное число релевантных документов и разные оценки, и сырой DCG несравним между ними. Деление на DCG идеальной перестановки приводит значение к <span class="tex">[0, 1]</span>, и метрику можно усреднять по запросам.</p>
+</details>
+<details class="callout md details"><summary>Чем ERR отличается от NDCG на длинной выдаче, где уже в топе стоит идеальный документ?</summary>
+<p>В NDCG вклад позиции не зависит от того, что стоит выше. В ERR пользователь с вероятностью <span class="tex">R_j</span> останавливается, поэтому после идеального документа на первом месте вклады нижних позиций умножаются на малое <span class="tex">1 - R_1</span> и почти исчезают.</p>
+</details>
+<details class="callout md details"><summary>Что произойдёт с NDCG, если новая модель вернёт много релевантных документов, которых не было в пуле разметки?</summary>
+<p>Непомеченные документы считаются нерелевантными, и метрика занизится: система будет наказана за то, что нашла больше, чем участники пула. Лечится доразметкой топа новой системы (в том числе LLM) и контролем доли размеченных документов в топ-10 (judged@10).</p>
+</details>
+<details class="callout md details"><summary>Почему сырой CTR документа нельзя использовать как метку релевантности?</summary>
+<p>Клик происходит только по просмотренному документу, а вероятность просмотра зависит от позиции. Документ, поднятый с 5-го места на 1-е, получит больше кликов без изменения релевантности; поэтому нужны модели кликов или поправка на позицию.</p>
+</details>
+<details class="callout md details"><summary>Почему interleaving чувствительнее A/B-теста?</summary>
+<p>Каждый пользователь сам сравнивает две системы в одной выдаче, и межпользовательская дисперсия уходит из сравнения. Поэтому одного и того же вывода хватает при заметно меньшем трафике.</p>
+</details>
 <h2 id="что-почитать">Что почитать</h2>
 <ul>
 <li>Järvelin K., Kekäläinen J. Cumulated Gain-Based Evaluation of IR Techniques, 2002 — определение NDCG.</li>
@@ -239,6 +263,8 @@ report <span class="tok-p">=</span> compare<span class="tok-p">(</span>qrels<spa
       
 
       
+
+      
       <nav class="pager" aria-label="Соседние статьи">
         <a href="/edufamcs-demo/handbook/retrieval/bm25-invertirovannyj-indeks/"><span><svg class="ico sm" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-arrow-left"/></svg>Назад</span>BM25 и инвертированный индекс</a>
         <a href="/edufamcs-demo/handbook/retrieval/learning-to-rank/"><span>Дальше<svg class="ico sm" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-arrow"/></svg></span>Обучение ранжированию</a>
@@ -247,7 +273,7 @@ report <span class="tok-p">=</span> compare<span class="tok-p">(</span>qrels<spa
     </article>
 
     <aside class="hb-toc" aria-label="На этой странице">
-      <a class="l2" href="#парадигма-кранфилда">Парадигма Кранфилда</a><a class="l2" href="#как-размечают">Как размечают</a><a class="l2" href="#метрики-поискового-уклона">Метрики поискового уклона</a><a class="l2" href="#бенчмарки">Бенчмарки</a><a class="l2" href="#клики-как-сигнал">Клики как сигнал</a><a class="l2" href="#онлайн-оценка">Онлайн-оценка</a><a class="l2" href="#llm-как-асессор">LLM как асессор</a><a class="l2" href="#код">Код</a><a class="l2" href="#ловушки">Ловушки</a><a class="l2" href="#что-почитать">Что почитать</a>
+      <a class="l2" href="#парадигма-кранфилда">Парадигма Кранфилда</a><a class="l2" href="#как-размечают">Как размечают</a><a class="l2" href="#метрики-поискового-уклона">Метрики поискового уклона</a><a class="l2" href="#бенчмарки">Бенчмарки</a><a class="l2" href="#клики-как-сигнал">Клики как сигнал</a><a class="l2" href="#онлайн-оценка">Онлайн-оценка</a><a class="l2" href="#llm-как-асессор">LLM как асессор</a><a class="l2" href="#код">Код</a><a class="l2" href="#ловушки">Ловушки</a><a class="l2" href="#проверь-себя">Проверь себя</a><a class="l2" href="#что-почитать">Что почитать</a>
     </aside>
   </div>
 </div>

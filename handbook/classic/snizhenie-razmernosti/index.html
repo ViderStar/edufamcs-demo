@@ -27,7 +27,7 @@
 <script src="/edufamcs-demo/static/js/site.js" defer></script>
 <script src="/edufamcs-demo/static/handbook/handbook.js" defer></script>
 </head>
-<body class="" hx-headers='{"X-CSRFToken": "dXa5h4l33I3zpftLdXcfkkubSXwMSPXxZ3bsbRDKeVjN4Op1qm5kBMCwok81XAIw"}'>
+<body class="" hx-headers='{"X-CSRFToken": "DCwJF9jyAyNJROmD12hIncnDaOuL52RLfPlGVbSpBl1i27B50vvF55fBCXBJPMQs"}'>
 <a class="skip" href="#main">К содержанию</a>
 <div class="demo-bar" role="note">Демо-версия для отзывов: вход, запись на курсы и формы здесь не работают.</div>
 
@@ -60,6 +60,7 @@
 
 
 <div class="container hb-page hb-tone">
+  <div class="hb-readbar" aria-hidden="true"><i></i></div>
   <div class="hb">
     <aside class="hb-nav" aria-label="Статьи раздела">
       
@@ -84,9 +85,9 @@
       <div class="hb-meta">
         
         
-        <span><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-clock"/></svg>12&nbsp;мин</span>
+        <span><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-clock"/></svg>14&nbsp;мин</span>
         <span class="hb-authors"><span class="avatar sm" title="Артем Лебедевич">АЛ</span>Артем Лебедевич</span>
-        <span><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-edit"/></svg>9 ноября 2026</span>
+        <span><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-edit"/></svg>10 ноября 2026</span>
         
         
       </div>
@@ -94,7 +95,7 @@
       
       <details class="hb-mtoc">
         <summary><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-list"/></svg>Содержание<svg class="ico sm" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-chev-down"/></svg></summary>
-        <a class="l2" href="#проклятие-размерности">Проклятие размерности</a><a class="l2" href="#pca">PCA</a><a class="l3" href="#объяснённая-дисперсия-и-выбор">Объяснённая дисперсия и выбор k</a><a class="l3" href="#loadings-и-интерпретация">Loadings и интерпретация</a><a class="l3" href="#ограничения-pca">Ограничения PCA</a><a class="l2" href="#t-sne">t-SNE</a><a class="l2" href="#umap">UMAP</a><a class="l2" href="#когда-что-использовать">Когда что использовать</a><a class="l2" href="#код">Код</a><a class="l2" href="#ловушки">Ловушки</a><a class="l2" href="#что-почитать">Что почитать</a>
+        <a class="l2" href="#проклятие-размерности">Проклятие размерности</a><a class="l2" href="#pca">PCA</a><a class="l3" href="#объяснённая-дисперсия-и-выбор">Объяснённая дисперсия и выбор k</a><a class="l3" href="#pca-вручную-на-шести-точках">PCA вручную на шести точках</a><a class="l3" href="#loadings-и-интерпретация">Loadings и интерпретация</a><a class="l3" href="#ограничения-pca">Ограничения PCA</a><a class="l2" href="#t-sne">t-SNE</a><a class="l2" href="#umap">UMAP</a><a class="l2" href="#когда-что-использовать">Когда что использовать</a><a class="l2" href="#код">Код</a><a class="l2" href="#ловушки">Ловушки</a><a class="l2" href="#проверь-себя">Проверь себя</a><a class="l2" href="#что-почитать">Что почитать</a>
       </details>
       
 
@@ -116,6 +117,10 @@
 <p>Доля дисперсии, приходящаяся на компоненту <span class="tex">j</span> (explained variance ratio):</p>
 <div class="tex tex-block">\mathrm{EVR}_j = \frac{\lambda_j}{\sum_{i=1}^{d}\lambda_i}, \qquad \mathrm{CumEVR}_k=\sum_{j=1}^{k}\mathrm{EVR}_j .</div>
 <p>Число компонент выбирают одним из способов: минимальное <span class="tex">k</span>, при котором <span class="tex">\mathrm{CumEVR}_k \ge \theta</span> (0,90–0,95); «локоть» на scree plot (график <span class="tex">\lambda_j</span>); правило Кайзера для стандартизованных данных (<span class="tex">\lambda_j&gt;1</span>); качество последующей модели при кросс-валидации. В sklearn <code>PCA(n_components=0.95)</code> выбирает <span class="tex">k</span> сам.</p>
+<h3 id="pca-вручную-на-шести-точках">PCA вручную на шести точках</h3>
+<p>Точки <span class="tex">(1,2),(2,3),(3,5),(4,4),(5,7),(6,7)</span>. Среднее <span class="tex">(3{,}5;\;4{,}667)</span>; центрированные координаты <span class="tex">(-2{,}5;-2{,}667),(-1{,}5;-1{,}667),(-0{,}5;0{,}333),(0{,}5;-0{,}667),(1{,}5;2{,}333),(2{,}5;2{,}333)</span>. Ковариационная матрица с делителем <span class="tex">n-1=5</span>:</p>
+<div class="tex tex-block">\Sigma=\begin{pmatrix}3{,}5&amp;3{,}6\\3{,}6&amp;4{,}267\end{pmatrix},\quad \operatorname{tr}\Sigma=7{,}767,\ \det\Sigma=1{,}973 .</div>
+<p>Характеристическое уравнение <span class="tex">\lambda^2-7{,}767\lambda+1{,}973=0</span> даёт <span class="tex">\lambda_{1,2}=\dfrac{7{,}767\pm\sqrt{7{,}767^2-4\cdot1{,}973}}{2}</span>, то есть <span class="tex">\lambda_1=7{,}504</span>, <span class="tex">\lambda_2=0{,}263</span> (сумма равна следу: дисперсия сохраняется). Объяснённая дисперсия: <span class="tex">\mathrm{EVR}_1=7{,}504/7{,}767=0{,}966</span>, <span class="tex">\mathrm{EVR}_2=0{,}034</span>. Первое направление <span class="tex">w_1=(0{,}669;\,0{,}744)</span> (с точностью до знака), угол <span class="tex">\approx48^\circ</span> к оси <span class="tex">x</span>; проекции <span class="tex">Z_1=(-3{,}65;\,-2{,}24;\,-0{,}09;\,-0{,}16;\,2{,}74;\,3{,}41)</span>. Одномерная проекция сохраняет 96,6% дисперсии, ошибка реконструкции пропорциональна <span class="tex">\lambda_2</span>. Значения совпадают с <code>PCA().fit(X)</code> (<code>explained_variance_</code>, <code>explained_variance_ratio_</code>, <code>components_</code>).</p>
 <h3 id="loadings-и-интерпретация">Loadings и интерпретация</h3>
 <p><strong>Loadings</strong> — элементы векторов <span class="tex">w_j</span> (иногда умноженные на <span class="tex">\sqrt{\lambda_j}</span>; для стандартизованных признаков это корреляции признаков с компонентой). Большие по модулю loadings показывают, какие исходные признаки формируют компоненту: например, первая компонента на данных о недвижимости с положительными loadings у площади, числа комнат и стоимости читается как «размер». Знак компоненты не определён (можно умножить на <span class="tex">-1</span>). Для интерпретации рисуют биплот: точки в осях PC1–PC2 и стрелки признаков.</p>
 <h3 id="ограничения-pca">Ограничения PCA</h3>
@@ -236,8 +241,24 @@ clf <span class="tok-p">=</span> make_pipeline<span class="tok-p">(</span>Standa
 <li><strong>PCA без стандартизации</strong> на разнородных признаках — классическая ошибка.</li>
 <li><strong>Кластеризация после t-SNE</strong> даёт артефакты: плотности искажены. Если нужно кластеризовать — делайте это в исходном пространстве или в PCA/UMAP с умеренным числом компонент.</li>
 <li>Категориальные признаки в PCA бессмысленны без кодирования (для них — MCA или эмбеддинги).</li>
-<li>На интервью спрашивают: вывод PCA через ковариацию и собственные векторы; связь с SVD; как выбрать <span class="tex">k</span>; зачем нужна стандартизация; чем t-SNE отличается от PCA; почему нельзя сравнивать размеры кластеров на t-SNE.</li>
+<li><strong>На собеседовании:</strong> спрашивают: вывод PCA через ковариацию и собственные векторы; связь с SVD; как выбрать <span class="tex">k</span>; зачем нужна стандартизация; чем t-SNE отличается от PCA; почему нельзя сравнивать размеры кластеров на t-SNE.</li>
 </ul>
+<h2 id="проверь-себя">Проверь себя</h2>
+<details class="callout md details"><summary>Почему первая главная компонента — собственный вектор ковариационной матрицы?</summary>
+<p>Максимизация <span class="tex">w^\top\Sigma w</span> при <span class="tex">\|w\|=1</span> с множителем Лагранжа даёт <span class="tex">\Sigma w=\lambda w</span>; значение цели равно <span class="tex">\lambda</span>, поэтому берётся наибольшее собственное значение.</p>
+</details>
+<details class="callout md details"><summary>Как связаны SVD матрицы $X$ и собственные значения $\Sigma$?</summary>
+<p>Для центрированной <span class="tex">X=USV^\top</span> столбцы <span class="tex">V</span> — главные направления, <span class="tex">\lambda_j=s_j^2/(n-1)</span>. Ковариационную матрицу строить не нужно.</p>
+</details>
+<details class="callout md details"><summary>Что случится с PCA, если не стандартизовать признаки в разных единицах?</summary>
+<p>Первая компонента совпадёт с признаком с наибольшей дисперсией (например, в рублях), а остальные признаки будут почти проигнорированы.</p>
+</details>
+<details class="callout md details"><summary>Что нельзя читать по картинке t-SNE?</summary>
+<p>Размеры кластеров, расстояния между кластерами, их взаимное расположение и сам факт существования кластеров при одном значении перплексии.</p>
+</details>
+<details class="callout md details"><summary>Почему t-SNE нельзя использовать как препроцессинг для модели, а UMAP можно?</summary>
+<p>В sklearn у t-SNE нет <code>transform</code> для новых точек, а обучение на всех данных до сплита просачивает структуру теста. UMAP имеет <code>transform</code>.</p>
+</details>
 <h2 id="что-почитать">Что почитать</h2>
 <ul>
 <li>Pearson K. <em>On lines and planes of closest fit to systems of points in space</em>, 1901; Hotelling H. <em>Analysis of a complex of statistical variables into principal components</em>, 1933.</li>
@@ -251,15 +272,17 @@ clf <span class="tok-p">=</span> make_pipeline<span class="tok-p">(</span>Standa
       
 
       
+
+      
       <nav class="pager" aria-label="Соседние статьи">
         <a href="/edufamcs-demo/handbook/classic/klasterizaciya/"><span><svg class="ico sm" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-arrow-left"/></svg>Назад</span>Кластеризация: k-means, иерархическая, DBSCAN</a>
-        
+        <a href="/edufamcs-demo/handbook/classic/priznaki-i-kodirovanie-kategorij/"><span>Дальше<svg class="ico sm" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-arrow"/></svg></span>Признаки и кодирование категорий</a>
       </nav>
       
     </article>
 
     <aside class="hb-toc" aria-label="На этой странице">
-      <a class="l2" href="#проклятие-размерности">Проклятие размерности</a><a class="l2" href="#pca">PCA</a><a class="l3" href="#объяснённая-дисперсия-и-выбор">Объяснённая дисперсия и выбор k</a><a class="l3" href="#loadings-и-интерпретация">Loadings и интерпретация</a><a class="l3" href="#ограничения-pca">Ограничения PCA</a><a class="l2" href="#t-sne">t-SNE</a><a class="l2" href="#umap">UMAP</a><a class="l2" href="#когда-что-использовать">Когда что использовать</a><a class="l2" href="#код">Код</a><a class="l2" href="#ловушки">Ловушки</a><a class="l2" href="#что-почитать">Что почитать</a>
+      <a class="l2" href="#проклятие-размерности">Проклятие размерности</a><a class="l2" href="#pca">PCA</a><a class="l3" href="#объяснённая-дисперсия-и-выбор">Объяснённая дисперсия и выбор k</a><a class="l3" href="#pca-вручную-на-шести-точках">PCA вручную на шести точках</a><a class="l3" href="#loadings-и-интерпретация">Loadings и интерпретация</a><a class="l3" href="#ограничения-pca">Ограничения PCA</a><a class="l2" href="#t-sne">t-SNE</a><a class="l2" href="#umap">UMAP</a><a class="l2" href="#когда-что-использовать">Когда что использовать</a><a class="l2" href="#код">Код</a><a class="l2" href="#ловушки">Ловушки</a><a class="l2" href="#проверь-себя">Проверь себя</a><a class="l2" href="#что-почитать">Что почитать</a>
     </aside>
   </div>
 </div>

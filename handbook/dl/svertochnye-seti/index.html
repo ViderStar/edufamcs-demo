@@ -27,7 +27,7 @@
 <script src="/edufamcs-demo/static/js/site.js" defer></script>
 <script src="/edufamcs-demo/static/handbook/handbook.js" defer></script>
 </head>
-<body class="" hx-headers='{"X-CSRFToken": "Vt3dNZWnPpE8KobytkQ54Lt3OYRSzr71Hz4AHMe40CUmpX7OGJJaldBoklt7EcS0"}'>
+<body class="" hx-headers='{"X-CSRFToken": "4kVvbUhqL2vp97tIxOHpdRdmfhWZPR25GxKsrWQhMPJYkqIawhVmVK5kHq3XzB1M"}'>
 <a class="skip" href="#main">К содержанию</a>
 <div class="demo-bar" role="note">Демо-версия для отзывов: вход, запись на курсы и формы здесь не работают.</div>
 
@@ -60,6 +60,7 @@
 
 
 <div class="container hb-page hb-tone">
+  <div class="hb-readbar" aria-hidden="true"><i></i></div>
   <div class="hb">
     <aside class="hb-nav" aria-label="Статьи раздела">
       
@@ -86,9 +87,9 @@
       <div class="hb-meta">
         
         
-        <span><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-clock"/></svg>11&nbsp;мин</span>
+        <span><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-clock"/></svg>13&nbsp;мин</span>
         <span class="hb-authors"><span class="avatar sm" title="Артем Лебедевич">АЛ</span>Артем Лебедевич</span>
-        <span><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-edit"/></svg>9 ноября 2026</span>
+        <span><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-edit"/></svg>10 ноября 2026</span>
         
         
       </div>
@@ -96,11 +97,11 @@
       
       <details class="hb-mtoc">
         <summary><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-list"/></svg>Содержание<svg class="ico sm" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-chev-down"/></svg></summary>
-        <a class="l2" href="#изображение-как-тензор-и-почему-не-mlp">Изображение как тензор и почему не MLP</a><a class="l2" href="#операция-свёртки">Операция свёртки</a><a class="l2" href="#пулинг-и-рецептивное-поле">Пулинг и рецептивное поле</a><a class="l2" href="#иерархия-признаков">Иерархия признаков</a><a class="l2" href="#история-архитектур">История архитектур</a><a class="l2" href="#transfer-learning">Transfer learning</a><a class="l2" href="#детекция-и-сегментация">Детекция и сегментация</a><a class="l2" href="#код-маленькая-cnn-и-fine-tuning">Код: маленькая CNN и fine-tuning</a><a class="l2" href="#практика-и-подводные-камни">Практика и подводные камни</a><a class="l2" href="#что-почитать">Что почитать</a>
+        <a class="l2" href="#изображение-как-тензор-и-почему-не-mlp">Изображение как тензор и почему не MLP</a><a class="l2" href="#операция-свёртки">Операция свёртки</a><a class="l2" href="#пулинг-и-рецептивное-поле">Пулинг и рецептивное поле</a><a class="l2" href="#иерархия-признаков">Иерархия признаков</a><a class="l2" href="#история-архитектур">История архитектур</a><a class="l2" href="#transfer-learning">Transfer learning</a><a class="l2" href="#детекция-и-сегментация">Детекция и сегментация</a><a class="l2" href="#код-маленькая-cnn-и-fine-tuning">Код: маленькая CNN и fine-tuning</a><a class="l2" href="#практика-и-подводные-камни">Практика и подводные камни</a><a class="l2" href="#проверь-себя">Проверь себя</a><a class="l2" href="#что-почитать">Что почитать</a>
       </details>
       
 
-      <div class="prose"><p>До 2012 года задачи компьютерного зрения в основном решали не нейросетями: на изображении вручную считали признаки (например, SIFT или HOG — гистограммы направлений градиентов яркости), а поверх обучали SVM или бустинг. Свёрточные сети существовали с 1990-х и даже читали рукописные цифры на банковских чеках, но на больших натуральных изображениях уступали классическим конвейерам. Всё изменилось, когда свёрточная сеть AlexNet выиграла ImageNet с огромным отрывом. Сейчас признаки не проектируют, а <strong>учат</strong>, и свёртка — основной инструмент для этого.</p>
+      <div class="prose"><p>До 2012 года задачи компьютерного зрения в основном решали не нейросетями: на изображении вручную считали признаки (например, SIFT или HOG — гистограммы направлений градиентов яркости), а поверх обучали SVM или бустинг. Свёрточные сети существовали с конца 1980-х (LeCun et al., 1989) и даже читали рукописные цифры на банковских чеках, но на больших натуральных изображениях уступали классическим конвейерам. Всё изменилось, когда свёрточная сеть AlexNet выиграла ImageNet с огромным отрывом. Сейчас признаки не проектируют, а <strong>учат</strong>, и свёртка — основной инструмент для этого.</p>
 <h2 id="изображение-как-тензор-и-почему-не-mlp">Изображение как тензор и почему не MLP</h2>
 <p>Цветная картинка — тензор <span class="tex">C\times H\times W</span> (каналы × высота × ширина), для RGB <span class="tex">C=3</span>, значения пикселей в <span class="tex">[0,255]</span> нормируют. Чёрно-белая картинка MNIST — одна матрица <span class="tex">1\times28\times28</span> (в лекции — <span class="tex">32\times32</span>, как в LeNet).</p>
 <p>Полносвязная сеть требует растянуть картинку в вектор, и это ломает задачу:</p>
@@ -241,10 +242,26 @@ opt <span class="tok-p">=</span> torch<span class="tok-p">.</span>optim<span cla
 <li><strong>Размер изображения в голове.</strong> Если голова — <code>Linear</code> после <code>Flatten</code>, она привязана к разрешению входа; <code>AdaptiveAvgPool2d</code> снимает это ограничение.</li>
 <li><strong>Дисбаланс классов и утечки</strong>: кадры одного объекта или пациента не должны попасть и в train, и в val (иначе метрики завышены); для классов с малой долей используйте взвешенную потерю и метрики вроде PR-AUC.</li>
 <li><strong>Сдвиг распределения</strong>: сеть, обученная на студийных фото, ломается на снимках с телефона. Проверяйте на данных из реального источника.</li>
-<li><strong>Что спрашивают на интервью</strong>: формула размера выхода и числа параметров, роль пулинга, зачем остаточные связи, чем fine-tuning отличается от feature extraction.</li>
+<li><strong>Что спрашивают на интервью</strong>: формула размера выхода и числа параметров, роль пулинга, зачем остаточные связи, чем fine-tuning отличается от feature extraction. Дополнительно: чем свёртка отличается от полносвязного слоя, что такое рецептивное поле и как оно растёт, зачем свёртка <span class="tex">1\times1</span>, почему при заморозке нужен <code>eval()</code> для BatchNorm.</li>
 <li><strong>Мост к рекомендациям и поиску.</strong> Эмбеддинги изображений из предобученной сети — готовые контентные признаки товаров для <a href="/edufamcs-demo/handbook/recsys/holodnyj-start-i-bandity/" rel="noopener noreferrer nofollow">холодного старта в рекомендациях</a> и для кандидатов в <a href="/edufamcs-demo/handbook/recsys/kandidaty-i-ranzhirovanie/" rel="noopener noreferrer nofollow">двухстадийной схеме</a>; а картинка и текст в одном пространстве — основа мультимодального <a href="/edufamcs-demo/handbook/retrieval/plotnyj-i-gibridnyj-poisk/" rel="noopener noreferrer nofollow">плотного поиска</a>.</li>
 </ul>
-<p>Материалы курса: лекция первого сезона «Введение в компьютерное зрение» (Никита Киселёв), запись <a href="https://www.youtube.com/watch?v=_kM-eJWOAVs" rel="noopener noreferrer nofollow">_kM-eJWOAVs</a>, и гостевая встреча второго сезона 28.05.2026 «Как компьютер учится смотреть: основы CV».</p>
+<p>Материалы курса: лекция первого сезона «Введение в компьютерное зрение» (Никита Киселев), запись <a href="https://www.youtube.com/watch?v=_kM-eJWOAVs" rel="noopener noreferrer nofollow">_kM-eJWOAVs</a>, и гостевая встреча второго сезона 28.05.2026 «Как компьютер учится смотреть: основы CV».</p>
+<h2 id="проверь-себя">Проверь себя</h2>
+<details class="callout md details"><summary>Сколько параметров у свёртки $3\times3$ из 64 каналов в 128 и зависит ли это число от размера картинки?</summary>
+<p><span class="tex">3\cdot3\cdot64\cdot128+128=73\,856</span>. Не зависит: ядро одно и то же во всех позициях (разделение весов), поэтому число параметров определяется только размером ядра и каналами.</p>
+</details>
+<details class="callout md details"><summary>Почему стек из трёх свёрток $3\times3$ часто лучше одной $7\times7$?</summary>
+<p>Рецептивное поле то же (<span class="tex">7\times7</span>), но параметров <span class="tex">27C^2</span> вместо <span class="tex">49C^2</span>, и между слоями есть три нелинейности вместо одной.</p>
+</details>
+<details class="callout md details"><summary>Чем отличаются эквивариантность и инвариантность к сдвигу и откуда они берутся в CNN?</summary>
+<p>Свёртка эквивариантна: сдвиг входа сдвигает карту признаков. Инвариантность (результат не зависит от положения) возникает дальше за счёт пулинга и глобального усреднения.</p>
+</details>
+<details class="callout md details"><summary>Для $n=32$, $k=5$, $p=2$, $s=1$ какой размер выхода и что даёт $p=\lfloor k/2\rfloor$?</summary>
+<p><span class="tex">\lfloor(32+4-5)/1\rfloor+1=32</span>: паддинг <span class="tex">\lfloor k/2\rfloor</span> при <span class="tex">s=1</span> сохраняет размер («same»).</p>
+</details>
+<details class="callout md details"><summary>Почему при fine-tuning на малой выборке сначала обучают только голову?</summary>
+<p>Новая голова инициализирована случайно, и её большие градиенты испортили бы хорошие предобученные признаки. Сначала обучают голову, затем размораживают верхние блоки с малым <span class="tex">\eta</span>.</p>
+</details>
 <h2 id="что-почитать">Что почитать</h2>
 <ul>
 <li>LeCun, Bottou, Bengio, Haffner, <em>Gradient-Based Learning Applied to Document Recognition</em>, Proceedings of the IEEE, 1998: <a href="https://doi.org/10.1109/5.726791" rel="noopener noreferrer nofollow">doi.org/10.1109/5.726791</a>.</li>
@@ -257,6 +274,8 @@ opt <span class="tok-p">=</span> torch<span class="tok-p">.</span>optim<span cla
       
 
       
+
+      
       <nav class="pager" aria-label="Соседние статьи">
         <a href="/edufamcs-demo/handbook/dl/optimizatory-i-regulyarizaciya/"><span><svg class="ico sm" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-arrow-left"/></svg>Назад</span>Оптимизаторы, регуляризация и практика обучения</a>
         <a href="/edufamcs-demo/handbook/dl/posledovatelnosti-i-rnn/"><span>Дальше<svg class="ico sm" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-arrow"/></svg></span>Последовательности: эмбеддинги и рекуррентные сети</a>
@@ -265,7 +284,7 @@ opt <span class="tok-p">=</span> torch<span class="tok-p">.</span>optim<span cla
     </article>
 
     <aside class="hb-toc" aria-label="На этой странице">
-      <a class="l2" href="#изображение-как-тензор-и-почему-не-mlp">Изображение как тензор и почему не MLP</a><a class="l2" href="#операция-свёртки">Операция свёртки</a><a class="l2" href="#пулинг-и-рецептивное-поле">Пулинг и рецептивное поле</a><a class="l2" href="#иерархия-признаков">Иерархия признаков</a><a class="l2" href="#история-архитектур">История архитектур</a><a class="l2" href="#transfer-learning">Transfer learning</a><a class="l2" href="#детекция-и-сегментация">Детекция и сегментация</a><a class="l2" href="#код-маленькая-cnn-и-fine-tuning">Код: маленькая CNN и fine-tuning</a><a class="l2" href="#практика-и-подводные-камни">Практика и подводные камни</a><a class="l2" href="#что-почитать">Что почитать</a>
+      <a class="l2" href="#изображение-как-тензор-и-почему-не-mlp">Изображение как тензор и почему не MLP</a><a class="l2" href="#операция-свёртки">Операция свёртки</a><a class="l2" href="#пулинг-и-рецептивное-поле">Пулинг и рецептивное поле</a><a class="l2" href="#иерархия-признаков">Иерархия признаков</a><a class="l2" href="#история-архитектур">История архитектур</a><a class="l2" href="#transfer-learning">Transfer learning</a><a class="l2" href="#детекция-и-сегментация">Детекция и сегментация</a><a class="l2" href="#код-маленькая-cnn-и-fine-tuning">Код: маленькая CNN и fine-tuning</a><a class="l2" href="#практика-и-подводные-камни">Практика и подводные камни</a><a class="l2" href="#проверь-себя">Проверь себя</a><a class="l2" href="#что-почитать">Что почитать</a>
     </aside>
   </div>
 </div>

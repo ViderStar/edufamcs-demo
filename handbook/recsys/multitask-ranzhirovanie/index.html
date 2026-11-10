@@ -1,0 +1,323 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Многозадачное ранжирование: MMoE, PLE, ESMM · EDU FAMCS</title>
+<meta name="description" content="Многозадачное ранжирование: MMoE, PLE, ESMM — Рекомендательные системы. Хендбук ML-курса ФПМИ.">
+<meta name="theme-color" content="#060A16">
+<meta name="robots" content="noindex, nofollow">
+<meta name="htmx-config" content='{"allowEval":false,"includeIndicatorStyles":false,"historyCacheSize":0,"selfRequestsOnly":true}'>
+<meta name="katex-js" content="/edufamcs-demo/static/vendor/katex/katex.min.js">
+<meta name="katex-css" content="/edufamcs-demo/static/vendor/katex/katex.min.css">
+<link rel="icon" href="/edufamcs-demo/static/brand/logo/favicon-16.svg" type="image/svg+xml" sizes="16x16">
+<link rel="icon" href="/edufamcs-demo/static/brand/logo/favicon.svg" type="image/svg+xml" sizes="any">
+<link rel="preload" href="/edufamcs-demo/static/brand/fonts/manrope-cyrillic-400.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/edufamcs-demo/static/brand/fonts/unbounded-cyrillic-800.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="/edufamcs-demo/static/brand/fonts.css">
+<link rel="stylesheet" href="/edufamcs-demo/static/brand/tokens.css">
+<link rel="stylesheet" href="/edufamcs-demo/static/brand/components.css">
+<link rel="stylesheet" href="/edufamcs-demo/static/css/site.css">
+<link rel="stylesheet" href="/edufamcs-demo/static/css/hub.css">
+<link rel="stylesheet" href="/edufamcs-demo/static/css/about.css">
+<link rel="stylesheet" href="/edufamcs-demo/static/handbook/handbook.css">
+<script src="/edufamcs-demo/static/js/theme.js"></script>
+<script src="/edufamcs-demo/static/vendor/htmx/htmx.min.js" defer></script>
+<script src="/edufamcs-demo/static/vendor/alpine/alpine-csp.min.js" defer></script>
+<script src="/edufamcs-demo/static/js/site.js" defer></script>
+<script src="/edufamcs-demo/static/handbook/handbook.js" defer></script>
+</head>
+<body class="" hx-headers='{"X-CSRFToken": "QEBWM1Pr50blw7krjCjuDtrRnS9T2cgAsRqT23oi6NpUHqzTi5xrlmjPP1gRMWfh"}'>
+<a class="skip" href="#main">К содержанию</a>
+<div class="demo-bar" role="note">Демо-версия для отзывов: вход, запись на курсы и формы здесь не работают.</div>
+
+<header class="hdr">
+  <div class="container">
+    <a class="brand" href="/edufamcs-demo/" aria-label="EDU FAMCS — главная">
+      <span class="full"><img class="only-light" src="/edufamcs-demo/static/brand/logo/logo-edu-light.svg" alt="EDU FAMCS" width="196" height="40"><img class="only-dark" src="/edufamcs-demo/static/brand/logo/logo-edu-dark.svg" alt="EDU FAMCS" width="196" height="40"></span>
+      <span class="short"><img class="only-light" src="/edufamcs-demo/static/brand/logo/logo-edu-light.svg" alt="EDU FAMCS" height="30"><img class="only-dark" src="/edufamcs-demo/static/brand/logo/logo-edu-dark.svg" alt="EDU FAMCS" height="30"></span>
+    </a>
+    <nav class="nav" id="main-nav" aria-label="Основная навигация">
+      <a href="/edufamcs-demo/#courses">Курсы</a>
+      <a href="/edufamcs-demo/ml/" >Машинное обучение</a>
+      
+      <a href="/edufamcs-demo/handbook/" aria-current="page">Хендбук</a>
+      <a href="/edufamcs-demo/news/" >Новости</a>
+      <a href="/edufamcs-demo/people/" >Авторы</a>
+      <a href="/edufamcs-demo/about/" >О&nbsp;нас</a>
+    </nav>
+    <div class="hdr-actions">
+      
+      <a class="btn btn-outline btn-login" href="/edufamcs-demo/accounts/login/?next=/handbook/recsys/multitask-ranzhirovanie/">Войти</a>
+      
+      <button class="icon-btn menu-btn" type="button" aria-label="Меню" aria-expanded="false" aria-controls="main-nav"><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-menu"/></svg></button>
+    </div>
+  </div>
+</header>
+
+<main id="main">
+
+
+
+<div class="container hb-page s-recsys">
+  <div class="hb-readbar" aria-hidden="true"><i></i></div>
+  <div class="hb">
+    <aside class="hb-nav" aria-label="Статьи раздела">
+      
+<form class="hb-search" action="/edufamcs-demo/handbook/search/" method="get" role="search">
+  <svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-search"/></svg>
+  <input class="input" type="search" name="q" value="" placeholder="Поиск по хендбуку" aria-label="Поиск по хендбуку" autocomplete="off" maxlength="120"
+    hx-get="/edufamcs-demo/handbook/search/" hx-trigger="input changed delay:250ms, search" hx-target="#hb-nav-results" hx-sync="this:replace">
+</form>
+
+      <div id="hb-nav-results" class="hb-nav-results" aria-live="polite"></div>
+      <a class="grp" href="/edufamcs-demo/handbook/recsys/">Рекомендательная система целиком</a>
+      
+      <a class="" href="/edufamcs-demo/handbook/recsys/kandidaty-i-ranzhirovanie/">Двухстадийная схема: кандидаты → ранжирование</a>
+      
+      <a class="" href="/edufamcs-demo/handbook/recsys/holodnyj-start-i-bandity/">Холодный старт, исследование и бандиты</a>
+      
+      <a class="" href="/edufamcs-demo/handbook/recsys/prodakshen-i-ab-testy/">Рекомендации в продакшене: A/B-тесты и эксплуатация</a>
+      
+      <a class="cur" href="/edufamcs-demo/handbook/recsys/multitask-ranzhirovanie/" aria-current="page">Многозадачное ранжирование: MMoE, PLE, ESMM</a>
+      
+      <a class="" href="/edufamcs-demo/handbook/recsys/priznaki-i-feature-store/">Признаки для рекомендаций и feature store</a>
+      
+      <a class="" href="/edufamcs-demo/handbook/recsys/protokol-oflajn-ocenki/">Протокол офлайн-оценки и утечки</a>
+      
+      <a class="" href="/edufamcs-demo/handbook/recsys/system-design-rekomendacij/">System design: как спроектировать рекомендательную систему на собеседовании</a>
+      
+    </aside>
+
+    <article class="hb-main">
+      <nav class="crumbs" aria-label="Навигация"><a href="/edufamcs-demo/handbook/">Хендбук</a><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-chev"/></svg><a href="/edufamcs-demo/handbook/recsys/">Рекомендательные системы</a></nav>
+      <h1 class="h1">Многозадачное ранжирование: MMoE, PLE, ESMM</h1>
+      <div class="hb-meta">
+        
+        
+        <span><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-clock"/></svg>15&nbsp;мин</span>
+        <span class="hb-authors"><span class="avatar sm" title="Артем Лебедевич">АЛ</span>Артем Лебедевич</span>
+        <span><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-edit"/></svg>10 ноября 2026</span>
+        
+        
+      </div>
+
+      
+      <details class="hb-mtoc">
+        <summary><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-list"/></svg>Содержание<svg class="ico sm" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-chev-down"/></svg></summary>
+        <a class="l2" href="#зачем-несколько-целей">Зачем несколько целей</a><a class="l2" href="#esmm-конверсия-на-всём-пространстве-показов">ESMM: конверсия на всём пространстве показов</a><a class="l2" href="#shared-bottom-и-негативный-перенос">Shared-bottom и негативный перенос</a><a class="l2" href="#mmoe-смесь-экспертов-с-воротами-на-каждую-задачу">MMoE: смесь экспертов с воротами на каждую задачу</a><a class="l2" href="#ple-и-cgc-явное-разделение-общего-и-своего">PLE и CGC: явное разделение общего и своего</a><a class="l2" href="#взвешивание-потерь">Взвешивание потерь</a><a class="l2" href="#свёртка-в-один-скор-и-калибровка">Свёртка в один скор и калибровка</a><a class="l2" href="#пример-mmoe-против-shared-bottom">Пример: MMoE против shared-bottom</a><a class="l2" href="#код">Код</a><a class="l2" href="#ловушки">Ловушки</a><a class="l2" href="#проверь-себя">Проверь себя</a><a class="l2" href="#что-почитать">Что почитать</a>
+      </details>
+      
+
+      <div class="prose"><p>Ранжировщик, который предсказывает только клик, учится на самом дешёвом сигнале: он любит броские заголовки и обложки. Реальному продукту нужны сразу клик, лайк, покупку, досмотр, возврат завтра, и эти цели тянут модель в разные стороны. Многозадачное (multi-task) ранжирование решает три вопроса: как обучить несколько голов на общих признаках, как не дать задачам портить друг друга и как свести их оценки в один скор для сортировки.</p>
+<h2 id="зачем-несколько-целей">Зачем несколько целей</h2>
+<p>Клик дешёв и обилен, но шумен: кликбейт даёт клик и тут же закрытую вкладку. Покупка или досмотр до конца ближе к ценности, но их на порядки меньше и они приходят с задержкой. Лайк, шеринг, жалоба или «не интересует» добавляют явный сигнал. Оптимизировать только CTR значит получить выдачу, которая хорошо кликается и плохо удерживает; оптимизировать только покупки значит учиться на крошечной выборке. Поэтому модель выдаёт вектор вероятностей <span class="tex">(\hat p_1,\dots,\hat p_K)</span>, а продуктовая логика сворачивает его в скор (последний раздел). Общую схему каскада см. в <a href="/edufamcs-demo/handbook/recsys/kandidaty-i-ranzhirovanie/" rel="noopener noreferrer nofollow">двухстадийной схеме</a>, а краткий обзор многозадачных моделей — в <a href="/edufamcs-demo/handbook/recsys/ctr-modeli/" rel="noopener noreferrer nofollow">главе про CTR-модели</a>.</p>
+<h2 id="esmm-конверсия-на-всём-пространстве-показов">ESMM: конверсия на всём пространстве показов</h2>
+<p>Пусть <span class="tex">x</span> — признаки показа, <span class="tex">y=1</span> — клик, <span class="tex">z=1</span> — конверсия (покупка). Конверсия наблюдается <strong>только после клика</strong>. Классическая модель <span class="tex">\mathrm{pCVR}=p(z=1\mid y=1,x)</span> учится на кликнутых показах, а применяется ко всем показам, которые надо отранжировать. Распределения разные: клик отбирает определённый тип пар <span class="tex">(u,i)</span> — это sample selection bias. Кроме того, кликов мало, конверсий ещё меньше: данные разрежены.</p>
+<p>Ma et al. (SIGIR 2018) используют цепочку «показ → клик → конверсия». По определению условной вероятности</p>
+<div class="tex tex-block">\underbrace{p(y=1,z=1\mid x)}_{\mathrm{pCTCVR}} = \underbrace{p(y=1\mid x)}_{\mathrm{pCTR}}\cdot\underbrace{p(z=1\mid y=1,x)}_{\mathrm{pCVR}} .</div>
+<p>Величины pCTR и pCTCVR наблюдаемы на <strong>всех</strong> показах: <span class="tex">y</span> известен всегда, а событие «клик и конверсия» <span class="tex">y\cdot z</span> — тоже (без клика конверсии быть не может). Значит, можно обучить две сети — <span class="tex">\mathrm{pCTR}(x)</span> и <span class="tex">\mathrm{pCVR}(x)</span> — через потерю</p>
+<div class="tex tex-block">\mathcal{L} = \sum_{i=1}^{N}\Big[\ell\big(y_i,\ \mathrm{pCTR}_i\big) + \ell\big(y_i z_i,\ \mathrm{pCTR}_i\cdot \mathrm{pCVR}_i\big)\Big],</div>
+<p>где <span class="tex">\ell</span> — логлосс, а сумма идёт по всем <span class="tex">N</span> показам. Сеть pCVR <strong>нигде не получает собственной метки</strong>: она входит в произведение, и её градиент приходит от второго слагаемого. Поэтому она обучается на всём пространстве показов, а не на кликах: для некликнутых показов метка pCTCVR равна 0, и это понижает произведение; для кликнутых метка <span class="tex">z</span> даёт сигнал по конверсии. Эмбеддинги признаков у двух сетей общие (feature representation transfer) — именно кликовых данных много, и они учат общие представления для редких конверсий. Оговорка: pCVR здесь неявная, и честность её оценки на некликнутых парах держится на допущении, что <span class="tex">p(z\mid y=1,x)</span> обобщается за пределы кликнутой области; прямой гарантии нет. Позже показано, что оценка pCVR в ESMM смещена (ESCM², Wang et al., SIGIR 2022), и предложены поправки через IPS/DR.</p>
+<h2 id="shared-bottom-и-негативный-перенос">Shared-bottom и негативный перенос</h2>
+<p>Базовая архитектура: общее «дно» <span class="tex">h(x)</span> и по голове на каждую задачу, <span class="tex">\hat y_k = t_k(h(x))</span>. Общее дно экономит параметры и даёт регуляризацию, если задачи близки. Если нет, возникает <strong>негативный перенос</strong> (negative transfer): градиенты задач конфликтуют, общие веса — компромисс, и улучшение одной метрики часто сопровождается падением другой («качели», seesaw). Эмпирически в статье MMoE показано, что качество shared-bottom деградирует по мере уменьшения корреляции между задачами.</p>
+<h2 id="mmoe-смесь-экспертов-с-воротами-на-каждую-задачу">MMoE: смесь экспертов с воротами на каждую задачу</h2>
+<p>Ma et al. (KDD 2018) заменяют общее дно набором <span class="tex">n</span> экспертов <span class="tex">f_1,\dots,f_n</span> (небольших сетей), общих для всех задач, и вводят для каждой задачи <span class="tex">k</span> свои ворота (gate) — softmax-слой над входом:</p>
+<div class="tex tex-block">g^k(x) = \operatorname{softmax}(W_{g^k}\,x)\in\mathbb{R}^n,\qquad
+h^k(x) = \sum_{i=1}^{n} g^k(x)_i\, f_i(x),\qquad
+\hat y_k = t_k\big(h^k(x)\big).</div>
+<p>Размерности: <span class="tex">W_{g^k}\in\mathbb{R}^{n\times d}</span>, каждый <span class="tex">f_i(x)\in\mathbb{R}^{m}</span>, башня <span class="tex">t_k</span> — небольшая сеть. Интуиция: если задачи близки, ворота выбирают одних и тех же экспертов; если нет, разводят по разным, и эксперты специализируются. Параметров больше, чем в одном дне, зато нет жёсткого принуждения к общему представлению. Известные практические проблемы: ворота могут «схлопнуться» на одного эксперта, поэтому полезны dropout на ворота и регуляризация загрузки.</p>
+<h2 id="ple-и-cgc-явное-разделение-общего-и-своего">PLE и CGC: явное разделение общего и своего</h2>
+<p>В MMoE все эксперты формально общие, и задача может «испортить» эксперта, нужного соседней. Tang et al. (RecSys 2020, Tencent) делят экспертов на <strong>общих</strong> и <strong>специфичных для задачи</strong>. Блок CGC (Customized Gate Control) для задачи <span class="tex">k</span> выбирает смесь из её собственных экспертов и общих. <strong>PLE</strong> (Progressive Layered Extraction) стакает несколько уровней: на промежуточных уровнях у общего модуля есть свои ворота над всеми экспертами, а выходы уровня <span class="tex">\ell</span> подаются на вход уровня <span class="tex">\ell+1</span>, то есть общие знания извлекаются постепенно (progressive routing). Авторы показывают на данных Tencent Video и открытых датасетах, что PLE снижает «качели» относительно MMoE. Цена: больше параметров и гиперпараметров (число экспертов каждого типа, число уровней).</p>
+<h2 id="взвешивание-потерь">Взвешивание потерь</h2>
+<p>Итоговая потеря <span class="tex">\sum_k w_k \mathcal{L}_k</span>. Простейший вариант — фиксированные <span class="tex">w_k</span> из перебора; он плохо масштабируется по числу задач, а шкалы потерь у задач разные. Kendall et al. (CVPR 2018) вывели вес из <strong>гомоскедастической неопределённости</strong> задачи: для <span class="tex">K</span> задач с обучаемым <span class="tex">\sigma_k</span></p>
+<div class="tex tex-block">\mathcal{L}=\sum_{k}\Big(\frac{1}{2\sigma_k^2}\mathcal{L}_k + \log\sigma_k\Big),</div>
+<p>где <span class="tex">\log\sigma_k</span> не даёт <span class="tex">\sigma_k</span> уйти в бесконечность (иначе потеря обнулилась бы). Это форма для регрессии (гауссово правдоподобие). Для классификации Kendall et al. выводят <span class="tex">\frac{1}{\sigma_k^2}\mathcal{L}_k+\log\sigma_k</span> (softmax с температурой <span class="tex">\sigma_k^2</span>, приближение); в CTR-задачах с логлоссом берут именно её или, на практике, общую форму <span class="tex">e^{-s_k}\mathcal{L}_k+s_k</span> без множителя ½. Для регрессионной формы на практике обучают <span class="tex">s_k=\log\sigma_k^2</span> и пишут <span class="tex">\tfrac12\big(e^{-s_k}\mathcal{L}_k+s_k\big)</span> — так нет деления на ноль. Шумная задача получает большое <span class="tex">\sigma</span> и малый вес. <strong>GradNorm</strong> (Chen et al., ICML 2018) вместо этого подстраивает <span class="tex">w_k</span> так, чтобы нормы градиентов задач по общим весам относились друг к другу в соответствии с относительной скоростью обучения; один гиперпараметр <span class="tex">\alpha</span>. Оба метода балансируют <em>обучение</em>; вес задачи в итоговом скоринге — это отдельное продуктовое решение.</p>
+<h2 id="свёртка-в-один-скор-и-калибровка">Свёртка в один скор и калибровка</h2>
+<p>Для сортировки нужно одно число. Типичный вид — мультипликативный: <span class="tex">s=\prod_k \hat p_k^{\,w_k}</span>, или аддитивный <span class="tex">s=\sum_k w_k\hat p_k</span> (см. <a href="/edufamcs-demo/handbook/recsys/kandidaty-i-ranzhirovanie/" rel="noopener noreferrer nofollow">смешивание целей</a>). Веса подбирают так: офлайн строят <strong>Парето-фронт</strong> (как меняются NDCG или AUC по каждой цели при разных <span class="tex">w</span>), отсекают заведомо плохие точки, затем 2–4 кандидата проверяют в A/B-тесте по онлайн-метрикам и ограничениям (см. <a href="/edufamcs-demo/handbook/recsys/prodakshen-i-ab-testy/" rel="noopener noreferrer nofollow">A/B-тесты</a>). Калибровка голов критична: сумма <span class="tex">0{,}3\,p_{\text{click}}+0{,}7\,p_{\text{buy}}</span> имеет смысл только если <span class="tex">p_{\text{click}}</span> и <span class="tex">p_{\text{buy}}</span> — настоящие вероятности. Если одна голова систематически завышена из-за прореженных негативов, её вес де-факто в разы больше заданного, и любое переобучение молча сдвигает баланс продукта. Проверяйте калибровку каждой головы по отдельности (кривая надёжности, ECE) и при необходимости калибруйте изотонической регрессией или Платтом.</p>
+<h2 id="пример-mmoe-против-shared-bottom">Пример: MMoE против shared-bottom</h2>
+<p>Синтетика: две бинарные задачи, логит <span class="tex">z_k=\sqrt{\rho}\,f_0(x)+\sqrt{1-\rho}\,f_k(x)</span>, где <span class="tex">f_j</span> — случайные нелинейные функции признаков, <span class="tex">\rho</span> задаёт долю общего сигнала. Две модели с одинаковым числом параметров (~3000): shared-bottom (ширина 40) и MMoE (3 эксперта, ширина 18). 20 000 строк обучения и столько же теста, 8 сидов, AUC по тесту, среднее ± std.</p>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th><span class="tex">\rho</span> (корр. логитов)</th>
+<th>Модель</th>
+<th>AUC задачи 1</th>
+<th>AUC задачи 2</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>0,95 (0,97)</td>
+<td>shared-bottom</td>
+<td>0,8015 ± 0,0030</td>
+<td>0,8011 ± 0,0056</td>
+</tr>
+<tr>
+<td>0,95 (0,97)</td>
+<td>MMoE</td>
+<td>0,7974 ± 0,0024</td>
+<td>0,7935 ± 0,0042</td>
+</tr>
+<tr>
+<td>0,00 (0,12)</td>
+<td>shared-bottom</td>
+<td>0,7374 ± 0,0030</td>
+<td>0,7989 ± 0,0038</td>
+</tr>
+<tr>
+<td>0,00 (0,12)</td>
+<td>MMoE</td>
+<td>0,7375 ± 0,0046</td>
+<td>0,7942 ± 0,0042</td>
+</tr>
+</tbody>
+</table></div>
+<p>Вывод честный и неудобный: на этой игрушке MMoE <strong>не лучше</strong> shared-bottom ни при сильной, ни при слабой связи (на задаче 1 при <span class="tex">\rho=0</span> — ничья, на остальных — небольшой проигрыш, соизмеримый с разбросом по сидам). Дно с общим представлением справляется, когда признаки богатые, данных хватает, а задачи — функции одного набора признаков. Преимущество MMoE и PLE показывают в статьях на больших промышленных данных с разреженными и конфликтующими задачами; воспроизводить его надо на своих данных, сравнивая при равных параметрах и с несколькими сидами.</p>
+<h2 id="код">Код</h2>
+<p>Полный скрипт эксперимента (CPU, около 40 секунд): <code>uv run --with torch --with numpy --with scikit-learn python mmoe.py</code>.</p>
+<div class="code"><div class="code-head"><span class="lang">python</span></div><pre><code><span class="tok-k">import</span> numpy <span class="tok-k">as</span> np<span class="tok-p">,</span> torch<span class="tok-p">,</span> torch.nn <span class="tok-k">as</span> nn
+<span class="tok-k">from</span> sklearn.metrics <span class="tok-k">import</span> roc_auc_score
+torch<span class="tok-p">.</span>set_num_threads<span class="tok-p">(</span><span class="tok-n">4</span><span class="tok-p">)</span>
+
+<span class="tok-k">def</span> <span class="tok-f">make_data</span><span class="tok-p">(</span>n<span class="tok-p">,</span> rho<span class="tok-p">,</span> d<span class="tok-p">=</span><span class="tok-n">32</span><span class="tok-p">,</span> seed<span class="tok-p">=</span><span class="tok-n">0</span><span class="tok-p">)</span><span class="tok-p">:</span>
+    <span class="tok-s">"""Два бинарных таска; логиты: z_k = sqrt(rho)*s + sqrt(1-rho)*t_k, где s, t_k — нелинейные функции x."""</span>
+    g <span class="tok-p">=</span> np<span class="tok-p">.</span>random<span class="tok-p">.</span>default_rng<span class="tok-p">(</span><span class="tok-n">1234</span><span class="tok-p">)</span>  <span class="tok-c"># фиксированные "истинные" функции</span>
+    W <span class="tok-p">=</span> g<span class="tok-p">.</span>normal<span class="tok-p">(</span>size<span class="tok-p">=</span><span class="tok-p">(</span><span class="tok-n">3</span><span class="tok-p">,</span> d<span class="tok-p">,</span> <span class="tok-n">8</span><span class="tok-p">)</span><span class="tok-p">)</span><span class="tok-p">;</span> v <span class="tok-p">=</span> g<span class="tok-p">.</span>normal<span class="tok-p">(</span>size<span class="tok-p">=</span><span class="tok-p">(</span><span class="tok-n">3</span><span class="tok-p">,</span> <span class="tok-n">8</span><span class="tok-p">)</span><span class="tok-p">)</span>
+    r <span class="tok-p">=</span> np<span class="tok-p">.</span>random<span class="tok-p">.</span>default_rng<span class="tok-p">(</span>seed<span class="tok-p">)</span>
+    x <span class="tok-p">=</span> r<span class="tok-p">.</span>normal<span class="tok-p">(</span>size<span class="tok-p">=</span><span class="tok-p">(</span>n<span class="tok-p">,</span> d<span class="tok-p">)</span><span class="tok-p">)</span><span class="tok-p">.</span>astype<span class="tok-p">(</span>np<span class="tok-p">.</span>float32<span class="tok-p">)</span>
+    f <span class="tok-p">=</span> <span class="tok-p">[</span>np<span class="tok-p">.</span>tanh<span class="tok-p">(</span>x <span class="tok-p">@</span> W<span class="tok-p">[</span>j<span class="tok-p">]</span><span class="tok-p">)</span> <span class="tok-p">@</span> v<span class="tok-p">[</span>j<span class="tok-p">]</span> <span class="tok-p">/</span> np<span class="tok-p">.</span>sqrt<span class="tok-p">(</span><span class="tok-n">8</span><span class="tok-p">)</span> <span class="tok-p">*</span> <span class="tok-n">2.0</span> <span class="tok-k">for</span> j <span class="tok-k">in</span> <span class="tok-f">range</span><span class="tok-p">(</span><span class="tok-n">3</span><span class="tok-p">)</span><span class="tok-p">]</span>
+    z <span class="tok-p">=</span> <span class="tok-p">[</span>np<span class="tok-p">.</span>sqrt<span class="tok-p">(</span>rho<span class="tok-p">)</span> <span class="tok-p">*</span> f<span class="tok-p">[</span><span class="tok-n">0</span><span class="tok-p">]</span> <span class="tok-p">+</span> np<span class="tok-p">.</span>sqrt<span class="tok-p">(</span><span class="tok-n">1</span> <span class="tok-p">-</span> rho<span class="tok-p">)</span> <span class="tok-p">*</span> f<span class="tok-p">[</span><span class="tok-n">1</span> <span class="tok-p">+</span> k<span class="tok-p">]</span> <span class="tok-k">for</span> k <span class="tok-k">in</span> <span class="tok-f">range</span><span class="tok-p">(</span><span class="tok-n">2</span><span class="tok-p">)</span><span class="tok-p">]</span>
+    y <span class="tok-p">=</span> <span class="tok-p">[</span><span class="tok-p">(</span>r<span class="tok-p">.</span>random<span class="tok-p">(</span>n<span class="tok-p">)</span> <span class="tok-p">&lt;</span> <span class="tok-n">1</span> <span class="tok-p">/</span> <span class="tok-p">(</span><span class="tok-n">1</span> <span class="tok-p">+</span> np<span class="tok-p">.</span>exp<span class="tok-p">(</span><span class="tok-p">-</span><span class="tok-p">(</span>z<span class="tok-p">[</span>k<span class="tok-p">]</span> <span class="tok-p">-</span> <span class="tok-n">1.0</span><span class="tok-p">)</span><span class="tok-p">)</span><span class="tok-p">)</span><span class="tok-p">)</span><span class="tok-p">.</span>astype<span class="tok-p">(</span>np<span class="tok-p">.</span>float32<span class="tok-p">)</span> <span class="tok-k">for</span> k <span class="tok-k">in</span> <span class="tok-f">range</span><span class="tok-p">(</span><span class="tok-n">2</span><span class="tok-p">)</span><span class="tok-p">]</span>
+    <span class="tok-k">return</span> x<span class="tok-p">,</span> np<span class="tok-p">.</span>stack<span class="tok-p">(</span>y<span class="tok-p">,</span> <span class="tok-n">1</span><span class="tok-p">)</span><span class="tok-p">,</span> np<span class="tok-p">.</span>corrcoef<span class="tok-p">(</span>z<span class="tok-p">[</span><span class="tok-n">0</span><span class="tok-p">]</span><span class="tok-p">,</span> z<span class="tok-p">[</span><span class="tok-n">1</span><span class="tok-p">]</span><span class="tok-p">)</span><span class="tok-p">[</span><span class="tok-n">0</span><span class="tok-p">,</span> <span class="tok-n">1</span><span class="tok-p">]</span>
+
+<span class="tok-k">def</span> <span class="tok-f">mlp</span><span class="tok-p">(</span>i<span class="tok-p">,</span> h<span class="tok-p">,</span> o<span class="tok-p">)</span><span class="tok-p">:</span> <span class="tok-k">return</span> nn<span class="tok-p">.</span>Sequential<span class="tok-p">(</span>nn<span class="tok-p">.</span>Linear<span class="tok-p">(</span>i<span class="tok-p">,</span> h<span class="tok-p">)</span><span class="tok-p">,</span> nn<span class="tok-p">.</span>ReLU<span class="tok-p">(</span><span class="tok-p">)</span><span class="tok-p">,</span> nn<span class="tok-p">.</span>Linear<span class="tok-p">(</span>h<span class="tok-p">,</span> o<span class="tok-p">)</span><span class="tok-p">,</span> nn<span class="tok-p">.</span>ReLU<span class="tok-p">(</span><span class="tok-p">)</span><span class="tok-p">)</span>
+
+<span class="tok-k">class</span> <span class="tok-f">SharedBottom</span><span class="tok-p">(</span>nn<span class="tok-p">.</span>Module<span class="tok-p">)</span><span class="tok-p">:</span>
+    <span class="tok-k">def</span> <span class="tok-f">__init__</span><span class="tok-p">(</span>s<span class="tok-p">,</span> d<span class="tok-p">,</span> h<span class="tok-p">=</span><span class="tok-n">40</span><span class="tok-p">,</span> T<span class="tok-p">=</span><span class="tok-n">2</span><span class="tok-p">)</span><span class="tok-p">:</span>
+        <span class="tok-f">super</span><span class="tok-p">(</span><span class="tok-p">)</span><span class="tok-p">.</span><span class="tok-f">__init__</span><span class="tok-p">(</span><span class="tok-p">)</span><span class="tok-p">;</span> s<span class="tok-p">.</span>b <span class="tok-p">=</span> mlp<span class="tok-p">(</span>d<span class="tok-p">,</span> h<span class="tok-p">,</span> h<span class="tok-p">)</span><span class="tok-p">;</span> s<span class="tok-p">.</span>t <span class="tok-p">=</span> nn<span class="tok-p">.</span>ModuleList<span class="tok-p">(</span><span class="tok-p">[</span>nn<span class="tok-p">.</span>Linear<span class="tok-p">(</span>h<span class="tok-p">,</span> <span class="tok-n">1</span><span class="tok-p">)</span> <span class="tok-k">for</span> _ <span class="tok-k">in</span> <span class="tok-f">range</span><span class="tok-p">(</span>T<span class="tok-p">)</span><span class="tok-p">]</span><span class="tok-p">)</span>
+    <span class="tok-k">def</span> <span class="tok-f">forward</span><span class="tok-p">(</span>s<span class="tok-p">,</span> x<span class="tok-p">)</span><span class="tok-p">:</span>
+        h <span class="tok-p">=</span> s<span class="tok-p">.</span>b<span class="tok-p">(</span>x<span class="tok-p">)</span><span class="tok-p">;</span> <span class="tok-k">return</span> torch<span class="tok-p">.</span>cat<span class="tok-p">(</span><span class="tok-p">[</span>t<span class="tok-p">(</span>h<span class="tok-p">)</span> <span class="tok-k">for</span> t <span class="tok-k">in</span> s<span class="tok-p">.</span>t<span class="tok-p">]</span><span class="tok-p">,</span> <span class="tok-n">1</span><span class="tok-p">)</span>
+
+<span class="tok-k">class</span> <span class="tok-f">MMoE</span><span class="tok-p">(</span>nn<span class="tok-p">.</span>Module<span class="tok-p">)</span><span class="tok-p">:</span>
+    <span class="tok-k">def</span> <span class="tok-f">__init__</span><span class="tok-p">(</span>s<span class="tok-p">,</span> d<span class="tok-p">,</span> h<span class="tok-p">=</span><span class="tok-n">18</span><span class="tok-p">,</span> E<span class="tok-p">=</span><span class="tok-n">3</span><span class="tok-p">,</span> T<span class="tok-p">=</span><span class="tok-n">2</span><span class="tok-p">)</span><span class="tok-p">:</span>
+        <span class="tok-f">super</span><span class="tok-p">(</span><span class="tok-p">)</span><span class="tok-p">.</span><span class="tok-f">__init__</span><span class="tok-p">(</span><span class="tok-p">)</span>
+        s<span class="tok-p">.</span>experts <span class="tok-p">=</span> nn<span class="tok-p">.</span>ModuleList<span class="tok-p">(</span><span class="tok-p">[</span>mlp<span class="tok-p">(</span>d<span class="tok-p">,</span> h<span class="tok-p">,</span> h<span class="tok-p">)</span> <span class="tok-k">for</span> _ <span class="tok-k">in</span> <span class="tok-f">range</span><span class="tok-p">(</span>E<span class="tok-p">)</span><span class="tok-p">]</span><span class="tok-p">)</span>
+        s<span class="tok-p">.</span>gates <span class="tok-p">=</span> nn<span class="tok-p">.</span>ModuleList<span class="tok-p">(</span><span class="tok-p">[</span>nn<span class="tok-p">.</span>Linear<span class="tok-p">(</span>d<span class="tok-p">,</span> E<span class="tok-p">)</span> <span class="tok-k">for</span> _ <span class="tok-k">in</span> <span class="tok-f">range</span><span class="tok-p">(</span>T<span class="tok-p">)</span><span class="tok-p">]</span><span class="tok-p">)</span>
+        s<span class="tok-p">.</span>towers <span class="tok-p">=</span> nn<span class="tok-p">.</span>ModuleList<span class="tok-p">(</span><span class="tok-p">[</span>nn<span class="tok-p">.</span>Linear<span class="tok-p">(</span>h<span class="tok-p">,</span> <span class="tok-n">1</span><span class="tok-p">)</span> <span class="tok-k">for</span> _ <span class="tok-k">in</span> <span class="tok-f">range</span><span class="tok-p">(</span>T<span class="tok-p">)</span><span class="tok-p">]</span><span class="tok-p">)</span>
+    <span class="tok-k">def</span> <span class="tok-f">forward</span><span class="tok-p">(</span>s<span class="tok-p">,</span> x<span class="tok-p">)</span><span class="tok-p">:</span>
+        ex <span class="tok-p">=</span> torch<span class="tok-p">.</span>stack<span class="tok-p">(</span><span class="tok-p">[</span>e<span class="tok-p">(</span>x<span class="tok-p">)</span> <span class="tok-k">for</span> e <span class="tok-k">in</span> s<span class="tok-p">.</span>experts<span class="tok-p">]</span><span class="tok-p">,</span> <span class="tok-n">1</span><span class="tok-p">)</span>             <span class="tok-c"># B,E,h</span>
+        out <span class="tok-p">=</span> <span class="tok-p">[</span><span class="tok-p">]</span>
+        <span class="tok-k">for</span> g<span class="tok-p">,</span> t <span class="tok-k">in</span> <span class="tok-f">zip</span><span class="tok-p">(</span>s<span class="tok-p">.</span>gates<span class="tok-p">,</span> s<span class="tok-p">.</span>towers<span class="tok-p">)</span><span class="tok-p">:</span>
+            w <span class="tok-p">=</span> torch<span class="tok-p">.</span>softmax<span class="tok-p">(</span>g<span class="tok-p">(</span>x<span class="tok-p">)</span><span class="tok-p">,</span> <span class="tok-p">-</span><span class="tok-n">1</span><span class="tok-p">)</span><span class="tok-p">.</span>unsqueeze<span class="tok-p">(</span><span class="tok-p">-</span><span class="tok-n">1</span><span class="tok-p">)</span>               <span class="tok-c"># B,E,1</span>
+            out<span class="tok-p">.</span>append<span class="tok-p">(</span>t<span class="tok-p">(</span><span class="tok-p">(</span>w <span class="tok-p">*</span> ex<span class="tok-p">)</span><span class="tok-p">.</span>sum<span class="tok-p">(</span><span class="tok-n">1</span><span class="tok-p">)</span><span class="tok-p">)</span><span class="tok-p">)</span>                          <span class="tok-c"># sum_e g_e(x) f_e(x)</span>
+        <span class="tok-k">return</span> torch<span class="tok-p">.</span>cat<span class="tok-p">(</span>out<span class="tok-p">,</span> <span class="tok-n">1</span><span class="tok-p">)</span>
+
+<span class="tok-k">def</span> <span class="tok-f">run</span><span class="tok-p">(</span>model_cls<span class="tok-p">,</span> rho<span class="tok-p">,</span> seed<span class="tok-p">,</span> epochs<span class="tok-p">=</span><span class="tok-n">25</span><span class="tok-p">)</span><span class="tok-p">:</span>
+    torch<span class="tok-p">.</span>manual_seed<span class="tok-p">(</span>seed<span class="tok-p">)</span>
+    xtr<span class="tok-p">,</span> ytr<span class="tok-p">,</span> c <span class="tok-p">=</span> make_data<span class="tok-p">(</span><span class="tok-n">20000</span><span class="tok-p">,</span> rho<span class="tok-p">,</span> seed<span class="tok-p">=</span>seed<span class="tok-p">)</span><span class="tok-p">;</span> xte<span class="tok-p">,</span> yte<span class="tok-p">,</span> _ <span class="tok-p">=</span> make_data<span class="tok-p">(</span><span class="tok-n">20000</span><span class="tok-p">,</span> rho<span class="tok-p">,</span> seed<span class="tok-p">=</span>seed <span class="tok-p">+</span> <span class="tok-n">100</span><span class="tok-p">)</span>
+    m <span class="tok-p">=</span> model_cls<span class="tok-p">(</span>xtr<span class="tok-p">.</span>shape<span class="tok-p">[</span><span class="tok-n">1</span><span class="tok-p">]</span><span class="tok-p">)</span><span class="tok-p">;</span> opt <span class="tok-p">=</span> torch<span class="tok-p">.</span>optim<span class="tok-p">.</span>Adam<span class="tok-p">(</span>m<span class="tok-p">.</span>parameters<span class="tok-p">(</span><span class="tok-p">)</span><span class="tok-p">,</span> <span class="tok-n">3e-3</span><span class="tok-p">,</span> weight_decay<span class="tok-p">=</span><span class="tok-n">1e-5</span><span class="tok-p">)</span>
+    X<span class="tok-p">,</span> Y <span class="tok-p">=</span> torch<span class="tok-p">.</span>tensor<span class="tok-p">(</span>xtr<span class="tok-p">)</span><span class="tok-p">,</span> torch<span class="tok-p">.</span>tensor<span class="tok-p">(</span>ytr<span class="tok-p">)</span>
+    <span class="tok-k">for</span> ep <span class="tok-k">in</span> <span class="tok-f">range</span><span class="tok-p">(</span>epochs<span class="tok-p">)</span><span class="tok-p">:</span>
+        p <span class="tok-p">=</span> torch<span class="tok-p">.</span>randperm<span class="tok-p">(</span><span class="tok-f">len</span><span class="tok-p">(</span>X<span class="tok-p">)</span><span class="tok-p">)</span>
+        <span class="tok-k">for</span> i <span class="tok-k">in</span> <span class="tok-f">range</span><span class="tok-p">(</span><span class="tok-n">0</span><span class="tok-p">,</span> <span class="tok-f">len</span><span class="tok-p">(</span>X<span class="tok-p">)</span><span class="tok-p">,</span> <span class="tok-n">256</span><span class="tok-p">)</span><span class="tok-p">:</span>
+            b <span class="tok-p">=</span> p<span class="tok-p">[</span>i<span class="tok-p">:</span>i <span class="tok-p">+</span> <span class="tok-n">256</span><span class="tok-p">]</span>
+            loss <span class="tok-p">=</span> nn<span class="tok-p">.</span>functional<span class="tok-p">.</span>binary_cross_entropy_with_logits<span class="tok-p">(</span>m<span class="tok-p">(</span>X<span class="tok-p">[</span>b<span class="tok-p">]</span><span class="tok-p">)</span><span class="tok-p">,</span> Y<span class="tok-p">[</span>b<span class="tok-p">]</span><span class="tok-p">,</span> reduction<span class="tok-p">=</span><span class="tok-s">'</span><span class="tok-s">none</span><span class="tok-s">'</span><span class="tok-p">)</span><span class="tok-p">.</span>mean<span class="tok-p">(</span><span class="tok-n">0</span><span class="tok-p">)</span><span class="tok-p">.</span>sum<span class="tok-p">(</span><span class="tok-p">)</span>
+            opt<span class="tok-p">.</span>zero_grad<span class="tok-p">(</span><span class="tok-p">)</span><span class="tok-p">;</span> loss<span class="tok-p">.</span>backward<span class="tok-p">(</span><span class="tok-p">)</span><span class="tok-p">;</span> opt<span class="tok-p">.</span>step<span class="tok-p">(</span><span class="tok-p">)</span>
+    <span class="tok-k">with</span> torch<span class="tok-p">.</span>no_grad<span class="tok-p">(</span><span class="tok-p">)</span><span class="tok-p">:</span> s <span class="tok-p">=</span> m<span class="tok-p">(</span>torch<span class="tok-p">.</span>tensor<span class="tok-p">(</span>xte<span class="tok-p">)</span><span class="tok-p">)</span><span class="tok-p">.</span>numpy<span class="tok-p">(</span><span class="tok-p">)</span>
+    <span class="tok-k">return</span> <span class="tok-p">[</span>roc_auc_score<span class="tok-p">(</span>yte<span class="tok-p">[</span><span class="tok-p">:</span><span class="tok-p">,</span> k<span class="tok-p">]</span><span class="tok-p">,</span> s<span class="tok-p">[</span><span class="tok-p">:</span><span class="tok-p">,</span> k<span class="tok-p">]</span><span class="tok-p">)</span> <span class="tok-k">for</span> k <span class="tok-k">in</span> <span class="tok-f">range</span><span class="tok-p">(</span><span class="tok-n">2</span><span class="tok-p">)</span><span class="tok-p">]</span><span class="tok-p">,</span> <span class="tok-f">sum</span><span class="tok-p">(</span>p<span class="tok-p">.</span>numel<span class="tok-p">(</span><span class="tok-p">)</span> <span class="tok-k">for</span> p <span class="tok-k">in</span> m<span class="tok-p">.</span>parameters<span class="tok-p">(</span><span class="tok-p">)</span><span class="tok-p">)</span><span class="tok-p">,</span> c
+
+<span class="tok-k">if</span> __name__ <span class="tok-p">==</span> <span class="tok-s">"</span><span class="tok-s">__main__</span><span class="tok-s">"</span><span class="tok-p">:</span>
+    <span class="tok-k">import</span> time<span class="tok-p">;</span> t0 <span class="tok-p">=</span> time<span class="tok-p">.</span>time<span class="tok-p">(</span><span class="tok-p">)</span>
+    <span class="tok-k">for</span> rho <span class="tok-k">in</span> <span class="tok-p">(</span><span class="tok-n">0.95</span><span class="tok-p">,</span> <span class="tok-n">0.0</span><span class="tok-p">)</span><span class="tok-p">:</span>
+        res <span class="tok-p">=</span> <span class="tok-p">{</span><span class="tok-p">}</span>
+        <span class="tok-k">for</span> name<span class="tok-p">,</span> <span class="tok-f">cls</span> <span class="tok-k">in</span> <span class="tok-p">(</span><span class="tok-p">(</span><span class="tok-s">"</span><span class="tok-s">shared-bottom</span><span class="tok-s">"</span><span class="tok-p">,</span> SharedBottom<span class="tok-p">)</span><span class="tok-p">,</span> <span class="tok-p">(</span><span class="tok-s">"</span><span class="tok-s">MMoE</span><span class="tok-s">"</span><span class="tok-p">,</span> MMoE<span class="tok-p">)</span><span class="tok-p">)</span><span class="tok-p">:</span>
+            a <span class="tok-p">=</span> <span class="tok-p">[</span><span class="tok-p">]</span>
+            <span class="tok-k">for</span> seed <span class="tok-k">in</span> <span class="tok-f">range</span><span class="tok-p">(</span><span class="tok-n">8</span><span class="tok-p">)</span><span class="tok-p">:</span>
+                r<span class="tok-p">,</span> npar<span class="tok-p">,</span> c <span class="tok-p">=</span> run<span class="tok-p">(</span><span class="tok-f">cls</span><span class="tok-p">,</span> rho<span class="tok-p">,</span> seed<span class="tok-p">)</span><span class="tok-p">;</span> a<span class="tok-p">.</span>append<span class="tok-p">(</span>r<span class="tok-p">)</span>
+            a <span class="tok-p">=</span> np<span class="tok-p">.</span>array<span class="tok-p">(</span>a<span class="tok-p">)</span><span class="tok-p">;</span> res<span class="tok-p">[</span>name<span class="tok-p">]</span> <span class="tok-p">=</span> <span class="tok-p">(</span>a<span class="tok-p">.</span>mean<span class="tok-p">(</span><span class="tok-n">0</span><span class="tok-p">)</span><span class="tok-p">,</span> a<span class="tok-p">.</span>std<span class="tok-p">(</span><span class="tok-n">0</span><span class="tok-p">)</span><span class="tok-p">,</span> npar<span class="tok-p">)</span>
+        <span class="tok-f">print</span><span class="tok-p">(</span><span class="tok-s">f</span><span class="tok-s">"</span><span class="tok-s">rho=</span><span class="tok-s">{</span>rho<span class="tok-s">}</span><span class="tok-s">  corr(logit1,logit2)~</span><span class="tok-s">{</span>c<span class="tok-s">:</span><span class="tok-s">.2f</span><span class="tok-s">}</span><span class="tok-s">"</span><span class="tok-p">)</span>
+        <span class="tok-k">for</span> k<span class="tok-p">,</span> <span class="tok-p">(</span>m<span class="tok-p">,</span> s<span class="tok-p">,</span> n<span class="tok-p">)</span> <span class="tok-k">in</span> res<span class="tok-p">.</span>items<span class="tok-p">(</span><span class="tok-p">)</span><span class="tok-p">:</span> <span class="tok-f">print</span><span class="tok-p">(</span><span class="tok-s">f</span><span class="tok-s">"</span>  <span class="tok-s">{</span>k<span class="tok-s">:</span><span class="tok-s">14s</span><span class="tok-s">}</span><span class="tok-s"> params=</span><span class="tok-s">{</span>n<span class="tok-s">:</span><span class="tok-s">5d</span><span class="tok-s">}</span><span class="tok-s">  AUC1=</span><span class="tok-s">{</span>m<span class="tok-p">[</span><span class="tok-n">0</span><span class="tok-p">]</span><span class="tok-s">:</span><span class="tok-s">.4f</span><span class="tok-s">}</span><span class="tok-s">±</span><span class="tok-s">{</span>s<span class="tok-p">[</span><span class="tok-n">0</span><span class="tok-p">]</span><span class="tok-s">:</span><span class="tok-s">.4f</span><span class="tok-s">}</span><span class="tok-s">  AUC2=</span><span class="tok-s">{</span>m<span class="tok-p">[</span><span class="tok-n">1</span><span class="tok-p">]</span><span class="tok-s">:</span><span class="tok-s">.4f</span><span class="tok-s">}</span><span class="tok-s">±</span><span class="tok-s">{</span>s<span class="tok-p">[</span><span class="tok-n">1</span><span class="tok-p">]</span><span class="tok-s">:</span><span class="tok-s">.4f</span><span class="tok-s">}</span><span class="tok-s">"</span><span class="tok-p">)</span>
+    <span class="tok-f">print</span><span class="tok-p">(</span><span class="tok-s">"</span><span class="tok-s">time</span><span class="tok-s">"</span><span class="tok-p">,</span> <span class="tok-f">round</span><span class="tok-p">(</span>time<span class="tok-p">.</span>time<span class="tok-p">(</span><span class="tok-p">)</span> <span class="tok-p">-</span> t0<span class="tok-p">)</span><span class="tok-p">)</span>
+</code></pre></div>
+<h2 id="ловушки">Ловушки</h2>
+<ul>
+<li><strong>Сравнение при разных параметрах.</strong> MMoE с тремя экспертами легко получает втрое больше параметров, чем дно. Выравнивайте бюджет и сиды, иначе «победа» — это ёмкость.</li>
+<li><strong>Метка конверсии только на кликах.</strong> Обучая CVR-голову отдельно, вы сдвигаете распределение; используйте ESMM-постановку или учитывайте веса отбора.</li>
+<li><strong>Скор из некалиброванных голов.</strong> Веса в произведении теряют смысл, если шкалы вероятностей поплыли после очередного переобучения.</li>
+<li><strong>Балансировка вместо метрик продукта.</strong> Uncertainty weighting уравновешивает обучение, но не решает, сколько «стоит» лайк относительно покупки.</li>
+</ul>
+<p>На собеседовании: чем ESMM обучает pCVR без кликового отбора; при каких условиях MMoE лучше shared-bottom и почему на игрушечных данных выигрыша может не быть; как подобрать веса при свёртке целей; что делать, если одна задача ухудшается при улучшении другой.</p>
+<h2 id="проверь-себя">Проверь себя</h2>
+<details class="callout md details"><summary>Почему pCVR в ESMM обучается на всех показах, хотя у него нет собственной метки?</summary>
+<p>Потому что потеря второго слагаемого содержит произведение <span class="tex">\mathrm{pCTR}\cdot\mathrm{pCVR}</span> с меткой <span class="tex">y\cdot z</span>, наблюдаемой на каждом показе; градиент через произведение доходит до pCVR.</p>
+</details>
+<details class="callout md details"><summary>Чем ворота MMoE отличаются от одних общих ворот?</summary>
+<p>У каждой задачи собственный softmax над экспертами, поэтому разные задачи могут смешивать экспертов по-разному, а при конфликте — выбирать разных.</p>
+</details>
+<details class="callout md details"><summary>Что PLE меняет по сравнению с MMoE?</summary>
+<p>Делит экспертов на общих и специфичных для задачи и стакает несколько уровней с прогрессивной маршрутизацией; это уменьшает вредное влияние задач друг на друга.</p>
+</details>
+<details class="callout md details"><summary>Зачем в формуле Kendall слагаемое $\log\sigma_k$?</summary>
+<p>Без него минимизация гнала бы все <span class="tex">\sigma_k</span> в бесконечность, обнуляя потерю; логарифм штрафует за большую неопределённость.</p>
+</details>
+<details class="callout md details"><summary>Почему калибровка голов важна при свёртке в один скор?</summary>
+<p>Веса <span class="tex">w_k</span> задают пропорции только для вероятностей на одной шкале; если голова завышена или занижена, её эффективный вес отличается от заданного.</p>
+</details>
+<h2 id="что-почитать">Что почитать</h2>
+<ul>
+<li>Ma X. et al. <em>Entire Space Multi-Task Model: An Effective Approach for Estimating Post-Click Conversion Rate</em>, SIGIR 2018 — https://arxiv.org/abs/1804.07931</li>
+<li>Ma J., Zhao Z., Yi X., Chen J., Hong L., Chi E. <em>Modeling Task Relationships in Multi-task Learning with Multi-gate Mixture-of-Experts</em>, KDD 2018.</li>
+<li>Tang H., Liu J., Zhao M., Gong X. <em>Progressive Layered Extraction (PLE): A Novel Multi-Task Learning Model for Personalized Recommendations</em>, RecSys 2020.</li>
+<li>Kendall A., Gal Y., Cipolla R. <em>Multi-Task Learning Using Uncertainty to Weigh Losses for Scene Geometry and Semantics</em>, CVPR 2018 — https://arxiv.org/abs/1705.07115</li>
+<li>Chen Z., Badrinarayanan V., Lee C.-Y., Rabinovich A. <em>GradNorm: Gradient Normalization for Adaptive Loss Balancing in Deep Multitask Networks</em>, ICML 2018 — https://arxiv.org/abs/1711.02257</li>
+</ul>
+</div>
+      
+
+      
+
+      
+      <nav class="pager" aria-label="Соседние статьи">
+        <a href="/edufamcs-demo/handbook/recsys/llm-v-rekomendaciyah/"><span><svg class="ico sm" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-arrow-left"/></svg>Назад</span>Большие языковые модели в рекомендациях</a>
+        <a href="/edufamcs-demo/handbook/recsys/priznaki-i-feature-store/"><span>Дальше<svg class="ico sm" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-arrow"/></svg></span>Признаки для рекомендаций и feature store</a>
+      </nav>
+      
+    </article>
+
+    <aside class="hb-toc" aria-label="На этой странице">
+      <a class="l2" href="#зачем-несколько-целей">Зачем несколько целей</a><a class="l2" href="#esmm-конверсия-на-всём-пространстве-показов">ESMM: конверсия на всём пространстве показов</a><a class="l2" href="#shared-bottom-и-негативный-перенос">Shared-bottom и негативный перенос</a><a class="l2" href="#mmoe-смесь-экспертов-с-воротами-на-каждую-задачу">MMoE: смесь экспертов с воротами на каждую задачу</a><a class="l2" href="#ple-и-cgc-явное-разделение-общего-и-своего">PLE и CGC: явное разделение общего и своего</a><a class="l2" href="#взвешивание-потерь">Взвешивание потерь</a><a class="l2" href="#свёртка-в-один-скор-и-калибровка">Свёртка в один скор и калибровка</a><a class="l2" href="#пример-mmoe-против-shared-bottom">Пример: MMoE против shared-bottom</a><a class="l2" href="#код">Код</a><a class="l2" href="#ловушки">Ловушки</a><a class="l2" href="#проверь-себя">Проверь себя</a><a class="l2" href="#что-почитать">Что почитать</a>
+    </aside>
+  </div>
+</div>
+
+
+</main>
+
+<footer class="ftr" data-theme="dark">
+  <svg class="sym fern" viewBox="0 0 40.5 65.02" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#fern"/></svg>
+  <div class="container">
+    <div class="ftr-row">
+      <a href="/edufamcs-demo/" aria-label="EDU FAMCS — главная"><img src="/edufamcs-demo/static/brand/logo/logo-edu-dark.svg" alt="EDU FAMCS" width="196" height="40"></a>
+      <ul class="ftr-links">
+        <li><a href="/edufamcs-demo/#courses">Курсы</a></li>
+        <li><a href="/edufamcs-demo/ml/">Машинное обучение</a></li>
+        <li><a href="/edufamcs-demo/handbook/">Хендбук</a></li>
+        <li><a href="/edufamcs-demo/news/">Новости</a></li>
+        <li><a href="/edufamcs-demo/people/">Авторы</a></li>
+        <li><a href="/edufamcs-demo/about/">О&nbsp;нас</a></li>
+        <li><a href="/edufamcs-demo/propose/">Предложить или исправить</a></li>
+        <li><a href="/edufamcs-demo/privacy/">Конфиденциальность</a></li>
+      </ul>
+    </div>
+    <div class="ftr-big" aria-hidden="true">EDU<span class="d">·</span>FAMCS</div>
+    <p class="ftr-copy">© 2026 EDU FAMCS · Минск</p>
+  </div>
+</footer>
+
+<div class="toasts-region" aria-live="polite" id="toasts">
+
+</div>
+
+</body>
+</html>

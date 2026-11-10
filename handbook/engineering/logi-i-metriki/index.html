@@ -1,0 +1,365 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Логи и метрики: Prometheus · EDU FAMCS</title>
+<meta name="description" content="Логи и метрики: Prometheus — Инженерия: от ноутбука до сервиса. Хендбук ML-курса ФПМИ.">
+<meta name="theme-color" content="#060A16">
+<meta name="robots" content="noindex, nofollow">
+<meta name="htmx-config" content='{"allowEval":false,"includeIndicatorStyles":false,"historyCacheSize":0,"selfRequestsOnly":true}'>
+<meta name="katex-js" content="/edufamcs-demo/static/vendor/katex/katex.min.js">
+<meta name="katex-css" content="/edufamcs-demo/static/vendor/katex/katex.min.css">
+<link rel="icon" href="/edufamcs-demo/static/brand/logo/favicon-16.svg" type="image/svg+xml" sizes="16x16">
+<link rel="icon" href="/edufamcs-demo/static/brand/logo/favicon.svg" type="image/svg+xml" sizes="any">
+<link rel="preload" href="/edufamcs-demo/static/brand/fonts/manrope-cyrillic-400.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/edufamcs-demo/static/brand/fonts/unbounded-cyrillic-800.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="/edufamcs-demo/static/brand/fonts.css">
+<link rel="stylesheet" href="/edufamcs-demo/static/brand/tokens.css">
+<link rel="stylesheet" href="/edufamcs-demo/static/brand/components.css">
+<link rel="stylesheet" href="/edufamcs-demo/static/css/site.css">
+<link rel="stylesheet" href="/edufamcs-demo/static/css/hub.css">
+<link rel="stylesheet" href="/edufamcs-demo/static/css/about.css">
+<link rel="stylesheet" href="/edufamcs-demo/static/handbook/handbook.css">
+<script src="/edufamcs-demo/static/js/theme.js"></script>
+<script src="/edufamcs-demo/static/vendor/htmx/htmx.min.js" defer></script>
+<script src="/edufamcs-demo/static/vendor/alpine/alpine-csp.min.js" defer></script>
+<script src="/edufamcs-demo/static/js/site.js" defer></script>
+<script src="/edufamcs-demo/static/handbook/handbook.js" defer></script>
+</head>
+<body class="" hx-headers='{"X-CSRFToken": "0A4XhZUUugjbOnPS3nMBcMZ5kbLSkJ1tCNTUx1tLv3xKZG4k2Q0yUFR3MkSQ4t0a"}'>
+<a class="skip" href="#main">К содержанию</a>
+<div class="demo-bar" role="note">Демо-версия для отзывов: вход, запись на курсы и формы здесь не работают.</div>
+
+<header class="hdr">
+  <div class="container">
+    <a class="brand" href="/edufamcs-demo/" aria-label="EDU FAMCS — главная">
+      <span class="full"><img class="only-light" src="/edufamcs-demo/static/brand/logo/logo-edu-light.svg" alt="EDU FAMCS" width="196" height="40"><img class="only-dark" src="/edufamcs-demo/static/brand/logo/logo-edu-dark.svg" alt="EDU FAMCS" width="196" height="40"></span>
+      <span class="short"><img class="only-light" src="/edufamcs-demo/static/brand/logo/logo-edu-light.svg" alt="EDU FAMCS" height="30"><img class="only-dark" src="/edufamcs-demo/static/brand/logo/logo-edu-dark.svg" alt="EDU FAMCS" height="30"></span>
+    </a>
+    <nav class="nav" id="main-nav" aria-label="Основная навигация">
+      <a href="/edufamcs-demo/#courses">Курсы</a>
+      <a href="/edufamcs-demo/ml/" >Машинное обучение</a>
+      
+      <a href="/edufamcs-demo/handbook/" aria-current="page">Хендбук</a>
+      <a href="/edufamcs-demo/news/" >Новости</a>
+      <a href="/edufamcs-demo/people/" >Авторы</a>
+      <a href="/edufamcs-demo/about/" >О&nbsp;нас</a>
+    </nav>
+    <div class="hdr-actions">
+      
+      <a class="btn btn-outline btn-login" href="/edufamcs-demo/accounts/login/?next=/handbook/engineering/logi-i-metriki/">Войти</a>
+      
+      <button class="icon-btn menu-btn" type="button" aria-label="Меню" aria-expanded="false" aria-controls="main-nav"><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-menu"/></svg></button>
+    </div>
+  </div>
+</header>
+
+<main id="main">
+
+
+
+<div class="container hb-page hb-tone">
+  <div class="hb-readbar" aria-hidden="true"><i></i></div>
+  <div class="hb">
+    <aside class="hb-nav" aria-label="Статьи раздела">
+      
+<form class="hb-search" action="/edufamcs-demo/handbook/search/" method="get" role="search">
+  <svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-search"/></svg>
+  <input class="input" type="search" name="q" value="" placeholder="Поиск по хендбуку" aria-label="Поиск по хендбуку" autocomplete="off" maxlength="120"
+    hx-get="/edufamcs-demo/handbook/search/" hx-trigger="input changed delay:250ms, search" hx-target="#hb-nav-results" hx-sync="this:replace">
+</form>
+
+      <div id="hb-nav-results" class="hb-nav-results" aria-live="polite"></div>
+      <a class="grp" href="/edufamcs-demo/handbook/engineering/">Наблюдаемость</a>
+      
+      <a class="cur" href="/edufamcs-demo/handbook/engineering/logi-i-metriki/" aria-current="page">Логи и метрики: Prometheus</a>
+      
+      <a class="" href="/edufamcs-demo/handbook/engineering/grafana/">Grafana: дашборды и алерты</a>
+      
+      <a class="" href="/edufamcs-demo/handbook/engineering/monitoring-modelej/">Мониторинг ML-модели: дрейф, качество, деградация</a>
+      
+    </aside>
+
+    <article class="hb-main">
+      <nav class="crumbs" aria-label="Навигация"><a href="/edufamcs-demo/handbook/">Хендбук</a><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-chev"/></svg><a href="/edufamcs-demo/handbook/engineering/">Инженерия: от ноутбука до сервиса</a></nav>
+      <h1 class="h1">Логи и метрики: Prometheus</h1>
+      <div class="hb-meta">
+        
+        
+        <span><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-clock"/></svg>10&nbsp;мин</span>
+        <span class="hb-authors"><span class="avatar sm" title="Артем Лебедевич">АЛ</span>Артем Лебедевич</span>
+        <span><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-edit"/></svg>10 ноября 2026</span>
+        
+        
+      </div>
+
+      
+      <details class="hb-mtoc">
+        <summary><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-list"/></svg>Содержание<svg class="ico sm" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-chev-down"/></svg></summary>
+        <a class="l2" href="#три-типа-сигналов">Три типа сигналов</a><a class="l2" href="#структурные-логи-в-python">Структурные логи в Python</a><a class="l3" href="#где-смотреть-логи-и-как-их-ограничить">Где смотреть логи и как их ограничить</a><a class="l2" href="#типы-метрик">Типы метрик</a><a class="l3" href="#ловушка-кардинальности">Ловушка кардинальности</a><a class="l2" href="#prometheus-сбор-и-compose">Prometheus: сбор и compose</a><a class="l2" href="#promql-основное">PromQL: основное</a><a class="l2" href="#red-и-четыре-золотых-сигнала">RED и четыре золотых сигнала</a><a class="l2" href="#ловушки">Ловушки</a><a class="l2" href="#проверь-себя">Проверь себя</a><a class="l2" href="#что-почитать">Что почитать</a>
+      </details>
+      
+
+      <div class="prose"><p>Сервис в продакшене — чёрный ящик: вы не видите, сколько запросов он обрабатывает, как быстро и что происходит при ошибках. <strong>Наблюдаемость</strong> (observability) — это набор сигналов, по которым можно ответить на эти вопросы, не заходя в контейнер с отладчиком. В статье — логи и метрики на примере нашего сервиса: как писать полезные логи, как вывести метрики через <code>prometheus-client</code> и как их читать на PromQL.</p>
+<h2 id="три-типа-сигналов">Три типа сигналов</h2>
+<ul>
+<li><strong>Логи</strong> — события с контекстом: «в 12:03:07 запрос <code>a1b2</code> к <code>/predict</code> вернул 500, потому что…». Отвечают на вопрос <em>что именно произошло</em>. Дороги в хранении, неудобны для агрегатов.</li>
+<li><strong>Метрики</strong> — числа во времени: запросов в секунду, доля ошибок, p95 задержки. Дёшевы, компактны, хорошо агрегируются и по ним строятся алерты. Отвечают на вопрос <em>что-то идёт не так?</em></li>
+<li><strong>Трейсы</strong> — путь одного запроса через несколько сервисов с замером каждого участка. Нужны, когда сервисов много; для одного сервиса обычно избыточны (стандарт — OpenTelemetry).</li>
+</ul>
+<p>Рабочая последовательность: метрика сигналит, лог объясняет, трейс показывает, в каком из сервисов узкое место.</p>
+<h2 id="структурные-логи-в-python">Структурные логи в Python</h2>
+<p>Лог-строка «Prediction failed for user» бесполезна при тысяче строк в минуту. Нужны <strong>уровни</strong> (<code>DEBUG</code> — детали разработки, <code>INFO</code> — нормальные события, <code>WARNING</code> — подозрительно, но работаем, <code>ERROR</code> — запрос не выполнен), <strong>JSON</strong> (чтобы логи можно было фильтровать полем, а не регуляркой) и <strong>идентификатор запроса</strong>, по которому все строки одного запроса находятся вместе.</p>
+<p>Полный код сервиса с JSON-логом, <code>request_id</code> и метриками (в одном файле <code>main.py</code>; проверено запуском на Python с FastAPI, <code>uvicorn</code> и <code>prometheus-client</code>):</p>
+<div class="code"><div class="code-head"><span class="lang">python</span></div><pre><code><span class="tok-k">import</span> json
+<span class="tok-k">import</span> logging
+<span class="tok-k">import</span> time
+<span class="tok-k">import</span> uuid
+<span class="tok-k">from</span> contextvars <span class="tok-k">import</span> ContextVar
+
+<span class="tok-k">from</span> fastapi <span class="tok-k">import</span> FastAPI<span class="tok-p">,</span> Request<span class="tok-p">,</span> Response
+<span class="tok-k">from</span> prometheus_client <span class="tok-k">import</span> <span class="tok-p">(</span>CONTENT_TYPE_LATEST<span class="tok-p">,</span> Counter<span class="tok-p">,</span> Gauge<span class="tok-p">,</span> Histogram<span class="tok-p">,</span>
+                               generate_latest<span class="tok-p">)</span>
+
+request_id_var<span class="tok-p">:</span> ContextVar<span class="tok-p">[</span><span class="tok-f">str</span><span class="tok-p">]</span> <span class="tok-p">=</span> ContextVar<span class="tok-p">(</span><span class="tok-s">"</span><span class="tok-s">request_id</span><span class="tok-s">"</span><span class="tok-p">,</span> default<span class="tok-p">=</span><span class="tok-s">"</span><span class="tok-s">-</span><span class="tok-s">"</span><span class="tok-p">)</span>
+
+
+<span class="tok-k">class</span> <span class="tok-f">JsonFormatter</span><span class="tok-p">(</span>logging<span class="tok-p">.</span>Formatter<span class="tok-p">)</span><span class="tok-p">:</span>
+    <span class="tok-k">def</span> <span class="tok-f">format</span><span class="tok-p">(</span><span class="tok-f">self</span><span class="tok-p">,</span> record<span class="tok-p">:</span> logging<span class="tok-p">.</span>LogRecord<span class="tok-p">)</span> <span class="tok-p">-</span><span class="tok-p">&gt;</span> <span class="tok-f">str</span><span class="tok-p">:</span>
+        payload <span class="tok-p">=</span> <span class="tok-p">{</span>
+            <span class="tok-s">"</span><span class="tok-s">ts</span><span class="tok-s">"</span><span class="tok-p">:</span> <span class="tok-f">self</span><span class="tok-p">.</span>formatTime<span class="tok-p">(</span>record<span class="tok-p">,</span> <span class="tok-s">"</span><span class="tok-s">%</span><span class="tok-s">Y-</span><span class="tok-s">%</span><span class="tok-s">m-</span><span class="tok-s">%d</span><span class="tok-s">T</span><span class="tok-s">%</span><span class="tok-s">H:</span><span class="tok-s">%</span><span class="tok-s">M:</span><span class="tok-s">%</span><span class="tok-s">S</span><span class="tok-s">%</span><span class="tok-s">z</span><span class="tok-s">"</span><span class="tok-p">)</span><span class="tok-p">,</span>
+            <span class="tok-s">"</span><span class="tok-s">level</span><span class="tok-s">"</span><span class="tok-p">:</span> record<span class="tok-p">.</span>levelname<span class="tok-p">,</span>
+            <span class="tok-s">"</span><span class="tok-s">logger</span><span class="tok-s">"</span><span class="tok-p">:</span> record<span class="tok-p">.</span>name<span class="tok-p">,</span>
+            <span class="tok-s">"</span><span class="tok-s">msg</span><span class="tok-s">"</span><span class="tok-p">:</span> record<span class="tok-p">.</span>getMessage<span class="tok-p">(</span><span class="tok-p">)</span><span class="tok-p">,</span>
+            <span class="tok-s">"</span><span class="tok-s">request_id</span><span class="tok-s">"</span><span class="tok-p">:</span> request_id_var<span class="tok-p">.</span>get<span class="tok-p">(</span><span class="tok-p">)</span><span class="tok-p">,</span>
+        <span class="tok-p">}</span>
+        payload<span class="tok-p">.</span>update<span class="tok-p">(</span><span class="tok-f">getattr</span><span class="tok-p">(</span>record<span class="tok-p">,</span> <span class="tok-s">"</span><span class="tok-s">extra_fields</span><span class="tok-s">"</span><span class="tok-p">,</span> <span class="tok-p">{</span><span class="tok-p">}</span><span class="tok-p">)</span><span class="tok-p">)</span>
+        <span class="tok-k">if</span> record<span class="tok-p">.</span>exc_info<span class="tok-p">:</span>
+            payload<span class="tok-p">[</span><span class="tok-s">"</span><span class="tok-s">exc</span><span class="tok-s">"</span><span class="tok-p">]</span> <span class="tok-p">=</span> <span class="tok-f">self</span><span class="tok-p">.</span>formatException<span class="tok-p">(</span>record<span class="tok-p">.</span>exc_info<span class="tok-p">)</span>
+        <span class="tok-k">return</span> json<span class="tok-p">.</span>dumps<span class="tok-p">(</span>payload<span class="tok-p">,</span> ensure_ascii<span class="tok-p">=</span><span class="tok-k">False</span><span class="tok-p">)</span>
+
+
+handler <span class="tok-p">=</span> logging<span class="tok-p">.</span>StreamHandler<span class="tok-p">(</span><span class="tok-p">)</span>
+handler<span class="tok-p">.</span>setFormatter<span class="tok-p">(</span>JsonFormatter<span class="tok-p">(</span><span class="tok-p">)</span><span class="tok-p">)</span>
+log <span class="tok-p">=</span> logging<span class="tok-p">.</span>getLogger<span class="tok-p">(</span><span class="tok-s">"</span><span class="tok-s">app</span><span class="tok-s">"</span><span class="tok-p">)</span>
+log<span class="tok-p">.</span>addHandler<span class="tok-p">(</span>handler<span class="tok-p">)</span>
+log<span class="tok-p">.</span>setLevel<span class="tok-p">(</span>logging<span class="tok-p">.</span>INFO<span class="tok-p">)</span>
+log<span class="tok-p">.</span>propagate <span class="tok-p">=</span> <span class="tok-k">False</span>
+
+REQUESTS <span class="tok-p">=</span> Counter<span class="tok-p">(</span>
+    <span class="tok-s">"</span><span class="tok-s">http_requests_total</span><span class="tok-s">"</span><span class="tok-p">,</span> <span class="tok-s">"</span><span class="tok-s">HTTP requests</span><span class="tok-s">"</span><span class="tok-p">,</span> <span class="tok-p">[</span><span class="tok-s">"</span><span class="tok-s">method</span><span class="tok-s">"</span><span class="tok-p">,</span> <span class="tok-s">"</span><span class="tok-s">route</span><span class="tok-s">"</span><span class="tok-p">,</span> <span class="tok-s">"</span><span class="tok-s">status</span><span class="tok-s">"</span><span class="tok-p">]</span>
+<span class="tok-p">)</span>
+LATENCY <span class="tok-p">=</span> Histogram<span class="tok-p">(</span>
+    <span class="tok-s">"</span><span class="tok-s">http_request_duration_seconds</span><span class="tok-s">"</span><span class="tok-p">,</span>
+    <span class="tok-s">"</span><span class="tok-s">HTTP request latency</span><span class="tok-s">"</span><span class="tok-p">,</span>
+    <span class="tok-p">[</span><span class="tok-s">"</span><span class="tok-s">route</span><span class="tok-s">"</span><span class="tok-p">]</span><span class="tok-p">,</span>
+    buckets<span class="tok-p">=</span><span class="tok-p">(</span><span class="tok-n">0.005</span><span class="tok-p">,</span> <span class="tok-n">0.01</span><span class="tok-p">,</span> <span class="tok-n">0.025</span><span class="tok-p">,</span> <span class="tok-n">0.05</span><span class="tok-p">,</span> <span class="tok-n">0.1</span><span class="tok-p">,</span> <span class="tok-n">0.25</span><span class="tok-p">,</span> <span class="tok-n">0.5</span><span class="tok-p">,</span> <span class="tok-n">1</span><span class="tok-p">,</span> <span class="tok-n">2.5</span><span class="tok-p">)</span><span class="tok-p">,</span>
+<span class="tok-p">)</span>
+IN_FLIGHT <span class="tok-p">=</span> Gauge<span class="tok-p">(</span><span class="tok-s">"</span><span class="tok-s">http_requests_in_flight</span><span class="tok-s">"</span><span class="tok-p">,</span> <span class="tok-s">"</span><span class="tok-s">Requests being processed</span><span class="tok-s">"</span><span class="tok-p">)</span>
+
+app <span class="tok-p">=</span> FastAPI<span class="tok-p">(</span><span class="tok-p">)</span>
+
+
+<span class="tok-f">@app</span><span class="tok-p">.</span>middleware<span class="tok-p">(</span><span class="tok-s">"</span><span class="tok-s">http</span><span class="tok-s">"</span><span class="tok-p">)</span>
+<span class="tok-k">async</span> <span class="tok-k">def</span> <span class="tok-f">observe</span><span class="tok-p">(</span>request<span class="tok-p">:</span> Request<span class="tok-p">,</span> call_next<span class="tok-p">)</span><span class="tok-p">:</span>
+    rid <span class="tok-p">=</span> request<span class="tok-p">.</span>headers<span class="tok-p">.</span>get<span class="tok-p">(</span><span class="tok-s">"</span><span class="tok-s">x-request-id</span><span class="tok-s">"</span><span class="tok-p">)</span> <span class="tok-k">or</span> uuid<span class="tok-p">.</span>uuid4<span class="tok-p">(</span><span class="tok-p">)</span><span class="tok-p">.</span>hex<span class="tok-p">[</span><span class="tok-p">:</span><span class="tok-n">12</span><span class="tok-p">]</span>
+    request_id_var<span class="tok-p">.</span>set<span class="tok-p">(</span>rid<span class="tok-p">)</span>
+    start <span class="tok-p">=</span> time<span class="tok-p">.</span>perf_counter<span class="tok-p">(</span><span class="tok-p">)</span>
+    status <span class="tok-p">=</span> <span class="tok-n">500</span>
+    IN_FLIGHT<span class="tok-p">.</span>inc<span class="tok-p">(</span><span class="tok-p">)</span>
+    <span class="tok-k">try</span><span class="tok-p">:</span>
+        response <span class="tok-p">=</span> <span class="tok-k">await</span> call_next<span class="tok-p">(</span>request<span class="tok-p">)</span>
+        status <span class="tok-p">=</span> response<span class="tok-p">.</span>status_code
+        response<span class="tok-p">.</span>headers<span class="tok-p">[</span><span class="tok-s">"</span><span class="tok-s">x-request-id</span><span class="tok-s">"</span><span class="tok-p">]</span> <span class="tok-p">=</span> rid
+        <span class="tok-k">return</span> response
+    <span class="tok-k">finally</span><span class="tok-p">:</span>
+        IN_FLIGHT<span class="tok-p">.</span>dec<span class="tok-p">(</span><span class="tok-p">)</span>
+        route <span class="tok-p">=</span> request<span class="tok-p">.</span>scope<span class="tok-p">.</span>get<span class="tok-p">(</span><span class="tok-s">"</span><span class="tok-s">route</span><span class="tok-s">"</span><span class="tok-p">)</span>
+        route_path <span class="tok-p">=</span> route<span class="tok-p">.</span>path <span class="tok-k">if</span> route <span class="tok-k">else</span> <span class="tok-s">"</span><span class="tok-s">unmatched</span><span class="tok-s">"</span>  <span class="tok-c"># шаблон, не сырой URL</span>
+        elapsed <span class="tok-p">=</span> time<span class="tok-p">.</span>perf_counter<span class="tok-p">(</span><span class="tok-p">)</span> <span class="tok-p">-</span> start
+        REQUESTS<span class="tok-p">.</span>labels<span class="tok-p">(</span>request<span class="tok-p">.</span>method<span class="tok-p">,</span> route_path<span class="tok-p">,</span> <span class="tok-f">str</span><span class="tok-p">(</span>status<span class="tok-p">)</span><span class="tok-p">)</span><span class="tok-p">.</span>inc<span class="tok-p">(</span><span class="tok-p">)</span>
+        LATENCY<span class="tok-p">.</span>labels<span class="tok-p">(</span>route_path<span class="tok-p">)</span><span class="tok-p">.</span>observe<span class="tok-p">(</span>elapsed<span class="tok-p">)</span>
+        log<span class="tok-p">.</span>info<span class="tok-p">(</span>
+            <span class="tok-s">"</span><span class="tok-s">request</span><span class="tok-s">"</span><span class="tok-p">,</span>
+            extra<span class="tok-p">=</span><span class="tok-p">{</span><span class="tok-s">"</span><span class="tok-s">extra_fields</span><span class="tok-s">"</span><span class="tok-p">:</span> <span class="tok-p">{</span><span class="tok-s">"</span><span class="tok-s">method</span><span class="tok-s">"</span><span class="tok-p">:</span> request<span class="tok-p">.</span>method<span class="tok-p">,</span> <span class="tok-s">"</span><span class="tok-s">route</span><span class="tok-s">"</span><span class="tok-p">:</span> route_path<span class="tok-p">,</span>
+                                    <span class="tok-s">"</span><span class="tok-s">status</span><span class="tok-s">"</span><span class="tok-p">:</span> status<span class="tok-p">,</span> <span class="tok-s">"</span><span class="tok-s">ms</span><span class="tok-s">"</span><span class="tok-p">:</span> <span class="tok-f">round</span><span class="tok-p">(</span>elapsed <span class="tok-p">*</span> <span class="tok-n">1000</span><span class="tok-p">,</span> <span class="tok-n">1</span><span class="tok-p">)</span><span class="tok-p">}</span><span class="tok-p">}</span><span class="tok-p">,</span>
+        <span class="tok-p">)</span>
+
+
+<span class="tok-f">@app</span><span class="tok-p">.</span>get<span class="tok-p">(</span><span class="tok-s">"</span><span class="tok-s">/healthz</span><span class="tok-s">"</span><span class="tok-p">)</span>
+<span class="tok-k">def</span> <span class="tok-f">healthz</span><span class="tok-p">(</span><span class="tok-p">)</span><span class="tok-p">:</span>
+    <span class="tok-k">return</span> <span class="tok-p">{</span><span class="tok-s">"</span><span class="tok-s">status</span><span class="tok-s">"</span><span class="tok-p">:</span> <span class="tok-s">"</span><span class="tok-s">ok</span><span class="tok-s">"</span><span class="tok-p">}</span>
+
+
+<span class="tok-f">@app</span><span class="tok-p">.</span>post<span class="tok-p">(</span><span class="tok-s">"</span><span class="tok-s">/predict</span><span class="tok-s">"</span><span class="tok-p">)</span>
+<span class="tok-k">def</span> <span class="tok-f">predict</span><span class="tok-p">(</span>payload<span class="tok-p">:</span> <span class="tok-f">dict</span><span class="tok-p">)</span><span class="tok-p">:</span>
+    time<span class="tok-p">.</span>sleep<span class="tok-p">(</span><span class="tok-n">0.02</span><span class="tok-p">)</span>  <span class="tok-c"># здесь будет model.predict</span>
+    <span class="tok-k">return</span> <span class="tok-p">{</span><span class="tok-s">"</span><span class="tok-s">score</span><span class="tok-s">"</span><span class="tok-p">:</span> <span class="tok-n">0.5</span><span class="tok-p">,</span> <span class="tok-s">"</span><span class="tok-s">model_version</span><span class="tok-s">"</span><span class="tok-p">:</span> <span class="tok-s">"</span><span class="tok-s">v1</span><span class="tok-s">"</span><span class="tok-p">}</span>
+
+
+<span class="tok-f">@app</span><span class="tok-p">.</span>get<span class="tok-p">(</span><span class="tok-s">"</span><span class="tok-s">/metrics</span><span class="tok-s">"</span><span class="tok-p">)</span>
+<span class="tok-k">def</span> <span class="tok-f">metrics</span><span class="tok-p">(</span><span class="tok-p">)</span><span class="tok-p">:</span>
+    <span class="tok-k">return</span> Response<span class="tok-p">(</span>generate_latest<span class="tok-p">(</span><span class="tok-p">)</span><span class="tok-p">,</span> media_type<span class="tok-p">=</span>CONTENT_TYPE_LATEST<span class="tok-p">)</span>
+</code></pre></div>
+<p>В сервисе churn перенесите <code>observe</code>, метрики и эндпоинт <code>/metrics</code> в <code>src/churn/api.py</code> и добавьте зависимость: <code>uv add prometheus-client</code>; иначе цель <code>app:8000</code> будет <code>DOWN</code> (404).</p>
+<p>Запуск: <code>uv run --with fastapi --with uvicorn --with prometheus-client uvicorn main:app --port 8770</code>. После нескольких запросов к <code>/predict</code> и <code>/healthz</code> строка лога выглядит так (поля реально печатаются кодом выше):</p>
+<div class="code"><div class="code-head"><span class="lang">text</span></div><pre><code>{"ts": "2026-11-10T13:31:13+0300", "level": "INFO", "logger": "app", "msg": "request", "request_id": "302fd46f2ad0", "method": "GET", "route": "unmatched", "status": 404, "ms": 0.2}
+</code></pre></div>
+<p>А <code>/metrics</code> отдаёт текст в формате Prometheus:</p>
+<div class="code"><div class="code-head"><span class="lang">text</span></div><pre><code>http_requests_total{method="POST",route="/predict",status="200"} 3.0
+http_requests_total{method="GET",route="unmatched",status="404"} 1.0
+http_request_duration_seconds_count{route="/predict"} 3.0
+</code></pre></div>
+<div class="callout md warn"><p class="callout-title">Не логируйте секреты и персональные данные</p>
+<p>Не пишите в лог тела запросов целиком, токены, пароли, e-mail и телефоны. Логируйте идентификатор объекта, версию модели, статус и время. Отладочный <code>print(payload)</code> — частая причина утечки.</p>
+</div>
+<h3 id="где-смотреть-логи-и-как-их-ограничить">Где смотреть логи и как их ограничить</h3>
+<p>Контейнер пишет в stdout, Docker сохраняет это в файл на диске. Смотреть: <code>docker compose logs -f --tail 100 app</code>. По умолчанию драйвер <code>json-file</code> не ограничивает размер, и логи могут забить диск. Лимит задаётся в <code>compose.yaml</code>:</p>
+<div class="code"><div class="code-head"><span class="lang">yaml</span></div><pre><code>services<span class="tok-p">:</span>
+  app<span class="tok-p">:</span>
+    logging<span class="tok-p">:</span>
+      driver<span class="tok-p">:</span> json-file
+      options<span class="tok-p">:</span>
+        max-size<span class="tok-p">:</span> <span class="tok-s">"</span><span class="tok-s">10m</span><span class="tok-s">"</span>
+        max-file<span class="tok-p">:</span> <span class="tok-s">"</span><span class="tok-s">3</span><span class="tok-s">"</span>
+</code></pre></div>
+<h2 id="типы-метрик">Типы метрик</h2>
+<ul>
+<li><strong>Counter</strong> — число, которое только растёт (сбрасывается в 0 при перезапуске процесса). Запросы, ошибки, обработанные строки. Само значение бесполезно, смотрят на скорость роста — <code>rate()</code>.</li>
+<li><strong>Gauge</strong> — текущее значение, которое может и расти, и падать: запросов в обработке, размер очереди, использование памяти.</li>
+<li><strong>Histogram</strong> — распределение наблюдений по заранее заданным корзинам. Для каждой корзины хранится накопленный счётчик <code>_bucket{le="0.05"}</code> (число наблюдений ≤ 0,05 с), плюс <code>_sum</code> и <code>_count</code>. Из корзин оценивают квантили на стороне Prometheus; точность зависит от границ корзин, поэтому расставляйте их вокруг ваших целей по задержке (SLO).</li>
+</ul>
+<p>Среднее время ответа скрывает хвост: 99 быстрых запросов и один за 10 с дают среднее 0,1 с. Поэтому для задержки смотрят квантили (p95, p99), а не среднее.</p>
+<h3 id="ловушка-кардинальности">Ловушка кардинальности</h3>
+<p>Каждая уникальная комбинация значений меток — это <strong>отдельный временной ряд</strong>, и все они занимают память Prometheus. Метка <code>route</code> с десятком значений — нормально; метка <code>user_id</code> или сырой URL с идентификатором (<code>/items/18274</code>) создаёт миллионы рядов и роняет сервер. В коде выше используется шаблон маршрута (<code>/items/{id}</code>), а не фактический путь; неизвестные пути сводятся к <code>unmatched</code>.</p>
+<h2 id="prometheus-сбор-и-compose">Prometheus: сбор и compose</h2>
+<p>Prometheus сам <strong>забирает</strong> (pull) метрики с <code>/metrics</code> каждые <code>scrape_interval</code>. Конфиг <code>prometheus/prometheus.yml</code>:</p>
+<div class="code"><div class="code-head"><span class="lang">yaml</span></div><pre><code>global<span class="tok-p">:</span>
+  scrape_interval<span class="tok-p">:</span> 15s
+
+scrape_configs<span class="tok-p">:</span>
+  <span class="tok-p">-</span> job_name<span class="tok-p">:</span> app
+    metrics_path<span class="tok-p">:</span> /metrics
+    static_configs<span class="tok-p">:</span>
+      <span class="tok-p">-</span> targets<span class="tok-p">:</span> <span class="tok-p">[</span><span class="tok-s">"</span><span class="tok-s">app:8000</span><span class="tok-s">"</span><span class="tok-p">]</span>
+</code></pre></div>
+<p>Добавляем сервис в <code>compose.yaml</code> (адрес <code>app:8000</code> — имя сервиса в сети compose, см. <a href="/edufamcs-demo/handbook/engineering/docker-compose/" rel="noopener noreferrer nofollow">Docker Compose</a>):</p>
+<div class="code"><div class="code-head"><span class="lang">yaml</span></div><pre><code>  prometheus<span class="tok-p">:</span>
+    image<span class="tok-p">:</span> prom/prometheus:v3.16.0
+    profiles<span class="tok-p">:</span> <span class="tok-p">[</span><span class="tok-s">"</span><span class="tok-s">monitoring</span><span class="tok-s">"</span><span class="tok-p">]</span>
+    command<span class="tok-p">:</span>
+      <span class="tok-p">-</span> --config.file=/etc/prometheus/prometheus.yml
+      <span class="tok-p">-</span> --storage.tsdb.retention.time=15d
+    volumes<span class="tok-p">:</span>
+      <span class="tok-p">-</span> ./prometheus/prometheus.yml:/etc/prometheus/prometheus.yml:ro
+      <span class="tok-p">-</span> promdata:/prometheus
+    ports<span class="tok-p">:</span>
+      <span class="tok-p">-</span> <span class="tok-s">"</span><span class="tok-s">127.0.0.1:9090:9090</span><span class="tok-s">"</span>
+    restart<span class="tok-p">:</span> unless-stopped
+
+volumes<span class="tok-p">:</span>
+  promdata<span class="tok-p">:</span>
+</code></pre></div>
+<p>Раздел <code>Status → Targets</code> в интерфейсе на <code>localhost:9090</code> покажет, <code>UP</code> ли цель. Версии образов сверяйте с релизами Prometheus.</p>
+<h2 id="promql-основное">PromQL: основное</h2>
+<p><strong><code>rate()</code></strong> превращает счётчик в скорость в секунду на окне. Запросы в секунду на каждый маршрут:</p>
+<div class="code"><div class="code-head"><span class="lang">promql</span></div><pre><code><span class="tok-k">sum</span> <span class="tok-k">by</span> <span class="tok-p">(</span>route<span class="tok-p">)</span> <span class="tok-p">(</span><span class="tok-k">rate</span><span class="tok-p">(</span>http_requests_total<span class="tok-p">[</span><span class="tok-s">5m</span><span class="tok-p">]</span><span class="tok-p">)</span><span class="tok-p">)</span>
+</code></pre></div>
+<p>Окно <code>[5m]</code> должно содержать минимум 3–4 скрейпа (при шаге 15 с это с запасом). <code>sum by (route)</code> схлопывает остальные метки (метод, статус), оставляя <code>route</code>.</p>
+<p><strong>Доля ошибок</strong> — отношение двух скоростей, умножать на 100 не нужно, Grafana покажет проценты по единице <code>percentunit</code>:</p>
+<div class="code"><div class="code-head"><span class="lang">promql</span></div><pre><code><span class="tok-k">sum</span><span class="tok-p">(</span><span class="tok-k">rate</span><span class="tok-p">(</span>http_requests_total<span class="tok-p">{</span>status<span class="tok-p">=~</span><span class="tok-p">"</span><span class="tok-s">5..</span><span class="tok-p">"</span><span class="tok-p">}</span><span class="tok-p">[</span><span class="tok-s">5m</span><span class="tok-p">]</span><span class="tok-p">)</span><span class="tok-p">)</span>
+<span class="tok-p">/</span>
+<span class="tok-k">sum</span><span class="tok-p">(</span><span class="tok-k">rate</span><span class="tok-p">(</span>http_requests_total<span class="tok-p">[</span><span class="tok-s">5m</span><span class="tok-p">]</span><span class="tok-p">)</span><span class="tok-p">)</span>
+</code></pre></div>
+<p><strong>p95 задержки</strong> по histogram: суммируем скорости корзин, сохраняя метку <code>le</code>, и берём квантиль.</p>
+<div class="code"><div class="code-head"><span class="lang">promql</span></div><pre><code><span class="tok-k">histogram_quantile</span><span class="tok-p">(</span>
+  <span class="tok-n">0.95</span><span class="tok-p">,</span>
+  <span class="tok-k">sum</span> <span class="tok-k">by</span> <span class="tok-p">(</span>le<span class="tok-p">)</span> <span class="tok-p">(</span><span class="tok-k">rate</span><span class="tok-p">(</span>http_request_duration_seconds_bucket<span class="tok-p">[</span><span class="tok-s">5m</span><span class="tok-p">]</span><span class="tok-p">)</span><span class="tok-p">)</span>
+<span class="tok-p">)</span>
+</code></pre></div>
+<p>Если <code>le</code> потерять в <code>sum by</code>, запрос вернёт пустоту: квантиль считается именно по границам корзин. Средняя задержка по тому же histogram: <code>rate(..._sum[5m]) / rate(..._count[5m])</code>.</p>
+<h2 id="red-и-четыре-золотых-сигнала">RED и четыре золотых сигнала</h2>
+<p>Для сервиса, отвечающего на запросы, достаточно <strong>RED</strong>: <strong>R</strong>ate (RPS), <strong>E</strong>rrors (доля ошибок), <strong>D</strong>uration (p50/p95/p99). Расширение от Google SRE — <strong>четыре золотых сигнала</strong>: latency, traffic, errors и <strong>saturation</strong> (насколько ресурс заполнен: загрузка CPU, память, число запросов в обработке, очередь). Первые три мы уже собрали; saturation в нашем сервисе пока представляет Gauge <code>http_requests_in_flight</code>. Дашборд на этих сигналах — в статье <a href="/edufamcs-demo/handbook/engineering/grafana/" rel="noopener noreferrer nofollow">Grafana</a>.</p>
+<h2 id="ловушки">Ловушки</h2>
+<ul>
+<li>Метрики с метками высокой кардинальности: <code>user_id</code>, <code>request_id</code>, сырой URL.</li>
+<li>Смотреть на <code>http_requests_total</code> без <code>rate()</code>: счётчик растёт монотонно и ничего не показывает.</li>
+<li>Среднее вместо квантилей; корзины histogram, не покрывающие реальные задержки (всё падает в <code>+Inf</code>).</li>
+<li>Логи без лимита на диске; <code>print</code> вместо логгера; секреты в логах.</li>
+<li>Пустой график после <code>histogram_quantile</code> — забыли <code>le</code> в <code>sum by</code>.</li>
+<li>Спрашивают на собеседовании: чем counter отличается от gauge; как считается p95 из histogram и в чём его погрешность; почему Prometheus использует pull; что такое кардинальность; что такое RED/USE/четыре золотых сигнала.</li>
+</ul>
+<h2 id="проверь-себя">Проверь себя</h2>
+<details class="callout md details"><summary>Чем counter отличается от gauge и почему к счётчику применяют `rate()`?</summary>
+<p>Counter монотонно растёт и сбрасывается при перезапуске, поэтому его абсолютное значение неинформативно; <code>rate()</code> даёт скорость и корректно переживает сбросы. Gauge показывает текущее значение, которое может меняться в обе стороны.</p>
+</details>
+<details class="callout md details"><summary>Почему метка `user_id` в метрике — ошибка?</summary>
+<p>Каждое значение метки создаёт отдельный временной ряд; миллионы пользователей дают миллионы рядов и исчерпывают память Prometheus. Такие данные должны жить в логах или БД.</p>
+</details>
+<details class="callout md details"><summary>Как считается p95 по histogram и от чего зависит точность?</summary>
+<p><code>histogram_quantile</code> интерполирует внутри корзины по накопленным счётчикам; точность определяется шириной корзин вокруг значения квантиля, поэтому границы подбирают под целевую задержку.</p>
+</details>
+<details class="callout md details"><summary>Зачем идентификатор запроса в логах?</summary>
+<p>По нему находят все строки одного запроса, в том числе из разных сервисов, если id передаётся в заголовке (<code>x-request-id</code>).</p>
+</details>
+<h2 id="что-почитать">Что почитать</h2>
+<ul>
+<li>Prometheus, документация: https://prometheus.io/docs/introduction/overview/</li>
+<li>Типы метрик: https://prometheus.io/docs/concepts/metric_types/</li>
+<li>Histogram и summary, практика: https://prometheus.io/docs/practices/histograms/</li>
+<li>Именование метрик и меток: https://prometheus.io/docs/practices/naming/</li>
+<li>PromQL: https://prometheus.io/docs/prometheus/latest/querying/basics/</li>
+<li><code>prometheus-client</code> для Python: https://prometheus.github.io/client_python/</li>
+<li>Google SRE Book, Monitoring Distributed Systems: https://sre.google/sre-book/monitoring-distributed-systems/</li>
+<li>Docker, JSON file logging driver: https://docs.docker.com/engine/logging/drivers/json-file/</li>
+</ul>
+</div>
+      
+
+      
+
+      
+      <nav class="pager" aria-label="Соседние статьи">
+        <a href="/edufamcs-demo/handbook/engineering/ci-github-actions/"><span><svg class="ico sm" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-arrow-left"/></svg>Назад</span>CI: тесты и линтер на каждый коммит</a>
+        <a href="/edufamcs-demo/handbook/engineering/grafana/"><span>Дальше<svg class="ico sm" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-arrow"/></svg></span>Grafana: дашборды и алерты</a>
+      </nav>
+      
+    </article>
+
+    <aside class="hb-toc" aria-label="На этой странице">
+      <a class="l2" href="#три-типа-сигналов">Три типа сигналов</a><a class="l2" href="#структурные-логи-в-python">Структурные логи в Python</a><a class="l3" href="#где-смотреть-логи-и-как-их-ограничить">Где смотреть логи и как их ограничить</a><a class="l2" href="#типы-метрик">Типы метрик</a><a class="l3" href="#ловушка-кардинальности">Ловушка кардинальности</a><a class="l2" href="#prometheus-сбор-и-compose">Prometheus: сбор и compose</a><a class="l2" href="#promql-основное">PromQL: основное</a><a class="l2" href="#red-и-четыре-золотых-сигнала">RED и четыре золотых сигнала</a><a class="l2" href="#ловушки">Ловушки</a><a class="l2" href="#проверь-себя">Проверь себя</a><a class="l2" href="#что-почитать">Что почитать</a>
+    </aside>
+  </div>
+</div>
+
+
+</main>
+
+<footer class="ftr" data-theme="dark">
+  <svg class="sym fern" viewBox="0 0 40.5 65.02" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#fern"/></svg>
+  <div class="container">
+    <div class="ftr-row">
+      <a href="/edufamcs-demo/" aria-label="EDU FAMCS — главная"><img src="/edufamcs-demo/static/brand/logo/logo-edu-dark.svg" alt="EDU FAMCS" width="196" height="40"></a>
+      <ul class="ftr-links">
+        <li><a href="/edufamcs-demo/#courses">Курсы</a></li>
+        <li><a href="/edufamcs-demo/ml/">Машинное обучение</a></li>
+        <li><a href="/edufamcs-demo/handbook/">Хендбук</a></li>
+        <li><a href="/edufamcs-demo/news/">Новости</a></li>
+        <li><a href="/edufamcs-demo/people/">Авторы</a></li>
+        <li><a href="/edufamcs-demo/about/">О&nbsp;нас</a></li>
+        <li><a href="/edufamcs-demo/propose/">Предложить или исправить</a></li>
+        <li><a href="/edufamcs-demo/privacy/">Конфиденциальность</a></li>
+      </ul>
+    </div>
+    <div class="ftr-big" aria-hidden="true">EDU<span class="d">·</span>FAMCS</div>
+    <p class="ftr-copy">© 2026 EDU FAMCS · Минск</p>
+  </div>
+</footer>
+
+<div class="toasts-region" aria-live="polite" id="toasts">
+
+</div>
+
+</body>
+</html>

@@ -27,7 +27,7 @@
 <script src="/edufamcs-demo/static/js/site.js" defer></script>
 <script src="/edufamcs-demo/static/handbook/handbook.js" defer></script>
 </head>
-<body class="" hx-headers='{"X-CSRFToken": "Tg5aXiwC4oiXDbXMs34SqCyaOb5UphVTFm6xR5OjfBybiKT2FsXXH4GvkyH9u2GS"}'>
+<body class="" hx-headers='{"X-CSRFToken": "A37SjnIyphnhQnA5Xp8bkoBd6hh6VFBQcgWPzphpq4BQ1GPxWSm82htbyqo4FpAx"}'>
 <a class="skip" href="#main">К содержанию</a>
 <div class="demo-bar" role="note">Демо-версия для отзывов: вход, запись на курсы и формы здесь не работают.</div>
 
@@ -60,6 +60,7 @@
 
 
 <div class="container hb-page hb-tone">
+  <div class="hb-readbar" aria-hidden="true"><i></i></div>
   <div class="hb">
     <aside class="hb-nav" aria-label="Статьи раздела">
       
@@ -78,6 +79,12 @@
       
       <a class="" href="/edufamcs-demo/handbook/math/intervaly-i-proverka-gipotez/">Доверительные интервалы и проверка гипотез</a>
       
+      <a class="" href="/edufamcs-demo/handbook/math/bajesovskaya-statistika/">Байесовская статистика</a>
+      
+      <a class="" href="/edufamcs-demo/handbook/math/teoriya-informacii/">Теория информации для ML</a>
+      
+      <a class="" href="/edufamcs-demo/handbook/math/statistika-ab-testov/">Статистика A/B-тестов</a>
+      
     </aside>
 
     <article class="hb-main">
@@ -86,9 +93,9 @@
       <div class="hb-meta">
         
         
-        <span><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-clock"/></svg>10&nbsp;мин</span>
+        <span><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-clock"/></svg>13&nbsp;мин</span>
         <span class="hb-authors"><span class="avatar sm" title="Артем Лебедевич">АЛ</span>Артем Лебедевич</span>
-        <span><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-edit"/></svg>9 ноября 2026</span>
+        <span><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-edit"/></svg>10 ноября 2026</span>
         
         
       </div>
@@ -96,7 +103,7 @@
       
       <details class="hb-mtoc">
         <summary><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-list"/></svg>Содержание<svg class="ico sm" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-chev-down"/></svg></summary>
-        <a class="l2" href="#вероятностное-пространство">Вероятностное пространство</a><a class="l2" href="#условная-вероятность-и-формула-байеса">Условная вероятность и формула Байеса</a><a class="l2" href="#случайные-величины-и-распределения">Случайные величины и распределения</a><a class="l2" href="#математическое-ожидание-дисперсия-ковариация">Математическое ожидание, дисперсия, ковариация</a><a class="l2" href="#закон-больших-чисел-и-цпт">Закон больших чисел и ЦПТ</a><a class="l2" href="#информация-энтропия-кросс-энтропия">Информация, энтропия, кросс-энтропия</a><a class="l2" href="#код">Код</a><a class="l2" href="#ловушки">Ловушки</a><a class="l2" href="#что-почитать">Что почитать</a>
+        <a class="l2" href="#вероятностное-пространство">Вероятностное пространство</a><a class="l2" href="#условная-вероятность-и-формула-байеса">Условная вероятность и формула Байеса</a><a class="l2" href="#случайные-величины-и-распределения">Случайные величины и распределения</a><a class="l2" href="#математическое-ожидание-дисперсия-ковариация">Математическое ожидание, дисперсия, ковариация</a><a class="l3" href="#полное-матожидание-и-полная-дисперсия">Полное матожидание и полная дисперсия</a><a class="l3" href="#неравенства-маркова-и-чебышёва">Неравенства Маркова и Чебышёва</a><a class="l2" href="#закон-больших-чисел-и-цпт">Закон больших чисел и ЦПТ</a><a class="l2" href="#информация-энтропия-кросс-энтропия">Информация, энтропия, кросс-энтропия</a><a class="l2" href="#код">Код</a><a class="l2" href="#ловушки">Ловушки</a><a class="l2" href="#проверь-себя">Проверь себя</a><a class="l2" href="#что-почитать">Что почитать</a>
       </details>
       
 
@@ -187,6 +194,12 @@
 <div class="tex tex-block">\mathrm{Cov}(\xi,\eta)=\mathbb{E}\big[(\xi-\mathbb{E}\xi)(\eta-\mathbb{E}\eta)\big],\qquad\rho=\frac{\mathrm{Cov}(\xi,\eta)}{\sigma_\xi\sigma_\eta}\in[-1,1].</div>
 <p><span class="tex">|\rho|=1</span> тогда и только тогда, когда <span class="tex">\eta=a\xi+b</span>. Для вектора <span class="tex">\xi\in\mathbb{R}^d</span> ковариационная матрица <span class="tex">\Sigma_{ij}=\mathrm{Cov}(\xi_i,\xi_j)</span> симметрична и положительно полуопределена, <span class="tex">\mathrm{Var}(a^\top\xi)=a^\top\Sigma a</span>.</p>
 <p><strong>Независимые величины некоррелированы, обратное неверно.</strong> Классический контрпример: <span class="tex">\xi\sim\mathcal{N}(0,1)</span>, <span class="tex">\eta=\xi^2</span>. Они жёстко зависимы, но <span class="tex">\mathrm{Cov}=\mathbb{E}\xi^3-\mathbb{E}\xi\,\mathbb{E}\xi^2=0</span>. Пирсон ловит только линейную связь; для монотонной нелинейной используют ранговую корреляцию Спирмена, для произвольной — взаимную информацию.</p>
+<h3 id="полное-матожидание-и-полная-дисперсия">Полное матожидание и полная дисперсия</h3>
+<p>Для разбиения по скрытой величине <span class="tex">S</span> (сегмент, кластер, компонента смеси) условное матожидание <span class="tex">\mathbb{E}(\xi\mid S)</span> само случайно, и</p>
+<div class="tex tex-block">\mathbb{E}\,\xi=\mathbb{E}\big[\mathbb{E}(\xi\mid S)\big],\qquad\mathrm{Var}\,\xi=\mathbb{E}\big[\mathrm{Var}(\xi\mid S)\big]+\mathrm{Var}\big(\mathbb{E}(\xi\mid S)\big).</div>
+<p>Дисперсия складывается из <strong>средней внутригрупповой</strong> и <strong>межгрупповой</strong>. Пример: чек <span class="tex">\xi</span> в двух сегментах, доли <span class="tex">0{,}3</span> и <span class="tex">0{,}7</span>, средние <span class="tex">10</span> и <span class="tex">20</span>, дисперсии <span class="tex">4</span> и <span class="tex">9</span>. Тогда <span class="tex">\mathbb{E}\xi=0{,}3\cdot10+0{,}7\cdot20=17</span>; <span class="tex">\mathbb{E}\,\mathrm{Var}(\xi\mid S)=0{,}3\cdot4+0{,}7\cdot9=7{,}5</span>; <span class="tex">\mathrm{Var}\,\mathbb{E}(\xi\mid S)=0{,}3\cdot(10-17)^2+0{,}7\cdot(20-17)^2=21</span>. Итого <span class="tex">\mathrm{Var}\,\xi=28{,}5</span> (симуляция на <span class="tex">2\cdot10^6</span> точек: <span class="tex">17{,}00</span> и <span class="tex">28{,}49</span>). На этом разложении держатся стратификация и CUPED в A/B (<a href="/edufamcs-demo/handbook/math/statistika-ab-testov/" rel="noopener noreferrer nofollow">статистика A/B-тестов</a>): дисперсию уменьшают, убирая межгрупповую часть.</p>
+<h3 id="неравенства-маркова-и-чебышёва">Неравенства Маркова и Чебышёва</h3>
+<p>Для <span class="tex">\xi\ge0</span> и <span class="tex">a&gt;0</span> неравенство <strong>Маркова</strong>: <span class="tex">P(\xi\ge a)\le\mathbb{E}\xi/a</span> (иначе среднее превысило бы <span class="tex">\mathbb{E}\xi</span>). Применив его к <span class="tex">(\xi-\mu)^2</span>, получаем <strong>Чебышёва</strong>: <span class="tex">P(|\xi-\mu|\ge k\sigma)\le1/k^2</span>. Не нужно знать распределение, поэтому оценки грубые: для <span class="tex">\mathrm{Exp}(1)</span> и <span class="tex">a=3</span> граница Маркова <span class="tex">1/3</span> при истинных <span class="tex">e^{-3}\approx0{,}050</span>, граница Чебышёва при <span class="tex">k=2</span> равна <span class="tex">0{,}25</span> при <span class="tex">0{,}0455</span> у нормального. Применения: «средняя сессия 5 минут — не более 10% сессий длиннее 50» (Марков); для среднего <span class="tex">P(|\bar\xi_n-\mu|\ge\varepsilon)\le\sigma^2/(n\varepsilon^2)</span> — это доказательство слабого ЗБЧ, а при <span class="tex">\sigma=1</span>, <span class="tex">\varepsilon=0{,}1</span> и вероятности <span class="tex">0{,}05</span> даёт <span class="tex">n=2000</span> против <span class="tex">\approx384</span> по ЦПТ.</p>
 <h2 id="закон-больших-чисел-и-цпт">Закон больших чисел и ЦПТ</h2>
 <p>Пусть <span class="tex">\xi_1,\xi_2,\dots</span> — независимые одинаково распределённые с <span class="tex">\mathbb{E}\xi=\mu</span>, <span class="tex">\mathrm{Var}\,\xi=\sigma^2&lt;\infty</span>, <span class="tex">\bar\xi_n=\frac1n\sum\xi_i</span>.</p>
 <p><strong>Закон больших чисел</strong>: <span class="tex">\bar\xi_n\to\mu</span> по вероятности (слабый ЗБЧ), и почти наверное (усиленный). Это оправдывает оценку матожидания по выборке и, например, оценку CTR как доли кликов.</p>
@@ -241,7 +254,26 @@ x <span class="tok-p">=</span> rng<span class="tok-p">.</span>normal<span class=
 <li><strong>Плотность как вероятность.</strong> Значения PDF выше 1 — не ошибка; в правдоподобии это нормально, но сравнивать плотности разных масштабов нельзя.</li>
 <li><strong>Нули в логарифмах.</strong> <span class="tex">\ln0</span> в кросс-энтропии — обрезайте предсказания (<span class="tex">\varepsilon=10^{-15}</span>) или считайте из логитов.</li>
 <li><strong>Accuracy вместо калибровки.</strong> log-loss наказывает за уверенные ошибки сильнее accuracy; модель с хорошей точностью может выдавать плохо откалиброванные вероятности.</li>
+<li><strong>На собеседовании: <span class="tex">P(A\mid B)</span> или <span class="tex">P(B\mid A)</span>?</strong> Precision — это <span class="tex">P(\text{класс}=1\mid\text{предсказан }1)</span>, recall — <span class="tex">P(\text{предсказан }1\mid\text{класс}=1)</span>; перевод между ними — формула Байеса и доля классов.</li>
+<li><strong>На собеседовании: чему равна дисперсия смеси?</strong> Средняя внутри плюс дисперсия средних по компонентам — закон полной дисперсии; частая задача на A/B со стратами.</li>
+<li><strong>На собеседовании: назовите условия ЦПТ и случай, где она не работает.</strong> Независимость, одинаковое распределение, конечная дисперсия; для Коши среднее не сходится ни к чему.</li>
 </ul>
+<h2 id="проверь-себя">Проверь себя</h2>
+<details class="callout md details"><summary>Приведите пример зависимых, но некоррелированных величин.</summary>
+<p><span class="tex">\xi\sim\mathcal{N}(0,1)</span> и <span class="tex">\eta=\xi^2</span>: <span class="tex">\mathrm{Cov}=\mathbb{E}\xi^3-\mathbb{E}\xi\,\mathbb{E}\xi^2=0</span>, но <span class="tex">\eta</span> — функция <span class="tex">\xi</span>. Для совместно нормальных величин некоррелированность влечёт независимость.</p>
+</details>
+<details class="callout md details"><summary>Тест на болезнь с чувствительностью 99% положителен. Почему вероятность болезни может быть ниже 2%?</summary>
+<p>Всё решает доля больных: при <span class="tex">P(\text{б})=10^{-3}</span> и ложноположительной доле <span class="tex">5\%</span> на одного больного приходится около 50 здоровых с плюсом, <span class="tex">P(\text{б}\mid+)\approx0{,}019</span>. Это base rate neglect.</p>
+</details>
+<details class="callout md details"><summary>Почему кросс-энтропия — естественная функция потерь для классификации?</summary>
+<p>Минимизация <span class="tex">D_{KL}(p\|q_\theta)=H(p,q_\theta)-H(p)</span> по <span class="tex">\theta</span> эквивалентна минимизации <span class="tex">H(p,q_\theta)</span>, а для эмпирического <span class="tex">p</span> это в точности минус средний лог-правдоподобие модели (ММП).</p>
+</details>
+<details class="callout md details"><summary>Почему плотность может быть больше 1?</summary>
+<p>Плотность — производная функции распределения, а не вероятность; вероятностью служит интеграл. У <span class="tex">\mathcal{U}[0;0{,}1]</span> плотность равна 10 на всём отрезке, интеграл равен 1.</p>
+</details>
+<details class="callout md details"><summary>Как оценить, сколько наблюдений достаточно, без знания распределения?</summary>
+<p>Неравенством Чебышёва: <span class="tex">n\ge\sigma^2/(\alpha\varepsilon^2)</span> гарантирует <span class="tex">P(|\bar\xi_n-\mu|\ge\varepsilon)\le\alpha</span> при любом распределении с дисперсией <span class="tex">\sigma^2</span>, но оценка в разы консервативнее ЦПТ.</p>
+</details>
 <h2 id="что-почитать">Что почитать</h2>
 <ul>
 <li>А. Н. Колмогоров. <em>Основные понятия теории вероятностей</em>. 1936 (нем. оригинал — <em>Grundbegriffe der Wahrscheinlichkeitsrechnung</em>, 1933).</li>
@@ -255,6 +287,8 @@ x <span class="tok-p">=</span> rng<span class="tok-p">.</span>normal<span class=
       
 
       
+
+      
       <nav class="pager" aria-label="Соседние статьи">
         <a href="/edufamcs-demo/handbook/math/gradienty-i-optimizaciya/"><span><svg class="ico sm" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-arrow-left"/></svg>Назад</span>Производные, градиенты и оптимизация</a>
         <a href="/edufamcs-demo/handbook/math/ocenki-parametrov-i-mmp/"><span>Дальше<svg class="ico sm" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-arrow"/></svg></span>Оценки параметров и метод максимального правдоподобия</a>
@@ -263,7 +297,7 @@ x <span class="tok-p">=</span> rng<span class="tok-p">.</span>normal<span class=
     </article>
 
     <aside class="hb-toc" aria-label="На этой странице">
-      <a class="l2" href="#вероятностное-пространство">Вероятностное пространство</a><a class="l2" href="#условная-вероятность-и-формула-байеса">Условная вероятность и формула Байеса</a><a class="l2" href="#случайные-величины-и-распределения">Случайные величины и распределения</a><a class="l2" href="#математическое-ожидание-дисперсия-ковариация">Математическое ожидание, дисперсия, ковариация</a><a class="l2" href="#закон-больших-чисел-и-цпт">Закон больших чисел и ЦПТ</a><a class="l2" href="#информация-энтропия-кросс-энтропия">Информация, энтропия, кросс-энтропия</a><a class="l2" href="#код">Код</a><a class="l2" href="#ловушки">Ловушки</a><a class="l2" href="#что-почитать">Что почитать</a>
+      <a class="l2" href="#вероятностное-пространство">Вероятностное пространство</a><a class="l2" href="#условная-вероятность-и-формула-байеса">Условная вероятность и формула Байеса</a><a class="l2" href="#случайные-величины-и-распределения">Случайные величины и распределения</a><a class="l2" href="#математическое-ожидание-дисперсия-ковариация">Математическое ожидание, дисперсия, ковариация</a><a class="l3" href="#полное-матожидание-и-полная-дисперсия">Полное матожидание и полная дисперсия</a><a class="l3" href="#неравенства-маркова-и-чебышёва">Неравенства Маркова и Чебышёва</a><a class="l2" href="#закон-больших-чисел-и-цпт">Закон больших чисел и ЦПТ</a><a class="l2" href="#информация-энтропия-кросс-энтропия">Информация, энтропия, кросс-энтропия</a><a class="l2" href="#код">Код</a><a class="l2" href="#ловушки">Ловушки</a><a class="l2" href="#проверь-себя">Проверь себя</a><a class="l2" href="#что-почитать">Что почитать</a>
     </aside>
   </div>
 </div>

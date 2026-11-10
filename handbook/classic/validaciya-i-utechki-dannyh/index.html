@@ -1,0 +1,292 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Валидация и утечки данных · EDU FAMCS</title>
+<meta name="description" content="Валидация и утечки данных — Классическое машинное обучение. Хендбук ML-курса ФПМИ.">
+<meta name="theme-color" content="#060A16">
+<meta name="robots" content="noindex, nofollow">
+<meta name="htmx-config" content='{"allowEval":false,"includeIndicatorStyles":false,"historyCacheSize":0,"selfRequestsOnly":true}'>
+<meta name="katex-js" content="/edufamcs-demo/static/vendor/katex/katex.min.js">
+<meta name="katex-css" content="/edufamcs-demo/static/vendor/katex/katex.min.css">
+<link rel="icon" href="/edufamcs-demo/static/brand/logo/favicon-16.svg" type="image/svg+xml" sizes="16x16">
+<link rel="icon" href="/edufamcs-demo/static/brand/logo/favicon.svg" type="image/svg+xml" sizes="any">
+<link rel="preload" href="/edufamcs-demo/static/brand/fonts/manrope-cyrillic-400.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/edufamcs-demo/static/brand/fonts/unbounded-cyrillic-800.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="/edufamcs-demo/static/brand/fonts.css">
+<link rel="stylesheet" href="/edufamcs-demo/static/brand/tokens.css">
+<link rel="stylesheet" href="/edufamcs-demo/static/brand/components.css">
+<link rel="stylesheet" href="/edufamcs-demo/static/css/site.css">
+<link rel="stylesheet" href="/edufamcs-demo/static/css/hub.css">
+<link rel="stylesheet" href="/edufamcs-demo/static/css/about.css">
+<link rel="stylesheet" href="/edufamcs-demo/static/handbook/handbook.css">
+<script src="/edufamcs-demo/static/js/theme.js"></script>
+<script src="/edufamcs-demo/static/vendor/htmx/htmx.min.js" defer></script>
+<script src="/edufamcs-demo/static/vendor/alpine/alpine-csp.min.js" defer></script>
+<script src="/edufamcs-demo/static/js/site.js" defer></script>
+<script src="/edufamcs-demo/static/handbook/handbook.js" defer></script>
+</head>
+<body class="" hx-headers='{"X-CSRFToken": "1igkWfBfzWMNL05pH1oTrgQcDIGjEoJnDv5hcha6AJ0mWjkRGuCQ99Ia5RNho8I4"}'>
+<a class="skip" href="#main">К содержанию</a>
+<div class="demo-bar" role="note">Демо-версия для отзывов: вход, запись на курсы и формы здесь не работают.</div>
+
+<header class="hdr">
+  <div class="container">
+    <a class="brand" href="/edufamcs-demo/" aria-label="EDU FAMCS — главная">
+      <span class="full"><img class="only-light" src="/edufamcs-demo/static/brand/logo/logo-edu-light.svg" alt="EDU FAMCS" width="196" height="40"><img class="only-dark" src="/edufamcs-demo/static/brand/logo/logo-edu-dark.svg" alt="EDU FAMCS" width="196" height="40"></span>
+      <span class="short"><img class="only-light" src="/edufamcs-demo/static/brand/logo/logo-edu-light.svg" alt="EDU FAMCS" height="30"><img class="only-dark" src="/edufamcs-demo/static/brand/logo/logo-edu-dark.svg" alt="EDU FAMCS" height="30"></span>
+    </a>
+    <nav class="nav" id="main-nav" aria-label="Основная навигация">
+      <a href="/edufamcs-demo/#courses">Курсы</a>
+      <a href="/edufamcs-demo/ml/" >Машинное обучение</a>
+      
+      <a href="/edufamcs-demo/handbook/" aria-current="page">Хендбук</a>
+      <a href="/edufamcs-demo/news/" >Новости</a>
+      <a href="/edufamcs-demo/people/" >Авторы</a>
+      <a href="/edufamcs-demo/about/" >О&nbsp;нас</a>
+    </nav>
+    <div class="hdr-actions">
+      
+      <a class="btn btn-outline btn-login" href="/edufamcs-demo/accounts/login/?next=/handbook/classic/validaciya-i-utechki-dannyh/">Войти</a>
+      
+      <button class="icon-btn menu-btn" type="button" aria-label="Меню" aria-expanded="false" aria-controls="main-nav"><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-menu"/></svg></button>
+    </div>
+  </div>
+</header>
+
+<main id="main">
+
+
+
+<div class="container hb-page hb-tone">
+  <div class="hb-readbar" aria-hidden="true"><i></i></div>
+  <div class="hb">
+    <aside class="hb-nav" aria-label="Статьи раздела">
+      
+<form class="hb-search" action="/edufamcs-demo/handbook/search/" method="get" role="search">
+  <svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-search"/></svg>
+  <input class="input" type="search" name="q" value="" placeholder="Поиск по хендбуку" aria-label="Поиск по хендбуку" autocomplete="off" maxlength="120"
+    hx-get="/edufamcs-demo/handbook/search/" hx-trigger="input changed delay:250ms, search" hx-target="#hb-nav-results" hx-sync="this:replace">
+</form>
+
+      <div id="hb-nav-results" class="hb-nav-results" aria-live="polite"></div>
+      <a class="grp" href="/edufamcs-demo/handbook/classic/">Данные, метрики и валидация</a>
+      
+      <a class="" href="/edufamcs-demo/handbook/classic/priznaki-i-kodirovanie-kategorij/">Признаки и кодирование категорий</a>
+      
+      <a class="" href="/edufamcs-demo/handbook/classic/nesbalansirovannye-klassy/">Несбалансированные классы</a>
+      
+      <a class="" href="/edufamcs-demo/handbook/classic/metriki-klassifikacii-i-kalibrovka/">Метрики классификации и калибровка</a>
+      
+      <a class="cur" href="/edufamcs-demo/handbook/classic/validaciya-i-utechki-dannyh/" aria-current="page">Валидация и утечки данных</a>
+      
+      <a class="" href="/edufamcs-demo/handbook/classic/poisk-anomalij/">Поиск аномалий</a>
+      
+    </aside>
+
+    <article class="hb-main">
+      <nav class="crumbs" aria-label="Навигация"><a href="/edufamcs-demo/handbook/">Хендбук</a><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-chev"/></svg><a href="/edufamcs-demo/handbook/classic/">Классическое машинное обучение</a></nav>
+      <h1 class="h1">Валидация и утечки данных</h1>
+      <div class="hb-meta">
+        
+        
+        <span><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-clock"/></svg>10&nbsp;мин</span>
+        <span class="hb-authors"><span class="avatar sm" title="Артем Лебедевич">АЛ</span>Артем Лебедевич</span>
+        <span><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-edit"/></svg>10 ноября 2026</span>
+        
+        
+      </div>
+
+      
+      <details class="hb-mtoc">
+        <summary><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-list"/></svg>Содержание<svg class="ico sm" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-chev-down"/></svg></summary>
+        <a class="l2" href="#что-и-чем-оцениваем">Что и чем оцениваем</a><a class="l2" href="#схема-разбиения-следует-за-использованием-модели">Схема разбиения следует за использованием модели</a><a class="l2" href="#таксономия-утечек">Таксономия утечек</a><a class="l2" href="#как-находить-утечки">Как находить утечки</a><a class="l2" href="#числа-три-демонстрации">Числа: три демонстрации</a><a class="l2" href="#код">Код</a><a class="l2" href="#ловушки">Ловушки</a><a class="l2" href="#проверь-себя">Проверь себя</a><a class="l2" href="#что-почитать">Что почитать</a>
+      </details>
+      
+
+      <div class="prose"><p>Валидация оценивает не «насколько модель запомнила данные» и даже не «насколько она работает на случайных новых строках», а <strong>как она будет работать там, где её применят</strong>. Почти все громкие провалы «на тесте 0,95, в проде 0,6» — это либо утечка информации в оценку, либо валидация, не похожая на реальное использование. Глава учит выбирать схему разбиения под сценарий, узнавать утечки по типам и находить их до выкатки.</p>
+<h2 id="что-и-чем-оцениваем">Что и чем оцениваем</h2>
+<p>Цель — ожидаемая ошибка на <strong>распределении, на котором модель будет работать</strong>. Hold-out (одно разбиение) даёт несмещённую, но шумную оценку: при 500 положительных объектах в тесте стандартная ошибка метрики сопоставима с различиями между моделями. <strong>K-fold</strong> использует все данные, но фолды зависимы, и оценка дисперсии приближённая. <strong>Repeated K-fold</strong> (несколько перемешиваний) уменьшает шум разбиения, а не шум самих данных. Базовое описание KFold, Stratified, Group, TimeSeries и nested CV — в <a href="/edufamcs-demo/handbook/classic/giperparametry-i-interpretiruemost/" rel="noopener noreferrer nofollow">главе про гиперпараметры</a>; здесь выбор схемы по сценарию.</p>
+<h2 id="схема-разбиения-следует-за-использованием-модели">Схема разбиения следует за использованием модели</h2>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>Как модель будет применяться</th>
+<th>Разбиение</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Новые независимые объекты</td>
+<td>случайное, <code>StratifiedKFold</code> при дисбалансе</td>
+</tr>
+<tr>
+<td>Новые пользователи/устройства/товары, а в данных по нескольку строк на сущность</td>
+<td><strong>группировка</strong>: <code>GroupKFold</code>, <code>StratifiedGroupKFold</code> — группа целиком в одном фолде</td>
+</tr>
+<tr>
+<td>Предсказание будущего по прошлому</td>
+<td><strong>по времени</strong>: обучение на прошлом, проверка на последующем окне; <code>TimeSeriesSplit</code></td>
+</tr>
+<tr>
+<td>Рекомендации, сессии, цепочки событий</td>
+<td>по времени и по пользователю одновременно (см. <a href="/edufamcs-demo/handbook/recsys/protokol-oflajn-ocenki/" rel="noopener noreferrer nofollow">протокол оффлайн-оценки</a>)</td>
+</tr>
+<tr>
+<td>Выбор модели и гиперпараметров + честная оценка</td>
+<td><strong>nested CV</strong>: внутренний цикл подбирает, внешний оценивает</td>
+</tr>
+</tbody>
+</table></div>
+<p><strong>Зазор (gap, embargo).</strong> Если признаки используют окно истории (среднее за 30 дней) или таргет определён на горизонте (отток через 14 дней), строки около границы train/test перекрываются по информации. Между обучением и проверкой оставляют зазор: <code>TimeSeriesSplit(n_splits=5, gap=14)</code> пропускает 14 наблюдений между частями.</p>
+<p>Схему разбиения фиксируют до экспериментов и не меняют ради красивых цифр.</p>
+<h2 id="таксономия-утечек">Таксономия утечек</h2>
+<p>Утечка — любая информация о таргете или тесте, недоступная в момент реального предсказания, но попавшая в обучение или оценку.</p>
+<ol>
+<li><strong>Утечка таргета через признак.</strong> Признак порождён после события или из таргета: при предсказании «клиент уйдёт» поле «дата закрытия счёта»; при прогнозе кликов — «время просмотра после клика». Лечение: для каждого признака спросить «будет ли это значение известно в момент предсказания?».</li>
+<li><strong>Препроцессинг на всех данных.</strong> Масштабирование, импутация, отбор признаков, PCA, кодирование, обученные до split. Демонстрация ниже.</li>
+<li><strong>Дубликаты и почти-дубликаты.</strong> Одна и та же картинка/строка с небольшими изменениями в train и test: оценка измеряет память. Дедупликация до разбиения, а у почти-дубликатов — группировка по кластеру.</li>
+<li><strong>Групповая утечка.</strong> Несколько строк одного пользователя, пациента, товара, документа попадают в разные части; модель узнаёт пользователя, а не закономерность.</li>
+<li><strong>Временная утечка.</strong> Случайное разбиение временных данных: модель «видит будущее» и интерполирует. Признаки, посчитанные по полному периоду (средний чек клиента за год), тоже содержат будущее.</li>
+<li><strong>Утечка через target encoding.</strong> Среднее таргета по категории, посчитанное на всех строках, включая собственную (см. <a href="/edufamcs-demo/handbook/classic/priznaki-i-kodirovanie-kategorij/" rel="noopener noreferrer nofollow">признаки и кодирование категорий</a>).</li>
+<li><strong>Тюнинг на тесте.</strong> Ранняя остановка, выбор порога, подбор гиперпараметров и выбор «лучшей из десяти моделей» по тестовой метрике: тест перестаёт быть тестом. Для early stopping нужна отдельная валидация, а итоговый тест открывают один раз.</li>
+<li><strong>Train/serve skew.</strong> Признак в обучении считался batch-запросом по полным данным, а в проде приходит иным кодом, с задержкой или в другой единице. Это не утечка оценки, а расхождение пайплайнов, но проявляется так же: хорошо в офлайне, плохо онлайн (см. <a href="/edufamcs-demo/handbook/engineering/monitoring-modelej/" rel="noopener noreferrer nofollow">мониторинг моделей</a>).</li>
+</ol>
+<h2 id="как-находить-утечки">Как находить утечки</h2>
+<ul>
+<li><strong>Слишком хорошая метрика.</strong> AUC 0,99 на задаче, где предметный эксперт ждёт 0,7, — повод искать утечку, а не праздновать.</li>
+<li><strong>Один доминирующий признак</strong> в важностях (permutation importance, SHAP): проверьте его происхождение и момент доступности.</li>
+<li><strong>Падение при честной схеме.</strong> Пересчитайте метрику по групповому/временному разбиению: резкий провал вскрывает утечку.</li>
+<li><strong>Adversarial validation.</strong> Обучите классификатор отличать train от test (или train от прода): метка — «из теста». Если ROC-AUC близок к 0,5, распределения неразличимы; высокий AUC означает сдвиг, а важности этого классификатора показывают, какие признаки его создают. Метод находит и утечки (признак-идентификатор, зависящий от времени), и covariate shift.</li>
+</ul>
+<h2 id="числа-три-демонстрации">Числа: три демонстрации</h2>
+<p><strong>1. Отбор признаков вне CV на чистом шуме.</strong> 100 объектов, 5000 нормальных признаков, метки — бросок монеты, то есть реальная точность 0,5. Берём 20 признаков с наибольшей F-статистикой, затем 5-fold CV логистической регрессии. Среднее по 20 повторениям:</p>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>Схема</th>
+<th>accuracy (CV)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>отбор до CV, на всех данных</td>
+<td>0,877 ± 0,031</td>
+</tr>
+<tr>
+<td>отбор внутри <code>Pipeline</code> (в каждом фолде)</td>
+<td>0,504 ± 0,035</td>
+</tr>
+</tbody>
+</table></div>
+<p>Отбор на всех данных использует метки тестовых фолдов: из 5000 шумовых признаков всегда найдутся 20, «объясняющих» метки. Внутри цикла получаются ожидаемые 0,5.</p>
+<p><strong>2. Групповая утечка.</strong> 300 пользователей, по 20 строк на каждого — зашумлённые копии пользовательского вектора; метка — свойство пользователя, не связанное с признаками. <code>RandomForest</code>: <code>KFold</code> с перемешиванием даёт AUC 0,906, <code>GroupKFold</code> — 0,481 (то есть случайный уровень).</p>
+<p><strong>3. Adversarial validation.</strong> Train и test по 5000 строк, 6 признаков; у теста сдвинуто среднее признака <code>c</code> на 0,8 и дисперсия <code>e</code> увеличена в 1,5 раза. Классификатор в 5-fold даёт AUC 0,739; permutation importance (по AUC): <code>c</code> — 0,159, <code>e</code> — 0,064, остальные около нуля. Без сдвига AUC 0,504.</p>
+<p>Все три — синтетика, числа иллюстрируют масштаб эффекта.</p>
+<h2 id="код">Код</h2>
+<div class="code"><div class="code-head"><span class="lang">python</span></div><pre><code><span class="tok-k">import</span> numpy <span class="tok-k">as</span> np<span class="tok-p">,</span> pandas <span class="tok-k">as</span> pd
+<span class="tok-k">from</span> sklearn.ensemble <span class="tok-k">import</span> HistGradientBoostingClassifier
+<span class="tok-k">from</span> sklearn.feature_selection <span class="tok-k">import</span> SelectKBest<span class="tok-p">,</span> f_classif
+<span class="tok-k">from</span> sklearn.linear_model <span class="tok-k">import</span> LogisticRegression
+<span class="tok-k">from</span> sklearn.model_selection <span class="tok-k">import</span> StratifiedKFold<span class="tok-p">,</span> cross_val_predict<span class="tok-p">,</span> cross_val_score
+<span class="tok-k">from</span> sklearn.pipeline <span class="tok-k">import</span> make_pipeline
+<span class="tok-k">from</span> sklearn.preprocessing <span class="tok-k">import</span> StandardScaler
+<span class="tok-k">from</span> sklearn.metrics <span class="tok-k">import</span> roc_auc_score
+
+<span class="tok-c"># отбор внутри Pipeline: обучается заново в каждом фолде</span>
+pipe <span class="tok-p">=</span> make_pipeline<span class="tok-p">(</span>StandardScaler<span class="tok-p">(</span><span class="tok-p">)</span><span class="tok-p">,</span> SelectKBest<span class="tok-p">(</span>f_classif<span class="tok-p">,</span> k<span class="tok-p">=</span><span class="tok-n">20</span><span class="tok-p">)</span><span class="tok-p">,</span>
+                     LogisticRegression<span class="tok-p">(</span>max_iter<span class="tok-p">=</span><span class="tok-n">1000</span><span class="tok-p">)</span><span class="tok-p">)</span>
+cv <span class="tok-p">=</span> StratifiedKFold<span class="tok-p">(</span><span class="tok-n">5</span><span class="tok-p">,</span> shuffle<span class="tok-p">=</span><span class="tok-k">True</span><span class="tok-p">,</span> random_state<span class="tok-p">=</span><span class="tok-n">0</span><span class="tok-p">)</span>
+<span class="tok-f">print</span><span class="tok-p">(</span>cross_val_score<span class="tok-p">(</span>pipe<span class="tok-p">,</span> X<span class="tok-p">,</span> y<span class="tok-p">,</span> cv<span class="tok-p">=</span>cv<span class="tok-p">,</span> scoring<span class="tok-p">=</span><span class="tok-s">"</span><span class="tok-s">accuracy</span><span class="tok-s">"</span><span class="tok-p">)</span><span class="tok-p">.</span>mean<span class="tok-p">(</span><span class="tok-p">)</span><span class="tok-p">)</span>
+
+<span class="tok-c"># adversarial validation: train против test</span>
+Z <span class="tok-p">=</span> pd<span class="tok-p">.</span>concat<span class="tok-p">(</span><span class="tok-p">[</span>X_train<span class="tok-p">,</span> X_test<span class="tok-p">]</span><span class="tok-p">)</span>
+d <span class="tok-p">=</span> np<span class="tok-p">.</span>r_<span class="tok-p">[</span>np<span class="tok-p">.</span>zeros<span class="tok-p">(</span><span class="tok-f">len</span><span class="tok-p">(</span>X_train<span class="tok-p">)</span><span class="tok-p">)</span><span class="tok-p">,</span> np<span class="tok-p">.</span>ones<span class="tok-p">(</span><span class="tok-f">len</span><span class="tok-p">(</span>X_test<span class="tok-p">)</span><span class="tok-p">)</span><span class="tok-p">]</span>   <span class="tok-c"># 1 = из теста</span>
+p <span class="tok-p">=</span> cross_val_predict<span class="tok-p">(</span>HistGradientBoostingClassifier<span class="tok-p">(</span><span class="tok-p">)</span><span class="tok-p">,</span> Z<span class="tok-p">,</span> d<span class="tok-p">,</span>
+                      cv<span class="tok-p">=</span>cv<span class="tok-p">,</span> method<span class="tok-p">=</span><span class="tok-s">"</span><span class="tok-s">predict_proba</span><span class="tok-s">"</span><span class="tok-p">)</span><span class="tok-p">[</span><span class="tok-p">:</span><span class="tok-p">,</span> <span class="tok-n">1</span><span class="tok-p">]</span>
+<span class="tok-f">print</span><span class="tok-p">(</span><span class="tok-s">"</span><span class="tok-s">adversarial AUC:</span><span class="tok-s">"</span><span class="tok-p">,</span> roc_auc_score<span class="tok-p">(</span>d<span class="tok-p">,</span> p<span class="tok-p">)</span><span class="tok-p">)</span>   <span class="tok-c"># ~0.5: сдвига нет</span>
+</code></pre></div>
+<h2 id="ловушки">Ловушки</h2>
+<ul>
+<li>Любой <code>fit</code> (scaler, imputer, selector, encoder) вне <code>Pipeline</code> до <code>cross_val_score</code>.</li>
+<li>Случайный <code>KFold</code> на данных с пользователями или временем.</li>
+<li>Early stopping и подбор порога на той же выборке, по которой отчитываетесь.</li>
+<li>Много повторных «посмотрим на тест»: каждый просмотр — подбор по тесту; публичный лидерборд тоже тест.</li>
+<li>Дедупликация после разбиения.</li>
+<li>На собеседовании: назовите пять типов утечки и пример каждого; почему отбор признаков по корреляции с таргетом на всех данных даёт ложные результаты; когда <code>GroupKFold</code>, а когда <code>TimeSeriesSplit</code> и зачем gap; как работает adversarial validation и что делать, если AUC 0,9.</li>
+</ul>
+<h2 id="проверь-себя">Проверь себя</h2>
+<details class="callout md details"><summary>Зачем нужен зазор между обучающей и проверочной частями при временном разбиении?</summary>
+<p>Если признаки используют окна истории или таргет определён на горизонте, соседние строки делят информацию, и без зазора оценка завышена.</p>
+</details>
+<details class="callout md details"><summary>Почему отбор 20 лучших признаков из 5000 шумовых до CV даёт точность 0,88 при истинных 0,5?</summary>
+<p>Отбор использует метки всей выборки, включая тестовые фолды: среди 5000 случайных признаков всегда есть те, что случайно коррелируют с метками, и модель «подтверждает» их на тех же объектах.</p>
+</details>
+<details class="callout md details"><summary>Как работает adversarial validation и что означает AUC 0,5?</summary>
+<p>Классификатор учится отличать train от test; AUC около 0,5 означает, что распределения неразличимы, а высокий AUC означает сдвиг, и важности показывают, по каким признакам.</p>
+</details>
+<details class="callout md details"><summary>Чем group leakage отличается от дубликатов?</summary>
+<p>Дубликаты — почти одинаковые строки. Групповая утечка — разные строки, связанные общей сущностью (пользователем), по которой модель может «узнать» метку.</p>
+</details>
+<details class="callout md details"><summary>Для чего нужен nested CV?</summary>
+<p>Чтобы оценка не была завышена выбором лучшей конфигурации по тем же данным: внутренний цикл подбирает гиперпараметры, внешний честно оценивает всю процедуру.</p>
+</details>
+<h2 id="что-почитать">Что почитать</h2>
+<ul>
+<li>Ambroise C., McLachlan G. <em>Selection bias in gene extraction on the basis of microarray gene-expression data</em>, PNAS, 2002 — классика про отбор признаков вне CV.</li>
+<li>Hastie T., Tibshirani R., Friedman J. <em>The Elements of Statistical Learning</em>, раздел 7.10.2 «The Wrong and Right Way to Do Cross-validation»: https://hastie.su.domains/ElemStatLearn/</li>
+<li>Kaufman S., Rosset S., Perlich C., Stitelman O. <em>Leakage in Data Mining: Formulation, Detection, and Avoidance</em>, ACM TKDD, 2012.</li>
+<li>Cawley G., Talbot N. <em>On Over-fitting in Model Selection and Subsequent Selection Bias in Performance Evaluation</em>, JMLR, 2010.</li>
+<li>Kapoor S., Narayanan A. <em>Leakage and the reproducibility crisis in machine-learning-based science</em>, Patterns, 2023: https://arxiv.org/abs/2207.07048</li>
+<li>Документация scikit-learn: Cross-validation (раздел «Cross-validation iterators for grouped data» и <code>TimeSeriesSplit</code>): https://scikit-learn.org/stable/modules/cross_validation.html</li>
+</ul>
+</div>
+      
+
+      
+
+      
+      <nav class="pager" aria-label="Соседние статьи">
+        <a href="/edufamcs-demo/handbook/classic/metriki-klassifikacii-i-kalibrovka/"><span><svg class="ico sm" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-arrow-left"/></svg>Назад</span>Метрики классификации и калибровка</a>
+        <a href="/edufamcs-demo/handbook/classic/poisk-anomalij/"><span>Дальше<svg class="ico sm" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-arrow"/></svg></span>Поиск аномалий</a>
+      </nav>
+      
+    </article>
+
+    <aside class="hb-toc" aria-label="На этой странице">
+      <a class="l2" href="#что-и-чем-оцениваем">Что и чем оцениваем</a><a class="l2" href="#схема-разбиения-следует-за-использованием-модели">Схема разбиения следует за использованием модели</a><a class="l2" href="#таксономия-утечек">Таксономия утечек</a><a class="l2" href="#как-находить-утечки">Как находить утечки</a><a class="l2" href="#числа-три-демонстрации">Числа: три демонстрации</a><a class="l2" href="#код">Код</a><a class="l2" href="#ловушки">Ловушки</a><a class="l2" href="#проверь-себя">Проверь себя</a><a class="l2" href="#что-почитать">Что почитать</a>
+    </aside>
+  </div>
+</div>
+
+
+</main>
+
+<footer class="ftr" data-theme="dark">
+  <svg class="sym fern" viewBox="0 0 40.5 65.02" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#fern"/></svg>
+  <div class="container">
+    <div class="ftr-row">
+      <a href="/edufamcs-demo/" aria-label="EDU FAMCS — главная"><img src="/edufamcs-demo/static/brand/logo/logo-edu-dark.svg" alt="EDU FAMCS" width="196" height="40"></a>
+      <ul class="ftr-links">
+        <li><a href="/edufamcs-demo/#courses">Курсы</a></li>
+        <li><a href="/edufamcs-demo/ml/">Машинное обучение</a></li>
+        <li><a href="/edufamcs-demo/handbook/">Хендбук</a></li>
+        <li><a href="/edufamcs-demo/news/">Новости</a></li>
+        <li><a href="/edufamcs-demo/people/">Авторы</a></li>
+        <li><a href="/edufamcs-demo/about/">О&nbsp;нас</a></li>
+        <li><a href="/edufamcs-demo/propose/">Предложить или исправить</a></li>
+        <li><a href="/edufamcs-demo/privacy/">Конфиденциальность</a></li>
+      </ul>
+    </div>
+    <div class="ftr-big" aria-hidden="true">EDU<span class="d">·</span>FAMCS</div>
+    <p class="ftr-copy">© 2026 EDU FAMCS · Минск</p>
+  </div>
+</footer>
+
+<div class="toasts-region" aria-live="polite" id="toasts">
+
+</div>
+
+</body>
+</html>

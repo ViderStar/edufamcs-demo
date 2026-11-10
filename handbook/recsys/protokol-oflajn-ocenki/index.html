@@ -1,0 +1,362 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Протокол офлайн-оценки и утечки · EDU FAMCS</title>
+<meta name="description" content="Протокол офлайн-оценки и утечки — Рекомендательные системы. Хендбук ML-курса ФПМИ.">
+<meta name="theme-color" content="#060A16">
+<meta name="robots" content="noindex, nofollow">
+<meta name="htmx-config" content='{"allowEval":false,"includeIndicatorStyles":false,"historyCacheSize":0,"selfRequestsOnly":true}'>
+<meta name="katex-js" content="/edufamcs-demo/static/vendor/katex/katex.min.js">
+<meta name="katex-css" content="/edufamcs-demo/static/vendor/katex/katex.min.css">
+<link rel="icon" href="/edufamcs-demo/static/brand/logo/favicon-16.svg" type="image/svg+xml" sizes="16x16">
+<link rel="icon" href="/edufamcs-demo/static/brand/logo/favicon.svg" type="image/svg+xml" sizes="any">
+<link rel="preload" href="/edufamcs-demo/static/brand/fonts/manrope-cyrillic-400.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/edufamcs-demo/static/brand/fonts/unbounded-cyrillic-800.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="/edufamcs-demo/static/brand/fonts.css">
+<link rel="stylesheet" href="/edufamcs-demo/static/brand/tokens.css">
+<link rel="stylesheet" href="/edufamcs-demo/static/brand/components.css">
+<link rel="stylesheet" href="/edufamcs-demo/static/css/site.css">
+<link rel="stylesheet" href="/edufamcs-demo/static/css/hub.css">
+<link rel="stylesheet" href="/edufamcs-demo/static/css/about.css">
+<link rel="stylesheet" href="/edufamcs-demo/static/handbook/handbook.css">
+<script src="/edufamcs-demo/static/js/theme.js"></script>
+<script src="/edufamcs-demo/static/vendor/htmx/htmx.min.js" defer></script>
+<script src="/edufamcs-demo/static/vendor/alpine/alpine-csp.min.js" defer></script>
+<script src="/edufamcs-demo/static/js/site.js" defer></script>
+<script src="/edufamcs-demo/static/handbook/handbook.js" defer></script>
+</head>
+<body class="" hx-headers='{"X-CSRFToken": "nfjTDJhR5AmP3xcW9cmPfJHvi7l9DQ19Zs8QTLQI6nAoeQro8FAMXCztKgs7nA0Q"}'>
+<a class="skip" href="#main">К содержанию</a>
+<div class="demo-bar" role="note">Демо-версия для отзывов: вход, запись на курсы и формы здесь не работают.</div>
+
+<header class="hdr">
+  <div class="container">
+    <a class="brand" href="/edufamcs-demo/" aria-label="EDU FAMCS — главная">
+      <span class="full"><img class="only-light" src="/edufamcs-demo/static/brand/logo/logo-edu-light.svg" alt="EDU FAMCS" width="196" height="40"><img class="only-dark" src="/edufamcs-demo/static/brand/logo/logo-edu-dark.svg" alt="EDU FAMCS" width="196" height="40"></span>
+      <span class="short"><img class="only-light" src="/edufamcs-demo/static/brand/logo/logo-edu-light.svg" alt="EDU FAMCS" height="30"><img class="only-dark" src="/edufamcs-demo/static/brand/logo/logo-edu-dark.svg" alt="EDU FAMCS" height="30"></span>
+    </a>
+    <nav class="nav" id="main-nav" aria-label="Основная навигация">
+      <a href="/edufamcs-demo/#courses">Курсы</a>
+      <a href="/edufamcs-demo/ml/" >Машинное обучение</a>
+      
+      <a href="/edufamcs-demo/handbook/" aria-current="page">Хендбук</a>
+      <a href="/edufamcs-demo/news/" >Новости</a>
+      <a href="/edufamcs-demo/people/" >Авторы</a>
+      <a href="/edufamcs-demo/about/" >О&nbsp;нас</a>
+    </nav>
+    <div class="hdr-actions">
+      
+      <a class="btn btn-outline btn-login" href="/edufamcs-demo/accounts/login/?next=/handbook/recsys/protokol-oflajn-ocenki/">Войти</a>
+      
+      <button class="icon-btn menu-btn" type="button" aria-label="Меню" aria-expanded="false" aria-controls="main-nav"><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-menu"/></svg></button>
+    </div>
+  </div>
+</header>
+
+<main id="main">
+
+
+
+<div class="container hb-page s-recsys">
+  <div class="hb-readbar" aria-hidden="true"><i></i></div>
+  <div class="hb">
+    <aside class="hb-nav" aria-label="Статьи раздела">
+      
+<form class="hb-search" action="/edufamcs-demo/handbook/search/" method="get" role="search">
+  <svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-search"/></svg>
+  <input class="input" type="search" name="q" value="" placeholder="Поиск по хендбуку" aria-label="Поиск по хендбуку" autocomplete="off" maxlength="120"
+    hx-get="/edufamcs-demo/handbook/search/" hx-trigger="input changed delay:250ms, search" hx-target="#hb-nav-results" hx-sync="this:replace">
+</form>
+
+      <div id="hb-nav-results" class="hb-nav-results" aria-live="polite"></div>
+      <a class="grp" href="/edufamcs-demo/handbook/recsys/">Рекомендательная система целиком</a>
+      
+      <a class="" href="/edufamcs-demo/handbook/recsys/kandidaty-i-ranzhirovanie/">Двухстадийная схема: кандидаты → ранжирование</a>
+      
+      <a class="" href="/edufamcs-demo/handbook/recsys/holodnyj-start-i-bandity/">Холодный старт, исследование и бандиты</a>
+      
+      <a class="" href="/edufamcs-demo/handbook/recsys/prodakshen-i-ab-testy/">Рекомендации в продакшене: A/B-тесты и эксплуатация</a>
+      
+      <a class="" href="/edufamcs-demo/handbook/recsys/multitask-ranzhirovanie/">Многозадачное ранжирование: MMoE, PLE, ESMM</a>
+      
+      <a class="" href="/edufamcs-demo/handbook/recsys/priznaki-i-feature-store/">Признаки для рекомендаций и feature store</a>
+      
+      <a class="cur" href="/edufamcs-demo/handbook/recsys/protokol-oflajn-ocenki/" aria-current="page">Протокол офлайн-оценки и утечки</a>
+      
+      <a class="" href="/edufamcs-demo/handbook/recsys/system-design-rekomendacij/">System design: как спроектировать рекомендательную систему на собеседовании</a>
+      
+    </aside>
+
+    <article class="hb-main">
+      <nav class="crumbs" aria-label="Навигация"><a href="/edufamcs-demo/handbook/">Хендбук</a><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-chev"/></svg><a href="/edufamcs-demo/handbook/recsys/">Рекомендательные системы</a></nav>
+      <h1 class="h1">Протокол офлайн-оценки и утечки</h1>
+      <div class="hb-meta">
+        
+        
+        <span><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-clock"/></svg>15&nbsp;мин</span>
+        <span class="hb-authors"><span class="avatar sm" title="Артем Лебедевич">АЛ</span>Артем Лебедевич</span>
+        <span><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-edit"/></svg>10 ноября 2026</span>
+        
+        
+      </div>
+
+      
+      <details class="hb-mtoc">
+        <summary><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-list"/></svg>Содержание<svg class="ico sm" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-chev-down"/></svg></summary>
+        <a class="l2" href="#какой-вопрос-задаёт-офлайн-оценка">Какой вопрос задаёт офлайн-оценка</a><a class="l2" href="#разбиения-и-что-в-них-утекает">Разбиения и что в них утекает</a><a class="l2" href="#холодные-пользователи-и-объекты-в-тесте">Холодные пользователи и объекты в тесте</a><a class="l2" href="#повторное-потребление">Повторное потребление</a><a class="l2" href="#кандидаты-полный-каталог-против-сэмплирования">Кандидаты: полный каталог против сэмплирования</a><a class="l2" href="#популярность-в-тесте-и-несмещённые-оценки">Популярность в тесте и несмещённые оценки</a><a class="l2" href="#бейзлайны-в-каждой-таблице">Бейзлайны в каждой таблице</a><a class="l2" href="#статистическая-аккуратность">Статистическая аккуратность</a><a class="l2" href="#офлайн-против-онлайн">Офлайн против онлайн</a><a class="l2" href="#чек-лист">Чек-лист</a><a class="l2" href="#пример-один-и-тот-же-набор-моделей-два-сплита">Пример: один и тот же набор моделей, два сплита</a><a class="l2" href="#код">Код</a><a class="l2" href="#ловушки">Ловушки</a><a class="l2" href="#проверь-себя">Проверь себя</a><a class="l2" href="#что-почитать">Что почитать</a>
+      </details>
+      
+
+      <div class="prose"><p>Метрики (<a href="/edufamcs-demo/handbook/recsys/oflajn-metriki/" rel="noopener noreferrer nofollow">офлайн-метрики</a>) говорят, как считать качество; протокол — на каких данных, при каких допущениях и с какими сравнениями. Одна и та же пара моделей может поменяться местами при смене разбиения, а прирост в третьем знаке часто оказывается шумом. Эта глава собирает правила в один протокол и заканчивается экспериментом, где ранжирование моделей меняется от выбора сплита.</p>
+<h2 id="какой-вопрос-задаёт-офлайн-оценка">Какой вопрос задаёт офлайн-оценка</h2>
+<p>Офлайн-оценка отвечает на вопрос: <strong>«если бы модель обучили на данных до момента <span class="tex">T</span> и выкатили в момент <span class="tex">T</span>, насколько хорошо она предсказала бы то, что пользователи сделали после»</strong>. Она не отвечает, вырастет ли выручка (на это есть <a href="/edufamcs-demo/handbook/recsys/prodakshen-i-ab-testy/" rel="noopener noreferrer nofollow">A/B-тесты</a>), потому что лог создан прежней политикой: пользователи видели то, что им показали. Её работа — дёшево отсеять слабые идеи и не пропустить сильные. Любое разбиение, которое подсматривает в будущее относительно <span class="tex">T</span>, отвечает на другой вопрос.</p>
+<h2 id="разбиения-и-что-в-них-утекает">Разбиения и что в них утекает</h2>
+<ul>
+<li><strong>Случайное</strong> (по событиям): обучение содержит события позже тестовых; модель видит будущую популярность объектов и связи между ними. Сильно завышает метрики и <strong>может переставлять модели</strong>.</li>
+<li><strong>Leave-one-out / leave-last-out:</strong> последнее событие каждого пользователя — в тест. Тестовые события разных пользователей лежат в разное время, значит, в обучении есть события других пользователей из будущего относительно теста. Ji et al. (TOIS 2023) показали на ряде датасетов и моделей (BPR, NeuMF, SASRec, LightGCN), что при leave-last-out модели рекомендуют объекты, которых на момент тестового события ещё не существовало, а относительный порядок моделей зависит от того, сколько будущего просочилось.</li>
+<li><strong>Per-user temporal:</strong> у каждого пользователя тест — последняя доля его истории. Годится как защита от утечки внутри пользователя, но глобальной временной оси не соблюдает: те же проблемы будущего других пользователей.</li>
+<li><strong>Глобальный временной сплит:</strong> один момент <span class="tex">T</span> для всех; обучение — до <span class="tex">T</span>, тест — после. Единственный вариант без утечки по времени; он же честно показывает холодные объекты и дрейф. Встречаются и валидационное окно между обучением и тестом.</li>
+</ul>
+<p>Meng et al. (RecSys 2020) сравнили три распространённые стратегии на семи моделях и двух датасетах и показали, что выбор стратегии — «смешивающая переменная»: он заметно меняет ранжирование моделей, и поэтому статьи с разными сплитами несопоставимы, даже если датасет и метрики совпадают. Практическое правило: фиксируйте сплит в описании эксперимента и заимствованные цифры не сравнивайте с чужими.</p>
+<h2 id="холодные-пользователи-и-объекты-в-тесте">Холодные пользователи и объекты в тесте</h2>
+<p>В глобальном временном тесте появляются пользователи и объекты, которых не было в обучении. Это <strong>реальность прода</strong>, а не ошибка: модель, которая молчит про новые объекты, будет неудачной. Решения: считать метрики отдельно по срезам «тёплые / новые пользователи» и «старые / новые объекты»; не выбрасывать холодные пары молча; для оценки холодного старта отдельный протокол (см. <a href="/edufamcs-demo/handbook/recsys/holodnyj-start-i-bandity/" rel="noopener noreferrer nofollow">холодный старт</a>).</p>
+<h2 id="повторное-потребление">Повторное потребление</h2>
+<p>Нужно ли исключать уже виденное из кандидатов? Зависит от домена. Фильм смотрят один раз — исключаем. Продукты в продуктовой корзине, музыка, «купить снова», новостная лента с повторными визитами — повтор и есть целевое поведение. Правило: <strong>политика фильтрации в офлайн-оценке должна совпадать с продом</strong>. Если в проде просмотренное фильтруется, а офлайн нет, метрики завышены; если наоборот — занижены. Считайте метрики отдельно для «новых» и «повторных» пар.</p>
+<h2 id="кандидаты-полный-каталог-против-сэмплирования">Кандидаты: полный каталог против сэмплирования</h2>
+<p>Ранг лучше считать по <strong>всему каталогу</strong>. Krichene &amp; Rendle (KDD 2020, <em>On Sampled Metrics for Item Recommendation</em>) показали, что метрики, посчитанные по сэмплу негативов, <strong>не согласованы</strong> с точными: сэмплированная метрика не сохраняет порядок моделей по полной метрике, то есть её победитель может проиграть при честном расчёте. Авторы предлагают поправки (оценки, подгоняемые под точное значение), но они повышают дисперсию, и рекомендуют по возможности считать метрики без сэмплирования. Разбор механизма — в <a href="/edufamcs-demo/handbook/recsys/oflajn-metriki/" rel="noopener noreferrer nofollow">главе про метрики</a>.</p>
+<h2 id="популярность-в-тесте-и-несмещённые-оценки">Популярность в тесте и несмещённые оценки</h2>
+<p>Тест состоит из того, что показала старая политика: популярное показывали чаще, значит, чаще кликали. Метрика по такому тесту награждает модели, повторяющие старую политику, и недооценивает те, что вытаскивают редкое. Несмещённые оценки пытаются это исправить: IPS и его варианты взвешивают наблюдаемые исходы на <span class="tex">1/\text{вероятность показа}</span> (см. <a href="/edufamcs-demo/handbook/recsys/holodnyj-start-i-bandity/" rel="noopener noreferrer nofollow">офлайн-оценка политик</a> в главе про бандиты). Условия: в логе должны быть вероятности показа и случайность в политике, иначе знаменатель нулевой. Без этого — хотя бы разные срезы по популярности объекта и отдельная метрика покрытия.</p>
+<h2 id="бейзлайны-в-каждой-таблице">Бейзлайны в каждой таблице</h2>
+<p>В любой таблице должны стоять: <strong>Popular</strong> (глобальная популярность), <strong>Popular за последнюю неделю</strong> (там, где важна свежесть), <strong>item-kNN</strong> (<a href="/edufamcs-demo/handbook/recsys/kollaborativnaya-filtraciya-po-sosedyam/" rel="noopener noreferrer nofollow">соседские методы</a>), <strong>настроенные EASE и ALS</strong> (<a href="/edufamcs-demo/handbook/recsys/slim-i-ease/" rel="noopener noreferrer nofollow">EASE</a>, <a href="/edufamcs-demo/handbook/recsys/matrichnye-razlozheniya-als/" rel="noopener noreferrer nofollow">ALS</a>). Бейзлайны настраиваются с тем же бюджетом, что и новая модель; ненастроенный бейзлайн — самый частый способ «улучшить» статью (о воспроизводимости см. <a href="/edufamcs-demo/handbook/recsys/oflajn-metriki/" rel="noopener noreferrer nofollow">главу про метрики</a>).</p>
+<h2 id="статистическая-аккуратность">Статистическая аккуратность</h2>
+<p>Метрика — среднее по пользователям, у каждого пользователя своё значение. Поэтому:</p>
+<ol>
+<li>Смотрите на <strong>распределение</strong> per-user метрик: у большинства пользователей NDCG равен нулю, среднее живёт на небольшой доле.</li>
+<li>Доверительный интервал — <strong>бутстрап по пользователям</strong>: перевыбираем пользователей с возвращением <span class="tex">B</span> раз (обычно 1000), считаем среднее; границы — перцентили 2,5 и 97,5.</li>
+<li>Модели сравниваем <strong>парно</strong> на тех же пользователях: бутстрап разности <span class="tex">m_{A}(u)-m_{B}(u)</span> даёт интервал, куда уже не входит шум между пользователями. Подойдёт и парный тест Уилкоксона или <span class="tex">t</span>-тест на разностях; при множестве сравнений — поправка на множественные гипотезы.</li>
+<li>Несколько сидов обучения и разных окон времени: одно окно — одна реализация дрейфа.</li>
+</ol>
+<h2 id="офлайн-против-онлайн">Офлайн против онлайн</h2>
+<p>Команды копят <strong>таблицу «офлайн-прирост → онлайн-результат»</strong> по прошлым A/B-тестам и считают корреляцию (или хотя бы долю согласованных знаков). Это показывает, каким офлайн-метрикам и срезам можно доверять и какой минимальный прирост офлайн стоит выкатывать в тест; она же ловит систематические расхождения (метрика растёт, онлайн не меняется — обычно утечка, скос признаков или петля обратной связи). См. <a href="/edufamcs-demo/handbook/recsys/prodakshen-i-ab-testy/" rel="noopener noreferrer nofollow">разрыв офлайн и онлайн</a>.</p>
+<h2 id="чек-лист">Чек-лист</h2>
+<ul>
+<li>Сплит глобальный по времени; зафиксирован <span class="tex">T</span>; валидация внутри обучающего периода, тест трогаем один раз.</li>
+<li>Признаки и кандидат-модели считаются только по данным до <span class="tex">T</span> (<a href="/edufamcs-demo/handbook/recsys/priznaki-i-feature-store/" rel="noopener noreferrer nofollow">признаки</a>).</li>
+<li>Метрики по полному каталогу; фильтр просмотренного совпадает с продом.</li>
+<li>Бейзлайны настроены с равным бюджетом; указано, сколько раз тестировались гипотезы.</li>
+<li>Метрики по срезам (новые и старые пользователи и объекты, популярные и хвост).</li>
+<li>Бутстрап-интервалы по пользователям и парное сравнение; несколько сидов.</li>
+<li>Результат сверен с историей офлайн–онлайн.</li>
+</ul>
+<h2 id="пример-один-и-тот-же-набор-моделей-два-сплита">Пример: один и тот же набор моделей, два сплита</h2>
+<p>Синтетика с дрейфом: 3000 пользователей, 1500 объектов, 60 суток, 120 000 событий. 300 объектов существуют с начала, остальные запускаются по ходу; после запуска популярность объекта всплескивает и затухает с постоянной 10 суток. Модели: <strong>Popular</strong> (счётчик по обучению), <strong>Popular-7d</strong> (по последним 7 суткам обучения), <strong>ItemKNN</strong> (косинус по ко-встречаемости). Полный каталог, просмотренное фильтруется, метрики @20, 95 % бутстрап-интервал по пользователям для NDCG.</p>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>Сплит</th>
+<th>Модель</th>
+<th>Recall@20</th>
+<th>NDCG@20 [95 % ДИ]</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>случайный 80/20</td>
+<td>Popular</td>
+<td>0,0757</td>
+<td>0,0591 [0,0562; 0,0622]</td>
+</tr>
+<tr>
+<td>случайный 80/20</td>
+<td>Popular-7d</td>
+<td>0,0252</td>
+<td>0,0227 [0,0206; 0,0249]</td>
+</tr>
+<tr>
+<td>случайный 80/20</td>
+<td>ItemKNN</td>
+<td>0,0945</td>
+<td>0,0732 [0,0698; 0,0764]</td>
+</tr>
+<tr>
+<td>глобальный по времени (тест — сутки 50–59)</td>
+<td>Popular</td>
+<td>0,0419</td>
+<td>0,0268 [0,0246; 0,0291]</td>
+</tr>
+<tr>
+<td>глобальный по времени</td>
+<td>Popular-7d</td>
+<td>0,0816</td>
+<td>0,0666 [0,0627; 0,0704]</td>
+</tr>
+<tr>
+<td>глобальный по времени</td>
+<td>ItemKNN</td>
+<td>0,0474</td>
+<td>0,0327 [0,0302; 0,0353]</td>
+</tr>
+</tbody>
+</table></div>
+<p>Что меняется. При случайном сплите <strong>Popular-7d — худшая модель</strong> (старые счётчики по хвосту обучения не помогают, когда тест — вперемешку весь период), а ItemKNN лидирует. При временном сплите <strong>Popular-7d — лучшая, ItemKNN лишь чуть выше Popular</strong>: победитель сменился. Парная разность NDCG (ItemKNN − Popular) сужается с +0,0141 [+0,0123; +0,0158] до +0,0059 [+0,0046; +0,0073]. Мораль: слабость «простой» модели при случайном сплите — артефакт сплита, и на нём легко «доказать» превосходство сложной модели, которая в прод-режиме выигрывает куда меньше. Данные синтетические, иллюстративные: направления эффектов зависят от силы дрейфа.</p>
+<h2 id="код">Код</h2>
+<p>Генерация лога (<code>split.py</code>) и оценка (<code>evalsplit.py</code>); запуск: <code>uv run --with numpy python split.py &amp;&amp; uv run --with numpy --with scipy python evalsplit.py</code>, около минуты на CPU.</p>
+<div class="code"><div class="code-head"><span class="lang">python</span></div><pre><code><span class="tok-c"># split.py</span>
+<span class="tok-k">import</span> numpy <span class="tok-k">as</span> np
+rng <span class="tok-p">=</span> np<span class="tok-p">.</span>random<span class="tok-p">.</span>default_rng<span class="tok-p">(</span><span class="tok-n">0</span><span class="tok-p">)</span>
+U<span class="tok-p">,</span> I<span class="tok-p">,</span> D<span class="tok-p">,</span> K<span class="tok-p">,</span> EV <span class="tok-p">=</span> <span class="tok-n">3000</span><span class="tok-p">,</span> <span class="tok-n">1500</span><span class="tok-p">,</span> <span class="tok-n">60</span><span class="tok-p">,</span> <span class="tok-n">8</span><span class="tok-p">,</span> <span class="tok-n">40</span>          <span class="tok-c"># пользователи, объекты, дни, размерность вкуса, событий на пользователя</span>
+pu <span class="tok-p">=</span> rng<span class="tok-p">.</span>dirichlet<span class="tok-p">(</span>np<span class="tok-p">.</span>ones<span class="tok-p">(</span>K<span class="tok-p">)</span> <span class="tok-p">*</span> <span class="tok-n">0.3</span><span class="tok-p">,</span> U<span class="tok-p">)</span>          <span class="tok-c"># вкусы пользователей</span>
+qi <span class="tok-p">=</span> rng<span class="tok-p">.</span>dirichlet<span class="tok-p">(</span>np<span class="tok-p">.</span>ones<span class="tok-p">(</span>K<span class="tok-p">)</span> <span class="tok-p">*</span> <span class="tok-n">0.3</span><span class="tok-p">,</span> I<span class="tok-p">)</span>          <span class="tok-c"># профили объектов</span>
+launch <span class="tok-p">=</span> np<span class="tok-p">.</span>concatenate<span class="tok-p">(</span><span class="tok-p">[</span>np<span class="tok-p">.</span>zeros<span class="tok-p">(</span><span class="tok-n">300</span><span class="tok-p">)</span><span class="tok-p">,</span> rng<span class="tok-p">.</span>integers<span class="tok-p">(</span><span class="tok-n">0</span><span class="tok-p">,</span> D<span class="tok-p">,</span> I <span class="tok-p">-</span> <span class="tok-n">300</span><span class="tok-p">)</span><span class="tok-p">]</span><span class="tok-p">)</span><span class="tok-p">.</span>astype<span class="tok-p">(</span><span class="tok-f">int</span><span class="tok-p">)</span>   <span class="tok-c"># 300 объектов «с начала», остальные запускаются по ходу</span>
+hot <span class="tok-p">=</span> rng<span class="tok-p">.</span>normal<span class="tok-p">(</span><span class="tok-n">0</span><span class="tok-p">,</span> <span class="tok-n">1.0</span><span class="tok-p">,</span> I<span class="tok-p">)</span>                      <span class="tok-c"># базовая «горячесть»</span>
+<span class="tok-k">def</span> <span class="tok-f">pop_t</span><span class="tok-p">(</span>t<span class="tok-p">)</span><span class="tok-p">:</span>                                    <span class="tok-c"># популярность во времени: после запуска — всплеск, затухающий с tau=10 дней</span>
+    age <span class="tok-p">=</span> t <span class="tok-p">-</span> launch
+    <span class="tok-k">return</span> np<span class="tok-p">.</span>where<span class="tok-p">(</span>age <span class="tok-p">&gt;</span><span class="tok-p">=</span> <span class="tok-n">0</span><span class="tok-p">,</span> np<span class="tok-p">.</span>exp<span class="tok-p">(</span>hot<span class="tok-p">)</span> <span class="tok-p">*</span> <span class="tok-p">(</span><span class="tok-n">0.3</span> <span class="tok-p">+</span> <span class="tok-n">2.5</span> <span class="tok-p">*</span> np<span class="tok-p">.</span>exp<span class="tok-p">(</span><span class="tok-p">-</span>np<span class="tok-p">.</span>clip<span class="tok-p">(</span>age<span class="tok-p">,</span> <span class="tok-n">0</span><span class="tok-p">,</span> <span class="tok-k">None</span><span class="tok-p">)</span> <span class="tok-p">/</span> <span class="tok-n">10</span><span class="tok-p">)</span><span class="tok-p">)</span><span class="tok-p">,</span> <span class="tok-n">0.0</span><span class="tok-p">)</span>
+rows <span class="tok-p">=</span> <span class="tok-p">[</span><span class="tok-p">]</span>
+<span class="tok-k">for</span> u <span class="tok-k">in</span> <span class="tok-f">range</span><span class="tok-p">(</span>U<span class="tok-p">)</span><span class="tok-p">:</span>
+    days <span class="tok-p">=</span> np<span class="tok-p">.</span>sort<span class="tok-p">(</span>rng<span class="tok-p">.</span>integers<span class="tok-p">(</span><span class="tok-n">0</span><span class="tok-p">,</span> D<span class="tok-p">,</span> EV<span class="tok-p">)</span><span class="tok-p">)</span>
+    <span class="tok-k">for</span> t <span class="tok-k">in</span> days<span class="tok-p">:</span>
+        p <span class="tok-p">=</span> <span class="tok-p">(</span>pu<span class="tok-p">[</span>u<span class="tok-p">]</span> <span class="tok-p">@</span> qi<span class="tok-p">.</span>T<span class="tok-p">)</span> <span class="tok-p">*</span> <span class="tok-n">10</span> <span class="tok-p">*</span> pop_t<span class="tok-p">(</span>t<span class="tok-p">)</span> <span class="tok-p">*</span><span class="tok-p">*</span> <span class="tok-n">0.7</span> <span class="tok-p">+</span> <span class="tok-n">1e-12</span>
+        p <span class="tok-p">/</span><span class="tok-p">=</span> p<span class="tok-p">.</span>sum<span class="tok-p">(</span><span class="tok-p">)</span><span class="tok-p">;</span> rows<span class="tok-p">.</span>append<span class="tok-p">(</span><span class="tok-p">(</span>u<span class="tok-p">,</span> rng<span class="tok-p">.</span>choice<span class="tok-p">(</span>I<span class="tok-p">,</span> p<span class="tok-p">=</span>p<span class="tok-p">)</span><span class="tok-p">,</span> t<span class="tok-p">)</span><span class="tok-p">)</span>
+ev <span class="tok-p">=</span> np<span class="tok-p">.</span>array<span class="tok-p">(</span>rows<span class="tok-p">)</span>                              <span class="tok-c"># (user, item, day)</span>
+np<span class="tok-p">.</span>save<span class="tok-p">(</span><span class="tok-s">"</span><span class="tok-s">ev.npy</span><span class="tok-s">"</span><span class="tok-p">,</span> ev<span class="tok-p">)</span>
+<span class="tok-f">print</span><span class="tok-p">(</span><span class="tok-f">len</span><span class="tok-p">(</span>ev<span class="tok-p">)</span><span class="tok-p">)</span>
+</code></pre></div>
+<div class="code"><div class="code-head"><span class="lang">python</span></div><pre><code><span class="tok-c"># evalsplit.py</span>
+<span class="tok-k">import</span> numpy <span class="tok-k">as</span> np<span class="tok-p">,</span> scipy.sparse <span class="tok-k">as</span> sp
+ev <span class="tok-p">=</span> np<span class="tok-p">.</span>load<span class="tok-p">(</span><span class="tok-s">"</span><span class="tok-s">ev.npy</span><span class="tok-s">"</span><span class="tok-p">)</span><span class="tok-p">;</span> U<span class="tok-p">,</span> I<span class="tok-p">,</span> D<span class="tok-p">,</span> KK <span class="tok-p">=</span> <span class="tok-n">3000</span><span class="tok-p">,</span> <span class="tok-n">1500</span><span class="tok-p">,</span> <span class="tok-n">60</span><span class="tok-p">,</span> <span class="tok-n">20</span>
+_<span class="tok-p">,</span> first <span class="tok-p">=</span> np<span class="tok-p">.</span>unique<span class="tok-p">(</span>ev<span class="tok-p">[</span><span class="tok-p">:</span><span class="tok-p">,</span> <span class="tok-n">0</span><span class="tok-p">]</span> <span class="tok-p">*</span> I <span class="tok-p">+</span> ev<span class="tok-p">[</span><span class="tok-p">:</span><span class="tok-p">,</span> <span class="tok-n">1</span><span class="tok-p">]</span><span class="tok-p">,</span> return_index<span class="tok-p">=</span><span class="tok-k">True</span><span class="tok-p">)</span>    <span class="tok-c"># без повторов (u,i): оставляем первое по порядку генерации</span>
+ev <span class="tok-p">=</span> ev<span class="tok-p">[</span>np<span class="tok-p">.</span>sort<span class="tok-p">(</span>first<span class="tok-p">)</span><span class="tok-p">]</span>
+rng <span class="tok-p">=</span> np<span class="tok-p">.</span>random<span class="tok-p">.</span>default_rng<span class="tok-p">(</span><span class="tok-n">1</span><span class="tok-p">)</span>
+
+<span class="tok-k">def</span> <span class="tok-f">mat</span><span class="tok-p">(</span>e<span class="tok-p">)</span><span class="tok-p">:</span> <span class="tok-k">return</span> sp<span class="tok-p">.</span>csr_matrix<span class="tok-p">(</span><span class="tok-p">(</span>np<span class="tok-p">.</span>ones<span class="tok-p">(</span><span class="tok-f">len</span><span class="tok-p">(</span>e<span class="tok-p">)</span><span class="tok-p">)</span><span class="tok-p">,</span> <span class="tok-p">(</span>e<span class="tok-p">[</span><span class="tok-p">:</span><span class="tok-p">,</span> <span class="tok-n">0</span><span class="tok-p">]</span><span class="tok-p">,</span> e<span class="tok-p">[</span><span class="tok-p">:</span><span class="tok-p">,</span> <span class="tok-n">1</span><span class="tok-p">]</span><span class="tok-p">)</span><span class="tok-p">)</span><span class="tok-p">,</span> shape<span class="tok-p">=</span><span class="tok-p">(</span>U<span class="tok-p">,</span> I<span class="tok-p">)</span><span class="tok-p">)</span>
+
+<span class="tok-k">def</span> <span class="tok-f">fit_models</span><span class="tok-p">(</span>tr<span class="tok-p">)</span><span class="tok-p">:</span>
+    X <span class="tok-p">=</span> mat<span class="tok-p">(</span>tr<span class="tok-p">)</span><span class="tok-p">;</span> pop <span class="tok-p">=</span> np<span class="tok-p">.</span>asarray<span class="tok-p">(</span>X<span class="tok-p">.</span>sum<span class="tok-p">(</span><span class="tok-n">0</span><span class="tok-p">)</span><span class="tok-p">)</span><span class="tok-p">.</span>ravel<span class="tok-p">(</span><span class="tok-p">)</span>
+    recent <span class="tok-p">=</span> np<span class="tok-p">.</span>bincount<span class="tok-p">(</span>tr<span class="tok-p">[</span>tr<span class="tok-p">[</span><span class="tok-p">:</span><span class="tok-p">,</span> <span class="tok-n">2</span><span class="tok-p">]</span> <span class="tok-p">&gt;</span><span class="tok-p">=</span> tr<span class="tok-p">[</span><span class="tok-p">:</span><span class="tok-p">,</span> <span class="tok-n">2</span><span class="tok-p">]</span><span class="tok-p">.</span>max<span class="tok-p">(</span><span class="tok-p">)</span> <span class="tok-p">-</span> <span class="tok-n">6</span><span class="tok-p">,</span> <span class="tok-n">1</span><span class="tok-p">]</span><span class="tok-p">,</span> minlength<span class="tok-p">=</span>I<span class="tok-p">)</span><span class="tok-p">.</span>astype<span class="tok-p">(</span><span class="tok-f">float</span><span class="tok-p">)</span>
+    G <span class="tok-p">=</span> <span class="tok-p">(</span>X<span class="tok-p">.</span>T <span class="tok-p">@</span> X<span class="tok-p">)</span><span class="tok-p">.</span>toarray<span class="tok-p">(</span><span class="tok-p">)</span><span class="tok-p">;</span> n <span class="tok-p">=</span> np<span class="tok-p">.</span>sqrt<span class="tok-p">(</span>np<span class="tok-p">.</span>diag<span class="tok-p">(</span>G<span class="tok-p">)</span><span class="tok-p">)</span> <span class="tok-p">+</span> <span class="tok-n">1e-9</span><span class="tok-p">;</span> S <span class="tok-p">=</span> G <span class="tok-p">/</span> n<span class="tok-p">[</span><span class="tok-p">:</span><span class="tok-p">,</span> <span class="tok-k">None</span><span class="tok-p">]</span> <span class="tok-p">/</span> n<span class="tok-p">[</span><span class="tok-k">None</span><span class="tok-p">,</span> <span class="tok-p">:</span><span class="tok-p">]</span><span class="tok-p">;</span> np<span class="tok-p">.</span>fill_diagonal<span class="tok-p">(</span>S<span class="tok-p">,</span> <span class="tok-n">0</span><span class="tok-p">)</span>
+    <span class="tok-k">return</span> X<span class="tok-p">,</span> <span class="tok-p">{</span><span class="tok-s">"</span><span class="tok-s">Popular</span><span class="tok-s">"</span><span class="tok-p">:</span> <span class="tok-k">lambda</span><span class="tok-p">:</span> np<span class="tok-p">.</span>tile<span class="tok-p">(</span>pop<span class="tok-p">,</span> <span class="tok-p">(</span>U<span class="tok-p">,</span> <span class="tok-n">1</span><span class="tok-p">)</span><span class="tok-p">)</span><span class="tok-p">,</span>
+               <span class="tok-s">"</span><span class="tok-s">Popular-7d</span><span class="tok-s">"</span><span class="tok-p">:</span> <span class="tok-k">lambda</span><span class="tok-p">:</span> np<span class="tok-p">.</span>tile<span class="tok-p">(</span>recent<span class="tok-p">,</span> <span class="tok-p">(</span>U<span class="tok-p">,</span> <span class="tok-n">1</span><span class="tok-p">)</span><span class="tok-p">)</span><span class="tok-p">,</span>
+               <span class="tok-s">"</span><span class="tok-s">ItemKNN</span><span class="tok-s">"</span><span class="tok-p">:</span> <span class="tok-k">lambda</span><span class="tok-p">:</span> <span class="tok-p">(</span>X <span class="tok-p">@</span> S<span class="tok-p">)</span><span class="tok-p">}</span>
+
+<span class="tok-k">def</span> <span class="tok-f">evaluate</span><span class="tok-p">(</span>tr<span class="tok-p">,</span> te<span class="tok-p">,</span> users_mask<span class="tok-p">=</span><span class="tok-k">None</span><span class="tok-p">)</span><span class="tok-p">:</span>
+    X<span class="tok-p">,</span> models <span class="tok-p">=</span> fit_models<span class="tok-p">(</span>tr<span class="tok-p">)</span><span class="tok-p">;</span> T <span class="tok-p">=</span> mat<span class="tok-p">(</span>te<span class="tok-p">)</span>
+    users <span class="tok-p">=</span> np<span class="tok-p">.</span>where<span class="tok-p">(</span>np<span class="tok-p">.</span>asarray<span class="tok-p">(</span>T<span class="tok-p">.</span>sum<span class="tok-p">(</span><span class="tok-n">1</span><span class="tok-p">)</span><span class="tok-p">)</span><span class="tok-p">.</span>ravel<span class="tok-p">(</span><span class="tok-p">)</span> <span class="tok-p">&gt;</span> <span class="tok-n">0</span><span class="tok-p">)</span><span class="tok-p">[</span><span class="tok-n">0</span><span class="tok-p">]</span>
+    out <span class="tok-p">=</span> <span class="tok-p">{</span><span class="tok-p">}</span>
+    <span class="tok-k">for</span> name<span class="tok-p">,</span> f <span class="tok-k">in</span> models<span class="tok-p">.</span>items<span class="tok-p">(</span><span class="tok-p">)</span><span class="tok-p">:</span>
+        sc <span class="tok-p">=</span> np<span class="tok-p">.</span>asarray<span class="tok-p">(</span>f<span class="tok-p">(</span><span class="tok-p">)</span><span class="tok-p">,</span> dtype<span class="tok-p">=</span><span class="tok-f">float</span><span class="tok-p">)</span><span class="tok-p">[</span>users<span class="tok-p">]</span>
+        seen <span class="tok-p">=</span> X<span class="tok-p">[</span>users<span class="tok-p">]</span><span class="tok-p">.</span>toarray<span class="tok-p">(</span><span class="tok-p">)</span> <span class="tok-p">&gt;</span> <span class="tok-n">0</span><span class="tok-p">;</span> sc<span class="tok-p">[</span>seen<span class="tok-p">]</span> <span class="tok-p">=</span> <span class="tok-p">-</span>np<span class="tok-p">.</span>inf                  <span class="tok-c"># фильтруем уже виденное</span>
+        top <span class="tok-p">=</span> np<span class="tok-p">.</span>argpartition<span class="tok-p">(</span><span class="tok-p">-</span>sc<span class="tok-p">,</span> KK<span class="tok-p">,</span> axis<span class="tok-p">=</span><span class="tok-n">1</span><span class="tok-p">)</span><span class="tok-p">[</span><span class="tok-p">:</span><span class="tok-p">,</span> <span class="tok-p">:</span>KK<span class="tok-p">]</span>
+        order <span class="tok-p">=</span> np<span class="tok-p">.</span>take_along_axis<span class="tok-p">(</span>top<span class="tok-p">,</span> np<span class="tok-p">.</span>argsort<span class="tok-p">(</span><span class="tok-p">-</span>np<span class="tok-p">.</span>take_along_axis<span class="tok-p">(</span>sc<span class="tok-p">,</span> top<span class="tok-p">,</span> <span class="tok-n">1</span><span class="tok-p">)</span><span class="tok-p">,</span> <span class="tok-n">1</span><span class="tok-p">)</span><span class="tok-p">,</span> <span class="tok-n">1</span><span class="tok-p">)</span>
+        rel <span class="tok-p">=</span> <span class="tok-p">(</span>T<span class="tok-p">[</span>users<span class="tok-p">]</span><span class="tok-p">.</span>toarray<span class="tok-p">(</span><span class="tok-p">)</span> <span class="tok-p">&gt;</span> <span class="tok-n">0</span><span class="tok-p">)</span>
+        hit <span class="tok-p">=</span> np<span class="tok-p">.</span>take_along_axis<span class="tok-p">(</span>rel<span class="tok-p">,</span> order<span class="tok-p">,</span> <span class="tok-n">1</span><span class="tok-p">)</span>
+        nrel <span class="tok-p">=</span> rel<span class="tok-p">.</span>sum<span class="tok-p">(</span><span class="tok-n">1</span><span class="tok-p">)</span>
+        rec <span class="tok-p">=</span> hit<span class="tok-p">.</span>sum<span class="tok-p">(</span><span class="tok-n">1</span><span class="tok-p">)</span> <span class="tok-p">/</span> nrel
+        disc <span class="tok-p">=</span> <span class="tok-n">1</span> <span class="tok-p">/</span> np<span class="tok-p">.</span>log2<span class="tok-p">(</span>np<span class="tok-p">.</span>arange<span class="tok-p">(</span><span class="tok-n">2</span><span class="tok-p">,</span> KK <span class="tok-p">+</span> <span class="tok-n">2</span><span class="tok-p">)</span><span class="tok-p">)</span>
+        ndcg <span class="tok-p">=</span> <span class="tok-p">(</span>hit <span class="tok-p">*</span> disc<span class="tok-p">)</span><span class="tok-p">.</span>sum<span class="tok-p">(</span><span class="tok-n">1</span><span class="tok-p">)</span> <span class="tok-p">/</span> np<span class="tok-p">.</span>array<span class="tok-p">(</span><span class="tok-p">[</span>disc<span class="tok-p">[</span><span class="tok-p">:</span><span class="tok-f">min</span><span class="tok-p">(</span>k<span class="tok-p">,</span> KK<span class="tok-p">)</span><span class="tok-p">]</span><span class="tok-p">.</span>sum<span class="tok-p">(</span><span class="tok-p">)</span> <span class="tok-k">for</span> k <span class="tok-k">in</span> nrel<span class="tok-p">]</span><span class="tok-p">)</span>
+        out<span class="tok-p">[</span>name<span class="tok-p">]</span> <span class="tok-p">=</span> <span class="tok-p">(</span>rec<span class="tok-p">,</span> ndcg<span class="tok-p">)</span>
+    <span class="tok-k">return</span> out
+
+<span class="tok-k">def</span> <span class="tok-f">boot</span><span class="tok-p">(</span>v<span class="tok-p">,</span> B<span class="tok-p">=</span><span class="tok-n">1000</span><span class="tok-p">)</span><span class="tok-p">:</span>
+    r <span class="tok-p">=</span> np<span class="tok-p">.</span>random<span class="tok-p">.</span>default_rng<span class="tok-p">(</span><span class="tok-n">2</span><span class="tok-p">)</span><span class="tok-p">;</span> idx <span class="tok-p">=</span> r<span class="tok-p">.</span>integers<span class="tok-p">(</span><span class="tok-n">0</span><span class="tok-p">,</span> <span class="tok-f">len</span><span class="tok-p">(</span>v<span class="tok-p">)</span><span class="tok-p">,</span> <span class="tok-p">(</span>B<span class="tok-p">,</span> <span class="tok-f">len</span><span class="tok-p">(</span>v<span class="tok-p">)</span><span class="tok-p">)</span><span class="tok-p">)</span>
+    m <span class="tok-p">=</span> v<span class="tok-p">[</span>idx<span class="tok-p">]</span><span class="tok-p">.</span>mean<span class="tok-p">(</span><span class="tok-n">1</span><span class="tok-p">)</span><span class="tok-p">;</span> <span class="tok-k">return</span> np<span class="tok-p">.</span>percentile<span class="tok-p">(</span>m<span class="tok-p">,</span> <span class="tok-p">[</span><span class="tok-n">2.5</span><span class="tok-p">,</span> <span class="tok-n">97.5</span><span class="tok-p">]</span><span class="tok-p">)</span>
+
+<span class="tok-k">def</span> <span class="tok-f">report</span><span class="tok-p">(</span>title<span class="tok-p">,</span> res<span class="tok-p">)</span><span class="tok-p">:</span>
+    <span class="tok-f">print</span><span class="tok-p">(</span>title<span class="tok-p">)</span>
+    <span class="tok-k">for</span> k<span class="tok-p">,</span> <span class="tok-p">(</span>rec<span class="tok-p">,</span> nd<span class="tok-p">)</span> <span class="tok-k">in</span> res<span class="tok-p">.</span>items<span class="tok-p">(</span><span class="tok-p">)</span><span class="tok-p">:</span>
+        lo<span class="tok-p">,</span> hi <span class="tok-p">=</span> boot<span class="tok-p">(</span>nd<span class="tok-p">)</span>
+        <span class="tok-f">print</span><span class="tok-p">(</span><span class="tok-s">f</span><span class="tok-s">"</span>  <span class="tok-s">{</span>k<span class="tok-s">:</span><span class="tok-s">11s</span><span class="tok-s">}</span><span class="tok-s"> Recall@20=</span><span class="tok-s">{</span>rec<span class="tok-p">.</span>mean<span class="tok-p">(</span><span class="tok-p">)</span><span class="tok-s">:</span><span class="tok-s">.4f</span><span class="tok-s">}</span><span class="tok-s">  NDCG@20=</span><span class="tok-s">{</span>nd<span class="tok-p">.</span>mean<span class="tok-p">(</span><span class="tok-p">)</span><span class="tok-s">:</span><span class="tok-s">.4f</span><span class="tok-s">}</span><span class="tok-s">  [</span><span class="tok-s">{</span>lo<span class="tok-s">:</span><span class="tok-s">.4f</span><span class="tok-s">}</span><span class="tok-s">, </span><span class="tok-s">{</span>hi<span class="tok-s">:</span><span class="tok-s">.4f</span><span class="tok-s">}</span><span class="tok-s">]  users=</span><span class="tok-s">{</span><span class="tok-f">len</span><span class="tok-p">(</span>nd<span class="tok-p">)</span><span class="tok-s">}</span><span class="tok-s">"</span><span class="tok-p">)</span>
+
+<span class="tok-c"># 1) случайный сплит 80/20 по событиям</span>
+m <span class="tok-p">=</span> rng<span class="tok-p">.</span>random<span class="tok-p">(</span><span class="tok-f">len</span><span class="tok-p">(</span>ev<span class="tok-p">)</span><span class="tok-p">)</span> <span class="tok-p">&lt;</span> <span class="tok-n">0.2</span>
+r_rand <span class="tok-p">=</span> evaluate<span class="tok-p">(</span>ev<span class="tok-p">[</span><span class="tok-p">~</span>m<span class="tok-p">]</span><span class="tok-p">,</span> ev<span class="tok-p">[</span>m<span class="tok-p">]</span><span class="tok-p">)</span><span class="tok-p">;</span> report<span class="tok-p">(</span><span class="tok-s">"</span><span class="tok-s">Random split 80/20</span><span class="tok-s">"</span><span class="tok-p">,</span> r_rand<span class="tok-p">)</span>
+<span class="tok-c"># 2) глобальный временной сплит: тест = последние 10 суток; обучение = дни 0..49</span>
+r_time <span class="tok-p">=</span> evaluate<span class="tok-p">(</span>ev<span class="tok-p">[</span>ev<span class="tok-p">[</span><span class="tok-p">:</span><span class="tok-p">,</span> <span class="tok-n">2</span><span class="tok-p">]</span> <span class="tok-p">&lt;</span> <span class="tok-n">50</span><span class="tok-p">]</span><span class="tok-p">,</span> ev<span class="tok-p">[</span>ev<span class="tok-p">[</span><span class="tok-p">:</span><span class="tok-p">,</span> <span class="tok-n">2</span><span class="tok-p">]</span> <span class="tok-p">&gt;</span><span class="tok-p">=</span> <span class="tok-n">50</span><span class="tok-p">]</span><span class="tok-p">)</span><span class="tok-p">;</span> report<span class="tok-p">(</span><span class="tok-s">"</span><span class="tok-s">Global time split (test = days 50..59)</span><span class="tok-s">"</span><span class="tok-p">,</span> r_time<span class="tok-p">)</span>
+<span class="tok-c"># парный бутстрап по пользователям: ItemKNN − Popular</span>
+<span class="tok-k">for</span> nm<span class="tok-p">,</span> r <span class="tok-k">in</span> <span class="tok-p">(</span><span class="tok-p">(</span><span class="tok-s">"</span><span class="tok-s">random</span><span class="tok-s">"</span><span class="tok-p">,</span> r_rand<span class="tok-p">)</span><span class="tok-p">,</span> <span class="tok-p">(</span><span class="tok-s">"</span><span class="tok-s">time</span><span class="tok-s">"</span><span class="tok-p">,</span> r_time<span class="tok-p">)</span><span class="tok-p">)</span><span class="tok-p">:</span>
+    d <span class="tok-p">=</span> r<span class="tok-p">[</span><span class="tok-s">"</span><span class="tok-s">ItemKNN</span><span class="tok-s">"</span><span class="tok-p">]</span><span class="tok-p">[</span><span class="tok-n">1</span><span class="tok-p">]</span> <span class="tok-p">-</span> r<span class="tok-p">[</span><span class="tok-s">"</span><span class="tok-s">Popular</span><span class="tok-s">"</span><span class="tok-p">]</span><span class="tok-p">[</span><span class="tok-n">1</span><span class="tok-p">]</span><span class="tok-p">;</span> lo<span class="tok-p">,</span> hi <span class="tok-p">=</span> boot<span class="tok-p">(</span>d<span class="tok-p">)</span>
+    <span class="tok-f">print</span><span class="tok-p">(</span><span class="tok-s">f</span><span class="tok-s">"</span><span class="tok-s">{</span>nm<span class="tok-s">}</span><span class="tok-s">: NDCG(ItemKNN)-NDCG(Popular) = </span><span class="tok-s">{</span>d<span class="tok-p">.</span>mean<span class="tok-p">(</span><span class="tok-p">)</span><span class="tok-s">:</span><span class="tok-s">+.4f</span><span class="tok-s">}</span><span class="tok-s"> [</span><span class="tok-s">{</span>lo<span class="tok-s">:</span><span class="tok-s">+.4f</span><span class="tok-s">}</span><span class="tok-s">, </span><span class="tok-s">{</span>hi<span class="tok-s">:</span><span class="tok-s">+.4f</span><span class="tok-s">}</span><span class="tok-s">]</span><span class="tok-s">"</span><span class="tok-p">)</span>
+</code></pre></div>
+<h2 id="ловушки">Ловушки</h2>
+<ul>
+<li><strong>Тестирование на одном и том же тесте много раз.</strong> Каждый просмотр теста — подгонка. Тест открывается один раз, подбор — на валидации.</li>
+<li><strong>Ненастроенные бейзлайны.</strong> Сравнение с кNN при <span class="tex">k=10</span> по умолчанию ничего не доказывает.</li>
+<li><strong>Признаки по всему периоду</strong> (<a href="/edufamcs-demo/handbook/recsys/priznaki-i-feature-store/" rel="noopener noreferrer nofollow">утечка</a>) и эмбеддинги, обученные на тесте.</li>
+<li><strong>Сравнение чужих цифр</strong> без совпадения сплита, фильтра и каталога.</li>
+</ul>
+<p>На собеседовании: чем плох случайный сплит и что делать вместо него; чем плохи сэмплированные метрики; как посчитать доверительный интервал для NDCG; как сравнить две модели на одних и тех же пользователях.</p>
+<h2 id="проверь-себя">Проверь себя</h2>
+<details class="callout md details"><summary>Почему leave-last-out допускает утечку?</summary>
+<p>Последнее событие у разных пользователей приходится на разное время, и в обучении есть события других пользователей, произошедшие позже тестового.</p>
+</details>
+<details class="callout md details"><summary>Что показали Krichene и Rendle про сэмплированные метрики?</summary>
+<p>Они не согласованы с точной метрикой по всему каталогу: победитель по сэмплированной может проиграть по полной; поправки возможны, но повышают дисперсию.</p>
+</details>
+<details class="callout md details"><summary>Зачем парный бутстрап вместо двух отдельных интервалов?</summary>
+<p>Пользователи общие для обеих моделей: разность метрик на одном пользователе убирает вариацию между пользователями, и интервал на разности оказывается уже.</p>
+</details>
+<details class="callout md details"><summary>Когда не стоит фильтровать просмотренное?</summary>
+<p>Когда повторное потребление — цель домена (музыка, покупка расходников); офлайн-фильтр должен совпадать с продом.</p>
+</details>
+<details class="callout md details"><summary>Что делать с холодными объектами в временном тесте?</summary>
+<p>Не выбрасывать: это условие прода. Считать метрики по срезам и оценивать холодный старт отдельно.</p>
+</details>
+<h2 id="что-почитать">Что почитать</h2>
+<ul>
+<li>Ji Y., Sun A., Zhang J., Li C. <em>A Critical Study on Data Leakage in Recommender System Offline Evaluation</em>, ACM TOIS 2023 — https://arxiv.org/abs/2010.11060</li>
+<li>Meng Z., McCreadie R., Macdonald C., Ounis I. <em>Exploring Data Splitting Strategies for the Evaluation of Recommendation Models</em>, RecSys 2020 — https://arxiv.org/abs/2007.13237</li>
+<li>Krichene W., Rendle S. <em>On Sampled Metrics for Item Recommendation</em>, KDD 2020 — https://doi.org/10.1145/3394486.3403226</li>
+<li>Ferrari Dacrema M., Cremonesi P., Jannach D. <em>Are We Really Making Much Progress?</em>, RecSys 2019.</li>
+<li>Steck H. <em>Embarrassingly Shallow Autoencoders for Sparse Data</em>, WWW 2019.</li>
+</ul>
+</div>
+      
+
+      
+
+      
+      <nav class="pager" aria-label="Соседние статьи">
+        <a href="/edufamcs-demo/handbook/recsys/priznaki-i-feature-store/"><span><svg class="ico sm" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-arrow-left"/></svg>Назад</span>Признаки для рекомендаций и feature store</a>
+        <a href="/edufamcs-demo/handbook/recsys/system-design-rekomendacij/"><span>Дальше<svg class="ico sm" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-arrow"/></svg></span>System design: как спроектировать рекомендательную систему на собеседовании</a>
+      </nav>
+      
+    </article>
+
+    <aside class="hb-toc" aria-label="На этой странице">
+      <a class="l2" href="#какой-вопрос-задаёт-офлайн-оценка">Какой вопрос задаёт офлайн-оценка</a><a class="l2" href="#разбиения-и-что-в-них-утекает">Разбиения и что в них утекает</a><a class="l2" href="#холодные-пользователи-и-объекты-в-тесте">Холодные пользователи и объекты в тесте</a><a class="l2" href="#повторное-потребление">Повторное потребление</a><a class="l2" href="#кандидаты-полный-каталог-против-сэмплирования">Кандидаты: полный каталог против сэмплирования</a><a class="l2" href="#популярность-в-тесте-и-несмещённые-оценки">Популярность в тесте и несмещённые оценки</a><a class="l2" href="#бейзлайны-в-каждой-таблице">Бейзлайны в каждой таблице</a><a class="l2" href="#статистическая-аккуратность">Статистическая аккуратность</a><a class="l2" href="#офлайн-против-онлайн">Офлайн против онлайн</a><a class="l2" href="#чек-лист">Чек-лист</a><a class="l2" href="#пример-один-и-тот-же-набор-моделей-два-сплита">Пример: один и тот же набор моделей, два сплита</a><a class="l2" href="#код">Код</a><a class="l2" href="#ловушки">Ловушки</a><a class="l2" href="#проверь-себя">Проверь себя</a><a class="l2" href="#что-почитать">Что почитать</a>
+    </aside>
+  </div>
+</div>
+
+
+</main>
+
+<footer class="ftr" data-theme="dark">
+  <svg class="sym fern" viewBox="0 0 40.5 65.02" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#fern"/></svg>
+  <div class="container">
+    <div class="ftr-row">
+      <a href="/edufamcs-demo/" aria-label="EDU FAMCS — главная"><img src="/edufamcs-demo/static/brand/logo/logo-edu-dark.svg" alt="EDU FAMCS" width="196" height="40"></a>
+      <ul class="ftr-links">
+        <li><a href="/edufamcs-demo/#courses">Курсы</a></li>
+        <li><a href="/edufamcs-demo/ml/">Машинное обучение</a></li>
+        <li><a href="/edufamcs-demo/handbook/">Хендбук</a></li>
+        <li><a href="/edufamcs-demo/news/">Новости</a></li>
+        <li><a href="/edufamcs-demo/people/">Авторы</a></li>
+        <li><a href="/edufamcs-demo/about/">О&nbsp;нас</a></li>
+        <li><a href="/edufamcs-demo/propose/">Предложить или исправить</a></li>
+        <li><a href="/edufamcs-demo/privacy/">Конфиденциальность</a></li>
+      </ul>
+    </div>
+    <div class="ftr-big" aria-hidden="true">EDU<span class="d">·</span>FAMCS</div>
+    <p class="ftr-copy">© 2026 EDU FAMCS · Минск</p>
+  </div>
+</footer>
+
+<div class="toasts-region" aria-live="polite" id="toasts">
+
+</div>
+
+</body>
+</html>

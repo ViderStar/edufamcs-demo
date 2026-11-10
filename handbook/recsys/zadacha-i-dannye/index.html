@@ -27,7 +27,7 @@
 <script src="/edufamcs-demo/static/js/site.js" defer></script>
 <script src="/edufamcs-demo/static/handbook/handbook.js" defer></script>
 </head>
-<body class="" hx-headers='{"X-CSRFToken": "i10TKAtvDqozbnC8tzVom81WJKB9fEhC471gEnLcODENQWyoGYOtDA9hf7dokp2B"}'>
+<body class="" hx-headers='{"X-CSRFToken": "UiEOodv5QoNNeNCRjOKEnRE1DzJQohzFwvtLEf4WRb1mp6RjihYB5KwZ5IQO81ym"}'>
 <a class="skip" href="#main">К содержанию</a>
 <div class="demo-bar" role="note">Демо-версия для отзывов: вход, запись на курсы и формы здесь не работают.</div>
 
@@ -60,6 +60,7 @@
 
 
 <div class="container hb-page s-recsys">
+  <div class="hb-readbar" aria-hidden="true"><i></i></div>
   <div class="hb">
     <aside class="hb-nav" aria-label="Статьи раздела">
       
@@ -84,9 +85,9 @@
       <div class="hb-meta">
         
         
-        <span><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-clock"/></svg>10&nbsp;мин</span>
+        <span><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-clock"/></svg>15&nbsp;мин</span>
         <span class="hb-authors"><span class="avatar sm" title="Артем Лебедевич">АЛ</span>Артем Лебедевич</span>
-        <span><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-edit"/></svg>9 ноября 2026</span>
+        <span><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-edit"/></svg>10 ноября 2026</span>
         
         
       </div>
@@ -94,7 +95,7 @@
       
       <details class="hb-mtoc">
         <summary><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-list"/></svg>Содержание<svg class="ico sm" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-chev-down"/></svg></summary>
-        <a class="l2" href="#карта-раздела-от-tapestry-до-генеративных-моделей">Карта раздела: от Tapestry до генеративных моделей</a><a class="l2" href="#публичные-датасеты">Публичные датасеты</a><a class="l2" href="#матрица-взаимодействий">Матрица взаимодействий</a><a class="l2" href="#явный-и-неявный-фидбэк">Явный и неявный фидбэк</a><a class="l2" href="#смещения-в-данных">Смещения в данных</a><a class="l2" href="#холодный-старт">Холодный старт</a><a class="l2" href="#что-считать-успехом">Что считать успехом</a><a class="l2" href="#бейзлайны-которые-надо-побить">Бейзлайны, которые надо побить</a><a class="l2" href="#что-почитать">Что почитать</a>
+        <a class="l2" href="#карта-раздела-от-tapestry-до-генеративных-моделей">Карта раздела: от Tapestry до генеративных моделей</a><a class="l2" href="#постановки-задачи">Постановки задачи</a><a class="l2" href="#публичные-датасеты">Публичные датасеты</a><a class="l2" href="#матрица-взаимодействий">Матрица взаимодействий</a><a class="l2" href="#явный-и-неявный-фидбэк">Явный и неявный фидбэк</a><a class="l2" href="#лог-показов">Лог показов</a><a class="l2" href="#смещения-в-данных">Смещения в данных</a><a class="l2" href="#холодный-старт">Холодный старт</a><a class="l2" href="#что-считать-успехом">Что считать успехом</a><a class="l2" href="#бейзлайны-которые-надо-побить">Бейзлайны, которые надо побить</a><a class="l2" href="#ловушки">Ловушки</a><a class="l2" href="#проверь-себя">Проверь себя</a><a class="l2" href="#что-почитать">Что почитать</a>
       </details>
       
 
@@ -111,6 +112,45 @@
 <li><strong>2023–2026.</strong> Генеративные рекомендации: объекты кодируются <a href="/edufamcs-demo/handbook/recsys/semanticheskie-id-tiger/" rel="noopener noreferrer nofollow">семантическими ID</a>, а следующий объект порождается авторегрессионно (TIGER, Rajput et al., 2023); трансформеры масштабируют на логах по образцу языковых моделей (<a href="/edufamcs-demo/handbook/recsys/generativnye-rekomendateli/" rel="noopener noreferrer nofollow">HSTU и наследники</a>, Zhai et al., 2024); отдельная ветка — <a href="/edufamcs-demo/handbook/recsys/llm-v-rekomendaciyah/" rel="noopener noreferrer nofollow">LLM в рекомендациях</a>.</li>
 </ul>
 <p>Метрики и методология оценки — в <a href="/edufamcs-demo/handbook/recsys/oflajn-metriki/" rel="noopener noreferrer nofollow">следующей статье</a>.</p>
+<h2 id="постановки-задачи">Постановки задачи</h2>
+<p>«Рекомендации» — это несколько разных задач с разными входом, выходом и метриками; путаница между ними — частая причина невоспроизводимых сравнений.</p>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>Постановка</th>
+<th>Что предсказываем</th>
+<th>Метрика</th>
+<th>Где в разделе</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Rating prediction</td>
+<td>оценку <span class="tex">\hat r_{ui}</span> для пары</td>
+<td>RMSE, MAE</td>
+<td><a href="/edufamcs-demo/handbook/recsys/matrichnye-razlozheniya-als/" rel="noopener noreferrer nofollow">ALS и разложения</a></td>
+</tr>
+<tr>
+<td>Top-N</td>
+<td>упорядоченный список из <span class="tex">k</span> объектов для <span class="tex">u</span> по всей истории</td>
+<td>Recall@k, NDCG@k</td>
+<td><a href="/edufamcs-demo/handbook/recsys/matrichnye-razlozheniya-als/" rel="noopener noreferrer nofollow">ALS</a>, <a href="/edufamcs-demo/handbook/recsys/slim-i-ease/" rel="noopener noreferrer nofollow">EASE</a></td>
+</tr>
+<tr>
+<td>Next-item</td>
+<td>следующий объект <span class="tex">i_{t+1}</span> по упорядоченной истории</td>
+<td>HitRate/NDCG при глобальном временном сплите</td>
+<td><a href="/edufamcs-demo/handbook/recsys/posledovatelnye-modeli/" rel="noopener noreferrer nofollow">последовательные модели</a></td>
+</tr>
+<tr>
+<td>CTR/CVR prediction</td>
+<td><span class="tex">P(y=1\mid u,i,\text{контекст})</span> для показанного объекта</td>
+<td>log-loss, AUC, GAUC, калибровка</td>
+<td><a href="/edufamcs-demo/handbook/recsys/ctr-modeli/" rel="noopener noreferrer nofollow">CTR-модели</a></td>
+</tr>
+</tbody>
+</table></div>
+<p>Rating prediction — наследие Netflix Prize; в продуктах с неявным сигналом почти не встречается. Top-N и next-item решают одну продуктовую задачу, но отвечают на разные вопросы: «что вообще подойдёт» и «что дальше». CTR-модель ранжирует уже собранных кандидатов и работает с контекстом показа.</p>
 <h2 id="публичные-датасеты">Публичные датасеты</h2>
 <p>Для обучения и сравнений используют несколько стандартных наборов, у каждого свои особенности.</p>
 <div class="table-wrap"><table>
@@ -168,6 +208,14 @@ R <span class="tok-p">=</span> sp<span class="tok-p">.</span>csr_matrix<span cla
 <li><strong>Сигналы разной силы.</strong> Покупка весит больше, чем просмотр; прослушанный до конца трек — больше, чем пропущенный через три секунды. На практике события переводят в веса, например <span class="tex">w = 1</span> за просмотр, <span class="tex">w = 5</span> за корзину, <span class="tex">w = 20</span> за покупку, и подбирают веса по валидации.</li>
 </ol>
 <p>Удобно разделять <strong>предпочтение</strong> <span class="tex">p_{ui} = [r_{ui} &gt; 0]</span> (было ли взаимодействие) и <strong>уверенность</strong> <span class="tex">c_{ui} = 1 + \alpha r_{ui}</span> (насколько мы верим в это предпочтение). На этой идее построен неявный ALS — о нём в статье про матричные разложения.</p>
+<h2 id="лог-показов">Лог показов</h2>
+<p>Главная структура данных боевой системы — не матрица <span class="tex">R</span>, а <strong>лог показов</strong> (impressions log): строка на каждый показ с полями <code>user_id</code>, <code>item_id</code>, <code>ts</code>, поверхность, <strong>позиция</strong>, источник кандидата, версия модели и исход (клик, добавление в корзину, покупка, досмотр). Матрица <span class="tex">R</span> — агрегат этого лога.</p>
+<ul>
+<li><strong>Негативы.</strong> Объект, который <em>показали, но не кликнули</em>, — гораздо более честный негатив, чем случайный ноль в <span class="tex">R</span>: пользователь хотя бы мог его заметить. Это всё ещё шумный сигнал (могли не доскроллить, закрыть выдачу), но именно такие пары нужны CTR-моделям и обучению ранжирования.</li>
+<li><strong>Смещения.</strong> Позиция и источник кандидата в логе позволяют учитывать position bias и считать, что именно система решила показать; без них ничего из этого не восстановить.</li>
+<li><strong>Только клики.</strong> Если логировались лишь позитивные события, негативы можно лишь сэмплировать (см. <a href="/edufamcs-demo/handbook/recsys/neyavnyj-fidbek-bpr/" rel="noopener noreferrer nofollow">BPR</a>), а какая часть каталога вообще попадала в выдачу, неизвестно.</li>
+</ul>
+<p>Поэтому логирование показов с позицией — требование к платформе, а не оптимизация: исправить его постфактум нельзя.</p>
 <h2 id="смещения-в-данных">Смещения в данных</h2>
 <p>Логи собраны не в вакууме: пользователь видел то, что ему показала прошлая версия системы. Отсюда:</p>
 <ul>
@@ -187,7 +235,34 @@ R <span class="tok-p">=</span> sp<span class="tok-p">.</span>csr_matrix<span cla
 recent <span class="tok-p">=</span> events<span class="tok-p">[</span>events<span class="tok-p">.</span>ts <span class="tok-p">&gt;</span><span class="tok-p">=</span> events<span class="tok-p">.</span>ts<span class="tok-p">.</span>max<span class="tok-p">(</span><span class="tok-p">)</span> <span class="tok-p">-</span> pd<span class="tok-p">.</span>Timedelta<span class="tok-p">(</span>days<span class="tok-p">=</span><span class="tok-n">7</span><span class="tok-p">)</span><span class="tok-p">]</span>
 top <span class="tok-p">=</span> recent<span class="tok-p">.</span>item_id<span class="tok-p">.</span>value_counts<span class="tok-p">(</span><span class="tok-p">)</span><span class="tok-p">.</span>index<span class="tok-p">[</span><span class="tok-p">:</span><span class="tok-n">10</span><span class="tok-p">]</span><span class="tok-p">.</span>tolist<span class="tok-p">(</span><span class="tok-p">)</span>   <span class="tok-c"># бейзлайн «популярное за неделю»</span>
 </code></pre></div>
-<p>Если модель не обгоняет «популярное за неделю» на честной валидации по времени, ошибка почти наверняка в данных или в схеме оценки, а не в архитектуре.</p>
+<p>Если модель не обгоняет «популярное за неделю» на честной валидации по времени, сначала проверьте данные и схему оценки (утечки, сплит, маскирование просмотренного, фильтры). Если с ними всё в порядке, возможно, в этом домене свежесть и тренды доминируют над персональными вкусами (новости, акции, сезонная розница) — тогда популярность должна стать признаком модели и отдельным источником кандидатов, а не только бейзлайном.</p>
+<h2 id="ловушки">Ловушки</h2>
+<ul>
+<li>Случайный сплит вместо глобального временного: модель видит будущую популярность, метрики завышены, порядок моделей может быть другим.</li>
+<li>Ноль в <span class="tex">R</span> принимается за «не понравилось»; на деле это смесь «не интересно» и «не видел».</li>
+<li>Не логируются показы и позиции: негативы и смещения потом не восстановить.</li>
+<li>Сравнение с слабым бейзлайном: популярное за неделю и «с этим покупают» часто сильнее, чем кажется.</li>
+<li>Оценка по пользователям, которых нет в обучении, без отдельного учёта холодного старта.</li>
+<li>На собеседовании: чем неявный фидбэк отличается от явного и почему нули в матрице — не негативы?</li>
+<li>На собеседовании: как собрать офлайн-оценку, чтобы она повторяла прод (временной сплит, окно теста, холодные пользователи)?</li>
+<li>На собеседовании: модель не бьёт «популярное за неделю» — что проверяете и в каком порядке?</li>
+</ul>
+<h2 id="проверь-себя">Проверь себя</h2>
+<details class="callout md details"><summary>Почему нельзя считать нулевую ячейку неявной матрицы негативным примером?</summary>
+<p>Ноль означает «нет взаимодействия» и смешивает «не интересно» с «не знаю, что это есть»: объект мог просто не попасть в выдачу. Поэтому для обучения нужны либо веса уверенности, как в iALS, либо осознанный выбор негативов, как в BPR.</p>
+</details>
+<details class="callout md details"><summary>Что произойдёт с оценкой, если разбить события на train и test случайно, а не по времени?</summary>
+<p>Модель обучится на событиях, которые произошли позже тестовых, и увидит будущую популярность объектов. Метрики окажутся завышенными, а порядок моделей может поменяться по сравнению с реальным продом.</p>
+</details>
+<details class="callout md details"><summary>Чем top-N отличается от next-item prediction?</summary>
+<p>Top-N строит список по всей истории пользователя как множеству и оценивается по отложенным взаимодействиям; next-item использует порядок событий и предсказывает следующий объект, а тест обычно строится по глобальному времени. Это разные вопросы: «что подойдёт» и «что будет дальше».</p>
+</details>
+<details class="callout md details"><summary>Зачем логировать показы, а не только клики?</summary>
+<p>Показанный, но не кликнутый объект — более честный негатив, чем случайный ноль. Позиция и источник кандидата в логе нужны, чтобы учитывать position bias и обучать CTR-модели; восстановить это из одних кликов нельзя.</p>
+</details>
+<details class="callout md details"><summary>Модель не обгоняет «популярное за неделю». Что проверить?</summary>
+<p>Сначала данные и схему оценки: утечки, временной сплит, маскирование просмотренного. Если они чистые, в домене могут доминировать свежесть и тренды (новости, акции, сезонная розница) — тогда популярность надо сделать признаком и источником кандидатов.</p>
+</details>
 <h2 id="что-почитать">Что почитать</h2>
 <ul>
 <li>Goldberg D., Nichols D., Oki B., Terry D. <em>Using collaborative filtering to weave an information tapestry</em>, CACM, 1992 — https://doi.org/10.1145/138859.138867</li>
@@ -201,6 +276,8 @@ top <span class="tok-p">=</span> recent<span class="tok-p">.</span>item_id<span 
       
 
       
+
+      
       <nav class="pager" aria-label="Соседние статьи">
         <i></i>
         <a href="/edufamcs-demo/handbook/recsys/oflajn-metriki/"><span>Дальше<svg class="ico sm" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-arrow"/></svg></span>Офлайн-метрики: Precision@k, Recall@k, MAP, NDCG</a>
@@ -209,7 +286,7 @@ top <span class="tok-p">=</span> recent<span class="tok-p">.</span>item_id<span 
     </article>
 
     <aside class="hb-toc" aria-label="На этой странице">
-      <a class="l2" href="#карта-раздела-от-tapestry-до-генеративных-моделей">Карта раздела: от Tapestry до генеративных моделей</a><a class="l2" href="#публичные-датасеты">Публичные датасеты</a><a class="l2" href="#матрица-взаимодействий">Матрица взаимодействий</a><a class="l2" href="#явный-и-неявный-фидбэк">Явный и неявный фидбэк</a><a class="l2" href="#смещения-в-данных">Смещения в данных</a><a class="l2" href="#холодный-старт">Холодный старт</a><a class="l2" href="#что-считать-успехом">Что считать успехом</a><a class="l2" href="#бейзлайны-которые-надо-побить">Бейзлайны, которые надо побить</a><a class="l2" href="#что-почитать">Что почитать</a>
+      <a class="l2" href="#карта-раздела-от-tapestry-до-генеративных-моделей">Карта раздела: от Tapestry до генеративных моделей</a><a class="l2" href="#постановки-задачи">Постановки задачи</a><a class="l2" href="#публичные-датасеты">Публичные датасеты</a><a class="l2" href="#матрица-взаимодействий">Матрица взаимодействий</a><a class="l2" href="#явный-и-неявный-фидбэк">Явный и неявный фидбэк</a><a class="l2" href="#лог-показов">Лог показов</a><a class="l2" href="#смещения-в-данных">Смещения в данных</a><a class="l2" href="#холодный-старт">Холодный старт</a><a class="l2" href="#что-считать-успехом">Что считать успехом</a><a class="l2" href="#бейзлайны-которые-надо-побить">Бейзлайны, которые надо побить</a><a class="l2" href="#ловушки">Ловушки</a><a class="l2" href="#проверь-себя">Проверь себя</a><a class="l2" href="#что-почитать">Что почитать</a>
     </aside>
   </div>
 </div>

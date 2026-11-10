@@ -1,0 +1,331 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Генеративные модели: VAE, GAN, диффузия · EDU FAMCS</title>
+<meta name="description" content="Генеративные модели: VAE, GAN, диффузия — Введение в глубокое обучение. Хендбук ML-курса ФПМИ.">
+<meta name="theme-color" content="#060A16">
+<meta name="robots" content="noindex, nofollow">
+<meta name="htmx-config" content='{"allowEval":false,"includeIndicatorStyles":false,"historyCacheSize":0,"selfRequestsOnly":true}'>
+<meta name="katex-js" content="/edufamcs-demo/static/vendor/katex/katex.min.js">
+<meta name="katex-css" content="/edufamcs-demo/static/vendor/katex/katex.min.css">
+<link rel="icon" href="/edufamcs-demo/static/brand/logo/favicon-16.svg" type="image/svg+xml" sizes="16x16">
+<link rel="icon" href="/edufamcs-demo/static/brand/logo/favicon.svg" type="image/svg+xml" sizes="any">
+<link rel="preload" href="/edufamcs-demo/static/brand/fonts/manrope-cyrillic-400.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/edufamcs-demo/static/brand/fonts/unbounded-cyrillic-800.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="/edufamcs-demo/static/brand/fonts.css">
+<link rel="stylesheet" href="/edufamcs-demo/static/brand/tokens.css">
+<link rel="stylesheet" href="/edufamcs-demo/static/brand/components.css">
+<link rel="stylesheet" href="/edufamcs-demo/static/css/site.css">
+<link rel="stylesheet" href="/edufamcs-demo/static/css/hub.css">
+<link rel="stylesheet" href="/edufamcs-demo/static/css/about.css">
+<link rel="stylesheet" href="/edufamcs-demo/static/handbook/handbook.css">
+<script src="/edufamcs-demo/static/js/theme.js"></script>
+<script src="/edufamcs-demo/static/vendor/htmx/htmx.min.js" defer></script>
+<script src="/edufamcs-demo/static/vendor/alpine/alpine-csp.min.js" defer></script>
+<script src="/edufamcs-demo/static/js/site.js" defer></script>
+<script src="/edufamcs-demo/static/handbook/handbook.js" defer></script>
+</head>
+<body class="" hx-headers='{"X-CSRFToken": "BI2WcldAix9mzpKVRFP3A5BpZLBBmKb0dVRTsnMrjknVKIZnQ830iYtnrUIz6uaH"}'>
+<a class="skip" href="#main">К содержанию</a>
+<div class="demo-bar" role="note">Демо-версия для отзывов: вход, запись на курсы и формы здесь не работают.</div>
+
+<header class="hdr">
+  <div class="container">
+    <a class="brand" href="/edufamcs-demo/" aria-label="EDU FAMCS — главная">
+      <span class="full"><img class="only-light" src="/edufamcs-demo/static/brand/logo/logo-edu-light.svg" alt="EDU FAMCS" width="196" height="40"><img class="only-dark" src="/edufamcs-demo/static/brand/logo/logo-edu-dark.svg" alt="EDU FAMCS" width="196" height="40"></span>
+      <span class="short"><img class="only-light" src="/edufamcs-demo/static/brand/logo/logo-edu-light.svg" alt="EDU FAMCS" height="30"><img class="only-dark" src="/edufamcs-demo/static/brand/logo/logo-edu-dark.svg" alt="EDU FAMCS" height="30"></span>
+    </a>
+    <nav class="nav" id="main-nav" aria-label="Основная навигация">
+      <a href="/edufamcs-demo/#courses">Курсы</a>
+      <a href="/edufamcs-demo/ml/" >Машинное обучение</a>
+      
+      <a href="/edufamcs-demo/handbook/" aria-current="page">Хендбук</a>
+      <a href="/edufamcs-demo/news/" >Новости</a>
+      <a href="/edufamcs-demo/people/" >Авторы</a>
+      <a href="/edufamcs-demo/about/" >О&nbsp;нас</a>
+    </nav>
+    <div class="hdr-actions">
+      
+      <a class="btn btn-outline btn-login" href="/edufamcs-demo/accounts/login/?next=/handbook/dl/generativnye-modeli/">Войти</a>
+      
+      <button class="icon-btn menu-btn" type="button" aria-label="Меню" aria-expanded="false" aria-controls="main-nav"><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-menu"/></svg></button>
+    </div>
+  </div>
+</header>
+
+<main id="main">
+
+
+
+<div class="container hb-page hb-tone">
+  <div class="hb-readbar" aria-hidden="true"><i></i></div>
+  <div class="hb">
+    <aside class="hb-nav" aria-label="Статьи раздела">
+      
+<form class="hb-search" action="/edufamcs-demo/handbook/search/" method="get" role="search">
+  <svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-search"/></svg>
+  <input class="input" type="search" name="q" value="" placeholder="Поиск по хендбуку" aria-label="Поиск по хендбуку" autocomplete="off" maxlength="120"
+    hx-get="/edufamcs-demo/handbook/search/" hx-trigger="input changed delay:250ms, search" hx-target="#hb-nav-results" hx-sync="this:replace">
+</form>
+
+      <div id="hb-nav-results" class="hb-nav-results" aria-live="polite"></div>
+      <a class="grp" href="/edufamcs-demo/handbook/dl/">Практика и представления</a>
+      
+      <a class="" href="/edufamcs-demo/handbook/dl/normalizaciya-i-inicializaciya/">Нормализация и инициализация</a>
+      
+      <a class="" href="/edufamcs-demo/handbook/dl/pytorch-na-praktike/">PyTorch на практике: обучение и дообучение</a>
+      
+      <a class="" href="/edufamcs-demo/handbook/dl/kontrastivnoe-obuchenie/">Эмбеддинги и контрастивное обучение</a>
+      
+      <a class="cur" href="/edufamcs-demo/handbook/dl/generativnye-modeli/" aria-current="page">Генеративные модели: VAE, GAN, диффузия</a>
+      
+    </aside>
+
+    <article class="hb-main">
+      <nav class="crumbs" aria-label="Навигация"><a href="/edufamcs-demo/handbook/">Хендбук</a><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-chev"/></svg><a href="/edufamcs-demo/handbook/dl/">Введение в глубокое обучение</a></nav>
+      <h1 class="h1">Генеративные модели: VAE, GAN, диффузия</h1>
+      <div class="hb-meta">
+        
+        
+        <span><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-clock"/></svg>11&nbsp;мин</span>
+        <span class="hb-authors"><span class="avatar sm" title="Артем Лебедевич">АЛ</span>Артем Лебедевич</span>
+        <span><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-edit"/></svg>10 ноября 2026</span>
+        
+        
+      </div>
+
+      
+      <details class="hb-mtoc">
+        <summary><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-list"/></svg>Содержание<svg class="ico sm" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-chev-down"/></svg></summary>
+        <a class="l2" href="#карта-семейств">Карта семейств</a><a class="l2" href="#vae">VAE</a><a class="l2" href="#gan">GAN</a><a class="l2" href="#диффузия-ddpm">Диффузия (DDPM)</a><a class="l2" href="#оценка-fid">Оценка: FID</a><a class="l2" href="#код">Код</a><a class="l2" href="#ловушки">Ловушки</a><a class="l2" href="#проверь-себя">Проверь себя</a><a class="l2" href="#что-почитать">Что почитать</a>
+      </details>
+      
+
+      <div class="prose"><p>Дискриминативная модель учит <span class="tex">p(y\mid x)</span>, генеративная — само распределение данных <span class="tex">p(x)</span>: либо чтобы вычислять правдоподобие, либо чтобы сэмплировать новые объекты (картинки, звук, молекулы). Современные генераторы изображений, видео и звука — это в основном диффузионные модели и их родственники; VAE остаются основой латентных пространств, а GAN — историческая база и до сих пор быстрый генератор. Разберём три семейства и то, что в них нужно уметь выводить самостоятельно.</p>
+<h2 id="карта-семейств">Карта семейств</h2>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>Семейство</th>
+<th>Правдоподобие</th>
+<th>Сэмплирование</th>
+<th>Сильные стороны</th>
+<th>Слабые стороны</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Авторегрессионные</td>
+<td>точное, <span class="tex">\prod_i p(x_i\mid x_{&lt;i})</span></td>
+<td>последовательное, шаг за шагом</td>
+<td>точность, масштабируются (LLM)</td>
+<td>медленная генерация длинных объектов</td>
+</tr>
+<tr>
+<td>VAE</td>
+<td>нижняя граница (ELBO)</td>
+<td>один проход декодера</td>
+<td>быстро, есть латентное пространство</td>
+<td>размытость, коллапс апостериорного</td>
+</tr>
+<tr>
+<td>GAN</td>
+<td>нет (неявная модель)</td>
+<td>один проход генератора</td>
+<td>резкие образцы, быстро</td>
+<td>нестабильность, mode collapse</td>
+</tr>
+<tr>
+<td>Нормализующие потоки</td>
+<td>точное, обратимые слои</td>
+<td>один проход</td>
+<td>точное <span class="tex">p(x)</span></td>
+<td>жёсткие ограничения архитектуры</td>
+</tr>
+<tr>
+<td>Диффузия</td>
+<td>граница, близкая к ELBO</td>
+<td>много шагов (десятки–сотни)</td>
+<td>качество и покрытие мод</td>
+<td>дорогой вывод</td>
+</tr>
+</tbody>
+</table></div>
+<h2 id="vae">VAE</h2>
+<p>Хотим <span class="tex">p_\theta(x)=\int p_\theta(x\mid z)p(z)\,dz</span> с простым prior <span class="tex">p(z)=\mathcal N(0,I)</span>. Интеграл не берётся, апостериорное <span class="tex">p(z\mid x)</span> тоже. Вводим приближение <span class="tex">q_\phi(z\mid x)</span> и выводим нижнюю границу (ELBO). По неравенству Йенсена
+<span class="tex tex-block">\log p(x)=\log\mathbb E_{q(z\mid x)}\!\left[\frac{p(x\mid z)p(z)}{q(z\mid x)}\right]\ge \mathbb E_{q}\bigl[\log p(x\mid z)\bigr]-\mathrm{KL}\bigl(q(z\mid x)\,\|\,p(z)\bigr).</span>
+Точная связь: <span class="tex">\log p(x)-\text{ELBO}=\mathrm{KL}\bigl(q(z\mid x)\,\|\,p(z\mid x)\bigr)\ge0</span>, так что максимизация ELBO одновременно подтягивает <span class="tex">q</span> к истинному апостериорному. Первое слагаемое — качество реконструкции, второе — регуляризатор, прижимающий <span class="tex">q</span> к prior.</p>
+<p><strong>Репараметризация.</strong> Градиент по <span class="tex">\phi</span> через сэмплирование <span class="tex">z\sim q_\phi</span> не проходит. Пишем <span class="tex">z=\mu_\phi(x)+\sigma_\phi(x)\odot\varepsilon</span>, <span class="tex">\varepsilon\sim\mathcal N(0,I)</span>: случайность вынесена в <span class="tex">\varepsilon</span>, остальное детерминировано и дифференцируемо.</p>
+<p><strong>KL в закрытой форме</strong> для <span class="tex">q=\mathcal N(\mu,\operatorname{diag}\sigma^2)</span> и <span class="tex">p=\mathcal N(0,I)</span> раскладывается по координатам:
+<span class="tex tex-block">\mathrm{KL}=\tfrac12\sum_{j=1}^{d}\bigl(\mu_j^2+\sigma_j^2-1-\log\sigma_j^2\bigr).</span>
+Проверка: при <span class="tex">\mu=0,\sigma=1</span> получаем 0.</p>
+<p><strong>Posterior collapse.</strong> Если декодер слишком мощный (авторегрессионный), он моделирует <span class="tex">x</span> без <span class="tex">z</span>; тогда выгоднее всего <span class="tex">q(z\mid x)=p(z)</span>, KL равен нулю, а латентный код не несёт информации. Лечат отжигом веса KL (KL annealing), «свободными битами», ослаблением декодера, <span class="tex">\beta</span>-VAE (вес <span class="tex">\beta</span> перед KL).</p>
+<h2 id="gan">GAN</h2>
+<p>Две сети: генератор <span class="tex">G(z)</span> и дискриминатор <span class="tex">D(x)\in(0,1)</span> играют в минимакс (Goodfellow и соавторы, 2014):
+<span class="tex tex-block">\min_G\max_D\;\mathbb E_{x\sim p_{\text{data}}}\log D(x)+\mathbb E_{z}\log\bigl(1-D(G(z))\bigr).</span>
+Для фиксированного <span class="tex">G</span> оптимальный дискриминатор поточечно максимизирует <span class="tex">p_{\text{data}}\log D+p_g\log(1-D)</span>, откуда <span class="tex">D^*(x)=\dfrac{p_{\text{data}}(x)}{p_{\text{data}}(x)+p_g(x)}</span>. Подстановка даёт
+<span class="tex tex-block">V(D^*,G)=-\log4+2\,\mathrm{JS}\bigl(p_{\text{data}}\,\|\,p_g\bigr),</span>
+то есть генератор минимизирует дивергенцию Йенсена–Шеннона; минимум <span class="tex">-\log 4</span> достигается при <span class="tex">p_g=p_{\text{data}}</span>.</p>
+<p><strong>Практические вещи.</strong> Исходная потеря генератора <span class="tex">\log(1-D(G(z)))</span> насыщается, когда дискриминатор уверенно побеждает: градиент почти нулевой. Поэтому на практике генератор максимизирует <span class="tex">\log D(G(z))</span> — <strong>non-saturating</strong> потеря. <strong>Mode collapse</strong>: генератор выдаёт несколько «удобных» образцов, которые дискриминатор плохо отличает, и не покрывает все моды. <strong>Нестабильность</strong>: игра двух игроков, а не минимизация одной функции; когда носители <span class="tex">p_{\text{data}}</span> и <span class="tex">p_g</span> почти не пересекаются, JS насыщается константой, а градиент исчезает (Arjovsky &amp; Bottou, 2017). Отсюда Wasserstein GAN, спектральная нормализация, штраф на градиент.</p>
+<h2 id="диффузия-ddpm">Диффузия (DDPM)</h2>
+<p><strong>Прямой процесс</strong> постепенно зашумляет данные: <span class="tex">q(x_t\mid x_{t-1})=\mathcal N\bigl(\sqrt{1-\beta_t}\,x_{t-1},\,\beta_tI\bigr)</span> — то есть <span class="tex">x_t=\sqrt{\alpha_t}x_{t-1}+\sqrt{1-\alpha_t}\,\varepsilon</span>, где <span class="tex">\alpha_t=1-\beta_t</span>. Выведем замкнутую форму. Подставим <span class="tex">x_{t-1}=\sqrt{\alpha_{t-1}}x_{t-2}+\sqrt{1-\alpha_{t-1}}\varepsilon'</span>:
+<span class="tex tex-block">x_t=\sqrt{\alpha_t\alpha_{t-1}}\,x_{t-2}+\underbrace{\sqrt{\alpha_t(1-\alpha_{t-1})}\,\varepsilon'+\sqrt{1-\alpha_t}\,\varepsilon}_{\text{сумма независимых гауссовских шумов}}.</span>
+Дисперсия суммы <span class="tex">\alpha_t(1-\alpha_{t-1})+1-\alpha_t=1-\alpha_t\alpha_{t-1}</span>, поэтому это снова один гауссовский шум. По индукции, с <span class="tex">\bar\alpha_t=\prod_{s\le t}\alpha_s</span>:
+<span class="tex tex-block">q(x_t\mid x_0)=\mathcal N\bigl(\sqrt{\bar\alpha_t}\,x_0,\;(1-\bar\alpha_t)I\bigr),\qquad x_t=\sqrt{\bar\alpha_t}\,x_0+\sqrt{1-\bar\alpha_t}\,\varepsilon.</span>
+Любой <span class="tex">x_t</span> получается за один шаг; при больших <span class="tex">t</span> получается практически чистый шум.</p>
+<p><strong>Обучение.</strong> Сеть <span class="tex">\varepsilon_\theta(x_t,t)</span> предсказывает шум, добавленный к <span class="tex">x_0</span>. Упрощённая потеря DDPM (Ho и соавторы, 2020):
+<span class="tex tex-block">L_{\text{simple}}=\mathbb E_{t,x_0,\varepsilon}\bigl\|\varepsilon-\varepsilon_\theta(\sqrt{\bar\alpha_t}x_0+\sqrt{1-\bar\alpha_t}\varepsilon,\;t)\bigr\|^2.</span>
+Это вариационная граница без весовых множителей перед слагаемыми по <span class="tex">t</span>; <span class="tex">t</span> берётся равномерно.</p>
+<p><strong>Сэмплирование.</strong> Стартуем с <span class="tex">x_T\sim\mathcal N(0,I)</span> и шаг за шагом идём назад:
+<span class="tex tex-block">x_{t-1}=\frac1{\sqrt{\alpha_t}}\Bigl(x_t-\frac{1-\alpha_t}{\sqrt{1-\bar\alpha_t}}\,\varepsilon_\theta(x_t,t)\Bigr)+\sigma_tz,\quad z\sim\mathcal N(0,I),</span>
+где в DDPM <span class="tex">\sigma_t^2=\beta_t</span> (или дисперсия апостериорного <span class="tex">q(x_{t-1}\mid x_t,x_0)</span>); на последнем шаге шум не добавляют. Ho и соавторы брали <span class="tex">T=1000</span> и линейное <span class="tex">\beta_t</span> от <span class="tex">10^{-4}</span> до <span class="tex">0{,}02</span>.</p>
+<p><strong>Classifier-free guidance</strong> (Ho &amp; Salimans, 2021). Модель одновременно учат условной (на текст/класс <span class="tex">c</span>) и безусловной: условие с некоторой вероятностью заменяют пустым <span class="tex">\varnothing</span>. На сэмплировании берут экстраполяцию <span class="tex">\tilde\varepsilon=\varepsilon_\theta(x_t,\varnothing)+s\bigl(\varepsilon_\theta(x_t,c)-\varepsilon_\theta(x_t,\varnothing)\bigr)</span>, <span class="tex">s&gt;1</span>: сильнее следуем условию ценой разнообразия.</p>
+<p><strong>Латентная диффузия</strong> (Rombach и соавторы, CVPR 2022): сначала отдельный автоэнкодер сжимает изображение в латентное представление меньшей размерности; диффузия выполняется в этом пространстве (на порядки дешевле), а декодер возвращает пиксели. Условие (текст) подаётся через кросс-внимание. Так устроен Stable Diffusion.</p>
+<p><strong>Flow matching</strong> (Lipman и соавторы, ICLR 2023) обучает векторное поле <span class="tex">v_\theta(x,t)</span>, задающее ОДУ <span class="tex">\dot x=v_\theta(x,t)</span>, которое переносит простое распределение (шум) в данные. Обучение — регрессия на условное векторное поле вдоль заданной траектории вероятностей между шумом и конкретным образцом, и авторы показывают, что градиенты этой условной потери совпадают с градиентами исходной «маргинальной», которую нельзя вычислить напрямую. В простейшем варианте с прямой линией <span class="tex">x_t=(1-t)x_0+tx_1</span>, <span class="tex">x_0\sim\mathcal N(0,I)</span>, <span class="tex">x_1\sim p_{\text{data}}</span>, цель равна <span class="tex">x_1-x_0</span>, потеря <span class="tex">\|v_\theta(x_t,t)-(x_1-x_0)\|^2</span>, а сэмплирование — интегрирование ОДУ от <span class="tex">t=0</span> до <span class="tex">t=1</span>. Гауссовские траектории диффузии — частный случай этой рамки; преимущество в простоте обучения и в том, что для сэмплирования годятся обычные ОДУ-решатели.</p>
+<h2 id="оценка-fid">Оценка: FID</h2>
+<p>Fréchet Inception Distance (Heusel и соавторы, 2017) аппроксимирует признаки Inception-v3 для реальных и сгенерированных картинок гауссианами <span class="tex">(\mu_r,\Sigma_r)</span>, <span class="tex">(\mu_g,\Sigma_g)</span> и считает
+<span class="tex tex-block">\mathrm{FID}=\|\mu_r-\mu_g\|^2+\operatorname{tr}\bigl(\Sigma_r+\Sigma_g-2(\Sigma_r\Sigma_g)^{1/2}\bigr).</span>
+Меньше — лучше. Оговорки: смещение зависит от числа образцов (сравнивать только при одинаковом <span class="tex">N</span>, обычно десятки тысяч); значения чувствительны к реализации (ресайз, библиотека); признаки Inception обучены на ImageNet и плохо отражают другие домены; метрика не видит запоминания обучающих картинок и не оценивает соответствие тексту. Её дополняют precision/recall для генераторов, CLIP-score и человеческими оценками.</p>
+<h2 id="код">Код</h2>
+<div class="code"><div class="code-head"><span class="lang">python</span></div><pre><code><span class="tok-k">import</span> torch
+<span class="tok-k">import</span> torch.nn.functional <span class="tok-k">as</span> F
+
+torch<span class="tok-p">.</span>manual_seed<span class="tok-p">(</span><span class="tok-n">0</span><span class="tok-p">)</span>
+
+<span class="tok-k">def</span> <span class="tok-f">vae_loss</span><span class="tok-p">(</span>x<span class="tok-p">,</span> x_logits<span class="tok-p">,</span> mu<span class="tok-p">,</span> logvar<span class="tok-p">,</span> beta<span class="tok-p">=</span><span class="tok-n">1.0</span><span class="tok-p">)</span><span class="tok-p">:</span>
+    rec <span class="tok-p">=</span> F<span class="tok-p">.</span>binary_cross_entropy_with_logits<span class="tok-p">(</span>x_logits<span class="tok-p">,</span> x<span class="tok-p">,</span> reduction<span class="tok-p">=</span><span class="tok-s">"</span><span class="tok-s">none</span><span class="tok-s">"</span><span class="tok-p">)</span><span class="tok-p">.</span>flatten<span class="tok-p">(</span><span class="tok-n">1</span><span class="tok-p">)</span><span class="tok-p">.</span>sum<span class="tok-p">(</span><span class="tok-n">1</span><span class="tok-p">)</span>   <span class="tok-c"># -log p(x|z)</span>
+    kl <span class="tok-p">=</span> <span class="tok-n">0.5</span> <span class="tok-p">*</span> <span class="tok-p">(</span>mu<span class="tok-p">.</span>pow<span class="tok-p">(</span><span class="tok-n">2</span><span class="tok-p">)</span> <span class="tok-p">+</span> logvar<span class="tok-p">.</span>exp<span class="tok-p">(</span><span class="tok-p">)</span> <span class="tok-p">-</span> <span class="tok-n">1</span> <span class="tok-p">-</span> logvar<span class="tok-p">)</span><span class="tok-p">.</span>sum<span class="tok-p">(</span><span class="tok-n">1</span><span class="tok-p">)</span>                                  <span class="tok-c"># KL(q(z|x) || N(0, I))</span>
+    <span class="tok-k">return</span> <span class="tok-p">(</span>rec <span class="tok-p">+</span> beta <span class="tok-p">*</span> kl<span class="tok-p">)</span><span class="tok-p">.</span>mean<span class="tok-p">(</span><span class="tok-p">)</span><span class="tok-p">,</span> rec<span class="tok-p">.</span>mean<span class="tok-p">(</span><span class="tok-p">)</span><span class="tok-p">,</span> kl<span class="tok-p">.</span>mean<span class="tok-p">(</span><span class="tok-p">)</span>
+
+B<span class="tok-p">,</span> D<span class="tok-p">,</span> Z <span class="tok-p">=</span> <span class="tok-n">4</span><span class="tok-p">,</span> <span class="tok-n">784</span><span class="tok-p">,</span> <span class="tok-n">16</span>
+x <span class="tok-p">=</span> torch<span class="tok-p">.</span>rand<span class="tok-p">(</span>B<span class="tok-p">,</span> D<span class="tok-p">)</span><span class="tok-p">.</span>round<span class="tok-p">(</span><span class="tok-p">)</span>
+mu<span class="tok-p">,</span> logvar <span class="tok-p">=</span> torch<span class="tok-p">.</span>randn<span class="tok-p">(</span>B<span class="tok-p">,</span> Z<span class="tok-p">)</span><span class="tok-p">,</span> torch<span class="tok-p">.</span>randn<span class="tok-p">(</span>B<span class="tok-p">,</span> Z<span class="tok-p">)</span>
+z <span class="tok-p">=</span> mu <span class="tok-p">+</span> torch<span class="tok-p">.</span>exp<span class="tok-p">(</span><span class="tok-n">0.5</span> <span class="tok-p">*</span> logvar<span class="tok-p">)</span> <span class="tok-p">*</span> torch<span class="tok-p">.</span>randn_like<span class="tok-p">(</span>mu<span class="tok-p">)</span>        <span class="tok-c"># репараметризация</span>
+x_logits <span class="tok-p">=</span> torch<span class="tok-p">.</span>randn<span class="tok-p">(</span>B<span class="tok-p">,</span> D<span class="tok-p">)</span>
+loss<span class="tok-p">,</span> rec<span class="tok-p">,</span> kl <span class="tok-p">=</span> vae_loss<span class="tok-p">(</span>x<span class="tok-p">,</span> x_logits<span class="tok-p">,</span> mu<span class="tok-p">,</span> logvar<span class="tok-p">)</span>
+<span class="tok-f">print</span><span class="tok-p">(</span><span class="tok-s">"</span><span class="tok-s">z</span><span class="tok-s">"</span><span class="tok-p">,</span> <span class="tok-f">tuple</span><span class="tok-p">(</span>z<span class="tok-p">.</span>shape<span class="tok-p">)</span><span class="tok-p">,</span> <span class="tok-s">"</span><span class="tok-s">loss</span><span class="tok-s">"</span><span class="tok-p">,</span> <span class="tok-f">round</span><span class="tok-p">(</span>loss<span class="tok-p">.</span>item<span class="tok-p">(</span><span class="tok-p">)</span><span class="tok-p">,</span> <span class="tok-n">2</span><span class="tok-p">)</span><span class="tok-p">,</span> <span class="tok-s">"</span><span class="tok-s">rec</span><span class="tok-s">"</span><span class="tok-p">,</span> <span class="tok-f">round</span><span class="tok-p">(</span>rec<span class="tok-p">.</span>item<span class="tok-p">(</span><span class="tok-p">)</span><span class="tok-p">,</span> <span class="tok-n">2</span><span class="tok-p">)</span><span class="tok-p">,</span> <span class="tok-s">"</span><span class="tok-s">kl</span><span class="tok-s">"</span><span class="tok-p">,</span> <span class="tok-f">round</span><span class="tok-p">(</span>kl<span class="tok-p">.</span>item<span class="tok-p">(</span><span class="tok-p">)</span><span class="tok-p">,</span> <span class="tok-n">2</span><span class="tok-p">)</span><span class="tok-p">)</span>
+<span class="tok-f">print</span><span class="tok-p">(</span><span class="tok-s">"</span><span class="tok-s">KL при mu=0, logvar=0:</span><span class="tok-s">"</span><span class="tok-p">,</span> vae_loss<span class="tok-p">(</span>x<span class="tok-p">,</span> x_logits<span class="tok-p">,</span> torch<span class="tok-p">.</span>zeros<span class="tok-p">(</span>B<span class="tok-p">,</span> Z<span class="tok-p">)</span><span class="tok-p">,</span> torch<span class="tok-p">.</span>zeros<span class="tok-p">(</span>B<span class="tok-p">,</span> Z<span class="tok-p">)</span><span class="tok-p">)</span><span class="tok-p">[</span><span class="tok-n">2</span><span class="tok-p">]</span><span class="tok-p">.</span>item<span class="tok-p">(</span><span class="tok-p">)</span><span class="tok-p">)</span>
+
+T <span class="tok-p">=</span> <span class="tok-n">1000</span>
+betas <span class="tok-p">=</span> torch<span class="tok-p">.</span>linspace<span class="tok-p">(</span><span class="tok-n">1e-4</span><span class="tok-p">,</span> <span class="tok-n">0.02</span><span class="tok-p">,</span> T<span class="tok-p">)</span>
+alphas <span class="tok-p">=</span> <span class="tok-n">1</span> <span class="tok-p">-</span> betas
+abar <span class="tok-p">=</span> torch<span class="tok-p">.</span>cumprod<span class="tok-p">(</span>alphas<span class="tok-p">,</span> dim<span class="tok-p">=</span><span class="tok-n">0</span><span class="tok-p">)</span>
+<span class="tok-f">print</span><span class="tok-p">(</span><span class="tok-s">"</span><span class="tok-s">abar[0], abar[499], abar[999]:</span><span class="tok-s">"</span><span class="tok-p">,</span> <span class="tok-p">[</span><span class="tok-f">round</span><span class="tok-p">(</span>abar<span class="tok-p">[</span>i<span class="tok-p">]</span><span class="tok-p">.</span>item<span class="tok-p">(</span><span class="tok-p">)</span><span class="tok-p">,</span> <span class="tok-n">5</span><span class="tok-p">)</span> <span class="tok-k">for</span> i <span class="tok-k">in</span> <span class="tok-p">(</span><span class="tok-n">0</span><span class="tok-p">,</span> <span class="tok-n">499</span><span class="tok-p">,</span> <span class="tok-n">999</span><span class="tok-p">)</span><span class="tok-p">]</span><span class="tok-p">)</span>
+
+<span class="tok-k">def</span> <span class="tok-f">q_sample</span><span class="tok-p">(</span>x0<span class="tok-p">,</span> t<span class="tok-p">,</span> eps<span class="tok-p">)</span><span class="tok-p">:</span>
+    a <span class="tok-p">=</span> abar<span class="tok-p">[</span>t<span class="tok-p">]</span><span class="tok-p">.</span>view<span class="tok-p">(</span><span class="tok-p">-</span><span class="tok-n">1</span><span class="tok-p">,</span> <span class="tok-n">1</span><span class="tok-p">,</span> <span class="tok-n">1</span><span class="tok-p">,</span> <span class="tok-n">1</span><span class="tok-p">)</span>
+    <span class="tok-k">return</span> a<span class="tok-p">.</span>sqrt<span class="tok-p">(</span><span class="tok-p">)</span> <span class="tok-p">*</span> x0 <span class="tok-p">+</span> <span class="tok-p">(</span><span class="tok-n">1</span> <span class="tok-p">-</span> a<span class="tok-p">)</span><span class="tok-p">.</span>sqrt<span class="tok-p">(</span><span class="tok-p">)</span> <span class="tok-p">*</span> eps
+
+x0 <span class="tok-p">=</span> torch<span class="tok-p">.</span>randn<span class="tok-p">(</span><span class="tok-n">8</span><span class="tok-p">,</span> <span class="tok-n">3</span><span class="tok-p">,</span> <span class="tok-n">32</span><span class="tok-p">,</span> <span class="tok-n">32</span><span class="tok-p">)</span><span class="tok-p">.</span>clamp<span class="tok-p">(</span><span class="tok-p">-</span><span class="tok-n">1</span><span class="tok-p">,</span> <span class="tok-n">1</span><span class="tok-p">)</span>
+t <span class="tok-p">=</span> torch<span class="tok-p">.</span>randint<span class="tok-p">(</span><span class="tok-n">0</span><span class="tok-p">,</span> T<span class="tok-p">,</span> <span class="tok-p">(</span><span class="tok-n">8</span><span class="tok-p">,</span><span class="tok-p">)</span><span class="tok-p">)</span>
+xt <span class="tok-p">=</span> q_sample<span class="tok-p">(</span>x0<span class="tok-p">,</span> t<span class="tok-p">,</span> torch<span class="tok-p">.</span>randn_like<span class="tok-p">(</span>x0<span class="tok-p">)</span><span class="tok-p">)</span>
+<span class="tok-f">print</span><span class="tok-p">(</span><span class="tok-s">"</span><span class="tok-s">xt</span><span class="tok-s">"</span><span class="tok-p">,</span> <span class="tok-f">tuple</span><span class="tok-p">(</span>xt<span class="tok-p">.</span>shape<span class="tok-p">)</span><span class="tok-p">,</span> <span class="tok-s">"</span><span class="tok-s">t</span><span class="tok-s">"</span><span class="tok-p">,</span> t<span class="tok-p">.</span>tolist<span class="tok-p">(</span><span class="tok-p">)</span><span class="tok-p">)</span>
+<span class="tok-k">for</span> tt <span class="tok-k">in</span> <span class="tok-p">(</span><span class="tok-n">0</span><span class="tok-p">,</span> <span class="tok-n">99</span><span class="tok-p">,</span> <span class="tok-n">499</span><span class="tok-p">,</span> <span class="tok-n">999</span><span class="tok-p">)</span><span class="tok-p">:</span>
+    xt_ <span class="tok-p">=</span> q_sample<span class="tok-p">(</span>x0<span class="tok-p">,</span> torch<span class="tok-p">.</span>full<span class="tok-p">(</span><span class="tok-p">(</span><span class="tok-n">8</span><span class="tok-p">,</span><span class="tok-p">)</span><span class="tok-p">,</span> tt<span class="tok-p">)</span><span class="tok-p">,</span> torch<span class="tok-p">.</span>randn_like<span class="tok-p">(</span>x0<span class="tok-p">)</span><span class="tok-p">)</span>
+    corr <span class="tok-p">=</span> torch<span class="tok-p">.</span>corrcoef<span class="tok-p">(</span>torch<span class="tok-p">.</span>stack<span class="tok-p">(</span><span class="tok-p">[</span>xt_<span class="tok-p">.</span>flatten<span class="tok-p">(</span><span class="tok-p">)</span><span class="tok-p">,</span> x0<span class="tok-p">.</span>flatten<span class="tok-p">(</span><span class="tok-p">)</span><span class="tok-p">]</span><span class="tok-p">)</span><span class="tok-p">)</span><span class="tok-p">[</span><span class="tok-n">0</span><span class="tok-p">,</span> <span class="tok-n">1</span><span class="tok-p">]</span><span class="tok-p">.</span>item<span class="tok-p">(</span><span class="tok-p">)</span>
+    <span class="tok-f">print</span><span class="tok-p">(</span><span class="tok-s">f</span><span class="tok-s">"</span><span class="tok-s">t=</span><span class="tok-s">{</span>tt<span class="tok-s">}</span><span class="tok-s">: std(xt)=</span><span class="tok-s">{</span>xt_<span class="tok-p">.</span>std<span class="tok-p">(</span><span class="tok-p">)</span><span class="tok-p">.</span>item<span class="tok-p">(</span><span class="tok-p">)</span><span class="tok-s">:</span><span class="tok-s">.3f</span><span class="tok-s">}</span><span class="tok-s">, corr(xt,x0)=</span><span class="tok-s">{</span>corr<span class="tok-s">:</span><span class="tok-s">.3f</span><span class="tok-s">}</span><span class="tok-s">"</span><span class="tok-p">)</span>
+</code></pre></div>
+<p>Вывод (CPU, torch 2.x):</p>
+<div class="code"><div class="code-head"><span class="lang">code</span></div><pre><code>z (4, 16) loss 641.28 rec 630.23 kl 11.04
+KL при mu=0, logvar=0: 0.0
+abar[0], abar[499], abar[999]: [0.9999, 0.07859, 4e-05]
+xt (8, 3, 32, 32) t [717, 39, 42, 666, 55, 801, 493, 994]
+t=0: std(xt)=0.720, corr(xt,x0)=1.000
+t=99: std(xt)=0.753, corr(xt,x0)=0.905
+t=499: std(xt)=0.985, corr(xt,x0)=0.201
+t=999: std(xt)=1.004, corr(xt,x0)=0.003
+</code></pre></div>
+<p>К <span class="tex">t=999</span> корреляция с исходной картинкой практически нулевая: <span class="tex">\bar\alpha_T\approx4\cdot10^{-5}</span>, то есть <span class="tex">x_T</span> — почти чистый шум, и стартовать сэмплирование с <span class="tex">\mathcal N(0,I)</span> корректно. Отдельная проверка (не показана): 100 шагов пошагового зашумления дали дисперсию остатка 0,103 при теоретических <span class="tex">1-\bar\alpha_{99}=0{,}103</span>. Закрытая форма KL совпала с <code>torch.distributions.kl_divergence</code> (11,04489).</p>
+<h2 id="ловушки">Ловушки</h2>
+<div class="callout md warn"><p class="callout-title">Размытие и «хорошая» потеря</p>
+<p>Низкое значение потери VAE не означает красивые образцы: реконструкция по MSE/BCE усредняет моды и даёт размытие. Потеря GAN, наоборот, почти ничего не говорит о качестве — следите за образцами и FID.</p>
+</div>
+<ul>
+<li>В VAE реконструкция суммируется по пикселям (сотни–тысячи нат), а KL — по латентным координатам: если одно суммировать, а другое усреднять, баланс ломается; держите обе в одной нормировке (сумма по размерности, среднее по батчу): следите, чтобы реконструкция и KL были в одной нормировке (сумма по размерности, среднее по батчу).</li>
+<li>Диффузия: <span class="tex">t</span> нужно подавать в сеть (эмбеддинг времени); перепутанное расписание <span class="tex">\bar\alpha_t</span> на обучении и сэмплировании даёт шум вместо картинки.</li>
+<li>Сравнение FID между работами без одинакового числа образцов, набора и реализации бессмысленно.</li>
+</ul>
+<p>На собеседовании:</p>
+<ul>
+<li>Выведите ELBO и объясните, откуда зазор <span class="tex">\mathrm{KL}(q\|p(z\mid x))</span>.</li>
+<li>Зачем репараметризация, как выглядит KL для диагональных гауссиан.</li>
+<li>Оптимальный дискриминатор и связь с JS; mode collapse.</li>
+<li>Выведите <span class="tex">q(x_t\mid x_0)</span> в DDPM и объясните, что предсказывает сеть.</li>
+</ul>
+<h2 id="проверь-себя">Проверь себя</h2>
+<details class="callout md details"><summary>Почему ELBO — нижняя граница и в чём заключается зазор?</summary>
+<p>По неравенству Йенсена <span class="tex">\log\mathbb E_q[\cdot]\ge\mathbb E_q\log[\cdot]</span>. Зазор равен <span class="tex">\mathrm{KL}(q(z\mid x)\,\|\,p(z\mid x))</span> — расстоянию приближённого апостериорного до истинного.</p>
+</details>
+<details class="callout md details"><summary>Как работает трюк репараметризации?</summary>
+<p>Сэмплирование <span class="tex">z\sim\mathcal N(\mu,\sigma^2)</span> заменяют на <span class="tex">z=\mu+\sigma\varepsilon</span> с внешним шумом <span class="tex">\varepsilon\sim\mathcal N(0,I)</span>. Тогда <span class="tex">z</span> — дифференцируемая функция <span class="tex">\mu,\sigma</span>, и градиент проходит до параметров энкодера.</p>
+</details>
+<details class="callout md details"><summary>Чему равен оптимальный дискриминатор и какую дивергенцию минимизирует генератор?</summary>
+<p><span class="tex">D^*(x)=p_{\text{data}}/(p_{\text{data}}+p_g)</span>; при нём <span class="tex">V=-\log4+2\,\mathrm{JS}(p_{\text{data}}\|p_g)</span>, то есть генератор минимизирует дивергенцию Йенсена–Шеннона.</p>
+</details>
+<details class="callout md details"><summary>Почему $x_t=\sqrt{\bar\alpha_t}x_0+\sqrt{1-\bar\alpha_t}\varepsilon$ можно получить за один шаг?</summary>
+<p>Каждый шаг — линейное преобразование с независимым гауссовским шумом; сумма независимых гауссовских величин снова гауссовская, дисперсии складываются и дают <span class="tex">1-\bar\alpha_t</span>.</p>
+</details>
+<details class="callout md details"><summary>Что делает classifier-free guidance?</summary>
+<p>Экстраполирует предсказание шума от безусловного к условному: <span class="tex">\varepsilon_\varnothing+s(\varepsilon_c-\varepsilon_\varnothing)</span>. Больше <span class="tex">s</span> — точнее следование условию, но меньше разнообразия.</p>
+</details>
+<h2 id="что-почитать">Что почитать</h2>
+<ul>
+<li>Kingma, Welling, <em>Auto-Encoding Variational Bayes</em>, ICLR 2014: <a href="https://arxiv.org/abs/1312.6114" rel="noopener noreferrer nofollow">arXiv:1312.6114</a>.</li>
+<li>Goodfellow и соавторы, <em>Generative Adversarial Nets</em>, NeurIPS 2014: <a href="https://arxiv.org/abs/1406.2661" rel="noopener noreferrer nofollow">arXiv:1406.2661</a>; Arjovsky, Bottou, <em>Towards Principled Methods for Training GANs</em>, ICLR 2017: <a href="https://arxiv.org/abs/1701.04862" rel="noopener noreferrer nofollow">arXiv:1701.04862</a>.</li>
+<li>Ho, Jain, Abbeel, <em>Denoising Diffusion Probabilistic Models</em>, NeurIPS 2020: <a href="https://arxiv.org/abs/2006.11239" rel="noopener noreferrer nofollow">arXiv:2006.11239</a>.</li>
+<li>Ho, Salimans, <em>Classifier-Free Diffusion Guidance</em>, NeurIPS 2021 Workshop: <a href="https://arxiv.org/abs/2207.12598" rel="noopener noreferrer nofollow">arXiv:2207.12598</a>.</li>
+<li>Rombach и соавторы, <em>High-Resolution Image Synthesis with Latent Diffusion Models</em>, CVPR 2022: <a href="https://arxiv.org/abs/2112.10752" rel="noopener noreferrer nofollow">arXiv:2112.10752</a>.</li>
+<li>Lipman и соавторы, <em>Flow Matching for Generative Modeling</em>, ICLR 2023: <a href="https://arxiv.org/abs/2210.02747" rel="noopener noreferrer nofollow">arXiv:2210.02747</a>.</li>
+<li>Heusel и соавторы, <em>GANs Trained by a Two Time-Scale Update Rule Converge to a Local Nash Equilibrium</em> (FID), NeurIPS 2017: <a href="https://arxiv.org/abs/1706.08500" rel="noopener noreferrer nofollow">arXiv:1706.08500</a>.</li>
+</ul>
+</div>
+      
+
+      
+
+      
+      <nav class="pager" aria-label="Соседние статьи">
+        <a href="/edufamcs-demo/handbook/dl/kontrastivnoe-obuchenie/"><span><svg class="ico sm" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-arrow-left"/></svg>Назад</span>Эмбеддинги и контрастивное обучение</a>
+        
+      </nav>
+      
+    </article>
+
+    <aside class="hb-toc" aria-label="На этой странице">
+      <a class="l2" href="#карта-семейств">Карта семейств</a><a class="l2" href="#vae">VAE</a><a class="l2" href="#gan">GAN</a><a class="l2" href="#диффузия-ddpm">Диффузия (DDPM)</a><a class="l2" href="#оценка-fid">Оценка: FID</a><a class="l2" href="#код">Код</a><a class="l2" href="#ловушки">Ловушки</a><a class="l2" href="#проверь-себя">Проверь себя</a><a class="l2" href="#что-почитать">Что почитать</a>
+    </aside>
+  </div>
+</div>
+
+
+</main>
+
+<footer class="ftr" data-theme="dark">
+  <svg class="sym fern" viewBox="0 0 40.5 65.02" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#fern"/></svg>
+  <div class="container">
+    <div class="ftr-row">
+      <a href="/edufamcs-demo/" aria-label="EDU FAMCS — главная"><img src="/edufamcs-demo/static/brand/logo/logo-edu-dark.svg" alt="EDU FAMCS" width="196" height="40"></a>
+      <ul class="ftr-links">
+        <li><a href="/edufamcs-demo/#courses">Курсы</a></li>
+        <li><a href="/edufamcs-demo/ml/">Машинное обучение</a></li>
+        <li><a href="/edufamcs-demo/handbook/">Хендбук</a></li>
+        <li><a href="/edufamcs-demo/news/">Новости</a></li>
+        <li><a href="/edufamcs-demo/people/">Авторы</a></li>
+        <li><a href="/edufamcs-demo/about/">О&nbsp;нас</a></li>
+        <li><a href="/edufamcs-demo/propose/">Предложить или исправить</a></li>
+        <li><a href="/edufamcs-demo/privacy/">Конфиденциальность</a></li>
+      </ul>
+    </div>
+    <div class="ftr-big" aria-hidden="true">EDU<span class="d">·</span>FAMCS</div>
+    <p class="ftr-copy">© 2026 EDU FAMCS · Минск</p>
+  </div>
+</footer>
+
+<div class="toasts-region" aria-live="polite" id="toasts">
+
+</div>
+
+</body>
+</html>

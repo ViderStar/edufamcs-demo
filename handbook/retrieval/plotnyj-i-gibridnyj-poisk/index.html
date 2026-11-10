@@ -27,7 +27,7 @@
 <script src="/edufamcs-demo/static/js/site.js" defer></script>
 <script src="/edufamcs-demo/static/handbook/handbook.js" defer></script>
 </head>
-<body class="" hx-headers='{"X-CSRFToken": "zKDVMxG0gC8G5FSqDSEvzJRNrsn7vmdWlQEiGkYHrPoUKeOGQhxAQbZ8XPZmA7YV"}'>
+<body class="" hx-headers='{"X-CSRFToken": "wOY5oH3wlaDAJjM8O1Gfo5GqUvbA4ICl81N2EJCnmXR9UC1ANuUc6YyomEiyOsB2"}'>
 <a class="skip" href="#main">К содержанию</a>
 <div class="demo-bar" role="note">Демо-версия для отзывов: вход, запись на курсы и формы здесь не работают.</div>
 
@@ -60,6 +60,7 @@
 
 
 <div class="container hb-page s-recsys">
+  <div class="hb-readbar" aria-hidden="true"><i></i></div>
   <div class="hb">
     <aside class="hb-nav" aria-label="Статьи раздела">
       
@@ -86,9 +87,9 @@
       <div class="hb-meta">
         
         
-        <span><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-clock"/></svg>13&nbsp;мин</span>
+        <span><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-clock"/></svg>17&nbsp;мин</span>
         <span class="hb-authors"><span class="avatar sm" title="Артем Лебедевич">АЛ</span>Артем Лебедевич</span>
-        <span><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-edit"/></svg>9 ноября 2026</span>
+        <span><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-edit"/></svg>10 ноября 2026</span>
         
         
       </div>
@@ -96,7 +97,7 @@
       
       <details class="hb-mtoc">
         <summary><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-list"/></svg>Содержание<svg class="ico sm" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-chev-down"/></svg></summary>
-        <a class="l2" href="#bi-encoder">Bi-encoder</a><a class="l2" href="#история-плотного-поиска">История плотного поиска</a><a class="l2" href="#cross-encoder-точнее-но-дороже">Cross-encoder: точнее, но дороже</a><a class="l2" href="#почему-одного-плотного-поиска-мало">Почему одного плотного поиска мало</a><a class="l2" href="#гибридный-поиск">Гибридный поиск</a><a class="l2" href="#как-оценивать">Как оценивать</a><a class="l2" href="#связь-с-llm">Связь с LLM</a><a class="l2" href="#что-почитать">Что почитать</a>
+        <a class="l2" href="#bi-encoder">Bi-encoder</a><a class="l2" href="#история-плотного-поиска">История плотного поиска</a><a class="l2" href="#cross-encoder-точнее-но-дороже">Cross-encoder: точнее, но дороже</a><a class="l2" href="#почему-одного-плотного-поиска-мало">Почему одного плотного поиска мало</a><a class="l2" href="#гибридный-поиск">Гибридный поиск</a><a class="l2" href="#как-оценивать">Как оценивать</a><a class="l2" href="#связь-с-llm">Связь с LLM</a><a class="l2" href="#ловушки">Ловушки</a><a class="l2" href="#проверь-себя">Проверь себя</a><a class="l2" href="#что-почитать">Что почитать</a>
       </details>
       
 
@@ -112,6 +113,9 @@
 <div class="code"><div class="code-head"><span class="lang">python</span></div><pre><code><span class="tok-k">from</span> sentence_transformers <span class="tok-k">import</span> SentenceTransformer
 
 model <span class="tok-p">=</span> SentenceTransformer<span class="tok-p">(</span><span class="tok-s">"</span><span class="tok-s">intfloat/multilingual-e5-base</span><span class="tok-s">"</span><span class="tok-p">)</span>
+docs <span class="tok-p">=</span> <span class="tok-p">[</span><span class="tok-s">"</span><span class="tok-s">ALS раскладывает матрицу взаимодействий пользователей и товаров</span><span class="tok-s">"</span><span class="tok-p">,</span>
+        <span class="tok-s">"</span><span class="tok-s">HNSW — графовый индекс для поиска ближайших соседей</span><span class="tok-s">"</span><span class="tok-p">,</span>
+        <span class="tok-s">"</span><span class="tok-s">BM25 — вероятностная функция ранжирования для текстов</span><span class="tok-s">"</span><span class="tok-p">]</span>
 doc_vecs <span class="tok-p">=</span> model<span class="tok-p">.</span>encode<span class="tok-p">(</span><span class="tok-p">[</span><span class="tok-s">"</span><span class="tok-s">passage: </span><span class="tok-s">"</span> <span class="tok-p">+</span> t <span class="tok-k">for</span> t <span class="tok-k">in</span> docs<span class="tok-p">]</span><span class="tok-p">,</span> normalize_embeddings<span class="tok-p">=</span><span class="tok-k">True</span><span class="tok-p">)</span>
 q_vec <span class="tok-p">=</span> model<span class="tok-p">.</span>encode<span class="tok-p">(</span><span class="tok-s">"</span><span class="tok-s">query: как работает ALS</span><span class="tok-s">"</span><span class="tok-p">,</span> normalize_embeddings<span class="tok-p">=</span><span class="tok-k">True</span><span class="tok-p">)</span>
 top <span class="tok-p">=</span> <span class="tok-p">(</span>doc_vecs <span class="tok-p">@</span> q_vec<span class="tok-p">)</span><span class="tok-p">.</span>argsort<span class="tok-p">(</span><span class="tok-p">)</span><span class="tok-p">[</span><span class="tok-p">:</span><span class="tok-p">:</span><span class="tok-p">-</span><span class="tok-n">1</span><span class="tok-p">]</span><span class="tok-p">[</span><span class="tok-p">:</span><span class="tok-n">10</span><span class="tok-p">]</span>     <span class="tok-c"># косинус = скалярное произведение нормированных</span>
@@ -148,6 +152,7 @@ s_\text{hyb}(d) = \alpha\, \tilde s_\text{dense}(d) + (1 - \alpha)\, \tilde s_\t
 <p><strong>Reciprocal Rank Fusion (RRF; Cormack, Clarke, Buettcher, 2009).</strong> Смотрим не на скоры, а только на позиции:</p>
 <div class="tex tex-block">\mathrm{RRF}(d) = \sum_{r \in \text{выдачи}} \frac{1}{k + \mathrm{rank}_r(d)}, \qquad k = 60 .</div>
 <p>Документ, высоко стоящий хотя бы в одной выдаче, получает заметный вклад; стоящий высоко в обеих — побеждает. Константа <span class="tex">k</span> сглаживает разрыв между первой и второй позициями: при <span class="tex">k=60</span> документы на местах 1 и 2 различаются на <span class="tex">1/61 - 1/62 \approx 0.0003</span> — одна случайная перестановка наверху не решает исхода. RRF не требует нормировки и подбора весов, устойчив и поэтому стал стандартом по умолчанию (он встроен в Elasticsearch, OpenSearch и большинство векторных баз).</p>
+<p><strong>Пример на числах.</strong> Две выдачи: BM25 — A (30), B (8), C (7), D (6); плотный поиск — B (0,82), C (0,81), E (0,80), A (0,40). Выброс у A в BM25 (30 при остальных 6–8) сжимает после min-max остальные документы: A, B, C, D получают <span class="tex">1;\ 0{,}083;\ 0{,}042;\ 0</span>, а плотные скоры B, C, E, A — <span class="tex">1;\ 0{,}976;\ 0{,}952;\ 0</span>. При <span class="tex">\alpha = 0{,}5</span> итог: B 0,542, C 0,509, A 0,500, E 0,476, D 0 — порядок B, C, A, E, D. RRF при <span class="tex">k = 60</span> видит только позиции: B <span class="tex">= 1/62 + 1/61 = 0{,}0325</span>, A <span class="tex">= 1/61 + 1/64 = 0{,}0320</span>, C <span class="tex">= 1/63 + 1/62 = 0{,}0320</span>, E <span class="tex">= 0{,}0159</span>, D <span class="tex">= 0{,}0156</span> — порядок B, A, C, E, D. Порядки различаются: min-max «видит» огромный отрыв A в BM25, но тот же min-max обнуляет A в плотной выдаче, где она последняя, и итог зависит от шкалы; RRF считает A первой в одном списке и четвёртой в другом, не обращаясь к шкале. Разница здесь мала (A и C почти равны в обоих способах), но на реальных данных выбросы в скорах сдвигают порядок заметнее, а RRF от них не зависит.</p>
 <div class="code"><div class="code-head"><span class="lang">python</span></div><pre><code><span class="tok-k">from</span> collections <span class="tok-k">import</span> defaultdict
 
 <span class="tok-k">def</span> <span class="tok-f">rrf</span><span class="tok-p">(</span>rankings<span class="tok-p">,</span> k<span class="tok-p">=</span><span class="tok-n">60</span><span class="tok-p">,</span> top_n<span class="tok-p">=</span><span class="tok-n">10</span><span class="tok-p">)</span><span class="tok-p">:</span>
@@ -171,6 +176,31 @@ final <span class="tok-p">=</span> rrf<span class="tok-p">(</span><span class="t
 <p>Типичный рецепт, с которого стоит начать: BM25 + bi-encoder → RRF → cross-encoder на топ-50. Каждую стадию оценивайте отдельно, а итог — на A/B-тесте по поисковым метрикам продукта: доля запросов с кликом, конверсия, доля пустых выдач.</p>
 <h2 id="связь-с-llm">Связь с LLM</h2>
 <p>Найденные гибридным поиском фрагменты подаются языковой модели как контекст — это RAG, подробно разобранный в <a href="/edufamcs-demo/handbook/retrieval/rag/" rel="noopener noreferrer nofollow">отдельной главе</a>. Качество ответа там упирается в качество поиска: если нужного фрагмента нет в топе, модель его не процитирует.</p>
+<h2 id="ловушки">Ловушки</h2>
+<ul>
+<li><strong>Нормировка и размерность.</strong> Эмбеддинги и индекс должны быть нормированы одинаково: забытая нормировка при inner product превращает косинус в длину вектора. Отдельная ловушка — смешать BM25 и косинус без нормировки скоров.</li>
+<li><strong>Префиксы и модель.</strong> Для E5 нужны <code>query:</code> и <code>passage:</code>; без них качество падает без единой ошибки в логах. Запрос и документы кодируются одной версией модели; смена модели — переиндексация.</li>
+<li><strong>Хрупкость min-max.</strong> Min-max внутри выдачи нестабилен: один выброс в скорах меняет всё. Если используете взвешенную сумму, фиксируйте способ нормировки и подбирайте <span class="tex">\alpha</span> на размеченных запросах; RRF устойчивее.</li>
+<li><strong>Cross-encoder на всём корпусе.</strong> Его нельзя применять к миллионам документов: он только переранжирует топ-50–200 после быстрой стадии.</li>
+<li><strong>Оценка по одному числу.</strong> Гибрид должен не проседать на артикулах, коротких навигационных и длинных смысловых запросах; смотрите метрики по сегментам и Recall@100 первой стадии отдельно.</li>
+<li><strong>На собеседовании</strong> спрашивают: выведите InfoNCE и объясните роль температуры и размера батча; чем bi-encoder отличается от cross-encoder и почему они стоят в разных стадиях; как работает RRF и зачем в нём <span class="tex">k=60</span>; почему dense проигрывает BM25 на точных совпадениях и новом домене; как оценить гибрид.</li>
+</ul>
+<h2 id="проверь-себя">Проверь себя</h2>
+<details class="callout md details"><summary>Почему при контрастивном обучении важны трудные негативы и большой батч?</summary>
+<p>Негативы задают, какие ошибки модель научится различать: случайные слишком лёгкие, и она выучит только тематику. Размер батча — это число негативов в знаменателе InfoNCE, поэтому большой батч или очередь негативов дают более сильный сигнал.</p>
+</details>
+<details class="callout md details"><summary>Что делает температура $\tau$ в InfoNCE?</summary>
+<p>Чем она меньше, тем резче softmax и тем сильнее градиент сосредоточен на самых трудных негативах батча. Слишком малая <span class="tex">\tau</span> делает обучение чувствительным к ложным негативам.</p>
+</details>
+<details class="callout md details"><summary>Почему RRF не требует нормировки скоров, и за что отвечает константа $k$?</summary>
+<p>RRF использует только позиции, а они не зависят от шкалы скоров. Константа <span class="tex">k</span> сглаживает разрыв между первыми местами: при <span class="tex">k = 60</span> позиции 1 и 2 различаются на <span class="tex">1/61 - 1/62 \approx 0{,}0003</span>, и случайная перестановка наверху не решает исхода.</p>
+</details>
+<details class="callout md details"><summary>Почему плотный поиск проигрывает BM25 на артикулах и редких именах?</summary>
+<p>Эмбеддинг сжимает смысл текста в вектор и размывает точные строки, а редкие токены модель могла почти не видеть при обучении. BM25 сопоставляет именно термы, и редкий терм получает высокий IDF.</p>
+</details>
+<details class="callout md details"><summary>Почему cross-encoder точнее bi-encoder, но используется только на втором этапе?</summary>
+<p>Он подаёт запрос и документ в трансформер вместе, и внимание видит их слова рядом, поэтому качество выше. Но заранее ничего не посчитать: на каждую пару нужен полный прогон модели, что допустимо для топ-50–200, но не для корпуса.</p>
+</details>
 <h2 id="что-почитать">Что почитать</h2>
 <ul>
 <li>Karpukhin et al., <a href="https://arxiv.org/abs/2004.04906" rel="noopener noreferrer nofollow">Dense Passage Retrieval for Open-Domain QA</a>, 2020.</li>
@@ -185,6 +215,8 @@ final <span class="tok-p">=</span> rrf<span class="tok-p">(</span><span class="t
       
 
       
+
+      
       <nav class="pager" aria-label="Соседние статьи">
         <a href="/edufamcs-demo/handbook/retrieval/ponimanie-zaprosa/"><span><svg class="ico sm" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-arrow-left"/></svg>Назад</span>Понимание запроса</a>
         <a href="/edufamcs-demo/handbook/retrieval/nejrosetevoe-ranzhirovanie/"><span>Дальше<svg class="ico sm" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-arrow"/></svg></span>Нейросетевое ранжирование: cross-encoder, ColBERT, SPLADE</a>
@@ -193,7 +225,7 @@ final <span class="tok-p">=</span> rrf<span class="tok-p">(</span><span class="t
     </article>
 
     <aside class="hb-toc" aria-label="На этой странице">
-      <a class="l2" href="#bi-encoder">Bi-encoder</a><a class="l2" href="#история-плотного-поиска">История плотного поиска</a><a class="l2" href="#cross-encoder-точнее-но-дороже">Cross-encoder: точнее, но дороже</a><a class="l2" href="#почему-одного-плотного-поиска-мало">Почему одного плотного поиска мало</a><a class="l2" href="#гибридный-поиск">Гибридный поиск</a><a class="l2" href="#как-оценивать">Как оценивать</a><a class="l2" href="#связь-с-llm">Связь с LLM</a><a class="l2" href="#что-почитать">Что почитать</a>
+      <a class="l2" href="#bi-encoder">Bi-encoder</a><a class="l2" href="#история-плотного-поиска">История плотного поиска</a><a class="l2" href="#cross-encoder-точнее-но-дороже">Cross-encoder: точнее, но дороже</a><a class="l2" href="#почему-одного-плотного-поиска-мало">Почему одного плотного поиска мало</a><a class="l2" href="#гибридный-поиск">Гибридный поиск</a><a class="l2" href="#как-оценивать">Как оценивать</a><a class="l2" href="#связь-с-llm">Связь с LLM</a><a class="l2" href="#ловушки">Ловушки</a><a class="l2" href="#проверь-себя">Проверь себя</a><a class="l2" href="#что-почитать">Что почитать</a>
     </aside>
   </div>
 </div>

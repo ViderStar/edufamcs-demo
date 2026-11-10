@@ -27,7 +27,7 @@
 <script src="/edufamcs-demo/static/js/site.js" defer></script>
 <script src="/edufamcs-demo/static/handbook/handbook.js" defer></script>
 </head>
-<body class="" hx-headers='{"X-CSRFToken": "yg8U0WnDhxvnNwSsWXYBC378MdT15hNqkm9hUJFksKLBs5OI9mRGTvftiAvga2yp"}'>
+<body class="" hx-headers='{"X-CSRFToken": "jtbPm3ehp0rn4hOdulnVvYc1ShxQ9aQCVG0MC5N8qNFWfA3FtOBSdR4ZkqEOTUPj"}'>
 <a class="skip" href="#main">К содержанию</a>
 <div class="demo-bar" role="note">Демо-версия для отзывов: вход, запись на курсы и формы здесь не работают.</div>
 
@@ -60,6 +60,7 @@
 
 
 <div class="container hb-page hb-tone">
+  <div class="hb-readbar" aria-hidden="true"><i></i></div>
   <div class="hb">
     <aside class="hb-nav" aria-label="Статьи раздела">
       
@@ -88,9 +89,9 @@
       <div class="hb-meta">
         
         
-        <span><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-clock"/></svg>10&nbsp;мин</span>
+        <span><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-clock"/></svg>13&nbsp;мин</span>
         <span class="hb-authors"><span class="avatar sm" title="Артем Лебедевич">АЛ</span>Артем Лебедевич</span>
-        <span><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-edit"/></svg>9 ноября 2026</span>
+        <span><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-edit"/></svg>10 ноября 2026</span>
         
         
       </div>
@@ -98,7 +99,7 @@
       
       <details class="hb-mtoc">
         <summary><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-list"/></svg>Содержание<svg class="ico sm" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-chev-down"/></svg></summary>
-        <a class="l2" href="#k-ближайших-соседей">k ближайших соседей</a><a class="l3" href="#идея">Идея</a><a class="l3" href="#формулы">Формулы</a><a class="l3" href="#метрики-и-масштабирование">Метрики и масштабирование</a><a class="l3" href="#выбор">Выбор k</a><a class="l3" href="#проклятие-размерности">Проклятие размерности</a><a class="l3" href="#сложность-и-индексы">Сложность и индексы</a><a class="l2" href="#наивный-байесовский-классификатор">Наивный байесовский классификатор</a><a class="l3" href="#идея-1">Идея</a><a class="l3" href="#решающее-правило-в-логарифмах">Решающее правило в логарифмах</a><a class="l3" href="#варианты">Варианты</a><a class="l3" href="#сглаживание-лапласа">Сглаживание Лапласа</a><a class="l3" href="#тексты-спам-и-почему-наивность-работает">Тексты, спам и почему «наивность» работает</a><a class="l3" href="#генеративный-и-дискриминативный-подходы">Генеративный и дискриминативный подходы</a><a class="l2" href="#код">Код</a><a class="l2" href="#практика-и-типичные-ошибки">Практика и типичные ошибки</a><a class="l2" href="#что-почитать">Что почитать</a>
+        <a class="l2" href="#k-ближайших-соседей">k ближайших соседей</a><a class="l3" href="#идея">Идея</a><a class="l3" href="#формулы">Формулы</a><a class="l3" href="#метрики-и-масштабирование">Метрики и масштабирование</a><a class="l3" href="#выбор">Выбор k</a><a class="l3" href="#проклятие-размерности">Проклятие размерности</a><a class="l3" href="#сложность-и-индексы">Сложность и индексы</a><a class="l2" href="#наивный-байесовский-классификатор">Наивный байесовский классификатор</a><a class="l3" href="#идея-1">Идея</a><a class="l3" href="#решающее-правило-в-логарифмах">Решающее правило в логарифмах</a><a class="l3" href="#варианты">Варианты</a><a class="l3" href="#сглаживание-лапласа">Сглаживание Лапласа</a><a class="l3" href="#тексты-спам-и-почему-наивность-работает">Тексты, спам и почему «наивность» работает</a><a class="l3" href="#генеративный-и-дискриминативный-подходы">Генеративный и дискриминативный подходы</a><a class="l2" href="#на-салфетке">На салфетке</a><a class="l2" href="#код">Код</a><a class="l2" href="#практика-и-типичные-ошибки">Практика и типичные ошибки</a><a class="l2" href="#проверь-себя">Проверь себя</a><a class="l2" href="#что-почитать">Что почитать</a>
       </details>
       
 
@@ -144,6 +145,42 @@
 <p>Наивный Байес — классическая модель для текстов: мешок слов и Multinomial NB. Работа Sahami, Dumais, Heckerman, Horvitz (1998) применила байесовский подход к фильтрации спама, и на таких моделях строились первые массовые антиспам-фильтры. Условная независимость слов явно ложна («Нью» и «Йорк»), но метод даёт хорошую <strong>классификацию</strong> при плохих <strong>вероятностях</strong>. Домингос и Пацциани (1997) показали, что при 0–1 потере NB остаётся оптимальным в гораздо более широком классе распределений, чем те, где признаки независимы: для верного решения достаточно, чтобы правильный класс получил максимальную оценку, а не точную вероятность. Чжан (2004) добавил объяснение, почему так часто бывает: зависимости распределены по классам похоже или взаимно гасятся и argmax не меняют. Практическое следствие: выходы <code>predict_proba</code> у NB сильно перекошены к 0 и 1, перед использованием их нужно калибровать.</p>
 <h3 id="генеративный-и-дискриминативный-подходы">Генеративный и дискриминативный подходы</h3>
 <p>NB — <strong>генеративная</strong> модель: учит <span class="tex">P(x\mid y)P(y)</span>, то есть как данные порождаются. <strong>Дискриминативная</strong> (логистическая регрессия) учит <span class="tex">P(y\mid x)</span> напрямую. Нг и Джордан (2001) показали: NB приближается к своей асимптотической ошибке (обычно более высокой, если допущение независимости нарушено) быстрее — за порядка <span class="tex">\log d</span> примеров против порядка <span class="tex">d</span> у логистической регрессии, поэтому на малых выборках он часто лучше, а с ростом выборки логистическая регрессия его обгоняет. У Gaussian NB с дисперсиями, общими для всех классов (<span class="tex">\sigma_{jy}=\sigma_j</span>), решающая граница линейна, а в бинарном случае апостериорная вероятность — сигмоида от линейной функции <span class="tex">x</span>: то же семейство, что у <a href="/edufamcs-demo/handbook/classic/logisticheskaya-regressiya-i-metriki/" rel="noopener noreferrer nofollow">логистической регрессии</a>; отличается способ оценки параметров.</p>
+<h2 id="на-салфетке">На салфетке</h2>
+<p><strong>kNN.</strong> Шесть точек на прямой: <span class="tex">x=1,2,3,6,7,8</span>, классы <span class="tex">A,A,B,B,A,A</span>. Запрос <span class="tex">x=4{,}4</span>. Расстояния по возрастанию: <span class="tex">3\,(1{,}4;B)</span>, <span class="tex">6\,(1{,}6;B)</span>, <span class="tex">2\,(2{,}4;A)</span>, <span class="tex">7\,(2{,}6;A)</span>, <span class="tex">1\,(3{,}4;A)</span>, <span class="tex">8\,(3{,}6;A)</span>.</p>
+<ul>
+<li><span class="tex">k=1</span>: ближайший — <span class="tex">B</span>. <span class="tex">k=3</span>: голоса <span class="tex">B,B,A</span> — <span class="tex">B</span>.</li>
+<li><span class="tex">k=5</span>: <span class="tex">B,B,A,A,A</span> — уже <span class="tex">A</span>. Ответ меняется с <span class="tex">k</span>: это и есть компромисс смещения и разброса.</li>
+<li>Взвешенный (<span class="tex">w=1/\rho</span>), <span class="tex">k=5</span>: <span class="tex">B</span> получает <span class="tex">\frac1{1{,}4}+\frac1{1{,}6}=1{,}339</span>, <span class="tex">A</span> — <span class="tex">0{,}417+0{,}385+0{,}294=1{,}095</span>; побеждает <span class="tex">B</span>, потому что два самых близких соседа весят больше трёх далёких.</li>
+</ul>
+<p><strong>Наивный Байес.</strong> Шесть документов, словарь <span class="tex">d=4</span>: (акция, скидка, встреча, отчёт). Спам: <code>[1,2,0,0]</code>, <code>[1,1,0,0]</code>, <code>[0,1,1,0]</code>; не спам: <code>[0,0,1,1]</code>, <code>[0,0,1,2]</code>, <code>[1,0,0,1]</code>. Суммарные счётчики по словам: спам <span class="tex">(2,4,1,0)</span>, <span class="tex">n_s=7</span>; не спам <span class="tex">(1,0,2,4)</span>, <span class="tex">n_h=7</span>; априори <span class="tex">P=\frac12</span>. Классифицируем документ «скидка встреча отчёт» (<code>[0,1,1,1]</code>). Без сглаживания слово «отчёт» даёт спаму <span class="tex">\theta=0/7=0</span> и класс умирает. С <span class="tex">\alpha=1</span>: <span class="tex">\theta_{jy}=(n_{jy}+1)/(7+4)</span>.</p>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th></th>
+<th><span class="tex">\theta</span>(скидка)</th>
+<th><span class="tex">\theta</span>(встреча)</th>
+<th><span class="tex">\theta</span>(отчёт)</th>
+<th><span class="tex">\log P(y)+\sum\log\theta</span></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>спам</td>
+<td><span class="tex">5/11</span></td>
+<td><span class="tex">2/11</span></td>
+<td><span class="tex">1/11</span></td>
+<td><span class="tex">-5{,}584</span></td>
+</tr>
+<tr>
+<td>не спам</td>
+<td><span class="tex">1/11</span></td>
+<td><span class="tex">3/11</span></td>
+<td><span class="tex">5/11</span></td>
+<td><span class="tex">-5{,}179</span></td>
+</tr>
+</tbody>
+</table></div>
+<p>Разность логарифмов <span class="tex">0{,}405</span>, то есть апостериорные вероятности <span class="tex">0{,}6</span> у «не спам» против <span class="tex">0{,}4</span> — те же числа, что у <code>MultinomialNB(alpha=1).predict_proba</code>. Одно слово («скидка») тянет к спаму, два других сильнее тянут к обычной почте.</p>
 <h2 id="код">Код</h2>
 <p>kNN: масштабирование и подбор <span class="tex">k</span> в одном пайплайне.</p>
 <div class="code"><div class="code-head"><span class="lang">python</span></div><pre><code><span class="tok-k">from</span> sklearn.datasets <span class="tok-k">import</span> load_wine
@@ -186,8 +223,24 @@ nb <span class="tok-p">=</span> make_pipeline<span class="tok-p">(</span>CountVe
 <li><strong>Скорость в продакшене.</strong> Хранить всю выборку и считать расстояния онлайн не масштабируется; нужен ANN-индекс или смена модели.</li>
 <li><strong>NB: коррелированные признаки</strong> учитываются дважды и перекашивают вероятности; удаляйте дубли, калибруйте вероятности.</li>
 <li><strong>NB: нулевые вероятности</strong> — не забывайте <span class="tex">\alpha&gt;0</span>; для Gaussian NB с нулевой дисперсией признака в классе есть <code>var_smoothing</code>.</li>
-<li>На собеседованиях спрашивают: почему NB работает при нарушении независимости, чем kNN отличается от k-means, какова сложность предсказания kNN и как её снизить.</li>
+<li><strong>На собеседовании:</strong> спрашивают: почему NB работает при нарушении независимости, чем kNN отличается от k-means, какова сложность предсказания kNN и как её снизить.</li>
 </ul>
+<h2 id="проверь-себя">Проверь себя</h2>
+<details class="callout md details"><summary>Почему у kNN при $k=1$ ошибка на обучении нулевая, и о чём это говорит?</summary>
+<p>Ближайший сосед объекта из обучения — он сам (при отсутствии дубликатов с другой меткой). Это максимальная гибкость: высокий разброс, переобучение; ошибку нужно оценивать на отложенных данных.</p>
+</details>
+<details class="callout md details"><summary>Почему перед kNN обязателен масштаб признаков?</summary>
+<p>Расстояние складывает вклады признаков в их единицах: признак с диапазоном <span class="tex">10^5</span> определяет почти всё, а признак с диапазоном <span class="tex">1</span> не влияет. Стандартизация уравнивает вклады.</p>
+</details>
+<details class="callout md details"><summary>Почему NB даёт хорошую классификацию, но плохие вероятности?</summary>
+<p>Для верного argmax достаточно, чтобы правильный класс получил максимальную оценку; зависимости признаков искажают величины, но часто не порядок. Коррелированные признаки учитываются дважды, поэтому вероятности перекошены к 0 и 1 и требуют калибровки.</p>
+</details>
+<details class="callout md details"><summary>Для чего нужно сглаживание Лапласа?</summary>
+<p>Слово, не встречавшееся в классе, даёт <span class="tex">\theta=0</span> и <span class="tex">\log\theta=-\infty</span>; один незнакомый признак обнуляет класс. Добавка <span class="tex">\alpha</span> к счётчикам делает все вероятности положительными.</p>
+</details>
+<details class="callout md details"><summary>Когда NB обгоняет логистическую регрессию, а когда нет?</summary>
+<p>На малых выборках NB быстрее выходит на свою асимптоту (Ng, Jordan, 2001) и часто точнее; с ростом выборки логистическая регрессия, не опирающаяся на независимость признаков, его обгоняет.</p>
+</details>
 <h2 id="что-почитать">Что почитать</h2>
 <ul>
 <li>E. Fix, J. Hodges, <em>Discriminatory Analysis. Nonparametric Discrimination: Consistency Properties</em>, USAF School of Aviation Medicine, 1951.</li>
@@ -205,6 +258,8 @@ nb <span class="tok-p">=</span> make_pipeline<span class="tok-p">(</span>CountVe
       
 
       
+
+      
       <nav class="pager" aria-label="Соседние статьи">
         <a href="/edufamcs-demo/handbook/classic/razvedochnyj-analiz-dannyh/"><span><svg class="ico sm" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-arrow-left"/></svg>Назад</span>Разведочный анализ данных</a>
         <a href="/edufamcs-demo/handbook/classic/linejnaya-regressiya/"><span>Дальше<svg class="ico sm" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-arrow"/></svg></span>Линейная регрессия</a>
@@ -213,7 +268,7 @@ nb <span class="tok-p">=</span> make_pipeline<span class="tok-p">(</span>CountVe
     </article>
 
     <aside class="hb-toc" aria-label="На этой странице">
-      <a class="l2" href="#k-ближайших-соседей">k ближайших соседей</a><a class="l3" href="#идея">Идея</a><a class="l3" href="#формулы">Формулы</a><a class="l3" href="#метрики-и-масштабирование">Метрики и масштабирование</a><a class="l3" href="#выбор">Выбор k</a><a class="l3" href="#проклятие-размерности">Проклятие размерности</a><a class="l3" href="#сложность-и-индексы">Сложность и индексы</a><a class="l2" href="#наивный-байесовский-классификатор">Наивный байесовский классификатор</a><a class="l3" href="#идея-1">Идея</a><a class="l3" href="#решающее-правило-в-логарифмах">Решающее правило в логарифмах</a><a class="l3" href="#варианты">Варианты</a><a class="l3" href="#сглаживание-лапласа">Сглаживание Лапласа</a><a class="l3" href="#тексты-спам-и-почему-наивность-работает">Тексты, спам и почему «наивность» работает</a><a class="l3" href="#генеративный-и-дискриминативный-подходы">Генеративный и дискриминативный подходы</a><a class="l2" href="#код">Код</a><a class="l2" href="#практика-и-типичные-ошибки">Практика и типичные ошибки</a><a class="l2" href="#что-почитать">Что почитать</a>
+      <a class="l2" href="#k-ближайших-соседей">k ближайших соседей</a><a class="l3" href="#идея">Идея</a><a class="l3" href="#формулы">Формулы</a><a class="l3" href="#метрики-и-масштабирование">Метрики и масштабирование</a><a class="l3" href="#выбор">Выбор k</a><a class="l3" href="#проклятие-размерности">Проклятие размерности</a><a class="l3" href="#сложность-и-индексы">Сложность и индексы</a><a class="l2" href="#наивный-байесовский-классификатор">Наивный байесовский классификатор</a><a class="l3" href="#идея-1">Идея</a><a class="l3" href="#решающее-правило-в-логарифмах">Решающее правило в логарифмах</a><a class="l3" href="#варианты">Варианты</a><a class="l3" href="#сглаживание-лапласа">Сглаживание Лапласа</a><a class="l3" href="#тексты-спам-и-почему-наивность-работает">Тексты, спам и почему «наивность» работает</a><a class="l3" href="#генеративный-и-дискриминативный-подходы">Генеративный и дискриминативный подходы</a><a class="l2" href="#на-салфетке">На салфетке</a><a class="l2" href="#код">Код</a><a class="l2" href="#практика-и-типичные-ошибки">Практика и типичные ошибки</a><a class="l2" href="#проверь-себя">Проверь себя</a><a class="l2" href="#что-почитать">Что почитать</a>
     </aside>
   </div>
 </div>

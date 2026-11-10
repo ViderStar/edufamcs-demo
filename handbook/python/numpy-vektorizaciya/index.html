@@ -1,0 +1,284 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>NumPy: массивы, broadcasting, векторизация · EDU FAMCS</title>
+<meta name="description" content="NumPy: массивы, broadcasting, векторизация — Python и исследования. Хендбук ML-курса ФПМИ.">
+<meta name="theme-color" content="#060A16">
+<meta name="robots" content="noindex, nofollow">
+<meta name="htmx-config" content='{"allowEval":false,"includeIndicatorStyles":false,"historyCacheSize":0,"selfRequestsOnly":true}'>
+<meta name="katex-js" content="/edufamcs-demo/static/vendor/katex/katex.min.js">
+<meta name="katex-css" content="/edufamcs-demo/static/vendor/katex/katex.min.css">
+<link rel="icon" href="/edufamcs-demo/static/brand/logo/favicon-16.svg" type="image/svg+xml" sizes="16x16">
+<link rel="icon" href="/edufamcs-demo/static/brand/logo/favicon.svg" type="image/svg+xml" sizes="any">
+<link rel="preload" href="/edufamcs-demo/static/brand/fonts/manrope-cyrillic-400.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/edufamcs-demo/static/brand/fonts/unbounded-cyrillic-800.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="/edufamcs-demo/static/brand/fonts.css">
+<link rel="stylesheet" href="/edufamcs-demo/static/brand/tokens.css">
+<link rel="stylesheet" href="/edufamcs-demo/static/brand/components.css">
+<link rel="stylesheet" href="/edufamcs-demo/static/css/site.css">
+<link rel="stylesheet" href="/edufamcs-demo/static/css/hub.css">
+<link rel="stylesheet" href="/edufamcs-demo/static/css/about.css">
+<link rel="stylesheet" href="/edufamcs-demo/static/handbook/handbook.css">
+<script src="/edufamcs-demo/static/js/theme.js"></script>
+<script src="/edufamcs-demo/static/vendor/htmx/htmx.min.js" defer></script>
+<script src="/edufamcs-demo/static/vendor/alpine/alpine-csp.min.js" defer></script>
+<script src="/edufamcs-demo/static/js/site.js" defer></script>
+<script src="/edufamcs-demo/static/handbook/handbook.js" defer></script>
+</head>
+<body class="" hx-headers='{"X-CSRFToken": "qyXJfQcoLe5FOB4APZDjisAsZYvaMoAz2LMGvSLfM1jeZUj2OsRg0lsqr7C8w8zg"}'>
+<a class="skip" href="#main">К содержанию</a>
+<div class="demo-bar" role="note">Демо-версия для отзывов: вход, запись на курсы и формы здесь не работают.</div>
+
+<header class="hdr">
+  <div class="container">
+    <a class="brand" href="/edufamcs-demo/" aria-label="EDU FAMCS — главная">
+      <span class="full"><img class="only-light" src="/edufamcs-demo/static/brand/logo/logo-edu-light.svg" alt="EDU FAMCS" width="196" height="40"><img class="only-dark" src="/edufamcs-demo/static/brand/logo/logo-edu-dark.svg" alt="EDU FAMCS" width="196" height="40"></span>
+      <span class="short"><img class="only-light" src="/edufamcs-demo/static/brand/logo/logo-edu-light.svg" alt="EDU FAMCS" height="30"><img class="only-dark" src="/edufamcs-demo/static/brand/logo/logo-edu-dark.svg" alt="EDU FAMCS" height="30"></span>
+    </a>
+    <nav class="nav" id="main-nav" aria-label="Основная навигация">
+      <a href="/edufamcs-demo/#courses">Курсы</a>
+      <a href="/edufamcs-demo/ml/" >Машинное обучение</a>
+      
+      <a href="/edufamcs-demo/handbook/" aria-current="page">Хендбук</a>
+      <a href="/edufamcs-demo/news/" >Новости</a>
+      <a href="/edufamcs-demo/people/" >Авторы</a>
+      <a href="/edufamcs-demo/about/" >О&nbsp;нас</a>
+    </nav>
+    <div class="hdr-actions">
+      
+      <a class="btn btn-outline btn-login" href="/edufamcs-demo/accounts/login/?next=/handbook/python/numpy-vektorizaciya/">Войти</a>
+      
+      <button class="icon-btn menu-btn" type="button" aria-label="Меню" aria-expanded="false" aria-controls="main-nav"><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-menu"/></svg></button>
+    </div>
+  </div>
+</header>
+
+<main id="main">
+
+
+
+<div class="container hb-page hb-tone">
+  <div class="hb-readbar" aria-hidden="true"><i></i></div>
+  <div class="hb">
+    <aside class="hb-nav" aria-label="Статьи раздела">
+      
+<form class="hb-search" action="/edufamcs-demo/handbook/search/" method="get" role="search">
+  <svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-search"/></svg>
+  <input class="input" type="search" name="q" value="" placeholder="Поиск по хендбуку" aria-label="Поиск по хендбуку" autocomplete="off" maxlength="120"
+    hx-get="/edufamcs-demo/handbook/search/" hx-trigger="input changed delay:250ms, search" hx-target="#hb-nav-results" hx-sync="this:replace">
+</form>
+
+      <div id="hb-nav-results" class="hb-nav-results" aria-live="polite"></div>
+      <a class="grp" href="/edufamcs-demo/handbook/python/">Инструменты</a>
+      
+      <a class="" href="/edufamcs-demo/handbook/python/okruzhenie-uv/">Окружение: uv, виртуальные окружения и структура проекта</a>
+      
+      <a class="" href="/edufamcs-demo/handbook/python/python-dlya-ml/">Python для ML: что нужно на самом деле</a>
+      
+      <a class="cur" href="/edufamcs-demo/handbook/python/numpy-vektorizaciya/" aria-current="page">NumPy: массивы, broadcasting, векторизация</a>
+      
+      <a class="" href="/edufamcs-demo/handbook/python/pandas-i-polars/">Таблицы: pandas и polars</a>
+      
+      <a class="" href="/edufamcs-demo/handbook/python/jupyter-noutbuki/">Jupyter: как работать в ноутбуках и не утонуть</a>
+      
+      <a class="" href="/edufamcs-demo/handbook/python/vizualizaciya/">Графики, которые читаются: matplotlib и seaborn</a>
+      
+    </aside>
+
+    <article class="hb-main">
+      <nav class="crumbs" aria-label="Навигация"><a href="/edufamcs-demo/handbook/">Хендбук</a><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-chev"/></svg><a href="/edufamcs-demo/handbook/python/">Python и исследования</a></nav>
+      <h1 class="h1">NumPy: массивы, broadcasting, векторизация</h1>
+      <div class="hb-meta">
+        
+        
+        <span><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-clock"/></svg>10&nbsp;мин</span>
+        <span class="hb-authors"><span class="avatar sm" title="Артем Лебедевич">АЛ</span>Артем Лебедевич</span>
+        <span><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-edit"/></svg>10 ноября 2026</span>
+        
+        
+      </div>
+
+      
+      <details class="hb-mtoc">
+        <summary><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-list"/></svg>Содержание<svg class="ico sm" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-chev-down"/></svg></summary>
+        <a class="l2" href="#модель-памяти-shape-dtype-strides">Модель памяти: shape, dtype, strides</a><a class="l2" href="#broadcasting">Broadcasting</a><a class="l2" href="#оси">Оси</a><a class="l2" href="#индексирование">Индексирование</a><a class="l2" href="#векторизация-от-цикла-к-матричному-произведению">Векторизация: от цикла к матричному произведению</a><a class="l2" href="#einsum">einsum</a><a class="l2" href="#ловушки-dtype">Ловушки dtype</a><a class="l2" href="#случайные-числа">Случайные числа</a><a class="l2" href="#ловушки">Ловушки</a><a class="l2" href="#проверь-себя">Проверь себя</a><a class="l2" href="#что-почитать">Что почитать</a>
+      </details>
+      
+
+      <div class="prose"><p>NumPy — фундамент всего научного Python: pandas, scikit-learn, PyTorch и JAX наследуют его модель массива. Чтобы писать быстрый код и понимать чужие ошибки формы («operands could not be broadcast together»), нужно знать три вещи: как массив лежит в памяти, как работает broadcasting и как заменить цикл операцией над целым массивом. Линейная алгебра, на которой всё держится, разобрана в главе <a href="/edufamcs-demo/handbook/math/vektory-i-matricy/" rel="noopener noreferrer nofollow">Векторы и матрицы</a>.</p>
+<h2 id="модель-памяти-shape-dtype-strides">Модель памяти: shape, dtype, strides</h2>
+<p><code>ndarray</code> — один непрерывный блок памяти плюс метаданные: <strong>dtype</strong> (тип элемента), <strong>shape</strong> (размеры) и <strong>strides</strong> (на сколько байт сдвигаться, чтобы перейти к следующему элементу по каждой оси). Многомерность — только способ интерпретации плоского буфера.</p>
+<div class="code"><div class="code-head"><span class="lang">python</span></div><pre><code><span class="tok-k">import</span> numpy <span class="tok-k">as</span> np
+
+a <span class="tok-p">=</span> np<span class="tok-p">.</span>arange<span class="tok-p">(</span><span class="tok-n">12</span><span class="tok-p">,</span> dtype<span class="tok-p">=</span>np<span class="tok-p">.</span>float32<span class="tok-p">)</span><span class="tok-p">.</span>reshape<span class="tok-p">(</span><span class="tok-n">3</span><span class="tok-p">,</span> <span class="tok-n">4</span><span class="tok-p">)</span>
+<span class="tok-f">print</span><span class="tok-p">(</span>a<span class="tok-p">.</span>shape<span class="tok-p">,</span> a<span class="tok-p">.</span>dtype<span class="tok-p">,</span> a<span class="tok-p">.</span>strides<span class="tok-p">,</span> a<span class="tok-p">.</span>flags<span class="tok-p">[</span><span class="tok-s">"</span><span class="tok-s">C_CONTIGUOUS</span><span class="tok-s">"</span><span class="tok-p">]</span><span class="tok-p">)</span>
+<span class="tok-c"># (3, 4) float32 (16, 4) True</span>
+t <span class="tok-p">=</span> a<span class="tok-p">.</span>T
+<span class="tok-f">print</span><span class="tok-p">(</span>t<span class="tok-p">.</span>shape<span class="tok-p">,</span> t<span class="tok-p">.</span>strides<span class="tok-p">,</span> t<span class="tok-p">.</span>flags<span class="tok-p">[</span><span class="tok-s">"</span><span class="tok-s">C_CONTIGUOUS</span><span class="tok-s">"</span><span class="tok-p">]</span><span class="tok-p">)</span>
+<span class="tok-c"># (4, 3) (4, 16) False</span>
+</code></pre></div>
+<p>Строка из 4 <code>float32</code> занимает 16 байт, поэтому шаг по оси 0 — 16, по оси 1 — 4. Транспонирование ничего не копирует: оно лишь переставляет strides (<code>(4, 16)</code>), и массив перестаёт быть C-непрерывным. Операции над некоторыми срезами и <code>reshape</code> после транспонирования могут из-за этого сделать копию.</p>
+<p><strong>View или copy.</strong> Базовые срезы (<code>a[:2]</code>, <code>a[:, ::2]</code>, <code>a.T</code>, <code>reshape</code> в большинстве случаев) возвращают <strong>view</strong> — другой взгляд на те же данные; запись в него меняет оригинал. «Продвинутая» индексация (списком индексов, булевой маской) возвращает <strong>copy</strong>.</p>
+<div class="code"><div class="code-head"><span class="lang">python</span></div><pre><code>v <span class="tok-p">=</span> a<span class="tok-p">[</span><span class="tok-p">:</span><span class="tok-p">,</span> <span class="tok-p">:</span><span class="tok-p">:</span><span class="tok-n">2</span><span class="tok-p">]</span>
+v<span class="tok-p">[</span><span class="tok-n">0</span><span class="tok-p">,</span> <span class="tok-n">0</span><span class="tok-p">]</span> <span class="tok-p">=</span> <span class="tok-n">100</span>
+<span class="tok-f">print</span><span class="tok-p">(</span>a<span class="tok-p">[</span><span class="tok-n">0</span><span class="tok-p">,</span> <span class="tok-n">0</span><span class="tok-p">]</span><span class="tok-p">,</span> np<span class="tok-p">.</span>shares_memory<span class="tok-p">(</span>a<span class="tok-p">,</span> v<span class="tok-p">)</span><span class="tok-p">)</span>   <span class="tok-c"># 100.0 True — оригинал изменён</span>
+c <span class="tok-p">=</span> a<span class="tok-p">[</span><span class="tok-p">[</span><span class="tok-n">0</span><span class="tok-p">,</span> <span class="tok-n">1</span><span class="tok-p">]</span><span class="tok-p">]</span>                             <span class="tok-c"># fancy indexing → копия</span>
+<span class="tok-f">print</span><span class="tok-p">(</span>c<span class="tok-p">.</span>base <span class="tok-k">is</span> <span class="tok-k">None</span><span class="tok-p">)</span>                     <span class="tok-c"># True: своя память</span>
+</code></pre></div>
+<div class="callout md warn"><p class="callout-title">Ловушка</p>
+<p>Функцию, которая получила массив и меняет его на месте (<code>x -= x.mean()</code>), вызывающий код не ждёт. Если нужна независимость — <code>x.copy()</code>; проверить связь — <code>np.shares_memory(a, b)</code>.</p>
+</div>
+<h2 id="broadcasting">Broadcasting</h2>
+<p>Чтобы сложить массивы разных форм, NumPy выравнивает их формы <strong>по правому краю</strong>, и для каждой пары размеров должно выполняться: размеры равны, <strong>или</strong> один из них равен 1 (тогда он «растягивается» без копирования), или у одного массива этой оси нет (считается 1). Результат — поэлементный максимум размеров.</p>
+<div class="code"><div class="code-head"><span class="lang">text</span></div><pre><code>a:       (8, 1, 5)
+b:          (3, 1)     →  выравниваем справа: (1, 3, 1)
+результат:  (8, 3, 5)
+</code></pre></div>
+<div class="code"><div class="code-head"><span class="lang">python</span></div><pre><code><span class="tok-f">print</span><span class="tok-p">(</span><span class="tok-p">(</span>np<span class="tok-p">.</span>ones<span class="tok-p">(</span><span class="tok-p">(</span><span class="tok-n">8</span><span class="tok-p">,</span> <span class="tok-n">1</span><span class="tok-p">,</span> <span class="tok-n">5</span><span class="tok-p">)</span><span class="tok-p">)</span> <span class="tok-p">+</span> np<span class="tok-p">.</span>ones<span class="tok-p">(</span><span class="tok-p">(</span><span class="tok-n">3</span><span class="tok-p">,</span> <span class="tok-n">1</span><span class="tok-p">)</span><span class="tok-p">)</span><span class="tok-p">)</span><span class="tok-p">.</span>shape<span class="tok-p">)</span>   <span class="tok-c"># (8, 3, 5)</span>
+X <span class="tok-p">=</span> np<span class="tok-p">.</span>arange<span class="tok-p">(</span><span class="tok-n">6</span><span class="tok-p">)</span><span class="tok-p">.</span>reshape<span class="tok-p">(</span><span class="tok-n">3</span><span class="tok-p">,</span> <span class="tok-n">2</span><span class="tok-p">)</span>          <span class="tok-c"># [[0 1] [2 3] [4 5]]</span>
+<span class="tok-f">print</span><span class="tok-p">(</span>X <span class="tok-p">-</span> X<span class="tok-p">.</span>mean<span class="tok-p">(</span>axis<span class="tok-p">=</span><span class="tok-n">0</span><span class="tok-p">)</span><span class="tok-p">)</span>               <span class="tok-c"># (3,2) - (2,) → центрирование столбцов</span>
+</code></pre></div>
+<p>Несовместимая пара, например <code>(3, 2)</code> и <code>(3,)</code>: справа выравниваются <code>2</code> и <code>3</code> — не равны и не 1, ошибка. Лечится явной осью: <code>v[:, None]</code> превращает <code>(3,)</code> в <code>(3, 1)</code>. Типичные применения: центрирование и стандартизация признаков, матрица попарных разностей (<code>x[:, None] - x[None, :]</code>), маски внимания.</p>
+<h2 id="оси">Оси</h2>
+<p><code>axis=k</code> означает «схлопнуть ось k». Для <code>X</code> формы <code>(3, 2)</code>: <code>X.sum(axis=0)</code> → <code>[6 9]</code> (по строкам, сумма столбцов), <code>X.sum(axis=1)</code> → <code>[1 5 9]</code>. С <code>keepdims=True</code> форма сохраняет ось размера 1 (<code>(1, 2)</code>), и результат можно сразу вычесть из <code>X</code> через broadcasting — привычка, которая убирает половину ошибок формы. Те же правила у <code>mean</code>, <code>std</code>, <code>max</code>, <code>argmax</code>, <code>softmax</code>.</p>
+<h2 id="индексирование">Индексирование</h2>
+<div class="code"><div class="code-head"><span class="lang">python</span></div><pre><code>a <span class="tok-p">=</span> np<span class="tok-p">.</span>arange<span class="tok-p">(</span><span class="tok-n">12</span><span class="tok-p">,</span> dtype<span class="tok-p">=</span>np<span class="tok-p">.</span>float32<span class="tok-p">)</span><span class="tok-p">.</span>reshape<span class="tok-p">(</span><span class="tok-n">3</span><span class="tok-p">,</span> <span class="tok-n">4</span><span class="tok-p">)</span>
+<span class="tok-f">print</span><span class="tok-p">(</span>a<span class="tok-p">[</span>a <span class="tok-p">&gt;</span> <span class="tok-n">5</span><span class="tok-p">]</span><span class="tok-p">,</span> a<span class="tok-p">[</span>a <span class="tok-p">&gt;</span> <span class="tok-n">5</span><span class="tok-p">]</span><span class="tok-p">.</span>shape<span class="tok-p">)</span>         <span class="tok-c"># [ 6.  7.  8.  9. 10. 11.] (6,) — копия, одномерная</span>
+a<span class="tok-p">[</span>a <span class="tok-p">&gt;</span> <span class="tok-n">5</span><span class="tok-p">]</span> <span class="tok-p">=</span> <span class="tok-n">0</span>                            <span class="tok-c"># запись по маске работает на месте</span>
+idx <span class="tok-p">=</span> np<span class="tok-p">.</span>array<span class="tok-p">(</span><span class="tok-p">[</span><span class="tok-n">2</span><span class="tok-p">,</span> <span class="tok-n">0</span><span class="tok-p">]</span><span class="tok-p">)</span>
+<span class="tok-f">print</span><span class="tok-p">(</span>a<span class="tok-p">[</span>idx<span class="tok-p">,</span> <span class="tok-n">1</span><span class="tok-p">]</span><span class="tok-p">)</span>                        <span class="tok-c"># элементы (2,1) и (0,1)</span>
+</code></pre></div>
+<p>Маска имеет форму массива (или его первых осей), результат — одномерный: порядок элементов сохраняется, форма теряется. Для «по строке взять индексы из другой матрицы» используйте <code>np.take_along_axis</code>.</p>
+<h2 id="векторизация-от-цикла-к-матричному-произведению">Векторизация: от цикла к матричному произведению</h2>
+<p>Цикл <code>for</code> по строкам выполняется в интерпретаторе, а <code>A @ B</code> — в оптимизированной BLAS. Задача: найти <span class="tex">k</span> ближайших векторов по косинусной близости для батча запросов.</p>
+<div class="code"><div class="code-head"><span class="lang">python</span></div><pre><code>rng <span class="tok-p">=</span> np<span class="tok-p">.</span>random<span class="tok-p">.</span>default_rng<span class="tok-p">(</span><span class="tok-n">0</span><span class="tok-p">)</span>
+A <span class="tok-p">=</span> rng<span class="tok-p">.</span>normal<span class="tok-p">(</span>size<span class="tok-p">=</span><span class="tok-p">(</span><span class="tok-n">1000</span><span class="tok-p">,</span> <span class="tok-n">64</span><span class="tok-p">)</span><span class="tok-p">)</span><span class="tok-p">.</span>astype<span class="tok-p">(</span>np<span class="tok-p">.</span>float32<span class="tok-p">)</span>   <span class="tok-c"># корпус</span>
+Q <span class="tok-p">=</span> rng<span class="tok-p">.</span>normal<span class="tok-p">(</span>size<span class="tok-p">=</span><span class="tok-p">(</span><span class="tok-n">5</span><span class="tok-p">,</span> <span class="tok-n">64</span><span class="tok-p">)</span><span class="tok-p">)</span><span class="tok-p">.</span>astype<span class="tok-p">(</span>np<span class="tok-p">.</span>float32<span class="tok-p">)</span>      <span class="tok-c"># запросы</span>
+
+<span class="tok-c"># евклидовы расстояния: ||q-a||² = ||q||² − 2 q·a + ||a||²</span>
+d2 <span class="tok-p">=</span> <span class="tok-p">(</span>Q<span class="tok-p">*</span><span class="tok-p">*</span><span class="tok-n">2</span><span class="tok-p">)</span><span class="tok-p">.</span>sum<span class="tok-p">(</span><span class="tok-n">1</span><span class="tok-p">)</span><span class="tok-p">[</span><span class="tok-p">:</span><span class="tok-p">,</span> <span class="tok-k">None</span><span class="tok-p">]</span> <span class="tok-p">-</span> <span class="tok-n">2</span> <span class="tok-p">*</span> Q <span class="tok-p">@</span> A<span class="tok-p">.</span>T <span class="tok-p">+</span> <span class="tok-p">(</span>A<span class="tok-p">*</span><span class="tok-p">*</span><span class="tok-n">2</span><span class="tok-p">)</span><span class="tok-p">.</span>sum<span class="tok-p">(</span><span class="tok-n">1</span><span class="tok-p">)</span><span class="tok-p">[</span><span class="tok-k">None</span><span class="tok-p">,</span> <span class="tok-p">:</span><span class="tok-p">]</span>
+d2_naive <span class="tok-p">=</span> <span class="tok-p">(</span><span class="tok-p">(</span>Q<span class="tok-p">[</span><span class="tok-p">:</span><span class="tok-p">,</span> <span class="tok-k">None</span><span class="tok-p">,</span> <span class="tok-p">:</span><span class="tok-p">]</span> <span class="tok-p">-</span> A<span class="tok-p">[</span><span class="tok-k">None</span><span class="tok-p">,</span> <span class="tok-p">:</span><span class="tok-p">,</span> <span class="tok-p">:</span><span class="tok-p">]</span><span class="tok-p">)</span> <span class="tok-p">*</span><span class="tok-p">*</span> <span class="tok-n">2</span><span class="tok-p">)</span><span class="tok-p">.</span>sum<span class="tok-p">(</span><span class="tok-p">-</span><span class="tok-n">1</span><span class="tok-p">)</span>   <span class="tok-c"># (5, 1000, 64) в памяти</span>
+<span class="tok-f">print</span><span class="tok-p">(</span>d2<span class="tok-p">.</span>shape<span class="tok-p">,</span> np<span class="tok-p">.</span>abs<span class="tok-p">(</span>d2 <span class="tok-p">-</span> d2_naive<span class="tok-p">)</span><span class="tok-p">.</span>max<span class="tok-p">(</span><span class="tok-p">)</span> <span class="tok-p">&lt;</span> <span class="tok-n">1e-3</span><span class="tok-p">)</span>         <span class="tok-c"># (5, 1000) True</span>
+
+<span class="tok-c"># косинус: нормируем, дальше — просто скалярные произведения</span>
+An <span class="tok-p">=</span> A <span class="tok-p">/</span> np<span class="tok-p">.</span>linalg<span class="tok-p">.</span>norm<span class="tok-p">(</span>A<span class="tok-p">,</span> axis<span class="tok-p">=</span><span class="tok-n">1</span><span class="tok-p">,</span> keepdims<span class="tok-p">=</span><span class="tok-k">True</span><span class="tok-p">)</span>
+Qn <span class="tok-p">=</span> Q <span class="tok-p">/</span> np<span class="tok-p">.</span>linalg<span class="tok-p">.</span>norm<span class="tok-p">(</span>Q<span class="tok-p">,</span> axis<span class="tok-p">=</span><span class="tok-n">1</span><span class="tok-p">,</span> keepdims<span class="tok-p">=</span><span class="tok-k">True</span><span class="tok-p">)</span>
+S <span class="tok-p">=</span> Qn <span class="tok-p">@</span> An<span class="tok-p">.</span>T                                                <span class="tok-c"># (5, 1000)</span>
+
+k <span class="tok-p">=</span> <span class="tok-n">3</span>
+idx <span class="tok-p">=</span> np<span class="tok-p">.</span>argpartition<span class="tok-p">(</span><span class="tok-p">-</span>S<span class="tok-p">,</span> k<span class="tok-p">,</span> axis<span class="tok-p">=</span><span class="tok-n">1</span><span class="tok-p">)</span><span class="tok-p">[</span><span class="tok-p">:</span><span class="tok-p">,</span> <span class="tok-p">:</span>k<span class="tok-p">]</span>                  <span class="tok-c"># k лучших, но неупорядоченно, O(N)</span>
+order <span class="tok-p">=</span> np<span class="tok-p">.</span>argsort<span class="tok-p">(</span><span class="tok-p">-</span>np<span class="tok-p">.</span>take_along_axis<span class="tok-p">(</span>S<span class="tok-p">,</span> idx<span class="tok-p">,</span> <span class="tok-n">1</span><span class="tok-p">)</span><span class="tok-p">,</span> axis<span class="tok-p">=</span><span class="tok-n">1</span><span class="tok-p">)</span>   <span class="tok-c"># сортируем только k штук</span>
+top <span class="tok-p">=</span> np<span class="tok-p">.</span>take_along_axis<span class="tok-p">(</span>idx<span class="tok-p">,</span> order<span class="tok-p">,</span> <span class="tok-n">1</span><span class="tok-p">)</span>
+<span class="tok-f">print</span><span class="tok-p">(</span>top<span class="tok-p">.</span>shape<span class="tok-p">,</span> top<span class="tok-p">[</span><span class="tok-n">0</span><span class="tok-p">]</span><span class="tok-p">)</span>                                     <span class="tok-c"># (5, 3) [ 51 960 378]</span>
+<span class="tok-f">print</span><span class="tok-p">(</span>np<span class="tok-p">.</span>allclose<span class="tok-p">(</span>top<span class="tok-p">,</span> np<span class="tok-p">.</span>argsort<span class="tok-p">(</span><span class="tok-p">-</span>S<span class="tok-p">,</span> axis<span class="tok-p">=</span><span class="tok-n">1</span><span class="tok-p">)</span><span class="tok-p">[</span><span class="tok-p">:</span><span class="tok-p">,</span> <span class="tok-p">:</span>k<span class="tok-p">]</span><span class="tok-p">)</span><span class="tok-p">)</span>       <span class="tok-c"># True</span>
+</code></pre></div>
+<p>Идея: <code>argpartition</code> делает частичную сортировку за <span class="tex">O(N)</span> на строку вместо полной за <span class="tex">O(N\log N)</span> — это стандартный приём top-<span class="tex">k</span> (в точном поиске ближайших соседей, см. <a href="/edufamcs-demo/handbook/retrieval/vektornye-indeksy/" rel="noopener noreferrer nofollow">векторные индексы</a>). Наивная версия через <code>Q[:, None, :] - A[None, :, :]</code> материализует тензор <code>(5, 1000, 64)</code>: на реальных размерах он не поместится в память, поэтому формула с матричным произведением — не оптимизация, а необходимость. Скорость на вашей машине проверьте <code>%timeit</code>; относительно цикла по запросам выигрыш обычно в десятки раз, но числа зависят от железа и размеров.</p>
+<h2 id="einsum">einsum</h2>
+<p><code>np.einsum</code> записывает контракцию индексов строкой: повторяющийся индекс суммируется, индексы после <code>-&gt;</code> остаются.</p>
+<div class="code"><div class="code-head"><span class="lang">python</span></div><pre><code>S2 <span class="tok-p">=</span> np<span class="tok-p">.</span>einsum<span class="tok-p">(</span><span class="tok-s">"</span><span class="tok-s">qd,nd-&gt;qn</span><span class="tok-s">"</span><span class="tok-p">,</span> Qn<span class="tok-p">,</span> An<span class="tok-p">)</span>       <span class="tok-c"># то же, что Qn @ An.T</span>
+<span class="tok-f">print</span><span class="tok-p">(</span>np<span class="tok-p">.</span>allclose<span class="tok-p">(</span>S<span class="tok-p">,</span> S2<span class="tok-p">,</span> atol<span class="tok-p">=</span><span class="tok-n">1e-6</span><span class="tok-p">)</span><span class="tok-p">)</span>      <span class="tok-c"># True</span>
+<span class="tok-c"># скалярное произведение каждой пары строк:  np.einsum("nd,nd-&gt;n", X, Y)</span>
+<span class="tok-c"># батч матричных произведений:               np.einsum("bij,bjk-&gt;bik", A, B)</span>
+</code></pre></div>
+<p>Когда читаемость выше (внимание, батчи, тензоры), <code>einsum</code> понятнее цепочки <code>transpose</code>/<code>reshape</code>; для обычного умножения матриц <code>@</code> быстрее и проще.</p>
+<h2 id="ловушки-dtype">Ловушки dtype</h2>
+<div class="code"><div class="code-head"><span class="lang">python</span></div><pre><code><span class="tok-f">print</span><span class="tok-p">(</span>np<span class="tok-p">.</span>array<span class="tok-p">(</span><span class="tok-p">[</span><span class="tok-n">100</span><span class="tok-p">]</span><span class="tok-p">,</span> dtype<span class="tok-p">=</span>np<span class="tok-p">.</span>int8<span class="tok-p">)</span> <span class="tok-p">+</span> np<span class="tok-p">.</span>int8<span class="tok-p">(</span><span class="tok-n">100</span><span class="tok-p">)</span><span class="tok-p">)</span>        <span class="tok-c"># [-56] — переполнение без ошибки</span>
+<span class="tok-f">print</span><span class="tok-p">(</span>np<span class="tok-p">.</span>float32<span class="tok-p">(</span><span class="tok-n">16777216</span><span class="tok-p">)</span> <span class="tok-p">+</span> np<span class="tok-p">.</span>float32<span class="tok-p">(</span><span class="tok-n">1</span><span class="tok-p">)</span><span class="tok-p">)</span>                  <span class="tok-c"># 1.6777216e+07 — +1 потерялся</span>
+<span class="tok-f">print</span><span class="tok-p">(</span>np<span class="tok-p">.</span>float64<span class="tok-p">(</span><span class="tok-n">16777216</span><span class="tok-p">)</span> <span class="tok-p">+</span> <span class="tok-n">1</span><span class="tok-p">)</span>                              <span class="tok-c"># 16777217.0</span>
+<span class="tok-f">print</span><span class="tok-p">(</span>np<span class="tok-p">.</span>arange<span class="tok-p">(</span><span class="tok-n">5</span><span class="tok-p">)</span><span class="tok-p">.</span>dtype<span class="tok-p">,</span> <span class="tok-p">(</span>np<span class="tok-p">.</span>arange<span class="tok-p">(</span><span class="tok-n">3</span><span class="tok-p">)</span> <span class="tok-p">/</span> <span class="tok-n">2</span><span class="tok-p">)</span><span class="tok-p">.</span>dtype<span class="tok-p">)</span>          <span class="tok-c"># int64 float64</span>
+</code></pre></div>
+<p>Целые типы NumPy переполняются молча (оборачиваются по модулю); <code>float32</code> имеет ~7 десятичных разрядов, и сумма миллионов слагаемых копит ошибку (суммирование NumPy попарное и сглаживает, но не отменяет её). В NumPy 2 приведение типов подчиняется NEP 50: результат <code>float32_array + python_float</code> остаётся <code>float32</code> (Python-скаляр «слабый»), а <code>float32_array + np.float64(...)</code> — уже <code>float64</code>.</p>
+<h2 id="случайные-числа">Случайные числа</h2>
+<p>Современный API — <code>Generator</code>, а не <code>np.random.seed</code> с глобальным состоянием:</p>
+<div class="code"><div class="code-head"><span class="lang">python</span></div><pre><code>g <span class="tok-p">=</span> np<span class="tok-p">.</span>random<span class="tok-p">.</span>default_rng<span class="tok-p">(</span><span class="tok-n">42</span><span class="tok-p">)</span>
+<span class="tok-f">print</span><span class="tok-p">(</span>g<span class="tok-p">.</span>integers<span class="tok-p">(</span><span class="tok-n">0</span><span class="tok-p">,</span> <span class="tok-n">10</span><span class="tok-p">,</span> <span class="tok-n">5</span><span class="tok-p">)</span><span class="tok-p">,</span> g<span class="tok-p">.</span>normal<span class="tok-p">(</span>size<span class="tok-p">=</span><span class="tok-n">2</span><span class="tok-p">)</span><span class="tok-p">.</span>round<span class="tok-p">(</span><span class="tok-n">3</span><span class="tok-p">)</span><span class="tok-p">)</span>   <span class="tok-c"># [0 7 6 4 4] [ 0.941 -1.951]</span>
+child_a<span class="tok-p">,</span> child_b <span class="tok-p">=</span> np<span class="tok-p">.</span>random<span class="tok-p">.</span>SeedSequence<span class="tok-p">(</span><span class="tok-n">1</span><span class="tok-p">)</span><span class="tok-p">.</span>spawn<span class="tok-p">(</span><span class="tok-n">2</span><span class="tok-p">)</span>    <span class="tok-c"># независимые потоки для воркеров</span>
+rng_a<span class="tok-p">,</span> rng_b <span class="tok-p">=</span> np<span class="tok-p">.</span>random<span class="tok-p">.</span>default_rng<span class="tok-p">(</span>child_a<span class="tok-p">)</span><span class="tok-p">,</span> np<span class="tok-p">.</span>random<span class="tok-p">.</span>default_rng<span class="tok-p">(</span>child_b<span class="tok-p">)</span>
+</code></pre></div>
+<p>Передавайте <code>rng</code> в функцию явно — воспроизводимость не зависит от порядка вызовов в чужом коде. Для параллельных процессов сидируйте через <code>SeedSequence.spawn</code>, а не <code>seed + i</code> (потоки с соседними сидами не гарантированно независимы). Подробнее о воспроизводимости — в главе <a href="/edufamcs-demo/handbook/python/vosproizvodimost-i-trekking/" rel="noopener noreferrer nofollow">Воспроизводимость и трекинг</a>.</p>
+<h2 id="ловушки">Ловушки</h2>
+<ul>
+<li>Бессознательная мутация view: правите срез — меняется исходный массив.</li>
+<li><code>A * B</code> — поэлементное умножение, <code>A @ B</code> — матричное; <code>np.dot</code> для ≥3-мерных ведёт себя неочевидно, используйте <code>@</code>/<code>matmul</code>.</li>
+<li>Форма <code>(n,)</code> против <code>(n, 1)</code>: <code>(n,) - (n, 1)</code> даёт <code>(n, n)</code>, а не <code>(n,)</code>. Это самый частый «тихий» баг broadcasting'а: ошибки нет, форма не та, а метрика странная.</li>
+<li>Цикл по строкам или <code>np.vectorize</code> (это всё ещё цикл Python) вместо матричной операции.</li>
+<li><code>np.mean</code> по пустому массиву даёт <code>nan</code> с предупреждением; <code>==</code> для float вместо <code>np.isclose</code>.</li>
+<li>На собеседованиях: объяснить broadcasting на примере; реализовать softmax/стандартизацию/попарные расстояния без циклов; найти top-<span class="tex">k</span> без полной сортировки; чем view отличается от copy; почему <code>int8</code> переполняется; как посчитать accuracy одной строкой (<code>(y_pred == y_true).mean()</code>).</li>
+</ul>
+<h2 id="проверь-себя">Проверь себя</h2>
+<details class="callout md details"><summary>Какая форма у результата `np.ones((4, 1, 3)) * np.ones((5, 1))`?</summary>
+<p>Выравниваем справа: <code>(4, 1, 3)</code> и <code>(1, 5, 1)</code> → <code>(4, 5, 3)</code>.</p>
+</details>
+<details class="callout md details"><summary>Почему `x = a[:, 0]; x += 1` меняет `a`, а `x = a[[0, 1], 0]; x += 1` — нет?</summary>
+<p>Базовый срез — view на те же данные, индексирование списком (fancy indexing) — копия.</p>
+</details>
+<details class="callout md details"><summary>Как найти 10 наибольших элементов в массиве из $10^7$ чисел и зачем не `sort`?</summary>
+<p><code>np.argpartition(-x, 10)[:10]</code>, затем отсортировать эти 10. Частичная сортировка <span class="tex">O(N)</span> вместо <span class="tex">O(N\log N)</span>.</p>
+</details>
+<details class="callout md details"><summary>Чему равны `X.sum(axis=0)` и `X.sum(axis=1)` для `X` формы `(3, 2)` и какие у них формы?</summary>
+<p><code>axis=0</code> схлопывает строки: форма <code>(2,)</code>; <code>axis=1</code> схлопывает столбцы: форма <code>(3,)</code>. Ось, указанная в <code>axis</code>, из формы исчезает.</p>
+</details>
+<details class="callout md details"><summary>Как векторизованно посчитать матрицу косинусных близостей для двух наборов векторов?</summary>
+<p>Нормировать строки (<code>/ np.linalg.norm(..., axis=1, keepdims=True)</code>) и умножить <code>Qn @ An.T</code>. Матрица <code>(n_q, n_a)</code>.</p>
+</details>
+<h2 id="что-почитать">Что почитать</h2>
+<ul>
+<li><a href="https://numpy.org/doc/stable/user/absolute_beginners.html" rel="noopener noreferrer nofollow">NumPy: the absolute basics for beginners</a>.</li>
+<li><a href="https://numpy.org/doc/stable/user/basics.broadcasting.html" rel="noopener noreferrer nofollow">NumPy: Broadcasting</a>.</li>
+<li><a href="https://numpy.org/doc/stable/user/basics.indexing.html" rel="noopener noreferrer nofollow">NumPy: Indexing on ndarrays</a> (view и copy).</li>
+<li><a href="https://numpy.org/doc/stable/reference/random/generator.html" rel="noopener noreferrer nofollow">NumPy: Random Generator</a>.</li>
+<li><a href="https://numpy.org/doc/stable/numpy_2_0_migration_guide.html" rel="noopener noreferrer nofollow">NumPy 2.0 migration guide</a> (правила приведения типов, NEP 50).</li>
+<li><a href="https://numpy.org/doc/stable/reference/generated/numpy.einsum.html" rel="noopener noreferrer nofollow">numpy.einsum</a>.</li>
+<li>Jake VanderPlas, <a href="https://jakevdp.github.io/PythonDataScienceHandbook/" rel="noopener noreferrer nofollow">Python Data Science Handbook</a>, глава про NumPy.</li>
+</ul>
+</div>
+      
+
+      
+
+      
+      <nav class="pager" aria-label="Соседние статьи">
+        <a href="/edufamcs-demo/handbook/python/python-dlya-ml/"><span><svg class="ico sm" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-arrow-left"/></svg>Назад</span>Python для ML: что нужно на самом деле</a>
+        <a href="/edufamcs-demo/handbook/python/pandas-i-polars/"><span>Дальше<svg class="ico sm" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-arrow"/></svg></span>Таблицы: pandas и polars</a>
+      </nav>
+      
+    </article>
+
+    <aside class="hb-toc" aria-label="На этой странице">
+      <a class="l2" href="#модель-памяти-shape-dtype-strides">Модель памяти: shape, dtype, strides</a><a class="l2" href="#broadcasting">Broadcasting</a><a class="l2" href="#оси">Оси</a><a class="l2" href="#индексирование">Индексирование</a><a class="l2" href="#векторизация-от-цикла-к-матричному-произведению">Векторизация: от цикла к матричному произведению</a><a class="l2" href="#einsum">einsum</a><a class="l2" href="#ловушки-dtype">Ловушки dtype</a><a class="l2" href="#случайные-числа">Случайные числа</a><a class="l2" href="#ловушки">Ловушки</a><a class="l2" href="#проверь-себя">Проверь себя</a><a class="l2" href="#что-почитать">Что почитать</a>
+    </aside>
+  </div>
+</div>
+
+
+</main>
+
+<footer class="ftr" data-theme="dark">
+  <svg class="sym fern" viewBox="0 0 40.5 65.02" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#fern"/></svg>
+  <div class="container">
+    <div class="ftr-row">
+      <a href="/edufamcs-demo/" aria-label="EDU FAMCS — главная"><img src="/edufamcs-demo/static/brand/logo/logo-edu-dark.svg" alt="EDU FAMCS" width="196" height="40"></a>
+      <ul class="ftr-links">
+        <li><a href="/edufamcs-demo/#courses">Курсы</a></li>
+        <li><a href="/edufamcs-demo/ml/">Машинное обучение</a></li>
+        <li><a href="/edufamcs-demo/handbook/">Хендбук</a></li>
+        <li><a href="/edufamcs-demo/news/">Новости</a></li>
+        <li><a href="/edufamcs-demo/people/">Авторы</a></li>
+        <li><a href="/edufamcs-demo/about/">О&nbsp;нас</a></li>
+        <li><a href="/edufamcs-demo/propose/">Предложить или исправить</a></li>
+        <li><a href="/edufamcs-demo/privacy/">Конфиденциальность</a></li>
+      </ul>
+    </div>
+    <div class="ftr-big" aria-hidden="true">EDU<span class="d">·</span>FAMCS</div>
+    <p class="ftr-copy">© 2026 EDU FAMCS · Минск</p>
+  </div>
+</footer>
+
+<div class="toasts-region" aria-live="polite" id="toasts">
+
+</div>
+
+</body>
+</html>

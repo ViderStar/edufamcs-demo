@@ -1,0 +1,183 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Временные ряды — хендбук · EDU FAMCS</title>
+<meta name="description" content="Валидация во времени, ETS и ARIMA, бустинг на лагах, нейросети и фундаментальные модели.">
+<meta name="theme-color" content="#060A16">
+<meta name="robots" content="noindex, nofollow">
+<meta name="htmx-config" content='{"allowEval":false,"includeIndicatorStyles":false,"historyCacheSize":0,"selfRequestsOnly":true}'>
+<meta name="katex-js" content="/edufamcs-demo/static/vendor/katex/katex.min.js">
+<meta name="katex-css" content="/edufamcs-demo/static/vendor/katex/katex.min.css">
+<link rel="icon" href="/edufamcs-demo/static/brand/logo/favicon-16.svg" type="image/svg+xml" sizes="16x16">
+<link rel="icon" href="/edufamcs-demo/static/brand/logo/favicon.svg" type="image/svg+xml" sizes="any">
+<link rel="preload" href="/edufamcs-demo/static/brand/fonts/manrope-cyrillic-400.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/edufamcs-demo/static/brand/fonts/unbounded-cyrillic-800.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="/edufamcs-demo/static/brand/fonts.css">
+<link rel="stylesheet" href="/edufamcs-demo/static/brand/tokens.css">
+<link rel="stylesheet" href="/edufamcs-demo/static/brand/components.css">
+<link rel="stylesheet" href="/edufamcs-demo/static/css/site.css">
+<link rel="stylesheet" href="/edufamcs-demo/static/css/hub.css">
+<link rel="stylesheet" href="/edufamcs-demo/static/css/about.css">
+<link rel="stylesheet" href="/edufamcs-demo/static/handbook/handbook.css">
+<script src="/edufamcs-demo/static/js/theme.js"></script>
+<script src="/edufamcs-demo/static/vendor/htmx/htmx.min.js" defer></script>
+<script src="/edufamcs-demo/static/vendor/alpine/alpine-csp.min.js" defer></script>
+<script src="/edufamcs-demo/static/js/site.js" defer></script>
+
+</head>
+<body class="" hx-headers='{"X-CSRFToken": "xLtD7eDnfP8Id8eKUj8PGfmAq9I7eVM99YiAngcegCmhortcTMmMo8eySiP5YFLQ"}'>
+<a class="skip" href="#main">К содержанию</a>
+<div class="demo-bar" role="note">Демо-версия для отзывов: вход, запись на курсы и формы здесь не работают.</div>
+
+<header class="hdr">
+  <div class="container">
+    <a class="brand" href="/edufamcs-demo/" aria-label="EDU FAMCS — главная">
+      <span class="full"><img class="only-light" src="/edufamcs-demo/static/brand/logo/logo-edu-light.svg" alt="EDU FAMCS" width="196" height="40"><img class="only-dark" src="/edufamcs-demo/static/brand/logo/logo-edu-dark.svg" alt="EDU FAMCS" width="196" height="40"></span>
+      <span class="short"><img class="only-light" src="/edufamcs-demo/static/brand/logo/logo-edu-light.svg" alt="EDU FAMCS" height="30"><img class="only-dark" src="/edufamcs-demo/static/brand/logo/logo-edu-dark.svg" alt="EDU FAMCS" height="30"></span>
+    </a>
+    <nav class="nav" id="main-nav" aria-label="Основная навигация">
+      <a href="/edufamcs-demo/#courses">Курсы</a>
+      <a href="/edufamcs-demo/ml/" >Машинное обучение</a>
+      
+      <a href="/edufamcs-demo/handbook/" aria-current="page">Хендбук</a>
+      <a href="/edufamcs-demo/news/" >Новости</a>
+      <a href="/edufamcs-demo/people/" >Авторы</a>
+      <a href="/edufamcs-demo/about/" >О&nbsp;нас</a>
+    </nav>
+    <div class="hdr-actions">
+      
+      <a class="btn btn-outline btn-login" href="/edufamcs-demo/accounts/login/?next=/handbook/ts/">Войти</a>
+      
+      <button class="icon-btn menu-btn" type="button" aria-label="Меню" aria-expanded="false" aria-controls="main-nav"><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-menu"/></svg></button>
+    </div>
+  </div>
+</header>
+
+<main id="main">
+
+
+
+<div class="container page s-ts">
+  <header class="hb-sec-head">
+    <div>
+      <nav class="crumbs" aria-label="Навигация"><a href="/edufamcs-demo/handbook/">Хендбук</a><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-chev"/></svg><span>Временные ряды</span></nav>
+      <h1 class="display-l">Временные ряды</h1>
+      <p class="lead">Валидация во времени, ETS и ARIMA, бустинг на лагах, нейросети и фундаментальные модели.</p>
+      
+    </div>
+    <div class="hb-sec-art" aria-hidden="true">
+
+<svg viewBox="0 0 220 120" aria-hidden="true">
+  <defs><linearGradient id="hb-tsg" x1="0" x2="0" y1="0" y2="1"><stop offset="0" stop-color="currentColor" stop-opacity=".28"/><stop offset="1" stop-color="currentColor" stop-opacity="0"/></linearGradient></defs>
+  <g stroke="currentColor" stroke-opacity=".14"><path d="M0 30h220M0 60h220M0 90h220"/></g>
+  <path d="M0 86 L18 74 L34 80 L52 58 L68 66 L86 44 L102 52 L120 36 L136 48 L140 46 L140 120 L0 120Z" fill="url(#hb-tsg)"/>
+  <path d="M140 40 L160 26 L180 34 L200 16 L220 22 L220 62 L200 58 L180 72 L160 64 L140 54Z" fill="currentColor" opacity=".12"/>
+  <path d="M0 86 L18 74 L34 80 L52 58 L68 66 L86 44 L102 52 L120 36 L136 48 L140 46" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linejoin="round"/>
+  <path d="M140 46 L160 44 L180 52 L200 36 L220 42" fill="none" stroke="var(--accent)" stroke-width="2.2" stroke-dasharray="5 5" stroke-linejoin="round"/>
+  <circle cx="140" cy="46" r="4.5" fill="var(--accent)"/>
+</svg>
+
+</div>
+  </header>
+
+  
+  
+  <section class="hb-group">
+    <h2 class="h3 hb-group-t">Основы</h2>
+    <ol class="hb-list">
+      
+      <li><a class="hb-item" href="/edufamcs-demo/handbook/ts/postanovka-i-validaciya/">
+        <span class="n">01</span>
+        <span class="t">Прогнозирование: постановка, бейзлайны, валидация</span>
+        <span class="m">
+          
+          <svg class="ico sm" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-clock"/></svg>12&nbsp;мин
+          <svg class="ico sm" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-arrow"/></svg>
+        </span>
+      </a></li>
+      
+      <li><a class="hb-item" href="/edufamcs-demo/handbook/ts/ets-i-arima/">
+        <span class="n">02</span>
+        <span class="t">Классика: экспоненциальное сглаживание и ARIMA</span>
+        <span class="m">
+          
+          <svg class="ico sm" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-clock"/></svg>10&nbsp;мин
+          <svg class="ico sm" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-arrow"/></svg>
+        </span>
+      </a></li>
+      
+    </ol>
+  </section>
+  
+  <section class="hb-group">
+    <h2 class="h3 hb-group-t">ML-подходы</h2>
+    <ol class="hb-list">
+      
+      <li><a class="hb-item" href="/edufamcs-demo/handbook/ts/busting-na-lagah/">
+        <span class="n">01</span>
+        <span class="t">Бустинг на лагах и признаки для рядов</span>
+        <span class="m">
+          
+          <svg class="ico sm" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-clock"/></svg>10&nbsp;мин
+          <svg class="ico sm" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-arrow"/></svg>
+        </span>
+      </a></li>
+      
+      <li><a class="hb-item" href="/edufamcs-demo/handbook/ts/nejroseti-dlya-ryadov/">
+        <span class="n">02</span>
+        <span class="t">Нейросети и фундаментальные модели для рядов</span>
+        <span class="m">
+          
+          <svg class="ico sm" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-clock"/></svg>11&nbsp;мин
+          <svg class="ico sm" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-arrow"/></svg>
+        </span>
+      </a></li>
+      
+      <li><a class="hb-item" href="/edufamcs-demo/handbook/ts/praktika-prognozirovaniya/">
+        <span class="n">03</span>
+        <span class="t">Практика: иерархии, прерывистый спрос, аномалии и продакшен</span>
+        <span class="m">
+          
+          <svg class="ico sm" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-clock"/></svg>10&nbsp;мин
+          <svg class="ico sm" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-arrow"/></svg>
+        </span>
+      </a></li>
+      
+    </ol>
+  </section>
+  
+  
+</div>
+
+
+</main>
+
+<footer class="ftr" data-theme="dark">
+  <svg class="sym fern" viewBox="0 0 40.5 65.02" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#fern"/></svg>
+  <div class="container">
+    <div class="ftr-row">
+      <a href="/edufamcs-demo/" aria-label="EDU FAMCS — главная"><img src="/edufamcs-demo/static/brand/logo/logo-edu-dark.svg" alt="EDU FAMCS" width="196" height="40"></a>
+      <ul class="ftr-links">
+        <li><a href="/edufamcs-demo/#courses">Курсы</a></li>
+        <li><a href="/edufamcs-demo/ml/">Машинное обучение</a></li>
+        <li><a href="/edufamcs-demo/handbook/">Хендбук</a></li>
+        <li><a href="/edufamcs-demo/news/">Новости</a></li>
+        <li><a href="/edufamcs-demo/people/">Авторы</a></li>
+        <li><a href="/edufamcs-demo/about/">О&nbsp;нас</a></li>
+        <li><a href="/edufamcs-demo/propose/">Предложить или исправить</a></li>
+        <li><a href="/edufamcs-demo/privacy/">Конфиденциальность</a></li>
+      </ul>
+    </div>
+    <div class="ftr-big" aria-hidden="true">EDU<span class="d">·</span>FAMCS</div>
+    <p class="ftr-copy">© 2026 EDU FAMCS · Минск</p>
+  </div>
+</footer>
+
+<div class="toasts-region" aria-live="polite" id="toasts">
+
+</div>
+
+</body>
+</html>

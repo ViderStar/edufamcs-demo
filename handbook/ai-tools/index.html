@@ -1,0 +1,237 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>ИИ-ассистенты для кода — хендбук · EDU FAMCS</title>
+<meta name="description" content="Claude Code и Codex: как устроен агент, скиллы, MCP, субагенты, безопасность и честная защита проекта.">
+<meta name="theme-color" content="#060A16">
+<meta name="robots" content="noindex, nofollow">
+<meta name="htmx-config" content='{"allowEval":false,"includeIndicatorStyles":false,"historyCacheSize":0,"selfRequestsOnly":true}'>
+<meta name="katex-js" content="/edufamcs-demo/static/vendor/katex/katex.min.js">
+<meta name="katex-css" content="/edufamcs-demo/static/vendor/katex/katex.min.css">
+<link rel="icon" href="/edufamcs-demo/static/brand/logo/favicon-16.svg" type="image/svg+xml" sizes="16x16">
+<link rel="icon" href="/edufamcs-demo/static/brand/logo/favicon.svg" type="image/svg+xml" sizes="any">
+<link rel="preload" href="/edufamcs-demo/static/brand/fonts/manrope-cyrillic-400.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/edufamcs-demo/static/brand/fonts/unbounded-cyrillic-800.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="/edufamcs-demo/static/brand/fonts.css">
+<link rel="stylesheet" href="/edufamcs-demo/static/brand/tokens.css">
+<link rel="stylesheet" href="/edufamcs-demo/static/brand/components.css">
+<link rel="stylesheet" href="/edufamcs-demo/static/css/site.css">
+<link rel="stylesheet" href="/edufamcs-demo/static/css/hub.css">
+<link rel="stylesheet" href="/edufamcs-demo/static/css/about.css">
+<link rel="stylesheet" href="/edufamcs-demo/static/handbook/handbook.css">
+<script src="/edufamcs-demo/static/js/theme.js"></script>
+<script src="/edufamcs-demo/static/vendor/htmx/htmx.min.js" defer></script>
+<script src="/edufamcs-demo/static/vendor/alpine/alpine-csp.min.js" defer></script>
+<script src="/edufamcs-demo/static/js/site.js" defer></script>
+
+</head>
+<body class="" hx-headers='{"X-CSRFToken": "pPUhsWZup7fOufNvdekurucvQGWteLNR12JeIYylqUtnFy2XcHyr9n4tiP3rYvMy"}'>
+<a class="skip" href="#main">К содержанию</a>
+<div class="demo-bar" role="note">Демо-версия для отзывов: вход, запись на курсы и формы здесь не работают.</div>
+
+<header class="hdr">
+  <div class="container">
+    <a class="brand" href="/edufamcs-demo/" aria-label="EDU FAMCS — главная">
+      <span class="full"><img class="only-light" src="/edufamcs-demo/static/brand/logo/logo-edu-light.svg" alt="EDU FAMCS" width="196" height="40"><img class="only-dark" src="/edufamcs-demo/static/brand/logo/logo-edu-dark.svg" alt="EDU FAMCS" width="196" height="40"></span>
+      <span class="short"><img class="only-light" src="/edufamcs-demo/static/brand/logo/logo-edu-light.svg" alt="EDU FAMCS" height="30"><img class="only-dark" src="/edufamcs-demo/static/brand/logo/logo-edu-dark.svg" alt="EDU FAMCS" height="30"></span>
+    </a>
+    <nav class="nav" id="main-nav" aria-label="Основная навигация">
+      <a href="/edufamcs-demo/#courses">Курсы</a>
+      <a href="/edufamcs-demo/ml/" >Машинное обучение</a>
+      
+      <a href="/edufamcs-demo/handbook/" aria-current="page">Хендбук</a>
+      <a href="/edufamcs-demo/news/" >Новости</a>
+      <a href="/edufamcs-demo/people/" >Авторы</a>
+      <a href="/edufamcs-demo/about/" >О&nbsp;нас</a>
+    </nav>
+    <div class="hdr-actions">
+      
+      <a class="btn btn-outline btn-login" href="/edufamcs-demo/accounts/login/?next=/handbook/ai-tools/">Войти</a>
+      
+      <button class="icon-btn menu-btn" type="button" aria-label="Меню" aria-expanded="false" aria-controls="main-nav"><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-menu"/></svg></button>
+    </div>
+  </div>
+</header>
+
+<main id="main">
+
+
+
+<div class="container page s-agents">
+  <header class="hb-sec-head">
+    <div>
+      <nav class="crumbs" aria-label="Навигация"><a href="/edufamcs-demo/handbook/">Хендбук</a><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-chev"/></svg><span>ИИ-ассистенты для кода</span></nav>
+      <h1 class="display-l">ИИ-ассистенты для кода</h1>
+      <p class="lead">Claude Code и Codex: как устроен агент, скиллы, MCP, субагенты, безопасность и честная защита проекта.</p>
+      
+    </div>
+    <div class="hb-sec-art" aria-hidden="true">
+
+<svg viewBox="0 0 220 120" aria-hidden="true">
+  <g stroke="currentColor" stroke-width="1.5" opacity=".5"><path d="M40 60 L110 22 L180 60 L110 98 Z M40 60 L180 60 M110 22 L110 98"/></g>
+  <g fill="currentColor"><circle cx="40" cy="60" r="12"/><circle cx="180" cy="60" r="12" opacity=".4"/><circle cx="110" cy="98" r="12" opacity=".4"/></g>
+  <circle cx="110" cy="22" r="12" fill="var(--accent)"/>
+  <rect x="94" y="48" width="32" height="24" rx="8" fill="currentColor"/>
+</svg>
+
+</div>
+  </header>
+
+  
+  
+  <section class="hb-group">
+    <h2 class="h3 hb-group-t">Основы</h2>
+    <ol class="hb-list">
+      
+      <li><a class="hb-item" href="/edufamcs-demo/handbook/ai-tools/kak-ustroen-kodovyj-agent/">
+        <span class="n">01</span>
+        <span class="t">Как устроен кодовый агент: модель, инструменты, контекст</span>
+        <span class="m">
+          
+          <svg class="ico sm" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-clock"/></svg>10&nbsp;мин
+          <svg class="ico sm" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-arrow"/></svg>
+        </span>
+      </a></li>
+      
+      <li><a class="hb-item" href="/edufamcs-demo/handbook/ai-tools/claude-code/">
+        <span class="n">02</span>
+        <span class="t">Claude Code: установка, режимы, CLAUDE.md</span>
+        <span class="m">
+          
+          <svg class="ico sm" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-clock"/></svg>11&nbsp;мин
+          <svg class="ico sm" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-arrow"/></svg>
+        </span>
+      </a></li>
+      
+      <li><a class="hb-item" href="/edufamcs-demo/handbook/ai-tools/codex/">
+        <span class="n">03</span>
+        <span class="t">Codex CLI: AGENTS.md, песочница, согласования</span>
+        <span class="m">
+          
+          <svg class="ico sm" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-clock"/></svg>11&nbsp;мин
+          <svg class="ico sm" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-arrow"/></svg>
+        </span>
+      </a></li>
+      
+      <li><a class="hb-item" href="/edufamcs-demo/handbook/ai-tools/postanovka-zadach-agentu/">
+        <span class="n">04</span>
+        <span class="t">Как ставить задачу агенту</span>
+        <span class="m">
+          
+          <svg class="ico sm" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-clock"/></svg>10&nbsp;мин
+          <svg class="ico sm" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-arrow"/></svg>
+        </span>
+      </a></li>
+      
+    </ol>
+  </section>
+  
+  <section class="hb-group">
+    <h2 class="h3 hb-group-t">Расширения</h2>
+    <ol class="hb-list">
+      
+      <li><a class="hb-item" href="/edufamcs-demo/handbook/ai-tools/skills/">
+        <span class="n">01</span>
+        <span class="t">Скиллы: SKILL.md и как написать свой</span>
+        <span class="m">
+          
+          <svg class="ico sm" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-clock"/></svg>14&nbsp;мин
+          <svg class="ico sm" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-arrow"/></svg>
+        </span>
+      </a></li>
+      
+      <li><a class="hb-item" href="/edufamcs-demo/handbook/ai-tools/mcp/">
+        <span class="n">02</span>
+        <span class="t">MCP: подключаем инструменты и данные</span>
+        <span class="m">
+          
+          <svg class="ico sm" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-clock"/></svg>11&nbsp;мин
+          <svg class="ico sm" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-arrow"/></svg>
+        </span>
+      </a></li>
+      
+      <li><a class="hb-item" href="/edufamcs-demo/handbook/ai-tools/subagenty-huki-komandy/">
+        <span class="n">03</span>
+        <span class="t">Субагенты, хуки и слэш-команды</span>
+        <span class="m">
+          
+          <svg class="ico sm" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-clock"/></svg>11&nbsp;мин
+          <svg class="ico sm" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-arrow"/></svg>
+        </span>
+      </a></li>
+      
+    </ol>
+  </section>
+  
+  <section class="hb-group">
+    <h2 class="h3 hb-group-t">Практика</h2>
+    <ol class="hb-list">
+      
+      <li><a class="hb-item" href="/edufamcs-demo/handbook/ai-tools/agent-v-ml-proekte/">
+        <span class="n">01</span>
+        <span class="t">Агент в ML-проекте: ноутбуки, эксперименты, ревью</span>
+        <span class="m">
+          
+          <svg class="ico sm" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-clock"/></svg>10&nbsp;мин
+          <svg class="ico sm" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-arrow"/></svg>
+        </span>
+      </a></li>
+      
+      <li><a class="hb-item" href="/edufamcs-demo/handbook/ai-tools/bezopasnost-agentov/">
+        <span class="n">02</span>
+        <span class="t">Безопасность: секреты, права, prompt injection</span>
+        <span class="m">
+          
+          <svg class="ico sm" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-clock"/></svg>11&nbsp;мин
+          <svg class="ico sm" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-arrow"/></svg>
+        </span>
+      </a></li>
+      
+      <li><a class="hb-item" href="/edufamcs-demo/handbook/ai-tools/vajb-koding-i-zashchita/">
+        <span class="n">03</span>
+        <span class="t">Вайб-кодинг и защита проекта: как понимать код, который писали не вы</span>
+        <span class="m">
+          
+          <svg class="ico sm" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-clock"/></svg>12&nbsp;мин
+          <svg class="ico sm" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-arrow"/></svg>
+        </span>
+      </a></li>
+      
+    </ol>
+  </section>
+  
+  
+</div>
+
+
+</main>
+
+<footer class="ftr" data-theme="dark">
+  <svg class="sym fern" viewBox="0 0 40.5 65.02" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#fern"/></svg>
+  <div class="container">
+    <div class="ftr-row">
+      <a href="/edufamcs-demo/" aria-label="EDU FAMCS — главная"><img src="/edufamcs-demo/static/brand/logo/logo-edu-dark.svg" alt="EDU FAMCS" width="196" height="40"></a>
+      <ul class="ftr-links">
+        <li><a href="/edufamcs-demo/#courses">Курсы</a></li>
+        <li><a href="/edufamcs-demo/ml/">Машинное обучение</a></li>
+        <li><a href="/edufamcs-demo/handbook/">Хендбук</a></li>
+        <li><a href="/edufamcs-demo/news/">Новости</a></li>
+        <li><a href="/edufamcs-demo/people/">Авторы</a></li>
+        <li><a href="/edufamcs-demo/about/">О&nbsp;нас</a></li>
+        <li><a href="/edufamcs-demo/propose/">Предложить или исправить</a></li>
+        <li><a href="/edufamcs-demo/privacy/">Конфиденциальность</a></li>
+      </ul>
+    </div>
+    <div class="ftr-big" aria-hidden="true">EDU<span class="d">·</span>FAMCS</div>
+    <p class="ftr-copy">© 2026 EDU FAMCS · Минск</p>
+  </div>
+</footer>
+
+<div class="toasts-region" aria-live="polite" id="toasts">
+
+</div>
+
+</body>
+</html>

@@ -1,0 +1,285 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Классика: экспоненциальное сглаживание и ARIMA · EDU FAMCS</title>
+<meta name="description" content="Классика: экспоненциальное сглаживание и ARIMA — Временные ряды. Хендбук ML-курса ФПМИ.">
+<meta name="theme-color" content="#060A16">
+<meta name="robots" content="noindex, nofollow">
+<meta name="htmx-config" content='{"allowEval":false,"includeIndicatorStyles":false,"historyCacheSize":0,"selfRequestsOnly":true}'>
+<meta name="katex-js" content="/edufamcs-demo/static/vendor/katex/katex.min.js">
+<meta name="katex-css" content="/edufamcs-demo/static/vendor/katex/katex.min.css">
+<link rel="icon" href="/edufamcs-demo/static/brand/logo/favicon-16.svg" type="image/svg+xml" sizes="16x16">
+<link rel="icon" href="/edufamcs-demo/static/brand/logo/favicon.svg" type="image/svg+xml" sizes="any">
+<link rel="preload" href="/edufamcs-demo/static/brand/fonts/manrope-cyrillic-400.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/edufamcs-demo/static/brand/fonts/unbounded-cyrillic-800.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="/edufamcs-demo/static/brand/fonts.css">
+<link rel="stylesheet" href="/edufamcs-demo/static/brand/tokens.css">
+<link rel="stylesheet" href="/edufamcs-demo/static/brand/components.css">
+<link rel="stylesheet" href="/edufamcs-demo/static/css/site.css">
+<link rel="stylesheet" href="/edufamcs-demo/static/css/hub.css">
+<link rel="stylesheet" href="/edufamcs-demo/static/css/about.css">
+<link rel="stylesheet" href="/edufamcs-demo/static/handbook/handbook.css">
+<script src="/edufamcs-demo/static/js/theme.js"></script>
+<script src="/edufamcs-demo/static/vendor/htmx/htmx.min.js" defer></script>
+<script src="/edufamcs-demo/static/vendor/alpine/alpine-csp.min.js" defer></script>
+<script src="/edufamcs-demo/static/js/site.js" defer></script>
+<script src="/edufamcs-demo/static/handbook/handbook.js" defer></script>
+</head>
+<body class="" hx-headers='{"X-CSRFToken": "b3e2hQXgWfHdzvSn0f5GJL7g4vsfE3QQNg3ZxSw7X2VMKO7PZIjDrEZewEzdoNPx"}'>
+<a class="skip" href="#main">К содержанию</a>
+<div class="demo-bar" role="note">Демо-версия для отзывов: вход, запись на курсы и формы здесь не работают.</div>
+
+<header class="hdr">
+  <div class="container">
+    <a class="brand" href="/edufamcs-demo/" aria-label="EDU FAMCS — главная">
+      <span class="full"><img class="only-light" src="/edufamcs-demo/static/brand/logo/logo-edu-light.svg" alt="EDU FAMCS" width="196" height="40"><img class="only-dark" src="/edufamcs-demo/static/brand/logo/logo-edu-dark.svg" alt="EDU FAMCS" width="196" height="40"></span>
+      <span class="short"><img class="only-light" src="/edufamcs-demo/static/brand/logo/logo-edu-light.svg" alt="EDU FAMCS" height="30"><img class="only-dark" src="/edufamcs-demo/static/brand/logo/logo-edu-dark.svg" alt="EDU FAMCS" height="30"></span>
+    </a>
+    <nav class="nav" id="main-nav" aria-label="Основная навигация">
+      <a href="/edufamcs-demo/#courses">Курсы</a>
+      <a href="/edufamcs-demo/ml/" >Машинное обучение</a>
+      
+      <a href="/edufamcs-demo/handbook/" aria-current="page">Хендбук</a>
+      <a href="/edufamcs-demo/news/" >Новости</a>
+      <a href="/edufamcs-demo/people/" >Авторы</a>
+      <a href="/edufamcs-demo/about/" >О&nbsp;нас</a>
+    </nav>
+    <div class="hdr-actions">
+      
+      <a class="btn btn-outline btn-login" href="/edufamcs-demo/accounts/login/?next=/handbook/ts/ets-i-arima/">Войти</a>
+      
+      <button class="icon-btn menu-btn" type="button" aria-label="Меню" aria-expanded="false" aria-controls="main-nav"><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-menu"/></svg></button>
+    </div>
+  </div>
+</header>
+
+<main id="main">
+
+
+
+<div class="container hb-page s-ts">
+  <div class="hb-readbar" aria-hidden="true"><i></i></div>
+  <div class="hb">
+    <aside class="hb-nav" aria-label="Статьи раздела">
+      
+<form class="hb-search" action="/edufamcs-demo/handbook/search/" method="get" role="search">
+  <svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-search"/></svg>
+  <input class="input" type="search" name="q" value="" placeholder="Поиск по хендбуку" aria-label="Поиск по хендбуку" autocomplete="off" maxlength="120"
+    hx-get="/edufamcs-demo/handbook/search/" hx-trigger="input changed delay:250ms, search" hx-target="#hb-nav-results" hx-sync="this:replace">
+</form>
+
+      <div id="hb-nav-results" class="hb-nav-results" aria-live="polite"></div>
+      <a class="grp" href="/edufamcs-demo/handbook/ts/">Основы</a>
+      
+      <a class="" href="/edufamcs-demo/handbook/ts/postanovka-i-validaciya/">Прогнозирование: постановка, бейзлайны, валидация</a>
+      
+      <a class="cur" href="/edufamcs-demo/handbook/ts/ets-i-arima/" aria-current="page">Классика: экспоненциальное сглаживание и ARIMA</a>
+      
+    </aside>
+
+    <article class="hb-main">
+      <nav class="crumbs" aria-label="Навигация"><a href="/edufamcs-demo/handbook/">Хендбук</a><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-chev"/></svg><a href="/edufamcs-demo/handbook/ts/">Временные ряды</a></nav>
+      <h1 class="h1">Классика: экспоненциальное сглаживание и ARIMA</h1>
+      <div class="hb-meta">
+        
+        
+        <span><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-clock"/></svg>10&nbsp;мин</span>
+        <span class="hb-authors"><span class="avatar sm" title="Артем Лебедевич">АЛ</span>Артем Лебедевич</span>
+        <span><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-edit"/></svg>10 ноября 2026</span>
+        
+        
+      </div>
+
+      
+      <details class="hb-mtoc">
+        <summary><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-list"/></svg>Содержание<svg class="ico sm" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-chev-down"/></svg></summary>
+        <a class="l2" href="#простое-экспоненциальное-сглаживание">Простое экспоненциальное сглаживание</a><a class="l3" href="#пример-руками">Пример руками</a><a class="l2" href="#holt-и-holtwinters">Holt и Holt–Winters</a><a class="l2" href="#стационарность-и-arima">Стационарность и ARIMA</a><a class="l2" href="#когда-классика-выигрывает">Когда классика выигрывает</a><a class="l2" href="#код">Код</a><a class="l2" href="#ловушки">Ловушки</a><a class="l2" href="#проверь-себя">Проверь себя</a><a class="l2" href="#что-почитать">Что почитать</a>
+      </details>
+      
+
+      <div class="prose"><p>Экспоненциальное сглаживание (ETS) и ARIMA — два семейства классических моделей, на которых десятилетиями держалось прогнозирование. Они обучаются на одном ряде за секунды, дают интервалы и часто выигрывают у нейросетей на коротких рядах с чёткой сезонностью. Понимать их нужно и для собеседований, и затем, что любая современная модель сравнивается именно с ними.</p>
+<h2 id="простое-экспоненциальное-сглаживание">Простое экспоненциальное сглаживание</h2>
+<p>Идея: прогноз на завтра — взвешенное среднее прошлого, где свежие наблюдения весят больше. Держим «уровень» <span class="tex">\ell_t</span> и обновляем его рекурсией
+<span class="tex tex-block">\ell_t=\alpha y_t+(1-\alpha)\ell_{t-1},\qquad \hat y_{t+h|t}=\ell_t,\quad 0&lt;\alpha\le1 .</span>
+Раскроем рекурсию: <span class="tex">\ell_t=\alpha y_t+(1-\alpha)\big[\alpha y_{t-1}+(1-\alpha)\ell_{t-2}\big]=\dots</span>, откуда
+<span class="tex tex-block">\ell_t=\alpha\sum_{j=0}^{t-1}(1-\alpha)^j y_{t-j}+(1-\alpha)^t\ell_0 .</span>
+Веса <span class="tex">\alpha(1-\alpha)^j</span> убывают геометрически и в сумме стремятся к <span class="tex">\alpha\sum_j(1-\alpha)^j=1</span>. Большой <span class="tex">\alpha</span> — короткая память, прогноз быстро реагирует; <span class="tex">\alpha\to0</span> — почти постоянное среднее. <span class="tex">\alpha=1</span> — наивный прогноз.</p>
+<h3 id="пример-руками">Пример руками</h3>
+<p><span class="tex">\alpha=0{,}5</span>, ряд 20, 22, 19, 23, 24, начальное <span class="tex">\ell_1=y_1=20</span>.</p>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th><span class="tex">t</span></th>
+<th>факт <span class="tex">y_t</span></th>
+<th>прогноз <span class="tex">\ell_{t-1}</span></th>
+<th>новый <span class="tex">\ell_t</span></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>2</td>
+<td>22</td>
+<td>20</td>
+<td><span class="tex">0{,}5\cdot22+0{,}5\cdot20=21</span></td>
+</tr>
+<tr>
+<td>3</td>
+<td>19</td>
+<td>21</td>
+<td><span class="tex">20</span></td>
+</tr>
+<tr>
+<td>4</td>
+<td>23</td>
+<td>20</td>
+<td><span class="tex">21{,}5</span></td>
+</tr>
+<tr>
+<td>5</td>
+<td>24</td>
+<td>21,5</td>
+<td><span class="tex">22{,}75</span></td>
+</tr>
+</tbody>
+</table></div>
+<p>Прогноз на все будущие шаги — 22,75. Ряд растёт, а прогноз плоский: SES не умеет ни тренд, ни сезонность.</p>
+<h2 id="holt-и-holtwinters">Holt и Holt–Winters</h2>
+<p><strong>Holt</strong> добавляет тренд <span class="tex">b_t</span> (наклон):
+<span class="tex tex-block">\ell_t=\alpha y_t+(1-\alpha)(\ell_{t-1}+b_{t-1}),\quad b_t=\beta^*(\ell_t-\ell_{t-1})+(1-\beta^*)b_{t-1},\quad \hat y_{t+h|t}=\ell_t+h\,b_t .</span>
+Линейный тренд на длинном горизонте обычно слишком оптимистичен, поэтому используют <em>затухающий</em> тренд: <span class="tex">\hat y_{t+h|t}=\ell_t+(\phi+\phi^2+\dots+\phi^h)b_t</span>, <span class="tex">\phi&lt;1</span>.</p>
+<p><strong>Holt–Winters</strong> добавляет сезонную компоненту <span class="tex">s_t</span> периода <span class="tex">m</span>. Аддитивная: <span class="tex">\hat y_{t+h|t}=\ell_t+h b_t+s_{t+h-m(k+1)}</span> (<span class="tex">k=\lfloor (h-1)/m\rfloor</span>), амплитуда сезонности постоянна. Мультипликативная: <span class="tex">\hat y=(\ell_t+hb_t)\,s_{t+h-m(k+1)}</span>, амплитуда растёт вместе с уровнем — типично для продаж. Выбор между ними часто сводится к вопросу «растёт ли размах колебаний вместе с уровнем» (или к логарифму ряда).</p>
+<p><strong>ETS как пространство состояний.</strong> Каждой модели соответствует пара: уравнение наблюдения и уравнения состояния, а ошибка может входить аддитивно или мультипликативно. Тройка букв ETS(Error, Trend, Seasonal): ETS(A,N,N) — SES, ETS(A,Ad,A) — затухающий тренд с аддитивной сезонностью. Состояние-пространственная форма даёт правдоподобие, а значит оценку параметров по максимуму правдоподобия, AIC и интервалы прогноза.</p>
+<h2 id="стационарность-и-arima">Стационарность и ARIMA</h2>
+<p>Ряд <strong>слабо стационарен</strong>, если среднее и дисперсия постоянны, а автоковариация зависит лишь от лага. Тренд и сезонность стационарность нарушают. Лечат <strong>дифференцированием</strong>: <span class="tex">\nabla y_t=y_t-y_{t-1}</span> убирает линейный тренд, сезонная разность <span class="tex">y_t-y_{t-m}</span> — сезонность.</p>
+<p>Инструменты диагностики — <strong>ACF</strong> (корреляция <span class="tex">y_t</span> и <span class="tex">y_{t-k}</span>) и <strong>PACF</strong> (корреляция с лагом <span class="tex">k</span> после вычета влияния промежуточных лагов). Правила чтения:</p>
+<ul>
+<li>AR(<span class="tex">p</span>): PACF обрывается после лага <span class="tex">p</span>, ACF затухает.</li>
+<li>MA(<span class="tex">q</span>): ACF обрывается после лага <span class="tex">q</span>, PACF затухает.</li>
+<li>Пики на лагах <span class="tex">m, 2m,\dots</span> — сезонность.</li>
+</ul>
+<p>Модели:
+<span class="tex tex-block">\text{AR}(p):\ y_t=c+\sum_{i=1}^p\varphi_i y_{t-i}+\varepsilon_t,\qquad
+\text{MA}(q):\ y_t=c+\varepsilon_t+\sum_{j=1}^q\theta_j\varepsilon_{t-j}.</span>
+ARMA(<span class="tex">p,q</span>) совмещает оба. <strong>ARIMA(<span class="tex">p,d,q</span>)</strong> — это ARMA для ряда, продифференцированного <span class="tex">d</span> раз. Сезонная SARIMA <span class="tex">(p,d,q)(P,D,Q)_m</span> добавляет те же компоненты на лагах, кратных <span class="tex">m</span>; на практике частая стартовая модель — «airline model» <span class="tex">(0,1,1)(0,1,1)_m</span>. Часть моделей ETS и ARIMA пересекается: SES эквивалентно ARIMA(0,1,1) с <span class="tex">\theta_1=\alpha-1</span>.</p>
+<p><strong>Тесты на единичный корень.</strong> <em>ADF</em>: нулевая гипотеза — единичный корень есть (ряд нестационарен); малое p-значение — отвергаем, ряд стационарен. <em>KPSS</em>: нулевая гипотеза обратная — ряд стационарен (вокруг константы или тренда); малое p-значение говорит о нестационарности. Тесты дополняют друг друга: если ADF не отвергает, а KPSS отвергает — ряд нестационарен, дифференцируйте; если оба в пользу стационарности — всё хорошо; расхождения разбирают по графику.</p>
+<p><strong>Выбор модели.</strong> По AIC <span class="tex">=2k-2\ln \hat L</span> сравниваются модели одного класса на одних и тех же данных; AIC ARIMA с разным <span class="tex">d</span> (а значит, с разным числом наблюдений) и AIC ETS сравнивать нельзя. Поэтому окончательный выбор — по бэктесту (<a href="/edufamcs-demo/handbook/ts/postanovka-i-validaciya/" rel="noopener noreferrer nofollow">см. статью про валидацию</a>), а AIC годится для сужения перебора.</p>
+<p><strong>Интервалы.</strong> Для ARIMA и ETS дисперсия ошибки прогноза растёт с горизонтом (в ARIMA с <span class="tex">d\ge1</span> она неограниченно растёт), интервалы получаются аналитически или бутстрепом при предположении гауссовых независимых остатков. Они недооценивают неопределённость выбора модели и сдвигов режима; проверяйте покрытие на бэктесте.</p>
+<h2 id="когда-классика-выигрывает">Когда классика выигрывает</h2>
+<p>Побеждает: короткий одиночный ряд (десятки–сотни точек), устойчивая сезонность, нужен интерпретируемый прогноз с интервалами, тысячи рядов дёшево. Проигрывает: много ковариат (промо, цена, погода), общие закономерности между тысячами рядов, прерывистые и нелинейные ряды, мульти-сезонность с нерегулярными праздниками. В соревновании M4 комбинации статистических методов оказались сильнее чистых нейросетей, но лидировал гибрид ETS и RNN (Smyl), а M5 выиграли модели на бустинге с ковариатами (см. <a href="/edufamcs-demo/handbook/ts/busting-na-lagah/" rel="noopener noreferrer nofollow">бустинг на лагах</a>).</p>
+<h2 id="код">Код</h2>
+<p>Синтетический ряд: тренд, годовая сезонность с периодом 12, шум; 240 точек, горизонт 12, 6 фолдов rolling-origin.</p>
+<div class="code"><div class="code-head"><span class="lang">python</span></div><pre><code><span class="tok-k">import</span> numpy <span class="tok-k">as</span> np
+<span class="tok-k">from</span> statsmodels.tsa.exponential_smoothing.ets <span class="tok-k">import</span> ETSModel
+<span class="tok-k">from</span> statsmodels.tsa.statespace.sarimax <span class="tok-k">import</span> SARIMAX
+<span class="tok-k">from</span> statsmodels.tsa.stattools <span class="tok-k">import</span> adfuller<span class="tok-p">,</span> kpss
+
+rng <span class="tok-p">=</span> np<span class="tok-p">.</span>random<span class="tok-p">.</span>default_rng<span class="tok-p">(</span><span class="tok-n">1</span><span class="tok-p">)</span><span class="tok-p">;</span> n<span class="tok-p">,</span> m<span class="tok-p">,</span> H <span class="tok-p">=</span> <span class="tok-n">240</span><span class="tok-p">,</span> <span class="tok-n">12</span><span class="tok-p">,</span> <span class="tok-n">12</span>
+t <span class="tok-p">=</span> np<span class="tok-p">.</span>arange<span class="tok-p">(</span>n<span class="tok-p">)</span>
+y <span class="tok-p">=</span> <span class="tok-n">50</span> <span class="tok-p">+</span> <span class="tok-n">0.3</span><span class="tok-p">*</span>t <span class="tok-p">+</span> <span class="tok-n">10</span><span class="tok-p">*</span>np<span class="tok-p">.</span>sin<span class="tok-p">(</span><span class="tok-n">2</span><span class="tok-p">*</span>np<span class="tok-p">.</span>pi<span class="tok-p">*</span>t<span class="tok-p">/</span>m<span class="tok-p">)</span> <span class="tok-p">+</span> rng<span class="tok-p">.</span>normal<span class="tok-p">(</span><span class="tok-n">0</span><span class="tok-p">,</span> <span class="tok-n">2</span><span class="tok-p">,</span> n<span class="tok-p">)</span>
+
+snaive <span class="tok-p">=</span> <span class="tok-k">lambda</span> tr<span class="tok-p">,</span> h<span class="tok-p">:</span> np<span class="tok-p">.</span>array<span class="tok-p">(</span><span class="tok-p">[</span>tr<span class="tok-p">[</span><span class="tok-p">-</span>m <span class="tok-p">+</span> <span class="tok-p">(</span>i <span class="tok-p">%</span> m<span class="tok-p">)</span><span class="tok-p">]</span> <span class="tok-k">for</span> i <span class="tok-k">in</span> <span class="tok-f">range</span><span class="tok-p">(</span>h<span class="tok-p">)</span><span class="tok-p">]</span><span class="tok-p">)</span>
+errs <span class="tok-p">=</span> <span class="tok-p">{</span><span class="tok-s">"</span><span class="tok-s">snaive</span><span class="tok-s">"</span><span class="tok-p">:</span> <span class="tok-p">[</span><span class="tok-p">]</span><span class="tok-p">,</span> <span class="tok-s">"</span><span class="tok-s">ETS(A,Ad,A)</span><span class="tok-s">"</span><span class="tok-p">:</span> <span class="tok-p">[</span><span class="tok-p">]</span><span class="tok-p">,</span> <span class="tok-s">"</span><span class="tok-s">SARIMA(1,1,1)(0,1,1)12</span><span class="tok-s">"</span><span class="tok-p">:</span> <span class="tok-p">[</span><span class="tok-p">]</span><span class="tok-p">}</span>
+<span class="tok-k">for</span> o <span class="tok-k">in</span> <span class="tok-f">range</span><span class="tok-p">(</span><span class="tok-n">168</span><span class="tok-p">,</span> n<span class="tok-p">-</span>H<span class="tok-p">+</span><span class="tok-n">1</span><span class="tok-p">,</span> <span class="tok-n">12</span><span class="tok-p">)</span><span class="tok-p">:</span>
+    tr<span class="tok-p">,</span> te <span class="tok-p">=</span> y<span class="tok-p">[</span><span class="tok-p">:</span>o<span class="tok-p">]</span><span class="tok-p">,</span> y<span class="tok-p">[</span>o<span class="tok-p">:</span>o<span class="tok-p">+</span>H<span class="tok-p">]</span>
+    ets <span class="tok-p">=</span> ETSModel<span class="tok-p">(</span>tr<span class="tok-p">,</span> error<span class="tok-p">=</span><span class="tok-s">"</span><span class="tok-s">add</span><span class="tok-s">"</span><span class="tok-p">,</span> trend<span class="tok-p">=</span><span class="tok-s">"</span><span class="tok-s">add</span><span class="tok-s">"</span><span class="tok-p">,</span> damped_trend<span class="tok-p">=</span><span class="tok-k">True</span><span class="tok-p">,</span>
+                   seasonal<span class="tok-p">=</span><span class="tok-s">"</span><span class="tok-s">add</span><span class="tok-s">"</span><span class="tok-p">,</span> seasonal_periods<span class="tok-p">=</span>m<span class="tok-p">)</span><span class="tok-p">.</span>fit<span class="tok-p">(</span>disp<span class="tok-p">=</span><span class="tok-k">False</span><span class="tok-p">)</span>
+    sar <span class="tok-p">=</span> SARIMAX<span class="tok-p">(</span>tr<span class="tok-p">,</span> order<span class="tok-p">=</span><span class="tok-p">(</span><span class="tok-n">1</span><span class="tok-p">,</span><span class="tok-n">1</span><span class="tok-p">,</span><span class="tok-n">1</span><span class="tok-p">)</span><span class="tok-p">,</span> seasonal_order<span class="tok-p">=</span><span class="tok-p">(</span><span class="tok-n">0</span><span class="tok-p">,</span><span class="tok-n">1</span><span class="tok-p">,</span><span class="tok-n">1</span><span class="tok-p">,</span>m<span class="tok-p">)</span><span class="tok-p">)</span><span class="tok-p">.</span>fit<span class="tok-p">(</span>disp<span class="tok-p">=</span><span class="tok-k">False</span><span class="tok-p">)</span>
+    <span class="tok-k">for</span> k<span class="tok-p">,</span> p <span class="tok-k">in</span> <span class="tok-f">zip</span><span class="tok-p">(</span>errs<span class="tok-p">,</span> <span class="tok-p">[</span>snaive<span class="tok-p">(</span>tr<span class="tok-p">,</span> H<span class="tok-p">)</span><span class="tok-p">,</span> ets<span class="tok-p">.</span>forecast<span class="tok-p">(</span>H<span class="tok-p">)</span><span class="tok-p">,</span> sar<span class="tok-p">.</span>forecast<span class="tok-p">(</span>H<span class="tok-p">)</span><span class="tok-p">]</span><span class="tok-p">)</span><span class="tok-p">:</span>
+        errs<span class="tok-p">[</span>k<span class="tok-p">]</span><span class="tok-p">.</span>append<span class="tok-p">(</span>np<span class="tok-p">.</span>mean<span class="tok-p">(</span>np<span class="tok-p">.</span>abs<span class="tok-p">(</span>te <span class="tok-p">-</span> p<span class="tok-p">)</span><span class="tok-p">)</span><span class="tok-p">)</span>
+<span class="tok-k">for</span> k<span class="tok-p">,</span> v <span class="tok-k">in</span> errs<span class="tok-p">.</span>items<span class="tok-p">(</span><span class="tok-p">)</span><span class="tok-p">:</span> <span class="tok-f">print</span><span class="tok-p">(</span>k<span class="tok-p">,</span> <span class="tok-s">"</span><span class="tok-s">MAE </span><span class="tok-s">%.3f</span><span class="tok-s">"</span> <span class="tok-p">%</span> np<span class="tok-p">.</span>mean<span class="tok-p">(</span>v<span class="tok-p">)</span><span class="tok-p">)</span>
+
+<span class="tok-f">print</span><span class="tok-p">(</span><span class="tok-s">"</span><span class="tok-s">ADF p</span><span class="tok-s">"</span><span class="tok-p">,</span> adfuller<span class="tok-p">(</span>y<span class="tok-p">)</span><span class="tok-p">[</span><span class="tok-n">1</span><span class="tok-p">]</span><span class="tok-p">,</span> <span class="tok-s">"</span><span class="tok-s">KPSS p</span><span class="tok-s">"</span><span class="tok-p">,</span> kpss<span class="tok-p">(</span>y<span class="tok-p">,</span> regression<span class="tok-p">=</span><span class="tok-s">"</span><span class="tok-s">c</span><span class="tok-s">"</span><span class="tok-p">,</span> nlags<span class="tok-p">=</span><span class="tok-s">"</span><span class="tok-s">auto</span><span class="tok-s">"</span><span class="tok-p">)</span><span class="tok-p">[</span><span class="tok-n">1</span><span class="tok-p">]</span><span class="tok-p">)</span>
+fc <span class="tok-p">=</span> sar<span class="tok-p">.</span>get_forecast<span class="tok-p">(</span>H<span class="tok-p">)</span><span class="tok-p">.</span>conf_int<span class="tok-p">(</span>alpha<span class="tok-p">=</span><span class="tok-n">0.2</span><span class="tok-p">)</span>   <span class="tok-c"># 80% интервал</span>
+</code></pre></div>
+<p>Результаты запуска:</p>
+<div class="code"><div class="code-head"><span class="lang">code</span></div><pre><code>snaive                 MAE 3.773
+ETS(A,Ad,A)            MAE 1.579
+SARIMA(1,1,1)(0,1,1)12 MAE 1.595
+ADF p 0.938   KPSS p 0.01 (граница таблицы)
+после первой разности: ADF p 5e-19, KPSS p 0.1 (граница таблицы)
+</code></pre></div>
+<p>Обе классические модели вдвое точнее сезонного наивного (он копирует шум последнего цикла, а ETS и SARIMA его сглаживают). Тест подтверждает нестационарность: ADF не отвергает единичный корень, KPSS отвергает стационарность; после разности картина обратная. На последнем фолде (трейн 228 точек) 80%-й интервал SARIMA на шаг вперёд — [115,7; 120,5] вокруг прогноза 118,1. AIC ETS 972,7 и SARIMA 922,4 сравнивать нельзя: разные классы и разное число эффективных наблюдений.</p>
+<h2 id="ловушки">Ловушки</h2>
+<ul>
+<li>Дифференцировать «на всякий случай» лишний раз: передифференцированный ряд получает скользящую среднюю с единичным корнем и шумные прогнозы.</li>
+<li>Принимать ADF-p-значение как доказательство стационарности: тест имеет малую мощность на коротких рядах; смотрите и на KPSS, и на график.</li>
+<li>Мультипликативная сезонность на ряде с нулями или отрицательными значениями не определена.</li>
+<li>Доверять интервалам без проверки покрытия на бэктесте.</li>
+<li>На собеседовании: выведите веса SES; что значит <span class="tex">d=1</span> и <span class="tex">D=1</span>; как по ACF/PACF выбрать <span class="tex">p</span> и <span class="tex">q</span>; нулевые гипотезы ADF и KPSS; почему AIC нельзя сравнивать при разных <span class="tex">d</span>.</li>
+</ul>
+<h2 id="проверь-себя">Проверь себя</h2>
+<details class="callout md details"><summary>Почему SES с $\alpha=1$ — это наивный прогноз, а с малым $\alpha$ — почти среднее?</summary>
+<p>При <span class="tex">\alpha=1</span> уровень равен последнему наблюдению. При малом <span class="tex">\alpha</span> веса <span class="tex">\alpha(1-\alpha)^j</span> убывают очень медленно, и прогноз усредняет всю историю почти равномерно.</p>
+</details>
+<details class="callout md details"><summary>Чем отличается нулевая гипотеза ADF от нулевой гипотезы KPSS?</summary>
+<p>ADF: в ряде есть единичный корень (нестационарность). KPSS: ряд стационарен. Поэтому малое p-значение у ADF говорит о стационарности, а у KPSS — о нестационарности.</p>
+</details>
+<details class="callout md details"><summary>Как по ACF и PACF отличить AR(2) от MA(2)?</summary>
+<p>У AR(2) PACF обрывается после лага 2, а ACF затухает. У MA(2) обрывается ACF, а затухает PACF.</p>
+</details>
+<details class="callout md details"><summary>Когда мультипликативная сезонность предпочтительнее аддитивной?</summary>
+<p>Когда амплитуда сезонных колебаний растёт с уровнем ряда (типично для продаж). Иногда проще взять логарифм ряда и использовать аддитивную модель.</p>
+</details>
+<details class="callout md details"><summary>Почему итоговый выбор между ETS и ARIMA лучше делать по бэктесту, а не по AIC?</summary>
+<p>AIC сопоставим только внутри одного класса и на одних данных; ETS и ARIMA с разным <span class="tex">d</span> его нарушают. Бэктест измеряет то, что нужно, — ошибку вне выборки на нужном горизонте.</p>
+</details>
+<h2 id="что-почитать">Что почитать</h2>
+<ul>
+<li>Hyndman R., Athanasopoulos G. <em>Forecasting: Principles and Practice</em>, 3rd ed., главы про ETS и ARIMA: https://otexts.com/fpp3/</li>
+<li>Hyndman R., Koehler A., Snyder R., Grose S. <em>A state space framework for automatic forecasting using exponential smoothing methods</em>, International Journal of Forecasting, 2002.</li>
+<li>Box G., Jenkins G. <em>Time Series Analysis: Forecasting and Control</em> (классика ARIMA).</li>
+<li>Hyndman R., Khandakar Y. <em>Automatic time series forecasting: the forecast package for R</em>, Journal of Statistical Software, 2008.</li>
+<li>Makridakis S., Spiliotis E., Assimakopoulos V. <em>The M4 Competition: 100,000 time series and 61 forecasting methods</em>, International Journal of Forecasting, 2020.</li>
+<li>Документация statsmodels: <code>ETSModel</code>, <code>SARIMAX</code>, <code>adfuller</code>, <code>kpss</code>: https://www.statsmodels.org/stable/tsa.html</li>
+</ul>
+</div>
+      
+
+      
+
+      
+      <nav class="pager" aria-label="Соседние статьи">
+        <a href="/edufamcs-demo/handbook/ts/postanovka-i-validaciya/"><span><svg class="ico sm" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-arrow-left"/></svg>Назад</span>Прогнозирование: постановка, бейзлайны, валидация</a>
+        <a href="/edufamcs-demo/handbook/ts/busting-na-lagah/"><span>Дальше<svg class="ico sm" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-arrow"/></svg></span>Бустинг на лагах и признаки для рядов</a>
+      </nav>
+      
+    </article>
+
+    <aside class="hb-toc" aria-label="На этой странице">
+      <a class="l2" href="#простое-экспоненциальное-сглаживание">Простое экспоненциальное сглаживание</a><a class="l3" href="#пример-руками">Пример руками</a><a class="l2" href="#holt-и-holtwinters">Holt и Holt–Winters</a><a class="l2" href="#стационарность-и-arima">Стационарность и ARIMA</a><a class="l2" href="#когда-классика-выигрывает">Когда классика выигрывает</a><a class="l2" href="#код">Код</a><a class="l2" href="#ловушки">Ловушки</a><a class="l2" href="#проверь-себя">Проверь себя</a><a class="l2" href="#что-почитать">Что почитать</a>
+    </aside>
+  </div>
+</div>
+
+
+</main>
+
+<footer class="ftr" data-theme="dark">
+  <svg class="sym fern" viewBox="0 0 40.5 65.02" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#fern"/></svg>
+  <div class="container">
+    <div class="ftr-row">
+      <a href="/edufamcs-demo/" aria-label="EDU FAMCS — главная"><img src="/edufamcs-demo/static/brand/logo/logo-edu-dark.svg" alt="EDU FAMCS" width="196" height="40"></a>
+      <ul class="ftr-links">
+        <li><a href="/edufamcs-demo/#courses">Курсы</a></li>
+        <li><a href="/edufamcs-demo/ml/">Машинное обучение</a></li>
+        <li><a href="/edufamcs-demo/handbook/">Хендбук</a></li>
+        <li><a href="/edufamcs-demo/news/">Новости</a></li>
+        <li><a href="/edufamcs-demo/people/">Авторы</a></li>
+        <li><a href="/edufamcs-demo/about/">О&nbsp;нас</a></li>
+        <li><a href="/edufamcs-demo/propose/">Предложить или исправить</a></li>
+        <li><a href="/edufamcs-demo/privacy/">Конфиденциальность</a></li>
+      </ul>
+    </div>
+    <div class="ftr-big" aria-hidden="true">EDU<span class="d">·</span>FAMCS</div>
+    <p class="ftr-copy">© 2026 EDU FAMCS · Минск</p>
+  </div>
+</footer>
+
+<div class="toasts-region" aria-live="polite" id="toasts">
+
+</div>
+
+</body>
+</html>

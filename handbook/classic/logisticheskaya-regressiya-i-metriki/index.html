@@ -27,7 +27,7 @@
 <script src="/edufamcs-demo/static/js/site.js" defer></script>
 <script src="/edufamcs-demo/static/handbook/handbook.js" defer></script>
 </head>
-<body class="" hx-headers='{"X-CSRFToken": "EnnNmjtUpO89BhWXASkkPYolLkJDQtt0qtoag6LBA1ongQSdNhdp6qwGhHlSVeeZ"}'>
+<body class="" hx-headers='{"X-CSRFToken": "zcbFJENHhwobdiOIY48Nt9vDFEp07bYPbp0CZGmyijCKoB3aXxmKb2nB7NwYRVXw"}'>
 <a class="skip" href="#main">К содержанию</a>
 <div class="demo-bar" role="note">Демо-версия для отзывов: вход, запись на курсы и формы здесь не работают.</div>
 
@@ -60,6 +60,7 @@
 
 
 <div class="container hb-page hb-tone">
+  <div class="hb-readbar" aria-hidden="true"><i></i></div>
   <div class="hb">
     <aside class="hb-nav" aria-label="Статьи раздела">
       
@@ -88,9 +89,9 @@
       <div class="hb-meta">
         
         
-        <span><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-clock"/></svg>10&nbsp;мин</span>
+        <span><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-clock"/></svg>12&nbsp;мин</span>
         <span class="hb-authors"><span class="avatar sm" title="Артем Лебедевич">АЛ</span>Артем Лебедевич</span>
-        <span><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-edit"/></svg>9 ноября 2026</span>
+        <span><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-edit"/></svg>10 ноября 2026</span>
         
         
       </div>
@@ -98,7 +99,7 @@
       
       <details class="hb-mtoc">
         <summary><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-list"/></svg>Содержание<svg class="ico sm" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-chev-down"/></svg></summary>
-        <a class="l2" href="#постановка-и-логистическая-функция">Постановка и логистическая функция</a><a class="l2" href="#правдоподобие-и-кросс-энтропия">Правдоподобие и кросс-энтропия</a><a class="l2" href="#регуляризация-и-нелинейность">Регуляризация и нелинейность</a><a class="l2" href="#многоклассовость">Многоклассовость</a><a class="l2" href="#метрики-классификации">Метрики классификации</a><a class="l3" href="#матрица-ошибок">Матрица ошибок</a><a class="l3" href="#roc-и-auc">ROC и AUC</a><a class="l3" href="#pr-кривая">PR-кривая</a><a class="l3" href="#порог-и-бизнес-цель">Порог и бизнес-цель</a><a class="l3" href="#log-loss-и-калибровка">Log-loss и калибровка</a><a class="l3" href="#усреднение-для-многоклассовых-задач">Усреднение для многоклассовых задач</a><a class="l2" href="#код">Код</a><a class="l2" href="#практика-и-типичные-ошибки">Практика и типичные ошибки</a><a class="l2" href="#что-почитать">Что почитать</a>
+        <a class="l2" href="#постановка-и-логистическая-функция">Постановка и логистическая функция</a><a class="l2" href="#правдоподобие-и-кросс-энтропия">Правдоподобие и кросс-энтропия</a><a class="l2" href="#регуляризация-и-нелинейность">Регуляризация и нелинейность</a><a class="l2" href="#многоклассовость">Многоклассовость</a><a class="l2" href="#метрики-классификации">Метрики классификации</a><a class="l3" href="#матрица-ошибок">Матрица ошибок</a><a class="l3" href="#roc-и-auc">ROC и AUC</a><a class="l3" href="#пример-на-шести-точках">Пример на шести точках</a><a class="l3" href="#pr-кривая">PR-кривая</a><a class="l3" href="#порог-и-бизнес-цель">Порог и бизнес-цель</a><a class="l3" href="#log-loss-и-калибровка">Log-loss и калибровка</a><a class="l3" href="#усреднение-для-многоклассовых-задач">Усреднение для многоклассовых задач</a><a class="l2" href="#код">Код</a><a class="l2" href="#практика-и-типичные-ошибки">Практика и типичные ошибки</a><a class="l2" href="#проверь-себя">Проверь себя</a><a class="l2" href="#что-почитать">Что почитать</a>
       </details>
       
 
@@ -123,7 +124,7 @@
 <h2 id="регуляризация-и-нелинейность">Регуляризация и нелинейность</h2>
 <p>Если классы линейно разделимы, оптимум без регуляризации достигается при <span class="tex">\|w\|\to\infty</span> (вероятности стремятся к 0 и 1), и обучение не сходится. Добавляют штраф; в sklearn целевая функция записана так:</p>
 <div class="tex tex-block">C\sum_{i=1}^n\ell_i(w)+\tfrac12\|w\|_2^2\quad\Longleftrightarrow\quad L(w)+\frac{1}{2Cn}\|w\|_2^2,</div>
-<p>где <span class="tex">\ell_i</span> — log-loss на <span class="tex">i</span>-м объекте, а <strong><span class="tex">C</span> — обратная сила регуляризации</strong> (меньше <span class="tex">C</span> — сильнее штраф). Из-за суммы, а не среднего, при том же <span class="tex">C</span> регуляризация слабеет с ростом <span class="tex">n</span>. Свободный член не штрафуется. Есть <span class="tex">\ell_1</span> (разрежённость) и Elastic Net.</p>
+<p>где <span class="tex">\ell_i</span> — log-loss на <span class="tex">i</span>-м объекте, а <strong><span class="tex">C</span> — обратная сила регуляризации</strong> (меньше <span class="tex">C</span> — сильнее штраф). Из-за суммы, а не среднего, при том же <span class="tex">C</span> регуляризация слабеет с ростом <span class="tex">n</span>. Свободный член не штрафуется, за одним исключением: при <code>solver="liblinear"</code> он регуляризуется как обычный вес (он трактуется как вес синтетического признака, константы <code>intercept_scaling</code>; увеличив <code>intercept_scaling</code>, штраф на него можно ослабить). Есть <span class="tex">\ell_1</span> (разрежённость) и Elastic Net.</p>
 <p>Для <strong>линейно неразделимых</strong> выборок добавляют нелинейные признаки — полиномиальные, сплайны, взаимодействия: граница остаётся линейной в расширенном пространстве и нелинейной в исходном. Для сложных зависимостей применяют деревья, бустинг, ядровые методы.</p>
 <h2 id="многоклассовость">Многоклассовость</h2>
 <ul>
@@ -161,6 +162,64 @@
 <p>Классификатор выдаёт оценку <span class="tex">s(x)</span>, класс получается пороговой обработкой. <strong>ROC-кривая</strong> — график <span class="tex">\mathrm{TPR}</span> против <span class="tex">\mathrm{FPR}=\frac{FP}{FP+TN}</span> при всех порогах. Диагональ — случайный классификатор. <strong>ROC-AUC</strong> — площадь под кривой, и у неё вероятностный смысл:</p>
 <div class="tex tex-block">\mathrm{AUC}=P\big(s(x^+)&gt;s(x^-)\big)+\tfrac12P\big(s(x^+)=s(x^-)\big),</div>
 <p>то есть вероятность, что случайный положительный объект получит оценку выше случайного отрицательного (статистика Манна–Уитни). AUC зависит только от упорядочивания, не чувствителен к монотонным преобразованиям оценки и к калибровке, и инвариантен к балансу классов в смысле определения. Но при сильном дисбалансе даже малый FPR означает огромное число ложных срабатываний, а AUC этого не показывает.</p>
+<h3 id="пример-на-шести-точках">Пример на шести точках</h3>
+<p>Оценки и метки по убыванию оценки: <span class="tex">(0{,}9;1),(0{,}8;1),(0{,}7;0),(0{,}6;1),(0{,}4;0),(0{,}3;0)</span>. Положительных <span class="tex">P=3</span>, отрицательных <span class="tex">N=3</span>. Порог 0,65 даёт матрицу ошибок <span class="tex">TP=2,\ FN=1,\ FP=1,\ TN=2</span>: precision <span class="tex">=2/3</span>, recall <span class="tex">=2/3</span>, accuracy <span class="tex">=4/6</span>. Опуская порог по очереди через каждую оценку, получаем точки ROC:</p>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>порог</th>
+<th>TP</th>
+<th>FP</th>
+<th>TPR</th>
+<th>FPR</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><span class="tex">\ge0{,}9</span></td>
+<td>1</td>
+<td>0</td>
+<td>0,333</td>
+<td>0</td>
+</tr>
+<tr>
+<td><span class="tex">\ge0{,}8</span></td>
+<td>2</td>
+<td>0</td>
+<td>0,667</td>
+<td>0</td>
+</tr>
+<tr>
+<td><span class="tex">\ge0{,}7</span></td>
+<td>2</td>
+<td>1</td>
+<td>0,667</td>
+<td>0,333</td>
+</tr>
+<tr>
+<td><span class="tex">\ge0{,}6</span></td>
+<td>3</td>
+<td>1</td>
+<td>1</td>
+<td>0,333</td>
+</tr>
+<tr>
+<td><span class="tex">\ge0{,}4</span></td>
+<td>3</td>
+<td>2</td>
+<td>1</td>
+<td>0,667</td>
+</tr>
+<tr>
+<td><span class="tex">\ge0{,}3</span></td>
+<td>3</td>
+<td>3</td>
+<td>1</td>
+<td>1</td>
+</tr>
+</tbody>
+</table></div>
+<p>Площадь под ломаной (трапеции) равна <span class="tex">8/9\approx0{,}889</span>. Вероятностное определение даёт то же: из <span class="tex">3\times3=9</span> пар «положительный — отрицательный» правильно упорядочены 8 (положительный с оценкой <span class="tex">0{,}6</span> проигрывает отрицательному <span class="tex">0{,}7</span>). Коэффициент Джини <span class="tex">=2\,\mathrm{AUC}-1=7/9\approx0{,}778</span> — та же информация, перенормированная так, что случайная модель получает 0, а идеальная 1. Значения совпадают с <code>roc_auc_score</code>.</p>
 <h3 id="pr-кривая">PR-кривая</h3>
 <p><strong>PR-кривая</strong> — precision против recall. Она учитывает долю положительных: у случайной модели precision равна доле позитива, а не 0,5. <strong>Average precision</strong> <span class="tex">=\sum_k (R_k-R_{k-1})P_k</span> — ступенчатая оценка площади под ней (без линейной интерполяции, которая завышала бы площадь). Для редкого положительного класса PR-кривая информативнее ROC.</p>
 <h3 id="порог-и-бизнес-цель">Порог и бизнес-цель</h3>
@@ -214,8 +273,25 @@ CalibrationDisplay<span class="tok-p">.</span>from_estimator<span class="tok-p">
 <li><strong>Регуляризация без масштабирования</strong> признаков: штраф зависит от единиц измерения.</li>
 <li><strong>Номинальные категории, закодированные числами</strong> 1, 2, 3: модель увидит порядок и «расстояния», которых нет; нужен one-hot или target encoding.</li>
 <li><strong>Дрейф калибровки</strong>: доля положительных изменилась — вероятности «поплыли» при неизменном AUC.</li>
-<li>Вопросы собеседований: вывод градиента, почему кросс-энтропия, а не MSE (MSE с сигмоидой невыпукла и даёт затухающий градиент), вероятностный смысл AUC, когда PR лучше ROC.</li>
+<li><strong>На собеседовании:</strong> вывод градиента, почему кросс-энтропия, а не MSE (MSE с сигмоидой невыпукла и даёт затухающий градиент), вероятностный смысл AUC, когда PR лучше ROC.</li>
+<li><strong>На собеседовании:</strong> посчитайте AUC и Gini на шести точках вручную; как читать веса логистической регрессии (шансы умножаются на <span class="tex">e^{w_j}</span>).</li>
 </ul>
+<h2 id="проверь-себя">Проверь себя</h2>
+<details class="callout md details"><summary>Почему градиент логистической потери совпадает по форме с градиентом MSE линейной регрессии?</summary>
+<p>Производная сигмоиды <span class="tex">\sigma'=\sigma(1-\sigma)</span> сокращается с знаменателем в производной логарифма, остаётся <span class="tex">X^\top(p-y)/n</span>: признаки на остаток.</p>
+</details>
+<details class="callout md details"><summary>Что произойдёт без регуляризации, если классы линейно разделимы?</summary>
+<p>Потеря убывает при росте <span class="tex">\|w\|</span> в направлении разделяющей гиперплоскости, оптимума нет: веса растут, вероятности стремятся к 0 и 1, обучение не сходится.</p>
+</details>
+<details class="callout md details"><summary>Почему AUC не зависит от монотонного преобразования оценок?</summary>
+<p>AUC — вероятность правильного упорядочивания пары положительный–отрицательный; она зависит только от порядка оценок, а монотонное преобразование его не меняет.</p>
+</details>
+<details class="callout md details"><summary>Когда PR-кривая информативнее ROC?</summary>
+<p>При сильном дисбалансе: малый FPR соответствует большому числу ложных срабатываний, а ROC этого не показывает. Precision учитывает долю положительных в выборке.</p>
+</details>
+<details class="callout md details"><summary>Как связаны Gini и AUC и чему равен Gini случайной модели?</summary>
+<p><span class="tex">\mathrm{Gini}=2\,\mathrm{AUC}-1</span>. Для случайной модели AUC <span class="tex">=0{,}5</span>, значит Gini <span class="tex">=0</span>.</p>
+</details>
 <h2 id="что-почитать">Что почитать</h2>
 <ul>
 <li>D. R. Cox, <em>The Regression Analysis of Binary Sequences</em>, JRSS B, 20(2), 1958.</li>
@@ -230,6 +306,8 @@ CalibrationDisplay<span class="tok-p">.</span>from_estimator<span class="tok-p">
       
 
       
+
+      
       <nav class="pager" aria-label="Соседние статьи">
         <a href="/edufamcs-demo/handbook/classic/linejnaya-regressiya/"><span><svg class="ico sm" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-arrow-left"/></svg>Назад</span>Линейная регрессия</a>
         <a href="/edufamcs-demo/handbook/classic/metod-opornyh-vektorov/"><span>Дальше<svg class="ico sm" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-arrow"/></svg></span>Метод опорных векторов</a>
@@ -238,7 +316,7 @@ CalibrationDisplay<span class="tok-p">.</span>from_estimator<span class="tok-p">
     </article>
 
     <aside class="hb-toc" aria-label="На этой странице">
-      <a class="l2" href="#постановка-и-логистическая-функция">Постановка и логистическая функция</a><a class="l2" href="#правдоподобие-и-кросс-энтропия">Правдоподобие и кросс-энтропия</a><a class="l2" href="#регуляризация-и-нелинейность">Регуляризация и нелинейность</a><a class="l2" href="#многоклассовость">Многоклассовость</a><a class="l2" href="#метрики-классификации">Метрики классификации</a><a class="l3" href="#матрица-ошибок">Матрица ошибок</a><a class="l3" href="#roc-и-auc">ROC и AUC</a><a class="l3" href="#pr-кривая">PR-кривая</a><a class="l3" href="#порог-и-бизнес-цель">Порог и бизнес-цель</a><a class="l3" href="#log-loss-и-калибровка">Log-loss и калибровка</a><a class="l3" href="#усреднение-для-многоклассовых-задач">Усреднение для многоклассовых задач</a><a class="l2" href="#код">Код</a><a class="l2" href="#практика-и-типичные-ошибки">Практика и типичные ошибки</a><a class="l2" href="#что-почитать">Что почитать</a>
+      <a class="l2" href="#постановка-и-логистическая-функция">Постановка и логистическая функция</a><a class="l2" href="#правдоподобие-и-кросс-энтропия">Правдоподобие и кросс-энтропия</a><a class="l2" href="#регуляризация-и-нелинейность">Регуляризация и нелинейность</a><a class="l2" href="#многоклассовость">Многоклассовость</a><a class="l2" href="#метрики-классификации">Метрики классификации</a><a class="l3" href="#матрица-ошибок">Матрица ошибок</a><a class="l3" href="#roc-и-auc">ROC и AUC</a><a class="l3" href="#пример-на-шести-точках">Пример на шести точках</a><a class="l3" href="#pr-кривая">PR-кривая</a><a class="l3" href="#порог-и-бизнес-цель">Порог и бизнес-цель</a><a class="l3" href="#log-loss-и-калибровка">Log-loss и калибровка</a><a class="l3" href="#усреднение-для-многоклассовых-задач">Усреднение для многоклассовых задач</a><a class="l2" href="#код">Код</a><a class="l2" href="#практика-и-типичные-ошибки">Практика и типичные ошибки</a><a class="l2" href="#проверь-себя">Проверь себя</a><a class="l2" href="#что-почитать">Что почитать</a>
     </aside>
   </div>
 </div>

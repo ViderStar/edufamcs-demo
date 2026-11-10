@@ -27,7 +27,7 @@
 <script src="/edufamcs-demo/static/js/site.js" defer></script>
 <script src="/edufamcs-demo/static/handbook/handbook.js" defer></script>
 </head>
-<body class="" hx-headers='{"X-CSRFToken": "PsbFYUGs3zuxORK2IyXPvn0wMEje6ZW4Byc2SHY9eMKLtqGiVXQUMP8Ri1VtbKH3"}'>
+<body class="" hx-headers='{"X-CSRFToken": "bou93EQoyybQvJtseYj4lNNvHO62LhMWNBj6jGpfzlppG2IUdrx13GFt9Xd0v1LD"}'>
 <a class="skip" href="#main">К содержанию</a>
 <div class="demo-bar" role="note">Демо-версия для отзывов: вход, запись на курсы и формы здесь не работают.</div>
 
@@ -60,6 +60,7 @@
 
 
 <div class="container hb-page hb-tone">
+  <div class="hb-readbar" aria-hidden="true"><i></i></div>
   <div class="hb">
     <aside class="hb-nav" aria-label="Статьи раздела">
       
@@ -86,9 +87,9 @@
       <div class="hb-meta">
         
         
-        <span><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-clock"/></svg>12&nbsp;мин</span>
+        <span><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-clock"/></svg>14&nbsp;мин</span>
         <span class="hb-authors"><span class="avatar sm" title="Артем Лебедевич">АЛ</span>Артем Лебедевич</span>
-        <span><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-edit"/></svg>9 ноября 2026</span>
+        <span><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-edit"/></svg>10 ноября 2026</span>
         
         
       </div>
@@ -96,7 +97,7 @@
       
       <details class="hb-mtoc">
         <summary><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-list"/></svg>Содержание<svg class="ico sm" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-chev-down"/></svg></summary>
-        <a class="l2" href="#токены-и-эмбеддинги">Токены и эмбеддинги</a><a class="l2" href="#рекуррентная-сеть">Рекуррентная сеть</a><a class="l2" href="#проблема-длинных-зависимостей">Проблема длинных зависимостей</a><a class="l2" href="#lstm-и-gru">LSTM и GRU</a><a class="l2" href="#seq2seq-и-внимание">Seq2seq и внимание</a><a class="l2" href="#в-рекомендациях">В рекомендациях</a><a class="l2" href="#код-nnembedding-nnlstm">Код: nn.Embedding + nn.LSTM</a><a class="l2" href="#практика-и-подводные-камни">Практика и подводные камни</a><a class="l2" href="#что-почитать">Что почитать</a>
+        <a class="l2" href="#токены-и-эмбеддинги">Токены и эмбеддинги</a><a class="l2" href="#рекуррентная-сеть">Рекуррентная сеть</a><a class="l2" href="#проблема-длинных-зависимостей">Проблема длинных зависимостей</a><a class="l2" href="#lstm-и-gru">LSTM и GRU</a><a class="l2" href="#seq2seq-и-внимание">Seq2seq и внимание</a><a class="l2" href="#в-рекомендациях">В рекомендациях</a><a class="l2" href="#код-nnembedding-nnlstm">Код: nn.Embedding + nn.LSTM</a><a class="l2" href="#практика-и-подводные-камни">Практика и подводные камни</a><a class="l2" href="#проверь-себя">Проверь себя</a><a class="l2" href="#что-почитать">Что почитать</a>
       </details>
       
 
@@ -107,6 +108,14 @@
 <p><strong>word2vec</strong> (Миколов и соавторы, 2013) опирается на дистрибутивную гипотезу: слова с похожим контекстом близки по смыслу. В варианте <strong>skip-gram</strong> по слову <span class="tex">w</span> предсказываются слова <span class="tex">c</span> из окна вокруг него. Полный softmax по всему словарю дорог, поэтому во второй статье тех же авторов (Миколов и соавторы, 2013, NeurIPS) предложен <strong>negative sampling</strong>: для пар «слово–реальный контекст» максимизируют <span class="tex">\log\sigma(u_c^\top v_w)</span>, а для <span class="tex">K</span> случайных слов <span class="tex">c'</span> из шумового распределения — <span class="tex">\log\sigma(-u_{c'}^\top v_w)</span>:</p>
 <div class="tex tex-block">\ell=-\log\sigma(u_c^\top v_w)-\sum_{k=1}^K\log\sigma(-u_{c_k'}^\top v_w).</div>
 <p>Побочный результат — арифметика смыслов: <span class="tex">v_{\text{king}}-v_{\text{man}}+v_{\text{woman}}\approx v_{\text{queen}}</span>. <strong>GloVe</strong> (Пеннингтон, Сохер, Мэннинг, 2014) приходит к похожему результату иначе: факторизует логарифм матрицы совместной встречаемости слов. Идея близка к матричным разложениям из рекомендаций.</p>
+<p><strong>Как строится BPE.</strong> Алгоритм начинает с символов и жадно сливает самую частую соседнюю пару, пока словарь не достигнет нужного размера. Игрушечный корпус: <code>hug</code>×10, <code>pug</code>×5, <code>pun</code>×12, <code>bun</code>×4, <code>hugs</code>×5; начальный словарь — символы <code>b g h n p s u</code>.</p>
+<ol>
+<li>Частоты пар: <code>ug</code> — 20, <code>pu</code> — 17, <code>un</code> — 16, <code>hu</code> — 15. Сливаем <code>u</code>+<code>g</code> → <code>ug</code>: слова <code>h ug</code>, <code>p ug</code>, <code>p u n</code>, <code>b u n</code>, <code>h ug s</code>.</li>
+<li>Теперь <code>un</code> — 16 (<code>pun</code> 12 + <code>bun</code> 4), <code>h ug</code> — 15. Сливаем <code>u</code>+<code>n</code> → <code>un</code>.</li>
+<li>Лидер — <code>h ug</code> (15 = 10 + 5). Сливаем → <code>hug</code>: слова <code>hug</code>, <code>p ug</code>, <code>p un</code>, <code>b un</code>, <code>hug s</code>.</li>
+<li>Лидер — <code>p un</code> (12). Сливаем → <code>pun</code>; корпус: <code>hug</code> ×10, <code>p ug</code> ×5, <code>pun</code> ×12, <code>b un</code> ×4, <code>hug s</code> ×5.</li>
+</ol>
+<p>Новое слово <code>bugs</code> разобьётся по тем же правилам в порядке слияний: <code>b ug s</code> → <code>b</code>, <code>ug</code>, <code>s</code>: даже невиданное слово представимо подсловами, а неизвестных токенов нет. На практике корпус считают в байтах или добавляют маркер конца слова, но механика та же.</p>
 <p><strong>Тот же приём для товаров.</strong> Заменим слова на товары, а предложения на сессии пользователей — и получим <strong>item2vec</strong> (Barkan и Koenigstein, 2016) и родственные prod2vec-подходы: товары, встречающиеся в одних сессиях, получают близкие эмбеддинги. Это один из рабочих способов получить признаки и кандидатов для рекомендаций; как он стыкуется с неявным фидбэком — в статье <a href="/edufamcs-demo/handbook/recsys/neyavnyj-fidbek-bpr/" rel="noopener noreferrer nofollow">про неявный фидбэк и BPR</a>.</p>
 <p>Статические эмбеддинги имеют предел: «замок» (castle) и «замок» (lock) получают один вектор. Контекстуальные представления (ELMo на LSTM, затем BERT на трансформере) дают разный вектор слову в разных предложениях — это следующий шаг.</p>
 <h2 id="рекуррентная-сеть">Рекуррентная сеть</h2>
@@ -132,7 +141,7 @@ h_t&amp;=o_t\odot\tanh(c_t)
 <h2 id="seq2seq-и-внимание">Seq2seq и внимание</h2>
 <p>Для задач «последовательность → последовательность» (перевод, суммаризация) Суцкевер и соавторы (2014) предложили <strong>seq2seq</strong>: энкодер-LSTM сжимает всё предложение в один вектор — финальное состояние, а декодер-LSTM генерирует по нему ответ токен за токеном. Узкое место очевидно: вся информация предложения проходит через вектор фиксированной длины, и, как показали Чо и соавторы (2014), качество такого энкодера-декодера заметно падает с ростом длины предложения.</p>
 <p><strong>Внимание Баданау</strong> (Bahdanau, Cho, Bengio, 2014) его снимает: на каждом шаге декодирования строится взвешенная сумма <strong>всех</strong> состояний энкодера, <span class="tex">c_t=\sum_j\alpha_{tj}h_j</span>, а веса <span class="tex">\alpha_{tj}=\text{softmax}_j\,s(d_{t-1},h_j)</span> говорят, на какие слова исходного предложения сейчас смотреть. Декодер получил возможность «подсмотреть» нужное место вместо сжатой памяти. Эта же идея, возведённая в принцип и избавленная от рекуррентности, станет трансформером: см. следующую статью <a href="/edufamcs-demo/handbook/dl/vnimanie-i-transformery/" rel="noopener noreferrer nofollow">про внимание</a>.</p>
-<p>Фундаментальный недостаток RNN и после LSTM остаётся: обработка <strong>последовательная</strong>. Состояние <span class="tex">h_t</span> нельзя посчитать, не вычислив <span class="tex">h_{t-1}</span>, поэтому на GPU обучение плохо параллелится, а путь информации между далёкими позициями всё ещё длинный. Трансформеры убрали именно это.</p>
+<p>Фундаментальный недостаток RNN и после LSTM остаётся: обработка <strong>последовательная</strong>. Состояние <span class="tex">h_t</span> нельзя посчитать, не вычислив <span class="tex">h_{t-1}</span>, поэтому на GPU обучение плохо параллелится, а путь информации между далёкими позициями всё ещё длинный. Трансформеры убрали именно это. Сказанное верно для классических нелинейных RNN; линейные рекуррентные модели и модели пространства состояний (S4, Mamba, xLSTM) обучаются параллельно через scan, хранят <span class="tex">O(1)</span> памяти на шаг генерации и применяются в гибридах с вниманием.</p>
 <h2 id="в-рекомендациях">В рекомендациях</h2>
 <p>Последовательность действий пользователя — естественный кандидат на RNN. <strong>GRU4Rec</strong> (Хидаши и соавторы, 2016) впервые применил GRU к сессионным рекомендациям: на вход подаются эмбеддинги просмотренных товаров, на выходе — скоры по каталогу для следующего. В исходной статье он обошёл item-kNN, который смотрит только на последний клик, и показал, что порядок событий несёт сигнал. Позже Ludewig и Jannach (2018) показали, что хорошо настроенные соседские методы по сессиям конкурируют с GRU4Rec, — честное сравнение с простыми бейзлайнами здесь обязательно. Подробнее об этой ветке, о SASRec и BERT4Rec — в статье <a href="/edufamcs-demo/handbook/recsys/posledovatelnye-modeli/" rel="noopener noreferrer nofollow">про последовательные модели</a>. Лекция 7 курса DeepRecSys «Sequential Recommenders» как раз проводит эту линию от RNN до трансформеров: <a href="https://www.youtube.com/watch?v=LATI_HsAnkk" rel="noopener noreferrer nofollow">LATI_HsAnkk</a>.</p>
 <h2 id="код-nnembedding-nnlstm">Код: nn.Embedding + nn.LSTM</h2>
@@ -170,8 +179,25 @@ lengths <span class="tok-p">=</span> torch<span class="tok-p">.</span>tensor<spa
 <li><strong>Утечки по времени.</strong> Для логов и рядов разбивайте выборку по времени, а не случайно; будущие события не должны попасть в признаки прошлого.</li>
 <li><strong>Взрыв градиента</strong>: <code>clip_grad_norm_</code> (1–5) для RNN — по умолчанию.</li>
 <li><strong>Что спрашивают на интервью</strong>: почему RNN не помнит далёкое прошлое, чем LSTM лучше, что делают вентили, чем GRU отличается от LSTM, зачем внимание, чем BPTT отличается от обычного backprop.</li>
+<li><strong>Токенизатор</strong> фиксируется до обучения модели и учится на корпусе: смена токенизатора означает переобучение модели. Спрашивают, как строится BPE и зачем подслова вместо слов.</li>
 </ul>
 <p>Материалы курса: лекция первого сезона «Введение в NLP» (Екатерина Данькова) — задачи NLP, пословная разметка, неоднозначность слов; на её фоне полезно понимать, зачем нужны контекстные представления.</p>
+<h2 id="проверь-себя">Проверь себя</h2>
+<details class="callout md details"><summary>Почему простая RNN не запоминает зависимости на сотни шагов?</summary>
+<p>Градиент от <span class="tex">h_T</span> к <span class="tex">h_k</span> — произведение якобианов <span class="tex">\mathrm{diag}(\tanh')\,W</span>. Если сингулярные числа <span class="tex">W</span> меньше 1, он затухает экспоненциально по длине, и сигнал от далёких токенов не доходит до обучения.</p>
+</details>
+<details class="callout md details"><summary>Какую строку LSTM называют ключевой и как она помогает градиенту?</summary>
+<p><span class="tex">c_t=f_t\odot c_{t-1}+i_t\odot\tilde c_t</span>: ячейка обновляется аддитивно, и по прямому пути <span class="tex">\partial c_t/\partial c_{t-1}=\mathrm{diag}(f_t)</span>. При <span class="tex">f_t\approx1</span> градиент идёт почти без затухания.</p>
+</details>
+<details class="callout md details"><summary>Чем GRU отличается от LSTM?</summary>
+<p>У GRU два вентиля (обновления и сброса) и нет отдельной ячейки: <span class="tex">h_t=(1-z_t)\odot h_{t-1}+z_t\odot\tilde h_t</span>. Весовых блоков три вместо четырёх, параметров на четверть меньше, качество обычно сопоставимо.</p>
+</details>
+<details class="callout md details"><summary>Зачем нужно внимание Баданау в seq2seq?</summary>
+<p>Без него вся информация предложения сжимается в один вектор фиксированной длины, и качество падает с длиной. Внимание строит на каждом шаге взвешенную сумму всех состояний энкодера и даёт декодеру «подсмотреть» нужное место.</p>
+</details>
+<details class="callout md details"><summary>Почему word2vec с negative sampling быстрее полного softmax?</summary>
+<p>Вместо нормировки по всему словарю считается <span class="tex">1+K</span> сигмоид: одна для реального контекста и <span class="tex">K</span> для случайных слов. Стоимость шага не зависит от размера словаря.</p>
+</details>
 <h2 id="что-почитать">Что почитать</h2>
 <ul>
 <li>Mikolov et al., <em>Efficient Estimation of Word Representations in Vector Space</em>, 2013: <a href="https://arxiv.org/abs/1301.3781" rel="noopener noreferrer nofollow">arxiv.org/abs/1301.3781</a>; <em>Distributed Representations of Words and Phrases and their Compositionality</em> (negative sampling), NeurIPS 2013: <a href="https://arxiv.org/abs/1310.4546" rel="noopener noreferrer nofollow">arxiv.org/abs/1310.4546</a>; Pennington, Socher, Manning, <em>GloVe</em>, EMNLP 2014: <a href="https://aclanthology.org/D14-1162/" rel="noopener noreferrer nofollow">aclanthology.org/D14-1162</a>.</li>
@@ -184,6 +210,8 @@ lengths <span class="tok-p">=</span> torch<span class="tok-p">.</span>tensor<spa
       
 
       
+
+      
       <nav class="pager" aria-label="Соседние статьи">
         <a href="/edufamcs-demo/handbook/dl/svertochnye-seti/"><span><svg class="ico sm" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-arrow-left"/></svg>Назад</span>Свёрточные сети</a>
         <a href="/edufamcs-demo/handbook/dl/vnimanie-i-transformery/"><span>Дальше<svg class="ico sm" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-arrow"/></svg></span>Внимание и трансформеры</a>
@@ -192,7 +220,7 @@ lengths <span class="tok-p">=</span> torch<span class="tok-p">.</span>tensor<spa
     </article>
 
     <aside class="hb-toc" aria-label="На этой странице">
-      <a class="l2" href="#токены-и-эмбеддинги">Токены и эмбеддинги</a><a class="l2" href="#рекуррентная-сеть">Рекуррентная сеть</a><a class="l2" href="#проблема-длинных-зависимостей">Проблема длинных зависимостей</a><a class="l2" href="#lstm-и-gru">LSTM и GRU</a><a class="l2" href="#seq2seq-и-внимание">Seq2seq и внимание</a><a class="l2" href="#в-рекомендациях">В рекомендациях</a><a class="l2" href="#код-nnembedding-nnlstm">Код: nn.Embedding + nn.LSTM</a><a class="l2" href="#практика-и-подводные-камни">Практика и подводные камни</a><a class="l2" href="#что-почитать">Что почитать</a>
+      <a class="l2" href="#токены-и-эмбеддинги">Токены и эмбеддинги</a><a class="l2" href="#рекуррентная-сеть">Рекуррентная сеть</a><a class="l2" href="#проблема-длинных-зависимостей">Проблема длинных зависимостей</a><a class="l2" href="#lstm-и-gru">LSTM и GRU</a><a class="l2" href="#seq2seq-и-внимание">Seq2seq и внимание</a><a class="l2" href="#в-рекомендациях">В рекомендациях</a><a class="l2" href="#код-nnembedding-nnlstm">Код: nn.Embedding + nn.LSTM</a><a class="l2" href="#практика-и-подводные-камни">Практика и подводные камни</a><a class="l2" href="#проверь-себя">Проверь себя</a><a class="l2" href="#что-почитать">Что почитать</a>
     </aside>
   </div>
 </div>

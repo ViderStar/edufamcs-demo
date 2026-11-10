@@ -27,7 +27,7 @@
 <script src="/edufamcs-demo/static/js/site.js" defer></script>
 <script src="/edufamcs-demo/static/handbook/handbook.js" defer></script>
 </head>
-<body class="" hx-headers='{"X-CSRFToken": "PilXLInLPi9xVmzG29jU5Tz4JYJw2BeOBomkFvFs0vpLAVvWfycZmlHpfllL7mZN"}'>
+<body class="" hx-headers='{"X-CSRFToken": "8oYUR4sgphKn78zievqq6EDCvLBCV473KBNR7617q4YWirOKdYEnOxvAXUIAFO6K"}'>
 <a class="skip" href="#main">К содержанию</a>
 <div class="demo-bar" role="note">Демо-версия для отзывов: вход, запись на курсы и формы здесь не работают.</div>
 
@@ -60,6 +60,7 @@
 
 
 <div class="container hb-page s-recsys">
+  <div class="hb-readbar" aria-hidden="true"><i></i></div>
   <div class="hb">
     <aside class="hb-nav" aria-label="Статьи раздела">
       
@@ -86,9 +87,9 @@
       <div class="hb-meta">
         
         
-        <span><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-clock"/></svg>17&nbsp;мин</span>
+        <span><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-clock"/></svg>21&nbsp;мин</span>
         <span class="hb-authors"><span class="avatar sm" title="Артем Лебедевич">АЛ</span>Артем Лебедевич</span>
-        <span><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-edit"/></svg>9 ноября 2026</span>
+        <span><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-edit"/></svg>10 ноября 2026</span>
         
         
       </div>
@@ -96,7 +97,7 @@
       
       <details class="hb-mtoc">
         <summary><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-list"/></svg>Содержание<svg class="ico sm" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-chev-down"/></svg></summary>
-        <a class="l2" href="#роли-llm">Роли LLM</a><a class="l3" href="#1-энкодер-контента">1. Энкодер контента</a><a class="l3" href="#2-ранжировщик-без-обучения">2. Ранжировщик без обучения</a><a class="l3" href="#3-дообученный-рекомендатель">3. Дообученный рекомендатель</a><a class="l3" href="#4-профили-интересов-объяснения-разметка">4. Профили интересов, объяснения, разметка</a><a class="l3" href="#5-диалоговые-рекомендации-агенты-и-симуляторы">5. Диалоговые рекомендации, агенты и симуляторы</a><a class="l2" href="#индустрия-20252026">Индустрия 2025–2026</a><a class="l3" href="#сводная-таблица">Сводная таблица</a><a class="l2" href="#llm-против-sid-моделей">LLM против SID-моделей</a><a class="l2" href="#ограничения">Ограничения</a><a class="l2" href="#код-переранжирование-кандидатов-с-проверкой-id">Код: переранжирование кандидатов с проверкой ID</a><a class="l2" href="#вопросы-на-собеседованиях">Вопросы на собеседованиях</a><a class="l2" href="#что-почитать">Что почитать</a>
+        <a class="l2" href="#роли-llm">Роли LLM</a><a class="l3" href="#1-энкодер-контента">1. Энкодер контента</a><a class="l3" href="#2-ранжировщик-без-обучения">2. Ранжировщик без обучения</a><a class="l3" href="#3-дообученный-рекомендатель">3. Дообученный рекомендатель</a><a class="l3" href="#4-профили-интересов-объяснения-разметка">4. Профили интересов, объяснения, разметка</a><a class="l3" href="#5-диалоговые-рекомендации-агенты-и-симуляторы">5. Диалоговые рекомендации, агенты и симуляторы</a><a class="l2" href="#индустрия-20252026">Индустрия 2025–2026</a><a class="l3" href="#сводная-таблица">Сводная таблица</a><a class="l2" href="#llm-против-sid-моделей">LLM против SID-моделей</a><a class="l2" href="#ограничения">Ограничения</a><a class="l2" href="#код-переранжирование-кандидатов-с-проверкой-id">Код: переранжирование кандидатов с проверкой ID</a><a class="l3" href="#оценка-стоимости-llm-в-цикле-на-каждый-запрос">Оценка стоимости: LLM в цикле на каждый запрос</a><a class="l2" href="#ловушки">Ловушки</a><a class="l2" href="#вопросы-на-собеседованиях">Вопросы на собеседованиях</a><a class="l2" href="#проверь-себя">Проверь себя</a><a class="l2" href="#что-почитать">Что почитать</a>
       </details>
       
 
@@ -132,9 +133,9 @@
 <li><strong>PLUM</strong> (YouTube, <a href="https://arxiv.org/abs/2510.07784" rel="noopener noreferrer nofollow">arXiv:2510.07784</a>, WWW 2026). Рецепт: (1) токенизация объектов семантическими ID; (2) <strong>continued pre-training</strong> языковой модели на доменных данных — корпус пользовательских действий над SID и мультимодальными метаданными; (3) дообучение под генеративный retrieval — модель по контексту пользователя порождает SID рекомендуемых видео. Результат по авторам: существенный выигрыш на retrieval над сильной продакшен-моделью, построенной на огромных таблицах эмбеддингов, и развёртывание на миллиарды пользователей. В живом эксперименте кандидатов PLUM добавили в пул к продакшен-ретриверу: по таблице 3 статьи CTR панели вырос на +4,96% в Shorts и на +0,76% в длинных видео (относительно продакшен-ретривера с увеличенной квотой).</li>
 <li><strong>RecGPT</strong> (Taobao/Alibaba): технический отчёт 2025 (<a href="https://arxiv.org/abs/2507.22879" rel="noopener noreferrer nofollow">arXiv:2507.22879</a>) — LLM встроена в центр системы и моделирует <strong>намерение пользователя</strong> (из истории выводятся интересы в виде текста, по ним строятся запросы к каталогу); развёрнуто в приложении Taobao. <strong>RecGPT-V2</strong> (<a href="https://arxiv.org/abs/2512.14503" rel="noopener noreferrer nofollow">arXiv:2512.14503</a>, декабрь 2025): в A/B на Taobao заявлены +2,98% CTR, +3,71% IPV, +2,19% объёма транзакций и +11,46% «новой вовлечённости». <strong>RecGPT-V3</strong> (<a href="https://arxiv.org/abs/2607.15591" rel="noopener noreferrer nofollow">arXiv:2607.15591</a>, июль 2026): в ленте «Guess What You Like» +1,28% IPV, +1,00% CTR, +3,97% GMV и −52,4% затрат ресурсов на сквозное обслуживание. Эти данные — авторские отчёты Alibaba без независимой проверки; GMV в 4% — исключительная цифра по меркам индустрии, и её надо читать с оглядкой на то, как устроена базовая линия.</li>
 <li><strong>OneRec-Think</strong> (Kuaishou, глава 16): мост между рассуждением текстом и item-токенами; +0,159% времени в приложении.</li>
-<li><strong>LinkedIn.</strong> Работа <em>Large Scale Retrieval for the LinkedIn Feed using Causal Language Models</em> (AAAI 2026, <a href="https://arxiv.org/abs/2510.14223" rel="noopener noreferrer nofollow">arXiv:2510.14223</a>): дообученная LLaMA 3 используется как <strong>двухбашенный энкодер</strong> текстов участников и постов; из огромного пула постов отбираются около 2000 кандидатов для ранкера за бюджет в несколько миллисекунд. Полезная деталь: числовые признаки в промпте квантуют (подают не сырым числом, а дискретным уровнем), и тогда LLM-эмбеддинг лучше их учитывает. В онлайн-A/B выросла вовлечённость, сильнее всего — у новых участников с малой сетью контактов, то есть снова на холодном старте.</li>
+<li><strong>LinkedIn.</strong> Работа <em>Large Scale Retrieval for the LinkedIn Feed using Causal Language Models</em> (AAAI-26, трек IAAI, <a href="https://arxiv.org/abs/2510.14223" rel="noopener noreferrer nofollow">arXiv:2510.14223</a>): дообученная LLaMA 3 используется как <strong>двухбашенный энкодер</strong> текстов участников и постов; из огромного пула постов отбираются около 2000 кандидатов для ранкера за бюджет в несколько миллисекунд. Полезная деталь: числовые признаки в промпте квантуют (подают не сырым числом, а дискретным уровнем), и тогда LLM-эмбеддинг лучше их учитывает. В онлайн-A/B выросла вовлечённость, сильнее всего — у новых участников с малой сетью контактов, то есть снова на холодном старте.</li>
 <li><strong>Netflix GenRec</strong> (<em>GenRec: An LLM-Backed Recommendation Ranker at Netflix</em>, <a href="https://arxiv.org/abs/2608.10257" rel="noopener noreferrer nofollow">arXiv:2608.10257</a>, август 2026). Основа — собственная базовая LLM Netflix: сначала открытую модель адаптируют к данным Netflix, затем дообучают на ранжирующих данных, метках и сигналах вознаграждения. Вместо дискриминативного ранкера с тысячами признаков — LLM по «вербализованной» истории и контексту, с обслуживанием в режиме prefill-only (только проход по входу, без генерации текста) под ограничение по стоимости. В большом A/B против продакшен-ранкера авторы заявляют статистически значимые офлайн- и онлайн-приросты при заметно меньшем числе размеченных примеров и входных сигналов, но в абстракте <strong>не называют величину</strong> онлайн-эффекта. Главный тезис статьи — не рост качества, а смена способа работы: вместо инженерии признаков — «инженерия контекста», вместо отдельной архитектуры под задачу — общий базовый бэкбон.</li>
-<li><strong>Spotify.</strong> <em>GLIDE</em> (<a href="https://arxiv.org/abs/2603.17540" rel="noopener noreferrer nofollow">arXiv:2603.17540</a>): рекомендация подкастов как выполнение инструкции над SID, бэкбон на базе Llama 3.2 1B, долгосрочные эмбеддинги пользователя подаются как soft prompt; в A/B на миллионах пользователей главной страницы — до +5,4% «непривычных» прослушиваний подкастов и до +14,3% открытия новых шоу в рамках ограничений по стоимости и задержке. <em>NEO</em> (<a href="https://arxiv.org/abs/2603.17533" rel="noopener noreferrer nofollow">arXiv:2603.17533</a>): одна LLM для поиска, рекомендаций и рассуждения, которая перемежает текст и типизированные SID и с ограниченным декодированием выдаёт только существующие объекты каталога из более чем 10 млн позиций; результаты — офлайн. По сводке Spotify Research обе работы приняты на KDD 2026 (не проверено по трудам конференции).</li>
+<li><strong>Spotify.</strong> <em>GLIDE</em> (<a href="https://arxiv.org/abs/2603.17540" rel="noopener noreferrer nofollow">arXiv:2603.17540</a>): рекомендация подкастов как выполнение инструкции над SID, LLM-бэкбон, долгосрочные эмбеддинги пользователя подаются как soft prompt; в A/B на миллионах пользователей главной страницы — до +5,4% «непривычных» прослушиваний подкастов и до +14,3% открытия новых шоу в рамках ограничений по стоимости и задержке. <em>NEO</em> (<a href="https://arxiv.org/abs/2603.17533" rel="noopener noreferrer nofollow">arXiv:2603.17533</a>): одна LLM для поиска, рекомендаций и рассуждения, которая перемежает текст и типизированные SID и с ограниченным декодированием выдаёт только существующие объекты каталога из более чем 10 млн позиций; результаты — офлайн. По сводке Spotify Research обе работы приняты на KDD 2026 (не проверено по трудам конференции).</li>
 </ul>
 <h3 id="сводная-таблица">Сводная таблица</h3>
 <div class="table-wrap"><table>
@@ -222,7 +223,7 @@
 <td>GLIDE</td>
 <td>Spotify</td>
 <td>2026, arXiv (KDD 2026 — по блогу Spotify)</td>
-<td>SID подкастов, бэкбон Llama 3.2 1B</td>
+<td>SID подкастов, LLM-бэкбон</td>
 <td>до +5,4% прослушиваний вне привычных шоу, до +14,3% новых шоу</td>
 </tr>
 </tbody>
@@ -284,17 +285,59 @@ MODEL <span class="tok-p">=</span> os<span class="tok-p">.</span>environ<span cl
     <span class="tok-k">for</span> _ <span class="tok-k">in</span> <span class="tok-f">range</span><span class="tok-p">(</span>n_votes<span class="tok-p">)</span><span class="tok-p">:</span>
         shuffled <span class="tok-p">=</span> random<span class="tok-p">.</span>sample<span class="tok-p">(</span>ids<span class="tok-p">,</span> <span class="tok-f">len</span><span class="tok-p">(</span>ids<span class="tok-p">)</span><span class="tok-p">)</span>
         msg <span class="tok-p">=</span> client<span class="tok-p">.</span>messages<span class="tok-p">.</span>create<span class="tok-p">(</span>
-            model<span class="tok-p">=</span>MODEL<span class="tok-p">,</span> max_tokens<span class="tok-p">=</span><span class="tok-n">2000</span><span class="tok-p">,</span>
+            model<span class="tok-p">=</span>MODEL<span class="tok-p">,</span> max_tokens<span class="tok-p">=</span><span class="tok-n">16000</span><span class="tok-p">,</span>
             messages<span class="tok-p">=</span><span class="tok-p">[</span><span class="tok-p">{</span><span class="tok-s">"</span><span class="tok-s">role</span><span class="tok-s">"</span><span class="tok-p">:</span> <span class="tok-s">"</span><span class="tok-s">user</span><span class="tok-s">"</span><span class="tok-p">,</span>
                        <span class="tok-s">"</span><span class="tok-s">content</span><span class="tok-s">"</span><span class="tok-p">:</span> build_prompt<span class="tok-p">(</span>history<span class="tok-p">,</span> <span class="tok-p">{</span>i<span class="tok-p">:</span> cands<span class="tok-p">[</span>i<span class="tok-p">]</span> <span class="tok-k">for</span> i <span class="tok-k">in</span> shuffled<span class="tok-p">}</span><span class="tok-p">)</span><span class="tok-p">}</span><span class="tok-p">]</span><span class="tok-p">,</span>
-            output_config<span class="tok-p">=</span><span class="tok-p">{</span><span class="tok-s">"</span><span class="tok-s">format</span><span class="tok-s">"</span><span class="tok-p">:</span> <span class="tok-p">{</span><span class="tok-s">"</span><span class="tok-s">type</span><span class="tok-s">"</span><span class="tok-p">:</span> <span class="tok-s">"</span><span class="tok-s">json_schema</span><span class="tok-s">"</span><span class="tok-p">,</span> <span class="tok-s">"</span><span class="tok-s">schema</span><span class="tok-s">"</span><span class="tok-p">:</span> ranking_schema<span class="tok-p">(</span>ids<span class="tok-p">)</span><span class="tok-p">}</span><span class="tok-p">}</span><span class="tok-p">,</span>
+            output_config<span class="tok-p">=</span><span class="tok-p">{</span><span class="tok-s">"</span><span class="tok-s">effort</span><span class="tok-s">"</span><span class="tok-p">:</span> <span class="tok-s">"</span><span class="tok-s">low</span><span class="tok-s">"</span><span class="tok-p">,</span>   <span class="tok-c"># ограничиваем глубину рассуждения</span>
+                           <span class="tok-s">"</span><span class="tok-s">format</span><span class="tok-s">"</span><span class="tok-p">:</span> <span class="tok-p">{</span><span class="tok-s">"</span><span class="tok-s">type</span><span class="tok-s">"</span><span class="tok-p">:</span> <span class="tok-s">"</span><span class="tok-s">json_schema</span><span class="tok-s">"</span><span class="tok-p">,</span> <span class="tok-s">"</span><span class="tok-s">schema</span><span class="tok-s">"</span><span class="tok-p">:</span> ranking_schema<span class="tok-p">(</span>ids<span class="tok-p">)</span><span class="tok-p">}</span><span class="tok-p">}</span><span class="tok-p">,</span>
         <span class="tok-p">)</span>
         text <span class="tok-p">=</span> <span class="tok-f">next</span><span class="tok-p">(</span><span class="tok-p">(</span>b<span class="tok-p">.</span>text <span class="tok-k">for</span> b <span class="tok-k">in</span> msg<span class="tok-p">.</span>content <span class="tok-k">if</span> b<span class="tok-p">.</span>type <span class="tok-p">==</span> <span class="tok-s">"</span><span class="tok-s">text</span><span class="tok-s">"</span><span class="tok-p">)</span><span class="tok-p">,</span> <span class="tok-s">"</span><span class="tok-s">"</span><span class="tok-p">)</span>
         <span class="tok-k">for</span> rank<span class="tok-p">,</span> i <span class="tok-k">in</span> <span class="tok-f">enumerate</span><span class="tok-p">(</span>parse_and_validate<span class="tok-p">(</span>text<span class="tok-p">,</span> ids<span class="tok-p">)</span><span class="tok-p">)</span><span class="tok-p">:</span>
             score<span class="tok-p">[</span>i<span class="tok-p">]</span> <span class="tok-p">+</span><span class="tok-p">=</span> rank
     <span class="tok-k">return</span> <span class="tok-f">sorted</span><span class="tok-p">(</span>ids<span class="tok-p">,</span> key<span class="tok-p">=</span><span class="tok-k">lambda</span> i<span class="tok-p">:</span> score<span class="tok-p">[</span>i<span class="tok-p">]</span><span class="tok-p">)</span>
 </code></pre></div>
-<p>Что здесь важно. Перемешивание кандидатов в каждом прогоне и усреднение рангов гасят позиционную предвзятость. <code>enum</code> в схеме не даёт модели выдумать ID, а проверка после ответа страхует от повторов и пропусков. Фолбэк к порядку ретривера гарантирует, что результат есть всегда, даже если модель отказалась отвечать или ответ оборвался. Текст берётся из первого текстового блока, а не из <code>content[0]</code>: у современных моделей ответ может начинаться с блока рассуждений, поэтому и <code>max_tokens</code> взят с запасом. Параметр <code>temperature</code> не передаём: актуальные модели Claude отклоняют параметры сэмплирования с ошибкой 400. В реальной системе ещё нужны таймауты, кэш по хэшу пары (история, кандидаты) и экранирование описаний, пришедших от продавцов. Качество сначала сравните с исходным порядком по офлайн-метрике на отложенных данных, потом в A/B: не думайте, что LLM по умолчанию лучше бустинга.</p>
+<p>Что здесь важно. Перемешивание кандидатов в каждом прогоне и усреднение рангов гасят позиционную предвзятость. <code>enum</code> в схеме не даёт модели выдумать ID, а проверка после ответа страхует от повторов и пропусков. Фолбэк к порядку ретривера гарантирует, что результат есть всегда, даже если модель отказалась отвечать или ответ оборвался. Текст берётся из первого текстового блока, а не из <code>content[0]</code>: у современных моделей ответ может начинаться с блока рассуждений. Токены рассуждения входят в <code>max_tokens</code> (даже если сами блоки не возвращаются), и при малом лимите JSON обрывается на полуслове, а код молча падает в порядок ретривера; поэтому лимит взят с большим запасом (16000), а <code>effort: "low"</code> ограничивает глубину рассуждения — для переупорядочивания 20–50 кандидатов длинное рассуждение не нужно и лишь добавляет задержку и стоимость. Уровни <code>effort</code> и их умолчания зависят от модели (в документации Anthropic для используемой здесь модели поддержаны все пять уровней), поэтому на своей задаче проверьте качество на <code>low</code> против <code>medium</code>; <code>stop_reason == "max_tokens"</code> стоит логировать. Параметр <code>temperature</code> не передаём: актуальные модели Claude отклоняют параметры сэмплирования с ошибкой 400. В реальной системе ещё нужны таймауты, кэш по хэшу пары (история, кандидаты) и экранирование описаний, пришедших от продавцов. Качество сначала сравните с исходным порядком по офлайн-метрике на отложенных данных, потом в A/B: не думайте, что LLM по умолчанию лучше бустинга.</p>
+<h3 id="оценка-стоимости-llm-в-цикле-на-каждый-запрос">Оценка стоимости: LLM в цикле на каждый запрос</h3>
+<p>Шаблон расчёта: <span class="tex">\text{стоимость в сутки} = N_{\text{req}}\cdot\big(T_{\text{in}}\,p_{\text{in}} + T_{\text{out}}\,p_{\text{out}}\big)\cdot n_{\text{votes}}</span>, где <span class="tex">T</span> — токены на запрос, <span class="tex">p</span> — цена за токен, <span class="tex">n_{\text{votes}}</span> — число прогонов с перестановками. Цены ниже условные (1 у.е. за 1 млн входных и 4 у.е. за 1 млн выходных токенов), подставьте свои. Пусть история — 50 объектов по 20 токенов, кандидатов 30 по 40 токенов, ответ 100 токенов: <span class="tex">T_{\text{in}} = 2200</span>, <span class="tex">T_{\text{out}} = 100</span>, <span class="tex">N_{\text{req}} = 10^7</span> запросов в сутки.</p>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>Вариант</th>
+<th>Расчёт</th>
+<th>В сутки, у.е.</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>LLM на каждый запрос, 1 прогон</td>
+<td><span class="tex">10^7 \cdot (2200 + 400)/10^6</span></td>
+<td>26 000</td>
+</tr>
+<tr>
+<td>то же, 3 прогона с перестановками (как в коде выше)</td>
+<td><span class="tex">\times 3</span></td>
+<td>78 000</td>
+</tr>
+<tr>
+<td>офлайн-эмбеддинги: 5 млн объектов по 300 токенов, один раз</td>
+<td><span class="tex">5\cdot10^6\cdot 300/10^6</span></td>
+<td>1 500 разово</td>
+</tr>
+<tr>
+<td>то же для 100 тыс. новых объектов в сутки</td>
+<td><span class="tex">10^5\cdot 300/10^6</span></td>
+<td>30</td>
+</tr>
+</tbody>
+</table></div>
+<p>Разница почти в три порядка (26 000 против 30), и это ещё без задержки: десятки–сотни мс на вызов против бюджета в десятки мс. Поэтому LLM в цикле для каждого запроса обычно заменяют тем, что считается за пределами запроса: офлайн-обогащением (эмбеддинги, профили, разметка) и дистилляцией качества LLM в маленькую модель, которая обслуживает трафик. Прямой вызов оставляют для узкого места (малый список, холодный сегмент) и кэшируют по хэшу входа.</p>
+<h2 id="ловушки">Ловушки</h2>
+<ul>
+<li><strong>Сравнение с обученным бустингом на публичных данных.</strong> LLM видела MovieLens и Amazon в предобучении; приросты на них нельзя переносить на закрытый каталог.</li>
+<li><strong>Доверие ответу модели.</strong> Без <code>enum</code>/ограниченного декодирования и проверки после ответа в выдачу попадают несуществующие и повторные ID.</li>
+<li><strong>Обрыв ответа.</strong> Токены рассуждения входят в <code>max_tokens</code>; слишком малый лимит даёт обрезанный JSON и молчаливый фолбэк — метрика «LLM-ранкера» на деле измеряет ретривер.</li>
+<li><strong>Текст продавца в промпте</strong> — вектор prompt injection; изолируйте описания и не давайте модели инструментов с побочными эффектами.</li>
+</ul>
 <h2 id="вопросы-на-собеседованиях">Вопросы на собеседованиях</h2>
 <ul>
 <li><em>Как использовать LLM в рекомендациях, если задержка ограничена 50 мс?</em> Офлайн-эмбеддинги и профили; LLM-энкодер для текстов с кэшем; дистилляция в маленькую модель; переранжирование малого списка асинхронно.</li>
@@ -302,6 +345,23 @@ MODEL <span class="tok-p">=</span> os<span class="tok-p">.</span>environ<span cl
 <li><em>Почему бенчмарки с публичными датасетами для LLM-рекомендателей ненадёжны?</em> Утечка: модель могла видеть датасет в обучении.</li>
 <li><em>Когда нулевое обучение выигрывает, когда проигрывает?</em> Выигрывает при очень малой истории и новом каталоге; проигрывает обученной модели при достатке данных.</li>
 </ul>
+<p>На собеседовании: оцените на салфетке стоимость LLM-ранжирования на 10 млн запросов в сутки и предложите, как её снизить на порядок или два, не потеряв значимо в качестве.</p>
+<h2 id="проверь-себя">Проверь себя</h2>
+<details class="callout md details"><summary>Почему LLM-энкодер контента считается самым надёжным применением LLM в рекомендациях?</summary>
+<p>Эмбеддинг считается офлайн один раз на объект, поэтому задержка и стоимость не мешают, а выгода конкретна: вектор для холодного объекта сразу и вход для семантических ID.</p>
+</details>
+<details class="callout md details"><summary>Что показали Hou et al. про LLM как zero-shot-ранжировщик и как смягчить его слабости?</summary>
+<p>Модель плохо учитывает порядок истории, склонна к позиционной предвзятости и к популярному. Порядок помогают передать явные подсказки в промпте, а предвзятость — бутстреп: несколько прогонов с перемешанными кандидатами и усреднение рангов.</p>
+</details>
+<details class="callout md details"><summary>Зачем в схеме JSON указан `enum` с допустимыми ID, если ответ всё равно проверяется кодом?</summary>
+<p><code>enum</code> — ограниченное декодирование на стороне API: модель физически не выдаст чужой ID. Проверка после ответа страхует от повторов, пропусков и обрыва по <code>max_tokens</code>; фолбэк к порядку ретривера гарантирует результат.</p>
+</details>
+<details class="callout md details"><summary>Что произойдёт, если оставить `max_tokens=2000` для модели с рассуждением?</summary>
+<p>Токены рассуждения считаются в лимит, поэтому ответ может оборваться на неполном JSON; <code>json.loads</code> падает, парсер возвращает порядок ретривера, и ошибка не видна без логирования <code>stop_reason</code>.</p>
+</details>
+<details class="callout md details"><summary>Почему LLM в цикле на каждый запрос обычно заменяют офлайн-обогащением или дистилляцией?</summary>
+<p>Стоимость растёт как запросы × токены × цена × число прогонов и в примере выше почти на три порядка выше разовой офлайн-обработки каталога, плюс задержка в десятки–сотни мс против бюджета в десятки.</p>
+</details>
 <h2 id="что-почитать">Что почитать</h2>
 <ul>
 <li>Hou et al. <em>Large Language Models are Zero-Shot Rankers for Recommender Systems</em>. ECIR 2024 (<a href="https://arxiv.org/abs/2305.08845" rel="noopener noreferrer nofollow">arXiv:2305.08845</a>); Bao et al. <em>TALLRec</em> (<a href="https://arxiv.org/abs/2305.00447" rel="noopener noreferrer nofollow">arXiv:2305.00447</a>); Yue et al. <em>LlamaRec</em> (<a href="https://arxiv.org/abs/2311.02089" rel="noopener noreferrer nofollow">arXiv:2311.02089</a>).</li>
@@ -315,15 +375,17 @@ MODEL <span class="tok-p">=</span> os<span class="tok-p">.</span>environ<span cl
       
 
       
+
+      
       <nav class="pager" aria-label="Соседние статьи">
         <a href="/edufamcs-demo/handbook/recsys/generativnye-rekomendateli/"><span><svg class="ico sm" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-arrow-left"/></svg>Назад</span>Генеративные рекомендатели на масштабе: HSTU, OneRec и наследники</a>
-        
+        <a href="/edufamcs-demo/handbook/recsys/multitask-ranzhirovanie/"><span>Дальше<svg class="ico sm" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-arrow"/></svg></span>Многозадачное ранжирование: MMoE, PLE, ESMM</a>
       </nav>
       
     </article>
 
     <aside class="hb-toc" aria-label="На этой странице">
-      <a class="l2" href="#роли-llm">Роли LLM</a><a class="l3" href="#1-энкодер-контента">1. Энкодер контента</a><a class="l3" href="#2-ранжировщик-без-обучения">2. Ранжировщик без обучения</a><a class="l3" href="#3-дообученный-рекомендатель">3. Дообученный рекомендатель</a><a class="l3" href="#4-профили-интересов-объяснения-разметка">4. Профили интересов, объяснения, разметка</a><a class="l3" href="#5-диалоговые-рекомендации-агенты-и-симуляторы">5. Диалоговые рекомендации, агенты и симуляторы</a><a class="l2" href="#индустрия-20252026">Индустрия 2025–2026</a><a class="l3" href="#сводная-таблица">Сводная таблица</a><a class="l2" href="#llm-против-sid-моделей">LLM против SID-моделей</a><a class="l2" href="#ограничения">Ограничения</a><a class="l2" href="#код-переранжирование-кандидатов-с-проверкой-id">Код: переранжирование кандидатов с проверкой ID</a><a class="l2" href="#вопросы-на-собеседованиях">Вопросы на собеседованиях</a><a class="l2" href="#что-почитать">Что почитать</a>
+      <a class="l2" href="#роли-llm">Роли LLM</a><a class="l3" href="#1-энкодер-контента">1. Энкодер контента</a><a class="l3" href="#2-ранжировщик-без-обучения">2. Ранжировщик без обучения</a><a class="l3" href="#3-дообученный-рекомендатель">3. Дообученный рекомендатель</a><a class="l3" href="#4-профили-интересов-объяснения-разметка">4. Профили интересов, объяснения, разметка</a><a class="l3" href="#5-диалоговые-рекомендации-агенты-и-симуляторы">5. Диалоговые рекомендации, агенты и симуляторы</a><a class="l2" href="#индустрия-20252026">Индустрия 2025–2026</a><a class="l3" href="#сводная-таблица">Сводная таблица</a><a class="l2" href="#llm-против-sid-моделей">LLM против SID-моделей</a><a class="l2" href="#ограничения">Ограничения</a><a class="l2" href="#код-переранжирование-кандидатов-с-проверкой-id">Код: переранжирование кандидатов с проверкой ID</a><a class="l3" href="#оценка-стоимости-llm-в-цикле-на-каждый-запрос">Оценка стоимости: LLM в цикле на каждый запрос</a><a class="l2" href="#ловушки">Ловушки</a><a class="l2" href="#вопросы-на-собеседованиях">Вопросы на собеседованиях</a><a class="l2" href="#проверь-себя">Проверь себя</a><a class="l2" href="#что-почитать">Что почитать</a>
     </aside>
   </div>
 </div>

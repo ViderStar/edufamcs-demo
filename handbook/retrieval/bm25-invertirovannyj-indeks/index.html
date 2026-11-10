@@ -27,7 +27,7 @@
 <script src="/edufamcs-demo/static/js/site.js" defer></script>
 <script src="/edufamcs-demo/static/handbook/handbook.js" defer></script>
 </head>
-<body class="" hx-headers='{"X-CSRFToken": "niD7apAM89MwH49ACgm4WV8PsjdDADVh9oEu4cStjm2KmD5QPFf9dngaYGPSFoGg"}'>
+<body class="" hx-headers='{"X-CSRFToken": "UllArumRUE706FxlRKw68tkC4KgAxms5wyaxHwVIVrlzhYMNQdK3QmcAwTnyh6rM"}'>
 <a class="skip" href="#main">К содержанию</a>
 <div class="demo-bar" role="note">Демо-версия для отзывов: вход, запись на курсы и формы здесь не работают.</div>
 
@@ -60,6 +60,7 @@
 
 
 <div class="container hb-page s-recsys">
+  <div class="hb-readbar" aria-hidden="true"><i></i></div>
   <div class="hb">
     <aside class="hb-nav" aria-label="Статьи раздела">
       
@@ -88,9 +89,9 @@
       <div class="hb-meta">
         
         
-        <span><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-clock"/></svg>12&nbsp;мин</span>
+        <span><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-clock"/></svg>16&nbsp;мин</span>
         <span class="hb-authors"><span class="avatar sm" title="Артем Лебедевич">АЛ</span>Артем Лебедевич</span>
-        <span><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-edit"/></svg>9 ноября 2026</span>
+        <span><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-edit"/></svg>10 ноября 2026</span>
         
         
       </div>
@@ -98,7 +99,7 @@
       
       <details class="hb-mtoc">
         <summary><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-list"/></svg>Содержание<svg class="ico sm" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-chev-down"/></svg></summary>
-        <a class="l2" href="#откуда-это-взялось">Откуда это взялось</a><a class="l2" href="#подготовка-текста">Подготовка текста</a><a class="l2" href="#инвертированный-индекс">Инвертированный индекс</a><a class="l2" href="#от-tf-idf-к-bm25">От TF-IDF к BM25</a><a class="l3" href="#откуда-берётся-idf">Откуда берётся IDF</a><a class="l3" href="#пример-на-числах">Пример на числах</a><a class="l2" href="#поля-и-бусты">Поля и бусты</a><a class="l2" href="#ограничения-лексического-поиска">Ограничения лексического поиска</a><a class="l2" href="#что-почитать">Что почитать</a>
+        <a class="l2" href="#откуда-это-взялось">Откуда это взялось</a><a class="l2" href="#подготовка-текста">Подготовка текста</a><a class="l2" href="#инвертированный-индекс">Инвертированный индекс</a><a class="l2" href="#от-tf-idf-к-bm25">От TF-IDF к BM25</a><a class="l3" href="#откуда-берётся-idf">Откуда берётся IDF</a><a class="l3" href="#пример-на-числах">Пример на числах</a><a class="l2" href="#поля-и-бусты">Поля и бусты</a><a class="l2" href="#ограничения-лексического-поиска">Ограничения лексического поиска</a><a class="l2" href="#ловушки">Ловушки</a><a class="l2" href="#проверь-себя">Проверь себя</a><a class="l2" href="#что-почитать">Что почитать</a>
       </details>
       
 
@@ -126,12 +127,13 @@ als      → [(d42, tf=5)]
 <h2 id="от-tf-idf-к-bm25">От TF-IDF к BM25</h2>
 <p>Интуиция: документ релевантнее, если терм запроса встречается в нём <strong>часто</strong> (term frequency) и если терм <strong>редкий</strong> в коллекции (inverse document frequency) — слово «алгоритм» встречается везде и мало говорит, слово «ALS» — точный сигнал.</p>
 <p>TF-IDF просто перемножает эти величины, но у него две проблемы. Во-первых, вклад частоты растёт линейно: документ, где слово повторено 50 раз, получает огромный скор, хотя после нескольких упоминаний релевантность почти не растёт. Во-вторых, длинные документы выигрывают просто потому, что в них больше слов.</p>
-<p>BM25 (Robertson, Spärck Jones и соавторы) решает обе проблемы. Для запроса <span class="tex">Q = \{q_1, \dots, q_n\}</span> и документа <span class="tex">D</span>:</p>
+<p>BM25 (Robertson, Walker и соавторы, система Okapi, TREC-3) решает обе проблемы. Для запроса <span class="tex">Q = \{q_1, \dots, q_n\}</span> и документа <span class="tex">D</span>:</p>
 <div class="tex tex-block">\mathrm{score}(D, Q) = \sum_{q \in Q} \mathrm{IDF}(q) \cdot
 \frac{f(q, D)\,(k_1 + 1)}{f(q, D) + k_1 \left(1 - b + b \dfrac{|D|}{\mathrm{avgdl}}\right)}</div>
 <p>где <span class="tex">f(q, D)</span> — частота терма в документе, <span class="tex">|D|</span> — длина документа в термах, <span class="tex">\mathrm{avgdl}</span> — средняя длина по коллекции. IDF в варианте Lucene:</p>
 <div class="tex tex-block">\mathrm{IDF}(q) = \ln\left(1 + \frac{N - n(q) + 0{,}5}{n(q) + 0{,}5}\right),</div>
 <p>где <span class="tex">N</span> — число документов, <span class="tex">n(q)</span> — сколько из них содержат терм.</p>
+<p>Осторожно с версиями Lucene. Начиная с Lucene 8 из числителя убран множитель <span class="tex">(k_1+1)</span>: порядок документов не меняется, а абсолютные скоры другие, и это важно, когда BM25 смешивают с плотными скорами взвешенной суммой. Длина документа хранится приближённо (в сжатом однобайтовом виде), поэтому ручной расчёт по формуле совпадёт с движком лишь с точностью до этого округления.</p>
 <h3 id="откуда-берётся-idf">Откуда берётся IDF</h3>
 <p>Логарифм в IDF не подобран «на глаз»: он выводится из вероятностной модели (binary independence model). Будем ранжировать документы по отношению шансов <span class="tex">P(R\mid D)/P(\bar R\mid D)</span>, где <span class="tex">R</span> — событие «документ релевантен». Представим документ бинарным вектором «терм есть / терма нет» и предположим, что при фиксированной релевантности термы независимы. Обозначим <span class="tex">p_t = P(t \in D \mid R)</span> и <span class="tex">u_t = P(t \in D \mid \bar R)</span>. После логарифмирования и отбрасывания слагаемых, одинаковых для всех документов, остаётся сумма по термам запроса, которые есть в документе:</p>
 <div class="tex tex-block">\log\frac{P(R\mid D)}{P(\bar R\mid D)} \stackrel{\mathrm{rank}}{=} \sum_{t \in Q \cap D} \log\frac{p_t\,(1-u_t)}{u_t\,(1-p_t)}.</div>
@@ -210,6 +212,31 @@ als      → [(d42, tf=5)]
 <li><strong>Нет понимания смысла.</strong> «Фильмы, похожие на Интерстеллар» — для BM25 просто набор слов.</li>
 </ul>
 <p>Часть ограничений снимается обработкой запроса ещё до похода в индекс: исправление опечаток, синонимы, переписывание запроса — см. <a href="/edufamcs-demo/handbook/retrieval/ponimanie-zaprosa/" rel="noopener noreferrer nofollow">понимание запроса</a>. Остальное закрывает плотный поиск на эмбеддингах, но лучшие результаты почти всегда даёт сочетание — <a href="/edufamcs-demo/handbook/retrieval/plotnyj-i-gibridnyj-poisk/" rel="noopener noreferrer nofollow">плотный и гибридный поиск</a>. Идея «веса термов, но выученные» развита в SPLADE: это обученный разреженный поиск на том же инвертированном индексе, см. <a href="/edufamcs-demo/handbook/retrieval/nejrosetevoe-ranzhirovanie/" rel="noopener noreferrer nofollow">нейросетевое ранжирование</a>. Как измерять, стало ли лучше, — в статье <a href="/edufamcs-demo/handbook/retrieval/ocenka-kachestva-poiska/" rel="noopener noreferrer nofollow">оценка качества поиска</a>.</p>
+<h2 id="ловушки">Ловушки</h2>
+<ul>
+<li><strong>Разная токенизация при индексации и поиске.</strong> Лемматизатор обновили только на стороне запроса, и термы не совпадают; признак — внезапно упавший recall на словоформах. Любое изменение анализатора требует переиндексации.</li>
+<li><strong>Стоп-слова и лемматизация вслепую.</strong> Удаление «не», «или» и склейка форм разных слов («мышь» — животное и устройство) ломают точные запросы; проверяйте на навигационных и коротких запросах.</li>
+<li><strong>Скоры BM25 несравнимы между запросами и индексами.</strong> Они зависят от IDF коллекции и от версии Lucene (см. выше), поэтому фиксированный порог «скор &gt; 10» или смешивание с косинусом без нормировки ненадёжны.</li>
+<li><strong>Дефолтные <span class="tex">k_1</span> и <span class="tex">b</span> не везде хороши.</strong> Для коротких названий товаров <span class="tex">b</span> часто уменьшают; подбирайте их на размеченных запросах, а не «на глаз».</li>
+<li><strong>BM25F против суммы по полям.</strong> Сумма BM25 по полям насыщает частоты в каждом поле отдельно, а BM25F — после взвешенной суммы частот; результаты различаются.</li>
+<li><strong>На собеседовании</strong> спрашивают: выведите IDF из вероятностной модели и объясните, почему он может быть отрицательным; что делают <span class="tex">k_1</span> и <span class="tex">b</span> и чему равны пределы; чем BM25 лучше TF-IDF; как устроен posting list и почему время ответа не зависит от размера коллекции.</li>
+</ul>
+<h2 id="проверь-себя">Проверь себя</h2>
+<details class="callout md details"><summary>Почему вклад частоты терма в BM25 ограничен и чему равен предел?</summary>
+<p>При <span class="tex">f \to \infty</span> дробь стремится к <span class="tex">k_1 + 1</span>, поэтому десятое упоминание терма почти ничего не добавляет к первому. Так BM25 убирает линейный рост TF-IDF, где документ с 50 повторами слова получает огромный скор.</p>
+</details>
+<details class="callout md details"><summary>Что произойдёт при $b = 0$ и при $b = 1$?</summary>
+<p>При <span class="tex">b = 0</span> длина документа игнорируется и длинные документы выигрывают за счёт большего числа слов. При <span class="tex">b = 1</span> частота полностью нормируется на относительную длину, и длинный документ, где терм встречается пару раз, штрафуется сильнее всего.</p>
+</details>
+<details class="callout md details"><summary>Почему в формуле Lucene под логарифмом стоит $1 + \dots$?</summary>
+<p>Исходный вес <span class="tex">\log\frac{N - n + 0{,}5}{n + 0{,}5}</span> отрицателен для терма, который встречается больше чем в половине документов, то есть частое слово работало бы как довод против релевантности. Добавление единицы делает IDF положительным.</p>
+</details>
+<details class="callout md details"><summary>Почему время ответа по инвертированному индексу не зависит от размера коллекции?</summary>
+<p>Для запроса читаются только posting lists его термов, а не все документы. Слияние отсортированных по ID списков линейно по их длине, а WAND и MaxScore дополнительно отсекают документы, заведомо не попадающие в топ.</p>
+</details>
+<details class="callout md details"><summary>Почему «разложение матрицы» не найдёт «разложением матриц» без лемматизации?</summary>
+<p>Индекс сравнивает точные термы: «разложение» и «разложением», «матрицы» и «матриц» для него разные строки. Лемматизация или стемминг приводят формы к одному терму, причём запрос обрабатывается тем же пайплайном, что и документы.</p>
+</details>
 <h2 id="что-почитать">Что почитать</h2>
 <ul>
 <li>Robertson S., Zaragoza H. The Probabilistic Relevance Framework: BM25 and Beyond, 2009 — стандартный обзор: https://www.staff.city.ac.uk/~sbrp622/papers/foundations_bm25_review.pdf</li>
@@ -223,6 +250,8 @@ als      → [(d42, tf=5)]
       
 
       
+
+      
       <nav class="pager" aria-label="Соседние статьи">
         <i></i>
         <a href="/edufamcs-demo/handbook/retrieval/ocenka-kachestva-poiska/"><span>Дальше<svg class="ico sm" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-arrow"/></svg></span>Оценка качества поиска</a>
@@ -231,7 +260,7 @@ als      → [(d42, tf=5)]
     </article>
 
     <aside class="hb-toc" aria-label="На этой странице">
-      <a class="l2" href="#откуда-это-взялось">Откуда это взялось</a><a class="l2" href="#подготовка-текста">Подготовка текста</a><a class="l2" href="#инвертированный-индекс">Инвертированный индекс</a><a class="l2" href="#от-tf-idf-к-bm25">От TF-IDF к BM25</a><a class="l3" href="#откуда-берётся-idf">Откуда берётся IDF</a><a class="l3" href="#пример-на-числах">Пример на числах</a><a class="l2" href="#поля-и-бусты">Поля и бусты</a><a class="l2" href="#ограничения-лексического-поиска">Ограничения лексического поиска</a><a class="l2" href="#что-почитать">Что почитать</a>
+      <a class="l2" href="#откуда-это-взялось">Откуда это взялось</a><a class="l2" href="#подготовка-текста">Подготовка текста</a><a class="l2" href="#инвертированный-индекс">Инвертированный индекс</a><a class="l2" href="#от-tf-idf-к-bm25">От TF-IDF к BM25</a><a class="l3" href="#откуда-берётся-idf">Откуда берётся IDF</a><a class="l3" href="#пример-на-числах">Пример на числах</a><a class="l2" href="#поля-и-бусты">Поля и бусты</a><a class="l2" href="#ограничения-лексического-поиска">Ограничения лексического поиска</a><a class="l2" href="#ловушки">Ловушки</a><a class="l2" href="#проверь-себя">Проверь себя</a><a class="l2" href="#что-почитать">Что почитать</a>
     </aside>
   </div>
 </div>

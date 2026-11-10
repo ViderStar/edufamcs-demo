@@ -1,0 +1,263 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Эмбеддинги и контрастивное обучение · EDU FAMCS</title>
+<meta name="description" content="Эмбеддинги и контрастивное обучение — Введение в глубокое обучение. Хендбук ML-курса ФПМИ.">
+<meta name="theme-color" content="#060A16">
+<meta name="robots" content="noindex, nofollow">
+<meta name="htmx-config" content='{"allowEval":false,"includeIndicatorStyles":false,"historyCacheSize":0,"selfRequestsOnly":true}'>
+<meta name="katex-js" content="/edufamcs-demo/static/vendor/katex/katex.min.js">
+<meta name="katex-css" content="/edufamcs-demo/static/vendor/katex/katex.min.css">
+<link rel="icon" href="/edufamcs-demo/static/brand/logo/favicon-16.svg" type="image/svg+xml" sizes="16x16">
+<link rel="icon" href="/edufamcs-demo/static/brand/logo/favicon.svg" type="image/svg+xml" sizes="any">
+<link rel="preload" href="/edufamcs-demo/static/brand/fonts/manrope-cyrillic-400.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/edufamcs-demo/static/brand/fonts/unbounded-cyrillic-800.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="/edufamcs-demo/static/brand/fonts.css">
+<link rel="stylesheet" href="/edufamcs-demo/static/brand/tokens.css">
+<link rel="stylesheet" href="/edufamcs-demo/static/brand/components.css">
+<link rel="stylesheet" href="/edufamcs-demo/static/css/site.css">
+<link rel="stylesheet" href="/edufamcs-demo/static/css/hub.css">
+<link rel="stylesheet" href="/edufamcs-demo/static/css/about.css">
+<link rel="stylesheet" href="/edufamcs-demo/static/handbook/handbook.css">
+<script src="/edufamcs-demo/static/js/theme.js"></script>
+<script src="/edufamcs-demo/static/vendor/htmx/htmx.min.js" defer></script>
+<script src="/edufamcs-demo/static/vendor/alpine/alpine-csp.min.js" defer></script>
+<script src="/edufamcs-demo/static/js/site.js" defer></script>
+<script src="/edufamcs-demo/static/handbook/handbook.js" defer></script>
+</head>
+<body class="" hx-headers='{"X-CSRFToken": "3EpISxWk06RHWt2cipV71LZbCiJT1SMfFReF8zvb1T5g7MhEhS94JER94rQRLCLW"}'>
+<a class="skip" href="#main">К содержанию</a>
+<div class="demo-bar" role="note">Демо-версия для отзывов: вход, запись на курсы и формы здесь не работают.</div>
+
+<header class="hdr">
+  <div class="container">
+    <a class="brand" href="/edufamcs-demo/" aria-label="EDU FAMCS — главная">
+      <span class="full"><img class="only-light" src="/edufamcs-demo/static/brand/logo/logo-edu-light.svg" alt="EDU FAMCS" width="196" height="40"><img class="only-dark" src="/edufamcs-demo/static/brand/logo/logo-edu-dark.svg" alt="EDU FAMCS" width="196" height="40"></span>
+      <span class="short"><img class="only-light" src="/edufamcs-demo/static/brand/logo/logo-edu-light.svg" alt="EDU FAMCS" height="30"><img class="only-dark" src="/edufamcs-demo/static/brand/logo/logo-edu-dark.svg" alt="EDU FAMCS" height="30"></span>
+    </a>
+    <nav class="nav" id="main-nav" aria-label="Основная навигация">
+      <a href="/edufamcs-demo/#courses">Курсы</a>
+      <a href="/edufamcs-demo/ml/" >Машинное обучение</a>
+      
+      <a href="/edufamcs-demo/handbook/" aria-current="page">Хендбук</a>
+      <a href="/edufamcs-demo/news/" >Новости</a>
+      <a href="/edufamcs-demo/people/" >Авторы</a>
+      <a href="/edufamcs-demo/about/" >О&nbsp;нас</a>
+    </nav>
+    <div class="hdr-actions">
+      
+      <a class="btn btn-outline btn-login" href="/edufamcs-demo/accounts/login/?next=/handbook/dl/kontrastivnoe-obuchenie/">Войти</a>
+      
+      <button class="icon-btn menu-btn" type="button" aria-label="Меню" aria-expanded="false" aria-controls="main-nav"><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-menu"/></svg></button>
+    </div>
+  </div>
+</header>
+
+<main id="main">
+
+
+
+<div class="container hb-page hb-tone">
+  <div class="hb-readbar" aria-hidden="true"><i></i></div>
+  <div class="hb">
+    <aside class="hb-nav" aria-label="Статьи раздела">
+      
+<form class="hb-search" action="/edufamcs-demo/handbook/search/" method="get" role="search">
+  <svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-search"/></svg>
+  <input class="input" type="search" name="q" value="" placeholder="Поиск по хендбуку" aria-label="Поиск по хендбуку" autocomplete="off" maxlength="120"
+    hx-get="/edufamcs-demo/handbook/search/" hx-trigger="input changed delay:250ms, search" hx-target="#hb-nav-results" hx-sync="this:replace">
+</form>
+
+      <div id="hb-nav-results" class="hb-nav-results" aria-live="polite"></div>
+      <a class="grp" href="/edufamcs-demo/handbook/dl/">Практика и представления</a>
+      
+      <a class="" href="/edufamcs-demo/handbook/dl/normalizaciya-i-inicializaciya/">Нормализация и инициализация</a>
+      
+      <a class="" href="/edufamcs-demo/handbook/dl/pytorch-na-praktike/">PyTorch на практике: обучение и дообучение</a>
+      
+      <a class="cur" href="/edufamcs-demo/handbook/dl/kontrastivnoe-obuchenie/" aria-current="page">Эмбеддинги и контрастивное обучение</a>
+      
+      <a class="" href="/edufamcs-demo/handbook/dl/generativnye-modeli/">Генеративные модели: VAE, GAN, диффузия</a>
+      
+    </aside>
+
+    <article class="hb-main">
+      <nav class="crumbs" aria-label="Навигация"><a href="/edufamcs-demo/handbook/">Хендбук</a><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-chev"/></svg><a href="/edufamcs-demo/handbook/dl/">Введение в глубокое обучение</a></nav>
+      <h1 class="h1">Эмбеддинги и контрастивное обучение</h1>
+      <div class="hb-meta">
+        
+        
+        <span><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-clock"/></svg>12&nbsp;мин</span>
+        <span class="hb-authors"><span class="avatar sm" title="Артем Лебедевич">АЛ</span>Артем Лебедевич</span>
+        <span><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-edit"/></svg>10 ноября 2026</span>
+        
+        
+      </div>
+
+      
+      <details class="hb-mtoc">
+        <summary><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-list"/></svg>Содержание<svg class="ico sm" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-chev-down"/></svg></summary>
+        <a class="l2" href="#что-такое-хорошее-представление">Что такое хорошее представление</a><a class="l2" href="#метрическое-обучение">Метрическое обучение</a><a class="l2" href="#infonce-как--классовая-классификация">InfoNCE как (K+1)-классовая классификация</a><a class="l2" href="#семейство-методов">Семейство методов</a><a class="l2" href="#выравнивание-и-однородность">Выравнивание и однородность</a><a class="l2" href="#мост-к-поиску-и-рекомендациям">Мост к поиску и рекомендациям</a><a class="l2" href="#разбор-на-числах">Разбор на числах</a><a class="l2" href="#код">Код</a><a class="l2" href="#ловушки">Ловушки</a><a class="l2" href="#проверь-себя">Проверь себя</a><a class="l2" href="#что-почитать">Что почитать</a>
+      </details>
+      
+
+      <div class="prose"><p>Нейросеть, обученная на классификацию, на выходе даёт метки, но самое ценное в ней — внутреннее представление: вектор, в котором близкие по смыслу объекты лежат рядом. Контрастивное обучение формулирует это напрямую: «притяни пары, которые должны быть близки, и оттолкни остальные». Один и тот же приём стоит за самообучением на изображениях, моделью CLIP, плотным поиском и двухбашенными рекомендациями.</p>
+<h2 id="что-такое-хорошее-представление">Что такое хорошее представление</h2>
+<p>Представление <span class="tex">z=f(x)</span> хорошо, если простая модель поверх него решает много задач. Стандартные проверки:</p>
+<ul>
+<li><strong>Linear probe</strong>: заморозить <span class="tex">f</span>, обучить на <span class="tex">z</span> линейный классификатор (логистическую регрессию) и измерить точность. Если классы линейно разделимы в <span class="tex">z</span>, признаки содержательны.</li>
+<li><strong>kNN-оценка</strong>: классифицировать объект по меткам ближайших соседей в <span class="tex">z</span> (по косинусу), без обучения вообще.</li>
+<li>Для поиска — Recall@K и NDCG на размеченных запросах (см. <a href="/edufamcs-demo/handbook/retrieval/ocenka-kachestva-poiska/" rel="noopener noreferrer nofollow">оценку поиска</a>).</li>
+</ul>
+<p>Хорошее представление инвариантно к тому, что нам неважно (поворот, яркость, формулировка запроса), и различает то, что важно.</p>
+<h2 id="метрическое-обучение">Метрическое обучение</h2>
+<p><strong>Contrastive loss</strong> (Hadsell, Chopra, LeCun, 2006) для пары с расстоянием <span class="tex">d</span> и меткой <span class="tex">y=1</span> (похожи) или <span class="tex">0</span>:
+<span class="tex tex-block">\ell = y\,d^2 + (1-y)\max(0,\,m-d)^2.</span>
+Похожие притягиваются, непохожие отталкиваются, но только пока ближе поля <span class="tex">m</span>.</p>
+<p><strong>Triplet loss</strong> (FaceNet, Schroff и соавторы, 2015): для якоря <span class="tex">a</span>, положительного <span class="tex">p</span> и отрицательного <span class="tex">n</span>
+<span class="tex tex-block">\ell=\max\bigl(0,\; d(a,p)-d(a,n)+m\bigr).</span>
+Требуем, чтобы положительный был ближе отрицательного хотя бы на запас <span class="tex">m</span>. Если условие выполнено, градиент нулевой — <strong>большинство случайных троек бесполезны</strong>. Поэтому нужны сложные отрицательные (hard negatives): те, что ближе положительного. Но самые сложные — часто шум разметки или почти дубликаты, и обучение на них схлопывает представление; обычная практика — полусложные (semi-hard) отрицательные, которые дальше положительного, но в пределах запаса.</p>
+<h2 id="infonce-как--классовая-классификация">InfoNCE как <span class="tex">(K+1)</span>-классовая классификация</h2>
+<p>Возьмём якорь <span class="tex">q</span>, одного настоящего партнёра <span class="tex">k_+\sim p(k\mid q)</span> и <span class="tex">K</span> случайных объектов <span class="tex">k_1,\dots,k_K\sim p(k)</span>. Перемешаем <span class="tex">K+1</span> кандидата и спросим: какой из них настоящий? По формуле Байеса, при независимых отрицательных
+<span class="tex tex-block">P(\text{«}i\text{ — настоящий»}\mid q,\{k_j\})=\frac{p(k_i\mid q)/p(k_i)}{\sum_{j=0}^{K}p(k_j\mid q)/p(k_j)}.</span>
+Отношение плотностей <span class="tex">p(k\mid q)/p(k)</span> мы не знаем, но моделируем его как <span class="tex">\exp(s(q,k)/\tau)</span>, где <span class="tex">s</span> — оценка сходства (чаще всего косинус), а <span class="tex">\tau&gt;0</span> — температура. Получаем softmax по кандидатам, а максимизация правдоподобия верного ответа даёт
+<span class="tex tex-block">\mathcal L_{\text{InfoNCE}}=-\log\frac{\exp(s(q,k_+)/\tau)}{\exp(s(q,k_+)/\tau)+\sum_{j=1}^{K}\exp(s(q,k_j)/\tau)}.</span>
+Это обычная кросс-энтропия по <span class="tex">K+1</span> логитам. В оригинальной работе (van den Oord, Li, Vinyals, 2018, Contrastive Predictive Coding) показано: <span class="tex">I(q;k_+)\ge \log(K+1)-\mathcal L_{\text{InfoNCE}}</span>. Следствие: оценка взаимной информации не превосходит <span class="tex">\log(K+1)</span>, так что чем больше отрицательных, тем содержательнее граница (об информации — в <a href="/edufamcs-demo/handbook/math/teoriya-informacii/" rel="noopener noreferrer nofollow">теории информации</a>).</p>
+<p><strong>Внутрибатчевые отрицательные.</strong> В батче из <span class="tex">B</span> пар <span class="tex">(q_i,k_i)</span> для <span class="tex">q_i</span> отрицательными служат остальные <span class="tex">k_j</span>, <span class="tex">j\ne i</span>: матрица сходств <span class="tex">B\times B</span> с положительными на диагонали, потеря — кросс-энтропия по строкам с метками <span class="tex">0,\dots,B-1</span>. Это бесплатно по вычислениям, но даёт две проблемы:</p>
+<ul>
+<li><strong>Ложные отрицательные</strong>: <span class="tex">k_j</span> того же класса/смысла, что и <span class="tex">q_i</span>, трактуется как отрицательный и отталкивается. Лечат дедупликацией, учётом меток (supervised contrastive), поправкой на вероятность выборки (для популярных товаров в рекомендациях — logQ-коррекция, см. <a href="/edufamcs-demo/handbook/recsys/two-tower-ann/" rel="noopener noreferrer nofollow">двухбашенные модели</a>).</li>
+<li>Зависимость от размера батча: меньше отрицательных — слабее сигнал.</li>
+</ul>
+<p><strong>Температура.</strong> Градиент по логиту отрицательного <span class="tex">j</span> пропорционален <span class="tex">p_j/\tau</span>, где <span class="tex">p_j</span> — softmax-вероятность. При малом <span class="tex">\tau</span> распределение острое, и вес получают в основном самые сложные отрицательные; при большом — все отрицательные вносят примерно одинаково. Слишком малое <span class="tex">\tau</span> делает обучение чувствительным к ложным отрицательным, слишком большое — «размазывает» (Wang &amp; Liu, CVPR 2021). Типичные значения: 0,05–0,2; в CLIP <span class="tex">\tau</span> обучаемый.</p>
+<h2 id="семейство-методов">Семейство методов</h2>
+<p><strong>SimCLR</strong> (Chen и соавторы, ICML 2020). Из одной картинки две случайные аугментации (кроп с масштабированием, цветовые искажения, размытие) — это положительная пара; другие картинки батча — отрицательные. Энкодер (ResNet) даёт представление, <strong>projection head</strong> (маленький MLP) переводит его в пространство, где считается потеря; после обучения голову выбрасывают, и linear probe берут с представления до неё. Ключевое: набор аугментаций определяет, что считается «неважным», а качество растёт с размером батча (тысячи пар).</p>
+<p><strong>MoCo</strong> (He и соавторы, CVPR 2020). Чтобы не зависеть от размера батча, отрицательные берутся из <strong>очереди</strong> ранее вычисленных ключей (десятки тысяч). Чтобы ключи в очереди были согласованы, ключевой энкодер — <strong>momentum-копия</strong> запросного: <span class="tex">\theta_k\leftarrow m\theta_k+(1-m)\theta_q</span> с <span class="tex">m\approx0{,}999</span>, градиент через него не идёт.</p>
+<p><strong>BYOL и DINO — без отрицательных.</strong> BYOL (Grill и соавторы, NeurIPS 2020): «онлайн»-сеть с предиктором учится предсказывать выход «целевой» сети — EMA-копии, — на другой аугментации того же изображения. Казалось бы, константный выход решает задачу, но на практике коллапса нет. Почему именно — до конца не объяснено; установлено, что нужны stop-gradient и асимметрия предиктора/EMA (SimSiam, Chen &amp; He, 2021, показал, что работает и без EMA, но не без stop-gradient). DINO (Caron и соавторы, ICCV 2021) — самодистилляция: ученик предсказывает распределение учителя (EMA ученика), от коллапса защищают центрирование и «заострение» (sharpening) выхода учителя; на ViT получаются признаки, пригодные для kNN.</p>
+<p><strong>CLIP</strong> (Radford и соавторы, ICML 2021). Два энкодера — изображений и текстов, — обучаются на 400 млн пар «картинка–подпись». В батче <span class="tex">B</span> пар матрица сходств <span class="tex">B\times B</span> и <strong>симметричная</strong> InfoNCE: кросс-энтропия по строкам (картинка выбирает подпись) и по столбцам (подпись выбирает картинку), температура обучаемая. <strong>Zero-shot классификация</strong>: для каждого класса пишется текст («a photo of a {класс}»), эмбеддинг текста играет роль весов классификатора, выбирается ближайший к картинке. <strong>SigLIP</strong> (Zhai и соавторы, ICCV 2023) заменяет softmax на сигмоиду: каждая пара (картинка, подпись) — независимая бинарная задача «совпадает/нет». Нормализация по всему батчу не нужна, потеря лучше масштабируется по размеру батча и работает при меньших батчах.</p>
+<h2 id="выравнивание-и-однородность">Выравнивание и однородность</h2>
+<p>Wang &amp; Isola (ICML 2020) разложили качество контрастивного представления на две части для векторов на единичной сфере:
+<span class="tex tex-block">\mathcal L_{\text{align}}=\mathbb E_{(x,y)\sim p_{\text{pos}}}\|f(x)-f(y)\|^2,\qquad \mathcal L_{\text{unif}}=\log\mathbb E_{x,y\sim p}\,e^{-2\|f(x)-f(y)\|^2}.</span>
+Первая — положительные пары рядом, вторая — точки равномерно покрывают сферу (информация не теряется). Они показали, что InfoNCE при <span class="tex">K\to\infty</span> асимптотически оптимизирует обе, и что эти две метрики хорошо коррелируют с качеством на последующих задачах. Коллапс — это идеальное выравнивание при провальной однородности.</p>
+<h2 id="мост-к-поиску-и-рекомендациям">Мост к поиску и рекомендациям</h2>
+<p>Двухбашенная модель — это InfoNCE, где «якорь» — запрос или пользователь, «позитив» — документ или товар, а отрицательные — внутрибатчевые и добытые (hard negatives из BM25 или ANN). Плотный поиск DPR (Karpukhin и соавторы, 2020) обучается именно так; см. <a href="/edufamcs-demo/handbook/retrieval/plotnyj-i-gibridnyj-poisk/" rel="noopener noreferrer nofollow">плотный и гибридный поиск</a>, <a href="/edufamcs-demo/handbook/recsys/two-tower-ann/" rel="noopener noreferrer nofollow">двухбашенные модели</a> и <a href="/edufamcs-demo/handbook/nlp/tokenizaciya-i-embeddingi/" rel="noopener noreferrer nofollow">токенизацию и эмбеддинги</a>. Поправка на частоту выборки и дедупликация отрицательных, перечисленные выше, — главные продакшен-детали.</p>
+<h2 id="разбор-на-числах">Разбор на числах</h2>
+<p>Пусть сходства 3 пар <span class="tex">(q_i,k_j)</span> — матрица <span class="tex">S</span> (диагональ — положительные):
+<span class="tex tex-block">S=\begin{pmatrix}0{,}9&amp;0{,}2&amp;0{,}1\\0{,}3&amp;0{,}8&amp;0{,}4\\0{,}0&amp;0{,}5&amp;0{,}7\end{pmatrix}.</span>
+Для первой строки при <span class="tex">\tau=1</span>: <span class="tex">e^{0{,}9}=2{,}460</span>, <span class="tex">e^{0{,}2}=1{,}221</span>, <span class="tex">e^{0{,}1}=1{,}105</span>, сумма <span class="tex">4{,}786</span>, вероятность положительного <span class="tex">2{,}460/4{,}786=0{,}514</span>, потеря <span class="tex">-\ln0{,}514=0{,}666</span>. Остальные строки считаются так же; запуск кода даёт потери 0,666; 0,823; 0,840 и среднее <strong>0,776</strong>. При <span class="tex">\tau=0{,}1</span> логиты в 10 раз больше: вероятности положительных 0,999; 0,976; 0,880, среднее <strong>0,051</strong>. Третья строка осталась самой сложной: её отрицательное <span class="tex">k_2</span> (сходство 0,5) лишь на 0,2 уступает положительному.</p>
+<h2 id="код">Код</h2>
+<div class="code"><div class="code-head"><span class="lang">python</span></div><pre><code><span class="tok-k">import</span> torch
+<span class="tok-k">import</span> torch.nn.functional <span class="tok-k">as</span> F
+
+<span class="tok-k">def</span> <span class="tok-f">info_nce</span><span class="tok-p">(</span>q<span class="tok-p">,</span> k<span class="tok-p">,</span> tau<span class="tok-p">=</span><span class="tok-n">0.1</span><span class="tok-p">)</span><span class="tok-p">:</span>
+    <span class="tok-s">"""q, k: (B, d) — пары (q_i, k_i) положительные, остальные k_j — отрицательные."""</span>
+    q<span class="tok-p">,</span> k <span class="tok-p">=</span> F<span class="tok-p">.</span>normalize<span class="tok-p">(</span>q<span class="tok-p">,</span> dim<span class="tok-p">=</span><span class="tok-p">-</span><span class="tok-n">1</span><span class="tok-p">)</span><span class="tok-p">,</span> F<span class="tok-p">.</span>normalize<span class="tok-p">(</span>k<span class="tok-p">,</span> dim<span class="tok-p">=</span><span class="tok-p">-</span><span class="tok-n">1</span><span class="tok-p">)</span>
+    logits <span class="tok-p">=</span> q <span class="tok-p">@</span> k<span class="tok-p">.</span>T <span class="tok-p">/</span> tau                          <span class="tok-c"># (B, B) косинусы / температура</span>
+    labels <span class="tok-p">=</span> torch<span class="tok-p">.</span>arange<span class="tok-p">(</span><span class="tok-f">len</span><span class="tok-p">(</span>q<span class="tok-p">)</span><span class="tok-p">)</span>                   <span class="tok-c"># положительный — на диагонали</span>
+    <span class="tok-k">return</span> F<span class="tok-p">.</span>cross_entropy<span class="tok-p">(</span>logits<span class="tok-p">,</span> labels<span class="tok-p">)</span>
+
+S <span class="tok-p">=</span> torch<span class="tok-p">.</span>tensor<span class="tok-p">(</span><span class="tok-p">[</span><span class="tok-p">[</span><span class="tok-n">0.9</span><span class="tok-p">,</span> <span class="tok-n">0.2</span><span class="tok-p">,</span> <span class="tok-n">0.1</span><span class="tok-p">]</span><span class="tok-p">,</span> <span class="tok-p">[</span><span class="tok-n">0.3</span><span class="tok-p">,</span> <span class="tok-n">0.8</span><span class="tok-p">,</span> <span class="tok-n">0.4</span><span class="tok-p">]</span><span class="tok-p">,</span> <span class="tok-p">[</span><span class="tok-n">0.0</span><span class="tok-p">,</span> <span class="tok-n">0.5</span><span class="tok-p">,</span> <span class="tok-n">0.7</span><span class="tok-p">]</span><span class="tok-p">]</span><span class="tok-p">)</span>
+<span class="tok-k">for</span> tau <span class="tok-k">in</span> <span class="tok-p">(</span><span class="tok-n">1.0</span><span class="tok-p">,</span> <span class="tok-n">0.1</span><span class="tok-p">)</span><span class="tok-p">:</span>
+    Z <span class="tok-p">=</span> S <span class="tok-p">/</span> tau
+    manual <span class="tok-p">=</span> <span class="tok-p">-</span>torch<span class="tok-p">.</span>log<span class="tok-p">(</span>torch<span class="tok-p">.</span>softmax<span class="tok-p">(</span>Z<span class="tok-p">,</span> dim<span class="tok-p">=</span><span class="tok-n">1</span><span class="tok-p">)</span><span class="tok-p">.</span>diag<span class="tok-p">(</span><span class="tok-p">)</span><span class="tok-p">)</span>
+    <span class="tok-f">print</span><span class="tok-p">(</span>tau<span class="tok-p">,</span> manual<span class="tok-p">.</span>mean<span class="tok-p">(</span><span class="tok-p">)</span><span class="tok-p">.</span>item<span class="tok-p">(</span><span class="tok-p">)</span><span class="tok-p">,</span> F<span class="tok-p">.</span>cross_entropy<span class="tok-p">(</span>Z<span class="tok-p">,</span> torch<span class="tok-p">.</span>arange<span class="tok-p">(</span><span class="tok-n">3</span><span class="tok-p">)</span><span class="tok-p">)</span><span class="tok-p">.</span>item<span class="tok-p">(</span><span class="tok-p">)</span><span class="tok-p">)</span>
+
+torch<span class="tok-p">.</span>manual_seed<span class="tok-p">(</span><span class="tok-n">0</span><span class="tok-p">)</span>
+q<span class="tok-p">,</span> k <span class="tok-p">=</span> torch<span class="tok-p">.</span>randn<span class="tok-p">(</span><span class="tok-n">8</span><span class="tok-p">,</span> <span class="tok-n">16</span><span class="tok-p">)</span><span class="tok-p">,</span> torch<span class="tok-p">.</span>randn<span class="tok-p">(</span><span class="tok-n">8</span><span class="tok-p">,</span> <span class="tok-n">16</span><span class="tok-p">)</span>
+<span class="tok-f">print</span><span class="tok-p">(</span><span class="tok-s">"</span><span class="tok-s">random pairs:</span><span class="tok-s">"</span><span class="tok-p">,</span> info_nce<span class="tok-p">(</span>q<span class="tok-p">,</span> k<span class="tok-p">)</span><span class="tok-p">.</span>item<span class="tok-p">(</span><span class="tok-p">)</span><span class="tok-p">,</span> <span class="tok-s">"</span><span class="tok-s">ln(8) =</span><span class="tok-s">"</span><span class="tok-p">,</span> torch<span class="tok-p">.</span>log<span class="tok-p">(</span>torch<span class="tok-p">.</span>tensor<span class="tok-p">(</span><span class="tok-n">8.</span><span class="tok-p">)</span><span class="tok-p">)</span><span class="tok-p">.</span>item<span class="tok-p">(</span><span class="tok-p">)</span><span class="tok-p">)</span>
+<span class="tok-f">print</span><span class="tok-p">(</span><span class="tok-s">"</span><span class="tok-s">aligned pairs:</span><span class="tok-s">"</span><span class="tok-p">,</span> info_nce<span class="tok-p">(</span>q<span class="tok-p">,</span> q <span class="tok-p">+</span> <span class="tok-n">0.05</span> <span class="tok-p">*</span> torch<span class="tok-p">.</span>randn<span class="tok-p">(</span><span class="tok-n">8</span><span class="tok-p">,</span> <span class="tok-n">16</span><span class="tok-p">)</span><span class="tok-p">)</span><span class="tok-p">.</span>item<span class="tok-p">(</span><span class="tok-p">)</span><span class="tok-p">)</span>
+</code></pre></div>
+<p>Вывод: ручной расчёт и <code>F.cross_entropy</code> совпали (0,7760 при <span class="tex">\tau=1</span> и 0,0512 при <span class="tex">\tau=0{,}1</span>). На случайных векторах потеря 3,29 — выше <span class="tex">\ln 8=2{,}08</span> (случайные в <span class="tex">d=16</span> косинусы при <span class="tex">\tau=0{,}1</span> дают разброс логитов, и softmax не равномерен); на почти совпадающих парах — 0,0031.</p>
+<h2 id="ловушки">Ловушки</h2>
+<div class="callout md warn"><p class="callout-title">Нормируйте и следите за температурой</p>
+<p>Без <span class="tex">\ell_2</span>-нормализации потеря может падать за счёт роста норм, а не улучшения направлений. Температуру тоже выбирают: при <span class="tex">\tau\to0</span> обучение нестабильно, при <span class="tex">\tau\to\infty</span> сигнал вырождается.</p>
+</div>
+<ul>
+<li>Эмбеддинги из BatchNorm-энкодера: статистика батча может «подсказывать» положительные пары (утечка); MoCo решает это перемешиванием BN между устройствами.</li>
+<li>Слабые аугментации: сеть решает задачу по цвету или по краям, а не по содержанию.</li>
+<li>Ложные отрицательные в рекомендациях: популярные товары чаще попадают в батч как отрицательные и недооцениваются без logQ-коррекции.</li>
+<li>Оценивайте не потерю, а linear probe/kNN или метрики поиска.</li>
+</ul>
+<p>На собеседовании:</p>
+<ul>
+<li>Выведите InfoNCE как классификацию <span class="tex">(K+1)</span> классов и объясните, что даёт температура.</li>
+<li>Чем triplet loss отличается от InfoNCE и в чём проблема hard negatives.</li>
+<li>Как BYOL избегает коллапса (и что в этом ответе доказано, а что нет).</li>
+<li>Почему CLIP умеет zero-shot и чем SigLIP отличается по потере.</li>
+</ul>
+<h2 id="проверь-себя">Проверь себя</h2>
+<details class="callout md details"><summary>Что такое InfoNCE в терминах классификации?</summary>
+<p>Кросс-энтропия по <span class="tex">K+1</span> кандидатам с логитами <span class="tex">s(q,k_j)/\tau</span>, где верный класс — настоящий партнёр якоря. Она оценивает отношение плотностей <span class="tex">p(k\mid q)/p(k)</span> и даёт нижнюю оценку взаимной информации <span class="tex">\log(K+1)-\mathcal L</span>.</p>
+</details>
+<details class="callout md details"><summary>Как температура влияет на градиент?</summary>
+<p>Градиент по логиту отрицательного пропорционален его softmax-вероятности, делённой на <span class="tex">\tau</span>. Малое <span class="tex">\tau</span> концентрирует вес на сложных отрицательных, большое — распределяет его равномерно.</p>
+</details>
+<details class="callout md details"><summary>Что такое ложный отрицательный и как с ним бороться?</summary>
+<p>Объект в батче, который семантически совпадает с якорем, но считается отрицательным. Лечат дедупликацией, метками классов (supervised contrastive), поправкой на вероятность выборки, исключением известных положительных.</p>
+</details>
+<details class="callout md details"><summary>Почему MoCo нужен momentum-энкодер?</summary>
+<p>Очередь содержит ключи, посчитанные на разных шагах. Если ключевой энкодер быстро меняется, ключи несогласованны. EMA-обновление делает его плавным, а градиенты через него не идут.</p>
+</details>
+<details class="callout md details"><summary>Что измеряют alignment и uniformity?</summary>
+<p>Alignment — средняя близость положительных пар; uniformity — равномерность распределения эмбеддингов на сфере. Коллапс — отличное выравнивание при провальной однородности.</p>
+</details>
+<h2 id="что-почитать">Что почитать</h2>
+<ul>
+<li>van den Oord, Li, Vinyals, <em>Representation Learning with Contrastive Predictive Coding</em>, 2018: <a href="https://arxiv.org/abs/1807.03748" rel="noopener noreferrer nofollow">arXiv:1807.03748</a>.</li>
+<li>Chen, Kornblith, Norouzi, Hinton, <em>A Simple Framework for Contrastive Learning of Visual Representations</em> (SimCLR), ICML 2020: <a href="https://arxiv.org/abs/2002.05709" rel="noopener noreferrer nofollow">arXiv:2002.05709</a>.</li>
+<li>He, Fan, Wu, Xie, Girshick, <em>Momentum Contrast for Unsupervised Visual Representation Learning</em> (MoCo), CVPR 2020: <a href="https://arxiv.org/abs/1911.05722" rel="noopener noreferrer nofollow">arXiv:1911.05722</a>.</li>
+<li>Grill и соавторы, <em>Bootstrap Your Own Latent</em>, NeurIPS 2020: <a href="https://arxiv.org/abs/2006.07733" rel="noopener noreferrer nofollow">arXiv:2006.07733</a>; Caron и соавторы, <em>Emerging Properties in Self-Supervised Vision Transformers</em> (DINO), ICCV 2021: <a href="https://arxiv.org/abs/2104.14294" rel="noopener noreferrer nofollow">arXiv:2104.14294</a>.</li>
+<li>Radford и соавторы, <em>Learning Transferable Visual Models From Natural Language Supervision</em> (CLIP), ICML 2021: <a href="https://arxiv.org/abs/2103.00020" rel="noopener noreferrer nofollow">arXiv:2103.00020</a>; Zhai и соавторы, <em>Sigmoid Loss for Language Image Pre-Training</em>, ICCV 2023: <a href="https://arxiv.org/abs/2303.15343" rel="noopener noreferrer nofollow">arXiv:2303.15343</a>.</li>
+<li>Wang, Isola, <em>Understanding Contrastive Representation Learning through Alignment and Uniformity on the Hypersphere</em>, ICML 2020: <a href="https://arxiv.org/abs/2005.10242" rel="noopener noreferrer nofollow">arXiv:2005.10242</a>.</li>
+<li>Schroff, Kalenichenko, Philbin, <em>FaceNet</em>, CVPR 2015: <a href="https://arxiv.org/abs/1503.03832" rel="noopener noreferrer nofollow">arXiv:1503.03832</a>; Karpukhin и соавторы, <em>Dense Passage Retrieval</em>, EMNLP 2020: <a href="https://arxiv.org/abs/2004.04906" rel="noopener noreferrer nofollow">arXiv:2004.04906</a>.</li>
+</ul>
+</div>
+      
+
+      
+
+      
+      <nav class="pager" aria-label="Соседние статьи">
+        <a href="/edufamcs-demo/handbook/dl/pytorch-na-praktike/"><span><svg class="ico sm" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-arrow-left"/></svg>Назад</span>PyTorch на практике: обучение и дообучение</a>
+        <a href="/edufamcs-demo/handbook/dl/generativnye-modeli/"><span>Дальше<svg class="ico sm" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-arrow"/></svg></span>Генеративные модели: VAE, GAN, диффузия</a>
+      </nav>
+      
+    </article>
+
+    <aside class="hb-toc" aria-label="На этой странице">
+      <a class="l2" href="#что-такое-хорошее-представление">Что такое хорошее представление</a><a class="l2" href="#метрическое-обучение">Метрическое обучение</a><a class="l2" href="#infonce-как--классовая-классификация">InfoNCE как (K+1)-классовая классификация</a><a class="l2" href="#семейство-методов">Семейство методов</a><a class="l2" href="#выравнивание-и-однородность">Выравнивание и однородность</a><a class="l2" href="#мост-к-поиску-и-рекомендациям">Мост к поиску и рекомендациям</a><a class="l2" href="#разбор-на-числах">Разбор на числах</a><a class="l2" href="#код">Код</a><a class="l2" href="#ловушки">Ловушки</a><a class="l2" href="#проверь-себя">Проверь себя</a><a class="l2" href="#что-почитать">Что почитать</a>
+    </aside>
+  </div>
+</div>
+
+
+</main>
+
+<footer class="ftr" data-theme="dark">
+  <svg class="sym fern" viewBox="0 0 40.5 65.02" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#fern"/></svg>
+  <div class="container">
+    <div class="ftr-row">
+      <a href="/edufamcs-demo/" aria-label="EDU FAMCS — главная"><img src="/edufamcs-demo/static/brand/logo/logo-edu-dark.svg" alt="EDU FAMCS" width="196" height="40"></a>
+      <ul class="ftr-links">
+        <li><a href="/edufamcs-demo/#courses">Курсы</a></li>
+        <li><a href="/edufamcs-demo/ml/">Машинное обучение</a></li>
+        <li><a href="/edufamcs-demo/handbook/">Хендбук</a></li>
+        <li><a href="/edufamcs-demo/news/">Новости</a></li>
+        <li><a href="/edufamcs-demo/people/">Авторы</a></li>
+        <li><a href="/edufamcs-demo/about/">О&nbsp;нас</a></li>
+        <li><a href="/edufamcs-demo/propose/">Предложить или исправить</a></li>
+        <li><a href="/edufamcs-demo/privacy/">Конфиденциальность</a></li>
+      </ul>
+    </div>
+    <div class="ftr-big" aria-hidden="true">EDU<span class="d">·</span>FAMCS</div>
+    <p class="ftr-copy">© 2026 EDU FAMCS · Минск</p>
+  </div>
+</footer>
+
+<div class="toasts-region" aria-live="polite" id="toasts">
+
+</div>
+
+</body>
+</html>

@@ -1,0 +1,257 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Агент в ML-проекте: ноутбуки, эксперименты, ревью · EDU FAMCS</title>
+<meta name="description" content="Агент в ML-проекте: ноутбуки, эксперименты, ревью — ИИ-ассистенты для кода. Хендбук ML-курса ФПМИ.">
+<meta name="theme-color" content="#060A16">
+<meta name="robots" content="noindex, nofollow">
+<meta name="htmx-config" content='{"allowEval":false,"includeIndicatorStyles":false,"historyCacheSize":0,"selfRequestsOnly":true}'>
+<meta name="katex-js" content="/edufamcs-demo/static/vendor/katex/katex.min.js">
+<meta name="katex-css" content="/edufamcs-demo/static/vendor/katex/katex.min.css">
+<link rel="icon" href="/edufamcs-demo/static/brand/logo/favicon-16.svg" type="image/svg+xml" sizes="16x16">
+<link rel="icon" href="/edufamcs-demo/static/brand/logo/favicon.svg" type="image/svg+xml" sizes="any">
+<link rel="preload" href="/edufamcs-demo/static/brand/fonts/manrope-cyrillic-400.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/edufamcs-demo/static/brand/fonts/unbounded-cyrillic-800.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="/edufamcs-demo/static/brand/fonts.css">
+<link rel="stylesheet" href="/edufamcs-demo/static/brand/tokens.css">
+<link rel="stylesheet" href="/edufamcs-demo/static/brand/components.css">
+<link rel="stylesheet" href="/edufamcs-demo/static/css/site.css">
+<link rel="stylesheet" href="/edufamcs-demo/static/css/hub.css">
+<link rel="stylesheet" href="/edufamcs-demo/static/css/about.css">
+<link rel="stylesheet" href="/edufamcs-demo/static/handbook/handbook.css">
+<script src="/edufamcs-demo/static/js/theme.js"></script>
+<script src="/edufamcs-demo/static/vendor/htmx/htmx.min.js" defer></script>
+<script src="/edufamcs-demo/static/vendor/alpine/alpine-csp.min.js" defer></script>
+<script src="/edufamcs-demo/static/js/site.js" defer></script>
+<script src="/edufamcs-demo/static/handbook/handbook.js" defer></script>
+</head>
+<body class="" hx-headers='{"X-CSRFToken": "JHE7gjtyfNO5ZC1cZDQoH4QbjopMzsZ1lUt4wl2pgA2EaVgEY64lpXI9LxwKjcYI"}'>
+<a class="skip" href="#main">К содержанию</a>
+<div class="demo-bar" role="note">Демо-версия для отзывов: вход, запись на курсы и формы здесь не работают.</div>
+
+<header class="hdr">
+  <div class="container">
+    <a class="brand" href="/edufamcs-demo/" aria-label="EDU FAMCS — главная">
+      <span class="full"><img class="only-light" src="/edufamcs-demo/static/brand/logo/logo-edu-light.svg" alt="EDU FAMCS" width="196" height="40"><img class="only-dark" src="/edufamcs-demo/static/brand/logo/logo-edu-dark.svg" alt="EDU FAMCS" width="196" height="40"></span>
+      <span class="short"><img class="only-light" src="/edufamcs-demo/static/brand/logo/logo-edu-light.svg" alt="EDU FAMCS" height="30"><img class="only-dark" src="/edufamcs-demo/static/brand/logo/logo-edu-dark.svg" alt="EDU FAMCS" height="30"></span>
+    </a>
+    <nav class="nav" id="main-nav" aria-label="Основная навигация">
+      <a href="/edufamcs-demo/#courses">Курсы</a>
+      <a href="/edufamcs-demo/ml/" >Машинное обучение</a>
+      
+      <a href="/edufamcs-demo/handbook/" aria-current="page">Хендбук</a>
+      <a href="/edufamcs-demo/news/" >Новости</a>
+      <a href="/edufamcs-demo/people/" >Авторы</a>
+      <a href="/edufamcs-demo/about/" >О&nbsp;нас</a>
+    </nav>
+    <div class="hdr-actions">
+      
+      <a class="btn btn-outline btn-login" href="/edufamcs-demo/accounts/login/?next=/handbook/ai-tools/agent-v-ml-proekte/">Войти</a>
+      
+      <button class="icon-btn menu-btn" type="button" aria-label="Меню" aria-expanded="false" aria-controls="main-nav"><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-menu"/></svg></button>
+    </div>
+  </div>
+</header>
+
+<main id="main">
+
+
+
+<div class="container hb-page s-agents">
+  <div class="hb-readbar" aria-hidden="true"><i></i></div>
+  <div class="hb">
+    <aside class="hb-nav" aria-label="Статьи раздела">
+      
+<form class="hb-search" action="/edufamcs-demo/handbook/search/" method="get" role="search">
+  <svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-search"/></svg>
+  <input class="input" type="search" name="q" value="" placeholder="Поиск по хендбуку" aria-label="Поиск по хендбуку" autocomplete="off" maxlength="120"
+    hx-get="/edufamcs-demo/handbook/search/" hx-trigger="input changed delay:250ms, search" hx-target="#hb-nav-results" hx-sync="this:replace">
+</form>
+
+      <div id="hb-nav-results" class="hb-nav-results" aria-live="polite"></div>
+      <a class="grp" href="/edufamcs-demo/handbook/ai-tools/">Практика</a>
+      
+      <a class="cur" href="/edufamcs-demo/handbook/ai-tools/agent-v-ml-proekte/" aria-current="page">Агент в ML-проекте: ноутбуки, эксперименты, ревью</a>
+      
+      <a class="" href="/edufamcs-demo/handbook/ai-tools/bezopasnost-agentov/">Безопасность: секреты, права, prompt injection</a>
+      
+      <a class="" href="/edufamcs-demo/handbook/ai-tools/vajb-koding-i-zashchita/">Вайб-кодинг и защита проекта: как понимать код, который писали не вы</a>
+      
+    </aside>
+
+    <article class="hb-main">
+      <nav class="crumbs" aria-label="Навигация"><a href="/edufamcs-demo/handbook/">Хендбук</a><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-chev"/></svg><a href="/edufamcs-demo/handbook/ai-tools/">ИИ-ассистенты для кода</a></nav>
+      <h1 class="h1">Агент в ML-проекте: ноутбуки, эксперименты, ревью</h1>
+      <div class="hb-meta">
+        
+        
+        <span><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-clock"/></svg>10&nbsp;мин</span>
+        <span class="hb-authors"><span class="avatar sm" title="Артем Лебедевич">АЛ</span>Артем Лебедевич</span>
+        <span><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-edit"/></svg>10 ноября 2026</span>
+        
+        
+      </div>
+
+      
+      <details class="hb-mtoc">
+        <summary><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-list"/></svg>Содержание<svg class="ico sm" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-chev-down"/></svg></summary>
+        <a class="l2" href="#где-агент-помогает">Где агент помогает</a><a class="l2" href="#где-агент-вредит">Где агент вредит</a><a class="l2" href="#ноутбуки">Ноутбуки</a><a class="l2" href="#цикл-эксперимента-с-журналом">Цикл эксперимента с журналом</a><a class="l2" href="#состязательное-ревью-свежим-агентом">Состязательное ревью свежим агентом</a><a class="l2" href="#проверяемые-цели">Проверяемые цели</a><a class="l2" href="#долгие-прогоны-под-наблюдением">Долгие прогоны под наблюдением</a><a class="l2" href="#пример-рекомендатель-на-movielens-подобных-данных">Пример: рекомендатель на MovieLens-подобных данных</a><a class="l2" href="#ловушки">Ловушки</a><a class="l2" href="#проверь-себя">Проверь себя</a><a class="l2" href="#что-почитать">Что почитать</a>
+      </details>
+      
+
+      <div class="prose"><p>В обычной разработке ошибку ловят тесты. В ML работающий код легко даёт неверный результат: утечка, «подправленная» метрика, другой сплит, и всё это выглядит как успех. Поэтому агента в ML-проекте нужно не просто «попросить сделать», а встроить в процесс, где у него есть проверяемая цель, а решения о данных, разбиении и метрике остаются за вами. Инструменты и их возможности меняются; общие приёмы ниже от них не зависят, а точные команды ищите в документации.</p>
+<h2 id="где-агент-помогает">Где агент помогает</h2>
+<ul>
+<li><strong>Каркас EDA</strong>: загрузка, типы, пропуски, распределения, первые графики. Выводы всё равно делаете вы (<a href="/edufamcs-demo/handbook/classic/razvedochnyj-analiz-dannyh/" rel="noopener noreferrer nofollow">разведочный анализ</a>).</li>
+<li><strong>Рефакторинг ноутбука в модули</strong>: функции препроцессинга, конфиг, скрипт запуска. Агент хорош там, где есть «до» и «после» и их можно сравнить.</li>
+<li><strong>Тесты на препроцессинг</strong>: размер выхода, отсутствие NaN, одинаковый результат при повторе, невозможность утечки (если заменить значения признаков в valid случайными, параметры препроцессинга и признаки train не меняются; перестановка строк valid не годится — агрегаты от порядка не зависят).</li>
+<li><strong>Скрипты перебора гиперпараметров</strong>, логирование, сохранение артефактов.</li>
+<li><strong>Чтение статьи в чек-лист</strong>: «что именно сделано, на каких данных, с каким разбиением, что сравнивается». Для проверки ссылок и чисел нужен второй проход, агент может перепутать таблицы.</li>
+<li><strong>Ревью дизайна эксперимента до долгого GPU-запуска</strong>: самое выгодное применение, ошибка обходится часами.</li>
+</ul>
+<h2 id="где-агент-вредит">Где агент вредит</h2>
+<ul>
+<li><strong>Молча меняет разбиение</strong>, чтобы тест прошёл или метрика выросла.</li>
+<li><strong>«Чинит» метрику</strong>: меняет усреднение, фильтрует «выбросы», считает на train.</li>
+<li><strong>Придумывает результаты</strong>: пишет в отчёт число, которого нигде не получал, или цитирует ячейку, не запускавшуюся.</li>
+<li><strong>Подгоняет под тест</strong>: ослабляет проверку вместо исправления кода.</li>
+<li><strong>Правит ноутбук во время прогона</strong>, и результат относится уже не к тому коду, что стартовал.</li>
+</ul>
+<p>Общий принцип: всё, что определяет смысл числа (данные, сплит, метрика, seed), агент меняет только по вашему явному согласию и всегда сообщает об этом отдельной строкой.</p>
+<h2 id="ноутбуки">Ноутбуки</h2>
+<p>Подробнее о ноутбуках — в <a href="/edufamcs-demo/handbook/python/jupyter-noutbuki/" rel="noopener noreferrer nofollow">статье про Jupyter</a>. Для агента важны три правила.</p>
+<ol>
+<li><strong>Запуск без интерфейса.</strong> Ноутбук исполняется командой, а не кликами, а вывод идёт в отдельный файл: <code>uv run --with jupyter jupyter nbconvert --to notebook --execute nb.ipynb --output out.ipynb</code>. Исходный файл не меняется, результат сравнивается diff-ом.</li>
+<li><strong>Сначала дешёвый профиль.</strong> Переменная окружения <code>SMOKE=1</code> уменьшает выборку и число эпох; сначала проходит она, и только потом полный запуск. Цель smoke-прогона: убедиться, что ноутбук доходит до метрики и пишет артефакты, а не получить качество.</li>
+<li><strong>Во время прогона ноутбук не правят</strong> ни вы, ни агент. Нужна правка — остановить, поправить, запустить заново. Положите это правило в <code>CLAUDE.md</code>/<code>AGENTS.md</code> проекта.</li>
+</ol>
+<h2 id="цикл-эксперимента-с-журналом">Цикл эксперимента с журналом</h2>
+<p>Агент не помнит прошлых сессий, поэтому память — файл <code>JOURNAL.md</code> в репозитории. Одна запись на запуск:</p>
+<div class="code"><div class="code-head"><span class="lang">markdown</span></div><pre><code>## 2026-11-10 run-03
+<span class="tok-k">-</span> Гипотеза: добавление признака X улучшает NDCG@10 на valid.
+<span class="tok-k">-</span> Что изменено относительно run-02: только признак X (diff: &lt;commit&gt;).
+<span class="tok-k">-</span> Данные/сплит/seed: без изменений (hash сплита &lt;…&gt;, seed 0).
+<span class="tok-k">-</span> Профиль: full; команда: <span class="tok-s">`SMOKE=0 uv run python train.py --cfg cfg/x.yaml`</span>.
+<span class="tok-k">-</span> Результат: &lt;метрика: среднее и разброс по 3 seed + бутстрэп-интервал по пользователям valid&gt;; baseline: &lt;…&gt;.
+<span class="tok-k">-</span> Вывод: &lt;принято / отклонено / неясно, почему&gt;.
+<span class="tok-k">-</span> Следующий шаг: &lt;…&gt;.
+</code></pre></div>
+<p>Журнал связывает эксперименты, снимает вопрос «что мы уже пробовали» и мешает агенту «забыть» неудачу. Как вести исследование целиком — в статье <a href="/edufamcs-demo/handbook/python/kak-vesti-issledovanie/" rel="noopener noreferrer nofollow">как вести исследование</a>, как фиксировать окружение и трекать запуски — в <a href="/edufamcs-demo/handbook/python/vosproizvodimost-i-trekking/" rel="noopener noreferrer nofollow">воспроизводимости и трекинге</a>.</p>
+<h2 id="состязательное-ревью-свежим-агентом">Состязательное ревью свежим агентом</h2>
+<p>Автор кода (и агент-автор) предвзят: он знает, «как должно быть». Поэтому перед дорогим прогоном ревью поручают другому агенту с чистым контекстом, роль которого — искать, что сломает результат. Дайте ему только ноутбук, гипотезу и чек-лист (утечки, сплит, одинаковые условия у baseline, шум метрики), запретите писать, попросите список находок с указанием ячейки. Готовый шаблон такого рецензента есть в статье про <a href="/edufamcs-demo/handbook/ai-tools/subagenty-huki-komandy/" rel="noopener noreferrer nofollow">субагентов</a>; оформить чек-лист можно как <a href="/edufamcs-demo/handbook/ai-tools/skills/" rel="noopener noreferrer nofollow">скилл</a>. Находки читаете вы: часть окажется ложной тревогой, и решать это тоже вам.</p>
+<h2 id="проверяемые-цели">Проверяемые цели</h2>
+<p>Агент работает лучше, когда у задачи есть автоматический критерий успеха:</p>
+<ul>
+<li><strong>Тест</strong>: «если заменить признаки valid случайным шумом, параметры препроцессинга и признаки train не меняются; тест проходит».</li>
+<li><strong>Порог метрики</strong>: «NDCG@10 на valid не ниже baseline минус шум; считается скриптом <code>eval.py</code>, который вы не даёте править».</li>
+<li><strong>Референсное число</strong>: воспроизведение статьи или своего прежнего запуска, где известно правильное значение с допуском.</li>
+</ul>
+<p>Скрипт оценки и разбиение лежат отдельно и защищены: агент их запускает, но не редактирует. Если он «улучшил» метрику, меняя <code>eval.py</code>, это красный флаг, а не успех. Постановка таких задач — в статье <a href="/edufamcs-demo/handbook/ai-tools/postanovka-zadach-agentu/" rel="noopener noreferrer nofollow">как ставить задачи агенту</a>.</p>
+<h2 id="долгие-прогоны-под-наблюдением">Долгие прогоны под наблюдением</h2>
+<p>Прогон на часы запускают в фоне с логом в файл и с заранее оговорённым признаком конца: агент не должен «ждать вслепую». Минимум: лог пишется на диск, в нём есть строка прогресса и метрика по эпохам, ошибка завершает процесс с ненулевым кодом, а конец прогона виден по файлу: <code>cmd &gt; run.log 2&gt;&amp;1; echo "exit=$?" &gt;&gt; run.log</code> (хуки <code>Stop</code>/<code>Notification</code> в Claude Code срабатывают, когда агент закончил ответ или ждёт вас, а не когда завершился фоновый процесс). Агента просят не «проверить, что всё хорошо», а прочитать конкретное: последние 30 строк лога, наличие артефакта, финальную метрику.</p>
+<h2 id="пример-рекомендатель-на-movielens-подобных-данных">Пример: рекомендатель на MovieLens-подобных данных</h2>
+<p>Сценарий: небольшая задача неявной обратной связи (<a href="/edufamcs-demo/handbook/recsys/zadacha-i-dannye/" rel="noopener noreferrer nofollow">постановка</a>, <a href="/edufamcs-demo/handbook/recsys/oflajn-metriki/" rel="noopener noreferrer nofollow">офлайн-метрики</a>). Цель — сравнить baseline «популярное» с матричной факторизацией. Ниже промпты по шагам; числа в журнале выше — шаблон, а не реальный результат.</p>
+<div class="code"><div class="code-head"><span class="lang">text</span></div><pre><code>1. Данные. Прочитай data/ratings.csv, опиши схему, пропуски, число пользователей и
+   объектов, диапазон времени. Ничего не меняй. Предложи сплит для задачи рекомендаций
+   (глобальный временной срез) и объясни, почему не случайный.
+</code></pre></div>
+<div class="code"><div class="code-head"><span class="lang">text</span></div><pre><code>2. Сплит и baseline. Реализуй сплит по времени в src/split.py (последние 10% по ts —
+   valid) и сохрани хеш индексов. Реализуй baseline «популярное» и скрипт eval.py:
+   Recall@20 и NDCG@10 по пользователям из valid. Тесты: нет пересечения по времени,
+   в valid только пользователи, видевшиеся в train. eval.py и split.py после этого
+   не менять без моего подтверждения.
+</code></pre></div>
+<div class="code"><div class="code-head"><span class="lang">text</span></div><pre><code>3. Модель. Добавь ALS (implicit) в src/als.py с seed из конфига. Сначала SMOKE=1:
+   1% пользователей, 2 итерации, убедись, что доходит до метрики. Только потом полный
+   прогон на 3 seed. Запиши результат в JOURNAL.md по шаблону.
+</code></pre></div>
+<div class="code"><div class="code-head"><span class="lang">text</span></div><pre><code>4. Ревью. Ты рецензент без доверия к автору. Прочитай src/, eval.py и JOURNAL.md.
+   Найди утечки (user/item, время), несравнимые условия baseline и ALS, шум метрики.
+   Ничего не правь; для каждой находки — файл, строка, как проверить.
+</code></pre></div>
+<p>Шаги 1–2 строят проверяемую основу, шаг 3 — управляемый запуск, шаг 4 — независимый взгляд. Результат принимаете вы: сверяете число из журнала с тем, что печатает <code>eval.py</code>, а не с пересказом агента.</p>
+<h2 id="ловушки">Ловушки</h2>
+<ul>
+<li>Просить «улучши метрику» без проверяемого критерия и без запрета на правку сплита и оценки.</li>
+<li>Принимать отчёт агента без запуска: цифры в тексте должны совпадать с логом.</li>
+<li>Полный прогон без smoke: сутки GPU на опечатку.</li>
+<li>Сравнивать запуски с разными сплитами, seed или данными, не заметив изменения.</li>
+<li>Один и тот же агент пишет код и ревьюит его.</li>
+<li>Загружать в чужой облачный сервис данные, которые нельзя выносить: см. <a href="/edufamcs-demo/handbook/ai-tools/bezopasnost-agentov/" rel="noopener noreferrer nofollow">безопасность</a>.</li>
+</ul>
+<h2 id="проверь-себя">Проверь себя</h2>
+<details class="callout md details"><summary>Назовите три способа, которыми агент может испортить ML-результат, не вызвав ни одной ошибки.</summary>
+<p>Сменить разбиение, изменить расчёт метрики, обучаться или подбирать гиперпараметры на valid/test, написать в отчёт число, которого не получал.</p>
+</details>
+<details class="callout md details"><summary>Зачем сначала запускать дешёвый профиль и что он должен показать?</summary>
+<p>Он дёшево проверяет, что ноутбук доходит до метрики, пишет артефакты и не падает; качество на нём не оценивают.</p>
+</details>
+<details class="callout md details"><summary>Почему ноутбук нельзя править во время прогона?</summary>
+<p>Результат будет относиться не к тому коду, что стартовал; он не воспроизводится, и непонятно, что именно измерено. Правка — только после остановки и с новым запуском.</p>
+</details>
+<details class="callout md details"><summary>Что такое «проверяемая цель» и почему `eval.py` защищают от правок?</summary>
+<p>Критерий, который проверяется автоматически: тест, порог метрики, референсное число. Если агент может менять сам способ оценки, он может «достичь» цели, не улучшив модель.</p>
+</details>
+<details class="callout md details"><summary>Чем ревью свежим агентом лучше самопроверки автора?</summary>
+<p>У него нет общего контекста и предвзятости автора, поэтому он ищет ошибки в самом артефакте, а не подтверждает уже принятое решение; но его находки нужно проверять самому.</p>
+</details>
+<h2 id="что-почитать">Что почитать</h2>
+<ul>
+<li><a href="/edufamcs-demo/handbook/python/kak-vesti-issledovanie/" rel="noopener noreferrer nofollow">Как вести исследование</a>, <a href="/edufamcs-demo/handbook/python/jupyter-noutbuki/" rel="noopener noreferrer nofollow">Jupyter-ноутбуки</a>, <a href="/edufamcs-demo/handbook/python/vosproizvodimost-i-trekking/" rel="noopener noreferrer nofollow">Воспроизводимость и трекинг</a>.</li>
+<li>Claude Code: <a href="https://code.claude.com/docs/en/headless" rel="noopener noreferrer nofollow">Run Claude Code programmatically</a> — <code>claude -p</code>, формат вывода, права для автоматических запусков.</li>
+<li>Claude Code: <a href="https://code.claude.com/docs/en/hooks" rel="noopener noreferrer nofollow">Hooks</a> — уведомления и проверки на события.</li>
+<li>Codex: <a href="https://learn.chatgpt.com/docs/non-interactive-mode" rel="noopener noreferrer nofollow">Non-interactive mode</a> — <code>codex exec</code>.</li>
+<li>Codex: <a href="https://learn.chatgpt.com/docs/agent-configuration/agents-md" rel="noopener noreferrer nofollow">AGENTS.md</a> — постоянные правила проекта.</li>
+<li>Внутри курса: <a href="/edufamcs-demo/handbook/ai-tools/postanovka-zadach-agentu/" rel="noopener noreferrer nofollow">Постановка задач агенту</a>, <a href="/edufamcs-demo/handbook/ai-tools/subagenty-huki-komandy/" rel="noopener noreferrer nofollow">Субагенты, хуки и команды</a>.</li>
+</ul>
+</div>
+      
+
+      
+
+      
+      <nav class="pager" aria-label="Соседние статьи">
+        <a href="/edufamcs-demo/handbook/ai-tools/subagenty-huki-komandy/"><span><svg class="ico sm" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-arrow-left"/></svg>Назад</span>Субагенты, хуки и слэш-команды</a>
+        <a href="/edufamcs-demo/handbook/ai-tools/bezopasnost-agentov/"><span>Дальше<svg class="ico sm" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-arrow"/></svg></span>Безопасность: секреты, права, prompt injection</a>
+      </nav>
+      
+    </article>
+
+    <aside class="hb-toc" aria-label="На этой странице">
+      <a class="l2" href="#где-агент-помогает">Где агент помогает</a><a class="l2" href="#где-агент-вредит">Где агент вредит</a><a class="l2" href="#ноутбуки">Ноутбуки</a><a class="l2" href="#цикл-эксперимента-с-журналом">Цикл эксперимента с журналом</a><a class="l2" href="#состязательное-ревью-свежим-агентом">Состязательное ревью свежим агентом</a><a class="l2" href="#проверяемые-цели">Проверяемые цели</a><a class="l2" href="#долгие-прогоны-под-наблюдением">Долгие прогоны под наблюдением</a><a class="l2" href="#пример-рекомендатель-на-movielens-подобных-данных">Пример: рекомендатель на MovieLens-подобных данных</a><a class="l2" href="#ловушки">Ловушки</a><a class="l2" href="#проверь-себя">Проверь себя</a><a class="l2" href="#что-почитать">Что почитать</a>
+    </aside>
+  </div>
+</div>
+
+
+</main>
+
+<footer class="ftr" data-theme="dark">
+  <svg class="sym fern" viewBox="0 0 40.5 65.02" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#fern"/></svg>
+  <div class="container">
+    <div class="ftr-row">
+      <a href="/edufamcs-demo/" aria-label="EDU FAMCS — главная"><img src="/edufamcs-demo/static/brand/logo/logo-edu-dark.svg" alt="EDU FAMCS" width="196" height="40"></a>
+      <ul class="ftr-links">
+        <li><a href="/edufamcs-demo/#courses">Курсы</a></li>
+        <li><a href="/edufamcs-demo/ml/">Машинное обучение</a></li>
+        <li><a href="/edufamcs-demo/handbook/">Хендбук</a></li>
+        <li><a href="/edufamcs-demo/news/">Новости</a></li>
+        <li><a href="/edufamcs-demo/people/">Авторы</a></li>
+        <li><a href="/edufamcs-demo/about/">О&nbsp;нас</a></li>
+        <li><a href="/edufamcs-demo/propose/">Предложить или исправить</a></li>
+        <li><a href="/edufamcs-demo/privacy/">Конфиденциальность</a></li>
+      </ul>
+    </div>
+    <div class="ftr-big" aria-hidden="true">EDU<span class="d">·</span>FAMCS</div>
+    <p class="ftr-copy">© 2026 EDU FAMCS · Минск</p>
+  </div>
+</footer>
+
+<div class="toasts-region" aria-live="polite" id="toasts">
+
+</div>
+
+</body>
+</html>

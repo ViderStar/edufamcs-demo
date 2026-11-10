@@ -27,7 +27,7 @@
 <script src="/edufamcs-demo/static/js/site.js" defer></script>
 <script src="/edufamcs-demo/static/handbook/handbook.js" defer></script>
 </head>
-<body class="" hx-headers='{"X-CSRFToken": "MNhoDZRliV1FVVv5TbMFrhTB9XO71DjgyTiLxM92t8hTAurl6AFKIJ1WFkqm6o4f"}'>
+<body class="" hx-headers='{"X-CSRFToken": "CO4Qp2VkVoAbQmZckyYsrQ0CrkpiGuFMe1TNF4ubWbOK1FeEj1cp9JSATtwgqeEt"}'>
 <a class="skip" href="#main">К содержанию</a>
 <div class="demo-bar" role="note">Демо-версия для отзывов: вход, запись на курсы и формы здесь не работают.</div>
 
@@ -60,6 +60,7 @@
 
 
 <div class="container hb-page hb-tone">
+  <div class="hb-readbar" aria-hidden="true"><i></i></div>
   <div class="hb">
     <aside class="hb-nav" aria-label="Статьи раздела">
       
@@ -84,9 +85,9 @@
       <div class="hb-meta">
         
         
-        <span><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-clock"/></svg>10&nbsp;мин</span>
+        <span><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-clock"/></svg>12&nbsp;мин</span>
         <span class="hb-authors"><span class="avatar sm" title="Артем Лебедевич">АЛ</span>Артем Лебедевич</span>
-        <span><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-edit"/></svg>9 ноября 2026</span>
+        <span><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-edit"/></svg>10 ноября 2026</span>
         
         
       </div>
@@ -94,7 +95,7 @@
       
       <details class="hb-mtoc">
         <summary><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-list"/></svg>Содержание<svg class="ico sm" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-chev-down"/></svg></summary>
-        <a class="l2" href="#короткая-история">Короткая история</a><a class="l2" href="#виды-задач">Виды задач</a><a class="l2" href="#язык-постановки">Язык постановки</a><a class="l2" href="#обобщение-недо--и-переобучение">Обобщение: недо- и переобучение</a><a class="l2" href="#как-честно-оценить-качество">Как честно оценить качество</a><a class="l3" href="#утечки-данных">Утечки данных</a><a class="l2" href="#код-pipeline-и-кросс-валидация">Код: Pipeline и кросс-валидация</a><a class="l2" href="#пайплайн-проекта">Пайплайн проекта</a><a class="l2" href="#практика-и-типичные-ошибки">Практика и типичные ошибки</a><a class="l2" href="#что-почитать">Что почитать</a>
+        <a class="l2" href="#короткая-история">Короткая история</a><a class="l2" href="#виды-задач">Виды задач</a><a class="l2" href="#язык-постановки">Язык постановки</a><a class="l2" href="#обобщение-недо--и-переобучение">Обобщение: недо- и переобучение</a><a class="l2" href="#как-честно-оценить-качество">Как честно оценить качество</a><a class="l3" href="#утечки-данных">Утечки данных</a><a class="l2" href="#код-pipeline-и-кросс-валидация">Код: Pipeline и кросс-валидация</a><a class="l2" href="#пайплайн-проекта">Пайплайн проекта</a><a class="l2" href="#практика-и-типичные-ошибки">Практика и типичные ошибки</a><a class="l2" href="#проверь-себя">Проверь себя</a><a class="l2" href="#что-почитать">Что почитать</a>
       </details>
       
 
@@ -244,13 +245,36 @@ pipe<span class="tok-p">.</span>fit<span class="tok-p">(</span>X_dev<span class=
 <p>Инструменты: NumPy (массивы), pandas (таблицы), scikit-learn (модели и пайплайны), Jupyter (эксперименты), git (воспроизводимость — фиксируйте код, сиды и версии данных).</p>
 <h2 id="практика-и-типичные-ошибки">Практика и типичные ошибки</h2>
 <ul>
-<li><strong>Нет бейзлайна.</strong> Без константной и простой модели невозможно понять, много ли даёт сложная. Для классификации с 95% одного класса accuracy константы — 0,95.</li>
+<li><strong>Нет бейзлайна.</strong> Без константной и простой модели невозможно понять, много ли даёт сложная. Для классификации с 95% одного класса accuracy константы — 0,95. Для вероятностной модели планка — log-loss константного прогноза <span class="tex">\hat p=\pi</span>: он равен энтропии <span class="tex">H(\pi)=-\pi\ln\pi-(1-\pi)\ln(1-\pi)</span> (при <span class="tex">\pi=0{,}95</span> это <span class="tex">\approx 0{,}199</span> нат); модель, не опустившаяся ниже, ничего не выучила.</li>
 <li><strong>Тест как валидация.</strong> Многократно подбирать гиперпараметры по тесту значит переобучиться на него.</li>
 <li><strong>Разбиение не отражает продакшен.</strong> Если модель будет применяться к будущим пользователям, делить нужно по времени или по группам.</li>
 <li><strong>Игнорирование дисперсии.</strong> Разница <span class="tex">0{,}002</span> между моделями при std по фолдам <span class="tex">0{,}01</span> — шум. Фиксируйте сид и сравнивайте на одних и тех же фолдах.</li>
 <li><strong>Метрика не равна цели.</strong> Хорошая RMSE не гарантирует прибыли; метрику выбирают до экспериментов.</li>
 </ul>
+<p><strong>На собеседовании:</strong></p>
+<ul>
+<li>Объясните bias–variance и как по кривым обучения отличить недообучение от переобучения. Ждут: высокий train и val с малым зазором — смещение, большой зазор — разброс, и разное лечение.</li>
+<li>«Где может быть утечка в этой постановке?» Назовите препроцессинг до сплита, признаки из будущего, дубликаты и группы (один пользователь в train и test).</li>
+<li>«Почему не доверять одной цифре метрики?» Дисперсия по фолдам, один сид, доверительный интервал; сравнение на одних фолдах.</li>
+<li>«Чем test отличается от validation?» Тест используют один раз; после подбора по нему он становится валидацией.</li>
+</ul>
 <p><strong>No free lunch</strong> (Wolpert, 1996): усреднённо по всем возможным задачам ни один алгоритм не лучше другого. Следовательно, выбор модели — это выбор предположений о данных (гладкость, линейность, независимость), и проверять их нужно экспериментом на честной валидации.</p>
+<h2 id="проверь-себя">Проверь себя</h2>
+<details class="callout md details"><summary>Почему эмпирический риск обученной модели занижает истинный?</summary>
+<p>Параметры подбирались по тем же <span class="tex">n</span> точкам, на которых риск считается, поэтому ошибка на них оптимистична: часть подгонки приходится на шум. Честную оценку даёт отложенная выборка или кросс-валидация.</p>
+</details>
+<details class="callout md details"><summary>Train-ошибка 2%, validation 15%, кривые не сходятся. Что делать?</summary>
+<p>Это переобучение (большой зазор). Помогают больше данных, регуляризация, упрощение модели; усложнять модель не нужно.</p>
+</details>
+<details class="callout md details"><summary>Почему масштабирование надо делать внутри Pipeline, а не до кросс-валидации?</summary>
+<p>Среднее и std, посчитанные на всей выборке, содержат информацию о валидационных фолдах; это утечка. В <code>Pipeline</code> <code>StandardScaler</code> обучается заново на обучающей части каждого фолда.</p>
+</details>
+<details class="callout md details"><summary>Почему для временных данных нельзя использовать обычный KFold с перемешиванием?</summary>
+<p>Модель увидит в обучении будущее относительно валидации и получит завышенное качество. Нужен <code>TimeSeriesSplit</code>: обучение на прошлом, проверка на будущем.</p>
+</details>
+<details class="callout md details"><summary>Какую планку должна побить вероятностная модель в задаче с 95% одного класса?</summary>
+<p>Константный прогноз <span class="tex">\hat p=\pi</span>: его log-loss равен энтропии <span class="tex">H(\pi)\approx 0{,}199</span> нат. Accuracy константы <span class="tex">0{,}95</span> тоже бейзлайн, но для вероятностей сравнивают именно log-loss.</p>
+</details>
 <h2 id="что-почитать">Что почитать</h2>
 <ul>
 <li>T. Mitchell, <em>Machine Learning</em>, 1997 — источник определения: <a href="https://www.cs.cmu.edu/~tom/mlbook.html" rel="noopener noreferrer nofollow">cs.cmu.edu/~tom/mlbook.html</a>.</li>
@@ -265,6 +289,8 @@ pipe<span class="tok-p">.</span>fit<span class="tok-p">(</span>X_dev<span class=
       
 
       
+
+      
       <nav class="pager" aria-label="Соседние статьи">
         <i></i>
         <a href="/edufamcs-demo/handbook/classic/razvedochnyj-analiz-dannyh/"><span>Дальше<svg class="ico sm" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-arrow"/></svg></span>Разведочный анализ данных</a>
@@ -273,7 +299,7 @@ pipe<span class="tok-p">.</span>fit<span class="tok-p">(</span>X_dev<span class=
     </article>
 
     <aside class="hb-toc" aria-label="На этой странице">
-      <a class="l2" href="#короткая-история">Короткая история</a><a class="l2" href="#виды-задач">Виды задач</a><a class="l2" href="#язык-постановки">Язык постановки</a><a class="l2" href="#обобщение-недо--и-переобучение">Обобщение: недо- и переобучение</a><a class="l2" href="#как-честно-оценить-качество">Как честно оценить качество</a><a class="l3" href="#утечки-данных">Утечки данных</a><a class="l2" href="#код-pipeline-и-кросс-валидация">Код: Pipeline и кросс-валидация</a><a class="l2" href="#пайплайн-проекта">Пайплайн проекта</a><a class="l2" href="#практика-и-типичные-ошибки">Практика и типичные ошибки</a><a class="l2" href="#что-почитать">Что почитать</a>
+      <a class="l2" href="#короткая-история">Короткая история</a><a class="l2" href="#виды-задач">Виды задач</a><a class="l2" href="#язык-постановки">Язык постановки</a><a class="l2" href="#обобщение-недо--и-переобучение">Обобщение: недо- и переобучение</a><a class="l2" href="#как-честно-оценить-качество">Как честно оценить качество</a><a class="l3" href="#утечки-данных">Утечки данных</a><a class="l2" href="#код-pipeline-и-кросс-валидация">Код: Pipeline и кросс-валидация</a><a class="l2" href="#пайплайн-проекта">Пайплайн проекта</a><a class="l2" href="#практика-и-типичные-ошибки">Практика и типичные ошибки</a><a class="l2" href="#проверь-себя">Проверь себя</a><a class="l2" href="#что-почитать">Что почитать</a>
     </aside>
   </div>
 </div>

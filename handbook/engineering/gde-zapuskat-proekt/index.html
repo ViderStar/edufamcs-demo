@@ -1,0 +1,273 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Где запускать свой проект: ноутбук дома, VPS, облака · EDU FAMCS</title>
+<meta name="description" content="Где запускать свой проект: ноутбук дома, VPS, облака — Инженерия: от ноутбука до сервиса. Хендбук ML-курса ФПМИ.">
+<meta name="theme-color" content="#060A16">
+<meta name="robots" content="noindex, nofollow">
+<meta name="htmx-config" content='{"allowEval":false,"includeIndicatorStyles":false,"historyCacheSize":0,"selfRequestsOnly":true}'>
+<meta name="katex-js" content="/edufamcs-demo/static/vendor/katex/katex.min.js">
+<meta name="katex-css" content="/edufamcs-demo/static/vendor/katex/katex.min.css">
+<link rel="icon" href="/edufamcs-demo/static/brand/logo/favicon-16.svg" type="image/svg+xml" sizes="16x16">
+<link rel="icon" href="/edufamcs-demo/static/brand/logo/favicon.svg" type="image/svg+xml" sizes="any">
+<link rel="preload" href="/edufamcs-demo/static/brand/fonts/manrope-cyrillic-400.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/edufamcs-demo/static/brand/fonts/unbounded-cyrillic-800.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="/edufamcs-demo/static/brand/fonts.css">
+<link rel="stylesheet" href="/edufamcs-demo/static/brand/tokens.css">
+<link rel="stylesheet" href="/edufamcs-demo/static/brand/components.css">
+<link rel="stylesheet" href="/edufamcs-demo/static/css/site.css">
+<link rel="stylesheet" href="/edufamcs-demo/static/css/hub.css">
+<link rel="stylesheet" href="/edufamcs-demo/static/css/about.css">
+<link rel="stylesheet" href="/edufamcs-demo/static/handbook/handbook.css">
+<script src="/edufamcs-demo/static/js/theme.js"></script>
+<script src="/edufamcs-demo/static/vendor/htmx/htmx.min.js" defer></script>
+<script src="/edufamcs-demo/static/vendor/alpine/alpine-csp.min.js" defer></script>
+<script src="/edufamcs-demo/static/js/site.js" defer></script>
+<script src="/edufamcs-demo/static/handbook/handbook.js" defer></script>
+</head>
+<body class="" hx-headers='{"X-CSRFToken": "mDr9z57ZaYqx41QqxAXB0SC0YikbpSchYQg6P7GQbLE6fk5Sw3byILuYqrr99CbY"}'>
+<a class="skip" href="#main">К содержанию</a>
+<div class="demo-bar" role="note">Демо-версия для отзывов: вход, запись на курсы и формы здесь не работают.</div>
+
+<header class="hdr">
+  <div class="container">
+    <a class="brand" href="/edufamcs-demo/" aria-label="EDU FAMCS — главная">
+      <span class="full"><img class="only-light" src="/edufamcs-demo/static/brand/logo/logo-edu-light.svg" alt="EDU FAMCS" width="196" height="40"><img class="only-dark" src="/edufamcs-demo/static/brand/logo/logo-edu-dark.svg" alt="EDU FAMCS" width="196" height="40"></span>
+      <span class="short"><img class="only-light" src="/edufamcs-demo/static/brand/logo/logo-edu-light.svg" alt="EDU FAMCS" height="30"><img class="only-dark" src="/edufamcs-demo/static/brand/logo/logo-edu-dark.svg" alt="EDU FAMCS" height="30"></span>
+    </a>
+    <nav class="nav" id="main-nav" aria-label="Основная навигация">
+      <a href="/edufamcs-demo/#courses">Курсы</a>
+      <a href="/edufamcs-demo/ml/" >Машинное обучение</a>
+      
+      <a href="/edufamcs-demo/handbook/" aria-current="page">Хендбук</a>
+      <a href="/edufamcs-demo/news/" >Новости</a>
+      <a href="/edufamcs-demo/people/" >Авторы</a>
+      <a href="/edufamcs-demo/about/" >О&nbsp;нас</a>
+    </nav>
+    <div class="hdr-actions">
+      
+      <a class="btn btn-outline btn-login" href="/edufamcs-demo/accounts/login/?next=/handbook/engineering/gde-zapuskat-proekt/">Войти</a>
+      
+      <button class="icon-btn menu-btn" type="button" aria-label="Меню" aria-expanded="false" aria-controls="main-nav"><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-menu"/></svg></button>
+    </div>
+  </div>
+</header>
+
+<main id="main">
+
+
+
+<div class="container hb-page hb-tone">
+  <div class="hb-readbar" aria-hidden="true"><i></i></div>
+  <div class="hb">
+    <aside class="hb-nav" aria-label="Статьи раздела">
+      
+<form class="hb-search" action="/edufamcs-demo/handbook/search/" method="get" role="search">
+  <svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-search"/></svg>
+  <input class="input" type="search" name="q" value="" placeholder="Поиск по хендбуку" aria-label="Поиск по хендбуку" autocomplete="off" maxlength="120"
+    hx-get="/edufamcs-demo/handbook/search/" hx-trigger="input changed delay:250ms, search" hx-target="#hb-nav-results" hx-sync="this:replace">
+</form>
+
+      <div id="hb-nav-results" class="hb-nav-results" aria-live="polite"></div>
+      <a class="grp" href="/edufamcs-demo/handbook/engineering/">Запуск</a>
+      
+      <a class="" href="/edufamcs-demo/handbook/engineering/docker/">Docker: образы, контейнеры, Dockerfile для Python</a>
+      
+      <a class="" href="/edufamcs-demo/handbook/engineering/docker-compose/">Docker Compose: сервис, база и секреты</a>
+      
+      <a class="cur" href="/edufamcs-demo/handbook/engineering/gde-zapuskat-proekt/" aria-current="page">Где запускать свой проект: ноутбук дома, VPS, облака</a>
+      
+      <a class="" href="/edufamcs-demo/handbook/engineering/ci-github-actions/">CI: тесты и линтер на каждый коммит</a>
+      
+    </aside>
+
+    <article class="hb-main">
+      <nav class="crumbs" aria-label="Навигация"><a href="/edufamcs-demo/handbook/">Хендбук</a><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-chev"/></svg><a href="/edufamcs-demo/handbook/engineering/">Инженерия: от ноутбука до сервиса</a></nav>
+      <h1 class="h1">Где запускать свой проект: ноутбук дома, VPS, облака</h1>
+      <div class="hb-meta">
+        
+        
+        <span><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-clock"/></svg>11&nbsp;мин</span>
+        <span class="hb-authors"><span class="avatar sm" title="Артем Лебедевич">АЛ</span>Артем Лебедевич</span>
+        <span><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-edit"/></svg>10 ноября 2026</span>
+        
+        
+      </div>
+
+      
+      <details class="hb-mtoc">
+        <summary><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-list"/></svg>Содержание<svg class="ico sm" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-chev-down"/></svg></summary>
+        <a class="l2" href="#четыре-семейства-вариантов">Четыре семейства вариантов</a><a class="l3" href="#демо-хостинг">Демо-хостинг</a><a class="l3" href="#домашняя-машина-и-туннель">Домашняя машина и туннель</a><a class="l3" href="#vps">VPS</a><a class="l3" href="#free-tier-и-его-подводные-камни">Free tier и его подводные камни</a><a class="l2" href="#домен-dns-и-https">Домен, DNS и HTTPS</a><a class="l2" href="#минимальный-чек-лист-продакшена">Минимальный чек-лист продакшена</a><a class="l2" href="#деньги-и-gpu">Деньги и GPU</a><a class="l2" href="#ловушки">Ловушки</a><a class="l2" href="#проверь-себя">Проверь себя</a><a class="l2" href="#что-почитать">Что почитать</a>
+      </details>
+      
+
+      <div class="prose"><p>Сервис, который работает только у вас на ноутбуке, в портфолио не считается: ссылку нельзя открыть, а на собеседовании вопрос «где это крутится и что будет, если упадёт» остаётся без ответа. Эта статья — карта вариантов для студенческого проекта: от бесплатной демо-страницы до арендованного сервера. Выбор определяется тремя вещами: нужен ли вам постоянный адрес, нужна ли своя база данных и сколько вы готовы платить деньгами и временем на обслуживание.</p>
+<p>Рабочий пример сквозной для раздела: маленький сервис предсказаний (FastAPI с <code>/predict</code> и <code>/healthz</code> в Docker, рядом Postgres, всё описано в <code>compose.yaml</code>; см. <a href="/edufamcs-demo/handbook/engineering/docker-compose/" rel="noopener noreferrer nofollow">Docker Compose</a>). Всё, что ниже, — способы показать его миру.</p>
+<h2 id="четыре-семейства-вариантов">Четыре семейства вариантов</h2>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>Вариант</th>
+<th>Что получаете</th>
+<th>Цена вопроса</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Демо-хостинг</td>
+<td>Страница с моделью, URL «из коробки»</td>
+<td>Нет своего Postgres, нет контроля над средой</td>
+</tr>
+<tr>
+<td>Домашняя машина + туннель</td>
+<td>Полный <code>compose.yaml</code>, свой домен</td>
+<td>Электричество и интернет — на вас</td>
+</tr>
+<tr>
+<td>VPS</td>
+<td>Всё то же, но в дата-центре</td>
+<td>Ежемесячная плата и администрирование</td>
+</tr>
+<tr>
+<td>Облачные платформы и free tier</td>
+<td>Управляемые сервисы</td>
+<td>Ограничения, сон, привязка карты</td>
+</tr>
+</tbody>
+</table></div>
+<h3 id="демо-хостинг">Демо-хостинг</h3>
+<p>Подходит, когда цель — показать модель, а не сервис. <strong>Hugging Face Spaces</strong> хранят код в git-репозитории и пересобираются на каждый коммит; SDK — Gradio, Docker или статический HTML. По документации Hugging Face, статические Spaces бесплатны для всех, а Gradio- и Docker-Spaces требуют платного плана, и на бесплатном железе Space «засыпает» при простое. <strong>Streamlit Community Cloud</strong> разворачивает Streamlit-приложение прямо из репозитория GitHub. <strong>GitHub Pages</strong> отдаёт только статику: подойдёт для отчёта или для фронтенда, который ходит в API где-то ещё. Условия таких площадок меняются, поэтому перед выбором откройте актуальную страницу с тарифами и лимитами.</p>
+<p>Ограничение общее: это витрина. Фоновые задачи, свой Postgres и наблюдаемость вы здесь не получите.</p>
+<h3 id="домашняя-машина-и-туннель">Домашняя машина и туннель</h3>
+<p>Старый ноутбук или мини-ПК с Linux, который включён постоянно, — самый дешёвый способ получить настоящий сервер. Проблема в том, что у домашнего провайдера обычно нет белого IP, а проброс портов на роутере делает вашу домашнюю сеть мишенью. Решение — <strong>туннель</strong>. <code>cloudflared</code> на вашей машине сам открывает <em>исходящие</em> соединения до сети Cloudflare; запросы пользователей приходят через них. Входящие порты на роутере не нужны, наружу ничего не торчит, а HTTPS-сертификат для вашего домена обслуживает Cloudflare. Что нужно: домен, DNS которого управляется в Cloudflare, и аккаунт. Что ломается: отключили электричество или интернет — сервис недоступен; динамика домашней сети вас не касается, но надёжность дата-центра вы теряете.</p>
+<h3 id="vps">VPS</h3>
+<p><strong>VPS</strong> — виртуальная машина с публичным IP, в которой вы root. Для сервиса из нашего примера обычно хватает 1–2 ГБ памяти: FastAPI с небольшой sklearn- или GBDT-моделью и Postgres помещаются; PyTorch-модель на сотни мегабайт, эмбеддинги в памяти или несколько воркеров уже упираются в предел. После выдачи сервера сразу:</p>
+<div class="code"><div class="code-head"><span class="lang">bash</span></div><pre><code><span class="tok-c"># на сервере под root
+</span>adduser deploy <span class="tok-p">&amp;&amp;</span> usermod -aG sudo deploy
+<span class="tok-c"># на ноутбуке
+</span>ssh-keygen -t ed25519 -C <span class="tok-s">"vps"</span>
+ssh-copy-id deploy@SERVER_IP
+<span class="tok-c"># на сервере под deploy, проверив вход по ключу во втором окне
+</span><span class="tok-f">echo</span> <span class="tok-s">'PasswordAuthentication no'</span> <span class="tok-p">|</span> sudo tee /etc/ssh/sshd_config.d/00-no-password.conf
+sudo sshd -t <span class="tok-p">&amp;&amp;</span> sudo systemctl restart ssh
+sudo ufw default deny incoming
+sudo ufw allow OpenSSH <span class="tok-p">&amp;&amp;</span> sudo ufw allow <span class="tok-n">80</span>,443/tcp
+sudo ufw <span class="tok-f">enable</span>
+sudo apt install -y unattended-upgrades
+<span class="tok-c"># после установки Docker: sudo usermod -aG docker deploy (группа docker = права root)
+</span></code></pre></div>
+<p>Порядок важен: сначала создайте пользователя <code>deploy</code> (под root) и скопируйте ему ключ, убедитесь, что вход по ключу работает во втором окне терминала, и только потом отключайте пароли. Настройку кладём в <code>sshd_config.d/00-no-password.conf</code>, а не правим <code>sshd_config</code> через <code>sed</code>: на образах Ubuntu у облачных провайдеров файл <code>50-cloud-init.conf</code> может включать парольный вход обратно, а сервер читает файлы из <code>sshd_config.d</code> по алфавиту и применяет первое значение параметра, поэтому <code>00-</code> побеждает. Перед перезапуском <code>sshd -t</code> проверяет конфиг. В группу <code>docker</code> пользователя добавляют после установки Docker (до этого группы нет); она равна правам root, поэтому не выдавайте её посторонним.</p>
+<div class="callout md warn"><p class="callout-title">Docker обходит ufw</p>
+<p>Опубликованный порт (<code>ports: "5432:5432"</code>) Docker открывает через собственные правила iptables, мимо правил ufw. Привязывайте порты к <code>127.0.0.1</code> в <code>compose.yaml</code> и выставляйте наружу только reverse proxy.</p>
+</div>
+<h3 id="free-tier-и-его-подводные-камни">Free tier и его подводные камни</h3>
+<p>Облачные провайдеры дают бесплатные уровни. Типичные ловушки, которые нужно искать в условиях конкретного провайдера: инстанс <strong>засыпает</strong> после простоя и просыпается десятки секунд; <strong>бесплатная база данных истекает</strong> или удаляется через определённый срок; <strong>нужна банковская карта</strong>, и при выходе за лимит списываются деньги; квоты по трафику, часам и памяти; аккаунт могут заблокировать за неактивность. Конкретные цифры здесь не приводятся намеренно: они меняются, сверяйте их на странице цен провайдера в день выбора. Установите бюджетный алерт и убедитесь, что понимаете, что произойдёт при превышении лимита.</p>
+<h2 id="домен-dns-и-https">Домен, DNS и HTTPS</h2>
+<p><strong>DNS</strong> переводит имя в адрес. Запись <strong>A</strong> сопоставляет имя IPv4-адресу (<code>api.example.com → 203.0.113.10</code>), <strong>AAAA</strong> — IPv6, <strong>CNAME</strong> — делает имя псевдонимом другого имени (так вы направляете <code>www</code> на основной домен или на адрес платформы). При схеме с туннелем запись создаётся на вашем домене автоматически и указывает на туннель.</p>
+<p>Дальше на сервере стоит <strong>reverse proxy</strong> (Caddy, nginx, Traefik): он слушает 80/443, <strong>терминирует TLS</strong> (расшифровывает HTTPS, получая и продлевая сертификат, например у Let's Encrypt) и пересылает запрос приложению по обычному HTTP внутри машины. Самый короткий вариант — Caddy:</p>
+<div class="code"><div class="code-head"><span class="lang">text</span></div><pre><code>api.example.com {
+    reverse_proxy 127.0.0.1:8765
+}
+</code></pre></div>
+<p>Приложению при этом незачем знать про сертификаты, а наружу торчат только порты прокси.</p>
+<h2 id="минимальный-чек-лист-продакшена">Минимальный чек-лист продакшена</h2>
+<ul>
+<li><strong>Секреты</strong> — в переменных окружения или файле вне git, не в образе и не в репозитории.</li>
+<li><strong>Бэкапы и проверка восстановления.</strong> <code>pg_dump</code> по расписанию в другое место (не на тот же диск) и хотя бы раз реальный <code>restore</code> в чистую базу. Бэкап, который не восстанавливали, — гипотеза.</li>
+<li><strong>Healthcheck и внешний uptime-монитор.</strong> <code>/healthz</code> внутри Docker и проверка снаружи (UptimeRobot или аналог) с оповещением в Telegram или на почту.</li>
+<li><strong>Ротация логов</strong>: без лимита <code>docker logs</code> растут, пока не забьют диск (<a href="/edufamcs-demo/handbook/engineering/logi-i-metriki/" rel="noopener noreferrer nofollow">подробнее</a>).</li>
+<li><strong>Политика перезапуска</strong>: <code>restart: unless-stopped</code> в <code>compose.yaml</code>.</li>
+<li><strong>Не root в контейнере</strong> (<code>USER</code> в Dockerfile) и <strong>привязка к <code>127.0.0.1</code></strong> за прокси.</li>
+<li><strong>Обновления</strong>: образ базы и ОС обновляются, версии зафиксированы.</li>
+</ul>
+<h2 id="деньги-и-gpu">Деньги и GPU</h2>
+<p>Считайте не только ежемесячную плату, но и своё время: бесплатный вариант, который засыпает, и платный за несколько долларов в месяц, который стабильно работает, — разный опыт для посетителя вашего портфолио. Для проекта на резюме обычно достаточно одного небольшого VPS или домашнего сервера с туннелем.</p>
+<p>GPU нужны для <strong>обучения</strong>, а не для обслуживания: обучайте на Colab, Kaggle или арендованной по часам GPU и выключайте её, а в сервис отдавайте готовый артефакт. Инференс небольшой модели на CPU укладывается в задержки учебного проекта; GPU в сервисе оправдан для больших нейросетей и высокого RPS, и тогда он стоит заметно дороже всего остального вместе взятого.</p>
+<div class="callout md tip"><p class="callout-title">Не плодите сущности</p>
+<p>Начните с одного компьютера и <code>compose.yaml</code>. Kubernetes, оркестраторы и managed-базы появятся, когда у вас будет нагрузка, которая их требует, а не раньше.</p>
+</div>
+<h2 id="ловушки">Ловушки</h2>
+<ul>
+<li>Порт Postgres, опубликованный на <code>0.0.0.0</code> без файрвола: через несколько часов в логах появляются брутфорс-попытки.</li>
+<li>Пароль root вместо ключа; <code>.env</code> в git; секреты в Dockerfile (остаются в слоях образа).</li>
+<li>Бесплатный инстанс «спит», и первый запрос ревьюера падает по таймауту.</li>
+<li>Бэкап на тот же диск, что и база.</li>
+<li>Деплой «руками по ssh» без записи шагов: через месяц вы не воспроизведёте его сами.</li>
+<li>На собеседовании спрашивают: как открыть сервис наружу безопасно; что такое TLS termination; зачем reverse proxy; как узнать, что сервис упал, раньше пользователя; чем VPS отличается от контейнера.</li>
+</ul>
+<h2 id="проверь-себя">Проверь себя</h2>
+<details class="callout md details"><summary>Чем туннель Cloudflare безопаснее проброса порта на роутере?</summary>
+<p>Соединение инициирует ваша машина, поэтому на роутере не открыт ни один входящий порт; домашняя сеть недоступна из интернета напрямую, а TLS на границе обслуживает Cloudflare.</p>
+</details>
+<details class="callout md details"><summary>Что делает reverse proxy и где заканчивается HTTPS?</summary>
+<p>Принимает запросы на 80/443, терминирует TLS и пересылает их приложению по HTTP на <code>127.0.0.1</code>. Внутри машины трафик до приложения не шифруется, и это нормально, пока порт не выставлен наружу.</p>
+</details>
+<details class="callout md details"><summary>Почему `ports: "5432:5432"` опасно даже при включённом ufw?</summary>
+<p>Docker добавляет правила iptables в обход ufw, и порт оказывается открыт. Нужно привязывать к <code>127.0.0.1</code> или не публиковать порт вовсе, оставив доступ внутри сети compose.</p>
+</details>
+<details class="callout md details"><summary>Чем бэкап отличается от проверенного бэкапа?</summary>
+<p>Проверенный бэкап восстанавливали в чистую базу и убедились, что данные и схема на месте. Файл дампа без этого может оказаться пустым или несовместимым.</p>
+</details>
+<details class="callout md details"><summary>Где обучать модель, а где её обслуживать?</summary>
+<p>Обучение — на временно арендованной или бесплатной GPU (Colab, Kaggle, почасовая аренда), обслуживание — на дешёвой CPU-машине с готовым артефактом, пока модель и RPS позволяют.</p>
+</details>
+<h2 id="что-почитать">Что почитать</h2>
+<ul>
+<li>Cloudflare Tunnel: https://developers.cloudflare.com/cloudflare-one/connections/connect-networks/</li>
+<li>Hugging Face Spaces, обзор: https://huggingface.co/docs/hub/spaces-overview</li>
+<li>Streamlit Community Cloud: https://docs.streamlit.io/deploy/streamlit-community-cloud</li>
+<li>Caddy, reverse_proxy: https://caddyserver.com/docs/quick-starts/reverse-proxy</li>
+<li>Docker, packet filtering и firewalls: https://docs.docker.com/engine/network/packet-filtering-firewalls/</li>
+<li>Ubuntu, автоматические обновления: https://documentation.ubuntu.com/server/how-to/software/automatic-updates/</li>
+</ul>
+</div>
+      
+
+      
+
+      
+      <nav class="pager" aria-label="Соседние статьи">
+        <a href="/edufamcs-demo/handbook/engineering/docker-compose/"><span><svg class="ico sm" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-arrow-left"/></svg>Назад</span>Docker Compose: сервис, база и секреты</a>
+        <a href="/edufamcs-demo/handbook/engineering/ci-github-actions/"><span>Дальше<svg class="ico sm" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-arrow"/></svg></span>CI: тесты и линтер на каждый коммит</a>
+      </nav>
+      
+    </article>
+
+    <aside class="hb-toc" aria-label="На этой странице">
+      <a class="l2" href="#четыре-семейства-вариантов">Четыре семейства вариантов</a><a class="l3" href="#демо-хостинг">Демо-хостинг</a><a class="l3" href="#домашняя-машина-и-туннель">Домашняя машина и туннель</a><a class="l3" href="#vps">VPS</a><a class="l3" href="#free-tier-и-его-подводные-камни">Free tier и его подводные камни</a><a class="l2" href="#домен-dns-и-https">Домен, DNS и HTTPS</a><a class="l2" href="#минимальный-чек-лист-продакшена">Минимальный чек-лист продакшена</a><a class="l2" href="#деньги-и-gpu">Деньги и GPU</a><a class="l2" href="#ловушки">Ловушки</a><a class="l2" href="#проверь-себя">Проверь себя</a><a class="l2" href="#что-почитать">Что почитать</a>
+    </aside>
+  </div>
+</div>
+
+
+</main>
+
+<footer class="ftr" data-theme="dark">
+  <svg class="sym fern" viewBox="0 0 40.5 65.02" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#fern"/></svg>
+  <div class="container">
+    <div class="ftr-row">
+      <a href="/edufamcs-demo/" aria-label="EDU FAMCS — главная"><img src="/edufamcs-demo/static/brand/logo/logo-edu-dark.svg" alt="EDU FAMCS" width="196" height="40"></a>
+      <ul class="ftr-links">
+        <li><a href="/edufamcs-demo/#courses">Курсы</a></li>
+        <li><a href="/edufamcs-demo/ml/">Машинное обучение</a></li>
+        <li><a href="/edufamcs-demo/handbook/">Хендбук</a></li>
+        <li><a href="/edufamcs-demo/news/">Новости</a></li>
+        <li><a href="/edufamcs-demo/people/">Авторы</a></li>
+        <li><a href="/edufamcs-demo/about/">О&nbsp;нас</a></li>
+        <li><a href="/edufamcs-demo/propose/">Предложить или исправить</a></li>
+        <li><a href="/edufamcs-demo/privacy/">Конфиденциальность</a></li>
+      </ul>
+    </div>
+    <div class="ftr-big" aria-hidden="true">EDU<span class="d">·</span>FAMCS</div>
+    <p class="ftr-copy">© 2026 EDU FAMCS · Минск</p>
+  </div>
+</footer>
+
+<div class="toasts-region" aria-live="polite" id="toasts">
+
+</div>
+
+</body>
+</html>

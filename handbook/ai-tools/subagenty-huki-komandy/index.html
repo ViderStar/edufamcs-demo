@@ -1,0 +1,280 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Субагенты, хуки и слэш-команды · EDU FAMCS</title>
+<meta name="description" content="Субагенты, хуки и слэш-команды — ИИ-ассистенты для кода. Хендбук ML-курса ФПМИ.">
+<meta name="theme-color" content="#060A16">
+<meta name="robots" content="noindex, nofollow">
+<meta name="htmx-config" content='{"allowEval":false,"includeIndicatorStyles":false,"historyCacheSize":0,"selfRequestsOnly":true}'>
+<meta name="katex-js" content="/edufamcs-demo/static/vendor/katex/katex.min.js">
+<meta name="katex-css" content="/edufamcs-demo/static/vendor/katex/katex.min.css">
+<link rel="icon" href="/edufamcs-demo/static/brand/logo/favicon-16.svg" type="image/svg+xml" sizes="16x16">
+<link rel="icon" href="/edufamcs-demo/static/brand/logo/favicon.svg" type="image/svg+xml" sizes="any">
+<link rel="preload" href="/edufamcs-demo/static/brand/fonts/manrope-cyrillic-400.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/edufamcs-demo/static/brand/fonts/unbounded-cyrillic-800.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="/edufamcs-demo/static/brand/fonts.css">
+<link rel="stylesheet" href="/edufamcs-demo/static/brand/tokens.css">
+<link rel="stylesheet" href="/edufamcs-demo/static/brand/components.css">
+<link rel="stylesheet" href="/edufamcs-demo/static/css/site.css">
+<link rel="stylesheet" href="/edufamcs-demo/static/css/hub.css">
+<link rel="stylesheet" href="/edufamcs-demo/static/css/about.css">
+<link rel="stylesheet" href="/edufamcs-demo/static/handbook/handbook.css">
+<script src="/edufamcs-demo/static/js/theme.js"></script>
+<script src="/edufamcs-demo/static/vendor/htmx/htmx.min.js" defer></script>
+<script src="/edufamcs-demo/static/vendor/alpine/alpine-csp.min.js" defer></script>
+<script src="/edufamcs-demo/static/js/site.js" defer></script>
+<script src="/edufamcs-demo/static/handbook/handbook.js" defer></script>
+</head>
+<body class="" hx-headers='{"X-CSRFToken": "XSZDTdlHduoykAM5SArOwfgamEBMqUPnz5OA9fUyehC7vT1xR3FLe888ONIKaEO4"}'>
+<a class="skip" href="#main">К содержанию</a>
+<div class="demo-bar" role="note">Демо-версия для отзывов: вход, запись на курсы и формы здесь не работают.</div>
+
+<header class="hdr">
+  <div class="container">
+    <a class="brand" href="/edufamcs-demo/" aria-label="EDU FAMCS — главная">
+      <span class="full"><img class="only-light" src="/edufamcs-demo/static/brand/logo/logo-edu-light.svg" alt="EDU FAMCS" width="196" height="40"><img class="only-dark" src="/edufamcs-demo/static/brand/logo/logo-edu-dark.svg" alt="EDU FAMCS" width="196" height="40"></span>
+      <span class="short"><img class="only-light" src="/edufamcs-demo/static/brand/logo/logo-edu-light.svg" alt="EDU FAMCS" height="30"><img class="only-dark" src="/edufamcs-demo/static/brand/logo/logo-edu-dark.svg" alt="EDU FAMCS" height="30"></span>
+    </a>
+    <nav class="nav" id="main-nav" aria-label="Основная навигация">
+      <a href="/edufamcs-demo/#courses">Курсы</a>
+      <a href="/edufamcs-demo/ml/" >Машинное обучение</a>
+      
+      <a href="/edufamcs-demo/handbook/" aria-current="page">Хендбук</a>
+      <a href="/edufamcs-demo/news/" >Новости</a>
+      <a href="/edufamcs-demo/people/" >Авторы</a>
+      <a href="/edufamcs-demo/about/" >О&nbsp;нас</a>
+    </nav>
+    <div class="hdr-actions">
+      
+      <a class="btn btn-outline btn-login" href="/edufamcs-demo/accounts/login/?next=/handbook/ai-tools/subagenty-huki-komandy/">Войти</a>
+      
+      <button class="icon-btn menu-btn" type="button" aria-label="Меню" aria-expanded="false" aria-controls="main-nav"><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-menu"/></svg></button>
+    </div>
+  </div>
+</header>
+
+<main id="main">
+
+
+
+<div class="container hb-page s-agents">
+  <div class="hb-readbar" aria-hidden="true"><i></i></div>
+  <div class="hb">
+    <aside class="hb-nav" aria-label="Статьи раздела">
+      
+<form class="hb-search" action="/edufamcs-demo/handbook/search/" method="get" role="search">
+  <svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-search"/></svg>
+  <input class="input" type="search" name="q" value="" placeholder="Поиск по хендбуку" aria-label="Поиск по хендбуку" autocomplete="off" maxlength="120"
+    hx-get="/edufamcs-demo/handbook/search/" hx-trigger="input changed delay:250ms, search" hx-target="#hb-nav-results" hx-sync="this:replace">
+</form>
+
+      <div id="hb-nav-results" class="hb-nav-results" aria-live="polite"></div>
+      <a class="grp" href="/edufamcs-demo/handbook/ai-tools/">Расширения</a>
+      
+      <a class="" href="/edufamcs-demo/handbook/ai-tools/skills/">Скиллы: SKILL.md и как написать свой</a>
+      
+      <a class="" href="/edufamcs-demo/handbook/ai-tools/mcp/">MCP: подключаем инструменты и данные</a>
+      
+      <a class="cur" href="/edufamcs-demo/handbook/ai-tools/subagenty-huki-komandy/" aria-current="page">Субагенты, хуки и слэш-команды</a>
+      
+    </aside>
+
+    <article class="hb-main">
+      <nav class="crumbs" aria-label="Навигация"><a href="/edufamcs-demo/handbook/">Хендбук</a><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-chev"/></svg><a href="/edufamcs-demo/handbook/ai-tools/">ИИ-ассистенты для кода</a></nav>
+      <h1 class="h1">Субагенты, хуки и слэш-команды</h1>
+      <div class="hb-meta">
+        
+        
+        <span><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-clock"/></svg>11&nbsp;мин</span>
+        <span class="hb-authors"><span class="avatar sm" title="Артем Лебедевич">АЛ</span>Артем Лебедевич</span>
+        <span><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-edit"/></svg>10 ноября 2026</span>
+        
+        
+      </div>
+
+      
+      <details class="hb-mtoc">
+        <summary><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-list"/></svg>Содержание<svg class="ico sm" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-chev-down"/></svg></summary>
+        <a class="l2" href="#субагенты">Субагенты</a><a class="l3" href="#свой-субагент-в-claude-code">Свой субагент в Claude Code</a><a class="l3" href="#codex">Codex</a><a class="l2" href="#слэш-команды">Слэш-команды</a><a class="l2" href="#хуки">Хуки</a><a class="l2" href="#фоновые-headless-и-по-расписанию">Фоновые, headless и по расписанию</a><a class="l2" href="#ловушки">Ловушки</a><a class="l2" href="#проверь-себя">Проверь себя</a><a class="l2" href="#что-почитать">Что почитать</a>
+      </details>
+      
+
+      <div class="prose"><p>Кроме скиллов и MCP, у кодовых агентов есть ещё три рычага. Субагент — отдельный «исполнитель» со своим контекстным окном, инструментами и инструкцией. Слэш-команда — сохранённый запрос, который вы вызываете вручную. Хук — команда оболочки, которая выполняется на событие всегда, независимо от настроения модели. Набор функций у разных инструментов различается и меняется; формат ниже взят из документации Claude Code и Codex на ноябрь 2026, и именно она — источник истины.</p>
+<h2 id="субагенты">Субагенты</h2>
+<p>Субагент получает собственное окно контекста. Он не видит вашего диалога и файлов, которые агент уже прочёл: основной агент пишет ему задание, субагент работает по нему и возвращает <strong>только итоговое резюме</strong>. Отсюда плюсы и цена.</p>
+<p>Когда это окупается:</p>
+<ul>
+<li><strong>Широкий поиск.</strong> «Найди все места, где считается метрика» — сотни прочитанных файлов остаются в чужом контексте, в основной приходит абзац.</li>
+<li><strong>Независимое ревью.</strong> Свежий контекст не разделяет ваших допущений и не защищает уже написанное.</li>
+<li><strong>Параллельная работа</strong> над независимыми кусками.</li>
+</ul>
+<p>Цена: субагент знает только то, что ему написали (плохое задание — плохой результат), вы видите резюме, а не ход рассуждений, и токенов уходит больше, чем в однопоточной работе (Codex в документации говорит об этом прямо). Для задачи на три файла делегировать не нужно.</p>
+<h3 id="свой-субагент-в-claude-code">Свой субагент в Claude Code</h3>
+<p>Это Markdown-файл с YAML-заголовком в <code>.claude/agents/</code> (проект) или <code>~/.claude/agents/</code> (все проекты). Заголовок задаёт конфигурацию, тело становится системным промптом. Обязательны <code>name</code> и <code>description</code>; из необязательных полезны <code>tools</code> (белый список), <code>disallowedTools</code>, <code>model</code>, <code>maxTurns</code>, <code>skills</code>, <code>isolation: worktree</code>, <code>background</code>. Если <code>tools</code> не указать, субагент наследует все доступные инструменты.</p>
+<p>Пример — скептик для эксперимента: читает, но ничего не меняет.</p>
+<div class="code"><div class="code-head"><span class="lang">markdown</span></div><pre><code>---
+name: experiment-skeptic
+description: Независимое ревью дизайна эксперимента или ноутбука до долгого запуска. Использовать перед дорогим прогоном и когда нужен взгляд без доверия к автору.
+tools: Read, Grep, Glob
+model: inherit
+---
+
+Ты скептик-рецензент ML-эксперимента. Автор уверен, что всё верно; твоя
+задача — найти, что сделает результат ложным или бесполезным.
+
+Тебе дадут путь к ноутбуку или скрипту и формулировку гипотезы. Больше ты
+ничего не знаешь — не додумывай, читай файлы.
+
+Проверь по порядку:
+<span class="tok-k">1.</span> Утечки: fit препроцессинга до разбиения, признаки из будущего, пересечение
+   пользователей/объектов между train и valid, агрегаты по всей таблице.
+<span class="tok-k">2.</span> Валидация: соответствует ли разбиение реальному использованию (время, группы);
+   одинаковы ли условия у baseline и новой модели; шум метрики (seeds, размер valid).
+<span class="tok-k">3.</span> Метрика: считается ли то, что заявлено; можно ли её «улучшить» без пользы.
+<span class="tok-k">4.</span> Что в результате было бы опровержением гипотезы — и проверяется ли оно.
+
+Формат ответа: список находок по убыванию серьёзности. У каждой — где
+(файл, ячейка), почему опасно, как проверить. В конце — что ты не смог проверить.
+Не предлагай переписывать код целиком и ничего не правь.
+</code></pre></div>
+<p>Вызвать можно фразой «используй субагента experiment-skeptic для ноутбука <code>nb/ranker.ipynb</code>» или через <code>@</code>-упоминание. Фразы вроде «use proactively» в описании поощряют автоматическое делегирование. Для одного запуска определения можно передать JSON-ом через <code>claude --agents '{...}'</code>; встроенные субагенты (Explore, Plan, general-purpose) уже есть.</p>
+<h3 id="codex">Codex</h3>
+<p>Субагенты там тоже есть: отдельные TOML-файлы в <code>~/.codex/agents/</code> или <code>.codex/agents/</code>, обязательные поля <code>name</code>, <code>description</code> и <code>developer_instructions</code>, дополнительно можно задать модель и уровень рассуждений. Песочница и политика одобрений наследуются от родителя и в файле агента не переопределяются. Вызывают просьбой в запросе («запусти двух агентов…»), в CLI <code>/subagents</code> переключает между потоками.</p>
+<h2 id="слэш-команды">Слэш-команды</h2>
+<p>Это сохранённый запрос, который вы вызываете по имени. В Claude Code команды слились со скиллами: файл <code>.claude/commands/smoke.md</code> и скилл <code>.claude/skills/smoke/SKILL.md</code> создают одну и ту же <code>/smoke</code>; при совпадении имён побеждает скилл. Подпапки превращаются в двоеточия: <code>commands/frontend/component.md</code> — это <code>/frontend:component</code>. Заголовок у файла команды — тот же, что у скилла, без <code>name</code> и <code>paths</code>.</p>
+<div class="code"><div class="code-head"><span class="lang">markdown</span></div><pre><code>---
+description: Дешёвый прогон текущего ноутбука с проверкой, что дошли до метрики
+---
+
+Запусти ноутбук, на который я указал, в режиме SMOKE=1 (малая выборка, 1 эпоха).
+Не правь ноутбук. Верни: время, метрику на valid, предупреждения и первую ошибку.
+</code></pre></div>
+<p>В Codex аналог — кастомные промпты, <code>~/.codex/prompts/*.md</code> с <code>description:</code> и <code>argument-hint:</code> в заголовке и плейсхолдерами <code>$1</code>…<code>$9</code>, <code>$ARGUMENTS</code>; вызов — <code>/prompts:имя</code>. Но документация объявляет их <strong>устаревшими</strong> в пользу скиллов (они ещё и не делятся через репозиторий). См. <a href="/edufamcs-demo/handbook/ai-tools/skills/" rel="noopener noreferrer nofollow">скиллы</a>.</p>
+<h2 id="хуки">Хуки</h2>
+<p>Хук — команда, которую инструмент выполняет на событие: перед или после вызова инструмента, при остановке, при уведомлении. В отличие от просьбы в <code>CLAUDE.md</code>, хук срабатывает всегда: инструкции агент может «забыть», хук — нет. Типичное: автоформатирование после правки, блокировка опасных команд, уведомление «агент закончил».</p>
+<p>Конфигурация в Claude Code (<code>~/.claude/settings.json</code>, <code>.claude/settings.json</code>, <code>.claude/settings.local.json</code>) — три уровня: событие → группа с <code>matcher</code> → обработчик. Событий десятки; важнейшие: <code>PreToolUse</code>, <code>PostToolUse</code>, <code>Notification</code>, <code>Stop</code>, <code>SessionStart</code>, <code>UserPromptSubmit</code>. Хук получает JSON на stdin (<code>tool_name</code>, <code>tool_input</code>, <code>cwd</code>…). Коды выхода: <code>0</code> — всё хорошо; <code>2</code> — блокирующая ошибка, текст из stderr возвращается агенту (для <code>PreToolUse</code> вызов отменяется); любой другой — не блокирует, показывается предупреждение. Пример из документации — запрет <code>rm -rf</code>:</p>
+<div class="code"><div class="code-head"><span class="lang">json</span></div><pre><code><span class="tok-p">{</span>
+  "hooks"<span class="tok-p">:</span> <span class="tok-p">{</span>
+    "PreToolUse"<span class="tok-p">:</span> <span class="tok-p">[</span>
+      <span class="tok-p">{</span>
+        "matcher"<span class="tok-p">:</span> <span class="tok-s">"Bash"</span><span class="tok-p">,</span>
+        "hooks"<span class="tok-p">:</span> <span class="tok-p">[</span>
+          <span class="tok-p">{</span>
+            "type"<span class="tok-p">:</span> <span class="tok-s">"command"</span><span class="tok-p">,</span>
+            "if"<span class="tok-p">:</span> <span class="tok-s">"Bash(rm *)"</span><span class="tok-p">,</span>
+            "command"<span class="tok-p">:</span> <span class="tok-s">"${CLAUDE_PROJECT_DIR}/.claude/hooks/block-rm.sh"</span><span class="tok-p">,</span>
+            "args"<span class="tok-p">:</span> <span class="tok-p">[]</span>
+          <span class="tok-p">}</span>
+        <span class="tok-p">]</span>
+      <span class="tok-p">}</span>
+    <span class="tok-p">]</span>
+  <span class="tok-p">}</span>
+<span class="tok-p">}</span>
+</code></pre></div>
+<div class="code"><div class="code-head"><span class="lang">bash</span></div><pre><code><span class="tok-c">#!/bin/bash
+</span>COMMAND<span class="tok-p">=</span><span class="tok-k">$(</span>jq -r <span class="tok-s">'.tool_input.command'</span><span class="tok-k">)</span>
+
+<span class="tok-k">if</span> <span class="tok-f">echo</span> <span class="tok-s">"</span>$COMMAND<span class="tok-s">"</span> <span class="tok-p">|</span> grep -q <span class="tok-s">'rm -rf'</span><span class="tok-p">;</span> <span class="tok-k">then</span>
+  jq -n <span class="tok-s">'{
+    hookSpecificOutput: {
+      hookEventName: "PreToolUse",
+      permissionDecision: "deny",
+      permissionDecisionReason: "Destructive command blocked by hook"
+    }
+  }'</span>
+<span class="tok-k">else</span>
+  <span class="tok-f">exit</span> <span class="tok-n">0</span>  <span class="tok-c"># решения нет, работает обычная проверка разрешений
+</span><span class="tok-k">fi</span>
+</code></pre></div>
+<p>Скрипту нужен <code>chmod +x</code> и <code>jq</code>. Для форматирования подойдёт тот же шаблон на <code>PostToolUse</code> с <code>"matcher": "Write|Edit"</code> и вашим скриптом: этот хук не может отменить правку, она уже сделана, но может вернуть замечания агенту. Хук <code>Stop</code> с кодом <code>2</code> не даёт агенту остановиться — так делают «не заканчивай, пока тесты не зелёные», и так же легко устроить бесконечный цикл, поэтому ставьте условие выхода.</p>
+<p>В Codex хуки описаны в <code>~/.codex/hooks.json</code>, <code>&lt;repo&gt;/.codex/hooks.json</code> или в <code>config.toml</code>; формат тот же (событие → <code>matcher</code> → обработчик <code>type: "command"</code>), <code>PreToolUse</code> блокируется кодом <code>2</code> или тем же <code>permissionDecision: "deny"</code>. Проектные хуки грузятся только в доверенном проекте и до запуска проверяются командой <code>/hooks</code>. Набор событий у Codex меньше и отличается; смотрите актуальный список.</p>
+<div class="callout md warn"><p class="callout-title">Хук — это код, который вы запускаете</p>
+<p>Хуки из чужого репозитория выполняются с вашими правами. Читайте <code>.claude/settings.json</code> и <code>.codex/</code> до первого запуска агента в незнакомом проекте.</p>
+</div>
+<h2 id="фоновые-headless-и-по-расписанию">Фоновые, headless и по расписанию</h2>
+<p>Агента можно запускать без интерактива: <code>claude -p "…"</code> (с <code>--output-format json</code>, <code>--allowedTools</code>, <code>--permission-mode</code>) и <code>codex exec "…"</code> (по умолчанию песочница read-only; <code>--sandbox workspace-write</code> разрешает запись). Для скриптов и CI Claude Code рекомендует <code>--bare</code>: он не подхватывает хуки, скиллы, MCP-серверы и <code>CLAUDE.md</code> из окружения, и результат не зависит от машины. Без <code>--bare</code> режим <code>-p</code> исполняет хуки и подключает серверы проекта без вопросов. Субагенты, которых Claude запускает из основного диалога, уже стартуют в фоне; поле <code>background: true</code> оставляет субагента в фоне, даже когда Claude просят дождаться результата. Повторяющиеся запуски есть в обоих: в Claude Code — <code>/loop</code> (повтор в сессии) и <code>/schedule</code> (облачные задачи по расписанию), в Codex — Scheduled tasks в приложении ChatGPT и вебе (не в CLI). Формат быстро меняется: смотрите актуальные страницы. Как применять всё это к долгим ML-прогонам — в статье <a href="/edufamcs-demo/handbook/ai-tools/agent-v-ml-proekte/" rel="noopener noreferrer nofollow">агент в ML-проекте</a>.</p>
+<h2 id="ловушки">Ловушки</h2>
+<ul>
+<li>Делегировать мелочь: расход токенов и потеря контекста перевешивают выгоду.</li>
+<li>Короткое задание субагенту («проверь это»): он не знает ни цели, ни ограничений. Давайте путь, гипотезу, критерий готовности.</li>
+<li>Верить резюме субагента без проверки: он тоже может ошибаться; требуйте ссылки на файлы и строки.</li>
+<li>Хук без тайм-аута или с побочными эффектами; <code>Stop</code>-хук без условия выхода.</li>
+<li>Опасное правило держат только в <code>CLAUDE.md</code>: оно подсказка, хук — гарантия.</li>
+<li>Давать субагенту-рецензенту права на запись: ревьюер правит «заодно», и независимость пропадает.</li>
+</ul>
+<h2 id="проверь-себя">Проверь себя</h2>
+<details class="callout md details"><summary>Что видит субагент и что возвращает?</summary>
+<p>Свой системный промпт, задание от основного агента и базовые сведения об окружении; историю диалога он не видит. Возвращает итоговое резюме, остальной вывод остаётся в его контексте.</p>
+</details>
+<details class="callout md details"><summary>В каких случаях делегирование окупается, а в каких нет?</summary>
+<p>Окупается: широкий поиск, независимое ревью, параллельные независимые задачи. Не окупается: небольшая задача, где результат нужен целиком и контекст общий.</p>
+</details>
+<details class="callout md details"><summary>Чем хук отличается от строки в `CLAUDE.md`?</summary>
+<p><code>CLAUDE.md</code> — текст в контексте, модель может не последовать ему. Хук — команда, которую инструмент выполняет на событие всегда; блокирующий хук отменяет вызов.</p>
+</details>
+<details class="callout md details"><summary>Что означают коды выхода хука `PreToolUse` в Claude Code?</summary>
+<p><code>0</code> — успех, при JSON в stdout можно вернуть решение; <code>2</code> — блокировка, stderr уходит агенту; прочие — неблокирующая ошибка, действие продолжается.</p>
+</details>
+<details class="callout md details"><summary>Почему рецензенту-скептику не дают инструменты записи?</summary>
+<p>Чтобы он только искал проблемы: если он умеет править, он смешивает ревью с исправлением, и автор получает результат, который никто не проверял независимо.</p>
+</details>
+<h2 id="что-почитать">Что почитать</h2>
+<ul>
+<li>Claude Code: <a href="https://code.claude.com/docs/en/sub-agents" rel="noopener noreferrer nofollow">Subagents</a> — формат файла, поля, область действия.</li>
+<li>Claude Code: <a href="https://code.claude.com/docs/en/hooks" rel="noopener noreferrer nofollow">Hooks</a> — события, ввод, коды выхода.</li>
+<li>Claude Code: <a href="https://code.claude.com/docs/en/headless" rel="noopener noreferrer nofollow">Run Claude Code programmatically</a> — <code>-p</code>, <code>--bare</code>, форматы вывода.</li>
+<li>Codex: <a href="https://learn.chatgpt.com/docs/agent-configuration/subagents" rel="noopener noreferrer nofollow">Subagents</a>, <a href="https://learn.chatgpt.com/docs/hooks" rel="noopener noreferrer nofollow">Hooks</a>, <a href="https://learn.chatgpt.com/docs/non-interactive-mode" rel="noopener noreferrer nofollow">Non-interactive mode</a>, <a href="https://learn.chatgpt.com/docs/custom-prompts" rel="noopener noreferrer nofollow">Custom prompts</a>.</li>
+<li>Claude Code: <a href="https://code.claude.com/docs/en/commands" rel="noopener noreferrer nofollow">Commands</a> — встроенные команды и их связь со скиллами.</li>
+<li>Внутри курса: <a href="/edufamcs-demo/handbook/ai-tools/claude-code/" rel="noopener noreferrer nofollow">Claude Code</a>, <a href="/edufamcs-demo/handbook/ai-tools/codex/" rel="noopener noreferrer nofollow">Codex</a>.</li>
+</ul>
+</div>
+      
+
+      
+
+      
+      <nav class="pager" aria-label="Соседние статьи">
+        <a href="/edufamcs-demo/handbook/ai-tools/mcp/"><span><svg class="ico sm" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-arrow-left"/></svg>Назад</span>MCP: подключаем инструменты и данные</a>
+        <a href="/edufamcs-demo/handbook/ai-tools/agent-v-ml-proekte/"><span>Дальше<svg class="ico sm" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-arrow"/></svg></span>Агент в ML-проекте: ноутбуки, эксперименты, ревью</a>
+      </nav>
+      
+    </article>
+
+    <aside class="hb-toc" aria-label="На этой странице">
+      <a class="l2" href="#субагенты">Субагенты</a><a class="l3" href="#свой-субагент-в-claude-code">Свой субагент в Claude Code</a><a class="l3" href="#codex">Codex</a><a class="l2" href="#слэш-команды">Слэш-команды</a><a class="l2" href="#хуки">Хуки</a><a class="l2" href="#фоновые-headless-и-по-расписанию">Фоновые, headless и по расписанию</a><a class="l2" href="#ловушки">Ловушки</a><a class="l2" href="#проверь-себя">Проверь себя</a><a class="l2" href="#что-почитать">Что почитать</a>
+    </aside>
+  </div>
+</div>
+
+
+</main>
+
+<footer class="ftr" data-theme="dark">
+  <svg class="sym fern" viewBox="0 0 40.5 65.02" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#fern"/></svg>
+  <div class="container">
+    <div class="ftr-row">
+      <a href="/edufamcs-demo/" aria-label="EDU FAMCS — главная"><img src="/edufamcs-demo/static/brand/logo/logo-edu-dark.svg" alt="EDU FAMCS" width="196" height="40"></a>
+      <ul class="ftr-links">
+        <li><a href="/edufamcs-demo/#courses">Курсы</a></li>
+        <li><a href="/edufamcs-demo/ml/">Машинное обучение</a></li>
+        <li><a href="/edufamcs-demo/handbook/">Хендбук</a></li>
+        <li><a href="/edufamcs-demo/news/">Новости</a></li>
+        <li><a href="/edufamcs-demo/people/">Авторы</a></li>
+        <li><a href="/edufamcs-demo/about/">О&nbsp;нас</a></li>
+        <li><a href="/edufamcs-demo/propose/">Предложить или исправить</a></li>
+        <li><a href="/edufamcs-demo/privacy/">Конфиденциальность</a></li>
+      </ul>
+    </div>
+    <div class="ftr-big" aria-hidden="true">EDU<span class="d">·</span>FAMCS</div>
+    <p class="ftr-copy">© 2026 EDU FAMCS · Минск</p>
+  </div>
+</footer>
+
+<div class="toasts-region" aria-live="polite" id="toasts">
+
+</div>
+
+</body>
+</html>

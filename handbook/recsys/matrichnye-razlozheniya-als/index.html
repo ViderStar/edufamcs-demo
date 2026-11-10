@@ -27,7 +27,7 @@
 <script src="/edufamcs-demo/static/js/site.js" defer></script>
 <script src="/edufamcs-demo/static/handbook/handbook.js" defer></script>
 </head>
-<body class="" hx-headers='{"X-CSRFToken": "jF5sI3pW6eLI8HOS8S62drWUGSHcmST05L6PCQHDhr1WNgK8lhZ7uT4fcfjrrDEZ"}'>
+<body class="" hx-headers='{"X-CSRFToken": "zErfwJOEMkgG0CZQJ1mWDgKiDCz6HlPybRgcMLnvN7ufbVeiIuATl9Cg5LG4r5Of"}'>
 <a class="skip" href="#main">К содержанию</a>
 <div class="demo-bar" role="note">Демо-версия для отзывов: вход, запись на курсы и формы здесь не работают.</div>
 
@@ -60,6 +60,7 @@
 
 
 <div class="container hb-page s-recsys">
+  <div class="hb-readbar" aria-hidden="true"><i></i></div>
   <div class="hb">
     <aside class="hb-nav" aria-label="Статьи раздела">
       
@@ -88,9 +89,9 @@
       <div class="hb-meta">
         
         
-        <span><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-clock"/></svg>11&nbsp;мин</span>
+        <span><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-clock"/></svg>15&nbsp;мин</span>
         <span class="hb-authors"><span class="avatar sm" title="Артем Лебедевич">АЛ</span>Артем Лебедевич</span>
-        <span><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-edit"/></svg>9 ноября 2026</span>
+        <span><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-edit"/></svg>10 ноября 2026</span>
         
         
       </div>
@@ -98,7 +99,7 @@
       
       <details class="hb-mtoc">
         <summary><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-list"/></svg>Содержание<svg class="ico sm" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-chev-down"/></svg></summary>
-        <a class="l2" href="#история-netflix-prize-20062009">История: Netflix Prize (2006–2009)</a><a class="l2" href="#постановка-для-явных-оценок">Постановка для явных оценок</a><a class="l2" href="#шаг-als-вывод-формулы">Шаг ALS: вывод формулы</a><a class="l2" href="#неявный-фидбэк-als-с-весами-уверенности">Неявный фидбэк: ALS с весами уверенности</a><a class="l2" href="#как-подбирать-гиперпараметры">Как подбирать гиперпараметры</a><a class="l2" href="#als-или-sgd">ALS или SGD</a><a class="l2" href="#ограничения">Ограничения</a><a class="l2" href="#что-почитать">Что почитать</a>
+        <a class="l2" href="#история-netflix-prize-20062009">История: Netflix Prize (2006–2009)</a><a class="l2" href="#постановка-для-явных-оценок">Постановка для явных оценок</a><a class="l2" href="#шаг-als-вывод-формулы">Шаг ALS: вывод формулы</a><a class="l3" href="#числовой-пример-одного-шага">Числовой пример одного шага</a><a class="l2" href="#неявный-фидбэк-als-с-весами-уверенности">Неявный фидбэк: ALS с весами уверенности</a><a class="l2" href="#folding-in-вектор-нового-или-обновлённого-пользователя">Folding-in: вектор нового или обновлённого пользователя</a><a class="l2" href="#как-подбирать-гиперпараметры">Как подбирать гиперпараметры</a><a class="l2" href="#als-или-sgd">ALS или SGD</a><a class="l2" href="#ограничения">Ограничения</a><a class="l2" href="#ловушки">Ловушки</a><a class="l2" href="#проверь-себя">Проверь себя</a><a class="l2" href="#что-почитать">Что почитать</a>
       </details>
       
 
@@ -136,7 +137,7 @@ x_u = \left(Y_u^\top Y_u + \lambda I\right)^{-1} Y_u^\top r_u .</div>
 <p>Матрица <span class="tex">Y_u^\top Y_u + \lambda I</span> размера <span class="tex">f \times f</span> положительно определена при <span class="tex">\lambda &gt; 0</span>, поэтому решение существует и единственно. Симметрично, при фиксированном <span class="tex">X</span>:</p>
 <div class="tex tex-block">y_i = \left(X_i^\top X_i + \lambda I\right)^{-1} X_i^\top r_i ,</div>
 <p>где <span class="tex">X_i</span> — векторы пользователей, оценивших объект <span class="tex">i</span>.</p>
-<p>Алгоритм чередует два шага: обновить всех пользователей при фиксированных объектах, затем всех объектов при фиксированных пользователях. Каждый шаг точно минимизирует <span class="tex">\mathcal{L}</span> по своему блоку и потому не увеличивает её; значения <span class="tex">\mathcal{L}</span> ограничены снизу и монотонно сходятся, а факторы приходят к стационарной точке, не обязательно к глобальному минимуму. Обычно хватает 10–20 итераций. Главное практическое преимущество — <strong>независимость</strong>: векторы разных пользователей на одном шаге считаются параллельно, что хорошо ложится на многоядерные CPU, GPU и кластеры.</p>
+<p>Алгоритм чередует два шага: обновить всех пользователей при фиксированных объектах, затем всех объектов при фиксированных пользователях. Это блочный координатный спуск: каждый шаг точно минимизирует <span class="tex">\mathcal{L}</span> по своему блоку, поэтому <span class="tex">\mathcal{L}</span> монотонно не возрастает; она ограничена снизу нулём, так что её значения сходятся. Предельные точки последовательности факторов (при <span class="tex">\lambda&gt;0</span>) — стационарные точки <span class="tex">\mathcal{L}</span>; глобальный минимум не гарантирован. Обычно хватает 10–20 итераций. Главное практическое преимущество — <strong>независимость</strong>: векторы разных пользователей на одном шаге считаются параллельно, что хорошо ложится на многоядерные CPU, GPU и кластеры.</p>
 <div class="code"><div class="code-head"><span class="lang">python</span></div><pre><code><span class="tok-k">import</span> numpy <span class="tok-k">as</span> np
 
 <span class="tok-k">def</span> <span class="tok-f">als_step</span><span class="tok-p">(</span>R<span class="tok-p">,</span> Y<span class="tok-p">,</span> lam<span class="tok-p">)</span><span class="tok-p">:</span>
@@ -150,12 +151,31 @@ x_u = \left(Y_u^\top Y_u + \lambda I\right)^{-1} Y_u^\top r_u .</div>
         X<span class="tok-p">[</span>u<span class="tok-p">]</span> <span class="tok-p">=</span> np<span class="tok-p">.</span>linalg<span class="tok-p">.</span>solve<span class="tok-p">(</span>Y_u<span class="tok-p">.</span>T <span class="tok-p">@</span> Y_u <span class="tok-p">+</span> lam <span class="tok-p">*</span> np<span class="tok-p">.</span>eye<span class="tok-p">(</span>f<span class="tok-p">)</span><span class="tok-p">,</span> Y_u<span class="tok-p">.</span>T <span class="tok-p">@</span> r_u<span class="tok-p">)</span>
     <span class="tok-k">return</span> X
 </code></pre></div>
+<h3 id="числовой-пример-одного-шага">Числовой пример одного шага</h3>
+<p>Пусть <span class="tex">f=2</span>, у пользователя две оценки, <span class="tex">\lambda=1</span>:</p>
+<div class="tex tex-block">Y_u=\begin{pmatrix}1&amp;2\\3&amp;1\end{pmatrix},\quad r_u=\begin{pmatrix}4\\2\end{pmatrix}
+\;\Rightarrow\;
+Y_u^\top Y_u=\begin{pmatrix}10&amp;5\\5&amp;5\end{pmatrix},\quad Y_u^\top r_u=\begin{pmatrix}10\\10\end{pmatrix}.</div>
+<p>Тогда <span class="tex">Y_u^\top Y_u+\lambda I=\begin{pmatrix}11&amp;5\\5&amp;6\end{pmatrix}</span> с определителем <span class="tex">41</span>, обратная — <span class="tex">\frac1{41}\begin{pmatrix}6&amp;-5\\-5&amp;11\end{pmatrix}</span>, и</p>
+<div class="tex tex-block">x_u=\frac1{41}\begin{pmatrix}6&amp;-5\\-5&amp;11\end{pmatrix}\begin{pmatrix}10\\10\end{pmatrix}=\begin{pmatrix}10/41\\60/41\end{pmatrix}\approx\begin{pmatrix}0{,}244\\1{,}463\end{pmatrix}.</div>
+<p>Прогнозы <span class="tex">Y_u x_u\approx(3{,}17;\,2{,}20)</span> против <span class="tex">(4;\,2)</span>: регуляризация чуть сжимает ответ. При <span class="tex">\lambda=0</span> получилось бы <span class="tex">x_u=(0;\,2)</span> с нулевой ошибкой: двух оценок хватает, чтобы подогнать два числа, — это и есть переобучение, от которого защищает <span class="tex">\lambda</span>.</p>
 <h2 id="неявный-фидбэк-als-с-весами-уверенности">Неявный фидбэк: ALS с весами уверенности</h2>
 <p>С кликами и покупками постановка меняется (Hu, Koren, Volinsky, 2008). Неизвестные ячейки нельзя просто выбросить — тогда модель увидит только «единицы» и научится предсказывать единицу везде. Вместо этого вводят предпочтение <span class="tex">p_{ui} = [r_{ui} &gt; 0]</span> и уверенность <span class="tex">c_{ui} = 1 + \alpha r_{ui}</span> и суммируют по <strong>всем</strong> парам:</p>
 <div class="tex tex-block">\mathcal{L} = \sum_{u, i} c_{ui} \left(p_{ui} - x_u^\top y_i\right)^2 + \lambda \left( \sum_u \|x_u\|^2 + \sum_i \|y_i\|^2 \right)</div>
 <p>Нули участвуют в обучении с маленьким весом <span class="tex">1</span>, наблюдаемые взаимодействия — с весом, растущим вместе с силой сигнала. Тот же вывод с диагональной матрицей весов <span class="tex">C^u = \mathrm{diag}(c_{u1}, \dots, c_{u|I|})</span> даёт</p>
 <div class="tex tex-block">x_u = \left(Y^\top C^u Y + \lambda I\right)^{-1} Y^\top C^u p_u .</div>
 <p>Наивно считать <span class="tex">Y^\top C^u Y</span> для каждого пользователя дорого — это проход по всему каталогу. Трюк: <span class="tex">Y^\top C^u Y = Y^\top Y + Y^\top (C^u - I) Y</span>. Первое слагаемое общее для всех пользователей и считается один раз за шаг, а в <span class="tex">C^u - I</span> ненулевые только <span class="tex">n_u</span> диагональных элементов — по объектам, с которыми пользователь взаимодействовал. Итоговая сложность шага — <span class="tex">O(f^2 \cdot \mathrm{nnz}(R) + f^3 |U|)</span>, линейная по числу наблюдений.</p>
+<h2 id="folding-in-вектор-нового-или-обновлённого-пользователя">Folding-in: вектор нового или обновлённого пользователя</h2>
+<p>Пользователь пришёл после обучения или совершил новые действия, а переобучать всю модель ради него нельзя. Решение — <strong>folding-in</strong>: одна половина шага ALS при зафиксированных факторах объектов <span class="tex">Y</span>. Для неявной модели</p>
+<div class="tex tex-block">x_u = \bigl(Y^\top Y + Y^\top (C^u - I)\,Y + \lambda I\bigr)^{-1} Y^\top C^u p_u ,</div>
+<p>где <span class="tex">Y^\top Y</span> посчитана заранее и лежит в памяти сервиса, а остальное зависит только от <span class="tex">n_u</span> объектов истории: стоимость <span class="tex">O(n_u f^2 + f^3)</span>, миллисекунды. Тот же приём годится для обновления вектора существующего пользователя по свежим событиям — без ожидания ночного переобучения. В <code>implicit</code> это <code>model.recommend(user_id, user_items, recalculate_user=True)</code>.</p>
+<div class="code"><div class="code-head"><span class="lang">python</span></div><pre><code><span class="tok-k">def</span> <span class="tok-f">fold_in</span><span class="tok-p">(</span>Y<span class="tok-p">,</span> YtY<span class="tok-p">,</span> idx<span class="tok-p">,</span> conf<span class="tok-p">,</span> lam<span class="tok-p">)</span><span class="tok-p">:</span>
+    <span class="tok-s">"""idx — объекты истории, conf — c_ui = 1 + alpha * r_ui для них, p_ui = 1."""</span>
+    Yu <span class="tok-p">=</span> Y<span class="tok-p">[</span>idx<span class="tok-p">]</span>
+    A <span class="tok-p">=</span> YtY <span class="tok-p">+</span> <span class="tok-p">(</span>Yu<span class="tok-p">.</span>T <span class="tok-p">*</span> <span class="tok-p">(</span>conf <span class="tok-p">-</span> <span class="tok-n">1</span><span class="tok-p">)</span><span class="tok-p">)</span> <span class="tok-p">@</span> Yu <span class="tok-p">+</span> lam <span class="tok-p">*</span> np<span class="tok-p">.</span>eye<span class="tok-p">(</span>Y<span class="tok-p">.</span>shape<span class="tok-p">[</span><span class="tok-n">1</span><span class="tok-p">]</span><span class="tok-p">)</span>
+    <span class="tok-k">return</span> np<span class="tok-p">.</span>linalg<span class="tok-p">.</span>solve<span class="tok-p">(</span>A<span class="tok-p">,</span> <span class="tok-p">(</span>Yu<span class="tok-p">.</span>T <span class="tok-p">*</span> conf<span class="tok-p">)</span><span class="tok-p">.</span>sum<span class="tok-p">(</span>axis<span class="tok-p">=</span><span class="tok-n">1</span><span class="tok-p">)</span><span class="tok-p">)</span>
+</code></pre></div>
+<p>На игрушечных <span class="tex">Y</span> из четырёх объектов с <span class="tex">f=2</span>, <span class="tex">\alpha=10</span> и <span class="tex">\lambda=1</span> пользователь с двумя кликами получает <span class="tex">x_u\approx(0{,}196;\,0{,}390)</span>. Ограничения: вектор согласован с текущими <span class="tex">Y</span>, но не равен тому, что дало бы полное переобучение (там сдвинулись бы и <span class="tex">Y</span>); у пользователя с одним событием вектор шумный и в основном определяется <span class="tex">\lambda</span>; для нового <strong>объекта</strong> такая же операция требует взаимодействий с ним, поэтому холодный объект без истории так не обслужить.</p>
 <h2 id="как-подбирать-гиперпараметры">Как подбирать гиперпараметры</h2>
 <ul>
 <li><strong><span class="tex">f</span>, число факторов.</strong> Больше — выразительнее, но медленнее и легче переобучиться. Начните с 64.</li>
@@ -175,6 +195,33 @@ ids<span class="tok-p">,</span> scores <span class="tok-p">=</span> model<span c
 <h2 id="ограничения">Ограничения</h2>
 <p>Модель знает только ID: для нового пользователя или объекта вектора нет (холодный старт), признаки и контекст не учитываются, а порядок событий во времени теряется. Эти ограничения закрывают <a href="/edufamcs-demo/handbook/recsys/two-tower-ann/" rel="noopener noreferrer nofollow">двухбашенные модели</a>, <a href="/edufamcs-demo/handbook/recsys/posledovatelnye-modeli/" rel="noopener noreferrer nofollow">последовательные модели</a> и <a href="/edufamcs-demo/handbook/recsys/kandidaty-i-ranzhirovanie/" rel="noopener noreferrer nofollow">двухстадийная схема</a> с ранжированием по признакам.</p>
 <p>Что дальше по истории. Квадратичная потеря на нулях — не лучший способ оптимизировать порядок: это исправляют ранжирующие функции потерь в <a href="/edufamcs-demo/handbook/recsys/neyavnyj-fidbek-bpr/" rel="noopener noreferrer nofollow">BPR и WARP</a>, там же — эмпирическая проверка того, что iALS при хорошей настройке остаётся сильным. Альтернативный путь вообще без факторов — линейные модели <a href="/edufamcs-demo/handbook/recsys/slim-i-ease/" rel="noopener noreferrer nofollow">SLIM и EASE</a>.</p>
+<h2 id="ловушки">Ловушки</h2>
+<ul>
+<li>Не маскировать просмотренное при выдаче: модель с высокой вероятностью вернёт то, что пользователь уже видел.</li>
+<li>Подбирать <span class="tex">\lambda</span>, <span class="tex">\alpha</span>, <span class="tex">f</span> по случайному сплиту: выигрывает модель, лучше подглядывающая в будущее.</li>
+<li>Давать сырые счётчики в качестве <span class="tex">r_{ui}</span> с большим <span class="tex">\alpha</span>: одно «залипшее» событие перетягивает вектор; сначала сжимайте, например <span class="tex">\log(1+r)</span>.</li>
+<li>Считать, что ALS сходится к глобальному минимуму: гарантия только стационарной точки, результат зависит от инициализации.</li>
+<li>Забыть, что новому пользователю и объекту нужен folding-in или контент: вектора для них нет.</li>
+<li>На собеседовании: выведите шаг ALS для одного пользователя и объясните, почему матрица <span class="tex">Y_u^\top Y_u+\lambda I</span> обратима.</li>
+<li>На собеседовании: как ALS с весами уверенности учитывает все нули за линейное время (трюк с <span class="tex">Y^\top Y</span>)?</li>
+<li>На собеседовании: как получить вектор для пользователя, пришедшего после обучения?</li>
+</ul>
+<h2 id="проверь-себя">Проверь себя</h2>
+<details class="callout md details"><summary>Почему шаг ALS при фиксированных $Y$ имеет решение в замкнутой форме?</summary>
+<p>Тогда <span class="tex">\mathcal{L}_u</span> — квадратичная выпуклая функция от <span class="tex">x_u</span> (гребневая регрессия), и приравнивание градиента нулю даёт <span class="tex">x_u=(Y_u^\top Y_u+\lambda I)^{-1}Y_u^\top r_u</span>. Совместно по <span class="tex">(X,Y)</span> задача не выпукла.</p>
+</details>
+<details class="callout md details"><summary>Зачем нужен $\lambda&gt;0$, если у пользователя оценок меньше, чем $f$?</summary>
+<p>Без него <span class="tex">Y_u^\top Y_u</span> вырождена (ранг не больше <span class="tex">|\Omega_u|&lt;f</span>) и решение не единственно. Добавка <span class="tex">\lambda I</span> делает матрицу положительно определённой и не даёт подогнать две оценки идеально.</p>
+</details>
+<details class="callout md details"><summary>Почему в неявном ALS нельзя просто считать $Y^\top C^u Y$ для каждого пользователя?</summary>
+<p>Это проход по всему каталогу на каждого пользователя. Разложение <span class="tex">Y^\top Y + Y^\top(C^u-I)Y</span> выносит общую часть, а <span class="tex">C^u-I</span> ненулевая лишь на <span class="tex">n_u</span> объектах, поэтому шаг линеен по числу наблюдений.</p>
+</details>
+<details class="callout md details"><summary>Что такое folding-in и чем он отличается от переобучения модели?</summary>
+<p>Это одна половина шага ALS с зафиксированными факторами объектов: вектор пользователя пересчитывается по его истории за <span class="tex">O(n_u f^2+f^3)</span>. Факторы <span class="tex">Y</span> не обновляются, поэтому вектор согласован с текущей моделью, но не идентичен результату полного обучения.</p>
+</details>
+<details class="callout md details"><summary>Гарантирует ли ALS глобальный минимум?</summary>
+<p>Нет. Блочный координатный спуск монотонно не увеличивает <span class="tex">\mathcal{L}</span>, а предельные точки факторов при <span class="tex">\lambda&gt;0</span> — стационарные точки; глобальный минимум не гарантирован, задача не выпукла по <span class="tex">(X,Y)</span> совместно.</p>
+</details>
 <h2 id="что-почитать">Что почитать</h2>
 <ul>
 <li>Koren Y., Bell R., Volinsky C. <em>Matrix Factorization Techniques for Recommender Systems</em>, IEEE Computer, 2009 — https://doi.org/10.1109/MC.2009.263</li>
@@ -189,6 +236,8 @@ ids<span class="tok-p">,</span> scores <span class="tok-p">=</span> model<span c
       
 
       
+
+      
       <nav class="pager" aria-label="Соседние статьи">
         <a href="/edufamcs-demo/handbook/recsys/kollaborativnaya-filtraciya-po-sosedyam/"><span><svg class="ico sm" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-arrow-left"/></svg>Назад</span>Коллаборативная фильтрация по соседям</a>
         <a href="/edufamcs-demo/handbook/recsys/neyavnyj-fidbek-bpr/"><span>Дальше<svg class="ico sm" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-arrow"/></svg></span>Неявный фидбэк: BPR, WARP и негативы</a>
@@ -197,7 +246,7 @@ ids<span class="tok-p">,</span> scores <span class="tok-p">=</span> model<span c
     </article>
 
     <aside class="hb-toc" aria-label="На этой странице">
-      <a class="l2" href="#история-netflix-prize-20062009">История: Netflix Prize (2006–2009)</a><a class="l2" href="#постановка-для-явных-оценок">Постановка для явных оценок</a><a class="l2" href="#шаг-als-вывод-формулы">Шаг ALS: вывод формулы</a><a class="l2" href="#неявный-фидбэк-als-с-весами-уверенности">Неявный фидбэк: ALS с весами уверенности</a><a class="l2" href="#как-подбирать-гиперпараметры">Как подбирать гиперпараметры</a><a class="l2" href="#als-или-sgd">ALS или SGD</a><a class="l2" href="#ограничения">Ограничения</a><a class="l2" href="#что-почитать">Что почитать</a>
+      <a class="l2" href="#история-netflix-prize-20062009">История: Netflix Prize (2006–2009)</a><a class="l2" href="#постановка-для-явных-оценок">Постановка для явных оценок</a><a class="l2" href="#шаг-als-вывод-формулы">Шаг ALS: вывод формулы</a><a class="l3" href="#числовой-пример-одного-шага">Числовой пример одного шага</a><a class="l2" href="#неявный-фидбэк-als-с-весами-уверенности">Неявный фидбэк: ALS с весами уверенности</a><a class="l2" href="#folding-in-вектор-нового-или-обновлённого-пользователя">Folding-in: вектор нового или обновлённого пользователя</a><a class="l2" href="#как-подбирать-гиперпараметры">Как подбирать гиперпараметры</a><a class="l2" href="#als-или-sgd">ALS или SGD</a><a class="l2" href="#ограничения">Ограничения</a><a class="l2" href="#ловушки">Ловушки</a><a class="l2" href="#проверь-себя">Проверь себя</a><a class="l2" href="#что-почитать">Что почитать</a>
     </aside>
   </div>
 </div>

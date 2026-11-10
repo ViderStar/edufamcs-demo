@@ -27,7 +27,7 @@
 <script src="/edufamcs-demo/static/js/site.js" defer></script>
 <script src="/edufamcs-demo/static/handbook/handbook.js" defer></script>
 </head>
-<body class="" hx-headers='{"X-CSRFToken": "UBgzPlTfS5pRNasYm7Ohdq1fLwc1EbLKGHhWJ8bW3iF5sJoezwHmuS9AhTOgJWwJ"}'>
+<body class="" hx-headers='{"X-CSRFToken": "OSJpckUvxej4hlC0GlIOUbJOY4ROxa51q5ymsmtmy1xDsERsFOWLC4BMqdYMhU4I"}'>
 <a class="skip" href="#main">К содержанию</a>
 <div class="demo-bar" role="note">Демо-версия для отзывов: вход, запись на курсы и формы здесь не работают.</div>
 
@@ -60,6 +60,7 @@
 
 
 <div class="container hb-page s-recsys">
+  <div class="hb-readbar" aria-hidden="true"><i></i></div>
   <div class="hb">
     <aside class="hb-nav" aria-label="Статьи раздела">
       
@@ -86,9 +87,9 @@
       <div class="hb-meta">
         
         
-        <span><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-clock"/></svg>13&nbsp;мин</span>
+        <span><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-clock"/></svg>15&nbsp;мин</span>
         <span class="hb-authors"><span class="avatar sm" title="Артем Лебедевич">АЛ</span>Артем Лебедевич</span>
-        <span><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-edit"/></svg>9 ноября 2026</span>
+        <span><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-edit"/></svg>10 ноября 2026</span>
         
         
       </div>
@@ -96,7 +97,7 @@
       
       <details class="hb-mtoc">
         <summary><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-list"/></svg>Содержание<svg class="ico sm" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-chev-down"/></svg></summary>
-        <a class="l2" href="#зачем">Зачем</a><a class="l2" href="#история">История</a><a class="l2" href="#конвейер">Конвейер</a><a class="l3" href="#разбиение-на-фрагменты-chunking">Разбиение на фрагменты (chunking)</a><a class="l3" href="#поиск-и-переранжирование">Поиск и переранжирование</a><a class="l3" href="#сборка-контекста-и-промпт">Сборка контекста и промпт</a><a class="l2" href="#улучшения">Улучшения</a><a class="l2" href="#где-rag-ломается">Где RAG ломается</a><a class="l2" href="#оценка">Оценка</a><a class="l2" href="#продакшен">Продакшен</a><a class="l2" href="#код-минимальный-rag">Код: минимальный RAG</a><a class="l2" href="#что-почитать">Что почитать</a>
+        <a class="l2" href="#зачем">Зачем</a><a class="l2" href="#история">История</a><a class="l2" href="#конвейер">Конвейер</a><a class="l3" href="#разбиение-на-фрагменты-chunking">Разбиение на фрагменты (chunking)</a><a class="l3" href="#поиск-и-переранжирование">Поиск и переранжирование</a><a class="l3" href="#сборка-контекста-и-промпт">Сборка контекста и промпт</a><a class="l2" href="#улучшения">Улучшения</a><a class="l2" href="#где-rag-ломается">Где RAG ломается</a><a class="l2" href="#оценка">Оценка</a><a class="l2" href="#продакшен">Продакшен</a><a class="l2" href="#код-минимальный-rag">Код: минимальный RAG</a><a class="l2" href="#проверь-себя">Проверь себя</a><a class="l2" href="#что-почитать">Что почитать</a>
       </details>
       
 
@@ -155,6 +156,7 @@
 <li><strong>Нужный фрагмент не найден.</strong> Это самый частый случай и он невидим в ответе: модель отвечает уверенно на основе соседнего текста. Поэтому качество поиска измеряется отдельно.</li>
 <li><strong>Модель игнорирует контекст</strong> или, наоборот, слепо верит нерелевантному. Конфликт между знаниями в весах и в контексте разрешается непредсказуемо.</li>
 <li><strong>Длинный контекст против RAG.</strong> Современные модели принимают сотни тысяч токенов; можно положить в промпт весь документ. Для одного документа это часто лучше (нет ошибок поиска). Но для корпусов в миллионы токенов, при требованиях к цене и задержке (стоимость растёт линейно по длине контекста на каждый запрос), при необходимости разграничения прав и свежести RAG остаётся. Чаще всего это не альтернативы: RAG находит документы, длинный контекст вмещает их целиком.</li>
+<li><strong>На собеседовании</strong> спрашивают: как устроен RAG-конвейер и где он чаще всего ломается; как оценивать поиск и генерацию по отдельности и что такое faithfulness; как выбрать размер фрагмента; чем RAG отличается от fine-tuning и от длинного контекста; как защититься от prompt injection через документы.</li>
 </ul>
 <h2 id="оценка">Оценка</h2>
 <p>Оценивать нужно <strong>две части отдельно</strong>, иначе непонятно, что чинить.</p>
@@ -184,7 +186,11 @@
 <span class="tok-k">from</span> sentence_transformers <span class="tok-k">import</span> SentenceTransformer
 <span class="tok-k">from</span> anthropic <span class="tok-k">import</span> Anthropic            <span class="tok-c"># любой клиент LLM: схема та же</span>
 
-docs <span class="tok-p">=</span> <span class="tok-p">[</span><span class="tok-p">.</span><span class="tok-p">.</span><span class="tok-p">.</span><span class="tok-p">]</span>                               <span class="tok-c"># список фрагментов (строки)</span>
+docs <span class="tok-p">=</span> <span class="tok-p">[</span>                                   <span class="tok-c"># список фрагментов (строки); в проекте — из вашего чанкера</span>
+    <span class="tok-s">"</span><span class="tok-s">ALS раскладывает матрицу взаимодействий на факторы пользователей и товаров.</span><span class="tok-s">"</span><span class="tok-p">,</span>
+    <span class="tok-s">"</span><span class="tok-s">HNSW — графовый индекс для приближённого поиска ближайших соседей.</span><span class="tok-s">"</span><span class="tok-p">,</span>
+    <span class="tok-s">"</span><span class="tok-s">RRF объединяет выдачи BM25 и плотного поиска по позициям документов.</span><span class="tok-s">"</span><span class="tok-p">,</span>
+<span class="tok-p">]</span>
 tok <span class="tok-p">=</span> <span class="tok-k">lambda</span> s<span class="tok-p">:</span> s<span class="tok-p">.</span>lower<span class="tok-p">(</span><span class="tok-p">)</span><span class="tok-p">.</span>split<span class="tok-p">(</span><span class="tok-p">)</span>
 
 emb <span class="tok-p">=</span> SentenceTransformer<span class="tok-p">(</span><span class="tok-s">"</span><span class="tok-s">intfloat/multilingual-e5-base</span><span class="tok-s">"</span><span class="tok-p">)</span>
@@ -218,6 +224,22 @@ client <span class="tok-p">=</span> Anthropic<span class="tok-p">(</span>api_key
     <span class="tok-k">return</span> msg<span class="tok-p">.</span>content<span class="tok-p">[</span><span class="tok-n">0</span><span class="tok-p">]</span><span class="tok-p">.</span>text<span class="tok-p">,</span> ids
 </code></pre></div>
 <p>Эти сорок строк — база; всё остальное (чанкинг по структуре, ACL, оценка, кэш) добавляется вокруг неё. Модель задаётся переменной окружения, а не зашита в код, потому что имена моделей устаревают быстрее индекса.</p>
+<h2 id="проверь-себя">Проверь себя</h2>
+<details class="callout md details"><summary>Почему качество поиска в RAG нужно измерять отдельно от качества ответа?</summary>
+<p>Если нужного фрагмента нет в контексте, модель всё равно отвечает уверенно, опираясь на соседний текст, и по ответу этого не видно. Метрики поиска (recall@k по фрагментам) показывают, что чинить: индекс или генерацию.</p>
+</details>
+<details class="callout md details"><summary>Что произойдёт, если сделать фрагменты слишком большими или слишком маленькими?</summary>
+<p>Слишком большие размывают эмбеддинг и тратят токены контекста, слишком маленькие непонятны без окружения («рост составил 3%»). Лечат подбором размера на разметке, перекрытием, нарезкой по структуре, parent-document и контекстуализацией.</p>
+</details>
+<details class="callout md details"><summary>Почему фильтровать по правам доступа нужно в поиске, а не в ответе?</summary>
+<p>Если документ попал в контекст, LLM его увидит и может пересказать, даже когда ей велено промолчать. Поэтому ACL хранят как метаданные в индексе и применяют при поиске.</p>
+</details>
+<details class="callout md details"><summary>Что такое lost in the middle и что с ним делают?</summary>
+<p>Качество ответа зависит от позиции нужного фрагмента: лучше всего начало и конец контекста, хуже середина. Берут меньше фрагментов, лучшие ставят в начало и конец, переранжируют перед сборкой.</p>
+</details>
+<details class="callout md details"><summary>Когда RAG нужен, а когда достаточно положить документ в длинный контекст?</summary>
+<p>Для одного документа длинный контекст часто лучше: нет ошибок поиска. Для корпусов в миллионы токенов, при ограничениях на цену и задержку (стоимость растёт с длиной контекста на каждый запрос), прав доступа и свежести остаётся RAG.</p>
+</details>
 <h2 id="что-почитать">Что почитать</h2>
 <ul>
 <li>Lewis et al., <a href="https://arxiv.org/abs/2005.11401" rel="noopener noreferrer nofollow">Retrieval-Augmented Generation for Knowledge-Intensive NLP Tasks</a>, 2020; Guu et al., <a href="https://arxiv.org/abs/2002.08909" rel="noopener noreferrer nofollow">REALM</a>, 2020; Izacard, Grave, <a href="https://arxiv.org/abs/2007.01282" rel="noopener noreferrer nofollow">Fusion-in-Decoder</a>, 2020.</li>
@@ -231,6 +253,8 @@ client <span class="tok-p">=</span> Anthropic<span class="tok-p">(</span>api_key
       
 
       
+
+      
       <nav class="pager" aria-label="Соседние статьи">
         <a href="/edufamcs-demo/handbook/retrieval/vektornye-indeksy/"><span><svg class="ico sm" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-arrow-left"/></svg>Назад</span>Векторные индексы: HNSW, IVF, PQ</a>
         <a href="/edufamcs-demo/handbook/retrieval/generativnyj-poisk/"><span>Дальше<svg class="ico sm" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-arrow"/></svg></span>Генеративный поиск: модель как индекс</a>
@@ -239,7 +263,7 @@ client <span class="tok-p">=</span> Anthropic<span class="tok-p">(</span>api_key
     </article>
 
     <aside class="hb-toc" aria-label="На этой странице">
-      <a class="l2" href="#зачем">Зачем</a><a class="l2" href="#история">История</a><a class="l2" href="#конвейер">Конвейер</a><a class="l3" href="#разбиение-на-фрагменты-chunking">Разбиение на фрагменты (chunking)</a><a class="l3" href="#поиск-и-переранжирование">Поиск и переранжирование</a><a class="l3" href="#сборка-контекста-и-промпт">Сборка контекста и промпт</a><a class="l2" href="#улучшения">Улучшения</a><a class="l2" href="#где-rag-ломается">Где RAG ломается</a><a class="l2" href="#оценка">Оценка</a><a class="l2" href="#продакшен">Продакшен</a><a class="l2" href="#код-минимальный-rag">Код: минимальный RAG</a><a class="l2" href="#что-почитать">Что почитать</a>
+      <a class="l2" href="#зачем">Зачем</a><a class="l2" href="#история">История</a><a class="l2" href="#конвейер">Конвейер</a><a class="l3" href="#разбиение-на-фрагменты-chunking">Разбиение на фрагменты (chunking)</a><a class="l3" href="#поиск-и-переранжирование">Поиск и переранжирование</a><a class="l3" href="#сборка-контекста-и-промпт">Сборка контекста и промпт</a><a class="l2" href="#улучшения">Улучшения</a><a class="l2" href="#где-rag-ломается">Где RAG ломается</a><a class="l2" href="#оценка">Оценка</a><a class="l2" href="#продакшен">Продакшен</a><a class="l2" href="#код-минимальный-rag">Код: минимальный RAG</a><a class="l2" href="#проверь-себя">Проверь себя</a><a class="l2" href="#что-почитать">Что почитать</a>
     </aside>
   </div>
 </div>

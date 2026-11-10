@@ -27,7 +27,7 @@
 <script src="/edufamcs-demo/static/js/site.js" defer></script>
 <script src="/edufamcs-demo/static/handbook/handbook.js" defer></script>
 </head>
-<body class="" hx-headers='{"X-CSRFToken": "u8BTIkYjpJqyAoHL0inxbvGgBzsSJqkNgeCgC7g0AWGMfXD1dHgCsXOB7W47Ob5M"}'>
+<body class="" hx-headers='{"X-CSRFToken": "0aEgGj3wgJuG3KJg3G7MGL3PAzXLONY1CntdWlCnhwIfe3YI29lJoEVN2I4JyxXI"}'>
 <a class="skip" href="#main">К содержанию</a>
 <div class="demo-bar" role="note">Демо-версия для отзывов: вход, запись на курсы и формы здесь не работают.</div>
 
@@ -60,6 +60,7 @@
 
 
 <div class="container hb-page s-recsys">
+  <div class="hb-readbar" aria-hidden="true"><i></i></div>
   <div class="hb">
     <aside class="hb-nav" aria-label="Статьи раздела">
       
@@ -90,9 +91,9 @@
       <div class="hb-meta">
         
         
-        <span><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-clock"/></svg>16&nbsp;мин</span>
+        <span><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-clock"/></svg>19&nbsp;мин</span>
         <span class="hb-authors"><span class="avatar sm" title="Артем Лебедевич">АЛ</span>Артем Лебедевич</span>
-        <span><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-edit"/></svg>9 ноября 2026</span>
+        <span><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-edit"/></svg>10 ноября 2026</span>
         
         
       </div>
@@ -100,7 +101,7 @@
       
       <details class="hb-mtoc">
         <summary><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-list"/></svg>Содержание<svg class="ico sm" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-chev-down"/></svg></summary>
-        <a class="l2" href="#постановка">Постановка</a><a class="l2" href="#логрегрессия-hashing-trick-и-ftrl-20092013">Логрегрессия, hashing trick и FTRL (2009–2013)</a><a class="l2" href="#factorization-machines-2010">Factorization Machines (2010)</a><a class="l2" href="#глубокие-модели-20162021">Глубокие модели (2016–2021)</a><a class="l2" href="#поведенческие-последовательности">Поведенческие последовательности</a><a class="l2" href="#многозадачность">Многозадачность</a><a class="l2" href="#числовые-признаки-и-эмбеддинги">Числовые признаки и эмбеддинги</a><a class="l2" href="#метрики">Метрики</a><a class="l2" href="#подводные-камни">Подводные камни</a><a class="l2" href="#что-дальше-масштабирование-ранжирования">Что дальше: масштабирование ранжирования</a><a class="l2" href="#что-почитать">Что почитать</a>
+        <a class="l2" href="#постановка">Постановка</a><a class="l2" href="#логрегрессия-hashing-trick-и-ftrl-20092013">Логрегрессия, hashing trick и FTRL (2009–2013)</a><a class="l2" href="#factorization-machines-2010">Factorization Machines (2010)</a><a class="l2" href="#глубокие-модели-20162021">Глубокие модели (2016–2021)</a><a class="l3" href="#gbdt-со-счётчиками-как-промышленный-бейзлайн">GBDT со счётчиками как промышленный бейзлайн</a><a class="l2" href="#поведенческие-последовательности">Поведенческие последовательности</a><a class="l2" href="#многозадачность">Многозадачность</a><a class="l2" href="#числовые-признаки-и-эмбеддинги">Числовые признаки и эмбеддинги</a><a class="l2" href="#метрики">Метрики</a><a class="l2" href="#подводные-камни">Подводные камни</a><a class="l2" href="#что-дальше-масштабирование-ранжирования">Что дальше: масштабирование ранжирования</a><a class="l2" href="#проверь-себя">Проверь себя</a><a class="l2" href="#что-почитать">Что почитать</a>
       </details>
       
 
@@ -221,6 +222,9 @@
         <span class="tok-k">return</span> <span class="tok-f">self</span><span class="tok-p">.</span>head<span class="tok-p">(</span>torch<span class="tok-p">.</span>cat<span class="tok-p">(</span><span class="tok-p">[</span>xl<span class="tok-p">,</span> <span class="tok-f">self</span><span class="tok-p">.</span>deep<span class="tok-p">(</span>x0<span class="tok-p">)</span><span class="tok-p">]</span><span class="tok-p">,</span> <span class="tok-p">-</span><span class="tok-n">1</span><span class="tok-p">)</span><span class="tok-p">)</span><span class="tok-p">.</span>squeeze<span class="tok-p">(</span><span class="tok-p">-</span><span class="tok-n">1</span><span class="tok-p">)</span>
 </code></pre></div>
 <p><strong>AutoInt</strong> (Song et al., 2019) трактует поля как токены и применяет к ним self-attention; веса внимания показывают, какие пары полей важны.</p>
+<p><strong>DLRM</strong> (Naumov et al., 2019, Meta) — референсная архитектура промышленного ранжирования, на которую ссылаются дальнейшие статьи раздела. Категориальные признаки превращаются в векторы одной размерности <span class="tex">d</span> через <strong>таблицы эмбеддингов</strong> (по одной на признак); числовые признаки проходят через <strong>bottom MLP</strong>, который тоже выдаёт вектор размерности <span class="tex">d</span>. Затем считаются <strong>попарные скалярные произведения</strong> всех этих векторов — явные взаимодействия второго порядка, как в FM, — результат конкатенируется с выходом bottom MLP и подаётся в <strong>top MLP</strong> с сигмоидой на выходе. Основная нагрузка по памяти — таблицы эмбеддингов (миллиарды параметров), по вычислениям — MLP; поэтому в обучении таблицы шардируют между устройствами, а MLP реплицируют.</p>
+<h3 id="gbdt-со-счётчиками-как-промышленный-бейзлайн">GBDT со счётчиками как промышленный бейзлайн</h3>
+<p>Прежде чем строить глубокую модель, обучите градиентный бустинг (LightGBM, CatBoost, XGBoost) на табличных признаках: <strong>счётчики</strong> CTR объекта, пользователя, сегмента и пар «пользователь × категория» по нескольким окнам (со сглаживанием <span class="tex">\frac{\text{клики}+\alpha p_0}{\text{показы}+\alpha}</span>), давность и частота событий, позиция и контекст. Такая модель быстро обучается, устойчива к плохим данным, не требует таблиц эмбеддингов и во многих системах остаётся ранжировщиком — а любая нейросеть должна доказать прирост относительно неё на той же временной валидации. Главная ловушка — утечка: счётчик для показа в момент <span class="tex">t</span> можно считать только по событиям до <span class="tex">t</span>.</p>
 <h2 id="поведенческие-последовательности">Поведенческие последовательности</h2>
 <p>Главный признак пользователя — его история. Усреднение эмбеддингов (sum pooling) теряет то, что <strong>для разных целевых объектов важны разные элементы истории</strong>: для кандидата-кроссовок история с рюкзаками и обувью важнее истории про бытовую химию.</p>
 <p><strong>DIN</strong> (Zhou et al., 2018, Alibaba). Target attention: вес элемента истории <span class="tex">e_j</span> зависит от кандидата <span class="tex">e_t</span>:</p>
@@ -258,9 +262,28 @@
 <li><strong>Отрицательные примеры.</strong> Показы без кликов — сильный дисбаланс (CTR 1–5 %); негативы подсэмплируют, а затем <strong>корректируют вероятность</strong>: <span class="tex">p = q/(q + (1-q)/w)</span>, где <span class="tex">q</span> — предсказание модели, обученной на подсэмплированных данных, а <span class="tex">w</span> — доля оставленных негативов. Вывод: подсэмплирование делит шансы <span class="tex">p/(1-p)</span> на <span class="tex">w</span>, значит <span class="tex">q/(1-q) = p/\big(w(1-p)\big)</span>.</li>
 <li><strong>Холодные значения</strong> в хешированных таблицах: редкие значения лучше обучать через общий «unknown»-бакет или <code>min_count</code>.</li>
 <li><strong>Latency.</strong> Ранжировщик вызывается на сотни кандидатов за десятки миллисекунд; поэтому с DIN нельзя ходить за каждой историей из базы — признак читают из онлайн-хранилища.</li>
+<li>На собеседовании: как устроен DLRM и чем явные взаимодействия лучше «просто MLP над конкатенацией»?</li>
+<li>На собеседовании: почему после подсэмплирования негативов вероятности нужно пересчитывать и как вывести формулу?</li>
+<li>На собеседовании: AUC против GAUC и калибровка: когда хорошая модель по AUC всё равно непригодна?</li>
 </ul>
 <h2 id="что-дальше-масштабирование-ранжирования">Что дальше: масштабирование ранжирования</h2>
 <p>К 2024 году индустрия пришла к вопросу: что даёт больше качества — новая архитектура взаимодействий или просто больший размер модели? Wukong (Meta, 2024, <a href="https://arxiv.org/abs/2403.02545" rel="noopener noreferrer nofollow">arXiv:2403.02545</a>) показал степенной закон масштабирования для ранжирования на стеке факторизационных блоков, RankMixer (ByteDance, 2025, <a href="https://arxiv.org/abs/2507.15551" rel="noopener noreferrer nofollow">arXiv:2507.15551</a>) заменил внимание на «смешивание токенов» с эффективным использованием GPU. Эту линию продолжают <a href="/edufamcs-demo/handbook/recsys/generativnye-rekomendateli/" rel="noopener noreferrer nofollow">генеративные рекомендатели</a>. Где именно в системе стоит CTR-модель и чем её кормят — в главе о <a href="/edufamcs-demo/handbook/recsys/kandidaty-i-ranzhirovanie/" rel="noopener noreferrer nofollow">двухстадийной схеме</a>.</p>
+<h2 id="проверь-себя">Проверь себя</h2>
+<details class="callout md details"><summary>Какой компромисс даёт hashing trick?</summary>
+<p>Индекс веса определяется хешем значения, поэтому память фиксирована, а новые значения не требуют перестройки словаря. Плата — коллизии; заметный вред от них возможен, лишь когда <span class="tex">M</span> сопоставим с числом частых значений.</p>
+</details>
+<details class="callout md details"><summary>Почему после $L$ cross-слоёв получаются взаимодействия до степени $L+1$?</summary>
+<p>В <span class="tex">x_{l+1}=x_0\odot(W_lx_l+b_l)+x_l</span> каждый слой умножает на <span class="tex">x_0</span>, повышая степень на единицу, а остаточная связь <span class="tex">+x_l</span> сохраняет низшие порядки.</p>
+</details>
+<details class="callout md details"><summary>Почему DIN нельзя использовать для ANN-поиска, как двухбашенную модель?</summary>
+<p>Вес элемента истории зависит от кандидата, поэтому вектор пользователя пересчитывается для каждого кандидата. Единого вектора пользователя нет, и по индексу объектов искать нельзя; модель годится только для ранжирования.</p>
+</details>
+<details class="callout md details"><summary>Зачем подсэмплируют негативы и как вернуть вероятность?</summary>
+<p>Негативов на порядки больше, и их оставляют долю <span class="tex">w</span>. Подсэмплирование делит шансы на <span class="tex">w</span>, поэтому <span class="tex">p=q/(q+(1-q)/w)</span>, где <span class="tex">q</span> — предсказание модели на подсэмплированных данных.</p>
+</details>
+<details class="callout md details"><summary>Почему CVR, обученная только на кликах, смещена и как это лечит ESMM?</summary>
+<p>Конверсия наблюдается только после клика, а применять модель нужно ко всем показам (sample selection bias). ESMM обучает <span class="tex">p(\text{click})</span> и <span class="tex">p(\text{conv}\mid\text{click})</span> на всём пространстве показов через их произведение.</p>
+</details>
 <h2 id="что-почитать">Что почитать</h2>
 <ul>
 <li>Rendle. <em>Factorization Machines</em>, ICDM 2010 (DOI 10.1109/ICDM.2010.127).</li>
@@ -274,6 +297,8 @@
       
 
       
+
+      
       <nav class="pager" aria-label="Соседние статьи">
         <a href="/edufamcs-demo/handbook/recsys/slim-i-ease/"><span><svg class="ico sm" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-arrow-left"/></svg>Назад</span>Линейные item-item модели: SLIM и EASE</a>
         <a href="/edufamcs-demo/handbook/recsys/two-tower-ann/"><span>Дальше<svg class="ico sm" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-arrow"/></svg></span>Нейросетевые рекомендации: two-tower, negative sampling, ANN</a>
@@ -282,7 +307,7 @@
     </article>
 
     <aside class="hb-toc" aria-label="На этой странице">
-      <a class="l2" href="#постановка">Постановка</a><a class="l2" href="#логрегрессия-hashing-trick-и-ftrl-20092013">Логрегрессия, hashing trick и FTRL (2009–2013)</a><a class="l2" href="#factorization-machines-2010">Factorization Machines (2010)</a><a class="l2" href="#глубокие-модели-20162021">Глубокие модели (2016–2021)</a><a class="l2" href="#поведенческие-последовательности">Поведенческие последовательности</a><a class="l2" href="#многозадачность">Многозадачность</a><a class="l2" href="#числовые-признаки-и-эмбеддинги">Числовые признаки и эмбеддинги</a><a class="l2" href="#метрики">Метрики</a><a class="l2" href="#подводные-камни">Подводные камни</a><a class="l2" href="#что-дальше-масштабирование-ранжирования">Что дальше: масштабирование ранжирования</a><a class="l2" href="#что-почитать">Что почитать</a>
+      <a class="l2" href="#постановка">Постановка</a><a class="l2" href="#логрегрессия-hashing-trick-и-ftrl-20092013">Логрегрессия, hashing trick и FTRL (2009–2013)</a><a class="l2" href="#factorization-machines-2010">Factorization Machines (2010)</a><a class="l2" href="#глубокие-модели-20162021">Глубокие модели (2016–2021)</a><a class="l3" href="#gbdt-со-счётчиками-как-промышленный-бейзлайн">GBDT со счётчиками как промышленный бейзлайн</a><a class="l2" href="#поведенческие-последовательности">Поведенческие последовательности</a><a class="l2" href="#многозадачность">Многозадачность</a><a class="l2" href="#числовые-признаки-и-эмбеддинги">Числовые признаки и эмбеддинги</a><a class="l2" href="#метрики">Метрики</a><a class="l2" href="#подводные-камни">Подводные камни</a><a class="l2" href="#что-дальше-масштабирование-ранжирования">Что дальше: масштабирование ранжирования</a><a class="l2" href="#проверь-себя">Проверь себя</a><a class="l2" href="#что-почитать">Что почитать</a>
     </aside>
   </div>
 </div>

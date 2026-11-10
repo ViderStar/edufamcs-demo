@@ -1,0 +1,287 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Поиск в e-commerce · EDU FAMCS</title>
+<meta name="description" content="Поиск в e-commerce — Поиск. Хендбук ML-курса ФПМИ.">
+<meta name="theme-color" content="#060A16">
+<meta name="robots" content="noindex, nofollow">
+<meta name="htmx-config" content='{"allowEval":false,"includeIndicatorStyles":false,"historyCacheSize":0,"selfRequestsOnly":true}'>
+<meta name="katex-js" content="/edufamcs-demo/static/vendor/katex/katex.min.js">
+<meta name="katex-css" content="/edufamcs-demo/static/vendor/katex/katex.min.css">
+<link rel="icon" href="/edufamcs-demo/static/brand/logo/favicon-16.svg" type="image/svg+xml" sizes="16x16">
+<link rel="icon" href="/edufamcs-demo/static/brand/logo/favicon.svg" type="image/svg+xml" sizes="any">
+<link rel="preload" href="/edufamcs-demo/static/brand/fonts/manrope-cyrillic-400.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/edufamcs-demo/static/brand/fonts/unbounded-cyrillic-800.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="/edufamcs-demo/static/brand/fonts.css">
+<link rel="stylesheet" href="/edufamcs-demo/static/brand/tokens.css">
+<link rel="stylesheet" href="/edufamcs-demo/static/brand/components.css">
+<link rel="stylesheet" href="/edufamcs-demo/static/css/site.css">
+<link rel="stylesheet" href="/edufamcs-demo/static/css/hub.css">
+<link rel="stylesheet" href="/edufamcs-demo/static/css/about.css">
+<link rel="stylesheet" href="/edufamcs-demo/static/handbook/handbook.css">
+<script src="/edufamcs-demo/static/js/theme.js"></script>
+<script src="/edufamcs-demo/static/vendor/htmx/htmx.min.js" defer></script>
+<script src="/edufamcs-demo/static/vendor/alpine/alpine-csp.min.js" defer></script>
+<script src="/edufamcs-demo/static/js/site.js" defer></script>
+<script src="/edufamcs-demo/static/handbook/handbook.js" defer></script>
+</head>
+<body class="" hx-headers='{"X-CSRFToken": "QnFnD180wBWAUsgdDIulSygCgBgqH2jNsAukT3HRxoa95LvFCbIiAr8AIKnorMiu"}'>
+<a class="skip" href="#main">К содержанию</a>
+<div class="demo-bar" role="note">Демо-версия для отзывов: вход, запись на курсы и формы здесь не работают.</div>
+
+<header class="hdr">
+  <div class="container">
+    <a class="brand" href="/edufamcs-demo/" aria-label="EDU FAMCS — главная">
+      <span class="full"><img class="only-light" src="/edufamcs-demo/static/brand/logo/logo-edu-light.svg" alt="EDU FAMCS" width="196" height="40"><img class="only-dark" src="/edufamcs-demo/static/brand/logo/logo-edu-dark.svg" alt="EDU FAMCS" width="196" height="40"></span>
+      <span class="short"><img class="only-light" src="/edufamcs-demo/static/brand/logo/logo-edu-light.svg" alt="EDU FAMCS" height="30"><img class="only-dark" src="/edufamcs-demo/static/brand/logo/logo-edu-dark.svg" alt="EDU FAMCS" height="30"></span>
+    </a>
+    <nav class="nav" id="main-nav" aria-label="Основная навигация">
+      <a href="/edufamcs-demo/#courses">Курсы</a>
+      <a href="/edufamcs-demo/ml/" >Машинное обучение</a>
+      
+      <a href="/edufamcs-demo/handbook/" aria-current="page">Хендбук</a>
+      <a href="/edufamcs-demo/news/" >Новости</a>
+      <a href="/edufamcs-demo/people/" >Авторы</a>
+      <a href="/edufamcs-demo/about/" >О&nbsp;нас</a>
+    </nav>
+    <div class="hdr-actions">
+      
+      <a class="btn btn-outline btn-login" href="/edufamcs-demo/accounts/login/?next=/handbook/retrieval/ecommerce-poisk/">Войти</a>
+      
+      <button class="icon-btn menu-btn" type="button" aria-label="Меню" aria-expanded="false" aria-controls="main-nav"><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-menu"/></svg></button>
+    </div>
+  </div>
+</header>
+
+<main id="main">
+
+
+
+<div class="container hb-page s-recsys">
+  <div class="hb-readbar" aria-hidden="true"><i></i></div>
+  <div class="hb">
+    <aside class="hb-nav" aria-label="Статьи раздела">
+      
+<form class="hb-search" action="/edufamcs-demo/handbook/search/" method="get" role="search">
+  <svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-search"/></svg>
+  <input class="input" type="search" name="q" value="" placeholder="Поиск по хендбуку" aria-label="Поиск по хендбуку" autocomplete="off" maxlength="120"
+    hx-get="/edufamcs-demo/handbook/search/" hx-trigger="input changed delay:250ms, search" hx-target="#hb-nav-results" hx-sync="this:replace">
+</form>
+
+      <div id="hb-nav-results" class="hb-nav-results" aria-live="polite"></div>
+      <a class="grp" href="/edufamcs-demo/handbook/retrieval/">Поиск в продакшене</a>
+      
+      <a class="" href="/edufamcs-demo/handbook/retrieval/obuchenie-embedderov/">Как обучают эмбеддеры для поиска</a>
+      
+      <a class="" href="/edufamcs-demo/handbook/retrieval/poiskovye-dvizhki/">Поисковые движки: Elasticsearch, OpenSearch, Qdrant, Vespa</a>
+      
+      <a class="cur" href="/edufamcs-demo/handbook/retrieval/ecommerce-poisk/" aria-current="page">Поиск в e-commerce</a>
+      
+    </aside>
+
+    <article class="hb-main">
+      <nav class="crumbs" aria-label="Навигация"><a href="/edufamcs-demo/handbook/">Хендбук</a><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-chev"/></svg><a href="/edufamcs-demo/handbook/retrieval/">Поиск</a></nav>
+      <h1 class="h1">Поиск в e-commerce</h1>
+      <div class="hb-meta">
+        
+        
+        <span><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-clock"/></svg>13&nbsp;мин</span>
+        <span class="hb-authors"><span class="avatar sm" title="Артем Лебедевич">АЛ</span>Артем Лебедевич</span>
+        <span><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-edit"/></svg>10 ноября 2026</span>
+        
+        
+      </div>
+
+      
+      <details class="hb-mtoc">
+        <summary><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-list"/></svg>Содержание<svg class="ico sm" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-chev-down"/></svg></summary>
+        <a class="l2" href="#чем-товарный-поиск-отличается-от-веба">Чем товарный поиск отличается от веба</a><a class="l2" href="#намерения-запроса">Намерения запроса</a><a class="l2" href="#конвейер">Конвейер</a><a class="l2" href="#фасеты-фильтры-и-пустая-выдача">Фасеты, фильтры и пустая выдача</a><a class="l2" href="#метки-релевантности-esci">Метки релевантности: ESCI</a><a class="l2" href="#онлайн-метрики-и-их-ловушки">Онлайн-метрики и их ловушки</a><a class="l2" href="#персонализация-и-связь-с-рекомендациями">Персонализация и связь с рекомендациями</a><a class="l2" href="#как-улучшить-поиск-маркетплейса-структура-ответа">Как улучшить поиск маркетплейса: структура ответа</a><a class="l2" href="#код">Код</a><a class="l2" href="#ловушки">Ловушки</a><a class="l2" href="#проверь-себя">Проверь себя</a><a class="l2" href="#что-почитать">Что почитать</a>
+      </details>
+      
+
+      <div class="prose"><p>Поиск по товарам выглядит как веб-поиск в миниатюре, но устроен иначе: документы — это структурированные карточки, запросы — две-три слова, а цель — не найти страницу, а продать подходящий товар, который есть на складе. Поэтому почти всё, что вы знаете про <a href="/edufamcs-demo/handbook/retrieval/bm25-invertirovannyj-indeks/" rel="noopener noreferrer nofollow">BM25</a>, <a href="/edufamcs-demo/handbook/retrieval/learning-to-rank/" rel="noopener noreferrer nofollow">ранжирование</a> и <a href="/edufamcs-demo/handbook/retrieval/ocenka-kachestva-poiska/" rel="noopener noreferrer nofollow">оценку</a>, здесь работает, но с другим набором признаков, меток и ограничений. Это и частый предмет интервью: «как улучшить поиск маркетплейса».</p>
+<h2 id="чем-товарный-поиск-отличается-от-веба">Чем товарный поиск отличается от веба</h2>
+<ul>
+<li><strong>Структурированный каталог.</strong> У товара есть категория, бренд, атрибуты (цвет, размер, объём памяти), цена, наличие. Запрос часто выражает ограничения на эти атрибуты, а не только тему.</li>
+<li><strong>Варианты и SKU.</strong> Одна карточка «кроссовки Nike Air» — десятки SKU (размер × цвет) с разным наличием и ценой. Что индексировать — карточку или вариант, определяет и выдачу, и дубли.</li>
+<li><strong>Короткие запросы</strong> с высокой долей опечаток, раскладок и транслита. Мало текста — слабый сигнал для BM25 и эмбеддера.</li>
+<li><strong>Деньги и логистика.</strong> Нерелевантный, но дорогой и маржинальный товар легко «победит» в ранжировании, если цель — выручка; недоступный товар на первом месте — прямая потеря доверия.</li>
+</ul>
+<h2 id="намерения-запроса">Намерения запроса</h2>
+<p>Разметка по Бродеру из <a href="/edufamcs-demo/handbook/retrieval/ponimanie-zaprosa/" rel="noopener noreferrer nofollow">статьи про понимание запроса</a> в e-commerce превращается в практичную смесь:</p>
+<ul>
+<li><strong>Навигационные:</strong> бренд или модель («iphone 15 pro», «nike air max»). Нужен точный товар или линейка; лексика и точные совпадения важнее семантики.</li>
+<li><strong>Категорийные</strong> («кроссовки», «наушники»): пользователь просматривает ассортимент. Здесь важны разнообразие и популярность, а не один «правильный» ответ.</li>
+<li><strong>Атрибутные</strong> («красные кроссовки 42», «ноутбук 16 гб 512 гб»): сочетание категории и жёстких ограничений. Размер 41 вместо 42 — не «почти хорошо», а промах.</li>
+<li><strong>Описательные и вопросительные</strong> («чем заменить пылесос», «подарок маме»): ближе всего к плотному поиску.</li>
+</ul>
+<p>Разные намерения требуют разной стратегии: жёсткие атрибуты лучше превращать в <strong>фильтры</strong>, а не в слова для скоринга.</p>
+<h2 id="конвейер">Конвейер</h2>
+<ol>
+<li><strong>Понимание запроса</strong>: исправление опечаток, транслит и раскладка («кросовки», «rhjccjdrb»), предсказание категории, извлечение атрибутов, нормализация единиц (см. <a href="/edufamcs-demo/handbook/retrieval/ponimanie-zaprosa/" rel="noopener noreferrer nofollow">понимание запроса</a>).</li>
+<li><strong>Отбор кандидатов</strong>: лексический поиск и векторный, объединённые RRF или взвешиванием (<a href="/edufamcs-demo/handbook/retrieval/plotnyj-i-gibridnyj-poisk/" rel="noopener noreferrer nofollow">плотный и гибридный поиск</a>), с фильтрами по категории и атрибутам, наличию и региону (<a href="/edufamcs-demo/handbook/retrieval/poiskovye-dvizhki/" rel="noopener noreferrer nofollow">движки</a>).</li>
+<li><strong>Ранжирование</strong>: модель <a href="/edufamcs-demo/handbook/retrieval/learning-to-rank/" rel="noopener noreferrer nofollow">LTR</a> на признаках: текстовая релевантность (BM25 по полям — название, бренд, атрибуты), семантическое сходство, популярность, конверсия карточки, цена относительно категории, наличие и срок доставки, персональные признаки.</li>
+<li><strong>Бизнес-переранжирование и разнообразие</strong>: рекламные (спонсорные) слоты, ограничения продавцов, дедупликация вариантов, диверсификация брендов и цен. Схема «кандидаты → ранжирование → правила» та же, что в рекомендациях: <a href="/edufamcs-demo/handbook/recsys/kandidaty-i-ranzhirovanie/" rel="noopener noreferrer nofollow">кандидаты и ранжирование</a>.</li>
+</ol>
+<p>Ключевая идея: фильтры и бизнес-правила — отдельные слои. Если наличие и доставка лежат в правилах, их видно и можно менять без переобучения; если они только признаки модели, жёсткость ограничения зависит от того, что модель выучила.</p>
+<h2 id="фасеты-фильтры-и-пустая-выдача">Фасеты, фильтры и пустая выдача</h2>
+<p><strong>Фасеты</strong> (счётчики значений атрибутов в выдаче) считаются агрегациями по найденному набору и работают в паре с предсказанной категорией: уместный набор фасетов зависит от категории (для обуви — размер, для ноутбуков — память). Фильтр, который пользователь выставил руками, нельзя молча снимать.</p>
+<p><strong>Нулевая и слабая выдача</strong> — отдельная проблема. Типичные приёмы по возрастанию агрессивности: исправить опечатку и повторить; <strong>ослабить запрос</strong> (relaxation) — убрать наименее важное слово или атрибут, начиная с самого слабого, и показать объяснение («показаны товары без фильтра по цвету»); перейти на векторный поиск, который не требует точных слов; предложить связанные запросы и популярные товары категории. Метрика доля пустых выдач (zero-result rate) легко «улучшается» мусорной выдачей, поэтому смотрите её вместе с кликами и конверсией.</p>
+<h2 id="метки-релевантности-esci">Метки релевантности: ESCI</h2>
+<p>Бинарные метки «релевантен / нет» для товаров грубы: красные кроссовки 42 вместо 43 — не то же самое, что чехол. Reddy et al. (2022) выпустили датасет <strong>Shopping Queries Dataset</strong> (arXiv 2206.06588, использовался в KDD Cup 2022): около 130 тысяч запросов и 2,6 млн размеченных пар «запрос — товар» на английском, японском и испанском (русского нет). Метка пары — одна из четырёх (схема ESCI):</p>
+<ul>
+<li><strong>Exact (E)</strong> — товар полностью соответствует запросу;</li>
+<li><strong>Substitute (S)</strong> — не то, что просили, но может служить заменой;</li>
+<li><strong>Complement (C)</strong> — подходит как дополнение к искомому;</li>
+<li><strong>Irrelevant (I)</strong> — не подходит.</li>
+</ul>
+<p>В датасете три задачи: ранжирование выдачи, классификация пары по четырём классам и определение заменителей. Для NDCG авторы задают градации усиления: <span class="tex">\text{gain}(E)=1{,}0</span>, <span class="tex">\text{gain}(S)=0{,}1</span>, <span class="tex">\text{gain}(C)=0{,}01</span>, <span class="tex">\text{gain}(I)=0</span>. Напомним определение с этими весами:</p>
+<div class="tex tex-block">\mathrm{DCG@}k=\sum_{i=1}^{k}\frac{g_i}{\log_2(i+1)},\qquad \mathrm{NDCG@}k=\frac{\mathrm{DCG@}k}{\mathrm{IDCG@}k},</div>
+<p>где <span class="tex">g_i</span> — усиление товара на позиции <span class="tex">i</span>, а <span class="tex">\mathrm{IDCG@}k</span> — DCG идеального порядка из тех же размеченных товаров (определения метрик — в <a href="/edufamcs-demo/handbook/recsys/oflajn-metriki/" rel="noopener noreferrer nofollow">офлайн-метриках</a>).</p>
+<p><strong>Пример.</strong> Размеченный пул запроса: EEESSCCIII. Выдача A (топ-5): S, E, E, I, C. Усиления: <span class="tex">0{,}1;\ 1;\ 1;\ 0;\ 0{,}01</span>, поэтому <span class="tex">\mathrm{DCG@5}=0{,}1+\frac{1}{1{,}585}+\frac{1}{2}+0+\frac{0{,}01}{2{,}585}\approx 1{,}235</span>. Идеальный топ-5 — E, E, E, S, S: <span class="tex">1+0{,}631+0{,}5+\frac{0{,}1}{2{,}322}+\frac{0{,}1}{2{,}585}\approx 2{,}213</span>. Итого <span class="tex">\mathrm{NDCG@5}\approx 0{,}558</span>. Заменитель на первом месте, где должен стоять точный товар, дорого стоит; подмена на «хотя бы релевантно» в бинарной метрике это скрывает.</p>
+<p>Конкретные значения градаций — договорённость, а не закон: для задачи «найти подходящий товар» заменитель может стоить больше, для «показать аксессуары» — комплемент. Фиксируйте шкалу до экспериментов.</p>
+<h2 id="онлайн-метрики-и-их-ловушки">Онлайн-метрики и их ловушки</h2>
+<ul>
+<li><strong>CTR@k</strong> (доля запросов с кликом в топ-<span class="tex">k</span>): растёт от привлекательной картинки и цены, не от релевантности; клик не равен покупке.</li>
+<li><strong>Add-to-cart и конверсия</strong>: ближе к ценности, но редки и запаздывают; на них влияют цена, акции и наличие вне поиска.</li>
+<li><strong>Zero-result rate</strong>: см. выше, легко «улучшить» мусором.</li>
+<li><strong>Доля реформулировок</strong> (пользователь тут же переписал запрос): сигнал недовольства, но и нормальная часть исследовательского поведения.</li>
+<li><strong>Выручка и маржа на сессию</strong>: цель бизнеса, но могут расти за счёт показа дорогого, а не нужного; проверяйте защитными метриками (возвраты, глубина прокрутки).</li>
+</ul>
+<p><strong>Позиционное смещение.</strong> Верхние позиции кликаются чаще просто потому, что их увидят. Клики нельзя читать как метки: нужны клик-модели (например, position-based model, где клик — это произведение вероятности просмотра позиции и привлекательности) или обучение с поправкой на позицию — разобрано в <a href="/edufamcs-demo/handbook/retrieval/ocenka-kachestva-poiska/" rel="noopener noreferrer nofollow">оценке качества</a> и <a href="/edufamcs-demo/handbook/retrieval/learning-to-rank/" rel="noopener noreferrer nofollow">LTR</a>. Свои изменения проверяйте A/B-тестом на метриках продукта, а не только офлайн NDCG.</p>
+<h2 id="персонализация-и-связь-с-рекомендациями">Персонализация и связь с рекомендациями</h2>
+<p>Один запрос «кроссовки» значит разное для разных людей: размер, бренд, ценовой сегмент. Персонализация добавляет в ранжирование признаки пользователя (история, предпочтения) и работает как в рекомендациях: двухбашенные модели и ранжирование на признаках — см. <a href="/edufamcs-demo/handbook/recsys/two-tower-ann/" rel="noopener noreferrer nofollow">two-tower и ANN</a>. Граница между поиском и рекомендациями размыта: пустой запрос — это рекомендации, запрос из одного слова — персонализированный поиск. Осторожно с «пузырём»: явный запрос приоритетнее профиля.</p>
+<h2 id="как-улучшить-поиск-маркетплейса-структура-ответа">Как улучшить поиск маркетплейса: структура ответа</h2>
+<ol>
+<li><strong>Определить цель и метрики</strong>: что оптимизируем (конверсия поиска, выручка на сессию) и какие защитные метрики (доля пустых выдач, возвраты, задержка).</li>
+<li><strong>Измерить текущее состояние</strong>: срезы по типам запросов (навигационные, атрибутные, редкие), доля нулевых выдач, топ запросов без кликов, размеченная выборка запросов с метками ESCI-типа.</li>
+<li><strong>Найти потери по слоям</strong>: понимание запроса (опечатки, атрибуты), кандидаты (recall@k по разметке), ранжирование, бизнес-правила. Часто самый большой выигрыш — в первых слоях.</li>
+<li><strong>Предложить гипотезы по убыванию отдачи/стоимости</strong>: словари и синонимы, исправление опечаток и транслита, извлечение атрибутов в фильтры, гибрид с эмбеддингами, LTR с признаками популярности и наличия, дообучение эмбеддера (<a href="/edufamcs-demo/handbook/retrieval/obuchenie-embedderov/" rel="noopener noreferrer nofollow">обучение эмбеддеров</a>).</li>
+<li><strong>Проверять</strong>: офлайн на размеченной выборке (NDCG с градациями, recall@k по срезам), затем A/B с защитными метриками.</li>
+<li><strong>Назвать риски</strong>: смещение кликов, дрейф каталога, цена переиндексации, влияние бизнес-правил.</li>
+</ol>
+<h2 id="код">Код</h2>
+<p>NDCG с градациями ESCI и простой правиловый экстрактор атрибутов из запроса (CPU, стандартная библиотека; <code>uv run ecom.py</code>):</p>
+<div class="code"><div class="code-head"><span class="lang">python</span></div><pre><code><span class="tok-k">import</span> math<span class="tok-p">,</span> re
+
+GAIN <span class="tok-p">=</span> <span class="tok-p">{</span><span class="tok-s">"</span><span class="tok-s">E</span><span class="tok-s">"</span><span class="tok-p">:</span> <span class="tok-n">1.0</span><span class="tok-p">,</span> <span class="tok-s">"</span><span class="tok-s">S</span><span class="tok-s">"</span><span class="tok-p">:</span> <span class="tok-n">0.1</span><span class="tok-p">,</span> <span class="tok-s">"</span><span class="tok-s">C</span><span class="tok-s">"</span><span class="tok-p">:</span> <span class="tok-n">0.01</span><span class="tok-p">,</span> <span class="tok-s">"</span><span class="tok-s">I</span><span class="tok-s">"</span><span class="tok-p">:</span> <span class="tok-n">0.0</span><span class="tok-p">}</span>
+
+<span class="tok-k">def</span> <span class="tok-f">dcg</span><span class="tok-p">(</span>gains<span class="tok-p">)</span><span class="tok-p">:</span>
+    <span class="tok-k">return</span> <span class="tok-f">sum</span><span class="tok-p">(</span>g <span class="tok-p">/</span> math<span class="tok-p">.</span>log2<span class="tok-p">(</span>i <span class="tok-p">+</span> <span class="tok-n">2</span><span class="tok-p">)</span> <span class="tok-k">for</span> i<span class="tok-p">,</span> g <span class="tok-k">in</span> <span class="tok-f">enumerate</span><span class="tok-p">(</span>gains<span class="tok-p">)</span><span class="tok-p">)</span>
+
+<span class="tok-k">def</span> <span class="tok-f">ndcg_at_k</span><span class="tok-p">(</span>labels<span class="tok-p">,</span> k<span class="tok-p">,</span> pool<span class="tok-p">)</span><span class="tok-p">:</span>
+    ideal <span class="tok-p">=</span> <span class="tok-f">sorted</span><span class="tok-p">(</span><span class="tok-p">(</span>GAIN<span class="tok-p">[</span>l<span class="tok-p">]</span> <span class="tok-k">for</span> l <span class="tok-k">in</span> pool<span class="tok-p">)</span><span class="tok-p">,</span> reverse<span class="tok-p">=</span><span class="tok-k">True</span><span class="tok-p">)</span><span class="tok-p">[</span><span class="tok-p">:</span>k<span class="tok-p">]</span>
+    <span class="tok-k">return</span> dcg<span class="tok-p">(</span><span class="tok-p">[</span>GAIN<span class="tok-p">[</span>l<span class="tok-p">]</span> <span class="tok-k">for</span> l <span class="tok-k">in</span> labels<span class="tok-p">[</span><span class="tok-p">:</span>k<span class="tok-p">]</span><span class="tok-p">]</span><span class="tok-p">)</span> <span class="tok-p">/</span> dcg<span class="tok-p">(</span>ideal<span class="tok-p">)</span>
+
+pool <span class="tok-p">=</span> <span class="tok-f">list</span><span class="tok-p">(</span><span class="tok-s">"</span><span class="tok-s">EEESSCCIII</span><span class="tok-s">"</span><span class="tok-p">)</span>
+<span class="tok-k">for</span> name<span class="tok-p">,</span> run <span class="tok-k">in</span> <span class="tok-p">[</span><span class="tok-p">(</span><span class="tok-s">"</span><span class="tok-s">A</span><span class="tok-s">"</span><span class="tok-p">,</span> <span class="tok-s">"</span><span class="tok-s">SEEICSIECI</span><span class="tok-s">"</span><span class="tok-p">)</span><span class="tok-p">,</span> <span class="tok-p">(</span><span class="tok-s">"</span><span class="tok-s">B</span><span class="tok-s">"</span><span class="tok-p">,</span> <span class="tok-s">"</span><span class="tok-s">EEESSCCIII</span><span class="tok-s">"</span><span class="tok-p">)</span><span class="tok-p">,</span> <span class="tok-p">(</span><span class="tok-s">"</span><span class="tok-s">C</span><span class="tok-s">"</span><span class="tok-p">,</span> <span class="tok-s">"</span><span class="tok-s">ESIEICSECI</span><span class="tok-s">"</span><span class="tok-p">)</span><span class="tok-p">]</span><span class="tok-p">:</span>
+    <span class="tok-f">print</span><span class="tok-p">(</span>name<span class="tok-p">,</span> <span class="tok-f">round</span><span class="tok-p">(</span>ndcg_at_k<span class="tok-p">(</span><span class="tok-f">list</span><span class="tok-p">(</span>run<span class="tok-p">)</span><span class="tok-p">,</span> <span class="tok-n">5</span><span class="tok-p">,</span> pool<span class="tok-p">)</span><span class="tok-p">,</span> <span class="tok-n">3</span><span class="tok-p">)</span><span class="tok-p">)</span>
+
+COLORS <span class="tok-p">=</span> <span class="tok-p">{</span><span class="tok-s">"</span><span class="tok-s">красные</span><span class="tok-s">"</span><span class="tok-p">:</span> <span class="tok-s">"</span><span class="tok-s">красный</span><span class="tok-s">"</span><span class="tok-p">,</span> <span class="tok-s">"</span><span class="tok-s">красный</span><span class="tok-s">"</span><span class="tok-p">:</span> <span class="tok-s">"</span><span class="tok-s">красный</span><span class="tok-s">"</span><span class="tok-p">,</span> <span class="tok-s">"</span><span class="tok-s">черные</span><span class="tok-s">"</span><span class="tok-p">:</span> <span class="tok-s">"</span><span class="tok-s">черный</span><span class="tok-s">"</span><span class="tok-p">,</span> <span class="tok-s">"</span><span class="tok-s">чёрные</span><span class="tok-s">"</span><span class="tok-p">:</span> <span class="tok-s">"</span><span class="tok-s">черный</span><span class="tok-s">"</span><span class="tok-p">,</span> <span class="tok-s">"</span><span class="tok-s">белые</span><span class="tok-s">"</span><span class="tok-p">:</span> <span class="tok-s">"</span><span class="tok-s">белый</span><span class="tok-s">"</span><span class="tok-p">}</span>
+BRANDS <span class="tok-p">=</span> <span class="tok-p">{</span><span class="tok-s">"</span><span class="tok-s">nike</span><span class="tok-s">"</span><span class="tok-p">,</span> <span class="tok-s">"</span><span class="tok-s">adidas</span><span class="tok-s">"</span><span class="tok-p">,</span> <span class="tok-s">"</span><span class="tok-s">puma</span><span class="tok-s">"</span><span class="tok-p">}</span>
+CATS <span class="tok-p">=</span> <span class="tok-p">{</span><span class="tok-s">"</span><span class="tok-s">кроссовки</span><span class="tok-s">"</span><span class="tok-p">:</span> <span class="tok-s">"</span><span class="tok-s">обувь/кроссовки</span><span class="tok-s">"</span><span class="tok-p">,</span> <span class="tok-s">"</span><span class="tok-s">футболка</span><span class="tok-s">"</span><span class="tok-p">:</span> <span class="tok-s">"</span><span class="tok-s">одежда/футболки</span><span class="tok-s">"</span><span class="tok-p">,</span> <span class="tok-s">"</span><span class="tok-s">куртка</span><span class="tok-s">"</span><span class="tok-p">:</span> <span class="tok-s">"</span><span class="tok-s">одежда/куртки</span><span class="tok-s">"</span><span class="tok-p">}</span>
+STORAGE <span class="tok-p">=</span> re<span class="tok-p">.</span>compile<span class="tok-p">(</span><span class="tok-s">r</span><span class="tok-s">"</span><span class="tok-s">^(</span><span class="tok-s">\</span><span class="tok-s">d+)</span><span class="tok-s">\</span><span class="tok-s">s*(гб|gb|тб|tb)$</span><span class="tok-s">"</span><span class="tok-p">)</span>
+
+<span class="tok-k">def</span> <span class="tok-f">parse</span><span class="tok-p">(</span>q<span class="tok-p">)</span><span class="tok-p">:</span>
+    toks<span class="tok-p">,</span> attrs<span class="tok-p">,</span> rest<span class="tok-p">,</span> i <span class="tok-p">=</span> q<span class="tok-p">.</span>lower<span class="tok-p">(</span><span class="tok-p">)</span><span class="tok-p">.</span>split<span class="tok-p">(</span><span class="tok-p">)</span><span class="tok-p">,</span> <span class="tok-p">{</span><span class="tok-p">}</span><span class="tok-p">,</span> <span class="tok-p">[</span><span class="tok-p">]</span><span class="tok-p">,</span> <span class="tok-n">0</span>
+    <span class="tok-k">while</span> i <span class="tok-p">&lt;</span> <span class="tok-f">len</span><span class="tok-p">(</span>toks<span class="tok-p">)</span><span class="tok-p">:</span>
+        t <span class="tok-p">=</span> toks<span class="tok-p">[</span>i<span class="tok-p">]</span>
+        two <span class="tok-p">=</span> <span class="tok-s">f</span><span class="tok-s">"</span><span class="tok-s">{</span>t<span class="tok-s">}</span> <span class="tok-s">{</span>toks<span class="tok-p">[</span>i<span class="tok-p">+</span><span class="tok-n">1</span><span class="tok-p">]</span><span class="tok-s">}</span><span class="tok-s">"</span> <span class="tok-k">if</span> i <span class="tok-p">+</span> <span class="tok-n">1</span> <span class="tok-p">&lt;</span> <span class="tok-f">len</span><span class="tok-p">(</span>toks<span class="tok-p">)</span> <span class="tok-k">else</span> <span class="tok-s">"</span><span class="tok-s">"</span>
+        <span class="tok-k">if</span> STORAGE<span class="tok-p">.</span>match<span class="tok-p">(</span>two<span class="tok-p">)</span><span class="tok-p">:</span> attrs<span class="tok-p">[</span><span class="tok-s">"</span><span class="tok-s">память</span><span class="tok-s">"</span><span class="tok-p">]</span> <span class="tok-p">=</span> two<span class="tok-p">;</span> i <span class="tok-p">+</span><span class="tok-p">=</span> <span class="tok-n">2</span><span class="tok-p">;</span> <span class="tok-k">continue</span>
+        <span class="tok-k">if</span> t <span class="tok-k">in</span> COLORS<span class="tok-p">:</span> attrs<span class="tok-p">[</span><span class="tok-s">"</span><span class="tok-s">цвет</span><span class="tok-s">"</span><span class="tok-p">]</span> <span class="tok-p">=</span> COLORS<span class="tok-p">[</span>t<span class="tok-p">]</span>
+        <span class="tok-k">elif</span> t <span class="tok-k">in</span> BRANDS<span class="tok-p">:</span> attrs<span class="tok-p">[</span><span class="tok-s">"</span><span class="tok-s">бренд</span><span class="tok-s">"</span><span class="tok-p">]</span> <span class="tok-p">=</span> t
+        <span class="tok-k">elif</span> t <span class="tok-k">in</span> CATS<span class="tok-p">:</span> attrs<span class="tok-p">[</span><span class="tok-s">"</span><span class="tok-s">категория</span><span class="tok-s">"</span><span class="tok-p">]</span> <span class="tok-p">=</span> CATS<span class="tok-p">[</span>t<span class="tok-p">]</span>
+        <span class="tok-k">elif</span> t<span class="tok-p">.</span>isdigit<span class="tok-p">(</span><span class="tok-p">)</span> <span class="tok-k">and</span> <span class="tok-n">30</span> <span class="tok-p">&lt;</span><span class="tok-p">=</span> <span class="tok-f">int</span><span class="tok-p">(</span>t<span class="tok-p">)</span> <span class="tok-p">&lt;</span><span class="tok-p">=</span> <span class="tok-n">50</span> <span class="tok-k">and</span> attrs<span class="tok-p">.</span>get<span class="tok-p">(</span><span class="tok-s">"</span><span class="tok-s">категория</span><span class="tok-s">"</span><span class="tok-p">,</span> <span class="tok-s">"</span><span class="tok-s">"</span><span class="tok-p">)</span><span class="tok-p">.</span>startswith<span class="tok-p">(</span><span class="tok-s">"</span><span class="tok-s">обувь</span><span class="tok-s">"</span><span class="tok-p">)</span><span class="tok-p">:</span>
+            attrs<span class="tok-p">[</span><span class="tok-s">"</span><span class="tok-s">размер</span><span class="tok-s">"</span><span class="tok-p">]</span> <span class="tok-p">=</span> <span class="tok-f">int</span><span class="tok-p">(</span>t<span class="tok-p">)</span>
+        <span class="tok-k">else</span><span class="tok-p">:</span> rest<span class="tok-p">.</span>append<span class="tok-p">(</span>t<span class="tok-p">)</span>
+        i <span class="tok-p">+</span><span class="tok-p">=</span> <span class="tok-n">1</span>
+    <span class="tok-k">return</span> attrs<span class="tok-p">,</span> <span class="tok-s">"</span> <span class="tok-s">"</span><span class="tok-p">.</span>join<span class="tok-p">(</span>rest<span class="tok-p">)</span>
+
+<span class="tok-k">for</span> q <span class="tok-k">in</span> <span class="tok-p">[</span><span class="tok-s">"</span><span class="tok-s">красные кроссовки 42</span><span class="tok-s">"</span><span class="tok-p">,</span> <span class="tok-s">"</span><span class="tok-s">nike кроссовки черные 43</span><span class="tok-s">"</span><span class="tok-p">,</span> <span class="tok-s">"</span><span class="tok-s">iphone 15 128 гб</span><span class="tok-s">"</span><span class="tok-p">,</span> <span class="tok-s">"</span><span class="tok-s">куртка зимняя</span><span class="tok-s">"</span><span class="tok-p">]</span><span class="tok-p">:</span>
+    <span class="tok-f">print</span><span class="tok-p">(</span>q<span class="tok-p">,</span> <span class="tok-s">"</span><span class="tok-s">-&gt;</span><span class="tok-s">"</span><span class="tok-p">,</span> parse<span class="tok-p">(</span>q<span class="tok-p">)</span><span class="tok-p">)</span>
+</code></pre></div>
+<p>Что получилось при запуске: NDCG@5 — A 0,558, B 1,000, C 0,675. Бинарная метка «только E» дала бы 0,531 для A и 0,671 для C: разница с градациями невелика на этом пуле, но порядок «S выше C» учитывается только в градуированной шкале. Разбор запросов: «красные кроссовки 42» → цвет красный, категория обувь/кроссовки, размер 42; «nike кроссовки черные 43» → бренд, категория, цвет, размер 43; «iphone 15 128 гб» → память «128 гб» и остаток «iphone 15»; «куртка зимняя» → категория и остаток «зимняя». Правиловый разбор хрупок: «42 красные кроссовки» уже не распознает размер, потому что категория ещё не встречена. Поэтому его используют как базовую линию и источник разметки для модели-теггера (см. <a href="/edufamcs-demo/handbook/retrieval/ponimanie-zaprosa/" rel="noopener noreferrer nofollow">понимание запроса</a>).</p>
+<h2 id="ловушки">Ловушки</h2>
+<ul>
+<li>Читать клики как метки релевантности без поправки на позицию.</li>
+<li>Оптимизировать CTR@k или выручку без защитных метрик.</li>
+<li>Молча снимать фильтры при пустой выдаче без объяснения.</li>
+<li>Класть наличие и доставку в скор модели, а не в слой правил.</li>
+<li>Менять шкалу градаций ESCI между экспериментами.</li>
+<li><strong>На собеседовании:</strong> чем товарный поиск отличается от веба; как устроен конвейер и где в нём фильтры; что такое метки ESCI и как они входят в NDCG; почему CTR — плохая единственная метрика; как бы вы улучшали поиск маркетплейса и в каком порядке.</li>
+</ul>
+<h2 id="проверь-себя">Проверь себя</h2>
+<details class="callout md details"><summary>Почему атрибутные запросы вроде «красные кроссовки 42» лучше превращать в фильтры?</summary>
+<p>Это жёсткие ограничения: товар неподходящего размера бесполезен. В скоре они «размываются» другими признаками, а фильтр гарантирует соответствие.</p>
+</details>
+<details class="callout md details"><summary>Что означают метки ESCI и какие градации усиления заданы в датасете?</summary>
+<p>Exact, Substitute, Complement, Irrelevant; для NDCG в статье задано 1,0, 0,1, 0,01 и 0.</p>
+</details>
+<details class="callout md details"><summary>Почему zero-result rate нельзя оптимизировать отдельно?</summary>
+<p>Пустоту можно «убрать» мусорной выдачей; метрика улучшится, а качество и доверие упадут. Её смотрят вместе с кликами, конверсией и релевантностью по разметке.</p>
+</details>
+<details class="callout md details"><summary>Что такое позиционное смещение и как с ним работать?</summary>
+<p>Верхние позиции кликаются чаще из-за видимости, а не релевантности. Используют клик-модели или обучение с поправкой на позицию и проверяют изменения A/B-тестом.</p>
+</details>
+<details class="callout md details"><summary>Какие шаги вы назовёте в ответе на кейс «как улучшить поиск маркетплейса»?</summary>
+<p>Цель и метрики, измерение по срезам, потери по слоям, гипотезы по отдаче к цене, офлайн и A/B проверка, риски.</p>
+</details>
+<h2 id="что-почитать">Что почитать</h2>
+<ul>
+<li>Reddy et al., <a href="https://arxiv.org/abs/2206.06588" rel="noopener noreferrer nofollow">Shopping Queries Dataset: A Large-Scale ESCI Benchmark for Improving Product Search</a>, 2022 (датасет: <a href="https://github.com/amazon-science/esci-data" rel="noopener noreferrer nofollow">amazon-science/esci-data</a>).</li>
+<li>Broder, <em>A Taxonomy of Web Search</em>, SIGIR Forum, 2002.</li>
+<li>Järvelin, Kekäläinen, <em>Cumulated Gain-based Evaluation of IR Techniques</em>, ACM TOIS, 2002.</li>
+<li>Craswell et al., <em>An Experimental Comparison of Click Position-Bias Models</em>, WSDM 2008.</li>
+<li>Статьи этого раздела: <a href="/edufamcs-demo/handbook/retrieval/ocenka-kachestva-poiska/" rel="noopener noreferrer nofollow">оценка качества поиска</a>, <a href="/edufamcs-demo/handbook/retrieval/learning-to-rank/" rel="noopener noreferrer nofollow">обучение ранжированию</a>, <a href="/edufamcs-demo/handbook/retrieval/ponimanie-zaprosa/" rel="noopener noreferrer nofollow">понимание запроса</a>.</li>
+</ul>
+</div>
+      
+
+      
+
+      
+      <nav class="pager" aria-label="Соседние статьи">
+        <a href="/edufamcs-demo/handbook/retrieval/poiskovye-dvizhki/"><span><svg class="ico sm" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-arrow-left"/></svg>Назад</span>Поисковые движки: Elasticsearch, OpenSearch, Qdrant, Vespa</a>
+        
+      </nav>
+      
+    </article>
+
+    <aside class="hb-toc" aria-label="На этой странице">
+      <a class="l2" href="#чем-товарный-поиск-отличается-от-веба">Чем товарный поиск отличается от веба</a><a class="l2" href="#намерения-запроса">Намерения запроса</a><a class="l2" href="#конвейер">Конвейер</a><a class="l2" href="#фасеты-фильтры-и-пустая-выдача">Фасеты, фильтры и пустая выдача</a><a class="l2" href="#метки-релевантности-esci">Метки релевантности: ESCI</a><a class="l2" href="#онлайн-метрики-и-их-ловушки">Онлайн-метрики и их ловушки</a><a class="l2" href="#персонализация-и-связь-с-рекомендациями">Персонализация и связь с рекомендациями</a><a class="l2" href="#как-улучшить-поиск-маркетплейса-структура-ответа">Как улучшить поиск маркетплейса: структура ответа</a><a class="l2" href="#код">Код</a><a class="l2" href="#ловушки">Ловушки</a><a class="l2" href="#проверь-себя">Проверь себя</a><a class="l2" href="#что-почитать">Что почитать</a>
+    </aside>
+  </div>
+</div>
+
+
+</main>
+
+<footer class="ftr" data-theme="dark">
+  <svg class="sym fern" viewBox="0 0 40.5 65.02" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#fern"/></svg>
+  <div class="container">
+    <div class="ftr-row">
+      <a href="/edufamcs-demo/" aria-label="EDU FAMCS — главная"><img src="/edufamcs-demo/static/brand/logo/logo-edu-dark.svg" alt="EDU FAMCS" width="196" height="40"></a>
+      <ul class="ftr-links">
+        <li><a href="/edufamcs-demo/#courses">Курсы</a></li>
+        <li><a href="/edufamcs-demo/ml/">Машинное обучение</a></li>
+        <li><a href="/edufamcs-demo/handbook/">Хендбук</a></li>
+        <li><a href="/edufamcs-demo/news/">Новости</a></li>
+        <li><a href="/edufamcs-demo/people/">Авторы</a></li>
+        <li><a href="/edufamcs-demo/about/">О&nbsp;нас</a></li>
+        <li><a href="/edufamcs-demo/propose/">Предложить или исправить</a></li>
+        <li><a href="/edufamcs-demo/privacy/">Конфиденциальность</a></li>
+      </ul>
+    </div>
+    <div class="ftr-big" aria-hidden="true">EDU<span class="d">·</span>FAMCS</div>
+    <p class="ftr-copy">© 2026 EDU FAMCS · Минск</p>
+  </div>
+</footer>
+
+<div class="toasts-region" aria-live="polite" id="toasts">
+
+</div>
+
+</body>
+</html>

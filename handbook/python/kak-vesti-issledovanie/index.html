@@ -1,0 +1,348 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Как вести исследование: гипотеза, бейзлайн, эксперимент · EDU FAMCS</title>
+<meta name="description" content="Как вести исследование: гипотеза, бейзлайн, эксперимент — Python и исследования. Хендбук ML-курса ФПМИ.">
+<meta name="theme-color" content="#060A16">
+<meta name="robots" content="noindex, nofollow">
+<meta name="htmx-config" content='{"allowEval":false,"includeIndicatorStyles":false,"historyCacheSize":0,"selfRequestsOnly":true}'>
+<meta name="katex-js" content="/edufamcs-demo/static/vendor/katex/katex.min.js">
+<meta name="katex-css" content="/edufamcs-demo/static/vendor/katex/katex.min.css">
+<link rel="icon" href="/edufamcs-demo/static/brand/logo/favicon-16.svg" type="image/svg+xml" sizes="16x16">
+<link rel="icon" href="/edufamcs-demo/static/brand/logo/favicon.svg" type="image/svg+xml" sizes="any">
+<link rel="preload" href="/edufamcs-demo/static/brand/fonts/manrope-cyrillic-400.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/edufamcs-demo/static/brand/fonts/unbounded-cyrillic-800.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="/edufamcs-demo/static/brand/fonts.css">
+<link rel="stylesheet" href="/edufamcs-demo/static/brand/tokens.css">
+<link rel="stylesheet" href="/edufamcs-demo/static/brand/components.css">
+<link rel="stylesheet" href="/edufamcs-demo/static/css/site.css">
+<link rel="stylesheet" href="/edufamcs-demo/static/css/hub.css">
+<link rel="stylesheet" href="/edufamcs-demo/static/css/about.css">
+<link rel="stylesheet" href="/edufamcs-demo/static/handbook/handbook.css">
+<script src="/edufamcs-demo/static/js/theme.js"></script>
+<script src="/edufamcs-demo/static/vendor/htmx/htmx.min.js" defer></script>
+<script src="/edufamcs-demo/static/vendor/alpine/alpine-csp.min.js" defer></script>
+<script src="/edufamcs-demo/static/js/site.js" defer></script>
+<script src="/edufamcs-demo/static/handbook/handbook.js" defer></script>
+</head>
+<body class="" hx-headers='{"X-CSRFToken": "PlPjbhRKRLB5n7V6m42x2o8QAuFFHM00ryEgrjqBSyPEyqaylxguKh0O2DMDrwZH"}'>
+<a class="skip" href="#main">К содержанию</a>
+<div class="demo-bar" role="note">Демо-версия для отзывов: вход, запись на курсы и формы здесь не работают.</div>
+
+<header class="hdr">
+  <div class="container">
+    <a class="brand" href="/edufamcs-demo/" aria-label="EDU FAMCS — главная">
+      <span class="full"><img class="only-light" src="/edufamcs-demo/static/brand/logo/logo-edu-light.svg" alt="EDU FAMCS" width="196" height="40"><img class="only-dark" src="/edufamcs-demo/static/brand/logo/logo-edu-dark.svg" alt="EDU FAMCS" width="196" height="40"></span>
+      <span class="short"><img class="only-light" src="/edufamcs-demo/static/brand/logo/logo-edu-light.svg" alt="EDU FAMCS" height="30"><img class="only-dark" src="/edufamcs-demo/static/brand/logo/logo-edu-dark.svg" alt="EDU FAMCS" height="30"></span>
+    </a>
+    <nav class="nav" id="main-nav" aria-label="Основная навигация">
+      <a href="/edufamcs-demo/#courses">Курсы</a>
+      <a href="/edufamcs-demo/ml/" >Машинное обучение</a>
+      
+      <a href="/edufamcs-demo/handbook/" aria-current="page">Хендбук</a>
+      <a href="/edufamcs-demo/news/" >Новости</a>
+      <a href="/edufamcs-demo/people/" >Авторы</a>
+      <a href="/edufamcs-demo/about/" >О&nbsp;нас</a>
+    </nav>
+    <div class="hdr-actions">
+      
+      <a class="btn btn-outline btn-login" href="/edufamcs-demo/accounts/login/?next=/handbook/python/kak-vesti-issledovanie/">Войти</a>
+      
+      <button class="icon-btn menu-btn" type="button" aria-label="Меню" aria-expanded="false" aria-controls="main-nav"><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-menu"/></svg></button>
+    </div>
+  </div>
+</header>
+
+<main id="main">
+
+
+
+<div class="container hb-page hb-tone">
+  <div class="hb-readbar" aria-hidden="true"><i></i></div>
+  <div class="hb">
+    <aside class="hb-nav" aria-label="Статьи раздела">
+      
+<form class="hb-search" action="/edufamcs-demo/handbook/search/" method="get" role="search">
+  <svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-search"/></svg>
+  <input class="input" type="search" name="q" value="" placeholder="Поиск по хендбуку" aria-label="Поиск по хендбуку" autocomplete="off" maxlength="120"
+    hx-get="/edufamcs-demo/handbook/search/" hx-trigger="input changed delay:250ms, search" hx-target="#hb-nav-results" hx-sync="this:replace">
+</form>
+
+      <div id="hb-nav-results" class="hb-nav-results" aria-live="polite"></div>
+      <a class="grp" href="/edufamcs-demo/handbook/python/">Как вести исследование</a>
+      
+      <a class="cur" href="/edufamcs-demo/handbook/python/kak-vesti-issledovanie/" aria-current="page">Как вести исследование: гипотеза, бейзлайн, эксперимент</a>
+      
+      <a class="" href="/edufamcs-demo/handbook/python/vosproizvodimost-i-trekking/">Воспроизводимость: сиды, данные, MLflow</a>
+      
+      <a class="" href="/edufamcs-demo/handbook/python/git-dlya-ml-proekta/">Git и GitHub для ML-проекта</a>
+      
+      <a class="" href="/edufamcs-demo/handbook/python/kak-oformit-rezultat/">Как оформить результат и защитить проект</a>
+      
+    </aside>
+
+    <article class="hb-main">
+      <nav class="crumbs" aria-label="Навигация"><a href="/edufamcs-demo/handbook/">Хендбук</a><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-chev"/></svg><a href="/edufamcs-demo/handbook/python/">Python и исследования</a></nav>
+      <h1 class="h1">Как вести исследование: гипотеза, бейзлайн, эксперимент</h1>
+      <div class="hb-meta">
+        
+        
+        <span><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-clock"/></svg>10&nbsp;мин</span>
+        <span class="hb-authors"><span class="avatar sm" title="Артем Лебедевич">АЛ</span>Артем Лебедевич</span>
+        <span><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-edit"/></svg>10 ноября 2026</span>
+        
+        
+      </div>
+
+      
+      <details class="hb-mtoc">
+        <summary><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-list"/></svg>Содержание<svg class="ico sm" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-chev-down"/></svg></summary>
+        <a class="l2" href="#цикл-исследования">Цикл исследования</a><a class="l2" href="#метрика-и-разбиение">Метрика и разбиение</a><a class="l2" href="#лестница-стоимости">Лестница стоимости</a><a class="l2" href="#дисперсия-прежде-чем-объявлять-03">Дисперсия: прежде чем объявлять +0,3%</a><a class="l2" href="#абляции-негативные-результаты-журнал">Абляции, негативные результаты, журнал</a><a class="l2" href="#разбор-мини-кейса">Разбор мини-кейса</a><a class="l2" href="#ловушки">Ловушки</a><a class="l2" href="#проверь-себя">Проверь себя</a><a class="l2" href="#что-почитать">Что почитать</a>
+      </details>
+      
+
+      <div class="prose"><p>Хаотичный ML-проект выглядит так: «обучил бустинг — 0,81; поменял признаки — 0,83; добавил нейросеть — 0,82; что из этого помогло, непонятно». Исследование — это цикл, в котором каждый шаг отвечает на один вопрос и оставляет след, по которому вывод можно проверить. На защите проекта и на собеседовании проверяют именно эту дисциплину: можете ли вы объяснить, почему число изменилось и стоит ли ему верить.</p>
+<h2 id="цикл-исследования">Цикл исследования</h2>
+<ol>
+<li><strong>Вопрос.</strong> Не «построить модель», а «предсказать, купит ли пользователь в течение 7 дней, чтобы ранжировать рассылку».</li>
+<li><strong>Метрика и схема валидации — до первой модели.</strong> Что считаем успехом и на каких данных меряем. Выбрать их после того, как увидели результаты, — это подгонка.</li>
+<li><strong>Тривиальный бейзлайн.</strong> Константа, популярное, последнее значение, средний таргет по группе. Он задаёт нижнюю границу и ловит ошибки в метрике.</li>
+<li><strong>Сильный простой бейзлайн.</strong> Линейная модель или градиентный бустинг с минимумом признаков. Это точка отсчёта для всех усложнений.</li>
+<li><strong>Одно изменение за раз.</strong> Новая фича, другая функция потерь, другая архитектура — по отдельности. Иначе вы не узнаете, что сработало.</li>
+<li><strong>Разбор ошибок.</strong> Где модель ошибается: по сегментам, по размеру группы, по новым и старым объектам.</li>
+<li><strong>Решение.</strong> Принять, отвергнуть или уточнить гипотезу — и записать вывод.</li>
+</ol>
+<p>Пункты 2–4 дают 80% ценности. Простая модель на корректной схеме валидации полезнее сложной на дырявой: числа второй ничего не значат.</p>
+<h2 id="метрика-и-разбиение">Метрика и разбиение</h2>
+<p>Метрика следует из задачи: перекошенные классы — PR-AUC или F-мера вместо accuracy; рекомендации — NDCG@k и покрытие (см. <a href="/edufamcs-demo/handbook/recsys/oflajn-metriki/" rel="noopener noreferrer nofollow">«Офлайн-метрики»</a>); регрессия с выбросами — MAE или квантильная потеря. Одна главная метрика, остальные — контрольные.</p>
+<p>Разбиение должно повторять условия применения модели:</p>
+<ul>
+<li><strong>Случайное</strong> — если наблюдения независимы и одинаково распределены (редко: чаще это иллюзия).</li>
+<li><strong>По времени</strong> — если модель предсказывает будущее: обучаемся на прошлом, валидируемся на более позднем периоде. Случайное разбиение логов даёт завышенные оценки: модель «видит» то же событие или соседа по времени.</li>
+<li><strong>По группам</strong> — если объекты связаны (несколько записей одного пользователя, один пациент, один товар): вся группа целиком в одной части, иначе утечка (<code>GroupKFold</code>).</li>
+</ul>
+<p>Любой признак, посчитанный с использованием информации из валидации или из будущего, — утечка; типичные случаи разобраны в <a href="/edufamcs-demo/handbook/classic/razvedochnyj-analiz-dannyh/" rel="noopener noreferrer nofollow">«Разведочном анализе»</a> и <a href="/edufamcs-demo/handbook/classic/giperparametry-i-interpretiruemost/" rel="noopener noreferrer nofollow">«Гиперпараметрах и кросс-валидации»</a>. Отложенный <strong>тест</strong> трогается один раз, в конце: подбираете всё на валидации, тест — для финального числа.</p>
+<div class="callout md warn"><p class="callout-title">Тест — не для подбора</p>
+<p>Если вы сравнили 40 конфигураций на тесте и выбрали лучшую, тестовое число стало ещё одной валидацией и завышено. Честная оценка — на данных, которые не участвовали ни в обучении, ни в выборе.</p>
+</div>
+<h2 id="лестница-стоимости">Лестница стоимости</h2>
+<p>Не запускайте дорогой прогон, пока дешёвый не прошёл. Три ступени:</p>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>Ступень</th>
+<th>Что</th>
+<th>Время</th>
+<th>Цель</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Smoke</td>
+<td>1–5% данных, 1–2 эпохи</td>
+<td>секунды–минуты</td>
+<td>код не падает, лосс падает, метрика считается, переобучение на маленьком батче работает</td>
+</tr>
+<tr>
+<td>Screening</td>
+<td>10–30% данных, 1–2 сида</td>
+<td>минуты</td>
+<td>отсеять заведомо плохие варианты, ранжировать идеи</td>
+</tr>
+<tr>
+<td>Final</td>
+<td>все данные, 3–5+ сидов</td>
+<td>часы</td>
+<td>число для отчёта с интервалом</td>
+</tr>
+</tbody>
+</table></div>
+<p>Профиль выбирается заранее, в конфиге (см. <a href="/edufamcs-demo/handbook/python/vosproizvodimost-i-trekking/" rel="noopener noreferrer nofollow">«Воспроизводимость»</a>). Только помните: результаты на семпле могут не переноситься на полные данные (редкие классы, холодный старт) — screening отбрасывает плохое, а не подтверждает хорошее.</p>
+<h2 id="дисперсия-прежде-чем-объявлять-03">Дисперсия: прежде чем объявлять +0,3%</h2>
+<p>Метрика случайна: сид инициализации, порядок батчей, разбиение. Если разница между двумя конфигурациями меньше шума, это не улучшение. Минимум: 3–5 сидов на ключевые сравнения, среднее и доверительный интервал; сравнивать <strong>парами</strong> (один сплит и сиды для обеих моделей), считая интервал для разности.</p>
+<div class="code"><div class="code-head"><span class="lang">python</span></div><pre><code><span class="tok-k">import</span> numpy <span class="tok-k">as</span> np
+<span class="tok-k">from</span> scipy <span class="tok-k">import</span> stats
+
+<span class="tok-k">def</span> <span class="tok-f">mean_ci</span><span class="tok-p">(</span>x<span class="tok-p">,</span> alpha<span class="tok-p">=</span><span class="tok-n">0.05</span><span class="tok-p">)</span><span class="tok-p">:</span>
+    x <span class="tok-p">=</span> np<span class="tok-p">.</span>asarray<span class="tok-p">(</span>x<span class="tok-p">,</span> <span class="tok-f">float</span><span class="tok-p">)</span>
+    h <span class="tok-p">=</span> stats<span class="tok-p">.</span>t<span class="tok-p">.</span>ppf<span class="tok-p">(</span><span class="tok-n">1</span> <span class="tok-p">-</span> alpha <span class="tok-p">/</span> <span class="tok-n">2</span><span class="tok-p">,</span> <span class="tok-f">len</span><span class="tok-p">(</span>x<span class="tok-p">)</span> <span class="tok-p">-</span> <span class="tok-n">1</span><span class="tok-p">)</span> <span class="tok-p">*</span> x<span class="tok-p">.</span>std<span class="tok-p">(</span>ddof<span class="tok-p">=</span><span class="tok-n">1</span><span class="tok-p">)</span> <span class="tok-p">/</span> np<span class="tok-p">.</span>sqrt<span class="tok-p">(</span><span class="tok-f">len</span><span class="tok-p">(</span>x<span class="tok-p">)</span><span class="tok-p">)</span>
+    <span class="tok-k">return</span> x<span class="tok-p">.</span>mean<span class="tok-p">(</span><span class="tok-p">)</span> <span class="tok-p">-</span> h<span class="tok-p">,</span> x<span class="tok-p">.</span>mean<span class="tok-p">(</span><span class="tok-p">)</span> <span class="tok-p">+</span> h
+
+base <span class="tok-p">=</span> np<span class="tok-p">.</span>array<span class="tok-p">(</span><span class="tok-p">[</span><span class="tok-n">0.1812</span><span class="tok-p">,</span> <span class="tok-n">0.1790</span><span class="tok-p">,</span> <span class="tok-n">0.1835</span><span class="tok-p">,</span> <span class="tok-n">0.1801</span><span class="tok-p">,</span> <span class="tok-n">0.1824</span><span class="tok-p">]</span><span class="tok-p">)</span>  <span class="tok-c"># NDCG@10 по сидам (пример)</span>
+new  <span class="tok-p">=</span> np<span class="tok-p">.</span>array<span class="tok-p">(</span><span class="tok-p">[</span><span class="tok-n">0.1838</span><span class="tok-p">,</span> <span class="tok-n">0.1811</span><span class="tok-p">,</span> <span class="tok-n">0.1829</span><span class="tok-p">,</span> <span class="tok-n">0.1846</span><span class="tok-p">,</span> <span class="tok-n">0.1820</span><span class="tok-p">]</span><span class="tok-p">)</span>
+<span class="tok-f">print</span><span class="tok-p">(</span>mean_ci<span class="tok-p">(</span>new <span class="tok-p">-</span> base<span class="tok-p">)</span><span class="tok-p">)</span>   <span class="tok-c"># (-0.0010, 0.0043): интервал содержит ноль</span>
+</code></pre></div>
+<p>Среднее улучшение здесь +0,0016 (около +0,9% относительно), но интервал разности включает 0: на 5 сидах утверждать улучшение нельзя. Либо больше сидов, либо признать, что эффекта нет. Теория — в <a href="/edufamcs-demo/handbook/math/intervaly-i-proverka-gipotez/" rel="noopener noreferrer nofollow">«Доверительных интервалах и проверке гипотез»</a>; для онлайна — в <a href="/edufamcs-demo/handbook/recsys/prodakshen-i-ab-testy/" rel="noopener noreferrer nofollow">«A/B-тестах»</a>.</p>
+<h2 id="абляции-негативные-результаты-журнал">Абляции, негативные результаты, журнал</h2>
+<p><strong>Абляция</strong> — убрать компонент из рабочей системы и посмотреть, что упало. Если без блока X метрика не изменилась, X не нужен: убирайте, система проще. Абляции — ответ на «а зачем здесь этот блок?» на защите.</p>
+<p><strong>Негативный результат</strong> — тоже результат: «гипотеза: добавить текстовые эмбеддинги; итог: +0,0004 при шуме ±0,002, отвергнута». Он экономит время вам и следующему человеку; в отчёт его пишут, чтобы не повторять.</p>
+<p><strong>Журнал экспериментов.</strong> Одна запись на гипотезу — в таблице, markdown или MLflow (<a href="/edufamcs-demo/handbook/python/vosproizvodimost-i-trekking/" rel="noopener noreferrer nofollow">«Воспроизводимость»</a>):</p>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>Поле</th>
+<th>Пример</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Гипотеза</td>
+<td>признак «время с последней покупки» улучшит ранжирование</td>
+</tr>
+<tr>
+<td>Изменение</td>
+<td>+1 признак в <code>features.py</code></td>
+</tr>
+<tr>
+<td>Конфиг / коммит</td>
+<td><code>lgbm_v2.yaml</code>, <code>a3f9c1e</code></td>
+</tr>
+<tr>
+<td>Метрика</td>
+<td>NDCG@10: 0,1824 ± 0,0016 (5 сидов)</td>
+</tr>
+<tr>
+<td>Вывод</td>
+<td>принято, +0,006 к базе</td>
+</tr>
+</tbody>
+</table></div>
+<h2 id="разбор-мини-кейса">Разбор мини-кейса</h2>
+<p>Задача (учебный пример, числа <strong>иллюстративные</strong>): предсказать следующую покупку пользователя в каталоге; метрика — NDCG@10, разбиение по времени (последние 2 недели — валидация, группировка по пользователю).</p>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>Шаг</th>
+<th>Модель</th>
+<th>NDCG@10 (среднее по 5 сидам)</th>
+<th>Вывод</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>0</td>
+<td>Популярное за 30 дней</td>
+<td>0,041</td>
+<td>нижняя граница</td>
+</tr>
+<tr>
+<td>1</td>
+<td>Item-to-item по совстречаемости</td>
+<td>0,092</td>
+<td>сильный простой бейзлайн</td>
+</tr>
+<tr>
+<td>2</td>
+<td>ALS (матричная факторизация)</td>
+<td>0,104 ± 0,002</td>
+<td>принято</td>
+</tr>
+<tr>
+<td>3</td>
+<td>+ LightGBM-ранкер на признаках</td>
+<td>0,118 ± 0,003</td>
+<td>принято</td>
+</tr>
+<tr>
+<td>4</td>
+<td>+ текстовые эмбеддинги</td>
+<td>0,119 ± 0,003</td>
+<td>в шуме, отвергнуто</td>
+</tr>
+<tr>
+<td>5</td>
+<td>LightGBM, другие параметры</td>
+<td>0,120 ± 0,004</td>
+<td>в шуме, стоп</td>
+</tr>
+</tbody>
+</table></div>
+<p>Главное в таблице: каждая строка — одно изменение, шаг 0 ловит ошибку метрики (если популярное даёт 0,4 — смотрите утечку), а строки 4–5 показывают момент остановки.</p>
+<div class="callout md tip"><p class="callout-title">Когда остановиться</p>
+<p>Когда три последние разумные идеи дают прирост в пределах шума, когда оставшийся потенциал меньше цены ещё одного шага или когда ошибки концентрируются в данных (шумные метки, холодный старт), а не в модели. Время тогда лучше потратить на данные и отчёт.</p>
+</div>
+<h2 id="ловушки">Ловушки</h2>
+<ul>
+<li>Подбор метрики и валидации после первых результатов; случайное разбиение для временных данных.</li>
+<li>Улучшение на одном сиде, выданное за результат; сравнение разных моделей на разных сплитах.</li>
+<li>Несколько изменений в одном эксперименте; затем объяснение «задним числом».</li>
+<li>Сравнение с «соломенным» бейзлайном (плохо настроенным): сильный бейзлайн получает такой же бюджет подбора.</li>
+<li>Полировка на тесте; нет журнала, нельзя повторить лучший запуск.</li>
+<li>Вопросы собеседований: «как выбрать схему валидации для временных данных?», «как узнать, что +0,3% — не шум?», «зачем тривиальный бейзлайн?», «что вы делаете, когда метрика на валидации слишком хороша?» (ищем утечку).</li>
+</ul>
+<h2 id="проверь-себя">Проверь себя</h2>
+<details class="callout md details"><summary>Почему метрику и схему валидации фиксируют до первой модели?</summary>
+<p>Иначе их можно подобрать под желаемый результат (метрика, где модель «лучше», разбиение, где утечка удобна). Заранее зафиксированная схема превращает числа в проверку гипотезы, а не в подгонку.</p>
+</details>
+<details class="callout md details"><summary>Когда для валидации нужно разбиение по времени, а когда по группам?</summary>
+<p>По времени — если модель применяется к будущему и данные нестационарны (логи, спрос). По группам — если несколько записей относятся к одному объекту (пользователь, пациент): группа целиком в одной части. Часто нужно и то, и другое.</p>
+</details>
+<details class="callout md details"><summary>Среднее по 5 сидам выросло с 0,1812 до 0,1828, интервал разности (−0,001; 0,004). Что вы скажете?</summary>
+<p>Улучшение не подтверждено: интервал содержит 0. Нужно больше сидов или данных, либо принять, что разницы нет; не стоит усложнять систему ради такого прироста.</p>
+</details>
+<details class="callout md details"><summary>Зачем нужен тривиальный бейзлайн, если есть сильная модель?</summary>
+<p>Он задаёт масштаб («+0,02 над константой или над сильным бейзлайном?») и ловит ошибки в метрике, данных и разбиении: если константа даёт «хорошее» значение, в схеме баг.</p>
+</details>
+<details class="callout md details"><summary>Что записать в журнал по эксперименту, который не удался?</summary>
+<p>Гипотезу, изменение, конфиг и коммит, метрику с интервалом и вывод: почему не сработало и от чего это отказ. Так вы не повторите эксперимент и сможете объяснить его в отчёте.</p>
+</details>
+<h2 id="что-почитать">Что почитать</h2>
+<ul>
+<li>Google, <em>Rules of Machine Learning</em> — <a href="https://developers.google.com/machine-learning/guides/rules-of-ml" rel="noopener noreferrer nofollow">developers.google.com/machine-learning/guides/rules-of-ml</a>.</li>
+<li>Andrej Karpathy, <em>A Recipe for Training Neural Networks</em> — <a href="https://karpathy.github.io/2019/04/25/recipe/" rel="noopener noreferrer nofollow">karpathy.github.io/2019/04/25/recipe</a>.</li>
+<li>scikit-learn, <em>Cross-validation: evaluating estimator performance</em> — <a href="https://scikit-learn.org/stable/modules/cross_validation.html" rel="noopener noreferrer nofollow">scikit-learn.org/stable/modules/cross_validation.html</a>.</li>
+<li>Kaufman, Rosset, Perlich, <em>Leakage in Data Mining: Formulation, Detection, and Avoidance</em>, KDD 2011.</li>
+<li>Bouthillier et al., <em>Accounting for Variance in Machine Learning Benchmarks</em>, MLSys 2021 (<a href="https://arxiv.org/abs/2103.03098" rel="noopener noreferrer nofollow">arXiv:2103.03098</a>).</li>
+<li>Kohavi, Tang, Xu, <em>Trustworthy Online Controlled Experiments</em>, Cambridge University Press, 2020.</li>
+</ul>
+</div>
+      
+
+      
+
+      
+      <nav class="pager" aria-label="Соседние статьи">
+        <a href="/edufamcs-demo/handbook/python/vizualizaciya/"><span><svg class="ico sm" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-arrow-left"/></svg>Назад</span>Графики, которые читаются: matplotlib и seaborn</a>
+        <a href="/edufamcs-demo/handbook/python/vosproizvodimost-i-trekking/"><span>Дальше<svg class="ico sm" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-arrow"/></svg></span>Воспроизводимость: сиды, данные, MLflow</a>
+      </nav>
+      
+    </article>
+
+    <aside class="hb-toc" aria-label="На этой странице">
+      <a class="l2" href="#цикл-исследования">Цикл исследования</a><a class="l2" href="#метрика-и-разбиение">Метрика и разбиение</a><a class="l2" href="#лестница-стоимости">Лестница стоимости</a><a class="l2" href="#дисперсия-прежде-чем-объявлять-03">Дисперсия: прежде чем объявлять +0,3%</a><a class="l2" href="#абляции-негативные-результаты-журнал">Абляции, негативные результаты, журнал</a><a class="l2" href="#разбор-мини-кейса">Разбор мини-кейса</a><a class="l2" href="#ловушки">Ловушки</a><a class="l2" href="#проверь-себя">Проверь себя</a><a class="l2" href="#что-почитать">Что почитать</a>
+    </aside>
+  </div>
+</div>
+
+
+</main>
+
+<footer class="ftr" data-theme="dark">
+  <svg class="sym fern" viewBox="0 0 40.5 65.02" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#fern"/></svg>
+  <div class="container">
+    <div class="ftr-row">
+      <a href="/edufamcs-demo/" aria-label="EDU FAMCS — главная"><img src="/edufamcs-demo/static/brand/logo/logo-edu-dark.svg" alt="EDU FAMCS" width="196" height="40"></a>
+      <ul class="ftr-links">
+        <li><a href="/edufamcs-demo/#courses">Курсы</a></li>
+        <li><a href="/edufamcs-demo/ml/">Машинное обучение</a></li>
+        <li><a href="/edufamcs-demo/handbook/">Хендбук</a></li>
+        <li><a href="/edufamcs-demo/news/">Новости</a></li>
+        <li><a href="/edufamcs-demo/people/">Авторы</a></li>
+        <li><a href="/edufamcs-demo/about/">О&nbsp;нас</a></li>
+        <li><a href="/edufamcs-demo/propose/">Предложить или исправить</a></li>
+        <li><a href="/edufamcs-demo/privacy/">Конфиденциальность</a></li>
+      </ul>
+    </div>
+    <div class="ftr-big" aria-hidden="true">EDU<span class="d">·</span>FAMCS</div>
+    <p class="ftr-copy">© 2026 EDU FAMCS · Минск</p>
+  </div>
+</footer>
+
+<div class="toasts-region" aria-live="polite" id="toasts">
+
+</div>
+
+</body>
+</html>

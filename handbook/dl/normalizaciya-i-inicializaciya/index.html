@@ -1,0 +1,366 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Нормализация и инициализация · EDU FAMCS</title>
+<meta name="description" content="Нормализация и инициализация — Введение в глубокое обучение. Хендбук ML-курса ФПМИ.">
+<meta name="theme-color" content="#060A16">
+<meta name="robots" content="noindex, nofollow">
+<meta name="htmx-config" content='{"allowEval":false,"includeIndicatorStyles":false,"historyCacheSize":0,"selfRequestsOnly":true}'>
+<meta name="katex-js" content="/edufamcs-demo/static/vendor/katex/katex.min.js">
+<meta name="katex-css" content="/edufamcs-demo/static/vendor/katex/katex.min.css">
+<link rel="icon" href="/edufamcs-demo/static/brand/logo/favicon-16.svg" type="image/svg+xml" sizes="16x16">
+<link rel="icon" href="/edufamcs-demo/static/brand/logo/favicon.svg" type="image/svg+xml" sizes="any">
+<link rel="preload" href="/edufamcs-demo/static/brand/fonts/manrope-cyrillic-400.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/edufamcs-demo/static/brand/fonts/unbounded-cyrillic-800.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="/edufamcs-demo/static/brand/fonts.css">
+<link rel="stylesheet" href="/edufamcs-demo/static/brand/tokens.css">
+<link rel="stylesheet" href="/edufamcs-demo/static/brand/components.css">
+<link rel="stylesheet" href="/edufamcs-demo/static/css/site.css">
+<link rel="stylesheet" href="/edufamcs-demo/static/css/hub.css">
+<link rel="stylesheet" href="/edufamcs-demo/static/css/about.css">
+<link rel="stylesheet" href="/edufamcs-demo/static/handbook/handbook.css">
+<script src="/edufamcs-demo/static/js/theme.js"></script>
+<script src="/edufamcs-demo/static/vendor/htmx/htmx.min.js" defer></script>
+<script src="/edufamcs-demo/static/vendor/alpine/alpine-csp.min.js" defer></script>
+<script src="/edufamcs-demo/static/js/site.js" defer></script>
+<script src="/edufamcs-demo/static/handbook/handbook.js" defer></script>
+</head>
+<body class="" hx-headers='{"X-CSRFToken": "V13vFyoClilsTjPy5T7DVPefbCklzUYoxeSsVAXtm5z14C404mlADI6dDLrjjEX5"}'>
+<a class="skip" href="#main">К содержанию</a>
+<div class="demo-bar" role="note">Демо-версия для отзывов: вход, запись на курсы и формы здесь не работают.</div>
+
+<header class="hdr">
+  <div class="container">
+    <a class="brand" href="/edufamcs-demo/" aria-label="EDU FAMCS — главная">
+      <span class="full"><img class="only-light" src="/edufamcs-demo/static/brand/logo/logo-edu-light.svg" alt="EDU FAMCS" width="196" height="40"><img class="only-dark" src="/edufamcs-demo/static/brand/logo/logo-edu-dark.svg" alt="EDU FAMCS" width="196" height="40"></span>
+      <span class="short"><img class="only-light" src="/edufamcs-demo/static/brand/logo/logo-edu-light.svg" alt="EDU FAMCS" height="30"><img class="only-dark" src="/edufamcs-demo/static/brand/logo/logo-edu-dark.svg" alt="EDU FAMCS" height="30"></span>
+    </a>
+    <nav class="nav" id="main-nav" aria-label="Основная навигация">
+      <a href="/edufamcs-demo/#courses">Курсы</a>
+      <a href="/edufamcs-demo/ml/" >Машинное обучение</a>
+      
+      <a href="/edufamcs-demo/handbook/" aria-current="page">Хендбук</a>
+      <a href="/edufamcs-demo/news/" >Новости</a>
+      <a href="/edufamcs-demo/people/" >Авторы</a>
+      <a href="/edufamcs-demo/about/" >О&nbsp;нас</a>
+    </nav>
+    <div class="hdr-actions">
+      
+      <a class="btn btn-outline btn-login" href="/edufamcs-demo/accounts/login/?next=/handbook/dl/normalizaciya-i-inicializaciya/">Войти</a>
+      
+      <button class="icon-btn menu-btn" type="button" aria-label="Меню" aria-expanded="false" aria-controls="main-nav"><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-menu"/></svg></button>
+    </div>
+  </div>
+</header>
+
+<main id="main">
+
+
+
+<div class="container hb-page hb-tone">
+  <div class="hb-readbar" aria-hidden="true"><i></i></div>
+  <div class="hb">
+    <aside class="hb-nav" aria-label="Статьи раздела">
+      
+<form class="hb-search" action="/edufamcs-demo/handbook/search/" method="get" role="search">
+  <svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-search"/></svg>
+  <input class="input" type="search" name="q" value="" placeholder="Поиск по хендбуку" aria-label="Поиск по хендбуку" autocomplete="off" maxlength="120"
+    hx-get="/edufamcs-demo/handbook/search/" hx-trigger="input changed delay:250ms, search" hx-target="#hb-nav-results" hx-sync="this:replace">
+</form>
+
+      <div id="hb-nav-results" class="hb-nav-results" aria-live="polite"></div>
+      <a class="grp" href="/edufamcs-demo/handbook/dl/">Практика и представления</a>
+      
+      <a class="cur" href="/edufamcs-demo/handbook/dl/normalizaciya-i-inicializaciya/" aria-current="page">Нормализация и инициализация</a>
+      
+      <a class="" href="/edufamcs-demo/handbook/dl/pytorch-na-praktike/">PyTorch на практике: обучение и дообучение</a>
+      
+      <a class="" href="/edufamcs-demo/handbook/dl/kontrastivnoe-obuchenie/">Эмбеддинги и контрастивное обучение</a>
+      
+      <a class="" href="/edufamcs-demo/handbook/dl/generativnye-modeli/">Генеративные модели: VAE, GAN, диффузия</a>
+      
+    </aside>
+
+    <article class="hb-main">
+      <nav class="crumbs" aria-label="Навигация"><a href="/edufamcs-demo/handbook/">Хендбук</a><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-chev"/></svg><a href="/edufamcs-demo/handbook/dl/">Введение в глубокое обучение</a></nav>
+      <h1 class="h1">Нормализация и инициализация</h1>
+      <div class="hb-meta">
+        
+        
+        <span><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-clock"/></svg>14&nbsp;мин</span>
+        <span class="hb-authors"><span class="avatar sm" title="Артем Лебедевич">АЛ</span>Артем Лебедевич</span>
+        <span><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-edit"/></svg>10 ноября 2026</span>
+        
+        
+      </div>
+
+      
+      <details class="hb-mtoc">
+        <summary><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-list"/></svg>Содержание<svg class="ico sm" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-chev-down"/></svg></summary>
+        <a class="l2" href="#зачем-сохранять-дисперсию">Зачем сохранять дисперсию</a><a class="l2" href="#эксперимент-20-слоёв">Эксперимент: 20 слоёв</a><a class="l2" href="#batchnorm">BatchNorm</a><a class="l2" href="#layernorm-groupnorm-rmsnorm">LayerNorm, GroupNorm, RMSNorm</a><a class="l2" href="#пре-норм-и-пост-норм-остаточные-ветви">Пре-норм и пост-норм, остаточные ветви</a><a class="l2" href="#код">Код</a><a class="l2" href="#чек-лист-что-делать-когда-обучение-не-идёт">Чек-лист: что делать, когда обучение не идёт</a><a class="l2" href="#ловушки">Ловушки</a><a class="l2" href="#проверь-себя">Проверь себя</a><a class="l2" href="#что-почитать">Что почитать</a>
+      </details>
+      
+
+      <div class="prose"><p>Глубокая сеть — это произведение десятков случайных матриц и нелинейностей. Если на каждом слое масштаб сигнала хоть немного отличается от единицы, после 20 слоёв он либо обнуляется, либо улетает в бесконечность — и вместе с ним градиенты. Инициализация выбирает масштаб весов так, чтобы сигнал сохранялся в момент старта, а нормализация удерживает его в ходе обучения. Именно поэтому глубокие сети вообще обучаются, а на собеседованиях по DL эту тему спрашивают почти всегда.</p>
+<h2 id="зачем-сохранять-дисперсию">Зачем сохранять дисперсию</h2>
+<p>Рассмотрим один линейный слой <span class="tex">z=\sum_{i=1}^{n_{in}} w_i x_i</span> (смещение пока опустим). Пусть веса независимы, центрированы, <span class="tex">\mathrm{Var}(w)=\sigma_w^2</span>, и независимы от входов. Тогда
+<span class="tex tex-block">\mathrm{Var}(z)=n_{in}\,\sigma_w^2\,\mathbb{E}[x^2].</span>
+За один слой второй момент умножается на <span class="tex">n_{in}\sigma_w^2</span>. За <span class="tex">L</span> слоёв — на <span class="tex">(n_{in}\sigma_w^2)^L</span>: при множителе 0,5 после 20 слоёв остаётся <span class="tex">10^{-6}</span>, при 2 — <span class="tex">10^{6}</span>. Обратный проход симметричен: <span class="tex">\delta_{l-1}=W_l^\top\delta_l</span> умножает дисперсию градиента на <span class="tex">n_{out}\sigma_w^2</span>. Отсюда два требования: <span class="tex">\sigma_w^2\approx 1/n_{in}</span> (прямой проход) и <span class="tex">\sigma_w^2\approx 1/n_{out}</span> (обратный).</p>
+<p><strong>Xavier/Glorot</strong> (Glorot &amp; Bengio, 2010): для линейных или почти линейных около нуля активаций (tanh) компромисс между двумя условиями — гармоническое среднее
+<span class="tex tex-block">\mathrm{Var}(w)=\frac{2}{n_{in}+n_{out}}.</span>
+Для квадратной матрицы это ровно <span class="tex">1/n</span>.</p>
+<p><strong>He/Kaiming</strong> (He и соавторы, 2015): ReLU обнуляет отрицательную половину симметричного <span class="tex">z</span>, поэтому <span class="tex">\mathbb{E}[\mathrm{ReLU}(z)^2]=\tfrac12\mathrm{Var}(z)</span>. Подставляем: второй момент на выходе слоя равен <span class="tex">\tfrac12 n_{in}\sigma_w^2\,\mathbb{E}[x^2]</span>. Требуем множитель 1:
+<span class="tex tex-block">\mathrm{Var}(w)=\frac{2}{n_{in}}.</span>
+Для обратного прохода аналогично получается <span class="tex">2/n_{out}</span>; в PyTorch выбирают режим через <code>mode="fan_in"</code> (по умолчанию) или <code>"fan_out"</code>.</p>
+<div class="callout md note"><p class="callout-title">Что делает PyTorch по умолчанию</p>
+<p><code>nn.Linear</code> и <code>nn.Conv*</code> инициализируются как <code>kaiming_uniform_(a=√5)</code>: веса из <span class="tex">U(-b,b)</span> с <span class="tex">b=1/\sqrt{n_{in}}</span>, то есть <span class="tex">\mathrm{Var}(w)=\frac{1}{3n_{in}}</span>, а смещения — из <span class="tex">U(-b,b)</span> с тем же <span class="tex">b</span>. Для ReLU это в 6 раз меньше, чем требует He: сигнал сжимается на каждом слое. Для сетей в 3–5 слоёв это терпимо, для глубоких — нет, поэтому в трансформерах и ResNet инициализацию переопределяют явно. <code>nn.Embedding</code> по умолчанию берёт <span class="tex">\mathcal N(0,1)</span>.</p>
+</div>
+<h2 id="эксперимент-20-слоёв">Эксперимент: 20 слоёв</h2>
+<p>MLP из 20 слоёв ширины 512 с ReLU, вход <span class="tex">\mathcal N(0,1)</span>, батч 1024. Измеряем стандартное отклонение активаций после ReLU. Код и вывод — ниже; для краткости показаны слои 1, 5, 10, 20.</p>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>Инициализация</th>
+<th>Нормализация</th>
+<th>L1</th>
+<th>L5</th>
+<th>L10</th>
+<th>L20</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><span class="tex">\mathcal N(0,0{,}01^2)</span></td>
+<td>нет</td>
+<td>0,132</td>
+<td>8,4e-5</td>
+<td>8,7e-9</td>
+<td>1,1e-16</td>
+</tr>
+<tr>
+<td><span class="tex">\mathcal N(0,0{,}1^2)</span></td>
+<td>нет</td>
+<td>1,32</td>
+<td>8,5</td>
+<td>82</td>
+<td>8,5e+3</td>
+</tr>
+<tr>
+<td>по умолчанию <code>nn.Linear</code> (смещения обнулены)</td>
+<td>нет</td>
+<td>0,337</td>
+<td>0,0098</td>
+<td>1,2e-4</td>
+<td>1,3e-8</td>
+</tr>
+<tr>
+<td>He</td>
+<td>нет</td>
+<td>0,828</td>
+<td>0,936</td>
+<td>0,847</td>
+<td>0,724</td>
+</tr>
+<tr>
+<td><span class="tex">\mathcal N(0,0{,}01^2)</span></td>
+<td>LayerNorm</td>
+<td>0,584</td>
+<td>0,581</td>
+<td>0,579</td>
+<td>0,612</td>
+</tr>
+<tr>
+<td><span class="tex">\mathcal N(0,0{,}01^2)</span></td>
+<td>BatchNorm</td>
+<td>0,582</td>
+<td>0,585</td>
+<td>0,587</td>
+<td>0,592</td>
+</tr>
+</tbody>
+</table></div>
+<p>Инициализация по умолчанию сжимает сигнал на 20 слоях в 7 порядков — подтверждение «в 6 раз меньше He» из заметки выше. Малая инициализация даёт множитель <span class="tex">\sqrt{512/2}\cdot 0{,}01\approx0{,}16</span> на слой — сигнал гаснет за 20 слоёв на 16 порядков. Большая даёт <span class="tex">\approx1{,}6</span> на слой — взрыв. С He масштаб остаётся порядка единицы; небольшие колебания — следствие конечной ширины (случайные матрицы дают мультипликативный случайный шаг). Нормализация вообще убирает зависимость от инициализации: выход нормализации — <span class="tex">\mathcal N(0,1)</span>, после ReLU стандартное отклонение равно <span class="tex">\sqrt{\tfrac12-\tfrac1{2\pi}}\approx0{,}584</span> — ровно то, что видно в таблице.</p>
+<h2 id="batchnorm">BatchNorm</h2>
+<p>Для мини-батча <span class="tex">B</span> и признака <span class="tex">j</span>:
+<span class="tex tex-block">\hat x_{j}=\frac{x_{j}-\mu_{B,j}}{\sqrt{\sigma^2_{B,j}+\varepsilon}},\qquad y_{j}=\gamma_j\hat x_{j}+\beta_j,</span>
+где <span class="tex">\mu_B,\sigma_B^2</span> — среднее и дисперсия по батчу (и по пространственным осям для сверток), <span class="tex">\gamma,\beta</span> обучаемы и возвращают сети выразительность. Слой ставят между линейным/свёрточным слоем и активацией: <code>Conv → BN → ReLU</code>.</p>
+<p><strong>Train и eval.</strong> В обучении статистика считается по текущему батчу, а в буферы <code>running_mean</code>/<code>running_var</code> пишется скользящее среднее (<code>momentum=0,1</code>). В <code>eval()</code> используются эти буферы, а не статистика батча. Проверка: после 50 батчей из <span class="tex">\mathcal N(5,3^2)</span> буферы дали <code>running_mean</code>≈[4,9; 4,9; 5,0; 4,8] и <code>running_var</code>≈[9,2; 9,1; 8,5; 8,7] — действительно близко к 5 и 9.</p>
+<p><strong>Малый батч</strong> делает <span class="tex">\mu_B,\sigma_B^2</span> шумными, и расхождение между train и eval растёт: при батче 2–8 BatchNorm заметно вредит: Wu &amp; He (2018) показали, что ошибка ResNet-50 на ImageNet растёт при уменьшении батча. Кроме того, объекты в батче перестают быть независимыми — для метрического обучения и контрастивных потерь это отдельная проблема утечки информации через статистику.</p>
+<p><strong>Почему работает?</strong> Исходная статья (Ioffe &amp; Szegedy, 2015) объясняла это уменьшением «внутреннего ковариационного сдвига» — меняющегося распределения входов слоя. Santurkar и соавторы (2018) проверили это напрямую: после BN они специально добавляли шум со случайными сдвигом и масштабом (то есть возвращали ковариационный сдвиг) — обучение при этом шло не хуже обычного BN. Их вывод: BN делает ландшафт потерь более гладким (меньше константа Липшица потерь и градиентов), и градиентам можно больше доверять — отсюда допустимость больших шагов. Это эмпирический результат; строгого объяснения до конца нет.</p>
+<h2 id="layernorm-groupnorm-rmsnorm">LayerNorm, GroupNorm, RMSNorm</h2>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>Метод</th>
+<th>По каким осям считается</th>
+<th>Где используется</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>BatchNorm</td>
+<td>батч + пространство, для каждого канала</td>
+<td>CNN с большим батчем</td>
+</tr>
+<tr>
+<td>LayerNorm</td>
+<td>все признаки одного объекта (токена)</td>
+<td>трансформеры, RNN</td>
+</tr>
+<tr>
+<td>GroupNorm</td>
+<td>группы каналов одного объекта</td>
+<td>CNN с малым батчем, детекция, диффузионные U-Net</td>
+</tr>
+<tr>
+<td>RMSNorm</td>
+<td>признаки одного токена, без вычитания среднего</td>
+<td>современные LLM (семейства LLaMA и др.)</td>
+</tr>
+</tbody>
+</table></div>
+<p>LayerNorm (Ba, Kiros, Hinton, 2016): <span class="tex">y=\gamma\odot\frac{x-\mu}{\sqrt{\sigma^2+\varepsilon}}+\beta</span>, <span class="tex">\mu,\sigma^2</span> — по <span class="tex">d</span> признакам одного вектора. Не зависит от батча, ведёт себя одинаково в train и eval. GroupNorm (Wu &amp; He, 2018) делит <span class="tex">C</span> каналов на <span class="tex">G</span> групп и нормирует внутри группы; <span class="tex">G=1</span> даёт LayerNorm по каналам, <span class="tex">G=C</span> — InstanceNorm. RMSNorm (Zhang &amp; Sennrich, 2019) убирает центрирование:
+<span class="tex tex-block">y=\gamma\odot\frac{x}{\sqrt{\tfrac1d\sum_i x_i^2+\varepsilon}}.</span>
+Меньше операций и столько же качества на практике — поэтому её берут большие LLM.</p>
+<h2 id="пре-норм-и-пост-норм-остаточные-ветви">Пре-норм и пост-норм, остаточные ветви</h2>
+<p>В оригинальном трансформере норма стоит <strong>после</strong> сложения с остатком: <span class="tex">x_{l+1}=\mathrm{LN}(x_l+F(x_l))</span> (post-norm). В <strong>pre-norm</strong> — на входе ветви: <span class="tex">x_{l+1}=x_l+F(\mathrm{LN}(x_l))</span>. Xiong и соавторы (2020) показали, что у post-norm градиенты у выхода на старте велики и без warmup обучение расходится, а у pre-norm градиенты ровные по глубине и warmup не обязателен. Цена: по ряду сообщений pre-norm при той же глубине иногда проигрывает в итоговом качестве, а остаточный поток растёт по норме с глубиной — перед выходом нужна финальная норма. Поэтому глубокие LLM почти всегда pre-norm (см. <a href="/edufamcs-demo/handbook/dl/vnimanie-i-transformery/" rel="noopener noreferrer nofollow">трансформеры</a>).</p>
+<p>Остаточный блок <span class="tex">x+F(x)</span> при <span class="tex">L</span> блоках суммирует <span class="tex">L</span> ветвей, и дисперсия потока растёт <span class="tex">\sim L</span>. Два приёма: (1) инициализировать выходную проекцию ветви нулём или малым значением — блок стартует как тождественный; для ResNet это <span class="tex">\gamma=0</span> у последней BN в блоке (Goyal и соавторы, 2017); (2) масштабировать веса выходных проекций остаточных слоёв на <span class="tex">1/\sqrt{N}</span>, где <span class="tex">N</span> — число таких слоёв (так сделано в GPT-2). Fixup (Zhang и соавторы, 2019) показывает, что при аккуратном масштабе ветвей глубокий ResNet обучается вообще без нормализации.</p>
+<h2 id="код">Код</h2>
+<div class="code"><div class="code-head"><span class="lang">python</span></div><pre><code><span class="tok-k">import</span> torch
+<span class="tok-k">from</span> torch <span class="tok-k">import</span> nn
+
+torch<span class="tok-p">.</span>manual_seed<span class="tok-p">(</span><span class="tok-n">0</span><span class="tok-p">)</span>
+D<span class="tok-p">,</span> L <span class="tok-p">=</span> <span class="tok-n">512</span><span class="tok-p">,</span> <span class="tok-n">20</span>
+
+<span class="tok-k">def</span> <span class="tok-f">mlp</span><span class="tok-p">(</span>init<span class="tok-p">,</span> norm<span class="tok-p">=</span><span class="tok-k">None</span><span class="tok-p">)</span><span class="tok-p">:</span>
+    layers <span class="tok-p">=</span> <span class="tok-p">[</span><span class="tok-p">]</span>
+    <span class="tok-k">for</span> _ <span class="tok-k">in</span> <span class="tok-f">range</span><span class="tok-p">(</span>L<span class="tok-p">)</span><span class="tok-p">:</span>
+        lin <span class="tok-p">=</span> nn<span class="tok-p">.</span>Linear<span class="tok-p">(</span>D<span class="tok-p">,</span> D<span class="tok-p">)</span>
+        nn<span class="tok-p">.</span>init<span class="tok-p">.</span>zeros_<span class="tok-p">(</span>lin<span class="tok-p">.</span>bias<span class="tok-p">)</span>
+        <span class="tok-k">if</span> init <span class="tok-p">==</span> <span class="tok-s">"</span><span class="tok-s">small</span><span class="tok-s">"</span><span class="tok-p">:</span> nn<span class="tok-p">.</span>init<span class="tok-p">.</span>normal_<span class="tok-p">(</span>lin<span class="tok-p">.</span>weight<span class="tok-p">,</span> std<span class="tok-p">=</span><span class="tok-n">0.01</span><span class="tok-p">)</span>
+        <span class="tok-k">if</span> init <span class="tok-p">==</span> <span class="tok-s">"</span><span class="tok-s">large</span><span class="tok-s">"</span><span class="tok-p">:</span> nn<span class="tok-p">.</span>init<span class="tok-p">.</span>normal_<span class="tok-p">(</span>lin<span class="tok-p">.</span>weight<span class="tok-p">,</span> std<span class="tok-p">=</span><span class="tok-n">0.1</span><span class="tok-p">)</span>
+        <span class="tok-k">if</span> init <span class="tok-p">==</span> <span class="tok-s">"</span><span class="tok-s">default</span><span class="tok-s">"</span><span class="tok-p">:</span> lin<span class="tok-p">.</span>reset_parameters<span class="tok-p">(</span><span class="tok-p">)</span><span class="tok-p">;</span> nn<span class="tok-p">.</span>init<span class="tok-p">.</span>zeros_<span class="tok-p">(</span>lin<span class="tok-p">.</span>bias<span class="tok-p">)</span>
+        <span class="tok-k">if</span> init <span class="tok-p">==</span> <span class="tok-s">"</span><span class="tok-s">he</span><span class="tok-s">"</span><span class="tok-p">:</span>    nn<span class="tok-p">.</span>init<span class="tok-p">.</span>kaiming_normal_<span class="tok-p">(</span>lin<span class="tok-p">.</span>weight<span class="tok-p">,</span> nonlinearity<span class="tok-p">=</span><span class="tok-s">"</span><span class="tok-s">relu</span><span class="tok-s">"</span><span class="tok-p">)</span>
+        layers <span class="tok-p">+</span><span class="tok-p">=</span> <span class="tok-p">[</span>lin<span class="tok-p">]</span> <span class="tok-p">+</span> <span class="tok-p">(</span><span class="tok-p">[</span>norm<span class="tok-p">(</span>D<span class="tok-p">)</span><span class="tok-p">]</span> <span class="tok-k">if</span> norm <span class="tok-k">else</span> <span class="tok-p">[</span><span class="tok-p">]</span><span class="tok-p">)</span> <span class="tok-p">+</span> <span class="tok-p">[</span>nn<span class="tok-p">.</span>ReLU<span class="tok-p">(</span><span class="tok-p">)</span><span class="tok-p">]</span>
+    <span class="tok-k">return</span> nn<span class="tok-p">.</span>Sequential<span class="tok-p">(</span><span class="tok-p">*</span>layers<span class="tok-p">)</span>
+
+x <span class="tok-p">=</span> torch<span class="tok-p">.</span>randn<span class="tok-p">(</span><span class="tok-n">1024</span><span class="tok-p">,</span> D<span class="tok-p">)</span>
+<span class="tok-k">for</span> init<span class="tok-p">,</span> norm <span class="tok-k">in</span> <span class="tok-p">[</span><span class="tok-p">(</span><span class="tok-s">"</span><span class="tok-s">small</span><span class="tok-s">"</span><span class="tok-p">,</span> <span class="tok-k">None</span><span class="tok-p">)</span><span class="tok-p">,</span> <span class="tok-p">(</span><span class="tok-s">"</span><span class="tok-s">large</span><span class="tok-s">"</span><span class="tok-p">,</span> <span class="tok-k">None</span><span class="tok-p">)</span><span class="tok-p">,</span> <span class="tok-p">(</span><span class="tok-s">"</span><span class="tok-s">default</span><span class="tok-s">"</span><span class="tok-p">,</span> <span class="tok-k">None</span><span class="tok-p">)</span><span class="tok-p">,</span> <span class="tok-p">(</span><span class="tok-s">"</span><span class="tok-s">he</span><span class="tok-s">"</span><span class="tok-p">,</span> <span class="tok-k">None</span><span class="tok-p">)</span><span class="tok-p">,</span>
+                   <span class="tok-p">(</span><span class="tok-s">"</span><span class="tok-s">small</span><span class="tok-s">"</span><span class="tok-p">,</span> nn<span class="tok-p">.</span>LayerNorm<span class="tok-p">)</span><span class="tok-p">,</span> <span class="tok-p">(</span><span class="tok-s">"</span><span class="tok-s">small</span><span class="tok-s">"</span><span class="tok-p">,</span> nn<span class="tok-p">.</span>BatchNorm1d<span class="tok-p">)</span><span class="tok-p">]</span><span class="tok-p">:</span>
+    h<span class="tok-p">,</span> stds <span class="tok-p">=</span> x<span class="tok-p">,</span> <span class="tok-p">[</span><span class="tok-p">]</span>
+    <span class="tok-k">for</span> m <span class="tok-k">in</span> mlp<span class="tok-p">(</span>init<span class="tok-p">,</span> norm<span class="tok-p">)</span><span class="tok-p">:</span>
+        h <span class="tok-p">=</span> m<span class="tok-p">(</span>h<span class="tok-p">)</span>
+        <span class="tok-k">if</span> <span class="tok-f">isinstance</span><span class="tok-p">(</span>m<span class="tok-p">,</span> nn<span class="tok-p">.</span>ReLU<span class="tok-p">)</span><span class="tok-p">:</span> stds<span class="tok-p">.</span>append<span class="tok-p">(</span>h<span class="tok-p">.</span>std<span class="tok-p">(</span><span class="tok-p">)</span><span class="tok-p">.</span>item<span class="tok-p">(</span><span class="tok-p">)</span><span class="tok-p">)</span>
+    <span class="tok-f">print</span><span class="tok-p">(</span><span class="tok-s">f</span><span class="tok-s">"</span><span class="tok-s">{</span>init<span class="tok-s">:</span><span class="tok-s">6s</span><span class="tok-s">}</span> <span class="tok-s">{</span>norm<span class="tok-p">.</span>__name__ <span class="tok-k">if</span> norm <span class="tok-k">else</span> <span class="tok-s">'</span><span class="tok-s">-</span><span class="tok-s">'</span><span class="tok-s">:</span><span class="tok-s">11s</span><span class="tok-s">}</span><span class="tok-s">"</span><span class="tok-p">,</span>
+          <span class="tok-p">*</span><span class="tok-p">(</span><span class="tok-s">f</span><span class="tok-s">"</span><span class="tok-s">L</span><span class="tok-s">{</span>k<span class="tok-s">}</span><span class="tok-s">: </span><span class="tok-s">{</span>stds<span class="tok-p">[</span>k<span class="tok-p">-</span><span class="tok-n">1</span><span class="tok-p">]</span><span class="tok-s">:</span><span class="tok-s">.3g</span><span class="tok-s">}</span><span class="tok-s">"</span> <span class="tok-k">for</span> k <span class="tok-k">in</span> <span class="tok-p">(</span><span class="tok-n">1</span><span class="tok-p">,</span> <span class="tok-n">5</span><span class="tok-p">,</span> <span class="tok-n">10</span><span class="tok-p">,</span> <span class="tok-n">20</span><span class="tok-p">)</span><span class="tok-p">)</span><span class="tok-p">)</span>
+</code></pre></div>
+<p>Вывод (запуск на CPU, torch 2.x):</p>
+<div class="code"><div class="code-head"><span class="lang">code</span></div><pre><code>small  -           L1: 0.132 L5: 8.38e-05 L10: 8.68e-09 L20: 1.08e-16
+large  -           L1: 1.32 L5: 8.54 L10: 82 L20: 8.51e+03
+default -           L1: 0.337 L5: 0.00975 L10: 0.000117 L20: 1.3e-08
+he     -           L1: 0.828 L5: 0.936 L10: 0.847 L20: 0.724
+small  LayerNorm   L1: 0.584 L5: 0.581 L10: 0.579 L20: 0.612
+small  BatchNorm1d L1: 0.582 L5: 0.585 L10: 0.587 L20: 0.592
+</code></pre></div>
+<h2 id="чек-лист-что-делать-когда-обучение-не-идёт">Чек-лист: что делать, когда обучение не идёт</h2>
+<ul>
+<li><strong>Потеря стала NaN/inf.</strong> Смотрите, на каком шаге и в каком слое: <code>torch.autograd.set_detect_anomaly(True)</code> (медленно, только для отладки). Типичные причины — слишком большой learning rate, <code>log(0)</code>/деление на ноль в своей потере, fp16 без масштабирования (см. <a href="/edufamcs-demo/handbook/dl/pytorch-na-praktike/" rel="noopener noreferrer nofollow">PyTorch на практике</a>), взрыв активаций из-за плохой инициализации. Лечение: понизить шаг, <code>clip_grad_norm_</code>, <code>bfloat16</code> вместо <code>float16</code>, <code>eps</code> побольше.</li>
+<li><strong>Потеря на старте сильно отличается от <span class="tex">\ln C</span>.</strong> Для <span class="tex">C</span> классов ожидаемая начальная кросс-энтропия — <span class="tex">\ln C</span>. Если сильно больше, выходные логиты слишком велики: уменьшите инициализацию последнего слоя.</li>
+<li><strong>Мёртвый ReLU.</strong> Доля нулевых активаций на слое около 100 % при неизменных весах — нейрон никогда не активируется и не получает градиента. Причины: слишком большой шаг, отрицательное смещение. Лечение: меньший шаг, LeakyReLU/GELU, нормализация перед активацией.</li>
+<li><strong>Взрыв градиента.</strong> Логируйте норму градиента (возвращает <code>clip_grad_norm_</code>) и сравнивайте по слоям. Если она растёт на порядки — клиппинг, warmup, понизить шаг, проверить норму в остаточных блоках.</li>
+<li><strong>Потеря не падает вообще.</strong> Сначала проверьте, что сеть способна переобучить один батч до нуля. Если нет — баг в данных/потере/форме, а не в нормализации.</li>
+</ul>
+<h2 id="ловушки">Ловушки</h2>
+<div class="callout md warn"><p class="callout-title">BatchNorm и валидация</p>
+<p>Забытый <code>model.eval()</code> оставляет BN на статистике батча, а у предобученной модели с замороженными весами BN-слои в режиме <code>train()</code> всё равно обновляют <code>running_*</code> и портят статистики — переведите их в <code>eval()</code> отдельно.</p>
+</div>
+<ul>
+<li>Weight decay для <span class="tex">\gamma,\beta</span> нормализаций и смещений обычно выключают (см. <a href="/edufamcs-demo/handbook/dl/optimizatory-i-regulyarizaciya/" rel="noopener noreferrer nofollow">оптимизаторы</a>).</li>
+<li>Dropout перед BN сдвигает дисперсию между train и eval (Li и соавторы, 2019, CVPR); обычно dropout ставят после BN или не используют вместе.</li>
+<li>Одинаковая инициализация (в частности, нулевая) во всех весах слоя оставляет нейроны симметричными. Исключение — нулевая инициализация <strong>последнего</strong> слоя ветви, где симметрия уже нарушена предыдущими весами.</li>
+</ul>
+<p>На собеседовании:</p>
+<ul>
+<li>Выведите He-инициализацию. Откуда множитель 2 (ответ: ReLU обнуляет половину входов) и почему Xavier — <span class="tex">2/(n_{in}+n_{out})</span>.</li>
+<li>Чем BatchNorm ведёт себя в train и в eval и почему плохо работает при батче 2.</li>
+<li>Pre-norm против post-norm: что стабильнее на глубине и почему.</li>
+<li>Почему LLM используют RMSNorm, а не BatchNorm.</li>
+</ul>
+<h2 id="проверь-себя">Проверь себя</h2>
+<details class="callout md details"><summary>Как $\mathrm{Var}(w)=2/n_{in}$ получается для ReLU?</summary>
+<p>Для симметричного <span class="tex">z</span> выполнено <span class="tex">\mathbb{E}[\mathrm{ReLU}(z)^2]=\tfrac12\mathrm{Var}(z)=\tfrac12 n_{in}\sigma_w^2\mathbb{E}[x^2]</span>. Требуем множитель 1 перед <span class="tex">\mathbb{E}[x^2]</span> — получаем <span class="tex">\sigma_w^2=2/n_{in}</span>.</p>
+</details>
+<details class="callout md details"><summary>Какая инициализация у `nn.Linear` по умолчанию и достаточна ли она для 20 слоёв с ReLU?</summary>
+<p><span class="tex">U(-1/\sqrt{n_{in}},1/\sqrt{n_{in}})</span>, дисперсия <span class="tex">1/(3n_{in})</span> — в 6 раз меньше He. Сигнал сжимается примерно в <span class="tex">\sqrt6</span> раз по std на слой (в эксперименте выше: 1,3e-8 на 20-м слое), так что для глубоких сетей без нормализации её нужно переопределять.</p>
+</details>
+<details class="callout md details"><summary>Почему BatchNorm в `eval()` использует скользящие средние, а не статистику входного батча?</summary>
+<p>На инференсе результат для объекта не должен зависеть от остальных объектов в батче (и батч может быть из одного элемента). Поэтому берут статистики, накопленные при обучении.</p>
+</details>
+<details class="callout md details"><summary>Какое объяснение успеха BatchNorm даёт Santurkar et al. (2018) и чем оно отличается от исходного?</summary>
+<p>Вместо уменьшения «внутреннего ковариационного сдвига» BN сглаживает ландшафт потерь: градиенты более предсказуемы, поэтому допустимы большие шаги. Их эксперименты показывают, что сдвиг распределений BN не убирает, а обучение всё равно ускоряется.</p>
+</details>
+<details class="callout md details"><summary>Почему pre-norm стабильнее post-norm на глубине?</summary>
+<p>В pre-norm остаточный путь <span class="tex">x_l\to x_{l+1}</span> не проходит через LayerNorm, поэтому градиент идёт по тождественной магистрали, и градиенты по глубине примерно одного масштаба. В post-norm нормировка стоит на магистрали и вблизи выхода градиенты большие — нужен warmup.</p>
+</details>
+<h2 id="что-почитать">Что почитать</h2>
+<ul>
+<li>Glorot, Bengio, <em>Understanding the difficulty of training deep feedforward neural networks</em>, AISTATS 2010.</li>
+<li>He, Zhang, Ren, Sun, <em>Delving Deep into Rectifiers</em>, ICCV 2015: <a href="https://arxiv.org/abs/1502.01852" rel="noopener noreferrer nofollow">arXiv:1502.01852</a>.</li>
+<li>Ioffe, Szegedy, <em>Batch Normalization</em>, ICML 2015: <a href="https://arxiv.org/abs/1502.03167" rel="noopener noreferrer nofollow">arXiv:1502.03167</a>.</li>
+<li>Santurkar, Tsipras, Ilyas, Madry, <em>How Does Batch Normalization Help Optimization?</em>, NeurIPS 2018: <a href="https://arxiv.org/abs/1805.11604" rel="noopener noreferrer nofollow">arXiv:1805.11604</a>.</li>
+<li>Ba, Kiros, Hinton, <em>Layer Normalization</em>, 2016: <a href="https://arxiv.org/abs/1607.06450" rel="noopener noreferrer nofollow">arXiv:1607.06450</a>; Wu, He, <em>Group Normalization</em>, ECCV 2018: <a href="https://arxiv.org/abs/1803.08494" rel="noopener noreferrer nofollow">arXiv:1803.08494</a>.</li>
+<li>Zhang, Sennrich, <em>Root Mean Square Layer Normalization</em>, NeurIPS 2019: <a href="https://arxiv.org/abs/1910.07467" rel="noopener noreferrer nofollow">arXiv:1910.07467</a>.</li>
+<li>Xiong и соавторы, <em>On Layer Normalization in the Transformer Architecture</em>, ICML 2020: <a href="https://arxiv.org/abs/2002.04745" rel="noopener noreferrer nofollow">arXiv:2002.04745</a>.</li>
+<li>Zhang, Dauphin, Ma, <em>Fixup Initialization</em>, ICLR 2019: <a href="https://arxiv.org/abs/1901.09321" rel="noopener noreferrer nofollow">arXiv:1901.09321</a>.</li>
+</ul>
+</div>
+      
+
+      
+
+      
+      <nav class="pager" aria-label="Соседние статьи">
+        <a href="/edufamcs-demo/handbook/dl/vnimanie-i-transformery/"><span><svg class="ico sm" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-arrow-left"/></svg>Назад</span>Внимание и трансформеры</a>
+        <a href="/edufamcs-demo/handbook/dl/pytorch-na-praktike/"><span>Дальше<svg class="ico sm" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-arrow"/></svg></span>PyTorch на практике: обучение и дообучение</a>
+      </nav>
+      
+    </article>
+
+    <aside class="hb-toc" aria-label="На этой странице">
+      <a class="l2" href="#зачем-сохранять-дисперсию">Зачем сохранять дисперсию</a><a class="l2" href="#эксперимент-20-слоёв">Эксперимент: 20 слоёв</a><a class="l2" href="#batchnorm">BatchNorm</a><a class="l2" href="#layernorm-groupnorm-rmsnorm">LayerNorm, GroupNorm, RMSNorm</a><a class="l2" href="#пре-норм-и-пост-норм-остаточные-ветви">Пре-норм и пост-норм, остаточные ветви</a><a class="l2" href="#код">Код</a><a class="l2" href="#чек-лист-что-делать-когда-обучение-не-идёт">Чек-лист: что делать, когда обучение не идёт</a><a class="l2" href="#ловушки">Ловушки</a><a class="l2" href="#проверь-себя">Проверь себя</a><a class="l2" href="#что-почитать">Что почитать</a>
+    </aside>
+  </div>
+</div>
+
+
+</main>
+
+<footer class="ftr" data-theme="dark">
+  <svg class="sym fern" viewBox="0 0 40.5 65.02" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#fern"/></svg>
+  <div class="container">
+    <div class="ftr-row">
+      <a href="/edufamcs-demo/" aria-label="EDU FAMCS — главная"><img src="/edufamcs-demo/static/brand/logo/logo-edu-dark.svg" alt="EDU FAMCS" width="196" height="40"></a>
+      <ul class="ftr-links">
+        <li><a href="/edufamcs-demo/#courses">Курсы</a></li>
+        <li><a href="/edufamcs-demo/ml/">Машинное обучение</a></li>
+        <li><a href="/edufamcs-demo/handbook/">Хендбук</a></li>
+        <li><a href="/edufamcs-demo/news/">Новости</a></li>
+        <li><a href="/edufamcs-demo/people/">Авторы</a></li>
+        <li><a href="/edufamcs-demo/about/">О&nbsp;нас</a></li>
+        <li><a href="/edufamcs-demo/propose/">Предложить или исправить</a></li>
+        <li><a href="/edufamcs-demo/privacy/">Конфиденциальность</a></li>
+      </ul>
+    </div>
+    <div class="ftr-big" aria-hidden="true">EDU<span class="d">·</span>FAMCS</div>
+    <p class="ftr-copy">© 2026 EDU FAMCS · Минск</p>
+  </div>
+</footer>
+
+<div class="toasts-region" aria-live="polite" id="toasts">
+
+</div>
+
+</body>
+</html>

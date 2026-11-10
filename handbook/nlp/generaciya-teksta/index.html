@@ -1,0 +1,274 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Генерация: декодирование и сэмплирование · EDU FAMCS</title>
+<meta name="description" content="Генерация: декодирование и сэмплирование — NLP и большие языковые модели. Хендбук ML-курса ФПМИ.">
+<meta name="theme-color" content="#060A16">
+<meta name="robots" content="noindex, nofollow">
+<meta name="htmx-config" content='{"allowEval":false,"includeIndicatorStyles":false,"historyCacheSize":0,"selfRequestsOnly":true}'>
+<meta name="katex-js" content="/edufamcs-demo/static/vendor/katex/katex.min.js">
+<meta name="katex-css" content="/edufamcs-demo/static/vendor/katex/katex.min.css">
+<link rel="icon" href="/edufamcs-demo/static/brand/logo/favicon-16.svg" type="image/svg+xml" sizes="16x16">
+<link rel="icon" href="/edufamcs-demo/static/brand/logo/favicon.svg" type="image/svg+xml" sizes="any">
+<link rel="preload" href="/edufamcs-demo/static/brand/fonts/manrope-cyrillic-400.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/edufamcs-demo/static/brand/fonts/unbounded-cyrillic-800.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="/edufamcs-demo/static/brand/fonts.css">
+<link rel="stylesheet" href="/edufamcs-demo/static/brand/tokens.css">
+<link rel="stylesheet" href="/edufamcs-demo/static/brand/components.css">
+<link rel="stylesheet" href="/edufamcs-demo/static/css/site.css">
+<link rel="stylesheet" href="/edufamcs-demo/static/css/hub.css">
+<link rel="stylesheet" href="/edufamcs-demo/static/css/about.css">
+<link rel="stylesheet" href="/edufamcs-demo/static/handbook/handbook.css">
+<script src="/edufamcs-demo/static/js/theme.js"></script>
+<script src="/edufamcs-demo/static/vendor/htmx/htmx.min.js" defer></script>
+<script src="/edufamcs-demo/static/vendor/alpine/alpine-csp.min.js" defer></script>
+<script src="/edufamcs-demo/static/js/site.js" defer></script>
+<script src="/edufamcs-demo/static/handbook/handbook.js" defer></script>
+</head>
+<body class="" hx-headers='{"X-CSRFToken": "Hriy8YHtT4f8P1jMRsYtAanlM56QKHwxjE7vo0gkURtH0kyeQVcqi3fjeedOurve"}'>
+<a class="skip" href="#main">К содержанию</a>
+<div class="demo-bar" role="note">Демо-версия для отзывов: вход, запись на курсы и формы здесь не работают.</div>
+
+<header class="hdr">
+  <div class="container">
+    <a class="brand" href="/edufamcs-demo/" aria-label="EDU FAMCS — главная">
+      <span class="full"><img class="only-light" src="/edufamcs-demo/static/brand/logo/logo-edu-light.svg" alt="EDU FAMCS" width="196" height="40"><img class="only-dark" src="/edufamcs-demo/static/brand/logo/logo-edu-dark.svg" alt="EDU FAMCS" width="196" height="40"></span>
+      <span class="short"><img class="only-light" src="/edufamcs-demo/static/brand/logo/logo-edu-light.svg" alt="EDU FAMCS" height="30"><img class="only-dark" src="/edufamcs-demo/static/brand/logo/logo-edu-dark.svg" alt="EDU FAMCS" height="30"></span>
+    </a>
+    <nav class="nav" id="main-nav" aria-label="Основная навигация">
+      <a href="/edufamcs-demo/#courses">Курсы</a>
+      <a href="/edufamcs-demo/ml/" >Машинное обучение</a>
+      
+      <a href="/edufamcs-demo/handbook/" aria-current="page">Хендбук</a>
+      <a href="/edufamcs-demo/news/" >Новости</a>
+      <a href="/edufamcs-demo/people/" >Авторы</a>
+      <a href="/edufamcs-demo/about/" >О&nbsp;нас</a>
+    </nav>
+    <div class="hdr-actions">
+      
+      <a class="btn btn-outline btn-login" href="/edufamcs-demo/accounts/login/?next=/handbook/nlp/generaciya-teksta/">Войти</a>
+      
+      <button class="icon-btn menu-btn" type="button" aria-label="Меню" aria-expanded="false" aria-controls="main-nav"><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-menu"/></svg></button>
+    </div>
+  </div>
+</header>
+
+<main id="main">
+
+
+
+<div class="container hb-page s-nlp">
+  <div class="hb-readbar" aria-hidden="true"><i></i></div>
+  <div class="hb">
+    <aside class="hb-nav" aria-label="Статьи раздела">
+      
+<form class="hb-search" action="/edufamcs-demo/handbook/search/" method="get" role="search">
+  <svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-search"/></svg>
+  <input class="input" type="search" name="q" value="" placeholder="Поиск по хендбуку" aria-label="Поиск по хендбуку" autocomplete="off" maxlength="120"
+    hx-get="/edufamcs-demo/handbook/search/" hx-trigger="input changed delay:250ms, search" hx-target="#hb-nav-results" hx-sync="this:replace">
+</form>
+
+      <div id="hb-nav-results" class="hb-nav-results" aria-live="polite"></div>
+      <a class="grp" href="/edufamcs-demo/handbook/nlp/">Основы</a>
+      
+      <a class="" href="/edufamcs-demo/handbook/nlp/tokenizaciya-i-embeddingi/">Токенизация и эмбеддинги слов</a>
+      
+      <a class="" href="/edufamcs-demo/handbook/nlp/predobuchenie-bert-gpt/">Предобучение: BERT, GPT и что между ними</a>
+      
+      <a class="cur" href="/edufamcs-demo/handbook/nlp/generaciya-teksta/" aria-current="page">Генерация: декодирование и сэмплирование</a>
+      
+    </aside>
+
+    <article class="hb-main">
+      <nav class="crumbs" aria-label="Навигация"><a href="/edufamcs-demo/handbook/">Хендбук</a><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-chev"/></svg><a href="/edufamcs-demo/handbook/nlp/">NLP и большие языковые модели</a></nav>
+      <h1 class="h1">Генерация: декодирование и сэмплирование</h1>
+      <div class="hb-meta">
+        
+        
+        <span><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-clock"/></svg>12&nbsp;мин</span>
+        <span class="hb-authors"><span class="avatar sm" title="Артем Лебедевич">АЛ</span>Артем Лебедевич</span>
+        <span><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-edit"/></svg>10 ноября 2026</span>
+        
+        
+      </div>
+
+      
+      <details class="hb-mtoc">
+        <summary><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-list"/></svg>Содержание<svg class="ico sm" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-chev-down"/></svg></summary>
+        <a class="l2" href="#от-логитов-к-токену">От логитов к токену</a><a class="l2" href="#жадный-поиск-и-beam-search">Жадный поиск и beam search</a><a class="l2" href="#температура">Температура</a><a class="l2" href="#усечение-хвоста-top-k-top-p-min-p">Усечение хвоста: top-k, top-p, min-p</a><a class="l2" href="#штрафы-за-повторы">Штрафы за повторы</a><a class="l2" href="#детерминизм-остановка-длина">Детерминизм, остановка, длина</a><a class="l2" href="#структурированная-генерация">Структурированная генерация</a><a class="l2" href="#logprobs-стриминг-kv-кэш">Logprobs, стриминг, KV-кэш</a><a class="l2" href="#галлюцинации-с-точки-зрения-декодирования">Галлюцинации с точки зрения декодирования</a><a class="l2" href="#код">Код</a><a class="l2" href="#ловушки">Ловушки</a><a class="l2" href="#проверь-себя">Проверь себя</a><a class="l2" href="#что-почитать">Что почитать</a>
+      </details>
+      
+
+      <div class="prose"><p>Языковая модель выдаёт не текст, а распределение вероятностей следующего токена. Как из него получить строку — отдельное инженерное решение, и оно сильно влияет на результат: одна и та же модель при разных настройках декодирования то повторяет себя по кругу, то несёт чепуху, то выдаёт валидный JSON. Разберём основные методы, их параметры и ограничения.</p>
+<h2 id="от-логитов-к-токену">От логитов к токену</h2>
+<p>Модель возвращает вектор логитов <span class="tex">z\in\mathbb R^{|V|}</span>; распределение <span class="tex">p_i=\operatorname{softmax}(z)_i=\frac{e^{z_i}}{\sum_j e^{z_j}}</span>. Токен <span class="tex">x_t</span> выбирается по <span class="tex">p</span>, дописывается к контексту, и всё повторяется до специального токена конца, стоп-последовательности или лимита <code>max_tokens</code>. Модель авторегрессионная (см. <a href="/edufamcs-demo/handbook/nlp/predobuchenie-bert-gpt/" rel="noopener noreferrer nofollow">предобучение</a>): вероятность всей строки равна произведению вероятностей токенов, и каждый выбор влияет на все последующие. Все методы ниже различаются только тем, как они превращают <span class="tex">p</span> в выбор.</p>
+<h2 id="жадный-поиск-и-beam-search">Жадный поиск и beam search</h2>
+<p><strong>Greedy:</strong> <span class="tex">x_t=\arg\max_i p_i</span>. Быстро и детерминированно, но локально оптимальный выбор не даёт самую вероятную строку, а длинный текст часто скатывается в повторы.</p>
+<p><strong>Beam search</strong> держит <span class="tex">B</span> лучших гипотез по сумме логарифмов вероятностей <span class="tex">\sum_t\log p(x_t\mid x_{&lt;t})</span>, на каждом шаге расширяет каждую всеми токенами и оставляет <span class="tex">B</span> лучших из <span class="tex">B\cdot|V|</span>. Суммарная логвероятность тем ниже, чем длиннее строка, поэтому применяют нормировку на длину. Для задач с узким «правильным» ответом (перевод, распознавание речи, суммаризация) метод полезен. Для открытой генерации он плох: Холтцман и соавторы (2019) показали, что самые вероятные строки — не человеческие: они скучны и повторяются, а у человеческого текста вероятность токенов ниже и неравномернее. Вывод: максимизировать вероятность и порождать правдоподобный текст — разные задачи.</p>
+<h2 id="температура">Температура</h2>
+<p>Температура <span class="tex">T&gt;0</span> масштабирует логиты: <span class="tex">p_i^{(T)}=\operatorname{softmax}(z/T)_i</span>. При <span class="tex">T\to0</span> распределение стягивается к one-hot на максимуме (greedy), при <span class="tex">T\to\infty</span> — к равномерному, <span class="tex">T=1</span> — исходное распределение модели. Интуиция: <span class="tex">T</span> управляет энтропией выбора.</p>
+<p><strong>Числовой пример.</strong> Логиты <span class="tex">z=(4,3,1,0)</span> для четырёх токенов; энтропия <span class="tex">H=-\sum p_i\ln p_i</span> в натах (максимум <span class="tex">\ln4=1{,}386</span>):</p>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th><span class="tex">T</span></th>
+<th><span class="tex">p</span></th>
+<th><span class="tex">H</span></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>0,5</td>
+<td>0,879; 0,119; 0,002; 0,000</td>
+<td>0,383</td>
+</tr>
+<tr>
+<td>1</td>
+<td>0,696; 0,256; 0,035; 0,013</td>
+<td>0,773</td>
+</tr>
+<tr>
+<td>2</td>
+<td>0,509; 0,309; 0,114; 0,069</td>
+<td>1,138</td>
+</tr>
+<tr>
+<td>100</td>
+<td>0,255; 0,252; 0,247; 0,245</td>
+<td>1,386</td>
+</tr>
+</tbody>
+</table></div>
+<p>Низкая температура усиливает лидера, высокая поднимает «хвост», где живут редкие и часто нелепые токены.</p>
+<h2 id="усечение-хвоста-top-k-top-p-min-p">Усечение хвоста: top-k, top-p, min-p</h2>
+<p>Температура не убирает хвост, а лишь меняет его вес: при большом словаре суммарная вероятность тысяч маловероятных токенов велика, и рано или поздно один из них выпадет. Поэтому распределение <strong>обрезают</strong> и пересчитывают нормировку.</p>
+<ul>
+<li><strong>Top-k:</strong> оставить <span class="tex">k</span> токенов с наибольшей вероятностью. Минус: <span class="tex">k</span> фиксирован, а «ширина» разумных вариантов меняется (после «Столица Франции —» разумен один токен, в начале предложения — сотни).</li>
+<li><strong>Top-p (nucleus)</strong> (Холтцман и соавторы, 2019/2020): упорядочить токены по убыванию <span class="tex">p</span> и оставить минимальный префикс, суммарная вероятность которого <span class="tex">\ge p_{\text{thr}}</span>. Алгоритм: <code>order = argsort(-p); c = cumsum(p[order]); n = первый индекс, где c &gt;= p_thr, плюс 1; оставить order[:n]; нормировать</code>. Размер ядра адаптивен.</li>
+<li><strong>Min-p</strong> (Нгуен и соавторы, 2024): оставить токены с <span class="tex">p_i\ge \rho\cdot p_{\max}</span>, где <span class="tex">\rho\in(0,1)</span> — порог, масштабируемый уверенностью модели.</li>
+</ul>
+<p>На нашем примере (<span class="tex">T=1</span>): top-k с <span class="tex">k=2</span> и top-p с порогом 0,8 или 0,95 оставляют два токена, распределение после пересчёта <span class="tex">(0{,}731;\,0{,}269)</span>. Порог 0,97 оставляет три токена: <span class="tex">(0{,}705;\,0{,}259;\,0{,}035)</span>, порог 0,99 — все четыре. Эмпирическая проверка: 20 000 сэмплов из top-p 0,8 дали частоты <span class="tex">(0{,}73;\,0{,}27;\,0;\,0)</span>.</p>
+<p>Порядок применения (температура, потом усечение, или наоборот) зависит от реализации — проверяйте документацию библиотеки, это влияет на результат.</p>
+<h2 id="штрафы-за-повторы">Штрафы за повторы</h2>
+<p><strong>Repetition penalty</strong> (Кескар и соавторы, CTRL, 2019): для уже встречавшихся токенов логит делят на <span class="tex">\theta&gt;1</span> (так в статье; в реализациях вроде <code>transformers</code> отрицательный логит умножают на <span class="tex">\theta</span>, чтобы штраф всегда понижал вероятность). Для <span class="tex">\theta=1{,}5</span> и первого токена из примера (его логит 4 положителен, его делят) получаем <span class="tex">(0{,}377;\,0{,}526;\,0{,}071;\,0{,}026)</span>: бывший лидер уступил. В API часто используют <strong>presence/frequency penalty</strong>: из логита токена вычитается константа за факт появления и/или величина, пропорциональная числу вхождений. Штрафы борются с зацикливанием, но могут испортить текст там, где повторы законны: код, имена, числа.</p>
+<h2 id="детерминизм-остановка-длина">Детерминизм, остановка, длина</h2>
+<ul>
+<li><strong><span class="tex">T=0</span> не гарантирует воспроизводимость.</strong> Даже при greedy результат может отличаться между запусками: сложение чисел с плавающей точкой неассоциативно, порядок редукций зависит от размера батча и ядер GPU, а в смесях экспертов маршрутизация зависит от соседних запросов. Равенство логитов в пределах ошибки может менять argmax. Хотите воспроизводимость — фиксируйте seed (если API его поддерживает), версию модели и железо, и не рассчитывайте на неё слепо; в тестах сравнивайте по смыслу.</li>
+<li><strong>Стоп-последовательности</strong> обрывают генерацию, когда выданный текст содержит заданную строку; сама строка обычно в ответ не попадает.</li>
+<li><strong><code>max_tokens</code></strong> ограничивает длину выхода: ответ может оборваться посреди предложения или JSON — проверяйте причину остановки (<code>stop</code> против <code>length</code>).</li>
+</ul>
+<h2 id="структурированная-генерация">Структурированная генерация</h2>
+<p>Если нужен валидный JSON по схеме или строка по регулярному выражению, «просить в промпте» недостаточно: модель иногда ошибается. Идея <strong>ограниченного декодирования</strong>: на каждом шаге вычислить множество токенов, которые допустимы по грамматике при уже сгенерированном префиксе, поставить всем остальным логит <span class="tex">-\infty</span> <strong>до</strong> сэмплирования и затем выбирать как обычно. Тогда невалидный вывод невозможен по построению. Реализации: грамматики GBNF в <code>llama.cpp</code>, библиотека Outlines, XGrammar (Дон и соавторы, 2024: движок для контекстно-свободных грамматик, интегрированный в серверы инференса). Подводные камни: сложная грамматика замедляет шаг; маска гарантирует форму, но не смысл (поле может быть валидным и неверным); жёсткое ограничение может заставить модель выбрать неподходящий токен ради формата. Применение в агентах — <a href="/edufamcs-demo/handbook/ai-tools/kak-ustroen-kodovyj-agent/" rel="noopener noreferrer nofollow">как устроен кодовый агент</a>.</p>
+<h2 id="logprobs-стриминг-kv-кэш">Logprobs, стриминг, KV-кэш</h2>
+<p><strong>Logprobs</strong> — логарифмы вероятностей выбранных (и нескольких лучших) токенов, которые отдают многие API. Применения: порог уверенности для классификации по первому токену ответа (с оговоркой: вероятности LLM плохо откалиброваны), ранжирование кандидатов по суммарной логвероятности, поиск места, где ответ «сломался» (резкий провал вероятности), оценка перплексии текста. <strong>Стриминг</strong> отдаёт токены по мере выбора: полезно для времени до первого токена, но не ускоряет полный ответ; ограниченное декодирование и проверка итога при стриминге сложнее.</p>
+<p><strong>KV-кэш.</strong> Без него каждый новый токен требует пересчитать внимание над всеми предыдущими: стоимость шага <span class="tex">O(T^2)</span> и <span class="tex">O(T^3)</span> на весь текст. Ключи и значения прошлых токенов не меняются (маска причинная), их сохраняют: шаг стоит <span class="tex">O(T)</span> на внимание плюс <span class="tex">O(1)</span> по длине на остальные слои, итого генерация <span class="tex">T</span> токенов — <span class="tex">O(T^2)</span>. Фаза обработки промпта (prefill) параллельна, а декодирование последовательно: каждый токен — отдельный проход, ограниченный чтением весов и кэша из памяти. Подробнее о памяти — в статье про <a href="/edufamcs-demo/handbook/nlp/ocenka-i-inferens-llm/" rel="noopener noreferrer nofollow">инференс</a>.</p>
+<h2 id="галлюцинации-с-точки-зрения-декодирования">Галлюцинации с точки зрения декодирования</h2>
+<p>Модель обучена выдавать <strong>правдоподобное</strong> продолжение, а не <strong>истинное</strong>; при отсутствии знания распределение просто размазано по правдоподобным вариантам. Декодирование модулирует проблему, но не создаёт её: высокая температура и широкое ядро повышают шанс выбрать неверный токен из хвоста, а greedy уверенно выдаёт самый вероятный из неверных. Снижение <span class="tex">T</span> уменьшает случайные ошибки, но не ошибки знания. Реальные средства — привязка к источникам (<a href="/edufamcs-demo/handbook/retrieval/rag/" rel="noopener noreferrer nofollow">RAG</a>), ограничения формата, проверка вывода и оценка (<a href="/edufamcs-demo/handbook/nlp/ocenka-i-inferens-llm/" rel="noopener noreferrer nofollow">следующие статьи раздела</a>).</p>
+<h2 id="код">Код</h2>
+<div class="code"><div class="code-head"><span class="lang">python</span></div><pre><code><span class="tok-k">import</span> numpy <span class="tok-k">as</span> np
+<span class="tok-k">def</span> <span class="tok-f">softmax</span><span class="tok-p">(</span>z<span class="tok-p">)</span><span class="tok-p">:</span> e <span class="tok-p">=</span> np<span class="tok-p">.</span>exp<span class="tok-p">(</span>z <span class="tok-p">-</span> z<span class="tok-p">.</span>max<span class="tok-p">(</span><span class="tok-p">)</span><span class="tok-p">)</span><span class="tok-p">;</span> <span class="tok-k">return</span> e <span class="tok-p">/</span> e<span class="tok-p">.</span>sum<span class="tok-p">(</span><span class="tok-p">)</span>
+<span class="tok-k">def</span> <span class="tok-f">temperature</span><span class="tok-p">(</span>l<span class="tok-p">,</span> T<span class="tok-p">)</span><span class="tok-p">:</span> <span class="tok-k">return</span> softmax<span class="tok-p">(</span>l <span class="tok-p">/</span> T<span class="tok-p">)</span>
+<span class="tok-k">def</span> <span class="tok-f">top_k</span><span class="tok-p">(</span>p<span class="tok-p">,</span> k<span class="tok-p">)</span><span class="tok-p">:</span>
+    q <span class="tok-p">=</span> np<span class="tok-p">.</span>zeros_like<span class="tok-p">(</span>p<span class="tok-p">)</span><span class="tok-p">;</span> i <span class="tok-p">=</span> np<span class="tok-p">.</span>argsort<span class="tok-p">(</span><span class="tok-p">-</span>p<span class="tok-p">)</span><span class="tok-p">[</span><span class="tok-p">:</span>k<span class="tok-p">]</span><span class="tok-p">;</span> q<span class="tok-p">[</span>i<span class="tok-p">]</span> <span class="tok-p">=</span> p<span class="tok-p">[</span>i<span class="tok-p">]</span><span class="tok-p">;</span> <span class="tok-k">return</span> q <span class="tok-p">/</span> q<span class="tok-p">.</span>sum<span class="tok-p">(</span><span class="tok-p">)</span>
+<span class="tok-k">def</span> <span class="tok-f">top_p</span><span class="tok-p">(</span>p<span class="tok-p">,</span> thr<span class="tok-p">)</span><span class="tok-p">:</span>
+    o <span class="tok-p">=</span> np<span class="tok-p">.</span>argsort<span class="tok-p">(</span><span class="tok-p">-</span>p<span class="tok-p">)</span><span class="tok-p">;</span> c <span class="tok-p">=</span> np<span class="tok-p">.</span>cumsum<span class="tok-p">(</span>p<span class="tok-p">[</span>o<span class="tok-p">]</span><span class="tok-p">)</span><span class="tok-p">;</span> n <span class="tok-p">=</span> np<span class="tok-p">.</span>searchsorted<span class="tok-p">(</span>c<span class="tok-p">,</span> thr<span class="tok-p">)</span> <span class="tok-p">+</span> <span class="tok-n">1</span>
+    q <span class="tok-p">=</span> np<span class="tok-p">.</span>zeros_like<span class="tok-p">(</span>p<span class="tok-p">)</span><span class="tok-p">;</span> q<span class="tok-p">[</span>o<span class="tok-p">[</span><span class="tok-p">:</span>n<span class="tok-p">]</span><span class="tok-p">]</span> <span class="tok-p">=</span> p<span class="tok-p">[</span>o<span class="tok-p">[</span><span class="tok-p">:</span>n<span class="tok-p">]</span><span class="tok-p">]</span><span class="tok-p">;</span> <span class="tok-k">return</span> q <span class="tok-p">/</span> q<span class="tok-p">.</span>sum<span class="tok-p">(</span><span class="tok-p">)</span>
+<span class="tok-k">def</span> <span class="tok-f">min_p</span><span class="tok-p">(</span>p<span class="tok-p">,</span> rho<span class="tok-p">)</span><span class="tok-p">:</span> q <span class="tok-p">=</span> np<span class="tok-p">.</span>where<span class="tok-p">(</span>p <span class="tok-p">&gt;</span><span class="tok-p">=</span> rho <span class="tok-p">*</span> p<span class="tok-p">.</span>max<span class="tok-p">(</span><span class="tok-p">)</span><span class="tok-p">,</span> p<span class="tok-p">,</span> <span class="tok-n">0</span><span class="tok-p">)</span><span class="tok-p">;</span> <span class="tok-k">return</span> q <span class="tok-p">/</span> q<span class="tok-p">.</span>sum<span class="tok-p">(</span><span class="tok-p">)</span>
+
+l <span class="tok-p">=</span> np<span class="tok-p">.</span>array<span class="tok-p">(</span><span class="tok-p">[</span><span class="tok-n">4.0</span><span class="tok-p">,</span> <span class="tok-n">3.0</span><span class="tok-p">,</span> <span class="tok-n">1.0</span><span class="tok-p">,</span> <span class="tok-n">0.0</span><span class="tok-p">]</span><span class="tok-p">)</span><span class="tok-p">;</span> p <span class="tok-p">=</span> temperature<span class="tok-p">(</span>l<span class="tok-p">,</span> <span class="tok-n">1</span><span class="tok-p">)</span>
+<span class="tok-f">print</span><span class="tok-p">(</span>temperature<span class="tok-p">(</span>l<span class="tok-p">,</span> <span class="tok-n">0.5</span><span class="tok-p">)</span><span class="tok-p">)</span>   <span class="tok-c"># [0.879 0.119 0.002 0.   ]</span>
+<span class="tok-f">print</span><span class="tok-p">(</span>top_p<span class="tok-p">(</span>p<span class="tok-p">,</span> <span class="tok-n">0.97</span><span class="tok-p">)</span><span class="tok-p">)</span>        <span class="tok-c"># [0.705 0.259 0.035 0.   ]</span>
+<span class="tok-f">print</span><span class="tok-p">(</span>top_k<span class="tok-p">(</span>p<span class="tok-p">,</span> <span class="tok-n">2</span><span class="tok-p">)</span><span class="tok-p">)</span>           <span class="tok-c"># [0.731 0.269 0.    0.   ]</span>
+<span class="tok-f">print</span><span class="tok-p">(</span>min_p<span class="tok-p">(</span>p<span class="tok-p">,</span> <span class="tok-n">0.04</span><span class="tok-p">)</span><span class="tok-p">)</span>        <span class="tok-c"># [0.705 0.259 0.035 0.   ]</span>
+rng <span class="tok-p">=</span> np<span class="tok-p">.</span>random<span class="tok-p">.</span>default_rng<span class="tok-p">(</span><span class="tok-n">0</span><span class="tok-p">)</span>
+token <span class="tok-p">=</span> rng<span class="tok-p">.</span>choice<span class="tok-p">(</span><span class="tok-f">len</span><span class="tok-p">(</span>p<span class="tok-p">)</span><span class="tok-p">,</span> p<span class="tok-p">=</span>top_p<span class="tok-p">(</span>p<span class="tok-p">,</span> <span class="tok-n">0.97</span><span class="tok-p">)</span><span class="tok-p">)</span>      <span class="tok-c"># сэмплирование</span>
+</code></pre></div>
+<p>Маска для ограниченного декодирования — те же две строки: <code>l = np.where(allowed, l, -np.inf)</code>, затем <code>softmax(l)</code>. Для <span class="tex">z=(4,3,1,0)</span> и допустимых токенов 1, 2 получается <span class="tex">(0;\,0{,}881;\,0{,}119;\,0)</span>.</p>
+<h2 id="ловушки">Ловушки</h2>
+<div class="callout md warn"><p class="callout-title">Температура 0 и тесты</p>
+<p>Тест, который сравнивает ответ модели со строкой, может быть нестабилен даже при <span class="tex">T=0</span>. Сравнивайте по смыслу, структуре или метрике, а не по точному совпадению.</p>
+</div>
+<ul>
+<li>Одновременно задавать температуру и top-p, не зная порядка применения в библиотеке, — результат получается неинтерпретируемым.</li>
+<li>Оставлять жёсткие штрафы за повторы на задачах с кодом и числами.</li>
+<li>Не проверять причину остановки: оборванный <code>length</code>-ответ принимают за полный.</li>
+<li>Считать, что структурированная генерация гарантирует верное содержание.</li>
+<li><strong>На собеседовании:</strong> выведите влияние температуры на энтропию; объясните top-p на примере и чем он лучше top-k.</li>
+<li><strong>На собеседовании:</strong> почему beam search плох для диалога и что такое KV-кэш; почему <code>temperature=0</code> не детерминирован.</li>
+</ul>
+<h2 id="проверь-себя">Проверь себя</h2>
+<details class="callout md details"><summary>Что делает температура с логитами и распределением?</summary>
+<p>Логиты делятся на <span class="tex">T</span> перед softmax: при <span class="tex">T&lt;1</span> распределение заостряется (энтропия падает), при <span class="tex">T&gt;1</span> сглаживается, <span class="tex">T\to0</span> даёт greedy.</p>
+</details>
+<details class="callout md details"><summary>Почему beam search плохо подходит для открытой генерации?</summary>
+<p>Он максимизирует вероятность строки, а самые вероятные строки скучны и склонны к повторам: человеческий текст не лежит в моде распределения.</p>
+</details>
+<details class="callout md details"><summary>Как работает top-p и в чём его преимущество над top-k?</summary>
+<p>Сортируем токены по убыванию, берём минимальный префикс с суммарной вероятностью <span class="tex">\ge p</span> и нормируем. Размер ядра подстраивается под неопределённость модели, а <span class="tex">k</span> фиксирован.</p>
+</details>
+<details class="callout md details"><summary>Как гарантировать валидный JSON на выходе?</summary>
+<p>Ограниченное декодирование: перед сэмплированием замаскировать токены, недопустимые по грамматике для текущего префикса (логит <span class="tex">-\infty</span>). Форма гарантирована, смысл — нет.</p>
+</details>
+<details class="callout md details"><summary>Почему при $T=0$ ответы всё же могут различаться?</summary>
+<p>Неассоциативность float-арифметики, зависимость редукций от батча и ядер, маршрутизация в MoE: почти равные логиты могут давать разный argmax.</p>
+</details>
+<h2 id="что-почитать">Что почитать</h2>
+<ul>
+<li>Holtzman et al., <em>The Curious Case of Neural Text Degeneration</em>, ICLR 2020: <a href="https://arxiv.org/abs/1904.09751" rel="noopener noreferrer nofollow">arxiv.org/abs/1904.09751</a>.</li>
+<li>Keskar et al., <em>CTRL: A Conditional Transformer Language Model for Controllable Generation</em>, 2019: <a href="https://arxiv.org/abs/1909.05858" rel="noopener noreferrer nofollow">arxiv.org/abs/1909.05858</a>.</li>
+<li>Nguyen et al., <em>Turning Up the Heat: Min-p Sampling for Creative and Coherent LLM Outputs</em>, ICLR 2025: <a href="https://arxiv.org/abs/2407.01082" rel="noopener noreferrer nofollow">arxiv.org/abs/2407.01082</a>.</li>
+<li>Dong et al., <em>XGrammar: Flexible and Efficient Structured Generation Engine for Large Language Models</em>, MLSys 2025: <a href="https://arxiv.org/abs/2411.15100" rel="noopener noreferrer nofollow">arxiv.org/abs/2411.15100</a>.</li>
+<li>Hugging Face, <em>Text generation strategies</em> — документация по <code>generate</code>: <a href="https://huggingface.co/docs/transformers/generation_strategies" rel="noopener noreferrer nofollow">huggingface.co/docs/transformers</a>.</li>
+<li>Fan, Lewis, Dauphin, <em>Hierarchical Neural Story Generation</em>, ACL 2018 (top-k сэмплирование): <a href="https://arxiv.org/abs/1805.04833" rel="noopener noreferrer nofollow">arxiv.org/abs/1805.04833</a>.</li>
+</ul>
+</div>
+      
+
+      
+
+      
+      <nav class="pager" aria-label="Соседние статьи">
+        <a href="/edufamcs-demo/handbook/nlp/predobuchenie-bert-gpt/"><span><svg class="ico sm" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-arrow-left"/></svg>Назад</span>Предобучение: BERT, GPT и что между ними</a>
+        <a href="/edufamcs-demo/handbook/nlp/doobuchenie-lora/"><span>Дальше<svg class="ico sm" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-arrow"/></svg></span>Дообучение LLM: от полного fine-tuning до LoRA</a>
+      </nav>
+      
+    </article>
+
+    <aside class="hb-toc" aria-label="На этой странице">
+      <a class="l2" href="#от-логитов-к-токену">От логитов к токену</a><a class="l2" href="#жадный-поиск-и-beam-search">Жадный поиск и beam search</a><a class="l2" href="#температура">Температура</a><a class="l2" href="#усечение-хвоста-top-k-top-p-min-p">Усечение хвоста: top-k, top-p, min-p</a><a class="l2" href="#штрафы-за-повторы">Штрафы за повторы</a><a class="l2" href="#детерминизм-остановка-длина">Детерминизм, остановка, длина</a><a class="l2" href="#структурированная-генерация">Структурированная генерация</a><a class="l2" href="#logprobs-стриминг-kv-кэш">Logprobs, стриминг, KV-кэш</a><a class="l2" href="#галлюцинации-с-точки-зрения-декодирования">Галлюцинации с точки зрения декодирования</a><a class="l2" href="#код">Код</a><a class="l2" href="#ловушки">Ловушки</a><a class="l2" href="#проверь-себя">Проверь себя</a><a class="l2" href="#что-почитать">Что почитать</a>
+    </aside>
+  </div>
+</div>
+
+
+</main>
+
+<footer class="ftr" data-theme="dark">
+  <svg class="sym fern" viewBox="0 0 40.5 65.02" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#fern"/></svg>
+  <div class="container">
+    <div class="ftr-row">
+      <a href="/edufamcs-demo/" aria-label="EDU FAMCS — главная"><img src="/edufamcs-demo/static/brand/logo/logo-edu-dark.svg" alt="EDU FAMCS" width="196" height="40"></a>
+      <ul class="ftr-links">
+        <li><a href="/edufamcs-demo/#courses">Курсы</a></li>
+        <li><a href="/edufamcs-demo/ml/">Машинное обучение</a></li>
+        <li><a href="/edufamcs-demo/handbook/">Хендбук</a></li>
+        <li><a href="/edufamcs-demo/news/">Новости</a></li>
+        <li><a href="/edufamcs-demo/people/">Авторы</a></li>
+        <li><a href="/edufamcs-demo/about/">О&nbsp;нас</a></li>
+        <li><a href="/edufamcs-demo/propose/">Предложить или исправить</a></li>
+        <li><a href="/edufamcs-demo/privacy/">Конфиденциальность</a></li>
+      </ul>
+    </div>
+    <div class="ftr-big" aria-hidden="true">EDU<span class="d">·</span>FAMCS</div>
+    <p class="ftr-copy">© 2026 EDU FAMCS · Минск</p>
+  </div>
+</footer>
+
+<div class="toasts-region" aria-live="polite" id="toasts">
+
+</div>
+
+</body>
+</html>

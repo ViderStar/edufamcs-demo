@@ -27,7 +27,7 @@
 <script src="/edufamcs-demo/static/js/site.js" defer></script>
 <script src="/edufamcs-demo/static/handbook/handbook.js" defer></script>
 </head>
-<body class="" hx-headers='{"X-CSRFToken": "IY96uFMA2TGunZ6IBGgjbZ7vFethjfv9u4atos4hd6WI2y2YO59osrfQbB5wo0g8"}'>
+<body class="" hx-headers='{"X-CSRFToken": "CQT2ik6RaIDYl6xr4iym3s5Ww6ylrlR1e3IZymFIbvRxwpMT3LMjLlXUYfFjb5QI"}'>
 <a class="skip" href="#main">К содержанию</a>
 <div class="demo-bar" role="note">Демо-версия для отзывов: вход, запись на курсы и формы здесь не работают.</div>
 
@@ -60,6 +60,7 @@
 
 
 <div class="container hb-page s-recsys">
+  <div class="hb-readbar" aria-hidden="true"><i></i></div>
   <div class="hb">
     <aside class="hb-nav" aria-label="Статьи раздела">
       
@@ -90,9 +91,9 @@
       <div class="hb-meta">
         
         
-        <span><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-clock"/></svg>14&nbsp;мин</span>
+        <span><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-clock"/></svg>17&nbsp;мин</span>
         <span class="hb-authors"><span class="avatar sm" title="Артем Лебедевич">АЛ</span>Артем Лебедевич</span>
-        <span><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-edit"/></svg>9 ноября 2026</span>
+        <span><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-edit"/></svg>10 ноября 2026</span>
         
         
       </div>
@@ -100,7 +101,7 @@
       
       <details class="hb-mtoc">
         <summary><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-list"/></svg>Содержание<svg class="ico sm" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-chev-down"/></svg></summary>
-        <a class="l2" href="#постановка-автоэнкодер-без-скрытого-слоя">Постановка: автоэнкодер без скрытого слоя</a><a class="l2" href="#slim-2011">SLIM (2011)</a><a class="l2" href="#ease-2019">EASE (2019)</a><a class="l3" href="#вывод">Вывод</a><a class="l3" href="#почему-это-работает">Почему это работает</a><a class="l3" href="#цена-и-масштаб">Цена и масштаб</a><a class="l2" href="#автоэнкодеры-как-нелинейное-продолжение">Автоэнкодеры как нелинейное продолжение</a><a class="l2" href="#почему-простые-модели-догнали-нейросети">Почему простые модели догнали нейросети</a><a class="l2" href="#как-ease-используют-в-индустрии">Как EASE используют в индустрии</a><a class="l2" href="#подводные-камни">Подводные камни</a><a class="l2" href="#что-почитать">Что почитать</a>
+        <a class="l2" href="#постановка-автоэнкодер-без-скрытого-слоя">Постановка: автоэнкодер без скрытого слоя</a><a class="l2" href="#slim-2011">SLIM (2011)</a><a class="l2" href="#ease-2019">EASE (2019)</a><a class="l3" href="#вывод">Вывод</a><a class="l3" href="#пример-33">Пример 3×3</a><a class="l3" href="#почему-это-работает">Почему это работает</a><a class="l3" href="#цена-и-масштаб">Цена и масштаб</a><a class="l2" href="#автоэнкодеры-как-нелинейное-продолжение">Автоэнкодеры как нелинейное продолжение</a><a class="l2" href="#почему-простые-модели-догнали-нейросети">Почему простые модели догнали нейросети</a><a class="l2" href="#как-ease-используют-в-индустрии">Как EASE используют в индустрии</a><a class="l2" href="#подводные-камни">Подводные камни</a><a class="l2" href="#проверь-себя">Проверь себя</a><a class="l2" href="#что-почитать">Что почитать</a>
       </details>
       
 
@@ -152,6 +153,13 @@ B = \hat P\,\big(G - \mathrm{diagMat}(\gamma)\big) = I - \hat P\,\big(\lambda I 
     <span class="tok-k">return</span> np<span class="tok-p">.</span>take_along_axis<span class="tok-p">(</span>top<span class="tok-p">,</span> order<span class="tok-p">,</span> <span class="tok-n">1</span><span class="tok-p">)</span>
 </code></pre></div>
 <p><code>B = -P / np.diag(P)</code> делит столбец <span class="tex">j</span> на <span class="tex">P_{jj}</span> благодаря бродкастингу по строкам. Маскирование просмотренного обязательно: линейная модель с <span class="tex">\mathrm{diag}(B)=0</span> всё равно может ставить уже виденные объекты выше новых: скор виденного <span class="tex">j</span> — это <span class="tex">\sum_{k \ne j} x_{uk} B_{kj}</span>, и он велик, если <span class="tex">j</span> похож на остальную историю.</p>
+<h3 id="пример-33">Пример 3×3</h3>
+<p>Три объекта <span class="tex">A,B,C</span> и шесть пользователей: <span class="tex">\{A,B\}</span>, <span class="tex">\{A,B\}</span>, <span class="tex">\{A,B,C\}</span>, <span class="tex">\{B,C\}</span>, <span class="tex">\{A,C\}</span>, <span class="tex">\{C\}</span>. Каждый объект встречается у четырёх пользователей, пары <span class="tex">AB</span> — у трёх, <span class="tex">AC</span> и <span class="tex">BC</span> — у двух. Матрица Грама и <span class="tex">\hat P=(G+\lambda I)^{-1}</span> при <span class="tex">\lambda=1</span>:</p>
+<div class="tex tex-block">G=\begin{pmatrix}4&amp;3&amp;2\\3&amp;4&amp;2\\2&amp;2&amp;4\end{pmatrix},\qquad
+\hat P=\frac1{64}\begin{pmatrix}21&amp;-11&amp;-4\\-11&amp;21&amp;-4\\-4&amp;-4&amp;16\end{pmatrix}.</div>
+<p>Делим столбец <span class="tex">j</span> на <span class="tex">\hat P_{jj}</span>, меняем знак и обнуляем диагональ (<span class="tex">B_{ij}=-\hat P_{ij}/\hat P_{jj}</span>):</p>
+<div class="tex tex-block">B=\begin{pmatrix}0&amp;11/21&amp;1/4\\11/21&amp;0&amp;1/4\\4/21&amp;4/21&amp;0\end{pmatrix}\approx\begin{pmatrix}0&amp;0{,}524&amp;0{,}250\\0{,}524&amp;0&amp;0{,}250\\0{,}190&amp;0{,}190&amp;0\end{pmatrix}.</div>
+<p>Пользователь с одним объектом <span class="tex">A</span> получает скоры — первую строку: <span class="tex">B</span> — <span class="tex">0{,}524</span>, <span class="tex">C</span> — <span class="tex">0{,}250</span>. Пользователь с <span class="tex">\{A,B\}</span> получает для <span class="tex">C</span> сумму <span class="tex">0{,}25+0{,}25=0{,}5</span>. Матрица несимметрична: вес <span class="tex">A\to C</span> равен <span class="tex">0{,}25</span>, а <span class="tex">C\to A</span> — <span class="tex">0{,}19</span>, потому что столбцы нормируются каждый на свой <span class="tex">\hat P_{jj}</span>.</p>
 <h3 id="почему-это-работает">Почему это работает</h3>
 <p>Матрица <span class="tex">\hat P</span> — регуляризованная обратная матрица Грама; с точностью до центрирования и нормировки это оценка обратной ковариации (precision matrix). Известный факт из гауссовых графических моделей: <span class="tex">-P_{ij}/P_{jj}</span> — коэффициент при объекте <span class="tex">i</span> в линейной регрессии объекта <span class="tex">j</span> на все остальные объекты. То есть <span class="tex">B</span> хранит <strong>условные зависимости</strong>, а не маргинальные корреляции. Именно это решает проблему «дважды засчитанного» сходства из начала статьи: если <span class="tex">a'</span> почти дублирует <span class="tex">a</span>, то при известном <span class="tex">a</span> он почти ничего не добавляет к предсказанию <span class="tex">c</span>, и вес делится между ними, а не суммируется. Единственный гиперпараметр — <span class="tex">\lambda</span>; он на порядки больше, чем в обычной гребневой регрессии, потому что <span class="tex">X^\top X</span> содержит счётчики совстречаемости (для крупных наборов — тысячи).</p>
 <h3 id="цена-и-масштаб">Цена и масштаб</h3>
@@ -178,7 +186,7 @@ B = \hat P\,\big(G - \mathrm{diagMat}(\gamma)\big) = I - \hat P\,\big(\lambda I 
 <li><strong>Разреженные данные</strong>: у большинства пользователей десятки взаимодействий; нелинейность выигрывает у линейной модели только когда есть данные для её обучения.</li>
 <li><strong>Протоколы оценки</strong>: случайный сплит, сэмплированные метрики, утечка из будущего (подробнее — в статье про <a href="/edufamcs-demo/handbook/recsys/oflajn-metriki/" rel="noopener noreferrer nofollow">офлайн-метрики</a>).</li>
 </ol>
-<p>Вывод для практики: любая новая модель должна сравниваться с настроенными EASE и item-kNN, иначе прирост может оказаться иллюзией.</p>
+<p>Вывод для практики: любая новая модель должна сравниваться с настроенными EASE и item-kNN, иначе прирост может оказаться иллюзией. Оговорка: это относится к «статическому» top-N по матрице взаимодействий. В next-item prediction при глобальном временном сплите настроенный SASRec с полной кросс-энтропией или gBCE (2023) обычно обгоняет EASE — см. <a href="/edufamcs-demo/handbook/recsys/posledovatelnye-modeli/" rel="noopener noreferrer nofollow">последовательные модели</a>. EASE остаётся обязательным бейзлайном, но не потолком.</p>
 <h2 id="как-ease-используют-в-индустрии">Как EASE используют в индустрии</h2>
 <ul>
 <li><strong>Источник кандидатов.</strong> Берём строку <span class="tex">\hat x_u = x_u B</span>, маскируем просмотренное, оставляем топ-<span class="tex">N</span> (100–500). Это первая стадия <a href="/edufamcs-demo/handbook/recsys/kandidaty-i-ranzhirovanie/" rel="noopener noreferrer nofollow">двухстадийной схемы</a>: быстрая, без признаков, но с хорошим Recall.</li>
@@ -194,7 +202,26 @@ B = \hat P\,\big(G - \mathrm{diagMat}(\gamma)\big) = I - \hat P\,\big(\lambda I 
 <li><strong>Популярность.</strong> Модель переоценивает популярные объекты; в рекомендациях «с этим покупают» их часто надо демпфировать (деление на степень популярности).</li>
 <li><strong>Холодный старт.</strong> У нового объекта нулевой столбец в <span class="tex">X</span>, EASE о нём ничего не знает. Нужны контентные источники.</li>
 <li><strong>Утечка.</strong> Пользователь, чьи события в <span class="tex">X</span> участвуют в обучении <span class="tex">B</span>, а затем проверяется на том же — классическая ошибка. Матрицу строят до отсечки по времени, а тестовые события используют только как цель.</li>
+<li>На собеседовании: выведите замкнутое решение EASE и объясните роль ограничения <span class="tex">\mathrm{diag}(B)=0</span>.</li>
+<li>На собеседовании: чем EASE отличается от SLIM и от item-kNN и почему обратная матрица Грама лучше сырой совстречаемости?</li>
+<li>На собеседовании: что делать, если каталог — миллион объектов, и сколько стоит обучение EASE?</li>
 </ul>
+<h2 id="проверь-себя">Проверь себя</h2>
+<details class="callout md details"><summary>Почему без ограничения $\mathrm{diag}(B)=0$ модель бесполезна?</summary>
+<p>Оптимум тривиален: <span class="tex">B=I</span> даёт <span class="tex">\hat X=X</span> с нулевой ошибкой, и объект предсказывается самим собой. Запрет диагонали заставляет предсказывать столбец по остальным.</p>
+</details>
+<details class="callout md details"><summary>Что хранит матрица $B$ и чем это лучше сходства по совстречаемости?</summary>
+<p><span class="tex">-\hat P_{ij}/\hat P_{jj}</span> — коэффициент при <span class="tex">i</span> в регрессии <span class="tex">j</span> на все остальные объекты, то есть условная зависимость. Если <span class="tex">a'</span> дублирует <span class="tex">a</span>, вес делится между ними, а не засчитывается дважды, как в kNN.</p>
+</details>
+<details class="callout md details"><summary>Что происходит при очень большом $\lambda$?</summary>
+<p><span class="tex">\hat P\approx(I-G/\lambda)/\lambda</span> и <span class="tex">B_{ij}\approx G_{ij}/\lambda</span>: модель вырождается в ненормированную совстречаемость, то есть в популярное. При слишком малом <span class="tex">\lambda</span> матрица плохо обусловлена.</p>
+</details>
+<details class="callout md details"><summary>Почему EASE нельзя запустить на миллионе SKU и как это обходят?</summary>
+<p>Обращение плотной матрицы <span class="tex">|I|\times|I|</span> стоит <span class="tex">O(|I|^3)</span> по времени и <span class="tex">O(|I|^2)</span> по памяти. Берут самые частые объекты, шардируют по категориям или используют разреженные и низкоранговые приближения (SANSA, ELSA).</p>
+</details>
+<details class="callout md details"><summary>Всегда ли EASE побеждает последовательные модели?</summary>
+<p>Нет. Он сильный бейзлайн для «статического» top-N, но в next-item prediction при временном сплите настроенный SASRec с полной кросс-энтропией или gBCE обычно его обгоняет. EASE остаётся обязательным бейзлайном, не потолком.</p>
+</details>
 <h2 id="что-почитать">Что почитать</h2>
 <ul>
 <li>Steck. <em>Embarrassingly Shallow Autoencoders for Sparse Data</em>, WWW 2019 — <a href="https://arxiv.org/abs/1905.03375" rel="noopener noreferrer nofollow">arXiv:1905.03375</a>. Полный вывод и эксперименты на трёх датасетах.</li>
@@ -209,6 +236,8 @@ B = \hat P\,\big(G - \mathrm{diagMat}(\gamma)\big) = I - \hat P\,\big(\lambda I 
       
 
       
+
+      
       <nav class="pager" aria-label="Соседние статьи">
         <a href="/edufamcs-demo/handbook/recsys/neyavnyj-fidbek-bpr/"><span><svg class="ico sm" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-arrow-left"/></svg>Назад</span>Неявный фидбэк: BPR, WARP и негативы</a>
         <a href="/edufamcs-demo/handbook/recsys/ctr-modeli/"><span>Дальше<svg class="ico sm" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-arrow"/></svg></span>Модели CTR: от логрегрессии до DCN и DIN</a>
@@ -217,7 +246,7 @@ B = \hat P\,\big(G - \mathrm{diagMat}(\gamma)\big) = I - \hat P\,\big(\lambda I 
     </article>
 
     <aside class="hb-toc" aria-label="На этой странице">
-      <a class="l2" href="#постановка-автоэнкодер-без-скрытого-слоя">Постановка: автоэнкодер без скрытого слоя</a><a class="l2" href="#slim-2011">SLIM (2011)</a><a class="l2" href="#ease-2019">EASE (2019)</a><a class="l3" href="#вывод">Вывод</a><a class="l3" href="#почему-это-работает">Почему это работает</a><a class="l3" href="#цена-и-масштаб">Цена и масштаб</a><a class="l2" href="#автоэнкодеры-как-нелинейное-продолжение">Автоэнкодеры как нелинейное продолжение</a><a class="l2" href="#почему-простые-модели-догнали-нейросети">Почему простые модели догнали нейросети</a><a class="l2" href="#как-ease-используют-в-индустрии">Как EASE используют в индустрии</a><a class="l2" href="#подводные-камни">Подводные камни</a><a class="l2" href="#что-почитать">Что почитать</a>
+      <a class="l2" href="#постановка-автоэнкодер-без-скрытого-слоя">Постановка: автоэнкодер без скрытого слоя</a><a class="l2" href="#slim-2011">SLIM (2011)</a><a class="l2" href="#ease-2019">EASE (2019)</a><a class="l3" href="#вывод">Вывод</a><a class="l3" href="#пример-33">Пример 3×3</a><a class="l3" href="#почему-это-работает">Почему это работает</a><a class="l3" href="#цена-и-масштаб">Цена и масштаб</a><a class="l2" href="#автоэнкодеры-как-нелинейное-продолжение">Автоэнкодеры как нелинейное продолжение</a><a class="l2" href="#почему-простые-модели-догнали-нейросети">Почему простые модели догнали нейросети</a><a class="l2" href="#как-ease-используют-в-индустрии">Как EASE используют в индустрии</a><a class="l2" href="#подводные-камни">Подводные камни</a><a class="l2" href="#проверь-себя">Проверь себя</a><a class="l2" href="#что-почитать">Что почитать</a>
     </aside>
   </div>
 </div>

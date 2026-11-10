@@ -1,0 +1,330 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>PyTorch на практике: обучение и дообучение · EDU FAMCS</title>
+<meta name="description" content="PyTorch на практике: обучение и дообучение — Введение в глубокое обучение. Хендбук ML-курса ФПМИ.">
+<meta name="theme-color" content="#060A16">
+<meta name="robots" content="noindex, nofollow">
+<meta name="htmx-config" content='{"allowEval":false,"includeIndicatorStyles":false,"historyCacheSize":0,"selfRequestsOnly":true}'>
+<meta name="katex-js" content="/edufamcs-demo/static/vendor/katex/katex.min.js">
+<meta name="katex-css" content="/edufamcs-demo/static/vendor/katex/katex.min.css">
+<link rel="icon" href="/edufamcs-demo/static/brand/logo/favicon-16.svg" type="image/svg+xml" sizes="16x16">
+<link rel="icon" href="/edufamcs-demo/static/brand/logo/favicon.svg" type="image/svg+xml" sizes="any">
+<link rel="preload" href="/edufamcs-demo/static/brand/fonts/manrope-cyrillic-400.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/edufamcs-demo/static/brand/fonts/unbounded-cyrillic-800.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="/edufamcs-demo/static/brand/fonts.css">
+<link rel="stylesheet" href="/edufamcs-demo/static/brand/tokens.css">
+<link rel="stylesheet" href="/edufamcs-demo/static/brand/components.css">
+<link rel="stylesheet" href="/edufamcs-demo/static/css/site.css">
+<link rel="stylesheet" href="/edufamcs-demo/static/css/hub.css">
+<link rel="stylesheet" href="/edufamcs-demo/static/css/about.css">
+<link rel="stylesheet" href="/edufamcs-demo/static/handbook/handbook.css">
+<script src="/edufamcs-demo/static/js/theme.js"></script>
+<script src="/edufamcs-demo/static/vendor/htmx/htmx.min.js" defer></script>
+<script src="/edufamcs-demo/static/vendor/alpine/alpine-csp.min.js" defer></script>
+<script src="/edufamcs-demo/static/js/site.js" defer></script>
+<script src="/edufamcs-demo/static/handbook/handbook.js" defer></script>
+</head>
+<body class="" hx-headers='{"X-CSRFToken": "jXRP0z0LElM18xI5Q0A7x3uxl6rV2wANVaGMgBzCF80AjQXxPtO4fWmvNfyTMgzu"}'>
+<a class="skip" href="#main">К содержанию</a>
+<div class="demo-bar" role="note">Демо-версия для отзывов: вход, запись на курсы и формы здесь не работают.</div>
+
+<header class="hdr">
+  <div class="container">
+    <a class="brand" href="/edufamcs-demo/" aria-label="EDU FAMCS — главная">
+      <span class="full"><img class="only-light" src="/edufamcs-demo/static/brand/logo/logo-edu-light.svg" alt="EDU FAMCS" width="196" height="40"><img class="only-dark" src="/edufamcs-demo/static/brand/logo/logo-edu-dark.svg" alt="EDU FAMCS" width="196" height="40"></span>
+      <span class="short"><img class="only-light" src="/edufamcs-demo/static/brand/logo/logo-edu-light.svg" alt="EDU FAMCS" height="30"><img class="only-dark" src="/edufamcs-demo/static/brand/logo/logo-edu-dark.svg" alt="EDU FAMCS" height="30"></span>
+    </a>
+    <nav class="nav" id="main-nav" aria-label="Основная навигация">
+      <a href="/edufamcs-demo/#courses">Курсы</a>
+      <a href="/edufamcs-demo/ml/" >Машинное обучение</a>
+      
+      <a href="/edufamcs-demo/handbook/" aria-current="page">Хендбук</a>
+      <a href="/edufamcs-demo/news/" >Новости</a>
+      <a href="/edufamcs-demo/people/" >Авторы</a>
+      <a href="/edufamcs-demo/about/" >О&nbsp;нас</a>
+    </nav>
+    <div class="hdr-actions">
+      
+      <a class="btn btn-outline btn-login" href="/edufamcs-demo/accounts/login/?next=/handbook/dl/pytorch-na-praktike/">Войти</a>
+      
+      <button class="icon-btn menu-btn" type="button" aria-label="Меню" aria-expanded="false" aria-controls="main-nav"><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-menu"/></svg></button>
+    </div>
+  </div>
+</header>
+
+<main id="main">
+
+
+
+<div class="container hb-page hb-tone">
+  <div class="hb-readbar" aria-hidden="true"><i></i></div>
+  <div class="hb">
+    <aside class="hb-nav" aria-label="Статьи раздела">
+      
+<form class="hb-search" action="/edufamcs-demo/handbook/search/" method="get" role="search">
+  <svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-search"/></svg>
+  <input class="input" type="search" name="q" value="" placeholder="Поиск по хендбуку" aria-label="Поиск по хендбуку" autocomplete="off" maxlength="120"
+    hx-get="/edufamcs-demo/handbook/search/" hx-trigger="input changed delay:250ms, search" hx-target="#hb-nav-results" hx-sync="this:replace">
+</form>
+
+      <div id="hb-nav-results" class="hb-nav-results" aria-live="polite"></div>
+      <a class="grp" href="/edufamcs-demo/handbook/dl/">Практика и представления</a>
+      
+      <a class="" href="/edufamcs-demo/handbook/dl/normalizaciya-i-inicializaciya/">Нормализация и инициализация</a>
+      
+      <a class="cur" href="/edufamcs-demo/handbook/dl/pytorch-na-praktike/" aria-current="page">PyTorch на практике: обучение и дообучение</a>
+      
+      <a class="" href="/edufamcs-demo/handbook/dl/kontrastivnoe-obuchenie/">Эмбеддинги и контрастивное обучение</a>
+      
+      <a class="" href="/edufamcs-demo/handbook/dl/generativnye-modeli/">Генеративные модели: VAE, GAN, диффузия</a>
+      
+    </aside>
+
+    <article class="hb-main">
+      <nav class="crumbs" aria-label="Навигация"><a href="/edufamcs-demo/handbook/">Хендбук</a><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-chev"/></svg><a href="/edufamcs-demo/handbook/dl/">Введение в глубокое обучение</a></nav>
+      <h1 class="h1">PyTorch на практике: обучение и дообучение</h1>
+      <div class="hb-meta">
+        
+        
+        <span><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-clock"/></svg>13&nbsp;мин</span>
+        <span class="hb-authors"><span class="avatar sm" title="Артем Лебедевич">АЛ</span>Артем Лебедевич</span>
+        <span><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-edit"/></svg>10 ноября 2026</span>
+        
+        
+      </div>
+
+      
+      <details class="hb-mtoc">
+        <summary><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-list"/></svg>Содержание<svg class="ico sm" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-chev-down"/></svg></summary>
+        <a class="l2" href="#данные-dataset-и-dataloader">Данные: Dataset и DataLoader</a><a class="l2" href="#канонический-цикл">Канонический цикл</a><a class="l2" href="#смешанная-точность-клиппинг-накопление">Смешанная точность, клиппинг, накопление</a><a class="l2" href="#чекпойнты-и-воспроизводимость">Чекпойнты и воспроизводимость</a><a class="l2" href="#дообучение">Дообучение</a><a class="l2" href="#код-полный-пример">Код: полный пример</a><a class="l2" href="#ловушки">Ловушки</a><a class="l2" href="#проверь-себя">Проверь себя</a><a class="l2" href="#что-почитать">Что почитать</a>
+      </details>
+      
+
+      <div class="prose"><p>Знать формулы backprop и Adam недостаточно: большинство потерянных дней в DL — это баги в обвязке вокруг модели (данные, режимы, формы, типы, чекпойнты). Здесь собран инженерный минимум на PyTorch 2.x: как устроен пайплайн данных, канонический цикл, смешанная точность, чекпойнты, воспроизводимость и дообучение предобученных моделей. Теорию оптимизаторов и расписаний см. в <a href="/edufamcs-demo/handbook/dl/optimizatory-i-regulyarizaciya/" rel="noopener noreferrer nofollow">статье про оптимизаторы</a>, здесь — как это собирается в работающий код.</p>
+<h2 id="данные-dataset-и-dataloader">Данные: Dataset и DataLoader</h2>
+<p><code>Dataset</code> отвечает на два вопроса: сколько объектов (<code>__len__</code>) и что вернуть для индекса (<code>__getitem__</code>). <code>DataLoader</code> собирает объекты в батчи и (при <code>num_workers&gt;0</code>) готовит их в параллельных процессах, пока GPU считает прошлый шаг.</p>
+<ul>
+<li><code>shuffle=True</code> для обучения — всегда; для валидации — нет.</li>
+<li><code>num_workers</code>: 0 означает загрузку в главном процессе. Если GPU простаивает, ждёт данных, поднимайте воркеров (сколько ядер не блокирует остальное — подбирайте замером). Для маленьких тензорных данных в памяти воркеры только замедляют (накладные расходы процессов).</li>
+<li><code>pin_memory=True</code> + <code>.to(device, non_blocking=True)</code>: копирование из закреплённой памяти на GPU асинхронно. Имеет смысл только для CUDA.</li>
+<li><code>persistent_workers=True</code> не пересоздаёт процессы каждую эпоху; <code>prefetch_factor</code> — сколько батчей готовит каждый воркер вперёд.</li>
+<li><code>collate_fn</code> склеивает список объектов в батч. Умолчание стекует тензоры; для последовательностей разной длины пишут свой: паддинг до максимума в батче и маска (см. <a href="/edufamcs-demo/handbook/dl/posledovatelnosti-i-rnn/" rel="noopener noreferrer nofollow">RNN</a>).</li>
+<li>Случайность в воркерах: у каждого воркера свой сид PyTorch, но генератор, созданный заранее (например, <code>np.random.default_rng()</code> в <code>__init__</code> датасета), копируется в каждый воркер и выдаёт там одинаковые числа; глобальные <code>random</code> и <code>np.random</code> PyTorch засевает сам начиная с версии 1.9. Такой генератор пересоздавайте в <code>worker_init_fn</code> от <code>torch.initial_seed()</code>. Аугментации лучше делать через <code>torch</code> либо засевать воркеров явно.</li>
+</ul>
+<h2 id="канонический-цикл">Канонический цикл</h2>
+<p>На каждом шаге: обнулить градиенты, прямой проход, потеря, <code>backward</code>, (клиппинг), <code>optimizer.step()</code>, при расписании «по шагам» — <code>scheduler.step()</code> <strong>после</strong> <code>optimizer.step()</code>. Два режима:</p>
+<ul>
+<li><code>model.train()</code> включает dropout и обновление статистик BatchNorm; <code>model.eval()</code> — выключает. Это <strong>не</strong> отключает вычисление градиентов.</li>
+<li><code>torch.no_grad()</code> и <code>torch.inference_mode()</code> отключают построение графа. <code>inference_mode</code> строже и немного быстрее, но создаваемые в нём тензоры нельзя потом использовать в autograd; для валидации подходит, для обучения — нет.</li>
+</ul>
+<p><strong>Устройство.</strong> <code>device = "cuda" if torch.cuda.is_available() else "cpu"</code> (на Mac — <code>"mps"</code>); <code>model.to(device)</code> один раз, а батч переносится каждый шаг. Безопасный порядок: сначала <code>model.to(device)</code>, затем создание оптимизатора.</p>
+<h2 id="смешанная-точность-клиппинг-накопление">Смешанная точность, клиппинг, накопление</h2>
+<p>Смешанная точность (идея — Micikevicius и соавторы, 2018): матричные операции в 16 битах, редукции и мастер-веса в <code>float32</code>. В <code>float16</code> мало порядков экспоненты, поэтому потерю умножают на масштаб, чтобы малые градиенты не обнулялись (<code>GradScaler</code>). У <code>bfloat16</code> диапазон как у <code>float32</code> (меньше мантисса), масштабировать не нужно.</p>
+<div class="code"><div class="code-head"><span class="lang">python</span></div><pre><code>scaler <span class="tok-p">=</span> torch<span class="tok-p">.</span>amp<span class="tok-p">.</span>GradScaler<span class="tok-p">(</span><span class="tok-s">"</span><span class="tok-s">cuda</span><span class="tok-s">"</span><span class="tok-p">)</span>                 <span class="tok-c"># нужен только для float16</span>
+<span class="tok-k">for</span> x<span class="tok-p">,</span> y <span class="tok-k">in</span> loader<span class="tok-p">:</span>
+    opt<span class="tok-p">.</span>zero_grad<span class="tok-p">(</span>set_to_none<span class="tok-p">=</span><span class="tok-k">True</span><span class="tok-p">)</span>
+    <span class="tok-k">with</span> torch<span class="tok-p">.</span>autocast<span class="tok-p">(</span>device_type<span class="tok-p">=</span><span class="tok-s">"</span><span class="tok-s">cuda</span><span class="tok-s">"</span><span class="tok-p">,</span> dtype<span class="tok-p">=</span>torch<span class="tok-p">.</span>float16<span class="tok-p">)</span><span class="tok-p">:</span>   <span class="tok-c"># bfloat16 — без scaler</span>
+        loss <span class="tok-p">=</span> loss_fn<span class="tok-p">(</span>model<span class="tok-p">(</span>x<span class="tok-p">)</span><span class="tok-p">,</span> y<span class="tok-p">)</span>
+    scaler<span class="tok-p">.</span>scale<span class="tok-p">(</span>loss<span class="tok-p">)</span><span class="tok-p">.</span>backward<span class="tok-p">(</span><span class="tok-p">)</span>
+    scaler<span class="tok-p">.</span>unscale_<span class="tok-p">(</span>opt<span class="tok-p">)</span>                               <span class="tok-c"># иначе клиппинг видит масштабированные градиенты</span>
+    nn<span class="tok-p">.</span>utils<span class="tok-p">.</span>clip_grad_norm_<span class="tok-p">(</span>model<span class="tok-p">.</span>parameters<span class="tok-p">(</span><span class="tok-p">)</span><span class="tok-p">,</span> <span class="tok-n">1.0</span><span class="tok-p">)</span>
+    scaler<span class="tok-p">.</span>step<span class="tok-p">(</span>opt<span class="tok-p">)</span><span class="tok-p">;</span> scaler<span class="tok-p">.</span>update<span class="tok-p">(</span><span class="tok-p">)</span>
+</code></pre></div>
+<p>Потерю в autocast-блоке лучше считать в <code>float32</code> (PyTorch сам поднимает точность для softmax и кросс-энтропии). На CPU <code>torch.autocast("cpu", dtype=torch.bfloat16)</code> тоже работает: на тестовом прогоне выход линейных слоёв получился <code>bfloat16</code>, а кросс-энтропия по <code>.float()</code> — <code>float32</code>.</p>
+<p><strong>Накопление градиентов</strong> имитирует большой батч: вызывать <code>backward()</code> на <code>loss / k</code> в каждом из <span class="tex">k</span> микробатчей, <code>step()</code> и <code>zero_grad()</code> — раз в <span class="tex">k</span> шагов. Деление на <span class="tex">k</span> нужно, чтобы градиент был средним, а не суммой. Расписание и клиппинг тоже считаются по числу <strong>оптимизационных</strong> шагов.</p>
+<h2 id="чекпойнты-и-воспроизводимость">Чекпойнты и воспроизводимость</h2>
+<p>В чекпойнт кладут не только веса: <strong>модель, оптимизатор</strong> (моменты Adam!), <strong>расписание, номер эпохи, состояния генераторов случайных чисел</strong> (<code>torch.get_rng_state()</code>, при CUDA — <code>torch.cuda.get_rng_state_all()</code>, а также <code>numpy</code> и <code>random</code>). Без оптимизатора возобновление обучения ломает траекторию: моменты стартуют с нуля. С версии 2.6 <code>torch.load</code> по умолчанию грузит только тензоры (<code>weights_only=True</code>); состояние <code>numpy</code> (ndarray внутри) и произвольные объекты не загрузятся: нужен <code>torch.serialization.add_safe_globals([...])</code> или <code>weights_only=False</code> — тогда файл надо считать исполняемым кодом, чужие так не открывайте. Состояние <code>random</code> (кортеж чисел) грузится и так — и тогда файл надо считать исполняемым кодом, не открывайте чужие.</p>
+<p>Воспроизводимость: <code>random.seed</code>, <code>np.random.seed</code>, <code>torch.manual_seed</code> (на CUDA сид задаётся тем же вызовом); для детерминизма на GPU — <code>torch.use_deterministic_algorithms(True)</code>, <code>torch.backends.cudnn.deterministic = True</code>, <code>torch.backends.cudnn.benchmark = False</code> и переменная <code>CUBLAS_WORKSPACE_CONFIG=:4096:8</code>. Это замедляет работу, а часть операций вообще бросает ошибку — для сравнений достаточно нескольких сидов с усреднением. См. также <a href="/edufamcs-demo/handbook/python/vosproizvodimost-i-trekking/" rel="noopener noreferrer nofollow">воспроизводимость и трекинг</a>.</p>
+<h2 id="дообучение">Дообучение</h2>
+<p>Два режима предобученной модели:</p>
+<ul>
+<li><strong>Feature extraction</strong>: backbone заморожен (<code>p.requires_grad=False</code>), учится только новая голова. Дёшево, не портит предобученные признаки; подходит при малых данных.</li>
+<li><strong>Fine-tuning</strong>: размораживают всё (или верхние блоки) и учат с малым шагом. Качество выше, если данных достаточно и домен отличается от предобучения.</li>
+</ul>
+<p>Часто делают в два этапа: голова при замороженном backbone, затем разморозка. <strong>Дискриминативные шаги</strong> задаются группами параметров: backbone с <span class="tex">10^{-5}</span>, голова с <span class="tex">10^{-3}</span> — новые веса случайны и могут двигаться быстро, предобученные нельзя разрушить. Замороженный backbone с BatchNorm в режиме <code>train()</code> всё равно обновляет <code>running_*</code>; для честной заморозки переводите эти модули в <code>eval()</code>. Для LLM аналогичная идея — адаптеры; см. <a href="/edufamcs-demo/handbook/nlp/doobuchenie-lora/" rel="noopener noreferrer nofollow">LoRA</a>.</p>
+<p><strong>Предобработка — часть модели.</strong> Предобученная сеть ждёт вход в том же масштабе и порядке каналов, что при обучении: для <code>torchvision</code> это <code>weights.transforms()</code>, для HF — свой <code>AutoImageProcessor</code>/<code>AutoTokenizer</code> для именно этой контрольной точки. Другой токенайзер или иная нормализация — и признаки бессмысленны, но ошибки при этом не будет.</p>
+<h2 id="код-полный-пример">Код: полный пример</h2>
+<p>Цифры (8×8 изображения, 1797 объектов, разбиение 60/20/20 со стратификацией), небольшой MLP, AdamW + OneCycleLR, ранняя остановка по валидационной потере с терпением 8:</p>
+<div class="code"><div class="code-head"><span class="lang">python</span></div><pre><code><span class="tok-k">import</span> copy<span class="tok-p">,</span> random
+<span class="tok-k">import</span> numpy <span class="tok-k">as</span> np
+<span class="tok-k">import</span> torch
+<span class="tok-k">from</span> torch <span class="tok-k">import</span> nn
+<span class="tok-k">from</span> torch.utils.data <span class="tok-k">import</span> Dataset<span class="tok-p">,</span> DataLoader
+<span class="tok-k">from</span> sklearn.datasets <span class="tok-k">import</span> load_digits
+<span class="tok-k">from</span> sklearn.model_selection <span class="tok-k">import</span> train_test_split
+
+<span class="tok-k">def</span> <span class="tok-f">seed_everything</span><span class="tok-p">(</span>seed<span class="tok-p">)</span><span class="tok-p">:</span>
+    random<span class="tok-p">.</span>seed<span class="tok-p">(</span>seed<span class="tok-p">)</span><span class="tok-p">;</span> np<span class="tok-p">.</span>random<span class="tok-p">.</span>seed<span class="tok-p">(</span>seed<span class="tok-p">)</span><span class="tok-p">;</span> torch<span class="tok-p">.</span>manual_seed<span class="tok-p">(</span>seed<span class="tok-p">)</span>
+
+seed_everything<span class="tok-p">(</span><span class="tok-n">0</span><span class="tok-p">)</span>
+X<span class="tok-p">,</span> y <span class="tok-p">=</span> load_digits<span class="tok-p">(</span>return_X_y<span class="tok-p">=</span><span class="tok-k">True</span><span class="tok-p">)</span>
+X_tr<span class="tok-p">,</span> X_tmp<span class="tok-p">,</span> y_tr<span class="tok-p">,</span> y_tmp <span class="tok-p">=</span> train_test_split<span class="tok-p">(</span>X<span class="tok-p">,</span> y<span class="tok-p">,</span> test_size<span class="tok-p">=</span><span class="tok-n">0.4</span><span class="tok-p">,</span> stratify<span class="tok-p">=</span>y<span class="tok-p">,</span> random_state<span class="tok-p">=</span><span class="tok-n">0</span><span class="tok-p">)</span>
+X_va<span class="tok-p">,</span> X_te<span class="tok-p">,</span> y_va<span class="tok-p">,</span> y_te <span class="tok-p">=</span> train_test_split<span class="tok-p">(</span>X_tmp<span class="tok-p">,</span> y_tmp<span class="tok-p">,</span> test_size<span class="tok-p">=</span><span class="tok-n">0.5</span><span class="tok-p">,</span> stratify<span class="tok-p">=</span>y_tmp<span class="tok-p">,</span> random_state<span class="tok-p">=</span><span class="tok-n">0</span><span class="tok-p">)</span>
+mu<span class="tok-p">,</span> sd <span class="tok-p">=</span> X_tr<span class="tok-p">.</span>mean<span class="tok-p">(</span><span class="tok-n">0</span><span class="tok-p">)</span><span class="tok-p">,</span> X_tr<span class="tok-p">.</span>std<span class="tok-p">(</span><span class="tok-n">0</span><span class="tok-p">)</span>                 <span class="tok-c"># статистики ТОЛЬКО по train</span>
+sd<span class="tok-p">[</span>sd <span class="tok-p">&lt;</span> <span class="tok-n">1e-6</span><span class="tok-p">]</span> <span class="tok-p">=</span> <span class="tok-n">1.0</span>                                <span class="tok-c"># константные пиксели: иначе деление на ~0</span>
+
+<span class="tok-k">class</span> <span class="tok-f">Digits</span><span class="tok-p">(</span>Dataset<span class="tok-p">)</span><span class="tok-p">:</span>
+    <span class="tok-k">def</span> <span class="tok-f">__init__</span><span class="tok-p">(</span><span class="tok-f">self</span><span class="tok-p">,</span> X<span class="tok-p">,</span> y<span class="tok-p">)</span><span class="tok-p">:</span>
+        <span class="tok-f">self</span><span class="tok-p">.</span>X <span class="tok-p">=</span> torch<span class="tok-p">.</span>tensor<span class="tok-p">(</span><span class="tok-p">(</span>X <span class="tok-p">-</span> mu<span class="tok-p">)</span> <span class="tok-p">/</span> sd<span class="tok-p">,</span> dtype<span class="tok-p">=</span>torch<span class="tok-p">.</span>float32<span class="tok-p">)</span>
+        <span class="tok-f">self</span><span class="tok-p">.</span>y <span class="tok-p">=</span> torch<span class="tok-p">.</span>tensor<span class="tok-p">(</span>y<span class="tok-p">,</span> dtype<span class="tok-p">=</span>torch<span class="tok-p">.</span>long<span class="tok-p">)</span>  <span class="tok-c"># CrossEntropyLoss: int64</span>
+    <span class="tok-k">def</span> <span class="tok-f">__len__</span><span class="tok-p">(</span><span class="tok-f">self</span><span class="tok-p">)</span><span class="tok-p">:</span> <span class="tok-k">return</span> <span class="tok-f">len</span><span class="tok-p">(</span><span class="tok-f">self</span><span class="tok-p">.</span>y<span class="tok-p">)</span>
+    <span class="tok-k">def</span> <span class="tok-f">__getitem__</span><span class="tok-p">(</span><span class="tok-f">self</span><span class="tok-p">,</span> i<span class="tok-p">)</span><span class="tok-p">:</span> <span class="tok-k">return</span> <span class="tok-f">self</span><span class="tok-p">.</span>X<span class="tok-p">[</span>i<span class="tok-p">]</span><span class="tok-p">,</span> <span class="tok-f">self</span><span class="tok-p">.</span>y<span class="tok-p">[</span>i<span class="tok-p">]</span>
+
+g <span class="tok-p">=</span> torch<span class="tok-p">.</span>Generator<span class="tok-p">(</span><span class="tok-p">)</span><span class="tok-p">.</span>manual_seed<span class="tok-p">(</span><span class="tok-n">0</span><span class="tok-p">)</span>
+train_dl <span class="tok-p">=</span> DataLoader<span class="tok-p">(</span>Digits<span class="tok-p">(</span>X_tr<span class="tok-p">,</span> y_tr<span class="tok-p">)</span><span class="tok-p">,</span> batch_size<span class="tok-p">=</span><span class="tok-n">64</span><span class="tok-p">,</span> shuffle<span class="tok-p">=</span><span class="tok-k">True</span><span class="tok-p">,</span> generator<span class="tok-p">=</span>g<span class="tok-p">)</span>
+val_dl <span class="tok-p">=</span> DataLoader<span class="tok-p">(</span>Digits<span class="tok-p">(</span>X_va<span class="tok-p">,</span> y_va<span class="tok-p">)</span><span class="tok-p">,</span> batch_size<span class="tok-p">=</span><span class="tok-n">256</span><span class="tok-p">)</span>
+test_dl <span class="tok-p">=</span> DataLoader<span class="tok-p">(</span>Digits<span class="tok-p">(</span>X_te<span class="tok-p">,</span> y_te<span class="tok-p">)</span><span class="tok-p">,</span> batch_size<span class="tok-p">=</span><span class="tok-n">256</span><span class="tok-p">)</span>
+
+model <span class="tok-p">=</span> nn<span class="tok-p">.</span>Sequential<span class="tok-p">(</span>nn<span class="tok-p">.</span>Linear<span class="tok-p">(</span><span class="tok-n">64</span><span class="tok-p">,</span> <span class="tok-n">128</span><span class="tok-p">)</span><span class="tok-p">,</span> nn<span class="tok-p">.</span>ReLU<span class="tok-p">(</span><span class="tok-p">)</span><span class="tok-p">,</span> nn<span class="tok-p">.</span>Dropout<span class="tok-p">(</span><span class="tok-n">0.2</span><span class="tok-p">)</span><span class="tok-p">,</span>
+                      nn<span class="tok-p">.</span>Linear<span class="tok-p">(</span><span class="tok-n">128</span><span class="tok-p">,</span> <span class="tok-n">64</span><span class="tok-p">)</span><span class="tok-p">,</span> nn<span class="tok-p">.</span>ReLU<span class="tok-p">(</span><span class="tok-p">)</span><span class="tok-p">,</span> nn<span class="tok-p">.</span>Linear<span class="tok-p">(</span><span class="tok-n">64</span><span class="tok-p">,</span> <span class="tok-n">10</span><span class="tok-p">)</span><span class="tok-p">)</span>
+opt <span class="tok-p">=</span> torch<span class="tok-p">.</span>optim<span class="tok-p">.</span>AdamW<span class="tok-p">(</span>model<span class="tok-p">.</span>parameters<span class="tok-p">(</span><span class="tok-p">)</span><span class="tok-p">,</span> lr<span class="tok-p">=</span><span class="tok-n">3e-3</span><span class="tok-p">,</span> weight_decay<span class="tok-p">=</span><span class="tok-n">1e-2</span><span class="tok-p">)</span>
+EPOCHS <span class="tok-p">=</span> <span class="tok-n">60</span>
+sched <span class="tok-p">=</span> torch<span class="tok-p">.</span>optim<span class="tok-p">.</span>lr_scheduler<span class="tok-p">.</span>OneCycleLR<span class="tok-p">(</span>opt<span class="tok-p">,</span> max_lr<span class="tok-p">=</span><span class="tok-n">3e-3</span><span class="tok-p">,</span> total_steps<span class="tok-p">=</span>EPOCHS <span class="tok-p">*</span> <span class="tok-f">len</span><span class="tok-p">(</span>train_dl<span class="tok-p">)</span><span class="tok-p">)</span>
+loss_fn <span class="tok-p">=</span> nn<span class="tok-p">.</span>CrossEntropyLoss<span class="tok-p">(</span><span class="tok-p">)</span>
+
+<span class="tok-f">@torch</span><span class="tok-p">.</span>inference_mode<span class="tok-p">(</span><span class="tok-p">)</span>
+<span class="tok-k">def</span> <span class="tok-f">evaluate</span><span class="tok-p">(</span>dl<span class="tok-p">)</span><span class="tok-p">:</span>
+    model<span class="tok-p">.</span>eval<span class="tok-p">(</span><span class="tok-p">)</span>
+    tot<span class="tok-p">,</span> correct<span class="tok-p">,</span> n <span class="tok-p">=</span> <span class="tok-n">0.0</span><span class="tok-p">,</span> <span class="tok-n">0</span><span class="tok-p">,</span> <span class="tok-n">0</span>
+    <span class="tok-k">for</span> xb<span class="tok-p">,</span> yb <span class="tok-k">in</span> dl<span class="tok-p">:</span>
+        out <span class="tok-p">=</span> model<span class="tok-p">(</span>xb<span class="tok-p">)</span>
+        tot <span class="tok-p">+</span><span class="tok-p">=</span> loss_fn<span class="tok-p">(</span>out<span class="tok-p">,</span> yb<span class="tok-p">)</span><span class="tok-p">.</span>item<span class="tok-p">(</span><span class="tok-p">)</span> <span class="tok-p">*</span> <span class="tok-f">len</span><span class="tok-p">(</span>yb<span class="tok-p">)</span>
+        correct <span class="tok-p">+</span><span class="tok-p">=</span> <span class="tok-p">(</span>out<span class="tok-p">.</span>argmax<span class="tok-p">(</span><span class="tok-n">1</span><span class="tok-p">)</span> <span class="tok-p">==</span> yb<span class="tok-p">)</span><span class="tok-p">.</span>sum<span class="tok-p">(</span><span class="tok-p">)</span><span class="tok-p">.</span>item<span class="tok-p">(</span><span class="tok-p">)</span><span class="tok-p">;</span> n <span class="tok-p">+</span><span class="tok-p">=</span> <span class="tok-f">len</span><span class="tok-p">(</span>yb<span class="tok-p">)</span>
+    <span class="tok-k">return</span> tot <span class="tok-p">/</span> n<span class="tok-p">,</span> correct <span class="tok-p">/</span> n
+
+best<span class="tok-p">,</span> bad<span class="tok-p">,</span> best_state <span class="tok-p">=</span> <span class="tok-f">float</span><span class="tok-p">(</span><span class="tok-s">"</span><span class="tok-s">inf</span><span class="tok-s">"</span><span class="tok-p">)</span><span class="tok-p">,</span> <span class="tok-n">0</span><span class="tok-p">,</span> <span class="tok-k">None</span>
+<span class="tok-k">for</span> epoch <span class="tok-k">in</span> <span class="tok-f">range</span><span class="tok-p">(</span>EPOCHS<span class="tok-p">)</span><span class="tok-p">:</span>
+    model<span class="tok-p">.</span>train<span class="tok-p">(</span><span class="tok-p">)</span>
+    <span class="tok-k">for</span> xb<span class="tok-p">,</span> yb <span class="tok-k">in</span> train_dl<span class="tok-p">:</span>
+        opt<span class="tok-p">.</span>zero_grad<span class="tok-p">(</span>set_to_none<span class="tok-p">=</span><span class="tok-k">True</span><span class="tok-p">)</span>
+        loss <span class="tok-p">=</span> loss_fn<span class="tok-p">(</span>model<span class="tok-p">(</span>xb<span class="tok-p">)</span><span class="tok-p">,</span> yb<span class="tok-p">)</span>
+        loss<span class="tok-p">.</span>backward<span class="tok-p">(</span><span class="tok-p">)</span>
+        nn<span class="tok-p">.</span>utils<span class="tok-p">.</span>clip_grad_norm_<span class="tok-p">(</span>model<span class="tok-p">.</span>parameters<span class="tok-p">(</span><span class="tok-p">)</span><span class="tok-p">,</span> <span class="tok-n">1.0</span><span class="tok-p">)</span>
+        opt<span class="tok-p">.</span>step<span class="tok-p">(</span><span class="tok-p">)</span><span class="tok-p">;</span> sched<span class="tok-p">.</span>step<span class="tok-p">(</span><span class="tok-p">)</span>
+    vl<span class="tok-p">,</span> va <span class="tok-p">=</span> evaluate<span class="tok-p">(</span>val_dl<span class="tok-p">)</span>
+    <span class="tok-k">if</span> epoch <span class="tok-p">%</span> <span class="tok-n">5</span> <span class="tok-p">==</span> <span class="tok-n">0</span><span class="tok-p">:</span> <span class="tok-f">print</span><span class="tok-p">(</span><span class="tok-s">f</span><span class="tok-s">"</span><span class="tok-s">epoch </span><span class="tok-s">{</span>epoch<span class="tok-s">:</span><span class="tok-s">2d</span><span class="tok-s">}</span><span class="tok-s"> train_loss(last batch) </span><span class="tok-s">{</span>loss<span class="tok-p">.</span>item<span class="tok-p">(</span><span class="tok-p">)</span><span class="tok-s">:</span><span class="tok-s">.3f</span><span class="tok-s">}</span><span class="tok-s"> val_loss </span><span class="tok-s">{</span>vl<span class="tok-s">:</span><span class="tok-s">.3f</span><span class="tok-s">}</span><span class="tok-s"> val_acc </span><span class="tok-s">{</span>va<span class="tok-s">:</span><span class="tok-s">.3f</span><span class="tok-s">}</span><span class="tok-s">"</span><span class="tok-p">)</span>
+    <span class="tok-k">if</span> vl <span class="tok-p">&lt;</span> best <span class="tok-p">-</span> <span class="tok-n">1e-4</span><span class="tok-p">:</span>
+        best<span class="tok-p">,</span> bad<span class="tok-p">,</span> best_epoch <span class="tok-p">=</span> vl<span class="tok-p">,</span> <span class="tok-n">0</span><span class="tok-p">,</span> epoch
+        best_state <span class="tok-p">=</span> copy<span class="tok-p">.</span>deepcopy<span class="tok-p">(</span>model<span class="tok-p">.</span>state_dict<span class="tok-p">(</span><span class="tok-p">)</span><span class="tok-p">)</span>
+    <span class="tok-k">else</span><span class="tok-p">:</span>
+        bad <span class="tok-p">+</span><span class="tok-p">=</span> <span class="tok-n">1</span>
+        <span class="tok-k">if</span> bad <span class="tok-p">&gt;</span><span class="tok-p">=</span> <span class="tok-n">8</span><span class="tok-p">:</span>
+            <span class="tok-f">print</span><span class="tok-p">(</span><span class="tok-s">f</span><span class="tok-s">"</span><span class="tok-s">early stop at epoch </span><span class="tok-s">{</span>epoch<span class="tok-s">}</span><span class="tok-s">, best epoch </span><span class="tok-s">{</span>best_epoch<span class="tok-s">}</span><span class="tok-s">"</span><span class="tok-p">)</span><span class="tok-p">;</span> <span class="tok-k">break</span>
+model<span class="tok-p">.</span>load_state_dict<span class="tok-p">(</span>best_state<span class="tok-p">)</span>
+<span class="tok-f">print</span><span class="tok-p">(</span><span class="tok-s">"</span><span class="tok-s">val  loss/acc: </span><span class="tok-s">%.3f</span><span class="tok-s"> / </span><span class="tok-s">%.3f</span><span class="tok-s">"</span> <span class="tok-p">%</span> evaluate<span class="tok-p">(</span>val_dl<span class="tok-p">)</span><span class="tok-p">)</span>
+<span class="tok-f">print</span><span class="tok-p">(</span><span class="tok-s">"</span><span class="tok-s">test loss/acc: </span><span class="tok-s">%.3f</span><span class="tok-s"> / </span><span class="tok-s">%.3f</span><span class="tok-s">"</span> <span class="tok-p">%</span> evaluate<span class="tok-p">(</span>test_dl<span class="tok-p">)</span><span class="tok-p">)</span>
+</code></pre></div>
+<p>Вывод запуска на CPU:</p>
+<div class="code"><div class="code-head"><span class="lang">code</span></div><pre><code>epoch  0 train_loss(last batch) 2.296 val_loss 2.274 val_acc 0.156
+epoch  5 train_loss(last batch) 1.187 val_loss 1.126 val_acc 0.769
+epoch 10 train_loss(last batch) 0.076 val_loss 0.165 val_acc 0.958
+epoch 15 train_loss(last batch) 0.041 val_loss 0.118 val_acc 0.967
+epoch 20 train_loss(last batch) 0.026 val_loss 0.106 val_acc 0.969
+epoch 25 train_loss(last batch) 0.003 val_loss 0.086 val_acc 0.975
+epoch 30 train_loss(last batch) 0.011 val_loss 0.096 val_acc 0.981
+epoch 35 train_loss(last batch) 0.002 val_loss 0.102 val_acc 0.981
+early stop at epoch 35, best epoch 27
+val  loss/acc: 0.083 / 0.972
+test loss/acc: 0.149 / 0.972
+</code></pre></div>
+<p>Начальная потеря 2,296 близка к <span class="tex">\ln 10\approx2{,}303</span> — ожидаемый ориентир для 10 классов. Лучшая эпоха выбрана по валидации (27), тест трогается один раз в конце. Дообучение с группами параметров:</p>
+<div class="code"><div class="code-head"><span class="lang">python</span></div><pre><code>opt <span class="tok-p">=</span> torch<span class="tok-p">.</span>optim<span class="tok-p">.</span>AdamW<span class="tok-p">(</span><span class="tok-p">[</span><span class="tok-p">{</span><span class="tok-s">"</span><span class="tok-s">params</span><span class="tok-s">"</span><span class="tok-p">:</span> backbone<span class="tok-p">.</span>parameters<span class="tok-p">(</span><span class="tok-p">)</span><span class="tok-p">,</span> <span class="tok-s">"</span><span class="tok-s">lr</span><span class="tok-s">"</span><span class="tok-p">:</span> <span class="tok-n">1e-5</span><span class="tok-p">}</span><span class="tok-p">,</span>
+                         <span class="tok-p">{</span><span class="tok-s">"</span><span class="tok-s">params</span><span class="tok-s">"</span><span class="tok-p">:</span> head<span class="tok-p">.</span>parameters<span class="tok-p">(</span><span class="tok-p">)</span><span class="tok-p">,</span>     <span class="tok-s">"</span><span class="tok-s">lr</span><span class="tok-s">"</span><span class="tok-p">:</span> <span class="tok-n">1e-3</span><span class="tok-p">}</span><span class="tok-p">]</span><span class="tok-p">,</span> weight_decay<span class="tok-p">=</span><span class="tok-n">0.01</span><span class="tok-p">)</span>
+</code></pre></div>
+<p>На игрушечном backbone 16 576 параметров заморозка оставляла обучаемыми только 650 параметров головы.</p>
+<h2 id="ловушки">Ловушки</h2>
+<div class="callout md warn"><p class="callout-title">Нормализация константных признаков — реальный случай</p>
+<p>В первой версии этого скрипта было <code>sd = X_tr.std(0) + 1e-6</code>. В <code>load_digits</code> есть пиксели, константные на train, но ненулевые в test: деление на <span class="tex">10^{-6}</span> дало тестовую потерю 1625,6 при точности 0,969. Точность почти не пострадала, потеря — на четыре порядка. Метрику одного вида недостаточно: смотрите и потерю. Статистики считаются по train, а константные признаки обрабатываются отдельно.</p>
+</div>
+<ul>
+<li>Забыт <code>model.eval()</code> на валидации — dropout и BatchNorm искажают метрики; забыт возврат в <code>model.train()</code>.</li>
+<li>Softmax/сигмоида перед <code>CrossEntropyLoss</code>/<code>BCEWithLogitsLoss</code>: функция потерь делает log-softmax сама; лишний softmax ослабляет градиенты.</li>
+<li>Формы потери: логиты <code>(B, C)</code> и метки <code>(B,)</code> типа <code>int64</code>; для <code>BCEWithLogitsLoss</code> — одинаковые формы и метки <code>float</code>. Для <code>MSELoss</code> расхождение <code>(B,1)</code> с <code>(B,)</code> транслируется в матрицу <code>(B,B)</code> — выдаётся лишь предупреждение, а потеря считается неверно.</li>
+<li>Нет <code>shuffle=True</code> на обучении — батчи упорядочены по классу или времени, обучение дёргается.</li>
+<li><code>.item()</code>/<code>.cpu()</code> в каждом шаге синхронизируют GPU; накапливайте метрики тензорами.</li>
+<li>Расписание вызвано до <code>optimizer.step()</code> или не пересчитано под число шагов при накоплении градиентов.</li>
+</ul>
+<p>На собеседовании:</p>
+<ul>
+<li>Нарисуйте тренировочный цикл по памяти. Что делает <code>zero_grad</code>, зачем <code>eval()</code> и чем <code>no_grad</code> отличается от <code>eval()</code>.</li>
+<li>Как смешанная точность не ломает обучение и зачем <code>GradScaler</code> для fp16, но не для bf16.</li>
+<li>Что хранить в чекпойнте, чтобы продолжить обучение «как будто его не прерывали».</li>
+<li>Заморозка vs fine-tuning: когда что и почему у головы шаг больше.</li>
+</ul>
+<h2 id="проверь-себя">Проверь себя</h2>
+<details class="callout md details"><summary>Что делают `model.eval()` и `torch.no_grad()` и можно ли обойтись одним из них при валидации?</summary>
+<p><code>eval()</code> меняет поведение слоёв (выключает dropout, BatchNorm берёт накопленные статистики), <code>no_grad()</code> отключает построение графа градиентов. Нужны оба: первое — для корректных метрик, второе — для экономии памяти и времени.</p>
+</details>
+<details class="callout md details"><summary>Почему при накоплении градиентов потерю делят на число микробатчей?</summary>
+<p><code>backward()</code> суммирует градиенты. Чтобы сумма по <span class="tex">k</span> микробатчам равнялась градиенту средней потери большого батча, каждую потерю делят на <span class="tex">k</span>.</p>
+</details>
+<details class="callout md details"><summary>Зачем `scaler.unscale_(opt)` перед `clip_grad_norm_`?</summary>
+<p>Градиенты при <code>GradScaler</code> умножены на масштаб. Порог клиппинга относится к настоящей норме, поэтому градиенты сначала возвращают к исходному масштабу.</p>
+</details>
+<details class="callout md details"><summary>Какие компоненты нужно сохранить в чекпойнт для точного возобновления обучения?</summary>
+<p>Веса модели, состояние оптимизатора (моменты), расписания, номер эпохи/шага и состояния генераторов случайных чисел (torch, CUDA, numpy, python), а также состояние <code>GradScaler</code>, если он используется.</p>
+</details>
+<details class="callout md details"><summary>Почему при fine-tuning шаг головы делают больше, чем backbone?</summary>
+<p>Веса головы инициализированы случайно и далеки от оптимума, а предобученные уже хороши — большие шаги их разрушат. Группы параметров дают каждому свой <code>lr</code>.</p>
+</details>
+<h2 id="что-почитать">Что почитать</h2>
+<ul>
+<li>PyTorch docs: <a href="https://docs.pytorch.org/tutorials/beginner/basics/data_tutorial.html" rel="noopener noreferrer nofollow">Datasets &amp; DataLoaders</a>, <a href="https://docs.pytorch.org/docs/stable/amp.html" rel="noopener noreferrer nofollow">Automatic Mixed Precision</a>, <a href="https://docs.pytorch.org/docs/stable/notes/randomness.html" rel="noopener noreferrer nofollow">Reproducibility</a>, <a href="https://docs.pytorch.org/tutorials/beginner/saving_loading_models.html" rel="noopener noreferrer nofollow">Saving and loading</a>.</li>
+<li>Micikevicius и соавторы, <em>Mixed Precision Training</em>, ICLR 2018: <a href="https://arxiv.org/abs/1710.03740" rel="noopener noreferrer nofollow">arXiv:1710.03740</a>.</li>
+<li>Goyal и соавторы, <em>Accurate, Large Minibatch SGD</em>, 2017: <a href="https://arxiv.org/abs/1706.02677" rel="noopener noreferrer nofollow">arXiv:1706.02677</a>.</li>
+<li>Howard, Ruder, <em>Universal Language Model Fine-tuning for Text Classification</em>, ACL 2018 (discriminative fine-tuning, постепенная разморозка): <a href="https://arxiv.org/abs/1801.06146" rel="noopener noreferrer nofollow">arXiv:1801.06146</a>.</li>
+<li>Karpathy, <em>A Recipe for Training Neural Networks</em>, 2019: <a href="https://karpathy.github.io/2019/04/25/recipe/" rel="noopener noreferrer nofollow">karpathy.github.io/2019/04/25/recipe</a>.</li>
+<li>Статья <a href="/edufamcs-demo/handbook/dl/normalizaciya-i-inicializaciya/" rel="noopener noreferrer nofollow">о нормализации и инициализации</a> — чек-лист для NaN и взрыва градиентов.</li>
+</ul>
+</div>
+      
+
+      
+
+      
+      <nav class="pager" aria-label="Соседние статьи">
+        <a href="/edufamcs-demo/handbook/dl/normalizaciya-i-inicializaciya/"><span><svg class="ico sm" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-arrow-left"/></svg>Назад</span>Нормализация и инициализация</a>
+        <a href="/edufamcs-demo/handbook/dl/kontrastivnoe-obuchenie/"><span>Дальше<svg class="ico sm" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-arrow"/></svg></span>Эмбеддинги и контрастивное обучение</a>
+      </nav>
+      
+    </article>
+
+    <aside class="hb-toc" aria-label="На этой странице">
+      <a class="l2" href="#данные-dataset-и-dataloader">Данные: Dataset и DataLoader</a><a class="l2" href="#канонический-цикл">Канонический цикл</a><a class="l2" href="#смешанная-точность-клиппинг-накопление">Смешанная точность, клиппинг, накопление</a><a class="l2" href="#чекпойнты-и-воспроизводимость">Чекпойнты и воспроизводимость</a><a class="l2" href="#дообучение">Дообучение</a><a class="l2" href="#код-полный-пример">Код: полный пример</a><a class="l2" href="#ловушки">Ловушки</a><a class="l2" href="#проверь-себя">Проверь себя</a><a class="l2" href="#что-почитать">Что почитать</a>
+    </aside>
+  </div>
+</div>
+
+
+</main>
+
+<footer class="ftr" data-theme="dark">
+  <svg class="sym fern" viewBox="0 0 40.5 65.02" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#fern"/></svg>
+  <div class="container">
+    <div class="ftr-row">
+      <a href="/edufamcs-demo/" aria-label="EDU FAMCS — главная"><img src="/edufamcs-demo/static/brand/logo/logo-edu-dark.svg" alt="EDU FAMCS" width="196" height="40"></a>
+      <ul class="ftr-links">
+        <li><a href="/edufamcs-demo/#courses">Курсы</a></li>
+        <li><a href="/edufamcs-demo/ml/">Машинное обучение</a></li>
+        <li><a href="/edufamcs-demo/handbook/">Хендбук</a></li>
+        <li><a href="/edufamcs-demo/news/">Новости</a></li>
+        <li><a href="/edufamcs-demo/people/">Авторы</a></li>
+        <li><a href="/edufamcs-demo/about/">О&nbsp;нас</a></li>
+        <li><a href="/edufamcs-demo/propose/">Предложить или исправить</a></li>
+        <li><a href="/edufamcs-demo/privacy/">Конфиденциальность</a></li>
+      </ul>
+    </div>
+    <div class="ftr-big" aria-hidden="true">EDU<span class="d">·</span>FAMCS</div>
+    <p class="ftr-copy">© 2026 EDU FAMCS · Минск</p>
+  </div>
+</footer>
+
+<div class="toasts-region" aria-live="polite" id="toasts">
+
+</div>
+
+</body>
+</html>

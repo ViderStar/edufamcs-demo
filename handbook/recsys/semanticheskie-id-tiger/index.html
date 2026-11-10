@@ -27,7 +27,7 @@
 <script src="/edufamcs-demo/static/js/site.js" defer></script>
 <script src="/edufamcs-demo/static/handbook/handbook.js" defer></script>
 </head>
-<body class="" hx-headers='{"X-CSRFToken": "zam7U9DDs1ibgkP5kF7IrYiO7m8A9g96lgnuOWVkDeypVTLlx40NIqq9DJKPe1U5"}'>
+<body class="" hx-headers='{"X-CSRFToken": "rLxoWZuMpbXP0oo24Hszy9S460Li7cPN3Ymlc13DqYbobHDu3aGwg2K2y9SgRWOu"}'>
 <a class="skip" href="#main">К содержанию</a>
 <div class="demo-bar" role="note">Демо-версия для отзывов: вход, запись на курсы и формы здесь не работают.</div>
 
@@ -60,6 +60,7 @@
 
 
 <div class="container hb-page s-recsys">
+  <div class="hb-readbar" aria-hidden="true"><i></i></div>
   <div class="hb">
     <aside class="hb-nav" aria-label="Статьи раздела">
       
@@ -86,9 +87,9 @@
       <div class="hb-meta">
         
         
-        <span><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-clock"/></svg>17&nbsp;мин</span>
+        <span><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-clock"/></svg>19&nbsp;мин</span>
         <span class="hb-authors"><span class="avatar sm" title="Артем Лебедевич">АЛ</span>Артем Лебедевич</span>
-        <span><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-edit"/></svg>9 ноября 2026</span>
+        <span><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-edit"/></svg>10 ноября 2026</span>
         
         
       </div>
@@ -96,7 +97,7 @@
       
       <details class="hb-mtoc">
         <summary><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-list"/></svg>Содержание<svg class="ico sm" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-chev-down"/></svg></summary>
-        <a class="l2" href="#идея-и-место-в-истории">Идея и место в истории</a><a class="l2" href="#семантические-id-остаточная-квантизация">Семантические ID: остаточная квантизация</a><a class="l3" href="#код-остаточная-квантизация-через-k-means-и-trie-допустимых-префиксов">Код: остаточная квантизация через k-means и trie допустимых префиксов</a><a class="l2" href="#tiger-генеративный-retrieval">TIGER: генеративный retrieval</a><a class="l2" href="#развитие-20232025">Развитие 2023–2025</a><a class="l3" href="#сводная-таблица">Сводная таблица</a><a class="l2" href="#трезвый-взгляд-20252026">Трезвый взгляд (2025–2026)</a><a class="l2" href="#вопросы-на-собеседованиях">Вопросы на собеседованиях</a><a class="l2" href="#что-почитать">Что почитать</a>
+        <a class="l2" href="#идея-и-место-в-истории">Идея и место в истории</a><a class="l2" href="#семантические-id-остаточная-квантизация">Семантические ID: остаточная квантизация</a><a class="l3" href="#код-остаточная-квантизация-через-k-means-и-trie-допустимых-префиксов">Код: остаточная квантизация через k-means и trie допустимых префиксов</a><a class="l2" href="#tiger-генеративный-retrieval">TIGER: генеративный retrieval</a><a class="l2" href="#развитие-20232025">Развитие 2023–2025</a><a class="l3" href="#сводная-таблица">Сводная таблица</a><a class="l2" href="#трезвый-взгляд-20252026">Трезвый взгляд (2025–2026)</a><a class="l2" href="#ловушки">Ловушки</a><a class="l2" href="#вопросы-на-собеседованиях">Вопросы на собеседованиях</a><a class="l2" href="#проверь-себя">Проверь себя</a><a class="l2" href="#что-почитать">Что почитать</a>
       </details>
       
 
@@ -270,7 +271,7 @@ trie <span class="tok-p">=</span> build_trie<span class="tok-p">(</span>sids<spa
 <td>GLIDE</td>
 <td>Spotify</td>
 <td>2026, <a href="https://arxiv.org/abs/2603.17540" rel="noopener noreferrer nofollow">arXiv:2603.17540</a> (KDD 2026 — по блогу Spotify Research, по трудам не сверено)</td>
-<td>SID подкастов по инструкции, бэкбон на базе Llama 3.2 1B</td>
+<td>SID подкастов по инструкции, LLM-бэкбон</td>
 <td>A/B на миллионах пользователей: до +5,4% «непривычных» прослушиваний подкастов, до +14,3% открытия новых шоу</td>
 </tr>
 </tbody>
@@ -283,6 +284,13 @@ trie <span class="tok-p">=</span> build_trie<span class="tok-p">(</span>sids<spa
 <li><strong>Обзоры.</strong> <a href="https://www.preprints.org/manuscript/202605.0619" rel="noopener noreferrer nofollow">«A Modular Survey for Semantic ID-Based Generative Recommendation»</a> (Hu et al., Preprints.org, май 2026, с открытым тулбоксом UniGenRec для контролируемых абляций по этапам конвейера) и <a href="https://www.preprints.org/manuscript/202609.1676" rel="noopener noreferrer nofollow">«Generative Recommendation in Dynamic Catalogs: A Survey of Item Admission, Semantic ID Evolution, and Model Adaptation»</a> (Preprints.org, сентябрь 2026: как быть с SID, когда объекты добавляются и меняются после обучения). Это препринты без рецензирования, их полезно читать как карты области, не как доказательства.</li>
 </ul>
 <p>Практический вывод для небольшой команды: SID — разумный инструмент, когда нужны <strong>холодные объекты</strong> и <strong>компактная память</strong> (огромный каталог, быстро меняющийся ассортимент, ограничение на размер индекса). Если каталог — сотни тысяч объектов и данных хватает, SASRec/EASE + бустинг (глава <a href="/edufamcs-demo/handbook/recsys/kandidaty-i-ranzhirovanie/" rel="noopener noreferrer nofollow">«Двухстадийная схема»</a>) проще, быстрее и сопоставимы по точности.</p>
+<h2 id="ловушки">Ловушки</h2>
+<ul>
+<li><strong>Ожидание холодного старта «из коробки».</strong> Без явной подмешки по префиксу TIGER почти не порождает новые объекты.</li>
+<li><strong>Слабый бейзлайн.</strong> Выигрыш над SASRec с BCE и сэмплированными негативами не переносится на SASRec с полной кросс-энтропией.</li>
+<li><strong>Невалидные ID.</strong> Без маски по trie beam search порождает «призраков».</li>
+<li><strong>Смена энкодера или словарей.</strong> Все SID меняются, обученную модель приходится пересоздавать.</li>
+</ul>
 <h2 id="вопросы-на-собеседованиях">Вопросы на собеседованиях</h2>
 <ul>
 <li><em>Зачем остаточная, а не одноуровневая квантизация?</em> Один уровень на <span class="tex">K^L</span> кодов потребовал бы словарь размера <span class="tex">K^L</span> с непосильным k-means; остаточная схема достигает той же ёмкости суммой <span class="tex">L\cdot K</span> векторов, а иерархия кодов получается автоматически.</li>
@@ -291,6 +299,22 @@ trie <span class="tok-p">=</span> build_trie<span class="tok-p">(</span>sids<spa
 <li><em>Чем TIGER отличается от SASRec?</em> Целевая переменная: у SASRec — индекс объекта (softmax по каталогу), у TIGER — последовательность кодов; поэтому разные память, холодный старт и стоимость инференса.</li>
 <li><em>Что сломается при смене энкодера контента?</em> Все SID изменятся, и обученную модель придётся пересоздавать; это главный операционный риск подхода.</li>
 </ul>
+<h2 id="проверь-себя">Проверь себя</h2>
+<details class="callout md details"><summary>Зачем нужен токен против коллизий и когда их слишком много?</summary>
+<p>Разные объекты могут получить один кортеж кодов; дополнительный токен — порядковый номер среди объектов с таким кортежем — делает ID однозначным. Много коллизий сигнализирует, что кодов или уровней мало.</p>
+</details>
+<details class="callout md details"><summary>Почему остаточная квантизация даёт порядок «от общего к частному»?</summary>
+<p>Каждый уровень кодирует остаток предыдущего: первый код задаёт крупный кластер, следующие уточняют, поэтому похожие объекты делят префикс.</p>
+</details>
+<details class="callout md details"><summary>Что даёт ограниченное декодирование по trie?</summary>
+<p>На каждом шаге допустимы только токены, продолжающие реальный префикс SID, поэтому beam search не порождает несуществующие объекты.</p>
+</details>
+<details class="callout md details"><summary>Почему прирост TIGER над SASRec в статье нельзя считать окончательным?</summary>
+<p>Каталоги маленькие, бейзлайн SASRec взят с BCE и сэмплированными негативами (с полной кросс-энтропией он сильнее), онлайн-A/B нет.</p>
+</details>
+<details class="callout md details"><summary>Почему TIGER плохо рекомендует холодные объекты, хотя SID даётся по контенту?</summary>
+<p>Модель переобучается на объекты, виденные при обучении, и сама почти не генерирует новые кортежи; нужна явная подмешка холодных объектов с тем же префиксом.</p>
+</details>
 <h2 id="что-почитать">Что почитать</h2>
 <ul>
 <li>Rajput et al. <em>Recommender Systems with Generative Retrieval</em>. NeurIPS 2023 (<a href="https://arxiv.org/abs/2305.05065" rel="noopener noreferrer nofollow">arXiv:2305.05065</a>).</li>
@@ -303,6 +327,8 @@ trie <span class="tok-p">=</span> build_trie<span class="tok-p">(</span>sids<spa
       
 
       
+
+      
       <nav class="pager" aria-label="Соседние статьи">
         <a href="/edufamcs-demo/handbook/recsys/prodakshen-i-ab-testy/"><span><svg class="ico sm" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-arrow-left"/></svg>Назад</span>Рекомендации в продакшене: A/B-тесты и эксплуатация</a>
         <a href="/edufamcs-demo/handbook/recsys/generativnye-rekomendateli/"><span>Дальше<svg class="ico sm" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-arrow"/></svg></span>Генеративные рекомендатели на масштабе: HSTU, OneRec и наследники</a>
@@ -311,7 +337,7 @@ trie <span class="tok-p">=</span> build_trie<span class="tok-p">(</span>sids<spa
     </article>
 
     <aside class="hb-toc" aria-label="На этой странице">
-      <a class="l2" href="#идея-и-место-в-истории">Идея и место в истории</a><a class="l2" href="#семантические-id-остаточная-квантизация">Семантические ID: остаточная квантизация</a><a class="l3" href="#код-остаточная-квантизация-через-k-means-и-trie-допустимых-префиксов">Код: остаточная квантизация через k-means и trie допустимых префиксов</a><a class="l2" href="#tiger-генеративный-retrieval">TIGER: генеративный retrieval</a><a class="l2" href="#развитие-20232025">Развитие 2023–2025</a><a class="l3" href="#сводная-таблица">Сводная таблица</a><a class="l2" href="#трезвый-взгляд-20252026">Трезвый взгляд (2025–2026)</a><a class="l2" href="#вопросы-на-собеседованиях">Вопросы на собеседованиях</a><a class="l2" href="#что-почитать">Что почитать</a>
+      <a class="l2" href="#идея-и-место-в-истории">Идея и место в истории</a><a class="l2" href="#семантические-id-остаточная-квантизация">Семантические ID: остаточная квантизация</a><a class="l3" href="#код-остаточная-квантизация-через-k-means-и-trie-допустимых-префиксов">Код: остаточная квантизация через k-means и trie допустимых префиксов</a><a class="l2" href="#tiger-генеративный-retrieval">TIGER: генеративный retrieval</a><a class="l2" href="#развитие-20232025">Развитие 2023–2025</a><a class="l3" href="#сводная-таблица">Сводная таблица</a><a class="l2" href="#трезвый-взгляд-20252026">Трезвый взгляд (2025–2026)</a><a class="l2" href="#ловушки">Ловушки</a><a class="l2" href="#вопросы-на-собеседованиях">Вопросы на собеседованиях</a><a class="l2" href="#проверь-себя">Проверь себя</a><a class="l2" href="#что-почитать">Что почитать</a>
     </aside>
   </div>
 </div>

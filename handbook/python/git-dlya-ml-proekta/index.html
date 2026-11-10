@@ -1,0 +1,266 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Git и GitHub для ML-проекта · EDU FAMCS</title>
+<meta name="description" content="Git и GitHub для ML-проекта — Python и исследования. Хендбук ML-курса ФПМИ.">
+<meta name="theme-color" content="#060A16">
+<meta name="robots" content="noindex, nofollow">
+<meta name="htmx-config" content='{"allowEval":false,"includeIndicatorStyles":false,"historyCacheSize":0,"selfRequestsOnly":true}'>
+<meta name="katex-js" content="/edufamcs-demo/static/vendor/katex/katex.min.js">
+<meta name="katex-css" content="/edufamcs-demo/static/vendor/katex/katex.min.css">
+<link rel="icon" href="/edufamcs-demo/static/brand/logo/favicon-16.svg" type="image/svg+xml" sizes="16x16">
+<link rel="icon" href="/edufamcs-demo/static/brand/logo/favicon.svg" type="image/svg+xml" sizes="any">
+<link rel="preload" href="/edufamcs-demo/static/brand/fonts/manrope-cyrillic-400.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/edufamcs-demo/static/brand/fonts/unbounded-cyrillic-800.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="/edufamcs-demo/static/brand/fonts.css">
+<link rel="stylesheet" href="/edufamcs-demo/static/brand/tokens.css">
+<link rel="stylesheet" href="/edufamcs-demo/static/brand/components.css">
+<link rel="stylesheet" href="/edufamcs-demo/static/css/site.css">
+<link rel="stylesheet" href="/edufamcs-demo/static/css/hub.css">
+<link rel="stylesheet" href="/edufamcs-demo/static/css/about.css">
+<link rel="stylesheet" href="/edufamcs-demo/static/handbook/handbook.css">
+<script src="/edufamcs-demo/static/js/theme.js"></script>
+<script src="/edufamcs-demo/static/vendor/htmx/htmx.min.js" defer></script>
+<script src="/edufamcs-demo/static/vendor/alpine/alpine-csp.min.js" defer></script>
+<script src="/edufamcs-demo/static/js/site.js" defer></script>
+<script src="/edufamcs-demo/static/handbook/handbook.js" defer></script>
+</head>
+<body class="" hx-headers='{"X-CSRFToken": "qprqdErz6LPugwePrWU8FJZ1nOKOxXm12CgntG0q7y33rPthqp85nCRZPXRMhHlI"}'>
+<a class="skip" href="#main">К содержанию</a>
+<div class="demo-bar" role="note">Демо-версия для отзывов: вход, запись на курсы и формы здесь не работают.</div>
+
+<header class="hdr">
+  <div class="container">
+    <a class="brand" href="/edufamcs-demo/" aria-label="EDU FAMCS — главная">
+      <span class="full"><img class="only-light" src="/edufamcs-demo/static/brand/logo/logo-edu-light.svg" alt="EDU FAMCS" width="196" height="40"><img class="only-dark" src="/edufamcs-demo/static/brand/logo/logo-edu-dark.svg" alt="EDU FAMCS" width="196" height="40"></span>
+      <span class="short"><img class="only-light" src="/edufamcs-demo/static/brand/logo/logo-edu-light.svg" alt="EDU FAMCS" height="30"><img class="only-dark" src="/edufamcs-demo/static/brand/logo/logo-edu-dark.svg" alt="EDU FAMCS" height="30"></span>
+    </a>
+    <nav class="nav" id="main-nav" aria-label="Основная навигация">
+      <a href="/edufamcs-demo/#courses">Курсы</a>
+      <a href="/edufamcs-demo/ml/" >Машинное обучение</a>
+      
+      <a href="/edufamcs-demo/handbook/" aria-current="page">Хендбук</a>
+      <a href="/edufamcs-demo/news/" >Новости</a>
+      <a href="/edufamcs-demo/people/" >Авторы</a>
+      <a href="/edufamcs-demo/about/" >О&nbsp;нас</a>
+    </nav>
+    <div class="hdr-actions">
+      
+      <a class="btn btn-outline btn-login" href="/edufamcs-demo/accounts/login/?next=/handbook/python/git-dlya-ml-proekta/">Войти</a>
+      
+      <button class="icon-btn menu-btn" type="button" aria-label="Меню" aria-expanded="false" aria-controls="main-nav"><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-menu"/></svg></button>
+    </div>
+  </div>
+</header>
+
+<main id="main">
+
+
+
+<div class="container hb-page hb-tone">
+  <div class="hb-readbar" aria-hidden="true"><i></i></div>
+  <div class="hb">
+    <aside class="hb-nav" aria-label="Статьи раздела">
+      
+<form class="hb-search" action="/edufamcs-demo/handbook/search/" method="get" role="search">
+  <svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-search"/></svg>
+  <input class="input" type="search" name="q" value="" placeholder="Поиск по хендбуку" aria-label="Поиск по хендбуку" autocomplete="off" maxlength="120"
+    hx-get="/edufamcs-demo/handbook/search/" hx-trigger="input changed delay:250ms, search" hx-target="#hb-nav-results" hx-sync="this:replace">
+</form>
+
+      <div id="hb-nav-results" class="hb-nav-results" aria-live="polite"></div>
+      <a class="grp" href="/edufamcs-demo/handbook/python/">Как вести исследование</a>
+      
+      <a class="" href="/edufamcs-demo/handbook/python/kak-vesti-issledovanie/">Как вести исследование: гипотеза, бейзлайн, эксперимент</a>
+      
+      <a class="" href="/edufamcs-demo/handbook/python/vosproizvodimost-i-trekking/">Воспроизводимость: сиды, данные, MLflow</a>
+      
+      <a class="cur" href="/edufamcs-demo/handbook/python/git-dlya-ml-proekta/" aria-current="page">Git и GitHub для ML-проекта</a>
+      
+      <a class="" href="/edufamcs-demo/handbook/python/kak-oformit-rezultat/">Как оформить результат и защитить проект</a>
+      
+    </aside>
+
+    <article class="hb-main">
+      <nav class="crumbs" aria-label="Навигация"><a href="/edufamcs-demo/handbook/">Хендбук</a><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-chev"/></svg><a href="/edufamcs-demo/handbook/python/">Python и исследования</a></nav>
+      <h1 class="h1">Git и GitHub для ML-проекта</h1>
+      <div class="hb-meta">
+        
+        
+        <span><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-clock"/></svg>10&nbsp;мин</span>
+        <span class="hb-authors"><span class="avatar sm" title="Артем Лебедевич">АЛ</span>Артем Лебедевич</span>
+        <span><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-edit"/></svg>10 ноября 2026</span>
+        
+        
+      </div>
+
+      
+      <details class="hb-mtoc">
+        <summary><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-list"/></svg>Содержание<svg class="ico sm" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-chev-down"/></svg></summary>
+        <a class="l2" href="#ментальная-модель">Ментальная модель</a><a class="l2" href="#ежедневные-команды">Ежедневные команды</a><a class="l2" href="#gitignore-для-ml">.gitignore для ML</a><a class="l2" href="#ветки-и-pull-request">Ветки и pull request</a><a class="l2" href="#осмысленные-коммиты">Осмысленные коммиты</a><a class="l2" href="#откатить-и-не-потерять">Откатить и не потерять</a><a class="l2" href="#большие-файлы">Большие файлы</a><a class="l2" href="#утёк-секрет-порядок-действий">Утёк секрет: порядок действий</a><a class="l2" href="#readme-и-github-как-портфолио">README и GitHub как портфолио</a><a class="l2" href="#ловушки">Ловушки</a><a class="l2" href="#проверь-себя">Проверь себя</a><a class="l2" href="#что-почитать">Что почитать</a>
+      </details>
+      
+
+      <div class="prose"><p>Git для ML-проекта — это не «сохранить файл на GitHub», а журнал изменений, к которому привязаны эксперименты: по хешу коммита можно вернуться к коду, давшему нужную метрику. Репозиторий же — ваше резюме: по нему на собеседовании видят, как вы работаете, а на защите проекта его открывают первым. Нужно понимать модель, несколько команд и особенности ML: данные, чекпоинты, секреты и ноутбуки.</p>
+<h2 id="ментальная-модель">Ментальная модель</h2>
+<p>Коммит — <strong>снимок</strong> всего проекта плюс ссылка на родителя, а не «разница». Ветка — <strong>указатель</strong> на один из коммитов, который сдвигается при новом коммите. <code>HEAD</code> — на что вы сейчас смотрите. Поэтому создать ветку дёшево (это просто имя), а переключение между ними — смена снимка.</p>
+<p>Три области: рабочая папка → <strong>индекс</strong> (staging, что попадёт в следующий коммит) → <strong>репозиторий</strong> (история). Команда <code>git add</code> перекладывает изменения в индекс, <code>git commit</code> фиксирует индекс.</p>
+<h2 id="ежедневные-команды">Ежедневные команды</h2>
+<div class="code"><div class="code-head"><span class="lang">bash</span></div><pre><code>git status                       <span class="tok-c"># что изменено и что в индексе
+</span>git add src/train.py configs/    <span class="tok-c"># добавлять явно, а не «git add .» вслепую
+</span>git diff --staged                <span class="tok-c"># посмотреть, что уйдёт в коммит
+</span>git commit -m <span class="tok-s">"Add time-based split for validation"</span>
+git log --oneline --graph -10    <span class="tok-c"># история коротко
+</span>git switch -c exp/lr-schedule    <span class="tok-c"># новая ветка для эксперимента
+</span>git switch main                  <span class="tok-c"># вернуться
+</span>git pull --rebase                <span class="tok-c"># подтянуть чужие изменения
+</span>git push -u origin exp/lr-schedule
+</code></pre></div>
+<p>Перед коммитом смотрите <code>git status</code> и <code>git diff --staged</code>: так вы не закоммитите случайно файл с данными или ключом.</p>
+<h2 id="gitignore-для-ml"><code>.gitignore</code> для ML</h2>
+<p>Не в git: данные, чекпоинты, логи запусков, секреты, окружения, кэши. В git: код, конфиги, ноутбуки без выводов, README, lock-файл (<code>uv.lock</code>).</p>
+<div class="code"><div class="code-head"><span class="lang">gitignore</span></div><pre><code># данные и результаты
+data/
+*.parquet
+*.csv
+models/
+checkpoints/
+*.pt
+*.ckpt
+mlruns/
+mlflow.db
+wandb/
+
+# секреты и окружение
+.env
+.env.*
+!.env.example
+.venv/
+
+# python и ноутбуки
+__pycache__/
+.ipynb_checkpoints/
+.DS_Store
+</code></pre></div>
+<p>Ноутбуки: вывод ячеек (графики в base64, таблицы) раздувает репозиторий и портит диффы. Пользуйтесь <code>nbstripout</code> (<code>uv add --dev nbstripout &amp;&amp; uv run nbstripout --install</code> — очищает выводы при коммите) или ограничьте вывод вручную; подробнее о ноутбуках — в <a href="/edufamcs-demo/handbook/python/jupyter-noutbuki/" rel="noopener noreferrer nofollow">«Jupyter»</a>. Для файла <code>.gitignore</code> не забудьте, что он действует только на <strong>неотслеживаемые</strong> файлы: если файл уже закоммичен, нужно <code>git rm --cached &lt;файл&gt;</code>.</p>
+<h2 id="ветки-и-pull-request">Ветки и pull request</h2>
+<p>Схема для учебного и рабочего проекта: <code>main</code> всегда работает; для каждой идеи — короткая ветка (<code>exp/…</code>, <code>fix/…</code>, <code>feat/…</code>), по готовности — <strong>pull request</strong> (PR). PR — место для обсуждения: описание «что и зачем», метрика до и после, ссылка на запуск в трекере. Даже работая одни, используйте PR: он оформляет историю и даёт возможность посмотреть собственный дифф перед слиянием. Сливайте через squash, если в ветке много служебных коммитов, и удаляйте ветку после слияния.</p>
+<p>Эксперименты, которые не получились, не нужно прятать: оставьте ветку или тег <code>exp/…</code> с README-заметкой, а вывод запишите в журнал (<a href="/edufamcs-demo/handbook/python/kak-vesti-issledovanie/" rel="noopener noreferrer nofollow">«Как вести исследование»</a>).</p>
+<h2 id="осмысленные-коммиты">Осмысленные коммиты</h2>
+<p>Один коммит — одно логическое изменение, сообщение отвечает на «что и зачем» в повелительном наклонении: <code>Fix target leakage in rolling features</code>, а не <code>update</code>/<code>fix2</code>/<code>final_final</code>. Метрики в сообщение не вставляйте — их место в трекере; но указывайте коммит в запуске, а в журнале — запись «гипотеза → коммит → метрика». Не коммитьте «сломанный» код в <code>main</code>. Сообщения в командном проекте принято писать по-английски (удобно соавторам, ревьюерам и работодателям).</p>
+<h2 id="откатить-и-не-потерять">Откатить и не потерять</h2>
+<div class="code"><div class="code-head"><span class="lang">bash</span></div><pre><code>git restore src/train.py             <span class="tok-c"># отбросить правки в файле (необратимо для несохранённого!)
+</span>git restore --staged src/train.py    <span class="tok-c"># убрать из индекса, правки остаются
+</span>git restore --source<span class="tok-p">=</span>HEAD~2 src/train.py   <span class="tok-c"># взять версию файла из прошлого коммита
+</span>git revert a3f9c1e                   <span class="tok-c"># новый коммит, отменяющий коммит a3f9c1e
+</span>git reflog                           <span class="tok-c"># журнал перемещений HEAD: найти «потерянный» коммит
+</span>git switch -c rescue a3f9c1e         <span class="tok-c"># вернуть потерянное состояние в новую ветку
+</span></code></pre></div>
+<p><strong><code>revert</code> против <code>reset</code>.</strong> <code>revert</code> добавляет новый коммит и безопасен для опубликованной истории. <code>reset --hard</code> двигает ветку и стирает правки в рабочей папке; применяйте только к локальным коммитам, которые ещё не отправили. Даже после ошибочного <code>reset</code> коммит обычно можно найти в <code>reflog</code>: записи о коммитах, недостижимых из веток, по умолчанию хранятся 30 дней (<code>gc.reflogExpireUnreachable</code>), остальные — 90; поэтому паниковать не нужно.</p>
+<div class="callout md warn"><p class="callout-title">Не делайте force-push в общие ветки</p>
+<p><code>git push --force</code> перезаписывает историю на сервере: коммиты коллег пропадают, чужие ветки расходятся. В своей личной ветке допустим <code>git push --force-with-lease</code> (откажет, если на сервере появилось то, чего вы не видели). В <code>main</code> — никогда.</p>
+</div>
+<h2 id="большие-файлы">Большие файлы</h2>
+<p>Git хранит каждую версию файла целиком, поэтому 500-мегабайтный parquet превращает репозиторий в тяжёлого монстра, а GitHub отклонит файлы свыше 100 МБ. Варианты:</p>
+<ul>
+<li><strong>Данные вне репозитория</strong> (обычный выбор): в git лежит код, скрипт или команда загрузки (<code>make data</code>), хеш и описание источника; сами данные — в S3, на диске, в Kaggle/Hugging Face Datasets. См. <a href="/edufamcs-demo/handbook/python/vosproizvodimost-i-trekking/" rel="noopener noreferrer nofollow">«Воспроизводимость»</a>.</li>
+<li><strong>DVC</strong> — версионирует данные через маленькие <code>.dvc</code>-файлы в git.</li>
+<li><strong>Git LFS</strong> — хранит большие файлы на сервере, в репозитории остаются указатели: <code>git lfs install</code>, <code>git lfs track "*.pt"</code> (уберите <code>*.pt</code> из <code>.gitignore</code>, иначе <code>git add</code> откажется добавлять файл). Подходит для небольших весов модели (у бесплатных планов хостингов есть квоты).</li>
+</ul>
+<p>Если большой файл уже закоммичен, простое удаление не уменьшит репозиторий: он остаётся в истории; нужен <code>git filter-repo --invert-paths --path &lt;файл&gt;</code> (или BFG) и force-push; <code>git rm --cached</code> лишь перестаёт отслеживать файл и историю не чистит (проще — создать новый репозиторий, если история короткая).</p>
+<h2 id="утёк-секрет-порядок-действий">Утёк секрет: порядок действий</h2>
+<p>Ключ API, пароль или токен попал в коммит — даже в приватный репозиторий, даже если удалили следующим коммитом.</p>
+<ol>
+<li><strong>Сначала отзовите (rotate) ключ</strong> в сервисе-источнике и выпустите новый. Секрет считается скомпрометированным с момента публикации: боты сканируют GitHub за минуты.</li>
+<li>Проверьте логи использования и затронутые ресурсы.</li>
+<li>Только потом уберите из истории (<code>git filter-repo</code> или BFG) и пересоберите репозиторий; для публичного репо история уже скопирована, поэтому шаг 1 важнее шага 3.</li>
+<li>Профилактика: секреты только в переменных окружения и в <code>.env</code> вне git, рядом <code>.env.example</code> без значений; включите <strong>secret scanning</strong> в настройках репозитория.</li>
+</ol>
+<h2 id="readme-и-github-как-портфолио">README и GitHub как портфолио</h2>
+<p>README — точка входа: что за проект, какой результат (одно число и один график), как воспроизвести одной командой, структура папок. Структуру отчёта см. в <a href="/edufamcs-demo/handbook/python/kak-oformit-rezultat/" rel="noopener noreferrer nofollow">«Как оформить результат»</a>. Для собеседований: закрепите 2–3 лучших репозитория, в каждом — история из осмысленных коммитов, зафиксированное окружение (<code>uv.lock</code>), воспроизводимый запуск, честные ограничения. Один доведённый проект с понятным README весит больше десяти заброшенных. Не публикуйте данные с персональной информацией и чужие закрытые датасеты.</p>
+<h2 id="ловушки">Ловушки</h2>
+<ul>
+<li><code>git add .</code> без <code>.gitignore</code>: в коммит попали <code>data/</code>, <code>.env</code>, веса.</li>
+<li>Работа сразу в <code>main</code>, коммиты «wip» без смысла; один гигантский коммит в конце проекта.</li>
+<li><code>git reset --hard</code> или <code>git checkout .</code> при несохранённых правках; <code>push --force</code> в общую ветку.</li>
+<li>Ноутбуки с выводами и конфликтами слияния в JSON.</li>
+<li>Удалили секрет следующим коммитом и считаете проблему решённой.</li>
+<li>На интервью: «чем <code>merge</code> отличается от <code>rebase</code>?», «как отменить опубликованный коммит?» (<code>revert</code>), «что делать, если закоммитили ключ?» (ротация), «как хранить данные и модели в репозитории?», «что такое <code>reflog</code>?».</li>
+</ul>
+<h2 id="проверь-себя">Проверь себя</h2>
+<details class="callout md details"><summary>Что такое ветка в git и почему её создание дёшево?</summary>
+<p>Ветка — подвижный указатель (имя) на коммит. Создание — запись одного небольшого файла с хешем; история и файлы не копируются.</p>
+</details>
+<details class="callout md details"><summary>Чем `git revert` отличается от `git reset --hard`?</summary>
+<p><code>revert</code> создаёт новый коммит с обратными изменениями и не переписывает историю — безопасен для общих веток. <code>reset --hard</code> перемещает ветку и стирает правки в рабочей папке; допустим только для локальной, не опубликованной истории.</p>
+</details>
+<details class="callout md details"><summary>Вы нечаянно сделали `reset --hard` и потеряли коммит. Как вернуть?</summary>
+<p>Через <code>git reflog</code> найти хеш потерянного коммита (записи о недостижимых коммитах по умолчанию хранятся 30 дней) и создать ветку: <code>git switch -c rescue &lt;хеш&gt;</code>. Несохранённые, не закоммиченные правки так не вернуть.</p>
+</details>
+<details class="callout md details"><summary>В репозиторий попал токен. Первые действия?</summary>
+<p>Отозвать и заменить токен в сервисе; проверить, не использовался ли он; затем убрать из истории и включить secret scanning. Очистка истории без отзыва ключа не защищает, потому что токен мог уже быть скопирован.</p>
+</details>
+<details class="callout md details"><summary>Где хранить 2 ГБ данных для проекта и как ссылаться на них?</summary>
+<p>Вне git: во внешнем хранилище или через DVC; в репозитории — скрипт/команда загрузки, хеш и описание источника, чтобы любой мог получить ту же версию данных.</p>
+</details>
+<h2 id="что-почитать">Что почитать</h2>
+<ul>
+<li><a href="https://git-scm.com/book/ru/v2" rel="noopener noreferrer nofollow">Pro Git (на русском)</a> — бесплатная книга.</li>
+<li><a href="https://git-scm.com/docs/git-reflog" rel="noopener noreferrer nofollow">Документация <code>git reflog</code></a>.</li>
+<li><a href="https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/removing-sensitive-data-from-a-repository" rel="noopener noreferrer nofollow">GitHub Docs: удаление конфиденциальных данных из репозитория</a>.</li>
+<li><a href="https://docs.github.com/en/code-security/secret-scanning/introduction/about-secret-scanning" rel="noopener noreferrer nofollow">GitHub Docs: о secret scanning</a>.</li>
+<li><a href="https://git-lfs.com/" rel="noopener noreferrer nofollow">Git LFS</a> и <a href="https://dvc.org/doc/start" rel="noopener noreferrer nofollow">DVC: Get Started</a>.</li>
+<li><a href="https://www.conventionalcommits.org/ru/v1.0.0/" rel="noopener noreferrer nofollow">Conventional Commits</a>.</li>
+<li><a href="https://ohshitgit.com/ru" rel="noopener noreferrer nofollow">Oh Shit, Git!?!</a> — типовые «как выпутаться».</li>
+</ul>
+</div>
+      
+
+      
+
+      
+      <nav class="pager" aria-label="Соседние статьи">
+        <a href="/edufamcs-demo/handbook/python/vosproizvodimost-i-trekking/"><span><svg class="ico sm" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-arrow-left"/></svg>Назад</span>Воспроизводимость: сиды, данные, MLflow</a>
+        <a href="/edufamcs-demo/handbook/python/kak-oformit-rezultat/"><span>Дальше<svg class="ico sm" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-arrow"/></svg></span>Как оформить результат и защитить проект</a>
+      </nav>
+      
+    </article>
+
+    <aside class="hb-toc" aria-label="На этой странице">
+      <a class="l2" href="#ментальная-модель">Ментальная модель</a><a class="l2" href="#ежедневные-команды">Ежедневные команды</a><a class="l2" href="#gitignore-для-ml">.gitignore для ML</a><a class="l2" href="#ветки-и-pull-request">Ветки и pull request</a><a class="l2" href="#осмысленные-коммиты">Осмысленные коммиты</a><a class="l2" href="#откатить-и-не-потерять">Откатить и не потерять</a><a class="l2" href="#большие-файлы">Большие файлы</a><a class="l2" href="#утёк-секрет-порядок-действий">Утёк секрет: порядок действий</a><a class="l2" href="#readme-и-github-как-портфолио">README и GitHub как портфолио</a><a class="l2" href="#ловушки">Ловушки</a><a class="l2" href="#проверь-себя">Проверь себя</a><a class="l2" href="#что-почитать">Что почитать</a>
+    </aside>
+  </div>
+</div>
+
+
+</main>
+
+<footer class="ftr" data-theme="dark">
+  <svg class="sym fern" viewBox="0 0 40.5 65.02" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#fern"/></svg>
+  <div class="container">
+    <div class="ftr-row">
+      <a href="/edufamcs-demo/" aria-label="EDU FAMCS — главная"><img src="/edufamcs-demo/static/brand/logo/logo-edu-dark.svg" alt="EDU FAMCS" width="196" height="40"></a>
+      <ul class="ftr-links">
+        <li><a href="/edufamcs-demo/#courses">Курсы</a></li>
+        <li><a href="/edufamcs-demo/ml/">Машинное обучение</a></li>
+        <li><a href="/edufamcs-demo/handbook/">Хендбук</a></li>
+        <li><a href="/edufamcs-demo/news/">Новости</a></li>
+        <li><a href="/edufamcs-demo/people/">Авторы</a></li>
+        <li><a href="/edufamcs-demo/about/">О&nbsp;нас</a></li>
+        <li><a href="/edufamcs-demo/propose/">Предложить или исправить</a></li>
+        <li><a href="/edufamcs-demo/privacy/">Конфиденциальность</a></li>
+      </ul>
+    </div>
+    <div class="ftr-big" aria-hidden="true">EDU<span class="d">·</span>FAMCS</div>
+    <p class="ftr-copy">© 2026 EDU FAMCS · Минск</p>
+  </div>
+</footer>
+
+<div class="toasts-region" aria-live="polite" id="toasts">
+
+</div>
+
+</body>
+</html>

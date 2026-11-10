@@ -1,0 +1,268 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Вайб-кодинг и защита проекта: как понимать код, который писали не вы · EDU FAMCS</title>
+<meta name="description" content="Вайб-кодинг и защита проекта: как понимать код, который писали не вы — ИИ-ассистенты для кода. Хендбук ML-курса ФПМИ.">
+<meta name="theme-color" content="#060A16">
+<meta name="robots" content="noindex, nofollow">
+<meta name="htmx-config" content='{"allowEval":false,"includeIndicatorStyles":false,"historyCacheSize":0,"selfRequestsOnly":true}'>
+<meta name="katex-js" content="/edufamcs-demo/static/vendor/katex/katex.min.js">
+<meta name="katex-css" content="/edufamcs-demo/static/vendor/katex/katex.min.css">
+<link rel="icon" href="/edufamcs-demo/static/brand/logo/favicon-16.svg" type="image/svg+xml" sizes="16x16">
+<link rel="icon" href="/edufamcs-demo/static/brand/logo/favicon.svg" type="image/svg+xml" sizes="any">
+<link rel="preload" href="/edufamcs-demo/static/brand/fonts/manrope-cyrillic-400.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/edufamcs-demo/static/brand/fonts/unbounded-cyrillic-800.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="/edufamcs-demo/static/brand/fonts.css">
+<link rel="stylesheet" href="/edufamcs-demo/static/brand/tokens.css">
+<link rel="stylesheet" href="/edufamcs-demo/static/brand/components.css">
+<link rel="stylesheet" href="/edufamcs-demo/static/css/site.css">
+<link rel="stylesheet" href="/edufamcs-demo/static/css/hub.css">
+<link rel="stylesheet" href="/edufamcs-demo/static/css/about.css">
+<link rel="stylesheet" href="/edufamcs-demo/static/handbook/handbook.css">
+<script src="/edufamcs-demo/static/js/theme.js"></script>
+<script src="/edufamcs-demo/static/vendor/htmx/htmx.min.js" defer></script>
+<script src="/edufamcs-demo/static/vendor/alpine/alpine-csp.min.js" defer></script>
+<script src="/edufamcs-demo/static/js/site.js" defer></script>
+<script src="/edufamcs-demo/static/handbook/handbook.js" defer></script>
+</head>
+<body class="" hx-headers='{"X-CSRFToken": "FPInmnr5SwZYsm9IAqfrlnhuwiaFjTw8h2xkCp0WTjdxDFoazTto3g9sYrhD3DvP"}'>
+<a class="skip" href="#main">К содержанию</a>
+<div class="demo-bar" role="note">Демо-версия для отзывов: вход, запись на курсы и формы здесь не работают.</div>
+
+<header class="hdr">
+  <div class="container">
+    <a class="brand" href="/edufamcs-demo/" aria-label="EDU FAMCS — главная">
+      <span class="full"><img class="only-light" src="/edufamcs-demo/static/brand/logo/logo-edu-light.svg" alt="EDU FAMCS" width="196" height="40"><img class="only-dark" src="/edufamcs-demo/static/brand/logo/logo-edu-dark.svg" alt="EDU FAMCS" width="196" height="40"></span>
+      <span class="short"><img class="only-light" src="/edufamcs-demo/static/brand/logo/logo-edu-light.svg" alt="EDU FAMCS" height="30"><img class="only-dark" src="/edufamcs-demo/static/brand/logo/logo-edu-dark.svg" alt="EDU FAMCS" height="30"></span>
+    </a>
+    <nav class="nav" id="main-nav" aria-label="Основная навигация">
+      <a href="/edufamcs-demo/#courses">Курсы</a>
+      <a href="/edufamcs-demo/ml/" >Машинное обучение</a>
+      
+      <a href="/edufamcs-demo/handbook/" aria-current="page">Хендбук</a>
+      <a href="/edufamcs-demo/news/" >Новости</a>
+      <a href="/edufamcs-demo/people/" >Авторы</a>
+      <a href="/edufamcs-demo/about/" >О&nbsp;нас</a>
+    </nav>
+    <div class="hdr-actions">
+      
+      <a class="btn btn-outline btn-login" href="/edufamcs-demo/accounts/login/?next=/handbook/ai-tools/vajb-koding-i-zashchita/">Войти</a>
+      
+      <button class="icon-btn menu-btn" type="button" aria-label="Меню" aria-expanded="false" aria-controls="main-nav"><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-menu"/></svg></button>
+    </div>
+  </div>
+</header>
+
+<main id="main">
+
+
+
+<div class="container hb-page s-agents">
+  <div class="hb-readbar" aria-hidden="true"><i></i></div>
+  <div class="hb">
+    <aside class="hb-nav" aria-label="Статьи раздела">
+      
+<form class="hb-search" action="/edufamcs-demo/handbook/search/" method="get" role="search">
+  <svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-search"/></svg>
+  <input class="input" type="search" name="q" value="" placeholder="Поиск по хендбуку" aria-label="Поиск по хендбуку" autocomplete="off" maxlength="120"
+    hx-get="/edufamcs-demo/handbook/search/" hx-trigger="input changed delay:250ms, search" hx-target="#hb-nav-results" hx-sync="this:replace">
+</form>
+
+      <div id="hb-nav-results" class="hb-nav-results" aria-live="polite"></div>
+      <a class="grp" href="/edufamcs-demo/handbook/ai-tools/">Практика</a>
+      
+      <a class="" href="/edufamcs-demo/handbook/ai-tools/agent-v-ml-proekte/">Агент в ML-проекте: ноутбуки, эксперименты, ревью</a>
+      
+      <a class="" href="/edufamcs-demo/handbook/ai-tools/bezopasnost-agentov/">Безопасность: секреты, права, prompt injection</a>
+      
+      <a class="cur" href="/edufamcs-demo/handbook/ai-tools/vajb-koding-i-zashchita/" aria-current="page">Вайб-кодинг и защита проекта: как понимать код, который писали не вы</a>
+      
+    </aside>
+
+    <article class="hb-main">
+      <nav class="crumbs" aria-label="Навигация"><a href="/edufamcs-demo/handbook/">Хендбук</a><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-chev"/></svg><a href="/edufamcs-demo/handbook/ai-tools/">ИИ-ассистенты для кода</a></nav>
+      <h1 class="h1">Вайб-кодинг и защита проекта: как понимать код, который писали не вы</h1>
+      <div class="hb-meta">
+        
+        
+        <span><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-clock"/></svg>12&nbsp;мин</span>
+        <span class="hb-authors"><span class="avatar sm" title="Артем Лебедевич">АЛ</span>Артем Лебедевич</span>
+        <span><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-edit"/></svg>10 ноября 2026</span>
+        
+        
+      </div>
+
+      
+      <details class="hb-mtoc">
+        <summary><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-list"/></svg>Содержание<svg class="ico sm" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-chev-down"/></svg></summary>
+        <a class="l2" href="#где-вайб-кодинг-особенно-опасен-в-ml">Где вайб-кодинг особенно опасен в ML</a><a class="l2" href="#как-действительно-понять-сгенерированный-код">Как действительно понять сгенерированный код</a><a class="l2" href="#что-спрашивает-комиссия-и-как-рассыпаются-проекты-с-ии-кодом">Что спрашивает комиссия и как рассыпаются проекты с ИИ-кодом</a><a class="l2" href="#чек-лист-самоаудита-перед-защитой">Чек-лист самоаудита перед защитой</a><a class="l2" href="#честное-раскрытие-использования-ии">Честное раскрытие использования ИИ</a><a class="l2" href="#как-учиться-с-агентом-а-не-вместо-себя">Как учиться с агентом, а не вместо себя</a><a class="l2" href="#ловушки">Ловушки</a><a class="l2" href="#проверь-себя">Проверь себя</a><a class="l2" href="#что-почитать">Что почитать</a>
+      </details>
+      
+
+      <div class="prose"><p><strong>Вайб-кодинг</strong> — режим, в котором вы описываете задачу словами, принимаете код от ассистента, почти не читая, и ориентируетесь на «работает или нет». Для скрипта-однодневки это нормально. Для проекта, который вы защищаете, — нет: на защите проверяется не то, запускается ли код, а понимаете ли вы, почему числа в отчёте верны. Здесь разобрано, где вайб-кодинг в ML ломается тише всего, как превратить чужой код в понятый и как подготовиться к вопросам комиссии. Использование ассистентов в курсе разрешено; ответственность за результат остаётся на вас.</p>
+<h2 id="где-вайб-кодинг-особенно-опасен-в-ml">Где вайб-кодинг особенно опасен в ML</h2>
+<p>В обычной разработке ошибка чаще всего громкая: исключение, упавший тест. В ML код выполняется без ошибок, а результат ложный. Типичные тихие отказы:</p>
+<ul>
+<li><strong>Утечка.</strong> Масштабирование, подбор порогов, отбор признаков или target-кодирование выполнены на всей выборке до разбиения; признак, содержащий будущее или саму цель; дубликаты и один и тот же пользователь в train и test.</li>
+<li><strong>Неверное разбиение.</strong> Случайный split там, где нужен split по времени или по группам (пользователь, товар, сессия); перемешивание временного ряда.</li>
+<li><strong>Не та метрика.</strong> <code>accuracy</code> при дисбалансе; ROC-AUC вместо PR-AUC там, где важен хвост; метрика считается по всей выборке, а не по пользователям; <code>recall@k</code> с неверным знаменателем; усреднение, скрывающее провал на редких группах.</li>
+<li><strong>Подгонка под валидацию.</strong> Гиперпараметры подобраны по тесту, «лучший чекпоинт» выбран по тому же набору, на котором отчитываетесь.</li>
+<li><strong>Правдоподобные, но неправильные числа.</strong> Метрика 0.97 на трудной задаче, внезапное улучшение после «рефакторинга», расхождение между запусками при фиксированном seed.</li>
+</ul>
+<p>Ассистент не знает вашу постановку задачи и по умолчанию выбирает самое распространённое: <code>train_test_split</code> с <code>shuffle=True</code>, <code>StandardScaler().fit(X)</code> на всём датасете. Всё это правдоподобно, быстро и ошибочно.</p>
+<div class="callout md warn"><p class="callout-title">Главное правило</p>
+<p>Вы владеете каждым числом в своём отчёте. Если не можете объяснить, откуда оно взялось, каким кодом получено и почему ему можно верить, — оно не готово к защите, кто бы ни написал код.</p>
+</div>
+<h2 id="как-действительно-понять-сгенерированный-код">Как действительно понять сгенерированный код</h2>
+<p><strong>1. Сначала схема валидации и метрика — ваши.</strong> До запроса к ассистенту запишите в 5–10 строк: что предсказываем, что является единицей наблюдения, как делим данные и почему именно так, какая метрика, чем она отличается от бизнес-цели, какой базовый уровень. Это главная защита: ассистент реализует вашу схему, а не навязывает свою. Как формулируется постановка исследования, разобрано в статье <a href="/edufamcs-demo/handbook/python/kak-vesti-issledovanie/" rel="noopener noreferrer nofollow">Как вести исследование</a>.</p>
+<p><strong>2. Попросите объяснить, затем проверьте возмущением.</strong> «Объясни по шагам, что делает этот пайплайн; на каких данных обучается каждый шаг» — полезно, но объяснение само может быть уверенно неверным. Поэтому проверяйте его экспериментом: меняете условие и смотрите, ведёт ли себя результат так, как вы предсказали. Если вы не можете предсказать, чем закончится правка, вы ещё не поняли код.</p>
+<p><strong>3. Санити-проверки.</strong> Это короткие тесты на «не может быть так, чтобы…»:</p>
+<ul>
+<li><strong>Перемешанные метки.</strong> Переставьте метки train и заново обучите весь пайплайн — вместе с шагами, которые используют метки (target-кодирование, отбор признаков, подбор порога); метки валидации не трогайте. Метрика на валидации должна упасть до уровня случайного (ROC-AUC около 0,5, PR-AUC около доли положительных). Если заметно выше — метки валидации протекают в обучение или ошибка в оценке. Признак — следствие цели (например, из будущего) эта проверка не ловит: модель на перемешанных метках его не выучит; для него смотрите важности признаков, качество на одном признаке и временной сплит.</li>
+<li><strong>Переобучение на крошечной выборке.</strong> Модель достаточной ёмкости (нейросеть, глубокие деревья) с выключенными регуляризацией, dropout и аугментациями должна на 20–50 объектах довести ошибку на обучении почти до нуля. Не может — ошибка в коде модели, лосса или подготовки данных (например, метки не совпадают с объектами). Для сильно регуляризованных линейных моделей и kNN с большим k проверка неприменима.</li>
+<li><strong>Сравнение с бейзлайном.</strong> Константное предсказание, самая частая категория, популярное, предыдущее значение, простая линейная модель. Ваша метрика должна быть записана рядом с ними. Выигрыш «0,02 над бейзлайном при шуме 0,02» не результат.</li>
+<li><strong>Ручной просмотр предсказаний.</strong> Выведите 20–30 примеров: вход, предсказание, правильный ответ. Ошибки, которые выдают дефект (одни и те же значения, пустые строки, перепутанные столбцы), видны глазом.</li>
+<li><strong>Проверка разбиения.</strong> Пересечение идентификаторов между train и test должно быть пустым; максимальная дата train меньше минимальной даты test, если сплит по времени.</li>
+<li><strong>Повторяемость.</strong> Два запуска с одним seed дают одно число; разные seed — разброс, который вы знаете и указываете.</li>
+</ul>
+<div class="code"><div class="code-head"><span class="lang">python</span></div><pre><code><span class="tok-k">import</span> numpy <span class="tok-k">as</span> np
+<span class="tok-k">from</span> sklearn.base <span class="tok-k">import</span> clone
+<span class="tok-k">from</span> sklearn.metrics <span class="tok-k">import</span> roc_auc_score
+
+<span class="tok-k">def</span> <span class="tok-f">shuffled_label_check</span><span class="tok-p">(</span>model<span class="tok-p">,</span> X_tr<span class="tok-p">,</span> y_tr<span class="tok-p">,</span> X_va<span class="tok-p">,</span> y_va<span class="tok-p">,</span> seed<span class="tok-p">=</span><span class="tok-n">0</span><span class="tok-p">)</span><span class="tok-p">:</span>
+    <span class="tok-s">"""model — весь Pipeline (препроцессинг + модель), X_tr/X_va — сырые признаки. Обучение на переставленных метках: на валидации должен быть шанс (~0.5)."""</span>
+    rng <span class="tok-p">=</span> np<span class="tok-p">.</span>random<span class="tok-p">.</span>default_rng<span class="tok-p">(</span>seed<span class="tok-p">)</span>
+    m <span class="tok-p">=</span> clone<span class="tok-p">(</span>model<span class="tok-p">)</span><span class="tok-p">.</span>fit<span class="tok-p">(</span>X_tr<span class="tok-p">,</span> rng<span class="tok-p">.</span>permutation<span class="tok-p">(</span>np<span class="tok-p">.</span>asarray<span class="tok-p">(</span>y_tr<span class="tok-p">)</span><span class="tok-p">)</span><span class="tok-p">)</span>  <span class="tok-c"># весь пайплайн целиком, метки только train</span>
+    <span class="tok-k">return</span> roc_auc_score<span class="tok-p">(</span>y_va<span class="tok-p">,</span> m<span class="tok-p">.</span>predict_proba<span class="tok-p">(</span>X_va<span class="tok-p">)</span><span class="tok-p">[</span><span class="tok-p">:</span><span class="tok-p">,</span> <span class="tok-n">1</span><span class="tok-p">]</span><span class="tok-p">)</span>
+
+<span class="tok-k">def</span> <span class="tok-f">split_overlap</span><span class="tok-p">(</span>train_ids<span class="tok-p">,</span> test_ids<span class="tok-p">)</span><span class="tok-p">:</span>
+    <span class="tok-s">"""Пересечение объектов между train и test должно быть пустым."""</span>
+    <span class="tok-k">return</span> <span class="tok-f">set</span><span class="tok-p">(</span>train_ids<span class="tok-p">)</span> <span class="tok-p">&amp;</span> <span class="tok-f">set</span><span class="tok-p">(</span>test_ids<span class="tok-p">)</span>
+</code></pre></div>
+<p>Конкретный порог («около 0,5») зависит от размера валидации: на малой выборке допускайте шум и повторите с несколькими seed.</p>
+<p><strong>4. Читайте дифф и ключевые функции построчно.</strong> Разбиение данных, подготовку признаков, расчёт метрики и место, где выбирается лучшая модель, вы должны уметь воспроизвести с нуля, закрыв код. Остальное (парсинг аргументов, логирование, построение графиков) читайте бегло.</p>
+<p><strong>5. Пишите сами хотя бы метрику и сплит.</strong> Они короткие, и именно они чаще всего ломаются. Даже если ассистент предложил свой вариант, сверяйте его с вашим независимым расчётом на ручном примере из 5–10 объектов.</p>
+<h2 id="что-спрашивает-комиссия-и-как-рассыпаются-проекты-с-ии-кодом">Что спрашивает комиссия и как рассыпаются проекты с ИИ-кодом</h2>
+<p>Вопросы на защите почти всегда такие:</p>
+<ul>
+<li>Как устроено разбиение и почему оно не пропускает будущее или тех же пользователей в тест?</li>
+<li>Откуда взялась эта цифра? Какой командой воспроизвести?</li>
+<li>Почему выбрана эта метрика, как она считается, что произойдёт, если изменить знаменатель?</li>
+<li>Что случится, если убрать признак X или заменить модель? Почему вы ожидаете именно это?</li>
+<li>Чем ваша модель лучше константы или простого бейзлайна? Какой разброс между seed?</li>
+<li>Что в проекте сделано не вами и как вы это проверили?</li>
+</ul>
+<p>Типичные провалы: автор не может объяснить строку кода из собственного репозитория; в отчёте число, которое не воспроизводится; нет бейзлайна; ответ «так предложил ассистент»; тест подогнан под код; описание в README не соответствует тому, что реально делает код; финальная метрика получена не из той версии кода, что в репозитории.</p>
+<h2 id="чек-лист-самоаудита-перед-защитой">Чек-лист самоаудита перед защитой</h2>
+<ol>
+<li>Могу ли я за две минуты объяснить задачу, данные, схему разбиения и метрику без подглядывания?</li>
+<li>Для каждого числа в отчёте: команда, ветка и коммит, seed — записаны, число воспроизводится на чистом клоне.</li>
+<li>Разбиение проверено кодом: пересечений нет, дата/группа соблюдены.</li>
+<li>Все преобразования, обучаемые на данных, обучены только на train.</li>
+<li>Выполнены проверки: перемешанные метки, малая выборка, бейзлайн, ручной просмотр предсказаний.</li>
+<li>Гиперпараметры и выбор модели не использовали тест.</li>
+<li>Указан разброс по seed или доверительный интервал; различия меньше шума не называю улучшением.</li>
+<li>Могу воспроизвести метрику и сплит с нуля, закрыв код.</li>
+<li>Для каждого модуля могу ответить «что будет, если это убрать».</li>
+<li>Тесты написаны или проверены мной, а не подогнаны под код.</li>
+<li>README описывает то, что реально происходит; в нём нет «магических» шагов, которых я не понимаю.</li>
+<li>Раздел об использовании ИИ написан (ниже).</li>
+</ol>
+<p>Как оформлять результат, чтобы его можно было проверить, — в статье <a href="/edufamcs-demo/handbook/python/kak-oformit-rezultat/" rel="noopener noreferrer nofollow">Как оформить результат</a>.</p>
+<h2 id="честное-раскрытие-использования-ии">Честное раскрытие использования ИИ</h2>
+<p>Правила курса разрешают ассистентов, поэтому скрывать использование незачем, а раскрытие защищает вас. Напишите в README или отчёте короткий раздел: какие инструменты использовались, для чего (каркас кода, тесты, рефакторинг, поиск ошибок, объяснения), какие части кода целиком или в основном сгенерированы, что вы проверили сами и как. Не приписывайте себе то, чего не делали, и не изображайте, что проверили, то, что не проверяли. Подробнее о безопасной работе с агентом — в статье <a href="/edufamcs-demo/handbook/ai-tools/bezopasnost-agentov/" rel="noopener noreferrer nofollow">Безопасность агентов</a>, о применении агента в проекте — <a href="/edufamcs-demo/handbook/ai-tools/agent-v-ml-proekte/" rel="noopener noreferrer nofollow">Агент в ML-проекте</a>.</p>
+<h2 id="как-учиться-с-агентом-а-не-вместо-себя">Как учиться с агентом, а не вместо себя</h2>
+<ul>
+<li>Сначала попытка, потом агент: набросайте решение или хотя бы план, затем просите ревью, а не ответ.</li>
+<li>Просите объяснения и контрпримеры: «в каком случае этот подход даст неверный результат?», «какие допущения здесь скрыты?».</li>
+<li>Просите задать вам вопросы по вашему же коду, как на защите, и отвечайте письменно.</li>
+<li>Переписывайте ключевые функции без подсказки: сначала сверху вниз по памяти, затем сверяйте.</li>
+<li>Для нового метода сначала прочитайте источник (статью, документацию), и только потом просите реализацию; сверяйте формулу и код.</li>
+<li>Фиксируйте в заметках, что вы не знали и что выяснили: это и подготовка к защите.</li>
+</ul>
+<div class="callout md note"><p class="callout-title">Заметка</p>
+<p>Инструменты и их возможности меняются; принципы проверки результата не меняются. Для деталей конкретного ассистента смотрите его документацию.</p>
+</div>
+<h2 id="ловушки">Ловушки</h2>
+<ul>
+<li>Полагаться на объяснение ассистента без проверки экспериментом.</li>
+<li>Принять метрику, которая «хорошо выглядит», не сравнив с бейзлайном.</li>
+<li>Подбирать гиперпараметры и отчитываться по одному и тому же набору.</li>
+<li>Оставить в проекте код, который не можете объяснить, «потому что работает».</li>
+<li>Просить ассистента написать тесты по уже написанному коду: он закрепит текущее, возможно ошибочное, поведение.</li>
+<li>Готовиться к защите вечером накануне: вопросы про «а что, если» требуют времени на эксперименты.</li>
+</ul>
+<h2 id="проверь-себя">Проверь себя</h2>
+<details class="callout md details"><summary>Почему в ML код, который запускается без ошибок, может быть неверен?</summary>
+<p>Утечка, неверный сплит или метрика не вызывают исключений, а дают правдоподобные, но завышенные или бессмысленные числа.</p>
+</details>
+<details class="callout md details"><summary>Что покажет проверка с перемешанными метками и какой вывод из неё?</summary>
+<p>Метрика на валидации должна быть на уровне случайного. Если выше — в пайплайне утечка или ошибка разбиения.</p>
+</details>
+<details class="callout md details"><summary>Что вы должны написать или продумать сами, а не принимать от ассистента?</summary>
+<p>Схему валидации и метрику: единицу наблюдения, разбиение, формулу, бейзлайн. Затем сверить реализацию на ручном примере.</p>
+</details>
+<details class="callout md details"><summary>Как ответить на «откуда эта цифра»?</summary>
+<p>Назвать команду, коммит, seed, данные; воспроизвести на чистом клоне; объяснить, как считается метрика и что за бейзлайн.</p>
+</details>
+<details class="callout md details"><summary>Что должно быть в разделе об использовании ИИ?</summary>
+<p>Инструменты, для чего использовались, какие части сгенерированы, что и как вы проверили сами.</p>
+</details>
+<h2 id="что-почитать">Что почитать</h2>
+<ul>
+<li><a href="https://code.claude.com/docs/en/how-claude-code-works" rel="noopener noreferrer nofollow">How Claude Code works</a> — почему агент «заканчивает», когда ему кажется, что готово, и как этим управлять.</li>
+<li><a href="https://code.claude.com/docs/en/best-practices" rel="noopener noreferrer nofollow">Best practices for Claude Code</a> — как давать агенту проверку, возвращающую «прошло/не прошло».</li>
+<li><a href="https://agents.md" rel="noopener noreferrer nofollow">AGENTS.md</a> — как зафиксировать для агента правила проекта (например, «split только по времени»).</li>
+<li><a href="https://code.claude.com/docs/en/common-workflows" rel="noopener noreferrer nofollow">Common workflows</a> — ревью изменений, тесты, PR.</li>
+</ul>
+</div>
+      
+
+      
+
+      
+      <nav class="pager" aria-label="Соседние статьи">
+        <a href="/edufamcs-demo/handbook/ai-tools/bezopasnost-agentov/"><span><svg class="ico sm" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-arrow-left"/></svg>Назад</span>Безопасность: секреты, права, prompt injection</a>
+        
+      </nav>
+      
+    </article>
+
+    <aside class="hb-toc" aria-label="На этой странице">
+      <a class="l2" href="#где-вайб-кодинг-особенно-опасен-в-ml">Где вайб-кодинг особенно опасен в ML</a><a class="l2" href="#как-действительно-понять-сгенерированный-код">Как действительно понять сгенерированный код</a><a class="l2" href="#что-спрашивает-комиссия-и-как-рассыпаются-проекты-с-ии-кодом">Что спрашивает комиссия и как рассыпаются проекты с ИИ-кодом</a><a class="l2" href="#чек-лист-самоаудита-перед-защитой">Чек-лист самоаудита перед защитой</a><a class="l2" href="#честное-раскрытие-использования-ии">Честное раскрытие использования ИИ</a><a class="l2" href="#как-учиться-с-агентом-а-не-вместо-себя">Как учиться с агентом, а не вместо себя</a><a class="l2" href="#ловушки">Ловушки</a><a class="l2" href="#проверь-себя">Проверь себя</a><a class="l2" href="#что-почитать">Что почитать</a>
+    </aside>
+  </div>
+</div>
+
+
+</main>
+
+<footer class="ftr" data-theme="dark">
+  <svg class="sym fern" viewBox="0 0 40.5 65.02" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#fern"/></svg>
+  <div class="container">
+    <div class="ftr-row">
+      <a href="/edufamcs-demo/" aria-label="EDU FAMCS — главная"><img src="/edufamcs-demo/static/brand/logo/logo-edu-dark.svg" alt="EDU FAMCS" width="196" height="40"></a>
+      <ul class="ftr-links">
+        <li><a href="/edufamcs-demo/#courses">Курсы</a></li>
+        <li><a href="/edufamcs-demo/ml/">Машинное обучение</a></li>
+        <li><a href="/edufamcs-demo/handbook/">Хендбук</a></li>
+        <li><a href="/edufamcs-demo/news/">Новости</a></li>
+        <li><a href="/edufamcs-demo/people/">Авторы</a></li>
+        <li><a href="/edufamcs-demo/about/">О&nbsp;нас</a></li>
+        <li><a href="/edufamcs-demo/propose/">Предложить или исправить</a></li>
+        <li><a href="/edufamcs-demo/privacy/">Конфиденциальность</a></li>
+      </ul>
+    </div>
+    <div class="ftr-big" aria-hidden="true">EDU<span class="d">·</span>FAMCS</div>
+    <p class="ftr-copy">© 2026 EDU FAMCS · Минск</p>
+  </div>
+</footer>
+
+<div class="toasts-region" aria-live="polite" id="toasts">
+
+</div>
+
+</body>
+</html>

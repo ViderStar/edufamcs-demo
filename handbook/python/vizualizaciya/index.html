@@ -1,0 +1,299 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Графики, которые читаются: matplotlib и seaborn · EDU FAMCS</title>
+<meta name="description" content="Графики, которые читаются: matplotlib и seaborn — Python и исследования. Хендбук ML-курса ФПМИ.">
+<meta name="theme-color" content="#060A16">
+<meta name="robots" content="noindex, nofollow">
+<meta name="htmx-config" content='{"allowEval":false,"includeIndicatorStyles":false,"historyCacheSize":0,"selfRequestsOnly":true}'>
+<meta name="katex-js" content="/edufamcs-demo/static/vendor/katex/katex.min.js">
+<meta name="katex-css" content="/edufamcs-demo/static/vendor/katex/katex.min.css">
+<link rel="icon" href="/edufamcs-demo/static/brand/logo/favicon-16.svg" type="image/svg+xml" sizes="16x16">
+<link rel="icon" href="/edufamcs-demo/static/brand/logo/favicon.svg" type="image/svg+xml" sizes="any">
+<link rel="preload" href="/edufamcs-demo/static/brand/fonts/manrope-cyrillic-400.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/edufamcs-demo/static/brand/fonts/unbounded-cyrillic-800.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="/edufamcs-demo/static/brand/fonts.css">
+<link rel="stylesheet" href="/edufamcs-demo/static/brand/tokens.css">
+<link rel="stylesheet" href="/edufamcs-demo/static/brand/components.css">
+<link rel="stylesheet" href="/edufamcs-demo/static/css/site.css">
+<link rel="stylesheet" href="/edufamcs-demo/static/css/hub.css">
+<link rel="stylesheet" href="/edufamcs-demo/static/css/about.css">
+<link rel="stylesheet" href="/edufamcs-demo/static/handbook/handbook.css">
+<script src="/edufamcs-demo/static/js/theme.js"></script>
+<script src="/edufamcs-demo/static/vendor/htmx/htmx.min.js" defer></script>
+<script src="/edufamcs-demo/static/vendor/alpine/alpine-csp.min.js" defer></script>
+<script src="/edufamcs-demo/static/js/site.js" defer></script>
+<script src="/edufamcs-demo/static/handbook/handbook.js" defer></script>
+</head>
+<body class="" hx-headers='{"X-CSRFToken": "UCXD5YeE0DtzHW5HELTXwKfUlnZienCfwPMAl0Nv1qH8Sfk9De7UeD7SNw6gY7BW"}'>
+<a class="skip" href="#main">К содержанию</a>
+<div class="demo-bar" role="note">Демо-версия для отзывов: вход, запись на курсы и формы здесь не работают.</div>
+
+<header class="hdr">
+  <div class="container">
+    <a class="brand" href="/edufamcs-demo/" aria-label="EDU FAMCS — главная">
+      <span class="full"><img class="only-light" src="/edufamcs-demo/static/brand/logo/logo-edu-light.svg" alt="EDU FAMCS" width="196" height="40"><img class="only-dark" src="/edufamcs-demo/static/brand/logo/logo-edu-dark.svg" alt="EDU FAMCS" width="196" height="40"></span>
+      <span class="short"><img class="only-light" src="/edufamcs-demo/static/brand/logo/logo-edu-light.svg" alt="EDU FAMCS" height="30"><img class="only-dark" src="/edufamcs-demo/static/brand/logo/logo-edu-dark.svg" alt="EDU FAMCS" height="30"></span>
+    </a>
+    <nav class="nav" id="main-nav" aria-label="Основная навигация">
+      <a href="/edufamcs-demo/#courses">Курсы</a>
+      <a href="/edufamcs-demo/ml/" >Машинное обучение</a>
+      
+      <a href="/edufamcs-demo/handbook/" aria-current="page">Хендбук</a>
+      <a href="/edufamcs-demo/news/" >Новости</a>
+      <a href="/edufamcs-demo/people/" >Авторы</a>
+      <a href="/edufamcs-demo/about/" >О&nbsp;нас</a>
+    </nav>
+    <div class="hdr-actions">
+      
+      <a class="btn btn-outline btn-login" href="/edufamcs-demo/accounts/login/?next=/handbook/python/vizualizaciya/">Войти</a>
+      
+      <button class="icon-btn menu-btn" type="button" aria-label="Меню" aria-expanded="false" aria-controls="main-nav"><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-menu"/></svg></button>
+    </div>
+  </div>
+</header>
+
+<main id="main">
+
+
+
+<div class="container hb-page hb-tone">
+  <div class="hb-readbar" aria-hidden="true"><i></i></div>
+  <div class="hb">
+    <aside class="hb-nav" aria-label="Статьи раздела">
+      
+<form class="hb-search" action="/edufamcs-demo/handbook/search/" method="get" role="search">
+  <svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-search"/></svg>
+  <input class="input" type="search" name="q" value="" placeholder="Поиск по хендбуку" aria-label="Поиск по хендбуку" autocomplete="off" maxlength="120"
+    hx-get="/edufamcs-demo/handbook/search/" hx-trigger="input changed delay:250ms, search" hx-target="#hb-nav-results" hx-sync="this:replace">
+</form>
+
+      <div id="hb-nav-results" class="hb-nav-results" aria-live="polite"></div>
+      <a class="grp" href="/edufamcs-demo/handbook/python/">Инструменты</a>
+      
+      <a class="" href="/edufamcs-demo/handbook/python/okruzhenie-uv/">Окружение: uv, виртуальные окружения и структура проекта</a>
+      
+      <a class="" href="/edufamcs-demo/handbook/python/python-dlya-ml/">Python для ML: что нужно на самом деле</a>
+      
+      <a class="" href="/edufamcs-demo/handbook/python/numpy-vektorizaciya/">NumPy: массивы, broadcasting, векторизация</a>
+      
+      <a class="" href="/edufamcs-demo/handbook/python/pandas-i-polars/">Таблицы: pandas и polars</a>
+      
+      <a class="" href="/edufamcs-demo/handbook/python/jupyter-noutbuki/">Jupyter: как работать в ноутбуках и не утонуть</a>
+      
+      <a class="cur" href="/edufamcs-demo/handbook/python/vizualizaciya/" aria-current="page">Графики, которые читаются: matplotlib и seaborn</a>
+      
+    </aside>
+
+    <article class="hb-main">
+      <nav class="crumbs" aria-label="Навигация"><a href="/edufamcs-demo/handbook/">Хендбук</a><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-chev"/></svg><a href="/edufamcs-demo/handbook/python/">Python и исследования</a></nav>
+      <h1 class="h1">Графики, которые читаются: matplotlib и seaborn</h1>
+      <div class="hb-meta">
+        
+        
+        <span><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-clock"/></svg>11&nbsp;мин</span>
+        <span class="hb-authors"><span class="avatar sm" title="Артем Лебедевич">АЛ</span>Артем Лебедевич</span>
+        <span><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-edit"/></svg>10 ноября 2026</span>
+        
+        
+      </div>
+
+      
+      <details class="hb-mtoc">
+        <summary><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-list"/></svg>Содержание<svg class="ico sm" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-chev-down"/></svg></summary>
+        <a class="l2" href="#figure-и-axes-а-не-pyplot-состояние">Figure и Axes, а не pyplot-состояние</a><a class="l2" href="#какой-график-под-какой-вопрос">Какой график под какой вопрос</a><a class="l2" href="#малые-кратные-и-несколько-осей">Малые кратные и несколько осей</a><a class="l2" href="#метрики-по-сидам-интервалы-и-кривые-обучения">Метрики по сидам: интервалы и кривые обучения</a><a class="l2" href="#цвет-и-подписи">Цвет и подписи</a><a class="l2" href="#seaborn-что-нужно-знать">Seaborn: что нужно знать</a><a class="l2" href="#вводящие-в-заблуждение-графики">Вводящие в заблуждение графики</a><a class="l2" href="#сохранение">Сохранение</a><a class="l2" href="#ловушки">Ловушки</a><a class="l2" href="#проверь-себя">Проверь себя</a><a class="l2" href="#что-почитать">Что почитать</a>
+      </details>
+      
+
+      <div class="prose"><p>График в ML-проекте — это аргумент, а не иллюстрация: по нему вы сами замечаете утечку, переобучение или выбросы, а ревьюер на защите за десять секунд решает, можно ли верить вашему числу. Плохой график либо прячет проблему, либо создаёт несуществующую. Ниже — как рисовать в matplotlib без путаницы с состоянием, какой график выбрать под вопрос и какие приёмы отличают честную картинку от обманчивой.</p>
+<h2 id="figure-и-axes-а-не-pyplot-состояние">Figure и Axes, а не pyplot-состояние</h2>
+<p>В matplotlib два стиля. Стиль <code>plt.plot(...)</code> хранит «текущую» фигуру и «текущие» оси в глобальном состоянии: удобно в одной ячейке, но стоит рисовать в цикле или в нескольких осях, как линии уходят не туда. Рабочий стиль — объектный: создаёте <code>Figure</code> (холст) и <code>Axes</code> (одна система координат с осями, линиями, подписями) и вызываете методы у них.</p>
+<div class="code"><div class="code-head"><span class="lang">python</span></div><pre><code><span class="tok-k">import</span> numpy <span class="tok-k">as</span> np
+<span class="tok-k">import</span> matplotlib.pyplot <span class="tok-k">as</span> plt
+
+fig<span class="tok-p">,</span> ax <span class="tok-p">=</span> plt<span class="tok-p">.</span>subplots<span class="tok-p">(</span>figsize<span class="tok-p">=</span><span class="tok-p">(</span><span class="tok-n">6</span><span class="tok-p">,</span> <span class="tok-n">4</span><span class="tok-p">)</span><span class="tok-p">,</span> layout<span class="tok-p">=</span><span class="tok-s">"</span><span class="tok-s">constrained</span><span class="tok-s">"</span><span class="tok-p">)</span>
+ax<span class="tok-p">.</span>plot<span class="tok-p">(</span>x<span class="tok-p">,</span> y<span class="tok-p">,</span> label<span class="tok-p">=</span><span class="tok-s">"</span><span class="tok-s">модель A</span><span class="tok-s">"</span><span class="tok-p">)</span>
+ax<span class="tok-p">.</span>set<span class="tok-p">(</span>xlabel<span class="tok-p">=</span><span class="tok-s">"</span><span class="tok-s">эпоха</span><span class="tok-s">"</span><span class="tok-p">,</span> ylabel<span class="tok-p">=</span><span class="tok-s">"</span><span class="tok-s">AUC</span><span class="tok-s">"</span><span class="tok-p">,</span> title<span class="tok-p">=</span><span class="tok-s">"</span><span class="tok-s">Валидация</span><span class="tok-s">"</span><span class="tok-p">)</span>
+ax<span class="tok-p">.</span>legend<span class="tok-p">(</span><span class="tok-p">)</span>
+fig<span class="tok-p">.</span>savefig<span class="tok-p">(</span><span class="tok-s">"</span><span class="tok-s">val.png</span><span class="tok-s">"</span><span class="tok-p">,</span> dpi<span class="tok-p">=</span><span class="tok-n">200</span><span class="tok-p">)</span>
+plt<span class="tok-p">.</span>close<span class="tok-p">(</span>fig<span class="tok-p">)</span>          <span class="tok-c"># в циклах и скриптах: иначе фигуры копятся в памяти</span>
+</code></pre></div>
+<p><code>layout="constrained"</code> сам раздвигает подписи и легенды, вместо ручного <code>tight_layout</code>. <code>pyplot</code> остаётся только как фабрика (<code>plt.subplots</code>, <code>plt.show</code>). Функции, которые рисуют, удобно писать как <code>def plot_curve(ax, ...)</code> — принимать <code>ax</code> и ничего не создавать: тогда их можно собирать в одну фигуру.</p>
+<h2 id="какой-график-под-какой-вопрос">Какой график под какой вопрос</h2>
+<p>Выбирайте график по вопросу, а не по знакомой кнопке.</p>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>Вопрос</th>
+<th>График</th>
+<th>Замечание</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Как распределена величина?</td>
+<td>гистограмма, KDE, ECDF, boxplot</td>
+<td>для сравнения групп — ECDF или violin, а не столбики рядом</td>
+</tr>
+<tr>
+<td>Какая модель лучше?</td>
+<td>точки с интервалами, горизонтальные столбики</td>
+<td>ось метрики не обрезайте произвольно (см. ниже)</td>
+</tr>
+<tr>
+<td>Связаны ли две величины?</td>
+<td>scatter, hexbin, binned mean</td>
+<td>при <span class="tex">n&gt;10^4</span> — hexbin или <code>alpha</code></td>
+</tr>
+<tr>
+<td>Как меняется во времени / по эпохам?</td>
+<td>линия</td>
+<td>ось времени равномерная, одна шкала на панель</td>
+</tr>
+<tr>
+<td>Из чего состоит целое?</td>
+<td>столбики с долями</td>
+<td>круговые диаграммы не нужны</td>
+</tr>
+</tbody>
+</table></div>
+<p>Для данных, охватывающих порядки величин (частоты слов, число взаимодействий на пользователя, размеры сессий), включайте <strong>логарифмическую шкалу</strong>: <code>ax.set_xscale("log")</code>, <code>ax.set_yscale("log")</code>. Степенной закон на log–log выглядит прямой; на линейной шкале вы видите «палку» и ничего больше. Нули на логшкале не нарисовать — используйте <code>symlog</code> или <code>log1p</code>-преобразование и скажите об этом в подписи.</p>
+<h2 id="малые-кратные-и-несколько-осей">Малые кратные и несколько осей</h2>
+<p>Если на одном графике больше 4–5 линий, вы не показываете, а прячете. <strong>Small multiples</strong> — одна и та же ось, повторённая по сеткам: по группе, по сиду, по гиперпараметру.</p>
+<div class="code"><div class="code-head"><span class="lang">python</span></div><pre><code>fig<span class="tok-p">,</span> axes <span class="tok-p">=</span> plt<span class="tok-p">.</span>subplots<span class="tok-p">(</span><span class="tok-n">1</span><span class="tok-p">,</span> <span class="tok-n">3</span><span class="tok-p">,</span> figsize<span class="tok-p">=</span><span class="tok-p">(</span><span class="tok-n">10</span><span class="tok-p">,</span> <span class="tok-n">3</span><span class="tok-p">)</span><span class="tok-p">,</span> sharey<span class="tok-p">=</span><span class="tok-k">True</span><span class="tok-p">,</span> layout<span class="tok-p">=</span><span class="tok-s">"</span><span class="tok-s">constrained</span><span class="tok-s">"</span><span class="tok-p">)</span>
+<span class="tok-k">for</span> ax<span class="tok-p">,</span> lr <span class="tok-k">in</span> <span class="tok-f">zip</span><span class="tok-p">(</span>axes<span class="tok-p">,</span> <span class="tok-p">[</span><span class="tok-n">1e-3</span><span class="tok-p">,</span> <span class="tok-n">1e-2</span><span class="tok-p">,</span> <span class="tok-n">1e-1</span><span class="tok-p">]</span><span class="tok-p">)</span><span class="tok-p">:</span>
+    ax<span class="tok-p">.</span>plot<span class="tok-p">(</span>epochs<span class="tok-p">,</span> curves<span class="tok-p">[</span>lr<span class="tok-p">]</span><span class="tok-p">)</span>
+    ax<span class="tok-p">.</span>set_title<span class="tok-p">(</span><span class="tok-s">f</span><span class="tok-s">"</span><span class="tok-s">lr=</span><span class="tok-s">{</span>lr<span class="tok-s">}</span><span class="tok-s">"</span><span class="tok-p">)</span>
+axes<span class="tok-p">[</span><span class="tok-n">0</span><span class="tok-p">]</span><span class="tok-p">.</span>set_ylabel<span class="tok-p">(</span><span class="tok-s">"</span><span class="tok-s">val AUC</span><span class="tok-s">"</span><span class="tok-p">)</span>
+</code></pre></div>
+<p><code>sharey=True</code> обязательно, если панели сравниваются: разные масштабы по вертикали превращают сравнение в фикцию.</p>
+<h2 id="метрики-по-сидам-интервалы-и-кривые-обучения">Метрики по сидам: интервалы и кривые обучения</h2>
+<p>Одно число метрики без разброса — не результат (подробнее в <a href="/edufamcs-demo/handbook/python/kak-vesti-issledovanie/" rel="noopener noreferrer nofollow">«Как вести исследование»</a> и <a href="/edufamcs-demo/handbook/math/intervaly-i-proverka-gipotez/" rel="noopener noreferrer nofollow">«Доверительные интервалы»</a>). Кривая обучения по нескольким сидам рисуется как среднее и полоса <span class="tex">\pm</span> стандартное отклонение (или доверительный интервал среднего):</p>
+<div class="code"><div class="code-head"><span class="lang">python</span></div><pre><code><span class="tok-c"># val, train: массивы формы (n_seeds, n_epochs)</span>
+fig<span class="tok-p">,</span> ax <span class="tok-p">=</span> plt<span class="tok-p">.</span>subplots<span class="tok-p">(</span>figsize<span class="tok-p">=</span><span class="tok-p">(</span><span class="tok-n">6</span><span class="tok-p">,</span> <span class="tok-n">4</span><span class="tok-p">)</span><span class="tok-p">,</span> layout<span class="tok-p">=</span><span class="tok-s">"</span><span class="tok-s">constrained</span><span class="tok-s">"</span><span class="tok-p">)</span>
+<span class="tok-k">for</span> y<span class="tok-p">,</span> name <span class="tok-k">in</span> <span class="tok-p">[</span><span class="tok-p">(</span>train<span class="tok-p">,</span> <span class="tok-s">"</span><span class="tok-s">train</span><span class="tok-s">"</span><span class="tok-p">)</span><span class="tok-p">,</span> <span class="tok-p">(</span>val<span class="tok-p">,</span> <span class="tok-s">"</span><span class="tok-s">val</span><span class="tok-s">"</span><span class="tok-p">)</span><span class="tok-p">]</span><span class="tok-p">:</span>
+    m<span class="tok-p">,</span> s <span class="tok-p">=</span> y<span class="tok-p">.</span>mean<span class="tok-p">(</span><span class="tok-n">0</span><span class="tok-p">)</span><span class="tok-p">,</span> y<span class="tok-p">.</span>std<span class="tok-p">(</span><span class="tok-n">0</span><span class="tok-p">,</span> ddof<span class="tok-p">=</span><span class="tok-n">1</span><span class="tok-p">)</span>
+    ax<span class="tok-p">.</span>plot<span class="tok-p">(</span>epochs<span class="tok-p">,</span> m<span class="tok-p">,</span> label<span class="tok-p">=</span>name<span class="tok-p">)</span>
+    ax<span class="tok-p">.</span>fill_between<span class="tok-p">(</span>epochs<span class="tok-p">,</span> m <span class="tok-p">-</span> s<span class="tok-p">,</span> m <span class="tok-p">+</span> s<span class="tok-p">,</span> alpha<span class="tok-p">=</span><span class="tok-n">0.25</span><span class="tok-p">)</span>
+ax<span class="tok-p">.</span>set<span class="tok-p">(</span>xlabel<span class="tok-p">=</span><span class="tok-s">"</span><span class="tok-s">эпоха</span><span class="tok-s">"</span><span class="tok-p">,</span> ylabel<span class="tok-p">=</span><span class="tok-s">"</span><span class="tok-s">AUC</span><span class="tok-s">"</span><span class="tok-p">,</span> title<span class="tok-p">=</span><span class="tok-s">"</span><span class="tok-s">Кривые обучения, 5 сидов, среднее ± std</span><span class="tok-s">"</span><span class="tok-p">)</span>
+ax<span class="tok-p">.</span>legend<span class="tok-p">(</span><span class="tok-p">)</span>
+</code></pre></div>
+<p>Что читать по такой картинке: расхождение train и val — переобучение; val ещё растёт — рано остановились; полосы пересекаются — различие между конфигурациями может быть шумом. Сравнение моделей — точка с «усами»: <code>ax.errorbar(x, mean, yerr=ci, fmt="o", capsize=3)</code>. В подписи всегда указывайте, что такое усы (std, 95% CI, min–max) и сколько сидов.</p>
+<div class="callout md tip"><p class="callout-title">Ось и честность</p>
+<p>Для столбиков ось начинается с нуля, потому что длина кодирует величину. Для точек с интервалами (метрика 0,912 против 0,915) ноль не нужен — наоборот, там нужно показать масштаб шума. Главное — чтобы масштаб оси был виден и согласован с шириной интервалов.</p>
+</div>
+<h2 id="цвет-и-подписи">Цвет и подписи</h2>
+<ul>
+<li><strong>Категории</strong> — качественная палитра с различимыми оттенками; не больше 6–8 цветов. Подойдёт <code>sns.color_palette("colorblind")</code> (безопасна при дальтонизме, около 8% мужчин) или встроенные стили matplotlib. Не опирайтесь только на цвет: добавляйте тип линии или маркер.</li>
+<li><strong>Упорядоченные величины</strong> (плотность, число, время) — последовательная палитра с монотонной яркостью: <code>viridis</code>, <code>cividis</code>. Радужные палитры (<code>jet</code>) создают ложные границы.</li>
+<li><strong>Отклонение от центра</strong> (корреляции, разности) — расходящаяся палитра с нейтральной серединой (<code>coolwarm</code>) и симметричными <code>vmin/vmax</code>, чтобы ноль был серым.</li>
+<li><strong>Подписи</strong>: у осей — величина и единицы, у графика — вывод, а не тема («val AUC растёт до 15-й эпохи, затем плато» вместо «Кривые»). Легенду размещайте рядом с линиями или вне данных, шрифт не меньше 9–10 pt.</li>
+</ul>
+<h2 id="seaborn-что-нужно-знать">Seaborn: что нужно знать</h2>
+<p>Seaborn 0.13+ — надстройка над matplotlib для таблиц <code>pandas</code>: сам агрегирует, считает интервалы и раскрашивает по <code>hue</code>. Возвращает <code>Axes</code> (функции уровня осей: <code>histplot</code>, <code>kdeplot</code>, <code>boxplot</code>, <code>pointplot</code>, <code>heatmap</code>) или <code>FacetGrid</code> (функции уровня фигуры: <code>displot</code>, <code>relplot</code>, <code>catplot</code> с <code>col=</code>/<code>row=</code> — это малые кратные в одну строку).</p>
+<div class="code"><div class="code-head"><span class="lang">python</span></div><pre><code><span class="tok-k">import</span> seaborn <span class="tok-k">as</span> sns
+sns<span class="tok-p">.</span>set_theme<span class="tok-p">(</span>style<span class="tok-p">=</span><span class="tok-s">"</span><span class="tok-s">whitegrid</span><span class="tok-s">"</span><span class="tok-p">,</span> palette<span class="tok-p">=</span><span class="tok-s">"</span><span class="tok-s">colorblind</span><span class="tok-s">"</span><span class="tok-p">)</span>
+
+<span class="tok-c"># метрика по моделям и сидам: seaborn сам считает среднее и 95% интервал (bootstrap)</span>
+sns<span class="tok-p">.</span>pointplot<span class="tok-p">(</span>data<span class="tok-p">=</span>df<span class="tok-p">,</span> x<span class="tok-p">=</span><span class="tok-s">"</span><span class="tok-s">model</span><span class="tok-s">"</span><span class="tok-p">,</span> y<span class="tok-p">=</span><span class="tok-s">"</span><span class="tok-s">auc</span><span class="tok-s">"</span><span class="tok-p">,</span> errorbar<span class="tok-p">=</span><span class="tok-p">(</span><span class="tok-s">"</span><span class="tok-s">ci</span><span class="tok-s">"</span><span class="tok-p">,</span> <span class="tok-n">95</span><span class="tok-p">)</span><span class="tok-p">,</span> ax<span class="tok-p">=</span>ax<span class="tok-p">)</span>
+sns<span class="tok-p">.</span>displot<span class="tok-p">(</span>df<span class="tok-p">,</span> x<span class="tok-p">=</span><span class="tok-s">"</span><span class="tok-s">auc</span><span class="tok-s">"</span><span class="tok-p">,</span> hue<span class="tok-p">=</span><span class="tok-s">"</span><span class="tok-s">model</span><span class="tok-s">"</span><span class="tok-p">,</span> kind<span class="tok-p">=</span><span class="tok-s">"</span><span class="tok-s">ecdf</span><span class="tok-s">"</span><span class="tok-p">,</span> height<span class="tok-p">=</span><span class="tok-n">3.5</span><span class="tok-p">)</span>
+sns<span class="tok-p">.</span>relplot<span class="tok-p">(</span>data<span class="tok-p">=</span>df<span class="tok-p">,</span> x<span class="tok-p">=</span><span class="tok-s">"</span><span class="tok-s">epoch</span><span class="tok-s">"</span><span class="tok-p">,</span> y<span class="tok-p">=</span><span class="tok-s">"</span><span class="tok-s">auc</span><span class="tok-s">"</span><span class="tok-p">,</span> hue<span class="tok-p">=</span><span class="tok-s">"</span><span class="tok-s">model</span><span class="tok-s">"</span><span class="tok-p">,</span> col<span class="tok-p">=</span><span class="tok-s">"</span><span class="tok-s">split</span><span class="tok-s">"</span><span class="tok-p">,</span> kind<span class="tok-p">=</span><span class="tok-s">"</span><span class="tok-s">line</span><span class="tok-s">"</span><span class="tok-p">)</span>
+</code></pre></div>
+<p>Параметр <code>errorbar</code> (в старых версиях <code>ci</code>) задаёт, что именно рисуется: <code>("ci", 95)</code>, <code>"sd"</code>, <code>"se"</code>. <code>sns.heatmap(corr, center=0, cmap="coolwarm", annot=True)</code> — стандарт для матриц корреляций и confusion matrix.</p>
+<h2 id="вводящие-в-заблуждение-графики">Вводящие в заблуждение графики</h2>
+<div class="callout md warn"><p class="callout-title">Обрезанная ось</p>
+<p>Столбики от 0,90 до 0,92 на оси, начинающейся с 0,89, выглядят как разница в 3 раза при реальной в 2%. Либо ось от нуля, либо точки с интервалами и честной подписью масштаба.</p>
+</div>
+<ul>
+<li><strong>Две оси Y (<code>twinx</code>)</strong>: пересечение линий выбирается масштабом осей, а не данными. Лучше две панели друг над другом с общей осью X.</li>
+<li><strong>Overplotting</strong>: 200 тысяч точек в scatter превращаются в сплошное пятно. Лечится прозрачностью (<code>alpha=0.05, s=2</code>) или бинингом: <code>ax.hexbin(x, y, gridsize=50, bins="log")</code> плюс <code>fig.colorbar</code>. Для больших выборок это обязательно.</li>
+<li><strong>Среднее без разброса и без <span class="tex">n</span></strong>: линия с выбросами на единичных наблюдениях выглядит как тренд.</li>
+<li><strong>Разный масштаб панелей</strong> при сравнении; объёмы 3D и «красивые» диаграммы.</li>
+<li><strong>Выбор после взгляда</strong>: рисуете 30 графиков и показываете тот, где красиво, — подгонка уровня ложных находок; в отчёт идёт график, выбранный заранее под вопрос.</li>
+</ul>
+<h2 id="сохранение">Сохранение</h2>
+<p><code>fig.savefig("fig.png", dpi=200, bbox_inches="tight")</code> — для презентаций и README (150–300 dpi). Для статей и отчётов нужна <strong>векторная</strong> графика: <code>fig.savefig("fig.svg")</code> или <code>.pdf</code> — не пикселизуется при увеличении. Для README в GitHub подойдёт PNG: размер файла разумный, виден везде. Сохраняйте график скриптом, а не скриншотом, и кладите скрипт в репозиторий — так картинку можно воспроизвести (см. <a href="/edufamcs-demo/handbook/python/vosproizvodimost-i-trekking/" rel="noopener noreferrer nofollow">«Воспроизводимость»</a>). Если работаете в ноутбуке, см. <a href="/edufamcs-demo/handbook/python/jupyter-noutbuki/" rel="noopener noreferrer nofollow">Jupyter</a>.</p>
+<h2 id="ловушки">Ловушки</h2>
+<ul>
+<li><code>plt.plot</code> в цикле без <code>plt.close</code> — утечка памяти и «наложение» старых линий на новую фигуру.</li>
+<li>Забыли <code>sharey</code>/<code>sharex</code> — панели несравнимы. Забыли подписи осей и единицы.</li>
+<li><code>jet</code> и красно-зелёные пары без второго признака; 12 цветов в легенде.</li>
+<li>Ошибка «сглаживания»: скользящее среднее по метрике скрывает шум, ради которого вы и рисовали сиды. Рисуйте сырые линии бледно, сглаженную — поверх.</li>
+<li>На интервью: «как показать сравнение двух моделей по 5 сидам?», «чем плох двойной <code>twinx</code>?», «когда нужна лог-шкала?», «почему гистограммы с разным числом корзин дают разные выводы?».</li>
+</ul>
+<h2 id="проверь-себя">Проверь себя</h2>
+<details class="callout md details"><summary>Почему `ax.plot(...)` предпочтительнее `plt.plot(...)` в функциях и циклах?</summary>
+<p><code>plt.plot</code> рисует в «текущие» оси из глобального состояния; при нескольких фигурах или осях легко нарисовать не туда. Метод у явного объекта <code>Axes</code> не зависит от состояния, функции становятся композируемыми (принимают <code>ax</code>), код проще тестировать.</p>
+</details>
+<details class="callout md details"><summary>Какой график выбрать, чтобы показать связь двух величин на 500 000 наблюдений?</summary>
+<p>Hexbin с логарифмической цветовой шкалой, либо scatter с маленькими прозрачными точками (<code>alpha</code> 0,02–0,1), либо усреднение по корзинам по оси X с доверительными интервалами. Обычный scatter даёт сплошное пятно, по которому плотность не прочитать.</p>
+</details>
+<details class="callout md details"><summary>Что обязательно подписать на кривой «среднее ± полоса по сидам»?</summary>
+<p>Число сидов и что означает полоса (std, SE, 95% CI), а также какая метрика и на какой выборке (train/val/test). Без этого вывод «модель B лучше» непроверяем.</p>
+</details>
+<details class="callout md details"><summary>Чем плох график с двумя осями Y?</summary>
+<p>Положение линий друг относительно друга зависит только от выбранных масштабов, поэтому можно «показать» любую корреляцию или пересечение. Лучше две панели с общей осью X.</p>
+</details>
+<details class="callout md details"><summary>Когда нужна логарифмическая шкала и что делать с нулями?</summary>
+<p>Когда значения охватывают несколько порядков или важны относительные изменения (частоты, время обучения, размер данных). Нули на лог-оси не рисуются: используют <code>symlog</code>, <code>log1p</code> либо отдельно показывают долю нулей.</p>
+</details>
+<h2 id="что-почитать">Что почитать</h2>
+<ul>
+<li><a href="https://matplotlib.org/stable/users/explain/quick_start.html" rel="noopener noreferrer nofollow">Документация matplotlib: Quick start guide</a> и <a href="https://matplotlib.org/stable/users/explain/figure/figure_intro.html" rel="noopener noreferrer nofollow">введение в Figure</a>.</li>
+<li><a href="https://matplotlib.org/stable/users/explain/colors/colormaps.html" rel="noopener noreferrer nofollow">Документация matplotlib: выбор colormap</a>.</li>
+<li><a href="https://seaborn.pydata.org/tutorial.html" rel="noopener noreferrer nofollow">Seaborn: Tutorial</a> и <a href="https://seaborn.pydata.org/tutorial/error_bars.html" rel="noopener noreferrer nofollow">Statistical estimation and error bars</a>.</li>
+<li>Claus Wilke, <em>Fundamentals of Data Visualization</em> — <a href="https://clauswilke.com/dataviz/" rel="noopener noreferrer nofollow">clauswilke.com/dataviz</a> (бесплатно онлайн).</li>
+<li>Fabio Crameri et al., <em>The misuse of colour in science communication</em>, Nature Communications, 2020.</li>
+<li>Edward Tufte, <em>The Visual Display of Quantitative Information</em>.</li>
+</ul>
+</div>
+      
+
+      
+
+      
+      <nav class="pager" aria-label="Соседние статьи">
+        <a href="/edufamcs-demo/handbook/python/jupyter-noutbuki/"><span><svg class="ico sm" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-arrow-left"/></svg>Назад</span>Jupyter: как работать в ноутбуках и не утонуть</a>
+        <a href="/edufamcs-demo/handbook/python/kak-vesti-issledovanie/"><span>Дальше<svg class="ico sm" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-arrow"/></svg></span>Как вести исследование: гипотеза, бейзлайн, эксперимент</a>
+      </nav>
+      
+    </article>
+
+    <aside class="hb-toc" aria-label="На этой странице">
+      <a class="l2" href="#figure-и-axes-а-не-pyplot-состояние">Figure и Axes, а не pyplot-состояние</a><a class="l2" href="#какой-график-под-какой-вопрос">Какой график под какой вопрос</a><a class="l2" href="#малые-кратные-и-несколько-осей">Малые кратные и несколько осей</a><a class="l2" href="#метрики-по-сидам-интервалы-и-кривые-обучения">Метрики по сидам: интервалы и кривые обучения</a><a class="l2" href="#цвет-и-подписи">Цвет и подписи</a><a class="l2" href="#seaborn-что-нужно-знать">Seaborn: что нужно знать</a><a class="l2" href="#вводящие-в-заблуждение-графики">Вводящие в заблуждение графики</a><a class="l2" href="#сохранение">Сохранение</a><a class="l2" href="#ловушки">Ловушки</a><a class="l2" href="#проверь-себя">Проверь себя</a><a class="l2" href="#что-почитать">Что почитать</a>
+    </aside>
+  </div>
+</div>
+
+
+</main>
+
+<footer class="ftr" data-theme="dark">
+  <svg class="sym fern" viewBox="0 0 40.5 65.02" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#fern"/></svg>
+  <div class="container">
+    <div class="ftr-row">
+      <a href="/edufamcs-demo/" aria-label="EDU FAMCS — главная"><img src="/edufamcs-demo/static/brand/logo/logo-edu-dark.svg" alt="EDU FAMCS" width="196" height="40"></a>
+      <ul class="ftr-links">
+        <li><a href="/edufamcs-demo/#courses">Курсы</a></li>
+        <li><a href="/edufamcs-demo/ml/">Машинное обучение</a></li>
+        <li><a href="/edufamcs-demo/handbook/">Хендбук</a></li>
+        <li><a href="/edufamcs-demo/news/">Новости</a></li>
+        <li><a href="/edufamcs-demo/people/">Авторы</a></li>
+        <li><a href="/edufamcs-demo/about/">О&nbsp;нас</a></li>
+        <li><a href="/edufamcs-demo/propose/">Предложить или исправить</a></li>
+        <li><a href="/edufamcs-demo/privacy/">Конфиденциальность</a></li>
+      </ul>
+    </div>
+    <div class="ftr-big" aria-hidden="true">EDU<span class="d">·</span>FAMCS</div>
+    <p class="ftr-copy">© 2026 EDU FAMCS · Минск</p>
+  </div>
+</footer>
+
+<div class="toasts-region" aria-live="polite" id="toasts">
+
+</div>
+
+</body>
+</html>

@@ -27,7 +27,7 @@
 <script src="/edufamcs-demo/static/js/site.js" defer></script>
 <script src="/edufamcs-demo/static/handbook/handbook.js" defer></script>
 </head>
-<body class="" hx-headers='{"X-CSRFToken": "X4XZjVtrtui9zoWG1GLY17tKwIqlRiKnJaYmdIL8EHyneXSWe5E3izB5252AW3vm"}'>
+<body class="" hx-headers='{"X-CSRFToken": "LjamCuxhJ9CbusAl2jtmPO7Rd3Rfr9EvnwZjSw68KWQKFLPN1MHjxHZPFcYdbTDc"}'>
 <a class="skip" href="#main">К содержанию</a>
 <div class="demo-bar" role="note">Демо-версия для отзывов: вход, запись на курсы и формы здесь не работают.</div>
 
@@ -60,6 +60,7 @@
 
 
 <div class="container hb-page hb-tone">
+  <div class="hb-readbar" aria-hidden="true"><i></i></div>
   <div class="hb">
     <aside class="hb-nav" aria-label="Статьи раздела">
       
@@ -84,9 +85,9 @@
       <div class="hb-meta">
         
         
-        <span><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-clock"/></svg>9&nbsp;мин</span>
+        <span><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-clock"/></svg>11&nbsp;мин</span>
         <span class="hb-authors"><span class="avatar sm" title="Артем Лебедевич">АЛ</span>Артем Лебедевич</span>
-        <span><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-edit"/></svg>9 ноября 2026</span>
+        <span><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-edit"/></svg>10 ноября 2026</span>
         
         
       </div>
@@ -94,7 +95,7 @@
       
       <details class="hb-mtoc">
         <summary><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-list"/></svg>Содержание<svg class="ico sm" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-chev-down"/></svg></summary>
-        <a class="l2" href="#типы-признаков">Типы признаков</a><a class="l2" href="#описательные-статистики">Описательные статистики</a><a class="l2" href="#пропуски">Пропуски</a><a class="l2" href="#выбросы-дубликаты-ошибки">Выбросы, дубликаты, ошибки</a><a class="l2" href="#связи-между-признаками">Связи между признаками</a><a class="l2" href="#визуализация">Визуализация</a><a class="l2" href="#категориальные-признаки-анонс">Категориальные признаки: анонс</a><a class="l2" href="#код">Код</a><a class="l2" href="#чек-лист-eda">Чек-лист EDA</a><a class="l2" href="#практика-и-типичные-ошибки">Практика и типичные ошибки</a><a class="l2" href="#что-почитать">Что почитать</a>
+        <a class="l2" href="#типы-признаков">Типы признаков</a><a class="l2" href="#описательные-статистики">Описательные статистики</a><a class="l2" href="#пропуски">Пропуски</a><a class="l2" href="#выбросы-дубликаты-ошибки">Выбросы, дубликаты, ошибки</a><a class="l2" href="#связи-между-признаками">Связи между признаками</a><a class="l2" href="#визуализация">Визуализация</a><a class="l2" href="#категориальные-признаки-анонс">Категориальные признаки: анонс</a><a class="l2" href="#код">Код</a><a class="l2" href="#чек-лист-eda">Чек-лист EDA</a><a class="l2" href="#практика-и-типичные-ошибки">Практика и типичные ошибки</a><a class="l2" href="#проверь-себя">Проверь себя</a><a class="l2" href="#что-почитать">Что почитать</a>
       </details>
       
 
@@ -201,14 +202,23 @@
 </table></div>
 <p>Аргумент за графики — <strong>квартет Энскомба</strong> (1973): четыре набора по 11 точек с практически одинаковыми средними, дисперсиями, корреляцией (≈0,816) и прямой регрессии <span class="tex">y\approx3+0{,}5x</span>, но один — линейная зависимость с шумом, второй — парабола, третий — прямая с одним выбросом, четвёртый — вертикальный столбец с одной удалённой точкой. Таблица статистик их не различает, график — сразу. Сводные числа нужно подтверждать картинкой.</p>
 <h2 id="категориальные-признаки-анонс">Категориальные признаки: анонс</h2>
-<p>Модели ожидают числа, поэтому категории кодируют. <strong>One-hot</strong> создаёт бинарный столбец на категорию; подходит для линейных моделей при небольшом числе значений, на категориях высокой кардинальности раздувает матрицу. <strong>Target encoding</strong> заменяет категорию средним таргета по ней — мощно, но опасно: считать его нужно только по фолдам (out-of-fold) со сглаживанием, иначе таргет просочится в признак. Подробности и работа с редкими категориями — в главах про линейные модели и бустинг.</p>
+<p>Модели ожидают числа, поэтому категории кодируют. <strong>One-hot</strong> создаёт бинарный столбец на категорию; подходит для линейных моделей при небольшом числе значений, на категориях высокой кардинальности раздувает матрицу. <strong>Target encoding</strong> заменяет категорию средним таргета по ней — мощно, но опасно: считать его нужно только по фолдам (out-of-fold) со сглаживанием, иначе таргет просочится в признак. Подробности и работа с редкими категориями — в статье <a href="/edufamcs-demo/handbook/classic/priznaki-i-kodirovanie-kategorij/" rel="noopener noreferrer nofollow">«Признаки и кодирование категорий»</a>.</p>
 <h2 id="код">Код</h2>
 <div class="code"><div class="code-head"><span class="lang">python</span></div><pre><code><span class="tok-k">import</span> numpy <span class="tok-k">as</span> np
 <span class="tok-k">import</span> pandas <span class="tok-k">as</span> pd
 <span class="tok-k">import</span> seaborn <span class="tok-k">as</span> sns
 <span class="tok-k">import</span> matplotlib.pyplot <span class="tok-k">as</span> plt
 
-df <span class="tok-p">=</span> pd<span class="tok-p">.</span>read_parquet<span class="tok-p">(</span><span class="tok-s">"</span><span class="tok-s">data.parquet</span><span class="tok-s">"</span><span class="tok-p">)</span>
+<span class="tok-c"># синтетическая таблица: скошенная цена, пропуски в age, категория city, бинарный таргет</span>
+rng <span class="tok-p">=</span> np<span class="tok-p">.</span>random<span class="tok-p">.</span>default_rng<span class="tok-p">(</span><span class="tok-n">0</span><span class="tok-p">)</span>
+n <span class="tok-p">=</span> <span class="tok-n">5000</span>
+age <span class="tok-p">=</span> rng<span class="tok-p">.</span>integers<span class="tok-p">(</span><span class="tok-n">18</span><span class="tok-p">,</span> <span class="tok-n">70</span><span class="tok-p">,</span> n<span class="tok-p">)</span><span class="tok-p">.</span>astype<span class="tok-p">(</span><span class="tok-f">float</span><span class="tok-p">)</span>
+price <span class="tok-p">=</span> np<span class="tok-p">.</span>exp<span class="tok-p">(</span>rng<span class="tok-p">.</span>normal<span class="tok-p">(</span><span class="tok-n">8</span><span class="tok-p">,</span> <span class="tok-n">1</span><span class="tok-p">,</span> n<span class="tok-p">)</span><span class="tok-p">)</span>
+city <span class="tok-p">=</span> rng<span class="tok-p">.</span>choice<span class="tok-p">(</span><span class="tok-p">[</span><span class="tok-s">"</span><span class="tok-s">Минск</span><span class="tok-s">"</span><span class="tok-p">,</span> <span class="tok-s">"</span><span class="tok-s">Гомель</span><span class="tok-s">"</span><span class="tok-p">,</span> <span class="tok-s">"</span><span class="tok-s">Брест</span><span class="tok-s">"</span><span class="tok-p">,</span> <span class="tok-s">"</span><span class="tok-s">Гродно</span><span class="tok-s">"</span><span class="tok-p">]</span><span class="tok-p">,</span> n<span class="tok-p">,</span> p<span class="tok-p">=</span><span class="tok-p">[</span><span class="tok-n">0.5</span><span class="tok-p">,</span> <span class="tok-n">0.2</span><span class="tok-p">,</span> <span class="tok-n">0.2</span><span class="tok-p">,</span> <span class="tok-n">0.1</span><span class="tok-p">]</span><span class="tok-p">)</span>
+target <span class="tok-p">=</span> <span class="tok-p">(</span>rng<span class="tok-p">.</span>random<span class="tok-p">(</span>n<span class="tok-p">)</span> <span class="tok-p">&lt;</span> <span class="tok-n">1</span> <span class="tok-p">/</span> <span class="tok-p">(</span><span class="tok-n">1</span> <span class="tok-p">+</span> np<span class="tok-p">.</span>exp<span class="tok-p">(</span><span class="tok-p">-</span><span class="tok-p">(</span>np<span class="tok-p">.</span>log<span class="tok-p">(</span>price<span class="tok-p">)</span> <span class="tok-p">-</span> <span class="tok-n">8</span><span class="tok-p">)</span> <span class="tok-p">-</span> <span class="tok-p">(</span>age <span class="tok-p">-</span> <span class="tok-n">40</span><span class="tok-p">)</span> <span class="tok-p">/</span> <span class="tok-n">30</span><span class="tok-p">)</span><span class="tok-p">)</span><span class="tok-p">)</span><span class="tok-p">.</span>astype<span class="tok-p">(</span><span class="tok-f">int</span><span class="tok-p">)</span>
+df <span class="tok-p">=</span> pd<span class="tok-p">.</span>DataFrame<span class="tok-p">(</span><span class="tok-p">{</span><span class="tok-s">"</span><span class="tok-s">price</span><span class="tok-s">"</span><span class="tok-p">:</span> price<span class="tok-p">,</span> <span class="tok-s">"</span><span class="tok-s">age</span><span class="tok-s">"</span><span class="tok-p">:</span> age<span class="tok-p">,</span> <span class="tok-s">"</span><span class="tok-s">city</span><span class="tok-s">"</span><span class="tok-p">:</span> city<span class="tok-p">,</span> <span class="tok-s">"</span><span class="tok-s">target</span><span class="tok-s">"</span><span class="tok-p">:</span> target<span class="tok-p">}</span><span class="tok-p">)</span>
+df<span class="tok-p">.</span>loc<span class="tok-p">[</span>rng<span class="tok-p">.</span>random<span class="tok-p">(</span>n<span class="tok-p">)</span> <span class="tok-p">&lt;</span> <span class="tok-n">0.1</span><span class="tok-p">,</span> <span class="tok-s">"</span><span class="tok-s">age</span><span class="tok-s">"</span><span class="tok-p">]</span> <span class="tok-p">=</span> np<span class="tok-p">.</span>nan   <span class="tok-c"># 10% пропусков</span>
+df <span class="tok-p">=</span> pd<span class="tok-p">.</span>concat<span class="tok-p">(</span><span class="tok-p">[</span>df<span class="tok-p">,</span> df<span class="tok-p">.</span>head<span class="tok-p">(</span><span class="tok-n">20</span><span class="tok-p">)</span><span class="tok-p">]</span><span class="tok-p">,</span> ignore_index<span class="tok-p">=</span><span class="tok-k">True</span><span class="tok-p">)</span>  <span class="tok-c"># немного дубликатов</span>
 
 df<span class="tok-p">.</span>info<span class="tok-p">(</span><span class="tok-p">)</span>
 <span class="tok-f">print</span><span class="tok-p">(</span>df<span class="tok-p">.</span>describe<span class="tok-p">(</span>include<span class="tok-p">=</span><span class="tok-s">"</span><span class="tok-s">all</span><span class="tok-s">"</span><span class="tok-p">)</span><span class="tok-p">.</span>T<span class="tok-p">)</span>
@@ -250,8 +260,27 @@ sns<span class="tok-p">.</span>pairplot<span class="tok-p">(</span>df<span class
 <li>Удалять все выбросы подряд: теряются самые интересные случаи, а на продакшене они всё равно придут.</li>
 <li>Заполнять пропуски нулём в признаке, где ноль — реальное значение.</li>
 <li>Пропустить временной дрейф: распределение признака в январе и в декабре различается, а валидация случайная.</li>
-<li>Типичные ошибки в курсе собраны отдельно: <a href="/edufamcs-demo/handbook/mistakes/" rel="noopener noreferrer nofollow">/handbook/mistakes/</a>.</li>
+<li><strong>На собеседовании:</strong> «Вам дали таблицу, что делаете первым?» Ждут порядок: размер и типы, пропуски, дубликаты, распределения таргета, утечки, и только потом модели.</li>
+<li><strong>На собеседовании:</strong> «Среднее или медиана для цен? Когда z-оценка не подходит для выбросов?» Скошенное распределение, выбросы искажают сами <span class="tex">\mu</span> и <span class="tex">\sigma</span>.</li>
+<li><strong>На собеседовании:</strong> «Один признак даёт AUC 0,99. Радоваться?» Нет: искать утечку, выяснять, когда и как признак считается.</li>
+<li>Каталог типичных ошибок есть в разделе справочника с разбором ошибок — просмотрите его после этой главы.</li>
 </ul>
+<h2 id="проверь-себя">Проверь себя</h2>
+<details class="callout md details"><summary>Почему нулевая корреляция не означает независимости?</summary>
+<p>Пирсон ловит только линейную связь. Для <span class="tex">y=x^2</span> и симметричного <span class="tex">x</span> корреляция равна нулю, хотя <span class="tex">y</span> полностью определяется <span class="tex">x</span>.</p>
+</details>
+<details class="callout md details"><summary>Чем MNAR опаснее MAR?</summary>
+<p>При MAR пропуск объясняется наблюдаемыми признаками, и импутация по ним корректна. При MNAR пропуск зависит от самого значения, наблюдаемые признаки его не восстановят; факт пропуска приходится использовать как признак.</p>
+</details>
+<details class="callout md details"><summary>Почему z-оценка плохо находит выбросы в скошенных данных?</summary>
+<p>Среднее и <span class="tex">\sigma</span> сами раздуваются выбросами и тяжёлым хвостом, и порог <span class="tex">|z|&gt;3</span> срабатывает поздно. Правило Тьюки опирается на квартили и устойчиво.</p>
+</details>
+<details class="callout md details"><summary>Что показывает квартет Энскомба?</summary>
+<p>Четыре набора с одинаковыми средними, дисперсиями, корреляцией и прямой регрессии, но разной структурой. Сводные числа нужно подтверждать графиком.</p>
+</details>
+<details class="callout md details"><summary>Зачем добавлять индикатор пропуска при импутации?</summary>
+<p>Заполнение медианой стирает информацию о том, что значение отсутствовало. Индикатор оставляет её модели; при MNAR сам факт пропуска может быть сильным сигналом.</p>
+</details>
 <h2 id="что-почитать">Что почитать</h2>
 <ul>
 <li>J. W. Tukey, <em>Exploratory Data Analysis</em>, Addison-Wesley, 1977.</li>
@@ -265,6 +294,8 @@ sns<span class="tok-p">.</span>pairplot<span class="tok-p">(</span>df<span class
       
 
       
+
+      
       <nav class="pager" aria-label="Соседние статьи">
         <a href="/edufamcs-demo/handbook/classic/chto-takoe-ml/"><span><svg class="ico sm" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-arrow-left"/></svg>Назад</span>Что такое машинное обучение</a>
         <a href="/edufamcs-demo/handbook/classic/knn-i-naivnyj-bajes/"><span>Дальше<svg class="ico sm" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-arrow"/></svg></span>Метод ближайших соседей и наивный Байес</a>
@@ -273,7 +304,7 @@ sns<span class="tok-p">.</span>pairplot<span class="tok-p">(</span>df<span class
     </article>
 
     <aside class="hb-toc" aria-label="На этой странице">
-      <a class="l2" href="#типы-признаков">Типы признаков</a><a class="l2" href="#описательные-статистики">Описательные статистики</a><a class="l2" href="#пропуски">Пропуски</a><a class="l2" href="#выбросы-дубликаты-ошибки">Выбросы, дубликаты, ошибки</a><a class="l2" href="#связи-между-признаками">Связи между признаками</a><a class="l2" href="#визуализация">Визуализация</a><a class="l2" href="#категориальные-признаки-анонс">Категориальные признаки: анонс</a><a class="l2" href="#код">Код</a><a class="l2" href="#чек-лист-eda">Чек-лист EDA</a><a class="l2" href="#практика-и-типичные-ошибки">Практика и типичные ошибки</a><a class="l2" href="#что-почитать">Что почитать</a>
+      <a class="l2" href="#типы-признаков">Типы признаков</a><a class="l2" href="#описательные-статистики">Описательные статистики</a><a class="l2" href="#пропуски">Пропуски</a><a class="l2" href="#выбросы-дубликаты-ошибки">Выбросы, дубликаты, ошибки</a><a class="l2" href="#связи-между-признаками">Связи между признаками</a><a class="l2" href="#визуализация">Визуализация</a><a class="l2" href="#категориальные-признаки-анонс">Категориальные признаки: анонс</a><a class="l2" href="#код">Код</a><a class="l2" href="#чек-лист-eda">Чек-лист EDA</a><a class="l2" href="#практика-и-типичные-ошибки">Практика и типичные ошибки</a><a class="l2" href="#проверь-себя">Проверь себя</a><a class="l2" href="#что-почитать">Что почитать</a>
     </aside>
   </div>
 </div>

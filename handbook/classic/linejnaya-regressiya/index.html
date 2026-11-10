@@ -27,7 +27,7 @@
 <script src="/edufamcs-demo/static/js/site.js" defer></script>
 <script src="/edufamcs-demo/static/handbook/handbook.js" defer></script>
 </head>
-<body class="" hx-headers='{"X-CSRFToken": "A2QColEndIYa2ktwHytODt4Xed0OB69Dm8RZi8W4oVeoHTpMUXmTUVciKAC3GRUC"}'>
+<body class="" hx-headers='{"X-CSRFToken": "mPwsY7wSWxdEatYYZrw81UDfpkF3L56HY2lpe95JXkrdlMdqYUK5JNvdRtM1vP5o"}'>
 <a class="skip" href="#main">К содержанию</a>
 <div class="demo-bar" role="note">Демо-версия для отзывов: вход, запись на курсы и формы здесь не работают.</div>
 
@@ -60,6 +60,7 @@
 
 
 <div class="container hb-page hb-tone">
+  <div class="hb-readbar" aria-hidden="true"><i></i></div>
   <div class="hb">
     <aside class="hb-nav" aria-label="Статьи раздела">
       
@@ -88,9 +89,9 @@
       <div class="hb-meta">
         
         
-        <span><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-clock"/></svg>9&nbsp;мин</span>
+        <span><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-clock"/></svg>12&nbsp;мин</span>
         <span class="hb-authors"><span class="avatar sm" title="Артем Лебедевич">АЛ</span>Артем Лебедевич</span>
-        <span><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-edit"/></svg>9 ноября 2026</span>
+        <span><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-edit"/></svg>10 ноября 2026</span>
         
         
       </div>
@@ -98,7 +99,7 @@
       
       <details class="hb-mtoc">
         <summary><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-list"/></svg>Содержание<svg class="ico sm" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-chev-down"/></svg></summary>
-        <a class="l2" href="#модель-и-функция-потерь">Модель и функция потерь</a><a class="l2" href="#аналитическое-решение">Аналитическое решение</a><a class="l2" href="#предположения-и-остатки">Предположения и остатки</a><a class="l2" href="#мультиколлинеарность">Мультиколлинеарность</a><a class="l2" href="#регуляризация">Регуляризация</a><a class="l2" href="#признаки">Признаки</a><a class="l2" href="#метрики-регрессии">Метрики регрессии</a><a class="l2" href="#код">Код</a><a class="l2" href="#практика-и-типичные-ошибки">Практика и типичные ошибки</a><a class="l2" href="#что-почитать">Что почитать</a>
+        <a class="l2" href="#модель-и-функция-потерь">Модель и функция потерь</a><a class="l2" href="#аналитическое-решение">Аналитическое решение</a><a class="l2" href="#предположения-и-остатки">Предположения и остатки</a><a class="l2" href="#мультиколлинеарность">Мультиколлинеарность</a><a class="l2" href="#регуляризация">Регуляризация</a><a class="l2" href="#признаки">Признаки</a><a class="l2" href="#метрики-регрессии">Метрики регрессии</a><a class="l2" href="#код">Код</a><a class="l2" href="#практика-и-типичные-ошибки">Практика и типичные ошибки</a><a class="l2" href="#проверь-себя">Проверь себя</a><a class="l2" href="#что-почитать">Что почитать</a>
       </details>
       
 
@@ -130,12 +131,16 @@
 <p>Если признаки почти линейно зависимы, матрица <span class="tex">X^\top X</span> плохо обусловлена: определитель близок к нулю, обратная матрица содержит огромные числа, и небольшие изменения данных радикально меняют <span class="tex">w</span>. Предсказания при этом могут оставаться хорошими, а вот <strong>интерпретация коэффициентов теряется</strong>: знак может оказаться «неправильным». Диагностика: матрица корреляций, число обусловленности, VIF. Лечение: удалить/объединить признаки, PCA, регуляризация.</p>
 <h2 id="регуляризация">Регуляризация</h2>
 <p>Идея: добавить к потере штраф за большие веса, обменяв небольшое смещение на значительное снижение разброса.</p>
-<p><strong>Ridge</strong> (Hoerl &amp; Kennard, 1970): штраф <span class="tex">\lambda\|w\|_2^2</span>.</p>
+<p><strong>Ridge</strong> (Hoerl &amp; Kennard, 1970): штраф <span class="tex">\lambda\|w\|_2^2</span>. Формула ниже записана для <strong>центрированных</strong> <span class="tex">X</span> и <span class="tex">y</span> (из столбцов <span class="tex">X</span> и из <span class="tex">y</span> вычтены средние): свободный член не штрафуется и в этой постановке равен <span class="tex">\bar y</span> (в исходных единицах <span class="tex">b=\bar y-w^\top\bar x</span>). Если дописать к <span class="tex">X</span> столбец единиц и применить ту же формулу, штраф затронет и <span class="tex">b</span>.</p>
 <div class="tex tex-block">\min_w\ \|Xw-y\|^2+\lambda\|w\|_2^2\ \Rightarrow\ w^*=(X^\top X+\lambda I)^{-1}X^\top y .</div>
 <p>Добавка <span class="tex">\lambda I</span> делает матрицу положительно определённой при любом <span class="tex">\lambda&gt;0</span> и стабилизирует решение; веса сжимаются к нулю, но не обращаются в нуль точно.</p>
 <p><strong>Lasso</strong> (Tibshirani, 1996): штраф <span class="tex">\lambda\|w\|_1=\lambda\sum|w_j|</span>. Закрытого решения нет (негладкий штраф), но задача выпукла и решается координатным спуском. Особенность — <strong>разреженность</strong>: часть весов становится ровно нулём, то есть Lasso одновременно отбирает признаки. При группе сильно коррелированных признаков выбирает один произвольно.</p>
 <p><strong>Elastic Net</strong> (Zou &amp; Hastie, 2005): <span class="tex">\lambda\big(\rho\|w\|_1+\tfrac{1-\rho}2\|w\|_2^2\big)</span> — разреженность Lasso плюс стабильность Ridge в группах коррелированных признаков.</p>
 <p><strong>Геометрическая картина.</strong> Задачу со штрафом можно записать как минимизацию потерь при ограничении <span class="tex">\|w\|_p\le t</span>. Линии уровня MSE — эллипсы вокруг решения МНК; ограничение <span class="tex">\ell_2</span> — круг, <span class="tex">\ell_1</span> — ромб с вершинами на осях. Эллипс чаще касается ромба в вершине, где часть координат равна нулю — отсюда разреженность. В байесовской трактовке Ridge — априорное нормальное распределение на веса, Lasso — лапласовское.</p>
+<p><strong>Lasso в явном виде.</strong> Для ортонормированных признаков (<span class="tex">X^\top X=I</span>) с целью <span class="tex">\tfrac12\|Xw-y\|^2+\lambda\|w\|_1</span> закрытое решение есть. Пусть <span class="tex">z=X^\top y</span> — решение МНК. Тогда <span class="tex">\tfrac12\|Xw-y\|^2=\text{const}+\tfrac12\|w-z\|^2</span>, и задача распадается на независимые одномерные:</p>
+<div class="tex tex-block">\min_{w_j}\ \tfrac12(w_j-z_j)^2+\lambda|w_j|\ \Rightarrow\ w_j^*=S_\lambda(z_j)=\operatorname{sign}(z_j)\,\max(|z_j|-\lambda,\,0),</div>
+<p>это <strong>мягкое пороговое преобразование</strong> (soft-thresholding): все веса сдвигаются к нулю на <span class="tex">\lambda</span>, а те, что меньше <span class="tex">\lambda</span> по модулю, становятся нулём. Ridge при тех же условиях просто масштабирует: <span class="tex">w_j^*=z_j/(1+\lambda)</span> — в ноль не уходит ничего. Если в цели нет множителя <span class="tex">\tfrac12</span>, как в формуле Ridge выше, порог равен <span class="tex">\lambda/2</span>; в <code>sklearn.linear_model.Lasso</code> цель <span class="tex">\tfrac1{2n}\|Xw-y\|^2+\alpha\|w\|_1</span>, то есть <span class="tex">\lambda=n\alpha</span>.</p>
+<p>Числа: <span class="tex">X</span> — три столбца матрицы Адамара <span class="tex">4\times4</span> (делённой на 2), <span class="tex">y=(3,-2,1,0{,}5)</span>, получаем <span class="tex">z=(2{,}75;\,-0{,}25;\,2{,}25)</span>. При <span class="tex">\lambda=1</span> Lasso даёт <span class="tex">(1{,}75;\,0;\,1{,}25)</span> — малый вес обнулён, остальные сдвинуты на 1; Ridge — <span class="tex">(1{,}375;\,-0{,}125;\,1{,}125)</span> — все веса сжаты вдвое. Оба результата совпадают с <code>Lasso(alpha=0.25, fit_intercept=False)</code> и <code>Ridge(alpha=1, fit_intercept=False)</code>.</p>
 <p>Параметр <span class="tex">\lambda</span> (в sklearn <code>alpha</code>) подбирают кросс-валидацией; признаки перед регуляризацией <strong>обязательно масштабируют</strong>, иначе штраф зависит от единиц измерения. Свободный член не штрафуют.</p>
 <h2 id="признаки">Признаки</h2>
 <ul>
@@ -218,8 +223,27 @@ alphas<span class="tok-p">,</span> coefs<span class="tok-p">,</span> _ <span cla
 <li><strong>Утечка при масштабировании и подборе <span class="tex">\lambda</span></strong> — только внутри пайплайна.</li>
 <li><strong><span class="tex">R^2</span> на train как мера качества</strong>: растёт при добавлении любых признаков, используйте валидацию.</li>
 <li><strong>Метрика, не соответствующая цели</strong>: MAPE для спроса с нулями, MSE при тяжёлых хвостах.</li>
-<li>Вопросы собеседований: вывод нормальных уравнений, почему Lasso разрежен, когда <span class="tex">X^\top X</span> вырождена, чем отличается Ridge от PCA-регрессии.</li>
+<li><strong>На собеседовании:</strong> выведите нормальные уравнения и объясните геометрию (проекция <span class="tex">y</span> на столбцы <span class="tex">X</span>).</li>
+<li><strong>На собеседовании:</strong> почему Lasso разрежен, а Ridge нет? Ждут либо картинку «ромб против круга», либо soft-thresholding: Lasso сдвигает и обнуляет, Ridge масштабирует.</li>
+<li><strong>На собеседовании:</strong> когда <span class="tex">X^\top X</span> вырождена и что делать; чем Ridge отличается от регрессии на главных компонентах.</li>
+<li><strong>На собеседовании:</strong> байесовская трактовка Ridge и Lasso — гауссовский и лапласовский приоры на веса.</li>
 </ul>
+<h2 id="проверь-себя">Проверь себя</h2>
+<details class="callout md details"><summary>Почему вектор остатков МНК ортогонален столбцам $X$?</summary>
+<p><span class="tex">\hat y</span> — ортогональная проекция <span class="tex">y</span> на пространство столбцов, поэтому <span class="tex">X^\top(y-\hat y)=0</span>; это и есть нормальные уравнения. При наличии столбца единиц остатки ещё и имеют нулевое среднее.</p>
+</details>
+<details class="callout md details"><summary>Что делает $\lambda I$ с матрицей $X^\top X$?</summary>
+<p>Сдвигает все собственные значения на <span class="tex">\lambda</span>: матрица становится положительно определённой и обратимой, число обусловленности падает. Цена — смещение оценки.</p>
+</details>
+<details class="callout md details"><summary>Какие веса обнулит Lasso при ортонормированных признаках?</summary>
+<p>Все, у которых <span class="tex">|z_j|\le\lambda</span>, где <span class="tex">z_j</span> — коэффициент МНК. Остальные сдвигаются к нулю на <span class="tex">\lambda</span>.</p>
+</details>
+<details class="callout md details"><summary>Почему при коллинеарности коэффициенты нестабильны, а предсказания могут оставаться хорошими?</summary>
+<p>Вдоль почти вырожденного направления данные почти не меняют потерю, и <span class="tex">w</span> там определяется шумом. Предсказания зависят от комбинации коррелированных признаков, а она стабильна.</p>
+</details>
+<details class="callout md details"><summary>MAPE занижает или завышает прогноз и почему?</summary>
+<p>Занижает: ошибка занижения не превосходит 100%, ошибка завышения не ограничена, и оптимизация MAPE тянет прогноз вниз.</p>
+</details>
 <h2 id="что-почитать">Что почитать</h2>
 <ul>
 <li>T. Hastie, R. Tibshirani, J. Friedman, <em>The Elements of Statistical Learning</em>, гл. 3 (Linear Methods for Regression): <a href="https://hastie.su.domains/ElemStatLearn/" rel="noopener noreferrer nofollow">hastie.su.domains/ElemStatLearn</a>.</li>
@@ -234,6 +258,8 @@ alphas<span class="tok-p">,</span> coefs<span class="tok-p">,</span> _ <span cla
       
 
       
+
+      
       <nav class="pager" aria-label="Соседние статьи">
         <a href="/edufamcs-demo/handbook/classic/knn-i-naivnyj-bajes/"><span><svg class="ico sm" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-arrow-left"/></svg>Назад</span>Метод ближайших соседей и наивный Байес</a>
         <a href="/edufamcs-demo/handbook/classic/logisticheskaya-regressiya-i-metriki/"><span>Дальше<svg class="ico sm" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-arrow"/></svg></span>Логистическая регрессия и метрики классификации</a>
@@ -242,7 +268,7 @@ alphas<span class="tok-p">,</span> coefs<span class="tok-p">,</span> _ <span cla
     </article>
 
     <aside class="hb-toc" aria-label="На этой странице">
-      <a class="l2" href="#модель-и-функция-потерь">Модель и функция потерь</a><a class="l2" href="#аналитическое-решение">Аналитическое решение</a><a class="l2" href="#предположения-и-остатки">Предположения и остатки</a><a class="l2" href="#мультиколлинеарность">Мультиколлинеарность</a><a class="l2" href="#регуляризация">Регуляризация</a><a class="l2" href="#признаки">Признаки</a><a class="l2" href="#метрики-регрессии">Метрики регрессии</a><a class="l2" href="#код">Код</a><a class="l2" href="#практика-и-типичные-ошибки">Практика и типичные ошибки</a><a class="l2" href="#что-почитать">Что почитать</a>
+      <a class="l2" href="#модель-и-функция-потерь">Модель и функция потерь</a><a class="l2" href="#аналитическое-решение">Аналитическое решение</a><a class="l2" href="#предположения-и-остатки">Предположения и остатки</a><a class="l2" href="#мультиколлинеарность">Мультиколлинеарность</a><a class="l2" href="#регуляризация">Регуляризация</a><a class="l2" href="#признаки">Признаки</a><a class="l2" href="#метрики-регрессии">Метрики регрессии</a><a class="l2" href="#код">Код</a><a class="l2" href="#практика-и-типичные-ошибки">Практика и типичные ошибки</a><a class="l2" href="#проверь-себя">Проверь себя</a><a class="l2" href="#что-почитать">Что почитать</a>
     </aside>
   </div>
 </div>

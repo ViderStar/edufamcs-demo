@@ -1,0 +1,339 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Как обучают эмбеддеры для поиска · EDU FAMCS</title>
+<meta name="description" content="Как обучают эмбеддеры для поиска — Поиск. Хендбук ML-курса ФПМИ.">
+<meta name="theme-color" content="#060A16">
+<meta name="robots" content="noindex, nofollow">
+<meta name="htmx-config" content='{"allowEval":false,"includeIndicatorStyles":false,"historyCacheSize":0,"selfRequestsOnly":true}'>
+<meta name="katex-js" content="/edufamcs-demo/static/vendor/katex/katex.min.js">
+<meta name="katex-css" content="/edufamcs-demo/static/vendor/katex/katex.min.css">
+<link rel="icon" href="/edufamcs-demo/static/brand/logo/favicon-16.svg" type="image/svg+xml" sizes="16x16">
+<link rel="icon" href="/edufamcs-demo/static/brand/logo/favicon.svg" type="image/svg+xml" sizes="any">
+<link rel="preload" href="/edufamcs-demo/static/brand/fonts/manrope-cyrillic-400.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/edufamcs-demo/static/brand/fonts/unbounded-cyrillic-800.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="/edufamcs-demo/static/brand/fonts.css">
+<link rel="stylesheet" href="/edufamcs-demo/static/brand/tokens.css">
+<link rel="stylesheet" href="/edufamcs-demo/static/brand/components.css">
+<link rel="stylesheet" href="/edufamcs-demo/static/css/site.css">
+<link rel="stylesheet" href="/edufamcs-demo/static/css/hub.css">
+<link rel="stylesheet" href="/edufamcs-demo/static/css/about.css">
+<link rel="stylesheet" href="/edufamcs-demo/static/handbook/handbook.css">
+<script src="/edufamcs-demo/static/js/theme.js"></script>
+<script src="/edufamcs-demo/static/vendor/htmx/htmx.min.js" defer></script>
+<script src="/edufamcs-demo/static/vendor/alpine/alpine-csp.min.js" defer></script>
+<script src="/edufamcs-demo/static/js/site.js" defer></script>
+<script src="/edufamcs-demo/static/handbook/handbook.js" defer></script>
+</head>
+<body class="" hx-headers='{"X-CSRFToken": "81E1s7dNqxomm0K4JpEtomq9AtpsafuLKetYI9MErkCVxjZwISSq6fi72CwqUZts"}'>
+<a class="skip" href="#main">К содержанию</a>
+<div class="demo-bar" role="note">Демо-версия для отзывов: вход, запись на курсы и формы здесь не работают.</div>
+
+<header class="hdr">
+  <div class="container">
+    <a class="brand" href="/edufamcs-demo/" aria-label="EDU FAMCS — главная">
+      <span class="full"><img class="only-light" src="/edufamcs-demo/static/brand/logo/logo-edu-light.svg" alt="EDU FAMCS" width="196" height="40"><img class="only-dark" src="/edufamcs-demo/static/brand/logo/logo-edu-dark.svg" alt="EDU FAMCS" width="196" height="40"></span>
+      <span class="short"><img class="only-light" src="/edufamcs-demo/static/brand/logo/logo-edu-light.svg" alt="EDU FAMCS" height="30"><img class="only-dark" src="/edufamcs-demo/static/brand/logo/logo-edu-dark.svg" alt="EDU FAMCS" height="30"></span>
+    </a>
+    <nav class="nav" id="main-nav" aria-label="Основная навигация">
+      <a href="/edufamcs-demo/#courses">Курсы</a>
+      <a href="/edufamcs-demo/ml/" >Машинное обучение</a>
+      
+      <a href="/edufamcs-demo/handbook/" aria-current="page">Хендбук</a>
+      <a href="/edufamcs-demo/news/" >Новости</a>
+      <a href="/edufamcs-demo/people/" >Авторы</a>
+      <a href="/edufamcs-demo/about/" >О&nbsp;нас</a>
+    </nav>
+    <div class="hdr-actions">
+      
+      <a class="btn btn-outline btn-login" href="/edufamcs-demo/accounts/login/?next=/handbook/retrieval/obuchenie-embedderov/">Войти</a>
+      
+      <button class="icon-btn menu-btn" type="button" aria-label="Меню" aria-expanded="false" aria-controls="main-nav"><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-menu"/></svg></button>
+    </div>
+  </div>
+</header>
+
+<main id="main">
+
+
+
+<div class="container hb-page s-recsys">
+  <div class="hb-readbar" aria-hidden="true"><i></i></div>
+  <div class="hb">
+    <aside class="hb-nav" aria-label="Статьи раздела">
+      
+<form class="hb-search" action="/edufamcs-demo/handbook/search/" method="get" role="search">
+  <svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-search"/></svg>
+  <input class="input" type="search" name="q" value="" placeholder="Поиск по хендбуку" aria-label="Поиск по хендбуку" autocomplete="off" maxlength="120"
+    hx-get="/edufamcs-demo/handbook/search/" hx-trigger="input changed delay:250ms, search" hx-target="#hb-nav-results" hx-sync="this:replace">
+</form>
+
+      <div id="hb-nav-results" class="hb-nav-results" aria-live="polite"></div>
+      <a class="grp" href="/edufamcs-demo/handbook/retrieval/">Поиск в продакшене</a>
+      
+      <a class="cur" href="/edufamcs-demo/handbook/retrieval/obuchenie-embedderov/" aria-current="page">Как обучают эмбеддеры для поиска</a>
+      
+      <a class="" href="/edufamcs-demo/handbook/retrieval/poiskovye-dvizhki/">Поисковые движки: Elasticsearch, OpenSearch, Qdrant, Vespa</a>
+      
+      <a class="" href="/edufamcs-demo/handbook/retrieval/ecommerce-poisk/">Поиск в e-commerce</a>
+      
+    </aside>
+
+    <article class="hb-main">
+      <nav class="crumbs" aria-label="Навигация"><a href="/edufamcs-demo/handbook/">Хендбук</a><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-chev"/></svg><a href="/edufamcs-demo/handbook/retrieval/">Поиск</a></nav>
+      <h1 class="h1">Как обучают эмбеддеры для поиска</h1>
+      <div class="hb-meta">
+        
+        
+        <span><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-clock"/></svg>18&nbsp;мин</span>
+        <span class="hb-authors"><span class="avatar sm" title="Артем Лебедевич">АЛ</span>Артем Лебедевич</span>
+        <span><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-edit"/></svg>10 ноября 2026</span>
+        
+        
+      </div>
+
+      
+      <details class="hb-mtoc">
+        <summary><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-list"/></svg>Содержание<svg class="ico sm" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-chev-down"/></svg></summary>
+        <a class="l2" href="#откуда-берутся-пары">Откуда берутся пары</a><a class="l2" href="#контрастивная-потеря-и-градиент">Контрастивная потеря и градиент</a><a class="l2" href="#почему-случайных-негативов-мало">Почему случайных негативов мало</a><a class="l2" href="#трудные-негативы">Трудные негативы</a><a class="l2" href="#ложные-негативы">Ложные негативы</a><a class="l2" href="#дистилляция-из-cross-encoderа">Дистилляция из cross-encoder&#x27;а</a><a class="l2" href="#многостадийное-обучение">Многостадийное обучение</a><a class="l2" href="#matryoshka-и-префиксы">Matryoshka и префиксы</a><a class="l2" href="#оценка-на-своём-домене">Оценка на своём домене</a><a class="l2" href="#практика-дообучения">Практика дообучения</a><a class="l2" href="#код">Код</a><a class="l2" href="#ловушки">Ловушки</a><a class="l2" href="#проверь-себя">Проверь себя</a><a class="l2" href="#что-почитать">Что почитать</a>
+      </details>
+      
+
+      <div class="prose"><p>Готовая модель вроде E5 или BGE закрывает половину задач, но на своём домене (каталог товаров, база знаний, русскоязычные вакансии) почти всегда уступает модели, дообученной на ваших парах «запрос — документ». Эта статья про полный рецепт: откуда берутся пары, какая у них бывает грязь, какие негативы нужны и почему, как не обучиться на ложных негативах и как проверить, что дообучение помогло. Архитектура bi-encoder и история моделей разобраны в <a href="/edufamcs-demo/handbook/retrieval/plotnyj-i-gibridnyj-poisk/" rel="noopener noreferrer nofollow">плотном поиске</a>; здесь — именно обучение.</p>
+<h2 id="откуда-берутся-пары">Откуда берутся пары</h2>
+<p>Три источника, и у каждого свой тип шума.</p>
+<ul>
+<li><strong>Клики и покупки из логов.</strong> Много и бесплатно, но клик — это не релевантность: на него влияют позиция, заголовок, картинка (<a href="/edufamcs-demo/handbook/retrieval/ocenka-kachestva-poiska/" rel="noopener noreferrer nofollow">позиционное смещение</a>). Модель выучит «что кликают наверху», а не «что подходит».</li>
+<li><strong>Ручная разметка и оценки асессоров.</strong> Чисто, но дорого и мало: сотни–тысячи запросов. Лучше всего подходит для <strong>валидации</strong>, а не для обучения.</li>
+<li><strong>Синтетические запросы.</strong> LLM по документу генерирует запрос, на который он отвечает. Идея в работах InPars (Bonifacio et al., 2022) и Promptagator (Dai et al., 2022): по немногим примерам задачи LLM порождает обучающие пары. В InPars модели переранжирования (monoT5), дообученные только на таких синтетических данных, превзошли BM25; в Promptagator двухбашенные модели, обученные на синтетике не более чем по 8 примеров на задачу, в среднем по 11 наборам превзошли ColBERT v2. Шум здесь другой: запросы бывают слишком «литературными», похожими на документ слово в слово, и не покрывают реальную лексику пользователей. Типичная защита — отфильтровать сгенерированные пары, у которых позитив не попал в топ-<span class="tex">k</span> базового ретривера по этому запросу.</li>
+</ul>
+<p>Для любого источника сразу заведите <strong>отложенную выборку по запросам</strong> (и по документам, если корпус дублируется): утечка одного документа в обучение и тест даёт красивые, но ложные метрики.</p>
+<h2 id="контрастивная-потеря-и-градиент">Контрастивная потеря и градиент</h2>
+<p>Обучение — тот же InfoNCE, что описан в <a href="/edufamcs-demo/handbook/dl/kontrastivnoe-obuchenie/" rel="noopener noreferrer nofollow">статье про контрастивное обучение</a>. Для запроса <span class="tex">q</span>, позитива <span class="tex">d^+</span> и набора кандидатов <span class="tex">\mathcal{D}</span> (позитив, негативы из батча, трудные негативы):</p>
+<div class="tex tex-block">\mathcal{L} = -\log \frac{e^{s(q,d^+)/\tau}}{\sum_{d\in\mathcal{D}} e^{s(q,d)/\tau}}, \qquad s=\cos .</div>
+<p>Продифференцируем по скору кандидата <span class="tex">j</span>, обозначив <span class="tex">p_j = e^{s_j/\tau}/\sum_{d} e^{s_d/\tau}</span>:</p>
+<div class="tex tex-block">\frac{\partial \mathcal{L}}{\partial s_j} = \frac{1}{\tau}\big(p_j - \mathbb{1}[j = +]\big).</div>
+<p>Из этой формулы следует почти всё, что нужно знать о негативах. Негатив получает градиент, пропорциональный вероятности <span class="tex">p_j</span>, которую модель ему уже присваивает. <strong>Случайный негатив с <span class="tex">p_j\approx 0</span> не даёт почти ничего</strong> — он «уже решён». Температура <span class="tex">\tau</span> масштабирует шаг и резкость <span class="tex">p</span>: при малой <span class="tex">\tau</span> вес концентрируется на нескольких самых похожих негативах, и обучение становится чувствительным к ложным негативам (ниже).</p>
+<h2 id="почему-случайных-негативов-мало">Почему случайных негативов мало</h2>
+<p>Пусть каталог состоит из 8 групп товаров. Негативы из батча — это документы случайных запросов, и в 7 случаях из 8 они из другой группы: отличить их по теме тривиально. Модель быстро учит грубое разделение групп, а настоящая трудность поиска — отличить «кроссовки Nike 42» от «кроссовок Nike 43» — остаётся без градиента. Размер батча <span class="tex">B</span> даёт <span class="tex">B-1</span> негатив, но если все они лёгкие, толку мало; поэтому батч помогает, но не лечит. Лечат <strong>трудные негативы</strong>: документы, которые выглядят релевантными, но таковыми не являются.</p>
+<h2 id="трудные-негативы">Трудные негативы</h2>
+<ul>
+<li><strong>BM25-негативы</strong> (DPR, Karpukhin et al., 2020): берут документы из топа BM25, не содержащие ответа. Дёшево, но это ошибки лексического поиска, а не вашей модели.</li>
+<li><strong>Негативы из собственного индекса модели — ANCE</strong> (Xiong et al., ICLR 2021): периодически (каждые несколько тысяч шагов, асинхронно с обучением) корпус переиндексируют текущей версией энкодера и берут негативы из её топа. Авторы объясняют узкое место плотного поиска тем, что обучающие негативы не похожи на нерелевантные документы, которые модель видит при поиске. Цена — периодическая переиндексация (и <a href="/edufamcs-demo/handbook/retrieval/vektornye-indeksy/" rel="noopener noreferrer nofollow">векторный индекс</a> для неё).</li>
+<li><strong>Окно рангов.</strong> Не берите самые верхние: берите ранги, скажем, с 3-го по 30-й и сэмплируйте. Верх выдачи чаще всего содержит ложные негативы.</li>
+<li><strong>Cross-batch негативы</strong> (RocketQA, Qu et al., NAACL 2021): при обучении на нескольких GPU каждый запрос получает в негативы пассажи со всех GPU того же шага — негативов в число GPU раз больше ценой обмена эмбеддингами. Очередь эмбеддингов из прошлых батчей (MoCo, He et al., 2020) даёт ещё больше негативов, но они посчитаны устаревшим энкодером.</li>
+</ul>
+<h2 id="ложные-негативы">Ложные негативы</h2>
+<p>Разметка неполна: документ, который выглядит негативом, может быть правильным ответом, просто никто его не пометил. Чем «труднее» негативы, тем выше доля таких ошибок — на самом верху выдачи они концентрируются. Модель, получившая сигнал «оттолкни релевантный документ», учится хуже. Способы борьбы:</p>
+<ol>
+<li><strong>Фильтр кросс-энкодером.</strong> RocketQA (Qu et al., 2021) использует денойзинг трудных негативов: сильный cross-encoder отсеивает кандидатов, которые он считает релевантными.</li>
+<li><strong>Порог по марже.</strong> Отбросить негатив, если скор cross-encoder'а для него выше <span class="tex">\text{score}(d^+) - m</span>, или если он не ниже заданной доли скора позитива. Порог <span class="tex">m</span> подбирается по валидации.</li>
+<li><strong>Дедупликация в батче.</strong> Один документ у двух запросов в батче — гарантированный ложный негатив; убирайте дубли.</li>
+<li><strong>Окно рангов</strong> (выше) — самая дешёвая мера.</li>
+</ol>
+<div class="callout md warn"><p class="callout-title">Ловушка</p>
+<p>Сильнее майнинг — не всегда лучше. Если брать негативы с первых мест выдачи без фильтра, доля ложных негативов растёт, а вместе с ней и вред. Начинайте с окна рангов и фильтра.</p>
+</div>
+<h2 id="дистилляция-из-cross-encoderа">Дистилляция из cross-encoder'а</h2>
+<p>Вместо бинарных меток «позитив/негатив» можно учить студента повторять <strong>оценки</strong> сильного cross-encoder'а. Проблема: скоры cross-encoder'а и bi-encoder'а в разных шкалах, прямая регрессия на скоры не работает. <strong>Margin-MSE</strong> (Hofstätter et al., 2020) сравнивает <em>разности</em> скоров позитива и негатива в тройке <span class="tex">(q, d^+, d^-)</span>:</p>
+<div class="tex tex-block">\mathcal{L}_{\text{MSE}} = \Big(\big[s_S(q,d^+) - s_S(q,d^-)\big] - \big[s_T(q,d^+) - s_T(q,d^-)\big]\Big)^2 ,</div>
+<p>где <span class="tex">S</span> — студент, <span class="tex">T</span> — учитель. Сдвиг шкалы учителя сокращается в разности. Заодно учитель сам «чистит» ложные негативы: если для него <span class="tex">d^-</span> почти не хуже <span class="tex">d^+</span>, целевая маржа мала, и студент не будет их расталкивать.</p>
+<h2 id="многостадийное-обучение">Многостадийное обучение</h2>
+<p>Типичная схема современных эмбеддеров: сначала <strong>слабо размеченное предобучение</strong> на огромных корпусах пар (в E5 это ~270 млн отфильтрованных пар CCPairs, Wang et al., 2022 — контрастивное предобучение со слабым сигналом, затем дообучение), потом <strong>дообучение на размеченных данных</strong> с трудными негативами и маржами. В C-Pack (Xiao et al., SIGIR 2024, семейство BGE) три стадии: (1) предобучение в стиле RetroMAE (маскированный автоэнкодер) на текстах Wudao; (2) общее контрастивное дообучение на ~100 млн неразмеченных пар C-MTP только с негативами из батча при батче до 19 200; (3) дообучение на ~838 тыс. размеченных пар с инструкцией в запросе и одним трудным негативом на пару. Для вашей задачи роль третьей стадии — ваш домен: стартуйте с публичной модели и дообучайте на своих парах.</p>
+<h2 id="matryoshka-и-префиксы">Matryoshka и префиксы</h2>
+<p><strong>Matryoshka Representation Learning</strong> (Kusupati et al., NeurIPS 2022) суммирует потерю по префиксам вектора: <span class="tex">\mathcal{L}_{\text{MRL}}=\sum_{m\in M} c_m\,\mathcal{L}(z_{1:m})</span>. После этого вектор можно усечь до первых 256 координат и перенормировать — индекс в 3 раза меньше при <span class="tex">d=768</span> и небольшой потере качества (на вашем домене проверьте, насколько небольшой).</p>
+<p><strong>Префиксы</strong> <code>query:</code> / <code>passage:</code> у E5 — часть обучения: модель видела именно такие строки. Правило одно: <strong>формат на инференсе обязан совпадать с форматом при обучении</strong>, а при дообучении сохраняйте исходный формат модели (смотрите model card). Ошибка не вызывает исключения — только тихое падение recall.</p>
+<h2 id="оценка-на-своём-домене">Оценка на своём домене</h2>
+<p>Пара чисел с лидерборда MTEB (Muennighoff et al., 2022) говорит о среднем по десяткам задач; ваш домен может вести себя иначе. Минимальная оценка: <strong>recall@<span class="tex">k</span> на отложенном размеченном наборе</strong> своих запросов против корпуса своего размера, сравнение с BM25, с базовой моделью и с дообученной; считайте метрики по срезам (короткие, длинные, артикульные запросы). Дополнительно проверьте на небольшом общем наборе, что модель не «забыла» общий язык.</p>
+<h2 id="практика-дообучения">Практика дообучения</h2>
+<ul>
+<li><strong>Размер батча</strong> — число негативов. Если батч не помещается в память, используйте <strong>gradient caching</strong> (Gao et al., RepL4NLP 2021): считают эмбеддинги всего батча без градиентов, затем потерю по ним, а градиент по эмбеддингам прогоняют через энкодер кусками — память почти не растёт с размером батча.</li>
+<li><strong>Катастрофическое забывание.</strong> Маленький learning rate, мало эпох, ранняя остановка по отложенной выборке; при необходимости — примешивать общие пары или обучать адаптеры (LoRA). Следите за общей метрикой.</li>
+<li><strong>Версионирование.</strong> Новая модель — это новая версия индекса: переиндексация всего корпуса (см. <a href="/edufamcs-demo/handbook/retrieval/poiskovye-dvizhki/" rel="noopener noreferrer nofollow">поисковые движки</a>).</li>
+</ul>
+<h2 id="код">Код</h2>
+<p>Потеря с трудными негативами и маской ложных негативов, Margin-MSE и Matryoshka — на случайных векторах (числа иллюстративные, смысла не имеют, нужны только форма вычислений):</p>
+<div class="code"><div class="code-head"><span class="lang">python</span></div><pre><code><span class="tok-k">import</span> torch<span class="tok-p">,</span> torch.nn.functional <span class="tok-k">as</span> F
+torch<span class="tok-p">.</span>manual_seed<span class="tok-p">(</span><span class="tok-n">0</span><span class="tok-p">)</span>
+B<span class="tok-p">,</span> d<span class="tok-p">,</span> tau <span class="tok-p">=</span> <span class="tok-n">4</span><span class="tok-p">,</span> <span class="tok-n">8</span><span class="tok-p">,</span> <span class="tok-n">0.05</span>
+q  <span class="tok-p">=</span> F<span class="tok-p">.</span>normalize<span class="tok-p">(</span>torch<span class="tok-p">.</span>randn<span class="tok-p">(</span>B<span class="tok-p">,</span> d<span class="tok-p">)</span><span class="tok-p">,</span> dim<span class="tok-p">=</span><span class="tok-p">-</span><span class="tok-n">1</span><span class="tok-p">)</span>
+dp <span class="tok-p">=</span> F<span class="tok-p">.</span>normalize<span class="tok-p">(</span>q <span class="tok-p">+</span> <span class="tok-n">0.5</span> <span class="tok-p">*</span> torch<span class="tok-p">.</span>randn<span class="tok-p">(</span>B<span class="tok-p">,</span> d<span class="tok-p">)</span><span class="tok-p">,</span> dim<span class="tok-p">=</span><span class="tok-p">-</span><span class="tok-n">1</span><span class="tok-p">)</span>   <span class="tok-c"># позитивы</span>
+dn <span class="tok-p">=</span> F<span class="tok-p">.</span>normalize<span class="tok-p">(</span>q <span class="tok-p">+</span> <span class="tok-n">0.8</span> <span class="tok-p">*</span> torch<span class="tok-p">.</span>randn<span class="tok-p">(</span>B<span class="tok-p">,</span> d<span class="tok-p">)</span><span class="tok-p">,</span> dim<span class="tok-p">=</span><span class="tok-p">-</span><span class="tok-n">1</span><span class="tok-p">)</span>   <span class="tok-c"># по трудному негативу на запрос</span>
+
+<span class="tok-k">def</span> <span class="tok-f">info_nce</span><span class="tok-p">(</span>q<span class="tok-p">,</span> docs<span class="tok-p">,</span> tau<span class="tok-p">,</span> drop<span class="tok-p">=</span><span class="tok-k">None</span><span class="tok-p">)</span><span class="tok-p">:</span>
+    logits <span class="tok-p">=</span> q <span class="tok-p">@</span> docs<span class="tok-p">.</span>T <span class="tok-p">/</span> tau              <span class="tok-c"># позитив запроса i — в столбце i</span>
+    <span class="tok-k">if</span> drop <span class="tok-k">is</span> <span class="tok-k">not</span> <span class="tok-k">None</span><span class="tok-p">:</span>
+        logits <span class="tok-p">=</span> logits<span class="tok-p">.</span>masked_fill<span class="tok-p">(</span>drop<span class="tok-p">,</span> <span class="tok-f">float</span><span class="tok-p">(</span><span class="tok-s">"</span><span class="tok-s">-inf</span><span class="tok-s">"</span><span class="tok-p">)</span><span class="tok-p">)</span>
+    <span class="tok-k">return</span> F<span class="tok-p">.</span>cross_entropy<span class="tok-p">(</span>logits<span class="tok-p">,</span> torch<span class="tok-p">.</span>arange<span class="tok-p">(</span><span class="tok-f">len</span><span class="tok-p">(</span>q<span class="tok-p">)</span><span class="tok-p">)</span><span class="tok-p">)</span>
+
+docs <span class="tok-p">=</span> torch<span class="tok-p">.</span>cat<span class="tok-p">(</span><span class="tok-p">[</span>dp<span class="tok-p">,</span> dn<span class="tok-p">]</span><span class="tok-p">)</span>                 <span class="tok-c"># B позитивов + B трудных негативов</span>
+ce_pos <span class="tok-p">=</span> torch<span class="tok-p">.</span>tensor<span class="tok-p">(</span><span class="tok-p">[</span><span class="tok-n">5.</span><span class="tok-p">,</span> <span class="tok-n">4.</span><span class="tok-p">,</span> <span class="tok-n">6.</span><span class="tok-p">,</span> <span class="tok-n">5.</span><span class="tok-p">]</span><span class="tok-p">)</span><span class="tok-p">;</span> ce_neg <span class="tok-p">=</span> torch<span class="tok-p">.</span>tensor<span class="tok-p">(</span><span class="tok-p">[</span><span class="tok-n">4.5</span><span class="tok-p">,</span> <span class="tok-n">.5</span><span class="tok-p">,</span> <span class="tok-n">5.9</span><span class="tok-p">,</span> <span class="tok-n">1.</span><span class="tok-p">]</span><span class="tok-p">)</span>
+suspect <span class="tok-p">=</span> ce_neg <span class="tok-p">&gt;</span> ce_pos <span class="tok-p">-</span> <span class="tok-n">1.0</span>            <span class="tok-c"># негатив почти так же хорош, как позитив</span>
+drop <span class="tok-p">=</span> torch<span class="tok-p">.</span>zeros<span class="tok-p">(</span>B<span class="tok-p">,</span> <span class="tok-n">2</span> <span class="tok-p">*</span> B<span class="tok-p">,</span> dtype<span class="tok-p">=</span>torch<span class="tok-p">.</span>bool<span class="tok-p">)</span>
+drop<span class="tok-p">[</span>torch<span class="tok-p">.</span>arange<span class="tok-p">(</span>B<span class="tok-p">)</span><span class="tok-p">,</span> B <span class="tok-p">+</span> torch<span class="tok-p">.</span>arange<span class="tok-p">(</span>B<span class="tok-p">)</span><span class="tok-p">]</span> <span class="tok-p">=</span> suspect
+<span class="tok-f">print</span><span class="tok-p">(</span><span class="tok-f">round</span><span class="tok-p">(</span>info_nce<span class="tok-p">(</span>q<span class="tok-p">,</span> docs<span class="tok-p">,</span> tau<span class="tok-p">,</span> drop<span class="tok-p">)</span><span class="tok-p">.</span>item<span class="tok-p">(</span><span class="tok-p">)</span><span class="tok-p">,</span> <span class="tok-n">3</span><span class="tok-p">)</span><span class="tok-p">)</span>
+
+s_pos<span class="tok-p">,</span> s_neg <span class="tok-p">=</span> <span class="tok-p">(</span>q <span class="tok-p">*</span> dp<span class="tok-p">)</span><span class="tok-p">.</span>sum<span class="tok-p">(</span><span class="tok-p">-</span><span class="tok-n">1</span><span class="tok-p">)</span><span class="tok-p">,</span> <span class="tok-p">(</span>q <span class="tok-p">*</span> dn<span class="tok-p">)</span><span class="tok-p">.</span>sum<span class="tok-p">(</span><span class="tok-p">-</span><span class="tok-n">1</span><span class="tok-p">)</span>       <span class="tok-c"># Margin-MSE</span>
+<span class="tok-f">print</span><span class="tok-p">(</span><span class="tok-f">round</span><span class="tok-p">(</span>F<span class="tok-p">.</span>mse_loss<span class="tok-p">(</span>s_pos <span class="tok-p">-</span> s_neg<span class="tok-p">,</span> ce_pos <span class="tok-p">-</span> ce_neg<span class="tok-p">)</span><span class="tok-p">.</span>item<span class="tok-p">(</span><span class="tok-p">)</span><span class="tok-p">,</span> <span class="tok-n">3</span><span class="tok-p">)</span><span class="tok-p">)</span>
+mrl <span class="tok-p">=</span> <span class="tok-f">sum</span><span class="tok-p">(</span>info_nce<span class="tok-p">(</span>F<span class="tok-p">.</span>normalize<span class="tok-p">(</span>q<span class="tok-p">[</span><span class="tok-p">:</span><span class="tok-p">,</span> <span class="tok-p">:</span>m<span class="tok-p">]</span><span class="tok-p">,</span> dim<span class="tok-p">=</span><span class="tok-p">-</span><span class="tok-n">1</span><span class="tok-p">)</span><span class="tok-p">,</span> F<span class="tok-p">.</span>normalize<span class="tok-p">(</span>dp<span class="tok-p">[</span><span class="tok-p">:</span><span class="tok-p">,</span> <span class="tok-p">:</span>m<span class="tok-p">]</span><span class="tok-p">,</span> dim<span class="tok-p">=</span><span class="tok-p">-</span><span class="tok-n">1</span><span class="tok-p">)</span><span class="tok-p">,</span> tau<span class="tok-p">)</span>
+          <span class="tok-k">for</span> m <span class="tok-k">in</span> <span class="tok-p">(</span><span class="tok-n">2</span><span class="tok-p">,</span> <span class="tok-n">4</span><span class="tok-p">,</span> <span class="tok-n">8</span><span class="tok-p">)</span><span class="tok-p">)</span>                           <span class="tok-c"># Matryoshka по префиксам</span>
+<span class="tok-f">print</span><span class="tok-p">(</span><span class="tok-f">round</span><span class="tok-p">(</span>mrl<span class="tok-p">.</span>item<span class="tok-p">(</span><span class="tok-p">)</span><span class="tok-p">,</span> <span class="tok-n">3</span><span class="tok-p">)</span><span class="tok-p">)</span>
+</code></pre></div>
+<p>Игрушечный эксперимент: две башни (<code>EmbeddingBag</code> + линейный слой, <span class="tex">d=64</span>) на синтетических данных. 8 групп по 6 подтем, подтемы группы делят пул слов, документ — 7 слов подтемы и 3 шумовых, запрос — 3 слова документа и одно шумовое. 2400 документов для обучения, 600 новых для теста, на тесте у запроса ровно один позитив. Сравниваются «только негативы батча (<span class="tex">B=64</span>)» и «+ по одному трудному негативу из топа текущей модели (пропуская первые 3 ранга, окно до 30-го), переиндексация каждую эпоху начиная с третьей, чужой позитив маскируется». Прогон: CPU, 3 сида, 17 секунд, <span class="tex">\tau=0{,}1</span> (<code>uv run --with torch --with numpy python toy.py</code>; код целиком ниже, затем результат):</p>
+<div class="code"><div class="code-head"><span class="lang">python</span></div><pre><code><span class="tok-k">import</span> numpy <span class="tok-k">as</span> np<span class="tok-p">,</span> torch<span class="tok-p">,</span> torch.nn <span class="tok-k">as</span> nn<span class="tok-p">,</span> torch.nn.functional <span class="tok-k">as</span> F
+G<span class="tok-p">,</span> SUB<span class="tok-p">,</span> POOL<span class="tok-p">,</span> NOISE <span class="tok-p">=</span> <span class="tok-n">8</span><span class="tok-p">,</span> <span class="tok-n">6</span><span class="tok-p">,</span> <span class="tok-n">24</span><span class="tok-p">,</span> <span class="tok-n">200</span>          <span class="tok-c"># 8 групп, по 6 подтем; подтемы одной группы делят пул слов</span>
+V <span class="tok-p">=</span> G <span class="tok-p">*</span> POOL <span class="tok-p">+</span> NOISE
+pr <span class="tok-p">=</span> np<span class="tok-p">.</span>random<span class="tok-p">.</span>default_rng<span class="tok-p">(</span><span class="tok-n">0</span><span class="tok-p">)</span>
+SUBTOK <span class="tok-p">=</span> <span class="tok-p">[</span>pr<span class="tok-p">.</span>choice<span class="tok-p">(</span>POOL<span class="tok-p">,</span> <span class="tok-n">12</span><span class="tok-p">,</span> replace<span class="tok-p">=</span><span class="tok-k">False</span><span class="tok-p">)</span> <span class="tok-p">+</span> <span class="tok-p">(</span>k <span class="tok-p">/</span><span class="tok-p">/</span> SUB<span class="tok-p">)</span> <span class="tok-p">*</span> POOL <span class="tok-k">for</span> k <span class="tok-k">in</span> <span class="tok-f">range</span><span class="tok-p">(</span>G <span class="tok-p">*</span> SUB<span class="tok-p">)</span><span class="tok-p">]</span>
+
+<span class="tok-k">def</span> <span class="tok-f">docs</span><span class="tok-p">(</span>rng<span class="tok-p">,</span> n<span class="tok-p">)</span><span class="tok-p">:</span>   <span class="tok-c"># документ: 7 слов своей подтемы + 3 шумовых</span>
+    s <span class="tok-p">=</span> rng<span class="tok-p">.</span>integers<span class="tok-p">(</span><span class="tok-n">0</span><span class="tok-p">,</span> G <span class="tok-p">*</span> SUB<span class="tok-p">,</span> n<span class="tok-p">)</span>
+    <span class="tok-k">return</span> torch<span class="tok-p">.</span>tensor<span class="tok-p">(</span><span class="tok-p">[</span>np<span class="tok-p">.</span>r_<span class="tok-p">[</span>rng<span class="tok-p">.</span>choice<span class="tok-p">(</span>SUBTOK<span class="tok-p">[</span>k<span class="tok-p">]</span><span class="tok-p">,</span> <span class="tok-n">7</span><span class="tok-p">,</span> replace<span class="tok-p">=</span><span class="tok-k">False</span><span class="tok-p">)</span><span class="tok-p">,</span> rng<span class="tok-p">.</span>integers<span class="tok-p">(</span>G <span class="tok-p">*</span> POOL<span class="tok-p">,</span> V<span class="tok-p">,</span> <span class="tok-n">3</span><span class="tok-p">)</span><span class="tok-p">]</span> <span class="tok-k">for</span> k <span class="tok-k">in</span> s<span class="tok-p">]</span><span class="tok-p">)</span>
+<span class="tok-k">def</span> <span class="tok-f">queries</span><span class="tok-p">(</span>rng<span class="tok-p">,</span> D<span class="tok-p">)</span><span class="tok-p">:</span>  <span class="tok-c"># запрос: 3 слова документа + 1 шумовое</span>
+    <span class="tok-k">return</span> torch<span class="tok-p">.</span>tensor<span class="tok-p">(</span><span class="tok-p">[</span>np<span class="tok-p">.</span>r_<span class="tok-p">[</span>rng<span class="tok-p">.</span>choice<span class="tok-p">(</span>d<span class="tok-p">[</span><span class="tok-p">:</span><span class="tok-n">7</span><span class="tok-p">]</span><span class="tok-p">,</span> <span class="tok-n">3</span><span class="tok-p">,</span> replace<span class="tok-p">=</span><span class="tok-k">False</span><span class="tok-p">)</span><span class="tok-p">,</span> rng<span class="tok-p">.</span>integers<span class="tok-p">(</span>G <span class="tok-p">*</span> POOL<span class="tok-p">,</span> V<span class="tok-p">)</span><span class="tok-p">]</span> <span class="tok-k">for</span> d <span class="tok-k">in</span> D<span class="tok-p">.</span>numpy<span class="tok-p">(</span><span class="tok-p">)</span><span class="tok-p">]</span><span class="tok-p">)</span>
+
+<span class="tok-k">def</span> <span class="tok-f">tower</span><span class="tok-p">(</span><span class="tok-p">)</span><span class="tok-p">:</span> <span class="tok-k">return</span> nn<span class="tok-p">.</span>Sequential<span class="tok-p">(</span>nn<span class="tok-p">.</span>EmbeddingBag<span class="tok-p">(</span>V<span class="tok-p">,</span> <span class="tok-n">64</span><span class="tok-p">,</span> mode<span class="tok-p">=</span><span class="tok-s">"</span><span class="tok-s">mean</span><span class="tok-s">"</span><span class="tok-p">)</span><span class="tok-p">,</span> nn<span class="tok-p">.</span>Linear<span class="tok-p">(</span><span class="tok-n">64</span><span class="tok-p">,</span> <span class="tok-n">64</span><span class="tok-p">)</span><span class="tok-p">)</span>
+enc <span class="tok-p">=</span> <span class="tok-k">lambda</span> t<span class="tok-p">,</span> x<span class="tok-p">:</span> F<span class="tok-p">.</span>normalize<span class="tok-p">(</span>t<span class="tok-p">(</span>x<span class="tok-p">)</span><span class="tok-p">,</span> dim<span class="tok-p">=</span><span class="tok-p">-</span><span class="tok-n">1</span><span class="tok-p">)</span>
+
+<span class="tok-k">def</span> <span class="tok-f">run</span><span class="tok-p">(</span>hard<span class="tok-p">,</span> seed<span class="tok-p">,</span> epochs<span class="tok-p">=</span><span class="tok-n">30</span><span class="tok-p">,</span> bs<span class="tok-p">=</span><span class="tok-n">64</span><span class="tok-p">,</span> tau<span class="tok-p">=</span><span class="tok-n">0.1</span><span class="tok-p">,</span> lo<span class="tok-p">=</span><span class="tok-n">3</span><span class="tok-p">,</span> hi<span class="tok-p">=</span><span class="tok-n">30</span><span class="tok-p">)</span><span class="tok-p">:</span>
+    rng <span class="tok-p">=</span> np<span class="tok-p">.</span>random<span class="tok-p">.</span>default_rng<span class="tok-p">(</span>seed<span class="tok-p">)</span><span class="tok-p">;</span> torch<span class="tok-p">.</span>manual_seed<span class="tok-p">(</span>seed<span class="tok-p">)</span>
+    Dtr<span class="tok-p">,</span> Dte <span class="tok-p">=</span> docs<span class="tok-p">(</span>rng<span class="tok-p">,</span> <span class="tok-n">2400</span><span class="tok-p">)</span><span class="tok-p">,</span> docs<span class="tok-p">(</span>rng<span class="tok-p">,</span> <span class="tok-n">600</span><span class="tok-p">)</span>
+    Qte <span class="tok-p">=</span> queries<span class="tok-p">(</span>np<span class="tok-p">.</span>random<span class="tok-p">.</span>default_rng<span class="tok-p">(</span><span class="tok-n">100</span> <span class="tok-p">+</span> seed<span class="tok-p">)</span><span class="tok-p">,</span> Dte<span class="tok-p">)</span>
+    tq<span class="tok-p">,</span> td <span class="tok-p">=</span> tower<span class="tok-p">(</span><span class="tok-p">)</span><span class="tok-p">,</span> tower<span class="tok-p">(</span><span class="tok-p">)</span><span class="tok-p">;</span> opt <span class="tok-p">=</span> torch<span class="tok-p">.</span>optim<span class="tok-p">.</span>Adam<span class="tok-p">(</span><span class="tok-p">[</span><span class="tok-p">*</span>tq<span class="tok-p">.</span>parameters<span class="tok-p">(</span><span class="tok-p">)</span><span class="tok-p">,</span> <span class="tok-p">*</span>td<span class="tok-p">.</span>parameters<span class="tok-p">(</span><span class="tok-p">)</span><span class="tok-p">]</span><span class="tok-p">,</span> <span class="tok-n">3e-3</span><span class="tok-p">)</span>
+    <span class="tok-k">for</span> ep <span class="tok-k">in</span> <span class="tok-f">range</span><span class="tok-p">(</span>epochs<span class="tok-p">)</span><span class="tok-p">:</span>
+        Q <span class="tok-p">=</span> queries<span class="tok-p">(</span>rng<span class="tok-p">,</span> Dtr<span class="tok-p">)</span><span class="tok-p">;</span> neg <span class="tok-p">=</span> <span class="tok-k">None</span>
+        <span class="tok-k">if</span> hard <span class="tok-k">and</span> ep <span class="tok-p">&gt;</span><span class="tok-p">=</span> <span class="tok-n">2</span><span class="tok-p">:</span>                      <span class="tok-c"># ANCE: переиндексация текущей моделью</span>
+            <span class="tok-k">with</span> torch<span class="tok-p">.</span>no_grad<span class="tok-p">(</span><span class="tok-p">)</span><span class="tok-p">:</span> S <span class="tok-p">=</span> enc<span class="tok-p">(</span>tq<span class="tok-p">,</span> Q<span class="tok-p">)</span> <span class="tok-p">@</span> enc<span class="tok-p">(</span>td<span class="tok-p">,</span> Dtr<span class="tok-p">)</span><span class="tok-p">.</span>T
+            S<span class="tok-p">.</span>fill_diagonal_<span class="tok-p">(</span><span class="tok-p">-</span><span class="tok-n">1e9</span><span class="tok-p">)</span>                <span class="tok-c"># не брать позитив</span>
+            top <span class="tok-p">=</span> S<span class="tok-p">.</span>argsort<span class="tok-p">(</span><span class="tok-n">1</span><span class="tok-p">,</span> descending<span class="tok-p">=</span><span class="tok-k">True</span><span class="tok-p">)</span><span class="tok-p">[</span><span class="tok-p">:</span><span class="tok-p">,</span> lo<span class="tok-p">:</span>hi<span class="tok-p">]</span>   <span class="tok-c"># окно рангов lo..hi: пропускаем самый верх</span>
+            neg <span class="tok-p">=</span> top<span class="tok-p">[</span>torch<span class="tok-p">.</span>arange<span class="tok-p">(</span><span class="tok-f">len</span><span class="tok-p">(</span>Q<span class="tok-p">)</span><span class="tok-p">)</span><span class="tok-p">,</span> torch<span class="tok-p">.</span>randint<span class="tok-p">(</span><span class="tok-n">0</span><span class="tok-p">,</span> hi <span class="tok-p">-</span> lo<span class="tok-p">,</span> <span class="tok-p">(</span><span class="tok-f">len</span><span class="tok-p">(</span>Q<span class="tok-p">)</span><span class="tok-p">,</span><span class="tok-p">)</span><span class="tok-p">)</span><span class="tok-p">]</span>
+        <span class="tok-k">for</span> idx <span class="tok-k">in</span> torch<span class="tok-p">.</span>randperm<span class="tok-p">(</span><span class="tok-f">len</span><span class="tok-p">(</span>Q<span class="tok-p">)</span><span class="tok-p">)</span><span class="tok-p">.</span>split<span class="tok-p">(</span>bs<span class="tok-p">)</span><span class="tok-p">:</span>
+            cand <span class="tok-p">=</span> idx <span class="tok-k">if</span> neg <span class="tok-k">is</span> <span class="tok-k">None</span> <span class="tok-k">else</span> torch<span class="tok-p">.</span>cat<span class="tok-p">(</span><span class="tok-p">[</span>idx<span class="tok-p">,</span> neg<span class="tok-p">[</span>idx<span class="tok-p">]</span><span class="tok-p">]</span><span class="tok-p">)</span>
+            logits <span class="tok-p">=</span> enc<span class="tok-p">(</span>tq<span class="tok-p">,</span> Q<span class="tok-p">[</span>idx<span class="tok-p">]</span><span class="tok-p">)</span> <span class="tok-p">@</span> enc<span class="tok-p">(</span>td<span class="tok-p">,</span> Dtr<span class="tok-p">[</span>cand<span class="tok-p">]</span><span class="tok-p">)</span><span class="tok-p">.</span>T <span class="tok-p">/</span> tau
+            <span class="tok-k">if</span> neg <span class="tok-k">is</span> <span class="tok-k">not</span> <span class="tok-k">None</span><span class="tok-p">:</span>                   <span class="tok-c"># чужой позитив, оказавшийся трудным негативом, маскируем</span>
+                logits<span class="tok-p">[</span><span class="tok-p">:</span><span class="tok-p">,</span> <span class="tok-f">len</span><span class="tok-p">(</span>idx<span class="tok-p">)</span><span class="tok-p">:</span><span class="tok-p">]</span> <span class="tok-p">+</span><span class="tok-p">=</span> <span class="tok-p">(</span>neg<span class="tok-p">[</span>idx<span class="tok-p">]</span><span class="tok-p">[</span><span class="tok-k">None</span><span class="tok-p">,</span> <span class="tok-p">:</span><span class="tok-p">]</span> <span class="tok-p">==</span> idx<span class="tok-p">[</span><span class="tok-p">:</span><span class="tok-p">,</span> <span class="tok-k">None</span><span class="tok-p">]</span><span class="tok-p">)</span> <span class="tok-p">*</span> <span class="tok-p">-</span><span class="tok-n">1e9</span>
+            loss <span class="tok-p">=</span> F<span class="tok-p">.</span>cross_entropy<span class="tok-p">(</span>logits<span class="tok-p">,</span> torch<span class="tok-p">.</span>arange<span class="tok-p">(</span><span class="tok-f">len</span><span class="tok-p">(</span>idx<span class="tok-p">)</span><span class="tok-p">)</span><span class="tok-p">)</span>
+            opt<span class="tok-p">.</span>zero_grad<span class="tok-p">(</span><span class="tok-p">)</span><span class="tok-p">;</span> loss<span class="tok-p">.</span>backward<span class="tok-p">(</span><span class="tok-p">)</span><span class="tok-p">;</span> opt<span class="tok-p">.</span>step<span class="tok-p">(</span><span class="tok-p">)</span>
+    <span class="tok-k">with</span> torch<span class="tok-p">.</span>no_grad<span class="tok-p">(</span><span class="tok-p">)</span><span class="tok-p">:</span>
+        S <span class="tok-p">=</span> enc<span class="tok-p">(</span>tq<span class="tok-p">,</span> Qte<span class="tok-p">)</span> <span class="tok-p">@</span> enc<span class="tok-p">(</span>td<span class="tok-p">,</span> Dte<span class="tok-p">)</span><span class="tok-p">.</span>T
+        rank <span class="tok-p">=</span> <span class="tok-p">(</span>S <span class="tok-p">&gt;</span> S<span class="tok-p">.</span>diag<span class="tok-p">(</span><span class="tok-p">)</span><span class="tok-p">[</span><span class="tok-p">:</span><span class="tok-p">,</span> <span class="tok-k">None</span><span class="tok-p">]</span><span class="tok-p">)</span><span class="tok-p">.</span>sum<span class="tok-p">(</span><span class="tok-n">1</span><span class="tok-p">)</span>     <span class="tok-c"># 0 = позитив на первом месте</span>
+    <span class="tok-k">return</span> <span class="tok-p">[</span><span class="tok-p">(</span>rank <span class="tok-p">&lt;</span> k<span class="tok-p">)</span><span class="tok-p">.</span>float<span class="tok-p">(</span><span class="tok-p">)</span><span class="tok-p">.</span>mean<span class="tok-p">(</span><span class="tok-p">)</span><span class="tok-p">.</span>item<span class="tok-p">(</span><span class="tok-p">)</span> <span class="tok-k">for</span> k <span class="tok-k">in</span> <span class="tok-p">(</span><span class="tok-n">1</span><span class="tok-p">,</span> <span class="tok-n">10</span><span class="tok-p">)</span><span class="tok-p">]</span>
+
+<span class="tok-k">for</span> epochs <span class="tok-k">in</span> <span class="tok-p">(</span><span class="tok-n">4</span><span class="tok-p">,</span> <span class="tok-n">10</span><span class="tok-p">,</span> <span class="tok-n">30</span><span class="tok-p">)</span><span class="tok-p">:</span>
+    <span class="tok-k">for</span> hard <span class="tok-k">in</span> <span class="tok-p">(</span><span class="tok-k">False</span><span class="tok-p">,</span> <span class="tok-k">True</span><span class="tok-p">)</span><span class="tok-p">:</span>
+        r <span class="tok-p">=</span> np<span class="tok-p">.</span>array<span class="tok-p">(</span><span class="tok-p">[</span>run<span class="tok-p">(</span>hard<span class="tok-p">,</span> s<span class="tok-p">,</span> epochs<span class="tok-p">)</span> <span class="tok-k">for</span> s <span class="tok-k">in</span> <span class="tok-f">range</span><span class="tok-p">(</span><span class="tok-n">3</span><span class="tok-p">)</span><span class="tok-p">]</span><span class="tok-p">)</span><span class="tok-p">.</span>mean<span class="tok-p">(</span><span class="tok-n">0</span><span class="tok-p">)</span>
+        <span class="tok-f">print</span><span class="tok-p">(</span><span class="tok-s">f</span><span class="tok-s">"</span><span class="tok-s">epochs=</span><span class="tok-s">{</span>epochs<span class="tok-s">:</span><span class="tok-s">2d</span><span class="tok-s">}</span><span class="tok-s">"</span><span class="tok-p">,</span> <span class="tok-s">"</span><span class="tok-s">hard negatives</span><span class="tok-s">"</span> <span class="tok-k">if</span> hard <span class="tok-k">else</span> <span class="tok-s">"</span><span class="tok-s">in-batch only</span><span class="tok-s">"</span><span class="tok-p">,</span> <span class="tok-s">f</span><span class="tok-s">"</span><span class="tok-s">recall@1=</span><span class="tok-s">{</span>r<span class="tok-p">[</span><span class="tok-n">0</span><span class="tok-p">]</span><span class="tok-s">:</span><span class="tok-s">.3f</span><span class="tok-s">}</span><span class="tok-s"> recall@10=</span><span class="tok-s">{</span>r<span class="tok-p">[</span><span class="tok-n">1</span><span class="tok-p">]</span><span class="tok-s">:</span><span class="tok-s">.3f</span><span class="tok-s">}</span><span class="tok-s">"</span><span class="tok-p">)</span>
+</code></pre></div>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>эпох</th>
+<th>только батч, R@1 / R@10</th>
+<th>+ трудные, R@1 / R@10</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>4</td>
+<td>0,131 / 0,646</td>
+<td>0,128 / 0,651</td>
+</tr>
+<tr>
+<td>10</td>
+<td>0,181 / 0,817</td>
+<td>0,197 / 0,836</td>
+</tr>
+<tr>
+<td>30</td>
+<td>0,256 / 0,949</td>
+<td>0,277 / 0,957</td>
+</tr>
+</tbody>
+</table></div>
+<p>Честный вывод: на этой игрушке эффект мал — +0,02 по recall@1 при разбросе между сидами порядка 0,01–0,02 (на малом бюджете эпох разницы нет вообще). Узкое место здесь — недообучение, а не негативы: модель ещё не выучила простое, поэтому трудные не нужны. Выигрыш трудных негативов проявляется на моделях и данных, где простое уже решено; не ждите от них чуда там, где метрика растёт с числом эпох.</p>
+<h2 id="ловушки">Ловушки</h2>
+<ul>
+<li>Обучение на кликах без учёта позиции: модель воспроизводит выдачу, которая была.</li>
+<li>Утечка: один документ (или его дубликат) в обучении и тесте.</li>
+<li>Майнинг без фильтра ложных негативов, особенно с самых первых рангов.</li>
+<li>Разные префиксы при дообучении и инференсе.</li>
+<li>Оценка только по MTEB: ваш домен другой.</li>
+<li><strong>На собеседовании:</strong> выведите градиент InfoNCE и объясните, почему случайные негативы почти не дают градиента; чем ANCE отличается от BM25-негативов; что такое ложный негатив и как с ним бороться; зачем Margin-MSE работает с разностью скоров; как поместить большой батч в память.</li>
+</ul>
+<h2 id="проверь-себя">Проверь себя</h2>
+<details class="callout md details"><summary>Почему градиент InfoNCE по скору негатива пропорционален $p_j$, и что это значит для случайных негативов?</summary>
+<p><span class="tex">\partial\mathcal{L}/\partial s_j = (p_j-\mathbb{1}[j=+])/\tau</span>. У лёгкого негатива <span class="tex">p_j\approx0</span>, и он почти не влияет на веса: это и есть причина, по которой нужны трудные негативы.</p>
+</details>
+<details class="callout md details"><summary>Что делает ANCE и чем это отличается от BM25-негативов?</summary>
+<p>Периодически переиндексирует корпус текущим энкодером и берёт негативы из его топа, то есть ошибки самой модели. BM25-негативы отражают ошибки лексического поиска, а не плотной модели.</p>
+</details>
+<details class="callout md details"><summary>Что такое ложный негатив и как его отсеять?</summary>
+<p>Релевантный документ, не помеченный как позитив. Его можно отфильтровать cross-encoder'ом, порогом по марже относительно скора позитива, окном рангов (без самого верха) и дедупликацией документов в батче.</p>
+</details>
+<details class="callout md details"><summary>Зачем в Margin-MSE сравнивать разности скоров, а не сами скоры?</summary>
+<p>У учителя и студента разные шкалы скоров; разность позитива и негатива не зависит от сдвига шкалы, поэтому студент учится повторять упорядочение и размер отрыва.</p>
+</details>
+<details class="callout md details"><summary>Как обучать с большим батчем, если он не помещается в память?</summary>
+<p>Gradient caching: эмбеддинги батча считаются без градиентов, потеря и её градиент по эмбеддингам — один раз, затем градиент прогоняется через энкодер кусками; память почти не зависит от размера батча.</p>
+</details>
+<h2 id="что-почитать">Что почитать</h2>
+<ul>
+<li>Karpukhin et al., <a href="https://arxiv.org/abs/2004.04906" rel="noopener noreferrer nofollow">Dense Passage Retrieval for Open-Domain QA</a>, 2020.</li>
+<li>Xiong et al., <a href="https://arxiv.org/abs/2007.00808" rel="noopener noreferrer nofollow">Approximate Nearest Neighbor Negative Contrastive Learning for Dense Text Retrieval</a>, ICLR 2021.</li>
+<li>Qu et al., <a href="https://arxiv.org/abs/2010.08191" rel="noopener noreferrer nofollow">RocketQA</a>, NAACL 2021.</li>
+<li>Hofstätter et al., <a href="https://arxiv.org/abs/2010.02666" rel="noopener noreferrer nofollow">Improving Efficient Neural Ranking Models with Cross-Architecture Knowledge Distillation</a>, 2020.</li>
+<li>Gao et al., <a href="https://arxiv.org/abs/2101.06983" rel="noopener noreferrer nofollow">Scaling Deep Contrastive Learning Batch Size under Memory Limited Setup</a>, RepL4NLP 2021.</li>
+<li>Kusupati et al., <a href="https://arxiv.org/abs/2205.13147" rel="noopener noreferrer nofollow">Matryoshka Representation Learning</a>, NeurIPS 2022; Wang et al., <a href="https://arxiv.org/abs/2212.03533" rel="noopener noreferrer nofollow">E5</a>, 2022; Xiao et al., <a href="https://arxiv.org/abs/2309.07597" rel="noopener noreferrer nofollow">C-Pack</a>, SIGIR 2024.</li>
+<li>Bonifacio et al., <a href="https://arxiv.org/abs/2202.05144" rel="noopener noreferrer nofollow">InPars</a>, 2022; Dai et al., <a href="https://arxiv.org/abs/2209.11755" rel="noopener noreferrer nofollow">Promptagator</a>, 2022.</li>
+</ul>
+</div>
+      
+
+      
+
+      
+      <nav class="pager" aria-label="Соседние статьи">
+        <a href="/edufamcs-demo/handbook/retrieval/agentnyj-poisk/"><span><svg class="ico sm" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-arrow-left"/></svg>Назад</span>Рассуждающий и агентный поиск: 2025–2026</a>
+        <a href="/edufamcs-demo/handbook/retrieval/poiskovye-dvizhki/"><span>Дальше<svg class="ico sm" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-arrow"/></svg></span>Поисковые движки: Elasticsearch, OpenSearch, Qdrant, Vespa</a>
+      </nav>
+      
+    </article>
+
+    <aside class="hb-toc" aria-label="На этой странице">
+      <a class="l2" href="#откуда-берутся-пары">Откуда берутся пары</a><a class="l2" href="#контрастивная-потеря-и-градиент">Контрастивная потеря и градиент</a><a class="l2" href="#почему-случайных-негативов-мало">Почему случайных негативов мало</a><a class="l2" href="#трудные-негативы">Трудные негативы</a><a class="l2" href="#ложные-негативы">Ложные негативы</a><a class="l2" href="#дистилляция-из-cross-encoderа">Дистилляция из cross-encoder&#x27;а</a><a class="l2" href="#многостадийное-обучение">Многостадийное обучение</a><a class="l2" href="#matryoshka-и-префиксы">Matryoshka и префиксы</a><a class="l2" href="#оценка-на-своём-домене">Оценка на своём домене</a><a class="l2" href="#практика-дообучения">Практика дообучения</a><a class="l2" href="#код">Код</a><a class="l2" href="#ловушки">Ловушки</a><a class="l2" href="#проверь-себя">Проверь себя</a><a class="l2" href="#что-почитать">Что почитать</a>
+    </aside>
+  </div>
+</div>
+
+
+</main>
+
+<footer class="ftr" data-theme="dark">
+  <svg class="sym fern" viewBox="0 0 40.5 65.02" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#fern"/></svg>
+  <div class="container">
+    <div class="ftr-row">
+      <a href="/edufamcs-demo/" aria-label="EDU FAMCS — главная"><img src="/edufamcs-demo/static/brand/logo/logo-edu-dark.svg" alt="EDU FAMCS" width="196" height="40"></a>
+      <ul class="ftr-links">
+        <li><a href="/edufamcs-demo/#courses">Курсы</a></li>
+        <li><a href="/edufamcs-demo/ml/">Машинное обучение</a></li>
+        <li><a href="/edufamcs-demo/handbook/">Хендбук</a></li>
+        <li><a href="/edufamcs-demo/news/">Новости</a></li>
+        <li><a href="/edufamcs-demo/people/">Авторы</a></li>
+        <li><a href="/edufamcs-demo/about/">О&nbsp;нас</a></li>
+        <li><a href="/edufamcs-demo/propose/">Предложить или исправить</a></li>
+        <li><a href="/edufamcs-demo/privacy/">Конфиденциальность</a></li>
+      </ul>
+    </div>
+    <div class="ftr-big" aria-hidden="true">EDU<span class="d">·</span>FAMCS</div>
+    <p class="ftr-copy">© 2026 EDU FAMCS · Минск</p>
+  </div>
+</footer>
+
+<div class="toasts-region" aria-live="polite" id="toasts">
+
+</div>
+
+</body>
+</html>

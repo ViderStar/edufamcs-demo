@@ -1,0 +1,270 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Теория информации для ML · EDU FAMCS</title>
+<meta name="description" content="Теория информации для ML — Математическая база. Хендбук ML-курса ФПМИ.">
+<meta name="theme-color" content="#060A16">
+<meta name="robots" content="noindex, nofollow">
+<meta name="htmx-config" content='{"allowEval":false,"includeIndicatorStyles":false,"historyCacheSize":0,"selfRequestsOnly":true}'>
+<meta name="katex-js" content="/edufamcs-demo/static/vendor/katex/katex.min.js">
+<meta name="katex-css" content="/edufamcs-demo/static/vendor/katex/katex.min.css">
+<link rel="icon" href="/edufamcs-demo/static/brand/logo/favicon-16.svg" type="image/svg+xml" sizes="16x16">
+<link rel="icon" href="/edufamcs-demo/static/brand/logo/favicon.svg" type="image/svg+xml" sizes="any">
+<link rel="preload" href="/edufamcs-demo/static/brand/fonts/manrope-cyrillic-400.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/edufamcs-demo/static/brand/fonts/unbounded-cyrillic-800.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="/edufamcs-demo/static/brand/fonts.css">
+<link rel="stylesheet" href="/edufamcs-demo/static/brand/tokens.css">
+<link rel="stylesheet" href="/edufamcs-demo/static/brand/components.css">
+<link rel="stylesheet" href="/edufamcs-demo/static/css/site.css">
+<link rel="stylesheet" href="/edufamcs-demo/static/css/hub.css">
+<link rel="stylesheet" href="/edufamcs-demo/static/css/about.css">
+<link rel="stylesheet" href="/edufamcs-demo/static/handbook/handbook.css">
+<script src="/edufamcs-demo/static/js/theme.js"></script>
+<script src="/edufamcs-demo/static/vendor/htmx/htmx.min.js" defer></script>
+<script src="/edufamcs-demo/static/vendor/alpine/alpine-csp.min.js" defer></script>
+<script src="/edufamcs-demo/static/js/site.js" defer></script>
+<script src="/edufamcs-demo/static/handbook/handbook.js" defer></script>
+</head>
+<body class="" hx-headers='{"X-CSRFToken": "GPUGGzOmmbmbCyeYFRg9M8KqRAzWECKyi2JDWBndnYAKNRtqEku6u1CojJGUomJf"}'>
+<a class="skip" href="#main">К содержанию</a>
+<div class="demo-bar" role="note">Демо-версия для отзывов: вход, запись на курсы и формы здесь не работают.</div>
+
+<header class="hdr">
+  <div class="container">
+    <a class="brand" href="/edufamcs-demo/" aria-label="EDU FAMCS — главная">
+      <span class="full"><img class="only-light" src="/edufamcs-demo/static/brand/logo/logo-edu-light.svg" alt="EDU FAMCS" width="196" height="40"><img class="only-dark" src="/edufamcs-demo/static/brand/logo/logo-edu-dark.svg" alt="EDU FAMCS" width="196" height="40"></span>
+      <span class="short"><img class="only-light" src="/edufamcs-demo/static/brand/logo/logo-edu-light.svg" alt="EDU FAMCS" height="30"><img class="only-dark" src="/edufamcs-demo/static/brand/logo/logo-edu-dark.svg" alt="EDU FAMCS" height="30"></span>
+    </a>
+    <nav class="nav" id="main-nav" aria-label="Основная навигация">
+      <a href="/edufamcs-demo/#courses">Курсы</a>
+      <a href="/edufamcs-demo/ml/" >Машинное обучение</a>
+      
+      <a href="/edufamcs-demo/handbook/" aria-current="page">Хендбук</a>
+      <a href="/edufamcs-demo/news/" >Новости</a>
+      <a href="/edufamcs-demo/people/" >Авторы</a>
+      <a href="/edufamcs-demo/about/" >О&nbsp;нас</a>
+    </nav>
+    <div class="hdr-actions">
+      
+      <a class="btn btn-outline btn-login" href="/edufamcs-demo/accounts/login/?next=/handbook/math/teoriya-informacii/">Войти</a>
+      
+      <button class="icon-btn menu-btn" type="button" aria-label="Меню" aria-expanded="false" aria-controls="main-nav"><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-menu"/></svg></button>
+    </div>
+  </div>
+</header>
+
+<main id="main">
+
+
+
+<div class="container hb-page hb-tone">
+  <div class="hb-readbar" aria-hidden="true"><i></i></div>
+  <div class="hb">
+    <aside class="hb-nav" aria-label="Статьи раздела">
+      
+<form class="hb-search" action="/edufamcs-demo/handbook/search/" method="get" role="search">
+  <svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-search"/></svg>
+  <input class="input" type="search" name="q" value="" placeholder="Поиск по хендбуку" aria-label="Поиск по хендбуку" autocomplete="off" maxlength="120"
+    hx-get="/edufamcs-demo/handbook/search/" hx-trigger="input changed delay:250ms, search" hx-target="#hb-nav-results" hx-sync="this:replace">
+</form>
+
+      <div id="hb-nav-results" class="hb-nav-results" aria-live="polite"></div>
+      <a class="grp" href="/edufamcs-demo/handbook/math/">Вероятность и статистика</a>
+      
+      <a class="" href="/edufamcs-demo/handbook/math/teoriya-veroyatnostej/">Теория вероятностей</a>
+      
+      <a class="" href="/edufamcs-demo/handbook/math/ocenki-parametrov-i-mmp/">Оценки параметров и метод максимального правдоподобия</a>
+      
+      <a class="" href="/edufamcs-demo/handbook/math/intervaly-i-proverka-gipotez/">Доверительные интервалы и проверка гипотез</a>
+      
+      <a class="" href="/edufamcs-demo/handbook/math/bajesovskaya-statistika/">Байесовская статистика</a>
+      
+      <a class="cur" href="/edufamcs-demo/handbook/math/teoriya-informacii/" aria-current="page">Теория информации для ML</a>
+      
+      <a class="" href="/edufamcs-demo/handbook/math/statistika-ab-testov/">Статистика A/B-тестов</a>
+      
+    </aside>
+
+    <article class="hb-main">
+      <nav class="crumbs" aria-label="Навигация"><a href="/edufamcs-demo/handbook/">Хендбук</a><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-chev"/></svg><a href="/edufamcs-demo/handbook/math/">Математическая база</a></nav>
+      <h1 class="h1">Теория информации для ML</h1>
+      <div class="hb-meta">
+        
+        
+        <span><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-clock"/></svg>10&nbsp;мин</span>
+        <span class="hb-authors"><span class="avatar sm" title="Артем Лебедевич">АЛ</span>Артем Лебедевич</span>
+        <span><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-edit"/></svg>10 ноября 2026</span>
+        
+        
+      </div>
+
+      
+      <details class="hb-mtoc">
+        <summary><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-list"/></svg>Содержание<svg class="ico sm" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-chev-down"/></svg></summary>
+        <a class="l2" href="#неожиданность-и-энтропия">Неожиданность и энтропия</a><a class="l2" href="#кросс-энтропия-и-kl-дивергенция">Кросс-энтропия и KL-дивергенция</a><a class="l2" href="#почему-log-loss-это-максимум-правдоподобия">Почему log-loss — это максимум правдоподобия</a><a class="l2" href="#прямая-и-обратная-kl">Прямая и обратная KL</a><a class="l2" href="#взаимная-информация">Взаимная информация</a><a class="l2" href="#perplexity">Perplexity</a><a class="l2" href="#прирост-информации-в-дереве">Прирост информации в дереве</a><a class="l2" href="#label-smoothing-и-температура">Label smoothing и температура</a><a class="l2" href="#код">Код</a><a class="l2" href="#ловушки">Ловушки</a><a class="l2" href="#проверь-себя">Проверь себя</a><a class="l2" href="#что-почитать">Что почитать</a>
+      </details>
+      
+
+      <div class="prose"><p>Кросс-энтропия, KL-дивергенция, perplexity, прирост информации в дереве, InfoNCE, label smoothing и температура softmax — всё это одни и те же несколько понятий, записанных по-разному. Если их связать, исчезает половина «магических» формул в ML: log-loss перестаёт быть выдумкой, а поведение разных потерь становится предсказуемым. Краткое введение есть в <a href="/edufamcs-demo/handbook/math/teoriya-veroyatnostej/" rel="noopener noreferrer nofollow">теории вероятностей</a>; здесь — вывод, геометрия и практика.</p>
+<h2 id="неожиданность-и-энтропия">Неожиданность и энтропия</h2>
+<p><strong>Неожиданность</strong> исхода с вероятностью <span class="tex">p</span> — <span class="tex">-\log p</span>: редкое событие несёт больше информации, а достоверное — ноль; для независимых событий неожиданности складываются, потому что вероятности перемножаются. <strong>Энтропия</strong> — средняя неожиданность:</p>
+<div class="tex tex-block">H(p)=-\sum_kp_k\log p_k.</div>
+<p>Основание логарифма задаёт единицу: <span class="tex">\log_2</span> — <strong>биты</strong>, <span class="tex">\ln</span> — <strong>наты</strong> (в ML обычно наты; <span class="tex">1</span> нат <span class="tex">=1/\ln2\approx1{,}443</span> бита). Монета с <span class="tex">p=0{,}9</span>: <span class="tex">H=-0{,}9\log_20{,}9-0{,}1\log_20{,}1=0{,}137+0{,}332=0{,}469</span> бита (<span class="tex">0{,}325</span> ната), у честной монеты ровно <span class="tex">1</span> бит. Предсказуемый источник даёт мало информации.</p>
+<p>Энтропия максимальна у равномерного распределения. Для <span class="tex">u_k=1/K</span> получаем <span class="tex">\mathrm{KL}(p\|u)=\sum p_k\ln(p_kK)=\ln K-H(p)</span>, откуда <span class="tex">H(p)=\ln K-\mathrm{KL}(p\|u)\le\ln K</span> — оценка следует из неотрицательности KL, которую мы докажем ниже.</p>
+<h2 id="кросс-энтропия-и-kl-дивергенция">Кросс-энтропия и KL-дивергенция</h2>
+<div class="tex tex-block">H(p,q)=-\sum_kp_k\ln q_k,\qquad\mathrm{KL}(p\|q)=\sum_kp_k\ln\frac{p_k}{q_k}=H(p,q)-H(p).</div>
+<p>Смысл: <span class="tex">H(p,q)</span> — средняя неожиданность, если события идут из <span class="tex">p</span>, а мы «кодируем» их по <span class="tex">q</span>; <span class="tex">\mathrm{KL}</span> — переплата сверх неизбежного минимума <span class="tex">H(p)</span>.</p>
+<p><strong>Теорема</strong> (<span class="tex">\mathrm{KL}\ge0</span>, равенство при <span class="tex">p=q</span>). Функция <span class="tex">\ln</span> вогнута, поэтому по неравенству Йенсена <span class="tex">\mathbb{E}[\ln\xi]\le\ln\mathbb{E}[\xi]</span>. Возьмём <span class="tex">\xi=q_k/p_k</span> при <span class="tex">k\sim p</span> (только <span class="tex">p_k&gt;0</span>):</p>
+<div class="tex tex-block">-\mathrm{KL}(p\|q)=\sum_{p_k&gt;0}p_k\ln\frac{q_k}{p_k}\le\ln\sum_{p_k&gt;0}p_k\frac{q_k}{p_k}=\ln\sum_{p_k&gt;0}q_k\le\ln1=0.</div>
+<p>Равенство в Йенсене для строго вогнутой функции — только при <span class="tex">q_k/p_k=\text{const}</span>, а сумма по носителю равна единице лишь если <span class="tex">q</span> не имеет массы вне носителя <span class="tex">p</span>; вместе это даёт <span class="tex">p=q</span>.</p>
+<p><strong>Несимметричность.</strong> <span class="tex">\mathrm{KL}(p\|q)\neq\mathrm{KL}(q\|p)</span>: на 3 точках, <span class="tex">p=(0{,}5;0{,}3;0{,}2)</span>, <span class="tex">q=(0{,}4;0{,}4;0{,}2)</span>:</p>
+<div class="tex tex-block">\mathrm{KL}(p\|q)=0{,}5\log_2\tfrac{0{,}5}{0{,}4}+0{,}3\log_2\tfrac{0{,}3}{0{,}4}+0=0{,}1610-0{,}1245=0{,}0365\text{ бит},</div>
+<div class="tex tex-block">\mathrm{KL}(q\|p)=0{,}4\log_2\tfrac{0{,}4}{0{,}5}+0{,}4\log_2\tfrac{0{,}4}{0{,}3}=-0{,}1288+0{,}1660=0{,}0372\text{ бит}.</div>
+<p>Заодно проверка тождества: <span class="tex">H(p)=1{,}4855</span>, <span class="tex">H(p,q)=1{,}5219=H(p)+0{,}0365</span> бит. Различия малы на близких распределениях, но становятся огромными, если <span class="tex">q_k\to0</span> там, где <span class="tex">p_k&gt;0</span>: <span class="tex">\mathrm{KL}(p\|q)\to\infty</span>.</p>
+<h2 id="почему-log-loss-это-максимум-правдоподобия">Почему log-loss — это максимум правдоподобия</h2>
+<p>Пусть <span class="tex">\hat p</span> — эмпирическое распределение меток, <span class="tex">q_\theta</span> — модель. Средний логарифм правдоподобия <span class="tex">\frac1n\sum_i\ln q_\theta(y_i)=\sum_k\hat p_k\ln q_\theta(k)=-H(\hat p,q_\theta)</span>. Поэтому</p>
+<div class="tex tex-block">\max_\theta\frac1n\sum_i\ln q_\theta(y_i)\;\Longleftrightarrow\;\min_\theta H(\hat p,q_\theta)\;\Longleftrightarrow\;\min_\theta\mathrm{KL}(\hat p\|q_\theta),</div>
+<p>потому что <span class="tex">H(\hat p)</span> от <span class="tex">\theta</span> не зависит. Минимизация log-loss, максимизация правдоподобия (<a href="/edufamcs-demo/handbook/math/ocenki-parametrov-i-mmp/" rel="noopener noreferrer nofollow">ММП</a>) и приближение эмпирического распределения в смысле <span class="tex">\mathrm{KL}(\hat p\|q)</span> — три записи одной задачи. (В проверке на 1000 объектов: среднее лог-правдоподобие <span class="tex">-1{,}06324</span> и <span class="tex">-(H(\hat p)+\mathrm{KL})</span> совпали до пятого знака.)</p>
+<h2 id="прямая-и-обратная-kl">Прямая и обратная KL</h2>
+<p>В <span class="tex">\mathrm{KL}(p\|q)</span> данные идут из <span class="tex">p</span>, и вклад даёт <span class="tex">p\ln(p/q)</span>: где <span class="tex">p&gt;0</span>, а <span class="tex">q\approx0</span> — штраф огромен, поэтому <span class="tex">q</span> вынуждена <strong>покрыть</strong> всю массу <span class="tex">p</span> (<em>mean-seeking</em>, «покрывающее»). В <span class="tex">\mathrm{KL}(q\|p)</span> штраф там, где <span class="tex">q&gt;0</span>, а <span class="tex">p\approx0</span>, поэтому <span class="tex">q</span> может спокойно игнорировать часть мод <span class="tex">p</span> и сесть на одну (<em>mode-seeking</em>). Максимальное правдоподобие минимизирует прямую; вариационный вывод (ELBO) — обратную.</p>
+<p>Эксперимент: <span class="tex">p=\tfrac12\mathcal{N}(-3,1)+\tfrac12\mathcal{N}(3,1)</span>, аппроксимируем нормальным <span class="tex">q=\mathcal{N}(\mu,\sigma^2)</span> (интегралы по сетке):</p>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>Критерий</th>
+<th><span class="tex">\mu</span></th>
+<th><span class="tex">\sigma</span></th>
+<th><span class="tex">\mathrm{KL}(p|q)</span></th>
+<th><span class="tex">\mathrm{KL}(q|p)</span></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><span class="tex">\min\mathrm{KL}(p|q)</span></td>
+<td><span class="tex">0{,}00</span></td>
+<td><span class="tex">3{,}16</span></td>
+<td><span class="tex">0{,}462</span></td>
+<td><span class="tex">0{,}938</span></td>
+</tr>
+<tr>
+<td><span class="tex">\min\mathrm{KL}(q|p)</span></td>
+<td><span class="tex">\pm2{,}98</span></td>
+<td><span class="tex">1{,}02</span></td>
+<td><span class="tex">7{,}86</span></td>
+<td><span class="tex">0{,}689</span></td>
+</tr>
+</tbody>
+</table></div>
+<p>Прямая KL даёт совпадение моментов: максимизируя <span class="tex">\mathbb{E}_p\ln q</span> по <span class="tex">\mu,\sigma</span>, получаем <span class="tex">\mu=\mathbb{E}_pX=0</span> и <span class="tex">\sigma^2=\mathrm{Var}_pX=1+9=10</span> (<span class="tex">\sigma=3{,}16</span>) — широкий колокол, накрывающий обе моды и пик посередине, где у <span class="tex">p</span> почти ноль. Обратная KL садится на одну моду (<span class="tex">\approx\ln2</span> потерь на вторую, <span class="tex">0{,}689</span>); есть два зеркальных локальных минимума. Значит, «правдоподобие» обучает покрывающие модели (и мутные сэмплы), а VI даёт модели, которые недооценивают разброс.</p>
+<p><strong>Дивергенция Йенсена–Шеннона</strong> симметризует: <span class="tex">\mathrm{JS}(p,q)=\tfrac12\mathrm{KL}(p\|m)+\tfrac12\mathrm{KL}(q\|m)</span>, <span class="tex">m=\tfrac{p+q}2</span>. Она ограничена: <span class="tex">\mathrm{JS}\le\ln2</span>, и конечна даже при непересекающихся носителях; на нашем примере <span class="tex">0{,}0064</span> ната. Именно она возникает в оригинальной GAN (Goodfellow et al., 2014) при оптимальном дискриминаторе.</p>
+<h2 id="взаимная-информация">Взаимная информация</h2>
+<div class="tex tex-block">I(X;Y)=\mathrm{KL}\big(p_{XY}\,\|\,p_Xp_Y\big)=H(X)+H(Y)-H(X,Y)=H(X)-H(X\mid Y)\ge0,</div>
+<p>нуль — только при независимости. Пример: пара бинарных величин с <span class="tex">p_{XY}=\begin{pmatrix}0{,}4&amp;0{,}1\\0{,}1&amp;0{,}4\end{pmatrix}</span>: <span class="tex">H(X)=H(Y)=1</span> бит, <span class="tex">H(X,Y)=1{,}722</span>, <span class="tex">I=0{,}278</span> бит.</p>
+<p><strong>Отбор признаков.</strong> <span class="tex">I(f;y)</span> ловит любую зависимость, а корреляция — только линейную. Проверка на синтетике (<span class="tex">n=5000</span>, <code>sklearn.feature_selection.mutual_info_classif</code>, оценка по ближайшим соседям): у признака, равного <span class="tex">\pm2</span> при <span class="tex">y=1</span> и шуму около нуля при <span class="tex">y=0</span>, модуль корреляции с <span class="tex">y</span> равен <span class="tex">0{,}007</span>, а <span class="tex">I=0{,}693</span> ната (<span class="tex">=\ln2</span>, признак полностью определяет <span class="tex">y</span>); у линейного признака — корреляция <span class="tex">0{,}45</span>, <span class="tex">I=0{,}118</span>; у шума — <span class="tex">0{,}012</span>.</p>
+<p><strong>InfoNCE.</strong> Контрастивные потери (CPC, Oord et al., 2018) выбирают из <span class="tex">N</span> примеров один положительный по оценке <span class="tex">f(x,c)</span>; для них <span class="tex">I(x;c)\ge\ln N-\mathcal{L}_{\text{NCE}}</span>. Минимизируя потерю, мы поднимаем нижнюю границу взаимной информации между парой представлений; граница не больше <span class="tex">\ln N</span>, поэтому для большой <span class="tex">I</span> нужны большие батчи.</p>
+<h2 id="perplexity">Perplexity</h2>
+<p>Языковая модель обучается на среднюю кросс-энтропию на токен <span class="tex">\mathcal{L}=-\frac1T\sum_t\ln q(w_t\mid w_{&lt;t})</span>; <strong>perplexity</strong> <span class="tex">=e^{\mathcal{L}}</span> — эффективное число равновероятных вариантов на токен. Модель дала четырём токенам вероятности <span class="tex">0{,}25;0{,}1;0{,}5;0{,}05</span>: <span class="tex">\mathcal{L}=1{,}844</span> ната, perplexity <span class="tex">=6{,}32</span> (среднее геометрическое <span class="tex">1/p</span>). Сравнивать perplexity можно только при одинаковых токенизации и тексте: у модели с более крупными токенами она выше, хотя качество может быть не хуже. Для сравнения между токенизаторами используют бит на символ или байт.</p>
+<h2 id="прирост-информации-в-дереве">Прирост информации в дереве</h2>
+<p>Для вершины <span class="tex">R</span> с распределением классов <span class="tex">p</span> и разбиения на <span class="tex">R_L,R_R</span> информационный прирост <span class="tex">IG=H(R)-\frac{|R_L|}{|R|}H(R_L)-\frac{|R_R|}{|R|}H(R_R)=I(\text{ветка};y)</span> — это взаимная информация метки и ответа на вопрос сплита. На примере из <a href="/edufamcs-demo/handbook/classic/derevya-reshenij/" rel="noopener noreferrer nofollow">главы о деревьях</a>: <span class="tex">5+/5-</span>, сплит A делит на <span class="tex">(4+,0-)</span> и <span class="tex">(1+,5-)</span>: <span class="tex">IG=1-0{,}6\cdot H(1/6)=0{,}610</span> бит; сплит B даёт <span class="tex">(3+,2-),(2+,3-)</span> и <span class="tex">IG=0{,}029</span> бит.</p>
+<h2 id="label-smoothing-и-температура">Label smoothing и температура</h2>
+<p><strong>Label smoothing</strong> (Szegedy et al., 2016) заменяет one-hot целью <span class="tex">q_k=(1-\varepsilon)\mathbb{1}[k=y]+\varepsilon/K</span>. Тогда потеря <span class="tex">-\sum q_k\ln\hat p_k=(1-\varepsilon)\big(-\ln\hat p_y\big)+\varepsilon\cdot\big(-\tfrac1K\sum\ln\hat p_k\big)</span> — обычная кросс-энтропия плюс <span class="tex">\varepsilon</span> раз кросс-энтропия до равномерного, то есть штраф <span class="tex">\mathrm{KL}(u\|\hat p)</span> с точностью до константы: он запрещает модели уходить к вероятности <span class="tex">1</span> и ограничивает размер логитов. <strong>Температура</strong> <span class="tex">T</span>: <span class="tex">\mathrm{softmax}(z/T)</span>. При <span class="tex">z=(2;0{,}5;-1;0;1)</span> энтропия <span class="tex">0{,}609</span> ната при <span class="tex">T=0{,}5</span>, <span class="tex">1{,}206</span> при <span class="tex">T=1</span>, <span class="tex">1{,}491</span> при <span class="tex">T=2</span> и <span class="tex">\to\ln5=1{,}609</span> при росте <span class="tex">T</span>: высокая температура приближает распределение к равномерному (в дистилляции мягкие метки несут «тёмное знание» — Hinton et al., 2015), низкая — к argmax.</p>
+<h2 id="код">Код</h2>
+<div class="code"><div class="code-head"><span class="lang">python</span></div><pre><code><span class="tok-k">import</span> numpy <span class="tok-k">as</span> np
+
+<span class="tok-k">def</span> <span class="tok-f">H</span><span class="tok-p">(</span>p<span class="tok-p">)</span><span class="tok-p">:</span>                      <span class="tok-c"># энтропия в натах</span>
+    p <span class="tok-p">=</span> p<span class="tok-p">[</span>p <span class="tok-p">&gt;</span> <span class="tok-n">0</span><span class="tok-p">]</span><span class="tok-p">;</span> <span class="tok-k">return</span> <span class="tok-p">-</span><span class="tok-p">(</span>p <span class="tok-p">*</span> np<span class="tok-p">.</span>log<span class="tok-p">(</span>p<span class="tok-p">)</span><span class="tok-p">)</span><span class="tok-p">.</span>sum<span class="tok-p">(</span><span class="tok-p">)</span>
+
+<span class="tok-k">def</span> <span class="tok-f">kl</span><span class="tok-p">(</span>p<span class="tok-p">,</span> q<span class="tok-p">)</span><span class="tok-p">:</span>                  <span class="tok-c"># KL(p||q), q&gt;0 там, где p&gt;0</span>
+    m <span class="tok-p">=</span> p <span class="tok-p">&gt;</span> <span class="tok-n">0</span><span class="tok-p">;</span> <span class="tok-k">return</span> <span class="tok-p">(</span>p<span class="tok-p">[</span>m<span class="tok-p">]</span> <span class="tok-p">*</span> np<span class="tok-p">.</span>log<span class="tok-p">(</span>p<span class="tok-p">[</span>m<span class="tok-p">]</span> <span class="tok-p">/</span> q<span class="tok-p">[</span>m<span class="tok-p">]</span><span class="tok-p">)</span><span class="tok-p">)</span><span class="tok-p">.</span>sum<span class="tok-p">(</span><span class="tok-p">)</span>
+
+p<span class="tok-p">,</span> q <span class="tok-p">=</span> np<span class="tok-p">.</span>array<span class="tok-p">(</span><span class="tok-p">[</span><span class="tok-n">.5</span><span class="tok-p">,</span> <span class="tok-n">.3</span><span class="tok-p">,</span> <span class="tok-n">.2</span><span class="tok-p">]</span><span class="tok-p">)</span><span class="tok-p">,</span> np<span class="tok-p">.</span>array<span class="tok-p">(</span><span class="tok-p">[</span><span class="tok-n">.4</span><span class="tok-p">,</span> <span class="tok-n">.4</span><span class="tok-p">,</span> <span class="tok-n">.2</span><span class="tok-p">]</span><span class="tok-p">)</span>
+<span class="tok-f">print</span><span class="tok-p">(</span>kl<span class="tok-p">(</span>p<span class="tok-p">,</span> q<span class="tok-p">)</span> <span class="tok-p">/</span> np<span class="tok-p">.</span>log<span class="tok-p">(</span><span class="tok-n">2</span><span class="tok-p">)</span><span class="tok-p">,</span> kl<span class="tok-p">(</span>q<span class="tok-p">,</span> p<span class="tok-p">)</span> <span class="tok-p">/</span> np<span class="tok-p">.</span>log<span class="tok-p">(</span><span class="tok-n">2</span><span class="tok-p">)</span><span class="tok-p">)</span>       <span class="tok-c"># 0.0365, 0.0372 бит</span>
+m <span class="tok-p">=</span> <span class="tok-p">(</span>p <span class="tok-p">+</span> q<span class="tok-p">)</span> <span class="tok-p">/</span> <span class="tok-n">2</span>
+<span class="tok-f">print</span><span class="tok-p">(</span><span class="tok-n">0.5</span> <span class="tok-p">*</span> kl<span class="tok-p">(</span>p<span class="tok-p">,</span> m<span class="tok-p">)</span> <span class="tok-p">+</span> <span class="tok-n">0.5</span> <span class="tok-p">*</span> kl<span class="tok-p">(</span>q<span class="tok-p">,</span> m<span class="tok-p">)</span><span class="tok-p">)</span>                   <span class="tok-c"># JS, наты: 0.0064</span>
+<span class="tok-f">print</span><span class="tok-p">(</span><span class="tok-p">-</span><span class="tok-p">(</span>p <span class="tok-p">*</span> np<span class="tok-p">.</span>log<span class="tok-p">(</span>q<span class="tok-p">)</span><span class="tok-p">)</span><span class="tok-p">.</span>sum<span class="tok-p">(</span><span class="tok-p">)</span><span class="tok-p">,</span> H<span class="tok-p">(</span>p<span class="tok-p">)</span> <span class="tok-p">+</span> kl<span class="tok-p">(</span>p<span class="tok-p">,</span> q<span class="tok-p">)</span><span class="tok-p">)</span>           <span class="tok-c"># H(p,q) = H(p) + KL</span>
+</code></pre></div>
+<h2 id="ловушки">Ловушки</h2>
+<ul>
+<li><span class="tex">\mathrm{KL}</span> бесконечна, если <span class="tex">q_k=0</span> при <span class="tex">p_k&gt;0</span>: в коде добавляют <span class="tex">\varepsilon</span> или считают через логиты (<code>log_softmax</code>), а не через <code>log(softmax)</code>.</li>
+<li>Энтропия непрерывной величины (дифференциальная) может быть отрицательной и не инвариантна к замене переменных; KL и MI инвариантны.</li>
+<li>Оценка MI по выборке смещена, особенно для непрерывных признаков и малого <span class="tex">n</span>; значения разных оценщиков несравнимы.</li>
+<li>На собеседовании: доказать <span class="tex">\mathrm{KL}\ge0</span>; связать log-loss, ММП и KL; объяснить, почему обучение по правдоподобию даёт «размазанные» модели; чему равна perplexity равномерной модели на словаре <span class="tex">V</span> (ровно <span class="tex">V</span>).</li>
+</ul>
+<h2 id="проверь-себя">Проверь себя</h2>
+<details class="callout md details"><summary>Почему $H(p,q)\ge H(p)$?</summary>
+<p>Разность равна <span class="tex">\mathrm{KL}(p\|q)\ge0</span> — по неравенству Йенсена для вогнутого логарифма. Лучший код для <span class="tex">p</span> — построенный по самому <span class="tex">p</span>.</p>
+</details>
+<details class="callout md details"><summary>Почему минимизация log-loss эквивалентна минимизации $\mathrm{KL}(\hat p\|q_\theta)$?</summary>
+<p>Среднее лог-правдоподобие равно <span class="tex">-H(\hat p,q_\theta)=-H(\hat p)-\mathrm{KL}(\hat p\|q_\theta)</span>, а <span class="tex">H(\hat p)</span> не зависит от параметров.</p>
+</details>
+<details class="callout md details"><summary>Какая из KL «покрывает» все моды целевого распределения, а какая выбирает одну?</summary>
+<p>Прямая <span class="tex">\mathrm{KL}(p\|q)</span> штрафует <span class="tex">q\approx0</span> там, где <span class="tex">p&gt;0</span>, и потому покрывает все моды (с размазыванием); обратная <span class="tex">\mathrm{KL}(q\|p)</span> штрафует массу <span class="tex">q</span> вне <span class="tex">p</span> и садится на одну моду.</p>
+</details>
+<details class="callout md details"><summary>Чему равна perplexity модели с cross-entropy $2{,}3$ ната на токен?</summary>
+<p><span class="tex">e^{2{,}3}\approx10</span>: в среднем модель «колеблется» между десятью равновероятными токенами.</p>
+</details>
+<details class="callout md details"><summary>Как label smoothing выражается в терминах KL?</summary>
+<p>К обычной кросс-энтропии добавляется <span class="tex">\varepsilon</span>-кратный штраф <span class="tex">\mathrm{KL}(u\|\hat p)</span> (с точностью до константы), то есть притяжение к равномерному распределению.</p>
+</details>
+<h2 id="что-почитать">Что почитать</h2>
+<ul>
+<li>Shannon C. <em>A Mathematical Theory of Communication</em>, Bell System Technical Journal, 1948.</li>
+<li>Cover T., Thomas J. <em>Elements of Information Theory</em>, 2nd ed., Wiley, 2006 — гл. 2.</li>
+<li>MacKay D. <em>Information Theory, Inference, and Learning Algorithms</em>, Cambridge University Press, 2003 (свободно доступна): https://www.inference.org.uk/itila/book.html</li>
+<li>Oord A., Li Y., Vinyals O. <em>Representation Learning with Contrastive Predictive Coding</em>, 2018: https://arxiv.org/abs/1807.03748</li>
+<li>Szegedy C. et al. <em>Rethinking the Inception Architecture for Computer Vision</em>, CVPR 2016: https://arxiv.org/abs/1512.00567</li>
+<li>Hinton G., Vinyals O., Dean J. <em>Distilling the Knowledge in a Neural Network</em>, 2015: https://arxiv.org/abs/1503.02531</li>
+<li>Lin J. <em>Divergence measures based on the Shannon entropy</em>, IEEE Trans. Information Theory, 1991.</li>
+<li>Kraskov A., Stögbauer H., Grassberger P. <em>Estimating mutual information</em>, Physical Review E, 2004 — идея оценки MI по соседям.</li>
+</ul>
+</div>
+      
+
+      
+
+      
+      <nav class="pager" aria-label="Соседние статьи">
+        <a href="/edufamcs-demo/handbook/math/bajesovskaya-statistika/"><span><svg class="ico sm" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-arrow-left"/></svg>Назад</span>Байесовская статистика</a>
+        <a href="/edufamcs-demo/handbook/math/statistika-ab-testov/"><span>Дальше<svg class="ico sm" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-arrow"/></svg></span>Статистика A/B-тестов</a>
+      </nav>
+      
+    </article>
+
+    <aside class="hb-toc" aria-label="На этой странице">
+      <a class="l2" href="#неожиданность-и-энтропия">Неожиданность и энтропия</a><a class="l2" href="#кросс-энтропия-и-kl-дивергенция">Кросс-энтропия и KL-дивергенция</a><a class="l2" href="#почему-log-loss-это-максимум-правдоподобия">Почему log-loss — это максимум правдоподобия</a><a class="l2" href="#прямая-и-обратная-kl">Прямая и обратная KL</a><a class="l2" href="#взаимная-информация">Взаимная информация</a><a class="l2" href="#perplexity">Perplexity</a><a class="l2" href="#прирост-информации-в-дереве">Прирост информации в дереве</a><a class="l2" href="#label-smoothing-и-температура">Label smoothing и температура</a><a class="l2" href="#код">Код</a><a class="l2" href="#ловушки">Ловушки</a><a class="l2" href="#проверь-себя">Проверь себя</a><a class="l2" href="#что-почитать">Что почитать</a>
+    </aside>
+  </div>
+</div>
+
+
+</main>
+
+<footer class="ftr" data-theme="dark">
+  <svg class="sym fern" viewBox="0 0 40.5 65.02" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#fern"/></svg>
+  <div class="container">
+    <div class="ftr-row">
+      <a href="/edufamcs-demo/" aria-label="EDU FAMCS — главная"><img src="/edufamcs-demo/static/brand/logo/logo-edu-dark.svg" alt="EDU FAMCS" width="196" height="40"></a>
+      <ul class="ftr-links">
+        <li><a href="/edufamcs-demo/#courses">Курсы</a></li>
+        <li><a href="/edufamcs-demo/ml/">Машинное обучение</a></li>
+        <li><a href="/edufamcs-demo/handbook/">Хендбук</a></li>
+        <li><a href="/edufamcs-demo/news/">Новости</a></li>
+        <li><a href="/edufamcs-demo/people/">Авторы</a></li>
+        <li><a href="/edufamcs-demo/about/">О&nbsp;нас</a></li>
+        <li><a href="/edufamcs-demo/propose/">Предложить или исправить</a></li>
+        <li><a href="/edufamcs-demo/privacy/">Конфиденциальность</a></li>
+      </ul>
+    </div>
+    <div class="ftr-big" aria-hidden="true">EDU<span class="d">·</span>FAMCS</div>
+    <p class="ftr-copy">© 2026 EDU FAMCS · Минск</p>
+  </div>
+</footer>
+
+<div class="toasts-region" aria-live="polite" id="toasts">
+
+</div>
+
+</body>
+</html>

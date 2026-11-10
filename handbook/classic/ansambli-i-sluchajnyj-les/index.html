@@ -27,7 +27,7 @@
 <script src="/edufamcs-demo/static/js/site.js" defer></script>
 <script src="/edufamcs-demo/static/handbook/handbook.js" defer></script>
 </head>
-<body class="" hx-headers='{"X-CSRFToken": "v6rWMW3kiXq1lblwNLka52Wn42hrzXp1hcsjGJl1taGf0KhM0adfmu4IApTGEIa0"}'>
+<body class="" hx-headers='{"X-CSRFToken": "EKdgjMpiTOwiIstncancH76NSxdHcwEwgX2dzOY9UBKRTLIPbDB9p0YLkGkFWgDd"}'>
 <a class="skip" href="#main">К содержанию</a>
 <div class="demo-bar" role="note">Демо-версия для отзывов: вход, запись на курсы и формы здесь не работают.</div>
 
@@ -60,6 +60,7 @@
 
 
 <div class="container hb-page hb-tone">
+  <div class="hb-readbar" aria-hidden="true"><i></i></div>
   <div class="hb">
     <aside class="hb-nav" aria-label="Статьи раздела">
       
@@ -88,9 +89,9 @@
       <div class="hb-meta">
         
         
-        <span><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-clock"/></svg>10&nbsp;мин</span>
+        <span><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-clock"/></svg>11&nbsp;мин</span>
         <span class="hb-authors"><span class="avatar sm" title="Артем Лебедевич">АЛ</span>Артем Лебедевич</span>
-        <span><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-edit"/></svg>9 ноября 2026</span>
+        <span><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-edit"/></svg>10 ноября 2026</span>
         
         
       </div>
@@ -98,7 +99,7 @@
       
       <details class="hb-mtoc">
         <summary><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-list"/></svg>Содержание<svg class="ico sm" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-chev-down"/></svg></summary>
-        <a class="l2" href="#почему-усреднение-помогает">Почему усреднение помогает</a><a class="l2" href="#бутстрап-и-бэггинг">Бутстрап и бэггинг</a><a class="l2" href="#случайный-лес">Случайный лес</a><a class="l3" href="#oob-оценка">OOB-оценка</a><a class="l3" href="#гиперпараметры">Гиперпараметры</a><a class="l3" href="#лес-как-адаптивные-соседи">Лес как адаптивные соседи</a><a class="l3" href="#важность-признаков">Важность признаков</a><a class="l2" href="#голосование-блендинг-стекинг">Голосование, блендинг, стекинг</a><a class="l2" href="#ловушки">Ловушки</a><a class="l2" href="#что-почитать">Что почитать</a>
+        <a class="l2" href="#почему-усреднение-помогает">Почему усреднение помогает</a><a class="l2" href="#бутстрап-и-бэггинг">Бутстрап и бэггинг</a><a class="l2" href="#случайный-лес">Случайный лес</a><a class="l3" href="#oob-оценка">OOB-оценка</a><a class="l3" href="#гиперпараметры">Гиперпараметры</a><a class="l3" href="#лес-как-адаптивные-соседи">Лес как адаптивные соседи</a><a class="l3" href="#важность-признаков">Важность признаков</a><a class="l2" href="#голосование-блендинг-стекинг">Голосование, блендинг, стекинг</a><a class="l2" href="#ловушки">Ловушки</a><a class="l2" href="#проверь-себя">Проверь себя</a><a class="l2" href="#что-почитать">Что почитать</a>
       </details>
       
 
@@ -174,8 +175,24 @@ stack <span class="tok-p">=</span> StackingClassifier<span class="tok-p">(</span
 <li><strong>Вероятности не откалиброваны.</strong> Усреднение голосов деревьев редко даёт значения около 0 и 1, поэтому вероятности леса сжаты к середине (Niculescu-Mizil &amp; Caruana, 2005). Если важны сами вероятности (скоринг, ставки в аукционе), нужна калибровка: <code>CalibratedClassifierCV</code>, изотоническая или Платта.</li>
 <li>Корреляция признаков не ломает прогноз, но размывает важности.</li>
 <li>Стекинг приносит доли процента и усложняет сопровождение: прежде чем строить его, убедитесь, что базовые модели действительно различны (посмотрите на корреляцию их ошибок).</li>
-<li>На собеседовании спрашивают: формулу дисперсии ансамбля; чем лес отличается от бэггинга; почему больше деревьев не переобучает; что такое OOB; почему стекинг на предсказаниях трейна течёт.</li>
+<li><strong>На собеседовании:</strong> спрашивают: формулу дисперсии ансамбля; чем лес отличается от бэггинга; почему больше деревьев не переобучает; что такое OOB; почему стекинг на предсказаниях трейна течёт.</li>
 </ul>
+<h2 id="проверь-себя">Проверь себя</h2>
+<details class="callout md details"><summary>Чему равна дисперсия ансамбля и почему её нельзя снизить увеличением $M$ до нуля?</summary>
+<p><span class="tex">\mathrm{Var}\,A=\rho\sigma^2+\frac{1-\rho}{M}\sigma^2</span>. Второе слагаемое убывает с <span class="tex">M</span>, первое нет: при <span class="tex">M\to\infty</span> остаётся <span class="tex">\rho\sigma^2</span>. Дальше помогает только снижение корреляции <span class="tex">\rho</span>.</p>
+</details>
+<details class="callout md details"><summary>Почему случайный лес лучше обычного бэггинга деревьев?</summary>
+<p>В каждом сплите доступна только случайная часть признаков, поэтому деревья не повторяют один и тот же сильный признак в корне. Корреляция <span class="tex">\rho</span> падает ценой небольшого роста смещения каждого дерева.</p>
+</details>
+<details class="callout md details"><summary>Почему увеличение числа деревьев не приводит к переобучению?</summary>
+<p>Ошибка выходит на плато, определяемое <span class="tex">\rho\sigma^2</span>, а не растёт: усреднение не добавляет сложности отдельным деревьям. Лишние деревья лишь тратят время и память.</p>
+</details>
+<details class="callout md details"><summary>Как работает OOB-оценка и когда она врёт?</summary>
+<p>Каждый объект предсказывают деревья, в чьи бутстрап-выборки он не попал (около 37% деревьев). Для временных данных и групп (несколько строк одного пользователя) она завышена, как и обычный случайный KFold.</p>
+</details>
+<details class="callout md details"><summary>Почему нельзя учить мета-модель стекинга на предсказаниях базовых моделей для того же трейна?</summary>
+<p>Глубокий лес почти идеально предсказывает собственный трейн; мета-модель выставит ему огромный вес и провалится на новых данных. Нужны OOF-предсказания: каждая часть предсказывается моделью, её не видевшей.</p>
+</details>
 <h2 id="что-почитать">Что почитать</h2>
 <ul>
 <li>Breiman L. <em>Bagging Predictors</em>, Machine Learning, 1996.</li>
@@ -189,6 +206,8 @@ stack <span class="tok-p">=</span> StackingClassifier<span class="tok-p">(</span
       
 
       
+
+      
       <nav class="pager" aria-label="Соседние статьи">
         <a href="/edufamcs-demo/handbook/classic/derevya-reshenij/"><span><svg class="ico sm" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-arrow-left"/></svg>Назад</span>Деревья решений</a>
         <a href="/edufamcs-demo/handbook/classic/gradientnyj-busting/"><span>Дальше<svg class="ico sm" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-arrow"/></svg></span>Градиентный бустинг</a>
@@ -197,7 +216,7 @@ stack <span class="tok-p">=</span> StackingClassifier<span class="tok-p">(</span
     </article>
 
     <aside class="hb-toc" aria-label="На этой странице">
-      <a class="l2" href="#почему-усреднение-помогает">Почему усреднение помогает</a><a class="l2" href="#бутстрап-и-бэггинг">Бутстрап и бэггинг</a><a class="l2" href="#случайный-лес">Случайный лес</a><a class="l3" href="#oob-оценка">OOB-оценка</a><a class="l3" href="#гиперпараметры">Гиперпараметры</a><a class="l3" href="#лес-как-адаптивные-соседи">Лес как адаптивные соседи</a><a class="l3" href="#важность-признаков">Важность признаков</a><a class="l2" href="#голосование-блендинг-стекинг">Голосование, блендинг, стекинг</a><a class="l2" href="#ловушки">Ловушки</a><a class="l2" href="#что-почитать">Что почитать</a>
+      <a class="l2" href="#почему-усреднение-помогает">Почему усреднение помогает</a><a class="l2" href="#бутстрап-и-бэггинг">Бутстрап и бэггинг</a><a class="l2" href="#случайный-лес">Случайный лес</a><a class="l3" href="#oob-оценка">OOB-оценка</a><a class="l3" href="#гиперпараметры">Гиперпараметры</a><a class="l3" href="#лес-как-адаптивные-соседи">Лес как адаптивные соседи</a><a class="l3" href="#важность-признаков">Важность признаков</a><a class="l2" href="#голосование-блендинг-стекинг">Голосование, блендинг, стекинг</a><a class="l2" href="#ловушки">Ловушки</a><a class="l2" href="#проверь-себя">Проверь себя</a><a class="l2" href="#что-почитать">Что почитать</a>
     </aside>
   </div>
 </div>

@@ -1,0 +1,321 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>MCP: подключаем инструменты и данные · EDU FAMCS</title>
+<meta name="description" content="MCP: подключаем инструменты и данные — ИИ-ассистенты для кода. Хендбук ML-курса ФПМИ.">
+<meta name="theme-color" content="#060A16">
+<meta name="robots" content="noindex, nofollow">
+<meta name="htmx-config" content='{"allowEval":false,"includeIndicatorStyles":false,"historyCacheSize":0,"selfRequestsOnly":true}'>
+<meta name="katex-js" content="/edufamcs-demo/static/vendor/katex/katex.min.js">
+<meta name="katex-css" content="/edufamcs-demo/static/vendor/katex/katex.min.css">
+<link rel="icon" href="/edufamcs-demo/static/brand/logo/favicon-16.svg" type="image/svg+xml" sizes="16x16">
+<link rel="icon" href="/edufamcs-demo/static/brand/logo/favicon.svg" type="image/svg+xml" sizes="any">
+<link rel="preload" href="/edufamcs-demo/static/brand/fonts/manrope-cyrillic-400.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/edufamcs-demo/static/brand/fonts/unbounded-cyrillic-800.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="/edufamcs-demo/static/brand/fonts.css">
+<link rel="stylesheet" href="/edufamcs-demo/static/brand/tokens.css">
+<link rel="stylesheet" href="/edufamcs-demo/static/brand/components.css">
+<link rel="stylesheet" href="/edufamcs-demo/static/css/site.css">
+<link rel="stylesheet" href="/edufamcs-demo/static/css/hub.css">
+<link rel="stylesheet" href="/edufamcs-demo/static/css/about.css">
+<link rel="stylesheet" href="/edufamcs-demo/static/handbook/handbook.css">
+<script src="/edufamcs-demo/static/js/theme.js"></script>
+<script src="/edufamcs-demo/static/vendor/htmx/htmx.min.js" defer></script>
+<script src="/edufamcs-demo/static/vendor/alpine/alpine-csp.min.js" defer></script>
+<script src="/edufamcs-demo/static/js/site.js" defer></script>
+<script src="/edufamcs-demo/static/handbook/handbook.js" defer></script>
+</head>
+<body class="" hx-headers='{"X-CSRFToken": "vqMMWAfIASVfSzU7rT6zvHLs8NHCFRHD7DBJcCOzBF9O3S9zqmkwdADqAWOApBGk"}'>
+<a class="skip" href="#main">К содержанию</a>
+<div class="demo-bar" role="note">Демо-версия для отзывов: вход, запись на курсы и формы здесь не работают.</div>
+
+<header class="hdr">
+  <div class="container">
+    <a class="brand" href="/edufamcs-demo/" aria-label="EDU FAMCS — главная">
+      <span class="full"><img class="only-light" src="/edufamcs-demo/static/brand/logo/logo-edu-light.svg" alt="EDU FAMCS" width="196" height="40"><img class="only-dark" src="/edufamcs-demo/static/brand/logo/logo-edu-dark.svg" alt="EDU FAMCS" width="196" height="40"></span>
+      <span class="short"><img class="only-light" src="/edufamcs-demo/static/brand/logo/logo-edu-light.svg" alt="EDU FAMCS" height="30"><img class="only-dark" src="/edufamcs-demo/static/brand/logo/logo-edu-dark.svg" alt="EDU FAMCS" height="30"></span>
+    </a>
+    <nav class="nav" id="main-nav" aria-label="Основная навигация">
+      <a href="/edufamcs-demo/#courses">Курсы</a>
+      <a href="/edufamcs-demo/ml/" >Машинное обучение</a>
+      
+      <a href="/edufamcs-demo/handbook/" aria-current="page">Хендбук</a>
+      <a href="/edufamcs-demo/news/" >Новости</a>
+      <a href="/edufamcs-demo/people/" >Авторы</a>
+      <a href="/edufamcs-demo/about/" >О&nbsp;нас</a>
+    </nav>
+    <div class="hdr-actions">
+      
+      <a class="btn btn-outline btn-login" href="/edufamcs-demo/accounts/login/?next=/handbook/ai-tools/mcp/">Войти</a>
+      
+      <button class="icon-btn menu-btn" type="button" aria-label="Меню" aria-expanded="false" aria-controls="main-nav"><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-menu"/></svg></button>
+    </div>
+  </div>
+</header>
+
+<main id="main">
+
+
+
+<div class="container hb-page s-agents">
+  <div class="hb-readbar" aria-hidden="true"><i></i></div>
+  <div class="hb">
+    <aside class="hb-nav" aria-label="Статьи раздела">
+      
+<form class="hb-search" action="/edufamcs-demo/handbook/search/" method="get" role="search">
+  <svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-search"/></svg>
+  <input class="input" type="search" name="q" value="" placeholder="Поиск по хендбуку" aria-label="Поиск по хендбуку" autocomplete="off" maxlength="120"
+    hx-get="/edufamcs-demo/handbook/search/" hx-trigger="input changed delay:250ms, search" hx-target="#hb-nav-results" hx-sync="this:replace">
+</form>
+
+      <div id="hb-nav-results" class="hb-nav-results" aria-live="polite"></div>
+      <a class="grp" href="/edufamcs-demo/handbook/ai-tools/">Расширения</a>
+      
+      <a class="" href="/edufamcs-demo/handbook/ai-tools/skills/">Скиллы: SKILL.md и как написать свой</a>
+      
+      <a class="cur" href="/edufamcs-demo/handbook/ai-tools/mcp/" aria-current="page">MCP: подключаем инструменты и данные</a>
+      
+      <a class="" href="/edufamcs-demo/handbook/ai-tools/subagenty-huki-komandy/">Субагенты, хуки и слэш-команды</a>
+      
+    </aside>
+
+    <article class="hb-main">
+      <nav class="crumbs" aria-label="Навигация"><a href="/edufamcs-demo/handbook/">Хендбук</a><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-chev"/></svg><a href="/edufamcs-demo/handbook/ai-tools/">ИИ-ассистенты для кода</a></nav>
+      <h1 class="h1">MCP: подключаем инструменты и данные</h1>
+      <div class="hb-meta">
+        
+        
+        <span><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-clock"/></svg>11&nbsp;мин</span>
+        <span class="hb-authors"><span class="avatar sm" title="Артем Лебедевич">АЛ</span>Артем Лебедевич</span>
+        <span><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-edit"/></svg>10 ноября 2026</span>
+        
+        
+      </div>
+
+      
+      <details class="hb-mtoc">
+        <summary><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-list"/></svg>Содержание<svg class="ico sm" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-chev-down"/></svg></summary>
+        <a class="l2" href="#какую-проблему-решает">Какую проблему решает</a><a class="l2" href="#устройство">Устройство</a><a class="l2" href="#подключение-в-claude-code">Подключение в Claude Code</a><a class="l2" href="#подключение-в-codex">Подключение в Codex</a><a class="l2" href="#минимальный-сервер-на-python">Минимальный сервер на Python</a><a class="l2" href="#цена-в-контексте">Цена в контексте</a><a class="l2" href="#безопасность">Безопасность</a><a class="l2" href="#когда-лучше-cli-и-скилл">Когда лучше CLI и скилл</a><a class="l2" href="#ловушки">Ловушки</a><a class="l2" href="#проверь-себя">Проверь себя</a><a class="l2" href="#что-почитать">Что почитать</a>
+      </details>
+      
+
+      <div class="prose"><p>Model Context Protocol (MCP) — открытый протокол, по которому ИИ-приложение подключается к внешним инструментам и данным: базе, трекеру, браузеру, вашей собственной функции. Без него каждая пара «клиент × система» требовала бы отдельной интеграции; с ним сервер пишется один раз и работает в любом клиенте с поддержкой протокола. Ниже — устройство, подключение в Claude Code и Codex, минимальный сервер на Python (проверен на <code>mcp</code> 2.3.0) и то, чем MCP опасен. Детали меняются быстро; источник истины — документация по ссылкам в конце.</p>
+<h2 id="какую-проблему-решает">Какую проблему решает</h2>
+<p>N инструментов и M клиентов (Claude Code, Codex, IDE, чат) без общего протокола дают N × M адаптеров. С MCP — N серверов и M клиентов, все говорят на одном языке: протокол описывает, как клиент узнаёт, что умеет сервер, и как вызывает его функции.</p>
+<h2 id="устройство">Устройство</h2>
+<p>Три роли. <strong>Хост</strong> — ИИ-приложение (Claude Code, Codex). <strong>Клиент</strong> — компонент хоста, держащий соединение с одним сервером; хост создаёт по клиенту на каждый сервер. <strong>Сервер</strong> — программа, отдающая контекст. В основе JSON-RPC 2.0; протокол делится на слой данных и слой транспорта.</p>
+<p>Сервер предлагает три примитива:</p>
+<ul>
+<li><strong>tools</strong> — функции, которые вызывает модель (запрос в базу, вызов API);</li>
+<li><strong>resources</strong> — данные для контекста (содержимое файла, схема таблицы);</li>
+<li><strong>prompts</strong> — готовые шаблоны запросов.</li>
+</ul>
+<p>Транспорта два. <strong>stdio</strong>: хост запускает сервер подпроцессом и общается через stdin/stdout; обычно это локальный сервер для одного клиента. <strong>Streamable HTTP</strong>: сервер доступен по адресу и обслуживает многих клиентов, поддерживаются токены, ключи и заголовки, рекомендуется OAuth. Транспорт SSE в документации Claude Code помечен устаревшим.</p>
+<h2 id="подключение-в-claude-code">Подключение в Claude Code</h2>
+<p>Команды ниже — из документации Claude Code.</p>
+<div class="code"><div class="code-head"><span class="lang">bash</span></div><pre><code><span class="tok-c"># удалённый сервер по HTTP
+</span>claude mcp add --transport http &lt;имя&gt; &lt;url&gt;
+
+<span class="tok-c"># локальный stdio-сервер: всё после -- передаётся серверу как есть
+</span>claude mcp add --env TABLES_DB<span class="tok-p">=</span>/abs/path/data.db --transport stdio tables <span class="tok-s">\
+</span>  -- uv run --with mcp python /abs/path/table_server.py
+
+claude mcp list
+claude mcp get tables
+claude mcp remove tables
+</code></pre></div>
+<p>Области: <code>local</code> (по умолчанию, только вы и этот проект, хранится в <code>~/.claude.json</code>), <code>project</code> (файл <code>.mcp.json</code> в корне репозитория, общий для команды), <code>user</code> (все ваши проекты). Внутри сессии <code>/mcp</code> показывает состояние серверов. Формат <code>.mcp.json</code>; значения секретов подставляются из окружения через <code>${VAR}</code>, в репозиторий они не попадают:</p>
+<div class="code"><div class="code-head"><span class="lang">json</span></div><pre><code><span class="tok-p">{</span>
+  "mcpServers"<span class="tok-p">:</span> <span class="tok-p">{</span>
+    "api-server"<span class="tok-p">:</span> <span class="tok-p">{</span>
+      "type"<span class="tok-p">:</span> <span class="tok-s">"http"</span><span class="tok-p">,</span>
+      "url"<span class="tok-p">:</span> <span class="tok-s">"${API_BASE_URL:-https://api.example.com}/mcp"</span><span class="tok-p">,</span>
+      "headers"<span class="tok-p">:</span> <span class="tok-p">{</span> "Authorization"<span class="tok-p">:</span> <span class="tok-s">"Bearer ${API_KEY}"</span> <span class="tok-p">}</span>
+    <span class="tok-p">}</span>
+  <span class="tok-p">}</span>
+<span class="tok-p">}</span>
+</code></pre></div>
+<h2 id="подключение-в-codex">Подключение в Codex</h2>
+<p>Файл конфигурации — <code>~/.codex/config.toml</code> или <code>.codex/config.toml</code> в доверенном проекте; CLI, IDE-расширение и приложение читают одну конфигурацию.</p>
+<div class="code"><div class="code-head"><span class="lang">bash</span></div><pre><code>codex mcp add &lt;имя&gt; --env VAR1<span class="tok-p">=</span>VALUE1 -- &lt;команда stdio-сервера&gt;
+codex mcp list
+</code></pre></div>
+<div class="code"><div class="code-head"><span class="lang">toml</span></div><pre><code><span class="tok-k">[</span><span class="tok-k">mcp_servers</span><span class="tok-k">.</span><span class="tok-k">tables</span><span class="tok-k">]</span>
+command <span class="tok-p">=</span> <span class="tok-s">"</span><span class="tok-s">uv</span><span class="tok-s">"</span>
+args <span class="tok-p">=</span> <span class="tok-p">[</span><span class="tok-s">"</span><span class="tok-s">run</span><span class="tok-s">"</span><span class="tok-p">,</span> <span class="tok-s">"</span><span class="tok-s">--with</span><span class="tok-s">"</span><span class="tok-p">,</span> <span class="tok-s">"</span><span class="tok-s">mcp</span><span class="tok-s">"</span><span class="tok-p">,</span> <span class="tok-s">"</span><span class="tok-s">python</span><span class="tok-s">"</span><span class="tok-p">,</span> <span class="tok-s">"</span><span class="tok-s">/abs/path/table_server.py</span><span class="tok-s">"</span><span class="tok-p">]</span>
+env_vars <span class="tok-p">=</span> <span class="tok-p">[</span><span class="tok-s">"</span><span class="tok-s">TABLES_DB</span><span class="tok-s">"</span><span class="tok-p">]</span>        <span class="tok-c"># имена переменных, которые пробросить серверу</span>
+
+<span class="tok-k">[</span><span class="tok-k">mcp_servers</span><span class="tok-k">.</span><span class="tok-k">api</span><span class="tok-k">]</span>
+url <span class="tok-p">=</span> <span class="tok-s">"</span><span class="tok-s">https://example.com/mcp</span><span class="tok-s">"</span>
+bearer_token_env_var <span class="tok-p">=</span> <span class="tok-s">"</span><span class="tok-s">API_TOKEN</span><span class="tok-s">"</span>
+enabled_tools <span class="tok-p">=</span> <span class="tok-p">[</span><span class="tok-s">"</span><span class="tok-s">search</span><span class="tok-s">"</span><span class="tok-p">]</span>      <span class="tok-c"># белый список инструментов</span>
+</code></pre></div>
+<p>Если передать <code>--oauth-client-secret</code>, Codex сохранит его в <code>config.toml</code> (<code>mcp_servers.&lt;имя&gt;.oauth.client_secret</code>), поэтому такой файл не коммитят; OAuth-токены хранятся отдельно (<code>mcp_oauth_credentials_store</code>: keyring или файл).</p>
+<h2 id="минимальный-сервер-на-python">Минимальный сервер на Python</h2>
+<p>Задача: дать агенту безопасный способ посмотреть таблицу — схему, долю пропусков, несколько строк — без права записи. Нужен Python 3.11+ и пакет <code>mcp</code>.</p>
+<div class="callout md warn"><p class="callout-title">Версии SDK</p>
+<p>В <code>mcp</code> 2.x класс <code>FastMCP</code> переименован в <code>MCPServer</code> (<code>from mcp.server import MCPServer</code>), модуль <code>mcp.server.fastmcp</code> исчез. Большинство учебников написано под 1.x; для старого кода закрепите <code>mcp&lt;2</code>. Код ниже запущен на <code>mcp</code> 2.3.0.</p>
+</div>
+<div class="code"><div class="code-head"><span class="lang">python</span></div><pre><code><span class="tok-k">import</span> os
+<span class="tok-k">import</span> re
+<span class="tok-k">import</span> sqlite3
+<span class="tok-k">from</span> pathlib <span class="tok-k">import</span> Path
+
+<span class="tok-k">from</span> mcp.server <span class="tok-k">import</span> MCPServer
+<span class="tok-k">from</span> mcp.server.mcpserver.exceptions <span class="tok-k">import</span> ToolError
+
+DB_PATH <span class="tok-p">=</span> Path<span class="tok-p">(</span>os<span class="tok-p">.</span>environ<span class="tok-p">.</span>get<span class="tok-p">(</span><span class="tok-s">"</span><span class="tok-s">TABLES_DB</span><span class="tok-s">"</span><span class="tok-p">,</span> <span class="tok-s">"</span><span class="tok-s">data.db</span><span class="tok-s">"</span><span class="tok-p">)</span><span class="tok-p">)</span><span class="tok-p">.</span>resolve<span class="tok-p">(</span><span class="tok-p">)</span>
+IDENT <span class="tok-p">=</span> re<span class="tok-p">.</span>compile<span class="tok-p">(</span><span class="tok-s">r</span><span class="tok-s">"</span><span class="tok-s">^[A-Za-z_][A-Za-z0-9_]*$</span><span class="tok-s">"</span><span class="tok-p">)</span>
+
+mcp <span class="tok-p">=</span> MCPServer<span class="tok-p">(</span><span class="tok-s">"</span><span class="tok-s">tables</span><span class="tok-s">"</span><span class="tok-p">)</span>
+
+
+<span class="tok-k">def</span> <span class="tok-f">connect</span><span class="tok-p">(</span><span class="tok-p">)</span> <span class="tok-p">-</span><span class="tok-p">&gt;</span> sqlite3<span class="tok-p">.</span>Connection<span class="tok-p">:</span>
+    <span class="tok-c"># mode=ro: сервер физически не может писать, что бы ни попросила модель</span>
+    <span class="tok-k">return</span> sqlite3<span class="tok-p">.</span>connect<span class="tok-p">(</span><span class="tok-s">f</span><span class="tok-s">"</span><span class="tok-s">file:</span><span class="tok-s">{</span>DB_PATH<span class="tok-s">}</span><span class="tok-s">?mode=ro</span><span class="tok-s">"</span><span class="tok-p">,</span> uri<span class="tok-p">=</span><span class="tok-k">True</span><span class="tok-p">)</span>
+
+
+<span class="tok-f">@mcp</span><span class="tok-p">.</span>tool<span class="tok-p">(</span><span class="tok-p">)</span>
+<span class="tok-k">def</span> <span class="tok-f">describe_table</span><span class="tok-p">(</span>table<span class="tok-p">:</span> <span class="tok-f">str</span><span class="tok-p">,</span> sample_rows<span class="tok-p">:</span> <span class="tok-f">int</span> <span class="tok-p">=</span> <span class="tok-n">3</span><span class="tok-p">)</span> <span class="tok-p">-</span><span class="tok-p">&gt;</span> <span class="tok-f">dict</span><span class="tok-p">:</span>
+    <span class="tok-s">"""Describe a table in the local SQLite database: columns, types,
+    row count, NULL share per column and a few sample rows.
+    Read-only. Use it before writing any code that touches the table."""</span>
+    <span class="tok-k">if</span> <span class="tok-k">not</span> IDENT<span class="tok-p">.</span>match<span class="tok-p">(</span>table<span class="tok-p">)</span><span class="tok-p">:</span>
+        <span class="tok-k">raise</span> ToolError<span class="tok-p">(</span><span class="tok-s">"</span><span class="tok-s">table name must be a plain identifier</span><span class="tok-s">"</span><span class="tok-p">)</span>
+    sample_rows <span class="tok-p">=</span> <span class="tok-f">max</span><span class="tok-p">(</span><span class="tok-n">0</span><span class="tok-p">,</span> <span class="tok-f">min</span><span class="tok-p">(</span>sample_rows<span class="tok-p">,</span> <span class="tok-n">10</span><span class="tok-p">)</span><span class="tok-p">)</span>
+    <span class="tok-k">with</span> connect<span class="tok-p">(</span><span class="tok-p">)</span> <span class="tok-k">as</span> db<span class="tok-p">:</span>
+        cols <span class="tok-p">=</span> db<span class="tok-p">.</span>execute<span class="tok-p">(</span><span class="tok-s">f</span><span class="tok-s">'</span><span class="tok-s">PRAGMA table_info(</span><span class="tok-s">"</span><span class="tok-s">{</span>table<span class="tok-s">}</span><span class="tok-s">"</span><span class="tok-s">)</span><span class="tok-s">'</span><span class="tok-p">)</span><span class="tok-p">.</span>fetchall<span class="tok-p">(</span><span class="tok-p">)</span>
+        <span class="tok-k">if</span> <span class="tok-k">not</span> cols<span class="tok-p">:</span>
+            <span class="tok-k">raise</span> ToolError<span class="tok-p">(</span><span class="tok-s">f</span><span class="tok-s">"</span><span class="tok-s">no such table: </span><span class="tok-s">{</span>table<span class="tok-s">}</span><span class="tok-s">"</span><span class="tok-p">)</span>
+        n <span class="tok-p">=</span> db<span class="tok-p">.</span>execute<span class="tok-p">(</span><span class="tok-s">f</span><span class="tok-s">'</span><span class="tok-s">SELECT COUNT(*) FROM </span><span class="tok-s">"</span><span class="tok-s">{</span>table<span class="tok-s">}</span><span class="tok-s">"</span><span class="tok-s">'</span><span class="tok-p">)</span><span class="tok-p">.</span>fetchone<span class="tok-p">(</span><span class="tok-p">)</span><span class="tok-p">[</span><span class="tok-n">0</span><span class="tok-p">]</span>
+        out_cols <span class="tok-p">=</span> <span class="tok-p">[</span><span class="tok-p">]</span>
+        <span class="tok-k">for</span> _<span class="tok-p">,</span> name<span class="tok-p">,</span> typ<span class="tok-p">,</span> <span class="tok-p">*</span>_ <span class="tok-k">in</span> cols<span class="tok-p">:</span>
+            nulls <span class="tok-p">=</span> db<span class="tok-p">.</span>execute<span class="tok-p">(</span>
+                <span class="tok-s">f</span><span class="tok-s">'</span><span class="tok-s">SELECT COUNT(*) FROM </span><span class="tok-s">"</span><span class="tok-s">{</span>table<span class="tok-s">}</span><span class="tok-s">"</span><span class="tok-s"> WHERE </span><span class="tok-s">"</span><span class="tok-s">{</span>name<span class="tok-s">}</span><span class="tok-s">"</span><span class="tok-s"> IS NULL</span><span class="tok-s">'</span>
+            <span class="tok-p">)</span><span class="tok-p">.</span>fetchone<span class="tok-p">(</span><span class="tok-p">)</span><span class="tok-p">[</span><span class="tok-n">0</span><span class="tok-p">]</span>
+            out_cols<span class="tok-p">.</span>append<span class="tok-p">(</span><span class="tok-p">{</span><span class="tok-s">"</span><span class="tok-s">name</span><span class="tok-s">"</span><span class="tok-p">:</span> name<span class="tok-p">,</span> <span class="tok-s">"</span><span class="tok-s">type</span><span class="tok-s">"</span><span class="tok-p">:</span> typ<span class="tok-p">,</span>
+                             <span class="tok-s">"</span><span class="tok-s">null_share</span><span class="tok-s">"</span><span class="tok-p">:</span> <span class="tok-f">round</span><span class="tok-p">(</span>nulls <span class="tok-p">/</span> n<span class="tok-p">,</span> <span class="tok-n">4</span><span class="tok-p">)</span> <span class="tok-k">if</span> n <span class="tok-k">else</span> <span class="tok-k">None</span><span class="tok-p">}</span><span class="tok-p">)</span>
+        cur <span class="tok-p">=</span> db<span class="tok-p">.</span>execute<span class="tok-p">(</span><span class="tok-s">f</span><span class="tok-s">'</span><span class="tok-s">SELECT * FROM </span><span class="tok-s">"</span><span class="tok-s">{</span>table<span class="tok-s">}</span><span class="tok-s">"</span><span class="tok-s"> LIMIT </span><span class="tok-s">{</span>sample_rows<span class="tok-s">}</span><span class="tok-s">'</span><span class="tok-p">)</span>
+        head <span class="tok-p">=</span> <span class="tok-p">[</span><span class="tok-f">dict</span><span class="tok-p">(</span><span class="tok-f">zip</span><span class="tok-p">(</span><span class="tok-p">[</span>c<span class="tok-p">[</span><span class="tok-n">0</span><span class="tok-p">]</span> <span class="tok-k">for</span> c <span class="tok-k">in</span> cur<span class="tok-p">.</span>description<span class="tok-p">]</span><span class="tok-p">,</span> r<span class="tok-p">)</span><span class="tok-p">)</span> <span class="tok-k">for</span> r <span class="tok-k">in</span> cur<span class="tok-p">.</span>fetchall<span class="tok-p">(</span><span class="tok-p">)</span><span class="tok-p">]</span>
+    <span class="tok-k">return</span> <span class="tok-p">{</span><span class="tok-s">"</span><span class="tok-s">table</span><span class="tok-s">"</span><span class="tok-p">:</span> table<span class="tok-p">,</span> <span class="tok-s">"</span><span class="tok-s">rows</span><span class="tok-s">"</span><span class="tok-p">:</span> n<span class="tok-p">,</span> <span class="tok-s">"</span><span class="tok-s">columns</span><span class="tok-s">"</span><span class="tok-p">:</span> out_cols<span class="tok-p">,</span> <span class="tok-s">"</span><span class="tok-s">sample</span><span class="tok-s">"</span><span class="tok-p">:</span> head<span class="tok-p">}</span>
+
+
+<span class="tok-k">if</span> __name__ <span class="tok-p">==</span> <span class="tok-s">"</span><span class="tok-s">__main__</span><span class="tok-s">"</span><span class="tok-p">:</span>
+    mcp<span class="tok-p">.</span>run<span class="tok-p">(</span><span class="tok-p">)</span>  <span class="tok-c"># по умолчанию stdio</span>
+</code></pre></div>
+<p>Проверка без всякого агента: тот же SDK содержит клиента, который запускает сервер подпроцессом.</p>
+<div class="code"><div class="code-head"><span class="lang">python</span></div><pre><code><span class="tok-k">import</span> asyncio<span class="tok-p">,</span> json
+<span class="tok-k">from</span> mcp <span class="tok-k">import</span> Client
+<span class="tok-k">from</span> mcp.client.stdio <span class="tok-k">import</span> StdioServerParameters
+
+<span class="tok-k">async</span> <span class="tok-k">def</span> <span class="tok-f">main</span><span class="tok-p">(</span><span class="tok-p">)</span><span class="tok-p">:</span>
+    params <span class="tok-p">=</span> StdioServerParameters<span class="tok-p">(</span>
+        command<span class="tok-p">=</span><span class="tok-s">"</span><span class="tok-s">uv</span><span class="tok-s">"</span><span class="tok-p">,</span> args<span class="tok-p">=</span><span class="tok-p">[</span><span class="tok-s">"</span><span class="tok-s">run</span><span class="tok-s">"</span><span class="tok-p">,</span> <span class="tok-s">"</span><span class="tok-s">--with</span><span class="tok-s">"</span><span class="tok-p">,</span> <span class="tok-s">"</span><span class="tok-s">mcp</span><span class="tok-s">"</span><span class="tok-p">,</span> <span class="tok-s">"</span><span class="tok-s">python</span><span class="tok-s">"</span><span class="tok-p">,</span> <span class="tok-s">"</span><span class="tok-s">table_server.py</span><span class="tok-s">"</span><span class="tok-p">]</span><span class="tok-p">)</span>
+    <span class="tok-k">async</span> <span class="tok-k">with</span> Client<span class="tok-p">(</span>params<span class="tok-p">)</span> <span class="tok-k">as</span> c<span class="tok-p">:</span>
+        <span class="tok-f">print</span><span class="tok-p">(</span><span class="tok-p">[</span>t<span class="tok-p">.</span>name <span class="tok-k">for</span> t <span class="tok-k">in</span> <span class="tok-p">(</span><span class="tok-k">await</span> c<span class="tok-p">.</span>list_tools<span class="tok-p">(</span><span class="tok-p">)</span><span class="tok-p">)</span><span class="tok-p">.</span>tools<span class="tok-p">]</span><span class="tok-p">)</span>
+        r <span class="tok-p">=</span> <span class="tok-k">await</span> c<span class="tok-p">.</span>call_tool<span class="tok-p">(</span><span class="tok-s">"</span><span class="tok-s">describe_table</span><span class="tok-s">"</span><span class="tok-p">,</span> <span class="tok-p">{</span><span class="tok-s">"</span><span class="tok-s">table</span><span class="tok-s">"</span><span class="tok-p">:</span> <span class="tok-s">"</span><span class="tok-s">ratings</span><span class="tok-s">"</span><span class="tok-p">,</span> <span class="tok-s">"</span><span class="tok-s">sample_rows</span><span class="tok-s">"</span><span class="tok-p">:</span> <span class="tok-n">1</span><span class="tok-p">}</span><span class="tok-p">)</span>
+        <span class="tok-f">print</span><span class="tok-p">(</span>json<span class="tok-p">.</span>loads<span class="tok-p">(</span>r<span class="tok-p">.</span>content<span class="tok-p">[</span><span class="tok-n">0</span><span class="tok-p">]</span><span class="tok-p">.</span>text<span class="tok-p">)</span><span class="tok-p">[</span><span class="tok-s">"</span><span class="tok-s">rows</span><span class="tok-s">"</span><span class="tok-p">]</span><span class="tok-p">)</span>
+        r <span class="tok-p">=</span> <span class="tok-k">await</span> c<span class="tok-p">.</span>call_tool<span class="tok-p">(</span><span class="tok-s">"</span><span class="tok-s">describe_table</span><span class="tok-s">"</span><span class="tok-p">,</span> <span class="tok-p">{</span><span class="tok-s">"</span><span class="tok-s">table</span><span class="tok-s">"</span><span class="tok-p">:</span> <span class="tok-s">"</span><span class="tok-s">ratings; DROP TABLE ratings</span><span class="tok-s">"</span><span class="tok-p">}</span><span class="tok-p">)</span>
+        <span class="tok-f">print</span><span class="tok-p">(</span>r<span class="tok-p">.</span>is_error<span class="tok-p">,</span> r<span class="tok-p">.</span>content<span class="tok-p">[</span><span class="tok-n">0</span><span class="tok-p">]</span><span class="tok-p">.</span>text<span class="tok-p">)</span>
+
+asyncio<span class="tok-p">.</span>run<span class="tok-p">(</span>main<span class="tok-p">(</span><span class="tok-p">)</span><span class="tok-p">)</span>
+</code></pre></div>
+<p>На игровой таблице <code>ratings</code> (1000 строк, SQLite) вышло: список инструментов <code>['describe_table']</code>, <code>rows = 1000</code>, доля пропусков в <code>rating</code> — 0,18, а запрос с инъекцией вернул <code>is_error=True</code> и текст <code>Error executing tool describe_table: table name must be a plain identifier</code>. Попытка <code>DROP TABLE</code> через соединение с <code>mode=ro</code> падает с <code>attempt to write a readonly database</code>. Для интерактивной отладки в документации SDK есть <code>uv run mcp dev server.py</code> (инспектор; команда <code>mcp</code> ставится с extra <code>mcp[cli]</code>: <code>uv run --with "mcp[cli]" mcp dev server.py</code>).</p>
+<p>Две вещи, о которых сервер не должен забывать. В stdio-режиме stdout занят протоколом: <code>print</code> в сервере сломает обмен, логи — в stderr. А описание инструмента (docstring) — это то, что читает модель: оно решает, когда её вызовут.</p>
+<h2 id="цена-в-контексте">Цена в контексте</h2>
+<p>Каждый инструмент — это имя, описание и JSON-схема параметров. Двадцать серверов по десять инструментов — это тысячи токенов до первого вопроса. Claude Code по умолчанию откладывает определения MCP-инструментов (tool search): при старте загружаются только имена и инструкции серверов, остальное подтягивается по требованию; у серверов есть и верхний предел на размер описания. В Codex список ограничивают вручную: <code>enabled_tools</code> / <code>disabled_tools</code>. Правило одно: подключайте только то, чем пользуетесь, и держите описания короткими и конкретными.</p>
+<h2 id="безопасность">Безопасность</h2>
+<ul>
+<li><strong>Результат инструмента — недоверенный ввод.</strong> Текст из трекера, веб-страницы или письма может содержать «инструкции» для модели. Документация Claude Code прямо предупреждает: серверы, получающие внешний контент, открывают риск prompt injection. Подробности и «смертельную тройку» разберём в <a href="/edufamcs-demo/handbook/ai-tools/bezopasnost-agentov/" rel="noopener noreferrer nofollow">статье про безопасность</a>.</li>
+<li><strong>Минимум прав.</strong> Отдельная учётная запись с read-only доступом вместо вашей основной; в примере выше — <code>mode=ro</code>, а не «модель же не будет писать».</li>
+<li><strong>Секреты — в окружении</strong>, не в <code>.mcp.json</code> и не в <code>config.toml</code> под git. Claude Code подставляет <code>${VAR}</code>, Codex пробрасывает имена через <code>env_vars</code> и <code>bearer_token_env_var</code>.</li>
+<li><strong>Доверять серверу — значит запускать его код</strong> с вашими правами. Ставьте серверы известных поставщиков или пишите свои, читайте исходники, закрепляйте версии. Anthropic не проводит аудит чужих MCP-серверов.</li>
+<li>Проектный <code>.mcp.json</code> из чужого репозитория в интерактивном режиме требует подтверждения, но в неинтерактивном <code>claude -p</code> серверы проекта подгружаются без вопроса.</li>
+</ul>
+<h2 id="когда-лучше-cli-и-скилл">Когда лучше CLI и скилл</h2>
+<p>Если у системы уже есть хороший консольный клиент (<code>gh</code>, <code>psql</code>, <code>git</code>, <code>aws</code>), часто проще дать агенту команду плюс скилл с правилами её применения: ничего не висит в контексте, права ограничивает обычный механизм разрешений, поведение воспроизводимо. MCP нужен, когда нужно: долгоживущее соединение или аутентификация, структурированные ответы, один сервер для многих клиентов, доступ туда, где нет CLI. См. <a href="/edufamcs-demo/handbook/ai-tools/skills/" rel="noopener noreferrer nofollow">скиллы</a>.</p>
+<h2 id="ловушки">Ловушки</h2>
+<ul>
+<li>Подключить десяток серверов «на всякий случай»: контекст и поверхность атаки растут, польза нет.</li>
+<li>Дать серверу доступ на запись или боевые учётные данные, потому что «так проще».</li>
+<li>Положить токен в <code>.mcp.json</code> или <code>config.toml</code> и закоммитить.</li>
+<li>Слепо доверять тексту, вернувшемуся из инструмента: он мог написать кто угодно.</li>
+<li>Писать <code>print</code> в stdio-сервере или копировать код под <code>FastMCP</code> на <code>mcp</code> 2.x.</li>
+<li>Не ограничивать размер ответа: тысяча строк таблицы в контексте — это дорого и бесполезно.</li>
+</ul>
+<h2 id="проверь-себя">Проверь себя</h2>
+<details class="callout md details"><summary>Сколько адаптеров нужно без MCP и сколько с ним?</summary>
+<p>N инструментов × M клиентов адаптеров без протокола; с MCP — N серверов и M клиентов, каждый реализует протокол один раз.</p>
+</details>
+<details class="callout md details"><summary>Чем различаются tools, resources и prompts?</summary>
+<p>Tools — функции, которые вызывает модель; resources — данные, подкладываемые в контекст; prompts — шаблоны запросов. Сервер может предоставлять любые из них.</p>
+</details>
+<details class="callout md details"><summary>Чем stdio отличается от Streamable HTTP и что выбрать для локального сервера над вашим файлом?</summary>
+<p>stdio — подпроцесс на вашей машине, общение через stdin/stdout, один клиент, без сети. HTTP — сетевой сервер для многих клиентов с авторизацией. Для локального файла — stdio.</p>
+</details>
+<details class="callout md details"><summary>Почему `mode=ro` лучше фразы «не пиши в базу» в описании инструмента?</summary>
+<p>Описание — просьба к модели, и её можно обойти инъекцией или ошибкой; <code>mode=ro</code> — ограничение на уровне системы, которое от решений модели не зависит.</p>
+</details>
+<details class="callout md details"><summary>Почему вывод MCP-инструмента нельзя считать безопасным и что с этим делать?</summary>
+<p>Он содержит данные из внешних источников, а модель может принять их за команды. Давать минимальные права, не соединять в одной сессии приватные данные, недоверенный контент и канал отправки наружу, проверять опасные действия вручную.</p>
+</details>
+<h2 id="что-почитать">Что почитать</h2>
+<ul>
+<li>Claude Code: <a href="https://code.claude.com/docs/en/mcp" rel="noopener noreferrer nofollow">Connect Claude Code to tools via MCP</a> — команды, области, <code>.mcp.json</code>, tool search, безопасность.</li>
+<li>Codex: <a href="https://learn.chatgpt.com/docs/extend/mcp?surface=cli" rel="noopener noreferrer nofollow">MCP</a> — <code>codex mcp add</code>, <code>config.toml</code>.</li>
+<li><a href="https://modelcontextprotocol.io/docs/learn/architecture" rel="noopener noreferrer nofollow">MCP: Architecture overview</a> — хост, клиент, сервер, примитивы, транспорты.</li>
+<li><a href="https://github.com/modelcontextprotocol/python-sdk" rel="noopener noreferrer nofollow">MCP Python SDK</a> — быстрый старт, инспектор, клиент.</li>
+<li>Claude Code: <a href="https://code.claude.com/docs/en/security" rel="noopener noreferrer nofollow">Security</a> — раздел про MCP и prompt injection.</li>
+<li>Внутри курса: <a href="/edufamcs-demo/handbook/ai-tools/kak-ustroen-kodovyj-agent/" rel="noopener noreferrer nofollow">Как устроен кодовый агент</a>.</li>
+</ul>
+</div>
+      
+
+      
+
+      
+      <nav class="pager" aria-label="Соседние статьи">
+        <a href="/edufamcs-demo/handbook/ai-tools/skills/"><span><svg class="ico sm" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-arrow-left"/></svg>Назад</span>Скиллы: SKILL.md и как написать свой</a>
+        <a href="/edufamcs-demo/handbook/ai-tools/subagenty-huki-komandy/"><span>Дальше<svg class="ico sm" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-arrow"/></svg></span>Субагенты, хуки и слэш-команды</a>
+      </nav>
+      
+    </article>
+
+    <aside class="hb-toc" aria-label="На этой странице">
+      <a class="l2" href="#какую-проблему-решает">Какую проблему решает</a><a class="l2" href="#устройство">Устройство</a><a class="l2" href="#подключение-в-claude-code">Подключение в Claude Code</a><a class="l2" href="#подключение-в-codex">Подключение в Codex</a><a class="l2" href="#минимальный-сервер-на-python">Минимальный сервер на Python</a><a class="l2" href="#цена-в-контексте">Цена в контексте</a><a class="l2" href="#безопасность">Безопасность</a><a class="l2" href="#когда-лучше-cli-и-скилл">Когда лучше CLI и скилл</a><a class="l2" href="#ловушки">Ловушки</a><a class="l2" href="#проверь-себя">Проверь себя</a><a class="l2" href="#что-почитать">Что почитать</a>
+    </aside>
+  </div>
+</div>
+
+
+</main>
+
+<footer class="ftr" data-theme="dark">
+  <svg class="sym fern" viewBox="0 0 40.5 65.02" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#fern"/></svg>
+  <div class="container">
+    <div class="ftr-row">
+      <a href="/edufamcs-demo/" aria-label="EDU FAMCS — главная"><img src="/edufamcs-demo/static/brand/logo/logo-edu-dark.svg" alt="EDU FAMCS" width="196" height="40"></a>
+      <ul class="ftr-links">
+        <li><a href="/edufamcs-demo/#courses">Курсы</a></li>
+        <li><a href="/edufamcs-demo/ml/">Машинное обучение</a></li>
+        <li><a href="/edufamcs-demo/handbook/">Хендбук</a></li>
+        <li><a href="/edufamcs-demo/news/">Новости</a></li>
+        <li><a href="/edufamcs-demo/people/">Авторы</a></li>
+        <li><a href="/edufamcs-demo/about/">О&nbsp;нас</a></li>
+        <li><a href="/edufamcs-demo/propose/">Предложить или исправить</a></li>
+        <li><a href="/edufamcs-demo/privacy/">Конфиденциальность</a></li>
+      </ul>
+    </div>
+    <div class="ftr-big" aria-hidden="true">EDU<span class="d">·</span>FAMCS</div>
+    <p class="ftr-copy">© 2026 EDU FAMCS · Минск</p>
+  </div>
+</footer>
+
+<div class="toasts-region" aria-live="polite" id="toasts">
+
+</div>
+
+</body>
+</html>

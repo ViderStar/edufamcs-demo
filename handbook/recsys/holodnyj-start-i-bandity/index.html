@@ -27,7 +27,7 @@
 <script src="/edufamcs-demo/static/js/site.js" defer></script>
 <script src="/edufamcs-demo/static/handbook/handbook.js" defer></script>
 </head>
-<body class="" hx-headers='{"X-CSRFToken": "MxPO8MaZ0mlHu7M6QUxFBWfXWlKp0sdSyDQb2zsGbzBV9GIm3jqKSonisImE5dYR"}'>
+<body class="" hx-headers='{"X-CSRFToken": "yaD0t1ZOuWdUGiQm9AEiDAjM2bTjSu7YansXJ3yFvJrtRB5O83SfltbKuk0hCe6F"}'>
 <a class="skip" href="#main">К содержанию</a>
 <div class="demo-bar" role="note">Демо-версия для отзывов: вход, запись на курсы и формы здесь не работают.</div>
 
@@ -60,6 +60,7 @@
 
 
 <div class="container hb-page s-recsys">
+  <div class="hb-readbar" aria-hidden="true"><i></i></div>
   <div class="hb">
     <aside class="hb-nav" aria-label="Статьи раздела">
       
@@ -78,6 +79,14 @@
       
       <a class="" href="/edufamcs-demo/handbook/recsys/prodakshen-i-ab-testy/">Рекомендации в продакшене: A/B-тесты и эксплуатация</a>
       
+      <a class="" href="/edufamcs-demo/handbook/recsys/multitask-ranzhirovanie/">Многозадачное ранжирование: MMoE, PLE, ESMM</a>
+      
+      <a class="" href="/edufamcs-demo/handbook/recsys/priznaki-i-feature-store/">Признаки для рекомендаций и feature store</a>
+      
+      <a class="" href="/edufamcs-demo/handbook/recsys/protokol-oflajn-ocenki/">Протокол офлайн-оценки и утечки</a>
+      
+      <a class="" href="/edufamcs-demo/handbook/recsys/system-design-rekomendacij/">System design: как спроектировать рекомендательную систему на собеседовании</a>
+      
     </aside>
 
     <article class="hb-main">
@@ -86,9 +95,9 @@
       <div class="hb-meta">
         
         
-        <span><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-clock"/></svg>17&nbsp;мин</span>
+        <span><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-clock"/></svg>18&nbsp;мин</span>
         <span class="hb-authors"><span class="avatar sm" title="Артем Лебедевич">АЛ</span>Артем Лебедевич</span>
-        <span><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-edit"/></svg>9 ноября 2026</span>
+        <span><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-edit"/></svg>10 ноября 2026</span>
         
         
       </div>
@@ -96,7 +105,7 @@
       
       <details class="hb-mtoc">
         <summary><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-list"/></svg>Содержание<svg class="ico sm" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-chev-down"/></svg></summary>
-        <a class="l2" href="#холодный-старт">Холодный старт</a><a class="l2" href="#исследование-и-эксплуатация">Исследование и эксплуатация</a><a class="l2" href="#многорукие-бандиты">Многорукие бандиты</a><a class="l3" href="#ε-greedy">ε-greedy</a><a class="l3" href="#ucb1">UCB1</a><a class="l3" href="#thompson-sampling">Thompson sampling</a><a class="l3" href="#симуляция">Симуляция</a><a class="l2" href="#контекстные-бандиты-linucb">Контекстные бандиты: LinUCB</a><a class="l2" href="#офлайн-оценка-политик">Офлайн-оценка политик</a><a class="l2" href="#rl-взгляд-reinforce-в-youtube">RL-взгляд: REINFORCE в YouTube</a><a class="l2" href="#практика-исследования-в-продакшене">Практика исследования в продакшене</a><a class="l2" href="#ошибки-и-вопросы-на-собеседованиях">Ошибки и вопросы на собеседованиях</a><a class="l2" href="#что-почитать">Что почитать</a>
+        <a class="l2" href="#холодный-старт">Холодный старт</a><a class="l2" href="#исследование-и-эксплуатация">Исследование и эксплуатация</a><a class="l2" href="#многорукие-бандиты">Многорукие бандиты</a><a class="l3" href="#ε-greedy">ε-greedy</a><a class="l3" href="#ucb1">UCB1</a><a class="l3" href="#thompson-sampling">Thompson sampling</a><a class="l3" href="#симуляция">Симуляция</a><a class="l2" href="#контекстные-бандиты-linucb">Контекстные бандиты: LinUCB</a><a class="l2" href="#офлайн-оценка-политик">Офлайн-оценка политик</a><a class="l2" href="#rl-взгляд-reinforce-в-youtube">RL-взгляд: REINFORCE в YouTube</a><a class="l2" href="#практика-исследования-в-продакшене">Практика исследования в продакшене</a><a class="l2" href="#ошибки-и-вопросы-на-собеседованиях">Ошибки и вопросы на собеседованиях</a><a class="l2" href="#проверь-себя">Проверь себя</a><a class="l2" href="#что-почитать">Что почитать</a>
       </details>
       
 
@@ -200,6 +209,22 @@ plt<span class="tok-p">.</span>xlabel<span class="tok-p">(</span><span class="to
 <li><strong>Вопрос «чем бандит отличается от A/B-теста».</strong> A/B распределяет трафик поровну на фиксированный срок и даёт надёжную оценку разницы; бандит перераспределяет трафик адаптивно, минимизируя потери, но оценки эффекта смещены и менее надёжны для выводов о причинности. Для выбора одного из нескольких вариантов дизайна, где важна цена потерь, бандит; для принятия решения о выкатке — A/B.</li>
 <li><strong>Вопрос «почему Thompson обычно лучше UCB на практике».</strong> Не завышает бонус в худшем случае и естественно рандомизирован (что удобно для логирования propensity: <span class="tex">\mu(a\mid x)</span> можно оценить сэмплированием).</li>
 </ul>
+<h2 id="проверь-себя">Проверь себя</h2>
+<details class="callout md details"><summary>Почему при постоянном $\varepsilon$ регрет ε-greedy линеен?</summary>
+<p>Доля <span class="tex">\varepsilon</span> показов всегда уходит на случайные ручки, включая заведомо плохие, и накопленная потеря растёт пропорционально <span class="tex">T</span> с наклоном порядка <span class="tex">\varepsilon\,\overline\Delta</span>.</p>
+</details>
+<details class="callout md details"><summary>Почему в симуляции UCB1 оказался хуже ε-greedy при $T=2\cdot 10^4$, хотя асимптотически он логарифмический?</summary>
+<p>Бонус <span class="tex">\sqrt{2\ln t/n_a}</span> рассчитан на награды в <span class="tex">[0,1]</span> и составляет около 0,14 при зазорах 0,02–0,06, поэтому пока он не сожмётся, UCB1 исследует почти равномерно.</p>
+</details>
+<details class="callout md details"><summary>Почему SNIPS обычно лучше IPS?</summary>
+<p>Нормировка на сумму весов даёт небольшое, исчезающее с <span class="tex">n</span> смещение, но заметно меньшую дисперсию, и оценка корректно сдвигается при добавлении константы к наградам.</p>
+</details>
+<details class="callout md details"><summary>Что идёт не так с IPS, если старая политика детерминирована?</summary>
+<p>Покрытие нарушено: <span class="tex">\mu(a\mid x)\in\{0,1\}</span>, для действий, которых лог не выбирал, оценки нет, а веса либо нули, либо огромны. Нужна хотя бы небольшая рандомизация и логирование propensity.</p>
+</details>
+<details class="callout md details"><summary>Зачем DropoutNet зануляет коллаборативную часть входа при обучении?</summary>
+<p>Чтобы сеть научилась извлекать из контента всё возможное: на инференсе у холодного объекта коллаборативный вход нулевой, и она уже к этому приучена.</p>
+</details>
 <h2 id="что-почитать">Что почитать</h2>
 <ul>
 <li>Auer, Cesa-Bianchi, Fischer. <em>Finite-time Analysis of the Multiarmed Bandit Problem</em>. Machine Learning, 2002 — UCB1 и доказательство логарифмического регрета.</li>
@@ -213,6 +238,8 @@ plt<span class="tok-p">.</span>xlabel<span class="tok-p">(</span><span class="to
       
 
       
+
+      
       <nav class="pager" aria-label="Соседние статьи">
         <a href="/edufamcs-demo/handbook/recsys/kandidaty-i-ranzhirovanie/"><span><svg class="ico sm" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-arrow-left"/></svg>Назад</span>Двухстадийная схема: кандидаты → ранжирование</a>
         <a href="/edufamcs-demo/handbook/recsys/prodakshen-i-ab-testy/"><span>Дальше<svg class="ico sm" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-arrow"/></svg></span>Рекомендации в продакшене: A/B-тесты и эксплуатация</a>
@@ -221,7 +248,7 @@ plt<span class="tok-p">.</span>xlabel<span class="tok-p">(</span><span class="to
     </article>
 
     <aside class="hb-toc" aria-label="На этой странице">
-      <a class="l2" href="#холодный-старт">Холодный старт</a><a class="l2" href="#исследование-и-эксплуатация">Исследование и эксплуатация</a><a class="l2" href="#многорукие-бандиты">Многорукие бандиты</a><a class="l3" href="#ε-greedy">ε-greedy</a><a class="l3" href="#ucb1">UCB1</a><a class="l3" href="#thompson-sampling">Thompson sampling</a><a class="l3" href="#симуляция">Симуляция</a><a class="l2" href="#контекстные-бандиты-linucb">Контекстные бандиты: LinUCB</a><a class="l2" href="#офлайн-оценка-политик">Офлайн-оценка политик</a><a class="l2" href="#rl-взгляд-reinforce-в-youtube">RL-взгляд: REINFORCE в YouTube</a><a class="l2" href="#практика-исследования-в-продакшене">Практика исследования в продакшене</a><a class="l2" href="#ошибки-и-вопросы-на-собеседованиях">Ошибки и вопросы на собеседованиях</a><a class="l2" href="#что-почитать">Что почитать</a>
+      <a class="l2" href="#холодный-старт">Холодный старт</a><a class="l2" href="#исследование-и-эксплуатация">Исследование и эксплуатация</a><a class="l2" href="#многорукие-бандиты">Многорукие бандиты</a><a class="l3" href="#ε-greedy">ε-greedy</a><a class="l3" href="#ucb1">UCB1</a><a class="l3" href="#thompson-sampling">Thompson sampling</a><a class="l3" href="#симуляция">Симуляция</a><a class="l2" href="#контекстные-бандиты-linucb">Контекстные бандиты: LinUCB</a><a class="l2" href="#офлайн-оценка-политик">Офлайн-оценка политик</a><a class="l2" href="#rl-взгляд-reinforce-в-youtube">RL-взгляд: REINFORCE в YouTube</a><a class="l2" href="#практика-исследования-в-продакшене">Практика исследования в продакшене</a><a class="l2" href="#ошибки-и-вопросы-на-собеседованиях">Ошибки и вопросы на собеседованиях</a><a class="l2" href="#проверь-себя">Проверь себя</a><a class="l2" href="#что-почитать">Что почитать</a>
     </aside>
   </div>
 </div>

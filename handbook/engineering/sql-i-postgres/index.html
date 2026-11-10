@@ -1,0 +1,342 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>SQL и Postgres: минимум для ML-инженера · EDU FAMCS</title>
+<meta name="description" content="SQL и Postgres: минимум для ML-инженера — Инженерия: от ноутбука до сервиса. Хендбук ML-курса ФПМИ.">
+<meta name="theme-color" content="#060A16">
+<meta name="robots" content="noindex, nofollow">
+<meta name="htmx-config" content='{"allowEval":false,"includeIndicatorStyles":false,"historyCacheSize":0,"selfRequestsOnly":true}'>
+<meta name="katex-js" content="/edufamcs-demo/static/vendor/katex/katex.min.js">
+<meta name="katex-css" content="/edufamcs-demo/static/vendor/katex/katex.min.css">
+<link rel="icon" href="/edufamcs-demo/static/brand/logo/favicon-16.svg" type="image/svg+xml" sizes="16x16">
+<link rel="icon" href="/edufamcs-demo/static/brand/logo/favicon.svg" type="image/svg+xml" sizes="any">
+<link rel="preload" href="/edufamcs-demo/static/brand/fonts/manrope-cyrillic-400.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/edufamcs-demo/static/brand/fonts/unbounded-cyrillic-800.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="/edufamcs-demo/static/brand/fonts.css">
+<link rel="stylesheet" href="/edufamcs-demo/static/brand/tokens.css">
+<link rel="stylesheet" href="/edufamcs-demo/static/brand/components.css">
+<link rel="stylesheet" href="/edufamcs-demo/static/css/site.css">
+<link rel="stylesheet" href="/edufamcs-demo/static/css/hub.css">
+<link rel="stylesheet" href="/edufamcs-demo/static/css/about.css">
+<link rel="stylesheet" href="/edufamcs-demo/static/handbook/handbook.css">
+<script src="/edufamcs-demo/static/js/theme.js"></script>
+<script src="/edufamcs-demo/static/vendor/htmx/htmx.min.js" defer></script>
+<script src="/edufamcs-demo/static/vendor/alpine/alpine-csp.min.js" defer></script>
+<script src="/edufamcs-demo/static/js/site.js" defer></script>
+<script src="/edufamcs-demo/static/handbook/handbook.js" defer></script>
+</head>
+<body class="" hx-headers='{"X-CSRFToken": "UhHNzLWUiLN25CJhgaUEAV1LTKxy9B3nwuwKPNvLjy1BgVYJfD8BiOTJlTEwTl24"}'>
+<a class="skip" href="#main">К содержанию</a>
+<div class="demo-bar" role="note">Демо-версия для отзывов: вход, запись на курсы и формы здесь не работают.</div>
+
+<header class="hdr">
+  <div class="container">
+    <a class="brand" href="/edufamcs-demo/" aria-label="EDU FAMCS — главная">
+      <span class="full"><img class="only-light" src="/edufamcs-demo/static/brand/logo/logo-edu-light.svg" alt="EDU FAMCS" width="196" height="40"><img class="only-dark" src="/edufamcs-demo/static/brand/logo/logo-edu-dark.svg" alt="EDU FAMCS" width="196" height="40"></span>
+      <span class="short"><img class="only-light" src="/edufamcs-demo/static/brand/logo/logo-edu-light.svg" alt="EDU FAMCS" height="30"><img class="only-dark" src="/edufamcs-demo/static/brand/logo/logo-edu-dark.svg" alt="EDU FAMCS" height="30"></span>
+    </a>
+    <nav class="nav" id="main-nav" aria-label="Основная навигация">
+      <a href="/edufamcs-demo/#courses">Курсы</a>
+      <a href="/edufamcs-demo/ml/" >Машинное обучение</a>
+      
+      <a href="/edufamcs-demo/handbook/" aria-current="page">Хендбук</a>
+      <a href="/edufamcs-demo/news/" >Новости</a>
+      <a href="/edufamcs-demo/people/" >Авторы</a>
+      <a href="/edufamcs-demo/about/" >О&nbsp;нас</a>
+    </nav>
+    <div class="hdr-actions">
+      
+      <a class="btn btn-outline btn-login" href="/edufamcs-demo/accounts/login/?next=/handbook/engineering/sql-i-postgres/">Войти</a>
+      
+      <button class="icon-btn menu-btn" type="button" aria-label="Меню" aria-expanded="false" aria-controls="main-nav"><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-menu"/></svg></button>
+    </div>
+  </div>
+</header>
+
+<main id="main">
+
+
+
+<div class="container hb-page hb-tone">
+  <div class="hb-readbar" aria-hidden="true"><i></i></div>
+  <div class="hb">
+    <aside class="hb-nav" aria-label="Статьи раздела">
+      
+<form class="hb-search" action="/edufamcs-demo/handbook/search/" method="get" role="search">
+  <svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-search"/></svg>
+  <input class="input" type="search" name="q" value="" placeholder="Поиск по хендбуку" aria-label="Поиск по хендбуку" autocomplete="off" maxlength="120"
+    hx-get="/edufamcs-demo/handbook/search/" hx-trigger="input changed delay:250ms, search" hx-target="#hb-nav-results" hx-sync="this:replace">
+</form>
+
+      <div id="hb-nav-results" class="hb-nav-results" aria-live="polite"></div>
+      <a class="grp" href="/edufamcs-demo/handbook/engineering/">Сервис</a>
+      
+      <a class="" href="/edufamcs-demo/handbook/engineering/iz-noutbuka-v-proekt/">Из ноутбука в проект: модули, конфиги, тесты</a>
+      
+      <a class="" href="/edufamcs-demo/handbook/engineering/http-i-fastapi/">HTTP и API: сервис с моделью на FastAPI</a>
+      
+      <a class="cur" href="/edufamcs-demo/handbook/engineering/sql-i-postgres/" aria-current="page">SQL и Postgres: минимум для ML-инженера</a>
+      
+    </aside>
+
+    <article class="hb-main">
+      <nav class="crumbs" aria-label="Навигация"><a href="/edufamcs-demo/handbook/">Хендбук</a><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-chev"/></svg><a href="/edufamcs-demo/handbook/engineering/">Инженерия: от ноутбука до сервиса</a></nav>
+      <h1 class="h1">SQL и Postgres: минимум для ML-инженера</h1>
+      <div class="hb-meta">
+        
+        
+        <span><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-clock"/></svg>12&nbsp;мин</span>
+        <span class="hb-authors"><span class="avatar sm" title="Артем Лебедевич">АЛ</span>Артем Лебедевич</span>
+        <span><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-edit"/></svg>10 ноября 2026</span>
+        
+        
+      </div>
+
+      
+      <details class="hb-mtoc">
+        <summary><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-list"/></svg>Содержание<svg class="ico sm" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-chev-down"/></svg></summary>
+        <a class="l2" href="#таблицы-ключи-типы">Таблицы, ключи, типы</a><a class="l2" href="#select-и-порядок-выполнения">SELECT и порядок выполнения</a><a class="l2" href="#join-и-взрыв-строк">JOIN и взрыв строк</a><a class="l2" href="#оконные-функции">Оконные функции</a><a class="l2" href="#cte">CTE</a><a class="l2" href="#индексы-и-explain-analyze">Индексы и EXPLAIN ANALYZE</a><a class="l2" href="#транзакции">Транзакции</a><a class="l2" href="#подключение-из-python">Подключение из Python</a><a class="l2" href="#миграции">Миграции</a><a class="l2" href="#типичные-задачи-интервью">Типичные задачи интервью</a><a class="l2" href="#ловушки">Ловушки</a><a class="l2" href="#проверь-себя">Проверь себя</a><a class="l2" href="#что-почитать">Что почитать</a>
+      </details>
+      
+
+      <div class="prose"><p>Данные для моделей почти всегда живут в реляционной базе, а признаки часто проще и быстрее посчитать в SQL, чем тащить таблицу в pandas. Кроме того, SQL — обязательная часть интервью на ML-позиции: оконные функции, соединения и «топ-N в группе» спрашивают чаще, чем бустинг. В нашем сервисе Postgres хранит заказы клиентов и журнал предсказаний. Запросы ниже выполнены на реальном Postgres (16; для 17 синтаксис тот же).</p>
+<h2 id="таблицы-ключи-типы">Таблицы, ключи, типы</h2>
+<p><strong>Первичный ключ</strong> однозначно идентифицирует строку, <strong>внешний ключ</strong> связывает таблицы и не даёт сослаться на несуществующую запись, <code>NOT NULL</code> и <code>CHECK</code> кодируют инварианты данных.</p>
+<div class="code"><div class="code-head"><span class="lang">sql</span></div><pre><code><span class="tok-k">CREATE</span> <span class="tok-k">TABLE</span> users <span class="tok-p">(</span>
+    user_id   <span class="tok-f">bigint</span> <span class="tok-k">PRIMARY</span> <span class="tok-k">KEY</span><span class="tok-p">,</span>
+    country   <span class="tok-f">text</span>   <span class="tok-k">NOT</span> <span class="tok-k">NULL</span><span class="tok-p">,</span>
+    signed_up <span class="tok-f">date</span>   <span class="tok-k">NOT</span> <span class="tok-k">NULL</span>
+<span class="tok-p">)</span><span class="tok-p">;</span>
+
+<span class="tok-k">CREATE</span> <span class="tok-k">TABLE</span> orders <span class="tok-p">(</span>
+    order_id   <span class="tok-f">bigint</span> <span class="tok-k">PRIMARY</span> <span class="tok-k">KEY</span><span class="tok-p">,</span>
+    user_id    <span class="tok-f">bigint</span>        <span class="tok-k">NOT</span> <span class="tok-k">NULL</span> <span class="tok-k">REFERENCES</span> users <span class="tok-p">(</span>user_id<span class="tok-p">)</span><span class="tok-p">,</span>
+    created_at timestamptz   <span class="tok-k">NOT</span> <span class="tok-k">NULL</span><span class="tok-p">,</span>
+    amount     <span class="tok-f">numeric</span><span class="tok-p">(</span><span class="tok-n">10</span><span class="tok-p">,</span><span class="tok-n">2</span><span class="tok-p">)</span> <span class="tok-k">NOT</span> <span class="tok-k">NULL</span> <span class="tok-k">CHECK</span> <span class="tok-p">(</span>amount <span class="tok-p">&gt;</span><span class="tok-p">=</span> <span class="tok-n">0</span><span class="tok-p">)</span><span class="tok-p">,</span>
+    category   <span class="tok-f">text</span>          <span class="tok-k">NOT</span> <span class="tok-k">NULL</span>
+<span class="tok-p">)</span><span class="tok-p">;</span>
+
+<span class="tok-k">CREATE</span> <span class="tok-k">TABLE</span> predictions <span class="tok-p">(</span>
+    id                <span class="tok-f">bigint</span> <span class="tok-k">GENERATED</span> ALWAYS <span class="tok-k">AS</span> <span class="tok-k">IDENTITY</span> <span class="tok-k">PRIMARY</span> <span class="tok-k">KEY</span><span class="tok-p">,</span>
+    created_at        timestamptz <span class="tok-k">NOT</span> <span class="tok-k">NULL</span> <span class="tok-k">DEFAULT</span> now<span class="tok-p">(</span><span class="tok-p">)</span><span class="tok-p">,</span>
+    features          jsonb       <span class="tok-k">NOT</span> <span class="tok-k">NULL</span><span class="tok-p">,</span>
+    churn_probability <span class="tok-f">real</span>        <span class="tok-k">NOT</span> <span class="tok-k">NULL</span><span class="tok-p">,</span>
+    model_version     <span class="tok-f">text</span>        <span class="tok-k">NOT</span> <span class="tok-k">NULL</span>
+<span class="tok-p">)</span><span class="tok-p">;</span>
+</code></pre></div>
+<p>Типы: деньги — <code>numeric</code>, не <code>float</code>; время — <code>timestamptz</code> (хранится в UTC); вложенные поля — <code>jsonb</code>. <code>NULL</code> означает «неизвестно»: <code>NULL = NULL</code> даёт не истину, а <code>NULL</code>, проверять нужно <code>IS NULL</code>.</p>
+<h2 id="select-и-порядок-выполнения">SELECT и порядок выполнения</h2>
+<p>Пишем в порядке <code>SELECT … FROM … WHERE … GROUP BY … HAVING … ORDER BY … LIMIT</code>, а выполняется логически иначе: <code>FROM/JOIN</code> → <code>WHERE</code> (фильтрует строки) → <code>GROUP BY</code> → <code>HAVING</code> (фильтрует группы) → <code>SELECT</code> → <code>ORDER BY</code> → <code>LIMIT</code>. Отсюда два следствия: алиас из <code>SELECT</code> в <code>WHERE</code> использовать нельзя, а условие на агрегат пишется в <code>HAVING</code>.</p>
+<div class="code"><div class="code-head"><span class="lang">sql</span></div><pre><code><span class="tok-k">SELECT</span> category<span class="tok-p">,</span> <span class="tok-k">count</span><span class="tok-p">(</span><span class="tok-p">*</span><span class="tok-p">)</span> <span class="tok-k">AS</span> n_orders<span class="tok-p">,</span> round<span class="tok-p">(</span><span class="tok-k">avg</span><span class="tok-p">(</span>amount<span class="tok-p">)</span><span class="tok-p">,</span> <span class="tok-n">2</span><span class="tok-p">)</span> <span class="tok-k">AS</span> avg_amount
+<span class="tok-k">FROM</span> orders
+<span class="tok-k">WHERE</span> created_at <span class="tok-p">&gt;</span><span class="tok-p">=</span> timestamptz <span class="tok-s">'2026-02-01'</span>
+<span class="tok-k">GROUP</span> <span class="tok-k">BY</span> category
+<span class="tok-k">HAVING</span> <span class="tok-k">count</span><span class="tok-p">(</span><span class="tok-p">*</span><span class="tok-p">)</span> <span class="tok-p">&gt;</span> <span class="tok-n">1000</span>
+<span class="tok-k">ORDER</span> <span class="tok-k">BY</span> n_orders <span class="tok-k">DESC</span><span class="tok-p">;</span>
+</code></pre></div>
+<h2 id="join-и-взрыв-строк">JOIN и взрыв строк</h2>
+<p><code>INNER JOIN</code> оставляет только совпавшие пары, <code>LEFT JOIN</code> сохраняет все строки левой таблицы (нет пары: <code>NULL</code>), <code>FULL JOIN</code> оставляет всё с обеих сторон, <code>CROSS JOIN</code> даёт все пары. Главная авария при соединениях — <strong>размножение строк</strong> (row explosion): если ключ соединения не уникален в правой таблице, левые строки дублируются, а <code>sum</code> и <code>count</code> после этого врут.</p>
+<p>Проверка: до и после соединения число строк должно совпасть, когда вы соединяете «многие к одному».</p>
+<div class="code"><div class="code-head"><span class="lang">sql</span></div><pre><code><span class="tok-k">SELECT</span> <span class="tok-k">count</span><span class="tok-p">(</span><span class="tok-p">*</span><span class="tok-p">)</span>                                  <span class="tok-k">AS</span> orders_n<span class="tok-p">,</span>
+       <span class="tok-k">count</span><span class="tok-p">(</span><span class="tok-p">*</span><span class="tok-p">)</span> FILTER <span class="tok-p">(</span><span class="tok-k">WHERE</span> u<span class="tok-p">.</span>user_id <span class="tok-k">IS</span> <span class="tok-k">NULL</span><span class="tok-p">)</span> <span class="tok-k">AS</span> orphans
+<span class="tok-k">FROM</span> orders o <span class="tok-k">LEFT</span> <span class="tok-k">JOIN</span> users u <span class="tok-k">USING</span> <span class="tok-p">(</span>user_id<span class="tok-p">)</span><span class="tok-p">;</span>
+<span class="tok-c">-- orders_n = 200000: столько же, сколько в orders; orphans = 0
+</span></code></pre></div>
+<p>Если строк стало больше, ключ в правой таблице не уникален: сначала агрегируйте её до уровня ключа (<code>GROUP BY</code>) или оставьте одну строку через <code>row_number</code>.</p>
+<h2 id="оконные-функции">Оконные функции</h2>
+<p>Агрегат с <code>GROUP BY</code> схлопывает строки; <strong>оконная функция</strong> считает по «окну» соседних строк и сохраняет каждую строку. Синтаксис: <code>функция() OVER (PARTITION BY … ORDER BY … ROWS …)</code>. Это основной инструмент feature engineering в SQL.</p>
+<div class="code"><div class="code-head"><span class="lang">sql</span></div><pre><code><span class="tok-k">SELECT</span> user_id<span class="tok-p">,</span> created_at<span class="tok-p">,</span> amount<span class="tok-p">,</span>
+       created_at <span class="tok-p">-</span> lag<span class="tok-p">(</span>created_at<span class="tok-p">)</span> OVER w <span class="tok-k">AS</span> since_prev<span class="tok-p">,</span>
+       <span class="tok-k">sum</span><span class="tok-p">(</span>amount<span class="tok-p">)</span> OVER <span class="tok-p">(</span>w <span class="tok-k">ROWS</span> <span class="tok-k">BETWEEN</span> UNBOUNDED PRECEDING <span class="tok-k">AND</span> <span class="tok-k">CURRENT</span> <span class="tok-k">ROW</span><span class="tok-p">)</span> <span class="tok-k">AS</span> running_amount<span class="tok-p">,</span>
+       <span class="tok-k">avg</span><span class="tok-p">(</span>amount<span class="tok-p">)</span> OVER <span class="tok-p">(</span>w <span class="tok-k">ROWS</span> <span class="tok-k">BETWEEN</span> <span class="tok-n">2</span> PRECEDING <span class="tok-k">AND</span> <span class="tok-k">CURRENT</span> <span class="tok-k">ROW</span><span class="tok-p">)</span>          <span class="tok-k">AS</span> avg_last3
+<span class="tok-k">FROM</span> orders
+<span class="tok-k">WHERE</span> user_id <span class="tok-p">=</span> <span class="tok-n">1</span>
+WINDOW w <span class="tok-k">AS</span> <span class="tok-p">(</span>PARTITION <span class="tok-k">BY</span> user_id <span class="tok-k">ORDER</span> <span class="tok-k">BY</span> created_at<span class="tok-p">)</span>
+<span class="tok-k">ORDER</span> <span class="tok-k">BY</span> created_at<span class="tok-p">;</span>
+</code></pre></div>
+<p><code>lag(x)</code> берёт значение из предыдущей строки (интервал между заказами), <code>sum … UNBOUNDED PRECEDING</code> даёт накопленную сумму, <code>ROWS BETWEEN 2 PRECEDING AND CURRENT ROW</code> — скользящее среднее по трём заказам, включая текущий; <code>row_number()</code> / <code>rank()</code> / <code>dense_rank()</code> нумеруют строки (уникально / с пропусками при ничьих / без пропусков).</p>
+<div class="callout md warn"><p class="callout-title">Утечка из будущего</p>
+<p>Окно <code>ROWS BETWEEN UNBOUNDED PRECEDING AND UNBOUNDED FOLLOWING</code> или признак «всего заказов у пользователя» без отсечки по времени содержит будущее. Признаки для обучения считайте «на момент предсказания»: окно только <code>PRECEDING</code>.</p>
+</div>
+<h2 id="cte">CTE</h2>
+<p><code>WITH name AS (...)</code> называет подзапрос и делает запрос читаемым сверху вниз. Топ-N в группе: нумеруем строки окном и фильтруем снаружи (в <code>WHERE</code> оконную функцию писать нельзя).</p>
+<div class="code"><div class="code-head"><span class="lang">sql</span></div><pre><code><span class="tok-k">WITH</span> rev <span class="tok-k">AS</span> <span class="tok-p">(</span>
+    <span class="tok-k">SELECT</span> u<span class="tok-p">.</span>country<span class="tok-p">,</span> o<span class="tok-p">.</span>user_id<span class="tok-p">,</span> <span class="tok-k">sum</span><span class="tok-p">(</span>o<span class="tok-p">.</span>amount<span class="tok-p">)</span> <span class="tok-k">AS</span> revenue
+    <span class="tok-k">FROM</span> orders o <span class="tok-k">JOIN</span> users u <span class="tok-k">USING</span> <span class="tok-p">(</span>user_id<span class="tok-p">)</span>
+    <span class="tok-k">GROUP</span> <span class="tok-k">BY</span> u<span class="tok-p">.</span>country<span class="tok-p">,</span> o<span class="tok-p">.</span>user_id
+<span class="tok-p">)</span>
+<span class="tok-k">SELECT</span> country<span class="tok-p">,</span> user_id<span class="tok-p">,</span> revenue<span class="tok-p">,</span> rn
+<span class="tok-k">FROM</span> <span class="tok-p">(</span>
+    <span class="tok-k">SELECT</span> <span class="tok-p">*</span><span class="tok-p">,</span> row_number<span class="tok-p">(</span><span class="tok-p">)</span> OVER <span class="tok-p">(</span>PARTITION <span class="tok-k">BY</span> country <span class="tok-k">ORDER</span> <span class="tok-k">BY</span> revenue <span class="tok-k">DESC</span><span class="tok-p">,</span> user_id<span class="tok-p">)</span> <span class="tok-k">AS</span> rn
+    <span class="tok-k">FROM</span> rev
+<span class="tok-p">)</span> t
+<span class="tok-k">WHERE</span> rn <span class="tok-p">&lt;</span><span class="tok-p">=</span> <span class="tok-n">3</span>
+<span class="tok-k">ORDER</span> <span class="tok-k">BY</span> country<span class="tok-p">,</span> rn<span class="tok-p">;</span>
+</code></pre></div>
+<p>Второй ключ сортировки делает порядок детерминированным при равной выручке.</p>
+<h2 id="индексы-и-explain-analyze">Индексы и EXPLAIN ANALYZE</h2>
+<p>Без индекса Postgres читает таблицу целиком (<strong>Seq Scan</strong>). Индекс — отсортированная структура (по умолчанию B-tree), по которой строки находятся за логарифмическое время. На таблице из 200 000 заказов:</p>
+<div class="code"><div class="code-head"><span class="lang">sql</span></div><pre><code><span class="tok-k">EXPLAIN</span> <span class="tok-p">(</span><span class="tok-k">ANALYZE</span><span class="tok-p">,</span> BUFFERS<span class="tok-p">)</span>
+<span class="tok-k">SELECT</span> <span class="tok-p">*</span> <span class="tok-k">FROM</span> orders <span class="tok-k">WHERE</span> user_id <span class="tok-p">=</span> <span class="tok-n">42</span> <span class="tok-k">AND</span> created_at <span class="tok-p">&gt;</span><span class="tok-p">=</span> timestamptz <span class="tok-s">'2026-06-01'</span><span class="tok-p">;</span>
+<span class="tok-c">-- Parallel Seq Scan on orders ... Rows Removed by Filter: 99911 (на воркер)
+</span><span class="tok-c">-- Execution Time: 12.909 ms
+</span>
+<span class="tok-k">CREATE</span> <span class="tok-k">INDEX</span> orders_user_created_idx <span class="tok-k">ON</span> orders <span class="tok-p">(</span>user_id<span class="tok-p">,</span> created_at<span class="tok-p">)</span><span class="tok-p">;</span>
+
+<span class="tok-c">-- Bitmap Index Scan on orders_user_created_idx ... rows=178
+</span><span class="tok-c">-- Execution Time: 0.214 ms
+</span></code></pre></div>
+<p>Читать план: <code>actual time</code> и <code>rows</code> — реальность, <code>cost</code> — оценка планировщика; <code>Rows Removed by Filter</code> — сколько прочитано зря; большое расхождение оценки и факта — повод сделать <code>ANALYZE</code>. Составной индекс <code>(user_id, created_at)</code> работает слева направо: по <code>user_id</code> и по <code>user_id + created_at</code> — да, по одному <code>created_at</code> — нет. Индекс ускоряет чтение, замедляет запись и занимает место: «индекс на каждую колонку» — антипаттерн. Цифры у вас будут другими; метод тот же: план до, индекс, план после.</p>
+<h2 id="транзакции">Транзакции</h2>
+<p>Транзакция — группа операций, выполняемых целиком или никак (атомарность); другие сессии не видят промежуточного состояния. В psycopg 3 соединение как контекстный менеджер коммитит при выходе и откатывает при исключении.</p>
+<h2 id="подключение-из-python">Подключение из Python</h2>
+<p>Библиотека — <code>psycopg</code> 3 (пакет <code>psycopg[binary]</code>, не <code>psycopg2</code>). <strong>Значения всегда передаются параметрами</strong>, не форматированием строки.</p>
+<div class="code"><div class="code-head"><span class="lang">python</span></div><pre><code><span class="tok-k">import</span> psycopg
+<span class="tok-k">from</span> psycopg.types.json <span class="tok-k">import</span> Jsonb
+
+<span class="tok-k">with</span> psycopg<span class="tok-p">.</span>connect<span class="tok-p">(</span>dsn<span class="tok-p">)</span> <span class="tok-k">as</span> conn<span class="tok-p">:</span>       <span class="tok-c"># dsn из окружения: CHURN_DATABASE_URL</span>
+    conn<span class="tok-p">.</span>execute<span class="tok-p">(</span>
+        <span class="tok-s">"</span><span class="tok-s">INSERT INTO predictions (features, churn_probability, model_version)</span><span class="tok-s">"</span>
+        <span class="tok-s">"</span><span class="tok-s"> VALUES (</span><span class="tok-s">%s</span><span class="tok-s">, </span><span class="tok-s">%s</span><span class="tok-s">, </span><span class="tok-s">%s</span><span class="tok-s">)</span><span class="tok-s">"</span><span class="tok-p">,</span>
+        <span class="tok-p">(</span>Jsonb<span class="tok-p">(</span><span class="tok-p">{</span><span class="tok-s">"</span><span class="tok-s">n_orders</span><span class="tok-s">"</span><span class="tok-p">:</span> <span class="tok-n">3</span><span class="tok-p">}</span><span class="tok-p">)</span><span class="tok-p">,</span> <span class="tok-n">0.34</span><span class="tok-p">,</span> <span class="tok-s">"</span><span class="tok-s">v1</span><span class="tok-s">"</span><span class="tok-p">)</span><span class="tok-p">,</span>
+    <span class="tok-p">)</span>
+    rows <span class="tok-p">=</span> conn<span class="tok-p">.</span>execute<span class="tok-p">(</span>
+        <span class="tok-s">"</span><span class="tok-s">SELECT id, created_at, churn_probability FROM predictions WHERE model_version = </span><span class="tok-s">%s</span><span class="tok-s">"</span><span class="tok-p">,</span>
+        <span class="tok-p">(</span><span class="tok-s">"</span><span class="tok-s">v1</span><span class="tok-s">"</span><span class="tok-p">,</span><span class="tok-p">)</span><span class="tok-p">,</span>
+    <span class="tok-p">)</span><span class="tok-p">.</span>fetchall<span class="tok-p">(</span><span class="tok-p">)</span>
+</code></pre></div>
+<div class="callout md warn"><p class="callout-title">SQL-инъекция</p>
+<p><code>f"... WHERE name = '{name}'"</code> с пользовательской строкой <code>x'; DROP TABLE orders; --</code> выполнит чужой код. Плейсхолдеры <code>%s</code> отправляют значение отдельно от текста запроса, и драйвер никогда не интерпретирует его как SQL. Плейсхолдер подставляет только значения: имена таблиц и колонок собирают через <code>psycopg.sql.Identifier</code>.</p>
+</div>
+<p>В pandas/polars результат запроса удобно собирать так:</p>
+<div class="code"><div class="code-head"><span class="lang">python</span></div><pre><code><span class="tok-k">import</span> pandas <span class="tok-k">as</span> pd
+<span class="tok-k">import</span> polars <span class="tok-k">as</span> pl
+
+<span class="tok-k">with</span> psycopg<span class="tok-p">.</span>connect<span class="tok-p">(</span>dsn<span class="tok-p">)</span> <span class="tok-k">as</span> conn<span class="tok-p">:</span>
+    cur <span class="tok-p">=</span> conn<span class="tok-p">.</span>execute<span class="tok-p">(</span><span class="tok-s">"</span><span class="tok-s">SELECT user_id, count(*) AS n FROM orders GROUP BY user_id</span><span class="tok-s">"</span><span class="tok-p">)</span>
+    cols <span class="tok-p">=</span> <span class="tok-p">[</span>d<span class="tok-p">.</span>name <span class="tok-k">for</span> d <span class="tok-k">in</span> cur<span class="tok-p">.</span>description<span class="tok-p">]</span>
+    df_pd <span class="tok-p">=</span> pd<span class="tok-p">.</span>DataFrame<span class="tok-p">(</span>cur<span class="tok-p">.</span>fetchall<span class="tok-p">(</span><span class="tok-p">)</span><span class="tok-p">,</span> columns<span class="tok-p">=</span>cols<span class="tok-p">)</span>
+    <span class="tok-c"># polars умеет читать и напрямую: pl.read_database(query, conn)</span>
+</code></pre></div>
+<p><code>pd.read_sql</code> с «голым» соединением psycopg выдаёт <code>UserWarning</code> (pandas поддерживает SQLAlchemy), поэтому выше <code>DataFrame</code> собран из курсора; большие выборки агрегируйте в базе. Открывать соединение на каждый запрос дорого: в продакшене берут пул (<code>psycopg_pool</code>).</p>
+<h2 id="миграции">Миграции</h2>
+<p>Схема меняется, и менять её руками на проде нельзя. <strong>Миграция</strong> — пронумерованный файл с изменением схемы (<code>ALTER TABLE …</code>), который выполняется один раз и хранится в git. Инструменты: Alembic (Python, SQLAlchemy), <code>dbmate</code>, Flyway. Схему меняют только миграциями: сначала добавить колонку, потом перевести код, потом удалить старое.</p>
+<h2 id="типичные-задачи-интервью">Типичные задачи интервью</h2>
+<ul>
+<li><strong>Топ-N в группе</strong>: см. пример с CTE выше.</li>
+<li><strong>Retention по когортам</strong>: когорта — месяц регистрации; считаем активных по месяцам от регистрации.</li>
+</ul>
+<div class="code"><div class="code-head"><span class="lang">sql</span></div><pre><code><span class="tok-k">WITH</span> cohort <span class="tok-k">AS</span> <span class="tok-p">(</span>
+    <span class="tok-k">SELECT</span> user_id<span class="tok-p">,</span> date_trunc<span class="tok-p">(</span><span class="tok-s">'month'</span><span class="tok-p">,</span> signed_up<span class="tok-p">)</span><span class="tok-p">:</span><span class="tok-p">:</span><span class="tok-f">date</span> <span class="tok-k">AS</span> cohort_month <span class="tok-k">FROM</span> users
+<span class="tok-p">)</span><span class="tok-p">,</span> activity <span class="tok-k">AS</span> <span class="tok-p">(</span>
+    <span class="tok-k">SELECT</span> <span class="tok-k">DISTINCT</span> user_id<span class="tok-p">,</span> date_trunc<span class="tok-p">(</span><span class="tok-s">'month'</span><span class="tok-p">,</span> created_at<span class="tok-p">)</span><span class="tok-p">:</span><span class="tok-p">:</span><span class="tok-f">date</span> <span class="tok-k">AS</span> active_month <span class="tok-k">FROM</span> orders
+<span class="tok-p">)</span>
+<span class="tok-k">SELECT</span> <span class="tok-k">c</span><span class="tok-p">.</span>cohort_month<span class="tok-p">,</span>
+       <span class="tok-p">(</span><span class="tok-k">extract</span><span class="tok-p">(</span><span class="tok-k">year</span> <span class="tok-k">FROM</span> age<span class="tok-p">(</span>a<span class="tok-p">.</span>active_month<span class="tok-p">,</span> <span class="tok-k">c</span><span class="tok-p">.</span>cohort_month<span class="tok-p">)</span><span class="tok-p">)</span> <span class="tok-p">*</span> <span class="tok-n">12</span>
+        <span class="tok-p">+</span> <span class="tok-k">extract</span><span class="tok-p">(</span><span class="tok-k">month</span> <span class="tok-k">FROM</span> age<span class="tok-p">(</span>a<span class="tok-p">.</span>active_month<span class="tok-p">,</span> <span class="tok-k">c</span><span class="tok-p">.</span>cohort_month<span class="tok-p">)</span><span class="tok-p">)</span><span class="tok-p">)</span><span class="tok-p">:</span><span class="tok-p">:</span><span class="tok-f">int</span> <span class="tok-k">AS</span> month_n<span class="tok-p">,</span>
+       <span class="tok-k">count</span><span class="tok-p">(</span><span class="tok-k">DISTINCT</span> a<span class="tok-p">.</span>user_id<span class="tok-p">)</span> <span class="tok-k">AS</span> active_users
+<span class="tok-k">FROM</span> cohort <span class="tok-k">c</span> <span class="tok-k">JOIN</span> activity a <span class="tok-k">USING</span> <span class="tok-p">(</span>user_id<span class="tok-p">)</span>
+<span class="tok-k">WHERE</span> a<span class="tok-p">.</span>active_month <span class="tok-p">&gt;</span><span class="tok-p">=</span> <span class="tok-k">c</span><span class="tok-p">.</span>cohort_month
+<span class="tok-k">GROUP</span> <span class="tok-k">BY</span> <span class="tok-n">1</span><span class="tok-p">,</span> <span class="tok-n">2</span>
+<span class="tok-k">ORDER</span> <span class="tok-k">BY</span> <span class="tok-n">1</span><span class="tok-p">,</span> <span class="tok-n">2</span><span class="tok-p">;</span>
+</code></pre></div>
+<ul>
+<li><strong>Сессионизация</strong>: новая сессия начинается, если пауза больше 30 минут. Помечаем начало через <code>lag</code>, номер сессии получаем накопленной суммой отметок.</li>
+</ul>
+<div class="code"><div class="code-head"><span class="lang">sql</span></div><pre><code><span class="tok-k">WITH</span> x <span class="tok-k">AS</span> <span class="tok-p">(</span>
+    <span class="tok-k">SELECT</span> user_id<span class="tok-p">,</span> created_at<span class="tok-p">,</span>
+           <span class="tok-k">CASE</span> <span class="tok-k">WHEN</span> created_at <span class="tok-p">-</span> lag<span class="tok-p">(</span>created_at<span class="tok-p">)</span> OVER <span class="tok-p">(</span>PARTITION <span class="tok-k">BY</span> user_id <span class="tok-k">ORDER</span> <span class="tok-k">BY</span> created_at<span class="tok-p">)</span>
+                     <span class="tok-p">&gt;</span> <span class="tok-f">interval</span> <span class="tok-s">'30 minutes'</span> <span class="tok-k">THEN</span> <span class="tok-n">1</span> <span class="tok-k">ELSE</span> <span class="tok-n">0</span> <span class="tok-k">END</span> <span class="tok-k">AS</span> new_session
+    <span class="tok-k">FROM</span> orders
+<span class="tok-p">)</span><span class="tok-p">,</span> s <span class="tok-k">AS</span> <span class="tok-p">(</span>
+    <span class="tok-k">SELECT</span> <span class="tok-p">*</span><span class="tok-p">,</span> <span class="tok-k">sum</span><span class="tok-p">(</span>new_session<span class="tok-p">)</span> OVER <span class="tok-p">(</span>PARTITION <span class="tok-k">BY</span> user_id <span class="tok-k">ORDER</span> <span class="tok-k">BY</span> created_at<span class="tok-p">)</span> <span class="tok-k">AS</span> session_id
+    <span class="tok-k">FROM</span> x
+<span class="tok-p">)</span>
+<span class="tok-k">SELECT</span> user_id<span class="tok-p">,</span> session_id<span class="tok-p">,</span> <span class="tok-k">count</span><span class="tok-p">(</span><span class="tok-p">*</span><span class="tok-p">)</span> <span class="tok-k">AS</span> n_events<span class="tok-p">,</span> <span class="tok-k">min</span><span class="tok-p">(</span>created_at<span class="tok-p">)</span> <span class="tok-k">AS</span> started<span class="tok-p">,</span> <span class="tok-k">max</span><span class="tok-p">(</span>created_at<span class="tok-p">)</span> <span class="tok-k">AS</span> ended
+<span class="tok-k">FROM</span> s
+<span class="tok-k">GROUP</span> <span class="tok-k">BY</span> user_id<span class="tok-p">,</span> session_id<span class="tok-p">;</span>
+</code></pre></div>
+<h2 id="ловушки">Ловушки</h2>
+<ul>
+<li><code>WHERE</code> вместо <code>HAVING</code> для агрегата и наоборот; оконная функция в <code>WHERE</code>.</li>
+<li><code>COUNT(col)</code> не считает <code>NULL</code>, <code>COUNT(*)</code> считает; <code>NOT IN</code> с <code>NULL</code> в подзапросе возвращает пусто (используйте <code>NOT EXISTS</code>).</li>
+<li>Условие по правой таблице в <code>WHERE</code> превращает <code>LEFT JOIN</code> в <code>INNER</code>.</li>
+<li>Деньги во <code>float</code>, время без часового пояса, значения в строке запроса через f-строку.</li>
+<li>На собеседовании спрашивают: разница <code>WHERE</code> и <code>HAVING</code>; <code>rank</code> / <code>dense_rank</code> / <code>row_number</code>; как найти дубли; как ускорить медленный запрос; что такое транзакция.</li>
+</ul>
+<h2 id="проверь-себя">Проверь себя</h2>
+<details class="callout md details"><summary>Почему после `JOIN` сумма заказов выросла вдвое и как это проверить?</summary>
+<p>Ключ в правой таблице не уникален, и строки левой дублируются. Проверка: <code>count(*)</code> до и после соединения, а также уникальность ключа правой стороны (<code>count(*)</code> против <code>count(DISTINCT key)</code>).</p>
+</details>
+<details class="callout md details"><summary>Чем оконная функция отличается от `GROUP BY`?</summary>
+<p><code>GROUP BY</code> схлопывает группу в одну строку; оконная функция считает по группе или скользящему окну и оставляет все исходные строки, добавляя вычисленную колонку.</p>
+</details>
+<details class="callout md details"><summary>Как выбрать по три самых дорогих заказа каждого пользователя?</summary>
+<p><code>row_number() OVER (PARTITION BY user_id ORDER BY amount DESC)</code> во вложенном запросе или CTE, а снаружи <code>WHERE rn &lt;= 3</code>: оконную функцию напрямую в <code>WHERE</code> писать нельзя.</p>
+</details>
+<details class="callout md details"><summary>Запрос по `user_id` и `created_at` медленный. Какие шаги?</summary>
+<p><code>EXPLAIN (ANALYZE, BUFFERS)</code>: видим Seq Scan и большое <code>Rows Removed by Filter</code>. Создаём индекс <code>(user_id, created_at)</code>, делаем <code>ANALYZE</code>, сравниваем план и время.</p>
+</details>
+<details class="callout md details"><summary>Почему нельзя собирать SQL через f-строки?</summary>
+<p>Пользовательский ввод станет частью кода запроса (инъекция). Параметры <code>%s</code> передаются отдельно, и драйвер не трактует их как SQL.</p>
+</details>
+<h2 id="что-почитать">Что почитать</h2>
+<ul>
+<li><a href="https://www.postgresql.org/docs/current/" rel="noopener noreferrer nofollow">PostgreSQL: документация</a></li>
+<li><a href="https://www.postgresql.org/docs/current/tutorial-window.html" rel="noopener noreferrer nofollow">PostgreSQL: оконные функции, tutorial</a></li>
+<li><a href="https://www.postgresql.org/docs/current/using-explain.html" rel="noopener noreferrer nofollow">PostgreSQL: использование EXPLAIN</a></li>
+<li><a href="https://www.psycopg.org/psycopg3/docs/" rel="noopener noreferrer nofollow">Psycopg 3: документация</a></li>
+<li><a href="https://use-the-index-luke.com/" rel="noopener noreferrer nofollow">Use The Index, Luke</a></li>
+<li><a href="https://pgexercises.com/" rel="noopener noreferrer nofollow">PG Exercises</a></li>
+</ul>
+</div>
+      
+
+      
+
+      
+      <nav class="pager" aria-label="Соседние статьи">
+        <a href="/edufamcs-demo/handbook/engineering/http-i-fastapi/"><span><svg class="ico sm" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-arrow-left"/></svg>Назад</span>HTTP и API: сервис с моделью на FastAPI</a>
+        <a href="/edufamcs-demo/handbook/engineering/docker/"><span>Дальше<svg class="ico sm" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-arrow"/></svg></span>Docker: образы, контейнеры, Dockerfile для Python</a>
+      </nav>
+      
+    </article>
+
+    <aside class="hb-toc" aria-label="На этой странице">
+      <a class="l2" href="#таблицы-ключи-типы">Таблицы, ключи, типы</a><a class="l2" href="#select-и-порядок-выполнения">SELECT и порядок выполнения</a><a class="l2" href="#join-и-взрыв-строк">JOIN и взрыв строк</a><a class="l2" href="#оконные-функции">Оконные функции</a><a class="l2" href="#cte">CTE</a><a class="l2" href="#индексы-и-explain-analyze">Индексы и EXPLAIN ANALYZE</a><a class="l2" href="#транзакции">Транзакции</a><a class="l2" href="#подключение-из-python">Подключение из Python</a><a class="l2" href="#миграции">Миграции</a><a class="l2" href="#типичные-задачи-интервью">Типичные задачи интервью</a><a class="l2" href="#ловушки">Ловушки</a><a class="l2" href="#проверь-себя">Проверь себя</a><a class="l2" href="#что-почитать">Что почитать</a>
+    </aside>
+  </div>
+</div>
+
+
+</main>
+
+<footer class="ftr" data-theme="dark">
+  <svg class="sym fern" viewBox="0 0 40.5 65.02" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#fern"/></svg>
+  <div class="container">
+    <div class="ftr-row">
+      <a href="/edufamcs-demo/" aria-label="EDU FAMCS — главная"><img src="/edufamcs-demo/static/brand/logo/logo-edu-dark.svg" alt="EDU FAMCS" width="196" height="40"></a>
+      <ul class="ftr-links">
+        <li><a href="/edufamcs-demo/#courses">Курсы</a></li>
+        <li><a href="/edufamcs-demo/ml/">Машинное обучение</a></li>
+        <li><a href="/edufamcs-demo/handbook/">Хендбук</a></li>
+        <li><a href="/edufamcs-demo/news/">Новости</a></li>
+        <li><a href="/edufamcs-demo/people/">Авторы</a></li>
+        <li><a href="/edufamcs-demo/about/">О&nbsp;нас</a></li>
+        <li><a href="/edufamcs-demo/propose/">Предложить или исправить</a></li>
+        <li><a href="/edufamcs-demo/privacy/">Конфиденциальность</a></li>
+      </ul>
+    </div>
+    <div class="ftr-big" aria-hidden="true">EDU<span class="d">·</span>FAMCS</div>
+    <p class="ftr-copy">© 2026 EDU FAMCS · Минск</p>
+  </div>
+</footer>
+
+<div class="toasts-region" aria-live="polite" id="toasts">
+
+</div>
+
+</body>
+</html>

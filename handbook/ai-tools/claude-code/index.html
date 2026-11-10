@@ -1,0 +1,354 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Claude Code: установка, режимы, CLAUDE.md · EDU FAMCS</title>
+<meta name="description" content="Claude Code: установка, режимы, CLAUDE.md — ИИ-ассистенты для кода. Хендбук ML-курса ФПМИ.">
+<meta name="theme-color" content="#060A16">
+<meta name="robots" content="noindex, nofollow">
+<meta name="htmx-config" content='{"allowEval":false,"includeIndicatorStyles":false,"historyCacheSize":0,"selfRequestsOnly":true}'>
+<meta name="katex-js" content="/edufamcs-demo/static/vendor/katex/katex.min.js">
+<meta name="katex-css" content="/edufamcs-demo/static/vendor/katex/katex.min.css">
+<link rel="icon" href="/edufamcs-demo/static/brand/logo/favicon-16.svg" type="image/svg+xml" sizes="16x16">
+<link rel="icon" href="/edufamcs-demo/static/brand/logo/favicon.svg" type="image/svg+xml" sizes="any">
+<link rel="preload" href="/edufamcs-demo/static/brand/fonts/manrope-cyrillic-400.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/edufamcs-demo/static/brand/fonts/unbounded-cyrillic-800.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="/edufamcs-demo/static/brand/fonts.css">
+<link rel="stylesheet" href="/edufamcs-demo/static/brand/tokens.css">
+<link rel="stylesheet" href="/edufamcs-demo/static/brand/components.css">
+<link rel="stylesheet" href="/edufamcs-demo/static/css/site.css">
+<link rel="stylesheet" href="/edufamcs-demo/static/css/hub.css">
+<link rel="stylesheet" href="/edufamcs-demo/static/css/about.css">
+<link rel="stylesheet" href="/edufamcs-demo/static/handbook/handbook.css">
+<script src="/edufamcs-demo/static/js/theme.js"></script>
+<script src="/edufamcs-demo/static/vendor/htmx/htmx.min.js" defer></script>
+<script src="/edufamcs-demo/static/vendor/alpine/alpine-csp.min.js" defer></script>
+<script src="/edufamcs-demo/static/js/site.js" defer></script>
+<script src="/edufamcs-demo/static/handbook/handbook.js" defer></script>
+</head>
+<body class="" hx-headers='{"X-CSRFToken": "d02l1vdRVjUimXXD6kVUuNiP09TZTj3iPdRihxMIW68Rxgc55N9RcGaNsi0XD32Z"}'>
+<a class="skip" href="#main">К содержанию</a>
+<div class="demo-bar" role="note">Демо-версия для отзывов: вход, запись на курсы и формы здесь не работают.</div>
+
+<header class="hdr">
+  <div class="container">
+    <a class="brand" href="/edufamcs-demo/" aria-label="EDU FAMCS — главная">
+      <span class="full"><img class="only-light" src="/edufamcs-demo/static/brand/logo/logo-edu-light.svg" alt="EDU FAMCS" width="196" height="40"><img class="only-dark" src="/edufamcs-demo/static/brand/logo/logo-edu-dark.svg" alt="EDU FAMCS" width="196" height="40"></span>
+      <span class="short"><img class="only-light" src="/edufamcs-demo/static/brand/logo/logo-edu-light.svg" alt="EDU FAMCS" height="30"><img class="only-dark" src="/edufamcs-demo/static/brand/logo/logo-edu-dark.svg" alt="EDU FAMCS" height="30"></span>
+    </a>
+    <nav class="nav" id="main-nav" aria-label="Основная навигация">
+      <a href="/edufamcs-demo/#courses">Курсы</a>
+      <a href="/edufamcs-demo/ml/" >Машинное обучение</a>
+      
+      <a href="/edufamcs-demo/handbook/" aria-current="page">Хендбук</a>
+      <a href="/edufamcs-demo/news/" >Новости</a>
+      <a href="/edufamcs-demo/people/" >Авторы</a>
+      <a href="/edufamcs-demo/about/" >О&nbsp;нас</a>
+    </nav>
+    <div class="hdr-actions">
+      
+      <a class="btn btn-outline btn-login" href="/edufamcs-demo/accounts/login/?next=/handbook/ai-tools/claude-code/">Войти</a>
+      
+      <button class="icon-btn menu-btn" type="button" aria-label="Меню" aria-expanded="false" aria-controls="main-nav"><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-menu"/></svg></button>
+    </div>
+  </div>
+</header>
+
+<main id="main">
+
+
+
+<div class="container hb-page s-agents">
+  <div class="hb-readbar" aria-hidden="true"><i></i></div>
+  <div class="hb">
+    <aside class="hb-nav" aria-label="Статьи раздела">
+      
+<form class="hb-search" action="/edufamcs-demo/handbook/search/" method="get" role="search">
+  <svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-search"/></svg>
+  <input class="input" type="search" name="q" value="" placeholder="Поиск по хендбуку" aria-label="Поиск по хендбуку" autocomplete="off" maxlength="120"
+    hx-get="/edufamcs-demo/handbook/search/" hx-trigger="input changed delay:250ms, search" hx-target="#hb-nav-results" hx-sync="this:replace">
+</form>
+
+      <div id="hb-nav-results" class="hb-nav-results" aria-live="polite"></div>
+      <a class="grp" href="/edufamcs-demo/handbook/ai-tools/">Основы</a>
+      
+      <a class="" href="/edufamcs-demo/handbook/ai-tools/kak-ustroen-kodovyj-agent/">Как устроен кодовый агент: модель, инструменты, контекст</a>
+      
+      <a class="cur" href="/edufamcs-demo/handbook/ai-tools/claude-code/" aria-current="page">Claude Code: установка, режимы, CLAUDE.md</a>
+      
+      <a class="" href="/edufamcs-demo/handbook/ai-tools/codex/">Codex CLI: AGENTS.md, песочница, согласования</a>
+      
+      <a class="" href="/edufamcs-demo/handbook/ai-tools/postanovka-zadach-agentu/">Как ставить задачу агенту</a>
+      
+    </aside>
+
+    <article class="hb-main">
+      <nav class="crumbs" aria-label="Навигация"><a href="/edufamcs-demo/handbook/">Хендбук</a><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-chev"/></svg><a href="/edufamcs-demo/handbook/ai-tools/">ИИ-ассистенты для кода</a></nav>
+      <h1 class="h1">Claude Code: установка, режимы, CLAUDE.md</h1>
+      <div class="hb-meta">
+        
+        
+        <span><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-clock"/></svg>11&nbsp;мин</span>
+        <span class="hb-authors"><span class="avatar sm" title="Артем Лебедевич">АЛ</span>Артем Лебедевич</span>
+        <span><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-edit"/></svg>10 ноября 2026</span>
+        
+        
+      </div>
+
+      
+      <details class="hb-mtoc">
+        <summary><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-list"/></svg>Содержание<svg class="ico sm" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-chev-down"/></svg></summary>
+        <a class="l2" href="#установка-и-первый-запуск">Установка и первый запуск</a><a class="l2" href="#рабочий-цикл-разведка-план-реализация-проверка">Рабочий цикл: разведка, план, реализация, проверка</a><a class="l2" href="#режимы-разрешений">Режимы разрешений</a><a class="l2" href="#claudemd-постоянные-инструкции">CLAUDE.md: постоянные инструкции</a><a class="l2" href="#полезные-команды">Полезные команды</a><a class="l2" href="#управление-контекстом">Управление контекстом</a><a class="l2" href="#git-pr-и-неинтерактивный-режим">Git, PR и неинтерактивный режим</a><a class="l2" href="#пример-сессии-добавить-метрику-и-тест">Пример сессии: добавить метрику и тест</a><a class="l2" href="#ловушки">Ловушки</a><a class="l2" href="#проверь-себя">Проверь себя</a><a class="l2" href="#что-почитать">Что почитать</a>
+      </details>
+      
+
+      <div class="prose"><p>Claude Code — кодовый агент Anthropic: он читает репозиторий, правит файлы, запускает команды и работает с git. Основной интерфейс — терминал, но тот же движок доступен в расширениях для VS Code и JetBrains, в десктопном приложении и в вебе. Эта статья — рабочий минимум: установка, цикл «разведка → план → реализация → проверка», режимы разрешений, файл <code>CLAUDE.md</code> и управление контекстом. Продукт быстро меняется, поэтому источник истины — официальная документация (ссылки внизу); ниже только то, что сверено с ней на ноябрь 2026.</p>
+<h2 id="установка-и-первый-запуск">Установка и первый запуск</h2>
+<p>Рекомендуемый способ для macOS, Linux и WSL — установочный скрипт; для Windows PowerShell есть свой, а также Homebrew и WinGet:</p>
+<div class="code"><div class="code-head"><span class="lang">bash</span></div><pre><code>curl -fsSL https://claude.ai/install.sh <span class="tok-p">|</span> bash
+</code></pre></div>
+<div class="code"><div class="code-head"><span class="lang">powershell</span></div><pre><code><span class="tok-f">irm </span>https<span class="tok-p">:</span><span class="tok-p">/</span><span class="tok-p">/</span>claude<span class="tok-p">.</span>ai<span class="tok-p">/</span>install<span class="tok-p">.</span>ps1 <span class="tok-p">|</span> <span class="tok-f">iex
+</span></code></pre></div>
+<div class="code"><div class="code-head"><span class="lang">bash</span></div><pre><code>brew install --cask claude-code
+</code></pre></div>
+<p>Проверка: откройте новое окно терминала и выполните <code>claude --version</code>. Запуск — из каталога проекта:</p>
+<div class="code"><div class="code-head"><span class="lang">bash</span></div><pre><code><span class="tok-f">cd</span> /path/to/your/project
+claude
+</code></pre></div>
+<p>При первом запуске откроется вход в браузере. Нужна подписка Claude (Pro, Max и др.), аккаунт Claude Console с API-доступом или доступ через поддерживаемого облачного провайдера. Установка скриптом обновляется автоматически, Homebrew и WinGet — вручную.</p>
+<p>Первые вопросы безопасны: «what does this project do?», «explain the folder structure». <code>/help</code> покажет команды, <code>/resume</code> продолжит прошлую беседу.</p>
+<h2 id="рабочий-цикл-разведка-план-реализация-проверка">Рабочий цикл: разведка, план, реализация, проверка</h2>
+<ol>
+<li><strong>Разведка.</strong> Попросите изучить код и ничего не менять: «как устроено обучение, где считаются метрики?». Агент читает файлы сам, указывать каждый не нужно.</li>
+<li><strong>План.</strong> Для всего нетривиального — в режиме планирования (ниже). Прочитайте план, поправьте до начала правок.</li>
+<li><strong>Реализация.</strong> Небольшими шагами; после каждого — коммит.</li>
+<li><strong>Проверка.</strong> Агент должен запустить тесты и линтер и показать результат; вы просматриваете дифф.</li>
+</ol>
+<p>Документация формулирует это жёстко: если у агента нет проверки, возвращающей «прошло/не прошло», проверяющим становитесь вы. Лучшая строка в <code>CLAUDE.md</code> — команда, которая запускает проверку.</p>
+<h2 id="режимы-разрешений">Режимы разрешений</h2>
+<p>Режим определяет, что агент делает без вашего подтверждения. Переключение в сессии — <code>Shift+Tab</code>; при запуске — флаг <code>--permission-mode</code>.</p>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>Режим (значение)</th>
+<th>Что выполняется без вопросов</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>default</code> («Manual»)</td>
+<td>только чтение; правки, команды и сеть — с подтверждением</td>
+</tr>
+<tr>
+<td><code>acceptEdits</code></td>
+<td>чтение, правка файлов и типовые файловые команды (<code>mkdir</code>, <code>mv</code>, <code>cp</code>…) в рабочих каталогах</td>
+</tr>
+<tr>
+<td><code>plan</code></td>
+<td>чтение; агент исследует и предлагает план, исходники не правит</td>
+</tr>
+<tr>
+<td><code>auto</code></td>
+<td>всё, но отдельная модель-классификатор проверяет действия в фоне</td>
+</tr>
+<tr>
+<td><code>dontAsk</code></td>
+<td>только чтение и заранее разрешённое; всё остальное отклоняется</td>
+</tr>
+<tr>
+<td><code>bypassPermissions</code></td>
+<td>всё; только для изолированного контейнера или ВМ</td>
+</tr>
+</tbody>
+</table></div>
+<p>В новых версиях интерактивные сессии по умолчанию стартуют в <code>auto</code>; в старых это зависело от тарифа, так что проверьте строку состояния. <code>bypassPermissions</code> (флаг <code>--dangerously-skip-permissions</code>) на рабочей машине не используйте.</p>
+<p><strong>Режим планирования:</strong> войти можно через <code>Shift+Tab</code> до индикатора «plan mode on», командой <code>/plan</code> (можно сразу с описанием: <code>/plan fix the auth bug</code>) или флагом <code>claude --permission-mode plan</code>. Когда план готов, агент предложит одобрить его и перейти к правкам; <code>Ctrl+G</code> открывает план в вашем редакторе.</p>
+<p><strong>Списки разрешений</strong> задают конкретные команды, которые можно не подтверждать, в <code>.claude/settings.json</code> (проект, коммитится в git), <code>.claude/settings.local.json</code> (личное) или <code>~/.claude/settings.json</code> (все проекты):</p>
+<div class="code"><div class="code-head"><span class="lang">json</span></div><pre><code><span class="tok-p">{</span>
+  "permissions"<span class="tok-p">:</span> <span class="tok-p">{</span>
+    "allow"<span class="tok-p">:</span> <span class="tok-p">[</span>
+      <span class="tok-s">"Bash(npm run *)"</span><span class="tok-p">,</span>
+      <span class="tok-s">"Bash(git commit *)"</span>
+    <span class="tok-p">],</span>
+    "deny"<span class="tok-p">:</span> <span class="tok-p">[</span>
+      <span class="tok-s">"Bash(git push *)"</span>
+    <span class="tok-p">]</span>
+  <span class="tok-p">}</span>
+<span class="tok-p">}</span>
+</code></pre></div>
+<p>Это пример из документации; для питонового проекта вместо <code>npm run</code> вы разрешите, например, <code>Bash(uv run pytest *)</code>. Запрещающее правило сильнее разрешающего. Интерактивно правила смотрят и правят через <code>/permissions</code>. Звёздочку ставьте после подкоманды: <code>Bash(git log *)</code> разрешает только <code>git log</code>, а <code>Bash(git *)</code> — любую git-команду.</p>
+<h2 id="claudemd-постоянные-инструкции">CLAUDE.md: постоянные инструкции</h2>
+<p>Каждая сессия начинается с пустого контекста. <code>CLAUDE.md</code> — markdown-файл, который подгружается в начало каждой сессии. Расположения:</p>
+<ul>
+<li><code>./CLAUDE.md</code> или <code>./.claude/CLAUDE.md</code> — инструкции проекта, общие для команды через git;</li>
+<li><code>~/.claude/CLAUDE.md</code> — ваши личные правила для всех проектов;</li>
+<li><code>./CLAUDE.local.md</code> — личное для проекта, добавьте в <code>.gitignore</code>.</li>
+</ul>
+<p>Команда <code>/init</code> генерирует стартовый файл, изучив репозиторий: команды сборки и тестов, структуру, соглашения. Если файл уже есть, она предложит улучшения. Дальше правьте руками: оставьте то, чего из кода не узнать.</p>
+<p>Что писать, и конкретно, чтобы это можно было проверить:</p>
+<div class="code"><div class="code-head"><span class="lang">markdown</span></div><pre><code># Проект: churn-model
+
+## Команды
+<span class="tok-k">-</span> Тесты: <span class="tok-s">`uv run pytest -x -q`</span>; один файл: <span class="tok-s">`uv run pytest tests/test_metrics.py`</span>
+<span class="tok-k">-</span> Линтер: <span class="tok-s">`uv run ruff check .`</span>
+<span class="tok-k">-</span> Обучение (дешёвый профиль): <span class="tok-s">`uv run python train.py --config configs/smoke.yaml`</span>
+
+## Соглашения
+<span class="tok-k">-</span> Метрики живут в <span class="tok-s">`src/metrics.py`</span>, с тестами в <span class="tok-s">`tests/test_metrics.py`</span>
+<span class="tok-k">-</span> Разбиение по времени: <span class="tok-s">`src/split.py`</span>; случайный split для этих данных запрещён
+
+## Не трогать
+<span class="tok-k">-</span> <span class="tok-s">`data/raw/`</span> — только чтение; <span class="tok-s">`configs/prod.yaml`</span> без моего подтверждения не менять
+</code></pre></div>
+<p>Правила: цель — короче 200 строк (длиннее — хуже соблюдаются и дороже по контексту), без противоречий, без многошаговых процедур. Многошаговое лучше вынести в <a href="/edufamcs-demo/handbook/ai-tools/skills/" rel="noopener noreferrer nofollow">навык</a>. Помните: <code>CLAUDE.md</code> — контекст, а не принуждение; то, что нельзя нарушить ни при каких условиях, закрывайте запретом в разрешениях или хуком. Если в репозитории уже есть <code>AGENTS.md</code>, Claude Code читает его, когда <code>CLAUDE.md</code> нет; детали — в <a href="/edufamcs-demo/handbook/ai-tools/codex/" rel="noopener noreferrer nofollow">статье про Codex</a>.</p>
+<h2 id="полезные-команды">Полезные команды</h2>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>Команда</th>
+<th>Зачем</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>/init</code></td>
+<td>создать стартовый <code>CLAUDE.md</code></td>
+</tr>
+<tr>
+<td><code>/clear</code></td>
+<td>новая беседа с пустым контекстом</td>
+</tr>
+<tr>
+<td><code>/compact [инструкции]</code></td>
+<td>сжать историю, можно указать фокус: <code>/compact focus on the API changes</code></td>
+</tr>
+<tr>
+<td><code>/context</code></td>
+<td>показать, что занимает окно</td>
+</tr>
+<tr>
+<td><code>/resume</code>, <code>claude --continue</code></td>
+<td>вернуться к прошлой беседе</td>
+</tr>
+<tr>
+<td><code>/rewind</code> (или двойной <code>Esc</code>)</td>
+<td>откатить беседу и/или правки к прошлой точке</td>
+</tr>
+<tr>
+<td><code>/diff</code></td>
+<td>просмотреть изменения в рабочем дереве</td>
+</tr>
+<tr>
+<td><code>/review</code></td>
+<td>ревью диффа или PR</td>
+</tr>
+<tr>
+<td><code>/permissions</code>, <code>/model</code>, <code>/memory</code>, <code>/usage</code></td>
+<td>разрешения, выбор модели, правка <code>CLAUDE.md</code>, расход</td>
+</tr>
+</tbody>
+</table></div>
+<p>Откат (checkpoints) покрывает только файлы; действия во внешних системах он не вернёт.</p>
+<h2 id="управление-контекстом">Управление контекстом</h2>
+<p>Одна задача — одна сессия: закончили, сделали <code>/clear</code> или начали новую. Не перетаскивайте в новую задачу чужую историю. Окно заполняется выводами команд и прочитанными файлами; <code>/context</code> покажет, что съело место. При приближении к лимиту история сжимается автоматически, но детали из начала разговора могут потеряться, поэтому правила держите в <code>CLAUDE.md</code>, а не в чате (корневой <code>CLAUDE.md</code> перечитывается после компактации). Тяжёлую разведку можно поручить субагенту: он работает в своём окне и возвращает резюме (<a href="/edufamcs-demo/handbook/ai-tools/subagenty-huki-komandy/" rel="noopener noreferrer nofollow">подробнее</a>).</p>
+<h2 id="git-pr-и-неинтерактивный-режим">Git, PR и неинтерактивный режим</h2>
+<p>Агент умеет <code>git</code>: «what files have I changed?», «commit my changes with a descriptive message», «create a pr». PR он создаёт через <code>gh pr create</code> или <code>glab mr create</code>, если инструмент установлен; читайте описание перед отправкой. Для параллельных задач есть <code>claude --worktree &lt;имя&gt;</code> — отдельная рабочая копия на своей ветке.</p>
+<p>Для скриптов и CI — флаг <code>-p</code>: <code>claude -p "query"</code> выполняет один запрос и завершается. С <code>--output-format json</code> вы получаете структурированный ответ, с <code>--allowedTools</code> заранее разрешаете инструменты:</p>
+<div class="code"><div class="code-head"><span class="lang">bash</span></div><pre><code>claude -p <span class="tok-s">"Run the test suite and fix any failures"</span> --allowedTools <span class="tok-s">"Bash,Read,Edit"</span>
+</code></pre></div>
+<p>В CI документация советует добавлять <code>--bare</code>, чтобы запуск не подхватывал чужие хуки и <code>CLAUDE.md</code> с машины. Ключи и токены — только через переменные окружения.</p>
+<h2 id="пример-сессии-добавить-метрику-и-тест">Пример сессии: добавить метрику и тест</h2>
+<p>Репозиторий с моделью оттока; хотим добавить <code>recall@k</code> в <code>src/metrics.py</code>.</p>
+<div class="code"><div class="code-head"><span class="lang">text</span></div><pre><code>&gt; Изучи src/metrics.py и tests/test_metrics.py. Как считаются текущие метрики и как они тестируются? Ничего не меняй.
+</code></pre></div>
+<p>Затем Shift+Tab до режима планирования:</p>
+<div class="code"><div class="code-head"><span class="lang">text</span></div><pre><code>&gt; Добавь recall@k: доля релевантных объектов среди топ-k по скору, усреднённая по пользователям. Пользователей без релевантных пропускать. Сначала план: сигнатура, обработка ничьих по скору, тесты.
+</code></pre></div>
+<p>Читаем план: проверяем определение (знаменатель, ничьи), правим словами и одобряем. Дальше:</p>
+<div class="code"><div class="code-head"><span class="lang">text</span></div><pre><code>&gt; Реализуй по плану. Тесты на ручном примере из 5 объектов, где ответ посчитан мной вручную (в тесте — мои числа). Запусти uv run pytest tests/test_metrics.py и покажи вывод.
+</code></pre></div>
+<p>Вручную: <code>/diff</code>, затем сверка с вашим расчётом на бумаге и, при желании, с независимой реализацией (например, из библиотеки для ранжирования). Только после этого — <code>commit this with a descriptive message</code>. Ключевое: ожидаемые значения в тесте вы задали сами, а не позволили агенту вывести их из своего же кода.</p>
+<h2 id="ловушки">Ловушки</h2>
+<ul>
+<li>Режим без подтверждений на рабочем ноутбуке с доступом к ключам и данным.</li>
+<li>Огромный <code>CLAUDE.md</code> с историей проекта; противоречивые правила.</li>
+<li>Одна бесконечная сессия на всё: контекст забит, ранние решения потеряны.</li>
+<li>Принятие правки без <code>/diff</code>; агент мог тихо изменить тест или конфиг.</li>
+<li>Вставка секретов в промпт; ключи только в переменных окружения.</li>
+<li>Отсутствие команды проверки в <code>CLAUDE.md</code>: агент «закончит», ничего не запустив.</li>
+</ul>
+<h2 id="проверь-себя">Проверь себя</h2>
+<details class="callout md details"><summary>Зачем нужен режим планирования и как в него войти?</summary>
+<p>Агент исследует и предлагает план, не правя исходники, пока вы не одобрите. Вход: <code>Shift+Tab</code>, <code>/plan</code> или <code>claude --permission-mode plan</code>.</p>
+</details>
+<details class="callout md details"><summary>Что должно быть в CLAUDE.md и чего там быть не должно?</summary>
+<p>Должно: команды тестов и линтера, соглашения, зоны «не трогать», проверяемыми формулировками. Не должно: длинные процедуры, пересказ кода, противоречия; ориентир — меньше 200 строк.</p>
+</details>
+<details class="callout md details"><summary>Чем `/clear` отличается от `/compact`?</summary>
+<p><code>/clear</code> начинает новую беседу с пустым контекстом, <code>/compact</code> сжимает текущую историю в резюме и продолжает её.</p>
+</details>
+<details class="callout md details"><summary>Почему deny-правило надёжнее просьбы в CLAUDE.md?</summary>
+<p><code>CLAUDE.md</code> — контекст, который модель может не учесть; правила разрешений применяет сама обвязка, и запрет сильнее разрешения.</p>
+</details>
+<details class="callout md details"><summary>Как сделать, чтобы агент сам проверял свою работу?</summary>
+<p>Дать команду с результатом «прошло/не прошло» (тесты, линтер, скрипт сравнения), записать её в <code>CLAUDE.md</code> и потребовать показать вывод.</p>
+</details>
+<h2 id="что-почитать">Что почитать</h2>
+<ul>
+<li><a href="https://code.claude.com/docs/en/quickstart" rel="noopener noreferrer nofollow">Quickstart</a> — установка и первая сессия.</li>
+<li><a href="https://code.claude.com/docs/en/memory" rel="noopener noreferrer nofollow">How Claude remembers your project</a> — CLAUDE.md, импорты, AGENTS.md, авто-память.</li>
+<li><a href="https://code.claude.com/docs/en/permission-modes" rel="noopener noreferrer nofollow">Permission modes</a> и <a href="https://code.claude.com/docs/en/permissions" rel="noopener noreferrer nofollow">Configure permissions</a>.</li>
+<li><a href="https://code.claude.com/docs/en/best-practices" rel="noopener noreferrer nofollow">Best practices</a> и <a href="https://code.claude.com/docs/en/common-workflows" rel="noopener noreferrer nofollow">Common workflows</a>.</li>
+<li><a href="https://code.claude.com/docs/en/commands" rel="noopener noreferrer nofollow">Commands</a> — полный список встроенных команд.</li>
+<li><a href="https://code.claude.com/docs/en/headless" rel="noopener noreferrer nofollow">Run Claude Code programmatically</a> — <code>claude -p</code>, форматы вывода, CI.</li>
+</ul>
+</div>
+      
+
+      
+
+      
+      <nav class="pager" aria-label="Соседние статьи">
+        <a href="/edufamcs-demo/handbook/ai-tools/kak-ustroen-kodovyj-agent/"><span><svg class="ico sm" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-arrow-left"/></svg>Назад</span>Как устроен кодовый агент: модель, инструменты, контекст</a>
+        <a href="/edufamcs-demo/handbook/ai-tools/codex/"><span>Дальше<svg class="ico sm" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-arrow"/></svg></span>Codex CLI: AGENTS.md, песочница, согласования</a>
+      </nav>
+      
+    </article>
+
+    <aside class="hb-toc" aria-label="На этой странице">
+      <a class="l2" href="#установка-и-первый-запуск">Установка и первый запуск</a><a class="l2" href="#рабочий-цикл-разведка-план-реализация-проверка">Рабочий цикл: разведка, план, реализация, проверка</a><a class="l2" href="#режимы-разрешений">Режимы разрешений</a><a class="l2" href="#claudemd-постоянные-инструкции">CLAUDE.md: постоянные инструкции</a><a class="l2" href="#полезные-команды">Полезные команды</a><a class="l2" href="#управление-контекстом">Управление контекстом</a><a class="l2" href="#git-pr-и-неинтерактивный-режим">Git, PR и неинтерактивный режим</a><a class="l2" href="#пример-сессии-добавить-метрику-и-тест">Пример сессии: добавить метрику и тест</a><a class="l2" href="#ловушки">Ловушки</a><a class="l2" href="#проверь-себя">Проверь себя</a><a class="l2" href="#что-почитать">Что почитать</a>
+    </aside>
+  </div>
+</div>
+
+
+</main>
+
+<footer class="ftr" data-theme="dark">
+  <svg class="sym fern" viewBox="0 0 40.5 65.02" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#fern"/></svg>
+  <div class="container">
+    <div class="ftr-row">
+      <a href="/edufamcs-demo/" aria-label="EDU FAMCS — главная"><img src="/edufamcs-demo/static/brand/logo/logo-edu-dark.svg" alt="EDU FAMCS" width="196" height="40"></a>
+      <ul class="ftr-links">
+        <li><a href="/edufamcs-demo/#courses">Курсы</a></li>
+        <li><a href="/edufamcs-demo/ml/">Машинное обучение</a></li>
+        <li><a href="/edufamcs-demo/handbook/">Хендбук</a></li>
+        <li><a href="/edufamcs-demo/news/">Новости</a></li>
+        <li><a href="/edufamcs-demo/people/">Авторы</a></li>
+        <li><a href="/edufamcs-demo/about/">О&nbsp;нас</a></li>
+        <li><a href="/edufamcs-demo/propose/">Предложить или исправить</a></li>
+        <li><a href="/edufamcs-demo/privacy/">Конфиденциальность</a></li>
+      </ul>
+    </div>
+    <div class="ftr-big" aria-hidden="true">EDU<span class="d">·</span>FAMCS</div>
+    <p class="ftr-copy">© 2026 EDU FAMCS · Минск</p>
+  </div>
+</footer>
+
+<div class="toasts-region" aria-live="polite" id="toasts">
+
+</div>
+
+</body>
+</html>

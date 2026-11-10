@@ -246,3 +246,31 @@ a.resume{text-decoration:none}
 .dash-grid{margin-top:16px}
 a.ev{color:inherit;text-decoration:none}
 a.ev:hover{background:var(--surface-2)}
+
+/* calendar link on the dashboard */
+.cal-sub{display:flex;gap:8px;align-items:center}
+.cal-sub .icon-btn.copied{color:var(--ok);border-color:var(--ok)}
+
+/* lesson feedback */
+.fb-wrap{max-width:var(--container-text)}
+.fb{margin-top:28px;padding:18px 20px;border:1px solid var(--line);border-radius:var(--r-lg);background:var(--surface)}
+.fb fieldset{border:0;margin:0;padding:0;min-width:0}
+.fb legend{padding:0;margin-bottom:10px}
+.fb-row{display:flex;flex-direction:row-reverse;justify-content:flex-end;gap:4px}
+.fb-row input{position:absolute;opacity:0;pointer-events:none}
+.fb-row label{display:grid;place-items:center;width:40px;height:40px;border-radius:var(--r-md);color:var(--line-strong);cursor:pointer;transition:color var(--dur-1)}
+.fb-row label .ico{width:26px;height:26px}
+.fb-row input:checked~label,.fb-row label:hover,.fb-row label:hover~label{color:var(--orange)}
+.fb-row input:checked~label .ico,.fb-row label:hover .ico,.fb-row label:hover~label .ico{fill:currentColor}
+.fb-row input:focus-visible+label{outline:2px solid var(--focus);outline-offset:2px}
+.fb-more{display:none;margin-top:12px}
+.fb-more.on,.fb:has(.fb-row input:checked) .fb-more{display:block}
+.fb-more .textarea{width:100%}
+.fb-f{display:flex;flex-wrap:wrap;align-items:center;gap:12px;margin-top:12px}
+@media (max-width:480px){.fb{padding:16px}.fb-row label{width:44px;height:44px}}
+
+/* phone: the step actions («Дальше») stay within thumb reach while the text scrolls */
+@media (max-width:860px){
+  .stage-f{position:sticky;bottom:0;z-index:5;margin-inline:calc(-1*var(--gutter));padding:12px var(--gutter) calc(12px + env(safe-area-inset-bottom));
+    background:color-mix(in srgb,var(--bg) 88%,transparent);-webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px)}
+}

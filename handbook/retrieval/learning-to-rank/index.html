@@ -27,7 +27,7 @@
 <script src="/edufamcs-demo/static/js/site.js" defer></script>
 <script src="/edufamcs-demo/static/handbook/handbook.js" defer></script>
 </head>
-<body class="" hx-headers='{"X-CSRFToken": "pLjCEYc9wmek7Bwmcvuc6GYytJio064TbRkZyLuQHzuyMasCpUnhn86TZ6UD5RPS"}'>
+<body class="" hx-headers='{"X-CSRFToken": "mUOyVwlpJIxyqUxTWR3KN0Gws1nUGQi1Y7DvbyUgKvL7BdMlVkhHvTyuUauSqAhI"}'>
 <a class="skip" href="#main">К содержанию</a>
 <div class="demo-bar" role="note">Демо-версия для отзывов: вход, запись на курсы и формы здесь не работают.</div>
 
@@ -60,6 +60,7 @@
 
 
 <div class="container hb-page s-recsys">
+  <div class="hb-readbar" aria-hidden="true"><i></i></div>
   <div class="hb">
     <aside class="hb-nav" aria-label="Статьи раздела">
       
@@ -88,9 +89,9 @@
       <div class="hb-meta">
         
         
-        <span><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-clock"/></svg>14&nbsp;мин</span>
+        <span><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-clock"/></svg>17&nbsp;мин</span>
         <span class="hb-authors"><span class="avatar sm" title="Артем Лебедевич">АЛ</span>Артем Лебедевич</span>
-        <span><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-edit"/></svg>9 ноября 2026</span>
+        <span><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-edit"/></svg>10 ноября 2026</span>
         
         
       </div>
@@ -98,7 +99,7 @@
       
       <details class="hb-mtoc">
         <summary><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-list"/></svg>Содержание<svg class="ico sm" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-chev-down"/></svg></summary>
-        <a class="l2" href="#признаки-пары-запросдокумент">Признаки пары запрос–документ</a><a class="l2" href="#три-подхода">Три подхода</a><a class="l3" href="#pointwise">Pointwise</a><a class="l3" href="#pairwise">Pairwise</a><a class="l3" href="#listwise">Listwise</a><a class="l2" href="#lambdarank-и-lambdamart">LambdaRank и LambdaMART</a><a class="l2" href="#реализации">Реализации</a><a class="l2" href="#обучение-на-кликах-без-смещения">Обучение на кликах без смещения</a><a class="l2" href="#нейросетевой-ltr">Нейросетевой LTR</a><a class="l2" href="#ловушки">Ловушки</a><a class="l2" href="#что-почитать">Что почитать</a>
+        <a class="l2" href="#признаки-пары-запросдокумент">Признаки пары запрос–документ</a><a class="l2" href="#три-подхода">Три подхода</a><a class="l3" href="#pointwise">Pointwise</a><a class="l3" href="#pairwise">Pairwise</a><a class="l3" href="#listwise">Listwise</a><a class="l2" href="#lambdarank-и-lambdamart">LambdaRank и LambdaMART</a><a class="l2" href="#реализации">Реализации</a><a class="l2" href="#обучение-на-кликах-без-смещения">Обучение на кликах без смещения</a><a class="l2" href="#нейросетевой-ltr">Нейросетевой LTR</a><a class="l2" href="#ловушки">Ловушки</a><a class="l2" href="#проверь-себя">Проверь себя</a><a class="l2" href="#что-почитать">Что почитать</a>
       </details>
       
 
@@ -135,6 +136,14 @@
 <p>Ключевое наблюдение Burges, Ragno, Le (2006): для обучения модели не нужна функция потерь, нужны <strong>градиенты</strong> — «силы», с которыми нужно двигать документы. Пусть градиенты RankNet умножаются на изменение метрики при обмене этих документов местами:</p>
 <div class="tex tex-block">\lambda_{ij} = \frac{-\sigma}{1 + e^{\sigma (s_i - s_j)}} \cdot |\Delta \mathrm{NDCG}_{ij}|,</div>
 <p>где <span class="tex">|\Delta\mathrm{NDCG}_{ij}|</span> — модуль изменения NDCG, если поменять <span class="tex">i</span> и <span class="tex">j</span> местами в текущем ранжировании. Итоговая «сила» на документ <span class="tex">i</span>: <span class="tex">\lambda_i = \sum_{j: y_i &gt; y_j}\lambda_{ij} - \sum_{j: y_j &gt; y_i}\lambda_{ji}</span>. Пары у вершины списка и пары с разными оценками (например 4 vs 0) получают больший вес, пары в хвосте — малый. Обмен 1-го и 2-го документов меняет NDCG сильно, 50-го и 51-го — почти нет, поэтому оптимизируется то, что видит пользователь. Функцию потерь, градиент которой равен <span class="tex">\lambda</span>, авторы не выписывали: λ задаются напрямую. Donmez, Svore, Burges (2009) эмпирически показали, что процедура приходит в локальный оптимум самой NDCG, а Wang et al. (2018, LambdaLoss) дали теоретическое обоснование: LambdaRank — частный случай их вероятностного фреймворка с корректно определённой функцией потерь, которая ограничивает потерю NDCG сверху (грубо; там же предложены более точные границы).</p>
+<p><strong>Пример на числах.</strong> Текущая выдача из четырёх документов с оценками <span class="tex">1, 0, 3, 2</span> (в порядке позиций). <span class="tex">\mathrm{IDCG} = 7 + 3/\log_2 3 + 1/2 + 0 \approx 9{,}393</span>, <span class="tex">\mathrm{DCG} = 1 + 0 + 7/2 + 3/\log_2 5 \approx 5{,}792</span>, <span class="tex">\mathrm{NDCG} \approx 0{,}617</span>. При обмене документов на позициях <span class="tex">p_i, p_j</span> меняются только два слагаемых, поэтому</p>
+<div class="tex tex-block">|\Delta\mathrm{NDCG}_{ij}| = \frac{|g_i - g_j|\,\bigl|\,1/\log_2(1+p_i) - 1/\log_2(1+p_j)\,\bigr|}{\mathrm{IDCG}}, \qquad g = 2^{\mathrm{rel}} - 1.</div>
+<ul>
+<li>Обмен позиций 1 и 3 (оценки 1 и 3): <span class="tex">|7 - 1| \cdot |1 - 0{,}5| / 9{,}393 \approx 0{,}319</span> (NDCG вырастает с 0,617 до 0,936).</li>
+<li>Обмен позиций 2 и 3 (оценки 0 и 3): <span class="tex">7 \cdot |0{,}631 - 0{,}5| / 9{,}393 \approx 0{,}098</span>.</li>
+<li>Обмен позиций 3 и 4 (оценки 3 и 2): <span class="tex">|7 - 3| \cdot |0{,}5 - 0{,}431| / 9{,}393 \approx 0{,}030</span>.</li>
+</ul>
+<p>Градиент RankNet для всех трёх пар умножается на эти числа: пара «тройка внизу, единица наверху» получает вес примерно в десять раз больше, чем пара двух хороших документов у конца списка.</p>
 <p><strong>LambdaMART</strong> (Burges, 2010) — то же, но вместо нейросети модель — <strong>градиентный бустинг над деревьями</strong> (MART): каждое следующее дерево аппроксимирует <span class="tex">\lambda_i</span> как «остатки», а значения в листьях подбирают шагом Ньютона, используя вторые производные. Деревья естественно работают с гетерогенными признаками разного масштаба, пропусками и нелинейными взаимодействиями, поэтому в Yahoo! Learning to Rank Challenge (2010) основной трек выиграл ансамбль на основе LambdaMART (команда Burges), и метод надолго стал стандартом индустрии. Второй трек, на перенос обучения между данными, выиграл YetiRank Яндекса (о нём ниже). Устройство бустинга и деревьев — <a href="/edufamcs-demo/handbook/classic/gradientnyj-busting/" rel="noopener noreferrer nofollow">градиентный бустинг</a>.</p>
 <p>В России параллельную линию вёл Яндекс: <strong>MatrixNet</strong> — бустинг над симметричными (oblivious) деревьями, на нём работал поисковый ранжировщик; <strong>YetiRank</strong> (Gulin, Kuralenok, Pavlov, 2011) — pairwise-метод с особым выбором пар и весов по позициям, ставший основой ранжирующих режимов CatBoost. Симметричные деревья быстро применяются (табличный лукап вместо ветвлений) и устойчивы к переобучению.</p>
 <h2 id="реализации">Реализации</h2>
@@ -218,6 +227,22 @@ scores <span class="tok-p">=</span> ranker<span class="tok-p">.</span>predict<sp
 <li><strong>Задержка.</strong> 500 деревьев на 100 документов — миллисекунды, но сотни признаков нужно ещё достать из хранилища; признак «число кликов за 30 дней» требует онлайн-хранилища (feature store), и это часто узкое место.</li>
 <li><strong>На собеседовании</strong> спрашивают: чем LambdaRank отличается от RankNet (веса <span class="tex">|\Delta\mathrm{NDCG}|</span>, градиент без явной функции потерь), почему NDCG нельзя оптимизировать градиентным спуском напрямую, почему нужны группы в LightGBM.</li>
 </ul>
+<h2 id="проверь-себя">Проверь себя</h2>
+<details class="callout md details"><summary>Почему NDCG нельзя оптимизировать градиентным спуском напрямую и как LambdaRank это обходит?</summary>
+<p>NDCG кусочно-постоянна по скорам: она меняется только при смене порядка, и градиент почти везде равен нулю. LambdaRank не задаёт функцию потерь, а прямо задаёт «силы» <span class="tex">\lambda_{ij}</span>: градиент RankNet, умноженный на <span class="tex">|\Delta\mathrm{NDCG}_{ij}|</span>.</p>
+</details>
+<details class="callout md details"><summary>Почему пара документов на позициях 1 и 2 получает больший вес, чем на позициях 50 и 51?</summary>
+<p>Множитель <span class="tex">|\Delta\mathrm{NDCG}|</span> содержит разность дисконтов <span class="tex">1/\log_2(1+p)</span>, а она быстро убывает с позицией. Обмен у вершины сильно меняет метрику, у хвоста почти нет, поэтому оптимизируется то, что видит пользователь.</p>
+</details>
+<details class="callout md details"><summary>Что случится, если в LightGBM не передать `group` или перемешать строки разных запросов?</summary>
+<p>Бустинг станет сравнивать между собой документы разных запросов: пары и <span class="tex">|\Delta\mathrm{NDCG}|</span> считаются по неверным спискам, и обучение теряет смысл. Данные должны идти подряд по запросам, а размеры групп передаются явно.</p>
+</details>
+<details class="callout md details"><summary>Почему случайный сплит по документам завышает качество LTR?</summary>
+<p>Документы одного запроса попадают и в обучение, и в валидацию, и модель запоминает особенности запроса. Делить нужно по запросам (и по времени, если признаки зависят от кликов).</p>
+</details>
+<details class="callout md details"><summary>Зачем в IPS клики делят на $p_k$ и в чём риск малых пропенсити?</summary>
+<p>Клик на нижней позиции возможен только после просмотра, который там редок, поэтому такой клик весит больше: <span class="tex">\mathbb{E}[c/p_k] = P(r=1)</span>. Малые <span class="tex">p_k</span> дают огромные веса и взрывную дисперсию, поэтому вес клипуют сверху.</p>
+</details>
 <h2 id="что-почитать">Что почитать</h2>
 <ul>
 <li>Burges C. From RankNet to LambdaRank to LambdaMART: An Overview, Microsoft Research Technical Report MSR-TR-2010-82, 2010 — лучший вводный текст по этой линии: https://www.microsoft.com/en-us/research/publication/from-ranknet-to-lambdarank-to-lambdamart-an-overview/</li>
@@ -233,6 +258,8 @@ scores <span class="tok-p">=</span> ranker<span class="tok-p">.</span>predict<sp
       
 
       
+
+      
       <nav class="pager" aria-label="Соседние статьи">
         <a href="/edufamcs-demo/handbook/retrieval/ocenka-kachestva-poiska/"><span><svg class="ico sm" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-arrow-left"/></svg>Назад</span>Оценка качества поиска</a>
         <a href="/edufamcs-demo/handbook/retrieval/ponimanie-zaprosa/"><span>Дальше<svg class="ico sm" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-arrow"/></svg></span>Понимание запроса</a>
@@ -241,7 +268,7 @@ scores <span class="tok-p">=</span> ranker<span class="tok-p">.</span>predict<sp
     </article>
 
     <aside class="hb-toc" aria-label="На этой странице">
-      <a class="l2" href="#признаки-пары-запросдокумент">Признаки пары запрос–документ</a><a class="l2" href="#три-подхода">Три подхода</a><a class="l3" href="#pointwise">Pointwise</a><a class="l3" href="#pairwise">Pairwise</a><a class="l3" href="#listwise">Listwise</a><a class="l2" href="#lambdarank-и-lambdamart">LambdaRank и LambdaMART</a><a class="l2" href="#реализации">Реализации</a><a class="l2" href="#обучение-на-кликах-без-смещения">Обучение на кликах без смещения</a><a class="l2" href="#нейросетевой-ltr">Нейросетевой LTR</a><a class="l2" href="#ловушки">Ловушки</a><a class="l2" href="#что-почитать">Что почитать</a>
+      <a class="l2" href="#признаки-пары-запросдокумент">Признаки пары запрос–документ</a><a class="l2" href="#три-подхода">Три подхода</a><a class="l3" href="#pointwise">Pointwise</a><a class="l3" href="#pairwise">Pairwise</a><a class="l3" href="#listwise">Listwise</a><a class="l2" href="#lambdarank-и-lambdamart">LambdaRank и LambdaMART</a><a class="l2" href="#реализации">Реализации</a><a class="l2" href="#обучение-на-кликах-без-смещения">Обучение на кликах без смещения</a><a class="l2" href="#нейросетевой-ltr">Нейросетевой LTR</a><a class="l2" href="#ловушки">Ловушки</a><a class="l2" href="#проверь-себя">Проверь себя</a><a class="l2" href="#что-почитать">Что почитать</a>
     </aside>
   </div>
 </div>

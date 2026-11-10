@@ -27,7 +27,7 @@
 <script src="/edufamcs-demo/static/js/site.js" defer></script>
 <script src="/edufamcs-demo/static/handbook/handbook.js" defer></script>
 </head>
-<body class="" hx-headers='{"X-CSRFToken": "d3gbbLp362aoDzXviKcJUSu4FWfxGnwSZ9hy5yHKhfqCi8TLv95ObkCpbjRML8hR"}'>
+<body class="" hx-headers='{"X-CSRFToken": "RzFrS9fyRg4sx5XKTn5gzSE9WbjEQC9PtMuo8bOpS3i1IoccSQjdhLw7okqCAm8w"}'>
 <a class="skip" href="#main">К содержанию</a>
 <div class="demo-bar" role="note">Демо-версия для отзывов: вход, запись на курсы и формы здесь не работают.</div>
 
@@ -60,6 +60,7 @@
 
 
 <div class="container hb-page hb-tone">
+  <div class="hb-readbar" aria-hidden="true"><i></i></div>
   <div class="hb">
     <aside class="hb-nav" aria-label="Статьи раздела">
       
@@ -86,9 +87,9 @@
       <div class="hb-meta">
         
         
-        <span><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-clock"/></svg>11&nbsp;мин</span>
+        <span><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-clock"/></svg>13&nbsp;мин</span>
         <span class="hb-authors"><span class="avatar sm" title="Артем Лебедевич">АЛ</span>Артем Лебедевич</span>
-        <span><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-edit"/></svg>9 ноября 2026</span>
+        <span><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-edit"/></svg>10 ноября 2026</span>
         
         
       </div>
@@ -96,7 +97,7 @@
       
       <details class="hb-mtoc">
         <summary><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-list"/></svg>Содержание<svg class="ico sm" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-chev-down"/></svg></summary>
-        <a class="l2" href="#нейрон-от-биологии-к-формуле">Нейрон: от биологии к формуле</a><a class="l2" href="#линейный-слой">Линейный слой</a><a class="l2" href="#зачем-нужны-нелинейности">Зачем нужны нелинейности</a><a class="l2" href="#функции-активации">Функции активации</a><a class="l2" href="#mlp-как-композиция">MLP как композиция</a><a class="l2" href="#универсальная-аппроксимация-и-глубина">Универсальная аппроксимация и глубина</a><a class="l2" href="#выходные-головы-и-потери">Выходные головы и потери</a><a class="l2" href="#почему-нейросети-хорошо-работают">Почему нейросети хорошо работают</a><a class="l2" href="#код-mlp-на-pytorch-и-один-шаг-обучения">Код: MLP на PyTorch и один шаг обучения</a><a class="l2" href="#практика-и-подводные-камни">Практика и подводные камни</a><a class="l2" href="#что-почитать">Что почитать</a>
+        <a class="l2" href="#нейрон-от-биологии-к-формуле">Нейрон: от биологии к формуле</a><a class="l2" href="#линейный-слой">Линейный слой</a><a class="l2" href="#зачем-нужны-нелинейности">Зачем нужны нелинейности</a><a class="l2" href="#функции-активации">Функции активации</a><a class="l2" href="#mlp-как-композиция">MLP как композиция</a><a class="l2" href="#универсальная-аппроксимация-и-глубина">Универсальная аппроксимация и глубина</a><a class="l2" href="#выходные-головы-и-потери">Выходные головы и потери</a><a class="l2" href="#почему-нейросети-хорошо-работают">Почему нейросети хорошо работают</a><a class="l2" href="#код-mlp-на-pytorch-и-один-шаг-обучения">Код: MLP на PyTorch и один шаг обучения</a><a class="l2" href="#практика-и-подводные-камни">Практика и подводные камни</a><a class="l2" href="#ловушки">Ловушки</a><a class="l2" href="#проверь-себя">Проверь себя</a><a class="l2" href="#что-почитать">Что почитать</a>
       </details>
       
 
@@ -105,8 +106,47 @@
 <p>В 1943 году Маккалок и Питтс предложили модель нейрона как логического порогового элемента: вход — набор бинарных сигналов, выход — 1, если взвешенная сумма превысила порог. Это не обучаемая модель, веса заданы вручную, но из таких элементов можно собрать любую булеву функцию.</p>
 <p>В 1958 году Розенблатт добавил <strong>обучение</strong>. Перцептрон считает</p>
 <div class="tex tex-block">\hat y = \mathbb{1}[\,w^\top x + b &gt; 0\,],</div>
-<p>а веса обновляются только на ошибках: если <span class="tex">\hat y \ne y</span>, то <span class="tex">w \leftarrow w + \eta\,(y-\hat y)\,x</span>. Для линейно разделимых данных правило сходится за конечное число шагов. Это ровно тот же класс разделяющих поверхностей, что у линейного SVM и логистической регрессии: гиперплоскость.</p>
-<p>Предел подхода показали Минский и Паперт в 1969 году: одним нейроном нельзя представить <strong>XOR</strong>. Точки <span class="tex">(0,0),(1,1)</span> принадлежат одному классу, <span class="tex">(0,1),(1,0)</span> — другому, и никакая прямая их не разделяет. Решение известно давно — добавить скрытый слой: <span class="tex">\text{XOR}(a,b) = \text{OR}(a,b)\wedge\neg\text{AND}(a,b)</span>, и каждая из частей линейно разделима. Но обучать многослойные сети тогда не умели, и интерес к области угас почти на два десятилетия, пока не вернулось обратное распространение ошибки (следующая статья).</p>
+<p>а веса обновляются только на ошибках: если <span class="tex">\hat y \ne y</span>, то <span class="tex">w \leftarrow w + \eta\,(y-\hat y)\,x</span> и <span class="tex">b \leftarrow b + \eta\,(y-\hat y)</span>. Для линейно разделимых данных правило сходится за конечное число шагов. Это ровно тот же класс разделяющих поверхностей, что у линейного SVM и логистической регрессии: гиперплоскость.</p>
+<p>Предел подхода показали Минский и Паперт в 1969 году: одним нейроном нельзя представить <strong>XOR</strong>. Точки <span class="tex">(0,0),(1,1)</span> принадлежат одному классу, <span class="tex">(0,1),(1,0)</span> — другому, и никакая прямая их не разделяет. Решение известно давно — добавить скрытый слой: <span class="tex">\text{XOR}(a,b) = \text{OR}(a,b)\wedge\neg\text{AND}(a,b)</span>, и каждая из частей линейно разделима. Проверим на числах: сеть <span class="tex">2\to2\to1</span> с ReLU и фиксированными весами</p>
+<div class="tex tex-block">h_1=\max(0,\,x_1+x_2),\qquad h_2=\max(0,\,x_1+x_2-1),\qquad \hat y=h_1-2h_2,</div>
+<p>то есть <span class="tex">W_1=\begin{pmatrix}1&amp;1\\1&amp;1\end{pmatrix}</span>, <span class="tex">b_1=(0,-1)^\top</span>, <span class="tex">w_2=(1,-2)^\top</span>, <span class="tex">b_2=0</span>. Прямой проход:</p>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th><span class="tex">(x_1,x_2)</span></th>
+<th><span class="tex">z=W_1x+b_1</span></th>
+<th><span class="tex">h=\text{ReLU}(z)</span></th>
+<th><span class="tex">\hat y=h_1-2h_2</span></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><span class="tex">(0,0)</span></td>
+<td><span class="tex">(0,-1)</span></td>
+<td><span class="tex">(0,0)</span></td>
+<td><span class="tex">0</span></td>
+</tr>
+<tr>
+<td><span class="tex">(0,1)</span></td>
+<td><span class="tex">(1,0)</span></td>
+<td><span class="tex">(1,0)</span></td>
+<td><span class="tex">1</span></td>
+</tr>
+<tr>
+<td><span class="tex">(1,0)</span></td>
+<td><span class="tex">(1,0)</span></td>
+<td><span class="tex">(1,0)</span></td>
+<td><span class="tex">1</span></td>
+</tr>
+<tr>
+<td><span class="tex">(1,1)</span></td>
+<td><span class="tex">(2,1)</span></td>
+<td><span class="tex">(2,1)</span></td>
+<td><span class="tex">0</span></td>
+</tr>
+</tbody>
+</table></div>
+<p>Скрытый слой «разворачивает» плоскость: точка <span class="tex">(1,1)</span> уходит в <span class="tex">h=(2,1)</span>, где линейный выход <span class="tex">h_1-2h_2</span> уже отделяет её от <span class="tex">(0,1)</span> и <span class="tex">(1,0)</span>. Но обучать многослойные сети тогда не умели, и интерес к области угас почти на два десятилетия, пока не вернулось обратное распространение ошибки (следующая статья).</p>
 <h2 id="линейный-слой">Линейный слой</h2>
 <p>Основной блок современных сетей — линейный слой</p>
 <div class="tex tex-block">\text{Linear}(x) = Wx + b,\qquad W\in\mathbb{R}^{d_{out}\times d_{in}},\; b\in\mathbb{R}^{d_{out}}.</div>
@@ -209,8 +249,32 @@ opt<span class="tok-p">.</span>step<span class="tok-p">(</span><span class="tok-
 <li><strong>Категориальные признаки</strong> подавайте через <code>nn.Embedding</code>, а не one-hot с тысячами столбцов.</li>
 <li><strong>Ширина против глубины.</strong> Начинайте с 2–3 скрытых слоёв и расширяйте, пока на валидации растёт качество; потом добавляйте регуляризацию.</li>
 <li><strong>Инициализация.</strong> Нулевая (и вообще одинаковая) инициализация весов не нарушает симметрию: все нейроны слоя получают одинаковый градиент и так и остаются копиями друг друга. Веса инициализируют случайно — подробности в <a href="/edufamcs-demo/handbook/dl/obratnoe-rasprostranenie-oshibki/" rel="noopener noreferrer nofollow">статье про backprop</a>.</li>
-<li><strong>Типичный вопрос на интервью:</strong> «что будет, если убрать нелинейности?» и «почему нельзя ставить softmax перед <code>CrossEntropyLoss</code>?»</li>
 </ul>
+<h2 id="ловушки">Ловушки</h2>
+<ul>
+<li><strong>Softmax перед <code>CrossEntropyLoss</code></strong> — потеря сама применяет log-softmax; двойной softmax сжимает вероятности и ослабляет градиент.</li>
+<li><strong>Нулевая инициализация весов</strong>: нейроны слоя симметричны, получают одинаковый градиент и остаются копиями. Нулевые смещения — нормально.</li>
+<li><strong>Нелинейность забыта между слоями</strong> — глубокая сеть вырождается в линейную модель; на интервью просят это показать на <span class="tex">W_3W_2W_1</span>.</li>
+<li><strong>Теорема об универсальной аппроксимации не говорит</strong>, сколько нейронов нужно, найдёт ли их градиентный спуск и как сеть обобщит. Типичный вопрос: «зачем глубина, если хватает одного слоя?»</li>
+<li><strong>Немасштабированные признаки</strong> и one-hot с тысячами столбцов вместо <code>nn.Embedding</code>.</li>
+<li>Спрашивают: что будет без нелинейностей, сколько параметров в <code>Linear(100, 256)</code> (25 856), почему XOR не решает один нейрон, чем ReLU лучше сигмоиды, когда ReLU «умирает».</li>
+</ul>
+<h2 id="проверь-себя">Проверь себя</h2>
+<details class="callout md details"><summary>Почему сеть из 100 линейных слоёв без активаций не лучше одного слоя?</summary>
+<p>Произведение матриц <span class="tex">W_{100}\cdots W_1</span> — снова матрица, поэтому композиция линейных (и аффинных) отображений остаётся аффинным отображением. Выразительности не прибавляется, нужны нелинейности между слоями.</p>
+</details>
+<details class="callout md details"><summary>Что произойдёт, если инициализировать все веса сети нулём?</summary>
+<p>Все нейроны слоя считают одно и то же и получают одинаковые градиенты, поэтому симметрия никогда не нарушается и слой работает как один нейрон. Веса надо инициализировать случайно.</p>
+</details>
+<details class="callout md details"><summary>Чем градиент по логитам для softmax с кросс-энтропией удобен и почему не нужен softmax перед `CrossEntropyLoss`?</summary>
+<p><span class="tex">\partial L/\partial z=p-\text{onehot}(y)</span> — разность предсказания и цели. <code>CrossEntropyLoss</code> уже включает log-softmax в устойчивой форме, второй softmax исказил бы вероятности и ослабил градиенты.</p>
+</details>
+<details class="callout md details"><summary>В чём разница между перцептроном и логистической регрессией?</summary>
+<p>Модель та же — гиперплоскость, но перцептрон выдаёт жёсткий класс и обновляется только на ошибках, а логистическая регрессия даёт вероятность и минимизирует кросс-энтропию на всех объектах плавным градиентом.</p>
+</details>
+<details class="callout md details"><summary>Что гарантирует теорема Цыбенко и чего не гарантирует?</summary>
+<p>Гарантирует, что один скрытый слой достаточной ширины приближает любую непрерывную функцию на компакте. Не гарантирует ни малого числа нейронов, ни того, что градиентный спуск найдёт такие веса, ни хорошего обобщения.</p>
+</details>
 <h2 id="что-почитать">Что почитать</h2>
 <ul>
 <li>Cybenko, <em>Approximation by superpositions of a sigmoidal function</em>, 1989: <a href="https://doi.org/10.1007/BF02551274" rel="noopener noreferrer nofollow">doi.org/10.1007/BF02551274</a>.</li>
@@ -225,6 +289,8 @@ opt<span class="tok-p">.</span>step<span class="tok-p">(</span><span class="tok-
       
 
       
+
+      
       <nav class="pager" aria-label="Соседние статьи">
         <i></i>
         <a href="/edufamcs-demo/handbook/dl/obratnoe-rasprostranenie-oshibki/"><span>Дальше<svg class="ico sm" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-arrow"/></svg></span>Обратное распространение ошибки</a>
@@ -233,7 +299,7 @@ opt<span class="tok-p">.</span>step<span class="tok-p">(</span><span class="tok-
     </article>
 
     <aside class="hb-toc" aria-label="На этой странице">
-      <a class="l2" href="#нейрон-от-биологии-к-формуле">Нейрон: от биологии к формуле</a><a class="l2" href="#линейный-слой">Линейный слой</a><a class="l2" href="#зачем-нужны-нелинейности">Зачем нужны нелинейности</a><a class="l2" href="#функции-активации">Функции активации</a><a class="l2" href="#mlp-как-композиция">MLP как композиция</a><a class="l2" href="#универсальная-аппроксимация-и-глубина">Универсальная аппроксимация и глубина</a><a class="l2" href="#выходные-головы-и-потери">Выходные головы и потери</a><a class="l2" href="#почему-нейросети-хорошо-работают">Почему нейросети хорошо работают</a><a class="l2" href="#код-mlp-на-pytorch-и-один-шаг-обучения">Код: MLP на PyTorch и один шаг обучения</a><a class="l2" href="#практика-и-подводные-камни">Практика и подводные камни</a><a class="l2" href="#что-почитать">Что почитать</a>
+      <a class="l2" href="#нейрон-от-биологии-к-формуле">Нейрон: от биологии к формуле</a><a class="l2" href="#линейный-слой">Линейный слой</a><a class="l2" href="#зачем-нужны-нелинейности">Зачем нужны нелинейности</a><a class="l2" href="#функции-активации">Функции активации</a><a class="l2" href="#mlp-как-композиция">MLP как композиция</a><a class="l2" href="#универсальная-аппроксимация-и-глубина">Универсальная аппроксимация и глубина</a><a class="l2" href="#выходные-головы-и-потери">Выходные головы и потери</a><a class="l2" href="#почему-нейросети-хорошо-работают">Почему нейросети хорошо работают</a><a class="l2" href="#код-mlp-на-pytorch-и-один-шаг-обучения">Код: MLP на PyTorch и один шаг обучения</a><a class="l2" href="#практика-и-подводные-камни">Практика и подводные камни</a><a class="l2" href="#ловушки">Ловушки</a><a class="l2" href="#проверь-себя">Проверь себя</a><a class="l2" href="#что-почитать">Что почитать</a>
     </aside>
   </div>
 </div>

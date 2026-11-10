@@ -1,0 +1,255 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Бустинг на лагах и признаки для рядов · EDU FAMCS</title>
+<meta name="description" content="Бустинг на лагах и признаки для рядов — Временные ряды. Хендбук ML-курса ФПМИ.">
+<meta name="theme-color" content="#060A16">
+<meta name="robots" content="noindex, nofollow">
+<meta name="htmx-config" content='{"allowEval":false,"includeIndicatorStyles":false,"historyCacheSize":0,"selfRequestsOnly":true}'>
+<meta name="katex-js" content="/edufamcs-demo/static/vendor/katex/katex.min.js">
+<meta name="katex-css" content="/edufamcs-demo/static/vendor/katex/katex.min.css">
+<link rel="icon" href="/edufamcs-demo/static/brand/logo/favicon-16.svg" type="image/svg+xml" sizes="16x16">
+<link rel="icon" href="/edufamcs-demo/static/brand/logo/favicon.svg" type="image/svg+xml" sizes="any">
+<link rel="preload" href="/edufamcs-demo/static/brand/fonts/manrope-cyrillic-400.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/edufamcs-demo/static/brand/fonts/unbounded-cyrillic-800.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="/edufamcs-demo/static/brand/fonts.css">
+<link rel="stylesheet" href="/edufamcs-demo/static/brand/tokens.css">
+<link rel="stylesheet" href="/edufamcs-demo/static/brand/components.css">
+<link rel="stylesheet" href="/edufamcs-demo/static/css/site.css">
+<link rel="stylesheet" href="/edufamcs-demo/static/css/hub.css">
+<link rel="stylesheet" href="/edufamcs-demo/static/css/about.css">
+<link rel="stylesheet" href="/edufamcs-demo/static/handbook/handbook.css">
+<script src="/edufamcs-demo/static/js/theme.js"></script>
+<script src="/edufamcs-demo/static/vendor/htmx/htmx.min.js" defer></script>
+<script src="/edufamcs-demo/static/vendor/alpine/alpine-csp.min.js" defer></script>
+<script src="/edufamcs-demo/static/js/site.js" defer></script>
+<script src="/edufamcs-demo/static/handbook/handbook.js" defer></script>
+</head>
+<body class="" hx-headers='{"X-CSRFToken": "OGDQ1f2QtKfbjmkpzj8xr5BEQcRKSYyYqTsNhhBHuxtKuFzRyMmu9YtCilYICIxF"}'>
+<a class="skip" href="#main">К содержанию</a>
+<div class="demo-bar" role="note">Демо-версия для отзывов: вход, запись на курсы и формы здесь не работают.</div>
+
+<header class="hdr">
+  <div class="container">
+    <a class="brand" href="/edufamcs-demo/" aria-label="EDU FAMCS — главная">
+      <span class="full"><img class="only-light" src="/edufamcs-demo/static/brand/logo/logo-edu-light.svg" alt="EDU FAMCS" width="196" height="40"><img class="only-dark" src="/edufamcs-demo/static/brand/logo/logo-edu-dark.svg" alt="EDU FAMCS" width="196" height="40"></span>
+      <span class="short"><img class="only-light" src="/edufamcs-demo/static/brand/logo/logo-edu-light.svg" alt="EDU FAMCS" height="30"><img class="only-dark" src="/edufamcs-demo/static/brand/logo/logo-edu-dark.svg" alt="EDU FAMCS" height="30"></span>
+    </a>
+    <nav class="nav" id="main-nav" aria-label="Основная навигация">
+      <a href="/edufamcs-demo/#courses">Курсы</a>
+      <a href="/edufamcs-demo/ml/" >Машинное обучение</a>
+      
+      <a href="/edufamcs-demo/handbook/" aria-current="page">Хендбук</a>
+      <a href="/edufamcs-demo/news/" >Новости</a>
+      <a href="/edufamcs-demo/people/" >Авторы</a>
+      <a href="/edufamcs-demo/about/" >О&nbsp;нас</a>
+    </nav>
+    <div class="hdr-actions">
+      
+      <a class="btn btn-outline btn-login" href="/edufamcs-demo/accounts/login/?next=/handbook/ts/busting-na-lagah/">Войти</a>
+      
+      <button class="icon-btn menu-btn" type="button" aria-label="Меню" aria-expanded="false" aria-controls="main-nav"><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-menu"/></svg></button>
+    </div>
+  </div>
+</header>
+
+<main id="main">
+
+
+
+<div class="container hb-page s-ts">
+  <div class="hb-readbar" aria-hidden="true"><i></i></div>
+  <div class="hb">
+    <aside class="hb-nav" aria-label="Статьи раздела">
+      
+<form class="hb-search" action="/edufamcs-demo/handbook/search/" method="get" role="search">
+  <svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-search"/></svg>
+  <input class="input" type="search" name="q" value="" placeholder="Поиск по хендбуку" aria-label="Поиск по хендбуку" autocomplete="off" maxlength="120"
+    hx-get="/edufamcs-demo/handbook/search/" hx-trigger="input changed delay:250ms, search" hx-target="#hb-nav-results" hx-sync="this:replace">
+</form>
+
+      <div id="hb-nav-results" class="hb-nav-results" aria-live="polite"></div>
+      <a class="grp" href="/edufamcs-demo/handbook/ts/">ML-подходы</a>
+      
+      <a class="cur" href="/edufamcs-demo/handbook/ts/busting-na-lagah/" aria-current="page">Бустинг на лагах и признаки для рядов</a>
+      
+      <a class="" href="/edufamcs-demo/handbook/ts/nejroseti-dlya-ryadov/">Нейросети и фундаментальные модели для рядов</a>
+      
+      <a class="" href="/edufamcs-demo/handbook/ts/praktika-prognozirovaniya/">Практика: иерархии, прерывистый спрос, аномалии и продакшен</a>
+      
+    </aside>
+
+    <article class="hb-main">
+      <nav class="crumbs" aria-label="Навигация"><a href="/edufamcs-demo/handbook/">Хендбук</a><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-chev"/></svg><a href="/edufamcs-demo/handbook/ts/">Временные ряды</a></nav>
+      <h1 class="h1">Бустинг на лагах и признаки для рядов</h1>
+      <div class="hb-meta">
+        
+        
+        <span><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-clock"/></svg>10&nbsp;мин</span>
+        <span class="hb-authors"><span class="avatar sm" title="Артем Лебедевич">АЛ</span>Артем Лебедевич</span>
+        <span><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-edit"/></svg>10 ноября 2026</span>
+        
+        
+      </div>
+
+      
+      <details class="hb-mtoc">
+        <summary><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-list"/></svg>Содержание<svg class="ico sm" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-chev-down"/></svg></summary>
+        <a class="l2" href="#прогноз-как-табличная-регрессия">Прогноз как табличная регрессия</a><a class="l2" href="#глобальная-и-локальная-модель">Глобальная и локальная модель</a><a class="l2" href="#многошаговые-стратегии">Многошаговые стратегии</a><a class="l2" href="#деревья-не-экстраполируют">Деревья не экстраполируют</a><a class="l2" href="#преобразования-цели-и-потери">Преобразования цели и потери</a><a class="l2" href="#валидация">Валидация</a><a class="l2" href="#код">Код</a><a class="l2" href="#ловушки">Ловушки</a><a class="l2" href="#проверь-себя">Проверь себя</a><a class="l2" href="#что-почитать">Что почитать</a>
+      </details>
+      
+
+      <div class="prose"><p>Градиентный бустинг решает прогнозирование, если превратить ряд в таблицу: для каждого момента <span class="tex">t</span> собрать признаки из прошлого и предсказывать <span class="tex">y_t</span>. Такой подход победил в M5 и остаётся главным рабочим инструментом для тысяч связанных рядов с ковариатами. Вся сложность переезжает в признаки и валидацию: одна ошибка со сдвигом даёт метрику, которой нет в продакшене.</p>
+<h2 id="прогноз-как-табличная-регрессия">Прогноз как табличная регрессия</h2>
+<p>Строка таблицы — пара (ряд <span class="tex">s</span>, момент <span class="tex">t</span>). Признаки берутся из информации, доступной на момент прогноза <span class="tex">t-h</span>, цель — <span class="tex">y_t</span>. Основные группы:</p>
+<ul>
+<li><strong>Лаги</strong> <span class="tex">y_{t-1}, y_{t-7}, y_{t-28},\dots</span> и разности/отношения: <span class="tex">y_{t-1}-y_{t-2}</span>, <span class="tex">y_{t-1}/y_{t-8}</span>.</li>
+<li><strong>Скользящие статистики</strong> (среднее, std, min/max, квантили по окну) — <strong>всегда со сдвигом</strong>: окно должно заканчиваться в <span class="tex">t-h</span>, а не в <span class="tex">t</span>.</li>
+<li><strong>Календарь</strong>: день недели, месяц, день месяца, праздники, дни до/после праздника. Циклические признаки можно закодировать парой <span class="tex">\sin(2\pi k/P),\cos(2\pi k/P)</span>, но деревьям обычно достаточно целочисленного кода: они сами делят по порогам.</li>
+<li><strong>Экзогенные переменные</strong>: <em>известные в будущем</em> (календарь, плановые цены, промо, погодный прогноз с оговорками) можно подавать на целевой момент; <em>неизвестные</em> (будущие продажи конкурентов) — только их лаги.</li>
+<li><strong>Статические признаки ряда</strong>: категория товара, магазин, регион, идентификатор ряда.</li>
+</ul>
+<h2 id="глобальная-и-локальная-модель">Глобальная и локальная модель</h2>
+<p><em>Локальная</em> — своя модель на каждый ряд: гибко, но на коротких и шумных рядах переобучается и не масштабируется на тысячи моделей. <em>Глобальная</em> — одна модель на все ряды с признаками-идентификаторами и статикой: ряды делятся силой друг с другом, холодный старт новых рядов решается через статические признаки. Платой становится необходимость нормировки (ряды разного масштаба): предсказывают отношение к уровню ряда или логарифм.</p>
+<h2 id="многошаговые-стратегии">Многошаговые стратегии</h2>
+<ul>
+<li><strong>Рекурсивная.</strong> Одна модель на горизонт 1; предсказание подставляется как лаг. Ошибки накапливаются, а в обучении модель видит истинные лаги, в прогнозе — собственные (смещение экспозиции).</li>
+<li><strong>Прямая.</strong> Модель на каждый горизонт <span class="tex">h</span> (или один признак <span class="tex">h</span> в общей модели): лаги берутся не меньше <span class="tex">h</span>, ошибки не накапливаются, но моделей <span class="tex">H</span> штук и они независимы.</li>
+<li><strong>Многовыходная.</strong> Одна модель выдаёт вектор из <span class="tex">H</span> значений (нейросети, мультивыходные деревья). Согласует горизонты, но в бустинге такие реализации редки.</li>
+</ul>
+<p>В коде ниже используется прямая стратегия: все признаки построены из лагов <span class="tex">\ge H=14</span>, поэтому одна общая модель честно предсказывает любой шаг в горизонте.</p>
+<h2 id="деревья-не-экстраполируют">Деревья не экстраполируют</h2>
+<p>Лист дерева выдаёт среднее по обучающим объектам, поэтому прогноз не выйдет за пределы наблюдавшихся значений: растущий ряд бустинг «срезает» на уровне максимума обучающей выборки. Средства:</p>
+<ul>
+<li><strong>Дифференцирование/детрендинг цели:</strong> предсказывать <span class="tex">y_t-y_{t-h}</span> или остаток после линейного тренда (тренд — отдельной простой моделью).</li>
+<li><strong>Отношения:</strong> цель <span class="tex">y_t/\bar y_{t-h}</span> с признаками, нормированными тем же уровнем; прогноз умножается на уровень обратно.</li>
+<li><strong>Линейные листья</strong> (<code>linear_tree=True</code> в LightGBM) — осторожно, нестабильны.</li>
+</ul>
+<h2 id="преобразования-цели-и-потери">Преобразования цели и потери</h2>
+<p>Логарифм <span class="tex">\log(1+y)</span> стабилизирует дисперсию и превращает мультипликативные эффекты в аддитивные, но обратное преобразование даёт <strong>смещение</strong>: по неравенству Йенсена <span class="tex">\mathbb E[e^{Z}]\ge e^{\mathbb E Z}</span>, поэтому <span class="tex">\exp(\hat z)-1</span> оценивает скорее медиану, чем среднее; для среднего нужна поправка (например <span class="tex">\sigma^2/2</span> для лог-нормали) или оптимизация нужной метрики напрямую.</p>
+<p>Потери подбираются под метрику: <strong>L2</strong> — среднее, <strong>L1</strong> — медиана (устойчива к выбросам), <strong>квантильная</strong> <code>objective="quantile"</code> — квантили, <strong>Poisson/Tweedie</strong> — для неотрицательных счётных и прерывистых данных с большим числом нулей: они моделируют среднее и не штрафуют нули так, как L2 после логарифма (подробнее в <a href="/edufamcs-demo/handbook/ts/praktika-prognozirovaniya/" rel="noopener noreferrer nofollow">практической статье</a>). Сам бустинг описан в <a href="/edufamcs-demo/handbook/classic/gradientnyj-busting/" rel="noopener noreferrer nofollow">статье про градиентный бустинг</a>.</p>
+<h2 id="валидация">Валидация</h2>
+<p>Только временное разбиение: rolling-origin, обучение на <span class="tex">t&lt;o</span>, тест на <span class="tex">[o,o+H)</span> (см. <a href="/edufamcs-demo/handbook/ts/postanovka-i-validaciya/" rel="noopener noreferrer nofollow">валидацию</a>). Число деревьев для ранней остановки берут из последнего окна перед тестом, а не из теста.</p>
+<div class="callout md warn"><p class="callout-title">Утечка через скользящее среднее</p>
+<p><code>x.rolling(7).mean()</code> без <code>shift</code> включает текущее значение <span class="tex">y_t</span>, то есть цель. Признак на 1/7 состоит из самой цели <span class="tex">y_t</span> и ещё из шести дней, которых в момент прогноза на 14 дней нет; офлайн-метрика становится недостижимо хорошей, а в продакшене признака просто нет. Правило: окно считается по данным не позже <span class="tex">t-h</span> — <code>shift(h)</code> перед <code>rolling</code>.</p>
+</div>
+<h2 id="код">Код</h2>
+<p>Синтетика: 50 рядов по 400 дней, тренд, недельный и годовой профиль, шум. Горизонт <span class="tex">H=14</span>, 4 фолда (шаг 28 дней); бейзлайн — сезонный наивный (лаг 14 при недельном периоде).</p>
+<div class="code"><div class="code-head"><span class="lang">python</span></div><pre><code><span class="tok-k">import</span> numpy <span class="tok-k">as</span> np<span class="tok-p">,</span> pandas <span class="tok-k">as</span> pd<span class="tok-p">,</span> lightgbm <span class="tok-k">as</span> lgb
+rng <span class="tok-p">=</span> np<span class="tok-p">.</span>random<span class="tok-p">.</span>default_rng<span class="tok-p">(</span><span class="tok-n">0</span><span class="tok-p">)</span><span class="tok-p">;</span> S<span class="tok-p">,</span> T<span class="tok-p">,</span> H <span class="tok-p">=</span> <span class="tok-n">50</span><span class="tok-p">,</span> <span class="tok-n">400</span><span class="tok-p">,</span> <span class="tok-n">14</span>
+dow_f <span class="tok-p">=</span> np<span class="tok-p">.</span>array<span class="tok-p">(</span><span class="tok-p">[</span><span class="tok-n">1</span><span class="tok-p">,</span> <span class="tok-n">.9</span><span class="tok-p">,</span> <span class="tok-n">.9</span><span class="tok-p">,</span> <span class="tok-n">1</span><span class="tok-p">,</span> <span class="tok-n">1.1</span><span class="tok-p">,</span> <span class="tok-n">1.4</span><span class="tok-p">,</span> <span class="tok-n">1.3</span><span class="tok-p">]</span><span class="tok-p">)</span><span class="tok-p">;</span> parts <span class="tok-p">=</span> <span class="tok-p">[</span><span class="tok-p">]</span>
+<span class="tok-k">for</span> s <span class="tok-k">in</span> <span class="tok-f">range</span><span class="tok-p">(</span>S<span class="tok-p">)</span><span class="tok-p">:</span>
+    lvl<span class="tok-p">,</span> tr<span class="tok-p">,</span> amp <span class="tok-p">=</span> rng<span class="tok-p">.</span>uniform<span class="tok-p">(</span><span class="tok-n">20</span><span class="tok-p">,</span> <span class="tok-n">200</span><span class="tok-p">)</span><span class="tok-p">,</span> rng<span class="tok-p">.</span>uniform<span class="tok-p">(</span><span class="tok-p">-</span><span class="tok-n">.05</span><span class="tok-p">,</span> <span class="tok-n">.15</span><span class="tok-p">)</span><span class="tok-p">,</span> rng<span class="tok-p">.</span>uniform<span class="tok-p">(</span><span class="tok-n">.1</span><span class="tok-p">,</span> <span class="tok-n">.4</span><span class="tok-p">)</span>
+    t <span class="tok-p">=</span> np<span class="tok-p">.</span>arange<span class="tok-p">(</span>T<span class="tok-p">)</span>
+    mu <span class="tok-p">=</span> <span class="tok-p">(</span>lvl <span class="tok-p">+</span> tr<span class="tok-p">*</span>t<span class="tok-p">)</span> <span class="tok-p">*</span> dow_f<span class="tok-p">[</span>t <span class="tok-p">%</span> <span class="tok-n">7</span><span class="tok-p">]</span> <span class="tok-p">*</span> <span class="tok-p">(</span><span class="tok-n">1</span> <span class="tok-p">+</span> amp<span class="tok-p">*</span>np<span class="tok-p">.</span>sin<span class="tok-p">(</span><span class="tok-n">2</span><span class="tok-p">*</span>np<span class="tok-p">.</span>pi<span class="tok-p">*</span>t<span class="tok-p">/</span><span class="tok-n">365</span><span class="tok-p">)</span><span class="tok-p">)</span>
+    parts<span class="tok-p">.</span>append<span class="tok-p">(</span>pd<span class="tok-p">.</span>DataFrame<span class="tok-p">(</span><span class="tok-f">dict</span><span class="tok-p">(</span>sid<span class="tok-p">=</span>s<span class="tok-p">,</span> t<span class="tok-p">=</span>t<span class="tok-p">,</span> y<span class="tok-p">=</span>np<span class="tok-p">.</span>maximum<span class="tok-p">(</span>mu <span class="tok-p">+</span> rng<span class="tok-p">.</span>normal<span class="tok-p">(</span><span class="tok-n">0</span><span class="tok-p">,</span> <span class="tok-n">.1</span><span class="tok-p">*</span>mu<span class="tok-p">)</span><span class="tok-p">,</span> <span class="tok-n">0</span><span class="tok-p">)</span><span class="tok-p">)</span><span class="tok-p">)</span><span class="tok-p">)</span>
+df <span class="tok-p">=</span> pd<span class="tok-p">.</span>concat<span class="tok-p">(</span>parts<span class="tok-p">,</span> ignore_index<span class="tok-p">=</span><span class="tok-k">True</span><span class="tok-p">)</span><span class="tok-p">;</span> g <span class="tok-p">=</span> df<span class="tok-p">.</span>groupby<span class="tok-p">(</span><span class="tok-s">"</span><span class="tok-s">sid</span><span class="tok-s">"</span><span class="tok-p">)</span><span class="tok-p">[</span><span class="tok-s">"</span><span class="tok-s">y</span><span class="tok-s">"</span><span class="tok-p">]</span>
+<span class="tok-k">for</span> l <span class="tok-k">in</span> <span class="tok-p">(</span><span class="tok-n">14</span><span class="tok-p">,</span> <span class="tok-n">21</span><span class="tok-p">,</span> <span class="tok-n">28</span><span class="tok-p">)</span><span class="tok-p">:</span> df<span class="tok-p">[</span><span class="tok-s">f</span><span class="tok-s">"</span><span class="tok-s">lag</span><span class="tok-s">{</span>l<span class="tok-s">}</span><span class="tok-s">"</span><span class="tok-p">]</span> <span class="tok-p">=</span> g<span class="tok-p">.</span>shift<span class="tok-p">(</span>l<span class="tok-p">)</span>
+df<span class="tok-p">[</span><span class="tok-s">"</span><span class="tok-s">rm7_h</span><span class="tok-s">"</span><span class="tok-p">]</span> <span class="tok-p">=</span> g<span class="tok-p">.</span>transform<span class="tok-p">(</span><span class="tok-k">lambda</span> x<span class="tok-p">:</span> x<span class="tok-p">.</span>shift<span class="tok-p">(</span>H<span class="tok-p">)</span><span class="tok-p">.</span>rolling<span class="tok-p">(</span><span class="tok-n">7</span><span class="tok-p">)</span><span class="tok-p">.</span>mean<span class="tok-p">(</span><span class="tok-p">)</span><span class="tok-p">)</span>  <span class="tok-c"># сдвиг на H</span>
+df<span class="tok-p">[</span><span class="tok-s">"</span><span class="tok-s">rm7_leak</span><span class="tok-s">"</span><span class="tok-p">]</span> <span class="tok-p">=</span> g<span class="tok-p">.</span>transform<span class="tok-p">(</span><span class="tok-k">lambda</span> x<span class="tok-p">:</span> x<span class="tok-p">.</span>rolling<span class="tok-p">(</span><span class="tok-n">7</span><span class="tok-p">)</span><span class="tok-p">.</span>mean<span class="tok-p">(</span><span class="tok-p">)</span><span class="tok-p">)</span>        <span class="tok-c"># включает y_t</span>
+df<span class="tok-p">[</span><span class="tok-s">"</span><span class="tok-s">dow</span><span class="tok-s">"</span><span class="tok-p">]</span> <span class="tok-p">=</span> df<span class="tok-p">.</span>t <span class="tok-p">%</span> <span class="tok-n">7</span><span class="tok-p">;</span> df <span class="tok-p">=</span> df<span class="tok-p">.</span>dropna<span class="tok-p">(</span><span class="tok-p">)</span>
+
+<span class="tok-k">def</span> <span class="tok-f">backtest</span><span class="tok-p">(</span>cols<span class="tok-p">)</span><span class="tok-p">:</span>
+    e<span class="tok-p">,</span> e_sn <span class="tok-p">=</span> <span class="tok-p">[</span><span class="tok-p">]</span><span class="tok-p">,</span> <span class="tok-p">[</span><span class="tok-p">]</span>
+    <span class="tok-k">for</span> o <span class="tok-k">in</span> <span class="tok-f">range</span><span class="tok-p">(</span><span class="tok-n">300</span><span class="tok-p">,</span> T<span class="tok-p">-</span>H<span class="tok-p">+</span><span class="tok-n">1</span><span class="tok-p">,</span> <span class="tok-n">28</span><span class="tok-p">)</span><span class="tok-p">:</span>
+        trn<span class="tok-p">,</span> tst <span class="tok-p">=</span> df<span class="tok-p">[</span>df<span class="tok-p">.</span>t <span class="tok-p">&lt;</span> o<span class="tok-p">]</span><span class="tok-p">,</span> df<span class="tok-p">[</span><span class="tok-p">(</span>df<span class="tok-p">.</span>t <span class="tok-p">&gt;</span><span class="tok-p">=</span> o<span class="tok-p">)</span> <span class="tok-p">&amp;</span> <span class="tok-p">(</span>df<span class="tok-p">.</span>t <span class="tok-p">&lt;</span> o<span class="tok-p">+</span>H<span class="tok-p">)</span><span class="tok-p">]</span>
+        m <span class="tok-p">=</span> lgb<span class="tok-p">.</span>LGBMRegressor<span class="tok-p">(</span>n_estimators<span class="tok-p">=</span><span class="tok-n">300</span><span class="tok-p">,</span> learning_rate<span class="tok-p">=</span><span class="tok-n">.05</span><span class="tok-p">,</span> objective<span class="tok-p">=</span><span class="tok-s">"</span><span class="tok-s">l1</span><span class="tok-s">"</span><span class="tok-p">,</span> verbose<span class="tok-p">=</span><span class="tok-p">-</span><span class="tok-n">1</span><span class="tok-p">)</span>
+        m<span class="tok-p">.</span>fit<span class="tok-p">(</span>trn<span class="tok-p">[</span>cols<span class="tok-p">]</span><span class="tok-p">,</span> trn<span class="tok-p">[</span><span class="tok-s">"</span><span class="tok-s">y</span><span class="tok-s">"</span><span class="tok-p">]</span><span class="tok-p">)</span>
+        e<span class="tok-p">.</span>append<span class="tok-p">(</span>np<span class="tok-p">.</span>mean<span class="tok-p">(</span>np<span class="tok-p">.</span>abs<span class="tok-p">(</span>m<span class="tok-p">.</span>predict<span class="tok-p">(</span>tst<span class="tok-p">[</span>cols<span class="tok-p">]</span><span class="tok-p">)</span> <span class="tok-p">-</span> tst<span class="tok-p">[</span><span class="tok-s">"</span><span class="tok-s">y</span><span class="tok-s">"</span><span class="tok-p">]</span><span class="tok-p">)</span><span class="tok-p">)</span><span class="tok-p">)</span>
+        e_sn<span class="tok-p">.</span>append<span class="tok-p">(</span>np<span class="tok-p">.</span>mean<span class="tok-p">(</span>np<span class="tok-p">.</span>abs<span class="tok-p">(</span>tst<span class="tok-p">[</span><span class="tok-s">"</span><span class="tok-s">lag14</span><span class="tok-s">"</span><span class="tok-p">]</span> <span class="tok-p">-</span> tst<span class="tok-p">[</span><span class="tok-s">"</span><span class="tok-s">y</span><span class="tok-s">"</span><span class="tok-p">]</span><span class="tok-p">)</span><span class="tok-p">)</span><span class="tok-p">)</span>
+    <span class="tok-k">return</span> np<span class="tok-p">.</span>mean<span class="tok-p">(</span>e<span class="tok-p">)</span><span class="tok-p">,</span> np<span class="tok-p">.</span>mean<span class="tok-p">(</span>e_sn<span class="tok-p">)</span>
+
+base <span class="tok-p">=</span> <span class="tok-p">[</span><span class="tok-s">"</span><span class="tok-s">lag14</span><span class="tok-s">"</span><span class="tok-p">,</span> <span class="tok-s">"</span><span class="tok-s">lag21</span><span class="tok-s">"</span><span class="tok-p">,</span> <span class="tok-s">"</span><span class="tok-s">lag28</span><span class="tok-s">"</span><span class="tok-p">,</span> <span class="tok-s">"</span><span class="tok-s">rm7_h</span><span class="tok-s">"</span><span class="tok-p">,</span> <span class="tok-s">"</span><span class="tok-s">dow</span><span class="tok-s">"</span><span class="tok-p">,</span> <span class="tok-s">"</span><span class="tok-s">sid</span><span class="tok-s">"</span><span class="tok-p">]</span>
+<span class="tok-f">print</span><span class="tok-p">(</span><span class="tok-s">"</span><span class="tok-s">honest MAE gbdt </span><span class="tok-s">%.2f</span><span class="tok-s"> snaive </span><span class="tok-s">%.2f</span><span class="tok-s">"</span> <span class="tok-p">%</span> backtest<span class="tok-p">(</span>base<span class="tok-p">)</span><span class="tok-p">)</span>
+<span class="tok-f">print</span><span class="tok-p">(</span><span class="tok-s">"</span><span class="tok-s">leak   MAE gbdt </span><span class="tok-s">%.2f</span><span class="tok-s"> snaive </span><span class="tok-s">%.2f</span><span class="tok-s">"</span> <span class="tok-p">%</span> backtest<span class="tok-p">(</span>base <span class="tok-p">+</span> <span class="tok-p">[</span><span class="tok-s">"</span><span class="tok-s">rm7_leak</span><span class="tok-s">"</span><span class="tok-p">]</span><span class="tok-p">)</span><span class="tok-p">)</span>
+</code></pre></div>
+<p>Вывод запуска:</p>
+<div class="code"><div class="code-head"><span class="lang">code</span></div><pre><code>honest MAE gbdt 14.20 snaive 15.59
+leak   MAE gbdt 10.00 snaive 15.59
+</code></pre></div>
+<p>Честный выигрыш у сезонного наивного — около 9%. С несдвинутым скользящим средним ошибка падает до 10,00 (на 30% лучше честной) — это и есть признак утечки: слишком хорошо для горизонта 14 дней и шумного ряда. Отдельный прогон с отношением (цель <span class="tex">y_t/\bar y_{t-14}</span>, признаки — лаги, делённые на тот же уровень, прогноз умножается обратно) на этих данных дал MAE 13,72 вместо 14,20: дереву не нужно экстраполировать растущий уровень рядов, он вынесен в множитель.</p>
+<h2 id="ловушки">Ловушки</h2>
+<ul>
+<li>Лаги меньше горизонта в прямой модели: в продакшене их в момент прогноза нет.</li>
+<li>Целевое кодирование ряда или категории, посчитанное по всей истории.</li>
+<li>Рекурсивный прогноз без учёта накопления ошибок: бэктест нужно делать тем же рекурсивным способом.</li>
+<li><code>random_state</code> без фиксации и один фолд: разница в 1–2% — шум.</li>
+<li>Метрика на логарифмической шкале без пересчёта в исходные единицы.</li>
+<li>На собеседовании: почему дерево не экстраполирует и что делать; чем рекурсивная стратегия хуже прямой; как найти утечку в скользящих признаках; что даёт Tweedie для прерывистого спроса; почему глобальная модель обычно лучше локальных при тысячах рядов.</li>
+</ul>
+<h2 id="проверь-себя">Проверь себя</h2>
+<details class="callout md details"><summary>Почему скользящее среднее нужно считать по сдвинутому ряду?</summary>
+<p>Иначе окно включает текущее значение цели (или данные после момента прогноза), и признак содержит ответ. В продакшене такого признака нет, поэтому офлайн-метрика завышена.</p>
+</details>
+<details class="callout md details"><summary>В чём разница между рекурсивной и прямой многошаговой стратегией?</summary>
+<p>Рекурсивная использует одну модель на шаг вперёд и подставляет собственные прогнозы как лаги, накапливая ошибку. Прямая обучает модель на каждый горизонт, используя лаги не меньше <span class="tex">h</span>, и ошибки не накапливаются.</p>
+</details>
+<details class="callout md details"><summary>Почему бустинг плохо предсказывает растущий ряд и что с этим делать?</summary>
+<p>Лист возвращает среднее обучающих значений, поэтому прогноз ограничен диапазоном трейна. Помогает предсказание разностей, остатка после тренда или отношения к уровню ряда.</p>
+</details>
+<details class="callout md details"><summary>Что такое смещение обратного преобразования $\exp(\hat z)-1$?</summary>
+<p>Из неравенства Йенсена экспонента от среднего меньше среднего от экспоненты, поэтому такой прогноз занижает среднее и ближе к медиане. Для среднего нужна поправка или обучение сразу на нужную потерю.</p>
+</details>
+<details class="callout md details"><summary>Когда для спроса выбирают Tweedie или Poisson, а не L2 на логарифме?</summary>
+<p>Когда много нулей и неотрицательные счётные значения: эти потери моделируют среднее напрямую, корректно работают с нулями и не требуют ручной обратной поправки.</p>
+</details>
+<h2 id="что-почитать">Что почитать</h2>
+<ul>
+<li>Ke G. et al. <em>LightGBM: A Highly Efficient Gradient Boosting Decision Tree</em>, NeurIPS 2017.</li>
+<li>Makridakis S., Spiliotis E., Assimakopoulos V. <em>M5 accuracy competition: Results, findings, and conclusions</em>, International Journal of Forecasting, 2022.</li>
+<li>Januschowski T. et al. <em>Criteria for classifying forecasting methods</em>, International Journal of Forecasting, 2020.</li>
+<li>Hyndman R., Athanasopoulos G. <em>Forecasting: Principles and Practice</em>, 3rd ed.: https://otexts.com/fpp3/</li>
+<li>Ben Taieb S., Bontempi G., Atiya A., Sorjamaa A. <em>A review and comparison of strategies for multi-step ahead time series forecasting based on the NN5 forecasting competition</em>, Expert Systems with Applications, 2012.</li>
+<li>Документация LightGBM: https://lightgbm.readthedocs.io</li>
+</ul>
+</div>
+      
+
+      
+
+      
+      <nav class="pager" aria-label="Соседние статьи">
+        <a href="/edufamcs-demo/handbook/ts/ets-i-arima/"><span><svg class="ico sm" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-arrow-left"/></svg>Назад</span>Классика: экспоненциальное сглаживание и ARIMA</a>
+        <a href="/edufamcs-demo/handbook/ts/nejroseti-dlya-ryadov/"><span>Дальше<svg class="ico sm" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-arrow"/></svg></span>Нейросети и фундаментальные модели для рядов</a>
+      </nav>
+      
+    </article>
+
+    <aside class="hb-toc" aria-label="На этой странице">
+      <a class="l2" href="#прогноз-как-табличная-регрессия">Прогноз как табличная регрессия</a><a class="l2" href="#глобальная-и-локальная-модель">Глобальная и локальная модель</a><a class="l2" href="#многошаговые-стратегии">Многошаговые стратегии</a><a class="l2" href="#деревья-не-экстраполируют">Деревья не экстраполируют</a><a class="l2" href="#преобразования-цели-и-потери">Преобразования цели и потери</a><a class="l2" href="#валидация">Валидация</a><a class="l2" href="#код">Код</a><a class="l2" href="#ловушки">Ловушки</a><a class="l2" href="#проверь-себя">Проверь себя</a><a class="l2" href="#что-почитать">Что почитать</a>
+    </aside>
+  </div>
+</div>
+
+
+</main>
+
+<footer class="ftr" data-theme="dark">
+  <svg class="sym fern" viewBox="0 0 40.5 65.02" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#fern"/></svg>
+  <div class="container">
+    <div class="ftr-row">
+      <a href="/edufamcs-demo/" aria-label="EDU FAMCS — главная"><img src="/edufamcs-demo/static/brand/logo/logo-edu-dark.svg" alt="EDU FAMCS" width="196" height="40"></a>
+      <ul class="ftr-links">
+        <li><a href="/edufamcs-demo/#courses">Курсы</a></li>
+        <li><a href="/edufamcs-demo/ml/">Машинное обучение</a></li>
+        <li><a href="/edufamcs-demo/handbook/">Хендбук</a></li>
+        <li><a href="/edufamcs-demo/news/">Новости</a></li>
+        <li><a href="/edufamcs-demo/people/">Авторы</a></li>
+        <li><a href="/edufamcs-demo/about/">О&nbsp;нас</a></li>
+        <li><a href="/edufamcs-demo/propose/">Предложить или исправить</a></li>
+        <li><a href="/edufamcs-demo/privacy/">Конфиденциальность</a></li>
+      </ul>
+    </div>
+    <div class="ftr-big" aria-hidden="true">EDU<span class="d">·</span>FAMCS</div>
+    <p class="ftr-copy">© 2026 EDU FAMCS · Минск</p>
+  </div>
+</footer>
+
+<div class="toasts-region" aria-live="polite" id="toasts">
+
+</div>
+
+</body>
+</html>

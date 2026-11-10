@@ -1,0 +1,381 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Скиллы: SKILL.md и как написать свой · EDU FAMCS</title>
+<meta name="description" content="Скиллы: SKILL.md и как написать свой — ИИ-ассистенты для кода. Хендбук ML-курса ФПМИ.">
+<meta name="theme-color" content="#060A16">
+<meta name="robots" content="noindex, nofollow">
+<meta name="htmx-config" content='{"allowEval":false,"includeIndicatorStyles":false,"historyCacheSize":0,"selfRequestsOnly":true}'>
+<meta name="katex-js" content="/edufamcs-demo/static/vendor/katex/katex.min.js">
+<meta name="katex-css" content="/edufamcs-demo/static/vendor/katex/katex.min.css">
+<link rel="icon" href="/edufamcs-demo/static/brand/logo/favicon-16.svg" type="image/svg+xml" sizes="16x16">
+<link rel="icon" href="/edufamcs-demo/static/brand/logo/favicon.svg" type="image/svg+xml" sizes="any">
+<link rel="preload" href="/edufamcs-demo/static/brand/fonts/manrope-cyrillic-400.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/edufamcs-demo/static/brand/fonts/unbounded-cyrillic-800.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="/edufamcs-demo/static/brand/fonts.css">
+<link rel="stylesheet" href="/edufamcs-demo/static/brand/tokens.css">
+<link rel="stylesheet" href="/edufamcs-demo/static/brand/components.css">
+<link rel="stylesheet" href="/edufamcs-demo/static/css/site.css">
+<link rel="stylesheet" href="/edufamcs-demo/static/css/hub.css">
+<link rel="stylesheet" href="/edufamcs-demo/static/css/about.css">
+<link rel="stylesheet" href="/edufamcs-demo/static/handbook/handbook.css">
+<script src="/edufamcs-demo/static/js/theme.js"></script>
+<script src="/edufamcs-demo/static/vendor/htmx/htmx.min.js" defer></script>
+<script src="/edufamcs-demo/static/vendor/alpine/alpine-csp.min.js" defer></script>
+<script src="/edufamcs-demo/static/js/site.js" defer></script>
+<script src="/edufamcs-demo/static/handbook/handbook.js" defer></script>
+</head>
+<body class="" hx-headers='{"X-CSRFToken": "bb0RoQdbmnTLoUV80m6FCGAhrmTPyFziNoPOESM2na7kzdaAZPkCkzsfTv0NipyZ"}'>
+<a class="skip" href="#main">К содержанию</a>
+<div class="demo-bar" role="note">Демо-версия для отзывов: вход, запись на курсы и формы здесь не работают.</div>
+
+<header class="hdr">
+  <div class="container">
+    <a class="brand" href="/edufamcs-demo/" aria-label="EDU FAMCS — главная">
+      <span class="full"><img class="only-light" src="/edufamcs-demo/static/brand/logo/logo-edu-light.svg" alt="EDU FAMCS" width="196" height="40"><img class="only-dark" src="/edufamcs-demo/static/brand/logo/logo-edu-dark.svg" alt="EDU FAMCS" width="196" height="40"></span>
+      <span class="short"><img class="only-light" src="/edufamcs-demo/static/brand/logo/logo-edu-light.svg" alt="EDU FAMCS" height="30"><img class="only-dark" src="/edufamcs-demo/static/brand/logo/logo-edu-dark.svg" alt="EDU FAMCS" height="30"></span>
+    </a>
+    <nav class="nav" id="main-nav" aria-label="Основная навигация">
+      <a href="/edufamcs-demo/#courses">Курсы</a>
+      <a href="/edufamcs-demo/ml/" >Машинное обучение</a>
+      
+      <a href="/edufamcs-demo/handbook/" aria-current="page">Хендбук</a>
+      <a href="/edufamcs-demo/news/" >Новости</a>
+      <a href="/edufamcs-demo/people/" >Авторы</a>
+      <a href="/edufamcs-demo/about/" >О&nbsp;нас</a>
+    </nav>
+    <div class="hdr-actions">
+      
+      <a class="btn btn-outline btn-login" href="/edufamcs-demo/accounts/login/?next=/handbook/ai-tools/skills/">Войти</a>
+      
+      <button class="icon-btn menu-btn" type="button" aria-label="Меню" aria-expanded="false" aria-controls="main-nav"><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-menu"/></svg></button>
+    </div>
+  </div>
+</header>
+
+<main id="main">
+
+
+
+<div class="container hb-page s-agents">
+  <div class="hb-readbar" aria-hidden="true"><i></i></div>
+  <div class="hb">
+    <aside class="hb-nav" aria-label="Статьи раздела">
+      
+<form class="hb-search" action="/edufamcs-demo/handbook/search/" method="get" role="search">
+  <svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-search"/></svg>
+  <input class="input" type="search" name="q" value="" placeholder="Поиск по хендбуку" aria-label="Поиск по хендбуку" autocomplete="off" maxlength="120"
+    hx-get="/edufamcs-demo/handbook/search/" hx-trigger="input changed delay:250ms, search" hx-target="#hb-nav-results" hx-sync="this:replace">
+</form>
+
+      <div id="hb-nav-results" class="hb-nav-results" aria-live="polite"></div>
+      <a class="grp" href="/edufamcs-demo/handbook/ai-tools/">Расширения</a>
+      
+      <a class="cur" href="/edufamcs-demo/handbook/ai-tools/skills/" aria-current="page">Скиллы: SKILL.md и как написать свой</a>
+      
+      <a class="" href="/edufamcs-demo/handbook/ai-tools/mcp/">MCP: подключаем инструменты и данные</a>
+      
+      <a class="" href="/edufamcs-demo/handbook/ai-tools/subagenty-huki-komandy/">Субагенты, хуки и слэш-команды</a>
+      
+    </aside>
+
+    <article class="hb-main">
+      <nav class="crumbs" aria-label="Навигация"><a href="/edufamcs-demo/handbook/">Хендбук</a><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-chev"/></svg><a href="/edufamcs-demo/handbook/ai-tools/">ИИ-ассистенты для кода</a></nav>
+      <h1 class="h1">Скиллы: SKILL.md и как написать свой</h1>
+      <div class="hb-meta">
+        
+        
+        <span><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-clock"/></svg>14&nbsp;мин</span>
+        <span class="hb-authors"><span class="avatar sm" title="Артем Лебедевич">АЛ</span>Артем Лебедевич</span>
+        <span><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-edit"/></svg>10 ноября 2026</span>
+        
+        
+      </div>
+
+      
+      <details class="hb-mtoc">
+        <summary><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-list"/></svg>Содержание<svg class="ico sm" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-chev-down"/></svg></summary>
+        <a class="l2" href="#что-внутри-скилла">Что внутри скилла</a><a class="l2" href="#прогрессивная-загрузка-и-контекст">Прогрессивная загрузка и контекст</a><a class="l2" href="#где-лежат-скиллы">Где лежат скиллы</a><a class="l2" href="#как-скилл-срабатывает">Как скилл срабатывает</a><a class="l2" href="#пример-проверка-ноутбука-перед-долгим-прогоном">Пример: проверка ноутбука перед долгим прогоном</a><a class="l2" href="#скиллы-claudemd-команды-mcp">Скиллы, CLAUDE.md, команды, MCP</a><a class="l2" href="#как-проверить-и-улучшить-скилл">Как проверить и улучшить скилл</a><a class="l2" href="#безопасность">Безопасность</a><a class="l2" href="#ловушки">Ловушки</a><a class="l2" href="#проверь-себя">Проверь себя</a><a class="l2" href="#что-почитать">Что почитать</a>
+      </details>
+      
+
+      <div class="prose"><p>Скилл (Agent Skill) — это папка с файлом <code>SKILL.md</code>: короткое описание «когда меня применять» и инструкция «как». Агент держит в контексте только описание, а полный текст и вспомогательные файлы подгружает, когда задача подходит. Так в агента можно «вшить» ваш порядок работы с экспериментами, не раздувая контекст каждой сессии. Инструменты меняются каждый месяц, поэтому формат ниже сверен с документацией на ноябрь 2026, а источником истины остаётся она (ссылки в конце).</p>
+<h2 id="что-внутри-скилла">Что внутри скилла</h2>
+<div class="code"><div class="code-head"><span class="lang">text</span></div><pre><code>notebook-preflight/
+├── SKILL.md          # обязательный: YAML-заголовок + инструкции
+├── scripts/          # необязательно: исполняемый код
+├── references/       # необязательно: справочные файлы
+└── assets/           # необязательно: шаблоны, данные
+</code></pre></div>
+<p>Формат описан открытой спецификацией <a href="https://agentskills.io/specification" rel="noopener noreferrer nofollow">agentskills.io</a>; её используют и Claude Code, и Codex. Обязательны два поля заголовка:</p>
+<ul>
+<li><code>name</code> — до 64 символов, строчные латинские буквы, цифры и дефисы, без дефиса в начале и конце и без двойного дефиса; по спецификации совпадает с именем папки;</li>
+<li><code>description</code> — до 1024 символов: что скилл делает <strong>и когда его применять</strong>.</li>
+</ul>
+<p>Остальное по спецификации необязательно: <code>license</code>, <code>compatibility</code>, <code>metadata</code>, <code>allowed-tools</code> (последнее помечено как экспериментальное). Claude Code добавляет собственные поля — например <code>disable-model-invocation</code>, <code>argument-hint</code>, <code>context: fork</code>; в других инструментах их может не быть, неизвестные поля игнорируются. Список полей смотрите в документации своего инструмента, а не в чужих примерах.</p>
+<h2 id="прогрессивная-загрузка-и-контекст">Прогрессивная загрузка и контекст</h2>
+<p>Загрузка идёт в три ступени:</p>
+<ol>
+<li><strong>Метаданные</strong> (порядка 100 токенов на скилл): <code>name</code> и <code>description</code> лежат в контексте всегда.</li>
+<li><strong>Тело <code>SKILL.md</code></strong>: читается, когда агент решил применить скилл. Рекомендация спецификации — до 5000 токенов и не больше 500 строк.</li>
+<li><strong>Файлы скилла</strong>: <code>references/</code> читаются по ссылке из тела, скрипты из <code>scripts/</code> запускаются, и в контекст попадает только их вывод, а не код.</li>
+</ol>
+<p>Следствие: десяток скиллов стоит лишь их описаний, а справочник на 50 страниц в <code>references/</code> ничего не стоит, пока не нужен. Но и описания занимают место: Claude Code режет описания при переполнении листинга и ограничивает каждое 1536 символами вместе с <code>when_to_use</code>, так что главное пишите в начале.</p>
+<div class="callout md note"><p class="callout-title">Скилл не «помнится» вечно</p>
+<p>В Claude Code загруженный скилл остаётся в диалоге, но файл заново не перечитывается. После автосжатия контекста сохраняется только начало скилла, поэтому самые важные правила ставьте вверх <code>SKILL.md</code>. Правило, которое должно выполняться всегда, надёжнее вынести в хук (см. <a href="/edufamcs-demo/handbook/ai-tools/subagenty-huki-komandy/" rel="noopener noreferrer nofollow">субагенты, хуки и команды</a>).</p>
+</div>
+<h2 id="где-лежат-скиллы">Где лежат скиллы</h2>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th style="text-align:left">Область</th>
+<th style="text-align:left">Claude Code</th>
+<th style="text-align:left">Codex</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">Личные</td>
+<td style="text-align:left"><code>~/.claude/skills/&lt;имя&gt;/SKILL.md</code></td>
+<td style="text-align:left"><code>$HOME/.agents/skills</code></td>
+</tr>
+<tr>
+<td style="text-align:left">Проект</td>
+<td style="text-align:left"><code>.claude/skills/&lt;имя&gt;/SKILL.md</code></td>
+<td style="text-align:left"><code>.agents/skills</code> в текущей папке и в родительских до корня репозитория</td>
+</tr>
+<tr>
+<td style="text-align:left">Плагин</td>
+<td style="text-align:left"><code>&lt;плагин&gt;/skills/&lt;имя&gt;/SKILL.md</code></td>
+<td style="text-align:left">в составе плагина (плагины Codex распространяют один или несколько скиллов)</td>
+</tr>
+<tr>
+<td style="text-align:left">Администратор</td>
+<td style="text-align:left">каталог managed settings</td>
+<td style="text-align:left"><code>/etc/codex/skills</code></td>
+</tr>
+</tbody>
+</table></div>
+<p>Проектные скиллы коммитят в репозиторий — команда получает один порядок действий. При совпадении имён Claude Code отдаёт приоритет личному скиллу над проектным. Codex одинаково названные скиллы не сливает: оба остаются в списке.</p>
+<h2 id="как-скилл-срабатывает">Как скилл срабатывает</h2>
+<p>Два пути. Явный: вы набираете <code>/имя</code> в Claude Code либо <code>$имя</code> (или <code>/skills</code>) в Codex. Неявный: агент сопоставляет вашу просьбу с <code>description</code> и сам решает загрузить скилл. Поэтому <strong><code>description</code> — самая важная строка файла</strong>: тело никто не прочтёт, если описание не совпало с запросом.</p>
+<p>Плохо: <code>description: Помогает с ноутбуками.</code> Хорошо: что делает, на какие фразы реагировать, когда не применять. Пишите словами, которыми вы реально просите: «проверь ноутбук перед запуском», «можно ли гонять это на GPU», «ревью эксперимента». Если скилл срабатывает не к месту — сузьте описание или запретите автозапуск (в Claude Code это <code>disable-model-invocation: true</code>, в Codex — <code>allow_implicit_invocation: false</code> в <code>agents/openai.yaml</code>).</p>
+<h2 id="пример-проверка-ноутбука-перед-долгим-прогоном">Пример: проверка ноутбука перед долгим прогоном</h2>
+<p>Скилл для студента: перед запуском на часы агент проходит по чек-листу и запускает дешёвый прогон. Файл <code>~/.claude/skills/notebook-preflight/SKILL.md</code> (для Codex — та же папка в <code>~/.agents/skills/</code>):</p>
+<div class="code"><div class="code-head"><span class="lang">markdown</span></div><pre><code>---
+name: notebook-preflight
+description: Проверяет Jupyter-ноутбук с обучением модели перед долгим прогоном — утечки, seed, разбиение, дешёвый smoke-прогон. Используй, когда просят «проверь ноутбук перед запуском», «можно ли гонять на сервере/GPU», «ревью эксперимента». Не применять к ноутбукам без обучения (чистый EDA).
+---
+
+# Проверка ноутбука перед долгим прогоном
+
+Ничего не правь, пока не покажешь список находок. Результат — таблица
+«проблема / ячейка / чем грозит / как исправить».
+
+## Шаги
+
+<span class="tok-k">1.</span> Запусти статический просмотр:
+   <span class="tok-s">`python3 ${CLAUDE_SKILL_DIR}/scripts/scan_notebook.py &lt;ноутбук.ipynb&gt;`</span>
+   Вывод — подсказки, не вердикт.
+<span class="tok-k">2.</span> Прочитай ноутбук сам и пройди чек-лист ниже.
+<span class="tok-k">3.</span> Предложи дешёвый профиль: малая выборка, 1–2 эпохи, фиксированный seed,
+   включается переменной окружения. Запусти его и убедись, что дошло до метрики.
+<span class="tok-k">4.</span> Отчёт: что нашёл, что запустил, что осталось непроверенным.
+
+## Чек-лист
+
+<span class="tok-k">-</span> Утечка: fit скейлера, кодировщика, отбора признаков, целевого кодирования — только
+  на train. Агрегаты по всей таблице считаются до разбиения? Дубликаты и один и тот же
+  пользователь/объект по обе стороны разбиения?
+<span class="tok-k">-</span> Разбиение: данные со временем — временной срез, а не случайный; группы — GroupKFold.
+  Валидация не меняется между запусками, которые вы сравниваете.
+<span class="tok-k">-</span> Seed: фиксируются все источники случайности; на выходе — версии библиотек.
+<span class="tok-k">-</span> Метрика: считается на valid, а не на train; сравнение с baseline в тех же условиях.
+<span class="tok-k">-</span> Подбор гиперпараметров идёт по valid; test открывается один раз в конце.
+<span class="tok-k">-</span> Ресурсы: оценка времени по smoke-прогону; промежуточные результаты пишутся на диск.
+
+## Чего не делать
+
+Не менять разбиение, метрику и данные «для починки» без явного согласия.
+Не править ноутбук во время идущего прогона.
+</code></pre></div>
+<p>Скрипт <code>scripts/scan_notebook.py</code> — 45 строк стандартной библиотеки: ищет seed, разбиение, переключатель дешёвого профиля, <code>fit</code> до разбиения и случайный сплит при наличии времени. На заведомо плохом игрушечном ноутбуке он выдаёт все четыре предупреждения, на аккуратном — ни одного.</p>
+<div class="code"><div class="code-head"><span class="lang">python</span></div><pre><code><span class="tok-c">#!/usr/bin/env python3</span>
+<span class="tok-s">"""Грубый статический просмотр .ipynb перед долгим прогоном. Только stdlib."""</span>
+<span class="tok-k">import</span> json
+<span class="tok-k">import</span> re
+<span class="tok-k">import</span> sys
+
+CHECKS <span class="tok-p">=</span> <span class="tok-p">[</span>
+    <span class="tok-p">(</span><span class="tok-s">"</span><span class="tok-s">seed</span><span class="tok-s">"</span><span class="tok-p">,</span> <span class="tok-s">r</span><span class="tok-s">"</span><span class="tok-s">random_state|random</span><span class="tok-s">\</span><span class="tok-s">.seed|np</span><span class="tok-s">\</span><span class="tok-s">.random</span><span class="tok-s">\</span><span class="tok-s">.seed|manual_seed|default_rng|set_seed</span><span class="tok-s">"</span><span class="tok-p">,</span>
+     <span class="tok-s">"</span><span class="tok-s">не найден ни один seed: прогон не воспроизвести</span><span class="tok-s">"</span><span class="tok-p">)</span><span class="tok-p">,</span>
+    <span class="tok-p">(</span><span class="tok-s">"</span><span class="tok-s">split</span><span class="tok-s">"</span><span class="tok-p">,</span> <span class="tok-s">r</span><span class="tok-s">"</span><span class="tok-s">train_test_split|TimeSeriesSplit|GroupKFold|KFold|train_test|</span><span class="tok-s">\</span><span class="tok-s">.iloc</span><span class="tok-s">\</span><span class="tok-s">[:</span><span class="tok-s">\</span><span class="tok-s">s*</span><span class="tok-s">\</span><span class="tok-s">w+</span><span class="tok-s">\</span><span class="tok-s">]</span><span class="tok-s">"</span><span class="tok-p">,</span>
+     <span class="tok-s">"</span><span class="tok-s">не найдено разбиение train/valid</span><span class="tok-s">"</span><span class="tok-p">)</span><span class="tok-p">,</span>
+    <span class="tok-p">(</span><span class="tok-s">"</span><span class="tok-s">smoke</span><span class="tok-s">"</span><span class="tok-p">,</span> <span class="tok-s">r</span><span class="tok-s">"</span><span class="tok-s">SMOKE|FAST|N_ROWS|nrows|</span><span class="tok-s">\</span><span class="tok-s">.head</span><span class="tok-s">\</span><span class="tok-s">(|</span><span class="tok-s">\</span><span class="tok-s">.sample</span><span class="tok-s">\</span><span class="tok-s">(|MAX_STEPS|EPOCHS</span><span class="tok-s">\</span><span class="tok-s">s*=</span><span class="tok-s">"</span><span class="tok-p">,</span>
+     <span class="tok-s">"</span><span class="tok-s">нет переключателя дешёвого профиля (SMOKE/N_ROWS/EPOCHS через переменную окружения)</span><span class="tok-s">"</span><span class="tok-p">)</span><span class="tok-p">,</span>
+<span class="tok-p">]</span>
+
+
+<span class="tok-k">def</span> <span class="tok-f">main</span><span class="tok-p">(</span>path<span class="tok-p">:</span> <span class="tok-f">str</span><span class="tok-p">)</span> <span class="tok-p">-</span><span class="tok-p">&gt;</span> <span class="tok-f">int</span><span class="tok-p">:</span>
+    nb <span class="tok-p">=</span> json<span class="tok-p">.</span>load<span class="tok-p">(</span><span class="tok-f">open</span><span class="tok-p">(</span>path<span class="tok-p">,</span> encoding<span class="tok-p">=</span><span class="tok-s">"</span><span class="tok-s">utf-8</span><span class="tok-s">"</span><span class="tok-p">)</span><span class="tok-p">)</span>
+    cells <span class="tok-p">=</span> <span class="tok-p">[</span><span class="tok-p">(</span><span class="tok-s">"</span><span class="tok-s">"</span><span class="tok-p">.</span>join<span class="tok-p">(</span>c<span class="tok-p">[</span><span class="tok-s">"</span><span class="tok-s">source</span><span class="tok-s">"</span><span class="tok-p">]</span><span class="tok-p">)</span><span class="tok-p">,</span> i<span class="tok-p">)</span> <span class="tok-k">for</span> i<span class="tok-p">,</span> c <span class="tok-k">in</span> <span class="tok-f">enumerate</span><span class="tok-p">(</span>nb<span class="tok-p">[</span><span class="tok-s">"</span><span class="tok-s">cells</span><span class="tok-s">"</span><span class="tok-p">]</span><span class="tok-p">)</span>
+             <span class="tok-k">if</span> c<span class="tok-p">[</span><span class="tok-s">"</span><span class="tok-s">cell_type</span><span class="tok-s">"</span><span class="tok-p">]</span> <span class="tok-p">==</span> <span class="tok-s">"</span><span class="tok-s">code</span><span class="tok-s">"</span><span class="tok-p">]</span>
+    code <span class="tok-p">=</span> <span class="tok-s">"</span><span class="tok-s">\n</span><span class="tok-s">"</span><span class="tok-p">.</span>join<span class="tok-p">(</span>src <span class="tok-k">for</span> src<span class="tok-p">,</span> _ <span class="tok-k">in</span> cells<span class="tok-p">)</span>
+    problems <span class="tok-p">=</span> <span class="tok-p">[</span><span class="tok-p">]</span>
+    <span class="tok-k">for</span> name<span class="tok-p">,</span> pat<span class="tok-p">,</span> msg <span class="tok-k">in</span> CHECKS<span class="tok-p">:</span>
+        <span class="tok-k">if</span> <span class="tok-k">not</span> re<span class="tok-p">.</span>search<span class="tok-p">(</span>pat<span class="tok-p">,</span> code<span class="tok-p">)</span><span class="tok-p">:</span>
+            problems<span class="tok-p">.</span>append<span class="tok-p">(</span><span class="tok-s">f</span><span class="tok-s">"</span><span class="tok-s">[</span><span class="tok-s">{</span>name<span class="tok-s">}</span><span class="tok-s">] </span><span class="tok-s">{</span>msg<span class="tok-s">}</span><span class="tok-s">"</span><span class="tok-p">)</span>
+    <span class="tok-c"># утечка: fit/fit_transform на всём X до первого разбиения</span>
+    split_at <span class="tok-p">=</span> <span class="tok-f">next</span><span class="tok-p">(</span><span class="tok-p">(</span>i <span class="tok-k">for</span> src<span class="tok-p">,</span> i <span class="tok-k">in</span> cells <span class="tok-k">if</span> re<span class="tok-p">.</span>search<span class="tok-p">(</span>CHECKS<span class="tok-p">[</span><span class="tok-n">1</span><span class="tok-p">]</span><span class="tok-p">[</span><span class="tok-n">1</span><span class="tok-p">]</span><span class="tok-p">,</span> src<span class="tok-p">)</span><span class="tok-p">)</span><span class="tok-p">,</span> <span class="tok-k">None</span><span class="tok-p">)</span>
+    <span class="tok-k">for</span> src<span class="tok-p">,</span> i <span class="tok-k">in</span> cells<span class="tok-p">:</span>
+        <span class="tok-k">if</span> re<span class="tok-p">.</span>search<span class="tok-p">(</span><span class="tok-s">r</span><span class="tok-s">"</span><span class="tok-s">\</span><span class="tok-s">.fit(_transform)?</span><span class="tok-s">\</span><span class="tok-s">(</span><span class="tok-s">"</span><span class="tok-p">,</span> src<span class="tok-p">)</span> <span class="tok-k">and</span> <span class="tok-p">(</span>split_at <span class="tok-k">is</span> <span class="tok-k">None</span> <span class="tok-k">or</span> i <span class="tok-p">&lt;</span> split_at<span class="tok-p">)</span> \
+                <span class="tok-k">and</span> <span class="tok-k">not</span> re<span class="tok-p">.</span>search<span class="tok-p">(</span><span class="tok-s">r</span><span class="tok-s">"</span><span class="tok-s">Pipeline|make_pipeline</span><span class="tok-s">"</span><span class="tok-p">,</span> src<span class="tok-p">)</span><span class="tok-p">:</span>
+            problems<span class="tok-p">.</span>append<span class="tok-p">(</span><span class="tok-s">f</span><span class="tok-s">"</span><span class="tok-s">[leak?] ячейка </span><span class="tok-s">{</span>i<span class="tok-s">}</span><span class="tok-s">: fit до разбиения на train/valid</span><span class="tok-s">"</span><span class="tok-p">)</span>
+    <span class="tok-k">if</span> re<span class="tok-p">.</span>search<span class="tok-p">(</span><span class="tok-s">r</span><span class="tok-s">"</span><span class="tok-s">(test|valid)</span><span class="tok-s">\</span><span class="tok-s">w*</span><span class="tok-s">\</span><span class="tok-s">s*=.*</span><span class="tok-s">\</span><span class="tok-s">.fit|fit</span><span class="tok-s">\</span><span class="tok-s">(.*(X_test|X_valid|X_val)</span><span class="tok-s">\</span><span class="tok-s">b</span><span class="tok-s">"</span><span class="tok-p">,</span> code<span class="tok-p">)</span><span class="tok-p">:</span>
+        problems<span class="tok-p">.</span>append<span class="tok-p">(</span><span class="tok-s">"</span><span class="tok-s">[leak?] fit/подбор на valid/test</span><span class="tok-s">"</span><span class="tok-p">)</span>
+    <span class="tok-k">if</span> re<span class="tok-p">.</span>search<span class="tok-p">(</span><span class="tok-s">r</span><span class="tok-s">"</span><span class="tok-s">train_test_split</span><span class="tok-s">\</span><span class="tok-s">(</span><span class="tok-s">"</span><span class="tok-p">,</span> code<span class="tok-p">)</span> <span class="tok-k">and</span> re<span class="tok-p">.</span>search<span class="tok-p">(</span><span class="tok-s">r</span><span class="tok-s">"</span><span class="tok-s">timestamp|</span><span class="tok-s">\</span><span class="tok-s">bts</span><span class="tok-s">\</span><span class="tok-s">b|date|time</span><span class="tok-s">"</span><span class="tok-p">,</span> code<span class="tok-p">)</span> \
+            <span class="tok-k">and</span> <span class="tok-k">not</span> re<span class="tok-p">.</span>search<span class="tok-p">(</span><span class="tok-s">r</span><span class="tok-s">"</span><span class="tok-s">shuffle</span><span class="tok-s">\</span><span class="tok-s">s*=</span><span class="tok-s">\</span><span class="tok-s">s*False|TimeSeriesSplit</span><span class="tok-s">"</span><span class="tok-p">,</span> code<span class="tok-p">)</span><span class="tok-p">:</span>
+        problems<span class="tok-p">.</span>append<span class="tok-p">(</span><span class="tok-s">"</span><span class="tok-s">[split?] в данных есть время, а разбиение случайное: нужен временной срез</span><span class="tok-s">"</span><span class="tok-p">)</span>
+    <span class="tok-f">print</span><span class="tok-p">(</span><span class="tok-s">f</span><span class="tok-s">"</span><span class="tok-s">{</span>path<span class="tok-s">}</span><span class="tok-s">: ячеек кода </span><span class="tok-s">{</span><span class="tok-f">len</span><span class="tok-p">(</span>cells<span class="tok-p">)</span><span class="tok-s">}</span><span class="tok-s">"</span><span class="tok-p">)</span>
+    <span class="tok-f">print</span><span class="tok-p">(</span><span class="tok-s">"</span><span class="tok-s">\n</span><span class="tok-s">"</span><span class="tok-p">.</span>join<span class="tok-p">(</span>problems<span class="tok-p">)</span> <span class="tok-k">if</span> problems <span class="tok-k">else</span> <span class="tok-s">"</span><span class="tok-s">эвристики ничего не нашли (это не гарантия)</span><span class="tok-s">"</span><span class="tok-p">)</span>
+    <span class="tok-k">return</span> <span class="tok-n">1</span> <span class="tok-k">if</span> problems <span class="tok-k">else</span> <span class="tok-n">0</span>
+
+
+<span class="tok-k">if</span> __name__ <span class="tok-p">==</span> <span class="tok-s">"</span><span class="tok-s">__main__</span><span class="tok-s">"</span><span class="tok-p">:</span>
+    <span class="tok-k">if</span> <span class="tok-f">len</span><span class="tok-p">(</span>sys<span class="tok-p">.</span>argv<span class="tok-p">)</span> <span class="tok-p">!=</span> <span class="tok-n">2</span><span class="tok-p">:</span>
+        sys<span class="tok-p">.</span>exit<span class="tok-p">(</span><span class="tok-s">"</span><span class="tok-s">usage: scan_notebook.py notebook.ipynb</span><span class="tok-s">"</span><span class="tok-p">)</span>
+    sys<span class="tok-p">.</span>exit<span class="tok-p">(</span>main<span class="tok-p">(</span>sys<span class="tok-p">.</span>argv<span class="tok-p">[</span><span class="tok-n">1</span><span class="tok-p">]</span><span class="tok-p">)</span><span class="tok-p">)</span>
+</code></pre></div>
+<p>Эвристики грубые (регулярные выражения по тексту), поэтому в скилле они названы подсказками. В скрипт выносят то, что должно считаться одинаково каждый раз; суждение оставляют модели. Путь к скрипту в Claude Code подставляется как <code>${CLAUDE_SKILL_DIR}</code>; в спецификации ссылки на файлы пишут относительно корня скилла.</p>
+<h2 id="скиллы-claudemd-команды-mcp">Скиллы, CLAUDE.md, команды, MCP</h2>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th style="text-align:left"></th>
+<th style="text-align:left">Что это</th>
+<th style="text-align:left">Когда в контексте</th>
+<th style="text-align:left">Брать, когда</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left"><code>CLAUDE.md</code> / <code>AGENTS.md</code></td>
+<td style="text-align:left">Постоянные правила проекта</td>
+<td style="text-align:left">Всегда</td>
+<td style="text-align:left">Короткие факты: как запускать тесты, где данные, чего не трогать</td>
+</tr>
+<tr>
+<td style="text-align:left">Скилл</td>
+<td style="text-align:left">Процедура + файлы</td>
+<td style="text-align:left">Описание всегда, тело по запросу</td>
+<td style="text-align:left">Повторяемый многошаговый порядок работы</td>
+</tr>
+<tr>
+<td style="text-align:left">Слэш-команда</td>
+<td style="text-align:left">Шаблон запроса, вызываемый вручную</td>
+<td style="text-align:left">По вызову</td>
+<td style="text-align:left">Вы сами знаете, когда это нужно. В Claude Code команды слились со скиллами; в Codex кастомные промпты объявлены устаревшими в пользу скиллов</td>
+</tr>
+<tr>
+<td style="text-align:left">MCP-сервер</td>
+<td style="text-align:left">Процесс с инструментами и данными</td>
+<td style="text-align:left">Определения инструментов</td>
+<td style="text-align:left">Нужен доступ к системе, а не знание (см. <a href="/edufamcs-demo/handbook/ai-tools/mcp/" rel="noopener noreferrer nofollow">MCP</a>)</td>
+</tr>
+<tr>
+<td style="text-align:left">Хук</td>
+<td style="text-align:left">Команда на событие</td>
+<td style="text-align:left">Не в контексте</td>
+<td style="text-align:left">Правило должно выполняться всегда, без «забывчивости» модели</td>
+</tr>
+</tbody>
+</table></div>
+<h2 id="как-проверить-и-улучшить-скилл">Как проверить и улучшить скилл</h2>
+<p>Тест такой же, как у модели: набор запросов с ожидаемым поведением. Составьте 5–10 фраз, на которые скилл <strong>должен</strong> сработать, и 5, на которые <strong>не должен</strong>. Проверьте: виден ли скилл в списке (в Claude Code — спросить «какие скиллы доступны» или <code>/skills</code>), срабатывает ли на нужные фразы, вызывается ли явно. Если не срабатывает — добавьте в описание слова из ваших фраз. Если YAML сломан, Claude Code загрузит тело без метаданных: <code>/имя</code> работает, а автоподбор нет; ищите ошибку через <code>--debug</code>. Дальше сравнивайте результат с скиллом и без него на одной и той же задаче: если разницы нет, скилл не нужен.</p>
+<h2 id="безопасность">Безопасность</h2>
+<p>Скилл — это инструкции плюс код, которые агент выполнит с вашими правами. Вредоносный скилл может заставить агента вызвать инструменты не так, как заявлено, и вынести данные. Документация Anthropic прямо советует брать скиллы только из доверенных источников и аудитировать всё, что внутри: <code>SKILL.md</code>, скрипты, ресурсы, особенно сетевые вызовы и обращения к файлам. Скиллы, которые подтягивают текст по внешним ссылкам, опасны отдельно: содержимое может поменяться уже после вашей проверки. В Claude Code <code>allowed-tools</code> в проектном скилле даёт права без запроса, так что чужой репозиторий проверяйте до первого запуска агента в нём. Подробнее — <a href="/edufamcs-demo/handbook/ai-tools/bezopasnost-agentov/" rel="noopener noreferrer nofollow">безопасность агентов</a>.</p>
+<h2 id="ловушки">Ловушки</h2>
+<ul>
+<li>Описание вроде «помогает с данными»: скилл не срабатывает или срабатывает на всё подряд.</li>
+<li>Раздутое тело: пол-тысячи строк в <code>SKILL.md</code> вместо вынесения деталей в <code>references/</code>.</li>
+<li>Скилл заменяет проверку: чек-лист прочитан, но ничего не запущено. Требуйте в отчёте, что именно запущено.</li>
+<li>Установка чужих скиллов «пачкой» без чтения скриптов.</li>
+<li>Правило, критичное всегда («не трогать разбиение»), оставлено только в скилле, а не в хуке или тесте.</li>
+<li>Секреты или токены в тексте скилла, который коммитится в репозиторий.</li>
+</ul>
+<h2 id="проверь-себя">Проверь себя</h2>
+<details class="callout md details"><summary>Что из скилла лежит в контексте всегда, а что подгружается по требованию?</summary>
+<p>Всегда — <code>name</code> и <code>description</code> (порядка ста токенов на скилл). Тело <code>SKILL.md</code> загружается, когда скилл выбран; файлы из <code>references/</code> — когда на них сослались; скрипты запускаются, и в контекст попадает только их вывод.</p>
+</details>
+<details class="callout md details"><summary>Почему `description` важнее тела и что в нём должно быть?</summary>
+<p>По нему агент решает, загружать ли скилл. Нужно сказать, что скилл делает и когда его применять, словами, которыми пользователь действительно формулирует запрос; полезно оговорить и случаи, когда применять не надо.</p>
+</details>
+<details class="callout md details"><summary>Для чего в этих трёх случаях взять `CLAUDE.md`, скилл и хук: «тесты запускаются через `uv run pytest`», «порядок ревью ноутбука», «никогда не запускать `rm -rf`»?</summary>
+<p>Первое — <code>CLAUDE.md</code>/<code>AGENTS.md</code> (короткий постоянный факт). Второе — скилл (процедура по запросу). Третье — хук (детерминированная блокировка, не зависящая от «послушности» модели).</p>
+</details>
+<details class="callout md details"><summary>Что проверить, прежде чем установить чужой скилл?</summary>
+<p>Прочитать все файлы: <code>SKILL.md</code>, скрипты и ресурсы; найти сетевые вызовы, чтение файлов вне задачи, подтягивание внешних инструкций, <code>allowed-tools</code>. Установить в изолированном окружении или хотя бы не давать ему доступ к секретам.</p>
+</details>
+<details class="callout md details"><summary>Как убедиться, что скилл срабатывает именно на нужные запросы?</summary>
+<p>Набрать фразы «должен сработать» и «не должен», прогнать их, посмотреть список доступных скиллов и вызов; править описание под реальные формулировки; сравнить результат на одной задаче со скиллом и без.</p>
+</details>
+<h2 id="что-почитать">Что почитать</h2>
+<ul>
+<li>Claude Code: <a href="https://code.claude.com/docs/en/skills" rel="noopener noreferrer nofollow">Extend Claude with skills</a> — поля заголовка, места, триггеры, отладка.</li>
+<li><a href="https://agentskills.io/specification" rel="noopener noreferrer nofollow">Agent Skills specification</a> — открытый формат.</li>
+<li>Anthropic: <a href="https://platform.claude.com/docs/en/agents-and-tools/agent-skills/overview" rel="noopener noreferrer nofollow">Agent Skills overview</a> — уровни загрузки и раздел о безопасности.</li>
+<li>Codex: <a href="https://learn.chatgpt.com/docs/build-skills" rel="noopener noreferrer nofollow">Skills</a> — пути, <code>$skill</code>, отключение через <code>config.toml</code>.</li>
+<li>Codex: <a href="https://learn.chatgpt.com/docs/custom-prompts" rel="noopener noreferrer nofollow">Custom prompts</a> — статус «устарело», замена скиллами.</li>
+<li>Внутри курса: <a href="/edufamcs-demo/handbook/ai-tools/kak-ustroen-kodovyj-agent/" rel="noopener noreferrer nofollow">как устроен кодовый агент</a>, <a href="/edufamcs-demo/handbook/ai-tools/claude-code/" rel="noopener noreferrer nofollow">Claude Code</a>, <a href="/edufamcs-demo/handbook/ai-tools/codex/" rel="noopener noreferrer nofollow">Codex</a>.</li>
+</ul>
+</div>
+      
+
+      
+
+      
+      <nav class="pager" aria-label="Соседние статьи">
+        <a href="/edufamcs-demo/handbook/ai-tools/postanovka-zadach-agentu/"><span><svg class="ico sm" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-arrow-left"/></svg>Назад</span>Как ставить задачу агенту</a>
+        <a href="/edufamcs-demo/handbook/ai-tools/mcp/"><span>Дальше<svg class="ico sm" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-arrow"/></svg></span>MCP: подключаем инструменты и данные</a>
+      </nav>
+      
+    </article>
+
+    <aside class="hb-toc" aria-label="На этой странице">
+      <a class="l2" href="#что-внутри-скилла">Что внутри скилла</a><a class="l2" href="#прогрессивная-загрузка-и-контекст">Прогрессивная загрузка и контекст</a><a class="l2" href="#где-лежат-скиллы">Где лежат скиллы</a><a class="l2" href="#как-скилл-срабатывает">Как скилл срабатывает</a><a class="l2" href="#пример-проверка-ноутбука-перед-долгим-прогоном">Пример: проверка ноутбука перед долгим прогоном</a><a class="l2" href="#скиллы-claudemd-команды-mcp">Скиллы, CLAUDE.md, команды, MCP</a><a class="l2" href="#как-проверить-и-улучшить-скилл">Как проверить и улучшить скилл</a><a class="l2" href="#безопасность">Безопасность</a><a class="l2" href="#ловушки">Ловушки</a><a class="l2" href="#проверь-себя">Проверь себя</a><a class="l2" href="#что-почитать">Что почитать</a>
+    </aside>
+  </div>
+</div>
+
+
+</main>
+
+<footer class="ftr" data-theme="dark">
+  <svg class="sym fern" viewBox="0 0 40.5 65.02" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#fern"/></svg>
+  <div class="container">
+    <div class="ftr-row">
+      <a href="/edufamcs-demo/" aria-label="EDU FAMCS — главная"><img src="/edufamcs-demo/static/brand/logo/logo-edu-dark.svg" alt="EDU FAMCS" width="196" height="40"></a>
+      <ul class="ftr-links">
+        <li><a href="/edufamcs-demo/#courses">Курсы</a></li>
+        <li><a href="/edufamcs-demo/ml/">Машинное обучение</a></li>
+        <li><a href="/edufamcs-demo/handbook/">Хендбук</a></li>
+        <li><a href="/edufamcs-demo/news/">Новости</a></li>
+        <li><a href="/edufamcs-demo/people/">Авторы</a></li>
+        <li><a href="/edufamcs-demo/about/">О&nbsp;нас</a></li>
+        <li><a href="/edufamcs-demo/propose/">Предложить или исправить</a></li>
+        <li><a href="/edufamcs-demo/privacy/">Конфиденциальность</a></li>
+      </ul>
+    </div>
+    <div class="ftr-big" aria-hidden="true">EDU<span class="d">·</span>FAMCS</div>
+    <p class="ftr-copy">© 2026 EDU FAMCS · Минск</p>
+  </div>
+</footer>
+
+<div class="toasts-region" aria-live="polite" id="toasts">
+
+</div>
+
+</body>
+</html>

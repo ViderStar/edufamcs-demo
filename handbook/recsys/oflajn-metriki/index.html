@@ -27,7 +27,7 @@
 <script src="/edufamcs-demo/static/js/site.js" defer></script>
 <script src="/edufamcs-demo/static/handbook/handbook.js" defer></script>
 </head>
-<body class="" hx-headers='{"X-CSRFToken": "ohz4Cqt313MYes7EDgy2zPlGgUIlhemSanArwdLKcg2cT13UQFr7Qht1MhkAmZ7R"}'>
+<body class="" hx-headers='{"X-CSRFToken": "0twnzJovgZeGq16BaaHTKPi7yli6hNuZCGlkPLXmhMsfBkl39DVQsIa50up41xtG"}'>
 <a class="skip" href="#main">К содержанию</a>
 <div class="demo-bar" role="note">Демо-версия для отзывов: вход, запись на курсы и формы здесь не работают.</div>
 
@@ -60,6 +60,7 @@
 
 
 <div class="container hb-page s-recsys">
+  <div class="hb-readbar" aria-hidden="true"><i></i></div>
   <div class="hb">
     <aside class="hb-nav" aria-label="Статьи раздела">
       
@@ -84,9 +85,9 @@
       <div class="hb-meta">
         
         
-        <span><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-clock"/></svg>11&nbsp;мин</span>
+        <span><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-clock"/></svg>13&nbsp;мин</span>
         <span class="hb-authors"><span class="avatar sm" title="Артем Лебедевич">АЛ</span>Артем Лебедевич</span>
-        <span><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-edit"/></svg>9 ноября 2026</span>
+        <span><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-edit"/></svg>10 ноября 2026</span>
         
         
       </div>
@@ -94,7 +95,7 @@
       
       <details class="hb-mtoc">
         <summary><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-list"/></svg>Содержание<svg class="ico sm" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-chev-down"/></svg></summary>
-        <a class="l2" href="#precisionk-и-recallk">Precision@k и Recall@k</a><a class="l2" href="#mapk">MAP@k</a><a class="l2" href="#ndcgk">NDCG@k</a><a class="l2" href="#hitratek">HitRate@k</a><a class="l2" href="#не-только-точность-покрытие-и-новизна">Не только точность: покрытие и новизна</a><a class="l2" href="#ловушки-оценки">Ловушки оценки</a><a class="l3" href="#сэмплированные-метрики">Сэмплированные метрики</a><a class="l3" href="#утечки-данных">Утечки данных</a><a class="l3" href="#воспроизводимость-сравнений">Воспроизводимость сравнений</a><a class="l2" href="#валидация-по-времени">Валидация по времени</a><a class="l2" href="#как-читать-результаты">Как читать результаты</a><a class="l2" href="#что-почитать">Что почитать</a>
+        <a class="l2" href="#precisionk-и-recallk">Precision@k и Recall@k</a><a class="l2" href="#mapk">MAP@k</a><a class="l2" href="#ndcgk">NDCG@k</a><a class="l2" href="#hitratek">HitRate@k</a><a class="l2" href="#не-только-точность-покрытие-и-новизна">Не только точность: покрытие и новизна</a><a class="l2" href="#ловушки-оценки">Ловушки оценки</a><a class="l3" href="#сэмплированные-метрики">Сэмплированные метрики</a><a class="l3" href="#утечки-данных">Утечки данных</a><a class="l3" href="#воспроизводимость-сравнений">Воспроизводимость сравнений</a><a class="l3" href="#что-спрашивают-на-собеседовании">Что спрашивают на собеседовании</a><a class="l2" href="#валидация-по-времени">Валидация по времени</a><a class="l2" href="#как-читать-результаты">Как читать результаты</a><a class="l2" href="#проверь-себя">Проверь себя</a><a class="l2" href="#что-почитать">Что почитать</a>
       </details>
       
 
@@ -184,6 +185,12 @@
 <p>Ji et al. (2023, <em>A Critical Study on Data Leakage in Recommender System Offline Evaluation</em>) показали: случайный сплит и leave-one-out по пользователю допускают <strong>утечку из будущего</strong> — модель обучается на событиях, которые произошли после тестовых, и видит будущую популярность и будущие связи между объектами. Утечка меняет не только величину метрики, но и <strong>порядок</strong> моделей. Рецепт: глобальный временной сплит (один момент <span class="tex">T</span> для всех, как в разделе ниже), а при leave-one-out — следить, чтобы в обучении не оказалось событий позже тестового ни у кого другого. Отдельная утечка — признаки, посчитанные по всему периоду (популярность, средний рейтинг).</p>
 <h3 id="воспроизводимость-сравнений">Воспроизводимость сравнений</h3>
 <p>Ferrari Dacrema, Cremonesi, Jannach (2019, <em>Are We Really Making Much Progress?</em>) взяли 18 нейросетевых методов с топ-конференций. С разумными усилиями воспроизвести удалось 7. Шесть из них часто проигрывали простым, хорошо настроенным эвристикам: соседским и графовым методам. Седьмой (Mult-VAE) бейзлайны обгонял, но не стабильно обгонял настроенную линейную модель SLIM. Урок для практики: бейзлайны нужно <strong>настраивать с тем же бюджетом</strong>, что и новую модель; фиксировать сплит и seed; сообщать доверительные интервалы (бутстрап по пользователям), а не одну цифру.</p>
+<h3 id="что-спрашивают-на-собеседовании">Что спрашивают на собеседовании</h3>
+<ul>
+<li>На собеседовании: чем NDCG отличается от MAP и почему Precision@k и Recall@k не видят порядок внутри топа?</li>
+<li>На собеседовании: чем плохи сэмплированные метрики и почему случайный сплит завышает качество?</li>
+<li>На собеседовании: как убедиться, что прирост офлайн-метрики не шум (бутстрап по пользователям, скользящие окна)?</li>
+</ul>
 <h2 id="валидация-по-времени">Валидация по времени</h2>
 <p>Самая частая ошибка в рекомендациях — <strong>случайный сплит</strong> взаимодействий на train и test. Он подглядывает в будущее: модель учится на событиях, произошедших позже тестовых, и видит популярность объектов, которой на момент «прогноза» ещё не было. Метрики выходят завышенными, иногда в разы, а сравнение моделей — неверным.</p>
 <p>Правильная схема повторяет то, как модель будет работать в проде:</p>
@@ -208,6 +215,22 @@ test <span class="tok-p">=</span> events<span class="tok-p">[</span><span class=
 <li>Офлайн-метрика — фильтр перед A/B-тестом, а не замена ему. Онлайн-метрики, дизайн A/B и ловушки онлайн-оценки — в статье <a href="/edufamcs-demo/handbook/recsys/prodakshen-i-ab-testy/" rel="noopener noreferrer nofollow">Продакшен и A/B-тесты</a>.</li>
 <li>Метрики из этой статьи — это точка отсчёта для сравнения методов дальше: <a href="/edufamcs-demo/handbook/recsys/kollaborativnaya-filtraciya-po-sosedyam/" rel="noopener noreferrer nofollow">соседей</a>, <a href="/edufamcs-demo/handbook/recsys/matrichnye-razlozheniya-als/" rel="noopener noreferrer nofollow">ALS</a>, <a href="/edufamcs-demo/handbook/recsys/neyavnyj-fidbek-bpr/" rel="noopener noreferrer nofollow">BPR</a>.</li>
 </ul>
+<h2 id="проверь-себя">Проверь себя</h2>
+<details class="callout md details"><summary>Почему при попаданиях на позициях 4 и 5 вместо 1 и 4 Precision@5 и Recall@5 не меняются, а AP падает?</summary>
+<p>Precision и Recall считают только число попаданий в топе, а AP усредняет precision на позициях попаданий, поэтому смещение вниз его уменьшает. В примере из статьи AP падает с <span class="tex">0{,}5</span> до <span class="tex">\approx 0{,}22</span>.</p>
+</details>
+<details class="callout md details"><summary>Зачем в NDCG нормировка на IDCG?</summary>
+<p>Без неё значение зависит от числа и градаций релевантных объектов пользователя, и усреднять по пользователям нельзя. Деление на DCG идеальной выдачи приводит метрику к отрезку <span class="tex">[0,1]</span> и делает её сравнимой между пользователями.</p>
+</details>
+<details class="callout md details"><summary>Почему HitRate@10 по 100 случайным негативам не равен HitRate@10 по каталогу?</summary>
+<p>Попадание засчитывается, когда объект выше примерно 90% случайных негативов, то есть он в верхних ~10% каталога, а не в топ-10. Такая метрика ближе к AUC и может поменять порядок моделей.</p>
+</details>
+<details class="callout md details"><summary>Что не так со случайным сплитом событий на train и test?</summary>
+<p>Модель обучается на событиях, которые произошли позже тестовых, и видит будущую популярность и связи между объектами. Метрики завышаются, а порядок моделей может измениться; нужен глобальный временной сплит.</p>
+</details>
+<details class="callout md details"><summary>Модель подняла NDCG, но покрытие каталога упало вдвое. Как это читать?</summary>
+<p>Скорее всего, модель сместилась к популярному: точность растёт, а выдача сужается. Метрики точности смотрят вместе с покрытием и новизной, а решение принимают по A/B-тесту.</p>
+</details>
 <h2 id="что-почитать">Что почитать</h2>
 <ul>
 <li>Krichene W., Rendle S. <em>On Sampled Metrics for Item Recommendation</em>, KDD 2020 — https://doi.org/10.1145/3394486.3403226</li>
@@ -220,6 +243,8 @@ test <span class="tok-p">=</span> events<span class="tok-p">[</span><span class=
       
 
       
+
+      
       <nav class="pager" aria-label="Соседние статьи">
         <a href="/edufamcs-demo/handbook/recsys/zadacha-i-dannye/"><span><svg class="ico sm" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-arrow-left"/></svg>Назад</span>Задача рекомендаций и данные</a>
         <a href="/edufamcs-demo/handbook/recsys/nepersonalnye-i-kontentnye/"><span>Дальше<svg class="ico sm" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-arrow"/></svg></span>Неперсонализированные и контентные рекомендации</a>
@@ -228,7 +253,7 @@ test <span class="tok-p">=</span> events<span class="tok-p">[</span><span class=
     </article>
 
     <aside class="hb-toc" aria-label="На этой странице">
-      <a class="l2" href="#precisionk-и-recallk">Precision@k и Recall@k</a><a class="l2" href="#mapk">MAP@k</a><a class="l2" href="#ndcgk">NDCG@k</a><a class="l2" href="#hitratek">HitRate@k</a><a class="l2" href="#не-только-точность-покрытие-и-новизна">Не только точность: покрытие и новизна</a><a class="l2" href="#ловушки-оценки">Ловушки оценки</a><a class="l3" href="#сэмплированные-метрики">Сэмплированные метрики</a><a class="l3" href="#утечки-данных">Утечки данных</a><a class="l3" href="#воспроизводимость-сравнений">Воспроизводимость сравнений</a><a class="l2" href="#валидация-по-времени">Валидация по времени</a><a class="l2" href="#как-читать-результаты">Как читать результаты</a><a class="l2" href="#что-почитать">Что почитать</a>
+      <a class="l2" href="#precisionk-и-recallk">Precision@k и Recall@k</a><a class="l2" href="#mapk">MAP@k</a><a class="l2" href="#ndcgk">NDCG@k</a><a class="l2" href="#hitratek">HitRate@k</a><a class="l2" href="#не-только-точность-покрытие-и-новизна">Не только точность: покрытие и новизна</a><a class="l2" href="#ловушки-оценки">Ловушки оценки</a><a class="l3" href="#сэмплированные-метрики">Сэмплированные метрики</a><a class="l3" href="#утечки-данных">Утечки данных</a><a class="l3" href="#воспроизводимость-сравнений">Воспроизводимость сравнений</a><a class="l3" href="#что-спрашивают-на-собеседовании">Что спрашивают на собеседовании</a><a class="l2" href="#валидация-по-времени">Валидация по времени</a><a class="l2" href="#как-читать-результаты">Как читать результаты</a><a class="l2" href="#проверь-себя">Проверь себя</a><a class="l2" href="#что-почитать">Что почитать</a>
     </aside>
   </div>
 </div>

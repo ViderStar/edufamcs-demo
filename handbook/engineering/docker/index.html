@@ -1,0 +1,284 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Docker: образы, контейнеры, Dockerfile для Python · EDU FAMCS</title>
+<meta name="description" content="Docker: образы, контейнеры, Dockerfile для Python — Инженерия: от ноутбука до сервиса. Хендбук ML-курса ФПМИ.">
+<meta name="theme-color" content="#060A16">
+<meta name="robots" content="noindex, nofollow">
+<meta name="htmx-config" content='{"allowEval":false,"includeIndicatorStyles":false,"historyCacheSize":0,"selfRequestsOnly":true}'>
+<meta name="katex-js" content="/edufamcs-demo/static/vendor/katex/katex.min.js">
+<meta name="katex-css" content="/edufamcs-demo/static/vendor/katex/katex.min.css">
+<link rel="icon" href="/edufamcs-demo/static/brand/logo/favicon-16.svg" type="image/svg+xml" sizes="16x16">
+<link rel="icon" href="/edufamcs-demo/static/brand/logo/favicon.svg" type="image/svg+xml" sizes="any">
+<link rel="preload" href="/edufamcs-demo/static/brand/fonts/manrope-cyrillic-400.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/edufamcs-demo/static/brand/fonts/unbounded-cyrillic-800.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="/edufamcs-demo/static/brand/fonts.css">
+<link rel="stylesheet" href="/edufamcs-demo/static/brand/tokens.css">
+<link rel="stylesheet" href="/edufamcs-demo/static/brand/components.css">
+<link rel="stylesheet" href="/edufamcs-demo/static/css/site.css">
+<link rel="stylesheet" href="/edufamcs-demo/static/css/hub.css">
+<link rel="stylesheet" href="/edufamcs-demo/static/css/about.css">
+<link rel="stylesheet" href="/edufamcs-demo/static/handbook/handbook.css">
+<script src="/edufamcs-demo/static/js/theme.js"></script>
+<script src="/edufamcs-demo/static/vendor/htmx/htmx.min.js" defer></script>
+<script src="/edufamcs-demo/static/vendor/alpine/alpine-csp.min.js" defer></script>
+<script src="/edufamcs-demo/static/js/site.js" defer></script>
+<script src="/edufamcs-demo/static/handbook/handbook.js" defer></script>
+</head>
+<body class="" hx-headers='{"X-CSRFToken": "bCocFTUD3ehQgYD9nJJd0RN5Ebho5m9WNPd9VVtu41vprhSBmcXaIKF36komP68D"}'>
+<a class="skip" href="#main">К содержанию</a>
+<div class="demo-bar" role="note">Демо-версия для отзывов: вход, запись на курсы и формы здесь не работают.</div>
+
+<header class="hdr">
+  <div class="container">
+    <a class="brand" href="/edufamcs-demo/" aria-label="EDU FAMCS — главная">
+      <span class="full"><img class="only-light" src="/edufamcs-demo/static/brand/logo/logo-edu-light.svg" alt="EDU FAMCS" width="196" height="40"><img class="only-dark" src="/edufamcs-demo/static/brand/logo/logo-edu-dark.svg" alt="EDU FAMCS" width="196" height="40"></span>
+      <span class="short"><img class="only-light" src="/edufamcs-demo/static/brand/logo/logo-edu-light.svg" alt="EDU FAMCS" height="30"><img class="only-dark" src="/edufamcs-demo/static/brand/logo/logo-edu-dark.svg" alt="EDU FAMCS" height="30"></span>
+    </a>
+    <nav class="nav" id="main-nav" aria-label="Основная навигация">
+      <a href="/edufamcs-demo/#courses">Курсы</a>
+      <a href="/edufamcs-demo/ml/" >Машинное обучение</a>
+      
+      <a href="/edufamcs-demo/handbook/" aria-current="page">Хендбук</a>
+      <a href="/edufamcs-demo/news/" >Новости</a>
+      <a href="/edufamcs-demo/people/" >Авторы</a>
+      <a href="/edufamcs-demo/about/" >О&nbsp;нас</a>
+    </nav>
+    <div class="hdr-actions">
+      
+      <a class="btn btn-outline btn-login" href="/edufamcs-demo/accounts/login/?next=/handbook/engineering/docker/">Войти</a>
+      
+      <button class="icon-btn menu-btn" type="button" aria-label="Меню" aria-expanded="false" aria-controls="main-nav"><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-menu"/></svg></button>
+    </div>
+  </div>
+</header>
+
+<main id="main">
+
+
+
+<div class="container hb-page hb-tone">
+  <div class="hb-readbar" aria-hidden="true"><i></i></div>
+  <div class="hb">
+    <aside class="hb-nav" aria-label="Статьи раздела">
+      
+<form class="hb-search" action="/edufamcs-demo/handbook/search/" method="get" role="search">
+  <svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-search"/></svg>
+  <input class="input" type="search" name="q" value="" placeholder="Поиск по хендбуку" aria-label="Поиск по хендбуку" autocomplete="off" maxlength="120"
+    hx-get="/edufamcs-demo/handbook/search/" hx-trigger="input changed delay:250ms, search" hx-target="#hb-nav-results" hx-sync="this:replace">
+</form>
+
+      <div id="hb-nav-results" class="hb-nav-results" aria-live="polite"></div>
+      <a class="grp" href="/edufamcs-demo/handbook/engineering/">Запуск</a>
+      
+      <a class="cur" href="/edufamcs-demo/handbook/engineering/docker/" aria-current="page">Docker: образы, контейнеры, Dockerfile для Python</a>
+      
+      <a class="" href="/edufamcs-demo/handbook/engineering/docker-compose/">Docker Compose: сервис, база и секреты</a>
+      
+      <a class="" href="/edufamcs-demo/handbook/engineering/gde-zapuskat-proekt/">Где запускать свой проект: ноутбук дома, VPS, облака</a>
+      
+      <a class="" href="/edufamcs-demo/handbook/engineering/ci-github-actions/">CI: тесты и линтер на каждый коммит</a>
+      
+    </aside>
+
+    <article class="hb-main">
+      <nav class="crumbs" aria-label="Навигация"><a href="/edufamcs-demo/handbook/">Хендбук</a><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-chev"/></svg><a href="/edufamcs-demo/handbook/engineering/">Инженерия: от ноутбука до сервиса</a></nav>
+      <h1 class="h1">Docker: образы, контейнеры, Dockerfile для Python</h1>
+      <div class="hb-meta">
+        
+        
+        <span><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-clock"/></svg>10&nbsp;мин</span>
+        <span class="hb-authors"><span class="avatar sm" title="Артем Лебедевич">АЛ</span>Артем Лебедевич</span>
+        <span><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-edit"/></svg>10 ноября 2026</span>
+        
+        
+      </div>
+
+      
+      <details class="hb-mtoc">
+        <summary><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-list"/></svg>Содержание<svg class="ico sm" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-chev-down"/></svg></summary>
+        <a class="l2" href="#образ-контейнер-реестр">Образ, контейнер, реестр</a><a class="l2" href="#слои-и-кэш-сборки">Слои и кэш сборки</a><a class="l2" href="#dockerfile-для-сервиса">Dockerfile для сервиса</a><a class="l2" href="#команды">Команды</a><a class="l2" href="#размер-образа">Размер образа</a><a class="l2" href="#gpu">GPU</a><a class="l2" href="#контейнер-сразу-завершается-разбор">Контейнер сразу завершается: разбор</a><a class="l2" href="#ловушки">Ловушки</a><a class="l2" href="#проверь-себя">Проверь себя</a><a class="l2" href="#что-почитать">Что почитать</a>
+      </details>
+      
+
+      <div class="prose"><p>«У меня на ноутбуке работает» — главная причина, по которой модель не доезжает до продакшена: другая версия Python, нет системной библиотеки, лежит не тот файл. Docker упаковывает приложение вместе с окружением в образ, который запускается одинаково на ноутбуке, в CI и на сервере. Мы упакуем сервис из <a href="/edufamcs-demo/handbook/engineering/http-i-fastapi/" rel="noopener noreferrer nofollow">предыдущих статей</a> в образ и запустим его.</p>
+<h2 id="образ-контейнер-реестр">Образ, контейнер, реестр</h2>
+<ul>
+<li><strong>Образ (image)</strong> — неизменяемый набор файловых слоёв плюс метаданные запуска: «шаблон». Собирается из <code>Dockerfile</code>.</li>
+<li><strong>Контейнер</strong> — запущенный экземпляр образа: обычный процесс Linux, изолированный от остальных (отдельные файловая система, сеть, дерево процессов). Не виртуальная машина: ядро общее, поэтому старт за доли секунды и нет накладных расходов гипервизора.</li>
+<li><strong>Реестр (registry)</strong> — хранилище образов: Docker Hub, GitHub Container Registry (<code>ghcr.io</code>), облачные реестры. <code>docker pull</code> скачивает, <code>docker push</code> загружает; имя вида <code>ghcr.io/org/churn:1.0.3</code>, где <code>1.0.3</code> — тег.</li>
+</ul>
+<p>Контейнер эфемерен: всё, что он записал в свою файловую систему, пропадает вместе с ним. Данные держат в <strong>томах</strong> (volume), настройки передают через переменные окружения.</p>
+<h2 id="слои-и-кэш-сборки">Слои и кэш сборки</h2>
+<p>Каждая инструкция <code>Dockerfile</code> создаёт слой. Docker переиспользует слой из кэша, если сама инструкция и все файлы, которые она копирует, не изменились, а после первого изменённого слоя пересобирает всё следующее. Поэтому <strong>редко меняющееся кладут выше, часто меняющееся — ниже</strong>: сначала копируем <code>pyproject.toml</code> и <code>uv.lock</code> и ставим зависимости (минуты), и только потом <code>src/</code> (секунды). Правите код, а слой с зависимостями берётся из кэша. Если написать <code>COPY . .</code> первой строкой, любая правка файла сбросит установку зависимостей.</p>
+<h2 id="dockerfile-для-сервиса">Dockerfile для сервиса</h2>
+<p>Используем <a href="/edufamcs-demo/handbook/python/okruzhenie-uv/" rel="noopener noreferrer nofollow">uv</a>: многоэтапная сборка (зависимости ставятся в одном образе, в итоговый копируется готовое окружение), тонкая база <code>python:3.13-slim</code>, непривилегированный пользователь, проверка здоровья.</p>
+<div class="code"><div class="code-head"><span class="lang">dockerfile</span></div><pre><code><span class="tok-c"># syntax=docker/dockerfile:1</span>
+<span class="tok-k">FROM</span> <span class="tok-s">python:3.13-slim</span> <span class="tok-k">AS</span> <span class="tok-s">builder</span>
+<span class="tok-k">COPY</span> --from<span class="tok-p">=</span>ghcr.io/astral-sh/uv:0.13.7 /uv /usr/local/bin/uv
+<span class="tok-k">ENV</span> UV_COMPILE_BYTECODE<span class="tok-p">=</span><span class="tok-n">1</span> UV_LINK_MODE<span class="tok-p">=</span>copy UV_PYTHON_DOWNLOADS<span class="tok-p">=</span>never
+<span class="tok-k">WORKDIR</span> <span class="tok-s">/app</span>
+
+<span class="tok-c"># 1) зависимости: слой меняется только при изменении pyproject.toml / uv.lock</span>
+<span class="tok-k">COPY</span> pyproject.toml uv.lock ./
+<span class="tok-k">RUN</span> --mount<span class="tok-p">=</span>type<span class="tok-p">=</span>cache,target<span class="tok-p">=</span>/root/.cache/uv <span class="tok-s">\
+</span>    uv sync --locked --no-dev --no-install-project --no-editable
+
+<span class="tok-c"># 2) код проекта: меняется часто, пересобирается быстро</span>
+<span class="tok-k">COPY</span> src ./src
+<span class="tok-k">RUN</span> --mount<span class="tok-p">=</span>type<span class="tok-p">=</span>cache,target<span class="tok-p">=</span>/root/.cache/uv <span class="tok-s">\
+</span>    uv sync --locked --no-dev --no-editable
+
+<span class="tok-k">FROM</span> <span class="tok-s">python:3.13-slim</span> <span class="tok-k">AS</span> <span class="tok-s">runtime</span>
+<span class="tok-k">RUN</span> useradd --system --uid <span class="tok-n">10001</span> --no-create-home app
+<span class="tok-k">WORKDIR</span> <span class="tok-s">/app</span>
+<span class="tok-k">COPY</span> --from<span class="tok-p">=</span>builder /app/.venv /app/.venv
+<span class="tok-k">COPY</span> artifacts ./artifacts
+<span class="tok-k">ENV</span> PATH<span class="tok-p">=</span><span class="tok-s">"</span><span class="tok-s">/app/.venv/bin:</span>$PATH<span class="tok-s">"</span> PYTHONUNBUFFERED<span class="tok-p">=</span><span class="tok-n">1</span> CHURN_MODEL_PATH<span class="tok-p">=</span>/app/artifacts/model.joblib
+<span class="tok-k">USER</span> <span class="tok-s">app</span>
+<span class="tok-k">EXPOSE</span> <span class="tok-s">8000</span>
+<span class="tok-k">HEALTHCHECK</span> --interval<span class="tok-p">=</span>15s --timeout<span class="tok-p">=</span>3s --start-period<span class="tok-p">=</span>20s --retries<span class="tok-p">=</span><span class="tok-n">3</span> <span class="tok-s">\
+</span>    CMD <span class="tok-p">[</span><span class="tok-s">"python"</span>, <span class="tok-s">"-c"</span>, <span class="tok-s">"import urllib.request as u; u.urlopen('http://127.0.0.1:8000/healthz', timeout=2)"</span><span class="tok-p">]</span>
+<span class="tok-k">CMD</span> <span class="tok-p">[</span><span class="tok-s">"uvicorn"</span><span class="tok-p">,</span> <span class="tok-s">"churn.api:app"</span><span class="tok-p">,</span> <span class="tok-s">"--host"</span><span class="tok-p">,</span> <span class="tok-s">"0.0.0.0"</span><span class="tok-p">,</span> <span class="tok-s">"--port"</span><span class="tok-p">,</span> <span class="tok-s">"8000"</span><span class="tok-p">]</span>
+</code></pre></div>
+<p>Что здесь важно:</p>
+<ul>
+<li><code>--locked</code> ставит ровно версии из <code>uv.lock</code> и падает, если lock не соответствует <code>pyproject.toml</code> (<code>--frozen</code> берёт lock как есть и ничего не проверяет); <code>--no-dev</code> оставляет тесты и линтер вне образа; <code>--no-editable</code> кладёт пакет в окружение, а не ссылкой на <code>/app/src</code> (в итоговом образе исходников нет).</li>
+<li>Оба этапа берут один и тот же базовый образ, поэтому <code>.venv</code> (там симлинк на <code>python</code>) работает после копирования.</li>
+<li>Многоэтапность убирает из итогового образа менеджер пакетов и кэш; <code>slim</code> не содержит <code>curl</code>, поэтому проверка здоровья написана на самом Python.</li>
+<li><code>USER app</code>: процесс не root. Если в сервисе найдут уязвимость, у атакующего нет прав на изменение системы контейнера.</li>
+<li>Модель из <code>artifacts/</code> в примере запечена в образ: проще для старта, но образ и модель тогда версионируются вместе. Для больших моделей их скачивают при старте из хранилища либо монтируют как том.</li>
+<li>Слой, однажды получивший секрет, хранит его навсегда: <code>COPY .env</code> или <code>ENV PASSWORD=...</code> оставят значение в истории образа, даже если следующим шагом файл удалён. Секреты передают при запуске (<code>-e</code>, <code>--env-file</code>, Compose secrets), а не при сборке.</li>
+</ul>
+<p>И <code>.dockerignore</code>: контекст сборки отправляется демону целиком, и без него в образ уедут <code>.git</code>, <code>.venv</code>, <code>.env</code> и данные.</p>
+<div class="code"><div class="code-head"><span class="lang">text</span></div><pre><code>.git
+.venv
+.env
+.env.*
+__pycache__
+*.pyc
+.pytest_cache
+.ruff_cache
+tests
+notebooks
+data
+</code></pre></div>
+<div class="callout md warn"><p class="callout-title">Ловушка: образ собран на Mac, запускается на сервере</p>
+<p>На Apple Silicon <code>docker build</code> по умолчанию собирает <code>linux/arm64</code>, а сервер обычно <code>amd64</code>: получите <code>exec format error</code>. Собирайте явно: <code>docker build --platform linux/amd64 ...</code> или используйте <code>buildx</code> для обеих платформ.</p>
+</div>
+<h2 id="команды">Команды</h2>
+<div class="code"><div class="code-head"><span class="lang">bash</span></div><pre><code>docker build -t churn:dev .                       <span class="tok-c"># собрать образ из Dockerfile в текущей папке
+</span>docker run -d --name churn -p <span class="tok-n">127</span>.0.0.1:8765:8000 <span class="tok-s">\
+</span>  -e CHURN_API_TOKEN churn:dev                <span class="tok-c"># запустить в фоне
+</span>docker ps                                          <span class="tok-c"># работающие контейнеры (-a: все)
+</span>docker logs -f churn                               <span class="tok-c"># логи (stdout/stderr процесса)
+</span>docker <span class="tok-f">exec</span> -it churn sh                           <span class="tok-c"># shell внутри работающего контейнера
+</span>docker stop churn <span class="tok-p">&amp;&amp;</span> docker rm churn               <span class="tok-c"># остановить и удалить
+</span>docker images                                      <span class="tok-c"># образы на диске
+</span></code></pre></div>
+<ul>
+<li><strong>Порты</strong>: <code>-p host:container</code> пробрасывает порт. Приложение в контейнере должно слушать <code>0.0.0.0</code>, а не <code>127.0.0.1</code> (иначе снаружи недоступно); а вот на хосте публикуйте на <code>127.0.0.1:...</code>, если сервис не должен быть виден из сети (подробнее в статье про <a href="/edufamcs-demo/handbook/engineering/docker-compose/" rel="noopener noreferrer nofollow">Compose</a>).</li>
+<li><strong>Том</strong>: <code>-v pgdata:/var/lib/postgresql/data</code> (именованный том, данные переживают контейнер) или <code>-v $(pwd)/data:/data:ro</code> (папка хоста, <code>ro</code> — только чтение).</li>
+<li><strong>Переменные</strong>: <code>-e NAME=value</code>, <code>-e NAME</code> (взять значение из текущего окружения, не печатая его) или <code>--env-file file</code>. Вместо <code>source .env</code> в shell используйте именно <code>--env-file</code>.</li>
+<li><strong>Логи</strong>: пишите в stdout/stderr, а не в файл внутри контейнера: <code>docker logs</code> и любые сборщики логов читают поток (см. <a href="/edufamcs-demo/handbook/engineering/logi-i-metriki/" rel="noopener noreferrer nofollow">логи и метрики</a>).</li>
+</ul>
+<h2 id="размер-образа">Размер образа</h2>
+<p>Типичный образ с numpy, pandas и scikit-learn весит сотни мегабайт (одно окружение с этими пакетами у меня заняло около 200 МБ), с PyTorch — гигабайты. Что помогает: <code>slim</code>-база, многоэтапность, <code>--no-dev</code>, не ставить лишнее (например, CPU-сборка PyTorch для сервиса без GPU), не копировать данные и ноутбуки (<code>.dockerignore</code>). Альпийские образы (<code>alpine</code>) для научного Python обычно хуже: колёса собраны под glibc, и пакеты приходится компилировать.</p>
+<h2 id="gpu">GPU</h2>
+<p>Для GPU нужен драйвер NVIDIA на хосте и NVIDIA Container Toolkit; контейнер запускают с <code>docker run --gpus all ...</code>, а внутри образа должна быть сборка фреймворка с CUDA (например, база <code>nvidia/cuda</code> или образ PyTorch). Драйвер в образ не кладут: он берётся с хоста. Проверка: <code>docker run --rm --gpus all &lt;образ&gt; nvidia-smi</code>. На Mac Docker GPU не видит, GPU-образы проверяют на Linux-машине.</p>
+<h2 id="контейнер-сразу-завершается-разбор">Контейнер сразу завершается: разбор</h2>
+<p>Контейнер живёт, пока жив его главный процесс. Диагностика по порядку:</p>
+<ol>
+<li><code>docker ps -a</code>: статус <code>Exited (N)</code>; код <code>1</code>, ошибка приложения, <code>127</code> команда не найдена, <code>137</code> убит (часто нехватка памяти, OOM), <code>139</code> segfault.</li>
+<li><code>docker logs &lt;name&gt;</code>: почти всегда причина в последних строках (нет модели, нет переменной окружения, ошибка импорта).</li>
+<li><code>docker run --rm -it --entrypoint sh churn:dev</code>: зайти внутрь и запустить команду руками.</li>
+<li><code>docker inspect &lt;name&gt;</code>: проверить <code>State.OOMKilled</code>, переменные окружения, точку входа.</li>
+<li>Процесс ушёл в фон (демонизировался) или команда одноразовая (<code>CMD ["python", "train.py"]</code>, отработал и вышел): для сервиса процесс должен работать на переднем плане.</li>
+</ol>
+<h2 id="ловушки">Ловушки</h2>
+<ul>
+<li><code>COPY . .</code> до установки зависимостей: кэш не работает, сборка по пять минут.</li>
+<li>Работа от root; тег <code>latest</code> в продакшене (нельзя понять, что запущено, и откатиться): используйте версию или хеш коммита.</li>
+<li>Секрет в <code>ENV</code>/<code>ARG</code>/скопированном <code>.env</code>: остаётся в слоях и в <code>docker history</code>.</li>
+<li>Данные базы в слое контейнера без тома: <code>docker rm</code> их стирает.</li>
+<li>Приложение слушает <code>127.0.0.1</code> внутри контейнера и «не открывается» снаружи.</li>
+<li>Забытый <code>.dockerignore</code>: гигабайтный контекст сборки и <code>.env</code> в образе.</li>
+<li>На собеседовании спрашивают: образ против контейнера; чем контейнер отличается от VM; как устроен кэш слоёв и как ускорить сборку; зачем многоэтапная сборка; как передать секрет; почему <code>latest</code> плох; как диагностировать упавший контейнер.</li>
+</ul>
+<h2 id="проверь-себя">Проверь себя</h2>
+<details class="callout md details"><summary>Почему `COPY pyproject.toml uv.lock` идёт раньше `COPY src`?</summary>
+<p>Зависимости меняются редко, код часто. Слой установки зависимостей остаётся в кэше, пока меняются только исходники, и сборка занимает секунды.</p>
+</details>
+<details class="callout md details"><summary>Чем контейнер отличается от виртуальной машины?</summary>
+<p>Контейнер — изолированный процесс, использующий ядро хоста; VM запускает собственное ядро поверх гипервизора. Контейнер легче и быстрее стартует, но изоляция слабее.</p>
+</details>
+<details class="callout md details"><summary>Секрет был в `ENV` и удалён следующей инструкцией. Он безопасен?</summary>
+<p>Нет: слои неизменяемы, значение остаётся в истории образа (<code>docker history</code>). Секрет нужно перевыпустить и передавать при запуске, а не при сборке.</p>
+</details>
+<details class="callout md details"><summary>Контейнер выходит с кодом 137. Что это значит?</summary>
+<p>Процесс убит сигналом SIGKILL; чаще всего контейнер вышел за лимит памяти (OOM). Проверяйте <code>docker inspect</code> (<code>OOMKilled</code>), увеличьте лимит или уменьшите потребление (размер модели, число воркеров).</p>
+</details>
+<details class="callout md details"><summary>Приложение в контейнере слушает `127.0.0.1:8000`, порт проброшен, но снаружи не открывается. Почему?</summary>
+<p><code>127.0.0.1</code> внутри контейнера — это его собственный loopback, до него не доходит трафик с хоста. Запускайте сервис на <code>0.0.0.0</code>.</p>
+</details>
+<h2 id="что-почитать">Что почитать</h2>
+<ul>
+<li><a href="https://docs.docker.com/get-started/" rel="noopener noreferrer nofollow">Docker: Get started</a></li>
+<li><a href="https://docs.docker.com/build/building/best-practices/" rel="noopener noreferrer nofollow">Docker: Building best practices</a></li>
+<li><a href="https://docs.docker.com/reference/dockerfile/" rel="noopener noreferrer nofollow">Dockerfile reference</a></li>
+<li><a href="https://docs.docker.com/build/cache/" rel="noopener noreferrer nofollow">Docker: кэш сборки</a></li>
+<li><a href="https://docs.docker.com/build/building/multi-stage/" rel="noopener noreferrer nofollow">Docker: multi-stage builds</a></li>
+<li><a href="https://docs.astral.sh/uv/guides/integration/docker/" rel="noopener noreferrer nofollow">uv: использование в Docker</a></li>
+<li><a href="https://docs.docker.com/engine/containers/resource_constraints/#gpu" rel="noopener noreferrer nofollow">Docker: доступ к GPU</a></li>
+</ul>
+</div>
+      
+
+      
+
+      
+      <nav class="pager" aria-label="Соседние статьи">
+        <a href="/edufamcs-demo/handbook/engineering/sql-i-postgres/"><span><svg class="ico sm" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-arrow-left"/></svg>Назад</span>SQL и Postgres: минимум для ML-инженера</a>
+        <a href="/edufamcs-demo/handbook/engineering/docker-compose/"><span>Дальше<svg class="ico sm" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-arrow"/></svg></span>Docker Compose: сервис, база и секреты</a>
+      </nav>
+      
+    </article>
+
+    <aside class="hb-toc" aria-label="На этой странице">
+      <a class="l2" href="#образ-контейнер-реестр">Образ, контейнер, реестр</a><a class="l2" href="#слои-и-кэш-сборки">Слои и кэш сборки</a><a class="l2" href="#dockerfile-для-сервиса">Dockerfile для сервиса</a><a class="l2" href="#команды">Команды</a><a class="l2" href="#размер-образа">Размер образа</a><a class="l2" href="#gpu">GPU</a><a class="l2" href="#контейнер-сразу-завершается-разбор">Контейнер сразу завершается: разбор</a><a class="l2" href="#ловушки">Ловушки</a><a class="l2" href="#проверь-себя">Проверь себя</a><a class="l2" href="#что-почитать">Что почитать</a>
+    </aside>
+  </div>
+</div>
+
+
+</main>
+
+<footer class="ftr" data-theme="dark">
+  <svg class="sym fern" viewBox="0 0 40.5 65.02" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#fern"/></svg>
+  <div class="container">
+    <div class="ftr-row">
+      <a href="/edufamcs-demo/" aria-label="EDU FAMCS — главная"><img src="/edufamcs-demo/static/brand/logo/logo-edu-dark.svg" alt="EDU FAMCS" width="196" height="40"></a>
+      <ul class="ftr-links">
+        <li><a href="/edufamcs-demo/#courses">Курсы</a></li>
+        <li><a href="/edufamcs-demo/ml/">Машинное обучение</a></li>
+        <li><a href="/edufamcs-demo/handbook/">Хендбук</a></li>
+        <li><a href="/edufamcs-demo/news/">Новости</a></li>
+        <li><a href="/edufamcs-demo/people/">Авторы</a></li>
+        <li><a href="/edufamcs-demo/about/">О&nbsp;нас</a></li>
+        <li><a href="/edufamcs-demo/propose/">Предложить или исправить</a></li>
+        <li><a href="/edufamcs-demo/privacy/">Конфиденциальность</a></li>
+      </ul>
+    </div>
+    <div class="ftr-big" aria-hidden="true">EDU<span class="d">·</span>FAMCS</div>
+    <p class="ftr-copy">© 2026 EDU FAMCS · Минск</p>
+  </div>
+</footer>
+
+<div class="toasts-region" aria-live="polite" id="toasts">
+
+</div>
+
+</body>
+</html>

@@ -1,0 +1,321 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Окружение: uv, виртуальные окружения и структура проекта · EDU FAMCS</title>
+<meta name="description" content="Окружение: uv, виртуальные окружения и структура проекта — Python и исследования. Хендбук ML-курса ФПМИ.">
+<meta name="theme-color" content="#060A16">
+<meta name="robots" content="noindex, nofollow">
+<meta name="htmx-config" content='{"allowEval":false,"includeIndicatorStyles":false,"historyCacheSize":0,"selfRequestsOnly":true}'>
+<meta name="katex-js" content="/edufamcs-demo/static/vendor/katex/katex.min.js">
+<meta name="katex-css" content="/edufamcs-demo/static/vendor/katex/katex.min.css">
+<link rel="icon" href="/edufamcs-demo/static/brand/logo/favicon-16.svg" type="image/svg+xml" sizes="16x16">
+<link rel="icon" href="/edufamcs-demo/static/brand/logo/favicon.svg" type="image/svg+xml" sizes="any">
+<link rel="preload" href="/edufamcs-demo/static/brand/fonts/manrope-cyrillic-400.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/edufamcs-demo/static/brand/fonts/unbounded-cyrillic-800.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="/edufamcs-demo/static/brand/fonts.css">
+<link rel="stylesheet" href="/edufamcs-demo/static/brand/tokens.css">
+<link rel="stylesheet" href="/edufamcs-demo/static/brand/components.css">
+<link rel="stylesheet" href="/edufamcs-demo/static/css/site.css">
+<link rel="stylesheet" href="/edufamcs-demo/static/css/hub.css">
+<link rel="stylesheet" href="/edufamcs-demo/static/css/about.css">
+<link rel="stylesheet" href="/edufamcs-demo/static/handbook/handbook.css">
+<script src="/edufamcs-demo/static/js/theme.js"></script>
+<script src="/edufamcs-demo/static/vendor/htmx/htmx.min.js" defer></script>
+<script src="/edufamcs-demo/static/vendor/alpine/alpine-csp.min.js" defer></script>
+<script src="/edufamcs-demo/static/js/site.js" defer></script>
+<script src="/edufamcs-demo/static/handbook/handbook.js" defer></script>
+</head>
+<body class="" hx-headers='{"X-CSRFToken": "CsDsEXd0rg7NDCba8UPV779OwqaawEkdeFspUZMRs3lmOVqC7n3SP01MYzh8gojU"}'>
+<a class="skip" href="#main">К содержанию</a>
+<div class="demo-bar" role="note">Демо-версия для отзывов: вход, запись на курсы и формы здесь не работают.</div>
+
+<header class="hdr">
+  <div class="container">
+    <a class="brand" href="/edufamcs-demo/" aria-label="EDU FAMCS — главная">
+      <span class="full"><img class="only-light" src="/edufamcs-demo/static/brand/logo/logo-edu-light.svg" alt="EDU FAMCS" width="196" height="40"><img class="only-dark" src="/edufamcs-demo/static/brand/logo/logo-edu-dark.svg" alt="EDU FAMCS" width="196" height="40"></span>
+      <span class="short"><img class="only-light" src="/edufamcs-demo/static/brand/logo/logo-edu-light.svg" alt="EDU FAMCS" height="30"><img class="only-dark" src="/edufamcs-demo/static/brand/logo/logo-edu-dark.svg" alt="EDU FAMCS" height="30"></span>
+    </a>
+    <nav class="nav" id="main-nav" aria-label="Основная навигация">
+      <a href="/edufamcs-demo/#courses">Курсы</a>
+      <a href="/edufamcs-demo/ml/" >Машинное обучение</a>
+      
+      <a href="/edufamcs-demo/handbook/" aria-current="page">Хендбук</a>
+      <a href="/edufamcs-demo/news/" >Новости</a>
+      <a href="/edufamcs-demo/people/" >Авторы</a>
+      <a href="/edufamcs-demo/about/" >О&nbsp;нас</a>
+    </nav>
+    <div class="hdr-actions">
+      
+      <a class="btn btn-outline btn-login" href="/edufamcs-demo/accounts/login/?next=/handbook/python/okruzhenie-uv/">Войти</a>
+      
+      <button class="icon-btn menu-btn" type="button" aria-label="Меню" aria-expanded="false" aria-controls="main-nav"><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-menu"/></svg></button>
+    </div>
+  </div>
+</header>
+
+<main id="main">
+
+
+
+<div class="container hb-page hb-tone">
+  <div class="hb-readbar" aria-hidden="true"><i></i></div>
+  <div class="hb">
+    <aside class="hb-nav" aria-label="Статьи раздела">
+      
+<form class="hb-search" action="/edufamcs-demo/handbook/search/" method="get" role="search">
+  <svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-search"/></svg>
+  <input class="input" type="search" name="q" value="" placeholder="Поиск по хендбуку" aria-label="Поиск по хендбуку" autocomplete="off" maxlength="120"
+    hx-get="/edufamcs-demo/handbook/search/" hx-trigger="input changed delay:250ms, search" hx-target="#hb-nav-results" hx-sync="this:replace">
+</form>
+
+      <div id="hb-nav-results" class="hb-nav-results" aria-live="polite"></div>
+      <a class="grp" href="/edufamcs-demo/handbook/python/">Инструменты</a>
+      
+      <a class="cur" href="/edufamcs-demo/handbook/python/okruzhenie-uv/" aria-current="page">Окружение: uv, виртуальные окружения и структура проекта</a>
+      
+      <a class="" href="/edufamcs-demo/handbook/python/python-dlya-ml/">Python для ML: что нужно на самом деле</a>
+      
+      <a class="" href="/edufamcs-demo/handbook/python/numpy-vektorizaciya/">NumPy: массивы, broadcasting, векторизация</a>
+      
+      <a class="" href="/edufamcs-demo/handbook/python/pandas-i-polars/">Таблицы: pandas и polars</a>
+      
+      <a class="" href="/edufamcs-demo/handbook/python/jupyter-noutbuki/">Jupyter: как работать в ноутбуках и не утонуть</a>
+      
+      <a class="" href="/edufamcs-demo/handbook/python/vizualizaciya/">Графики, которые читаются: matplotlib и seaborn</a>
+      
+    </aside>
+
+    <article class="hb-main">
+      <nav class="crumbs" aria-label="Навигация"><a href="/edufamcs-demo/handbook/">Хендбук</a><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-chev"/></svg><a href="/edufamcs-demo/handbook/python/">Python и исследования</a></nav>
+      <h1 class="h1">Окружение: uv, виртуальные окружения и структура проекта</h1>
+      <div class="hb-meta">
+        
+        
+        <span><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-clock"/></svg>11&nbsp;мин</span>
+        <span class="hb-authors"><span class="avatar sm" title="Артем Лебедевич">АЛ</span>Артем Лебедевич</span>
+        <span><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-edit"/></svg>10 ноября 2026</span>
+        
+        
+      </div>
+
+      
+      <details class="hb-mtoc">
+        <summary><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-list"/></svg>Содержание<svg class="ico sm" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-chev-down"/></svg></summary>
+        <a class="l2" href="#зачем-отдельное-окружение">Зачем отдельное окружение</a><a class="l2" href="#uv-за-пять-минут">uv за пять минут</a><a class="l2" href="#pyprojecttoml-uvlock-и-версия-python">pyproject.toml, uv.lock и версия Python</a><a class="l2" href="#разовые-запуски-uvx-и-uv-tool">Разовые запуски: uvx и uv tool</a><a class="l2" href="#структура-проекта">Структура проекта</a><a class="l2" href="#gpu-зависимости-pytorch">GPU-зависимости: PyTorch</a><a class="l2" href="#uv-или-conda">uv или conda</a><a class="l2" href="#воспроизвести-чужой-репозиторий">Воспроизвести чужой репозиторий</a><a class="l2" href="#ловушки">Ловушки</a><a class="l2" href="#проверь-себя">Проверь себя</a><a class="l2" href="#что-почитать">Что почитать</a>
+      </details>
+      
+
+      <div class="prose"><p>«У меня работает» — самая дорогая фраза в ML: модель обучена на <code>numpy 2.1</code>, а на сервере стоит <code>numpy 1.26</code>, и метрики плавают в третьем знаке. Окружение — это зафиксированный набор версий Python и библиотек, который можно воспроизвести одной командой. В этой главе — <code>uv</code>, современный менеджер проектов и пакетов для Python, и структура репозитория, которую ожидают на работе и на собеседовании.</p>
+<h2 id="зачем-отдельное-окружение">Зачем отдельное окружение</h2>
+<p>Системный интерпретатор общий для всех программ на машине; если поставить в него <code>pip install torch</code>, следующий проект сломает предыдущий. <strong>Виртуальное окружение</strong> — папка <code>.venv</code> с собственным интерпретатором и собственным <code>site-packages</code>; проект видит только то, что поставлено в неё. Второй слой — <strong>фиксация версий</strong>: в <code>pyproject.toml</code> вы пишете <em>требования</em> («<code>numpy&gt;=2.0</code>»), а в lock-файле — <em>точное решение</em> («<code>numpy==2.5.4</code> с такими-то хэшами и всеми транзитивными зависимостями»). Требования читает человек, lock — машина.</p>
+<h2 id="uv-за-пять-минут">uv за пять минут</h2>
+<p><code>uv</code> (Astral, написан на Rust) заменяет связку <code>pip</code> + <code>venv</code> + <code>pip-tools</code> + <code>pyenv</code> + <code>poetry</code>, и работает на порядок быстрее <code>pip</code>. Установка: <a href="https://docs.astral.sh/uv/getting-started/installation/" rel="noopener noreferrer nofollow">инструкция</a> (<code>brew install uv</code>, <code>pipx install uv</code> или установочный скрипт).</p>
+<div class="code"><div class="code-head"><span class="lang">bash</span></div><pre><code>uv init --lib churn        <span class="tok-c"># пакет churn/ с src-раскладкой, pyproject.toml, .python-version
+</span><span class="tok-f">cd</span> churn
+uv add numpy pandas scikit-learn   <span class="tok-c"># в [project.dependencies] + в uv.lock + в .venv
+</span>uv add --dev pytest ruff           <span class="tok-c"># в группу dev (PEP 735 [dependency-groups])
+</span>uv run python -c <span class="tok-s">"import numpy; print(numpy.__version__)"</span>
+uv run pytest
+</code></pre></div>
+<p>Что произошло: <code>uv add</code> дописал зависимость в <code>pyproject.toml</code>, пересчитал <code>uv.lock</code> и синхронизировал <code>.venv</code>. Активировать окружение вручную (<code>source .venv/bin/activate</code>) не нужно: <code>uv run</code> сам убедится, что lock и <code>.venv</code> согласованы, и запустит команду внутри.</p>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>Команда</th>
+<th>Что делает</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>uv init</code></td>
+<td>создаёт проект (<code>--lib</code> — с <code>src/</code>, <code>--package</code> — с CLI-точкой входа)</td>
+</tr>
+<tr>
+<td><code>uv add / uv remove</code></td>
+<td>меняет <code>pyproject.toml</code>, <code>uv.lock</code> и <code>.venv</code></td>
+</tr>
+<tr>
+<td><code>uv lock</code></td>
+<td>пересчитывает <code>uv.lock</code>; <code>--upgrade-package numpy</code> обновляет одну библиотеку</td>
+</tr>
+<tr>
+<td><code>uv sync</code></td>
+<td>приводит <code>.venv</code> в точное соответствие с <code>uv.lock</code></td>
+</tr>
+<tr>
+<td><code>uv sync --locked</code> / <code>--frozen</code></td>
+<td>падает, если lock устарел / не пересчитывает lock вообще (для CI и Docker)</td>
+</tr>
+<tr>
+<td><code>uv run</code></td>
+<td>запускает команду в окружении проекта</td>
+</tr>
+<tr>
+<td><code>uv tree</code></td>
+<td>дерево зависимостей — удобно искать, кто притащил конфликтную версию</td>
+</tr>
+</tbody>
+</table></div>
+<div class="callout md tip"><p class="callout-title">Не лечите окружение руками</p>
+<p>Если <code>.venv</code> «странный» — удалите папку и выполните <code>uv sync</code>. Окружение должно быть расходным материалом; ценны только <code>pyproject.toml</code> и <code>uv.lock</code>.</p>
+</div>
+<h2 id="pyprojecttoml-uvlock-и-версия-python">pyproject.toml, uv.lock и версия Python</h2>
+<div class="code"><div class="code-head"><span class="lang">toml</span></div><pre><code><span class="tok-k">[</span><span class="tok-k">project</span><span class="tok-k">]</span>
+name <span class="tok-p">=</span> <span class="tok-s">"</span><span class="tok-s">churn</span><span class="tok-s">"</span>
+version <span class="tok-p">=</span> <span class="tok-s">"</span><span class="tok-s">0.1.0</span><span class="tok-s">"</span>
+requires-python <span class="tok-p">=</span> <span class="tok-s">"</span><span class="tok-s">&gt;=3.12</span><span class="tok-s">"</span>
+dependencies <span class="tok-p">=</span> <span class="tok-p">[</span>
+    <span class="tok-s">"</span><span class="tok-s">numpy&gt;=2.0</span><span class="tok-s">"</span><span class="tok-p">,</span>
+    <span class="tok-s">"</span><span class="tok-s">pandas&gt;=3.0</span><span class="tok-s">"</span><span class="tok-p">,</span>
+    <span class="tok-s">"</span><span class="tok-s">scikit-learn&gt;=1.5</span><span class="tok-s">"</span><span class="tok-p">,</span>
+<span class="tok-p">]</span>
+
+<span class="tok-k">[</span><span class="tok-k">dependency-groups</span><span class="tok-k">]</span>
+dev <span class="tok-p">=</span> <span class="tok-p">[</span><span class="tok-s">"</span><span class="tok-s">pytest</span><span class="tok-s">"</span><span class="tok-p">,</span> <span class="tok-s">"</span><span class="tok-s">ruff</span><span class="tok-s">"</span><span class="tok-p">]</span>
+notebooks <span class="tok-p">=</span> <span class="tok-p">[</span><span class="tok-s">"</span><span class="tok-s">ipykernel</span><span class="tok-s">"</span><span class="tok-p">,</span> <span class="tok-s">"</span><span class="tok-s">matplotlib</span><span class="tok-s">"</span><span class="tok-p">]</span>
+</code></pre></div>
+<p>Правила: <code>pyproject.toml</code> и <code>uv.lock</code> <strong>коммитятся оба</strong>; <code>uv.lock</code> руками не правится. Версию интерпретатора фиксирует <code>.python-version</code> (создаётся <code>uv init</code> или командой <code>uv python pin 3.12</code>), а <code>requires-python</code> задаёт допустимый диапазон. Нужного Python на машине может не быть — <code>uv</code> скачает его сам (<code>uv python install 3.12</code>). Команда <code>uv python pin</code> проверяет совместимость с <code>requires-python</code> и откажет, если версия вне диапазона.</p>
+<p>Группы зависимостей ставятся выборочно: <code>uv sync --group notebooks</code>, а группа <code>dev</code> по умолчанию ставится всегда. Тяжёлое для обучения (torch) держите отдельно от лёгкого для сервиса.</p>
+<h2 id="разовые-запуски-uvx-и-uv-tool">Разовые запуски: uvx и uv tool</h2>
+<p>Инструмент, который не является зависимостью проекта (линтер, <code>jupyter</code>, <code>cookiecutter</code>), ставить в проект не нужно.</p>
+<div class="code"><div class="code-head"><span class="lang">bash</span></div><pre><code>uvx ruff check .                         <span class="tok-c"># временное изолированное окружение, одноразово
+</span>uv tool install ruff                     <span class="tok-c"># поставить как глобальную утилиту (изолированно)
+</span>uv run --with rich python script.py      <span class="tok-c"># добавить пакет только на этот запуск
+</span>uv run --with jupyter jupyter lab        <span class="tok-c"># JupyterLab без записи jupyter в зависимости
+</span></code></pre></div>
+<p>Одиночные скрипты можно снабдить зависимостями прямо в файле (PEP 723): <code>uv add --script train.py numpy</code> допишет блок <code># /// script</code> в начало, а <code>uv run train.py</code> соберёт под него окружение.</p>
+<h2 id="структура-проекта">Структура проекта</h2>
+<div class="code"><div class="code-head"><span class="lang">text</span></div><pre><code>churn/
+├── pyproject.toml
+├── uv.lock
+├── .python-version
+├── .gitignore
+├── .env.example          # имена переменных без значений — в git
+├── README.md
+├── src/churn/            # код: загрузка, признаки, модели, метрики
+│   ├── __init__.py
+│   └── features.py
+├── notebooks/            # исследования; логика уезжает в src/
+├── tests/
+└── data/                 # НЕ в git: raw/, interim/, processed/
+</code></pre></div>
+<div class="code"><div class="code-head"><span class="lang">gitignore</span></div><pre><code>.venv/
+data/
+.env
+*.parquet
+mlruns/
+mlflow.db
+__pycache__/
+.ipynb_checkpoints/
+</code></pre></div>
+<p><code>src/</code>-раскладка нужна, чтобы <code>import churn</code> работал одинаково из ноутбука, из тестов и в проде: пакет ставится в <code>.venv</code> в editable-режиме, и в корень репозитория случайно подложенный <code>churn/</code> не перекроет установленный. Данные в git не кладут: он не рассчитан на большие бинарные файлы, и репозиторий разбухает навсегда; версионируйте их через DVC, S3-пути или хэш выгрузки в README. <code>.env</code> с токенами в git — инцидент безопасности: даже удалённый следующим коммитом, секрет остаётся в истории; в репозиторий кладут только <code>.env.example</code>. Подробнее о структуре репозитория и истории — в главе <a href="/edufamcs-demo/handbook/python/git-dlya-ml-proekta/" rel="noopener noreferrer nofollow">Git для ML-проекта</a>.</p>
+<h2 id="gpu-зависимости-pytorch">GPU-зависимости: PyTorch</h2>
+<p>Колёса PyTorch для CUDA лежат не на PyPI, а на отдельных индексах <code>download.pytorch.org</code>. <code>uv</code> подключает индекс только для нужного пакета:</p>
+<div class="code"><div class="code-head"><span class="lang">toml</span></div><pre><code><span class="tok-k">[</span><span class="tok-k">project</span><span class="tok-k">]</span>
+dependencies <span class="tok-p">=</span> <span class="tok-p">[</span><span class="tok-s">"</span><span class="tok-s">torch&gt;=2.5</span><span class="tok-s">"</span><span class="tok-p">]</span>
+
+<span class="tok-k">[</span><span class="tok-k">tool</span><span class="tok-k">.</span><span class="tok-k">uv</span><span class="tok-k">.</span><span class="tok-k">sources</span><span class="tok-k">]</span>
+torch <span class="tok-p">=</span> <span class="tok-p">[</span><span class="tok-p">{</span> index <span class="tok-p">=</span> <span class="tok-s">"</span><span class="tok-s">pytorch-cu128</span><span class="tok-s">"</span><span class="tok-p">,</span> marker <span class="tok-p">=</span> <span class="tok-s">"</span><span class="tok-s">sys_platform == 'linux'</span><span class="tok-s">"</span> <span class="tok-p">}</span><span class="tok-p">]</span>
+
+<span class="tok-k">[[</span><span class="tok-k">tool</span><span class="tok-k">.</span><span class="tok-k">uv</span><span class="tok-k">.</span><span class="tok-k">index</span><span class="tok-k">]]</span>
+name <span class="tok-p">=</span> <span class="tok-s">"</span><span class="tok-s">pytorch-cu128</span><span class="tok-s">"</span>
+url <span class="tok-p">=</span> <span class="tok-s">"</span><span class="tok-s">https://download.pytorch.org/whl/cu128</span><span class="tok-s">"</span>
+explicit <span class="tok-p">=</span> <span class="tok-k">true</span>
+</code></pre></div>
+<p><code>explicit = true</code> означает: этот индекс используется только пакетами, которые на него явно указали в <code>tool.uv.sources</code>. На macOS маркер не сработает и <code>uv</code> возьмёт обычный PyPI-torch; на Linux без GPU этот конфиг всё равно поставит CUDA-колесо — для такой машины нужен индекс <code>cpu</code>. Нужный суффикс (<code>cu128</code>, <code>cu126</code>, <code>cpu</code>) зависит от драйвера на сервере: смотрите <code>nvidia-smi</code> и <a href="https://docs.astral.sh/uv/guides/integration/pytorch/" rel="noopener noreferrer nofollow">руководство uv по PyTorch</a>, там актуальный список. Проверка: <code>uv run python -c "import torch; print(torch.cuda.is_available())"</code>.</p>
+<h2 id="uv-или-conda">uv или conda</h2>
+<p>Conda ставит не только Python-пакеты, но и бинарные библиотеки вне Python (CUDA toolkit, <code>ffmpeg</code>, <code>gdal</code>, MKL) и умеет несколько версий интерпретатора. <code>uv</code> работает только с Python-пакетами (интерпретаторы скачивает сам), зато быстр, имеет воспроизводимый lock и стандартный <code>pyproject.toml</code>. Практика 2026 года: проектам на PyPI-стеке (torch, sklearn, pandas, polars) достаточно <code>uv</code>; conda/pixi оправданы, когда нужны системные нативные библиотеки или вам достался чужой <code>environment.yml</code>. Смешивать <code>pip install</code> внутри conda-окружения без нужды не стоит: решатели не знают друг о друге.</p>
+<h2 id="воспроизвести-чужой-репозиторий">Воспроизвести чужой репозиторий</h2>
+<div class="code"><div class="code-head"><span class="lang">bash</span></div><pre><code>git clone https://github.com/org/project <span class="tok-p">&amp;&amp;</span> <span class="tok-f">cd</span> project
+ls                                <span class="tok-c"># что есть: uv.lock? poetry.lock? requirements.txt? environment.yml?
+</span>uv sync --locked                  <span class="tok-c"># если есть uv.lock: точная копия окружения
+</span><span class="tok-c"># если только requirements.txt:
+</span>uv venv --python <span class="tok-n">3</span>.11 <span class="tok-p">&amp;&amp;</span> uv pip install -r requirements.txt
+uv run python -m project.train --help
+</code></pre></div>
+<p>Порядок поисков: <code>uv.lock</code> → <code>poetry.lock</code>/<code>pdm.lock</code> (поставьте их штатными инструментами или переведите) → <code>requirements.txt</code> с версиями (<code>==</code>) → <code>environment.yml</code> → README. Если версий нет, смотрите дату последнего коммита и берите библиотеки из того года; это нормальный способ раскопок. Старый код под старый Python — <code>uv venv --python 3.9</code>.</p>
+<h2 id="ловушки">Ловушки</h2>
+<ul>
+<li><code>uv.lock</code> не закоммичен или в <code>.gitignore</code>: коллега получает «свежие» версии и другой результат.</li>
+<li><code>pip install</code> в системный Python или в чужой <code>.venv</code>: окружение расходится с lock; ставьте через <code>uv add</code> или <code>uv pip install</code> только для разовых экспериментов.</li>
+<li>Версии в <code>pyproject.toml</code> без нижней границы (<code>"numpy"</code>) или с жёстким <code>==</code> для всего подряд: первое роняет старые окружения, второе делает конфликты неразрешимыми. Для приложения достаточно <code>&gt;=</code> + lock.</li>
+<li>Ноутбук запущен ядром другого окружения: <code>import torch</code> работает, а в <code>.venv</code> проекта его нет (см. <a href="/edufamcs-demo/handbook/python/jupyter-noutbuki/" rel="noopener noreferrer nofollow">главу про Jupyter</a>).</li>
+<li>Секреты в <code>.env</code>, закоммиченном «на минутку».</li>
+<li>На собеседовании спрашивают: чем <code>venv</code> отличается от conda; что такое lock-файл и зачем он при наличии <code>pyproject.toml</code>; как воспроизвести чужое обучение; почему в Docker копируют <code>pyproject.toml</code> и <code>uv.lock</code> раньше кода (слой с зависимостями кэшируется).</li>
+</ul>
+<h2 id="проверь-себя">Проверь себя</h2>
+<details class="callout md details"><summary>Чем `uv sync` отличается от `uv lock`?</summary>
+<p><code>uv lock</code> только пересчитывает <code>uv.lock</code> по требованиям из <code>pyproject.toml</code>, <code>.venv</code> не трогает. <code>uv sync</code> приводит <code>.venv</code> к содержимому lock (при необходимости сначала обновив lock, если нет <code>--locked</code>/<code>--frozen</code>).</p>
+</details>
+<details class="callout md details"><summary>Зачем два файла — `pyproject.toml` и `uv.lock`?</summary>
+<p>В первом — требования (диапазоны), их пишет человек. Во втором — точное решение со всеми транзитивными зависимостями и хэшами; оно даёт воспроизводимость. Через год диапазон <code>numpy&gt;=2.0</code> даст другую версию, lock — ту же.</p>
+</details>
+<details class="callout md details"><summary>Как поставить PyTorch с CUDA так, чтобы на macOS проект тоже собирался?</summary>
+<p>Добавить индекс <code>download.pytorch.org/whl/cuXXX</code> с <code>explicit = true</code> и привязать к нему <code>torch</code> в <code>tool.uv.sources</code> с маркером <code>sys_platform == 'linux'</code>; на остальных платформах <code>uv</code> возьмёт обычное колесо с PyPI.</p>
+</details>
+<details class="callout md details"><summary>Что должно лежать в git, а что нет?</summary>
+<p>В git: код, <code>pyproject.toml</code>, <code>uv.lock</code>, <code>.python-version</code>, <code>.env.example</code>, README, тесты. Не в git: <code>.venv</code>, <code>data/</code>, <code>.env</code>, веса моделей и артефакты экспериментов (для них — трекер или объектное хранилище).</p>
+</details>
+<details class="callout md details"><summary>Вы склонировали репозиторий, в нём только `requirements.txt` без версий. Что делать?</summary>
+<p>Создать окружение подходящего по дате Python, поставить зависимости, прогнать код, затем зафиксировать результат (<code>uv pip freeze</code> или перенос в <code>pyproject.toml</code> с <code>uv add</code>) и закоммитить lock, чтобы раскопки не повторять.</p>
+</details>
+<h2 id="что-почитать">Что почитать</h2>
+<ul>
+<li><a href="https://docs.astral.sh/uv/" rel="noopener noreferrer nofollow">uv documentation</a>: разделы Projects, Locking and syncing, Tools.</li>
+<li><a href="https://docs.astral.sh/uv/guides/integration/pytorch/" rel="noopener noreferrer nofollow">uv: Using uv with PyTorch</a>.</li>
+<li><a href="https://docs.astral.sh/uv/guides/scripts/" rel="noopener noreferrer nofollow">uv: Running scripts</a> (инлайн-зависимости, PEP 723).</li>
+<li><a href="https://packaging.python.org/en/latest/specifications/pyproject-toml/" rel="noopener noreferrer nofollow">Python Packaging User Guide: pyproject.toml specification</a>.</li>
+<li><a href="https://peps.python.org/pep-0735/" rel="noopener noreferrer nofollow">PEP 735: Dependency Groups</a> и <a href="https://peps.python.org/pep-0723/" rel="noopener noreferrer nofollow">PEP 723: Inline script metadata</a>.</li>
+<li><a href="https://docs.python.org/3/library/venv.html" rel="noopener noreferrer nofollow">Python docs: venv</a>.</li>
+</ul>
+</div>
+      
+
+      
+
+      
+      <nav class="pager" aria-label="Соседние статьи">
+        <i></i>
+        <a href="/edufamcs-demo/handbook/python/python-dlya-ml/"><span>Дальше<svg class="ico sm" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-arrow"/></svg></span>Python для ML: что нужно на самом деле</a>
+      </nav>
+      
+    </article>
+
+    <aside class="hb-toc" aria-label="На этой странице">
+      <a class="l2" href="#зачем-отдельное-окружение">Зачем отдельное окружение</a><a class="l2" href="#uv-за-пять-минут">uv за пять минут</a><a class="l2" href="#pyprojecttoml-uvlock-и-версия-python">pyproject.toml, uv.lock и версия Python</a><a class="l2" href="#разовые-запуски-uvx-и-uv-tool">Разовые запуски: uvx и uv tool</a><a class="l2" href="#структура-проекта">Структура проекта</a><a class="l2" href="#gpu-зависимости-pytorch">GPU-зависимости: PyTorch</a><a class="l2" href="#uv-или-conda">uv или conda</a><a class="l2" href="#воспроизвести-чужой-репозиторий">Воспроизвести чужой репозиторий</a><a class="l2" href="#ловушки">Ловушки</a><a class="l2" href="#проверь-себя">Проверь себя</a><a class="l2" href="#что-почитать">Что почитать</a>
+    </aside>
+  </div>
+</div>
+
+
+</main>
+
+<footer class="ftr" data-theme="dark">
+  <svg class="sym fern" viewBox="0 0 40.5 65.02" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#fern"/></svg>
+  <div class="container">
+    <div class="ftr-row">
+      <a href="/edufamcs-demo/" aria-label="EDU FAMCS — главная"><img src="/edufamcs-demo/static/brand/logo/logo-edu-dark.svg" alt="EDU FAMCS" width="196" height="40"></a>
+      <ul class="ftr-links">
+        <li><a href="/edufamcs-demo/#courses">Курсы</a></li>
+        <li><a href="/edufamcs-demo/ml/">Машинное обучение</a></li>
+        <li><a href="/edufamcs-demo/handbook/">Хендбук</a></li>
+        <li><a href="/edufamcs-demo/news/">Новости</a></li>
+        <li><a href="/edufamcs-demo/people/">Авторы</a></li>
+        <li><a href="/edufamcs-demo/about/">О&nbsp;нас</a></li>
+        <li><a href="/edufamcs-demo/propose/">Предложить или исправить</a></li>
+        <li><a href="/edufamcs-demo/privacy/">Конфиденциальность</a></li>
+      </ul>
+    </div>
+    <div class="ftr-big" aria-hidden="true">EDU<span class="d">·</span>FAMCS</div>
+    <p class="ftr-copy">© 2026 EDU FAMCS · Минск</p>
+  </div>
+</footer>
+
+<div class="toasts-region" aria-live="polite" id="toasts">
+
+</div>
+
+</body>
+</html>

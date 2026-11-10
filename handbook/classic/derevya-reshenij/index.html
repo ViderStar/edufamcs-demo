@@ -27,7 +27,7 @@
 <script src="/edufamcs-demo/static/js/site.js" defer></script>
 <script src="/edufamcs-demo/static/handbook/handbook.js" defer></script>
 </head>
-<body class="" hx-headers='{"X-CSRFToken": "uvjBEA0IoSP0czkiaPSn91lBRpIeWRoSgBkYynipz55eR8gyneLsqttWnMkt1C9R"}'>
+<body class="" hx-headers='{"X-CSRFToken": "aPltZzBYVUkiDumrIAUZCXnV8lQtHCX9M2aqfBaPWHyRONBTH38WkQfTAuXrrmWQ"}'>
 <a class="skip" href="#main">К содержанию</a>
 <div class="demo-bar" role="note">Демо-версия для отзывов: вход, запись на курсы и формы здесь не работают.</div>
 
@@ -60,6 +60,7 @@
 
 
 <div class="container hb-page hb-tone">
+  <div class="hb-readbar" aria-hidden="true"><i></i></div>
   <div class="hb">
     <aside class="hb-nav" aria-label="Статьи раздела">
       
@@ -88,9 +89,9 @@
       <div class="hb-meta">
         
         
-        <span><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-clock"/></svg>10&nbsp;мин</span>
+        <span><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-clock"/></svg>11&nbsp;мин</span>
         <span class="hb-authors"><span class="avatar sm" title="Артем Лебедевич">АЛ</span>Артем Лебедевич</span>
-        <span><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-edit"/></svg>9 ноября 2026</span>
+        <span><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-edit"/></svg>10 ноября 2026</span>
         
         
       </div>
@@ -98,7 +99,7 @@
       
       <details class="hb-mtoc">
         <summary><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-list"/></svg>Содержание<svg class="ico sm" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-chev-down"/></svg></summary>
-        <a class="l2" href="#жадное-построение">Жадное построение</a><a class="l2" href="#критерии-неоднородности">Критерии неоднородности</a><a class="l2" href="#остановка-и-обрезка">Остановка и обрезка</a><a class="l2" href="#что-умеет-и-чего-не-умеет-дерево">Что умеет и чего не умеет дерево</a><a class="l2" href="#важность-признаков-mdi">Важность признаков (MDI)</a><a class="l2" href="#код">Код</a><a class="l2" href="#ловушки">Ловушки</a><a class="l2" href="#что-почитать">Что почитать</a>
+        <a class="l2" href="#жадное-построение">Жадное построение</a><a class="l2" href="#критерии-неоднородности">Критерии неоднородности</a><a class="l2" href="#остановка-и-обрезка">Остановка и обрезка</a><a class="l2" href="#что-умеет-и-чего-не-умеет-дерево">Что умеет и чего не умеет дерево</a><a class="l2" href="#важность-признаков-mdi">Важность признаков (MDI)</a><a class="l2" href="#код">Код</a><a class="l2" href="#ловушки">Ловушки</a><a class="l2" href="#проверь-себя">Проверь себя</a><a class="l2" href="#что-почитать">Что почитать</a>
       </details>
       
 
@@ -201,8 +202,24 @@ path <span class="tok-p">=</span> DecisionTreeClassifier<span class="tok-p">(</s
 <li><strong>Утечка через ID и время.</strong> Дерево легко выучит идентификатор или дату; проверяйте, что признаки доступны на момент предсказания.</li>
 <li><strong>Дисбаланс классов.</strong> Отделение небольшой группы редких объектов даёт малый прирост критерия, и почти все листья предсказывают мажоритарный класс; используйте <code>class_weight="balanced"</code> и метрики PR-AUC/F1, а не accuracy.</li>
 <li><strong>Вероятности из листа грубые.</strong> Доля класса в листе с тремя объектами — плохая оценка вероятности; нужны <code>min_samples_leaf</code> и калибровка.</li>
-<li><strong>Интервью.</strong> Частые вопросы: чем Джини отличается от энтропии; почему дерево не требует нормализации; как оно ведёт себя за пределами обучающих данных; почему глубокое дерево переобучается; чем MDI хуже permutation importance.</li>
+<li><strong>На собеседовании:</strong> частые вопросы: чем Джини отличается от энтропии; почему дерево не требует нормализации; как оно ведёт себя за пределами обучающих данных; почему глубокое дерево переобучается; чем MDI хуже permutation importance.</li>
 </ul>
+<h2 id="проверь-себя">Проверь себя</h2>
+<details class="callout md details"><summary>Почему жадное построение не гарантирует оптимального дерева и при чём тут XOR?</summary>
+<p>Выбор в каждой вершине оптимален только локально. В XOR ни один признак по отдельности не снижает неоднородность, прирост первого сплита нулевой, хотя два сплита подряд разделяют классы идеально.</p>
+</details>
+<details class="callout md details"><summary>Чему равен прирост Джини для сплита A из примера и почему он лучше сплита B?</summary>
+<p><span class="tex">0{,}5-0{,}6\cdot0{,}278\approx0{,}333</span> против <span class="tex">0{,}02</span> у B: A выделяет чистый левый лист, B почти не меняет доли классов.</p>
+</details>
+<details class="callout md details"><summary>Почему дерево не требует масштабирования признаков и не экстраполирует?</summary>
+<p>Сплит <span class="tex">x_j\le t</span> инвариантен к монотонным преобразованиям <span class="tex">x_j</span>. Прогноз — константа листа, поэтому за краем обучающего диапазона он равен значению крайнего листа.</p>
+</details>
+<details class="callout md details"><summary>Почему MDI-важность смещена?</summary>
+<p>Признаки с многими уникальными значениями имеют больше порогов и чаще находят «случайно хороший» сплит, а считается она на обучающих данных. Надёжнее permutation importance на отложенной выборке.</p>
+</details>
+<details class="callout md details"><summary>Как работает cost-complexity pruning?</summary>
+<p>Минимизируется <span class="tex">R(T)+\alpha|T|</span>; с ростом <span class="tex">\alpha</span> схлопываются самые слабые ветви, получается вложенная последовательность поддеревьев, <span class="tex">\alpha</span> выбирают по кросс-валидации.</p>
+</details>
 <h2 id="что-почитать">Что почитать</h2>
 <ul>
 <li>Breiman L., Friedman J., Olshen R., Stone C. <em>Classification and Regression Trees</em>, 1984 — оригинальная книга про CART и cost-complexity pruning.</li>
@@ -216,6 +233,8 @@ path <span class="tok-p">=</span> DecisionTreeClassifier<span class="tok-p">(</s
       
 
       
+
+      
       <nav class="pager" aria-label="Соседние статьи">
         <a href="/edufamcs-demo/handbook/classic/metod-opornyh-vektorov/"><span><svg class="ico sm" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-arrow-left"/></svg>Назад</span>Метод опорных векторов</a>
         <a href="/edufamcs-demo/handbook/classic/ansambli-i-sluchajnyj-les/"><span>Дальше<svg class="ico sm" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-arrow"/></svg></span>Ансамбли и случайный лес</a>
@@ -224,7 +243,7 @@ path <span class="tok-p">=</span> DecisionTreeClassifier<span class="tok-p">(</s
     </article>
 
     <aside class="hb-toc" aria-label="На этой странице">
-      <a class="l2" href="#жадное-построение">Жадное построение</a><a class="l2" href="#критерии-неоднородности">Критерии неоднородности</a><a class="l2" href="#остановка-и-обрезка">Остановка и обрезка</a><a class="l2" href="#что-умеет-и-чего-не-умеет-дерево">Что умеет и чего не умеет дерево</a><a class="l2" href="#важность-признаков-mdi">Важность признаков (MDI)</a><a class="l2" href="#код">Код</a><a class="l2" href="#ловушки">Ловушки</a><a class="l2" href="#что-почитать">Что почитать</a>
+      <a class="l2" href="#жадное-построение">Жадное построение</a><a class="l2" href="#критерии-неоднородности">Критерии неоднородности</a><a class="l2" href="#остановка-и-обрезка">Остановка и обрезка</a><a class="l2" href="#что-умеет-и-чего-не-умеет-дерево">Что умеет и чего не умеет дерево</a><a class="l2" href="#важность-признаков-mdi">Важность признаков (MDI)</a><a class="l2" href="#код">Код</a><a class="l2" href="#ловушки">Ловушки</a><a class="l2" href="#проверь-себя">Проверь себя</a><a class="l2" href="#что-почитать">Что почитать</a>
     </aside>
   </div>
 </div>
