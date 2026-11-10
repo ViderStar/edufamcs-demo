@@ -203,3 +203,41 @@
   .a-task{padding:14px}
   .a-task-art{width:44px;height:44px}
 }
+
+/* ══ flat layer (design/flat) ═════════════════════════════════════════════ */
+/* summary on /tasks/: ring + numbers on the page */
+.a-band{padding:0 0 28px;border-bottom:1px solid var(--line-strong);margin-bottom:0}
+.a-ring{background:conic-gradient(var(--ok) calc(var(--v) * 1%),var(--line) 0)}
+.a-ring b{background:var(--bg)}
+.a-ring b span{color:var(--muted)}
+.a-bignums span{color:var(--muted)}
+
+/* tasks: numbered index rows */
+.a-tasks{display:block;counter-reset:t}
+.a-task{counter-increment:t;display:grid;grid-template-columns:72px minmax(0,1fr) 28px;gap:6px 24px;align-items:baseline;padding:24px 0;border:0;border-bottom:1px solid var(--line);border-radius:0;background:none;
+  transition:padding var(--dur-2) var(--ease)}
+.a-task:hover{transform:none;box-shadow:none;border-color:var(--line);padding-left:12px}
+.a-task::before{content:counter(t,decimal-leading-zero);font:800 15px/1 var(--font-display);color:var(--faint);letter-spacing:.04em}
+.a-task-art{display:none}
+.a-task-body{gap:12px}
+.a-task-title{font:800 clamp(18px,2vw,26px)/1.2 var(--font-display);letter-spacing:-.025em}
+.a-task-go{justify-self:end}
+@media (max-width:640px){.a-task{grid-template-columns:36px minmax(0,1fr) 20px;gap:6px 14px}}
+
+/* plain lists */
+.a-list{border:0;border-top:1px solid var(--line-strong);border-radius:0;background:none}
+.a-list a{padding-inline:0}
+.a-list a:hover{background:none}
+.a-quote{border-top:1px solid var(--line);background:none;padding-inline:0}
+.a-work{padding:24px 0}
+.a-peer{padding-top:24px}
+.a-booking-row{border:0;border-top:1px solid var(--line);border-radius:0;background:none;padding-inline:0}
+.a-locked{border:0;border-top:1.5px dashed var(--line-strong);border-radius:0;padding-inline:0}
+.a-rubric li{padding-inline:0}
+
+/* objects keep their frame: slot picker, staff queue, staff review */
+.card.a-def-card,.card.a-review-form,.a-queue{background:var(--surface);border:1px solid var(--line);border-radius:var(--r-lg)}
+.card.a-def-card,.card.a-review-form{padding:clamp(20px,3vw,28px)}
+.a-queue{overflow:hidden}
+.a-counters .stat-tile{border-top:1px solid var(--line);padding-top:14px}
+.a-counters .stat-tile.is-on{box-shadow:none;border-top:2px solid var(--heading)}

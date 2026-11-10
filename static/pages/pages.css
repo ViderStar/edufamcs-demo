@@ -38,31 +38,6 @@
 .nl-meta .ico{color:var(--stream)}
 @media (max-width:720px){.nl{grid-template-columns:auto minmax(0,1fr)}.nl .btn{grid-column:1/-1;justify-self:start}.nl-date{width:84px;height:84px}.nl-date b{font-size:34px}}
 
-/* ── season tiles ── */
-.season-tiles{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,320px),1fr));gap:16px}
-.season-tile{position:relative;isolation:isolate;overflow:hidden;display:flex;flex-direction:column;min-height:300px;padding:clamp(22px,3vw,32px);
-  border-radius:var(--r-xl);background:var(--surface);border:1px solid var(--line);text-decoration:none;color:var(--text);
-  transition:transform var(--dur-2) var(--ease),box-shadow var(--dur-2) var(--ease),border-color var(--dur-2)}
-.season-tile:hover{transform:translateY(-3px);box-shadow:var(--e-2);border-color:var(--line-strong)}
-.season-tile .big{position:absolute;z-index:-1;left:clamp(14px,2vw,22px);top:clamp(12px,2vw,20px);max-width:calc(100% - 80px);overflow:hidden;
-  font:800 clamp(110px,11vw,150px)/.8 var(--font-display);letter-spacing:-.06em;
-  color:transparent;-webkit-text-stroke:1.5px color-mix(in srgb,var(--muted) 45%,transparent);user-select:none;pointer-events:none}
-.season-tile .h2{margin-top:auto;padding-top:120px}
-.season-tile .when{margin-top:6px;color:var(--muted);font-weight:600}
-.season-tile .mini-stats{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px 16px;margin-top:22px;padding-top:18px;border-top:1px solid var(--line)}
-.mini-stats b{display:block;font:800 26px/1 var(--font-display);letter-spacing:-.03em;color:var(--heading)}
-.mini-stats span{display:block;margin-top:6px;font-size:13px;line-height:1.3;color:var(--muted)}
-.season-tile .go{position:absolute;right:22px;top:22px;width:44px;height:44px;border-radius:50%;display:grid;place-items:center;border:1px solid var(--line-strong);color:var(--text);
-  transition:transform var(--dur-2) var(--ease),background var(--dur-2)}
-.season-tile:hover .go{transform:translateX(3px);background:var(--surface-2)}
-.season-tile.now{background:var(--mesh-night);border-color:var(--night-line);color:var(--text)}
-.season-tile.now::before{content:"";position:absolute;inset:0;z-index:-1;background:var(--grain);opacity:.09;mix-blend-mode:overlay;pointer-events:none}
-.season-tile.now .big{-webkit-text-stroke-color:var(--night-line-strong)}
-.season-tile.now .when{color:var(--snow-2)}
-.season-tile.now .go{background:var(--orange);border-color:transparent;color:var(--raccoon)}
-.season-tile.now .mini-stats{border-top-color:var(--night-line-strong)}
-.season-tile.now .mini-stats span{color:var(--snow-muted)}
-
 /* ── about: values ── */
 .mission{min-height:340px;display:flex;flex-direction:column;justify-content:flex-end}
 .mission .display-xl{max-width:13ch}
@@ -192,14 +167,6 @@
 @media (max-width:640px){.vibe{grid-template-columns:1fr}.vibe .raccoon{width:84px;order:-1}}
 
 /* ── news ── */
-.news-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,320px),1fr));gap:16px}
-.news-card{display:flex;flex-direction:column;gap:12px;padding:22px;border-radius:var(--r-lg);background:var(--surface);border:1px solid var(--line);text-decoration:none;color:var(--text);
-  transition:transform var(--dur-2) var(--ease),box-shadow var(--dur-2) var(--ease),border-color var(--dur-2)}
-.news-card:hover{transform:translateY(-2px);box-shadow:var(--e-2);border-color:var(--line-strong)}
-.news-card time,.news-item time{display:inline-flex;align-items:center;gap:6px;font:500 13px/1 var(--font-mono);color:var(--muted)}
-.news-card .h3{margin-top:0}
-.news-card .ico,.news-item time .ico{color:var(--accent-ink)}
-@media (max-width:980px){.news-grid{grid-template-columns:1fr}.news-card{min-height:0}.news-card .h3{margin-top:0}}
 .news-list{display:flex;flex-direction:column;gap:16px;max-width:var(--container-text);margin-inline:auto}
 .news-item{padding:clamp(20px,3vw,32px);border-radius:var(--r-xl);background:var(--surface);border:1px solid var(--line);scroll-margin-top:calc(var(--header-h) + 16px)}
 .news-item .h2{margin-top:12px}
@@ -241,3 +208,91 @@
 .season-photo img{display:block;width:100%;max-height:560px;object-fit:cover;border-radius:var(--r-xl)}
 
 .pp-bio{max-width:640px;margin:clamp(20px,3vw,32px) 0 0;font-size:var(--fs-body-l);line-height:var(--lh-body);color:var(--text-2)}
+
+/* ══ flat layer (design/flat) ═════════════════════════════════════════════ */
+.sec-gap{margin-top:clamp(40px,6vw,72px)}
+
+/* numbers on the page, separated by rules */
+.mega{border-top:1px solid var(--line-strong)}
+.mega>div+div{border-left:0}
+.mega>div{padding:24px 24px 4px 0}
+.mega b{color:var(--heading);font-size:clamp(40px,5vw,72px)}
+.mega span{color:var(--muted)}
+.mega>div:first-child b{color:var(--accent-ink)}
+@media (max-width:700px){.mega>div:nth-child(n+3){border-top:0}}
+.band.stats-band h2{max-width:none}
+
+/* next lesson: a row */
+.nl{padding:28px 0;border:0;border-top:1px solid var(--line-strong);border-bottom:1px solid var(--line);border-radius:0;background:none}
+.nl:hover{transform:none;box-shadow:none;border-color:var(--line-strong)}
+.nl-date{width:auto;height:auto;border:0;border-radius:0;background:none;box-shadow:none;align-items:flex-start;min-width:96px}
+.nl-date b{font-size:clamp(48px,6vw,72px);color:var(--stream,var(--heading))}
+@media (max-width:720px){.nl-date{width:auto;height:auto}.nl-date b{font-size:44px}}
+
+/* seasons */
+.idx-season.now>.n{color:var(--accent-ink)}
+.idx-season .mini-stats{display:flex;flex-wrap:wrap;gap:4px 18px;margin:0;padding:0;border:0;justify-content:flex-end;font-size:14px;color:var(--muted)}
+.idx-season .mini-stats{display:flex}
+.idx-season .mini-stats span{display:inline;margin:0;font-size:14px}
+.idx-season .mini-stats b{display:inline;font:800 15px/1 var(--font-display);color:var(--heading)}
+.idx-season.now{background:none;border-color:var(--line);color:var(--text)}
+.idx-season.now::before{display:none}
+.idx-season .when{margin:0}
+.idx-row>.t small{margin-top:8px}
+
+/* values / people */
+.ab-values,.values{gap:0 32px}
+.ab-value,.value{padding:20px 0 0;border:0;border-top:1px solid var(--line);border-radius:0;background:none;overflow:visible;min-height:0;gap:12px}
+.ab-value::after{display:none}
+.ab-value .ic,.value .ic{width:auto;height:auto;border-radius:0;background:none;margin:0;color:var(--accent-ink)}
+.value.hl{background:none;border-top:2px solid var(--accent)}
+.value.hl .h3{color:var(--heading)}
+.value.hl .ic{background:none;color:var(--accent-ink)}
+.member,.guest,.ab-member,.ab-chip,.au-card{padding:16px 0;border:0;border-radius:0;background:none;min-height:0}
+.member,.ab-member{padding:20px 0 0;border-top:1px solid var(--line)}
+.ab-member:hover,.au-card:hover,.ab-chip:hover{transform:none;box-shadow:none;border-color:var(--line)}
+.ab-member:hover .nm,.au-card:hover .au-id b,.ab-chip:hover b{color:var(--accent-ink)}
+.ab-crew{padding:20px 0;border:0;border-top:1px solid var(--line);border-left:0;border-radius:0;background:none}
+.ab-teams{gap:0}
+.ab-course,.ab-course.core{padding:20px 0 0;min-height:0;border:0;border-top:1px solid var(--line);border-radius:0;background:none;color:var(--text)}
+.ab-course:hover{transform:none;box-shadow:none}
+.ab-course.core .h2{color:var(--heading)}
+.ab-course.core p,.ab-course.core .when{color:var(--muted)}
+.ab-course .go,.ab-course.core .go{border:0;background:none;color:var(--muted)}
+.pp-card,.pp-card.core{padding:24px 0 0;border:0;border-top:2px solid var(--stream);border-radius:0;background:none;box-shadow:none}
+.pp-card.core{border-top-color:var(--accent)}
+.pp-card.core header a,.pp-card.core .ttl{color:var(--heading)}
+.pp-card.core time,.pp-card.core .tp{color:var(--muted)}
+.pp-card .go,.pp-card.core .go{border:0;color:var(--muted)}
+.pp-run,.pp-card.core .pp-run{padding:16px 0;border:0;border-top:1px solid var(--line);border-radius:0;background:none}
+.pp-run:hover{transform:none;border-color:var(--line)}
+.pp-card.core .badge.stream{background:var(--stream-soft);color:var(--stream)}
+.pp-runs{gap:0}
+
+/* season page */
+.nums{border:0;border-radius:0;background:none;gap:0 32px}
+.nums>div{padding:20px 0 0;border:0;border-top:1px solid var(--line);margin:0}
+.facts{gap:0 32px}
+.fact{padding:20px 0 0;border:0;border-top:1px solid var(--line);border-radius:0;background:none}
+.gantt{padding:0;border:0;border-radius:0;background:none}
+.season-pager a{padding:18px 0;border:0;border-top:1px solid var(--line-strong);border-radius:0;background:none}
+.season-pager a:hover{border-color:var(--heading)}
+.vibe{border-top:1px solid var(--line-strong);padding-top:clamp(32px,4vw,56px)}
+.vibe .raccoon{color:var(--heading)}
+
+/* news */
+.nw-soon{gap:0 40px}
+.nw-start{padding:20px 0;border:0;border-bottom:1px solid var(--line);border-radius:0;background:none;color:var(--text)}
+.nw-start:hover{transform:none;box-shadow:none}
+.nw-start .h3{color:var(--heading)}
+.nw-list{gap:0}
+.nw-item{padding:28px 0;border:0;border-top:1px solid var(--line);border-radius:0;background:none}
+.nw-item.pinned{box-shadow:none;border-top:2px solid var(--accent)}
+.nw-date,.nw-date.up{width:auto;min-width:72px;min-height:0;padding:0;border:0;border-radius:0;background:none;align-items:flex-start;color:var(--muted)}
+.nw-date b,.nw-date.up b{color:var(--heading)}
+.nw-date.up b{color:var(--accent-ink)}
+.nw-date.up i,.nw-date.up span{color:var(--muted)}
+@media (max-width:520px){.nw-date{flex-direction:row;padding:0}}
+.news-item{padding:28px 0;border:0;border-top:1px solid var(--line);border-radius:0;background:none}
+.pr-done{padding:24px 0 0;border:0;border-top:1px solid var(--line-strong);border-radius:0;background:none}
+.nw-photo{border-radius:var(--r-md)}

@@ -119,3 +119,21 @@
 .acc-privacy-ic .ico{width:30px;height:30px}
 
 .acc-mail{display:flex;flex-wrap:wrap;align-items:center;gap:16px}
+
+/* ══ flat layer (design/flat) ═════════════════════════════════════════════ */
+/* the profile avatar block stays an object */
+.page>.band.acc-me:first-child{margin:0;padding:clamp(24px,4vw,48px);border:1px solid var(--night-line);border-radius:var(--r-2xl);background:var(--mesh-night);
+  -webkit-mask-image:none;mask-image:none;isolation:isolate;overflow:hidden}
+.acc-me .fern{display:block}
+.acc-stats{gap:0 32px}
+.acc-tile-link:hover{transform:none;border-top-color:var(--heading)}
+.acc-courses{gap:0;border-top:1px solid var(--line-strong)}
+.acc-course.card{padding:20px 0;border:0;border-bottom:1px solid var(--line);border-radius:0;background:none;transition:padding var(--dur-2) var(--ease)}
+.acc-course.card:hover{transform:none;box-shadow:none;padding-left:12px}
+.acc-course-ic{background:none;border-radius:0;color:var(--muted);width:auto;height:auto}
+.acc-sec>.h2{font:800 clamp(24px,2.6vw,34px)/1.1 var(--font-display);letter-spacing:-.03em}
+.acc-provs{gap:0 40px}
+.acc-prov{padding:16px 0;border:0;border-bottom:1px solid var(--line);border-radius:0;background:none}
+.acc-prov-ic{background:none;border-radius:0;color:var(--muted)}
+.acc-prov.is-on .acc-prov-ic{background:none;color:var(--ok)}
+.acc-art{border:0;border-radius:var(--r-lg)}

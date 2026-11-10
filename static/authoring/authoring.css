@@ -24,3 +24,11 @@
   .au-grid{grid-template-columns:1fr}
   .au-photo{flex-direction:column;align-items:flex-start}
 }
+
+/* ══ flat layer (design/flat) ═════════════════════════════════════════════ */
+.au-mod{padding:18px 0;border:0;border-top:1px solid var(--line);border-radius:0;background:none}
+.au-scroll{border:0;border-top:1px solid var(--line-strong);border-radius:0;background:none}
+.au-table th,.au-table td{padding-inline:0 16px}
+.au-card.card{display:flex;flex-direction:column;align-items:stretch;padding:24px 0 0;border:0;border-top:1px solid var(--line);border-radius:0;background:none}
+.au-card.card:hover{transform:none;border-color:var(--line)}
+.au-list{gap:32px}

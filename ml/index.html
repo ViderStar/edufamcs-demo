@@ -27,7 +27,7 @@
 <script src="/edufamcs-demo/static/js/site.js" defer></script>
 
 </head>
-<body class="pg-ml" hx-headers='{"X-CSRFToken": "coWVaGEDQXdULmgeWxePyisk0RIFtTHwACrZ7hc0El1AWgth1Y6clv2n5EvLDckc"}'>
+<body class="pg-ml" hx-headers='{"X-CSRFToken": "6aS5NqiBngrjXZej0UpZQtqM6wPMO0zgLsXUWEmtyEozvhzSq5tf2rFNnzZ2LY3W"}'>
 <a class="skip" href="#main">К содержанию</a>
 <div class="demo-bar" role="note">Демо-версия для отзывов: вход, запись на курсы и формы здесь не работают.</div>
 
@@ -230,9 +230,7 @@
 
 <section class="section tight" aria-labelledby="stats-t">
   <div class="container">
-    <div class="band" data-theme="dark">
-      <svg class="sym fern" viewBox="0 0 40.5 65.02" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#fern"/></svg>
-      <img class="seal-mini" src="/edufamcs-demo/static/brand/logo/raccoon-seal-gradient.svg" alt="" aria-hidden="true">
+    <div class="band stats-band">
       <h2 id="stats-t" class="display-l">Уже сделали</h2>
       <div class="mega">
         <div><b>2</b><span>сезона</span></div><div><b>42</b><span>занятия</span></div><div><b>929</b><span>проверенных работ</span></div><div><b>55</b><span>сертификатов</span></div>
@@ -246,32 +244,29 @@
 <section class="section tight" id="seasons" aria-labelledby="seasons-t">
   <div class="container">
     <div class="sec-title"><h2 id="seasons-t" class="display-l">Сезоны</h2></div>
-    <div class="season-tiles">
+    <div class="idx-list season-tiles">
       
 
-<a class="season-tile" href="/edufamcs-demo/ml/seasons/1/">
-  <span class="big" aria-hidden="true">01</span>
-  <h3 class="h2">Первый сезон</h3>
-  <div class="when">март — май 2025</div>
-  <div class="mini-stats"><div><b>23</b><span>занятия</span></div><div><b>6</b><span>гостевых встреч</span></div><div><b>4</b><span>домашки</span></div></div>
+<a class="idx-row idx-season" href="/edufamcs-demo/ml/seasons/1/">
+  <span class="n">01</span>
+  <div class="t"><h3>Первый сезон</h3><small>март — май 2025</small></div>
+  <span class="m mini-stats"><span><b>23</b> занятия</span><span><b>6</b> гостевых встреч</span><span><b>4</b> домашки</span></span>
   <span class="go" aria-hidden="true"><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-arrow"/></svg></span>
 </a>
 
 
-<a class="season-tile" href="/edufamcs-demo/ml/seasons/2/">
-  <span class="big" aria-hidden="true">02</span>
-  <h3 class="h2">Второй сезон</h3>
-  <div class="when">март — май 2026</div>
-  <div class="mini-stats"><div><b>19</b><span>занятий</span></div><div><b>4</b><span>гостевые встречи</span></div><div><b>13</b><span>домашек</span></div></div>
+<a class="idx-row idx-season" href="/edufamcs-demo/ml/seasons/2/">
+  <span class="n">02</span>
+  <div class="t"><h3>Второй сезон</h3><small>март — май 2026</small></div>
+  <span class="m mini-stats"><span><b>19</b> занятий</span><span><b>4</b> гостевые встречи</span><span><b>13</b> домашек</span></span>
   <span class="go" aria-hidden="true"><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-arrow"/></svg></span>
 </a>
 
 
-<a class="season-tile now" href="/edufamcs-demo/ml/" data-theme="dark">
-  <span class="big" aria-hidden="true">03</span>
-  <h3 class="h2">Третий сезон</h3>
-  <div class="when">февраль — май 2027</div>
-  
+<a class="idx-row idx-season now" href="/edufamcs-demo/ml/">
+  <span class="n">03</span>
+  <div class="t"><h3>Третий сезон</h3><small>февраль — май 2027</small></div>
+  <span class="m"></span>
   <span class="go" aria-hidden="true"><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-arrow"/></svg></span>
 </a>
 
@@ -313,8 +308,7 @@
 
 <section class="section tight">
   <div class="container">
-    <div class="band vibe" data-theme="dark">
-      <svg class="sym fern" viewBox="0 0 40.5 65.02" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#fern"/></svg>
+    <div class="band vibe">
       <div>
         <h2 class="display-l">Вайбкодинг можно. Понимание&nbsp;— на&nbsp;защите.</h2>
         <div class="hero-cta">
