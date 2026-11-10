@@ -144,6 +144,8 @@
   color:var(--text);text-decoration:none;transition:padding var(--dur-2) var(--ease)}
 .hb-tile:hover{padding-left:10px}
 .hb-tile .n{font:800 15px/1 var(--font-display);color:var(--faint);letter-spacing:.04em}
+.hb-tile.has-pic{grid-template-columns:104px minmax(0,1fr) auto;align-items:center;padding:18px 0}
+.hb-tile .pic{width:104px}
 .hb-tile .t h2{font:800 clamp(20px,2.2vw,28px)/1.15 var(--font-display);letter-spacing:-.03em;color:var(--heading)}
 .hb-tile .t .progress{display:block;margin-top:12px;max-width:260px;height:3px;box-shadow:none}
 .hb-tile .c{font-size:14px;color:var(--muted);white-space:nowrap}

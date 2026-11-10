@@ -462,6 +462,22 @@ a.idx-row:hover>.go,.streams>.stream-card:hover::after{transform:translateX(4px)
   .idx-row>.t,.streams>.stream-card .h3{font-size:20px}
 }
 
+/* row picture: the course / section illustration, drawn straight on the page (no frame, no fill) */
+.idx-row.has-pic{grid-template-columns:136px minmax(0,1fr) auto 28px;align-items:center;padding:22px 0}
+.pic{position:relative;display:block;width:136px;aspect-ratio:11/6;color:var(--pc,var(--stream,var(--heading)))}
+.pic>svg,.pic>img,.pic .art-svg{position:absolute;inset:0;width:100%;height:100%;object-fit:contain}
+.pic .art-svg{overflow:visible}
+.pic svg>rect[fill^="url"]{display:none} /* dot / grid backgrounds read as a box at this size */
+a.idx-row.has-pic:hover .pic{transform:translateY(-2px)}
+.pic{transition:transform var(--dur-2) var(--ease)}
+.idx-row.c-ml{--pc:var(--s-recsys)}.idx-row.c-backend{--pc:var(--s-nlp)}.idx-row.c-backend-go,.idx-row.c-frontend{--pc:var(--info)}
+.idx-row.c-ios{--pc:var(--s-ts)}.idx-row.c-gamedev{--pc:var(--s-agents)}.idx-row.c-figma{--pc:var(--s-cv)}
+.idx-row.c-math{--pc:var(--s-mlops)}.idx-row.c-analysis{--pc:var(--ok)}.idx-row.c-career{--pc:var(--err)}
+@media (max-width:640px){
+  .idx-row.has-pic{grid-template-columns:84px minmax(0,1fr) 20px;align-items:start;padding:18px 0}
+  .idx-row.has-pic>.pic{grid-row:1/span 2;width:84px;margin-top:2px}
+}
+
 /* cards → plain blocks with a hairline on top */
 .card,.card.pad-lg{background:none;border:0;border-top:1px solid var(--line);border-radius:0;padding:24px 0 0}
 .card.hover:hover{transform:none;box-shadow:none;border-color:var(--line)}
@@ -511,3 +527,13 @@ details.callout.md>:not(summary){margin:0 0 16px}
 .streams>.stream-card::after{order:4}
 .streams>.stream-card .stream-meta{display:none}
 @media (max-width:640px){.streams>.stream-card .idx{grid-row:1}.streams>.stream-card .h3{grid-row:1}}
+/* streams: the stream picture instead of the number */
+.streams>.stream-card{grid-template-columns:136px minmax(0,1fr) auto 28px;align-items:center;padding:22px 0}
+.streams>.stream-card .stream-art .idx{display:none}
+.streams>.stream-card .stream-art svg{display:block;order:0;position:static;width:136px;height:auto;max-width:none;aspect-ratio:11/6;color:var(--stream);transition:transform var(--dur-2) var(--ease)}
+.streams>.stream-card .stream-art svg>rect[fill^="url"]{display:none}
+.streams>.stream-card:hover .stream-art svg{transform:translateY(-2px)}
+@media (max-width:640px){
+  .streams>.stream-card{grid-template-columns:84px minmax(0,1fr) 20px;align-items:start;padding:18px 0}
+  .streams>.stream-card .stream-art svg{grid-row:1/span 2;width:84px;margin-top:2px}
+}

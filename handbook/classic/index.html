@@ -3,17 +3,10 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Классическое машинное обучение — хендбук · EDU FAMCS</title>
+<title>Классическое машинное обучение — конспекты · EDU FAMCS</title>
 <meta name="description" content="От постановки задачи и EDA до бустинга, кластеризации и снижения размерности.">
 <meta name="theme-color" content="#060A16">
 <meta name="robots" content="noindex, nofollow">
-<link rel="canonical" href="https://edufamcs.by/handbook/classic/">
-<meta property="og:site_name" content="EDU FAMCS">
-<meta property="og:locale" content="ru_RU">
-<meta property="og:type" content="website">
-<meta property="og:url" content="https://edufamcs.by/handbook/classic/">
-<link rel="sitemap" type="application/xml" href="/edufamcs-demo/sitemap.xml">
-
 <meta name="htmx-config" content='{"allowEval":false,"includeIndicatorStyles":false,"historyCacheSize":0,"selfRequestsOnly":true}'>
 <meta name="katex-js" content="/edufamcs-demo/static/vendor/katex/katex.min.js">
 <meta name="katex-css" content="/edufamcs-demo/static/vendor/katex/katex.min.css">
@@ -34,7 +27,7 @@
 <script src="/edufamcs-demo/static/js/site.js" defer></script>
 
 </head>
-<body class="" hx-headers='{"X-CSRFToken": "Xuw8lDfNTSfgFJlRq0KXxfGHHdySfSBawaNiS6HJjd3GUJJ3t1ZQJH5RAPP0xfbF"}'>
+<body class="" hx-headers='{"X-CSRFToken": "NgkcZYN7AoSOL4uIs379O4QVqcu7dYFjWOtABs8Cc9QysTTgxRYukG9k6v96CWPi"}'>
 <a class="skip" href="#main">К содержанию</a>
 <div class="demo-bar" role="note">Демо-версия для отзывов: вход, запись на курсы и формы здесь не работают.</div>
 
@@ -48,7 +41,7 @@
       <a href="/edufamcs-demo/#courses">Курсы</a>
       <a href="/edufamcs-demo/ml/" >Машинное обучение</a>
       
-      <a href="/edufamcs-demo/handbook/" aria-current="page">Хендбук</a>
+      <a href="/edufamcs-demo/handbook/" aria-current="page">Конспекты</a>
       <a href="/edufamcs-demo/news/" >Новости</a>
       <a href="/edufamcs-demo/people/" >Авторы</a>
       <a href="/edufamcs-demo/about/" >О&nbsp;нас</a>
@@ -69,7 +62,7 @@
 <div class="container page hb-tone">
   <header class="hb-sec-head">
     <div>
-      <nav class="crumbs" aria-label="Навигация"><a href="/edufamcs-demo/handbook/">Хендбук</a><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-chev"/></svg><span>Классическое машинное обучение</span></nav>
+      <nav class="crumbs" aria-label="Навигация"><a href="/edufamcs-demo/handbook/">Конспекты</a><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-chev"/></svg><span>Классическое машинное обучение</span></nav>
       <h1 class="display-l">Классическое машинное обучение</h1>
       <p class="lead">От постановки задачи и EDA до бустинга, кластеризации и снижения размерности.</p>
       
@@ -77,9 +70,10 @@
     <div class="hb-sec-art" aria-hidden="true">
 
 <svg viewBox="0 0 220 120" aria-hidden="true">
-  <g fill="none" stroke="currentColor" stroke-width="1.5"><path d="M20 14 h80 a10 10 0 0 1 10 10 v90 a10 10 0 0 0 -10 -10 h-80 z"/><path d="M200 14 h-80 a10 10 0 0 0 -10 10 v90 a10 10 0 0 1 10 -10 h80 z"/></g>
-  <g fill="currentColor"><rect x="32" y="32" width="56" height="7" rx="3.5"/><rect x="32" y="48" width="44" height="7" rx="3.5" opacity=".3"/><rect x="32" y="64" width="50" height="7" rx="3.5" opacity=".3"/><rect x="132" y="32" width="56" height="7" rx="3.5" opacity=".3"/><rect x="132" y="48" width="38" height="7" rx="3.5" opacity=".3"/></g>
-  <rect x="132" y="64" width="48" height="7" rx="3.5" fill="var(--accent)"/>
+  <g fill="none" stroke="currentColor" stroke-width="1.2" stroke-dasharray="3 4" opacity=".35"><path d="M20 96L200 -4"/><path d="M20 124L200 24"/></g>
+  <path d="M20 110L200 10" stroke="var(--accent)" stroke-width="2.4" stroke-linecap="round"/>
+  <g fill="none" stroke="currentColor" stroke-width="2" opacity=".6"><circle cx="30" cy="30" r="5"/><circle cx="52" cy="52" r="5"/><circle cx="70" cy="22" r="5"/><circle cx="90" cy="44" r="5"/><circle cx="40" cy="72" r="5"/><circle cx="112" cy="26" r="5"/><circle cx="60" cy="74" r="5"/></g>
+  <g fill="currentColor"><circle cx="122" cy="96" r="5"/><circle cx="150" cy="82" r="5"/><circle cx="172" cy="102" r="5"/><circle cx="192" cy="68" r="5"/><circle cx="140" cy="108" r="5"/><circle cx="204" cy="94" r="5"/><circle cx="166" cy="60" r="5"/></g>
 </svg>
 
 </div>
@@ -306,7 +300,7 @@
       <ul class="ftr-links">
         <li><a href="/edufamcs-demo/#courses">Курсы</a></li>
         <li><a href="/edufamcs-demo/ml/">Машинное обучение</a></li>
-        <li><a href="/edufamcs-demo/handbook/">Хендбук</a></li>
+        <li><a href="/edufamcs-demo/handbook/">Конспекты</a></li>
         <li><a href="/edufamcs-demo/news/">Новости</a></li>
         <li><a href="/edufamcs-demo/people/">Авторы</a></li>
         <li><a href="/edufamcs-demo/about/">О&nbsp;нас</a></li>
@@ -315,7 +309,7 @@
       </ul>
     </div>
     <div class="ftr-big" aria-hidden="true">EDU<span class="d">·</span>FAMCS</div>
-    <p class="ftr-copy">© 2026 EDU FAMCS · независимый проект выпускников ФПМИ БГУ · Минск</p>
+    <p class="ftr-copy">© 2026 EDU FAMCS · Минск</p>
   </div>
 </footer>
 

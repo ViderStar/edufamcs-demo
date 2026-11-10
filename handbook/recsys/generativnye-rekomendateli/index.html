@@ -4,16 +4,9 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Генеративные рекомендатели на масштабе: HSTU, OneRec и наследники · EDU FAMCS</title>
-<meta name="description" content="До 2023 года рекомендатели крупных компаний выглядели как DLRM: сотни разнородных признаков (счётчики, категории, кросс-признаки), огромные таблицы эмбеддингов, несколько полносвязных слоёв сверху. Т…">
+<meta name="description" content="Генеративные рекомендатели на масштабе: HSTU, OneRec и наследники — Рекомендательные системы. Хендбук ML-курса ФПМИ.">
 <meta name="theme-color" content="#060A16">
 <meta name="robots" content="noindex, nofollow">
-<link rel="canonical" href="https://edufamcs.by/handbook/recsys/generativnye-rekomendateli/">
-<meta property="og:site_name" content="EDU FAMCS">
-<meta property="og:locale" content="ru_RU">
-<meta property="og:type" content="website">
-<meta property="og:url" content="https://edufamcs.by/handbook/recsys/generativnye-rekomendateli/">
-<link rel="sitemap" type="application/xml" href="/edufamcs-demo/sitemap.xml">
-<script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"Генеративные рекомендатели на масштабе: HSTU, OneRec и наследники","description":"До 2023 года рекомендатели крупных компаний выглядели как DLRM: сотни разнородных признаков (счётчики, категории, кросс-признаки), огромные таблицы эмбеддингов, несколько полносвязных слоёв сверху. Такие модели плохо масштабируются: удвоение параметров почти не улучшает качество, потому что большая","url":"https://edufamcs.by/handbook/recsys/generativnye-rekomendateli/","inLanguage":"ru","dateModified":"2026-11-10T10:59:12.388219+00:00","publisher":{"@type":"EducationalOrganization","@id":"https://edufamcs.by/#org","name":"EDU FAMCS","url":"https://edufamcs.by/","logo":"https://edufamcs.by/static/brand/logo/favicon.svg","description":"Независимый образовательный проект выпускников ФПМИ БГУ: бесплатные курсы по машинному обучению и IT.","areaServed":"BY"},"articleSection":"Рекомендательные системы","author":[{"@type":"Person","name":"Артем Лебедевич"}]}</script>
 <meta name="htmx-config" content='{"allowEval":false,"includeIndicatorStyles":false,"historyCacheSize":0,"selfRequestsOnly":true}'>
 <meta name="katex-js" content="/edufamcs-demo/static/vendor/katex/katex.min.js">
 <meta name="katex-css" content="/edufamcs-demo/static/vendor/katex/katex.min.css">
@@ -34,7 +27,7 @@
 <script src="/edufamcs-demo/static/js/site.js" defer></script>
 <script src="/edufamcs-demo/static/handbook/handbook.js" defer></script>
 </head>
-<body class="" hx-headers='{"X-CSRFToken": "J2Vu6HdGoMZibnNKubvy26M46qUycKTWiIcEDaFCO7NIqnbWxcKreybeZ2bGu7tr"}'>
+<body class="" hx-headers='{"X-CSRFToken": "P7FC8JpPWc8ZhVPqoOMACNwT7Ry7QD8UYFO0KdKkyX6JYKeYtCDV8pPiNad6fBiT"}'>
 <a class="skip" href="#main">К содержанию</a>
 <div class="demo-bar" role="note">Демо-версия для отзывов: вход, запись на курсы и формы здесь не работают.</div>
 
@@ -48,7 +41,7 @@
       <a href="/edufamcs-demo/#courses">Курсы</a>
       <a href="/edufamcs-demo/ml/" >Машинное обучение</a>
       
-      <a href="/edufamcs-demo/handbook/" aria-current="page">Хендбук</a>
+      <a href="/edufamcs-demo/handbook/" aria-current="page">Конспекты</a>
       <a href="/edufamcs-demo/news/" >Новости</a>
       <a href="/edufamcs-demo/people/" >Авторы</a>
       <a href="/edufamcs-demo/about/" >О&nbsp;нас</a>
@@ -73,7 +66,7 @@
       
 <form class="hb-search" action="/edufamcs-demo/handbook/search/" method="get" role="search">
   <svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-search"/></svg>
-  <input class="input" type="search" name="q" value="" placeholder="Поиск по хендбуку" aria-label="Поиск по хендбуку" autocomplete="off" maxlength="120"
+  <input class="input" type="search" name="q" value="" placeholder="Поиск по конспектам" aria-label="Поиск по конспектам" autocomplete="off" maxlength="120"
     hx-get="/edufamcs-demo/handbook/search/" hx-trigger="input changed delay:250ms, search" hx-target="#hb-nav-results" hx-sync="this:replace">
 </form>
 
@@ -89,7 +82,7 @@
     </aside>
 
     <article class="hb-main">
-      <nav class="crumbs" aria-label="Навигация"><a href="/edufamcs-demo/handbook/">Хендбук</a><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-chev"/></svg><a href="/edufamcs-demo/handbook/recsys/">Рекомендательные системы</a></nav>
+      <nav class="crumbs" aria-label="Навигация"><a href="/edufamcs-demo/handbook/">Конспекты</a><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-chev"/></svg><a href="/edufamcs-demo/handbook/recsys/">Рекомендательные системы</a></nav>
       <h1 class="h1">Генеративные рекомендатели на масштабе: HSTU, OneRec и наследники</h1>
       <div class="hb-meta">
         
@@ -361,7 +354,7 @@
       <ul class="ftr-links">
         <li><a href="/edufamcs-demo/#courses">Курсы</a></li>
         <li><a href="/edufamcs-demo/ml/">Машинное обучение</a></li>
-        <li><a href="/edufamcs-demo/handbook/">Хендбук</a></li>
+        <li><a href="/edufamcs-demo/handbook/">Конспекты</a></li>
         <li><a href="/edufamcs-demo/news/">Новости</a></li>
         <li><a href="/edufamcs-demo/people/">Авторы</a></li>
         <li><a href="/edufamcs-demo/about/">О&nbsp;нас</a></li>
@@ -370,7 +363,7 @@
       </ul>
     </div>
     <div class="ftr-big" aria-hidden="true">EDU<span class="d">·</span>FAMCS</div>
-    <p class="ftr-copy">© 2026 EDU FAMCS · независимый проект выпускников ФПМИ БГУ · Минск</p>
+    <p class="ftr-copy">© 2026 EDU FAMCS · Минск</p>
   </div>
 </footer>
 

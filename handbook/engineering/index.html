@@ -3,17 +3,10 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Инженерия: от ноутбука до сервиса — хендбук · EDU FAMCS</title>
+<title>Инженерия: от ноутбука до сервиса — конспекты · EDU FAMCS</title>
 <meta name="description" content="FastAPI, SQL, Docker и Compose, где запускать проект, CI, Prometheus и Grafana, мониторинг модели.">
 <meta name="theme-color" content="#060A16">
 <meta name="robots" content="noindex, nofollow">
-<link rel="canonical" href="https://edufamcs.by/handbook/engineering/">
-<meta property="og:site_name" content="EDU FAMCS">
-<meta property="og:locale" content="ru_RU">
-<meta property="og:type" content="website">
-<meta property="og:url" content="https://edufamcs.by/handbook/engineering/">
-<link rel="sitemap" type="application/xml" href="/edufamcs-demo/sitemap.xml">
-
 <meta name="htmx-config" content='{"allowEval":false,"includeIndicatorStyles":false,"historyCacheSize":0,"selfRequestsOnly":true}'>
 <meta name="katex-js" content="/edufamcs-demo/static/vendor/katex/katex.min.js">
 <meta name="katex-css" content="/edufamcs-demo/static/vendor/katex/katex.min.css">
@@ -34,7 +27,7 @@
 <script src="/edufamcs-demo/static/js/site.js" defer></script>
 
 </head>
-<body class="" hx-headers='{"X-CSRFToken": "WUUmFzJy11lNZz00FooaOB9QC8uVOe5EvAbwc2burm9dezocIpD303y0vKL36BF9"}'>
+<body class="" hx-headers='{"X-CSRFToken": "2Z8jiWErJQWOnwaGxGifBiHthutWOhgRbxhHUqZWlBUy4lzeCu9A7U0SXN8VdfqQ"}'>
 <a class="skip" href="#main">К содержанию</a>
 <div class="demo-bar" role="note">Демо-версия для отзывов: вход, запись на курсы и формы здесь не работают.</div>
 
@@ -48,7 +41,7 @@
       <a href="/edufamcs-demo/#courses">Курсы</a>
       <a href="/edufamcs-demo/ml/" >Машинное обучение</a>
       
-      <a href="/edufamcs-demo/handbook/" aria-current="page">Хендбук</a>
+      <a href="/edufamcs-demo/handbook/" aria-current="page">Конспекты</a>
       <a href="/edufamcs-demo/news/" >Новости</a>
       <a href="/edufamcs-demo/people/" >Авторы</a>
       <a href="/edufamcs-demo/about/" >О&nbsp;нас</a>
@@ -69,7 +62,7 @@
 <div class="container page hb-tone">
   <header class="hb-sec-head">
     <div>
-      <nav class="crumbs" aria-label="Навигация"><a href="/edufamcs-demo/handbook/">Хендбук</a><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-chev"/></svg><span>Инженерия: от ноутбука до сервиса</span></nav>
+      <nav class="crumbs" aria-label="Навигация"><a href="/edufamcs-demo/handbook/">Конспекты</a><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-chev"/></svg><span>Инженерия: от ноутбука до сервиса</span></nav>
       <h1 class="display-l">Инженерия: от ноутбука до сервиса</h1>
       <p class="lead">FastAPI, SQL, Docker и Compose, где запускать проект, CI, Prometheus и Grafana, мониторинг модели.</p>
       
@@ -77,9 +70,13 @@
     <div class="hb-sec-art" aria-hidden="true">
 
 <svg viewBox="0 0 220 120" aria-hidden="true">
-  <g fill="none" stroke="currentColor" stroke-width="1.5"><path d="M20 14 h80 a10 10 0 0 1 10 10 v90 a10 10 0 0 0 -10 -10 h-80 z"/><path d="M200 14 h-80 a10 10 0 0 0 -10 10 v90 a10 10 0 0 1 10 -10 h80 z"/></g>
-  <g fill="currentColor"><rect x="32" y="32" width="56" height="7" rx="3.5"/><rect x="32" y="48" width="44" height="7" rx="3.5" opacity=".3"/><rect x="32" y="64" width="50" height="7" rx="3.5" opacity=".3"/><rect x="132" y="32" width="56" height="7" rx="3.5" opacity=".3"/><rect x="132" y="48" width="38" height="7" rx="3.5" opacity=".3"/></g>
-  <rect x="132" y="64" width="48" height="7" rx="3.5" fill="var(--accent)"/>
+  <g fill="currentColor"><rect x="10" y="66" width="44" height="30" rx="5" opacity=".35"/><rect x="60" y="66" width="44" height="30" rx="5" opacity=".6"/><rect x="35" y="30" width="44" height="30" rx="5"/></g>
+  <g stroke="currentColor" stroke-width="1.5" opacity=".35"><path d="M47 36v18M57 36v18M67 36v18"/></g>
+  <path d="M116 64h28M136 56l9 8-9 8" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" opacity=".6"/>
+  <path d="M158 84A28 28 0 0 1 214 84" fill="none" stroke="currentColor" stroke-width="6" stroke-linecap="round" opacity=".25"/>
+  <path d="M158 84A28 28 0 0 1 200 59.8" fill="none" stroke="var(--accent)" stroke-width="6" stroke-linecap="round"/>
+  <path d="M186 84L199 66" stroke="currentColor" stroke-width="3" stroke-linecap="round"/><circle cx="186" cy="84" r="4.5" fill="currentColor"/>
+  <path d="M6 108q10-6 20 0t20 0 20 0 20 0 20 0" fill="none" stroke="currentColor" stroke-width="1.5" opacity=".35"/>
 </svg>
 
 </div>
@@ -222,7 +219,7 @@
       <ul class="ftr-links">
         <li><a href="/edufamcs-demo/#courses">Курсы</a></li>
         <li><a href="/edufamcs-demo/ml/">Машинное обучение</a></li>
-        <li><a href="/edufamcs-demo/handbook/">Хендбук</a></li>
+        <li><a href="/edufamcs-demo/handbook/">Конспекты</a></li>
         <li><a href="/edufamcs-demo/news/">Новости</a></li>
         <li><a href="/edufamcs-demo/people/">Авторы</a></li>
         <li><a href="/edufamcs-demo/about/">О&nbsp;нас</a></li>
@@ -231,7 +228,7 @@
       </ul>
     </div>
     <div class="ftr-big" aria-hidden="true">EDU<span class="d">·</span>FAMCS</div>
-    <p class="ftr-copy">© 2026 EDU FAMCS · независимый проект выпускников ФПМИ БГУ · Минск</p>
+    <p class="ftr-copy">© 2026 EDU FAMCS · Минск</p>
   </div>
 </footer>
 

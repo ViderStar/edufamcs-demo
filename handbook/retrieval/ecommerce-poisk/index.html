@@ -4,16 +4,9 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Поиск в e-commerce · EDU FAMCS</title>
-<meta name="description" content="Поиск по товарам выглядит как веб-поиск в миниатюре, но устроен иначе: документы — это структурированные карточки, запросы — две-три слова, а цель — не найти страницу, а продать подходящий товар, кот…">
+<meta name="description" content="Поиск в e-commerce — Поиск. Хендбук ML-курса ФПМИ.">
 <meta name="theme-color" content="#060A16">
 <meta name="robots" content="noindex, nofollow">
-<link rel="canonical" href="https://edufamcs.by/handbook/retrieval/ecommerce-poisk/">
-<meta property="og:site_name" content="EDU FAMCS">
-<meta property="og:locale" content="ru_RU">
-<meta property="og:type" content="website">
-<meta property="og:url" content="https://edufamcs.by/handbook/retrieval/ecommerce-poisk/">
-<link rel="sitemap" type="application/xml" href="/edufamcs-demo/sitemap.xml">
-<script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"Поиск в e-commerce","description":"Поиск по товарам выглядит как веб-поиск в миниатюре, но устроен иначе: документы — это структурированные карточки, запросы — две-три слова, а цель — не найти страницу, а продать подходящий товар, который есть на складе. Поэтому почти всё, что вы знаете про BM25, ранжирование и оценку, здесь","url":"https://edufamcs.by/handbook/retrieval/ecommerce-poisk/","inLanguage":"ru","dateModified":"2026-11-10T11:19:57.145061+00:00","publisher":{"@type":"EducationalOrganization","@id":"https://edufamcs.by/#org","name":"EDU FAMCS","url":"https://edufamcs.by/","logo":"https://edufamcs.by/static/brand/logo/favicon.svg","description":"Независимый образовательный проект выпускников ФПМИ БГУ: бесплатные курсы по машинному обучению и IT.","areaServed":"BY"},"articleSection":"Поиск","author":[{"@type":"Person","name":"Артем Лебедевич"}]}</script>
 <meta name="htmx-config" content='{"allowEval":false,"includeIndicatorStyles":false,"historyCacheSize":0,"selfRequestsOnly":true}'>
 <meta name="katex-js" content="/edufamcs-demo/static/vendor/katex/katex.min.js">
 <meta name="katex-css" content="/edufamcs-demo/static/vendor/katex/katex.min.css">
@@ -34,7 +27,7 @@
 <script src="/edufamcs-demo/static/js/site.js" defer></script>
 <script src="/edufamcs-demo/static/handbook/handbook.js" defer></script>
 </head>
-<body class="" hx-headers='{"X-CSRFToken": "BG0LB3VtQaMh3AIN2n7UTbl5gxr4alEcamhV8wnpgvAHiA6Z5omN5DKf99IcsIeH"}'>
+<body class="" hx-headers='{"X-CSRFToken": "apDhjuT2Flxz9wylafemr4KWtkI63g0YjXMFVYexh6vjQlXTf35HXG3l9Dn5seaX"}'>
 <a class="skip" href="#main">К содержанию</a>
 <div class="demo-bar" role="note">Демо-версия для отзывов: вход, запись на курсы и формы здесь не работают.</div>
 
@@ -48,7 +41,7 @@
       <a href="/edufamcs-demo/#courses">Курсы</a>
       <a href="/edufamcs-demo/ml/" >Машинное обучение</a>
       
-      <a href="/edufamcs-demo/handbook/" aria-current="page">Хендбук</a>
+      <a href="/edufamcs-demo/handbook/" aria-current="page">Конспекты</a>
       <a href="/edufamcs-demo/news/" >Новости</a>
       <a href="/edufamcs-demo/people/" >Авторы</a>
       <a href="/edufamcs-demo/about/" >О&nbsp;нас</a>
@@ -73,7 +66,7 @@
       
 <form class="hb-search" action="/edufamcs-demo/handbook/search/" method="get" role="search">
   <svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-search"/></svg>
-  <input class="input" type="search" name="q" value="" placeholder="Поиск по хендбуку" aria-label="Поиск по хендбуку" autocomplete="off" maxlength="120"
+  <input class="input" type="search" name="q" value="" placeholder="Поиск по конспектам" aria-label="Поиск по конспектам" autocomplete="off" maxlength="120"
     hx-get="/edufamcs-demo/handbook/search/" hx-trigger="input changed delay:250ms, search" hx-target="#hb-nav-results" hx-sync="this:replace">
 </form>
 
@@ -89,7 +82,7 @@
     </aside>
 
     <article class="hb-main">
-      <nav class="crumbs" aria-label="Навигация"><a href="/edufamcs-demo/handbook/">Хендбук</a><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-chev"/></svg><a href="/edufamcs-demo/handbook/retrieval/">Поиск</a></nav>
+      <nav class="crumbs" aria-label="Навигация"><a href="/edufamcs-demo/handbook/">Конспекты</a><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-chev"/></svg><a href="/edufamcs-demo/handbook/retrieval/">Поиск</a></nav>
       <h1 class="h1">Поиск в e-commerce</h1>
       <div class="hb-meta">
         
@@ -273,7 +266,7 @@ STORAGE <span class="tok-p">=</span> re<span class="tok-p">.</span>compile<span 
       <ul class="ftr-links">
         <li><a href="/edufamcs-demo/#courses">Курсы</a></li>
         <li><a href="/edufamcs-demo/ml/">Машинное обучение</a></li>
-        <li><a href="/edufamcs-demo/handbook/">Хендбук</a></li>
+        <li><a href="/edufamcs-demo/handbook/">Конспекты</a></li>
         <li><a href="/edufamcs-demo/news/">Новости</a></li>
         <li><a href="/edufamcs-demo/people/">Авторы</a></li>
         <li><a href="/edufamcs-demo/about/">О&nbsp;нас</a></li>
@@ -282,7 +275,7 @@ STORAGE <span class="tok-p">=</span> re<span class="tok-p">.</span>compile<span 
       </ul>
     </div>
     <div class="ftr-big" aria-hidden="true">EDU<span class="d">·</span>FAMCS</div>
-    <p class="ftr-copy">© 2026 EDU FAMCS · независимый проект выпускников ФПМИ БГУ · Минск</p>
+    <p class="ftr-copy">© 2026 EDU FAMCS · Минск</p>
   </div>
 </footer>
 

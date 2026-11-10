@@ -3,17 +3,10 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Введение в глубокое обучение — хендбук · EDU FAMCS</title>
+<title>Введение в глубокое обучение — конспекты · EDU FAMCS</title>
 <meta name="description" content="Нейрон, обратное распространение, свёртки, рекуррентные сети и трансформеры.">
 <meta name="theme-color" content="#060A16">
 <meta name="robots" content="noindex, nofollow">
-<link rel="canonical" href="https://edufamcs.by/handbook/dl/">
-<meta property="og:site_name" content="EDU FAMCS">
-<meta property="og:locale" content="ru_RU">
-<meta property="og:type" content="website">
-<meta property="og:url" content="https://edufamcs.by/handbook/dl/">
-<link rel="sitemap" type="application/xml" href="/edufamcs-demo/sitemap.xml">
-
 <meta name="htmx-config" content='{"allowEval":false,"includeIndicatorStyles":false,"historyCacheSize":0,"selfRequestsOnly":true}'>
 <meta name="katex-js" content="/edufamcs-demo/static/vendor/katex/katex.min.js">
 <meta name="katex-css" content="/edufamcs-demo/static/vendor/katex/katex.min.css">
@@ -34,7 +27,7 @@
 <script src="/edufamcs-demo/static/js/site.js" defer></script>
 
 </head>
-<body class="" hx-headers='{"X-CSRFToken": "xmlj21N8tiwT9YsYJcTv6q7lP0cai4G762Ctzuf4TDkjoYQaMd8oiSwvICtiArgC"}'>
+<body class="" hx-headers='{"X-CSRFToken": "Rq1D09toPAKkHDRgO21cadwooCxDJv8e0Ya1CDOTrlI4osgOTQSxGPPN4VcC8tid"}'>
 <a class="skip" href="#main">К содержанию</a>
 <div class="demo-bar" role="note">Демо-версия для отзывов: вход, запись на курсы и формы здесь не работают.</div>
 
@@ -48,7 +41,7 @@
       <a href="/edufamcs-demo/#courses">Курсы</a>
       <a href="/edufamcs-demo/ml/" >Машинное обучение</a>
       
-      <a href="/edufamcs-demo/handbook/" aria-current="page">Хендбук</a>
+      <a href="/edufamcs-demo/handbook/" aria-current="page">Конспекты</a>
       <a href="/edufamcs-demo/news/" >Новости</a>
       <a href="/edufamcs-demo/people/" >Авторы</a>
       <a href="/edufamcs-demo/about/" >О&nbsp;нас</a>
@@ -69,7 +62,7 @@
 <div class="container page hb-tone">
   <header class="hb-sec-head">
     <div>
-      <nav class="crumbs" aria-label="Навигация"><a href="/edufamcs-demo/handbook/">Хендбук</a><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-chev"/></svg><span>Введение в глубокое обучение</span></nav>
+      <nav class="crumbs" aria-label="Навигация"><a href="/edufamcs-demo/handbook/">Конспекты</a><svg class="ico" aria-hidden="true"><use href="/edufamcs-demo/static/brand/icons.svg#i-chev"/></svg><span>Введение в глубокое обучение</span></nav>
       <h1 class="display-l">Введение в глубокое обучение</h1>
       <p class="lead">Нейрон, обратное распространение, свёртки, рекуррентные сети и трансформеры.</p>
       
@@ -77,9 +70,10 @@
     <div class="hb-sec-art" aria-hidden="true">
 
 <svg viewBox="0 0 220 120" aria-hidden="true">
-  <g fill="none" stroke="currentColor" stroke-width="1.5"><path d="M20 14 h80 a10 10 0 0 1 10 10 v90 a10 10 0 0 0 -10 -10 h-80 z"/><path d="M200 14 h-80 a10 10 0 0 0 -10 10 v90 a10 10 0 0 1 10 -10 h80 z"/></g>
-  <g fill="currentColor"><rect x="32" y="32" width="56" height="7" rx="3.5"/><rect x="32" y="48" width="44" height="7" rx="3.5" opacity=".3"/><rect x="32" y="64" width="50" height="7" rx="3.5" opacity=".3"/><rect x="132" y="32" width="56" height="7" rx="3.5" opacity=".3"/><rect x="132" y="48" width="38" height="7" rx="3.5" opacity=".3"/></g>
-  <rect x="132" y="64" width="48" height="7" rx="3.5" fill="var(--accent)"/>
+  <path d="M24 30L82 18M24 30L82 46M24 30L82 74M24 30L82 102M24 60L82 18M24 60L82 46M24 60L82 74M24 60L82 102M24 90L82 18M24 90L82 46M24 90L82 74M24 90L82 102M82 18L140 18M82 18L140 46M82 18L140 74M82 18L140 102M82 46L140 18M82 46L140 46M82 46L140 74M82 46L140 102M82 74L140 18M82 74L140 46M82 74L140 74M82 74L140 102M82 102L140 18M82 102L140 46M82 102L140 74M82 102L140 102M140 18L198 44M140 18L198 76M140 46L198 44M140 46L198 76M140 74L198 44M140 74L198 76M140 102L198 44M140 102L198 76" fill="none" stroke="currentColor" stroke-width="1" opacity=".22"/>
+  <path d="M24 60L82 46L140 74L198 44" fill="none" stroke="var(--accent)" stroke-width="2.2" stroke-linejoin="round"/>
+  <g fill="currentColor"><circle cx="24" cy="30" r="7"/><circle cx="24" cy="60" r="7"/><circle cx="24" cy="90" r="7"/><circle cx="82" cy="18" r="7" opacity=".5"/><circle cx="82" cy="46" r="7" opacity=".5"/><circle cx="82" cy="74" r="7" opacity=".5"/><circle cx="82" cy="102" r="7" opacity=".5"/><circle cx="140" cy="18" r="7" opacity=".5"/><circle cx="140" cy="46" r="7" opacity=".5"/><circle cx="140" cy="74" r="7" opacity=".5"/><circle cx="140" cy="102" r="7" opacity=".5"/><circle cx="198" cy="76" r="7"/></g>
+  <circle cx="198" cy="44" r="8" fill="var(--accent)"/>
 </svg>
 
 </div>
@@ -222,7 +216,7 @@
       <ul class="ftr-links">
         <li><a href="/edufamcs-demo/#courses">Курсы</a></li>
         <li><a href="/edufamcs-demo/ml/">Машинное обучение</a></li>
-        <li><a href="/edufamcs-demo/handbook/">Хендбук</a></li>
+        <li><a href="/edufamcs-demo/handbook/">Конспекты</a></li>
         <li><a href="/edufamcs-demo/news/">Новости</a></li>
         <li><a href="/edufamcs-demo/people/">Авторы</a></li>
         <li><a href="/edufamcs-demo/about/">О&nbsp;нас</a></li>
@@ -231,7 +225,7 @@
       </ul>
     </div>
     <div class="ftr-big" aria-hidden="true">EDU<span class="d">·</span>FAMCS</div>
-    <p class="ftr-copy">© 2026 EDU FAMCS · независимый проект выпускников ФПМИ БГУ · Минск</p>
+    <p class="ftr-copy">© 2026 EDU FAMCS · Минск</p>
   </div>
 </footer>
 
